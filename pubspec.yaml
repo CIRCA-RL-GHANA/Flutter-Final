@@ -1,0 +1,101 @@
+name: thepg
+description: PROMPT Genie - Your All-in-One Financial & Social Hub
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.6
+
+  # State Management
+  provider: ^6.1.1
+  flutter_riverpod: ^2.4.9
+
+  # Local Storage
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  shared_preferences: ^2.2.2
+
+  # Networking
+  dio: ^5.4.0
+  connectivity_plus: ^5.0.2
+
+  # UI & Animations
+  lottie: ^3.0.0
+  shimmer: ^3.0.0
+  google_fonts: ^6.1.0
+  flutter_svg: ^2.0.9
+  cached_network_image: ^3.3.1
+  smooth_page_indicator: ^1.1.0
+  pinput: ^4.0.0
+  confetti: ^0.7.0
+  animate_do: ^3.1.2
+  flutter_animate: ^4.3.0
+
+  # Permissions & Device
+  permission_handler: ^11.1.0
+  local_auth: ^2.1.8
+  device_info_plus: ^9.1.1
+  package_info_plus: ^5.0.1
+  geolocator: ^11.0.0
+  path_provider: ^2.1.2
+
+  # Image Handling
+  image_picker: ^1.0.5
+  image_cropper: ^5.0.1
+
+  # Country Picker
+  country_code_picker: ^3.0.0
+
+  # Utilities
+  intl: ^0.19.0
+  uuid: ^4.2.2
+  equatable: ^2.0.5
+  url_launcher: ^6.2.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.1
+  hive_generator: ^2.0.1
+  build_runner: ^2.4.7
+  mocktail: ^1.0.1
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/animations/
+    - assets/icons/
+    - assets/fonts/
+    # Individual icon references for PWA manifest
+    - assets/icons/icon_42x42.png
+    - assets/icons/icon_56x56.png
+    - assets/icons/icon_81x81.png
+    - assets/icons/icon_108x108.png
+    - assets/icons/icon_120x120.png
+    - assets/icons/icon_152x152.png
+    - assets/icons/icon_180x180.png
+    - assets/icons/icon_192x192.png
+    - assets/icons/icon_256x256.png
+    - assets/icons/icon_384x384.png
+    - assets/icons/icon_512x512.png
+    - assets/icons/icon_1024x1024.png
+    - assets/icons/icon_maskable_192x192.png
+    - assets/icons/icon_maskable_512x512.png
+
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
+        - asset: assets/fonts/Poppins-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Poppins-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Poppins-Bold.ttf
+          weight: 700
