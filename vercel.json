@@ -2,7 +2,7 @@
   "version": 2,
   "framework": null,
   "installCommand": "echo 'Flutter build — handled in buildCommand'",
-  "buildCommand": "curl -fsSL https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.29.2-stable.tar.xz -o /tmp/flutter.tar.xz && tar -xf /tmp/flutter.tar.xz -C /opt/ && export PATH=\"/opt/flutter/bin:$PATH\" && flutter --disable-analytics && flutter pub get && flutter build web --release --web-renderer canvaskit --dart-define=API_BASE_URL=${API_BASE_URL:-https://api.promptgenie.app} --dart-define=ENVIRONMENT=production",
+  "buildCommand": "curl -fsSL https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.22.0-stable.tar.xz -o /tmp/flutter.tar.xz && tar -xf /tmp/flutter.tar.xz -C /opt/ && export PATH=\"/opt/flutter/bin:$PATH\" && flutter --disable-analytics && flutter pub get && flutter build web --release --web-renderer canvaskit --dart-define=API_BASE_URL=${API_BASE_URL:-https://api.promptgenie.app} --dart-define=ENVIRONMENT=production",
   "outputDirectory": "build/web",
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
