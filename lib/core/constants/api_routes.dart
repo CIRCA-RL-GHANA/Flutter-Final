@@ -27,6 +27,9 @@ class ApiRoutes {
   static const entityProfiles = _EntityProfileRoutes();
   static const favoriteDrivers = _FavoriteDriverRoutes();
   static const marketProfiles = _MarketProfileRoutes();
+  static const wallets = _WalletRoutes();
+  static const payments = _PaymentRoutes();
+  static const go = _GoRoutes();
 }
 
 class _AuthRoutes {
@@ -428,4 +431,25 @@ class _MarketProfileRoutes {
   String get notifications => '/market-profiles/notifications/my-notifications';
   String markNotificationRead(String id) =>
       '/market-profiles/notifications/$id/read';
+}
+
+class _WalletRoutes {
+  const _WalletRoutes();
+  String get me      => '/wallets/me';
+  String get balance => '/wallets/balance';
+}
+
+class _PaymentRoutes {
+  const _PaymentRoutes();
+  String get create       => '/payments';
+  String refund(String id) => '/payments/$id/refund';
+  String get history      => '/payments/history';
+}
+
+class _GoRoutes {
+  const _GoRoutes();
+  String get wallet          => '/go/wallet';
+  String get transactions    => '/go/transactions';
+  String transactionById(String id) => '/go/transactions/$id';
+  String get topup           => '/go/topup';
 }
