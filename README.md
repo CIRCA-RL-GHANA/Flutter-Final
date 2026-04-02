@@ -50,15 +50,15 @@ thepg/
 │   │   ├── onboarding/               ← 14-screen registration flow
 │   │   ├── prompt/                   ← AI assistant hub (main dashboard)
 │   │   ├── user_details/             ← Profile, security, privacy (9 screens)
-│   │   ├── setup_dashboard/          ← Business setup wizard (32 screens)
-│   │   ├── go/                       ← Financial wallet (21 screens)
-│   │   ├── market/                   ← E-commerce (16 screens)
+│   │   ├── setup_dashboard/          ← Business setup wizard (34 screens)
+│   │   ├── go/                       ← Financial wallet (24 screens)
+│   │   ├── market/                   ← E-commerce (17 screens)
 │   │   ├── live/                     ← Fulfilment & driver ops (23 screens)
 │   │   ├── updates/                  ← Social feed (13 screens)
-│   │   ├── qualchat/                 ← Messaging (17 screens)
+│   │   ├── qualchat/                 ← Messaging (16 screens)
 │   │   ├── april/                    ← Finance calendar (7 screens)
-│   │   ├── alerts/                   ← Notification feeds
-│   │   └── utility/                  ← Settings, help, privacy (8 screens)
+│   │   ├── alerts/                   ← Notification feeds (12 screens)
+│   │   └── utility/                  ← Settings, help, privacy (9 screens)
 │   ├── models/local/                 ← Local-only Hive models
 │   ├── services/                     ← Cross-feature services (error tracking, PWA)
 │   └── widgets/
