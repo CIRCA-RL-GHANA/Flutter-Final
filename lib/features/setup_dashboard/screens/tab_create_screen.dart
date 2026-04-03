@@ -300,7 +300,7 @@ class _CustomerStep extends StatelessWidget {
         const SizedBox(height: 14),
         SetupFormField(
           label: 'Email',
-          hint: 'customer@example.com',
+          hint: 'e.g., user@email.com',
           controller: emailCtrl,
           keyboardType: TextInputType.emailAddress,
         ),
