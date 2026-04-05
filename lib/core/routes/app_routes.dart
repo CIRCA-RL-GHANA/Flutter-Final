@@ -110,6 +110,7 @@ import '../../features/live/screens/live_driver_performance_screen.dart';
 import '../../features/live/screens/live_emergency_sos_screen.dart';
 import '../../features/live/screens/live_incident_report_screen.dart';
 import '../../features/live/screens/live_settings_screen.dart';
+import '../../features/live/screens/live_operations_screen.dart';
 // Updates Module Screens
 import '../../features/updates/screens/updates_feed_screen.dart';
 import '../../features/updates/screens/updates_detail_screen.dart';
@@ -123,6 +124,7 @@ import '../../features/updates/screens/updates_notifications_screen.dart';
 import '../../features/updates/screens/updates_interests_screen.dart';
 import '../../features/updates/screens/updates_following_screen.dart';
 import '../../features/updates/screens/updates_insights_screen.dart';
+import '../../features/updates/screens/updates_social_feed_screen.dart';
 // QualChat Module Screens
 import '../../features/qualchat/screens/qualchat_loading_screen.dart';
 import '../../features/qualchat/screens/qualchat_dashboard_screen.dart';
@@ -139,6 +141,7 @@ import '../../features/qualchat/screens/qualchat_nudges_screen.dart';
 import '../../features/qualchat/screens/qualchat_action_center_screen.dart';
 import '../../features/qualchat/screens/qualchat_settings_screen.dart';
 import '../../features/qualchat/screens/qualchat_onboarding_screen.dart';
+import '../../features/qualchat/screens/qualchat_premium_screen.dart';
 
 // APRIL screens
 import '../../features/april/screens/april_widget_screen.dart';
@@ -164,6 +167,7 @@ import '../../features/alerts/screens/alerts_templates_screen.dart';
 import '../../features/alerts/screens/alerts_settings_screen.dart';
 
 // GO Module Screens
+import '../../features/go/screens/go_financial_screen.dart';
 import '../../features/go/screens/go_context_screen.dart';
 import '../../features/go/screens/qpoint_market_screen.dart';
 import '../../features/go/providers/qpoint_market_provider.dart';
@@ -310,6 +314,7 @@ class AppRoutes {
   static const String liveEmergencySOS = '/live/emergency-sos';
   static const String liveIncidentReport = '/live/incident-report';
   static const String liveSettings = '/live/settings';
+  static const String liveOperations = '/live/operations';
 
   // Updates Module Routes
   static const String updatesFeed = '/updates';
@@ -324,6 +329,7 @@ class AppRoutes {
   static const String updatesInterests = '/updates/interests';
   static const String updatesFollowing = '/updates/following';
   static const String updatesInsights = '/updates/insights';
+  static const String updatesSocialFeed = '/updates/social-feed';
 
   // QualChat Module Routes
   static const String qualChatDashboard = '/qualchat';
@@ -341,6 +347,7 @@ class AppRoutes {
   static const String qualChatActionCenter = '/qualchat/action-center';
   static const String qualChatSettings = '/qualchat/settings';
   static const String qualChatOnboarding = '/qualchat/onboarding';
+  static const String qualChatPremium = '/qualchat/premium';
 
   // APRIL Routes
   static const String aprilDashboard = '/april';
@@ -387,6 +394,7 @@ class AppRoutes {
   static const String goSecurity = '/go/security';
   static const String goIntegrations = '/go/integrations';
   static const String goArchive = '/go/archive';
+  static const String goFinancial = '/go/financial';
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -628,6 +636,8 @@ class AppRoutes {
         return _buildRoute(const LiveIncidentReportScreen(), settings);
       case liveSettings:
         return _buildRoute(const LiveSettingsScreen(), settings);
+      case liveOperations:
+        return _buildRoute(const LiveOperationsScreen(), settings);
 
       // Updates Module Screens
       case updatesFeed:
@@ -654,6 +664,8 @@ class AppRoutes {
         return _buildRoute(const UpdatesFollowingScreen(), settings);
       case updatesInsights:
         return _buildRoute(const UpdatesInsightsScreen(), settings);
+      case updatesSocialFeed:
+        return _buildRoute(const UpdatesSocialFeedScreen(), settings);
 
       // QualChat Module Screens
       case qualChatDashboard:
@@ -686,6 +698,9 @@ class AppRoutes {
         return _buildRoute(const QualChatSettingsScreen(), settings);
       case qualChatOnboarding:
         return _buildRoute(const QualChatOnboardingScreen(), settings);
+      case qualChatPremium:
+        final convId = settings.arguments as String?;
+        return _buildRoute(QualChatPremiumScreen(conversationId: convId), settings);
 
       // APRIL Routes
       case aprilDashboard:
@@ -779,6 +794,8 @@ class AppRoutes {
         return _buildRoute(const GoIntegrationsScreen(), settings);
       case goArchive:
         return _buildRoute(const GoArchiveScreen(), settings);
+      case goFinancial:
+        return _buildRoute(const GoFinancialScreen(), settings);
 
       default:
         return _buildRoute(
