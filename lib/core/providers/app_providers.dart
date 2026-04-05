@@ -22,6 +22,12 @@ import '../../features/april/providers/april_provider.dart';
 import '../../features/alerts/providers/alerts_provider.dart';
 import '../services/ai_assistant_service.dart';
 import '../services/ai_insights_notifier.dart';
+import '../services/websocket_service.dart';
+import '../services/chat_service.dart';
+import '../services/orders_service.dart';
+import '../services/localstorage_service.dart';
+import '../services/sync/sync_manager.dart';
+import '../network/api_client.dart';
 
 class AppProviders {
   AppProviders._();
@@ -78,6 +84,33 @@ class AppProviders {
 
       // AI Insights Notifier: financial / planner AI state
       ChangeNotifierProvider(create: (_) => AIInsightsNotifier()),
+
+      // ── Infrastructure Services ─────────────────────────────────────────
+      ChangeNotifierProvider(create: (_) => WebSocketService()),
+
+      ChangeNotifierProvider(
+        create: (_) => ChatService(ApiClient.instance.dio),
+      ),
+
+      ChangeNotifierProvider(
+        create: (_) => OrdersService(ApiClient.instance.dio),
+      ),
+
+      ChangeNotifierProvider(
+        create: (_) {
+          final storage = LocalStorageService();
+          storage.init();
+          return storage;
+        },
+      ),
+
+      ChangeNotifierProvider(
+        create: (_) {
+          final sync = SyncManager();
+          sync.init();
+          return sync;
+        },
+      ),
     ];
   }
 }

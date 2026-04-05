@@ -23,3 +23,4 @@ export 'favorite_driver_service.dart';
 export 'market_profile_service.dart';
 export 'qpoint_market_service.dart';
 export 'localstorage_service.dart';
+export 'websocket_service.dart';

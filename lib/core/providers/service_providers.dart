@@ -1,14 +1,14 @@
 import 'package:provider/provider.dart';
 import 'package:dio/dio.dart';
-import 'websocket_service.dart';
-import 'chat_service.dart';
-import 'orders_service.dart';
-import 'localstorage_service.dart';
-import 'sync/sync_manager.dart';
+import '../services/websocket_service.dart';
+import '../services/chat_service.dart';
+import '../services/orders_service.dart';
+import '../services/localstorage_service.dart';
+import '../services/sync/sync_manager.dart';
 import '../network/api_client.dart';
-import 'ai_service.dart';
-import 'ai_assistant_service.dart';
-import 'ai_insights_notifier.dart';
+import '../services/ai_service.dart';
+import '../services/ai_assistant_service.dart';
+import '../services/ai_insights_notifier.dart';
 
 // ignore_for_file: unused_import
 // Dio import kept because ChatService / OrdersService constructors require it.

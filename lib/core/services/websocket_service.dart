@@ -1,6 +1,5 @@
 ﻿import 'dart:async';
-import 'package:socket_client_io/socket_client_io.dart' as io;
-import 'package:socket_client/socket_client.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:flutter/foundation.dart';
 
 class ChatMessage {
@@ -61,7 +60,7 @@ class TypingIndicator {
 class WebSocketService extends ChangeNotifier {
   static final WebSocketService _instance = WebSocketService._internal();
   
-  late Socket _socket;
+  IO.Socket? _socket;
   final _messageController = StreamController<ChatMessage>.broadcast();
   final _typingController = StreamController<TypingIndicator>.broadcast();
   final _connectionController = StreamController<bool>.broadcast();
@@ -81,7 +80,7 @@ class WebSocketService extends ChangeNotifier {
   Stream<TypingIndicator> get typing => _typingController.stream;
   Stream<bool> get connectionStatus => _connectionController.stream;
 
-  bool get isConnected => _socket.connected ?? false;
+  bool get isConnected => _socket?.connected ?? false;
 
   /// Initialize and connect
   Future<void> connect({
@@ -93,23 +92,24 @@ class WebSocketService extends ChangeNotifier {
     _currentUserId = userId;
 
     try {
-      _socket = io.Socket(
-        baseUrl,
-        io.SocketOptions(
-          transports: ['websocket', 'polling'],
-          upgrade: true,
-          reconnection: true,
-          reconnectionDelay: 1000,
-          reconnectionDelayMax: 5000,
-          reconnectionAttempts: _maxReconnectAttempts,
-          auth: {
+      _socket = IO.io(
+        '$baseUrl/chat',
+        <String, dynamic>{
+          'transports': ['websocket', 'polling'],
+          'upgrade': true,
+          'reconnection': true,
+          'reconnectionDelay': 1000,
+          'reconnectionDelayMax': 5000,
+          'reconnectionAttempts': _maxReconnectAttempts,
+          'auth': {
             'token': token,
           },
-        ),
+          'autoConnect': false,
+        },
       );
 
       _setupEventListeners();
-      _socket.connect();
+      _socket!.connect();
     } catch (e) {
       debugPrint('[WebSocket] Connection error: $e');
       _connectionController.add(false);
@@ -187,7 +187,7 @@ class WebSocketService extends ChangeNotifier {
       return;
     }
 
-    _socket.emit('message:send', {
+    _socket?.emit('message:send', {
       'conversationId': conversationId,
       'content': content,
       'type': type,
@@ -198,7 +198,7 @@ class WebSocketService extends ChangeNotifier {
   /// Emit typing indicator
   void emitTyping(String conversationId) {
     if (isConnected) {
-      _socket.emit('typing:start', {
+      _socket?.emit('typing:start', {
         'conversationId': conversationId,
       });
     }
@@ -206,7 +206,7 @@ class WebSocketService extends ChangeNotifier {
 
   void stopTyping(String conversationId) {
     if (isConnected) {
-      _socket.emit('typing:stop', {
+      _socket?.emit('typing:stop', {
         'conversationId': conversationId,
       });
     }
@@ -215,7 +215,7 @@ class WebSocketService extends ChangeNotifier {
   /// Mark message as read
   void markMessageAsRead(String messageId) {
     if (isConnected) {
-      _socket.emit('message:read', {
+      _socket?.emit('message:read', {
         'messageId': messageId,
       });
     }
@@ -224,7 +224,7 @@ class WebSocketService extends ChangeNotifier {
   /// Join conversation
   void joinConversation(String conversationId) {
     if (isConnected) {
-      _socket.emit('conversation:join', {
+      _socket?.emit('conversation:join', {
         'conversationId': conversationId,
       });
     }
@@ -233,7 +233,7 @@ class WebSocketService extends ChangeNotifier {
   /// Leave conversation
   void leaveConversation(String conversationId) {
     if (isConnected) {
-      _socket.emit('conversation:leave', {
+      _socket?.emit('conversation:leave', {
         'conversationId': conversationId,
       });
     }
@@ -242,7 +242,7 @@ class WebSocketService extends ChangeNotifier {
   /// Delete message
   void deleteMessage(String messageId) {
     if (isConnected) {
-      _socket.emit('message:delete', {
+      _socket?.emit('message:delete', {
         'messageId': messageId,
       });
     }
@@ -275,7 +275,8 @@ class WebSocketService extends ChangeNotifier {
   /// Disconnect
   void disconnect() {
     _reconnectTimer?.cancel();
-    _socket.disconnect();
+    _socket?.disconnect();
+    _socket = null;
   }
 
   /// Dispose
