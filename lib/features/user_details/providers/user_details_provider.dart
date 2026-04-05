@@ -51,7 +51,7 @@ class UserDetailsProvider extends ChangeNotifier {
     displayName: 'John Doe',
     handle: '@johndoe',
     bio: 'Building the future of commerce in West Africa. Tech enthusiast & community leader.',
-    email: 'user@promptgenie.app',
+    email: 'user@genieinprompt.app',
     emailVerified: true,
     phone: '+1 (555) 123-4567',
     phoneVerified: true,

@@ -188,7 +188,7 @@ class UserProfile extends StatelessWidget {
                 CircleAvatar(radius: 50, backgroundColor: Colors.blue, child: const Text('JD', style: TextStyle(color: Colors.white, fontSize: 24))),
                 const SizedBox(height: 16),
                 const Text('John Doe', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-                const Text('user@promptgenie.app', style: TextStyle(color: Colors.grey)),
+                const Text('user@genieinprompt.app', style: TextStyle(color: Colors.grey)),
                 const SizedBox(height: 16),
                 ElevatedButton(onPressed: () {}, child: const Text('Edit Profile')),
               ],
