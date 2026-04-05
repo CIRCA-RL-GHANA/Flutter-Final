@@ -1,4 +1,5 @@
 import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:dio/dio.dart';
 import '../services/websocket_service.dart';
 import '../services/chat_service.dart';
@@ -107,3 +108,13 @@ class AppProviders {
   static AIInsightsNotifier aiInsights(context) =>
       context.read<AIInsightsNotifier>();
 }
+
+// ── Riverpod providers (for ConsumerWidget / ConsumerStatefulWidget screens) ─
+
+final chatServiceProvider = ChangeNotifierProvider<ChatService>(
+  (ref) => ChatService(ApiClient.instance.dio),
+);
+
+final ordersServiceProvider = ChangeNotifierProvider<OrdersService>(
+  (ref) => OrdersService(ApiClient.instance.dio),
+);

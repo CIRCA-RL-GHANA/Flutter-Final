@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:thepg/core/providers/service_providers.dart';
 
 class PromptDashboardScreen extends ConsumerStatefulWidget {
@@ -74,35 +73,35 @@ class _PromptDashboardScreenState extends ConsumerState<PromptDashboardScreen>
                           const SizedBox(height: 16),
                           ElevatedButton(
                             onPressed: () {
-                              context.push('/chat/new');
+                              Navigator.of(context).pushNamed('/chat/new');
                             },
                             child: const Text('Start a new conversation'),
                           ),
                         ],
                       ),
                     )
-                  : ListView.build(
+                  : ListView.builder(
                       itemCount: conversations.length,
                       itemBuilder: (context, index) {
                         final conversation = conversations[index];
                         return ListTile(
                           leading: CircleAvatar(
                             backgroundImage: NetworkImage(
-                              conversation.participantAvatar ?? '',
+                              (conversation['participantAvatar'] as String?) ?? '',
                             ),
                           ),
-                          title: Text(conversation.participantName ?? 'Unknown'),
+                          title: Text((conversation['participantName'] as String?) ?? 'Unknown'),
                           subtitle: Text(
-                            conversation.lastMessage ?? 'No messages yet',
+                            (conversation['lastMessage'] as String?) ?? 'No messages yet',
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
                           trailing: Text(
-                            conversation.lastMessageTime ?? '',
+                            (conversation['lastMessageTime'] as String?) ?? '',
                             style: Theme.of(context).textTheme.bodySmall,
                           ),
                           onTap: () {
-                            context.push('/chat/${conversation.id}');
+                            Navigator.of(context).pushNamed('/chat/${conversation['id']}');
                           },
                         );
                       },
