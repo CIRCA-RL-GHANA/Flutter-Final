@@ -12,9 +12,9 @@ class EnvConfig {
       case Environment.development:
         return 'http://10.0.2.2:3000/api/v1';
       case Environment.staging:
-        return 'https://staging-api.promptgenie.app/api/v1';
+        return 'https://staging-api.genieinprompt.app/api/v1';
       case Environment.production:
-        return 'https://api.promptgenie.app/api/v1';
+        return 'https://api.genieinprompt.app/api/v1';
     }
   }
 
@@ -23,9 +23,9 @@ class EnvConfig {
       case Environment.development:
         return 'ws://10.0.2.2:3000';
       case Environment.staging:
-        return 'wss://staging-api.promptgenie.app';
+        return 'wss://staging-api.genieinprompt.app';
       case Environment.production:
-        return 'wss://api.promptgenie.app';
+        return 'wss://api.genieinprompt.app';
     }
   }
 
