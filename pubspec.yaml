@@ -73,7 +73,6 @@ flutter:
     - assets/images/
     - assets/animations/
     - assets/icons/
-    - assets/fonts/
     # Individual icon references for PWA manifest
     - assets/icons/icon_42x42.png
     - assets/icons/icon_56x56.png
@@ -89,14 +88,4 @@ flutter:
     - assets/icons/icon_1024x1024.png
     - assets/icons/icon_maskable_192x192.png
     - assets/icons/icon_maskable_512x512.png
-
-  fonts:
-    - family: Poppins
-      fonts:
-        - asset: assets/fonts/Poppins-Regular.ttf
-        - asset: assets/fonts/Poppins-Medium.ttf
-          weight: 500
-        - asset: assets/fonts/Poppins-SemiBold.ttf
-          weight: 600
-        - asset: assets/fonts/Poppins-Bold.ttf
-          weight: 700
+  # Fonts are served via the google_fonts package (GoogleFonts.poppins) — no local font files required.
