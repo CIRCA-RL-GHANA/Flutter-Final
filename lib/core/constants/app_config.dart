@@ -11,7 +11,7 @@ class AppConfig {
 
   // Deep Linking
   static const String deepLinkScheme = 'promptgenie';
-  static const String deepLinkHost = 'promptgenie.app';
+  static const String deepLinkHost = 'genieinprompt.app';
 
   // Pagination
   static const int defaultPageSize = 20;
