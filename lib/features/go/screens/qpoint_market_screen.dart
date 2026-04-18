@@ -154,18 +154,14 @@ class _StatsBanner extends StatelessWidget {
                 : '—',
           ),
           const SizedBox(width: 16),
-          _Stat(
-            label: 'Last Price',
-            value: stats?.lastPrice != null
-                ? '\$${stats!.lastPrice!.toStringAsFixed(4)}'
-                : '—',
+          const _Stat(
+            label: 'Price',
+            value: '\$1.00',
           ),
           const SizedBox(width: 16),
           _Stat(
-            label: 'Spread',
-            value: stats?.spreadPercent != null
-                ? '${stats!.spreadPercent!.toStringAsFixed(2)}%'
-                : '—',
+            label: 'Vol 24h (QP)',
+            value: stats != null ? _formatVol(stats.volume24h) : '—',
           ),
           const SizedBox(width: 16),
           _Stat(
@@ -236,17 +232,12 @@ class _QuickActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bestBid = provider.orderBook?.bestBid;
-    final bestAsk = provider.orderBook?.bestAsk;
-
     return Row(
       children: [
         Expanded(
           child: _ActionCard(
             label: 'Buy QP',
-            subLabel: bestAsk != null
-                ? 'Best ask: \$${bestAsk.toStringAsFixed(4)}'
-                : 'No sell orders',
+            subLabel: 'Price: \$1.00 per QP',
             color: Colors.green.shade600,
             icon: Icons.trending_up,
             onTap: () => _showCashInSheet(context),
@@ -256,9 +247,7 @@ class _QuickActions extends StatelessWidget {
         Expanded(
           child: _ActionCard(
             label: 'Sell QP',
-            subLabel: bestBid != null
-                ? 'Best bid: \$${bestBid.toStringAsFixed(4)}'
-                : 'No buy orders',
+            subLabel: 'Price: \$1.00 per QP',
             color: Colors.red.shade600,
             icon: Icons.trending_down,
             onTap: () => _showCashOutSheet(context),
@@ -649,14 +638,12 @@ class _PlaceOrderSheet extends StatefulWidget {
 }
 
 class _PlaceOrderSheetState extends State<_PlaceOrderSheet> {
-  final _priceCtrl = TextEditingController();
   final _qtyCtrl = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   String _type = 'buy';
 
   @override
   void dispose() {
-    _priceCtrl.dispose();
     _qtyCtrl.dispose();
     super.dispose();
   }
@@ -693,9 +680,14 @@ class _PlaceOrderSheetState extends State<_PlaceOrderSheet> {
                   ),
                 ),
               ),
-              const Text('Place Limit Order',
+              const Text('Place Order',
                   style:
                       TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+              const SizedBox(height: 4),
+              const Text(
+                '1 Q Point = \$1.00 USD (fixed)',
+                style: TextStyle(color: Colors.black54, fontSize: 13),
+              ),
               const SizedBox(height: 20),
 
               // Buy / Sell toggle
@@ -719,23 +711,6 @@ class _PlaceOrderSheetState extends State<_PlaceOrderSheet> {
               const SizedBox(height: 16),
 
               TextFormField(
-                controller: _priceCtrl,
-                keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true),
-                decoration: const InputDecoration(
-                  labelText: 'Price per QP (USD)',
-                  prefixText: '\$ ',
-                  border: OutlineInputBorder(),
-                ),
-                validator: (v) {
-                  final n = double.tryParse(v ?? '');
-                  if (n == null || n <= 0) return 'Enter a valid price';
-                  return null;
-                },
-              ),
-              const SizedBox(height: 12),
-
-              TextFormField(
                 controller: _qtyCtrl,
                 keyboardType:
                     const TextInputType.numberWithOptions(decimal: true),
@@ -743,30 +718,28 @@ class _PlaceOrderSheetState extends State<_PlaceOrderSheet> {
                   labelText: 'Quantity (QP)',
                   border: OutlineInputBorder(),
                 ),
+                onChanged: (_) => setState(() {}),
                 validator: (v) {
                   final n = double.tryParse(v ?? '');
                   if (n == null || n <= 0) return 'Enter a valid quantity';
                   return null;
                 },
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 12),
 
-              // Estimated total
-              if (_priceCtrl.text.isNotEmpty && _qtyCtrl.text.isNotEmpty)
+              // Estimated total using fixed $1.00
+              if (_qtyCtrl.text.isNotEmpty)
                 Padding(
                   padding: const EdgeInsets.only(bottom: 12),
                   child: Text(
-                    'Estimated: \$${(double.tryParse(_priceCtrl.text) ?? 0) * (double.tryParse(_qtyCtrl.text) ?? 0)}'
-                        .replaceAllMapped(
-                      RegExp(r'(\d+)\.(\d{2})\d*'),
-                      (m) => '${m[1]}.${m[2]}',
-                    ),
+                    'Total: \$${(double.tryParse(_qtyCtrl.text) ?? 0).toStringAsFixed(2)}',
                     style: const TextStyle(
                       color: kMarketColor,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
+              const SizedBox(height: 8),
 
               SizedBox(
                 width: double.infinity,
@@ -784,7 +757,7 @@ class _PlaceOrderSheetState extends State<_PlaceOrderSheet> {
                           if (!_formKey.currentState!.validate()) return;
                           final err = await provider.placeOrder(
                             type: _type,
-                            price: double.parse(_priceCtrl.text),
+                            price: 1.0,
                             quantity: double.parse(_qtyCtrl.text),
                           );
                           if (!ctx.mounted) return;
@@ -885,11 +858,9 @@ class _CashInOutSheetState extends State<_CashInOutSheet> {
   Widget build(BuildContext context) {
     return Consumer<QPointMarketProvider>(
       builder: (ctx, provider, _) {
-        final refPrice = widget.isBuy
-            ? provider.orderBook?.bestAsk
-            : provider.orderBook?.bestBid;
+        const fixedPrice = 1.0;
         final qty = double.tryParse(_qtyCtrl.text) ?? 0;
-        final estimated = refPrice != null ? refPrice * qty : null;
+        final estimated = qty > 0 ? fixedPrice * qty : null;
         final isLoading =
             widget.isBuy ? provider.isCashingIn : provider.isCashingOut;
         final color =
@@ -927,26 +898,11 @@ class _CashInOutSheetState extends State<_CashInOutSheet> {
                   style: const TextStyle(
                       fontWeight: FontWeight.bold, fontSize: 18),
                 ),
-                if (refPrice != null)
-                  Padding(
+                Padding(
                     padding: const EdgeInsets.only(top: 6, bottom: 16),
                     child: Text(
-                      widget.isBuy
-                          ? 'Best ask: \$${refPrice.toStringAsFixed(4)}'
-                          : 'Best bid: \$${refPrice.toStringAsFixed(4)}',
-                      style:
-                          TextStyle(color: color, fontWeight: FontWeight.w500),
-                    ),
-                  )
-                else
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    child: Text(
-                      widget.isBuy
-                          ? 'No sell orders available. Place a limit buy order instead.'
-                          : 'No buy orders available. Place a limit sell order instead.',
-                      style: const TextStyle(
-                          color: Colors.orange, fontSize: 13),
+                      'Price: \$1.00 per QP (fixed)',
+                      style: TextStyle(color: color, fontWeight: FontWeight.w500),
                     ),
                   ),
                 TextFormField(
@@ -986,7 +942,7 @@ class _CashInOutSheetState extends State<_CashInOutSheet> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12)),
                     ),
-                    onPressed: (isLoading || refPrice == null)
+                    onPressed: isLoading
                         ? null
                         : () async {
                             if (!_formKey.currentState!.validate()) return;
