@@ -23,6 +23,7 @@ class ApiRoutes {
   static const places = _PlaceRoutes();
   static const subscriptions = _SubscriptionRoutes();
   static const ai = _AIRoutes();
+  static const revenue = _RevenueRoutes();
   static const health = _HealthRoutes();
   static const entityProfiles = _EntityProfileRoutes();
   static const favoriteDrivers = _FavoriteDriverRoutes();
@@ -452,4 +453,17 @@ class _GoRoutes {
   String get transactions    => '/go/transactions';
   String transactionById(String id) => '/go/transactions/$id';
   String get topup           => '/go/topup';
+}
+
+class _RevenueRoutes {
+  const _RevenueRoutes();
+
+  /// Admin: platform-wide revenue stats (totals by type + current month)
+  String get stats => '/admin/revenue/stats';
+
+  /// Admin: monthly transaction fee counters for a business entity
+  String entityFees(String entityId, {String? month}) {
+    final q = month != null ? '?month=$month' : '';
+    return '/admin/revenue/entities/$entityId/transaction-fees$q';
+  }
 }

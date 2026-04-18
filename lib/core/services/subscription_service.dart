@@ -32,10 +32,15 @@ class SubscriptionService {
   }
 
   /// Activate a subscription for a target.
+  ///
+  /// [staffCount] is required for per-staff billing (4 QP × staffCount for Basic, etc.).
+  /// [entityId]   is the business entity whose Q Points account is debited.
   Future<ApiResponse<Map<String, dynamic>>> activateSubscription({
     required String planId,
     required String targetType,
     required String targetId,
+    required String entityId,
+    int staffCount = 1,
   }) async {
     return _api.post<Map<String, dynamic>>(
       ApiRoutes.subscriptions.activate,
@@ -43,6 +48,8 @@ class SubscriptionService {
         'planId': planId,
         'targetType': targetType,
         'targetId': targetId,
+        'entityId': entityId,
+        'staffCount': staffCount,
       },
       fromJson: (json) => json as Map<String, dynamic>,
     );

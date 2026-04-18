@@ -99,8 +99,9 @@ enum TaskStatus { todo, inProgress, completed, overdue, blocked, cancelled }
 /// Goal status
 enum GoalStatus { onTrack, ahead, atRisk, behind, needsAttention, completed }
 
-/// Subscription plan
-enum SubscriptionPlan { free, basic, premium, enterprise }
+/// Subscription plan — matches backend SubscriptionTier enum
+/// Pricing: free=0 QP, basic=4 QP/staff, professional=8 QP/staff, enterprise=12 QP/staff
+enum SubscriptionPlan { free, basic, professional, enterprise }
 
 // ─── Hub Dashboard Models ───────────────────────────────────────────────────
 
@@ -1112,7 +1113,16 @@ class UserProfile {
 
 class SubscriptionInfo {
   final SubscriptionPlan plan;
+
+  /// Actual monthly cost in Q Points = pricePerStaffQPoints × staffCount
   final double monthlyPrice;
+
+  /// Per-staff Q Point rate (4 basic / 8 professional / 12 enterprise)
+  final double pricePerStaffQPoints;
+
+  /// Active staff count used for billing
+  final int staffCount;
+
   final bool isActive;
   final DateTime? renewalDate;
   final bool autoRenew;
@@ -1124,9 +1134,29 @@ class SubscriptionInfo {
   final int apiCallsUsed;
   final double utilizationPercent;
 
+  /// Whether the entity is in its first-month free trial
+  final bool isInFreeTrial;
+
+  /// When the free trial ends (null if not in trial)
+  final DateTime? freeTrialEndsAt;
+
+  /// Monthly transactions this calendar month
+  final int txCountThisMonth;
+
+  /// Free transaction quota (100 for paid plans, 0 during trial)
+  final int txFreeQuota;
+
+  /// Whether this plan includes native social features
+  final bool includesSocialFeatures;
+
+  /// Whether this plan includes marketing tools
+  final bool includesMarketingTools;
+
   const SubscriptionInfo({
     required this.plan,
     required this.monthlyPrice,
+    this.pricePerStaffQPoints = 4.0,
+    this.staffCount = 1,
     this.isActive = true,
     this.renewalDate,
     this.autoRenew = true,
@@ -1137,7 +1167,19 @@ class SubscriptionInfo {
     this.apiCallLimit = 50000,
     this.apiCallsUsed = 0,
     this.utilizationPercent = 0.0,
+    this.isInFreeTrial = false,
+    this.freeTrialEndsAt = null,
+    this.txCountThisMonth = 0,
+    this.txFreeQuota = 100,
+    this.includesSocialFeatures = false,
+    this.includesMarketingTools = false,
   });
+
+  /// Transactions still in the free quota this month
+  int get txFreeRemaining => (txFreeQuota - txCountThisMonth).clamp(0, txFreeQuota);
+
+  /// Chargeable transactions this month
+  int get txChargeable => (txCountThisMonth - txFreeQuota).clamp(0, txCountThisMonth);
 
   String get planName {
     switch (plan) {
@@ -1145,8 +1187,8 @@ class SubscriptionInfo {
         return 'Free';
       case SubscriptionPlan.basic:
         return 'Basic';
-      case SubscriptionPlan.premium:
-        return 'Premium';
+      case SubscriptionPlan.professional:
+        return 'Professional';
       case SubscriptionPlan.enterprise:
         return 'Enterprise';
     }
@@ -1158,7 +1200,7 @@ class SubscriptionInfo {
         return Icons.star_border;
       case SubscriptionPlan.basic:
         return Icons.star_half;
-      case SubscriptionPlan.premium:
+      case SubscriptionPlan.professional:
         return Icons.diamond;
       case SubscriptionPlan.enterprise:
         return Icons.workspace_premium;
@@ -1168,6 +1210,11 @@ class SubscriptionInfo {
   int get daysUntilRenewal =>
       renewalDate != null
           ? renewalDate!.difference(DateTime.now()).inDays
+          : 0;
+
+  int get daysInFreeTrial =>
+      freeTrialEndsAt != null
+          ? freeTrialEndsAt!.difference(DateTime.now()).inDays.clamp(0, 30)
           : 0;
 }
 

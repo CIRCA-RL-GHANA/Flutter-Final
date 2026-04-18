@@ -1097,9 +1097,9 @@ class SetupDashboardProvider extends ChangeNotifier {
   SubscriptionInfo get subscription =>
       _subscriptionInfo ??
       SubscriptionInfo(
-        plan: SubscriptionPlan.premium,
-        monthlyPrice: 500.0,
-        renewalDate: DateTime.now().add(const Duration(days: 15)),
+        plan: SubscriptionPlan.basic,
+        monthlyPrice: 0,
+        renewalDate: DateTime.now().add(const Duration(days: 30)),
         staffLimit: 50,
         staffUsed: 12,
         storageGB: 100,
@@ -1107,6 +1107,14 @@ class SetupDashboardProvider extends ChangeNotifier {
         apiCallLimit: 50000,
         apiCallsUsed: 12450,
         utilizationPercent: 75.0,
+        staffCount: 12,
+        pricePerStaffQPoints: 4,
+        isInFreeTrial: true,
+        freeTrialEndsAt: DateTime.now().add(const Duration(days: 30)),
+        includesSocialFeatures: false,
+        includesMarketingTools: false,
+        monthlyTransactionCount: 0,
+        freeTransactionQuota: 100,
       );
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -1839,6 +1847,16 @@ class SetupDashboardProvider extends ChangeNotifier {
       apiCallsUsed: (json['apiCallsUsed'] as num?)?.toInt() ?? 0,
       utilizationPercent:
           (json['utilizationPercent'] as num?)?.toDouble() ?? 0,
+      staffCount: (json['staffCount'] as num?)?.toInt() ?? 1,
+      pricePerStaffQPoints: (json['pricePerStaffQPoints'] as num?)?.toDouble() ?? 0,
+      isInFreeTrial: json['isInFreeTrial'] as bool? ?? false,
+      freeTrialEndsAt: json['freeTrialEndsAt'] != null
+          ? DateTime.tryParse(json['freeTrialEndsAt'].toString())
+          : null,
+      includesSocialFeatures: json['includesSocialFeatures'] as bool? ?? false,
+      includesMarketingTools: json['includesMarketingTools'] as bool? ?? false,
+      monthlyTransactionCount: (json['monthlyTransactionCount'] as num?)?.toInt() ?? 0,
+      freeTransactionQuota: (json['freeTransactionQuota'] as num?)?.toInt() ?? 100,
     );
   }
 

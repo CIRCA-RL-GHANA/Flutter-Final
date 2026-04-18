@@ -57,22 +57,43 @@ class SubscriptionScreen extends StatelessWidget {
                           style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w700, color: AppColors.textPrimary),
                         ),
                         const SizedBox(height: 4),
-                        Text(
-                          '₵${sub.monthlyPrice.toStringAsFixed(0)}/month',
-                          style: const TextStyle(fontSize: 16, color: AppColors.textSecondary),
-                        ),
+                        // Per-staff pricing
+                        if (sub.plan != SubscriptionPlan.free)
+                          Text(
+                            '${sub.pricePerStaffQPoints.toStringAsFixed(0)} QP × ${sub.staffCount} staff / month',
+                            style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
+                          ),
+                        if (sub.plan == SubscriptionPlan.free)
+                          const Text(
+                            'Free — no charge',
+                            style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
+                          ),
                         const SizedBox(height: 12),
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                          decoration: BoxDecoration(
-                            color: AppColors.info.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(12),
+                        // Free trial badge
+                        if (sub.isInFreeTrial)
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                            decoration: BoxDecoration(
+                              color: AppColors.success.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Text(
+                              '✨ Free Trial — ${sub.daysInFreeTrial} days left',
+                              style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: AppColors.success),
+                            ),
+                          )
+                        else
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                            decoration: BoxDecoration(
+                              color: AppColors.info.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Text(
+                              'Renews in ${sub.daysUntilRenewal} days',
+                              style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: AppColors.info),
+                            ),
                           ),
-                          child: Text(
-                            'Renews in ${sub.renewalDate?.difference(DateTime.now()).inDays ?? 0} days',
-                            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: AppColors.info),
-                          ),
-                        ),
                       ],
                     ),
                   ),
@@ -139,6 +160,16 @@ class SubscriptionScreen extends StatelessWidget {
                         limit: sub.apiCallLimit.toDouble(),
                         icon: Icons.api,
                       ),
+                      const SizedBox(height: 10),
+                      _UsageBar(
+                        label: 'Free Transactions',
+                        used: sub.monthlyTransactionCount.toDouble(),
+                        limit: sub.freeTransactionQuota.toDouble(),
+                        icon: Icons.receipt_long,
+                        overageNote: sub.monthlyTransactionCount > sub.freeTransactionQuota
+                            ? '${sub.monthlyTransactionCount - sub.freeTransactionQuota} × 0.02 QP fee'
+                            : null,
+                      ),
                     ],
                   ),
                 ),
@@ -158,8 +189,8 @@ class SubscriptionScreen extends StatelessWidget {
                             _FeatureRow(label: 'Staff Members', value: '${sub.staffLimit}', included: true),
                             _FeatureRow(label: 'Cloud Storage', value: '${sub.storageGB.toStringAsFixed(0)} GB', included: true),
                             _FeatureRow(label: 'API Calls / month', value: '${sub.apiCallLimit}', included: true),
-                            _FeatureRow(label: 'Priority Support', value: sub.plan == SubscriptionPlan.premium || sub.plan == SubscriptionPlan.enterprise ? 'Yes' : 'No', included: sub.plan == SubscriptionPlan.premium || sub.plan == SubscriptionPlan.enterprise),
-                            _FeatureRow(label: 'Custom Reports', value: sub.plan == SubscriptionPlan.enterprise ? 'Yes' : 'No', included: sub.plan == SubscriptionPlan.enterprise),
+                            _FeatureRow(label: 'Social Features', value: sub.includesSocialFeatures ? 'Included' : 'Not included', included: sub.includesSocialFeatures),
+                            _FeatureRow(label: 'Marketing Tools', value: sub.includesMarketingTools ? 'Included' : 'Not included', included: sub.includesMarketingTools),
                             _FeatureRow(label: 'Auto Renewal', value: sub.autoRenew ? 'Enabled' : 'Disabled', included: sub.autoRenew),
                           ],
                         ),
@@ -249,7 +280,7 @@ class SubscriptionScreen extends StatelessWidget {
         return AppColors.textTertiary;
       case SubscriptionPlan.basic:
         return AppColors.info;
-      case SubscriptionPlan.premium:
+      case SubscriptionPlan.professional:
         return AppColors.accent;
       case SubscriptionPlan.enterprise:
         return const Color(0xFF8B5CF6);
@@ -263,6 +294,7 @@ class _UsageBar extends StatelessWidget {
   final double limit;
   final String? unit;
   final IconData icon;
+  final String? overageNote;
 
   const _UsageBar({
     required this.label,
@@ -270,6 +302,7 @@ class _UsageBar extends StatelessWidget {
     required this.limit,
     this.unit,
     required this.icon,
+    this.overageNote,
   });
 
   @override
@@ -307,6 +340,10 @@ class _UsageBar extends StatelessWidget {
               minHeight: 6,
             ),
           ),
+          if (overageNote != null) ...[  
+            const SizedBox(height: 4),
+            Text(overageNote!, style: const TextStyle(fontSize: 11, color: AppColors.warning, fontWeight: FontWeight.w500)),
+          ],
         ],
       ),
     );

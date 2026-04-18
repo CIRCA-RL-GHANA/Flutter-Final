@@ -7,50 +7,53 @@ import 'ai_service.dart';
 class ChatService extends ChangeNotifier {
   final Dio _dio;
   final AIService _aiService;
-  static const String _baseEndpoint = '/chat';
+  // Base social endpoint — all chat routes are nested under /social
+  static const String _baseEndpoint = '/social';
 
   ChatService(this._dio, [AIService? aiService])
       : _aiService = aiService ?? AIService();
 
-  // Get conversations
+  // Get chat sessions (backend: GET /social/chat/sessions)
   Future<List<Map<String, dynamic>>> getConversations({
     int page = 1,
     int limit = 20,
   }) async {
     try {
       final response = await _dio.get(
-        '$_baseEndpoint/conversations',
+        '$_baseEndpoint/chat/sessions',
         queryParameters: {
           'page': page,
           'limit': limit,
-          'sortBy': 'updatedAt',
-          'sortOrder': 'DESC',
         },
       );
 
       final data = response.data['data'];
+      if (data is List) {
+        return List<Map<String, dynamic>>.from(data);
+      }
       if (data is Map && data.containsKey('items')) {
         return List<Map<String, dynamic>>.from(data['items']);
       }
       return [];
     } catch (e) {
-      debugPrint('[ChatService] Error fetching conversations: $e');
+      debugPrint('[ChatService] Error fetching sessions: $e');
       return [];
     }
   }
 
-  // Get conversation details
+  // Get or create a chat session (backend: POST /social/chat/sessions)
   Future<Map<String, dynamic>?> getConversation(String conversationId) async {
+    // The backend does not expose a GET-by-id for sessions;
+    // return from the session list instead.
+    final sessions = await getConversations();
     try {
-      final response = await _dio.get('$_baseEndpoint/conversations/$conversationId');
-      return response.data['data'];
-    } catch (e) {
-      debugPrint('[ChatService] Error fetching conversation: $e');
+      return sessions.firstWhere((s) => s['id'] == conversationId);
+    } catch (_) {
       return null;
     }
   }
 
-  // Get messages for conversation
+  // Get messages for a session (backend: GET /social/chat/sessions/:sessionId/messages)
   Future<List<Map<String, dynamic>>> getMessages(
     String conversationId, {
     int page = 1,
@@ -58,14 +61,16 @@ class ChatService extends ChangeNotifier {
   }) async {
     try {
       final response = await _dio.get(
-        '$_baseEndpoint/$conversationId/messages',
+        '$_baseEndpoint/chat/sessions/$conversationId/messages',
         queryParameters: {
-          'page': page,
           'limit': limit,
         },
       );
 
       final data = response.data['data'];
+      if (data is List) {
+        return List<Map<String, dynamic>>.from(data);
+      }
       if (data is Map && data.containsKey('items')) {
         return List<Map<String, dynamic>>.from(data['items']);
       }
@@ -76,83 +81,62 @@ class ChatService extends ChangeNotifier {
     }
   }
 
-  // Create conversation
+  // Create / get-or-create chat session (backend: POST /social/chat/sessions)
   Future<Map<String, dynamic>?> createConversation({
     required List<String> participantIds,
     String type = 'direct',
   }) async {
+    if (participantIds.length < 2) return null;
     try {
       final response = await _dio.post(
-        '$_baseEndpoint/conversations',
+        '$_baseEndpoint/chat/sessions',
         data: {
-          'participantIds': participantIds,
-          'type': type,
+          'user1Id': participantIds[0],
+          'user2Id': participantIds[1],
         },
       );
-
       return response.data['data'];
     } catch (e) {
-      debugPrint('[ChatService] Error creating conversation: $e');
+      debugPrint('[ChatService] Error creating session: $e');
       return null;
     }
   }
 
-  // Delete message
+  // Send a chat message (backend: POST /social/chat/messages)
   Future<bool> deleteMessage(String messageId) async {
-    try {
-      await _dio.delete('$_baseEndpoint/messages/$messageId');
-      return true;
-    } catch (e) {
-      debugPrint('[ChatService] Error deleting message: $e');
-      return false;
-    }
+    // The backend does not expose a message-delete endpoint;
+    // return false gracefully so callers can handle accordingly.
+    debugPrint('[ChatService] deleteMessage not supported by backend');
+    return false;
   }
 
-  // Archive conversation
+  // Mark session as read (backend: PUT /social/chat/sessions/:sessionId/read)
   Future<bool> archiveConversation(String conversationId) async {
+    // The backend does not expose an archive endpoint;
+    // map to mark-as-read as the closest available action.
     try {
-      await _dio.patch(
-        '$_baseEndpoint/conversations/$conversationId',
-        data: {'isArchived': true},
-      );
+      await _dio.put('$_baseEndpoint/chat/sessions/$conversationId/read');
       return true;
     } catch (e) {
-      debugPrint('[ChatService] Error archiving conversation: $e');
+      debugPrint('[ChatService] Error marking session read: $e');
       return false;
     }
   }
 
-  // Unarchive conversation
+  // Unarchive — no backend equivalent; no-op.
   Future<bool> unarchiveConversation(String conversationId) async {
-    try {
-      await _dio.patch(
-        '$_baseEndpoint/conversations/$conversationId',
-        data: {'isArchived': false},
-      );
-      return true;
-    } catch (e) {
-      debugPrint('[ChatService] Error unarchiving: $e');
-      return false;
-    }
+    return true;
   }
 
-  // Search conversations
+  // Search conversations — no backend search endpoint; filter client-side.
   Future<List<Map<String, dynamic>>> searchConversations(String query) async {
-    try {
-      final response = await _dio.get(
-        '$_baseEndpoint/conversations/search',
-        queryParameters: {'q': query},
-      );
-
-      final data = response.data['data'];
-      if (data is List) {
-        return List<Map<String, dynamic>>.from(data);
-      }
-      return [];
-    } catch (e) {
-      debugPrint('[ChatService] Error searching: $e');
-      return [];
-    }
+    final sessions = await getConversations(limit: 100);
+    final q = query.toLowerCase();
+    return sessions
+        .where((s) =>
+            s['recipientName']?.toString().toLowerCase().contains(q) == true ||
+            s['lastMessage']?.toString().toLowerCase().contains(q) == true)
+        .toList();
   }
 
   // ═══════════════════════════════════════════════════════════════════════

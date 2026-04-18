@@ -19,6 +19,11 @@ class ApiClient {
   static ApiClient? _instance;
   static ApiClient get instance => _instance ??= ApiClient._();
 
+  /// Expose the underlying Dio instance for services that construct with a
+  /// raw Dio (e.g. ChatService, OrdersService).  The instance carries all
+  /// configured interceptors, base URL and timeout settings.
+  Dio get dio => _dio;
+
   ApiClient._() {
     _dio = Dio(
       BaseOptions(

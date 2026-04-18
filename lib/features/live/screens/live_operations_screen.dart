@@ -35,7 +35,7 @@ class _LiveOperationsScreenState extends ConsumerState<LiveOperationsScreen> {
     {
       'title': 'Exclusive Webinar',
       'subtitle': 'Expert tips and tricks',
-      'icon': Icons.presentation,
+      'icon': Icons.present_to_all,
       'time': '1 hour ago',
       'participants': 'Recording available',
     },

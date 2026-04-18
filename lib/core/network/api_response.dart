@@ -56,6 +56,9 @@ class ApiResponse<T> {
     );
   }
 
+  /// Alias for [success] — preferred form used throughout service layer.
+  bool get isSuccess => success;
+
   /// Whether this response has data
   bool get hasData => data != null;
 
