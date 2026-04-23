@@ -36,10 +36,15 @@ class BranchesScreen extends StatelessWidget {
             ),
             floatingActionButton: SetupRbacFAB(
               cardId: 'branches',
-              onPressed: () {
-                context.read<SetupDashboardProvider>().selectBranch(null);
-                Navigator.pushNamed(context, AppRoutes.setupBranchDetail);
-              },
+              onPressed: () => showSetupOtpGuard(
+                context,
+                cardId: 'branches',
+                action: 'create',
+                onVerified: () {
+                  context.read<SetupDashboardProvider>().selectBranch(null);
+                  Navigator.pushNamed(context, AppRoutes.setupBranchDetail);
+                },
+              ),
               label: 'Add Branch',
               icon: Icons.add,
             ),

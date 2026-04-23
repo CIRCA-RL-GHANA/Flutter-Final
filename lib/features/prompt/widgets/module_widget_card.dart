@@ -176,6 +176,13 @@ class _NormalCard extends StatelessWidget {
                   child: AbsorbPointer(
                     child: Container(
                       color: Colors.transparent,
+                      child: const Center(
+                        child: Icon(
+                          Icons.lock_outline,
+                          color: Colors.black45,
+                          size: 28,
+                        ),
+                      ),
                     ),
                   ),
                 ),

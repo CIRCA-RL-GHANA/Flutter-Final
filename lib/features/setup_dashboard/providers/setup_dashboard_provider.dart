@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import '../../../core/services/services.dart';
 import '../../prompt/models/rbac_models.dart';
 import '../models/setup_dashboard_models.dart';
+import '../models/setup_rbac.dart';
 
 class SetupDashboardProvider extends ChangeNotifier {
   // ═══════════════════════════════════════════════════════════════════════════
@@ -361,6 +362,30 @@ class SetupDashboardProvider extends ChangeNotifier {
         level == CardAccessLevel.branchViewOnly;
   }
 
+  // ═══════════════════════════════════════════════════════════════════════════
+  // RBAC AUTHORITY DELEGATION — delegates to SetupDashboardRBAC
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  /// Full action-level permission for a card + role pair.
+  SetupActionPermission getActionPermission(String cardId, UserRole role) =>
+      SetupDashboardRBAC.getActionPermission(cardId, role);
+
+  /// Whether [role] can export [dataType].
+  bool canExportData(String dataType, UserRole role) =>
+      SetupDashboardRBAC.canExport(dataType, role);
+
+  /// Whether [action] on [cardId] requires OTP for [role].
+  bool requiresOtpFor(String cardId, String action, UserRole role) =>
+      SetupDashboardRBAC.requiresOtpFor(cardId, action, role);
+
+  /// Whether [role] sees [cardId] in redacted mode (PII masked).
+  bool isRedactedView(String cardId, UserRole role) =>
+      SetupDashboardRBAC.isRedactedView(cardId, role);
+
+  /// Tooltip / snackbar message for a locked feature, or null if no tooltip.
+  String? getTooltipMessage(String cardId, UserRole role) =>
+      SetupDashboardRBAC.getTooltipMessage(cardId, role);
+
   static final Map<String, Map<UserRole, CardAccessLevel>> _rbacMatrix = {
     'products': {
       UserRole.administrator: CardAccessLevel.fullAccess,
@@ -412,6 +437,8 @@ class SetupDashboardProvider extends ChangeNotifier {
       UserRole.owner: CardAccessLevel.fullAccess,
       UserRole.administrator: CardAccessLevel.fullAccess,
       UserRole.branchManager: CardAccessLevel.branchScoped,
+      UserRole.socialOfficer: CardAccessLevel.viewOnly,
+      UserRole.branchSocialOfficer: CardAccessLevel.branchViewOnly,
       UserRole.monitor: CardAccessLevel.viewOnly,
       UserRole.branchMonitor: CardAccessLevel.branchViewOnly,
       UserRole.responseOfficer: CardAccessLevel.viewOnly,

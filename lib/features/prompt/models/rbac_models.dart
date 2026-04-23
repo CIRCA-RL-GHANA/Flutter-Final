@@ -257,7 +257,7 @@ class WidgetVisibility {
         return {
           PromptModule.goPage: _hidden,
           PromptModule.market: _hidden,
-          PromptModule.myUpdates: _hidden,
+          PromptModule.myUpdates: _fullAccess,
           PromptModule.setupDashboard: _partial, // Engagement row emphasis
           PromptModule.alerts: _fullAccess,
           PromptModule.live: _hidden,
@@ -286,7 +286,7 @@ class WidgetVisibility {
           PromptModule.goPage: _hidden,
           PromptModule.market: _hidden,
           PromptModule.myUpdates: _hidden,
-          PromptModule.setupDashboard: _hidden,
+          PromptModule.setupDashboard: _partial,
           PromptModule.alerts: _fullAccess,
           PromptModule.live: _fullAccess,
           PromptModule.qualChat: _fullAccess,
@@ -299,8 +299,8 @@ class WidgetVisibility {
           PromptModule.goPage: _hidden,
           PromptModule.market: _hidden,
           PromptModule.myUpdates: _hidden,
-          PromptModule.setupDashboard: _hidden,
-          PromptModule.alerts: _fullAccess,
+          PromptModule.setupDashboard: _partial,
+          PromptModule.alerts: _hidden,
           PromptModule.live: _fullAccess,
           PromptModule.qualChat: _fullAccess,
           PromptModule.april: _hidden,

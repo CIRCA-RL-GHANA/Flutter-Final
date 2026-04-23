@@ -132,12 +132,17 @@ class _SetupDashboardScreenState extends State<SetupDashboardScreen> {
                                 ),
                                 itemCount: rowCards.length,
                                 itemBuilder: (context, i) {
+                                  final card = rowCards[i];
                                   return SetupModuleCard(
-                                    card: rowCards[i],
-                                    onTap: () => Navigator.pushNamed(
-                                      context,
-                                      rowCards[i].route,
-                                    ),
+                                    card: card,
+                                    onTap: () {
+                                      // For view-only cards, navigate but also show
+                                      // a brief tooltip so users know their access level.
+                                      if (card.isViewOnly) {
+                                        showSetupRbacTooltip(context, card.id);
+                                      }
+                                      Navigator.pushNamed(context, card.route);
+                                    },
                                   );
                                 },
                               );
@@ -163,13 +168,9 @@ class _SetupDashboardScreenState extends State<SetupDashboardScreen> {
                   ),
 
                 // ─── SOS Button (Owner/Admin/BranchManager only) ──
-                if (WidgetVisibility.canSeeSOS(role))
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 24, 20, 0),
-                      child: _SOSButton(),
-                    ),
-                  ),
+                SliverToBoxAdapter(
+                  child: SetupSOSButton(onPressed: () {}),
+                ),
 
                 // ─── Bottom Spacer ────────────────────────────
                 const SliverToBoxAdapter(child: SizedBox(height: 100)),
@@ -407,53 +408,6 @@ class _SearchBar extends StatelessWidget {
           ),
           const SizedBox(width: 14),
         ],
-      ),
-    );
-  }
-}
-
-// ─── SOS Button ──────────────────────────────────────────────────────────────
-
-class _SOSButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        HapticFeedback.heavyImpact();
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('SOS Alert Sent'),
-            backgroundColor: AppColors.error,
-          ),
-        );
-      },
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              AppColors.error.withOpacity(0.1),
-              AppColors.error.withOpacity(0.05),
-            ],
-          ),
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: AppColors.error.withOpacity(0.2)),
-        ),
-        child: const Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.sos, size: 24, color: AppColors.error),
-            SizedBox(width: 10),
-            Text(
-              'Emergency SOS',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
-                color: AppColors.error,
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

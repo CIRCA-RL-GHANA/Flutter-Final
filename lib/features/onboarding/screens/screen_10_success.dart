@@ -287,14 +287,14 @@ class _SuccessScreenState extends State<SuccessScreen>
                       padding: const EdgeInsets.symmetric(horizontal: 24),
                       child: Column(
                         children: [
-                          // Primary: Explore PROMPT
+                          // Primary: Explore Genie
                           PrimaryButton(
                             text: AppStrings.explorePrompt,
-                            icon: Icons.arrow_forward,
+                            icon: Icons.auto_awesome,
                             onPressed: () {
-                              // Navigate to main app
+                              // Navigate to Genie home (replaces PROMPT screen)
                               Navigator.of(context)
-                                  .pushReplacementNamed(AppRoutes.promptScreen);
+                                  .pushReplacementNamed(AppRoutes.genieHome);
                             },
                             margin: EdgeInsets.zero,
                           ),
@@ -319,7 +319,7 @@ class _SuccessScreenState extends State<SuccessScreen>
                             color: Colors.white60,
                             onPressed: () {
                               Navigator.of(context)
-                                  .pushReplacementNamed(AppRoutes.promptScreen);
+                                  .pushReplacementNamed(AppRoutes.genieHome);
                             },
                           ),
                         ],

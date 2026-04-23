@@ -15,6 +15,7 @@ import '../../features/onboarding/screens/screen_11_tutorial.dart';
 import '../../features/onboarding/screens/screen_12_welcome_back.dart';
 import '../../features/onboarding/screens/screen_13_error_recovery.dart';
 import '../screens/prompt_screen.dart';
+import '../../genie/genie_screen.dart';
 // User Details Screens
 import '../../features/user_details/screens/user_details_master_screen.dart';
 import '../../features/user_details/screens/context_management_screen.dart';
@@ -211,6 +212,9 @@ class AppRoutes {
   // Main App Routes
   static const String promptScreen = '/prompt';
   static const String home = '/home';
+  /// Genie is the new default home; PromptScreen is kept as classic fallback.
+  static const String genieHome = '/genie';
+  static const String classicDashboard = '/classic-dashboard';
 
   // User Details Module Routes
   static const String userDetailsMaster = '/user-details';
@@ -441,8 +445,11 @@ class AppRoutes {
           ),
           settings,
         );
-      case promptScreen:
+      case genieHome:
       case home:
+        return _buildRoute(const GenieScreen(), settings);
+      case promptScreen:
+      case classicDashboard:
         return _buildRoute(const PromptScreen(), settings);
 
       // User Details Module

@@ -562,31 +562,35 @@ class _SettingsTab extends StatelessWidget {
 
         // Danger Zone
         const SizedBox(height: 16),
-        SetupSectionCard(
-          borderColor: AppColors.error.withOpacity(0.3),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SetupSectionTitle(
-                title: 'Danger Zone',
-                icon: Icons.warning_amber,
-                iconColor: AppColors.error,
-              ),
-              SetupActionTile(
-                icon: Icons.pause_circle_outline,
-                label: 'Pause Discount',
-                subtitle: 'Temporarily disable this discount tier',
-                onTap: () {},
-              ),
-              const SizedBox(height: 8),
-              SetupActionTile(
-                icon: Icons.delete_outline,
-                label: 'Delete Discount',
-                subtitle: 'Permanently remove this discount tier',
-                onTap: () {},
-                iconColor: AppColors.error,
-              ),
-            ],
+        SetupActionGuard(
+          cardId: 'discounts',
+          requireDelete: true,
+          child: SetupSectionCard(
+            borderColor: AppColors.error.withOpacity(0.3),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SetupSectionTitle(
+                  title: 'Danger Zone',
+                  icon: Icons.warning_amber,
+                  iconColor: AppColors.error,
+                ),
+                SetupActionTile(
+                  icon: Icons.pause_circle_outline,
+                  label: 'Pause Discount',
+                  subtitle: 'Temporarily disable this discount tier',
+                  onTap: () {},
+                ),
+                const SizedBox(height: 8),
+                SetupActionTile(
+                  icon: Icons.delete_outline,
+                  label: 'Delete Discount',
+                  subtitle: 'Permanently remove this discount tier',
+                  onTap: () {},
+                  iconColor: AppColors.error,
+                ),
+              ],
+            ),
           ),
         ),
         const SizedBox(height: 80),

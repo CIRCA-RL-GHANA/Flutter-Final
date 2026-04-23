@@ -9,8 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../prompt/models/rbac_models.dart';
 import '../../prompt/providers/context_provider.dart';
 import '../models/setup_dashboard_models.dart';
+import '../models/setup_rbac.dart';
 import '../providers/setup_dashboard_provider.dart';
 import '../widgets/shared_widgets.dart';
 
@@ -23,18 +25,40 @@ class AuditScreen extends StatelessWidget {
       builder: (context, setupProv, ctxProv, _) {
         final entries = setupProv.filteredAuditEntries;
 
+        final role = ctxProv.currentRole;
+        final isRedacted = SetupDashboardRBAC.isRedactedView('activity_log', role);
+
         return SetupRbacGate(
-          cardId: 'audit',
+          cardId: 'activity_log',
           child: Scaffold(
             backgroundColor: const Color(0xFFF8F9FC),
             appBar: SetupAppBar(
               title: 'Activity Log',
               actions: [
-                DataScopeIndicator(access: setupProv.getCardAccess('audit', ctxProv.currentRole)),
-                SizedBox(width: 16),
+                SetupExportButton(
+                  dataType: role == UserRole.administrator
+                      ? 'audit_full'
+                      : 'audit_branch',
+                  cardId: 'activity_log',
+                  onExport: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Exporting audit log…'),
+                        behavior: SnackBarBehavior.floating,
+                      ),
+                    );
+                  },
+                ),
+                const SizedBox(width: 4),
+                DataScopeIndicator(access: setupProv.getCardAccess('activity_log', role)),
+                const SizedBox(width: 16),
               ],
             ),
-          body: CustomScrollView(
+          body: Column(
+            children: [
+              if (isRedacted) const SetupRedactedBanner(),
+              Expanded(
+                child: CustomScrollView(
             slivers: [
               // ─── KPI Summary ──────────────────────────────
               SliverToBoxAdapter(
@@ -202,17 +226,20 @@ class AuditScreen extends StatelessWidget {
                   },
                 ),
               ),
-                SliverPadding(
+              SliverPadding(
                   padding: const EdgeInsets.fromLTRB(20, 16, 20, 100),
                   sliver: SliverList(
                     delegate: SliverChildBuilderDelegate(
-                      (context, i) => _AuditEntryCard(entry: entries[i]),
+                      (context, i) => _AuditEntryCard(entry: entries[i], isRedacted: isRedacted),
                       childCount: entries.length,
                     ),
                   ),
                 ),
             ],
           ),
+        ),
+              ],
+            ),
         ),
         );
       },
@@ -237,7 +264,14 @@ class AuditScreen extends StatelessWidget {
 
 class _AuditEntryCard extends StatelessWidget {
   final AuditEntry entry;
-  const _AuditEntryCard({required this.entry});
+  final bool isRedacted;
+  const _AuditEntryCard({required this.entry, this.isRedacted = false});
+
+  // PII masking helpers
+  String get _displayUser => isRedacted ? '● ● ● ● ●' : entry.userName;
+  String get _displayRole => isRedacted ? 'Redacted' : entry.userRole;
+  String? get _displayIp => isRedacted ? null : entry.ipAddress;
+  String? get _displayDevice => isRedacted ? null : entry.deviceInfo;
 
   @override
   Widget build(BuildContext context) {
@@ -292,7 +326,7 @@ class _AuditEntryCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '${entry.userName} · ${entry.userRole}',
+                      '${_displayUser} · ${_displayRole}',
                       style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                     ),
                   ],
@@ -313,22 +347,22 @@ class _AuditEntryCard extends StatelessWidget {
                 setupTimeAgo(entry.timestamp),
                 style: const TextStyle(fontSize: 10, color: AppColors.textTertiary),
               ),
-              if (entry.ipAddress != null) ...[
+              if (_displayIp != null) ...[
                 const SizedBox(width: 12),
                 const Icon(Icons.location_on, size: 12, color: AppColors.textTertiary),
                 const SizedBox(width: 4),
                 Text(
-                  entry.ipAddress!,
+                  _displayIp!,
                   style: const TextStyle(fontSize: 10, color: AppColors.textTertiary),
                 ),
               ],
-              if (entry.deviceInfo != null) ...[
+              if (_displayDevice != null) ...[
                 const SizedBox(width: 12),
                 const Icon(Icons.devices, size: 12, color: AppColors.textTertiary),
                 const SizedBox(width: 4),
                 Expanded(
                   child: Text(
-                    entry.deviceInfo!,
+                    _displayDevice!,
                     style: const TextStyle(fontSize: 10, color: AppColors.textTertiary),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,

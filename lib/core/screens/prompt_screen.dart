@@ -36,6 +36,7 @@ import '../../features/user_details/providers/user_details_provider.dart';
 import '../../features/utility/providers/utility_provider.dart';
 import '../../features/setup_dashboard/providers/setup_dashboard_provider.dart';
 import '../theme/app_colors.dart';
+import '../routes/app_routes.dart';
 
 class PromptScreen extends StatefulWidget {
   const PromptScreen({super.key});
@@ -235,16 +236,33 @@ class _PromptScreenState extends State<PromptScreen> {
 
   void _onModuleTap(BuildContext context, PromptModule module) {
     HapticFeedback.lightImpact();
-    // Navigate to the full module screen
-    // In production: Navigator.pushNamed(context, module.route);
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Opening ${ModuleInfo.forModule(module).name}...'),
-        duration: const Duration(seconds: 1),
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      ),
-    );
+    final route = _routeForModule(module);
+    if (route != null) Navigator.pushNamed(context, route);
+  }
+
+  String? _routeForModule(PromptModule module) {
+    switch (module) {
+      case PromptModule.goPage:
+        return AppRoutes.goHub;
+      case PromptModule.market:
+        return AppRoutes.marketHub;
+      case PromptModule.myUpdates:
+        return AppRoutes.updatesFeed;
+      case PromptModule.setupDashboard:
+        return AppRoutes.setupDashboard;
+      case PromptModule.alerts:
+        return AppRoutes.alerts;
+      case PromptModule.live:
+        return AppRoutes.liveDashboard;
+      case PromptModule.qualChat:
+        return AppRoutes.qualChatDashboard;
+      case PromptModule.april:
+        return AppRoutes.aprilDashboard;
+      case PromptModule.userDetails:
+        return AppRoutes.userDetailsMaster;
+      case PromptModule.utility:
+        return AppRoutes.utilityDashboard;
+    }
   }
 
   void _onModuleLongPress(BuildContext context, PromptModule module) {
@@ -511,17 +529,14 @@ class _AddEntityFAB extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final role = contextProvider.currentRole;
+    if (role != UserRole.owner && role != UserRole.administrator) {
+      return const SizedBox.shrink();
+    }
     return FloatingActionButton.extended(
       onPressed: () {
         HapticFeedback.lightImpact();
-        // In production: navigate to entity creation flow
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: const Text('Add Entity flow coming soon...'),
-            behavior: SnackBarBehavior.floating,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          ),
-        );
+        Navigator.pushNamed(context, AppRoutes.userDetailsCreateEntity);
       },
       icon: const Icon(Icons.add, size: 20),
       label: const Text(

@@ -11,6 +11,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../prompt/providers/context_provider.dart';
 // ignore: unused_import
 import '../models/setup_dashboard_models.dart';
+import '../models/setup_rbac.dart';
 import '../providers/setup_dashboard_provider.dart';
 import '../widgets/shared_widgets.dart';
 
@@ -321,6 +322,13 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     ],
                   ),
+                ),
+              ),
+
+              // ─── SOS Button (Owner / Admin / BranchManager only) ─────
+              SliverToBoxAdapter(
+                child: SetupSOSButton(
+                  onPressed: () {},
                 ),
               ),
 

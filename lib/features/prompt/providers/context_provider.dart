@@ -244,6 +244,14 @@ class ContextProvider extends ChangeNotifier {
         return UserRole.owner;
       case 'administrator':
         return UserRole.administrator;
+      case 'socialofficer':
+      case 'social_officer':
+        return UserRole.socialOfficer;
+      case 'responseofficer':
+      case 'response_officer':
+        return UserRole.responseOfficer;
+      case 'monitor':
+        return UserRole.monitor;
       case 'branchmanager':
       case 'branch_manager':
         return UserRole.branchManager;

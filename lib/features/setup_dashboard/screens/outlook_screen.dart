@@ -31,6 +31,13 @@ class OutlookScreen extends StatelessWidget {
             appBar: SetupAppBar(
               title: 'Outlook & Analytics',
               actions: [
+                SetupExportButton(
+                  dataType: 'campaign_report',
+                  cardId: 'outlook',
+                  onExport: () {},
+                  label: 'Export',
+                ),
+                const SizedBox(width: 8),
                 DataScopeIndicator(access: setupProv.getCardAccess('outlook', ctxProv.currentRole)),
                 SizedBox(width: 16),
               ],

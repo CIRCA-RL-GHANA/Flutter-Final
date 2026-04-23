@@ -8,8 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../prompt/models/rbac_models.dart';
 import '../../prompt/providers/context_provider.dart';
 import '../models/setup_dashboard_models.dart';
+import '../models/setup_rbac.dart';
 import '../providers/setup_dashboard_provider.dart';
 
 // ─── Setup Dashboard Module Color ────────────────────────────────────────────
@@ -101,7 +103,7 @@ class SetupModuleCard extends StatelessWidget {
             }
           : null,
       child: Opacity(
-        opacity: card.isViewOnly ? 0.72 : 1.0,
+        opacity: card.isViewOnly ? 0.60 : 1.0,
         child: Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
@@ -1867,9 +1869,519 @@ class SetupActionGuard extends StatelessWidget {
     final role = ctxProv.currentRole;
 
     final bool allowed = requireDelete
-        ? setupProv.canEdit(cardId, role)
+        ? SetupDashboardRBAC.getActionPermission(cardId, role).canDelete
         : setupProv.canEdit(cardId, role);
 
     return allowed ? child : const SizedBox.shrink();
+  }
+}
+
+// ─── OTP Gate ────────────────────────────────────────────────────────────────
+
+/// Wraps an action that requires OTP/PIN verification before proceeding.
+///
+/// Usage:
+/// ```dart
+/// SetupOtpGate(
+///   cardId: 'staff',
+///   action: 'change_role',
+///   onVerified: () { /* proceed */ },
+///   child: ElevatedButton(...),
+/// )
+/// ```
+///
+/// If the current role does not require OTP for this action, [onVerified] is
+/// called immediately without showing the dialog.
+class SetupOtpGate extends StatelessWidget {
+  const SetupOtpGate({
+    super.key,
+    required this.cardId,
+    required this.action,
+    required this.child,
+    required this.onVerified,
+  });
+
+  final String cardId;
+  final String action;
+  final Widget child;
+  final VoidCallback onVerified;
+
+  @override
+  Widget build(BuildContext context) {
+    final role = Provider.of<ContextProvider>(context, listen: false).currentRole;
+    final needsOtp = SetupDashboardRBAC.requiresOtpFor(cardId, action, role);
+
+    return GestureDetector(
+      onTap: () {
+        HapticFeedback.mediumImpact();
+        if (needsOtp) {
+          _showOtpDialog(context);
+        } else {
+          onVerified();
+        }
+      },
+      child: child,
+    );
+  }
+
+  Future<void> _showOtpDialog(BuildContext context) async {
+    final controller = TextEditingController();
+    final confirmed = await showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: Row(
+          children: const [
+            Icon(Icons.lock_outline, color: kSetupColor, size: 22),
+            SizedBox(width: 10),
+            Text(
+              'OTP Verification',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+            ),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'This action requires administrator OTP verification. '
+              'Enter the OTP sent to the admin account.',
+              style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              controller: controller,
+              autofocus: true,
+              keyboardType: TextInputType.number,
+              maxLength: 6,
+              obscureText: true,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.w700,
+                letterSpacing: 8,
+              ),
+              decoration: InputDecoration(
+                hintText: '● ● ● ● ● ●',
+                hintStyle: const TextStyle(letterSpacing: 8, color: AppColors.textTertiary),
+                counterText: '',
+                filled: true,
+                fillColor: Colors.grey.shade50,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: Colors.grey.shade200),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: const BorderSide(color: kSetupColor, width: 1.5),
+                ),
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: const Text('Cancel', style: TextStyle(color: AppColors.textTertiary)),
+          ),
+          FilledButton(
+            onPressed: () {
+              // In production: validate OTP via AuthService.
+              // Here we accept any 6-digit code for UI purposes.
+              if (controller.text.length == 6) {
+                Navigator.pop(ctx, true);
+              }
+            },
+            style: FilledButton.styleFrom(backgroundColor: kSetupColor),
+            child: const Text('Verify'),
+          ),
+        ],
+      ),
+    );
+
+    controller.dispose();
+    if (confirmed == true) {
+      HapticFeedback.lightImpact();
+      onVerified();
+    }
+  }
+}
+
+// ─── Export Button (RBAC-gated) ───────────────────────────────────────────────
+
+/// Export button that is only rendered when [role] is allowed to export
+/// [dataType] per [SetupDashboardRBAC.canExport].
+///
+/// Shows an OTP dialog if the export action also requires OTP.
+class SetupExportButton extends StatelessWidget {
+  const SetupExportButton({
+    super.key,
+    required this.dataType,
+    required this.cardId,
+    required this.onExport,
+    this.label = 'Export',
+    this.icon = Icons.download_outlined,
+  });
+
+  final String dataType;
+  final String cardId;
+  final VoidCallback onExport;
+  final String label;
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    final role = Provider.of<ContextProvider>(context, listen: false).currentRole;
+
+    if (!SetupDashboardRBAC.canExport(dataType, role)) {
+      return const SizedBox.shrink();
+    }
+
+    final needsOtp = SetupDashboardRBAC.requiresOtpFor(cardId, 'export', role);
+
+    Widget button = OutlinedButton.icon(
+      onPressed: () {
+        HapticFeedback.selectionClick();
+        if (!needsOtp) onExport();
+      },
+      icon: Icon(icon, size: 16),
+      label: Text(label, style: const TextStyle(fontWeight: FontWeight.w600)),
+      style: OutlinedButton.styleFrom(
+        foregroundColor: kSetupColor,
+        side: const BorderSide(color: kSetupColor),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+      ),
+    );
+
+    if (needsOtp) {
+      button = SetupOtpGate(
+        cardId: cardId,
+        action: 'export',
+        onVerified: onExport,
+        child: button,
+      );
+    }
+
+    return button;
+  }
+}
+
+// ─── Redacted Data Banner ────────────────────────────────────────────────────
+
+/// Displayed at the top of a screen when the current role sees redacted data.
+/// (Spec: Monitor/BranchMonitor see audit logs with PII masked.)
+class SetupRedactedBanner extends StatelessWidget {
+  const SetupRedactedBanner({super.key, this.message});
+
+  final String? message;
+
+  @override
+  Widget build(BuildContext context) {
+    final text = message ??
+        'Redacted view — user identities and sensitive fields are masked '
+        'per your role permissions.';
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF3F4F6),
+        border: const Border(
+          bottom: BorderSide(color: Color(0xFFD1D5DB), width: 1),
+        ),
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.visibility_off_outlined, size: 16, color: AppColors.textTertiary),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              text,
+              style: const TextStyle(
+                fontSize: 12,
+                color: AppColors.textSecondary,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ─── OTP Guard (programmatic) ─────────────────────────────────────────────────
+
+/// Programmatic OTP guard for use in [onPressed] / [onTap] callbacks
+/// (e.g., FAB taps) where wrapping with [SetupOtpGate] is impractical.
+///
+/// If [cardId] + [action] requires OTP for the current role, an OTP dialog
+/// is shown first. Otherwise [onVerified] is called immediately.
+Future<void> showSetupOtpGuard(
+  BuildContext context, {
+  required String cardId,
+  required String action,
+  required VoidCallback onVerified,
+}) async {
+  final role = Provider.of<ContextProvider>(context, listen: false).currentRole;
+  final needsOtp = SetupDashboardRBAC.requiresOtpFor(cardId, action, role);
+  if (!needsOtp) {
+    onVerified();
+    return;
+  }
+  final controller = TextEditingController();
+  final confirmed = await showDialog<bool>(
+    context: context,
+    barrierDismissible: false,
+    builder: (ctx) => AlertDialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      title: const Row(
+        children: [
+          Icon(Icons.lock_outline, color: kSetupColor, size: 22),
+          SizedBox(width: 10),
+          Text(
+            'OTP Verification',
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+          ),
+        ],
+      ),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'This action requires administrator OTP verification. '
+            'Enter the OTP sent to the admin account.',
+            style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
+          ),
+          const SizedBox(height: 16),
+          TextField(
+            controller: controller,
+            autofocus: true,
+            keyboardType: TextInputType.number,
+            maxLength: 6,
+            obscureText: true,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.w700,
+              letterSpacing: 8,
+            ),
+            decoration: const InputDecoration(
+              hintText: '● ● ● ● ● ●',
+              hintStyle: TextStyle(letterSpacing: 8, color: AppColors.textTertiary),
+              counterText: '',
+              filled: true,
+              fillColor: Color(0xFFF8F9FC),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(12)),
+                borderSide: BorderSide(color: kSetupColor),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(12)),
+                borderSide: BorderSide(color: kSetupColor, width: 2),
+              ),
+            ),
+          ),
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(ctx, false),
+          child: const Text('Cancel', style: TextStyle(color: AppColors.textSecondary)),
+        ),
+        ElevatedButton(
+          onPressed: () => Navigator.pop(ctx, controller.text.length == 6),
+          style: ElevatedButton.styleFrom(backgroundColor: kSetupColor),
+          child: const Text('Verify', style: TextStyle(color: Colors.white)),
+        ),
+      ],
+    ),
+  );
+  if (confirmed == true) {
+    HapticFeedback.mediumImpact();
+    onVerified();
+  }
+}
+
+// ─── RBAC Tooltip Helper ─────────────────────────────────────────────────────
+
+/// Shows a role-scoped tooltip [SnackBar] when the user taps a restricted
+/// feature. Call this from [onTap] handlers of disabled buttons.
+void showSetupRbacTooltip(BuildContext context, String cardId) {
+  final role = Provider.of<ContextProvider>(context, listen: false).currentRole;
+  final message = SetupDashboardRBAC.getTooltipMessage(cardId, role);
+  if (message == null) return;
+
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Row(
+        children: [
+          const Icon(Icons.info_outline, color: Colors.white, size: 16),
+          const SizedBox(width: 8),
+          Expanded(child: Text(message, style: const TextStyle(fontSize: 13))),
+        ],
+      ),
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: AppColors.textSecondary,
+      duration: const Duration(seconds: 3),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      margin: const EdgeInsets.fromLTRB(16, 0, 16, 24),
+    ),
+  );
+}
+
+// ─── SOS Button ─────────────────────────────────────────────────────────────
+
+/// Emergency SOS button — visible to Owner, Administrator, Branch Manager only.
+/// Spec: Roles without access see nothing (SizedBox.shrink).
+class SetupSOSButton extends StatelessWidget {
+  const SetupSOSButton({super.key, this.onPressed});
+
+  final VoidCallback? onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    final role = Provider.of<ContextProvider>(context, listen: false).currentRole;
+    if (!SetupDashboardRBAC.canSeeSOS(role)) return const SizedBox.shrink();
+
+    return GestureDetector(
+      onTap: () {
+        HapticFeedback.heavyImpact();
+        onPressed?.call();
+        _showSOSDialog(context);
+      },
+      child: Container(
+        margin: const EdgeInsets.fromLTRB(20, 16, 20, 0),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: AppColors.error,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.error.withOpacity(0.3),
+              blurRadius: 16,
+              offset: const Offset(0, 6),
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Icon(Icons.emergency, color: Colors.white, size: 24),
+            SizedBox(width: 12),
+            Text(
+              'EMERGENCY SOS',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.w900,
+                letterSpacing: 1.5,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> _showSOSDialog(BuildContext context) async {
+    await showDialog<void>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        backgroundColor: const Color(0xFFFFF1F1),
+        title: const Row(
+          children: [
+            Icon(Icons.emergency, color: AppColors.error, size: 24),
+            SizedBox(width: 10),
+            Text(
+              'Emergency SOS',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w800,
+                color: AppColors.error,
+              ),
+            ),
+          ],
+        ),
+        content: const Text(
+          'This will alert your emergency contacts and dispatch team. '
+          'Only use in genuine emergencies.',
+          style: TextStyle(fontSize: 14, color: AppColors.textSecondary),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('Cancel', style: TextStyle(color: AppColors.textTertiary)),
+          ),
+          FilledButton(
+            onPressed: () {
+              HapticFeedback.heavyImpact();
+              Navigator.pop(ctx);
+              // TODO: Integrate with emergency broadcast service.
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('SOS signal sent — help is on the way.'),
+                  backgroundColor: AppColors.error,
+                  behavior: SnackBarBehavior.floating,
+                ),
+              );
+            },
+            style: FilledButton.styleFrom(backgroundColor: AppColors.error),
+            child: const Text('SEND SOS', style: TextStyle(fontWeight: FontWeight.w700)),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ─── Role Context Badge ───────────────────────────────────────────────────────
+
+/// Compact pill showing the active role with spec-accurate color coding.
+class SetupRoleBadge extends StatelessWidget {
+  const SetupRoleBadge({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final role = Provider.of<ContextProvider>(context).currentRole;
+    final color = RoleColors.forRole(role);
+    final label = _roleShortLabel(role);
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.12),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: color.withOpacity(0.3)),
+      ),
+      child: Text(
+        label,
+        style: TextStyle(
+          fontSize: 11,
+          fontWeight: FontWeight.w700,
+          color: color,
+        ),
+      ),
+    );
+  }
+
+  String _roleShortLabel(UserRole role) {
+    switch (role) {
+      case UserRole.owner:           return 'OWNER';
+      case UserRole.administrator:   return 'ADMIN';
+      case UserRole.socialOfficer:   return 'SOC OFF';
+      case UserRole.responseOfficer: return 'RESP OFF';
+      case UserRole.monitor:         return 'MONITOR';
+      case UserRole.branchManager:   return 'BR MGR';
+      case UserRole.branchSocialOfficer:   return 'BR SOC';
+      case UserRole.branchMonitor:         return 'BR MON';
+      case UserRole.branchResponseOfficer: return 'BR RESP';
+      case UserRole.driver:          return 'DRIVER';
+      default:                       return 'USER';
+    }
   }
 }

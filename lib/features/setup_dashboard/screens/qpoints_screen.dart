@@ -31,6 +31,13 @@ class QPointsScreen extends StatelessWidget {
             appBar: SetupAppBar(
               title: 'Q-Points',
               actions: [
+                SetupExportButton(
+                  dataType: 'transaction_history',
+                  cardId: 'qpoints',
+                  onExport: () {},
+                  label: 'Export',
+                ),
+                const SizedBox(width: 8),
                 DataScopeIndicator(access: setupProv.getCardAccess('qpoints', ctxProv.currentRole)),
                 SizedBox(width: 16),
               ],

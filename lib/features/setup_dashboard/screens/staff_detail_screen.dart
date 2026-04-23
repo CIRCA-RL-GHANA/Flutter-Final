@@ -8,8 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../prompt/models/rbac_models.dart';
 import '../../prompt/providers/context_provider.dart';
 import '../models/setup_dashboard_models.dart';
+import '../models/setup_rbac.dart';
 import '../providers/setup_dashboard_provider.dart';
 import '../widgets/shared_widgets.dart';
 
@@ -42,7 +44,23 @@ class _StaffDetailScreenState extends State<StaffDetailScreen> {
 
         return Scaffold(
           backgroundColor: const Color(0xFFF8F9FC),
-          appBar: SetupAppBar(title: staff.name),
+          appBar: SetupAppBar(
+            title: staff.name,
+            actions: [
+              // Edit role action — gated by OTP for Branch Manager
+              SetupActionGuard(
+                cardId: 'staff',
+                child: _RoleChangeButton(
+                  staff: staff,
+                  currentRole: ctxProv.currentRole,
+                ),
+              ),
+              DataScopeIndicator(
+                access: context.read<SetupDashboardProvider>().getCardAccess('staff', ctxProv.currentRole),
+              ),
+              const SizedBox(width: 12),
+            ],
+          ),
           body: Column(
             children: [
               _StaffHeader(staff: staff),
@@ -449,5 +467,124 @@ class _MetricBar extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+// ─── Role Change Button ───────────────────────────────────────────────────────
+
+/// Renders "Change Role" icon in the staff detail app bar.
+/// For Branch Managers, wraps in [SetupOtpGate] requiring Admin OTP.
+class _RoleChangeButton extends StatelessWidget {
+  const _RoleChangeButton({required this.staff, required this.currentRole});
+
+  final StaffMember staff;
+  final UserRole currentRole;
+
+  @override
+  Widget build(BuildContext context) {
+    void performRoleChange() {
+      showSetupBottomSheet(
+        context: context,
+        builder: (_) => _RolePickerSheet(staff: staff),
+      );
+    }
+
+    // Branch Manager: OTP required before showing role picker.
+    if (currentRole == UserRole.branchManager) {
+      return SetupOtpGate(
+        cardId: 'staff',
+        action: 'change_role',
+        onVerified: performRoleChange,
+        child: IconButton(
+          icon: const Icon(Icons.manage_accounts_outlined, size: 22),
+          color: kSetupColor,
+          tooltip: 'Change Role (OTP required)',
+          onPressed: null, // Tap handled by SetupOtpGate wrapper.
+        ),
+      );
+    }
+
+    // Administrator: direct access.
+    return IconButton(
+      icon: const Icon(Icons.manage_accounts_outlined, size: 22),
+      color: kSetupColor,
+      tooltip: 'Change Role',
+      onPressed: performRoleChange,
+    );
+  }
+}
+
+// ─── Role Picker Sheet ────────────────────────────────────────────────────────
+
+class _RolePickerSheet extends StatelessWidget {
+  const _RolePickerSheet({required this.staff});
+
+  final StaffMember staff;
+
+  static const _assignableRoles = [
+    UserRole.socialOfficer,
+    UserRole.responseOfficer,
+    UserRole.monitor,
+    UserRole.branchManager,
+    UserRole.branchSocialOfficer,
+    UserRole.branchMonitor,
+    UserRole.branchResponseOfficer,
+    UserRole.driver,
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      shrinkWrap: true,
+      padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
+      children: [
+        const Padding(
+          padding: EdgeInsets.only(bottom: 16),
+          child: Text(
+            'Assign Role',
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+          ),
+        ),
+        ..._assignableRoles.map(
+          (role) => ListTile(
+            leading: CircleAvatar(
+              radius: 16,
+              backgroundColor: RoleColors.forRole(role).withOpacity(0.15),
+              child: Icon(Icons.person, size: 16, color: RoleColors.forRole(role)),
+            ),
+            title: Text(
+              _roleLabel(role),
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+            ),
+            trailing: const Icon(Icons.chevron_right, size: 18, color: AppColors.textTertiary),
+            onTap: () {
+              Navigator.pop(context);
+              // TODO: Call provider.updateStaffRole(staff.id, role)
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Role changed to ${_roleLabel(role)}'),
+                  behavior: SnackBarBehavior.floating,
+                  backgroundColor: kSetupColor,
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  String _roleLabel(UserRole role) {
+    switch (role) {
+      case UserRole.socialOfficer:         return 'Social Officer';
+      case UserRole.responseOfficer:       return 'Response Officer';
+      case UserRole.monitor:               return 'Monitor';
+      case UserRole.branchManager:         return 'Branch Manager';
+      case UserRole.branchSocialOfficer:   return 'Branch Social Officer';
+      case UserRole.branchMonitor:         return 'Branch Monitor';
+      case UserRole.branchResponseOfficer: return 'Branch Response Officer';
+      case UserRole.driver:                return 'Driver';
+      default:                             return role.name;
+    }
   }
 }

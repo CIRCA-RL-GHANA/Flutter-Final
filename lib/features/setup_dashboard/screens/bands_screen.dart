@@ -23,18 +23,18 @@ class BandsScreen extends StatelessWidget {
         final bands = setupProv.bands;
 
         return SetupRbacGate(
-          cardId: 'bands',
+          cardId: 'vehicle_bands',
           child: Scaffold(
             backgroundColor: const Color(0xFFF8F9FC),
             appBar: SetupAppBar(
               title: 'Vehicle Bands',
               actions: [
-                DataScopeIndicator(access: setupProv.getCardAccess('bands', ctxProv.currentRole)),
+                DataScopeIndicator(access: setupProv.getCardAccess('vehicle_bands', ctxProv.currentRole)),
                 SizedBox(width: 16),
               ],
             ),
             floatingActionButton: SetupRbacFAB(
-              cardId: 'bands',
+              cardId: 'vehicle_bands',
               onPressed: () {},
               label: 'New Band',
               icon: Icons.add,

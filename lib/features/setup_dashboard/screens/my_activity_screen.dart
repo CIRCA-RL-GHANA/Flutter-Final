@@ -28,18 +28,18 @@ class MyActivityScreen extends StatelessWidget {
         final completedTasks = tasks.where((t) => t.status == TaskStatus.completed).length;
 
         return SetupRbacGate(
-          cardId: 'myActivity',
+          cardId: 'my_activity',
           child: Scaffold(
             backgroundColor: const Color(0xFFF8F9FC),
             appBar: SetupAppBar(
               title: 'My Activity',
               actions: [
-                DataScopeIndicator(access: setupProv.getCardAccess('myActivity', ctxProv.currentRole)),
+                DataScopeIndicator(access: setupProv.getCardAccess('my_activity', ctxProv.currentRole)),
                 SizedBox(width: 16),
               ],
             ),
             floatingActionButton: SetupRbacFAB(
-              cardId: 'myActivity',
+              cardId: 'my_activity',
               onPressed: () {},
               label: 'Add Task',
               icon: Icons.add_task,

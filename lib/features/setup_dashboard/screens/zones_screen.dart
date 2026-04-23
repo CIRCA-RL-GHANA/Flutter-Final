@@ -25,18 +25,18 @@ class ZonesScreen extends StatelessWidget {
         final zones = setupProv.zones;
 
         return SetupRbacGate(
-          cardId: 'zones',
+          cardId: 'delivery_zones',
           child: Scaffold(
             backgroundColor: const Color(0xFFF8F9FC),
             appBar: SetupAppBar(
               title: 'Delivery Zones',
               actions: [
-                DataScopeIndicator(access: setupProv.getCardAccess('zones', ctxProv.currentRole)),
+                DataScopeIndicator(access: setupProv.getCardAccess('delivery_zones', ctxProv.currentRole)),
                 SizedBox(width: 16),
               ],
             ),
             floatingActionButton: SetupRbacFAB(
-              cardId: 'zones',
+              cardId: 'delivery_zones',
               onPressed: () {
                 context.read<SetupDashboardProvider>().selectZone(null);
                 Navigator.pushNamed(context, AppRoutes.setupZoneDetail);

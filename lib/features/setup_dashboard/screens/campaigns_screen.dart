@@ -25,18 +25,18 @@ class CampaignsScreen extends StatelessWidget {
         final campaigns = setupProv.campaigns;
 
         return SetupRbacGate(
-          cardId: 'campaigns',
+          cardId: 'marketing',
           child: Scaffold(
             backgroundColor: const Color(0xFFF8F9FC),
             appBar: SetupAppBar(
               title: 'Marketing',
               actions: [
-                DataScopeIndicator(access: setupProv.getCardAccess('campaigns', ctxProv.currentRole)),
+                DataScopeIndicator(access: setupProv.getCardAccess('marketing', ctxProv.currentRole)),
                 SizedBox(width: 16),
               ],
             ),
             floatingActionButton: SetupRbacFAB(
-              cardId: 'campaigns',
+              cardId: 'marketing',
               onPressed: () {
                 Navigator.pushNamed(context, AppRoutes.setupCampaignCreate);
               },

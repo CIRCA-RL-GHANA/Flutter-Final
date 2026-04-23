@@ -304,10 +304,10 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
                       children: [
                         PrimaryButton(
                           text: AppStrings.continueWhereLeftOff,
-                          icon: Icons.arrow_forward,
+                          icon: Icons.auto_awesome,
                           onPressed: () {
                             Navigator.of(context)
-                                .pushReplacementNamed(AppRoutes.promptScreen);
+                                .pushReplacementNamed(AppRoutes.genieHome);
                           },
                           margin: EdgeInsets.zero,
                         ),

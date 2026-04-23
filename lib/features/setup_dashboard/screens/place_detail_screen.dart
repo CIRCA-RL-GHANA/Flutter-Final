@@ -368,7 +368,10 @@ class _SettingsTab extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 12),
-              Container(
+              SetupActionGuard(
+                cardId: 'places',
+                requireDelete: true,
+                child: Container(
               width: double.infinity,
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
@@ -398,6 +401,7 @@ class _SettingsTab extends StatelessWidget {
                 ],
               ),
             ),
+              ),
             ],
           ),
         ),
