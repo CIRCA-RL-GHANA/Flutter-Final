@@ -25,6 +25,12 @@ enum GenieTactileEvent {
   dragTension,
   /// SOS – urgent, escalating pulses
   sos,
+  /// Orchestration step tick – fires on each completed outbox step
+  orchestrationStepTick,
+  /// Role signature – fired via GenieHapticRoleSignature, listed here for
+  /// completeness so callers can trigger from the enum without importing
+  /// the separate class.
+  roleSignature,
 }
 
 class GenieTactileActions {
@@ -68,6 +74,17 @@ class GenieTactileActions {
           await HapticFeedback.heavyImpact();
           await Future.delayed(const Duration(milliseconds: 100));
         }
+
+      case GenieTactileEvent.orchestrationStepTick:
+        // Crisp micro-tick between orchestration steps
+        await HapticFeedback.selectionClick();
+        await Future.delayed(const Duration(milliseconds: 40));
+        await HapticFeedback.lightImpact();
+
+      case GenieTactileEvent.roleSignature:
+        // Delegate to GenieHapticRoleSignature — called directly with the
+        // current role; this case exists for enum completeness only.
+        await HapticFeedback.mediumImpact();
     }
   }
 

@@ -10,8 +10,15 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import '../features/prompt/models/rbac_models.dart';
 import '../features/prompt/providers/context_provider.dart';
+import 'genie_empty_state.dart';
+import 'genie_haptic_role_signature.dart';
+import 'genie_input_sanitizer.dart';
 import 'genie_intent.dart';
 import 'genie_intent_resolver.dart';
+import 'genie_offline_cache.dart';
+import 'genie_onboarding.dart';
+import 'genie_outbox.dart';
+import 'genie_performance_telemetry.dart';
 import 'genie_rbac_enforcer.dart';
 import 'genie_tactile_actions.dart';
 import 'genie_voice.dart';
@@ -47,8 +54,45 @@ class GenieController extends ChangeNotifier {
 
   // ─── Init ──────────────────────────────────────────────────────────────────
   void _init() {
+    // Bootstrap persistent services
+    unawaited(_bootstrapServices());
     _sendGreeting();
     _configureVoice();
+  }
+
+  Future<void> _bootstrapServices() async {
+    await Future.wait([
+      GenieOfflineCache.init(),
+      GenieOutbox.init(),
+      GenieOnboarding.init(),
+      GeniePerformanceTelemetry.init(),
+    ]);
+    // Fire role signature on first open
+    await GenieHapticRoleSignature.onGenieOpen(_role);
+    // Resume any interrupted orchestrations
+    final pending = GenieOutbox.getPendingOrchestrations();
+    if (pending.isNotEmpty) {
+      _addGenieMessage(
+        text: 'Resuming ${pending.length} incomplete action(s) from your last session…',
+        cardType: GenieCardType.text,
+        cardData: {'pendingOrchestrations': pending.map((o) => o.id).toList()},
+      );
+    }
+    // Show onboarding greeting on first launch
+    if (GenieOnboarding.isFirstLaunchForRole(_role)) {
+      final greet = GenieOnboarding.greetingForRole(_role);
+      _addGenieMessage(
+        text: greet.headline,
+        cardType: GenieCardType.greeting,
+        cardData: {
+          'subline': greet.subline,
+          'examples': greet.exampleCommands,
+          'ctaLabel': greet.ctaLabel,
+          'isOnboarding': true,
+        },
+      );
+      await GenieOnboarding.markFirstLaunchComplete(_role);
+    }
   }
 
   void _configureVoice() {
@@ -95,19 +139,58 @@ class GenieController extends ChangeNotifier {
   // ─── Main Input Handler ────────────────────────────────────────────────────
   /// Entry point for all text, voice, and chip inputs.
   Future<void> handleInput(String rawInput) async {
-    final input = rawInput.trim();
+    // ── 1. Input Sanitization ──────────────────────────────────────────────
+    final sanitized = GenieInputSanitizer.sanitize(rawInput);
+    if (sanitized.rejected) {
+      await GenieTactileActions.onError();
+      _addGenieMessage(
+        text: 'I couldn\'t process that input. Please try again.',
+        cardType: GenieCardType.text,
+      );
+      return;
+    }
+    final input = sanitized.cleanedText;
     if (input.isEmpty) return;
+
+    // ── 2. Telemetry: start task completion timer ──────────────────────────
+    final timerKey = 'task_${DateTime.now().millisecondsSinceEpoch}';
+    GeniePerformanceTelemetry.startTimer(timerKey);
 
     // Add user bubble
     _addUserMessage(input);
     _isProcessing = true;
     notifyListeners();
 
-    // Resolve intent
+    // ── 3. Intent Resolution ──────────────────────────────────────────────
+    GeniePerformanceTelemetry.startTimer('nlu_resolve');
     final intent = GenieIntentResolver.resolve(input) ??
         const GenieIntent(module: GenieModule.genie, action: 'unknown');
+    GeniePerformanceTelemetry.stopTimer(
+        'nlu_resolve', TelemetryEventType.modelInference,
+        meta: {'module': intent.module.name, 'action': intent.action});
 
-    // RBAC gate
+    // ── 4. Confusion detection ────────────────────────────────────────────
+    if (intent.action == 'unknown') {
+      final shouldShowLifeline = await GenieOnboarding.recordIntentFailure();
+      if (shouldShowLifeline) {
+        final lifeline = GenieOnboarding.confusionLifeline();
+        if (lifeline != null) {
+          _addGenieMessage(
+            text: lifeline.message,
+            cardType: GenieCardType.text,
+            cardData: {
+              'actionLabel': lifeline.actionLabel,
+              'actionIntent': lifeline.actionIntent?.action,
+              'isTip': true,
+            },
+          );
+        }
+      }
+    } else {
+      await GenieOnboarding.resetConfusion();
+    }
+
+    // ── 5. RBAC gate ──────────────────────────────────────────────────────
     if (!GenieRBACEnforcer.canPerformAction(_role, intent.module, intent.action)) {
       final denial = GenieRBACEnforcer.getDenialMessage(
           _role, intent.module, intent.action);
@@ -118,19 +201,31 @@ class GenieController extends ChangeNotifier {
       return;
     }
 
-    // Offline queue
-    if (!_isOnline && intent.requiresFullScreen) {
-      _addGenieMessage(
-        text: 'You\'re offline. This action will run when you reconnect.',
-        cardType: GenieCardType.text,
-      );
-      _queueOfflineIntent(intent);
+    // ── 6. Offline handling with cache ────────────────────────────────────
+    if (!_isOnline) {
+      final cached = GenieOfflineCache.retrieve(_role, intent.module, intent.action)
+          ?? GenieOfflineCache.staticFallback(_role, intent.module, intent.action);
+      if (cached != null) {
+        _addGenieMessage(
+          text: cached.text,
+          cardType: GenieCardType.values
+              .firstWhere((t) => t.name == cached.cardType,
+                  orElse: () => GenieCardType.text),
+          cardData: cached.cardData,
+        );
+      } else if (intent.requiresFullScreen) {
+        _addGenieMessage(
+          text: 'You\'re offline. This action will run when you reconnect.',
+          cardType: GenieCardType.text,
+        );
+        _queueOfflineIntent(intent);
+      }
       _isProcessing = false;
       notifyListeners();
       return;
     }
 
-    // Build response
+    // ── 7. Build response ─────────────────────────────────────────────────
     await Future.delayed(const Duration(milliseconds: 300));
     final response = _buildResponse(intent);
     await GenieTactileActions.onSuccess();
@@ -139,6 +234,24 @@ class GenieController extends ChangeNotifier {
       cardType: response.cardType,
       cardData: response.cardData,
     );
+
+    // ── 8. Cache the live response for offline use ────────────────────────
+    unawaited(GenieOfflineCache.store(
+      _role,
+      intent.module,
+      intent.action,
+      CachedIntentResponse(
+        text: response.text ?? '',
+        cardType: response.cardType.name,
+        cardData: response.cardData,
+        cachedAt: DateTime.now(),
+      ),
+    ));
+
+    // ── 9. Stop task completion timer ─────────────────────────────────────
+    GeniePerformanceTelemetry.stopTimer(
+        timerKey, TelemetryEventType.taskCompletion,
+        meta: {'module': intent.module.name, 'action': intent.action});
 
     _isProcessing = false;
     notifyListeners();
@@ -710,11 +823,24 @@ class GenieController extends ChangeNotifier {
 
   void setOnline(bool online) {
     _isOnline = online;
-    if (online && _offlineQueue.isNotEmpty) {
-      _replayOfflineQueue();
+    if (online) {
+      if (_offlineQueue.isNotEmpty) {
+        _replayOfflineQueue();
+      }
+      // Flush buffered telemetry now that we're online
+      unawaited(GeniePerformanceTelemetry.flush(isOnline: true));
     }
     notifyListeners();
   }
+
+  /// Called when the user manually switches role — fires the role signature.
+  Future<void> onRoleSwitch(UserRole newRole) async {
+    await GenieHapticRoleSignature.onRoleSwitch(newRole);
+  }
+
+  /// Returns a contextual empty-state tip for a module screen with no content.
+  GenieTipCard emptyStateFor(GenieModule module) =>
+      GenieEmptyState.forModule(module, role: _role);
 
   Future<void> _replayOfflineQueue() async {
     final queued = List.of(_offlineQueue);
