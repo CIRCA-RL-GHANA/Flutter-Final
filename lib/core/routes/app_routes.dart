@@ -167,6 +167,18 @@ import '../../features/alerts/screens/alerts_bulk_screen.dart';
 import '../../features/alerts/screens/alerts_templates_screen.dart';
 import '../../features/alerts/screens/alerts_settings_screen.dart';
 
+// e-Play Module Screens
+import '../../features/eplay/screens/eplay_hub_screen.dart';
+import '../../features/eplay/screens/eplay_browse_screen.dart';
+import '../../features/eplay/screens/eplay_asset_detail_screen.dart';
+import '../../features/eplay/screens/eplay_locker_screen.dart';
+import '../../features/eplay/screens/eplay_player_screen.dart';
+import '../../features/eplay/screens/eplay_creator_studio_screen.dart';
+// Community Module Screens
+import '../../features/community/screens/community_hub_screen.dart';
+import '../../features/community/screens/community_create_screen.dart';
+import '../../features/community/screens/community_detail_screen.dart';
+import '../../features/community/screens/community_members_screen.dart';
 // GO Module Screens
 import '../../features/go/screens/go_financial_screen.dart';
 import '../../features/go/screens/go_context_screen.dart';
@@ -399,6 +411,21 @@ class AppRoutes {
   static const String goIntegrations = '/go/integrations';
   static const String goArchive = '/go/archive';
   static const String goFinancial = '/go/financial';
+
+  // e-Play Module Routes
+  static const String eplayHub = '/eplay';
+  static const String eplayBrowse = '/eplay/browse';
+  static const String eplayDetail = '/eplay/detail';
+  static const String eplayPlayer = '/eplay/player';
+  static const String eplayLocker = '/eplay/locker';
+  static const String eplayCreatorStudio = '/eplay/creator-studio';
+
+  // Community Module Routes
+  static const String communityHub = '/community';
+  static const String communityCreate = '/community/create';
+  static const String communityMine = '/community/mine';
+  static const String communityDetail = '/community/detail';
+  static const String communityMembers = '/community/members';
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -803,6 +830,34 @@ class AppRoutes {
         return _buildRoute(const GoArchiveScreen(), settings);
       case goFinancial:
         return _buildRoute(const GoFinancialScreen(), settings);
+
+      // e-Play Module
+      case eplayHub:
+        return _buildRoute(const EPlayHubScreen(), settings);
+      case eplayBrowse:
+        final args = settings.arguments as Map<String, dynamic>?;
+        return _buildRoute(EPlayBrowseScreen(initialType: args?['type'] as String?), settings);
+      case eplayDetail:
+        return _buildRoute(EPlayAssetDetailScreen(asset: settings.arguments as Map<String, dynamic>?), settings);
+      case eplayPlayer:
+        return _buildRoute(EPlayPlayerScreen(asset: settings.arguments as Map<String, dynamic>?), settings);
+      case eplayLocker:
+        return _buildRoute(const EPlayLockerScreen(), settings);
+      case eplayCreatorStudio:
+        return _buildRoute(const EPlayCreatorStudioScreen(), settings);
+
+      // Community Module
+      case communityHub:
+        return _buildRoute(const CommunityHubScreen(), settings);
+      case communityCreate:
+        final args = settings.arguments as Map<String, dynamic>?;
+        return _buildRoute(CommunityCreateScreen(initialType: args?['type'] as String?), settings);
+      case communityMine:
+        return _buildRoute(const CommunityHubScreen(), settings); // stub: reuse hub filtered
+      case communityDetail:
+        return _buildRoute(CommunityDetailScreen(community: settings.arguments as Map<String, dynamic>?), settings);
+      case communityMembers:
+        return _buildRoute(CommunityMembersScreen(community: settings.arguments as Map<String, dynamic>?), settings);
 
       default:
         return _buildRoute(

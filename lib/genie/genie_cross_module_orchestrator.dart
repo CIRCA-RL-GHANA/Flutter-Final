@@ -115,6 +115,70 @@ class GenieCrossModuleOrchestrator {
     ];
   }
 
+  /// "Purchase e-Play content with QPoints + confirm in locker" workflow.
+  static List<OrchestrationStep> buildEPlayPurchaseWorkflow({
+    required String assetId,
+    required String assetTitle,
+    required double priceQp,
+  }) {
+    return [
+      OrchestrationStep(
+        description: 'Verifying asset availability in e-PLAY',
+        intent: GenieIntent(
+          module: GenieModule.eplay,
+          action: 'verify_asset',
+          params: {'assetId': assetId},
+        ),
+      ),
+      OrchestrationStep(
+        description: 'Deducting $priceQp QP from wallet via GO PAGE',
+        intent: GenieIntent(
+          module: GenieModule.goPage,
+          action: 'deduct_balance',
+          params: {'amount': priceQp, 'reason': 'e-Play purchase: $assetTitle'},
+        ),
+      ),
+      OrchestrationStep(
+        description: 'Granting cloud locker license for "$assetTitle"',
+        intent: GenieIntent(
+          module: GenieModule.eplay,
+          action: 'grant_license',
+          params: {'assetId': assetId, 'amountPaid': priceQp},
+        ),
+      ),
+    ];
+  }
+
+  /// "Create community + share to qualChat" workflow.
+  static List<OrchestrationStep> buildCommunityShareWorkflow({
+    required String communityId,
+    required String communityName,
+    required String qualChatRecipient,
+  }) {
+    return [
+      OrchestrationStep(
+        description: 'Fetching community invite link',
+        intent: GenieIntent(
+          module: GenieModule.community,
+          action: 'get_invite',
+          params: {'communityId': communityId},
+        ),
+      ),
+      OrchestrationStep(
+        description: 'Sharing "$communityName" via qualChat',
+        intent: GenieIntent(
+          module: GenieModule.qualChat,
+          action: 'send_message',
+          params: {
+            'recipient': qualChatRecipient,
+            'message': 'Join my community "$communityName" on Genie! 🌍',
+            'communityId': communityId,
+          },
+        ),
+      ),
+    ];
+  }
+
   // ─── Run Orchestration ───────────────────────────────────────────────────
   /// Execute a list of steps, verifying RBAC at each step.
   /// Returns an [OrchestrationResult] describing what completed.

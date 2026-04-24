@@ -58,6 +58,10 @@ class GenieFullScreenLauncher {
         return AppRoutes.userDetailsMaster;
       case GenieModule.utility:
         return AppRoutes.utilityDashboard;
+      case GenieModule.eplay:
+        return AppRoutes.eplayHub;
+      case GenieModule.community:
+        return AppRoutes.communityHub;
       default:
         return null;
     }
@@ -71,6 +75,8 @@ class _ModuleMenuSheet extends StatelessWidget {
   static const _allModules = [
     (GenieModule.goPage, 'GO PAGE', '💰', Color(0xFFFFD700)),
     (GenieModule.market, 'MARKET', '🛍️', Color(0xFF2563EB)),
+    (GenieModule.eplay, 'e-PLAY', '🎵', Color(0xFF7C3AED)),
+    (GenieModule.community, 'COMMUNITY', '🌍', Color(0xFF0891B2)),
     (GenieModule.myUpdates, 'MY UPDATES', '📰', Color(0xFF8B5CF6)),
     (GenieModule.setupDashboard, 'SETUP DASHBOARD', '⚙️', Color(0xFF6366F1)),
     (GenieModule.alerts, 'ALERTS', '🔔', Color(0xFFEF4444)),

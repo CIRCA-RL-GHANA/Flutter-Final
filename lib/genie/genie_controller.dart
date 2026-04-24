@@ -196,6 +196,10 @@ class GenieController extends ChangeNotifier {
         return _buildUtilityResponse(intent);
       case GenieModule.crossModule:
         return const _GenieResponse(text: 'Running cross-module workflow...', cardType: GenieCardType.text);
+      case GenieModule.eplay:
+        return _buildEPlayResponse(intent);
+      case GenieModule.community:
+        return _buildCommunityResponse(intent);
       case GenieModule.genie:
         return _buildGenieNativeResponse(intent);
     }
@@ -590,15 +594,88 @@ class GenieController extends ChangeNotifier {
         );
       case 'capabilities':
         return const _GenieResponse(
-          text: 'I can help with: QPoints, MARKET orders, deliveries, '
-              'alerts, chats, and more. Just ask or tap a shortcut.',
+          text: 'I can help with: QPoints, MARKET orders, e-Play content, '
+              'Communities, deliveries, alerts, chats, and more. Just ask or tap a shortcut.',
           cardType: GenieCardType.helpGuide,
         );
       default:
         return const _GenieResponse(
-          text: 'I didn\'t quite catch that. Try "check balance", '
-              '"incoming orders", or say "Hey Genie help".',
+          text: 'I didn\'t quite catch that. Try “check balance”, '
+              '“incoming orders”, or say “Hey Genie help”.',
           cardType: GenieCardType.text,
+        );
+    }
+  }
+
+  _GenieResponse _buildEPlayResponse(GenieIntent intent) {
+    switch (intent.action) {
+      case 'open_locker':
+        return const _GenieResponse(
+          text: 'Here\'s your e-Play Cloud Locker — your purchased digital content:',
+          cardType: GenieCardType.feedCard,
+          cardData: {
+            'type': 'eplay_locker',
+            'count': 12,
+            'pinned': 3,
+            'rentals': 2,
+          },
+        );
+      case 'browse':
+        return const _GenieResponse(
+          text: 'Discover music, movies, podcasts, e-books and shows from African creators:',
+          cardType: GenieCardType.shopCarousel,
+          cardData: {'type': 'eplay_browse'},
+        );
+      case 'creator_studio':
+        return const _GenieResponse(
+          text: 'Opening your Creator Studio — manage content, earnings and royalties:',
+          cardType: GenieCardType.operationsOverview,
+          cardData: {'type': 'creator_studio'},
+        );
+      case 'creator_profile':
+        return const _GenieResponse(
+          text: 'Your creator profile & earnings:',
+          cardType: GenieCardType.balance,
+          cardData: {'type': 'creator_earnings', 'total': 127, 'currency': 'QP'},
+        );
+      default:
+        return const _GenieResponse(
+          text: 'Opening e-Play…',
+          cardType: GenieCardType.comingSoon,
+        );
+    }
+  }
+
+  _GenieResponse _buildCommunityResponse(GenieIntent intent) {
+    switch (intent.action) {
+      case 'my_communities':
+        return const _GenieResponse(
+          text: 'Your community spaces:',
+          cardType: GenieCardType.feedCard,
+          cardData: {
+            'type': 'my_communities',
+            'communities': [
+              {'name': 'Afrobeats Book Club', 'type': 'library', 'unread': 4},
+              {'name': 'Dev Hive Africa', 'type': 'hub', 'unread': 12},
+            ],
+          },
+        );
+      case 'discover':
+        return const _GenieResponse(
+          text: 'Trending communities to explore:',
+          cardType: GenieCardType.shopCarousel,
+          cardData: {'type': 'community_discover'},
+        );
+      case 'create':
+        return const _GenieResponse(
+          text: 'Create a new community — pick a type to get started:',
+          cardType: GenieCardType.comingSoon,
+          cardData: {'action': 'community_create'},
+        );
+      default:
+        return const _GenieResponse(
+          text: 'Opening Communities…',
+          cardType: GenieCardType.comingSoon,
         );
     }
   }

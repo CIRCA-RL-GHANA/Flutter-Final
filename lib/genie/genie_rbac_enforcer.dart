@@ -55,6 +55,15 @@ class GenieRBACEnforcer {
       case GenieModule.utility:
         return role != UserRole.none;
 
+      // e-Play: all authenticated users can browse & use locker;
+      // creator studio requires owner or admin role
+      case GenieModule.eplay:
+        return role != UserRole.none;
+
+      // Community: all authenticated users
+      case GenieModule.community:
+        return role != UserRole.none;
+
       case GenieModule.crossModule:
       case GenieModule.genie:
         return role != UserRole.none;
@@ -110,6 +119,17 @@ class GenieRBACEnforcer {
         }
         return true;
 
+      case GenieModule.eplay:
+        // Creator studio only for owner/admin; everyone else can browse + locker
+        if (action == 'creator_studio' || action == 'creator_profile') {
+          return role == UserRole.owner || role == UserRole.administrator;
+        }
+        return true;
+
+      case GenieModule.community:
+        // Everyone can browse/join; only owner/admin can moderate
+        return true;
+
       default:
         return true;
     }
@@ -163,6 +183,12 @@ class GenieRBACEnforcer {
       case GenieModule.qualChat:
         return "That feature is restricted to Owners. "
             "You can still access regular chats and conversations.";
+      case GenieModule.eplay:
+        return "Creator Studio is available to Owner and Admin accounts. "
+            "You can still browse and access your cloud locker.";
+      case GenieModule.community:
+        return "You don't have access to that community action. "
+            "Try browsing or joining a public community.";
       default:
         return "I can't access that for you right now, "
             "but I can help with something related. What else can I do?";
@@ -192,6 +218,18 @@ class GenieRBACEnforcer {
             emoji: '✨',
             module: GenieModule.qualChat,
             intent: GenieIntent(module: GenieModule.qualChat, action: 'hey_ya'),
+          ),
+          GenieChip(
+            label: 'e-Play',
+            emoji: '🎵',
+            module: GenieModule.eplay,
+            intent: GenieIntent(module: GenieModule.eplay, action: 'open_locker', requiresFullScreen: true),
+          ),
+          GenieChip(
+            label: 'Communities',
+            emoji: '🌍',
+            module: GenieModule.community,
+            intent: GenieIntent(module: GenieModule.community, action: 'my_communities', requiresFullScreen: true),
           ),
           GenieChip(
             label: 'Reminders',
@@ -238,6 +276,18 @@ class GenieRBACEnforcer {
             emoji: '🛍️',
             module: GenieModule.market,
             intent: GenieIntent(module: GenieModule.market, action: 'browse_shops'),
+          ),
+          GenieChip(
+            label: 'e-Play',
+            emoji: '🎵',
+            module: GenieModule.eplay,
+            intent: GenieIntent(module: GenieModule.eplay, action: 'open_locker', requiresFullScreen: true),
+          ),
+          GenieChip(
+            label: 'Communities',
+            emoji: '🌍',
+            module: GenieModule.community,
+            intent: GenieIntent(module: GenieModule.community, action: 'discover', requiresFullScreen: true),
           ),
         ];
 

@@ -19,6 +19,8 @@ class GenieIntentResolver {
     // Walk through all module resolvers in priority order
     return _resolveGoPage(text) ??
         _resolveMarket(text) ??
+        _resolveEPlay(text) ??
+        _resolveCommunity(text) ??
         _resolveMyUpdates(text) ??
         _resolveLive(text) ??
         _resolveAlerts(text) ??
@@ -118,7 +120,60 @@ class GenieIntentResolver {
     return null;
   }
 
-  // ─── MY UPDATES ────────────────────────────────────────────────────────────
+  // ─── e-PLAY ─────────────────────────────────────────────────────────────────
+  static GenieIntent? _resolveEPlay(String t) {
+    if (_any(t, ['my locker', 'cloud locker', 'e-play locker', 'eplay locker',
+        'my digital content', 'my purchased content'])) {
+      return const GenieIntent(module: GenieModule.eplay, action: 'open_locker', requiresFullScreen: true);
+    }
+    if (_any(t, ['browse music', 'browse movies', 'browse podcasts',
+        'browse ebooks', 'browse e-play', 'browse eplay', 'digital content'])) {
+      return const GenieIntent(module: GenieModule.eplay, action: 'browse', requiresFullScreen: true);
+    }
+    if (_any(t, ['sell content', 'upload content', 'creator studio',
+        'my creator studio', 'digital branch', 'open digital branch'])) {
+      return const GenieIntent(module: GenieModule.eplay, action: 'creator_studio', requiresFullScreen: true);
+    }
+    if (_any(t, ['my creator profile', 'creator earnings', 'royalties',
+        'my earnings from e-play', 'eplay earnings'])) {
+      return const GenieIntent(module: GenieModule.eplay, action: 'creator_profile');
+    }
+    if (_any(t, ['play music', 'play a song', 'stream music', 'listen to',
+        'watch movie', 'read ebook', 'play podcast'])) {
+      return const GenieIntent(module: GenieModule.eplay, action: 'open_full', requiresFullScreen: true);
+    }
+    if (_any(t, ['open e-play', 'open eplay', 'go to eplay', 'go to e-play',
+        'launch eplay', 'eplay module'])) {
+      return const GenieIntent(module: GenieModule.eplay, action: 'open_full', requiresFullScreen: true);
+    }
+    return null;
+  }
+
+  // ─── COMMUNITY ─────────────────────────────────────────────────────────────
+  static GenieIntent? _resolveCommunity(String t) {
+    if (_any(t, ['my communities', 'communities i joined', 'joined communities'])) {
+      return const GenieIntent(module: GenieModule.community, action: 'my_communities', requiresFullScreen: true);
+    }
+    if (_any(t, ['discover communities', 'browse communities', 'find communities',
+        'explore communities', 'community hub'])) {
+      return const GenieIntent(module: GenieModule.community, action: 'discover', requiresFullScreen: true);
+    }
+    if (_any(t, ['create community', 'start a community', 'new community',
+        'create a library', 'create a hub', 'create a theater', 'create a hangout',
+        'create a fair', 'create a playlist', 'create a journal'])) {
+      return const GenieIntent(module: GenieModule.community, action: 'create', requiresFullScreen: true);
+    }
+    if (_any(t, ['community feed', 'community posts', 'my community feed'])) {
+      return const GenieIntent(module: GenieModule.community, action: 'my_communities', requiresFullScreen: true);
+    }
+    if (_any(t, ['open community', 'go to community', 'launch community',
+        'community module'])) {
+      return const GenieIntent(module: GenieModule.community, action: 'open_full', requiresFullScreen: true);
+    }
+    return null;
+  }
+
+  // ─── MY UPDATES ───────────────────────────────────────────────────────────
   static GenieIntent? _resolveMyUpdates(String t) {
     if (_any(t, ['feed', 'my feed', 'show my feed', 'updates feed', 'news feed'])) {
       return const GenieIntent(module: GenieModule.myUpdates, action: 'show_feed');
@@ -347,6 +402,9 @@ class GenieIntentResolver {
     final moduleMap = {
       'go page': GenieModule.goPage,
       'market': GenieModule.market,
+      'e-play': GenieModule.eplay,
+      'eplay': GenieModule.eplay,
+      'community': GenieModule.community,
       'updates': GenieModule.myUpdates,
       'my updates': GenieModule.myUpdates,
       'setup': GenieModule.setupDashboard,

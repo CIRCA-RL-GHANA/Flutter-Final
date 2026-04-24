@@ -3,7 +3,7 @@
 /// Maps voice/text/tap inputs to a canonical module action with parameters.
 /// ═══════════════════════════════════════════════════════════════════════════
 
-/// The 10 platform modules Genie can orchestrate.
+/// The 12 platform modules Genie can orchestrate.
 enum GenieModule {
   goPage,
   market,
@@ -15,6 +15,10 @@ enum GenieModule {
   april,
   userDetails,
   utility,
+  // Digital content marketplace
+  eplay,
+  // User-generated community spaces
+  community,
   // Cross-module orchestration placeholder
   crossModule,
   // Genie-native (help, settings, unknown)
