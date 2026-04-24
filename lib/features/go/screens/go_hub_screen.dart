@@ -37,7 +37,7 @@ class _GoHubScreenState extends State<GoHubScreen> {
                 Expanded(
                   child: RefreshIndicator(
                     color: kGoColor,
-                    onRefresh: () async => await Future.delayed(const Duration(seconds: 1)),
+                    onRefresh: () => provider.init(),
                     child: ListView(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       children: [

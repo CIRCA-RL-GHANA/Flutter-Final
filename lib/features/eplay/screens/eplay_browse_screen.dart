@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
+import '../providers/eplay_provider.dart';
 import 'eplay_hub_screen.dart' show kEPlayColor, kEPlayColorDark;
 
 const _allTypes = [
@@ -18,20 +19,6 @@ const _allTypes = [
   {'label': 'E-Books',  'type': 'ebook',   'icon': Icons.menu_book},
   {'label': 'Shows',    'type': 'show',    'icon': Icons.live_tv},
 ];
-
-// Stub catalogue — replace with API data
-final _catalogue = List.generate(24, (i) {
-  final types = ['music', 'movie', 'podcast', 'ebook', 'show'];
-  final type = types[i % types.length];
-  return {
-    'id': 'asset-$i',
-    'title': 'Title ${i + 1}',
-    'creator': 'Creator ${(i % 6) + 1}',
-    'type': type,
-    'price': i % 4 == 0 ? 'Free' : '₵${(i % 10) + 2}',
-    'plays': '${(i * 312) + 100}',
-  };
-});
 
 class EPlayBrowseScreen extends StatefulWidget {
   final String? initialType;
@@ -50,6 +37,11 @@ class _EPlayBrowseScreenState extends State<EPlayBrowseScreen> {
   void initState() {
     super.initState();
     _selectedType = widget.initialType;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final p = context.read<EPlayProvider>();
+      if (_selectedType != null) p.setTypeFilter(_selectedType);
+      if (p.assets.isEmpty) p.loadBrowse();
+    });
   }
 
   @override
@@ -58,20 +50,21 @@ class _EPlayBrowseScreenState extends State<EPlayBrowseScreen> {
     super.dispose();
   }
 
-  List<Map<String, dynamic>> get _filtered {
-    return _catalogue.where((item) {
+  List<Map<String, dynamic>> _filtered(List<Map<String, dynamic>> assets) {
+    return assets.where((item) {
       final matchType = _selectedType == null || item['type'] == _selectedType;
       final matchSearch = _searchQuery.isEmpty ||
-          (item['title'] as String).toLowerCase().contains(_searchQuery.toLowerCase()) ||
-          (item['creator'] as String).toLowerCase().contains(_searchQuery.toLowerCase());
+          (item['title'] as String? ?? '').toLowerCase().contains(_searchQuery.toLowerCase()) ||
+          (item['creator'] as String? ?? '').toLowerCase().contains(_searchQuery.toLowerCase());
       return matchType && matchSearch;
     }).toList();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AIInsightsNotifier>(
-      builder: (context, ai, _) {
+    return Consumer2<AIInsightsNotifier, EPlayProvider>(
+      builder: (context, ai, eplay, _) {
+        final items = _filtered(eplay.assets);
         return Scaffold(
           backgroundColor: AppColors.backgroundLight,
           appBar: AppBar(
@@ -129,7 +122,11 @@ class _EPlayBrowseScreenState extends State<EPlayBrowseScreen> {
                     final tab = _allTypes[i];
                     final isSelected = tab['type'] == _selectedType;
                     return GestureDetector(
-                      onTap: () => setState(() => _selectedType = tab['type'] as String?),
+                      onTap: () {
+                        final newType = tab['type'] as String?;
+                        setState(() => _selectedType = newType);
+                        eplay.setTypeFilter(newType);
+                      },
                       child: AnimatedContainer(
                         duration: const Duration(milliseconds: 200),
                         margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
@@ -152,19 +149,21 @@ class _EPlayBrowseScreenState extends State<EPlayBrowseScreen> {
 
               // ── Grid ────────────────────────────────────────────────
               Expanded(
-                child: _filtered.isEmpty
-                    ? const Center(child: Text('No content found.', style: TextStyle(color: AppColors.textSecondary)))
-                    : GridView.builder(
-                        padding: const EdgeInsets.all(12),
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          childAspectRatio: 0.75,
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 10,
-                        ),
-                        itemCount: _filtered.length,
-                        itemBuilder: (ctx, i) => _buildAssetCard(_filtered[i]),
-                      ),
+                child: eplay.isBrowseLoading && items.isEmpty
+                    ? const Center(child: CircularProgressIndicator())
+                    : items.isEmpty
+                        ? const Center(child: Text('No content found.', style: TextStyle(color: AppColors.textSecondary)))
+                        : GridView.builder(
+                            padding: const EdgeInsets.all(12),
+                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              childAspectRatio: 0.75,
+                              crossAxisSpacing: 10,
+                              mainAxisSpacing: 10,
+                            ),
+                            itemCount: items.length,
+                            itemBuilder: (ctx, i) => _buildAssetCard(items[i]),
+                          ),
               ),
             ],
           ),
@@ -206,18 +205,23 @@ class _EPlayBrowseScreenState extends State<EPlayBrowseScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(item['title']!, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13), maxLines: 1, overflow: TextOverflow.ellipsis),
+                    Text(item['title'] as String? ?? '', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13), maxLines: 1, overflow: TextOverflow.ellipsis),
                     const SizedBox(height: 2),
-                    Text(item['creator']!, style: const TextStyle(fontSize: 11, color: AppColors.textSecondary), maxLines: 1),
+                    Text(item['creator'] as String? ?? '', style: const TextStyle(fontSize: 11, color: AppColors.textSecondary), maxLines: 1),
                     const Spacer(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(item['price']!, style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: colors[0])),
+                        Text(
+                          (item['priceQPoints'] as num? ?? 0) == 0
+                              ? 'Free'
+                              : '${(item['priceQPoints'] as num).toInt()} QP',
+                          style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: colors[0]),
+                        ),
                         Row(children: [
                           const Icon(Icons.play_arrow, size: 12, color: AppColors.textTertiary),
                           const SizedBox(width: 2),
-                          Text(item['plays']!, style: const TextStyle(fontSize: 10, color: AppColors.textTertiary)),
+                          Text('${item['playCount'] ?? 0}', style: const TextStyle(fontSize: 10, color: AppColors.textTertiary)),
                         ]),
                       ],
                     ),

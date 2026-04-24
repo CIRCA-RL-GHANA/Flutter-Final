@@ -13,7 +13,7 @@ Flutter 3.2+ cross-platform application for the PROMPT Genie platform. Targets A
 | HTTP client | Dio |
 | App name | PROMPT Genie |
 | Version | 1.0.0+1 |
-| Production API | `https://api.promptgenie.app/api/v1` |
+| Production API | `https://api.genieinprompt.app/api/v1` |
 
 ## Directory Structure
 
@@ -101,8 +101,8 @@ static const Environment _environment = Environment.production;
 
 | Environment | Base URL |
 |---|---|
-| `production` | `https://api.promptgenie.app/api/v1` |
-| `staging` | `https://staging-api.promptgenie.app/api/v1` |
+| `production` | `https://api.genieinprompt.app/api/v1` |
+| `staging` | `https://staging-api.genieinprompt.app/api/v1` |
 | `development` | `http://10.0.2.2:3000/api/v1` (Android emulator) |
 
 For local development against `localhost`, set `_environment = Environment.development`.
@@ -156,7 +156,7 @@ flutter build web --release --base-href /
 # Output: build/web/
 ```
 
-The `build/web/` directory is mounted into Nginx by `docker-compose.prod.yml` and served at `https://promptgenie.app/`.
+The `build/web/` directory is mounted into Nginx by `docker-compose.prod.yml` and served at `https://genieinprompt.app/`.
 
 ### Build All Targets
 

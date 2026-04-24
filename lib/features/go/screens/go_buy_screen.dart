@@ -79,7 +79,11 @@ class _GoBuyScreenState extends State<GoBuyScreen> {
       case 0: return _StepGateway(gateways: provider.gateways, selectedId: _selectedGwId, onSelect: (id) => setState(() => _selectedGwId = id), onNext: () { if (_selectedGwId != null) setState(() => _step = 1); });
       case 1: return _StepAmount(gateway: provider.gateways.firstWhere((g) => g.id == _selectedGwId), controller: _amountCtrl, amount: _amount, fundingSources: provider.fundingSources, selectedFundingId: _selectedFundingId, onAmountChanged: (v) => setState(() => _amount = v), onFundingSelected: (id) => setState(() => _selectedFundingId = id), onBack: () => setState(() => _step = 0), onNext: () { if (_amount > 0) setState(() => _step = 2); });
       case 2: return _StepReview(gateway: provider.gateways.firstWhere((g) => g.id == _selectedGwId), amount: _amount, termsAccepted: _termsAccepted, onTermsChanged: (v) => setState(() => _termsAccepted = v), onBack: () => setState(() => _step = 1), onNext: () { if (_termsAccepted) setState(() => _step = 3); });
-      case 3: return _StepVerify(onBack: () => setState(() => _step = 2), onVerified: () { setState(() { _step = 4; _processing = true; }); Future.delayed(const Duration(seconds: 2), () { if (mounted) setState(() { _processing = false; _success = true; }); }); });
+      case 3: return _StepVerify(onBack: () => setState(() => _step = 2), onVerified: () async {
+        setState(() { _step = 4; _processing = true; });
+        final ok = await provider.buy(amount: _amount, source: _selectedGwId ?? 'card');
+        if (mounted) setState(() { _processing = false; _success = ok; });
+      });
       case 4: return _StepResult(processing: _processing, success: _success, amount: _amount, onDone: () => Navigator.pop(context), onRetry: () => setState(() { _step = 0; _processing = false; _success = null; }));
       default: return const SizedBox.shrink();
     }

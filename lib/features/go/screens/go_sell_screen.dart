@@ -74,7 +74,7 @@ class _GoSellScreenState extends State<GoSellScreen> {
       case 0: return _buildDestination(provider);
       case 1: return _buildAmount(provider);
       case 2: return _buildReview(provider);
-      case 3: return _buildVerify();
+      case 3: return _buildVerify(provider);
       case 4: return _buildResult();
       default: return const SizedBox.shrink();
     }
@@ -249,7 +249,7 @@ class _GoSellScreenState extends State<GoSellScreen> {
   }
 
   // Step 4: Verify
-  Widget _buildVerify() {
+  Widget _buildVerify(GoProvider provider) {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -260,9 +260,9 @@ class _GoSellScreenState extends State<GoSellScreen> {
           const Text('VERIFY WITHDRAWAL', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
           const SizedBox(height: 24),
           ...[
-            _buildVerifyBtn(Icons.fingerprint, 'Use Fingerprint'),
-            _buildVerifyBtn(Icons.pin, 'Enter PIN'),
-            _buildVerifyBtn(Icons.sms, 'OTP via SMS'),
+            _buildVerifyBtn(Icons.fingerprint, 'Use Fingerprint', provider),
+            _buildVerifyBtn(Icons.pin, 'Enter PIN', provider),
+            _buildVerifyBtn(Icons.sms, 'OTP via SMS', provider),
           ],
           const Spacer(),
           TextButton(onPressed: () => setState(() => _step = 2), child: const Text('Back', style: TextStyle(color: Color(0xFF6B7280)))),
@@ -271,7 +271,7 @@ class _GoSellScreenState extends State<GoSellScreen> {
     );
   }
 
-  Widget _buildVerifyBtn(IconData icon, String label) {
+  Widget _buildVerifyBtn(IconData icon, String label, GoProvider provider) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: SizedBox(
@@ -279,9 +279,13 @@ class _GoSellScreenState extends State<GoSellScreen> {
         child: OutlinedButton.icon(
           icon: Icon(icon, size: 20),
           label: Text(label),
-          onPressed: () {
+          onPressed: () async {
             setState(() { _step = 4; _processing = true; });
-            Future.delayed(const Duration(seconds: 2), () { if (mounted) setState(() { _processing = false; _success = true; }); });
+            final ok = await provider.sell(
+              amount: _amount,
+              destination: _selectedGwId ?? 'gateway',
+            );
+            if (mounted) setState(() { _processing = false; _success = ok; });
           },
           style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFFE5E7EB)), padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
         ),

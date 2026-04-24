@@ -20,6 +20,8 @@ import '../../features/updates/providers/updates_provider.dart';
 import '../../features/qualchat/providers/qualchat_provider.dart';
 import '../../features/april/providers/april_provider.dart';
 import '../../features/alerts/providers/alerts_provider.dart';
+import '../../features/eplay/providers/eplay_provider.dart';
+import '../../features/community/providers/community_provider.dart';
 import '../services/ai_assistant_service.dart';
 import '../services/ai_insights_notifier.dart';
 import '../services/websocket_service.dart';
@@ -77,6 +79,12 @@ class AppProviders {
 
       // Alerts Module Provider
       ChangeNotifierProvider(create: (_) => AlertsProvider()),
+
+      // e-Play Module Provider
+      ChangeNotifierProvider(create: (_) => EPlayProvider()),
+
+      // Community Module Provider
+      ChangeNotifierProvider(create: (_) => CommunityProvider()),
 
       // ── AI Cross-Cutting Providers ──────────────────────────────────────
       // AI Assistant: conversational AI chat available app-wide

@@ -435,6 +435,29 @@ class UpdatesProvider extends ChangeNotifier {
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
+  // REPORT CONTENT
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  Future<bool> reportContent({
+    required String contentId,
+    required String contentType,
+    required String reason,
+    String? details,
+  }) async {
+    try {
+      final response = await _socialService.reportContent(
+        contentId: contentId,
+        contentType: contentType,
+        reason: reason,
+        details: details,
+      );
+      return response.success;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
   // FALLBACK DATA
   // ═══════════════════════════════════════════════════════════════════════════
 

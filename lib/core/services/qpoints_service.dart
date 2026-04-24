@@ -10,31 +10,27 @@ class QPointsService {
   QPointsService([ApiClient? api]) : _api = api ?? ApiClient.instance;
 
   /// Deposit QPoints into wallet.
+  /// accountId is resolved server-side from the authenticated user's JWT.
   Future<ApiResponse<Map<String, dynamic>>> deposit({
     required double amount,
     required String description,
-    required String deviceFingerprint,
-    required String ipAddress,
   }) async {
     return _api.post<Map<String, dynamic>>(
       ApiRoutes.qpoints.deposit,
       data: {
         'amount': amount,
         'description': description,
-        'deviceFingerprint': deviceFingerprint,
-        'ipAddress': ipAddress,
       },
       fromJson: (json) => json as Map<String, dynamic>,
     );
   }
 
   /// Transfer QPoints to another user.
+  /// Source account is resolved from JWT; destination resolved from toUserId.
   Future<ApiResponse<Map<String, dynamic>>> transfer({
     required String toUserId,
     required double amount,
     required String description,
-    required String deviceFingerprint,
-    required String ipAddress,
   }) async {
     return _api.post<Map<String, dynamic>>(
       ApiRoutes.qpoints.transfer,
@@ -42,27 +38,22 @@ class QPointsService {
         'toUserId': toUserId,
         'amount': amount,
         'description': description,
-        'deviceFingerprint': deviceFingerprint,
-        'ipAddress': ipAddress,
       },
       fromJson: (json) => json as Map<String, dynamic>,
     );
   }
 
   /// Withdraw QPoints from wallet.
+  /// accountId is resolved server-side from the authenticated user's JWT.
   Future<ApiResponse<Map<String, dynamic>>> withdraw({
     required double amount,
     required String description,
-    required String deviceFingerprint,
-    required String ipAddress,
   }) async {
     return _api.post<Map<String, dynamic>>(
       ApiRoutes.qpoints.withdraw,
       data: {
         'amount': amount,
         'description': description,
-        'deviceFingerprint': deviceFingerprint,
-        'ipAddress': ipAddress,
       },
       fromJson: (json) => json as Map<String, dynamic>,
     );

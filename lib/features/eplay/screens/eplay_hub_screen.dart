@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
+import '../providers/eplay_provider.dart';
 
 // ── Module color
 const Color kEPlayColor = Color(0xFF7C3AED);       // Deep violet
@@ -51,6 +52,10 @@ class _EPlayHubScreenState extends State<EPlayHubScreen> {
       final collapsed = _scrollController.offset > 180;
       if (collapsed != _isCollapsed) setState(() => _isCollapsed = collapsed);
     });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final p = context.read<EPlayProvider>();
+      if (p.assets.isEmpty) p.loadBrowse();
+    });
   }
 
   @override
@@ -61,8 +66,8 @@ class _EPlayHubScreenState extends State<EPlayHubScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AIInsightsNotifier>(
-      builder: (context, ai, _) {
+    return Consumer2<AIInsightsNotifier, EPlayProvider>(
+      builder: (context, ai, eplay, _) {
         return AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle.light,
           child: Scaffold(
@@ -132,7 +137,7 @@ class _EPlayHubScreenState extends State<EPlayHubScreen> {
                     child: Text('Featured', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
                   ),
                 ),
-                SliverToBoxAdapter(child: _buildFeaturedCarousel()),
+                SliverToBoxAdapter(child: _buildFeaturedCarousel(eplay)),
 
                 // ── Quick actions ────────────────────────────────────────
                 SliverToBoxAdapter(child: _buildQuickActions()),
@@ -251,18 +256,39 @@ class _EPlayHubScreenState extends State<EPlayHubScreen> {
     );
   }
 
-  Widget _buildFeaturedCarousel() {
+  Widget _buildFeaturedCarousel(EPlayProvider eplay) {
+    // Use live assets from provider if available, fall back to curated stubs
+    final liveItems = eplay.assets.take(5).toList();
+    final useLive = liveItems.isNotEmpty;
+
+    if (eplay.isBrowseLoading && !useLive) {
+      return const SizedBox(
+        height: 200,
+        child: Center(child: CircularProgressIndicator(color: kEPlayColor)),
+      );
+    }
+
     return SizedBox(
       height: 200,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 12),
-        itemCount: _featured.length,
+        itemCount: useLive ? liveItems.length : _featured.length,
         itemBuilder: (ctx, i) {
-          final item = _featured[i];
+          final Map<String, dynamic> item = useLive
+              ? {
+                  'title': liveItems[i]['title'] ?? liveItems[i]['name'] ?? 'Untitled',
+                  'creator': liveItems[i]['creatorName'] ?? liveItems[i]['creator'] ?? '',
+                  'type': liveItems[i]['type'] ?? 'music',
+                  'price': liveItems[i]['priceQPoints'] != null
+                      ? '₵${liveItems[i]['priceQPoints']}'
+                      : 'Free',
+                }
+              : Map<String, dynamic>.from(_featured[i]);
           final colors = _colorForType(item['type'] as String);
           return GestureDetector(
-            onTap: () => Navigator.pushNamed(context, AppRoutes.eplayDetail, arguments: {'id': 'demo-$i', ...item}),
+            onTap: () => Navigator.pushNamed(context, AppRoutes.eplayDetail,
+                arguments: {'id': useLive ? liveItems[i]['id'] : 'demo-$i', ...item}),
             child: Container(
               width: 160,
               margin: const EdgeInsets.fromLTRB(4, 4, 4, 12),

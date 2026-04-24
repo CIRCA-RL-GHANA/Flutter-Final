@@ -152,7 +152,7 @@ class _PackageList extends StatelessWidget {
       color: kLiveColor,
       onRefresh: () async {
         HapticFeedback.mediumImpact();
-        await Future.delayed(const Duration(milliseconds: 500));
+        await prov.loadPackages();
       },
       child: ListView.builder(
         padding: const EdgeInsets.all(16),

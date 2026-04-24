@@ -26,3 +26,5 @@ export 'market_profile_service.dart';
 export 'qpoint_market_service.dart';
 export 'localstorage_service.dart';
 export 'websocket_service.dart';
+export 'eplay_service.dart';
+export 'community_service.dart';

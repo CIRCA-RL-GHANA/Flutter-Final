@@ -31,6 +31,8 @@ class ApiRoutes {
   static const wallets = _WalletRoutes();
   static const payments = _PaymentRoutes();
   static const go = _GoRoutes();
+  static const eplay = _EPlayRoutes();
+  static const community = _CommunityRoutes();
 }
 
 class _AuthRoutes {
@@ -201,6 +203,7 @@ class _SocialRoutes {
   String get engagements => '/social/engagements';
   String userEngagements(String userId) => '/social/users/$userId/engagements';
   String commentById(String id) => '/social/comments/$id';
+  String get reports => '/social/reports';
 }
 
 class _CalendarRoutes {
@@ -466,4 +469,50 @@ class _RevenueRoutes {
     final q = month != null ? '?month=$month' : '';
     return '/admin/revenue/entities/$entityId/transaction-fees$q';
   }
+}
+
+class _EPlayRoutes {
+  const _EPlayRoutes();
+
+  // ── Discovery ──────────────────────────────────────────────────────────
+  String get browse              => '/eplay/browse';
+  String assetById(String id)    => '/eplay/assets/$id';
+
+  // ── Content Management ─────────────────────────────────────────────────
+  String get uploadAsset         => '/eplay/assets';
+  String publishAsset(String id) => '/eplay/assets/$id/publish';
+
+  // ── Cloud Locker (purchased licenses) ─────────────────────────────────
+  String get locker              => '/eplay/locker';
+  String get purchase            => '/eplay/locker/purchase';
+  String stream(String assetId)  => '/eplay/locker/$assetId/stream';
+  String pinLocker(String id)    => '/eplay/locker/licenses/$id/pin';
+
+  // ── Creator Profile ────────────────────────────────────────────────────
+  String get openCreator         => '/eplay/creator/open';
+  String get myCreator           => '/eplay/creator/me';
+}
+
+class _CommunityRoutes {
+  const _CommunityRoutes();
+
+  // ── Discovery ──────────────────────────────────────────────────────────
+  String get discover            => '/community';
+  String get mine                => '/community/mine';
+  String byId(String id)         => '/community/$id';
+
+  // ── Lifecycle ──────────────────────────────────────────────────────────
+  String get create              => '/community';
+  String join(String id)         => '/community/$id/join';
+  String leave(String id)        => '/community/$id/leave';
+
+  // ── Members ────────────────────────────────────────────────────────────
+  String members(String id)             => '/community/$id/members';
+  String banMember(String id, String uid) =>
+      '/community/$id/members/$uid/ban';
+
+  // ── Posts ──────────────────────────────────────────────────────────────
+  String posts(String id)               => '/community/$id/posts';
+  String removePost(String id, String postId) =>
+      '/community/$id/posts/$postId';
 }

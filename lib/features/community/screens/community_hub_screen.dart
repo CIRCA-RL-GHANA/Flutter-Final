@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
+import '../providers/community_provider.dart';
 
 const Color kCommunityColor = Color(0xFF0891B2);       // Cyan-700
 const Color kCommunityColorDark = Color(0xFF0E7490);
@@ -24,16 +25,6 @@ const _archetypes = [
   {'type': 'journal',  'label': 'Journals',   'icon': Icons.book,               'desc': 'Shared blogs, notes & documentation',      'color': 0xFF6366F1},
 ];
 
-// Stub trending communities
-final _trending = [
-  {'name': 'Afrobeats Book Club',    'type': 'library',  'members': '1.2K'},
-  {'name': 'Friday Night Theater',   'type': 'theater',  'members': '845'},
-  {'name': 'Lagos Tech Fair 2026',   'type': 'fair',     'members': '3.1K'},
-  {'name': 'Kumasi Highlife Vibes',  'type': 'playlist', 'members': '620'},
-  {'name': 'Dev Hive Africa',        'type': 'hub',      'members': '2.4K'},
-  {'name': 'Accra Meetup',           'type': 'hangout',  'members': '510'},
-];
-
 class CommunityHubScreen extends StatefulWidget {
   const CommunityHubScreen({super.key});
 
@@ -44,15 +35,22 @@ class CommunityHubScreen extends StatefulWidget {
 class _CommunityHubScreenState extends State<CommunityHubScreen> {
   String? _filterType;
 
-  List<Map<String, dynamic>> get _filtered {
-    if (_filterType == null) return _trending;
-    return _trending.where((c) => c['type'] == _filterType).toList();
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final p = context.read<CommunityProvider>();
+      if (p.communities.isEmpty) p.loadDiscovery();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AIInsightsNotifier>(
-      builder: (context, ai, _) {
+    return Consumer2<AIInsightsNotifier, CommunityProvider>(
+      builder: (context, ai, community, _) {
+        final filtered = _filterType == null
+            ? community.communities
+            : community.communities.where((c) => c['type'] == _filterType).toList();
         return Scaffold(
           backgroundColor: AppColors.backgroundLight,
           body: CustomScrollView(
@@ -158,12 +156,14 @@ class _CommunityHubScreenState extends State<CommunityHubScreen> {
                   ),
                 ),
               ),
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (ctx, i) => _trendingTile(_filtered[i]),
-                  childCount: _filtered.length,
-                ),
-              ),
+              community.isDiscoveryLoading && filtered.isEmpty
+                  ? const SliverToBoxAdapter(child: Center(child: Padding(padding: EdgeInsets.all(32), child: CircularProgressIndicator())))
+                  : SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (ctx, i) => _trendingTile(filtered[i]),
+                        childCount: filtered.length,
+                      ),
+                    ),
               const SliverToBoxAdapter(child: SizedBox(height: 40)),
             ],
           ),

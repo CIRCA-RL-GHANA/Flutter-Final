@@ -503,8 +503,9 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
 
   Future<void> _placeOrder(BuildContext context, MarketProvider prov) async {
     setState(() => _isProcessing = true);
-    // Simulate processing
-    await Future.delayed(const Duration(seconds: 2));
+    final order = await prov.placeOrder(
+      deliveryAddress: _deliveryNote.isNotEmpty ? {'note': _deliveryNote} : null,
+    );
     setState(() => _isProcessing = false);
 
     if (!context.mounted) return;
@@ -520,20 +521,23 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
             Container(
               width: 72,
               height: 72,
-              decoration: const BoxDecoration(
-                color: kMarketColorLight,
+              decoration: BoxDecoration(
+                color: order != null ? kMarketColorLight : AppColors.error.withOpacity(0.1),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.check, size: 40, color: kMarketColor),
+              child: Icon(order != null ? Icons.check : Icons.error_outline,
+                  size: 40, color: order != null ? kMarketColor : AppColors.error),
             ),
             const SizedBox(height: 16),
-            const Text(
-              'Order Placed!',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+            Text(
+              order != null ? 'Order Placed!' : 'Order Failed',
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 8),
             Text(
-              'Your order has been placed successfully.\nYou can track it in My Transactions.',
+              order != null
+                  ? 'Your order has been placed successfully.\nYou can track it in My Transactions.'
+                  : 'Something went wrong. Please try again or check your Q Points balance.',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 14, color: AppColors.textSecondary),
             ),

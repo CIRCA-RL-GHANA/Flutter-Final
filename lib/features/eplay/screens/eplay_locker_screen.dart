@@ -9,15 +9,8 @@ import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
+import '../providers/eplay_provider.dart';
 import 'eplay_hub_screen.dart' show kEPlayColor, kEPlayColorDark;
-
-// Stub locker items — replace with API
-final _lockerItems = [
-  {'id': 'l1', 'title': 'Afrobeats Vol. 3', 'creator': 'KobiBeat',  'type': 'music',   'pinned': true,  'access': 'Perpetual'},
-  {'id': 'l2', 'title': 'Lagos Stories',     'creator': 'NaijaPen',  'type': 'ebook',   'pinned': false, 'access': 'Perpetual'},
-  {'id': 'l3', 'title': 'The River Speaks',  'creator': 'AkosiFilm', 'type': 'movie',   'pinned': false, 'access': 'Rental – 14d left'},
-  {'id': 'l4', 'title': 'Tech Minds Africa', 'creator': 'GeekCast',  'type': 'podcast', 'pinned': true,  'access': 'Perpetual'},
-];
 
 class EPlayLockerScreen extends StatefulWidget {
   const EPlayLockerScreen({super.key});
@@ -28,12 +21,14 @@ class EPlayLockerScreen extends StatefulWidget {
 
 class _EPlayLockerScreenState extends State<EPlayLockerScreen> with SingleTickerProviderStateMixin {
   late final TabController _tabs;
-  final _items = List<Map<String, dynamic>>.from(_lockerItems);
 
   @override
   void initState() {
     super.initState();
     _tabs = TabController(length: 3, vsync: this);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<EPlayProvider>().loadLocker();
+    });
   }
 
   @override
@@ -42,13 +37,17 @@ class _EPlayLockerScreenState extends State<EPlayLockerScreen> with SingleTicker
     super.dispose();
   }
 
-  List<Map<String, dynamic>> get _pinned => _items.where((i) => i['pinned'] == true).toList();
-  List<Map<String, dynamic>> get _rentals => _items.where((i) => (i['access'] as String).startsWith('Rental')).toList();
-
   @override
   Widget build(BuildContext context) {
-    return Consumer<AIInsightsNotifier>(
-      builder: (context, ai, _) {
+    return Consumer2<AIInsightsNotifier, EPlayProvider>(
+      builder: (context, ai, eplay, _) {
+        final items = eplay.lockerItems;
+        final pinned = items.where((i) => i['isPinned'] == true).toList();
+        final rentals = items.where((i) {
+          final asset = i['asset'] as Map<String, dynamic>?;
+          final status = i['status'] as String? ?? '';
+          return status == 'active' && asset != null;
+        }).toList();
         return Scaffold(
           backgroundColor: AppColors.backgroundLight,
           appBar: AppBar(
@@ -104,9 +103,9 @@ class _EPlayLockerScreenState extends State<EPlayLockerScreen> with SingleTicker
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    _lockerStat('${_items.length}', 'Total'),
-                    _lockerStat('${_pinned.length}', 'Pinned'),
-                    _lockerStat('${_rentals.length}', 'Rentals'),
+                    _lockerStat('${items.length}', 'Total'),
+                    _lockerStat('${pinned.length}', 'Pinned'),
+                    _lockerStat('${rentals.length}', 'Rentals'),
                     _lockerStat('0 GB', 'Cached'),
                   ],
                 ),
@@ -114,12 +113,14 @@ class _EPlayLockerScreenState extends State<EPlayLockerScreen> with SingleTicker
 
               // ── Tab content ─────────────────────────────────────────────
               Expanded(
-                child: TabBarView(
+                child: eplay.isLockerLoading
+                    ? const Center(child: CircularProgressIndicator())
+                    : TabBarView(
                   controller: _tabs,
                   children: [
-                    _buildList(_items),
-                    _buildList(_pinned),
-                    _buildList(_rentals),
+                    _buildList(items),
+                    _buildList(pinned),
+                    _buildList(rentals),
                   ],
                 ),
               ),
@@ -161,9 +162,12 @@ class _EPlayLockerScreenState extends State<EPlayLockerScreen> with SingleTicker
   }
 
   Widget _buildLockerTile(Map<String, dynamic> item) {
-    final isPinned = item['pinned'] as bool;
-    final type = item['type'] as String;
+    final isPinned = item['isPinned'] as bool? ?? false;
+    final asset = item['asset'] as Map<String, dynamic>? ?? item;
+    final type = asset['type'] as String? ?? 'music';
     final colors = _colorForType(type);
+    final lockerId = item['id'] as String? ?? '';
+    final eplay = context.read<EPlayProvider>();
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
@@ -183,16 +187,16 @@ class _EPlayLockerScreenState extends State<EPlayLockerScreen> with SingleTicker
           ),
           child: Icon(_iconForType(type), color: Colors.white, size: 26),
         ),
-        title: Text(item['title']!, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14)),
+        title: Text(asset['title'] as String? ?? '', style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14)),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(item['creator']!, style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+            Text(asset['creator'] as String? ?? '', style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
             const SizedBox(height: 2),
             Row(children: [
               Icon(isPinned ? Icons.wifi_off : Icons.cloud_done, size: 12, color: isPinned ? AppColors.warning : AppColors.success),
               const SizedBox(width: 4),
-              Text(item['access']!, style: TextStyle(fontSize: 11, color: isPinned ? AppColors.warning : AppColors.success)),
+              Text(item['status'] as String? ?? 'active', style: TextStyle(fontSize: 11, color: isPinned ? AppColors.warning : AppColors.success)),
             ]),
           ],
         ),
@@ -202,11 +206,11 @@ class _EPlayLockerScreenState extends State<EPlayLockerScreen> with SingleTicker
             IconButton(
               icon: Icon(isPinned ? Icons.push_pin : Icons.push_pin_outlined, color: isPinned ? kEPlayColor : AppColors.textTertiary, size: 20),
               tooltip: isPinned ? 'Unpin offline' : 'Pin for offline',
-              onPressed: () => setState(() => item['pinned'] = !isPinned),
+              onPressed: () => eplay.togglePin(lockerId),
             ),
           ],
         ),
-        onTap: () => Navigator.pushNamed(context, AppRoutes.eplayPlayer, arguments: item),
+        onTap: () => Navigator.pushNamed(context, AppRoutes.eplayPlayer, arguments: asset),
       ),
     );
   }

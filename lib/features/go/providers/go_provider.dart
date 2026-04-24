@@ -277,8 +277,6 @@ class GoProvider extends ChangeNotifier {
     required String toUserId,
     required double amount,
     String? note,
-    String deviceFingerprint = 'flutter-app',
-    String ipAddress = '0.0.0.0',
   }) async {
     _isLoading = true;
     _error = null;
@@ -289,8 +287,6 @@ class GoProvider extends ChangeNotifier {
         toUserId: toUserId,
         amount: amount,
         description: note ?? 'Transfer',
-        deviceFingerprint: deviceFingerprint,
-        ipAddress: ipAddress,
       );
 
       if (response.success) {
@@ -313,8 +309,6 @@ class GoProvider extends ChangeNotifier {
   Future<bool> buy({
     required double amount,
     required String source,
-    String deviceFingerprint = 'flutter-app',
-    String ipAddress = '0.0.0.0',
   }) async {
     _isLoading = true;
     _error = null;
@@ -324,8 +318,6 @@ class GoProvider extends ChangeNotifier {
       final response = await _qPointsService.deposit(
         amount: amount,
         description: 'Buy QPoints via $source',
-        deviceFingerprint: deviceFingerprint,
-        ipAddress: ipAddress,
       );
 
       if (response.success) {
@@ -348,8 +340,6 @@ class GoProvider extends ChangeNotifier {
   Future<bool> sell({
     required double amount,
     required String destination,
-    String deviceFingerprint = 'flutter-app',
-    String ipAddress = '0.0.0.0',
   }) async {
     _isLoading = true;
     _error = null;
@@ -359,8 +349,6 @@ class GoProvider extends ChangeNotifier {
       final response = await _qPointsService.withdraw(
         amount: amount,
         description: 'Sell QPoints to $destination',
-        deviceFingerprint: deviceFingerprint,
-        ipAddress: ipAddress,
       );
 
       if (response.success) {

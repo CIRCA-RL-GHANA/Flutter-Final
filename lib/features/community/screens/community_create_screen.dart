@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
+import '../providers/community_provider.dart';
 import 'community_hub_screen.dart' show kCommunityColor, kCommunityColorDark;
 
 const _types = [
@@ -239,7 +240,16 @@ class _CommunityCreateScreenState extends State<CommunityCreateScreen> {
       return;
     }
     setState(() => _creating = true);
-    await Future.delayed(const Duration(milliseconds: 1200)); // API stub
+    final tags = _tagsCtrl.text.trim().isEmpty
+        ? <String>[]
+        : _tagsCtrl.text.split(',').map((t) => t.trim()).where((t) => t.isNotEmpty).toList();
+    await context.read<CommunityProvider>().createCommunity(
+      name: _nameCtrl.text.trim(),
+      type: _selectedType!,
+      description: _descCtrl.text.trim(),
+      visibility: _visibility,
+      tags: tags,
+    );
     if (mounted) {
       setState(() => _creating = false);
       Navigator.pushReplacementNamed(context, AppRoutes.communityDetail, arguments: {

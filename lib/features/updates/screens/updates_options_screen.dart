@@ -398,7 +398,13 @@ class _ReportFlowState extends State<_ReportFlow> {
                               setState(() => _step++);
                             } else {
                               setState(() => _submitting = true);
-                              await Future.delayed(const Duration(seconds: 2));
+                              final prov = context.read<UpdatesProvider>();
+                              await prov.reportContent(
+                                contentId: 'update',
+                                contentType: 'update',
+                                reason: _selectedReason?.name ?? 'other',
+                                details: _detailsController.text,
+                              );
                               if (mounted) {
                                 Navigator.pop(context);
                                 Navigator.pop(context);

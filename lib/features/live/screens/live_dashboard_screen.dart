@@ -159,7 +159,7 @@ class _OrdersView extends StatelessWidget {
       color: kLiveColor,
       onRefresh: () async {
         HapticFeedback.mediumImpact();
-        await Future.delayed(const Duration(milliseconds: 500));
+        await prov.loadOrders();
       },
       child: ListView(
         padding: const EdgeInsets.all(16),

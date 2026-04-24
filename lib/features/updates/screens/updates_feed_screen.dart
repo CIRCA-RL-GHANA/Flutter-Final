@@ -146,7 +146,7 @@ class _Body extends StatelessWidget {
                       )
                     : RefreshIndicator(
                         color: kUpdatesColor,
-                        onRefresh: () async => await Future.delayed(const Duration(seconds: 1)),
+                        onRefresh: () => context.read<UpdatesProvider>().loadUpdates(),
                         child: ListView.builder(
                           padding: const EdgeInsets.fromLTRB(14, 8, 14, 80),
                           itemCount: sorted.length,

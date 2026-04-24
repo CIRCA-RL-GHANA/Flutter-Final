@@ -75,7 +75,7 @@ class _GoTransferScreenState extends State<GoTransferScreen> {
       case 0: return _buildReceiver(p);
       case 1: return _buildAmount(p);
       case 2: return _buildReview(p);
-      case 3: return _buildVerify();
+      case 3: return _buildVerify(p);
       case 4: return _buildResult();
       default: return const SizedBox.shrink();
     }
@@ -271,8 +271,7 @@ class _GoTransferScreenState extends State<GoTransferScreen> {
     );
   }
 
-  // Step 4: Verify
-  Widget _buildVerify() {
+  Widget _buildVerify(GoProvider p) {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -280,10 +279,10 @@ class _GoTransferScreenState extends State<GoTransferScreen> {
         const SizedBox(height: 16),
         const Text('VERIFY TRANSFER', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
         const SizedBox(height: 24),
-        ...[
-          _buildVerifyBtn(Icons.fingerprint, 'Use Fingerprint'),
-          _buildVerifyBtn(Icons.face, 'Face ID'),
-          _buildVerifyBtn(Icons.pin, 'Enter PIN'),
+        ..[
+          _buildVerifyBtn(Icons.fingerprint, 'Use Fingerprint', p),
+          _buildVerifyBtn(Icons.face, 'Face ID', p),
+          _buildVerifyBtn(Icons.pin, 'Enter PIN', p),
         ],
         const Spacer(),
         TextButton(onPressed: () => setState(() => _step = 2), child: const Text('Back', style: TextStyle(color: Color(0xFF6B7280)))),
@@ -291,14 +290,19 @@ class _GoTransferScreenState extends State<GoTransferScreen> {
     );
   }
 
-  Widget _buildVerifyBtn(IconData icon, String label) {
+  Widget _buildVerifyBtn(IconData icon, String label, GoProvider p) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: SizedBox(width: double.infinity, child: OutlinedButton.icon(
         icon: Icon(icon, size: 20), label: Text(label),
-        onPressed: () {
+        onPressed: () async {
           setState(() { _step = 4; _processing = true; });
-          Future.delayed(const Duration(seconds: 2), () { if (mounted) setState(() { _processing = false; _success = true; }); });
+          final ok = await p.transfer(
+            toUserId: _receiverId ?? '',
+            amount: _amount,
+            note: _messageCtrl.text.isNotEmpty ? _messageCtrl.text : null,
+          );
+          if (mounted) setState(() { _processing = false; _success = ok; });
         },
         style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFFE5E7EB)), padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
       )),

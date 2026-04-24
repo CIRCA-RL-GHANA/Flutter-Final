@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
+import '../providers/community_provider.dart';
 import 'community_hub_screen.dart' show kCommunityColor, kCommunityColorDark, _archetypes;
 
 class CommunityDetailScreen extends StatefulWidget {
@@ -38,6 +39,12 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> with Sing
     super.initState();
     _joined = _comm['isNew'] == true;
     _tabs = TabController(length: 2, vsync: this);
+    final id = _comm['id'] as String?;
+    if (id != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        context.read<CommunityProvider>().loadPosts(id);
+      });
+    }
   }
 
   @override
@@ -48,8 +55,10 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> with Sing
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AIInsightsNotifier>(
-      builder: (context, ai, _) {
+    return Consumer2<AIInsightsNotifier, CommunityProvider>(
+      builder: (context, ai, community, _) {
+        final communityId = _comm['id'] as String?;
+        final posts = communityId != null ? (community.postsCache[communityId] ?? []) : [];
         return Scaffold(
           backgroundColor: AppColors.backgroundLight,
           body: NestedScrollView(
@@ -145,7 +154,11 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> with Sing
                 )
               : FloatingActionButton.extended(
                   backgroundColor: _color,
-                  onPressed: () => setState(() => _joined = true),
+                  onPressed: () async {
+                    final id = _comm['id'] as String?;
+                    if (id != null) await context.read<CommunityProvider>().joinCommunity(id);
+                    if (mounted) setState(() => _joined = true);
+                  },
                   icon: const Icon(Icons.group_add, color: Colors.white),
                   label: const Text('Join', style: TextStyle(color: Colors.white)),
                 ),

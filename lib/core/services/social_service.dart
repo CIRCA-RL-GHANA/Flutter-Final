@@ -22,7 +22,7 @@ class SocialService {
     return _api.post<Map<String, dynamic>>(
       ApiRoutes.social.heyya,
       data: {
-        'targetUserId': targetUserId,
+        'recipientId': targetUserId,
         if (message != null) 'message': message,
       },
       fromJson: (json) => json as Map<String, dynamic>,
@@ -132,7 +132,7 @@ class SocialService {
   ) async {
     return _api.post<Map<String, dynamic>>(
       ApiRoutes.social.engagements,
-      data: {'updateId': updateId, 'type': 'like'},
+      data: {'targetType': 'update', 'targetId': updateId, 'type': 'like'},
       fromJson: (json) => json as Map<String, dynamic>,
     );
   }
@@ -204,14 +204,18 @@ class SocialService {
     );
   }
 
-  /// Remove an engagement (unlike).
+  /// Remove an engagement (unlike). Backend expects query params.
   Future<ApiResponse<Map<String, dynamic>>> removeEngagement({
     required String updateId,
     required String type,
   }) async {
     return _api.delete<Map<String, dynamic>>(
       ApiRoutes.social.engagements,
-      data: {'updateId': updateId, 'type': type},
+      queryParameters: {
+        'targetType': 'update',
+        'targetId': updateId,
+        'type': type,
+      },
       fromJson: (json) => json as Map<String, dynamic>,
     );
   }
@@ -281,5 +285,24 @@ class SocialService {
     String message2,
   ) {
     return _aiService.textSimilarity(message1, message2);
+  }
+
+  /// Report a piece of content (update, comment, user).
+  Future<ApiResponse<Map<String, dynamic>>> reportContent({
+    required String contentId,
+    required String contentType,
+    required String reason,
+    String? details,
+  }) async {
+    return _api.post<Map<String, dynamic>>(
+      ApiRoutes.social.reports,
+      data: {
+        'contentId': contentId,
+        'contentType': contentType,
+        'reason': reason,
+        if (details != null && details.isNotEmpty) 'details': details,
+      },
+      fromJson: (json) => json as Map<String, dynamic>,
+    );
   }
 }

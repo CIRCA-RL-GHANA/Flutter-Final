@@ -158,7 +158,7 @@ class _LiveOrdersScreenState extends State<LiveOrdersScreen> with SingleTickerPr
       color: kLiveColor,
       onRefresh: () async {
         HapticFeedback.mediumImpact();
-        await Future.delayed(const Duration(milliseconds: 500));
+        await prov.loadOrders();
       },
       child: ListView.builder(
         padding: const EdgeInsets.all(16),

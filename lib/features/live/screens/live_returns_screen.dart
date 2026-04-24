@@ -168,7 +168,7 @@ class _ReturnList extends StatelessWidget {
       color: kLiveColor,
       onRefresh: () async {
         HapticFeedback.mediumImpact();
-        await Future.delayed(const Duration(milliseconds: 500));
+        await prov.loadReturns();
       },
       child: ListView.builder(
         padding: const EdgeInsets.all(16),

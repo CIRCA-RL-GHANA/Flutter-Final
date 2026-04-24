@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
+import '../providers/eplay_provider.dart';
 import 'eplay_hub_screen.dart' show kEPlayColor, kEPlayColorDark;
 
 class EPlayAssetDetailScreen extends StatefulWidget {
@@ -220,8 +221,14 @@ class _EPlayAssetDetailScreenState extends State<EPlayAssetDetailScreen> {
   }
 
   Future<void> _purchase() async {
+    final assetId = _asset['id'] as String?;
     setState(() => _purchasing = true);
-    await Future.delayed(const Duration(milliseconds: 1500)); // API call stub
+    if (assetId != null) {
+      await context.read<EPlayProvider>().purchaseAsset(assetId);
+    } else {
+      // Fallback for screens opened with stub data (no id)
+      await Future.delayed(const Duration(milliseconds: 800));
+    }
     if (mounted) {
       setState(() { _purchasing = false; _owned = true; });
       ScaffoldMessenger.of(context).showSnackBar(
