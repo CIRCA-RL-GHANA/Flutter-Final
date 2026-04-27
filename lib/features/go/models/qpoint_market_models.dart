@@ -222,3 +222,190 @@ class QPointNotification {
         createdAt: DateTime.parse(j['createdAt'] as String? ?? j['created_at'] as String),
       );
 }
+
+// ────────────────────────────────────────────
+// Terms of Service Models
+// ────────────────────────────────────────────
+
+/// Full ToS document returned by GET /qpoints/tos
+class QPointsTosContent {
+  final String version;
+  final String effectiveDate;
+  final String contentHash;
+  final String text;
+
+  const QPointsTosContent({
+    required this.version,
+    required this.effectiveDate,
+    required this.contentHash,
+    required this.text,
+  });
+
+  factory QPointsTosContent.fromJson(Map<String, dynamic> j) =>
+      QPointsTosContent(
+        version: j['version'] as String,
+        effectiveDate: j['effectiveDate'] as String,
+        contentHash: j['contentHash'] as String,
+        text: j['text'] as String,
+      );
+}
+
+/// Acceptance status returned by GET /qpoints/tos/status
+class QPointsTosStatus {
+  final bool accepted;
+  final String version;
+  final String effectiveDate;
+
+  const QPointsTosStatus({
+    required this.accepted,
+    required this.version,
+    required this.effectiveDate,
+  });
+
+  factory QPointsTosStatus.fromJson(Map<String, dynamic> j) =>
+      QPointsTosStatus(
+        accepted: (j['accepted'] as bool?) ?? false,
+        version: j['version'] as String,
+        effectiveDate: j['effectiveDate'] as String,
+      );
+}
+
+// ────────────────────────────────────────────
+// Fee Schedule (TOS §7.1)
+// ────────────────────────────────────────────
+
+/// Fee schedule returned by GET /qpoints/fees (TOS Section 7.1)
+class QPointFeeSchedule {
+  /// Per-trade fee charged to the taker in USD
+  final double tradeFeePerTrade;
+  final String feeChargeTo;
+  final String pegRate;
+  final String description;
+
+  const QPointFeeSchedule({
+    required this.tradeFeePerTrade,
+    required this.feeChargeTo,
+    required this.pegRate,
+    required this.description,
+  });
+
+  factory QPointFeeSchedule.fromJson(Map<String, dynamic> j) =>
+      QPointFeeSchedule(
+        tradeFeePerTrade:
+            ((j['tradeFeePerTrade'] ?? j['trade_fee_per_trade']) as num)
+                .toDouble(),
+        feeChargeTo: j['feeChargeTo'] as String? ?? j['fee_charge_to'] as String? ?? 'taker',
+        pegRate: j['pegRate'] as String? ?? j['peg_rate'] as String? ?? '1.00 Q Points = \$1.00 USD (fixed)',
+        // Backend returns 'taxDisclosure' — map it to description field
+        description: j['taxDisclosure'] as String? ??
+            j['description'] as String? ?? '',
+      );
+}
+
+// ────────────────────────────────────────────
+// Facilitator Models (TOS §2.2)
+// ────────────────────────────────────────────
+
+/// Option for a select-type account field (e.g. account type choices).
+class QPointFieldOption {
+  final String value;
+  final String label;
+
+  const QPointFieldOption({required this.value, required this.label});
+
+  factory QPointFieldOption.fromJson(Map<String, dynamic> j) =>
+      QPointFieldOption(
+        value: j['value'] as String,
+        label: j['label'] as String,
+      );
+}
+
+/// A single field the user must provide to register with a facilitator.
+class QPointFacilitatorField {
+  final String key;
+  final String label;
+  final String type; // 'text' | 'phone' | 'select'
+  final bool required;
+  final List<QPointFieldOption> options;
+
+  const QPointFacilitatorField({
+    required this.key,
+    required this.label,
+    required this.type,
+    required this.required,
+    required this.options,
+  });
+
+  factory QPointFacilitatorField.fromJson(Map<String, dynamic> j) =>
+      QPointFacilitatorField(
+        key: j['key'] as String,
+        label: j['label'] as String,
+        type: j['type'] as String,
+        required: (j['required'] as bool?) ?? false,
+        options: (j['options'] as List<dynamic>? ?? [])
+            .map((e) => QPointFieldOption.fromJson(e as Map<String, dynamic>))
+            .toList(),
+      );
+}
+
+/// A payment facilitator available for a jurisdiction (from GET /qpoints/facilitators).
+class QPointFacilitatorInfo {
+  final String provider;
+  final String displayName;
+  final String description;
+  final List<String> supportedCountries;
+  final List<String> currencies;
+  final List<QPointFacilitatorField> accountFields;
+
+  const QPointFacilitatorInfo({
+    required this.provider,
+    required this.displayName,
+    required this.description,
+    required this.supportedCountries,
+    required this.currencies,
+    required this.accountFields,
+  });
+
+  factory QPointFacilitatorInfo.fromJson(Map<String, dynamic> j) =>
+      QPointFacilitatorInfo(
+        provider: j['provider'] as String,
+        displayName: j['displayName'] as String,
+        description: j['description'] as String,
+        supportedCountries: (j['supportedCountries'] as List<dynamic>? ?? [])
+            .map((e) => e as String)
+            .toList(),
+        currencies: (j['currencies'] as List<dynamic>? ?? [])
+            .map((e) => e as String)
+            .toList(),
+        accountFields: (j['accountFields'] as List<dynamic>? ?? [])
+            .map((e) => QPointFacilitatorField.fromJson(e as Map<String, dynamic>))
+            .toList(),
+      );
+}
+
+/// A registered facilitator account for the current user (from GET /qpoints/payment/accounts).
+class QPointFacilitatorAccount {
+  final String id;
+  final String provider;
+  /// Provider-specific external account / recipient ID (masked for display).
+  final String externalId;
+  final DateTime createdAt;
+
+  const QPointFacilitatorAccount({
+    required this.id,
+    required this.provider,
+    required this.externalId,
+    required this.createdAt,
+  });
+
+  factory QPointFacilitatorAccount.fromJson(Map<String, dynamic> j) =>
+      QPointFacilitatorAccount(
+        id: j['id'] as String,
+        provider: j['provider'] as String,
+        externalId: j['externalId'] as String? ?? j['external_id'] as String? ?? '',
+        createdAt: DateTime.parse(
+          j['createdAt'] as String? ?? j['created_at'] as String? ?? DateTime.now().toIso8601String(),
+        ),
+      );
+}
+

@@ -14,6 +14,8 @@ import '../../features/user_details/providers/user_details_provider.dart';
 import '../../features/utility/providers/utility_provider.dart';
 import '../../features/setup_dashboard/providers/setup_dashboard_provider.dart';
 import '../../features/go/providers/go_provider.dart';
+import '../../features/go/providers/qpoint_market_provider.dart';
+import '../../features/go/providers/qpoints_tos_provider.dart';
 import '../../features/market/providers/market_provider.dart';
 import '../../features/live/providers/live_provider.dart';
 import '../../features/updates/providers/updates_provider.dart';
@@ -61,6 +63,10 @@ class AppProviders {
 
       // GO Module Provider
       ChangeNotifierProvider(create: (_) => GoProvider()),
+
+      // Q Points Market Providers
+      ChangeNotifierProvider(create: (_) => QPointMarketProvider()),
+      ChangeNotifierProvider(create: (_) => QPointsTosProvider()),
 
       // Market Module Provider
       ChangeNotifierProvider(create: (_) => MarketProvider()),

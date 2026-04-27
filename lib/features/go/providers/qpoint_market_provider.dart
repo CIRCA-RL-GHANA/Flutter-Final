@@ -33,6 +33,20 @@ class QPointMarketProvider extends ChangeNotifier {
   List<QPointNotification> notifications = [];
   int unreadCount = 0;
 
+  // ── Fee schedule state (TOS §7.1) ────────────────────────────────────────
+
+  QPointFeeSchedule? feeSchedule;
+  bool isLoadingFees = false;
+
+  // ── Facilitator state (TOS §2.2) ─────────────────────────────────────────
+
+  List<QPointFacilitatorInfo> availableFacilitators = [];
+  List<QPointFacilitatorAccount> myFacilitatorAccounts = [];
+  bool isLoadingFacilitators = false;
+  bool isLoadingFacilitatorAccounts = false;
+  bool isRegisteringFacilitatorAccount = false;
+  String? facilitatorError;
+
   // ── Loaders ───────────────────────────────────────────────────────────────
 
   Future<void> loadAll() async {
@@ -199,5 +213,89 @@ class QPointMarketProvider extends ChangeNotifier {
   void clearError() {
     errorMessage = null;
     notifyListeners();
+  }
+
+  // ── Fee schedule (TOS §7.1 — must be disclosed on the Platform) ───────────
+
+  /// Loads and caches the current fee schedule.
+  /// GET /qpoints/fees — public endpoint, no ToS acceptance required.
+  Future<void> loadFeeSchedule() async {
+    if (isLoadingFees) return;
+    isLoadingFees = true;
+    notifyListeners();
+    final res = await _service.getFeeSchedule();
+    isLoadingFees = false;
+    if (res.isSuccess && res.data != null) {
+      feeSchedule = res.data;
+    }
+    notifyListeners();
+  }
+
+  // ── Facilitator loaders (TOS §2.2) ───────────────────────────────────────
+
+  Future<void> loadFacilitatorsForCountry(String countryCode) async {
+    if (isLoadingFacilitators) return;
+    isLoadingFacilitators = true;
+    facilitatorError = null;
+    notifyListeners();
+    final res = await _service.getFacilitatorsForCountry(countryCode);
+    isLoadingFacilitators = false;
+    if (res.isSuccess && res.data != null) {
+      availableFacilitators = res.data!;
+    } else {
+      facilitatorError = res.message;
+    }
+    notifyListeners();
+  }
+
+  Future<void> loadMyFacilitatorAccounts() async {
+    if (isLoadingFacilitatorAccounts) return;
+    isLoadingFacilitatorAccounts = true;
+    notifyListeners();
+    final res = await _service.getMyFacilitatorAccounts();
+    isLoadingFacilitatorAccounts = false;
+    if (res.isSuccess && res.data != null) {
+      myFacilitatorAccounts = res.data!;
+    }
+    notifyListeners();
+  }
+
+  /// Registers an account and refreshes the account list on success.
+  /// Returns [true] if successful.
+  Future<bool> registerFacilitatorAccount({
+    String? provider,
+    required String email,
+    String? countryCode,
+    String? accountNumber,
+    String? bankCode,
+    String? routingCode,
+    String? accountName,
+    String? currency,
+    String? type,
+    String? phone,
+  }) async {
+    isRegisteringFacilitatorAccount = true;
+    facilitatorError = null;
+    notifyListeners();
+    final res = await _service.registerFacilitatorAccount(
+      provider: provider,
+      email: email,
+      countryCode: countryCode,
+      accountNumber: accountNumber,
+      bankCode: bankCode,
+      routingCode: routingCode,
+      accountName: accountName,
+      currency: currency,
+      type: type,
+      phone: phone,
+    );
+    isRegisteringFacilitatorAccount = false;
+    if (res.isSuccess) {
+      await loadMyFacilitatorAccounts();
+      return true;
+    }
+    facilitatorError = res.message;
+    notifyListeners();
+    return false;
   }
 }

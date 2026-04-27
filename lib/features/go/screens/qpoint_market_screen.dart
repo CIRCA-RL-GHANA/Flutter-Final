@@ -1,14 +1,20 @@
 /// Q Points Market Screen — Full production implementation
 /// Sections: Stats Bar | Order Book | Place Order | Open Orders | Trade History
+///
+/// Access is gated behind Q Points ToS acceptance (v1.0.0).
+/// Users who have not accepted are shown the ToS screen first.
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/qpoint_market_provider.dart';
+import '../providers/qpoints_tos_provider.dart';
 import '../models/qpoint_market_models.dart';
+import 'qpoints_tos_screen.dart';
 
 // ── Brand colour for the market module ──────────────────────────────────────
 const Color kMarketColor = Color(0xFF6C47FF); // deep violet
 
+/// Entry point: checks ToS acceptance, shows ToS screen or the market.
 class QPointMarketScreen extends StatefulWidget {
   const QPointMarketScreen({super.key});
 
@@ -19,14 +25,45 @@ class QPointMarketScreen extends StatefulWidget {
 class _QPointMarketScreenState extends State<QPointMarketScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tab;
+  bool _tosCheckComplete = false;
 
   @override
   void initState() {
     super.initState();
     _tab = TabController(length: 3, vsync: this);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) => _checkTos());
+  }
+
+  Future<void> _checkTos() async {
+    final tosProvider = context.read<QPointsTosProvider>();
+    await tosProvider.loadTosStatus();
+    if (!mounted) return;
+    if (tosProvider.isAccepted) {
+      setState(() => _tosCheckComplete = true);
       context.read<QPointMarketProvider>().loadAll();
-    });
+    } else {
+      // Navigate to the ToS acceptance screen; replace so Back doesn't loop
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (_) => ChangeNotifierProvider.value(
+            value: tosProvider,
+            child: QPointsTosScreen(
+              onAccepted: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (_) => ChangeNotifierProvider.value(
+                      value: tosProvider,
+                      child: const QPointMarketScreen(),
+                    ),
+                  ),
+                );
+              },
+              onDeclined: () => Navigator.of(context).pop(),
+            ),
+          ),
+        ),
+      );
+    }
   }
 
   @override
@@ -37,6 +74,16 @@ class _QPointMarketScreenState extends State<QPointMarketScreen>
 
   @override
   Widget build(BuildContext context) {
+    // Show loading spinner while the ToS status is being checked
+    if (!_tosCheckComplete) {
+      return const Scaffold(
+        backgroundColor: Color(0xFFF4F3FF),
+        body: Center(
+          child: CircularProgressIndicator(color: kMarketColor),
+        ),
+      );
+    }
+
     return Scaffold(
       backgroundColor: const Color(0xFFF4F3FF),
       appBar: AppBar(
@@ -45,6 +92,11 @@ class _QPointMarketScreenState extends State<QPointMarketScreen>
         title: const Text('Q Points Market',
             style: TextStyle(fontWeight: FontWeight.bold)),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.info_outline),
+            tooltip: 'Fees & Disclosures (§7)',
+            onPressed: () => _showFeeSheet(context),
+          ),
           IconButton(
             icon: const Icon(Icons.notifications_outlined),
             tooltip: 'Notifications',
@@ -127,6 +179,20 @@ class _QPointMarketScreenState extends State<QPointMarketScreen>
       ),
     );
   }
+
+  /// Fee & Disclosure sheet — TOS §7.1 requires fees to be disclosed on the Platform.
+  void _showFeeSheet(BuildContext ctx) {
+    context.read<QPointMarketProvider>().loadFeeSchedule();
+    showModalBottomSheet(
+      context: ctx,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (_) => ChangeNotifierProvider.value(
+        value: context.read<QPointMarketProvider>(),
+        child: const _FeeDisclosureSheet(),
+      ),
+    );
+  }
 }
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -145,30 +211,52 @@ class _StatsBanner extends StatelessWidget {
     return Container(
       color: kMarketColor,
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _Stat(
-            label: 'Balance',
-            value: balance != null
-                ? '${balance.balance.toStringAsFixed(2)} QP'
-                : '—',
+          Row(
+            children: [
+              _Stat(
+                label: 'Balance',
+                value: balance != null
+                    ? '${balance.balance.toStringAsFixed(2)} QP'
+                    : '—',
+              ),
+              const SizedBox(width: 16),
+              const _Stat(
+                label: 'Price',
+                value: '\$1.00',
+              ),
+              const SizedBox(width: 16),
+              _Stat(
+                label: 'Vol 24h (QP)',
+                value: stats != null ? _formatVol(stats.volume24h) : '—',
+              ),
+            ],
           ),
-          const SizedBox(width: 16),
-          const _Stat(
-            label: 'Price',
-            value: '\$1.00',
-          ),
-          const SizedBox(width: 16),
-          _Stat(
-            label: 'Vol 24h (QP)',
-            value: stats != null ? _formatVol(stats.volume24h) : '—',
-          ),
-          const SizedBox(width: 16),
-          _Stat(
-            label: 'Vol 24h',
-            value: stats != null
-                ? _formatVol(stats.volume24h)
-                : '—',
+          const SizedBox(height: 8),
+          // TOS §5.2 — AI last-resort counterparty indicator (operational, not a legal guarantee)
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            decoration: BoxDecoration(
+              color: Colors.green.shade700,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: const Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(Icons.smart_toy_outlined, color: Colors.white, size: 12),
+                SizedBox(width: 4),
+                Text(
+                  'AI Standby at \$1.00',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -1069,6 +1157,8 @@ class _NotificationTile extends StatelessWidget {
         return Icons.cancel_outlined;
       case 'settlement_failed':
         return Icons.error_outline;
+      case 'settlement_pending':
+        return Icons.hourglass_bottom_outlined;
       case 'market_alert':
         return Icons.notifications_active_outlined;
       default:
@@ -1082,5 +1172,183 @@ class _NotificationTile extends StatelessWidget {
     if (diff.inMinutes < 60) return '${diff.inMinutes}m ago';
     if (diff.inHours < 24) return '${diff.inHours}h ago';
     return '${dt.month}/${dt.day}';
+  }
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// Fee Disclosure Sheet — TOS §7.1 & §7.2
+// "Fees will be disclosed on the Platform and may be changed upon notice."
+// ════════════════════════════════════════════════════════════════════════════
+
+class _FeeDisclosureSheet extends StatelessWidget {
+  const _FeeDisclosureSheet();
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<QPointMarketProvider>(
+      builder: (ctx, provider, _) => Container(
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        ),
+        padding: const EdgeInsets.fromLTRB(20, 16, 20, 32),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                const Icon(Icons.receipt_long_outlined, color: kMarketColor, size: 22),
+                const SizedBox(width: 10),
+                const Expanded(
+                  child: Text(
+                    'Fees & Disclosures',
+                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.close),
+                  onPressed: () => Navigator.pop(ctx),
+                ),
+              ],
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+              decoration: BoxDecoration(
+                color: kMarketColor.withOpacity(0.08),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: const Text(
+                'Q Points Terms of Service §7.1 — Fee Disclosure',
+                style: TextStyle(fontSize: 11, color: kMarketColor, fontWeight: FontWeight.w600),
+              ),
+            ),
+            const SizedBox(height: 16),
+            if (provider.isLoadingFees)
+              const Center(child: CircularProgressIndicator(color: kMarketColor))
+            else ...[
+              _FeeRow(
+                icon: Icons.swap_horiz,
+                label: 'Trade Execution Fee',
+                value: provider.feeSchedule != null
+                    ? '\$${provider.feeSchedule!.tradeFeePerTrade.toStringAsFixed(2)} per trade (charged to taker)'
+                    : '\$0.02 per matched trade (charged to taker)',
+                detail: 'Charged on each successfully matched order.',
+              ),
+              _FeeRow(
+                icon: Icons.add_circle_outline,
+                label: 'Order Placement Fee',
+                value: '\$0.00',
+                detail: 'No fee for placing or cancelling a limit order.',
+              ),
+              _FeeRow(
+                icon: Icons.output,
+                label: 'Withdrawal Fee',
+                value: '\$0.00 (Platform)',
+                detail: 'No Platform fee for Q Points withdrawal. Facilitator fees may apply.',
+              ),
+              _FeeRow(
+                icon: Icons.lock,
+                label: 'Fixed Exchange Rate',
+                value: provider.feeSchedule?.pegRate ?? '1.00 Q Points = \$1.00 USD (fixed)',
+                detail: 'The price peg is fixed. 1 Q Point is always equal to \$1.00 USD.',
+              ),
+              const SizedBox(height: 16),
+              // Tax disclosure — TOS §7.2
+              Container(
+                padding: const EdgeInsets.all(14),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFFFF8E1),
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: const Color(0xFFFFCC80)),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Row(
+                      children: [
+                        Icon(Icons.account_balance_outlined,
+                            size: 16, color: Color(0xFFE65100)),
+                        SizedBox(width: 6),
+                        Text(
+                          'Tax Disclosure — Q Points ToS §7.2',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
+                            color: Color(0xFFE65100),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      provider.feeSchedule?.description.isNotEmpty == true
+                          ? provider.feeSchedule!.description
+                          : 'You are solely responsible for determining and paying any taxes '
+                              'that may apply to your use of Q Points, including any taxes on '
+                              'trades or gains. The Company does not withhold or remit taxes '
+                              'on your behalf, except as required by law.',
+                      style: const TextStyle(
+                          fontSize: 12, color: Color(0xFF555555), height: 1.5),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                'Fees may be changed upon notice per Q Points Terms of Service §7.1.',
+                style: TextStyle(fontSize: 11, color: Colors.black38),
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _FeeRow extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final String value;
+  final String detail;
+
+  const _FeeRow({
+    required this.icon,
+    required this.label,
+    required this.value,
+    required this.detail,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 14),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(icon, size: 18, color: kMarketColor),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(label,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w600, fontSize: 13)),
+                Text(value,
+                    style: const TextStyle(
+                        color: kMarketColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13)),
+                Text(detail,
+                    style: const TextStyle(
+                        color: Colors.black45, fontSize: 11, height: 1.4)),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

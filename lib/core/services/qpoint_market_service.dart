@@ -109,4 +109,109 @@ class QPointMarketService {
         data: all ? {'all': true} : {'notificationIds': ids ?? []},
         fromJson: (json) => json as Map<String, dynamic>,
       );
+
+  // ── Terms of Service ──────────────────────────────────────────────────────
+
+  /// Returns the current ToS version, effective date, content hash, and full text.
+  Future<ApiResponse<QPointsTosContent>> getCurrentTos() => _api.get(
+        '/qpoints/tos',
+        fromJson: (json) =>
+            QPointsTosContent.fromJson(json as Map<String, dynamic>),
+      );
+
+  /// Returns whether the current user has accepted the current ToS version.
+  Future<ApiResponse<QPointsTosStatus>> getTosStatus() => _api.get(
+        '/qpoints/tos/status',
+        fromJson: (json) =>
+            QPointsTosStatus.fromJson(json as Map<String, dynamic>),
+      );
+
+  /// Records the user's acceptance of the current Q Points ToS.
+  /// All three confirmation flags must be true.
+  Future<ApiResponse<Map<String, dynamic>>> acceptTos({
+    required String tosVersion,
+    required bool readConfirmed,
+    required bool riskConfirmed,
+    required bool ageConfirmed,
+    required String platform,
+  }) =>
+      _api.post(
+        '/qpoints/tos/accept',
+        data: {
+          'tosVersion': tosVersion,
+          'readConfirmed': readConfirmed,
+          'riskConfirmed': riskConfirmed,
+          'ageConfirmed': ageConfirmed,
+          'platform': platform,
+        },
+        fromJson: (json) => json as Map<String, dynamic>,
+      );
+
+  // ── Fee Schedule (TOS §7.1) ───────────────────────────────────────────────
+
+  /// Returns the current fee schedule as required by TOS Section 7.1.
+  /// Does NOT require ToS acceptance — always publicly accessible.
+  Future<ApiResponse<QPointFeeSchedule>> getFeeSchedule() => _api.get(
+        '/qpoints/fees',
+        fromJson: (json) =>
+            QPointFeeSchedule.fromJson(json as Map<String, dynamic>),
+      );
+
+  // ── Facilitators (TOS §2.2) ───────────────────────────────────────────────
+
+  /// Returns available payment facilitators for a country (ISO 3166-1 alpha-2).
+  /// Includes account field definitions for rendering the registration form.
+  /// Does NOT require authentication or ToS acceptance.
+  Future<ApiResponse<List<QPointFacilitatorInfo>>> getFacilitatorsForCountry(
+    String countryCode,
+  ) =>
+      _api.get(
+        '/qpoints/facilitators',
+        queryParameters: {'country': countryCode},
+        fromJson: (json) => (json as List<dynamic>)
+            .map((e) =>
+                QPointFacilitatorInfo.fromJson(e as Map<String, dynamic>))
+            .toList(),
+      );
+
+  /// Returns all registered facilitator accounts for the authenticated user.
+  Future<ApiResponse<List<QPointFacilitatorAccount>>>
+      getMyFacilitatorAccounts() => _api.get(
+            '/qpoints/payment/accounts',
+            fromJson: (json) => (json as List<dynamic>)
+                .map((e) => QPointFacilitatorAccount.fromJson(
+                    e as Map<String, dynamic>))
+                .toList(),
+          );
+
+  /// Registers the user's payment account with a facilitator.
+  /// Call [getFacilitatorsForCountry] first to get required fields per provider.
+  Future<ApiResponse<Map<String, dynamic>>> registerFacilitatorAccount({
+    String? provider,
+    required String email,
+    String? countryCode,
+    String? accountNumber,
+    String? bankCode,
+    String? routingCode,
+    String? accountName,
+    String? currency,
+    String? type,
+    String? phone,
+  }) =>
+      _api.post(
+        '/qpoints/payment/register',
+        data: {
+          if (provider != null) 'provider': provider,
+          'email': email,
+          if (countryCode != null) 'countryCode': countryCode,
+          if (accountNumber != null) 'accountNumber': accountNumber,
+          if (bankCode != null) 'bankCode': bankCode,
+          if (routingCode != null) 'routingCode': routingCode,
+          if (accountName != null) 'accountName': accountName,
+          if (currency != null) 'currency': currency,
+          if (type != null) 'type': type,
+          if (phone != null) 'phone': phone,
+        },
+        fromJson: (json) => json as Map<String, dynamic>,
+      );
 }
