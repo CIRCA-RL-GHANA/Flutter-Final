@@ -47,6 +47,24 @@ class QPointMarketProvider extends ChangeNotifier {
   bool isRegisteringFacilitatorAccount = false;
   String? facilitatorError;
 
+  // ── Cross-Facilitator Bridge state ────────────────────────────────────────
+
+  /// The facilitator ID the user is currently trading through.
+  /// Derived from [myFacilitatorAccounts] — the most recently added account.
+  String? get activeFacilitatorId =>
+      myFacilitatorAccounts.isNotEmpty ? myFacilitatorAccounts.first.provider : null;
+
+  /// Whether the bridge is currently active for [activeFacilitatorId].
+  /// False = "Cash-out via this payment method is temporarily limited."
+  bool isBridgeActive = true; // optimistic default — corrected on load
+
+  /// Human-readable bridge suspension message (null when bridge is active).
+  String? get bridgeUnavailableMessage => isBridgeActive
+      ? null
+      : 'Cash-out via this payment method is temporarily limited. Please try again later.';
+
+  bool isLoadingBridgeStatus = false;
+
   // ── Loaders ───────────────────────────────────────────────────────────────
 
   Future<void> loadAll() async {
@@ -56,6 +74,9 @@ class QPointMarketProvider extends ChangeNotifier {
       loadOpenOrders(),
       loadStats(),
     ]);
+    // Load facilitator accounts first, then bridge status (depends on active account)
+    await loadMyFacilitatorAccounts();
+    await loadBridgeStatus();
   }
 
   Future<void> loadBalance() async {
@@ -232,6 +253,24 @@ class QPointMarketProvider extends ChangeNotifier {
   }
 
   // ── Facilitator loaders (TOS §2.2) ───────────────────────────────────────
+
+  /// Loads the bridge availability for the user's active facilitator.
+  /// This is a best-effort call — a network failure defaults to [isBridgeActive = true]
+  /// to avoid blocking users unnecessarily.
+  Future<void> loadBridgeStatus() async {
+    final facilitatorId = activeFacilitatorId;
+    if (facilitatorId == null) return;
+    isLoadingBridgeStatus = true;
+    notifyListeners();
+    try {
+      isBridgeActive = await _service.isBridgeActiveForFacilitator(facilitatorId);
+    } catch (_) {
+      isBridgeActive = true; // fail-open: do not block user on network error
+    } finally {
+      isLoadingBridgeStatus = false;
+    }
+    notifyListeners();
+  }
 
   Future<void> loadFacilitatorsForCountry(String countryCode) async {
     if (isLoadingFacilitators) return;

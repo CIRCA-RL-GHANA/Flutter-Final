@@ -306,10 +306,105 @@ class _MarketTab extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
+        // Bridge suspension banner — only shown when active facilitator's bridge is down
+        if (provider.bridgeUnavailableMessage != null)
+          _BridgeStatusBanner(message: provider.bridgeUnavailableMessage!),
+        if (provider.bridgeUnavailableMessage != null)
+          const SizedBox(height: 12),
+        // Active payment method indicator
+        if (provider.activeFacilitatorId != null)
+          _ActiveFacilitatorChip(facilitatorId: provider.activeFacilitatorId!),
+        if (provider.activeFacilitatorId != null)
+          const SizedBox(height: 12),
         _QuickActions(provider: provider),
         const SizedBox(height: 16),
         _OrderBookWidget(provider: provider),
       ],
+    );
+  }
+}
+
+/// Shows a non-blocking warning banner when the bridge is temporarily suspended
+/// for the user's active payment facilitator.
+class _BridgeStatusBanner extends StatelessWidget {
+  final String message;
+  const _BridgeStatusBanner({required this.message});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+      decoration: BoxDecoration(
+        color: Colors.amber.shade50,
+        border: Border.all(color: Colors.amber.shade300),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(Icons.info_outline, color: Colors.amber.shade800, size: 18),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              message,
+              style: TextStyle(
+                color: Colors.amber.shade900,
+                fontSize: 13,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Small chip showing the user's active payment method provider name.
+class _ActiveFacilitatorChip extends StatelessWidget {
+  final String facilitatorId;
+  const _ActiveFacilitatorChip({required this.facilitatorId});
+
+  /// Returns a human-friendly display name for the provider ID.
+  String _displayName(String id) {
+    const names = {
+      'stripe': 'Stripe',
+      'paystack': 'Paystack',
+      'flutterwave': 'Flutterwave',
+      'mtn_momo': 'MTN MoMo',
+      'mpesa': 'M-Pesa',
+      'wise': 'Wise',
+      'mock': 'Test Mode',
+    };
+    return names[id] ?? id;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.surfaceVariant,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.account_balance_wallet_outlined,
+                size: 14,
+                color: Theme.of(context).colorScheme.onSurfaceVariant),
+            const SizedBox(width: 5),
+            Text(
+              'Via ${_displayName(facilitatorId)}',
+              style: TextStyle(
+                fontSize: 12,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -325,7 +420,7 @@ class _QuickActions extends StatelessWidget {
         Expanded(
           child: _ActionCard(
             label: 'Buy QP',
-            subLabel: 'Price: \$1.00 per QP',
+            subLabel: 'Pay \$1.001 per QP',
             color: Colors.green.shade600,
             icon: Icons.trending_up,
             onTap: () => _showCashInSheet(context),
@@ -335,7 +430,7 @@ class _QuickActions extends StatelessWidget {
         Expanded(
           child: _ActionCard(
             label: 'Sell QP',
-            subLabel: 'Price: \$1.00 per QP',
+            subLabel: 'Receive \$0.999 per QP',
             color: Colors.red.shade600,
             icon: Icons.trending_down,
             onTap: () => _showCashOutSheet(context),

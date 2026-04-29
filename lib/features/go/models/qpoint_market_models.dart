@@ -94,6 +94,12 @@ class QPointTrade {
   final String sellerId;
   final DateTime createdAt;
 
+  // Cross-facilitator bridge metadata
+  final bool isCrossFacilitator;
+  final String? crossFacilitatorPairId;
+  final String? buyerFacilitatorId;
+  final String? sellerFacilitatorId;
+
   const QPointTrade({
     required this.id,
     required this.price,
@@ -101,6 +107,10 @@ class QPointTrade {
     required this.buyerId,
     required this.sellerId,
     required this.createdAt,
+    this.isCrossFacilitator = false,
+    this.crossFacilitatorPairId,
+    this.buyerFacilitatorId,
+    this.sellerFacilitatorId,
   });
 
   factory QPointTrade.fromJson(Map<String, dynamic> j) => QPointTrade(
@@ -110,6 +120,10 @@ class QPointTrade {
         buyerId: j['buyerId'] as String? ?? j['buyer_id'] as String,
         sellerId: j['sellerId'] as String? ?? j['seller_id'] as String,
         createdAt: DateTime.parse(j['createdAt'] as String? ?? j['created_at'] as String),
+        isCrossFacilitator: j['isCrossFacilitator'] as bool? ?? j['is_cross_facilitator'] as bool? ?? false,
+        crossFacilitatorPairId: j['crossFacilitatorPairId'] as String? ?? j['cross_facilitator_pair_id'] as String?,
+        buyerFacilitatorId: j['buyerFacilitatorId'] as String? ?? j['buyer_facilitator_id'] as String?,
+        sellerFacilitatorId: j['sellerFacilitatorId'] as String? ?? j['seller_facilitator_id'] as String?,
       );
 }
 
@@ -409,3 +423,163 @@ class QPointFacilitatorAccount {
       );
 }
 
+// ────────────────────────────────────────────
+// Cross-Facilitator Bridge Models
+// ────────────────────────────────────────────
+
+/// AI Participant's cash balance at a specific payment facilitator.
+class AiFacilitatorBalance {
+  final String id;
+  final String facilitatorId;
+  final double cashBalanceUsd;
+  final double minReserveUsd;
+  final bool isBridgeActive;
+  final double dailyOutflowUsd;
+  final DateTime? dailyOutflowResetAt;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+
+  const AiFacilitatorBalance({
+    required this.id,
+    required this.facilitatorId,
+    required this.cashBalanceUsd,
+    required this.minReserveUsd,
+    required this.isBridgeActive,
+    required this.dailyOutflowUsd,
+    this.dailyOutflowResetAt,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+
+  double get reserveRatio =>
+      minReserveUsd > 0 ? cashBalanceUsd / minReserveUsd : 1.0;
+
+  String get healthStatus {
+    if (!isBridgeActive || reserveRatio < 0.5) return 'critical';
+    if (reserveRatio < 1.0) return 'warning';
+    return 'healthy';
+  }
+
+  factory AiFacilitatorBalance.fromJson(Map<String, dynamic> j) =>
+      AiFacilitatorBalance(
+        id: j['id'] as String,
+        facilitatorId: j['facilitatorId'] as String? ?? j['facilitator_id'] as String,
+        cashBalanceUsd: (j['cashBalanceUsd'] ?? j['cash_balance_usd'] as num? ?? 0).toDouble(),
+        minReserveUsd: (j['minReserveUsd'] ?? j['min_reserve_usd'] as num? ?? 10000).toDouble(),
+        isBridgeActive: j['isBridgeActive'] as bool? ?? j['is_bridge_active'] as bool? ?? false,
+        dailyOutflowUsd: (j['dailyOutflowUsd'] ?? j['daily_outflow_usd'] as num? ?? 0).toDouble(),
+        dailyOutflowResetAt: (j['dailyOutflowResetAt'] ?? j['daily_outflow_reset_at']) != null
+            ? DateTime.parse(j['dailyOutflowResetAt'] as String? ?? j['daily_outflow_reset_at'] as String)
+            : null,
+        createdAt: DateTime.parse(j['createdAt'] as String? ?? j['created_at'] as String),
+        updatedAt: DateTime.parse(j['updatedAt'] as String? ?? j['updated_at'] as String),
+      );
+}
+
+/// A netting/rebalancing task created by the NettingEngine.
+class NettingTask {
+  final String id;
+  final String sourceFacilitatorId;
+  final String targetFacilitatorId;
+  final double amountUsd;
+  final String status;
+  final double? sourceBalanceAtCreation;
+  final double? targetBalanceAtCreation;
+  final String? notes;
+  final String? completedByAdminId;
+  final String? transferReference;
+  final DateTime createdAt;
+  final DateTime? completedAt;
+
+  const NettingTask({
+    required this.id,
+    required this.sourceFacilitatorId,
+    required this.targetFacilitatorId,
+    required this.amountUsd,
+    required this.status,
+    this.sourceBalanceAtCreation,
+    this.targetBalanceAtCreation,
+    this.notes,
+    this.completedByAdminId,
+    this.transferReference,
+    required this.createdAt,
+    this.completedAt,
+  });
+
+  bool get isPending => status == 'pending';
+  bool get isCompleted => status == 'completed';
+
+  factory NettingTask.fromJson(Map<String, dynamic> j) => NettingTask(
+        id: j['id'] as String,
+        sourceFacilitatorId: j['sourceFacilitatorId'] as String? ?? j['source_facilitator_id'] as String,
+        targetFacilitatorId: j['targetFacilitatorId'] as String? ?? j['target_facilitator_id'] as String,
+        amountUsd: (j['amountUsd'] ?? j['amount_usd'] as num).toDouble(),
+        status: j['status'] as String,
+        sourceBalanceAtCreation: (j['sourceBalanceAtCreation'] ?? j['source_balance_at_creation']) != null
+            ? ((j['sourceBalanceAtCreation'] ?? j['source_balance_at_creation']) as num).toDouble()
+            : null,
+        targetBalanceAtCreation: (j['targetBalanceAtCreation'] ?? j['target_balance_at_creation']) != null
+            ? ((j['targetBalanceAtCreation'] ?? j['target_balance_at_creation']) as num).toDouble()
+            : null,
+        notes: j['notes'] as String?,
+        completedByAdminId: j['completedByAdminId'] as String? ?? j['completed_by_admin_id'] as String?,
+        transferReference: j['transferReference'] as String? ?? j['transfer_reference'] as String?,
+        createdAt: DateTime.parse(j['createdAt'] as String? ?? j['created_at'] as String),
+        completedAt: (j['completedAt'] ?? j['completed_at']) != null
+            ? DateTime.parse(j['completedAt'] as String? ?? j['completed_at'] as String)
+            : null,
+      );
+}
+
+/// Net position summary for the AI bridge (admin dashboard).
+class CrossFacilitatorNetPosition {
+  final List<FacilitatorPosition> facilitators;
+  final double totalCashUsd;
+  final int pendingTasksCount;
+
+  const CrossFacilitatorNetPosition({
+    required this.facilitators,
+    required this.totalCashUsd,
+    required this.pendingTasksCount,
+  });
+
+  factory CrossFacilitatorNetPosition.fromJson(Map<String, dynamic> j) =>
+      CrossFacilitatorNetPosition(
+        facilitators: (j['facilitators'] as List<dynamic>)
+            .map((e) => FacilitatorPosition.fromJson(e as Map<String, dynamic>))
+            .toList(),
+        totalCashUsd: (j['totalCashUsd'] ?? j['total_cash_usd'] as num? ?? 0).toDouble(),
+        pendingTasksCount: (j['pendingTasksCount'] ?? j['pending_tasks_count'] as int? ?? 0),
+      );
+}
+
+class FacilitatorPosition {
+  final String facilitatorId;
+  final double cashBalanceUsd;
+  final double minReserveUsd;
+  final bool isBridgeActive;
+  final double dailyOutflowUsd;
+  final double reserveRatio;
+  final String status;
+
+  const FacilitatorPosition({
+    required this.facilitatorId,
+    required this.cashBalanceUsd,
+    required this.minReserveUsd,
+    required this.isBridgeActive,
+    required this.dailyOutflowUsd,
+    required this.reserveRatio,
+    required this.status,
+  });
+
+  factory FacilitatorPosition.fromJson(Map<String, dynamic> j) =>
+      FacilitatorPosition(
+        facilitatorId: j['facilitatorId'] as String? ?? j['facilitator_id'] as String,
+        cashBalanceUsd: (j['cashBalanceUsd'] ?? j['cash_balance_usd'] as num? ?? 0).toDouble(),
+        minReserveUsd: (j['minReserveUsd'] ?? j['min_reserve_usd'] as num? ?? 0).toDouble(),
+        isBridgeActive: j['isBridgeActive'] as bool? ?? j['is_bridge_active'] as bool? ?? false,
+        dailyOutflowUsd: (j['dailyOutflowUsd'] ?? j['daily_outflow_usd'] as num? ?? 0).toDouble(),
+        reserveRatio: (j['reserveRatio'] ?? j['reserve_ratio'] as num? ?? 0).toDouble(),
+        status: j['status'] as String? ?? 'unknown',
+      );
+}

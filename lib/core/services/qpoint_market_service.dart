@@ -214,4 +214,93 @@ class QPointMarketService {
         },
         fromJson: (json) => json as Map<String, dynamic>,
       );
+
+  // ── Cross-Facilitator Bridge (Admin) ─────────────────────────────────────
+
+  /// Returns the AI Participant's cash balance at each registered facilitator.
+  /// Admin only — requires admin JWT.
+  Future<ApiResponse<List<AiFacilitatorBalance>>> getCrossFacilitatorBalances() =>
+      _api.get(
+        '/qpoints/admin/cross-facilitator/balances',
+        fromJson: (json) => (json as List<dynamic>)
+            .map((e) => AiFacilitatorBalance.fromJson(e as Map<String, dynamic>))
+            .toList(),
+      );
+
+  /// Returns health summary of all facilitator positions + pending netting count.
+  /// Admin only.
+  Future<ApiResponse<CrossFacilitatorNetPosition>> getNetPositionSummary() =>
+      _api.get(
+        '/qpoints/admin/cross-facilitator/net-position',
+        fromJson: (json) =>
+            CrossFacilitatorNetPosition.fromJson(json as Map<String, dynamic>),
+      );
+
+  /// Lists netting/rebalancing tasks, optionally filtered by status.
+  Future<ApiResponse<List<NettingTask>>> listNettingTasks({String? status}) =>
+      _api.get(
+        '/qpoints/admin/netting/tasks',
+        queryParameters: {if (status != null) 'status': status},
+        fromJson: (json) => (json as List<dynamic>)
+            .map((e) => NettingTask.fromJson(e as Map<String, dynamic>))
+            .toList(),
+      );
+
+  /// Marks a netting task as completed after the finance team has executed the wire.
+  Future<ApiResponse<NettingTask>> completeNettingTask(
+    String taskId, {
+    required String transferReference,
+    String? notes,
+  }) =>
+      _api.post(
+        '/qpoints/admin/netting/tasks/$taskId/complete',
+        data: {
+          'transferReference': transferReference,
+          if (notes != null) 'notes': notes,
+        },
+        fromJson: (json) => NettingTask.fromJson(json as Map<String, dynamic>),
+      );
+
+  /// Cancels a pending netting task.
+  Future<ApiResponse<NettingTask>> cancelNettingTask(
+    String taskId, {
+    String? notes,
+  }) =>
+      _api.post(
+        '/qpoints/admin/netting/tasks/$taskId/cancel',
+        data: {if (notes != null) 'notes': notes},
+        fromJson: (json) => NettingTask.fromJson(json as Map<String, dynamic>),
+      );
+
+  /// Triggers an immediate netting analysis run (normally runs hourly via cron).
+  Future<ApiResponse<Map<String, dynamic>>> triggerManualNettingRun() =>
+      _api.post(
+        '/qpoints/admin/netting/run',
+        data: {},
+        fromJson: (json) => json as Map<String, dynamic>,
+      );
+
+  /// Records external funding into the AI's account at a facilitator.
+  /// Activates the bridge if balance crosses the minReserve threshold.
+  Future<ApiResponse<AiFacilitatorBalance>> recordFacilitatorFunding(
+    String facilitatorId, {
+    required double amountUsd,
+  }) =>
+      _api.post(
+        '/qpoints/admin/cross-facilitator/balances/$facilitatorId/fund',
+        data: {'amountUsd': amountUsd},
+        fromJson: (json) =>
+            AiFacilitatorBalance.fromJson(json as Map<String, dynamic>),
+      );
+
+  /// Checks if the bridge is active for a specific facilitator.
+  /// Returns the bridge availability status from the net-position summary.
+  Future<bool> isBridgeActiveForFacilitator(String facilitatorId) async {
+    final result = await getNetPositionSummary();
+    if (result.data == null) return false;
+    final match = result.data!.facilitators
+        .where((f) => f.facilitatorId == facilitatorId)
+        .firstOrNull;
+    return match?.isBridgeActive ?? false;
+  }
 }
