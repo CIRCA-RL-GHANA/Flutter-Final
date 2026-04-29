@@ -65,6 +65,12 @@ class QPointMarketProvider extends ChangeNotifier {
 
   bool isLoadingBridgeStatus = false;
 
+  // ── Facilitator Cash Balance (Zen of User Balance) ────────────────────────
+
+  FacilitatorCashBalance? cashBalance;
+  bool isLoadingCashBalance = false;
+  DateTime? cashBalanceLastUpdated;
+
   // ── Loaders ───────────────────────────────────────────────────────────────
 
   Future<void> loadAll() async {
@@ -77,6 +83,8 @@ class QPointMarketProvider extends ChangeNotifier {
     // Load facilitator accounts first, then bridge status (depends on active account)
     await loadMyFacilitatorAccounts();
     await loadBridgeStatus();
+    // Load cash balance (non-blocking — shows after accounts resolve)
+    await loadCashBalance();
   }
 
   Future<void> loadBalance() async {
@@ -268,6 +276,21 @@ class QPointMarketProvider extends ChangeNotifier {
       isBridgeActive = true; // fail-open: do not block user on network error
     } finally {
       isLoadingBridgeStatus = false;
+    }
+    notifyListeners();
+  }
+
+  /// Load the platform's real-time cash balance at the user's primary facilitator.
+  /// Set [forceRefresh] = true when the user taps the Refresh button.
+  Future<void> loadCashBalance({bool forceRefresh = false}) async {
+    if (isLoadingCashBalance) return;
+    isLoadingCashBalance = true;
+    notifyListeners();
+    final res = await _service.getCashBalance(forceRefresh: forceRefresh);
+    isLoadingCashBalance = false;
+    if (res.isSuccess && res.data != null) {
+      cashBalance = res.data;
+      cashBalanceLastUpdated = DateTime.now();
     }
     notifyListeners();
   }

@@ -553,6 +553,77 @@ class CrossFacilitatorNetPosition {
       );
 }
 
+// ── Facilitator Cash Balance (Zen of User Balance) ────────────────────────────
+
+/// Real-time cash balance at the user's primary payment facilitator.
+/// Fetched server-to-server and cached for 30 seconds on the backend.
+class FacilitatorCashBalance {
+  final String facilitatorId;
+
+  /// Platform's available balance in USD-equivalent. Null when unavailable.
+  final double? cashBalanceUsd;
+  final String displayCurrency;
+
+  /// Human-readable fee description for display in the UI.
+  final String feeDescription;
+
+  /// Current buy price per Q Point (includes 0.1% liquidity fee).
+  final double buyPrice;
+
+  /// Current sell price per Q Point (net of 0.1% liquidity fee).
+  final double sellPrice;
+
+  /// Liquidity fee as a percentage (e.g. 0.1 = 0.1%).
+  final double liquidityFeePercent;
+
+  final DateTime lastUpdatedAt;
+
+  /// True when this response was served from the 30-second Redis cache.
+  final bool isCached;
+
+  /// False when the provider does not expose a balance inquiry API.
+  final bool isAvailable;
+
+  /// Explains why [isAvailable] is false.
+  final String? unavailableReason;
+
+  const FacilitatorCashBalance({
+    required this.facilitatorId,
+    this.cashBalanceUsd,
+    required this.displayCurrency,
+    required this.feeDescription,
+    required this.buyPrice,
+    required this.sellPrice,
+    required this.liquidityFeePercent,
+    required this.lastUpdatedAt,
+    required this.isCached,
+    required this.isAvailable,
+    this.unavailableReason,
+  });
+
+  factory FacilitatorCashBalance.fromJson(Map<String, dynamic> j) =>
+      FacilitatorCashBalance(
+        facilitatorId: j['facilitatorId'] as String? ?? 'mock',
+        cashBalanceUsd: j['cashBalanceUsd'] != null
+            ? (j['cashBalanceUsd'] as num).toDouble()
+            : null,
+        displayCurrency: j['displayCurrency'] as String? ?? 'USD',
+        feeDescription: j['feeDescription'] as String? ?? '',
+        buyPrice: (j['buyPrice'] as num? ?? 1.001).toDouble(),
+        sellPrice: (j['sellPrice'] as num? ?? 0.999).toDouble(),
+        liquidityFeePercent:
+            (j['liquidityFeePercent'] as num? ?? 0.1).toDouble(),
+        lastUpdatedAt: j['lastUpdatedAt'] != null
+            ? DateTime.tryParse(j['lastUpdatedAt'] as String) ?? DateTime.now()
+            : DateTime.now(),
+        isCached: j['isCached'] as bool? ?? false,
+        isAvailable: j['isAvailable'] as bool? ?? false,
+        unavailableReason: j['unavailableReason'] as String?,
+      );
+}
+
+// ── FacilitatorPosition (AI bridge health) ────────────────────────────────────
+
 class FacilitatorPosition {
   final String facilitatorId;
   final double cashBalanceUsd;

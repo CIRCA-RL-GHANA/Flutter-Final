@@ -306,6 +306,9 @@ class _MarketTab extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
+        // Cash balance card — real-time facilitator liquidity with Refresh button
+        _CashBalanceCard(provider: provider),
+        const SizedBox(height: 16),
         // Bridge suspension banner — only shown when active facilitator's bridge is down
         if (provider.bridgeUnavailableMessage != null)
           _BridgeStatusBanner(message: provider.bridgeUnavailableMessage!),
@@ -320,6 +323,241 @@ class _MarketTab extends StatelessWidget {
         const SizedBox(height: 16),
         _OrderBookWidget(provider: provider),
       ],
+    );
+  }
+}
+
+/// Shows the platform's real-time cash balance at the user's primary facilitator.
+///
+/// Displays:
+///   - Balance amount (or "Unavailable" with a reason)
+///   - "Via [Facilitator]" + cached/live badge
+///   - Last updated timestamp
+///   - Refresh icon button (force-bypasses the 30-second cache)
+///   - Tooltip explaining the 0.1% liquidity fee on buy and sell prices
+class _CashBalanceCard extends StatelessWidget {
+  final QPointMarketProvider provider;
+  const _CashBalanceCard({required this.provider});
+
+  static const Map<String, String> _providerNames = {
+    'stripe': 'Stripe',
+    'paystack': 'Paystack',
+    'flutterwave': 'Flutterwave',
+    'mtn_momo': 'MTN MoMo',
+    'mpesa': 'M-Pesa',
+    'wise': 'Wise',
+    'mock': 'Test Mode',
+  };
+
+  String _providerName(String? id) =>
+      _providerNames[id ?? 'mock'] ?? (id ?? 'Facilitator');
+
+  String _formatAmount(double? amount) {
+    if (amount == null) return '—';
+    return '\$${amount.toStringAsFixed(2)}';
+  }
+
+  String _formatTime(DateTime? dt) {
+    if (dt == null) return '';
+    final h = dt.hour.toString().padLeft(2, '0');
+    final m = dt.minute.toString().padLeft(2, '0');
+    final s = dt.second.toString().padLeft(2, '0');
+    return '$h:$m:$s';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final cb = provider.cashBalance;
+    final isLoading = provider.isLoadingCashBalance;
+    final facilitatorId = provider.activeFacilitatorId;
+    final providerName = _providerName(facilitatorId ?? cb?.facilitatorId);
+
+    return Container(
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [Color(0xFF6C47FF), Color(0xFF9B79FF)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF6C47FF).withOpacity(0.25),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // ── Header row ──────────────────────────────────────────────
+          Row(
+            children: [
+              const Icon(
+                Icons.account_balance_wallet_outlined,
+                color: Colors.white70,
+                size: 16,
+              ),
+              const SizedBox(width: 6),
+              Text(
+                'Available via $providerName',
+                style: const TextStyle(
+                  color: Colors.white70,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const Spacer(),
+              // Cached badge
+              if (cb != null && cb.isCached)
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.15),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: const Text(
+                    'CACHED',
+                    style: TextStyle(
+                      color: Colors.white60,
+                      fontSize: 9,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                ),
+              const SizedBox(width: 4),
+              // Refresh button
+              SizedBox(
+                width: 28,
+                height: 28,
+                child: IconButton(
+                  padding: EdgeInsets.zero,
+                  icon: isLoading
+                      ? const SizedBox(
+                          width: 14,
+                          height: 14,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            color: Colors.white70,
+                          ),
+                        )
+                      : const Icon(Icons.refresh,
+                          color: Colors.white70, size: 18),
+                  tooltip: 'Refresh balance',
+                  onPressed: isLoading
+                      ? null
+                      : () => provider.loadCashBalance(forceRefresh: true),
+                ),
+              ),
+            ],
+          ),
+
+          const SizedBox(height: 10),
+
+          // ── Balance amount ───────────────────────────────────────────
+          if (isLoading && cb == null)
+            const SizedBox(
+              height: 32,
+              child: Center(
+                child: SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2.5,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            )
+          else if (cb == null)
+            const Text(
+              'Register a payment account to see balance',
+              style: TextStyle(color: Colors.white60, fontSize: 13),
+            )
+          else if (!cb.isAvailable)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Balance unavailable',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  cb.unavailableReason ?? '',
+                  style: const TextStyle(
+                    color: Colors.white60,
+                    fontSize: 11,
+                  ),
+                ),
+              ],
+            )
+          else
+            Text(
+              _formatAmount(cb.cashBalanceUsd),
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                letterSpacing: -0.5,
+              ),
+            ),
+
+          const SizedBox(height: 12),
+
+          // ── Fee disclosure row (TOS §7.1) ────────────────────────────
+          if (cb != null)
+            Row(
+              children: [
+                Tooltip(
+                  message: cb.feeDescription,
+                  textStyle: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                  ),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF3D2B9F),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.info_outline,
+                          color: Colors.white54, size: 13),
+                      const SizedBox(width: 4),
+                      Text(
+                        '${cb.liquidityFeePercent}% liquidity fee  '
+                        '·  Buy \$${cb.buyPrice.toStringAsFixed(3)}'
+                        '  ·  Sell \$${cb.sellPrice.toStringAsFixed(3)}',
+                        style: const TextStyle(
+                          color: Colors.white60,
+                          fontSize: 11,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const Spacer(),
+                // Last updated timestamp
+                if (provider.cashBalanceLastUpdated != null)
+                  Text(
+                    'Updated ${_formatTime(provider.cashBalanceLastUpdated)}',
+                    style: const TextStyle(
+                      color: Colors.white38,
+                      fontSize: 10,
+                    ),
+                  ),
+              ],
+            ),
+        ],
+      ),
     );
   }
 }

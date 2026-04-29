@@ -303,4 +303,27 @@ class QPointMarketService {
         .firstOrNull;
     return match?.isBridgeActive ?? false;
   }
+
+  // ── Facilitator Cash Balance (Zen of User Balance) ────────────────────────
+
+  /// Get the platform's real-time cash balance at the user's primary facilitator.
+  /// Results are cached for 30 seconds on the backend.
+  /// Set [forceRefresh] = true to bypass the cache (user tapped Refresh).
+  Future<ApiResponse<FacilitatorCashBalance>> getCashBalance({
+    bool forceRefresh = false,
+  }) {
+    if (forceRefresh) {
+      return _api.post(
+        '/qpoints/payment/cash-balance/refresh',
+        data: {},
+        fromJson: (json) =>
+            FacilitatorCashBalance.fromJson(json as Map<String, dynamic>),
+      );
+    }
+    return _api.get(
+      '/qpoints/payment/cash-balance',
+      fromJson: (json) =>
+          FacilitatorCashBalance.fromJson(json as Map<String, dynamic>),
+    );
+  }
 }
