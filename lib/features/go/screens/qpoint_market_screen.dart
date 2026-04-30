@@ -6,6 +6,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../providers/qpoint_market_provider.dart';
 import '../providers/qpoints_tos_provider.dart';
 import '../models/qpoint_market_models.dart';
@@ -653,26 +654,55 @@ class _QuickActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        Expanded(
-          child: _ActionCard(
-            label: 'Buy QP',
-            subLabel: 'Pay \$1.001 per QP',
-            color: Colors.green.shade600,
-            icon: Icons.trending_up,
-            onTap: () => _showCashInSheet(context),
-          ),
+        Row(
+          children: [
+            Expanded(
+              child: _ActionCard(
+                label: 'Buy QP',
+                subLabel: 'Pay \$1.001 per QP',
+                color: Colors.green.shade600,
+                icon: Icons.trending_up,
+                onTap: () => _showCashInSheet(context),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: _ActionCard(
+                label: 'Sell QP',
+                subLabel: 'Receive \$0.999 per QP',
+                color: Colors.red.shade600,
+                icon: Icons.trending_down,
+                onTap: () => _showCashOutSheet(context),
+              ),
+            ),
+          ],
         ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: _ActionCard(
-            label: 'Sell QP',
-            subLabel: 'Receive \$0.999 per QP',
-            color: Colors.red.shade600,
-            icon: Icons.trending_down,
-            onTap: () => _showCashOutSheet(context),
-          ),
+        const SizedBox(height: 12),
+        Row(
+          children: [
+            Expanded(
+              child: _ActionCard(
+                label: 'Deposit',
+                subLabel: 'Add funds',
+                color: const Color(0xFF1B7AE8),
+                icon: Icons.download_rounded,
+                onTap: () => _showDepositSheet(context),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: _ActionCard(
+                label: 'Withdraw',
+                subLabel: 'Send to bank',
+                color: const Color(0xFF9C27B0),
+                icon: Icons.upload_rounded,
+                onTap: () => _showWithdrawSheet(context),
+              ),
+            ),
+          ],
         ),
       ],
     );
@@ -698,6 +728,30 @@ class _QuickActions extends StatelessWidget {
       builder: (_) => ChangeNotifierProvider.value(
         value: provider,
         child: const _CashInOutSheet(isBuy: false),
+      ),
+    );
+  }
+
+  void _showDepositSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (_) => ChangeNotifierProvider.value(
+        value: provider,
+        child: const _DepositSheet(),
+      ),
+    );
+  }
+
+  void _showWithdrawSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (_) => ChangeNotifierProvider.value(
+        value: provider,
+        child: const _WithdrawSheet(),
       ),
     );
   }
@@ -990,24 +1044,47 @@ class _HistoryTabState extends State<_HistoryTab> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback(
-        (_) => widget.provider.loadTradeHistory());
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      widget.provider.loadTradeHistory();
+      widget.provider.loadTransactions();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final trades = widget.provider.tradeHistory;
+    final transactions = widget.provider.transactions;
 
-    if (trades.isEmpty) {
+    if (trades.isEmpty && transactions.isEmpty) {
       return const Center(
-        child: Text('No trade history', style: TextStyle(color: Colors.black38)),
+        child: Text('No history', style: TextStyle(color: Colors.black38)),
       );
     }
 
-    return ListView.builder(
+    return ListView(
       padding: const EdgeInsets.all(16),
-      itemCount: trades.length,
-      itemBuilder: (ctx, i) => _TradeTile(trade: trades[i]),
+      children: [
+        // ── Deposit / Withdrawal history ──────────────────────────────
+        if (transactions.isNotEmpty) ...[
+          const Padding(
+            padding: EdgeInsets.only(bottom: 8),
+            child: Text('Deposits & Withdrawals',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+          ),
+          ...transactions.map((tx) => _TransactionTile(transaction: tx)),
+          const SizedBox(height: 16),
+        ],
+
+        // ── Q Points trade history ────────────────────────────────────
+        if (trades.isNotEmpty) ...[
+          const Padding(
+            padding: EdgeInsets.only(bottom: 8),
+            child: Text('Q Points Trades',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+          ),
+          ...trades.map((t) => _TradeTile(trade: t)),
+        ],
+      ],
     );
   }
 }
@@ -1681,6 +1758,438 @@ class _FeeRow extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// Transaction tile — shows a single deposit or withdrawal record
+// ════════════════════════════════════════════════════════════════════════════
+
+class _TransactionTile extends StatelessWidget {
+  final FacilitatorTransaction transaction;
+  const _TransactionTile({required this.transaction});
+
+  Color _statusColor(String status) {
+    switch (status) {
+      case 'completed':
+        return Colors.green.shade600;
+      case 'failed':
+      case 'cancelled':
+        return Colors.red.shade600;
+      case 'processing':
+        return Colors.orange.shade600;
+      default:
+        return Colors.grey.shade500;
+    }
+  }
+
+  IconData _typeIcon(String type) =>
+      type == 'deposit' ? Icons.download_rounded : Icons.upload_rounded;
+
+  Color _typeColor(String type) =>
+      type == 'deposit' ? const Color(0xFF1B7AE8) : const Color(0xFF9C27B0);
+
+  String _formatDate(DateTime dt) {
+    return '${dt.month}/${dt.day} ${dt.hour.toString().padLeft(2, '0')}:${dt.minute.toString().padLeft(2, '0')}';
+  }
+
+  @override
+  Widget build(BuildContext context) => Card(
+        margin: const EdgeInsets.only(bottom: 8),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        child: ListTile(
+          leading: CircleAvatar(
+            backgroundColor: _typeColor(transaction.type).withOpacity(0.1),
+            child: Icon(_typeIcon(transaction.type),
+                color: _typeColor(transaction.type), size: 20),
+          ),
+          title: Text(
+            '${transaction.type == 'deposit' ? 'Deposit' : 'Withdraw'} '
+            '\$${transaction.amount.toStringAsFixed(2)} ${transaction.currency}',
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+          ),
+          subtitle: Text(
+            '${transaction.provider.toUpperCase()} · ${_formatDate(transaction.createdAt)}',
+            style: const TextStyle(fontSize: 11, color: Colors.black45),
+          ),
+          trailing: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+            decoration: BoxDecoration(
+              color: _statusColor(transaction.status).withOpacity(0.1),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Text(
+              transaction.status.toUpperCase(),
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.bold,
+                color: _statusColor(transaction.status),
+              ),
+            ),
+          ),
+        ),
+      );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// Deposit bottom sheet
+// ════════════════════════════════════════════════════════════════════════════
+
+class _DepositSheet extends StatefulWidget {
+  const _DepositSheet();
+
+  @override
+  State<_DepositSheet> createState() => _DepositSheetState();
+}
+
+class _DepositSheetState extends State<_DepositSheet> {
+  final _amountCtrl = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  String? _result;
+  bool _done = false;
+
+  @override
+  void dispose() {
+    _amountCtrl.dispose();
+    super.dispose();
+  }
+
+  Future<void> _submit(QPointMarketProvider provider) async {
+    if (!_formKey.currentState!.validate()) return;
+    final amount = double.tryParse(_amountCtrl.text.trim()) ?? 0;
+    final ok = await provider.initiateDeposit(amount: amount);
+
+    if (!mounted) return;
+
+    if (ok && provider.lastDepositResult != null) {
+      final result = provider.lastDepositResult!;
+      if (result.checkoutUrl != null) {
+        // Open checkout in system browser
+        final uri = Uri.parse(result.checkoutUrl!);
+        if (await canLaunchUrl(uri)) {
+          await launchUrl(uri, mode: LaunchMode.externalApplication);
+        }
+        setState(() {
+          _result = 'Checkout opened in your browser. Return here once payment is complete.';
+          _done = true;
+        });
+      } else {
+        // Push-based providers (MTN MoMo, M-Pesa)
+        setState(() {
+          _result = 'A payment prompt has been sent to your phone. '
+              'Approve it to complete the deposit.';
+          _done = true;
+        });
+      }
+      provider.clearLastDepositResult();
+    } else if (!ok) {
+      setState(() => _result = provider.depositError ?? 'Deposit failed.');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<QPointMarketProvider>(
+      builder: (ctx, provider, _) => Container(
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        ),
+        padding: EdgeInsets.fromLTRB(
+            20, 20, 20, MediaQuery.of(ctx).viewInsets.bottom + 24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: Container(
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                    color: Colors.black12,
+                    borderRadius: BorderRadius.circular(2)),
+              ),
+            ),
+            const SizedBox(height: 16),
+            const Text('Deposit Funds',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+            const SizedBox(height: 4),
+            const Text(
+              'Funds will be added to your registered payment account.',
+              style: TextStyle(color: Colors.black45, fontSize: 13),
+            ),
+            const SizedBox(height: 20),
+            if (_done && _result != null) ...[
+              Container(
+                padding: const EdgeInsets.all(14),
+                decoration: BoxDecoration(
+                  color: Colors.green.shade50,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.green.shade200),
+                ),
+                child: Row(children: [
+                  Icon(Icons.check_circle_outline,
+                      color: Colors.green.shade600, size: 20),
+                  const SizedBox(width: 10),
+                  Expanded(
+                      child: Text(_result!,
+                          style: TextStyle(
+                              color: Colors.green.shade700, fontSize: 13))),
+                ]),
+              ),
+              const SizedBox(height: 16),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: kMarketColor,
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12)),
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                  ),
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('Done'),
+                ),
+              ),
+            ] else ...[
+              if (_result != null) ...[
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.red.shade50,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Text(_result!,
+                      style: TextStyle(
+                          color: Colors.red.shade700, fontSize: 13)),
+                ),
+                const SizedBox(height: 12),
+              ],
+              Form(
+                key: _formKey,
+                child: TextFormField(
+                  controller: _amountCtrl,
+                  keyboardType:
+                      const TextInputType.numberWithOptions(decimal: true),
+                  decoration: InputDecoration(
+                    labelText: 'Amount (USD)',
+                    prefixText: '\$ ',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12)),
+                  ),
+                  validator: (v) {
+                    final n = double.tryParse(v?.trim() ?? '');
+                    if (n == null || n <= 0) return 'Enter a valid amount';
+                    if (n < 1) return 'Minimum deposit is \$1.00';
+                    if (n > 10000) return 'Maximum deposit is \$10,000.00';
+                    return null;
+                  },
+                ),
+              ),
+              const SizedBox(height: 20),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF1B7AE8),
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12)),
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                  ),
+                  onPressed: provider.isInitiatingDeposit
+                      ? null
+                      : () => _submit(provider),
+                  child: provider.isInitiatingDeposit
+                      ? const SizedBox(
+                          height: 18,
+                          width: 18,
+                          child: CircularProgressIndicator(
+                              strokeWidth: 2, color: Colors.white))
+                      : const Text('Deposit',
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                ),
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// Withdraw bottom sheet
+// ════════════════════════════════════════════════════════════════════════════
+
+class _WithdrawSheet extends StatefulWidget {
+  const _WithdrawSheet();
+
+  @override
+  State<_WithdrawSheet> createState() => _WithdrawSheetState();
+}
+
+class _WithdrawSheetState extends State<_WithdrawSheet> {
+  final _amountCtrl = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  String? _result;
+  bool _done = false;
+
+  @override
+  void dispose() {
+    _amountCtrl.dispose();
+    super.dispose();
+  }
+
+  Future<void> _submit(QPointMarketProvider provider) async {
+    if (!_formKey.currentState!.validate()) return;
+    final amount = double.tryParse(_amountCtrl.text.trim()) ?? 0;
+    final ok = await provider.initiateWithdrawal(amount: amount);
+
+    if (!mounted) return;
+
+    if (ok) {
+      setState(() {
+        _result = 'Withdrawal initiated! Funds will be sent to your '
+            'registered payout account within 1–3 business days depending on your provider.';
+        _done = true;
+      });
+      provider.clearLastWithdrawalResult();
+    } else {
+      setState(() => _result = provider.withdrawalError ?? 'Withdrawal failed.');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<QPointMarketProvider>(
+      builder: (ctx, provider, _) => Container(
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        ),
+        padding: EdgeInsets.fromLTRB(
+            20, 20, 20, MediaQuery.of(ctx).viewInsets.bottom + 24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: Container(
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                    color: Colors.black12,
+                    borderRadius: BorderRadius.circular(2)),
+              ),
+            ),
+            const SizedBox(height: 16),
+            const Text('Withdraw Funds',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+            const SizedBox(height: 4),
+            const Text(
+              'Funds will be sent to your registered payout account.',
+              style: TextStyle(color: Colors.black45, fontSize: 13),
+            ),
+            const SizedBox(height: 20),
+            if (_done && _result != null) ...[
+              Container(
+                padding: const EdgeInsets.all(14),
+                decoration: BoxDecoration(
+                  color: Colors.purple.shade50,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.purple.shade200),
+                ),
+                child: Row(children: [
+                  Icon(Icons.schedule,
+                      color: Colors.purple.shade600, size: 20),
+                  const SizedBox(width: 10),
+                  Expanded(
+                      child: Text(_result!,
+                          style: TextStyle(
+                              color: Colors.purple.shade700, fontSize: 13))),
+                ]),
+              ),
+              const SizedBox(height: 16),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: kMarketColor,
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12)),
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                  ),
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('Done'),
+                ),
+              ),
+            ] else ...[
+              if (_result != null) ...[
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.red.shade50,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Text(_result!,
+                      style: TextStyle(
+                          color: Colors.red.shade700, fontSize: 13)),
+                ),
+                const SizedBox(height: 12),
+              ],
+              Form(
+                key: _formKey,
+                child: TextFormField(
+                  controller: _amountCtrl,
+                  keyboardType:
+                      const TextInputType.numberWithOptions(decimal: true),
+                  decoration: InputDecoration(
+                    labelText: 'Amount (USD)',
+                    prefixText: '\$ ',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12)),
+                  ),
+                  validator: (v) {
+                    final n = double.tryParse(v?.trim() ?? '');
+                    if (n == null || n <= 0) return 'Enter a valid amount';
+                    if (n < 5) return 'Minimum withdrawal is \$5.00';
+                    if (n > 5000) return 'Maximum withdrawal is \$5,000.00';
+                    return null;
+                  },
+                ),
+              ),
+              const SizedBox(height: 20),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF9C27B0),
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12)),
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                  ),
+                  onPressed: provider.isInitiatingWithdrawal
+                      ? null
+                      : () => _submit(provider),
+                  child: provider.isInitiatingWithdrawal
+                      ? const SizedBox(
+                          height: 18,
+                          width: 18,
+                          child: CircularProgressIndicator(
+                              strokeWidth: 2, color: Colors.white))
+                      : const Text('Withdraw',
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                ),
+              ),
+            ],
+          ],
+        ),
       ),
     );
   }

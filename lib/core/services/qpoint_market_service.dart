@@ -326,4 +326,70 @@ class QPointMarketService {
           FacilitatorCashBalance.fromJson(json as Map<String, dynamic>),
     );
   }
+
+  // ── Deposit (on-ramp) ──────────────────────────────────────────────────────
+
+  /// Initiates a deposit into the caller's facilitator account.
+  ///
+  /// Returns a [FacilitatorTransactionResult] with a [checkoutUrl] to open
+  /// in the system browser (via url_launcher) for redirect-based providers.
+  /// For push-based providers (MTN MoMo, M-Pesa) [checkoutUrl] is null —
+  /// the user receives a payment prompt on their phone.
+  Future<ApiResponse<FacilitatorTransactionResult>> createDeposit({
+    required double amount,
+    String currency = 'USD',
+  }) {
+    return _api.post(
+      '/qpoints/payment/deposit',
+      body: {'amount': amount, 'currency': currency},
+      fromJson: (json) =>
+          FacilitatorTransactionResult.fromJson(json as Map<String, dynamic>),
+    );
+  }
+
+  // ── Withdrawal (off-ramp) ──────────────────────────────────────────────────
+
+  /// Initiates a payout from the caller's facilitator account.
+  ///
+  /// [payoutMethodId] is optional — if omitted the server uses the
+  /// registered default payout method on the facilitator account.
+  Future<ApiResponse<FacilitatorTransactionResult>> createWithdrawal({
+    required double amount,
+    String currency = 'USD',
+    String? payoutMethodId,
+  }) {
+    return _api.post(
+      '/qpoints/payment/withdraw',
+      body: {
+        'amount': amount,
+        'currency': currency,
+        if (payoutMethodId != null) 'payoutMethodId': payoutMethodId,
+      },
+      fromJson: (json) =>
+          FacilitatorTransactionResult.fromJson(json as Map<String, dynamic>),
+    );
+  }
+
+  // ── Transaction history ────────────────────────────────────────────────────
+
+  /// Returns the caller's deposit/withdrawal history (most recent first).
+  Future<ApiResponse<FacilitatorTransactionPage>> getTransactions({
+    int limit = 20,
+    int offset = 0,
+  }) {
+    return _api.get(
+      '/qpoints/payment/transactions?limit=$limit&offset=$offset',
+      fromJson: (json) =>
+          FacilitatorTransactionPage.fromJson(json as Map<String, dynamic>),
+    );
+  }
+
+  /// Returns a single transaction by ID.
+  Future<ApiResponse<FacilitatorTransaction>> getTransaction(String id) {
+    return _api.get(
+      '/qpoints/payment/transactions/$id',
+      fromJson: (json) =>
+          FacilitatorTransaction.fromJson(json as Map<String, dynamic>),
+    );
+  }
 }

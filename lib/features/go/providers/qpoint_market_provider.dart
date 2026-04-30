@@ -360,4 +360,105 @@ class QPointMarketProvider extends ChangeNotifier {
     notifyListeners();
     return false;
   }
+
+  // ── On-Ramp / Off-Ramp state ─────────────────────────────────────────────
+
+  FacilitatorTransactionResult? lastDepositResult;
+  FacilitatorTransactionResult? lastWithdrawalResult;
+
+  bool isInitiatingDeposit = false;
+  bool isInitiatingWithdrawal = false;
+
+  String? depositError;
+  String? withdrawalError;
+
+  List<FacilitatorTransaction> transactions = [];
+  int transactionsTotal = 0;
+  bool isLoadingTransactions = false;
+
+  // ── On-Ramp / Off-Ramp methods ────────────────────────────────────────────
+
+  Future<bool> initiateDeposit({
+    required double amount,
+    String currency = 'USD',
+  }) async {
+    if (isInitiatingDeposit) return false;
+    isInitiatingDeposit = true;
+    depositError = null;
+    lastDepositResult = null;
+    notifyListeners();
+
+    final res = await _service.createDeposit(amount: amount, currency: currency);
+    isInitiatingDeposit = false;
+
+    if (res.isSuccess && res.data != null) {
+      lastDepositResult = res.data;
+      loadTransactions();
+      notifyListeners();
+      return true;
+    }
+
+    depositError = res.message ?? 'Deposit failed. Please try again.';
+    notifyListeners();
+    return false;
+  }
+
+  Future<bool> initiateWithdrawal({
+    required double amount,
+    String currency = 'USD',
+    String? payoutMethodId,
+  }) async {
+    if (isInitiatingWithdrawal) return false;
+    isInitiatingWithdrawal = true;
+    withdrawalError = null;
+    lastWithdrawalResult = null;
+    notifyListeners();
+
+    final res = await _service.createWithdrawal(
+      amount: amount,
+      currency: currency,
+      payoutMethodId: payoutMethodId,
+    );
+    isInitiatingWithdrawal = false;
+
+    if (res.isSuccess && res.data != null) {
+      lastWithdrawalResult = res.data;
+      loadTransactions();
+      notifyListeners();
+      return true;
+    }
+
+    withdrawalError = res.message ?? 'Withdrawal failed. Please try again.';
+    notifyListeners();
+    return false;
+  }
+
+  Future<void> loadTransactions({int limit = 20, int offset = 0}) async {
+    if (isLoadingTransactions) return;
+    isLoadingTransactions = true;
+    notifyListeners();
+    final res = await _service.getTransactions(limit: limit, offset: offset);
+    isLoadingTransactions = false;
+    if (res.isSuccess && res.data != null) {
+      if (offset == 0) {
+        transactions = res.data!.items;
+      } else {
+        transactions = [...transactions, ...res.data!.items];
+      }
+      transactionsTotal = res.data!.total;
+    }
+    notifyListeners();
+  }
+
+  void clearLastDepositResult() {
+    lastDepositResult = null;
+    depositError = null;
+    notifyListeners();
+  }
+
+  void clearLastWithdrawalResult() {
+    lastWithdrawalResult = null;
+    withdrawalError = null;
+    notifyListeners();
+  }
 }

@@ -654,3 +654,109 @@ class FacilitatorPosition {
         status: j['status'] as String? ?? 'unknown',
       );
 }
+
+/// Result returned when initiating a deposit or withdrawal.
+class FacilitatorTransactionResult {
+  final String transactionId;
+  final String provider;
+  final String? checkoutUrl;
+  final String? clientSecret;
+  final String externalId;
+
+  const FacilitatorTransactionResult({
+    required this.transactionId,
+    required this.provider,
+    this.checkoutUrl,
+    this.clientSecret,
+    required this.externalId,
+  });
+
+  factory FacilitatorTransactionResult.fromJson(Map<String, dynamic> j) =>
+      FacilitatorTransactionResult(
+        transactionId: j['transactionId'] as String,
+        provider: j['provider'] as String,
+        checkoutUrl: j['checkoutUrl'] as String?,
+        clientSecret: j['clientSecret'] as String?,
+        externalId: j['externalId'] as String,
+      );
+}
+
+/// A single deposit or withdrawal transaction record.
+class FacilitatorTransaction {
+  final String id;
+  final String userId;
+  final String provider;
+  final String type; // 'deposit' | 'withdraw'
+  final double amount;
+  final String currency;
+  final String status; // 'pending' | 'processing' | 'completed' | 'failed' | 'cancelled'
+  final String? externalId;
+  final String idempotencyKey;
+  final String? checkoutUrl;
+  final String? errorMessage;
+  final DateTime? completedAt;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+
+  const FacilitatorTransaction({
+    required this.id,
+    required this.userId,
+    required this.provider,
+    required this.type,
+    required this.amount,
+    required this.currency,
+    required this.status,
+    this.externalId,
+    required this.idempotencyKey,
+    this.checkoutUrl,
+    this.errorMessage,
+    this.completedAt,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+
+  factory FacilitatorTransaction.fromJson(Map<String, dynamic> j) =>
+      FacilitatorTransaction(
+        id: j['id'] as String,
+        userId: j['userId'] as String,
+        provider: j['provider'] as String,
+        type: j['type'] as String,
+        amount: (j['amount'] as num).toDouble(),
+        currency: j['currency'] as String? ?? 'USD',
+        status: j['status'] as String,
+        externalId: j['externalId'] as String?,
+        idempotencyKey: j['idempotencyKey'] as String,
+        checkoutUrl: j['checkoutUrl'] as String?,
+        errorMessage: j['errorMessage'] as String?,
+        completedAt: j['completedAt'] != null
+            ? DateTime.parse(j['completedAt'] as String)
+            : null,
+        createdAt: DateTime.parse(j['createdAt'] as String),
+        updatedAt: DateTime.parse(j['updatedAt'] as String),
+      );
+
+  bool get isDeposit => type == 'deposit';
+  bool get isWithdrawal => type == 'withdraw';
+  bool get isCompleted => status == 'completed';
+  bool get isPending => status == 'pending' || status == 'processing';
+  bool get isFailed => status == 'failed' || status == 'cancelled';
+}
+
+/// Paginated list of transactions.
+class FacilitatorTransactionPage {
+  final List<FacilitatorTransaction> items;
+  final int total;
+
+  const FacilitatorTransactionPage({required this.items, required this.total});
+
+  factory FacilitatorTransactionPage.fromJson(Map<String, dynamic> j) {
+    final raw = j['items'] as List<dynamic>? ?? [];
+    return FacilitatorTransactionPage(
+      items: raw
+          .map((e) =>
+              FacilitatorTransaction.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      total: j['total'] as int? ?? raw.length,
+    );
+  }
+}
