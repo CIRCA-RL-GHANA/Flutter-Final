@@ -33,6 +33,11 @@ class ApiRoutes {
   static const go = _GoRoutes();
   static const eplay = _EPlayRoutes();
   static const community = _CommunityRoutes();
+  // ── Financial Institution Extension ────────────────────────────────────
+  static const loans = _LoanRoutes();
+  static const deposits = _DepositRoutes();
+  static const insurance = _InsuranceRoutes();
+  static const creditData = _CreditDataRoutes();
 }
 
 class _AuthRoutes {
@@ -515,4 +520,38 @@ class _CommunityRoutes {
   String posts(String id)               => '/community/$id/posts';
   String removePost(String id, String postId) =>
       '/community/$id/posts/$postId';
+}
+
+// ── Financial Institution Extension ──────────────────────────────────────────
+
+class _LoanRoutes {
+  const _LoanRoutes();
+  String get apply         => '/loans/apply';
+  String get applications  => '/loans/applications';
+  String get offers        => '/loans/offers';
+  String approve(String id) => '/loans/$id/approve';
+  String reject(String id)  => '/loans/$id/reject';
+  String repay(String id)   => '/loans/$id/repay';
+}
+
+class _DepositRoutes {
+  const _DepositRoutes();
+  String get create    => '/deposits';
+  String get list      => '/deposits';
+  String mature(String id) => '/deposits/$id/mature';
+}
+
+class _InsuranceRoutes {
+  const _InsuranceRoutes();
+  String get purchasePolicy => '/insurance/policies';
+  String get policies       => '/insurance/policies';
+  String get fileClaim      => '/insurance/claims';
+  String get claims         => '/insurance/claims';
+  String reviewClaim(String id) => '/insurance/claims/$id';
+}
+
+class _CreditDataRoutes {
+  const _CreditDataRoutes();
+  String get score     => '/credit-data/score';
+  String get subscribe => '/credit-data/subscribe';
 }

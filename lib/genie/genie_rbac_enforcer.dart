@@ -67,6 +67,10 @@ class GenieRBACEnforcer {
       case GenieModule.crossModule:
       case GenieModule.genie:
         return role != UserRole.none;
+
+      // Fintech: any authenticated user can view/apply; FI roles have extra access
+      case GenieModule.fintech:
+        return role != UserRole.none;
     }
   }
 

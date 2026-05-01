@@ -179,6 +179,58 @@ class GenieCrossModuleOrchestrator {
     ];
   }
 
+  /// Loan application workflow: confirm intent → submit application → show offers.
+  static List<OrchestrationStep> buildLoanApplicationWorkflow({
+    required double amountQp,
+    required String purpose,
+  }) {
+    return [
+      OrchestrationStep(
+        description: 'Checking your Q-Points balance via GO PAGE',
+        intent: const GenieIntent(module: GenieModule.goPage, action: 'check_balance'),
+      ),
+      OrchestrationStep(
+        description: 'Fetching loan offers for ${amountQp.toStringAsFixed(0)} QP',
+        intent: GenieIntent(
+          module: GenieModule.fintech,
+          action: 'view_loan_offers',
+          params: {'amount': amountQp, 'purpose': purpose},
+        ),
+      ),
+      OrchestrationStep(
+        description: 'Opening loan application screen',
+        intent: GenieIntent(
+          module: GenieModule.fintech,
+          action: 'apply_loan',
+          params: {'amount': amountQp, 'purpose': purpose},
+          requiresFullScreen: true,
+        ),
+      ),
+    ];
+  }
+
+  /// Deposit workflow: check balance → lock QP → confirm.
+  static List<OrchestrationStep> buildDepositWorkflow({
+    required double amountQp,
+    required int termDays,
+  }) {
+    return [
+      OrchestrationStep(
+        description: 'Verifying Q-Points balance',
+        intent: const GenieIntent(module: GenieModule.goPage, action: 'check_balance'),
+      ),
+      OrchestrationStep(
+        description: 'Opening term deposit screen for ${amountQp.toStringAsFixed(0)} QP / $termDays days',
+        intent: GenieIntent(
+          module: GenieModule.fintech,
+          action: 'create_deposit',
+          params: {'amount': amountQp, 'termDays': termDays},
+          requiresFullScreen: true,
+        ),
+      ),
+    ];
+  }
+
   // ─── Run Orchestration ───────────────────────────────────────────────────
   /// Execute a list of steps, verifying RBAC at each step.
   /// Returns an [OrchestrationResult] describing what completed.

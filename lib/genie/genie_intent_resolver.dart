@@ -28,6 +28,7 @@ class GenieIntentResolver {
         _resolveApril(text) ??
         _resolveSetupDashboard(text) ??
         _resolveUserDetails(text) ??
+        _resolveFintech(text) ??
         _resolveUtility(text) ??
         _resolveNavigation(text) ??
         _resolveGenieNative(text);
@@ -428,6 +429,42 @@ class GenieIntentResolver {
             action: 'open_full',
             requiresFullScreen: true);
       }
+    }
+    return null;
+  }
+
+  // ─── FINTECH ──────────────────────────────────────────────────────────────
+  static GenieIntent? _resolveFintech(String t) {
+    if (_any(t, ['apply for loan', 'need a loan', 'loan for', 'borrow qp',
+        'borrow money', 'get a loan', 'loan application', 'take a loan'])) {
+      return GenieIntent(module: GenieModule.fintech, action: 'apply_loan',
+          params: _extractAmount(t), requiresFullScreen: true);
+    }
+    if (_any(t, ['loan offers', 'view loan offers', 'show loans', 'loan rates'])) {
+      return const GenieIntent(module: GenieModule.fintech, action: 'view_loan_offers', requiresFullScreen: true);
+    }
+    if (_any(t, ['repay loan', 'pay back loan', 'loan repayment', 'pay my loan'])) {
+      return const GenieIntent(module: GenieModule.fintech, action: 'repay_loan', requiresFullScreen: true);
+    }
+    if (_any(t, ['term deposit', 'lock qp', 'deposit qpoints', 'save qp',
+        'lock my qp', 'earn interest', 'term savings'])) {
+      return GenieIntent(module: GenieModule.fintech, action: 'create_deposit',
+          params: _extractAmount(t), requiresFullScreen: true);
+    }
+    if (_any(t, ['my deposits', 'view deposits', 'show deposits'])) {
+      return const GenieIntent(module: GenieModule.fintech, action: 'view_deposits', requiresFullScreen: true);
+    }
+    if (_any(t, ['buy insurance', 'purchase insurance', 'get insurance',
+        'insure my', 'insurance cover', 'insurance policy', 'motor insurance',
+        'health insurance', 'inventory insurance', 'life insurance'])) {
+      return const GenieIntent(module: GenieModule.fintech, action: 'purchase_policy', requiresFullScreen: true);
+    }
+    if (_any(t, ['file claim', 'insurance claim', 'make a claim', 'submit claim'])) {
+      return const GenieIntent(module: GenieModule.fintech, action: 'file_claim', requiresFullScreen: true);
+    }
+    if (_any(t, ['credit score', 'my credit', 'check credit', 'credit rating',
+        'credit data', 'creditworthiness'])) {
+      return const GenieIntent(module: GenieModule.fintech, action: 'credit_score', requiresFullScreen: true);
     }
     return null;
   }

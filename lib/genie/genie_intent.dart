@@ -23,6 +23,8 @@ enum GenieModule {
   crossModule,
   // Genie-native (help, settings, unknown)
   genie,
+  // Financial Institution Extension (loans, deposits, insurance, credit data)
+  fintech,
 }
 
 /// A canonical action within a module.

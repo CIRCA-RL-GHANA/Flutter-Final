@@ -28,3 +28,5 @@ export 'localstorage_service.dart';
 export 'websocket_service.dart';
 export 'eplay_service.dart';
 export 'community_service.dart';
+// ── Financial Institution Extension ─────────────────────────────────────────
+export 'fintech_service.dart';
