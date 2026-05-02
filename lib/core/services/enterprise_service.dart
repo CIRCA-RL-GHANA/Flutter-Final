@@ -244,4 +244,91 @@ class EnterpriseService {
       fromJson: (json) => json as Map<String, dynamic>,
     );
   }
+
+  // ─── Pathway 1: QP Charge ─────────────────────────────────────────────────
+
+  Future<Map<String, dynamic>> chargeQp({
+    required String customerId,
+    required String merchantEntityId,
+    required double amount,
+    String? orderReference,
+    Map<String, dynamic>? metadata,
+  }) async {
+    final resp = await _api.post<Map<String, dynamic>>(
+      '/api/v1/payments/qp/charge',
+      body: {
+        'customerId': customerId,
+        'merchantEntityId': merchantEntityId,
+        'amount': amount,
+        if (orderReference != null) 'orderReference': orderReference,
+        if (metadata != null) 'metadata': metadata,
+      },
+      fromJson: (json) => json as Map<String, dynamic>,
+    );
+    if (resp.data == null) throw Exception(resp.message ?? 'QP charge failed');
+    return resp.data!;
+  }
+
+  // ─── Pathway 5: Facilitator Institutions ─────────────────────────────────
+
+  Future<ApiResponse<Map<String, dynamic>>> getInstitutionBalance(String entityId) async {
+    return _api.get<Map<String, dynamic>>(
+      '/api/v1/facilitator/institutions/$entityId/balance',
+      fromJson: (json) => json as Map<String, dynamic>,
+    );
+  }
+
+  Future<ApiResponse<Map<String, dynamic>>> issueQp({
+    required String entityId,
+    required double amount,
+    String? reason,
+  }) async {
+    return _api.post<Map<String, dynamic>>(
+      '/api/v1/facilitator/institutions/issue',
+      body: {'entityId': entityId, 'amount': amount, if (reason != null) 'reason': reason},
+      fromJson: (json) => json as Map<String, dynamic>,
+    );
+  }
+
+  Future<ApiResponse<Map<String, dynamic>>> initiateSettlement({
+    required String fromEntityId,
+    required String toEntityId,
+    required double amount,
+    String? reference,
+  }) async {
+    return _api.post<Map<String, dynamic>>(
+      '/api/v1/qpoints/settlement/initiate',
+      body: {
+        'fromEntityId': fromEntityId,
+        'toEntityId': toEntityId,
+        'amount': amount,
+        if (reference != null) 'reference': reference,
+      },
+      fromJson: (json) => json as Map<String, dynamic>,
+    );
+  }
+
+  // ─── Webhooks ─────────────────────────────────────────────────────────────
+
+  Future<ApiResponse<Map<String, dynamic>>> subscribeWebhook({
+    required String entityId,
+    required String url,
+    required List<String> events,
+  }) async {
+    return _api.post<Map<String, dynamic>>(
+      '/api/v1/webhooks/subscriptions',
+      body: {'entityId': entityId, 'url': url, 'events': events},
+      fromJson: (json) => json as Map<String, dynamic>,
+    );
+  }
+
+  Future<ApiResponse<List<Map<String, dynamic>>>> listWebhookSubscriptions(
+      String entityId) async {
+    return _api.get<List<Map<String, dynamic>>>(
+      '/api/v1/webhooks/subscriptions/$entityId',
+      fromJson: (json) =>
+          (json as List).map((e) => e as Map<String, dynamic>).toList(),
+    );
+  }
 }
+
