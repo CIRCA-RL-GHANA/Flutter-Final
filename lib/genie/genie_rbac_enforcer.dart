@@ -71,6 +71,10 @@ class GenieRBACEnforcer {
       // Fintech: any authenticated user can view/apply; FI roles have extra access
       case GenieModule.fintech:
         return role != UserRole.none;
+
+      // Enterprise: only owner and administrator roles can access enterprise features
+      case GenieModule.enterprise:
+        return role == UserRole.owner || role == UserRole.administrator;
     }
   }
 
@@ -133,6 +137,18 @@ class GenieRBACEnforcer {
       case GenieModule.community:
         // Everyone can browse/join; only owner/admin can moderate
         return true;
+
+      case GenieModule.enterprise:
+        // API key management and KYB verification are owner-only
+        if (action == 'create_api_key' || action == 'revoke_api_key' || action == 'verify_enterprise') {
+          return role == UserRole.owner;
+        }
+        // Channel and fulfillment management require owner or admin
+        if (action == 'register_channel' || action == 'dispatch_fulfillment' || action == 'create_routing_rule') {
+          return role == UserRole.owner || role == UserRole.administrator;
+        }
+        // Dashboard and analytics are owner/admin
+        return role == UserRole.owner || role == UserRole.administrator;
 
       default:
         return true;

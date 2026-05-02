@@ -30,3 +30,5 @@ export 'eplay_service.dart';
 export 'community_service.dart';
 // ── Financial Institution Extension ─────────────────────────────────────────
 export 'fintech_service.dart';
+// ── Enterprise Extension ─────────────────────────────────────────────────────
+export 'enterprise_service.dart';

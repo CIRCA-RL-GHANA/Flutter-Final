@@ -231,6 +231,84 @@ class GenieCrossModuleOrchestrator {
     ];
   }
 
+  /// Enterprise onboarding workflow: open profile form → KYB docs → confirm.
+  static List<OrchestrationStep> buildEnterpriseOnboardingWorkflow({
+    required String legalName,
+    required String enterpriseType,
+  }) {
+    return [
+      OrchestrationStep(
+        description: 'Opening enterprise registration form',
+        intent: GenieIntent(
+          module: GenieModule.enterprise,
+          action: 'onboard',
+          params: {'legalName': legalName, 'enterpriseType': enterpriseType},
+          requiresFullScreen: true,
+        ),
+      ),
+      OrchestrationStep(
+        description: 'Uploading KYB licence document',
+        intent: const GenieIntent(
+          module: GenieModule.enterprise,
+          action: 'upload_kyb_doc',
+          requiresFullScreen: true,
+        ),
+      ),
+    ];
+  }
+
+  /// Enterprise channel registration workflow: connect channel → trigger first sync.
+  static List<OrchestrationStep> buildConnectChannelWorkflow({
+    required String channelType,
+    required String channelName,
+  }) {
+    return [
+      OrchestrationStep(
+        description: 'Opening channel registration for $channelName ($channelType)',
+        intent: GenieIntent(
+          module: GenieModule.enterprise,
+          action: 'channels',
+          params: {'channelType': channelType, 'channelName': channelName},
+          requiresFullScreen: true,
+        ),
+      ),
+      OrchestrationStep(
+        description: 'Triggering initial inventory sync for $channelName',
+        intent: GenieIntent(
+          module: GenieModule.enterprise,
+          action: 'sync_channel',
+          params: {'channelName': channelName, 'fullResync': true},
+        ),
+      ),
+    ];
+  }
+
+  /// Enterprise fulfillment dispatch workflow: verify order → route → dispatch.
+  static List<OrchestrationStep> buildDispatchFulfillmentWorkflow({
+    required String orderId,
+    required String entityId,
+  }) {
+    return [
+      OrchestrationStep(
+        description: 'Verifying order $orderId in MARKET',
+        intent: GenieIntent(
+          module: GenieModule.market,
+          action: 'verify_order',
+          params: {'orderId': orderId},
+        ),
+      ),
+      OrchestrationStep(
+        description: 'Routing and dispatching fulfillment for order $orderId',
+        intent: GenieIntent(
+          module: GenieModule.enterprise,
+          action: 'dispatch_fulfillment',
+          params: {'orderId': orderId, 'entityId': entityId},
+          requiresFullScreen: true,
+        ),
+      ),
+    ];
+  }
+
   // ─── Run Orchestration ───────────────────────────────────────────────────
   /// Execute a list of steps, verifying RBAC at each step.
   /// Returns an [OrchestrationResult] describing what completed.

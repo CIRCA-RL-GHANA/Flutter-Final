@@ -29,6 +29,7 @@ class GenieIntentResolver {
         _resolveSetupDashboard(text) ??
         _resolveUserDetails(text) ??
         _resolveFintech(text) ??
+        _resolveEnterprise(text) ??
         _resolveUtility(text) ??
         _resolveNavigation(text) ??
         _resolveGenieNative(text);
@@ -465,6 +466,51 @@ class GenieIntentResolver {
     if (_any(t, ['credit score', 'my credit', 'check credit', 'credit rating',
         'credit data', 'creditworthiness'])) {
       return const GenieIntent(module: GenieModule.fintech, action: 'credit_score', requiresFullScreen: true);
+    }
+    return null;
+  }
+
+  // ─── ENTERPRISE ───────────────────────────────────────────────────────────
+  static GenieIntent? _resolveEnterprise(String t) {
+    if (_any(t, ['register enterprise', 'onboard enterprise', 'enterprise onboarding',
+        'enterprise setup', 'add enterprise', 'create enterprise'])) {
+      return const GenieIntent(
+          module: GenieModule.enterprise, action: 'onboard', requiresFullScreen: true);
+    }
+    if (_any(t, ['enterprise dashboard', 'enterprise home', 'open enterprise',
+        'my enterprise', 'enterprise profile'])) {
+      return const GenieIntent(
+          module: GenieModule.enterprise, action: 'dashboard', requiresFullScreen: true);
+    }
+    if (_any(t, ['create api key', 'generate api key', 'new api key',
+        'enterprise api key', 'api credentials'])) {
+      return const GenieIntent(
+          module: GenieModule.enterprise, action: 'create_api_key', requiresFullScreen: true);
+    }
+    if (_any(t, ['api keys', 'view api keys', 'list api keys', 'my api keys'])) {
+      return const GenieIntent(
+          module: GenieModule.enterprise, action: 'view_api_keys', requiresFullScreen: true);
+    }
+    if (_any(t, ['add channel', 'register channel', 'connect shopify', 'connect amazon',
+        'connect walmart', 'multi channel', 'multichannel', 'channel integration',
+        'link channel', 'sync channel'])) {
+      return const GenieIntent(
+          module: GenieModule.enterprise, action: 'channels', requiresFullScreen: true);
+    }
+    if (_any(t, ['fulfillment', 'dispatch order', 'fulfil order', 'fulfillment rule',
+        'delivery provider', 'set fulfillment', 'routing rule'])) {
+      return const GenieIntent(
+          module: GenieModule.enterprise, action: 'fulfillment', requiresFullScreen: true);
+    }
+    if (_any(t, ['ai concierge', 'concierge session', 'enterprise concierge',
+        'embed genie', 'genie concierge', 'start concierge', 'concierge ai'])) {
+      return const GenieIntent(
+          module: GenieModule.enterprise, action: 'concierge', requiresFullScreen: true);
+    }
+    if (_any(t, ['enterprise analytics', 'enterprise stats', 'enterprise revenue',
+        'enterprise report', 'enterprise insights'])) {
+      return const GenieIntent(
+          module: GenieModule.enterprise, action: 'analytics', requiresFullScreen: true);
     }
     return null;
   }

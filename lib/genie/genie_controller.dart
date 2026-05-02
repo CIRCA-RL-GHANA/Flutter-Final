@@ -315,6 +315,10 @@ class GenieController extends ChangeNotifier {
         return _buildCommunityResponse(intent);
       case GenieModule.genie:
         return _buildGenieNativeResponse(intent);
+      case GenieModule.fintech:
+        return _buildFintechResponse(intent);
+      case GenieModule.enterprise:
+        return _buildEnterpriseResponse(intent);
     }
   }
 
@@ -754,6 +758,240 @@ class GenieController extends ChangeNotifier {
       default:
         return const _GenieResponse(
           text: 'Opening e-Play…',
+          cardType: GenieCardType.comingSoon,
+        );
+    }
+  }
+
+  _GenieResponse _buildFintechResponse(GenieIntent intent) {
+    switch (intent.action) {
+      case 'apply_loan':
+        return _GenieResponse(
+          text: 'Opening loan application — comparing offers from verified FIs…',
+          cardType: GenieCardType.comingSoon,
+          cardData: {'action': 'apply_loan', ...intent.params},
+        );
+      case 'view_loan_offers':
+        return const _GenieResponse(
+          text: 'Fetching competitive loan offers for you:',
+          cardType: GenieCardType.comingSoon,
+          cardData: {'action': 'loan_offers'},
+        );
+      case 'repay_loan':
+        return const _GenieResponse(
+          text: 'Opening loan repayment screen:',
+          cardType: GenieCardType.comingSoon,
+          cardData: {'action': 'repay_loan'},
+        );
+      case 'create_deposit':
+        return _GenieResponse(
+          text: 'Opening term deposit — lock your QPoints and earn interest:',
+          cardType: GenieCardType.comingSoon,
+          cardData: {'action': 'create_deposit', ...intent.params},
+        );
+      case 'view_deposits':
+        return const _GenieResponse(
+          text: 'Your active term deposits:',
+          cardType: GenieCardType.comingSoon,
+          cardData: {'action': 'view_deposits'},
+        );
+      case 'purchase_policy':
+        return const _GenieResponse(
+          text: 'Browse and purchase insurance cover:',
+          cardType: GenieCardType.comingSoon,
+          cardData: {'action': 'insurance'},
+        );
+      case 'file_claim':
+        return const _GenieResponse(
+          text: 'Opening insurance claim submission:',
+          cardType: GenieCardType.comingSoon,
+          cardData: {'action': 'file_claim'},
+        );
+      case 'credit_score':
+        return const _GenieResponse(
+          text: 'Fetching your credit data profile:',
+          cardType: GenieCardType.comingSoon,
+          cardData: {'action': 'credit_score'},
+        );
+      default:
+        return const _GenieResponse(
+          text: 'Opening Fintech services…',
+          cardType: GenieCardType.comingSoon,
+        );
+    }
+  }
+
+  _GenieResponse _buildEnterpriseResponse(GenieIntent intent) {
+    switch (intent.action) {
+      case 'onboard':
+        return const _GenieResponse(
+          text: 'Opening Enterprise Onboarding — register your business for API access:',
+          cardType: GenieCardType.comingSoon,
+          cardData: {'action': 'enterprise_onboard'},
+        );
+      case 'dashboard':
+        return const _GenieResponse(
+          text: 'Opening your Enterprise Dashboard:',
+          cardType: GenieCardType.comingSoon,
+          cardData: {'action': 'enterprise_dashboard'},
+        );
+      case 'create_api_key':
+        return const _GenieResponse(
+          text: 'Opening API key generator — your key will be shown once:',
+          cardType: GenieCardType.comingSoon,
+          cardData: {'action': 'create_api_key'},
+        );
+      case 'view_api_keys':
+        return const _GenieResponse(
+          text: 'Showing your active API keys (prefixes only):',
+          cardType: GenieCardType.comingSoon,
+          cardData: {'action': 'view_api_keys'},
+        );
+      case 'channels':
+        return const _GenieResponse(
+          text: 'Opening multi-channel management — connect Shopify, Amazon, Walmart and more:',
+          cardType: GenieCardType.comingSoon,
+          cardData: {'action': 'channels'},
+        );
+      case 'fulfillment':
+        return const _GenieResponse(
+          text: 'Opening fulfillment routing — set providers and dispatch orders:',
+          cardType: GenieCardType.comingSoon,
+          cardData: {'action': 'fulfillment'},
+        );
+      case 'concierge':
+        return const _GenieResponse(
+          text: 'Opening the Agentic Concierge embed — start an AI session:',
+          cardType: GenieCardType.comingSoon,
+          cardData: {'action': 'concierge'},
+        );
+      case 'analytics':
+        return const _GenieResponse(
+          text: 'Enterprise analytics and revenue insights:',
+          cardType: GenieCardType.comingSoon,
+          cardData: {'action': 'enterprise_analytics'},
+        );
+      default:
+        return const _GenieResponse(
+          text: 'Opening Enterprise hub…',
+          cardType: GenieCardType.comingSoon,
+        );
+    }
+  }
+
+  _GenieResponse _buildCommunityResponse(GenieIntent intent) {
+    switch (intent.action) {
+      case 'my_communities':
+    switch (intent.action) {
+      case 'apply_loan':
+        return _GenieResponse(
+          text: 'Opening loan application — comparing offers from verified FIs…',
+          cardType: GenieCardType.comingSoon,
+          cardData: {'action': 'apply_loan', ...intent.params},
+        );
+      case 'view_loan_offers':
+        return const _GenieResponse(
+          text: 'Fetching competitive loan offers for you:',
+          cardType: GenieCardType.comingSoon,
+          cardData: {'action': 'loan_offers'},
+        );
+      case 'repay_loan':
+        return const _GenieResponse(
+          text: 'Opening loan repayment screen:',
+          cardType: GenieCardType.comingSoon,
+          cardData: {'action': 'repay_loan'},
+        );
+      case 'create_deposit':
+        return _GenieResponse(
+          text: 'Opening term deposit — lock your QPoints and earn interest:',
+          cardType: GenieCardType.comingSoon,
+          cardData: {'action': 'create_deposit', ...intent.params},
+        );
+      case 'view_deposits':
+        return const _GenieResponse(
+          text: 'Your active term deposits:',
+          cardType: GenieCardType.comingSoon,
+          cardData: {'action': 'view_deposits'},
+        );
+      case 'purchase_policy':
+        return const _GenieResponse(
+          text: 'Browse and purchase insurance cover:',
+          cardType: GenieCardType.comingSoon,
+          cardData: {'action': 'insurance'},
+        );
+      case 'file_claim':
+        return const _GenieResponse(
+          text: 'Opening insurance claim submission:',
+          cardType: GenieCardType.comingSoon,
+          cardData: {'action': 'file_claim'},
+        );
+      case 'credit_score':
+        return const _GenieResponse(
+          text: 'Fetching your credit data profile:',
+          cardType: GenieCardType.comingSoon,
+          cardData: {'action': 'credit_score'},
+        );
+      default:
+        return const _GenieResponse(
+          text: 'Opening Fintech services…',
+          cardType: GenieCardType.comingSoon,
+        );
+    }
+  }
+
+  _GenieResponse _buildEnterpriseResponse(GenieIntent intent) {
+    switch (intent.action) {
+      case 'onboard':
+        return const _GenieResponse(
+          text: 'Opening Enterprise Onboarding — register your business for API access:',
+          cardType: GenieCardType.comingSoon,
+          cardData: {'action': 'enterprise_onboard'},
+        );
+      case 'dashboard':
+        return const _GenieResponse(
+          text: 'Opening your Enterprise Dashboard:',
+          cardType: GenieCardType.comingSoon,
+          cardData: {'action': 'enterprise_dashboard'},
+        );
+      case 'create_api_key':
+        return const _GenieResponse(
+          text: 'Opening API key generator — your key will be shown once:',
+          cardType: GenieCardType.comingSoon,
+          cardData: {'action': 'create_api_key'},
+        );
+      case 'view_api_keys':
+        return const _GenieResponse(
+          text: 'Showing your active API keys (prefixes only):',
+          cardType: GenieCardType.comingSoon,
+          cardData: {'action': 'view_api_keys'},
+        );
+      case 'channels':
+        return const _GenieResponse(
+          text: 'Opening multi-channel management — connect Shopify, Amazon, Walmart and more:',
+          cardType: GenieCardType.comingSoon,
+          cardData: {'action': 'channels'},
+        );
+      case 'fulfillment':
+        return const _GenieResponse(
+          text: 'Opening fulfillment routing — set providers and dispatch orders:',
+          cardType: GenieCardType.comingSoon,
+          cardData: {'action': 'fulfillment'},
+        );
+      case 'concierge':
+        return const _GenieResponse(
+          text: 'Opening the Agentic Concierge embed — start an AI session:',
+          cardType: GenieCardType.comingSoon,
+          cardData: {'action': 'concierge'},
+        );
+      case 'analytics':
+        return const _GenieResponse(
+          text: 'Enterprise analytics and revenue insights:',
+          cardType: GenieCardType.comingSoon,
+          cardData: {'action': 'enterprise_analytics'},
+        );
+      default:
+        return const _GenieResponse(
+          text: 'Opening Enterprise hub…',
           cardType: GenieCardType.comingSoon,
         );
     }

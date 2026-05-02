@@ -38,6 +38,11 @@ class ApiRoutes {
   static const deposits = _DepositRoutes();
   static const insurance = _InsuranceRoutes();
   static const creditData = _CreditDataRoutes();
+  // ── Enterprise Extension ────────────────────────────────────────────────
+  static const enterprise = _EnterpriseRoutes();
+  static const multiChannel = _MultiChannelRoutes();
+  static const fulfillment = _FulfillmentRoutes();
+  static const concierge = _ConciergeRoutes();
 }
 
 class _AuthRoutes {
@@ -554,4 +559,44 @@ class _CreditDataRoutes {
   const _CreditDataRoutes();
   String get score     => '/credit-data/score';
   String get subscribe => '/credit-data/subscribe';
+}
+
+class _EnterpriseRoutes {
+  const _EnterpriseRoutes();
+  String get register       => '/enterprise/register';
+  String get profiles       => '/enterprise/profiles';
+  String profile(String id) => '/enterprise/profiles/$id';
+  String settings(String id) => '/enterprise/profiles/$id/settings';
+  String verify(String id) => '/enterprise/profiles/$id/verify';
+  String branches(String id) => '/enterprise/profiles/$id/branches';
+  String apiKeys(String id) => '/enterprise/profiles/$id/api-keys';
+  String revokeKey(String id, String keyId) => '/enterprise/profiles/$id/api-keys/$keyId';
+}
+
+class _MultiChannelRoutes {
+  const _MultiChannelRoutes();
+  String get channels        => '/multi-channel/channels';
+  String listChannels(String entityId) => '/multi-channel/channels/$entityId';
+  String syncChannel(String id) => '/multi-channel/channels/$id/sync';
+  String deactivate(String id)  => '/multi-channel/channels/$id';
+}
+
+class _FulfillmentRoutes {
+  const _FulfillmentRoutes();
+  String get rules         => '/fulfillment/rules';
+  String listRules(String entityId) => '/fulfillment/rules/$entityId';
+  String deleteRule(String id) => '/fulfillment/rules/$id';
+  String get tasks         => '/fulfillment/tasks';
+  String listTasks(String entityId) => '/fulfillment/tasks/$entityId';
+  String taskStatus(String id) => '/fulfillment/tasks/$id/status';
+}
+
+class _ConciergeRoutes {
+  const _ConciergeRoutes();
+  String get sessions      => '/concierge/sessions';
+  String listSessions(String entityId) => '/concierge/sessions/$entityId';
+  String closeSession(String id) => '/concierge/sessions/$id';
+  String sessionContext(String id) => '/concierge/sessions/$id/context';
+  String sendMessage(String id) => '/concierge/sessions/$id/messages';
+  String history(String id) => '/concierge/sessions/$id/messages';
 }

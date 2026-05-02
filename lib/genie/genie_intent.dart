@@ -25,6 +25,8 @@ enum GenieModule {
   genie,
   // Financial Institution Extension (loans, deposits, insurance, credit data)
   fintech,
+  // Enterprise Extension (onboarding, API keys, channels, fulfillment, concierge)
+  enterprise,
 }
 
 /// A canonical action within a module.
