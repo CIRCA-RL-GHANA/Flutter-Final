@@ -330,5 +330,88 @@ class EnterpriseService {
           (json as List).map((e) => e as Map<String, dynamic>).toList(),
     );
   }
+
+  // ─── Analytics ──────────────────────────────────────────────────────────
+
+  Future<ApiResponse<Map<String, dynamic>>> getAnalytics(
+    String entityId, {
+    String? branchId,
+  }) async {
+    final query = branchId != null ? '?branchId=$branchId' : '';
+    return _api.get<Map<String, dynamic>>(
+      '/api/v1/enterprise/analytics/$entityId$query',
+      fromJson: (json) => json as Map<String, dynamic>,
+    );
+  }
+
+  Future<ApiResponse<List<Map<String, dynamic>>>> getBranchSummaries(
+      String entityId) async {
+    return _api.get<List<Map<String, dynamic>>>(
+      '/api/v1/enterprise/analytics/$entityId/branches',
+      fromJson: (json) =>
+          (json as List).map((e) => e as Map<String, dynamic>).toList(),
+    );
+  }
+
+  Future<ApiResponse<Map<String, dynamic>>> getEntityFees(
+    String entityId, {
+    String? month,
+  }) async {
+    final query = month != null ? '?month=$month' : '';
+    return _api.get<Map<String, dynamic>>(
+      '/api/v1/enterprise/analytics/$entityId/fees$query',
+      fromJson: (json) => json as Map<String, dynamic>,
+    );
+  }
+
+  // ─── Products (Bulk) ────────────────────────────────────────────────────
+
+  Future<ApiResponse<List<Map<String, dynamic>>>> bulkCreateProducts(
+      List<Map<String, dynamic>> products) async {
+    return _api.post<List<Map<String, dynamic>>>(
+      '/api/v1/products/bulk',
+      body: {'products': products},
+      fromJson: (json) =>
+          (json as List).map((e) => e as Map<String, dynamic>).toList(),
+    );
+  }
+
+  Future<ApiResponse<Map<String, dynamic>>> bulkUpdateStock(
+      List<Map<String, dynamic>> updates) async {
+    return _api.patch<Map<String, dynamic>>(
+      '/api/v1/products/bulk/stock',
+      body: {'updates': updates},
+      fromJson: (json) => json as Map<String, dynamic>,
+    );
+  }
+
+  // ─── Orders (Entity-scoped) ─────────────────────────────────────────────
+
+  Future<ApiResponse<Map<String, dynamic>>> getOrdersByBranch(
+    String branchId, {
+    String? status,
+    int? limit,
+    int? offset,
+  }) async {
+    final params = <String, String>{};
+    if (status != null) params['status'] = status;
+    if (limit != null) params['limit'] = '$limit';
+    if (offset != null) params['offset'] = '$offset';
+    final query =
+        params.isNotEmpty ? '?${params.entries.map((e) => '${e.key}=${e.value}').join('&')}' : '';
+    return _api.get<Map<String, dynamic>>(
+      '/api/v1/orders/branch/$branchId$query',
+      fromJson: (json) => json as Map<String, dynamic>,
+    );
+  }
+
+  Future<ApiResponse<Map<String, dynamic>>> bulkUpdateOrderStatus(
+      List<Map<String, dynamic>> updates) async {
+    return _api.patch<Map<String, dynamic>>(
+      '/api/v1/orders/bulk/status',
+      body: {'updates': updates},
+      fromJson: (json) => json as Map<String, dynamic>,
+    );
+  }
 }
 
