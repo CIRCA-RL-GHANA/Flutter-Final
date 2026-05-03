@@ -204,15 +204,13 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Build Web (CanvasKit + offline-first PWA)
+      - name: Build Web (CanvasKit PWA)
         run: |
           flutter build web \
             --release \
             --web-renderer canvaskit \
-            --pwa-strategy offline-first \
             --dart-define=API_BASE_URL=${{ vars.API_BASE_URL || 'https://api.genieinprompt.app' }} \
-            --dart-define=ENVIRONMENT=production \
-            --source-maps
+            --dart-define=ENVIRONMENT=production
 
       - name: Verify PWA artefacts
         run: |
