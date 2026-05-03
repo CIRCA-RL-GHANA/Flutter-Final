@@ -238,7 +238,7 @@ jobs:
       - name: Smoke-test Vercel deployment
         run: |
           sleep 10
-          STATUS=$(curl -s -o /dev/null -w '%{http_code}' '${{ vars.VERCEL_URL || "https://genieinprompt.app" }}')
+          STATUS=$(curl -s -o /dev/null -w '%{http_code}' '${{ vars.VERCEL_URL || ''https://genieinprompt.app'' }}')
           echo "PWA HTTP status: $STATUS"
           [ "$STATUS" -eq 200 ] || { echo "::error::Smoke test failed (HTTP $STATUS)"; exit 1; }
 
