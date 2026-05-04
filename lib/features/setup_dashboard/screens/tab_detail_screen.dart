@@ -62,7 +62,7 @@ class _TabDetailScreenState extends State<TabDetailScreen> {
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
-                            'AI: ${ai.insights.first['title'] ?? ''}'',
+                            "AI: ${ai.insights.first['title'] ?? ''}",
                             style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kSetupColor),
                             maxLines: 1, overflow: TextOverflow.ellipsis,
                           ),
