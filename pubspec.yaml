@@ -47,7 +47,7 @@ dependencies:
 
   # Image Handling
   image_picker: ^1.0.5
-  image_cropper: ^12.2.1
+  image_cropper: ^9.1.0
 
   # Country Picker
   country_code_picker: ^3.0.0
