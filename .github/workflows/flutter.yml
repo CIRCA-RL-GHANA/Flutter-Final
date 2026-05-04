@@ -218,7 +218,6 @@ jobs:
         run: |
           flutter build web \
             --release \
-            --web-renderer canvaskit \
             --dart-define=API_BASE_URL=${{ vars.API_BASE_URL || 'https://api.genieinprompt.app' }} \
             --dart-define=ENVIRONMENT=production
 
