@@ -61,7 +61,7 @@ void _tone(AudioContext ctx, double freq, double startTime,
   gainNode.gain!.linearRampToValueAtTime(0.0, startTime + duration);
   osc.connectNode(gainNode);
   gainNode.connectNode(ctx.destination!);
-  osc.start();
+  js_util.callMethod(osc, 'start', [0]);
   osc.stop(startTime + duration + 0.02);
 }
 
@@ -77,6 +77,6 @@ void _sweepTone(AudioContext ctx, double startFreq, double endFreq,
   gainNode.gain!.linearRampToValueAtTime(0.0, startTime + duration);
   osc.connectNode(gainNode);
   gainNode.connectNode(ctx.destination!);
-  osc.start();
+  js_util.callMethod(osc, 'start', [0]);
   osc.stop(startTime + duration + 0.02);
 }
