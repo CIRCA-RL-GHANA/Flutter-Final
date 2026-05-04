@@ -1,4 +1,5 @@
-﻿import 'dart:async';
+import 'dart:async';
+import 'dart:math';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:flutter/foundation.dart';
 
@@ -118,58 +119,59 @@ class WebSocketService extends ChangeNotifier {
   }
 
   void _setupEventListeners() {
-    _socket.onConnect((_) {
+    final s = _socket!;
+    s.onConnect((_) {
       debugPrint('[WebSocket] Connected');
       _reconnectAttempts = 0;
       _connectionController.add(true);
       notifyListeners();
     });
 
-    _socket.on('connection:confirmed', (data) {
+    s.on('connection:confirmed', (data) {
       debugPrint('[WebSocket] Confirmed: $data');
     });
 
-    _socket.on('message:new', (data) {
+    s.on('message:new', (data) {
       final message = ChatMessage.fromJson(data);
       _messageController.add(message);
       notifyListeners();
     });
 
-    _socket.on('message:ack', (data) {
+    s.on('message:ack', (data) {
       final message = ChatMessage.fromJson(data);
       _messageController.add(message);
     });
 
-    _socket.on('user:typing', (data) {
+    s.on('user:typing', (data) {
       final typing = TypingIndicator.fromJson(data);
       _typingController.add(typing);
       notifyListeners();
     });
 
-    _socket.on('user:stopped-typing', (data) {
+    s.on('user:stopped-typing', (data) {
       debugPrint('[WebSocket] User stopped typing');
     });
 
-    _socket.on('message:read-receipt', (data) {
+    s.on('message:read-receipt', (data) {
       debugPrint('[WebSocket] Message read: ${data['messageId']}');
     });
 
-    _socket.on('message:deleted', (data) {
+    s.on('message:deleted', (data) {
       debugPrint('[WebSocket] Message deleted: ${data['messageId']}');
     });
 
-    _socket.on('error', (error) {
+    s.on('error', (error) {
       debugPrint('[WebSocket] Error: $error');
     });
 
-    _socket.onDisconnect((_) {
+    s.onDisconnect((_) {
       debugPrint('[WebSocket] Disconnected');
       _connectionController.add(false);
       _scheduleReconnect('');
       notifyListeners();
     });
 
-    _socket.onError((error) {
+    s.onError((error) {
       debugPrint('[WebSocket] Error event: $error');
       _connectionController.add(false);
     });
@@ -258,7 +260,7 @@ class WebSocketService extends ChangeNotifier {
     _reconnectTimer?.cancel();
     _reconnectAttempts++;
     
-    final delaySeconds = (1000 * (1.5 ^ (_reconnectAttempts - 1))).toInt();
+    final delaySeconds = (1000 * pow(1.5, _reconnectAttempts - 1)).toInt();
     debugPrint('[WebSocket] Reconnecting in ${delaySeconds}ms (attempt $_reconnectAttempts)');
 
     _reconnectTimer = Timer(Duration(milliseconds: delaySeconds), () {

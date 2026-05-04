@@ -35,8 +35,8 @@ class PwaService {
 
     // Monitor connectivity status
     _connectivitySubscription = Connectivity().onConnectivityChanged.listen(
-      (result) {
-        final isOnline = result != ConnectivityResult.none;
+      (results) {
+        final isOnline = !results.contains(ConnectivityResult.none);
         if (_isOnline != isOnline) {
           _isOnline = isOnline;
           _onlineController.add(isOnline);
@@ -45,8 +45,8 @@ class PwaService {
     );
 
     // Check initial online status
-    final connectivityResult = await Connectivity().checkConnectivity();
-    _isOnline = connectivityResult != ConnectivityResult.none;
+    final connectivityResults = await Connectivity().checkConnectivity();
+    _isOnline = !connectivityResults.contains(ConnectivityResult.none);
 
     _initialized = true;
   }

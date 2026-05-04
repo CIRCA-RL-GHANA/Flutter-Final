@@ -21,7 +21,7 @@ class OfflineBanner extends StatefulWidget {
 
 class _OfflineBannerState extends State<OfflineBanner>
     with SingleTickerProviderStateMixin {
-  late final StreamSubscription<ConnectivityResult> _sub;
+  late final StreamSubscription<List<ConnectivityResult>> _sub;
   late final AnimationController _animCtrl;
   late final Animation<Offset> _slideAnim;
   bool _isOffline = false;
@@ -39,14 +39,10 @@ class _OfflineBannerState extends State<OfflineBanner>
     ).animate(CurvedAnimation(parent: _animCtrl, curve: Curves.easeOut));
 
     // Check initial state
-    Connectivity().checkConnectivity().then(_handleSingleResult);
+    Connectivity().checkConnectivity().then(_handleResult);
 
     // Listen for changes
-    _sub = Connectivity().onConnectivityChanged.listen(_handleSingleResult);
-  }
-
-  void _handleSingleResult(ConnectivityResult result) {
-    _handleResult([result]);
+    _sub = Connectivity().onConnectivityChanged.listen(_handleResult);
   }
 
   void _handleResult(List<ConnectivityResult> results) {
@@ -85,7 +81,7 @@ class _OfflineBannerState extends State<OfflineBanner>
                 TextButton(
                   onPressed: () async {
                     final result = await Connectivity().checkConnectivity();
-                    _handleSingleResult(result);
+                    _handleResult(result);
                   },
                   child: const Text(
                     'RETRY',
