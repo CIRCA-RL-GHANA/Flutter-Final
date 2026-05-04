@@ -441,7 +441,7 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
                           const SizedBox(width: 8),
                           Expanded(
                             child: Text(
-                              insight.label,
+                              insight['label'] as String? ?? '',
                               style: const TextStyle(fontSize: 12, color: AppColors.textPrimary),
                             ),
                           ),

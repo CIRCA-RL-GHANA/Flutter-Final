@@ -58,9 +58,9 @@ class GenieInputSanitizer {
 
   // Common homoglyph substitution map (adversarial phoneme avoidance)
   static final Map<RegExp, String> _homoglyphMap = {
-    RegExp(r'[Ａ-Ｚａ-ｚ０-９]'): _normaliseFullWidth, // fullwidth ASCII
+    RegExp(r'[Ａ-Ｚａ-ｚ０-９]'): 'a', // fullwidth ASCII → normalize
     RegExp(r'[ₐₑₒₓₔ]'): 'a',
-    RegExp(r'[①②③④⑤⑥⑦⑧⑨⑩]'): _normaliseCircledDigit,
+    RegExp(r'[①②③④⑤⑥⑦⑧⑨⑩]'): '0',
   };
 
   // Control / non-printable characters

@@ -230,7 +230,7 @@ class _QualChatThreadScreenState extends State<QualChatThreadScreen> {
                 _AISmartReplyStrip(
                   suggestions: aiNotifier.recommendations
                       .take(3)
-                      .map((r) => r.name)
+                      .map((r) => r['name'] as String? ?? '')
                       .toList(),
                   onTap: (text) {
                     _messageCtrl.text = text;

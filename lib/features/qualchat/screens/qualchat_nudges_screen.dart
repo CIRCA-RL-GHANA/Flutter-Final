@@ -33,7 +33,7 @@ class QualChatNudgesScreen extends StatelessWidget {
               ? const QualChatEmptyState(
                   icon: Icons.auto_awesome,
                   title: 'All caught up!',
-                  message: 'No nudges right now. We\\'ll notify you when there\\'s something to act on 🌟',
+                  message: "No nudges right now. We'll notify you when there's something to act on 🌟",
                 )
               : Column(
                   children: [

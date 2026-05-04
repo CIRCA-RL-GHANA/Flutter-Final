@@ -17,8 +17,8 @@
 /// ═══════════════════════════════════════════════════════════════════════════
 
 import 'dart:convert';
-import 'dart:developer' as developer;
 import 'package:flutter/foundation.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // ─── Metric Enums ─────────────────────────────────────────────────────────────
@@ -110,16 +110,7 @@ class GeniePerformanceTelemetry {
   // ─── Memory Snapshot ──────────────────────────────────────────────────────
 
   static void captureMemorySnapshot() {
-    final info = developer.getCurrentIsolateMemory();
-    record(
-      TelemetryEventType.memorySnapshot,
-      (info.heapUsage / 1024).toDouble(), // KB
-      meta: {
-        'heapCapacity': info.heapCapacity,
-        'heapUsage': info.heapUsage,
-        'externalUsage': info.externalUsage,
-      },
-    );
+    // Memory introspection not available on web/all platforms — skip silently.
   }
 
   // ─── Jank Detection (frame callback) ─────────────────────────────────────
@@ -128,20 +119,20 @@ class GeniePerformanceTelemetry {
   /// persistent frame timing callback.
   static void enableJankMonitoring() {
     if (kIsWeb) return; // web scheduler has different frame semantics
-    developer.addFrameCallback(_onFrame);
-    developer.scheduleFrameCallback(_onFrame);
+    SchedulerBinding.instance.addTimingsCallback(_onTimings);
   }
 
-  static void _onFrame(Duration elapsed) {
-    // A frame over 16ms is jank; over 33ms is severe.
-    if (elapsed.inMilliseconds > 16) {
-      record(
-        TelemetryEventType.cardAnimationJank,
-        elapsed.inMilliseconds.toDouble(),
-        meta: {'severe': elapsed.inMilliseconds > 33},
-      );
+  static void _onTimings(List<FrameTiming> timings) {
+    for (final t in timings) {
+      final elapsed = t.totalSpan.inMilliseconds;
+      if (elapsed > 16) {
+        record(
+          TelemetryEventType.cardAnimationJank,
+          elapsed.toDouble(),
+          meta: {'severe': elapsed > 33},
+        );
+      }
     }
-    developer.scheduleFrameCallback(_onFrame);
   }
 
   // ─── Flush to Backend ────────────────────────────────────────────────────

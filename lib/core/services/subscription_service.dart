@@ -131,7 +131,7 @@ class SubscriptionService {
   }) async {
     final plansResp = await getPlans();
     if (!plansResp.isSuccess || plansResp.data == null) {
-      return ApiResponse.failure('Unable to fetch plans for AI analysis');
+      return ApiResponse.failure(ApiError(code: 'ERROR', message: 'Unable to fetch plans for AI analysis'));
     }
     return _aiService.recommendSubscriptionPlan(
       usageScore: usageScore,

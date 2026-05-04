@@ -34,7 +34,7 @@ void pwaPlayEarcon(String role) {
 }
 
 void _scheduleEarcon(AudioContext ctx, String role) {
-  final now = ctx.currentTime!;
+  final now = (ctx.currentTime ?? 0).toDouble();
 
   switch (role.toLowerCase()) {
     case 'owner':
@@ -61,7 +61,7 @@ void _tone(AudioContext ctx, double freq, double startTime,
   gainNode.gain!.linearRampToValueAtTime(0.0, startTime + duration);
   osc.connectNode(gainNode);
   gainNode.connectNode(ctx.destination!);
-  osc.start(startTime);
+  osc.start();
   osc.stop(startTime + duration + 0.02);
 }
 
@@ -77,6 +77,6 @@ void _sweepTone(AudioContext ctx, double startFreq, double endFreq,
   gainNode.gain!.linearRampToValueAtTime(0.0, startTime + duration);
   osc.connectNode(gainNode);
   gainNode.connectNode(ctx.destination!);
-  osc.start(startTime);
+  osc.start();
   osc.stop(startTime + duration + 0.02);
 }

@@ -397,6 +397,9 @@ class ArchivedChat {
     required this.sizeMb,
     required this.messageCount,
   });
+
+  String get id => conversation.id;
+  int get mediaCount => 0;
 }
 
 /// Onboarding step data

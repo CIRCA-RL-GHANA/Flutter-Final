@@ -82,7 +82,7 @@ class _LiveDriverAssignmentScreenState extends State<LiveDriverAssignmentScreen>
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
-                            'AI recommends: ${ai.recommendations.first.name}',
+                            'AI recommends: ${ai.recommendations.first['name'] ?? ''}',
                             style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kLiveColor),
                             maxLines: 1, overflow: TextOverflow.ellipsis,
                           ),

@@ -126,15 +126,15 @@ class ProductsScreen extends StatelessWidget {
               ),
 
               // ─── Product List ─────────────────────────────
-              if (products.isEmpty)
+              if (products.isEmpty) ...[
                 const SliverFillRemaining(
                   child: SetupEmptyState(
                     icon: Icons.inventory_2,
                     title: 'No products found',
                     subtitle: 'Try a different search or add new products.',
                   ),
-                )
-              else if (setupProv.isGridView)
+                ),
+              ] else if (setupProv.isGridView) ...[
               // ─── AI Insights ─────────────────────────────────────────
               SliverToBoxAdapter(
                 child: Consumer<AIInsightsNotifier>(
@@ -180,8 +180,8 @@ class ProductsScreen extends StatelessWidget {
                       childCount: products.length,
                     ),
                   ),
-                )
-              else
+                ),
+              ] else ...[
                 SliverPadding(
                   padding: const EdgeInsets.fromLTRB(20, 16, 20, 100),
                   sliver: SliverList(
@@ -191,6 +191,7 @@ class ProductsScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+              ],
             ],
           ),
         ),

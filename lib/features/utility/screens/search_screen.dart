@@ -62,7 +62,7 @@ class _SearchScreenState extends State<SearchScreen> {
           documents: docs,
           topN: 8,
         );
-        if (mounted) setState(() => _aiResults = ranked ?? []);
+        if (mounted) setState(() => _aiResults = (ranked as List?)?.cast<Map<String, dynamic>>() ?? []);
       }
     } catch (_) {
       // AI ranking is best-effort — fall back to standard results silently

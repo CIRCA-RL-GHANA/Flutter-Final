@@ -279,7 +279,7 @@ class _GoTransferScreenState extends State<GoTransferScreen> {
         const SizedBox(height: 16),
         const Text('VERIFY TRANSFER', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
         const SizedBox(height: 24),
-        ..[
+        ...[
           _buildVerifyBtn(Icons.fingerprint, 'Use Fingerprint', p),
           _buildVerifyBtn(Icons.face, 'Face ID', p),
           _buildVerifyBtn(Icons.pin, 'Enter PIN', p),

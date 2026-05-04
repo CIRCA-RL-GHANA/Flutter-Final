@@ -164,7 +164,7 @@ class WishlistService {
   }) async {
     final wishlistResp = await getWishlist();
     if (!wishlistResp.isSuccess || wishlistResp.data == null) {
-      return ApiResponse.failure('Unable to load wishlist for AI analysis');
+      return ApiResponse.failure(ApiError(code: 'ERROR', message: 'Unable to load wishlist for AI analysis'));
     }
     // Build user preference vector from wishlist categories/prices
     final Map<String, double> preferenceVector = {};

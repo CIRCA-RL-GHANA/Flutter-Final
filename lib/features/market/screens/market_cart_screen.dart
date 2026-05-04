@@ -88,7 +88,7 @@ class MarketCartScreen extends StatelessWidget {
                                 spacing: 6,
                                 runSpacing: 4,
                                 children: ai.recommendations.take(4).map((r) => Chip(
-                                  label: Text(r.name, style: const TextStyle(fontSize: 11)),
+                                  label: Text(r['name'] as String? ?? '', style: const TextStyle(fontSize: 11)),
                                   backgroundColor: kMarketColor.withOpacity(0.08),
                                   side: BorderSide.none,
                                   padding: EdgeInsets.zero,

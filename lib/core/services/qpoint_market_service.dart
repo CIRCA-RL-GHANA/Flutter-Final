@@ -341,7 +341,7 @@ class QPointMarketService {
   }) {
     return _api.post(
       '/qpoints/payment/deposit',
-      body: {'amount': amount, 'currency': currency},
+      data: {'amount': amount, 'currency': currency},
       fromJson: (json) =>
           FacilitatorTransactionResult.fromJson(json as Map<String, dynamic>),
     );
@@ -360,7 +360,7 @@ class QPointMarketService {
   }) {
     return _api.post(
       '/qpoints/payment/withdraw',
-      body: {
+      data: {
         'amount': amount,
         'currency': currency,
         if (payoutMethodId != null) 'payoutMethodId': payoutMethodId,

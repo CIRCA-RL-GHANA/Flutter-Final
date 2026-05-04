@@ -248,7 +248,7 @@ class _CommunityCreateScreenState extends State<CommunityCreateScreen> {
       type: _selectedType!,
       description: _descCtrl.text.trim(),
       visibility: _visibility,
-      tags: tags,
+      tags: tags.join(','),
     );
     if (mounted) {
       setState(() => _creating = false);

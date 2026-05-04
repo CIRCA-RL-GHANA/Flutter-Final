@@ -163,11 +163,11 @@ class SubscriptionScreen extends StatelessWidget {
                       const SizedBox(height: 10),
                       _UsageBar(
                         label: 'Free Transactions',
-                        used: sub.monthlyTransactionCount.toDouble(),
-                        limit: sub.freeTransactionQuota.toDouble(),
+                        used: sub.txCountThisMonth.toDouble(),
+                        limit: sub.txFreeQuota.toDouble(),
                         icon: Icons.receipt_long,
-                        overageNote: sub.monthlyTransactionCount > sub.freeTransactionQuota
-                            ? '${sub.monthlyTransactionCount - sub.freeTransactionQuota} × 0.02 QP fee'
+                        overageNote: sub.txCountThisMonth > sub.txFreeQuota
+                            ? '${sub.txCountThisMonth - sub.txFreeQuota} × 0.02 QP fee'
                             : null,
                       ),
                     ],

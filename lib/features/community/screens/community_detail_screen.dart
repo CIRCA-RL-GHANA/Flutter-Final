@@ -10,7 +10,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../providers/community_provider.dart';
-import 'community_hub_screen.dart' show kCommunityColor, kCommunityColorDark, _archetypes;
+import 'community_hub_screen.dart' show kCommunityColor, kCommunityColorDark, kCommunityArchetypes;
 
 class CommunityDetailScreen extends StatefulWidget {
   final Map<String, dynamic>? community;
@@ -30,7 +30,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> with Sing
   String get _members => _comm['members'] as String? ?? '0';
 
   Map<String, dynamic> get _arch =>
-      _archetypes.firstWhere((a) => a['type'] == _type, orElse: () => _archetypes[4]);
+      kCommunityArchetypes.firstWhere((a) => a['type'] == _type, orElse: () => kCommunityArchetypes[4]);
 
   Color get _color => Color(_arch['color'] as int);
 

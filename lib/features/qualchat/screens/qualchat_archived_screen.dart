@@ -38,7 +38,7 @@ class _QualChatArchivedScreenState extends State<QualChatArchivedScreen> {
     // Apply filter
     filtered = filtered.where((chat) {
       if (_selectedFilter == ArchiveFilter.individual) {
-        return chat.conversation.type == ChatType.direct;
+        return chat.conversation.type == ChatType.individual;
       } else if (_selectedFilter == ArchiveFilter.group) {
         return chat.conversation.type == ChatType.group;
       } else if (_selectedFilter == ArchiveFilter.media) {
@@ -448,6 +448,38 @@ class _ArchiveAction extends StatelessWidget {
           Text(label,
               style: TextStyle(
                   fontSize: 12, fontWeight: FontWeight.w500, color: color)),
+        ],
+      ),
+    );
+  }
+}
+
+class _ArchivedChatCard extends StatelessWidget {
+  final ArchivedChat chat;
+  final VoidCallback onDelete;
+  final VoidCallback onRestore;
+
+  const _ArchivedChatCard({
+    required this.chat,
+    required this.onDelete,
+    required this.onRestore,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: CircleAvatar(
+        child: Text(chat.conversation.title.isNotEmpty
+            ? chat.conversation.title[0].toUpperCase()
+            : '?'),
+      ),
+      title: Text(chat.conversation.title),
+      subtitle: Text(chat.conversation.lastMessage, maxLines: 1, overflow: TextOverflow.ellipsis),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          IconButton(icon: const Icon(Icons.restore), onPressed: onRestore),
+          IconButton(icon: const Icon(Icons.delete_outline), onPressed: onDelete),
         ],
       ),
     );

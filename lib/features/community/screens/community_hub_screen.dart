@@ -15,7 +15,7 @@ const Color kCommunityColor = Color(0xFF0891B2);       // Cyan-700
 const Color kCommunityColorDark = Color(0xFF0E7490);
 
 // 7 community archetypes
-const _archetypes = [
+const kCommunityArchetypes = [
   {'type': 'library',  'label': 'Libraries',  'icon': Icons.local_library,     'desc': 'Curate & discuss e-books and media',        'color': 0xFF0F766E},
   {'type': 'playlist', 'label': 'Playlists',  'icon': Icons.queue_music,        'desc': 'Collaborative audio/video curation',         'color': 0xFF7C3AED},
   {'type': 'theater',  'label': 'Theaters',   'icon': Icons.theaters,           'desc': 'Watch shows & movies together in sync',     'color': 0xFFDC2626},
@@ -137,8 +137,8 @@ class _CommunityHubScreenState extends State<CommunityHubScreen> {
                     mainAxisSpacing: 10,
                   ),
                   delegate: SliverChildBuilderDelegate(
-                    (ctx, i) => _archetypeCard(_archetypes[i]),
-                    childCount: _archetypes.length,
+                    (ctx, i) => _archetypeCard(kCommunityArchetypes[i]),
+                    childCount: kCommunityArchetypes.length,
                   ),
                 ),
               ),
@@ -208,7 +208,7 @@ class _CommunityHubScreenState extends State<CommunityHubScreen> {
   }
 
   Widget _trendingTile(Map<String, dynamic> community) {
-    final arch = _archetypes.firstWhere((a) => a['type'] == community['type'], orElse: () => _archetypes.last);
+    final arch = kCommunityArchetypes.firstWhere((a) => a['type'] == community['type'], orElse: () => kCommunityArchetypes.last);
     final color = Color(arch['color'] as int);
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),

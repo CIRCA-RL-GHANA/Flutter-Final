@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/services/ai_insights_notifier.dart';
-import 'community_hub_screen.dart' show kCommunityColor, kCommunityColorDark, _archetypes;
+import 'community_hub_screen.dart' show kCommunityColor, kCommunityColorDark, kCommunityArchetypes;
 
 const _roles = ['owner', 'admin', 'moderator', 'member'];
 
@@ -35,7 +35,7 @@ class _CommunityMembersScreenState extends State<CommunityMembersScreen> {
   String get _type => _comm['type'] as String? ?? 'hub';
 
   Map<String, dynamic> get _arch =>
-      _archetypes.firstWhere((a) => a['type'] == _type, orElse: () => _archetypes[4]);
+      kCommunityArchetypes.firstWhere((a) => a['type'] == _type, orElse: () => kCommunityArchetypes[4]);
 
   Color get _color => Color(_arch['color'] as int);
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart' hide Consumer;
 import 'package:thepg/core/providers/service_providers.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/widgets/ai_price_widgets.dart';

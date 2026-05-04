@@ -210,6 +210,8 @@ class CommunityProvider extends ChangeNotifier {
 
   final Map<String, List<Map<String, dynamic>>> _postsCache = {};
 
+  Map<String, List<Map<String, dynamic>>> get postsCache => _postsCache;
+
   List<Map<String, dynamic>> postsFor(String communityId) =>
       _postsCache[communityId] ?? [];
 

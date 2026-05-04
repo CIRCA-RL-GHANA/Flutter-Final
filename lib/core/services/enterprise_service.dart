@@ -256,7 +256,7 @@ class EnterpriseService {
   }) async {
     final resp = await _api.post<Map<String, dynamic>>(
       '/api/v1/payments/qp/charge',
-      body: {
+      data: {
         'customerId': customerId,
         'merchantEntityId': merchantEntityId,
         'amount': amount,
@@ -285,7 +285,7 @@ class EnterpriseService {
   }) async {
     return _api.post<Map<String, dynamic>>(
       '/api/v1/facilitator/institutions/issue',
-      body: {'entityId': entityId, 'amount': amount, if (reason != null) 'reason': reason},
+      data: {'entityId': entityId, 'amount': amount, if (reason != null) 'reason': reason},
       fromJson: (json) => json as Map<String, dynamic>,
     );
   }
@@ -298,7 +298,7 @@ class EnterpriseService {
   }) async {
     return _api.post<Map<String, dynamic>>(
       '/api/v1/qpoints/settlement/initiate',
-      body: {
+      data: {
         'fromEntityId': fromEntityId,
         'toEntityId': toEntityId,
         'amount': amount,
@@ -317,7 +317,7 @@ class EnterpriseService {
   }) async {
     return _api.post<Map<String, dynamic>>(
       '/api/v1/webhooks/subscriptions',
-      body: {'entityId': entityId, 'url': url, 'events': events},
+      data: {'entityId': entityId, 'url': url, 'events': events},
       fromJson: (json) => json as Map<String, dynamic>,
     );
   }
@@ -370,7 +370,7 @@ class EnterpriseService {
       List<Map<String, dynamic>> products) async {
     return _api.post<List<Map<String, dynamic>>>(
       '/api/v1/products/bulk',
-      body: {'products': products},
+      data: {'products': products},
       fromJson: (json) =>
           (json as List).map((e) => e as Map<String, dynamic>).toList(),
     );
@@ -380,7 +380,7 @@ class EnterpriseService {
       List<Map<String, dynamic>> updates) async {
     return _api.patch<Map<String, dynamic>>(
       '/api/v1/products/bulk/stock',
-      body: {'updates': updates},
+      data: {'updates': updates},
       fromJson: (json) => json as Map<String, dynamic>,
     );
   }
@@ -409,7 +409,7 @@ class EnterpriseService {
       List<Map<String, dynamic>> updates) async {
     return _api.patch<Map<String, dynamic>>(
       '/api/v1/orders/bulk/status',
-      body: {'updates': updates},
+      data: {'updates': updates},
       fromJson: (json) => json as Map<String, dynamic>,
     );
   }

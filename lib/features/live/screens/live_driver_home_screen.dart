@@ -116,7 +116,7 @@ class LiveDriverHomeScreen extends StatelessWidget {
                           children: [
                             const Icon(Icons.auto_awesome, size: 13, color: kLiveColor),
                             const SizedBox(width: 8),
-                            Expanded(child: Text(i.label, style: const TextStyle(fontSize: 12, color: kLiveColor), maxLines: 1, overflow: TextOverflow.ellipsis)),
+                            Expanded(child: Text(i['label'] as String? ?? '', style: const TextStyle(fontSize: 12, color: kLiveColor), maxLines: 1, overflow: TextOverflow.ellipsis)),
                           ],
                         )).toList(),
                       ),

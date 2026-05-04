@@ -807,6 +807,26 @@ class QualChatProvider extends ChangeNotifier {
   double get totalArchivedSizeMb =>
       archivedChats.fold(0.0, (sum, a) => sum + a.sizeMb);
 
+  void restoreAllArchived() {
+    archivedChats.clear();
+    notifyListeners();
+  }
+
+  void emptyArchive() {
+    archivedChats.clear();
+    notifyListeners();
+  }
+
+  void deleteArchivedChat(String id) {
+    archivedChats.removeWhere((c) => c.id == id);
+    notifyListeners();
+  }
+
+  void restoreArchivedChat(String id) {
+    archivedChats.removeWhere((c) => c.id == id);
+    notifyListeners();
+  }
+
   // ──────────────────────────────────────────────
   //  SETTINGS (Screen 13)
   // ──────────────────────────────────────────────

@@ -46,7 +46,7 @@ class QualChatHeyYasScreen extends StatelessWidget {
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
-                            'AI suggests: ${ai.recommendations.first.name}',
+                            'AI suggests: ${ai.recommendations.first['name'] ?? ''}',
                             style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kChatColor),
                             maxLines: 1, overflow: TextOverflow.ellipsis,
                           ),

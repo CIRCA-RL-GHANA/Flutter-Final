@@ -383,7 +383,7 @@ class _GoHubScreenState extends State<GoHubScreen> {
                     children: [
                       const Icon(Icons.auto_awesome, size: 16, color: kGoColor),
                       const SizedBox(width: 10),
-                      Expanded(child: Text(ins.label, style: const TextStyle(fontSize: 13))),
+                      Expanded(child: Text(ins['label'] as String? ?? '', style: const TextStyle(fontSize: 13))),
                     ],
                   ),
                 ))

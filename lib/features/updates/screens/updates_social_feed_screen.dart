@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:provider/provider.dart';
+import '../../../core/services/ai_insights_notifier.dart';
+import '../widgets/updates_widgets.dart';
 
-class UpdatesSocialFeedScreen extends ConsumerStatefulWidget {
+class UpdatesSocialFeedScreen extends StatefulWidget {
   const UpdatesSocialFeedScreen({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<UpdatesSocialFeedScreen> createState() =>
+  State<UpdatesSocialFeedScreen> createState() =>
       _UpdatesSocialFeedScreenState();
 }
 
-class _UpdatesSocialFeedScreenState extends ConsumerState<UpdatesSocialFeedScreen> {
+class _UpdatesSocialFeedScreenState extends State<UpdatesSocialFeedScreen> {
   final updates = [
     {
       'author': 'Tech Daily',

@@ -1140,8 +1140,8 @@ class SetupDashboardProvider extends ChangeNotifier {
         freeTrialEndsAt: DateTime.now().add(const Duration(days: 30)),
         includesSocialFeatures: false,
         includesMarketingTools: false,
-        monthlyTransactionCount: 0,
-        freeTransactionQuota: 100,
+        txCountThisMonth: 0,
+        txFreeQuota: 100,
       );
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -1882,8 +1882,8 @@ class SetupDashboardProvider extends ChangeNotifier {
           : null,
       includesSocialFeatures: json['includesSocialFeatures'] as bool? ?? false,
       includesMarketingTools: json['includesMarketingTools'] as bool? ?? false,
-      monthlyTransactionCount: (json['monthlyTransactionCount'] as num?)?.toInt() ?? 0,
-      freeTransactionQuota: (json['freeTransactionQuota'] as num?)?.toInt() ?? 100,
+      txCountThisMonth: (json['monthlyTransactionCount'] as num?)?.toInt() ?? 0,
+      txFreeQuota: (json['freeTransactionQuota'] as num?)?.toInt() ?? 100,
     );
   }
 
@@ -2062,7 +2062,7 @@ class SetupDashboardProvider extends ChangeNotifier {
       case 'enterprise':
         return SubscriptionPlan.enterprise;
       default:
-        return SubscriptionPlan.premium;
+        return SubscriptionPlan.professional;
     }
   }
 
