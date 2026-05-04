@@ -1,6 +1,6 @@
 import '../../core/network/api_client.dart';
 import '../../core/network/api_response.dart';
-import '../go/models/qpoint_market_models.dart';
+import '../../features/go/models/qpoint_market_models.dart';
 
 /// Service for the Q Points liquid market.
 /// Covers balance, order book, orders, trades, market stats, and notifications.

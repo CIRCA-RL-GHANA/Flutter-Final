@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import '../../core/services/qpoint_market_service.dart';
+import '../../../core/services/qpoint_market_service.dart';
 import '../models/qpoint_market_models.dart';
 
 /// State management for the Q Points Terms of Service flow.

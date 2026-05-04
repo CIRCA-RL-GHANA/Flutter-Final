@@ -3,7 +3,7 @@
 /// platform (pathways 1–5), upload KYB documents, and view profile status.
 
 import 'package:flutter/material.dart';
-import '../../../../core/services/enterprise_service.dart';
+import '../../../core/services/enterprise_service.dart';
 
 const _kGold = Color(0xFFD4A017);
 const _kCyan = Color(0xFF00BCD4);
