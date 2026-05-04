@@ -35,7 +35,8 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
-pubspec.lock
+# pubspec.lock is intentionally tracked for reproducible CI builds
+# see: https://dart.dev/tools/pub/glossary#lockfile
 
 # Web related
 lib/generated_plugin_registrant.dart
