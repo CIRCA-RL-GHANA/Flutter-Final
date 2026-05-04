@@ -175,7 +175,7 @@ class _UpdatesSocialFeedScreenState extends ConsumerState<UpdatesSocialFeedScree
                 ),
               ],
             ),
-          ));
+          );
         },
           )),
         ],
