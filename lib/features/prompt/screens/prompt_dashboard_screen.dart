@@ -32,7 +32,7 @@ class _PromptDashboardScreenState extends ConsumerState<PromptDashboardScreen>
     
     return Scaffold(
       appBar: AppBar(
-        title: const Text('PROMPT Genie'),
+        title: const Text('genie help'),
         elevation: 0,
         bottom: TabBar(
           controller: _tabController,
@@ -152,7 +152,7 @@ class _PromptDashboardScreenState extends ConsumerState<PromptDashboardScreen>
               ),
               ListTile(
                 title: const Text('About'),
-                subtitle: const Text('Learn about PROMPT Genie'),
+                subtitle: const Text('Learn about genie help'),
                 trailing: const Icon(Icons.arrow_forward),
                 onTap: () {
                   // Navigate to about page

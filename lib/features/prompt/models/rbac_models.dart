@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 // ─── User Roles ──────────────────────────────────────────────────────────────
 
-/// All 11 roles in the PROMPT Genie ecosystem
+/// All 11 roles in the genie help ecosystem
 enum UserRole {
   // Individual Entity
   owner,

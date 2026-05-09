@@ -48,7 +48,7 @@ class PromptGenieApp extends StatelessWidget {
       child: Consumer<OnboardingProvider>(
         builder: (context, onboardingProvider, child) {
           return MaterialApp(
-            title: 'PROMPT Genie',
+            title: 'genie help',
             debugShowCheckedModeBanner: false,
             theme: AppTheme.lightTheme,
             darkTheme: AppTheme.darkTheme,

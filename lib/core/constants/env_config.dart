@@ -1,7 +1,7 @@
-/// Environment configuration for PROMPT Genie
+/// Environment configuration for genie help
 /// Switch between environments by changing the active config.
 class EnvConfig {
-  static const String appName = 'PROMPT Genie';
+  static const String appName = 'genie help';
   static const String appVersion = '1.0.0';
 
   // Active environment

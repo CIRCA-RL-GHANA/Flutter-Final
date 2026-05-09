@@ -2,13 +2,13 @@ class AppStrings {
   AppStrings._();
 
   // App
-  static const String appName = 'PROMPT Genie';
+  static const String appName = 'genie help';
   static const String appTagline = 'Your All-in-One Financial & Social Hub';
 
   // Splash Screen
-  static const String splashTitle = 'PROMPT';
-  static const String splashSubtitle = 'Genie';
-  static const String splashLoading = 'PROMPT Genie loading, please wait';
+  static const String splashTitle = 'genie';
+  static const String splashSubtitle = 'help';
+  static const String splashLoading = 'genie help loading, please wait';
 
   // Welcome Screen
   static const String welcomeTagline = 'Your All-in-One Financial & Social Hub';

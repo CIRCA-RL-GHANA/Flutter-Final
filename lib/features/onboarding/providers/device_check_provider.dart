@@ -58,7 +58,7 @@ class DeviceCheckProvider extends ChangeNotifier {
       if (!_isOsCompatible) {
         _overallStatus = DeviceCheckStatus.failed;
         _errorType = DeviceCheckError.incompatibleOs;
-        _errorMessage = 'Your device OS needs to be updated to use PROMPT Genie.';
+        _errorMessage = 'Your device OS needs to be updated to use genie help.';
       } else if (!_hasEnoughStorage) {
         _overallStatus = DeviceCheckStatus.failed;
         _errorType = DeviceCheckError.insufficientStorage;

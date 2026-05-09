@@ -306,7 +306,7 @@ class _TosBody extends StatelessWidget {
               ),
               const SizedBox(height: 6),
               Text(
-                'PROMPT Genie Ltd. · ${tos.effectiveDate}',
+                'genie help Ltd. · ${tos.effectiveDate}',
                 style: const TextStyle(fontSize: 12, color: Colors.grey),
               ),
               const Divider(height: 24),

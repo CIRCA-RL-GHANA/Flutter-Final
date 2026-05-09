@@ -1,6 +1,6 @@
 {
-  "name": "PROMPT Genie",
-  "short_name": "PromptGenie",
+  "name": "genie help",
+  "short_name": "geniehelp",
   "description": "Your All-in-One Financial & Social Hub — manage finances, connect socially, and unlock intelligent insights.",
   "start_url": "/?utm_source=pwa",
   "scope": "/",
@@ -97,7 +97,7 @@
       "src": "icons/icon_512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "label": "PROMPT Genie Home Screen"
+      "label": "genie help Home Screen"
     }
   ],
   "shortcuts": [

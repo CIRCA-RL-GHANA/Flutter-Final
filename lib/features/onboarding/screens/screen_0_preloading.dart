@@ -51,7 +51,7 @@ class _PreLoadingScreenState extends State<PreLoadingScreen> {
           icon: Icons.storage_rounded,
           title: 'Not Enough Storage',
           message: deviceCheck.errorMessage ??
-              'You need at least 100MB of free storage to use PROMPT Genie.',
+              'You need at least 100MB of free storage to use genie help.',
           actionLabel: 'Open Storage Settings',
           onAction: () {
             // In production: Open device storage settings
@@ -66,7 +66,7 @@ class _PreLoadingScreenState extends State<PreLoadingScreen> {
           icon: Icons.system_update_rounded,
           title: 'OS Update Required',
           message: deviceCheck.errorMessage ??
-              'PROMPT Genie requires iOS 13+ or Android 8+. Please update your device.',
+              'genie help requires iOS 13+ or Android 8+. Please update your device.',
           actionLabel: 'Check for Updates',
           onAction: () {
             // In production: Open system update settings
@@ -145,7 +145,7 @@ class _PreLoadingScreenState extends State<PreLoadingScreen> {
                     ),
                     const SizedBox(height: 24),
                     Text(
-                      'Preparing PROMPT Genie...',
+                      'Preparing genie help...',
                       style: TextStyle(
                         color: Colors.white.withOpacity(0.7),
                         fontSize: 14,

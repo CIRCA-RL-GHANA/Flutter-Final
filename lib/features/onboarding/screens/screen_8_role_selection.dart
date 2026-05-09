@@ -64,7 +64,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
             children: [
               OnboardingHeader(
                 title: AppStrings.selectRole,
-                subtitle: 'How will you use PROMPT Genie?',
+                subtitle: 'How will you use genie help?',
                 currentStep: 6,
                 totalSteps: 8,
                 onBack: () => Navigator.pop(context),
