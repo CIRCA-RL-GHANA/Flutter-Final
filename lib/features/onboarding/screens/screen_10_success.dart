@@ -1,13 +1,30 @@
-import 'dart:math';
+﻿import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/constants/app_strings.dart';
 import '../../../core/utils/responsive.dart';
 import '../providers/onboarding_provider.dart';
 import '../widgets/buttons.dart';
+
+// OS palette — mirrors splash / welcome
+const Color _kBg        = Color(0xFF08080F);
+const Color _kSurface   = Color(0xFF0E0E1A);
+const Color _kBorder    = Color(0xFF1C1C2E);
+const Color _kAccent    = Color(0xFF4361EE);
+const Color _kAccentDim = Color(0xFF1E2A6E);
+const Color _kText      = Color(0xFFE8E8F0);
+const Color _kTextDim   = Color(0xFF6B6B88);
+
+// Confetti in OS accent palette
+const List<Color> _kConfettiColors = [
+  Color(0xFF4361EE),
+  Color(0xFF10B981),
+  Color(0xFF6B6B88),
+  Color(0xFF4361EE),
+  Color(0xFF1E2A6E),
+  Color(0xFFE8E8F0),
+];
 
 /// Screen 10: Sign Up Success (Celebration)
 /// Achievement recognition with clear next steps
@@ -45,7 +62,7 @@ class _SuccessScreenState extends State<SuccessScreen>
       y: _random.nextDouble() * -1.0,
       size: _random.nextDouble() * 8 + 4,
       speed: _random.nextDouble() * 2 + 1,
-      color: AppColors.confettiColors[_random.nextInt(AppColors.confettiColors.length)],
+      color: _kConfettiColors[_random.nextInt(_kConfettiColors.length)],
       rotation: _random.nextDouble() * 2 * pi,
     ));
 
@@ -64,7 +81,7 @@ class _SuccessScreenState extends State<SuccessScreen>
       vsync: this,
     )..repeat();
 
-    // Checkmark scale: 0 → 1.2 → 1.0
+    // Checkmark scale: 0 â†’ 1.2 â†’ 1.0
     _checkmarkScale = TweenSequence<double>([
       TweenSequenceItem(
         tween: Tween(begin: 0.0, end: 1.2)
@@ -163,10 +180,10 @@ class _SuccessScreenState extends State<SuccessScreen>
                           height: 100,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: AppColors.success,
+                            color: const Color(0xFF10B981),
                             boxShadow: [
                               BoxShadow(
-                                color: AppColors.success.withOpacity(0.4),
+                                color: const Color(0xFF10B981).withOpacity(0.4),
                                 blurRadius: 24,
                                 spreadRadius: 4,
                               ),
@@ -175,7 +192,7 @@ class _SuccessScreenState extends State<SuccessScreen>
                           child: const Icon(
                             Icons.check,
                             size: 48,
-                            color: Colors.white,
+                            color: const Color(0xFF0E0E1A),
                           ),
                         ),
                       );
@@ -197,7 +214,7 @@ class _SuccessScreenState extends State<SuccessScreen>
                               style: const TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.white,
+                                color: const Color(0xFF0E0E1A),
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -206,7 +223,7 @@ class _SuccessScreenState extends State<SuccessScreen>
                               AppStrings.accountReady,
                               style: TextStyle(
                                 fontSize: 16,
-                                color: Colors.white.withOpacity(0.7),
+                                color: const Color(0xFF0E0E1A).withOpacity(0.7),
                               ),
                             ),
                           ],
@@ -234,22 +251,22 @@ class _SuccessScreenState extends State<SuccessScreen>
                             setState(() => _currentPage = index),
                         children: const [
                           _FeatureCard(
-                            emoji: '🎯',
+                            emoji: 'ðŸŽ¯',
                             title: 'Your PROMPT Screen',
                             subtitle: 'Everything you need, personalized',
                           ),
                           _FeatureCard(
-                            emoji: '💸',
+                            emoji: 'ðŸ’¸',
                             title: 'GO PAGE Financial Hub',
                             subtitle: 'Manage QPoints and transactions',
                           ),
                           _FeatureCard(
-                            emoji: '🛍️',
+                            emoji: 'ðŸ›ï¸',
                             title: 'MARKET Shopping',
                             subtitle: 'Shop from local businesses',
                           ),
                           _FeatureCard(
-                            emoji: '💬',
+                            emoji: 'ðŸ’¬',
                             title: 'qualChat Connect',
                             subtitle: 'Message anyone in the ecosystem',
                           ),
@@ -270,8 +287,8 @@ class _SuccessScreenState extends State<SuccessScreen>
                         height: 8,
                         decoration: BoxDecoration(
                           color: _currentPage == index
-                              ? AppColors.accent
-                              : Colors.white24,
+                              ? const Color(0xFF4361EE)
+                              : const Color(0xFF1C1C2E),
                           borderRadius: BorderRadius.circular(4),
                         ),
                       );
@@ -316,7 +333,7 @@ class _SuccessScreenState extends State<SuccessScreen>
                           // Tertiary: Skip to Dashboard
                           SecondaryButton(
                             text: AppStrings.skipToDashboard,
-                            color: Colors.white60,
+                            color: const Color(0xFF6B6B88),
                             onPressed: () {
                               Navigator.of(context)
                                   .pushReplacementNamed(AppRoutes.genieHome);
@@ -336,7 +353,7 @@ class _SuccessScreenState extends State<SuccessScreen>
                       AppStrings.needHelp,
                       style: TextStyle(
                         fontSize: 12,
-                        color: Colors.white.withOpacity(0.4),
+                        color: const Color(0xFF0E0E1A).withOpacity(0.4),
                       ),
                     ),
                   ),
@@ -369,9 +386,9 @@ class _FeatureCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 6),
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.white12),
+        color: const Color(0xFF0E0E1A).withOpacity(0.1),
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: const Color(0xFF1C1C2E)),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -383,7 +400,7 @@ class _FeatureCard extends StatelessWidget {
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: Colors.white,
+              color: const Color(0xFF0E0E1A),
             ),
             textAlign: TextAlign.center,
           ),
@@ -392,7 +409,7 @@ class _FeatureCard extends StatelessWidget {
             subtitle,
             style: TextStyle(
               fontSize: 14,
-              color: Colors.white.withOpacity(0.6),
+              color: const Color(0xFF0E0E1A).withOpacity(0.6),
             ),
             textAlign: TextAlign.center,
           ),

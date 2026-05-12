@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/constants/app_dimensions.dart';
 
-/// Onboarding screen header with back button, title, subtitle, and progress
+// OS palette — shared with splash / welcome
+const Color _kBg        = Color(0xFF08080F);
+const Color _kSurface   = Color(0xFF0E0E1A);
+const Color _kBorder    = Color(0xFF1C1C2E);
+const Color _kAccent    = Color(0xFF4361EE);
+const Color _kText      = Color(0xFFE8E8F0);
+const Color _kTextDim   = Color(0xFF6B6B88);
+const Color _kTextMuted = Color(0xFF3A3A52);
+
+/// OS-aesthetic onboarding header.
+///
+/// Renders:
+///   [←]              03 / 08
+///   ──────────────[fill]─────
+///   Title text
+///   Optional subtitle
 class OnboardingHeader extends StatelessWidget {
   final String title;
   final String? subtitle;
@@ -23,91 +36,101 @@ class OnboardingHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final hasStep = currentStep != null && totalSteps != null;
+    final stepStr = hasStep
+        ? '${currentStep.toString().padLeft(2, '0')} / ${totalSteps.toString().padLeft(2, '0')}'
+        : null;
+
     return Padding(
-      padding: const EdgeInsets.fromLTRB(
-        AppDimensions.paddingScreen,
-        16,
-        AppDimensions.paddingScreen,
-        24,
-      ),
+      padding: const EdgeInsets.fromLTRB(24, 16, 24, 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Navigation row
+          // ── Nav row ───────────────────────────────────────────────────
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              // Back button — icon only, no container
               if (onBack != null)
                 GestureDetector(
                   onTap: onBack,
-                  child: Container(
-                    width: 44,
-                    height: 44,
-                    decoration: BoxDecoration(
-                      color: AppColors.inputFill,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: const Icon(
+                  behavior: HitTestBehavior.opaque,
+                  child: const Padding(
+                    padding: EdgeInsets.only(right: 8, top: 4, bottom: 4),
+                    child: Icon(
                       Icons.arrow_back_ios_new,
-                      size: 18,
-                      color: AppColors.textPrimary,
+                      size: 16,
+                      color: _kTextDim,
                     ),
                   ),
                 )
               else
-                const SizedBox(width: 44),
-              if (currentStep != null && totalSteps != null)
-                Text(
-                  'Step $currentStep of $totalSteps',
-                  style: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.textTertiary,
+                const SizedBox(width: 24),
+
+              const Spacer(),
+
+              // Step counter
+              if (stepStr != null)
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: _kSurface,
+                    border: Border.all(color: _kBorder),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Text(
+                    stepStr,
+                    style: const TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w600,
+                      color: _kTextDim,
+                      letterSpacing: 1.2,
+                      fontFeatures: [FontFeature.tabularFigures()],
+                    ),
                   ),
                 ),
-              if (trailing != null)
-                trailing!
-              else
-                const SizedBox(width: 44),
+
+              if (trailing != null) ...[
+                const SizedBox(width: 8),
+                trailing!,
+              ],
             ],
           ),
 
-          const SizedBox(height: 24),
+          const SizedBox(height: 16),
 
-          // Progress indicator
-          if (currentStep != null && totalSteps != null) ...[
+          // ── Thin progress bar ─────────────────────────────────────────
+          if (hasStep) ...[
             ClipRRect(
-              borderRadius: BorderRadius.circular(4),
+              borderRadius: BorderRadius.circular(2),
               child: LinearProgressIndicator(
                 value: currentStep! / totalSteps!,
-                backgroundColor: AppColors.inputFill,
-                valueColor: const AlwaysStoppedAnimation<Color>(
-                    AppColors.primaryLight),
-                minHeight: 4,
+                backgroundColor: _kBorder,
+                valueColor: const AlwaysStoppedAnimation<Color>(_kAccent),
+                minHeight: 2,
               ),
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 20),
           ],
 
-          // Title
+          // ── Title ─────────────────────────────────────────────────────
           Text(
             title,
             style: const TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: AppColors.textPrimary,
-              height: 1.2,
+              fontSize: 20,
+              fontWeight: FontWeight.w700,
+              color: _kText,
+              height: 1.25,
             ),
           ),
 
-          // Subtitle
+          // ── Subtitle ──────────────────────────────────────────────────
           if (subtitle != null) ...[
-            const SizedBox(height: 8),
+            const SizedBox(height: 6),
             Text(
               subtitle!,
               style: const TextStyle(
-                fontSize: 14,
-                color: AppColors.textSecondary,
+                fontSize: 13,
+                color: _kTextDim,
                 height: 1.5,
               ),
             ),

@@ -50,9 +50,9 @@ class PromptGenieApp extends StatelessWidget {
           return MaterialApp(
             title: 'genie help',
             debugShowCheckedModeBanner: false,
-            theme: AppTheme.lightTheme,
+            theme: AppTheme.darkTheme,
             darkTheme: AppTheme.darkTheme,
-            themeMode: ThemeMode.light,
+            themeMode: ThemeMode.dark,
             initialRoute: AppRoutes.preLoading,
             onGenerateRoute: AppRoutes.onGenerateRoute,
             builder: (context, child) {

@@ -1,14 +1,22 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/constants/app_strings.dart';
 import '../../../core/utils/responsive.dart';
 import '../providers/onboarding_provider.dart';
 import '../widgets/buttons.dart';
 import '../widgets/progress_indicators.dart';
 
+
+// OS palette — mirrors splash / welcome
+const Color _kBg        = Color(0xFF08080F);
+const Color _kSurface   = Color(0xFF0E0E1A);
+const Color _kBorder    = Color(0xFF1C1C2E);
+const Color _kAccent    = Color(0xFF4361EE);
+const Color _kAccentDim = Color(0xFF1E2A6E);
+const Color _kText      = Color(0xFFE8E8F0);
+const Color _kTextDim   = Color(0xFF6B6B88);
+const Color _kTextMuted = Color(0xFF3A3A52);
 /// Screen 11: Interactive Tutorial (Optional)
 /// Learn by doing, not by reading
 class TutorialScreen extends StatefulWidget {
@@ -28,35 +36,35 @@ class _TutorialScreenState extends State<TutorialScreen> {
       title: 'Your PROMPT Screen',
       description: 'This is your personalized dashboard. Tap any widget to interact with it.',
       icon: Icons.dashboard_customize_outlined,
-      color: AppColors.primaryLight,
+      color: const Color(0xFF4361EE),
       instruction: 'Tap to explore widgets',
     ),
     _TutorialStep(
       title: 'Widget Interactions',
       description: 'Swipe left/right to navigate. Long-press to customize. Tap to open.',
       icon: Icons.touch_app_outlined,
-      color: AppColors.roleShop,
+      color: const Color(0xFF10B981),
       instruction: 'Try swiping, tapping, and long-pressing',
     ),
     _TutorialStep(
       title: 'Your Role Features',
       description: 'Based on your selected role, you have unique features and widgets.',
       icon: Icons.person_outline,
-      color: AppColors.roleBuyer,
+      color: const Color(0xFF4361EE),
       instruction: 'Explore your role-specific tools',
     ),
     _TutorialStep(
       title: 'Quick Actions',
       description: 'The most common tasks are just one tap away from your home screen.',
       icon: Icons.flash_on_outlined,
-      color: AppColors.roleDelivery,
+      color: const Color(0xFFF59E0B),
       instruction: 'Try the quick action buttons',
     ),
     _TutorialStep(
       title: 'Get Help Anytime',
       description: 'Tap the help icon anywhere in the app to get instant assistance.',
       icon: Icons.help_outline,
-      color: AppColors.info,
+      color: const Color(0xFF4361EE),
       instruction: 'Look for the help icon',
     ),
   ];
@@ -86,7 +94,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFF08080F),
       body: SafeArea(
         child: Responsive.constrained(
           child: Column(
@@ -102,7 +110,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: AppColors.textPrimary,
+                        color: const Color(0xFFE8E8F0),
                       ),
                     ),
                     TextButton(
@@ -111,7 +119,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
                         'Skip',
                         style: TextStyle(
                           fontSize: 14,
-                          color: AppColors.textTertiary,
+                          color: const Color(0xFF3A3A52),
                         ),
                       ),
                     ),
@@ -153,7 +161,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
                       style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
-                        color: AppColors.textTertiary,
+                        color: const Color(0xFF3A3A52),
                       ),
                     ),
                     const Spacer(),
@@ -253,7 +261,7 @@ class _TutorialStepView extends StatelessWidget {
             style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: AppColors.textPrimary,
+              color: const Color(0xFFE8E8F0),
             ),
             textAlign: TextAlign.center,
           ),
@@ -265,7 +273,7 @@ class _TutorialStepView extends StatelessWidget {
             step.description,
             style: const TextStyle(
               fontSize: 16,
-              color: AppColors.textSecondary,
+              color: const Color(0xFF6B6B88),
               height: 1.5,
             ),
             textAlign: TextAlign.center,

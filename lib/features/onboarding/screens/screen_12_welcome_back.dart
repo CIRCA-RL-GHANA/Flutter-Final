@@ -1,13 +1,21 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/constants/app_strings.dart';
 import '../../../core/utils/responsive.dart';
 import '../providers/onboarding_provider.dart';
 import '../widgets/buttons.dart';
 
+
+// OS palette — mirrors splash / welcome
+const Color _kBg        = Color(0xFF08080F);
+const Color _kSurface   = Color(0xFF0E0E1A);
+const Color _kBorder    = Color(0xFF1C1C2E);
+const Color _kAccent    = Color(0xFF4361EE);
+const Color _kAccentDim = Color(0xFF1E2A6E);
+const Color _kText      = Color(0xFFE8E8F0);
+const Color _kTextDim   = Color(0xFF6B6B88);
+const Color _kTextMuted = Color(0xFF3A3A52);
 /// Screen 12: Existing User Welcome Back
 /// Warm re-engagement with context awareness
 class WelcomeBackScreen extends StatefulWidget {
@@ -42,7 +50,7 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
     if (lastLogin == null) {
       return const _WelcomeContext(
         greeting: AppStrings.welcomeBack,
-        emoji: '👋',
+        emoji: 'ðŸ‘‹',
         showWhatsNew: false,
         daysSince: 0,
       );
@@ -53,28 +61,28 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
     if (daysSince < 7) {
       return _WelcomeContext(
         greeting: AppStrings.welcomeBack,
-        emoji: '👋',
+        emoji: 'ðŸ‘‹',
         showWhatsNew: false,
         daysSince: daysSince,
       );
     } else if (daysSince < 30) {
       return _WelcomeContext(
         greeting: AppStrings.missedYou,
-        emoji: '💙',
+        emoji: 'ðŸ’™',
         showWhatsNew: false,
         daysSince: daysSince,
       );
     } else if (daysSince < 90) {
       return _WelcomeContext(
         greeting: AppStrings.whatsNew,
-        emoji: '🎉',
+        emoji: 'ðŸŽ‰',
         showWhatsNew: true,
         daysSince: daysSince,
       );
     } else {
       return _WelcomeContext(
         greeting: AppStrings.refreshAccount,
-        emoji: '🔄',
+        emoji: 'ðŸ”„',
         showWhatsNew: true,
         daysSince: daysSince,
       );
@@ -91,9 +99,7 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
 
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: AppColors.splashGradient,
-        ),
+        color: const Color(0xFF08080F),
         child: SafeArea(
           child: Responsive.constrained(
             child: Column(
@@ -101,13 +107,13 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
                   builder: (context, ai, _) {
                     if (ai.insights.isEmpty) return const SizedBox.shrink();
                     return Container(
-                      color: AppColors.primary.withOpacity(0.07),
+                      color: const Color(0xFF4361EE).withOpacity(0.07),
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                       child: Row(children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: AppColors.primary),
+                        const Icon(Icons.auto_awesome, size: 14, color: const Color(0xFF4361EE)),
                         const SizedBox(width: 8),
                         Expanded(child: Text('AI: ${ai.insights.first['title'] ?? ''}',
-                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: AppColors.primary),
+                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: const Color(0xFF4361EE)),
                           maxLines: 1, overflow: TextOverflow.ellipsis)),
                       ]),
                     );
@@ -123,13 +129,13 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
                         width: 44,
                         height: 44,
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.1),
+                          color: const Color(0xFF0E0E1A).withOpacity(0.1),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: const Icon(
                           Icons.arrow_back_ios_new,
                           size: 18,
-                          color: Colors.white,
+                          color: const Color(0xFF0E0E1A),
                         ),
                       ),
                     ),
@@ -168,7 +174,7 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
                             style: const TextStyle(
                               fontSize: 28,
                               fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                              color: const Color(0xFF0E0E1A),
                             ),
                             textAlign: TextAlign.center,
                           ),
@@ -185,7 +191,7 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
                             name,
                             style: TextStyle(
                               fontSize: 20,
-                              color: AppColors.accent.withOpacity(0.9),
+                              color: const Color(0xFF4361EE).withOpacity(0.9),
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -203,9 +209,9 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
                               width: double.infinity,
                               padding: const EdgeInsets.all(20),
                               decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(20),
-                                border: Border.all(color: Colors.white12),
+                                color: const Color(0xFF0E0E1A).withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(6),
+                                border: Border.all(color: const Color(0xFF1C1C2E)),
                               ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -215,7 +221,7 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
                                     style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.white,
+                                      color: const Color(0xFF0E0E1A),
                                     ),
                                   ),
                                   const SizedBox(height: 12),
@@ -248,9 +254,9 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
                             width: double.infinity,
                             padding: const EdgeInsets.all(20),
                             decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.08),
-                              borderRadius: BorderRadius.circular(20),
-                              border: Border.all(color: Colors.white10),
+                              color: const Color(0xFF0E0E1A).withOpacity(0.08),
+                              borderRadius: BorderRadius.circular(6),
+                              border: Border.all(color: const Color(0xFF0E0E1A)10),
                             ),
                             child: Column(
                               children: [
@@ -259,7 +265,7 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600,
-                                    color: Colors.white,
+                                    color: const Color(0xFF0E0E1A),
                                   ),
                                 ),
                                 const SizedBox(height: 16),
@@ -380,17 +386,17 @@ class _NewFeatureItem extends StatelessWidget {
             width: 32,
             height: 32,
             decoration: BoxDecoration(
-              color: AppColors.accent.withOpacity(0.2),
+              color: const Color(0xFF4361EE).withOpacity(0.2),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(icon, size: 16, color: AppColors.accent),
+            child: Icon(icon, size: 16, color: const Color(0xFF4361EE)),
           ),
           const SizedBox(width: 12),
           Text(
             text,
             style: TextStyle(
               fontSize: 14,
-              color: Colors.white.withOpacity(0.8),
+              color: const Color(0xFF0E0E1A).withOpacity(0.8),
             ),
           ),
         ],
@@ -414,7 +420,7 @@ class _StatItem extends StatelessWidget {
           style: const TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
-            color: AppColors.accent,
+            color: const Color(0xFF4361EE),
           ),
         ),
         const SizedBox(height: 4),
@@ -422,7 +428,7 @@ class _StatItem extends StatelessWidget {
           label,
           style: TextStyle(
             fontSize: 12,
-            color: Colors.white.withOpacity(0.6),
+            color: const Color(0xFF0E0E1A).withOpacity(0.6),
           ),
         ),
       ],
@@ -448,19 +454,19 @@ class _QuickActionBtn extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 16),
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.08),
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: Colors.white12),
+          color: const Color(0xFF0E0E1A).withOpacity(0.08),
+          borderRadius: BorderRadius.circular(6),
+          border: Border.all(color: const Color(0xFF1C1C2E)),
         ),
         child: Column(
           children: [
-            Icon(icon, size: 28, color: Colors.white70),
+            Icon(icon, size: 28, color: const Color(0xFF6B6B88)),
             const SizedBox(height: 8),
             Text(
               label,
               style: TextStyle(
                 fontSize: 12,
-                color: Colors.white.withOpacity(0.7),
+                color: const Color(0xFF0E0E1A).withOpacity(0.7),
                 height: 1.3,
               ),
               textAlign: TextAlign.center,

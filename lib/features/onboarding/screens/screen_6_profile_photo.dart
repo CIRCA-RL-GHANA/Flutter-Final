@@ -1,8 +1,6 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/constants/app_strings.dart';
 import '../../../core/utils/responsive.dart';
 import '../../../core/utils/helpers.dart';
@@ -12,6 +10,16 @@ import '../widgets/buttons.dart';
 import '../widgets/onboarding_header.dart';
 import '../widgets/progress_indicators.dart';
 
+
+// OS palette — mirrors splash / welcome
+const Color _kBg        = Color(0xFF08080F);
+const Color _kSurface   = Color(0xFF0E0E1A);
+const Color _kBorder    = Color(0xFF1C1C2E);
+const Color _kAccent    = Color(0xFF4361EE);
+const Color _kAccentDim = Color(0xFF1E2A6E);
+const Color _kText      = Color(0xFFE8E8F0);
+const Color _kTextDim   = Color(0xFF6B6B88);
+const Color _kTextMuted = Color(0xFF3A3A52);
 /// Screen 6: Profile Photo and Username
 /// Identity creation with social validation
 class ProfilePhotoScreen extends StatefulWidget {
@@ -66,8 +74,8 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
       builder: (context) => Container(
         padding: const EdgeInsets.all(24),
         decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          color: const Color(0xFF0E0E1A),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -76,7 +84,7 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
               width: 40,
               height: 4,
               decoration: BoxDecoration(
-                color: Colors.grey[300],
+                color: const Color(0xFF1C1C2E),
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
@@ -86,14 +94,14 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: AppColors.textPrimary,
+                color: const Color(0xFFE8E8F0),
               ),
             ),
             const SizedBox(height: 24),
             _PhotoOptionTile(
               icon: Icons.camera_alt_outlined,
               label: AppStrings.takePhoto,
-              color: AppColors.primaryLight,
+              color: const Color(0xFF4361EE),
               onTap: () {
                 Navigator.pop(context);
                 _pickPhoto('camera');
@@ -102,7 +110,7 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
             _PhotoOptionTile(
               icon: Icons.photo_library_outlined,
               label: AppStrings.chooseFromGallery,
-              color: AppColors.roleShop,
+              color: const Color(0xFF10B981),
               onTap: () {
                 Navigator.pop(context);
                 _pickPhoto('gallery');
@@ -111,7 +119,7 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
             _PhotoOptionTile(
               icon: Icons.auto_awesome,
               label: AppStrings.generateAiAvatar,
-              color: AppColors.roleBuyer,
+              color: const Color(0xFF4361EE),
               onTap: () {
                 Navigator.pop(context);
                 _generateAiAvatar();
@@ -120,7 +128,7 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
             _PhotoOptionTile(
               icon: Icons.skip_next_outlined,
               label: AppStrings.skipForNow,
-              color: AppColors.textTertiary,
+              color: const Color(0xFF3A3A52),
               onTap: () => Navigator.pop(context),
             ),
             const SizedBox(height: 16),
@@ -160,7 +168,7 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFF08080F),
       body: SafeArea(
         child: Responsive.constrained(
           child: Column(
@@ -195,11 +203,11 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                                       height: 120,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
-                                        color: AppColors.inputFill,
+                                        color: const Color(0xFF0E0E1A),
                                         border: Border.all(
                                           color: profile.hasPhoto
-                                              ? AppColors.primaryLight
-                                              : AppColors.inputBorder,
+                                              ? const Color(0xFF4361EE)
+                                              : const Color(0xFF1C1C2E),
                                           width: 3,
                                         ),
                                         image: profile.hasPhoto
@@ -214,7 +222,7 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                                           ? const Icon(
                                               Icons.person,
                                               size: 48,
-                                              color: AppColors.textTertiary,
+                                              color: const Color(0xFF3A3A52),
                                             )
                                           : null,
                                     ),
@@ -222,12 +230,12 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                                       width: 36,
                                       height: 36,
                                       decoration: const BoxDecoration(
-                                        color: AppColors.primaryLight,
+                                        color: const Color(0xFF4361EE),
                                         shape: BoxShape.circle,
                                       ),
                                       child: const Icon(
                                         Icons.add,
-                                        color: Colors.white,
+                                        color: const Color(0xFF0E0E1A),
                                         size: 20,
                                       ),
                                     ),
@@ -241,7 +249,7 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                                   style: const TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w500,
-                                    color: AppColors.primaryLight,
+                                    color: const Color(0xFF4361EE),
                                   ),
                                 ),
                               ],
@@ -258,7 +266,7 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
-                                color: AppColors.textPrimary,
+                                color: const Color(0xFFE8E8F0),
                               ),
                             ),
                           ),
@@ -271,15 +279,15 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                               prefixStyle: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
-                                color: AppColors.textSecondary,
+                                color: const Color(0xFF6B6B88),
                               ),
                               hintText: 'Choose a username',
                               suffixIcon: _buildUsernameSuffix(profile),
                               border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16),
+                                borderRadius: BorderRadius.circular(6),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16),
+                                borderRadius: BorderRadius.circular(6),
                                 borderSide: BorderSide(
                                   color: _getUsernameBorderColor(
                                       profile.usernameStatus),
@@ -322,7 +330,7 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                                 'Suggestions:',
                                 style: TextStyle(
                                   fontSize: 12,
-                                  color: AppColors.textTertiary,
+                                  color: const Color(0xFF3A3A52),
                                 ),
                               ),
                             ),
@@ -343,10 +351,10 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                                     ),
                                     decoration: BoxDecoration(
                                       color:
-                                          AppColors.primaryLight.withOpacity(0.1),
-                                      borderRadius: BorderRadius.circular(20),
+                                          const Color(0xFF4361EE).withOpacity(0.1),
+                                      borderRadius: BorderRadius.circular(6),
                                       border: Border.all(
-                                        color: AppColors.primaryLight
+                                        color: const Color(0xFF4361EE)
                                             .withOpacity(0.3),
                                       ),
                                     ),
@@ -354,7 +362,7 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                                       '@$suggestion',
                                       style: const TextStyle(
                                         fontSize: 13,
-                                        color: AppColors.primaryLight,
+                                        color: const Color(0xFF4361EE),
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ),
@@ -370,8 +378,8 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                           Container(
                             padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
-                              color: AppColors.inputFill,
-                              borderRadius: BorderRadius.circular(16),
+                              color: const Color(0xFF0E0E1A),
+                              borderRadius: BorderRadius.circular(6),
                             ),
                             child: Row(
                               children: [
@@ -391,7 +399,7 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                                         style: const TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600,
-                                          color: AppColors.textPrimary,
+                                          color: const Color(0xFFE8E8F0),
                                         ),
                                       ),
                                       const SizedBox(height: 4),
@@ -399,7 +407,7 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                                         AppStrings.completeProfile,
                                         style: TextStyle(
                                           fontSize: 12,
-                                          color: AppColors.textTertiary,
+                                          color: const Color(0xFF3A3A52),
                                         ),
                                       ),
                                       const SizedBox(height: 8),
@@ -476,17 +484,17 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
       case UsernameStatus.available:
         return const Padding(
           padding: EdgeInsets.all(16),
-          child: Icon(Icons.check_circle, color: AppColors.success, size: 20),
+          child: Icon(Icons.check_circle, color: const Color(0xFF10B981), size: 20),
         );
       case UsernameStatus.taken:
         return const Padding(
           padding: EdgeInsets.all(16),
-          child: Icon(Icons.cancel, color: AppColors.error, size: 20),
+          child: Icon(Icons.cancel, color: const Color(0xFFEF4444), size: 20),
         );
       case UsernameStatus.invalid:
         return const Padding(
           padding: EdgeInsets.all(16),
-          child: Icon(Icons.warning, color: AppColors.warning, size: 20),
+          child: Icon(Icons.warning, color: const Color(0xFFF59E0B), size: 20),
         );
       default:
         return null;
@@ -496,28 +504,28 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
   Color _getUsernameBorderColor(UsernameStatus status) {
     switch (status) {
       case UsernameStatus.available:
-        return AppColors.success;
+        return const Color(0xFF10B981);
       case UsernameStatus.taken:
-        return AppColors.error;
+        return const Color(0xFFEF4444);
       case UsernameStatus.invalid:
-        return AppColors.warning;
+        return const Color(0xFFF59E0B);
       default:
-        return AppColors.inputBorder;
+        return const Color(0xFF1C1C2E);
     }
   }
 
   Color _getUsernameColor(UsernameStatus status) {
     switch (status) {
       case UsernameStatus.available:
-        return AppColors.success;
+        return const Color(0xFF10B981);
       case UsernameStatus.taken:
-        return AppColors.error;
+        return const Color(0xFFEF4444);
       case UsernameStatus.invalid:
-        return AppColors.warning;
+        return const Color(0xFFF59E0B);
       case UsernameStatus.checking:
-        return AppColors.textTertiary;
+        return const Color(0xFF3A3A52);
       default:
-        return AppColors.textTertiary;
+        return const Color(0xFF3A3A52);
     }
   }
 
@@ -611,7 +619,7 @@ class _PointsRow extends StatelessWidget {
           Icon(
             points > 0 ? Icons.check_circle : Icons.circle_outlined,
             size: 12,
-            color: points > 0 ? AppColors.success : AppColors.textTertiary,
+            color: points > 0 ? const Color(0xFF10B981) : const Color(0xFF3A3A52),
           ),
           const SizedBox(width: 6),
           Text(
@@ -619,8 +627,8 @@ class _PointsRow extends StatelessWidget {
             style: TextStyle(
               fontSize: 11,
               color: points > 0
-                  ? AppColors.textSecondary
-                  : AppColors.textTertiary,
+                  ? const Color(0xFF6B6B88)
+                  : const Color(0xFF3A3A52),
             ),
           ),
         ],

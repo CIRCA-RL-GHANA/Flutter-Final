@@ -1,8 +1,6 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/constants/app_strings.dart';
 import '../../../core/utils/responsive.dart';
 import '../../../core/utils/helpers.dart';
@@ -12,6 +10,16 @@ import '../providers/onboarding_provider.dart';
 import '../widgets/buttons.dart';
 import '../widgets/onboarding_header.dart';
 
+
+// OS palette — mirrors splash / welcome
+const Color _kBg        = Color(0xFF08080F);
+const Color _kSurface   = Color(0xFF0E0E1A);
+const Color _kBorder    = Color(0xFF1C1C2E);
+const Color _kAccent    = Color(0xFF4361EE);
+const Color _kAccentDim = Color(0xFF1E2A6E);
+const Color _kText      = Color(0xFFE8E8F0);
+const Color _kTextDim   = Color(0xFF6B6B88);
+const Color _kTextMuted = Color(0xFF3A3A52);
 /// Screen 7: Biometric Setup (Adaptive)
 /// Security with convenience, not coercion
 class BiometricSetupScreen extends StatefulWidget {
@@ -116,7 +124,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFF08080F),
       body: SafeArea(
         child: Responsive.constrained(
           child: Column(
@@ -166,12 +174,12 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
                 height: 140,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: AppColors.primaryLight.withOpacity(
+                  color: const Color(0xFF4361EE).withOpacity(
                     0.08 + 0.05 * _animController.value,
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.primaryLight.withOpacity(
+                      color: const Color(0xFF4361EE).withOpacity(
                         0.1 + 0.1 * _animController.value,
                       ),
                       blurRadius: 20 + 10 * _animController.value,
@@ -182,7 +190,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
                 child: Icon(
                   _getBiometricIcon(biometric.biometricType),
                   size: 60,
-                  color: AppColors.primaryLight,
+                  color: const Color(0xFF4361EE),
                 ),
               );
             },
@@ -210,8 +218,8 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color: AppColors.inputFill,
-              borderRadius: BorderRadius.circular(16),
+              color: const Color(0xFF0E0E1A),
+              borderRadius: BorderRadius.circular(6),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -221,7 +229,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
-                    color: AppColors.textPrimary,
+                    color: const Color(0xFFE8E8F0),
                   ),
                 ),
                 Switch.adaptive(
@@ -229,7 +237,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
                   onChanged: (value) {
                     biometric.setBiometricEnabled(value);
                   },
-                  activeColor: AppColors.primaryLight,
+                  activeColor: const Color(0xFF4361EE),
                 ),
               ],
             ),
@@ -244,11 +252,11 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
             child: Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(6),
                 border: Border.all(
                   color: biometric.consentGiven
-                      ? AppColors.primaryLight
-                      : AppColors.inputBorder,
+                      ? const Color(0xFF4361EE)
+                      : const Color(0xFF1C1C2E),
                 ),
               ),
               child: Row(
@@ -258,8 +266,8 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
                         ? Icons.check_box
                         : Icons.check_box_outline_blank,
                     color: biometric.consentGiven
-                        ? AppColors.primaryLight
-                        : AppColors.textTertiary,
+                        ? const Color(0xFF4361EE)
+                        : const Color(0xFF3A3A52),
                     size: 24,
                   ),
                   const SizedBox(width: 12),
@@ -268,7 +276,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
                       AppStrings.biometricConsent,
                       style: const TextStyle(
                         fontSize: 13,
-                        color: AppColors.textSecondary,
+                        color: const Color(0xFF6B6B88),
                       ),
                     ),
                   ),
@@ -284,7 +292,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
             AppStrings.changeAnytime,
             style: const TextStyle(
               fontSize: 12,
-              color: AppColors.textTertiary,
+              color: const Color(0xFF3A3A52),
             ),
           ),
 
@@ -340,12 +348,12 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
             height: 100,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: AppColors.primaryLight.withOpacity(0.1),
+              color: const Color(0xFF4361EE).withOpacity(0.1),
             ),
             child: const Icon(
               Icons.pin_outlined,
               size: 48,
-              color: AppColors.primaryLight,
+              color: const Color(0xFF4361EE),
             ),
           ),
 
@@ -367,7 +375,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
               labelText: 'Enter PIN (4-6 digits)',
               counterText: '',
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(6),
               ),
             ),
           ),
@@ -390,7 +398,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
               labelText: 'Confirm PIN',
               counterText: '',
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(6),
               ),
             ),
           ),
@@ -402,7 +410,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
               _pinError!,
               style: const TextStyle(
                 fontSize: 13,
-                color: AppColors.error,
+                color: const Color(0xFFEF4444),
               ),
             ),
           ],
@@ -410,7 +418,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
           const SizedBox(height: 8),
           const Text(
             'Your PIN will be used as a fallback authentication method',
-            style: TextStyle(fontSize: 12, color: AppColors.textTertiary),
+            style: TextStyle(fontSize: 12, color: const Color(0xFF3A3A52)),
             textAlign: TextAlign.center,
           ),
 
@@ -468,17 +476,17 @@ class _BenefitRow extends StatelessWidget {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              color: AppColors.success.withOpacity(0.1),
+              color: const Color(0xFF10B981).withOpacity(0.1),
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Icon(icon, size: 20, color: AppColors.success),
+            child: Icon(icon, size: 20, color: const Color(0xFF10B981)),
           ),
           const SizedBox(width: 16),
           Text(
             text,
             style: const TextStyle(
               fontSize: 15,
-              color: AppColors.textPrimary,
+              color: const Color(0xFFE8E8F0),
               fontWeight: FontWeight.w500,
             ),
           ),

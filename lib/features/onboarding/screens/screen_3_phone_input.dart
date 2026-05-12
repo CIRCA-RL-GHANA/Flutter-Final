@@ -1,10 +1,8 @@
-import 'dart:async';
+﻿import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/constants/app_strings.dart';
 import '../../../core/utils/helpers.dart';
 import '../../../core/utils/responsive.dart';
@@ -13,6 +11,16 @@ import '../providers/onboarding_provider.dart';
 import '../widgets/buttons.dart';
 import '../widgets/onboarding_header.dart';
 
+
+// OS palette — mirrors splash / welcome
+const Color _kBg        = Color(0xFF08080F);
+const Color _kSurface   = Color(0xFF0E0E1A);
+const Color _kBorder    = Color(0xFF1C1C2E);
+const Color _kAccent    = Color(0xFF4361EE);
+const Color _kAccentDim = Color(0xFF1E2A6E);
+const Color _kText      = Color(0xFFE8E8F0);
+const Color _kTextDim   = Color(0xFF6B6B88);
+const Color _kTextMuted = Color(0xFF3A3A52);
 /// Screen 3: Phone Number Input (Intelligent)
 /// Frictionless number entry with predictive intelligence
 class PhoneInputScreen extends StatefulWidget {
@@ -32,16 +40,16 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
 
   // Country data
   final List<_CountryData> _countries = [
-    const _CountryData('US', 'United States', '+1', '🇺🇸'),
-    const _CountryData('GB', 'United Kingdom', '+44', '🇬🇧'),
-    const _CountryData('GH', 'Ghana', '+233', '🇬🇭'),
-    const _CountryData('NG', 'Nigeria', '+234', '🇳🇬'),
-    const _CountryData('CA', 'Canada', '+1', '🇨🇦'),
-    const _CountryData('DE', 'Germany', '+49', '🇩🇪'),
-    const _CountryData('FR', 'France', '+33', '🇫🇷'),
-    const _CountryData('IN', 'India', '+91', '🇮🇳'),
-    const _CountryData('KE', 'Kenya', '+254', '🇰🇪'),
-    const _CountryData('ZA', 'South Africa', '+27', '🇿🇦'),
+    const _CountryData('US', 'United States', '+1', 'ðŸ‡ºðŸ‡¸'),
+    const _CountryData('GB', 'United Kingdom', '+44', 'ðŸ‡¬ðŸ‡§'),
+    const _CountryData('GH', 'Ghana', '+233', 'ðŸ‡¬ðŸ‡­'),
+    const _CountryData('NG', 'Nigeria', '+234', 'ðŸ‡³ðŸ‡¬'),
+    const _CountryData('CA', 'Canada', '+1', 'ðŸ‡¨ðŸ‡¦'),
+    const _CountryData('DE', 'Germany', '+49', 'ðŸ‡©ðŸ‡ª'),
+    const _CountryData('FR', 'France', '+33', 'ðŸ‡«ðŸ‡·'),
+    const _CountryData('IN', 'India', '+91', 'ðŸ‡®ðŸ‡³'),
+    const _CountryData('KE', 'Kenya', '+254', 'ðŸ‡°ðŸ‡ª'),
+    const _CountryData('ZA', 'South Africa', '+27', 'ðŸ‡¿ðŸ‡¦'),
   ];
 
   late _CountryData _selectedCountry;
@@ -122,12 +130,12 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
     if (!mounted) return;
 
     if (result == NumberCheckResult.existingUser) {
-      // Existing user → welcome back flow
+      // Existing user â†’ welcome back flow
       onboarding.setReturningUser(true);
       Navigator.of(context).pushNamed(AppRoutes.welcomeBack);
     } else if (result == NumberCheckResult.newUser ||
         result == NumberCheckResult.valid) {
-      // New user → send OTP
+      // New user â†’ send OTP
       await phoneAuth.sendOtp();
       if (!mounted) return;
 
@@ -153,7 +161,7 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        backgroundColor: AppColors.error,
+        backgroundColor: const Color(0xFFEF4444),
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         margin: const EdgeInsets.all(16),
@@ -186,7 +194,7 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
     final isLoading = context.watch<PhoneAuthProvider>().isLoading;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFF08080F),
       body: SafeArea(
         child: Responsive.constrained(
           child: Column(
@@ -216,9 +224,9 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
                             vertical: 14,
                           ),
                           decoration: BoxDecoration(
-                            color: AppColors.inputFill,
-                            borderRadius: BorderRadius.circular(16),
-                            border: Border.all(color: AppColors.inputBorder),
+                            color: const Color(0xFF0E0E1A),
+                            borderRadius: BorderRadius.circular(6),
+                            border: Border.all(color: const Color(0xFF1C1C2E)),
                           ),
                           child: Row(
                             children: [
@@ -233,7 +241,7 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
                                   style: const TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500,
-                                    color: AppColors.textPrimary,
+                                    color: const Color(0xFFE8E8F0),
                                   ),
                                 ),
                               ),
@@ -242,13 +250,13 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
                                 style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
-                                  color: AppColors.textSecondary,
+                                  color: const Color(0xFF6B6B88),
                                 ),
                               ),
                               const SizedBox(width: 8),
                               const Icon(
                                 Icons.keyboard_arrow_down,
-                                color: AppColors.textTertiary,
+                                color: const Color(0xFF3A3A52),
                               ),
                             ],
                           ),
@@ -260,7 +268,7 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
                       // Phone input field
                       Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
+                          borderRadius: BorderRadius.circular(6),
                           border: Border.all(
                             color: _getBorderColor(),
                             width: _validationState == _ValidationState.empty
@@ -277,7 +285,7 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
                                 vertical: 18,
                               ),
                               decoration: BoxDecoration(
-                                color: AppColors.inputFill,
+                                color: const Color(0xFF0E0E1A),
                                 borderRadius: const BorderRadius.only(
                                   topLeft: Radius.circular(16),
                                   bottomLeft: Radius.circular(16),
@@ -288,7 +296,7 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
                                 style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
-                                  color: AppColors.textPrimary,
+                                  color: const Color(0xFFE8E8F0),
                                 ),
                               ),
                             ),
@@ -339,7 +347,7 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
                             AppStrings.invalidNumber,
                             style: const TextStyle(
                               fontSize: 12,
-                              color: AppColors.error,
+                              color: const Color(0xFFEF4444),
                             ),
                           ),
                         ),
@@ -358,8 +366,8 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
                                 decoration: BoxDecoration(
                                   color: _validationState ==
                                           _ValidationState.valid
-                                      ? AppColors.success.withOpacity(0.1)
-                                      : AppColors.primaryLight
+                                      ? const Color(0xFF10B981).withOpacity(0.1)
+                                      : const Color(0xFF4361EE)
                                           .withOpacity(0.05),
                                   shape: BoxShape.circle,
                                 ),
@@ -368,8 +376,8 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
                                   size: 80,
                                   color: _validationState ==
                                           _ValidationState.valid
-                                      ? AppColors.success.withOpacity(0.5)
-                                      : AppColors.primaryLight
+                                      ? const Color(0xFF10B981).withOpacity(0.5)
+                                      : const Color(0xFF4361EE)
                                           .withOpacity(0.2),
                                 ),
                               );
@@ -422,13 +430,13 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
   Color _getBorderColor() {
     switch (_validationState) {
       case _ValidationState.empty:
-        return AppColors.validationEmpty;
+        return const Color(0xFF1C1C2E);
       case _ValidationState.typing:
-        return AppColors.validationTyping;
+        return const Color(0xFF4361EE);
       case _ValidationState.valid:
-        return AppColors.validationValid;
+        return const Color(0xFF10B981);
       case _ValidationState.invalid:
-        return AppColors.validationInvalid;
+        return const Color(0xFFEF4444);
     }
   }
 
@@ -442,20 +450,20 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
           height: 20,
           child: CircularProgressIndicator(
             strokeWidth: 2,
-            color: AppColors.validationTyping,
+            color: const Color(0xFF4361EE),
           ),
         );
       case _ValidationState.valid:
         return const Icon(
           Icons.check_circle,
           size: 20,
-          color: AppColors.validationValid,
+          color: const Color(0xFF10B981),
         );
       case _ValidationState.invalid:
         return const Icon(
           Icons.error,
           size: 20,
-          color: AppColors.validationInvalid,
+          color: const Color(0xFFEF4444),
         );
     }
   }
@@ -470,8 +478,8 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
           bottom: MediaQuery.of(context).viewInsets.bottom,
         ),
         decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          color: const Color(0xFF0E0E1A),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
         ),
         child: Padding(
           padding: const EdgeInsets.all(24),
@@ -484,7 +492,7 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.textPrimary,
+                  color: const Color(0xFFE8E8F0),
                 ),
               ),
               const SizedBox(height: 16),
@@ -494,7 +502,7 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
                   hintText: 'Enter your email address',
                   prefixIcon: const Icon(Icons.email_outlined),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.circular(6),
                   ),
                 ),
               ),
@@ -575,8 +583,8 @@ class _CountryPickerSheetState extends State<_CountryPickerSheet> {
     return Container(
       height: MediaQuery.of(context).size.height * 0.8,
       decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        color: const Color(0xFF0E0E1A),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
       ),
       child: Column(
         children: [
@@ -589,7 +597,7 @@ class _CountryPickerSheetState extends State<_CountryPickerSheet> {
                   width: 40,
                   height: 4,
                   decoration: BoxDecoration(
-                    color: Colors.grey[300],
+                    color: const Color(0xFF1C1C2E),
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
@@ -633,12 +641,12 @@ class _CountryPickerSheetState extends State<_CountryPickerSheet> {
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       color: isSelected
-                          ? AppColors.primaryLight
-                          : AppColors.textSecondary,
+                          ? const Color(0xFF4361EE)
+                          : const Color(0xFF6B6B88),
                     ),
                   ),
                   selected: isSelected,
-                  selectedTileColor: AppColors.primaryLight.withOpacity(0.05),
+                  selectedTileColor: const Color(0xFF4361EE).withOpacity(0.05),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),

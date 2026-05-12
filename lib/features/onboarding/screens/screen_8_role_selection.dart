@@ -1,8 +1,6 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/constants/app_strings.dart';
 import '../../../core/utils/responsive.dart';
 import '../providers/role_provider.dart';
@@ -10,6 +8,16 @@ import '../providers/onboarding_provider.dart';
 import '../widgets/buttons.dart';
 import '../widgets/onboarding_header.dart';
 
+
+// OS palette — mirrors splash / welcome
+const Color _kBg        = Color(0xFF08080F);
+const Color _kSurface   = Color(0xFF0E0E1A);
+const Color _kBorder    = Color(0xFF1C1C2E);
+const Color _kAccent    = Color(0xFF4361EE);
+const Color _kAccentDim = Color(0xFF1E2A6E);
+const Color _kText      = Color(0xFFE8E8F0);
+const Color _kTextDim   = Color(0xFF6B6B88);
+const Color _kTextMuted = Color(0xFF3A3A52);
 /// Screen 8: Role Selection (Multi-Tenant)
 /// Context-aware role assignment with future flexibility
 class RoleSelectionScreen extends StatefulWidget {
@@ -57,7 +65,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
     final isMobile = Responsive.isMobile(context);
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFF08080F),
       body: SafeArea(
         child: Responsive.constrained(
           child: Column(
@@ -86,7 +94,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
                                 child: _RoleCategoryCard(
                                   title: AppStrings.individual,
                                   icon: Icons.person_outline,
-                                  color: AppColors.roleIndividual,
+                                  color: const Color(0xFF4361EE),
                                   features: role.getCategoryFeatures(
                                       RoleCategory.individual),
                                   isSelected: role.selectedCategory ==
@@ -102,7 +110,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
                                 child: _RoleCategoryCard(
                                   title: AppStrings.business,
                                   icon: Icons.business_outlined,
-                                  color: AppColors.roleBusiness,
+                                  color: const Color(0xFF0891B2),
                                   features: role.getCategoryFeatures(
                                       RoleCategory.business),
                                   isSelected: role.selectedCategory ==
@@ -126,7 +134,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
                                 style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
-                                  color: AppColors.textPrimary,
+                                  color: const Color(0xFFE8E8F0),
                                 ),
                               ),
                             ),
@@ -147,10 +155,10 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
                           Container(
                             padding: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
-                              color: AppColors.info.withOpacity(0.08),
+                              color: const Color(0xFF4361EE).withOpacity(0.08),
                               borderRadius: BorderRadius.circular(12),
                               border: Border.all(
-                                color: AppColors.info.withOpacity(0.2),
+                                color: const Color(0xFF4361EE).withOpacity(0.2),
                               ),
                             ),
                             child: Row(
@@ -158,7 +166,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
                                 Icon(
                                   Icons.info_outline,
                                   size: 18,
-                                  color: AppColors.info,
+                                  color: const Color(0xFF4361EE),
                                 ),
                                 const SizedBox(width: 8),
                                 Expanded(
@@ -166,7 +174,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
                                     'You can change your role anytime in settings',
                                     style: TextStyle(
                                       fontSize: 12,
-                                      color: AppColors.info,
+                                      color: const Color(0xFF4361EE),
                                     ),
                                   ),
                                 ),
@@ -211,28 +219,28 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
         'Buyer',
         'Primary shopping & social',
         Icons.shopping_bag_outlined,
-        AppColors.roleBuyer,
+        const Color(0xFF4361EE),
       ),
       _SubRoleData(
         IndividualRole.deliveryPartner,
         'Delivery Partner',
         'Earn through deliveries',
         Icons.local_shipping_outlined,
-        AppColors.roleDelivery,
+        const Color(0xFFF59E0B),
       ),
       _SubRoleData(
         IndividualRole.transportProvider,
         'Transport Provider',
         'Offer rides',
         Icons.directions_car_outlined,
-        AppColors.roleTransport,
+        const Color(0xFF4361EE),
       ),
       _SubRoleData(
         IndividualRole.contentCreator,
         'Content Creator',
         'Social features focus',
         Icons.create_outlined,
-        AppColors.roleBuyer,
+        const Color(0xFF4361EE),
       ),
     ];
 
@@ -255,28 +263,28 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
         'Owner',
         'Full control',
         Icons.admin_panel_settings_outlined,
-        AppColors.roleBusiness,
+        const Color(0xFF0891B2),
       ),
       _SubRoleData(
         BusinessRole.administrator,
         'Administrator',
         'Day-to-day management',
         Icons.manage_accounts_outlined,
-        AppColors.roleShop,
+        const Color(0xFF10B981),
       ),
       _SubRoleData(
         BusinessRole.branchManager,
         'Branch Manager',
         'Location-specific',
         Icons.store_outlined,
-        AppColors.roleDelivery,
+        const Color(0xFFF59E0B),
       ),
       _SubRoleData(
         BusinessRole.staff,
         'Staff',
         'Limited permissions',
         Icons.badge_outlined,
-        AppColors.textSecondary,
+        const Color(0xFF6B6B88),
       ),
     ];
 
@@ -329,10 +337,10 @@ class _RoleCategoryCard extends StatelessWidget {
           duration: const Duration(milliseconds: 300),
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: isSelected ? color.withOpacity(0.08) : Colors.white,
-            borderRadius: BorderRadius.circular(16),
+            color: isSelected ? color.withOpacity(0.08) : const Color(0xFF0E0E1A),
+            borderRadius: BorderRadius.circular(6),
             border: Border.all(
-              color: isSelected ? color : AppColors.inputBorder,
+              color: isSelected ? color : const Color(0xFF1C1C2E),
               width: isSelected ? 2 : 1,
             ),
             boxShadow: isSelected
@@ -362,7 +370,7 @@ class _RoleCategoryCard extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: isSelected ? color : AppColors.textPrimary,
+                  color: isSelected ? color : const Color(0xFFE8E8F0),
                 ),
               ),
               const SizedBox(height: 8),
@@ -375,7 +383,7 @@ class _RoleCategoryCard extends StatelessWidget {
                       Icon(
                         Icons.check,
                         size: 14,
-                        color: isSelected ? color : AppColors.textTertiary,
+                        color: isSelected ? color : const Color(0xFF3A3A52),
                       ),
                       const SizedBox(width: 4),
                       Flexible(
@@ -384,8 +392,8 @@ class _RoleCategoryCard extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 12,
                             color: isSelected
-                                ? AppColors.textPrimary
-                                : AppColors.textSecondary,
+                                ? const Color(0xFFE8E8F0)
+                                : const Color(0xFF6B6B88),
                           ),
                         ),
                       ),
@@ -398,15 +406,15 @@ class _RoleCategoryCard extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
-                  color: isSelected ? color : AppColors.inputFill,
-                  borderRadius: BorderRadius.circular(20),
+                  color: isSelected ? color : const Color(0xFF0E0E1A),
+                  borderRadius: BorderRadius.circular(6),
                 ),
                 child: Text(
                   isSelected ? 'Selected' : 'Select',
                   style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
-                    color: isSelected ? Colors.white : AppColors.textSecondary,
+                    color: isSelected ? Colors.white : const Color(0xFF6B6B88),
                   ),
                 ),
               ),
@@ -457,10 +465,10 @@ class _SubRoleCard extends StatelessWidget {
           decoration: BoxDecoration(
             color: isSelected
                 ? data.color.withOpacity(0.06)
-                : Colors.white,
+                : const Color(0xFF0E0E1A),
             borderRadius: BorderRadius.circular(14),
             border: Border.all(
-              color: isSelected ? data.color : AppColors.inputBorder,
+              color: isSelected ? data.color : const Color(0xFF1C1C2E),
               width: isSelected ? 2 : 1,
             ),
           ),
@@ -487,7 +495,7 @@ class _SubRoleCard extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                         color: isSelected
                             ? data.color
-                            : AppColors.textPrimary,
+                            : const Color(0xFFE8E8F0),
                       ),
                     ),
                     const SizedBox(height: 2),
@@ -495,7 +503,7 @@ class _SubRoleCard extends StatelessWidget {
                       data.description,
                       style: const TextStyle(
                         fontSize: 12,
-                        color: AppColors.textTertiary,
+                        color: const Color(0xFF3A3A52),
                       ),
                     ),
                   ],
@@ -505,7 +513,7 @@ class _SubRoleCard extends StatelessWidget {
                 isSelected
                     ? Icons.radio_button_checked
                     : Icons.radio_button_unchecked,
-                color: isSelected ? data.color : AppColors.textTertiary,
+                color: isSelected ? data.color : const Color(0xFF3A3A52),
                 size: 22,
               ),
             ],

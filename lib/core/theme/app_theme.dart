@@ -33,23 +33,53 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
-      primaryColor: AppColors.primary,
-      scaffoldBackgroundColor: AppColors.backgroundDark,
+      primaryColor: const Color(0xFF4361EE),
+      scaffoldBackgroundColor: const Color(0xFF08080F),
       colorScheme: ColorScheme.fromSeed(
-        seedColor: AppColors.primary,
+        seedColor: const Color(0xFF4361EE),
         brightness: Brightness.dark,
-        primary: AppColors.primaryLight,
-        secondary: AppColors.secondary,
-        surface: AppColors.surfaceDark,
-        error: AppColors.error,
+        primary: const Color(0xFF4361EE),
+        secondary: const Color(0xFF1E2A6E),
+        surface: const Color(0xFF0E0E1A),
+        error: const Color(0xFFEF4444),
+        onPrimary: Colors.white,
+        onSurface: const Color(0xFFE8E8F0),
+        onSecondary: const Color(0xFFE8E8F0),
       ),
       textTheme: _textThemeDark,
-      elevatedButtonTheme: _elevatedButtonTheme,
+      elevatedButtonTheme: _elevatedButtonThemeDark,
       outlinedButtonTheme: _outlinedButtonTheme,
       textButtonTheme: _textButtonTheme,
       inputDecorationTheme: _inputDecorationThemeDark,
       appBarTheme: _appBarThemeDark,
       cardTheme: _cardThemeDark,
+      dividerColor: const Color(0xFF1C1C2E),
+      dividerTheme: const DividerThemeData(color: Color(0xFF1C1C2E), thickness: 1),
+      snackBarTheme: const SnackBarThemeData(
+        backgroundColor: Color(0xFF0E0E1A),
+        contentTextStyle: TextStyle(color: Color(0xFFE8E8F0)),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(6)),
+          side: BorderSide(color: Color(0xFF1C1C2E)),
+        ),
+      ),
+      dialogTheme: DialogThemeData(
+        backgroundColor: const Color(0xFF0E0E1A),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(6)),
+          side: BorderSide(color: Color(0xFF1C1C2E)),
+        ),
+        titleTextStyle: GoogleFonts.poppins(
+          fontSize: 16,
+          fontWeight: FontWeight.w700,
+          color: const Color(0xFFE8E8F0),
+        ),
+        contentTextStyle: GoogleFonts.poppins(
+          fontSize: 13,
+          color: const Color(0xFF6B6B88),
+        ),
+      ),
     );
   }
 
@@ -205,8 +235,44 @@ class AppTheme {
   }
 
   static InputDecorationTheme get _inputDecorationThemeDark {
-    return _inputDecorationTheme.copyWith(
-      fillColor: AppColors.inputFillDark,
+    return InputDecorationTheme(
+      filled: true,
+      fillColor: const Color(0xFF0E0E1A),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(6),
+        borderSide: const BorderSide(color: Color(0xFF1C1C2E)),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(6),
+        borderSide: const BorderSide(color: Color(0xFF1C1C2E)),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(6),
+        borderSide: const BorderSide(color: Color(0xFF4361EE), width: 1.5),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(6),
+        borderSide: const BorderSide(color: Color(0xFFEF4444), width: 1.5),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(6),
+        borderSide: const BorderSide(color: Color(0xFFEF4444), width: 1.5),
+      ),
+      labelStyle: GoogleFonts.poppins(
+        fontSize: 13,
+        color: const Color(0xFF6B6B88),
+      ),
+      hintStyle: GoogleFonts.poppins(
+        fontSize: 13,
+        color: const Color(0xFF3A3A52),
+      ),
+      prefixIconColor: const Color(0xFF6B6B88),
+      suffixIconColor: const Color(0xFF6B6B88),
+      errorStyle: GoogleFonts.poppins(
+        fontSize: 11,
+        color: const Color(0xFFEF4444),
+      ),
     );
   }
 
@@ -246,8 +312,32 @@ class AppTheme {
   }
 
   static CardThemeData get _cardThemeDark {
-    return _cardTheme.copyWith(
-      color: AppColors.surfaceDark,
+    return const CardThemeData(
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(6)),
+        side: BorderSide(color: Color(0xFF1C1C2E)),
+      ),
+      color: Color(0xFF0E0E1A),
+    );
+  }
+
+  static ElevatedButtonThemeData get _elevatedButtonThemeDark {
+    return ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        minimumSize: const Size(double.infinity, 50),
+        backgroundColor: const Color(0xFF4361EE),
+        foregroundColor: Colors.white,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(6)),
+        ),
+        elevation: 0,
+        textStyle: GoogleFonts.poppins(
+          fontSize: 13,
+          fontWeight: FontWeight.w600,
+          letterSpacing: 1.5,
+        ),
+      ),
     );
   }
 }

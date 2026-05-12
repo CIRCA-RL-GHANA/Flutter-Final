@@ -1,10 +1,18 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../providers/device_check_provider.dart';
 
+
+// OS palette — mirrors splash / welcome
+const Color _kBg        = Color(0xFF08080F);
+const Color _kSurface   = Color(0xFF0E0E1A);
+const Color _kBorder    = Color(0xFF1C1C2E);
+const Color _kAccent    = Color(0xFF4361EE);
+const Color _kAccentDim = Color(0xFF1E2A6E);
+const Color _kText      = Color(0xFFE8E8F0);
+const Color _kTextDim   = Color(0xFF6B6B88);
+const Color _kTextMuted = Color(0xFF3A3A52);
 /// Screen 0: Pre-Loading Validation (Hidden System Check)
 /// Runs before splash to validate device capability
 class PreLoadingScreen extends StatefulWidget {
@@ -36,10 +44,10 @@ class _PreLoadingScreenState extends State<PreLoadingScreen> {
     if (!mounted) return;
 
     if (passed) {
-      // All checks passed → go to splash
+      // All checks passed â†’ go to splash
       Navigator.of(context).pushReplacementNamed(AppRoutes.splash);
     } else {
-      // Failed checks → show appropriate error
+      // Failed checks â†’ show appropriate error
       _handleFailure(deviceCheck);
     }
   }
@@ -123,7 +131,7 @@ class _PreLoadingScreenState extends State<PreLoadingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundDark,
+      backgroundColor: const Color(0xFF08080F),
       body: _errorWidget ??
           Consumer<DeviceCheckProvider>(
             builder: (context, deviceCheck, child) {
@@ -138,16 +146,16 @@ class _PreLoadingScreenState extends State<PreLoadingScreen> {
                       child: CircularProgressIndicator(
                         value: deviceCheck.progress,
                         strokeWidth: 3,
-                        backgroundColor: Colors.white12,
+                        backgroundColor: const Color(0xFF08080F)12,
                         valueColor: const AlwaysStoppedAnimation<Color>(
-                            AppColors.accent),
+                            const Color(0xFF4361EE)),
                       ),
                     ),
                     const SizedBox(height: 24),
                     Text(
                       'Preparing genie help...',
                       style: TextStyle(
-                        color: Colors.white.withOpacity(0.7),
+                        color: const Color(0xFF0E0E1A).withOpacity(0.7),
                         fontSize: 14,
                       ),
                     ),
@@ -193,19 +201,19 @@ class _CheckStatusRow extends StatelessWidget {
           AnimatedSwitcher(
             duration: const Duration(milliseconds: 300),
             child: isDone
-                ? const Icon(Icons.check_circle, color: AppColors.success, size: 16, key: ValueKey('done'))
+                ? const Icon(Icons.check_circle, color: const Color(0xFF10B981), size: 16, key: ValueKey('done'))
                 : const SizedBox(
                     width: 16,
                     height: 16,
                     key: ValueKey('loading'),
-                    child: CircularProgressIndicator(strokeWidth: 1.5, color: Colors.white24),
+                    child: CircularProgressIndicator(strokeWidth: 1.5, color: const Color(0xFF1C1C2E)),
                   ),
           ),
           const SizedBox(width: 12),
           Text(
             label,
             style: TextStyle(
-              color: isDone ? Colors.white70 : Colors.white30,
+              color: isDone ? const Color(0xFF6B6B88) : const Color(0xFF3A3A52),
               fontSize: 12,
             ),
           ),
@@ -246,16 +254,16 @@ class _ErrorDisplay extends StatelessWidget {
               width: 80,
               height: 80,
               decoration: BoxDecoration(
-                color: AppColors.error.withOpacity(0.15),
+                color: const Color(0xFFEF4444).withOpacity(0.15),
                 shape: BoxShape.circle,
               ),
-              child: Icon(icon, size: 40, color: AppColors.error),
+              child: Icon(icon, size: 40, color: const Color(0xFFEF4444)),
             ),
             const SizedBox(height: 24),
             Text(
               title,
               style: const TextStyle(
-                color: Colors.white,
+                color: const Color(0xFF0E0E1A),
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
@@ -265,7 +273,7 @@ class _ErrorDisplay extends StatelessWidget {
             Text(
               message,
               style: const TextStyle(
-                color: Colors.white60,
+                color: const Color(0xFF6B6B88),
                 fontSize: 14,
                 height: 1.5,
               ),
@@ -278,10 +286,10 @@ class _ErrorDisplay extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: onAction,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primaryLight,
-                  foregroundColor: Colors.white,
+                  backgroundColor: const Color(0xFF4361EE),
+                  foregroundcolor: const Color(0xFF0E0E1A),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.circular(6),
                   ),
                 ),
                 child: Text(actionLabel),
@@ -293,7 +301,7 @@ class _ErrorDisplay extends StatelessWidget {
                 onPressed: onSecondary,
                 child: Text(
                   secondaryLabel!,
-                  style: const TextStyle(color: Colors.white60),
+                  style: const TextStyle(color: const Color(0xFF6B6B88)),
                 ),
               ),
             ],

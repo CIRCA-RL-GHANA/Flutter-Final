@@ -1,16 +1,24 @@
-import 'dart:async';
+﻿import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/constants/app_strings.dart';
 import '../../../core/utils/responsive.dart';
 import '../providers/phone_auth_provider.dart';
 import '../providers/onboarding_provider.dart';
 import '../widgets/onboarding_header.dart';
 
+
+// OS palette — mirrors splash / welcome
+const Color _kBg        = Color(0xFF08080F);
+const Color _kSurface   = Color(0xFF0E0E1A);
+const Color _kBorder    = Color(0xFF1C1C2E);
+const Color _kAccent    = Color(0xFF4361EE);
+const Color _kAccentDim = Color(0xFF1E2A6E);
+const Color _kText      = Color(0xFFE8E8F0);
+const Color _kTextDim   = Color(0xFF6B6B88);
+const Color _kTextMuted = Color(0xFF3A3A52);
 /// Screen 4: OTP Verification (Secure)
 /// Maximum security with minimum friction
 class OtpVerificationScreen extends StatefulWidget {
@@ -111,7 +119,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
       _focusNodes[index + 1].requestFocus();
     }
 
-    // Check if all 6 digits are entered → auto-submit
+    // Check if all 6 digits are entered â†’ auto-submit
     final otp = _otpControllers.map((c) => c.text).join();
     if (otp.length == 6) {
       _verifyOtp(otp);
@@ -185,7 +193,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: const Text(AppStrings.newCodeSent),
-          backgroundColor: AppColors.success,
+          backgroundColor: const Color(0xFF10B981),
           behavior: SnackBarBehavior.floating,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -200,7 +208,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
     final auth = context.watch<PhoneAuthProvider>();
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFF08080F),
       body: SafeArea(
         child: Responsive.constrained(
           child: Column(
@@ -226,7 +234,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                             vertical: 12,
                           ),
                           decoration: BoxDecoration(
-                            color: AppColors.inputFill,
+                            color: const Color(0xFF0E0E1A),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Row(
@@ -237,14 +245,14 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                                 style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
-                                  color: AppColors.textPrimary,
+                                  color: const Color(0xFFE8E8F0),
                                 ),
                               ),
                               const SizedBox(width: 8),
                               const Icon(
                                 Icons.edit,
                                 size: 16,
-                                color: AppColors.primaryLight,
+                                color: const Color(0xFF4361EE),
                               ),
                             ],
                           ),
@@ -256,7 +264,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                         AppStrings.enterOtpCode,
                         style: const TextStyle(
                           fontSize: 14,
-                          color: AppColors.textSecondary,
+                          color: const Color(0xFF6B6B88),
                         ),
                       ),
 
@@ -310,7 +318,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                           auth.error!,
                           style: const TextStyle(
                             fontSize: 13,
-                            color: AppColors.error,
+                            color: const Color(0xFFEF4444),
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -323,7 +331,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                         const _SuccessIndicator()
                       else if (_isVerifying)
                         const CircularProgressIndicator(
-                          color: AppColors.primaryLight,
+                          color: const Color(0xFF4361EE),
                         )
                       else ...[
                         // Timer display
@@ -340,10 +348,10 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                                     CircularProgressIndicator(
                                       value: _remainingSeconds / 299,
                                       strokeWidth: 3,
-                                      backgroundColor: AppColors.inputFill,
+                                      backgroundColor: const Color(0xFF0E0E1A),
                                       valueColor:
                                           const AlwaysStoppedAnimation<Color>(
-                                        AppColors.primaryLight,
+                                        const Color(0xFF4361EE),
                                       ),
                                     ),
                                     Text(
@@ -351,7 +359,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                                       style: const TextStyle(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w600,
-                                        color: AppColors.textPrimary,
+                                        color: const Color(0xFFE8E8F0),
                                       ),
                                     ),
                                   ],
@@ -362,7 +370,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                                 '${AppStrings.resendCode} $_formattedTime',
                                 style: const TextStyle(
                                   fontSize: 13,
-                                  color: AppColors.textTertiary,
+                                  color: const Color(0xFF3A3A52),
                                 ),
                               ),
                             ],
@@ -382,8 +390,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600,
                                 color: auth.resendAttemptsRemaining > 0
-                                    ? AppColors.primaryLight
-                                    : AppColors.textTertiary,
+                                    ? const Color(0xFF4361EE)
+                                    : const Color(0xFF3A3A52),
                               ),
                             ),
                           ),
@@ -395,7 +403,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                           'Didn\'t receive a code?',
                           style: TextStyle(
                             fontSize: 14,
-                            color: AppColors.textSecondary,
+                            color: const Color(0xFF6B6B88),
                           ),
                         ),
                         const SizedBox(height: 12),
@@ -453,15 +461,15 @@ class _OtpDigitField extends StatelessWidget {
         duration: const Duration(milliseconds: 200),
         decoration: BoxDecoration(
           color: isSuccess
-              ? AppColors.success.withOpacity(0.1)
-              : AppColors.inputFill,
+              ? const Color(0xFF10B981).withOpacity(0.1)
+              : const Color(0xFF0E0E1A),
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
             color: isSuccess
-                ? AppColors.success
+                ? const Color(0xFF10B981)
                 : focusNode.hasFocus
-                    ? AppColors.primaryLight
-                    : AppColors.inputBorder,
+                    ? const Color(0xFF4361EE)
+                    : const Color(0xFF1C1C2E),
             width: focusNode.hasFocus || isSuccess ? 2 : 1,
           ),
         ),
@@ -475,7 +483,7 @@ class _OtpDigitField extends StatelessWidget {
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
-            color: isSuccess ? AppColors.success : AppColors.textPrimary,
+            color: isSuccess ? const Color(0xFF10B981) : const Color(0xFFE8E8F0),
           ),
           inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,
@@ -509,12 +517,12 @@ class _SuccessIndicator extends StatelessWidget {
                 width: 64,
                 height: 64,
                 decoration: const BoxDecoration(
-                  color: AppColors.success,
+                  color: const Color(0xFF10B981),
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(
                   Icons.check,
-                  color: Colors.white,
+                  color: const Color(0xFF0E0E1A),
                   size: 32,
                 ),
               ),
@@ -527,7 +535,7 @@ class _SuccessIndicator extends StatelessWidget {
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w600,
-            color: AppColors.success,
+            color: const Color(0xFF10B981),
           ),
         ),
       ],
@@ -554,24 +562,24 @@ class _AlternativeMethodButton extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: AppColors.inputBorder),
+          border: Border.all(color: const Color(0xFF1C1C2E)),
         ),
         child: Row(
           children: [
-            Icon(icon, size: 20, color: AppColors.textSecondary),
+            Icon(icon, size: 20, color: const Color(0xFF6B6B88)),
             const SizedBox(width: 12),
             Text(
               label,
               style: const TextStyle(
                 fontSize: 14,
-                color: AppColors.textSecondary,
+                color: const Color(0xFF6B6B88),
               ),
             ),
             const Spacer(),
             const Icon(
               Icons.arrow_forward_ios,
               size: 14,
-              color: AppColors.textTertiary,
+              color: const Color(0xFF3A3A52),
             ),
           ],
         ),

@@ -1,14 +1,22 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/constants/app_strings.dart';
 import '../../../core/utils/responsive.dart';
 import '../providers/permission_provider.dart';
 import '../providers/onboarding_provider.dart';
 import '../widgets/buttons.dart';
 
+
+// OS palette — mirrors splash / welcome
+const Color _kBg        = Color(0xFF08080F);
+const Color _kSurface   = Color(0xFF0E0E1A);
+const Color _kBorder    = Color(0xFF1C1C2E);
+const Color _kAccent    = Color(0xFF4361EE);
+const Color _kAccentDim = Color(0xFF1E2A6E);
+const Color _kText      = Color(0xFFE8E8F0);
+const Color _kTextDim   = Color(0xFF6B6B88);
+const Color _kTextMuted = Color(0xFF3A3A52);
 /// Screen 9: Permissions Onboarding
 /// Just-in-time, benefit-focused permission requests
 class PermissionsScreen extends StatefulWidget {
@@ -65,7 +73,7 @@ class _PermissionsScreenState extends State<PermissionsScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFF08080F),
       body: SafeArea(
         child: Responsive.constrained(
           child: Consumer<PermissionProvider>(
@@ -81,7 +89,7 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                 });
                 return const Center(
                   child: CircularProgressIndicator(
-                    color: AppColors.primaryLight,
+                    color: const Color(0xFF4361EE),
                   ),
                 );
               }
@@ -102,13 +110,13 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                                 width: 44,
                                 height: 44,
                                 decoration: BoxDecoration(
-                                  color: AppColors.inputFill,
+                                  color: const Color(0xFF0E0E1A),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: const Icon(
                                   Icons.arrow_back_ios_new,
                                   size: 18,
-                                  color: AppColors.textPrimary,
+                                  color: const Color(0xFFE8E8F0),
                                 ),
                               ),
                             ),
@@ -117,7 +125,7 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                               style: const TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,
-                                color: AppColors.textTertiary,
+                                color: const Color(0xFF3A3A52),
                               ),
                             ),
                             TextButton(
@@ -133,7 +141,7 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                                 'Skip All',
                                 style: TextStyle(
                                   fontSize: 13,
-                                  color: AppColors.textTertiary,
+                                  color: const Color(0xFF3A3A52),
                                 ),
                               ),
                             ),
@@ -146,10 +154,10 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                           borderRadius: BorderRadius.circular(4),
                           child: LinearProgressIndicator(
                             value: permProvider.progress,
-                            backgroundColor: AppColors.inputFill,
+                            backgroundColor: const Color(0xFF0E0E1A),
                             valueColor:
                                 const AlwaysStoppedAnimation<Color>(
-                                    AppColors.primaryLight),
+                                    const Color(0xFF4361EE)),
                             minHeight: 4,
                           ),
                         ),
@@ -187,7 +195,7 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                                   color: _getGroupColor(
                                           permProvider.currentGroup)
                                       .withOpacity(0.1),
-                                  borderRadius: BorderRadius.circular(20),
+                                  borderRadius: BorderRadius.circular(6),
                                 ),
                                 child: Text(
                                   _getGroupLabel(permProvider.currentGroup),
@@ -208,13 +216,13 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                                 height: 120,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: AppColors.primaryLight
+                                  color: const Color(0xFF4361EE)
                                       .withOpacity(0.08),
                                 ),
                                 child: Icon(
                                   _getPermissionIconData(currentPerm),
                                   size: 56,
-                                  color: AppColors.primaryLight,
+                                  color: const Color(0xFF4361EE),
                                 ),
                               ),
 
@@ -227,7 +235,7 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                                 style: const TextStyle(
                                   fontSize: 24,
                                   fontWeight: FontWeight.bold,
-                                  color: AppColors.textPrimary,
+                                  color: const Color(0xFFE8E8F0),
                                 ),
                               ),
 
@@ -239,7 +247,7 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                                     .getBenefitText(currentPerm),
                                 style: const TextStyle(
                                   fontSize: 16,
-                                  color: AppColors.textSecondary,
+                                  color: const Color(0xFF6B6B88),
                                   height: 1.5,
                                 ),
                                 textAlign: TextAlign.center,
@@ -252,8 +260,8 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                                 width: double.infinity,
                                 height: 160,
                                 decoration: BoxDecoration(
-                                  color: AppColors.inputFill,
-                                  borderRadius: BorderRadius.circular(16),
+                                  color: const Color(0xFF0E0E1A),
+                                  borderRadius: BorderRadius.circular(6),
                                 ),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -262,14 +270,14 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                                       _getPermissionIconData(currentPerm),
                                       size: 40,
                                       color:
-                                          AppColors.textTertiary.withOpacity(0.5),
+                                          const Color(0xFF3A3A52).withOpacity(0.5),
                                     ),
                                     const SizedBox(height: 8),
                                     Text(
                                       'Feature Preview',
                                       style: TextStyle(
                                         fontSize: 12,
-                                        color: AppColors.textTertiary,
+                                        color: const Color(0xFF3A3A52),
                                       ),
                                     ),
                                   ],
@@ -304,7 +312,7 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                           AppStrings.enableLater,
                           style: const TextStyle(
                             fontSize: 12,
-                            color: AppColors.textTertiary,
+                            color: const Color(0xFF3A3A52),
                           ),
                         ),
                       ],
@@ -344,11 +352,11 @@ class _PermissionsScreenState extends State<PermissionsScreen>
   Color _getGroupColor(PermissionGroup group) {
     switch (group) {
       case PermissionGroup.essential:
-        return AppColors.primaryLight;
+        return const Color(0xFF4361EE);
       case PermissionGroup.enhanced:
-        return AppColors.success;
+        return const Color(0xFF10B981);
       case PermissionGroup.premium:
-        return AppColors.accent;
+        return const Color(0xFF4361EE);
     }
   }
 

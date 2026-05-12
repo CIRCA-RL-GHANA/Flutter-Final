@@ -1,10 +1,18 @@
-import 'package:flutter/material.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/services/ai_insights_notifier.dart';
+﻿import 'package:flutter/material.dart';
 import '../../../core/constants/app_strings.dart';
 import '../../../core/utils/responsive.dart';
 import '../widgets/buttons.dart';
 
+
+// OS palette — mirrors splash / welcome
+const Color _kBg        = Color(0xFF08080F);
+const Color _kSurface   = Color(0xFF0E0E1A);
+const Color _kBorder    = Color(0xFF1C1C2E);
+const Color _kAccent    = Color(0xFF4361EE);
+const Color _kAccentDim = Color(0xFF1E2A6E);
+const Color _kText      = Color(0xFFE8E8F0);
+const Color _kTextDim   = Color(0xFF6B6B88);
+const Color _kTextMuted = Color(0xFF3A3A52);
 /// Error types for the recovery screen
 enum ErrorType {
   network,
@@ -60,7 +68,7 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
       case ErrorType.network:
         return _ErrorConfig(
           icon: Icons.wifi_off_rounded,
-          iconColor: AppColors.warning,
+          iconColor: const Color(0xFFF59E0B),
           title: AppStrings.offlineMode,
           message: widget.errorMessage ??
               'Check your internet connection and try again.',
@@ -79,7 +87,7 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
       case ErrorType.server:
         return _ErrorConfig(
           icon: Icons.cloud_off_rounded,
-          iconColor: AppColors.error,
+          iconColor: const Color(0xFFEF4444),
           title: AppStrings.serverBusy,
           message: widget.errorMessage ??
               'Our servers are experiencing high traffic. Please try again shortly.',
@@ -98,7 +106,7 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
       case ErrorType.validation:
         return _ErrorConfig(
           icon: Icons.error_outline_rounded,
-          iconColor: AppColors.warning,
+          iconColor: const Color(0xFFF59E0B),
           title: 'Validation Error',
           message: widget.errorMessage ??
               'Some information needs to be corrected.',
@@ -114,7 +122,7 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
       case ErrorType.accountSuspended:
         return _ErrorConfig(
           icon: Icons.block_rounded,
-          iconColor: AppColors.error,
+          iconColor: const Color(0xFFEF4444),
           title: 'Account Suspended',
           message: widget.errorMessage ??
               'Your account has been suspended. Contact support for more information.',
@@ -131,7 +139,7 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
       case ErrorType.accountDuplicate:
         return _ErrorConfig(
           icon: Icons.people_outline_rounded,
-          iconColor: AppColors.info,
+          iconColor: const Color(0xFF4361EE),
           title: 'Account Already Exists',
           message: widget.errorMessage ??
               'An account with this information already exists.',
@@ -148,7 +156,7 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
       case ErrorType.accountCompromised:
         return _ErrorConfig(
           icon: Icons.shield_rounded,
-          iconColor: AppColors.error,
+          iconColor: const Color(0xFFEF4444),
           title: 'Security Alert',
           message: widget.errorMessage ??
               'We detected unusual activity on your account.',
@@ -165,7 +173,7 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
       case ErrorType.phoneLost:
         return _ErrorConfig(
           icon: Icons.phone_disabled_rounded,
-          iconColor: AppColors.warning,
+          iconColor: const Color(0xFFF59E0B),
           title: 'Phone Number Changed?',
           message: 'Verify your identity through alternative methods.',
           primaryAction: 'Verify via Email',
@@ -181,7 +189,7 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
       case ErrorType.biometricChanged:
         return _ErrorConfig(
           icon: Icons.fingerprint,
-          iconColor: AppColors.warning,
+          iconColor: const Color(0xFFF59E0B),
           title: 'Biometric Changed',
           message: 'Your biometric data has changed. Please verify with your PIN or password.',
           primaryAction: 'Use PIN',
@@ -197,7 +205,7 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
       case ErrorType.deviceChange:
         return _ErrorConfig(
           icon: Icons.devices_rounded,
-          iconColor: AppColors.info,
+          iconColor: const Color(0xFF4361EE),
           title: 'New Device Detected',
           message: 'Transfer your account to this device securely.',
           primaryAction: 'Scan QR Code',
@@ -217,7 +225,7 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
     final config = _getErrorConfig();
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFF08080F),
       body: SafeArea(
         child: Responsive.constrained(
           child: Column(
@@ -233,13 +241,13 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
                       width: 44,
                       height: 44,
                       decoration: BoxDecoration(
-                        color: AppColors.inputFill,
+                        color: const Color(0xFF0E0E1A),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: const Icon(
                         Icons.close,
                         size: 20,
-                        color: AppColors.textPrimary,
+                        color: const Color(0xFFE8E8F0),
                       ),
                     ),
                   ),
@@ -278,7 +286,7 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
                           style: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
-                            color: AppColors.textPrimary,
+                            color: const Color(0xFFE8E8F0),
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -290,7 +298,7 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
                           config.message,
                           style: const TextStyle(
                             fontSize: 16,
-                            color: AppColors.textSecondary,
+                            color: const Color(0xFF6B6B88),
                             height: 1.5,
                           ),
                           textAlign: TextAlign.center,
@@ -304,8 +312,8 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
                             width: double.infinity,
                             padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
-                              color: AppColors.inputFill,
-                              borderRadius: BorderRadius.circular(16),
+                              color: const Color(0xFF0E0E1A),
+                              borderRadius: BorderRadius.circular(6),
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -315,7 +323,7 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
                                   style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w600,
-                                    color: AppColors.textPrimary,
+                                    color: const Color(0xFFE8E8F0),
                                   ),
                                 ),
                                 const SizedBox(height: 12),
@@ -330,7 +338,7 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
                                           width: 24,
                                           height: 24,
                                           decoration: BoxDecoration(
-                                            color: AppColors.primaryLight
+                                            color: const Color(0xFF4361EE)
                                                 .withOpacity(0.1),
                                             shape: BoxShape.circle,
                                           ),
@@ -340,7 +348,7 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
                                               style: const TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w600,
-                                                color: AppColors.primaryLight,
+                                                color: const Color(0xFF4361EE),
                                               ),
                                             ),
                                           ),
@@ -351,7 +359,7 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
                                             entry.value,
                                             style: const TextStyle(
                                               fontSize: 14,
-                                              color: AppColors.textSecondary,
+                                              color: const Color(0xFF6B6B88),
                                               height: 1.4,
                                             ),
                                           ),
@@ -398,7 +406,7 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
                       AppStrings.needHelp,
                       style: const TextStyle(
                         fontSize: 12,
-                        color: AppColors.textTertiary,
+                        color: const Color(0xFF3A3A52),
                       ),
                     ),
                   ],

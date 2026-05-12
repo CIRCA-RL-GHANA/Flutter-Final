@@ -1,8 +1,6 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/constants/app_strings.dart';
 import '../../../core/utils/responsive.dart';
 import '../../../core/utils/helpers.dart';
@@ -11,6 +9,16 @@ import '../providers/onboarding_provider.dart';
 import '../widgets/buttons.dart';
 import '../widgets/onboarding_header.dart';
 
+
+// OS palette — mirrors splash / welcome
+const Color _kBg        = Color(0xFF08080F);
+const Color _kSurface   = Color(0xFF0E0E1A);
+const Color _kBorder    = Color(0xFF1C1C2E);
+const Color _kAccent    = Color(0xFF4361EE);
+const Color _kAccentDim = Color(0xFF1E2A6E);
+const Color _kText      = Color(0xFFE8E8F0);
+const Color _kTextDim   = Color(0xFF6B6B88);
+const Color _kTextMuted = Color(0xFF3A3A52);
 /// Screen 5: User Registration (Comprehensive)
 /// Progressive profiling with privacy-first approach
 class RegistrationScreen extends StatefulWidget {
@@ -71,7 +79,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(reg.error ?? AppStrings.couldntSave),
-          backgroundColor: AppColors.error,
+          backgroundColor: const Color(0xFFEF4444),
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
@@ -92,10 +100,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         return Theme(
           data: Theme.of(context).copyWith(
             colorScheme: const ColorScheme.light(
-              primary: AppColors.primaryLight,
-              onPrimary: Colors.white,
-              surface: Colors.white,
-              onSurface: AppColors.textPrimary,
+              primary: const Color(0xFF4361EE),
+              onPrimary: const Color(0xFF0E0E1A),
+              surface: const Color(0xFF0E0E1A),
+              onSurface: const Color(0xFFE8E8F0),
             ),
           ),
           child: child!,
@@ -111,7 +119,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFF08080F),
       body: SafeArea(
         child: Responsive.constrained(
           child: Column(
@@ -131,7 +139,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     AppStrings.completeLater,
                     style: TextStyle(
                       fontSize: 13,
-                      color: AppColors.textTertiary,
+                      color: const Color(0xFF3A3A52),
                     ),
                   ),
                 ),
@@ -162,7 +170,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 labelText: AppStrings.firstName,
                                 prefixIcon: const Icon(Icons.person_outline, size: 20),
                                 border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(16),
+                                  borderRadius: BorderRadius.circular(6),
                                 ),
                               ),
                             ),
@@ -176,7 +184,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 labelText: AppStrings.lastName,
                                 prefixIcon: const Icon(Icons.person_outline, size: 20),
                                 border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(16),
+                                  borderRadius: BorderRadius.circular(6),
                                 ),
                               ),
                             ),
@@ -185,7 +193,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               AppStrings.forIdentityVerification,
                               style: const TextStyle(
                                 fontSize: 12,
-                                color: AppColors.textTertiary,
+                                color: const Color(0xFF3A3A52),
                               ),
                             ),
 
@@ -206,7 +214,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 labelText: 'Email address',
                                 prefixIcon: const Icon(Icons.email_outlined, size: 20),
                                 border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(16),
+                                  borderRadius: BorderRadius.circular(6),
                                 ),
                               ),
                             ),
@@ -218,7 +226,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 vertical: 8,
                               ),
                               decoration: BoxDecoration(
-                                color: AppColors.accent.withOpacity(0.1),
+                                color: const Color(0xFF4361EE).withOpacity(0.1),
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Row(
@@ -226,7 +234,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   Icon(
                                     Icons.star,
                                     size: 16,
-                                    color: AppColors.accent.withOpacity(0.8),
+                                    color: const Color(0xFF4361EE).withOpacity(0.8),
                                   ),
                                   const SizedBox(width: 8),
                                   const Text(
@@ -234,7 +242,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                     style: TextStyle(
                                       fontSize: 12,
                                       fontWeight: FontWeight.w500,
-                                      color: AppColors.textSecondary,
+                                      color: const Color(0xFF6B6B88),
                                     ),
                                   ),
                                 ],
@@ -257,10 +265,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   vertical: 16,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: AppColors.inputFill,
-                                  borderRadius: BorderRadius.circular(16),
+                                  color: const Color(0xFF0E0E1A),
+                                  borderRadius: BorderRadius.circular(6),
                                   border: Border.all(
-                                    color: AppColors.inputBorder,
+                                    color: const Color(0xFF1C1C2E),
                                   ),
                                 ),
                                 child: Row(
@@ -268,7 +276,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                     const Icon(
                                       Icons.calendar_today_outlined,
                                       size: 20,
-                                      color: AppColors.textTertiary,
+                                      color: const Color(0xFF3A3A52),
                                     ),
                                     const SizedBox(width: 12),
                                     Text(
@@ -278,14 +286,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                       style: TextStyle(
                                         fontSize: 16,
                                         color: reg.dateOfBirth != null
-                                            ? AppColors.textPrimary
-                                            : AppColors.textTertiary,
+                                            ? const Color(0xFFE8E8F0)
+                                            : const Color(0xFF3A3A52),
                                       ),
                                     ),
                                     const Spacer(),
                                     const Icon(
                                       Icons.keyboard_arrow_down,
-                                      color: AppColors.textTertiary,
+                                      color: const Color(0xFF3A3A52),
                                     ),
                                   ],
                                 ),
@@ -352,7 +360,7 @@ class _SectionLabel extends StatelessWidget {
           style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,
-            color: AppColors.textPrimary,
+            color: const Color(0xFFE8E8F0),
           ),
         ),
         const SizedBox(height: 2),
@@ -360,7 +368,7 @@ class _SectionLabel extends StatelessWidget {
           hint,
           style: const TextStyle(
             fontSize: 12,
-            color: AppColors.textTertiary,
+            color: const Color(0xFF3A3A52),
           ),
         ),
       ],
@@ -390,23 +398,23 @@ class _PrivacyDashboard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.inputFill,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.inputBorder),
+        color: const Color(0xFF0E0E1A),
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: const Color(0xFF1C1C2E)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              const Icon(Icons.shield_outlined, size: 20, color: AppColors.primaryLight),
+              const Icon(Icons.shield_outlined, size: 20, color: const Color(0xFF4361EE)),
               const SizedBox(width: 8),
               const Text(
                 'Privacy Preferences',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.textPrimary,
+                  color: const Color(0xFFE8E8F0),
                 ),
               ),
             ],
@@ -469,13 +477,13 @@ class _PrivacyToggle extends StatelessWidget {
             label,
             style: const TextStyle(
               fontSize: 14,
-              color: AppColors.textSecondary,
+              color: const Color(0xFF6B6B88),
             ),
           ),
           Switch.adaptive(
             value: value,
             onChanged: onChanged,
-            activeColor: AppColors.primaryLight,
+            activeColor: const Color(0xFF4361EE),
           ),
         ],
       ),
@@ -498,7 +506,7 @@ class _LegalLink extends StatelessWidget {
         label,
         style: const TextStyle(
           fontSize: 12,
-          color: AppColors.primaryLight,
+          color: const Color(0xFF4361EE),
           decoration: TextDecoration.underline,
         ),
       ),
