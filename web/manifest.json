@@ -1,7 +1,7 @@
 {
   "name": "genie help",
   "short_name": "geniehelp",
-  "description": "Everything you need, in one place. Pay. Ride. Shop. Connect. West Africa's super-app.",
+  "description": "The global operating system for commerce. Payments, logistics, e-commerce, finance, and AI intelligence — unified on one platform.",
   "start_url": "/?utm_source=pwa",
   "scope": "/",
   "display": "standalone",
