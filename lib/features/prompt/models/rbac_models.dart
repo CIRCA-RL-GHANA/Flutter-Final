@@ -7,9 +7,12 @@ import 'package:flutter/material.dart';
 
 // ─── User Roles ──────────────────────────────────────────────────────────────
 
-/// All 11 roles in the genie help ecosystem
+/// All 11 roles in the genie help ecosystem.
+/// NOTE: [owner] is strictly a personal/individual entity role.
+/// It is granted automatically when a user creates their individual entity
+/// and can NEVER be assigned as a staff role on a business or branch entity.
 enum UserRole {
-  // Individual Entity
+  // Individual Entity only — auto-granted, never staff-assignable
   owner,
 
   // Business Entity
@@ -84,7 +87,11 @@ class AppContextModel {
     this.driverType,
     this.avatarUrl,
     this.presence = PresenceStatus.online,
-  });
+  }) : assert(
+          role != UserRole.owner || entityType == EntityType.personal,
+          'UserRole.owner is only valid for EntityType.personal (individual entity). '
+          'Owner is a personal role — not an assignable business staff role.',
+        );
 
   /// Display label for the context
   String get displayLabel => '$name - ${roleLabel}';
@@ -143,7 +150,7 @@ class RoleColors {
   static Color forRole(UserRole role) {
     switch (role) {
       case UserRole.owner:
-        return const Color(0xFF7C3AED); // Purple
+        return const Color(0xFF4361EE); // Accent Blue — individual entity
       case UserRole.administrator:
         return const Color(0xFF2563EB); // Blue
       case UserRole.branchManager:
@@ -605,4 +612,16 @@ class PriorityEngine {
     });
     return sorted;
   }
+}
+
+// ─── UserRole Extensions ─────────────────────────────────────────────────────
+
+extension UserRoleX on UserRole {
+  /// True if this role can only exist within a personal (individual) entity.
+  /// Owner is granted automatically and is never staff-assignable.
+  bool get isPersonalOnly => this == UserRole.owner;
+
+  /// True if this role can be assigned to a user as a staff member under
+  /// a business or branch entity. Owner and none are excluded.
+  bool get isStaffAssignable => this != UserRole.owner && this != UserRole.none;
 }

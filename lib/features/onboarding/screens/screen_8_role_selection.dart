@@ -171,7 +171,11 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
                                 const SizedBox(width: 8),
                                 Expanded(
                                   child: Text(
-                                    'You can change your role anytime in settings',
+                                    role.selectedCategory == RoleCategory.individual
+                                        ? 'Your individual account gives you Owner access — shop, socialise, and manage your personal finances.'
+                                        : role.selectedCategory == RoleCategory.business
+                                            ? 'Select the staff role you have been invited to join this business entity as.'
+                                            : 'You can change your role anytime in settings.',
                                     style: TextStyle(
                                       fontSize: 12,
                                       color: const Color(0xFF4361EE),
@@ -257,14 +261,9 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
   }
 
   Widget _buildBusinessSubRoles(RoleProvider role) {
+    // Owner is NOT listed here — Owner is the individual who created the entity,
+    // not an assignable staff role. Business sub-roles are staff positions only.
     final subRoles = [
-      _SubRoleData(
-        BusinessRole.owner,
-        'Owner',
-        'Full control',
-        Icons.admin_panel_settings_outlined,
-        const Color(0xFF0891B2),
-      ),
       _SubRoleData(
         BusinessRole.administrator,
         'Administrator',

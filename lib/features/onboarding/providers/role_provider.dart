@@ -7,8 +7,9 @@ enum RoleCategory { individual, business }
 /// Individual sub-roles
 enum IndividualRole { buyer, deliveryPartner, transportProvider, contentCreator }
 
-/// Business sub-roles
-enum BusinessRole { owner, administrator, branchManager, staff }
+/// Business sub-roles — Owner is NOT a business staff role.
+/// Owner is automatically granted to the individual who creates the entity.
+enum BusinessRole { administrator, branchManager, staff }
 
 class RoleProvider extends ChangeNotifier {
   // Selected role
@@ -63,8 +64,6 @@ class RoleProvider extends ChangeNotifier {
       }
     } else if (_selectedCategory == RoleCategory.business) {
       switch (_businessRole) {
-        case BusinessRole.owner:
-          return 'Owner';
         case BusinessRole.administrator:
           return 'Administrator';
         case BusinessRole.branchManager:
