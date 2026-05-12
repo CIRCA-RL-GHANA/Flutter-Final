@@ -86,7 +86,17 @@ class SetupDashboardWidgetContent extends StatelessWidget {
       ];
     }
 
-    // Owner / Admin: Full 6-row matrix (showing top 4 that fit)
+    // Owner: personal-features only — no business entity management cards
+    if (role == UserRole.owner) {
+      return [
+        _MatrixRow(icon: Icons.insights, label: 'Outlook', value: 'Personal', color: color),
+        _MatrixRow(icon: Icons.stars_outlined, label: 'Q-Points', value: '4,820 pts', color: color),
+        _MatrixRow(icon: Icons.people_outline, label: 'Connections', value: '128', color: color),
+        _MatrixRow(icon: Icons.track_changes, label: 'My Activity', value: 'Today', color: color),
+      ];
+    }
+
+    // Admin: Full 6-row matrix (showing top 4 that fit)
     return [
       _MatrixRow(icon: Icons.inventory_2, label: 'Products', value: '1,245', color: color),
       _MatrixRow(icon: Icons.people, label: 'Staff', value: '42', color: color),

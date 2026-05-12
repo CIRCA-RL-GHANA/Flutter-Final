@@ -102,6 +102,8 @@ class GenieRBACEnforcer {
           return role == UserRole.administrator ||
               role == UserRole.branchManager;
         }
+        // Owner: personal features only — no business entity management
+        if (role == UserRole.owner) return _isPersonalSetupAction(action);
         // Social Officer can only access social/updates-related rows
         if (role == UserRole.socialOfficer ||
             role == UserRole.branchSocialOfficer) {
@@ -169,6 +171,17 @@ class GenieRBACEnforcer {
       'following', 'social', 'create_post',
     };
     return socialActions.any((s) => action.contains(s));
+  }
+
+  /// Actions within Setup Dashboard that are scoped to personal features.
+  /// Owner may only perform these — business entity management is excluded.
+  static bool _isPersonalSetupAction(String action) {
+    const personalActions = {
+      'open', 'profile', 'outlook', 'personal_metrics', 'my_activity',
+      'q_points', 'subscription', 'interests', 'connections', 'social',
+      'activity_log', 'places', 'marketing', 'interests_update',
+    };
+    return personalActions.any((a) => action.contains(a));
   }
 
   // ─── Polite Denial Message ────────────────────────────────────────────────

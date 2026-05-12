@@ -917,6 +917,33 @@ class SetupDashboardRBAC {
   }
 
   // ══════════════════════════════════════════════════════════════════════════
+  // PERSONAL CARD CLASSIFICATION
+  // ══════════════════════════════════════════════════════════════════════════
+
+  /// Card IDs that represent personal-scope features.
+  /// Owner (individual entity) has access to ONLY these cards.
+  /// Business-entity management cards (products, staff, vehicles, etc.)
+  /// are outside the owner's personal scope.
+  static const Set<String> _ownerPersonalCards = {
+    'activity_log',
+    'places',
+    'marketing',
+    'social',
+    'connections',
+    'profile',
+    'outlook',
+    'subscription',
+    'interests',
+    'qpoints',
+    'my_activity',
+  };
+
+  /// Returns true if [cardId] is a personal-scope feature accessible
+  /// to the owner (individual entity) role.
+  static bool isPersonalCard(String cardId) =>
+      _ownerPersonalCards.contains(cardId);
+
+  // ══════════════════════════════════════════════════════════════════════════
   // CROSS-BRANCH VISIBILITY HELPERS
   // ══════════════════════════════════════════════════════════════════════════
 
