@@ -1,7 +1,7 @@
 {
   "name": "genie help",
   "short_name": "geniehelp",
-  "description": "Your All-in-One Financial & Social Hub — manage finances, connect socially, and unlock intelligent insights.",
+  "description": "Everything you need, in one place. Pay. Ride. Shop. Connect. West Africa's super-app.",
   "start_url": "/?utm_source=pwa",
   "scope": "/",
   "display": "standalone",

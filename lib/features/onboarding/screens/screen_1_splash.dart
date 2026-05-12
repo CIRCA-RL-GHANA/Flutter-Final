@@ -263,33 +263,32 @@ class _SplashScreenState extends State<SplashScreen>
 
                       const SizedBox(height: 32),
 
-                      // "PROMPT" title
+                      // App name title
                       Opacity(
                         opacity: _titleOpacity.value,
                         child: const Text(
                           AppStrings.splashTitle,
                           style: TextStyle(
-                            fontSize: 32,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 36,
+                            fontWeight: FontWeight.w800,
                             color: Colors.white,
-                            letterSpacing: 4,
+                            letterSpacing: 1,
                           ),
                         ),
                       ),
 
                       const SizedBox(height: 4),
 
-                      // "Genie" subtitle
+                      // App name sub-word
                       Opacity(
                         opacity: _subtitleOpacity.value,
                         child: Text(
                           AppStrings.splashSubtitle,
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 20,
                             fontWeight: FontWeight.w300,
                             color: AppColors.accent.withOpacity(0.9),
-                            fontStyle: FontStyle.italic,
-                            letterSpacing: 2,
+                            letterSpacing: 1,
                           ),
                         ),
                       ),

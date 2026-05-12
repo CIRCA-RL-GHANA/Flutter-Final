@@ -3,7 +3,7 @@ class AppStrings {
 
   // App
   static const String appName = 'genie help';
-  static const String appTagline = 'Your All-in-One Financial & Social Hub';
+  static const String appTagline = 'Everything you need, in one place.';
 
   // Splash Screen
   static const String splashTitle = 'genie';
@@ -11,7 +11,7 @@ class AppStrings {
   static const String splashLoading = 'genie help loading, please wait';
 
   // Welcome Screen
-  static const String welcomeTagline = 'Your All-in-One Financial & Social Hub';
+  static const String welcomeTagline = 'Everything you need, in one place.';
   static const String getStarted = 'Get Started';
   static const String alreadyHaveAccount = 'Already have an account? ';
   static const String logIn = 'Log in';
