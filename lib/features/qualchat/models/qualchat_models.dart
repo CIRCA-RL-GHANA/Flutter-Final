@@ -21,8 +21,11 @@ enum HeyYaStatus { pending, accepted, expired, rejected, withdrawn }
 /// Hey Ya tab filter
 enum HeyYaTab { all, sent, received, matches }
 
+/// Hey Ya date intent — what kind of date the sender has in mind
+enum HeyYaIntent { coffee, dinner, walk, movie, videoCall, any }
+
 /// Timeline event types
-enum TimelineEventType { sent, seen, viewed, reacted, replied, matched, expired }
+enum TimelineEventType { sent, seen, viewed, reacted, replied, matched, expired, dateProposed, dateConfirmed }
 
 /// Nudge type from AI wingmate
 enum NudgeType { followUp, reEngagement, profileUpdate, compatibility, activity }
@@ -195,7 +198,9 @@ class Conversation {
   });
 }
 
-/// A Hey Ya request (dating / social feature — Owner only)
+/// A Hey Ya request (dating feature — Owner only)
+/// Expresses romantic/social interest in another user and proposes a date intent.
+/// Both users must accept for a match; Genie AI scores compatibility.
 class HeyYaRequest {
   final String id;
   final ChatUser person;
@@ -207,6 +212,8 @@ class HeyYaRequest {
   final bool isSentByMe;
   final int viewCount;
   final List<TimelineEvent> timeline;
+  final HeyYaIntent intent;
+  final CompatibilityBreakdown? compatibility;
 
   const HeyYaRequest({
     required this.id,
@@ -219,7 +226,26 @@ class HeyYaRequest {
     this.isSentByMe = true,
     this.viewCount = 0,
     this.timeline = const [],
+    this.intent = HeyYaIntent.any,
+    this.compatibility,
   });
+}
+
+/// Genie AI compatibility breakdown for a Hey Ya pair
+class CompatibilityBreakdown {
+  final int interests;  // 0–100
+  final int vibe;       // 0–100
+  final int lifestyle;  // 0–100
+  final int values;     // 0–100
+
+  const CompatibilityBreakdown({
+    required this.interests,
+    required this.vibe,
+    required this.lifestyle,
+    required this.values,
+  });
+
+  int get overall => ((interests + vibe + lifestyle + values) / 4).round();
 }
 
 /// A single event on the Hey Ya request timeline

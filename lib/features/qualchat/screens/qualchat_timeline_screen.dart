@@ -1,5 +1,5 @@
-/// qualChat Screen 3 — Request Timeline (Owner Only)
-/// Interactive journey map for a Hey Ya connection
+/// qualChat Screen 3 — Hey Ya Journey (Owner Only)
+/// Dating timeline: track your connection journey and plan a date
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +11,29 @@ import '../../../core/services/ai_insights_notifier.dart';
 class QualChatTimelineScreen extends StatelessWidget {
   const QualChatTimelineScreen({super.key});
 
+  String _intentLabel(HeyYaIntent intent) {
+    const labels = {
+      HeyYaIntent.coffee: 'Coffee ☕',
+      HeyYaIntent.dinner: 'Dinner 🍽️',
+      HeyYaIntent.walk: 'Walk 🚶',
+      HeyYaIntent.movie: 'Movie Night 🎬',
+      HeyYaIntent.videoCall: 'Video Date 📹',
+      HeyYaIntent.any: 'Open to Anything 💫',
+    };
+    return labels[intent] ?? 'Open to Anything';
+  }
+
+  String _statusLabel(HeyYaStatus status) {
+    const labels = {
+      HeyYaStatus.pending: '⏳ Awaiting response',
+      HeyYaStatus.accepted: '💘 Matched!',
+      HeyYaStatus.expired: '⌛ Expired',
+      HeyYaStatus.rejected: '💔 Passed',
+      HeyYaStatus.withdrawn: '↩️ Withdrawn',
+    };
+    return labels[status] ?? status.name;
+  }
+
   @override
   Widget build(BuildContext context) {
     // Use first Hey Ya as demo
@@ -18,7 +41,7 @@ class QualChatTimelineScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FE),
       appBar: QualChatAppBar(
-        title: 'Hey Ya Journey',
+        title: 'Dating Journey 💘',
         actions: [
           TextButton(
             onPressed: () {},
@@ -69,7 +92,7 @@ class QualChatTimelineScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Connection with: ${request.person.name}',
+                        request.person.name,
                         style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
                       ),
                       const SizedBox(height: 4),
@@ -79,7 +102,12 @@ class QualChatTimelineScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        'Status: 🟡 ${request.status.name[0].toUpperCase()}${request.status.name.substring(1)}',
+                        '📅 Intent: ${_intentLabel(request.intent)}',
+                        style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        'Status: ${_statusLabel(request.status)}',
                         style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
                       ),
                     ],
@@ -136,25 +164,27 @@ class QualChatTimelineScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'Still interested in ${request.person.name}? 😊',
+              request.status == HeyYaStatus.accepted
+                  ? '💘 You matched! Ready to plan your date?'
+                  : 'Still into ${request.person.name}? 😊',
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 12),
             Row(
               children: [
-                _ActionButton(icon: '💌', label: 'Send Nudge', onTap: () {}),
+                _ActionButton(icon: '💌', label: 'Say Hi', onTap: () {}),
                 const SizedBox(width: 8),
-                _ActionButton(icon: '🔄', label: 'Remind', onTap: () {}),
+                _ActionButton(icon: '📅', label: 'Plan Date', onTap: () {}, isPrimary: true),
                 const SizedBox(width: 8),
-                _ActionButton(icon: '🎁', label: 'Send Gift', onTap: () {}),
+                _ActionButton(icon: '🎤', label: 'Voice Note', onTap: () {}),
               ],
             ),
             const SizedBox(height: 8),
             Row(
               children: [
-                _ActionButton(icon: '✅', label: 'Accept', onTap: () {}, isPrimary: true),
+                _ActionButton(icon: '✅', label: 'Accept', onTap: () {}, isPrimary: request.status == HeyYaStatus.pending && !request.isSentByMe),
                 const SizedBox(width: 8),
-                _ActionButton(icon: '📝', label: 'Customize', onTap: () {}),
+                _ActionButton(icon: '🔄', label: 'Re-spark', onTap: () {}),
                 const SizedBox(width: 8),
                 _ActionButton(icon: '❌', label: 'Withdraw', onTap: () {}, isDestructive: true),
               ],

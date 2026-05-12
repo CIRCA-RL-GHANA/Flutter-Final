@@ -451,6 +451,9 @@ class HeyYaCard extends StatelessWidget {
                 ),
               ],
             ),
+            // Intent badge
+            const SizedBox(height: 8),
+            _IntentBadge(intent: r.intent),
             // Message
             if (r.message != null) ...[
               const SizedBox(height: 12),
@@ -479,9 +482,9 @@ class HeyYaCard extends StatelessWidget {
             // Actions
             Row(
               children: [
-                _ActionChip(label: 'View Timeline', icon: Icons.timeline, onTap: onTimeline),
+                _ActionChip(label: 'View Journey', icon: Icons.timeline, onTap: onTimeline),
                 const SizedBox(width: 8),
-                _ActionChip(label: 'Follow Up', icon: Icons.send, onTap: onFollowUp),
+                _ActionChip(label: 'Plan Date 📅', icon: Icons.event_outlined, onTap: onFollowUp),
                 const Spacer(),
                 IconButton(
                   icon: const Icon(Icons.more_horiz, color: Color(0xFF9CA3AF)),
@@ -492,6 +495,11 @@ class HeyYaCard extends StatelessWidget {
                 ),
               ],
             ),
+            // Compatibility breakdown
+            if (r.compatibility != null) ...[
+            if (r.compatibility != null) ...[              const SizedBox(height: 10),
+              _CompatibilityMiniBar(compatibility: r.compatibility!),
+            ],
           ],
         ),
       ),
@@ -499,6 +507,111 @@ class HeyYaCard extends StatelessWidget {
   }
 }
 
+// Intent badge showing what kind of date
+class _IntentBadge extends StatelessWidget {
+  final HeyYaIntent intent;
+  const _IntentBadge({required this.intent});
+
+  static const _icons = {
+    HeyYaIntent.coffee: ('☕', 'Coffee'),
+    HeyYaIntent.dinner: ('🍽️', 'Dinner'),
+    HeyYaIntent.walk: ('🚶', 'Walk'),
+    HeyYaIntent.movie: ('🎬', 'Movie Night'),
+    HeyYaIntent.videoCall: ('📹', 'Video Date'),
+    HeyYaIntent.any: ('💫', 'Open to Anything'),
+  };
+
+  @override
+  Widget build(BuildContext context) {
+    final info = _icons[intent] ?? ('💫', 'Open to Anything');
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      decoration: BoxDecoration(
+        color: kChatSocial.withOpacity(0.06),
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: kChatSocial.withOpacity(0.2)),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(info.$1, style: const TextStyle(fontSize: 13)),
+          const SizedBox(width: 4),
+          Text(
+            info.$2,
+            style: const TextStyle(
+              fontSize: 11,
+              fontWeight: FontWeight.w600,
+              color: Color(0xFF9D174D),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// Compact compatibility bar row
+class _CompatibilityMiniBar extends StatelessWidget {
+  final CompatibilityBreakdown compatibility;
+  const _CompatibilityMiniBar({required this.compatibility});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Compatibility',
+          style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: Color(0xFF6B7280)),
+        ),
+        const SizedBox(height: 4),
+        Row(
+          children: [
+            _MiniBar(label: 'Interests', value: compatibility.interests),
+            const SizedBox(width: 8),
+            _MiniBar(label: 'Vibe', value: compatibility.vibe),
+            const SizedBox(width: 8),
+            _MiniBar(label: 'Lifestyle', value: compatibility.lifestyle),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _MiniBar extends StatelessWidget {
+  final String label;
+  final int value;
+  const _MiniBar({required this.label, required this.value});
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(label, style: const TextStyle(fontSize: 9, color: Color(0xFF9CA3AF))),
+              Text('$value%', style: const TextStyle(fontSize: 9, fontWeight: FontWeight.w700, color: Color(0xFF6B7280))),
+            ],
+          ),
+          const SizedBox(height: 2),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(4),
+            child: LinearProgressIndicator(
+              value: value / 100,
+              backgroundColor: const Color(0xFFF3F4F6),
+              valueColor: AlwaysStoppedAnimation<Color>(kChatSocial),
+              minHeight: 4,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
 class _StatusBadge extends StatelessWidget {
   final HeyYaStatus status;
   const _StatusBadge({required this.status});
@@ -512,13 +625,13 @@ class _StatusBadge extends StatelessWidget {
         text = '🟡 Pending';
         color = const Color(0xFFF59E0B);
       case HeyYaStatus.accepted:
-        text = '💚 Accepted';
+        text = '� Matched';
         color = const Color(0xFF10B981);
       case HeyYaStatus.expired:
         text = '🔴 Expired';
         color = const Color(0xFFEF4444);
       case HeyYaStatus.rejected:
-        text = '❌ Rejected';
+        text = '❌ Passed';
         color = const Color(0xFFEF4444);
       case HeyYaStatus.withdrawn:
         text = '↩️ Withdrawn';

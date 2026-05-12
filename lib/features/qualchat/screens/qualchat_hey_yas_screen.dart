@@ -1,5 +1,5 @@
-/// qualChat Screen 2 — My Hey Yas (Owner Only)
-/// Browse, filter, and manage Hey Ya requests
+/// qualChat Screen 2 — Hey Ya (Owner Only)
+/// Dating feature: express romantic interest, get AI-matched, plan a date
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,6 +7,21 @@ import '../models/qualchat_models.dart';
 import '../providers/qualchat_provider.dart';
 import '../widgets/qualchat_widgets.dart';
 import '../../../core/services/ai_insights_notifier.dart';
+
+const _kTabLabels = {
+  HeyYaTab.all: 'All',
+  HeyYaTab.sent: 'Sparked',
+  HeyYaTab.received: 'Into Me',
+  HeyYaTab.matches: 'Matched 💘',
+};
+
+const _kStatusLabels = {
+  HeyYaStatus.pending: 'Pending',
+  HeyYaStatus.accepted: 'Matched',
+  HeyYaStatus.expired: 'Expired',
+  HeyYaStatus.rejected: 'Passed',
+  HeyYaStatus.withdrawn: 'Withdrawn',
+};
 
 class QualChatHeyYasScreen extends StatelessWidget {
   const QualChatHeyYasScreen({super.key});
@@ -19,21 +34,44 @@ class QualChatHeyYasScreen extends StatelessWidget {
         return Scaffold(
           backgroundColor: const Color(0xFFF8F9FE),
           appBar: QualChatAppBar(
-            title: 'My Hey Yas 💖',
+            title: 'Hey Ya 💖',
             actions: [
               PopupMenuButton<String>(
                 icon: const Icon(Icons.filter_list),
                 onSelected: (v) {},
                 itemBuilder: (_) => [
-                  const PopupMenuItem(value: 'date', child: Text('Sort by Date')),
                   const PopupMenuItem(value: 'match', child: Text('Sort by Match %')),
-                  const PopupMenuItem(value: 'status', child: Text('Sort by Status')),
+                  const PopupMenuItem(value: 'date', child: Text('Sort by Date')),
+                  const PopupMenuItem(value: 'intent', child: Text('Sort by Date Intent')),
                 ],
               ),
             ],
           ),
           body: Column(
             children: [
+              // Dating purpose strip
+              Container(
+                width: double.infinity,
+                color: kChatSocial.withOpacity(0.08),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                child: Row(
+                  children: [
+                    const Text('💘', style: TextStyle(fontSize: 16)),
+                    const SizedBox(width: 8),
+                    const Expanded(
+                      child: Text(
+                        'Spark interest · Get matched by Genie AI · Plan your date',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xFF9D174D),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              // AI insight strip
               Consumer<AIInsightsNotifier>(
                 builder: (context, ai, _) {
                   if (ai.recommendations.isEmpty) return const SizedBox.shrink();
@@ -46,7 +84,7 @@ class QualChatHeyYasScreen extends StatelessWidget {
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
-                            'AI suggests: ${ai.recommendations.first['name'] ?? ''}',
+                            'Genie AI match: ${ai.recommendations.first['name'] ?? ''}',
                             style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kChatColor),
                             maxLines: 1, overflow: TextOverflow.ellipsis,
                           ),
@@ -62,7 +100,6 @@ class QualChatHeyYasScreen extends StatelessWidget {
                 child: Row(
                   children: HeyYaTab.values.map((tab) {
                     final isSelected = provider.heyYaTab == tab;
-                    final label = tab.name[0].toUpperCase() + tab.name.substring(1);
                     return Expanded(
                       child: GestureDetector(
                         onTap: () => provider.setHeyYaTab(tab),
@@ -73,10 +110,10 @@ class QualChatHeyYasScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text(
-                            label,
+                            _kTabLabels[tab] ?? tab.name,
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontSize: 13,
+                              fontSize: 12,
                               fontWeight: FontWeight.w600,
                               color: isSelected ? Colors.white : const Color(0xFF6B7280),
                             ),
@@ -100,7 +137,7 @@ class QualChatHeyYasScreen extends StatelessWidget {
                     ),
                     ...HeyYaStatus.values.map((s) {
                       return _StatusChip(
-                        label: s.name[0].toUpperCase() + s.name.substring(1),
+                        label: _kStatusLabels[s] ?? s.name,
                         isSelected: provider.heyYaStatusFilter == s,
                         onTap: () => provider.setHeyYaStatusFilter(s),
                       );
@@ -114,8 +151,8 @@ class QualChatHeyYasScreen extends StatelessWidget {
                 child: heyYas.isEmpty
                     ? const QualChatEmptyState(
                         icon: Icons.favorite_border,
-                        title: 'No Hey Yas yet',
-                        message: 'Your vibe attracts your tribe ✨\nSend your first Hey Ya!',
+                        title: 'No sparks yet',
+                        message: 'Send a Hey Ya to someone you like — tell them\nyou\'re interested and pick a date idea ✨',
                         ctaLabel: '✨ Send Hey Ya',
                       )
                     : ListView.builder(
@@ -140,43 +177,41 @@ class QualChatHeyYasScreen extends StatelessWidget {
               ),
             ],
           ),
-          // Sticky footer for batch
-          bottomNavigationBar: heyYas.isNotEmpty
-              ? Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border(top: BorderSide(color: const Color(0xFFE5E7EB))),
+          // Sticky footer
+          bottomNavigationBar: Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border(top: BorderSide(color: const Color(0xFFE5E7EB))),
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton.icon(
+                    onPressed: () {},
+                    icon: const Text('💖'),
+                    label: const Text('Send Hey Ya'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: kChatSocial,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    ),
                   ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: ElevatedButton.icon(
-                          onPressed: () {},
-                          icon: const Text('✨'),
-                          label: const Text('Send Message'),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: kChatSocial,
-                            foregroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      OutlinedButton.icon(
-                        onPressed: () {},
-                        icon: const Icon(Icons.schedule, size: 16),
-                        label: const Text('Remind'),
-                        style: OutlinedButton.styleFrom(
-                          foregroundColor: kChatColor,
-                          side: const BorderSide(color: kChatColor),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                        ),
-                      ),
-                    ],
+                ),
+                const SizedBox(width: 8),
+                OutlinedButton.icon(
+                  onPressed: () {},
+                  icon: const Icon(Icons.explore_outlined, size: 16),
+                  label: const Text('Discover'),
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: kChatColor,
+                    side: const BorderSide(color: kChatColor),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   ),
-                )
-              : null,
+                ),
+              ],
+            ),
+          ),
         );
       },
     );
