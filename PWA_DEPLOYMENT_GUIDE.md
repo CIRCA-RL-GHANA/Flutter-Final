@@ -1,4 +1,4 @@
-# PROMPT Genie — Flutter PWA Deployment Guide
+# genie help — Flutter PWA Deployment Guide
 
 > **Audience:** Flutter developers joining the project.  
 > **Stack:** Flutter 3.22.0 · Vercel Edge · `genieinprompt.app`  
@@ -367,7 +367,7 @@ Controls install behaviour. Key fields for this project:
 
 ```json
 {
-  "name": "PROMPT Genie",
+  "name": "genie help",
   "short_name": "PromptGenie",
   "start_url": "/?utm_source=pwa",
   "display": "standalone",

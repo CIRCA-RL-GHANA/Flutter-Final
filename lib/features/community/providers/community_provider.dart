@@ -260,6 +260,61 @@ class CommunityProvider extends ChangeNotifier {
     }
   }
 
+  // ─── Members ─────────────────────────────────────────────────────────────
+
+  final Map<String, List<Map<String, dynamic>>> _membersCache = {};
+
+  List<Map<String, dynamic>> membersFor(String communityId) =>
+      _membersCache[communityId] ?? [];
+
+  bool _isMembersLoading = false;
+  bool get isMembersLoading => _isMembersLoading;
+
+  Future<void> loadMembers(String communityId, {bool refresh = false}) async {
+    if (!refresh && _membersCache.containsKey(communityId)) return;
+
+    _isMembersLoading = true;
+    notifyListeners();
+
+    try {
+      final response = await _service.getMembers(communityId);
+      if (response.success && response.data != null) {
+        final items = (response.data!['items'] as List? ?? [])
+            .map((e) => e as Map<String, dynamic>)
+            .toList();
+        _membersCache[communityId] = items;
+      } else {
+        _membersCache[communityId] = [];
+      }
+    } catch (_) {
+      _membersCache[communityId] = [];
+    } finally {
+      _isMembersLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<bool> banMember({
+    required String communityId,
+    required String userId,
+    required String reason,
+  }) async {
+    try {
+      final response = await _service.banMember(
+        communityId: communityId,
+        userId: userId,
+        reason: reason,
+      );
+      if (response.success) {
+        await loadMembers(communityId, refresh: true);
+        return true;
+      }
+      return false;
+    } catch (_) {
+      return false;
+    }
+  }
+
   // ─── Fallback / Offline Data ──────────────────────────────────────────────
 
   static final List<Map<String, dynamic>> _fallbackCommunities = [

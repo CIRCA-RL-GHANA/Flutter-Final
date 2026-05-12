@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/services/ai_insights_notifier.dart';
+import '../providers/eplay_provider.dart';
 import 'eplay_hub_screen.dart' show kEPlayColor, kEPlayColorDark;
 
 class EPlayCreatorStudioScreen extends StatefulWidget {
@@ -18,7 +19,6 @@ class EPlayCreatorStudioScreen extends StatefulWidget {
 
 class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> with SingleTickerProviderStateMixin {
   late final TabController _tabs;
-  bool _hasProfile = false; // stub: false = not yet opened digital branch
   String _selectedType = 'music';
   bool _uploading = false;
   final _titleCtrl = TextEditingController();
@@ -28,6 +28,9 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
   void initState() {
     super.initState();
     _tabs = TabController(length: 3, vsync: this);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<EPlayProvider>().loadCreatorProfile();
+    });
   }
 
   @override
@@ -40,15 +43,16 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AIInsightsNotifier>(
-      builder: (context, ai, _) {
+    return Consumer2<AIInsightsNotifier, EPlayProvider>(
+      builder: (context, ai, eplay, _) {
+        final hasProfile = eplay.creatorProfile != null;
         return Scaffold(
           backgroundColor: AppColors.backgroundLight,
           appBar: AppBar(
             backgroundColor: kEPlayColorDark,
             foregroundColor: Colors.white,
             title: const Text('Creator Studio', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-            bottom: _hasProfile
+            bottom: hasProfile
                 ? TabBar(
                     controller: _tabs,
                     labelColor: Colors.white,
@@ -58,7 +62,11 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
                   )
                 : null,
           ),
-          body: _hasProfile ? _buildStudio(ai) : _buildOnboarding(),
+          body: eplay.isCreatorLoading
+              ? const Center(child: CircularProgressIndicator())
+              : hasProfile
+                  ? _buildStudio(ai, eplay)
+                  : _buildOnboarding(eplay),
         );
       },
     );
@@ -66,7 +74,7 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
 
   // ── Onboarding: Open digital branch ──────────────────────────────────────
 
-  Widget _buildOnboarding() {
+  Widget _buildOnboarding(EPlayProvider eplay) {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(24),
       child: Column(
@@ -95,7 +103,10 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
           SizedBox(
             width: double.infinity,
             child: ElevatedButton.icon(
-              onPressed: () => setState(() => _hasProfile = true),
+              onPressed: () => eplay.openCreatorProfile(
+              displayName: 'My Digital Branch',
+              bio: '',
+            ),
               icon: const Icon(Icons.rocket_launch),
               label: const Text('Open Digital Branch'),
               style: ElevatedButton.styleFrom(
@@ -129,7 +140,7 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
 
   // ── Creator Studio ────────────────────────────────────────────────────────
 
-  Widget _buildStudio(AIInsightsNotifier ai) {
+  Widget _buildStudio(AIInsightsNotifier ai, EPlayProvider eplay) {
     return TabBarView(
       controller: _tabs,
       children: [

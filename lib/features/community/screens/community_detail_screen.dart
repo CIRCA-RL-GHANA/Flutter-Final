@@ -203,14 +203,46 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> with Sing
         ]),
       );
     }
-    return ListView.builder(
-      padding: const EdgeInsets.all(12),
-      itemCount: 5,
-      itemBuilder: (ctx, i) => _postCard(i),
+
+    final communityId = _comm['id'] as String?;
+    if (communityId == null) return const SizedBox.shrink();
+
+    return Consumer<CommunityProvider>(
+      builder: (ctx, provider, _) {
+        if (provider.isPostsLoading && provider.postsFor(communityId).isEmpty) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        final posts = provider.postsFor(communityId);
+        if (posts.isEmpty) {
+          return Center(
+            child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Icon(Icons.chat_bubble_outline, size: 48, color: _color.withOpacity(0.3)),
+              const SizedBox(height: 12),
+              const Text('No posts yet. Be the first to post!', style: TextStyle(color: AppColors.textSecondary)),
+            ]),
+          );
+        }
+        return ListView.builder(
+          padding: const EdgeInsets.all(12),
+          itemCount: posts.length,
+          itemBuilder: (ctx, i) => _postCard(posts[i]),
+        );
+      },
     );
   }
 
-  Widget _postCard(int i) {
+  Widget _postCard(Map<String, dynamic> post) {
+    final authorName = post['authorName'] as String? ??
+        post['author'] as String? ??
+        'Community Member';
+    final body = post['body'] as String? ??
+        post['content'] as String? ??
+        post['title'] as String? ??
+        '';
+    final likesCount = (post['likesCount'] as num?)?.toInt() ?? 0;
+    final commentsCount = (post['commentsCount'] as num?)?.toInt() ?? 0;
+    final createdAt = post['createdAt'] as String? ?? '';
+
     return Card(
       margin: const EdgeInsets.only(bottom: 10),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -218,27 +250,50 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> with Sing
         padding: const EdgeInsets.all(14),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Row(children: [
-            CircleAvatar(backgroundColor: _color.withOpacity(0.2), radius: 16, child: Icon(Icons.person, size: 16, color: _color)),
+            CircleAvatar(
+              backgroundColor: _color.withOpacity(0.2),
+              radius: 16,
+              child: Text(
+                authorName.isNotEmpty ? authorName[0].toUpperCase() : '?',
+                style: TextStyle(color: _color, fontWeight: FontWeight.bold, fontSize: 13),
+              ),
+            ),
             const SizedBox(width: 8),
-            Text('Member ${i + 1}', style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
-            const Spacer(),
-            const Text('2h ago', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+            Expanded(child: Text(authorName, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13))),
+            Text(
+              createdAt.isNotEmpty ? _formatDate(createdAt) : '',
+              style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
+            ),
           ]),
-          const SizedBox(height: 8),
-          Text('Post content #${i + 1} — Community discussion in progress. This is a stub.', style: const TextStyle(fontSize: 13, height: 1.5)),
+          if (body.isNotEmpty) ...[
+            const SizedBox(height: 8),
+            Text(body, style: const TextStyle(fontSize: 13, height: 1.5)),
+          ],
           const SizedBox(height: 8),
           Row(children: [
             Icon(Icons.favorite_border, size: 16, color: AppColors.textTertiary),
             const SizedBox(width: 4),
-            const Text('12', style: TextStyle(fontSize: 12, color: AppColors.textTertiary)),
+            Text('$likesCount', style: const TextStyle(fontSize: 12, color: AppColors.textTertiary)),
             const SizedBox(width: 16),
-            const Icon(Icons.comment_outlined, size: 16, color: AppColors.textTertiary),
+            Icon(Icons.comment_outlined, size: 16, color: AppColors.textTertiary),
             const SizedBox(width: 4),
-            const Text('5', style: TextStyle(fontSize: 12, color: AppColors.textTertiary)),
+            Text('$commentsCount', style: const TextStyle(fontSize: 12, color: AppColors.textTertiary)),
           ]),
         ]),
       ),
     );
+  }
+
+  String _formatDate(String iso) {
+    try {
+      final dt = DateTime.parse(iso);
+      final diff = DateTime.now().difference(dt);
+      if (diff.inMinutes < 60) return '${diff.inMinutes}m ago';
+      if (diff.inHours < 24) return '${diff.inHours}h ago';
+      return '${diff.inDays}d ago';
+    } catch (_) {
+      return iso;
+    }
   }
 
   Widget _buildAbout() {

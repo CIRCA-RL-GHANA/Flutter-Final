@@ -1,23 +1,16 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// COMMUNITY MODULE — Community Members Screen
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// COMMUNITY MODULE â€” Community Members Screen
 /// Paginated member list with roles. Admins can ban members.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/services/ai_insights_notifier.dart';
+import '../providers/community_provider.dart';
 import 'community_hub_screen.dart' show kCommunityColor, kCommunityColorDark, kCommunityArchetypes;
 
 const _roles = ['owner', 'admin', 'moderator', 'member'];
-
-// Stub member data
-final _stubMembers = List.generate(18, (i) => {
-  'id': 'user-$i',
-  'name': 'Member ${i + 1}',
-  'role': i == 0 ? 'owner' : (i < 3 ? 'admin' : (i < 6 ? 'moderator' : 'member')),
-  'joinedAt': 'May 2025',
-});
 
 class CommunityMembersScreen extends StatefulWidget {
   final Map<String, dynamic>? community;
@@ -33,21 +26,26 @@ class _CommunityMembersScreenState extends State<CommunityMembersScreen> {
 
   Map<String, dynamic> get _comm => widget.community ?? {};
   String get _type => _comm['type'] as String? ?? 'hub';
+  String? get _communityId => _comm['id'] as String?;
 
   Map<String, dynamic> get _arch =>
       kCommunityArchetypes.firstWhere((a) => a['type'] == _type, orElse: () => kCommunityArchetypes[4]);
 
   Color get _color => Color(_arch['color'] as int);
 
-  bool _isAdmin = true; // stub: current user is admin
+  /// Current user is admin if their role in the community data is owner/admin/moderator.
+  bool _isAdminRole(String? myRole) =>
+      myRole == 'owner' || myRole == 'admin' || myRole == 'moderator';
 
-  List<Map<String, dynamic>> get _filtered {
-    return _stubMembers.where((m) {
-      if (_roleFilter != 'all' && m['role'] != _roleFilter) return false;
-      final q = _searchCtrl.text.trim().toLowerCase();
-      if (q.isNotEmpty && !(m['name']! as String).toLowerCase().contains(q)) return false;
-      return true;
-    }).toList();
+  @override
+  void initState() {
+    super.initState();
+    final id = _communityId;
+    if (id != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        context.read<CommunityProvider>().loadMembers(id);
+      });
+    }
   }
 
   @override
@@ -56,10 +54,28 @@ class _CommunityMembersScreenState extends State<CommunityMembersScreen> {
     super.dispose();
   }
 
+  List<Map<String, dynamic>> _filtered(List<Map<String, dynamic>> members) {
+    return members.where((m) {
+      if (_roleFilter != 'all' && m['role'] != _roleFilter) return false;
+      final q = _searchCtrl.text.trim().toLowerCase();
+      final name = (m['name'] as String? ?? m['displayName'] as String? ?? '').toLowerCase();
+      if (q.isNotEmpty && !name.contains(q)) return false;
+      return true;
+    }).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Consumer<AIInsightsNotifier>(
-      builder: (context, ai, _) {
+    return Consumer2<AIInsightsNotifier, CommunityProvider>(
+      builder: (context, ai, communityProvider, _) {
+        final id = _communityId;
+        final allMembers = id != null ? communityProvider.membersFor(id) : <Map<String, dynamic>>[];
+        final filtered = _filtered(allMembers);
+
+        // Determine current user's role from member list
+        final myRole = communityProvider.activeCommunity?['myRole'] as String?;
+        final canModerate = _isAdminRole(myRole);
+
         return Scaffold(
           backgroundColor: AppColors.backgroundLight,
           appBar: AppBar(
@@ -75,7 +91,7 @@ class _CommunityMembersScreenState extends State<CommunityMembersScreen> {
           ),
           body: Column(
             children: [
-              // ── AI insight ──────────────────────────────────────────
+              // â”€â”€ AI insight â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               if (ai.insights.isNotEmpty)
                 Container(
                   margin: const EdgeInsets.fromLTRB(16, 10, 16, 0),
@@ -88,14 +104,14 @@ class _CommunityMembersScreenState extends State<CommunityMembersScreen> {
                   ]),
                 ),
 
-              // ── Search ──────────────────────────────────────────────
+              // â”€â”€ Search â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
                 child: TextField(
                   controller: _searchCtrl,
                   onChanged: (_) => setState(() {}),
                   decoration: InputDecoration(
-                    hintText: 'Search members…',
+                    hintText: 'Search membersâ€¦',
                     prefixIcon: const Icon(Icons.search, size: 20),
                     filled: true,
                     fillColor: AppColors.inputFill,
@@ -105,7 +121,7 @@ class _CommunityMembersScreenState extends State<CommunityMembersScreen> {
                 ),
               ),
 
-              // ── Role filter chips ──────────────────────────────────
+              // â”€â”€ Role filter chips â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 child: SingleChildScrollView(
@@ -129,24 +145,28 @@ class _CommunityMembersScreenState extends State<CommunityMembersScreen> {
                 ),
               ),
 
-              // ── Member count ───────────────────────────────────────
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Row(children: [
-                  Text('${_filtered.length} members', style: const TextStyle(fontSize: 13, color: AppColors.textSecondary, fontWeight: FontWeight.w500)),
-                ]),
-              ),
-
-              const SizedBox(height: 6),
-
-              // ── List ───────────────────────────────────────────────
-              Expanded(
-                child: ListView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  itemCount: _filtered.length,
-                  itemBuilder: (ctx, i) => _memberTile(_filtered[i]),
+              // â”€â”€ Member count / loading â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              if (communityProvider.isMembersLoading && allMembers.isEmpty)
+                const Expanded(child: Center(child: CircularProgressIndicator()))
+              else ...[
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(children: [
+                    Text('${filtered.length} member${filtered.length == 1 ? '' : 's'}',
+                        style: const TextStyle(fontSize: 13, color: AppColors.textSecondary, fontWeight: FontWeight.w500)),
+                  ]),
                 ),
-              ),
+                const SizedBox(height: 6),
+                Expanded(
+                  child: filtered.isEmpty
+                      ? const Center(child: Text('No members found.', style: TextStyle(color: AppColors.textSecondary)))
+                      : ListView.builder(
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          itemCount: filtered.length,
+                          itemBuilder: (ctx, i) => _memberTile(filtered[i], canModerate),
+                        ),
+                ),
+              ],
             ],
           ),
         );
@@ -154,9 +174,11 @@ class _CommunityMembersScreenState extends State<CommunityMembersScreen> {
     );
   }
 
-  Widget _memberTile(Map<String, dynamic> member) {
-    final role = member['role'] as String;
+  Widget _memberTile(Map<String, dynamic> member, bool canModerate) {
+    final role = member['role'] as String? ?? 'member';
     final isOwner = role == 'owner';
+    final name = member['name'] as String? ?? member['displayName'] as String? ?? 'Member';
+    final joinedAt = member['joinedAt'] as String? ?? member['createdAt'] as String? ?? '';
     final roleColor = switch (role) {
       'owner'     => const Color(0xFFD97706),
       'admin'     => const Color(0xFFDC2626),
@@ -170,10 +192,10 @@ class _CommunityMembersScreenState extends State<CommunityMembersScreen> {
       child: ListTile(
         leading: CircleAvatar(
           backgroundColor: _color.withOpacity(0.15),
-          child: Text((member['name']! as String)[0], style: TextStyle(color: _color, fontWeight: FontWeight.bold)),
+          child: Text(name.isNotEmpty ? name[0].toUpperCase() : '?', style: TextStyle(color: _color, fontWeight: FontWeight.bold)),
         ),
-        title: Text(member['name'] as String, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14)),
-        subtitle: Text('Joined ${member['joinedAt']}', style: const TextStyle(fontSize: 11, color: AppColors.textSecondary)),
+        title: Text(name, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14)),
+        subtitle: Text(joinedAt.isNotEmpty ? 'Joined $joinedAt' : '', style: const TextStyle(fontSize: 11, color: AppColors.textSecondary)),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -182,7 +204,7 @@ class _CommunityMembersScreenState extends State<CommunityMembersScreen> {
               decoration: BoxDecoration(color: roleColor.withOpacity(0.12), borderRadius: BorderRadius.circular(20)),
               child: Text(role.toUpperCase(), style: TextStyle(fontSize: 9, fontWeight: FontWeight.bold, color: roleColor)),
             ),
-            if (_isAdmin && !isOwner) ...[
+            if (canModerate && !isOwner) ...[
               const SizedBox(width: 4),
               PopupMenuButton<String>(
                 icon: const Icon(Icons.more_vert, size: 18, color: AppColors.textTertiary),
@@ -200,18 +222,31 @@ class _CommunityMembersScreenState extends State<CommunityMembersScreen> {
   }
 
   void _handleMemberAction(String action, Map<String, dynamic> member) {
-    if (action == 'ban') {
+    final id = _communityId;
+    final userId = member['id'] as String? ?? member['userId'] as String?;
+    final name = member['name'] as String? ?? member['displayName'] as String? ?? 'Member';
+
+    if (action == 'ban' && id != null && userId != null) {
       showDialog(
         context: context,
         builder: (_) => AlertDialog(
-          title: Text('Ban ${member['name']}?'),
+          title: Text('Ban $name?'),
           content: const Text('This will remove them from the community. They will not be able to rejoin unless unbanned.'),
           actions: [
             TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
             TextButton(
-              onPressed: () {
+              onPressed: () async {
                 Navigator.pop(context);
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${member['name']} has been banned.')));
+                final ok = await context.read<CommunityProvider>().banMember(
+                  communityId: id,
+                  userId: userId,
+                  reason: 'Banned by moderator',
+                );
+                if (mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text(ok ? '$name has been banned.' : 'Failed to ban member. Try again.'),
+                  ));
+                }
               },
               child: const Text('Ban', style: TextStyle(color: Colors.red)),
             ),
@@ -219,7 +254,8 @@ class _CommunityMembersScreenState extends State<CommunityMembersScreen> {
         ),
       );
     } else if (action == 'promote') {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${member['name']} promoted to Admin.')));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('$name promoted to Admin.')));
     }
   }
 }
+

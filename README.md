@@ -1,6 +1,6 @@
 # Frontend — thepg
 
-Flutter 3.2+ cross-platform application for the PROMPT Genie platform. Targets Android, iOS, and Web (PWA).
+Flutter 3.2+ cross-platform application for the genie help platform. Targets Android, iOS, and Web (PWA).
 
 ## Overview
 
@@ -11,7 +11,7 @@ Flutter 3.2+ cross-platform application for the PROMPT Genie platform. Targets A
 | State management | Provider (ChangeNotifier) + Riverpod |
 | Local storage | Hive + SharedPreferences |
 | HTTP client | Dio |
-| App name | PROMPT Genie |
+| App name | genie help |
 | Version | 1.0.0+1 |
 | Production API | `https://api.genieinprompt.app/api/v1` |
 

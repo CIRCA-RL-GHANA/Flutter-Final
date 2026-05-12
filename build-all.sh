@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# PROMPT Genie - Multi-Platform Build Script
+# genie help - Multi-Platform Build Script
 # Builds for iOS, Android, and Web platforms
 # Usage: ./build-all.sh [platform] [environment]
 # Examples:
@@ -32,7 +32,7 @@ VERSION_NAME="${APP_VERSION%%+*}"
 VERSION_CODE="${APP_VERSION##*+}"
 
 echo -e "${BLUE}===============================================${NC}"
-echo -e "${BLUE}PROMPT Genie - Multi-Platform Build Script${NC}"
+echo -e "${BLUE}genie help - Multi-Platform Build Script${NC}"
 echo -e "${BLUE}===============================================${NC}"
 echo -e "Platform:    ${YELLOW}${PLATFORM}${NC}"
 echo -e "Environment: ${YELLOW}${ENVIRONMENT}${NC}"
