@@ -4,8 +4,8 @@ import '../../../core/services/services.dart';
 /// Role category
 enum RoleCategory { individual, business }
 
-/// Individual sub-roles
-enum IndividualRole { buyer, deliveryPartner, transportProvider, contentCreator }
+/// Individual sub-roles — content creation requires a Digital branch (commercial activity)
+enum IndividualRole { buyer, deliveryPartner, transportProvider }
 
 /// Business sub-roles — Owner is NOT a business staff role.
 /// Owner is automatically granted to the individual who creates the entity.
@@ -57,8 +57,6 @@ class RoleProvider extends ChangeNotifier {
           return 'Delivery Partner';
         case IndividualRole.transportProvider:
           return 'Transport Provider';
-        case IndividualRole.contentCreator:
-          return 'Content Creator';
         default:
           return '';
       }

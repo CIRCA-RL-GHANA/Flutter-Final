@@ -39,6 +39,8 @@ enum BranchType {
   shop,
   logisticsProvider,
   transportProvider,
+  /// Content creation is a commercial activity — operates under a Digital branch.
+  digital,
 }
 
 /// Driver specialization within a branch type
@@ -127,7 +129,7 @@ class AppContextModel {
 
 // ─── Module Widget Identifiers ───────────────────────────────────────────────
 
-/// The 10 module widgets on the PROMPT screen
+/// The 12 module widgets on the PROMPT screen
 enum PromptModule {
   goPage,
   market,
@@ -139,6 +141,9 @@ enum PromptModule {
   april,
   userDetails,
   utility,
+  // Commercial modules — owner + administrator only
+  ePlay,
+  communities,
 }
 
 // ─── Role Colors ─────────────────────────────────────────────────────────────
@@ -194,6 +199,10 @@ class RoleColors {
         return const Color(0xFF6366F1); // Indigo (Profile)
       case PromptModule.utility:
         return const Color(0xFF64748B); // Slate (Utility)
+      case PromptModule.ePlay:
+        return const Color(0xFFE11D48); // Rose (Entertainment)
+      case PromptModule.communities:
+        return const Color(0xFF7C3AED); // Purple (Communities)
     }
   }
 }
@@ -232,6 +241,8 @@ class WidgetVisibility {
           PromptModule.april: _fullAccess, // ONLY for Owner
           PromptModule.userDetails: _fullAccess,
           PromptModule.utility: _fullAccess,
+          PromptModule.ePlay: _fullAccess,
+          PromptModule.communities: _fullAccess,
         };
       case UserRole.administrator:
         return {
@@ -245,6 +256,8 @@ class WidgetVisibility {
           PromptModule.april: _hidden,
           PromptModule.userDetails: _fullAccess,
           PromptModule.utility: _fullAccess,
+          PromptModule.ePlay: _fullAccess,
+          PromptModule.communities: _fullAccess,
         };
       case UserRole.branchManager:
         return {
@@ -258,6 +271,8 @@ class WidgetVisibility {
           PromptModule.april: _hidden,
           PromptModule.userDetails: _fullAccess,
           PromptModule.utility: _fullAccess,
+          PromptModule.ePlay: _hidden,
+          PromptModule.communities: _hidden,
         };
       case UserRole.socialOfficer:
       case UserRole.branchSocialOfficer:
@@ -272,6 +287,8 @@ class WidgetVisibility {
           PromptModule.april: _hidden,
           PromptModule.userDetails: _fullAccess,
           PromptModule.utility: _fullAccess,
+          PromptModule.ePlay: _hidden,
+          PromptModule.communities: _hidden,
         };
       case UserRole.monitor:
       case UserRole.branchMonitor:
@@ -286,6 +303,8 @@ class WidgetVisibility {
           PromptModule.april: _hidden,
           PromptModule.userDetails: _fullAccess,
           PromptModule.utility: _fullAccess,
+          PromptModule.ePlay: _hidden,
+          PromptModule.communities: _hidden,
         };
       case UserRole.responseOfficer:
       case UserRole.branchResponseOfficer:
@@ -300,6 +319,8 @@ class WidgetVisibility {
           PromptModule.april: _hidden,
           PromptModule.userDetails: _fullAccess,
           PromptModule.utility: _fullAccess,
+          PromptModule.ePlay: _hidden,
+          PromptModule.communities: _hidden,
         };
       case UserRole.driver:
         return {
@@ -313,6 +334,8 @@ class WidgetVisibility {
           PromptModule.april: _hidden,
           PromptModule.userDetails: _fullAccess,
           PromptModule.utility: _fullAccess,
+          PromptModule.ePlay: _hidden,
+          PromptModule.communities: _hidden,
         };
       case UserRole.none:
         return {
@@ -326,6 +349,8 @@ class WidgetVisibility {
           PromptModule.april: _hidden,
           PromptModule.userDetails: _fullAccess, // Always visible
           PromptModule.utility: _fullAccess,
+          PromptModule.ePlay: _hidden,
+          PromptModule.communities: _hidden,
         };
     }
   }
@@ -527,6 +552,24 @@ class ModuleInfo {
           icon: Icons.build_circle,
           color: RoleColors.forModule(module),
           description: 'Global Tools - Search, Help, Settings, Accessibility',
+        );
+      case PromptModule.ePlay:
+        return ModuleInfo(
+          module: module,
+          name: 'ePLAY',
+          shortName: 'ePlay',
+          icon: Icons.play_circle_outline,
+          color: RoleColors.forModule(module),
+          description: 'Entertainment Hub — Media, Content, Digital Experiences',
+        );
+      case PromptModule.communities:
+        return ModuleInfo(
+          module: module,
+          name: 'COMMUNITIES',
+          shortName: 'Community',
+          icon: Icons.people_outline,
+          color: RoleColors.forModule(module),
+          description: 'Social Communities — Groups, Feeds, Discussions',
         );
     }
   }

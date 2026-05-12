@@ -239,13 +239,6 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
         Icons.directions_car_outlined,
         const Color(0xFF4361EE),
       ),
-      _SubRoleData(
-        IndividualRole.contentCreator,
-        'Content Creator',
-        'Social features focus',
-        Icons.create_outlined,
-        const Color(0xFF4361EE),
-      ),
     ];
 
     return Column(
