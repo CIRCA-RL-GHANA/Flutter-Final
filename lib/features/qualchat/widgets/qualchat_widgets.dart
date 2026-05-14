@@ -497,7 +497,7 @@ class HeyYaCard extends StatelessWidget {
             ),
             // Compatibility breakdown
             if (r.compatibility != null) ...[
-            if (r.compatibility != null) ...[              const SizedBox(height: 10),
+              const SizedBox(height: 10),
               _CompatibilityMiniBar(compatibility: r.compatibility!),
             ],
           ],

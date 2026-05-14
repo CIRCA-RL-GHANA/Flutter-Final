@@ -229,6 +229,10 @@ class _PromptScreenState extends State<PromptScreen> {
         );
       case PromptModule.utility:
         return const UtilityWidgetContent();
+      case PromptModule.ePlay:
+        return const UtilityWidgetContent();
+      case PromptModule.communities:
+        return const UtilityWidgetContent();
     }
   }
 
@@ -262,6 +266,10 @@ class _PromptScreenState extends State<PromptScreen> {
         return AppRoutes.userDetailsMaster;
       case PromptModule.utility:
         return AppRoutes.utilityDashboard;
+      case PromptModule.ePlay:
+        return null;
+      case PromptModule.communities:
+        return null;
     }
   }
 

@@ -103,22 +103,8 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
         child: SafeArea(
           child: Responsive.constrained(
             child: Column(
-              children: [                Consumer<AIInsightsNotifier>(
-                  builder: (context, ai, _) {
-                    if (ai.insights.isEmpty) return const SizedBox.shrink();
-                    return Container(
-                      color: const Color(0xFF4361EE).withOpacity(0.07),
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                      child: Row(children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: const Color(0xFF4361EE)),
-                        const SizedBox(width: 8),
-                        Expanded(child: Text('AI: ${ai.insights.first['title'] ?? ''}',
-                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: const Color(0xFF4361EE)),
-                          maxLines: 1, overflow: TextOverflow.ellipsis)),
-                      ]),
-                    );
-                  },
-                ),                // Back button
+              children: [
+                // Back button
                 Padding(
                   padding: const EdgeInsets.all(16),
                   child: Align(
@@ -256,7 +242,7 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
                             decoration: BoxDecoration(
                               color: const Color(0xFF0E0E1A).withOpacity(0.08),
                               borderRadius: BorderRadius.circular(6),
-                              border: Border.all(color: const Color(0xFF0E0E1A)10),
+                              border: Border.all(color: const Color(0xFF0E0E1A)),
                             ),
                             child: Column(
                               children: [

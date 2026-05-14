@@ -146,9 +146,9 @@ class _PreLoadingScreenState extends State<PreLoadingScreen> {
                       child: CircularProgressIndicator(
                         value: deviceCheck.progress,
                         strokeWidth: 3,
-                        backgroundColor: const Color(0xFF08080F)12,
+                        backgroundColor: const Color(0xFF08080F),
                         valueColor: const AlwaysStoppedAnimation<Color>(
-                            const Color(0xFF4361EE)),
+                            Color(0xFF4361EE)),
                       ),
                     ),
                     const SizedBox(height: 24),
@@ -287,7 +287,7 @@ class _ErrorDisplay extends StatelessWidget {
                 onPressed: onAction,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF4361EE),
-                  foregroundcolor: const Color(0xFF0E0E1A),
+                  foregroundColor: const Color(0xFF0E0E1A),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(6),
                   ),
