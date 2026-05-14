@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/services/fintech_service.dart';
 import '../../../../core/services/ai_insights_notifier.dart';
 
-const _kIndigo = Color(0xFF3F51B5);
+const _kIndigo = Color(0xFF22BDD8);
 
 class DepositScreen extends StatefulWidget {
   const DepositScreen({super.key});

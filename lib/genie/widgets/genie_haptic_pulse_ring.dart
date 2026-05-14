@@ -36,7 +36,7 @@ class _GenieHapticPulseRingState extends State<GenieHapticPulseRing>
   late final Animation<double> _scale;
   late final Animation<double> _opacity;
 
-  Color _color = const Color(0xFF3F51B5);
+  Color _color = const Color(0xFF22BDD8);
 
   @override
   void initState() {

@@ -1,4 +1,4 @@
-ï»¿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/constants/app_strings.dart';
@@ -9,11 +9,11 @@ import '../widgets/buttons.dart';
 import '../widgets/onboarding_header.dart';
 
 
-// OS palette â€” mirrors splash / welcome
+// OS palette — mirrors splash / welcome
 const Color _kBg        = Color(0xFF08080F);
 const Color _kSurface   = Color(0xFF0E0E1A);
 const Color _kBorder    = Color(0xFF1C1C2E);
-const Color _kAccent    = Color(0xFF4361EE);
+const Color _kAccent    = Color(0xFF22BDD8);
 const Color _kAccentDim = Color(0xFF1E2A6E);
 const Color _kText      = Color(0xFFE8E8F0);
 const Color _kTextDim   = Color(0xFF6B6B88);
@@ -94,7 +94,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
                                 child: _RoleCategoryCard(
                                   title: AppStrings.individual,
                                   icon: Icons.person_outline,
-                                  color: const Color(0xFF4361EE),
+                                  color: const Color(0xFF22BDD8),
                                   features: role.getCategoryFeatures(
                                       RoleCategory.individual),
                                   isSelected: role.selectedCategory ==
@@ -155,10 +155,10 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
                           Container(
                             padding: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
-                              color: const Color(0xFF4361EE).withOpacity(0.08),
+                              color: const Color(0xFF22BDD8).withOpacity(0.08),
                               borderRadius: BorderRadius.circular(12),
                               border: Border.all(
-                                color: const Color(0xFF4361EE).withOpacity(0.2),
+                                color: const Color(0xFF22BDD8).withOpacity(0.2),
                               ),
                             ),
                             child: Row(
@@ -166,19 +166,19 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
                                 Icon(
                                   Icons.info_outline,
                                   size: 18,
-                                  color: const Color(0xFF4361EE),
+                                  color: const Color(0xFF22BDD8),
                                 ),
                                 const SizedBox(width: 8),
                                 Expanded(
                                   child: Text(
                                     role.selectedCategory == RoleCategory.individual
-                                        ? 'Your individual account gives you Owner access â€” shop, socialise, and manage your personal finances.'
+                                        ? 'Your individual account gives you Owner access — shop, socialise, and manage your personal finances.'
                                         : role.selectedCategory == RoleCategory.business
                                             ? 'Select the staff role you have been invited to join this business entity as.'
                                             : 'You can change your role anytime in settings.',
                                     style: TextStyle(
                                       fontSize: 12,
-                                      color: const Color(0xFF4361EE),
+                                      color: const Color(0xFF22BDD8),
                                     ),
                                   ),
                                 ),
@@ -223,7 +223,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
         'Buyer',
         'Primary shopping & social',
         Icons.shopping_bag_outlined,
-        const Color(0xFF4361EE),
+        const Color(0xFF22BDD8),
       ),
       _SubRoleData(
         IndividualRole.deliveryPartner,
@@ -237,7 +237,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
         'Transport Provider',
         'Offer rides',
         Icons.directions_car_outlined,
-        const Color(0xFF4361EE),
+        const Color(0xFF22BDD8),
       ),
     ];
 
@@ -254,7 +254,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
   }
 
   Widget _buildBusinessSubRoles(RoleProvider role) {
-    // Owner is NOT listed here â€” Owner is the individual who created the entity,
+    // Owner is NOT listed here — Owner is the individual who created the entity,
     // not an assignable staff role. Business sub-roles are staff positions only.
     final subRoles = [
       _SubRoleData(

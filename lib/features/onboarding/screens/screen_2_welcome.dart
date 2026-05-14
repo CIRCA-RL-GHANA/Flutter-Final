@@ -21,7 +21,7 @@ class WelcomeScreen extends StatefulWidget {
 const Color _kBg        = Color(0xFF08080F);
 const Color _kSurface   = Color(0xFF0E0E1A);
 const Color _kBorder    = Color(0xFF1C1C2E);
-const Color _kAccent    = Color(0xFF4361EE);
+const Color _kAccent    = Color(0xFF22BDD8);
 const Color _kAccentDim = Color(0xFF1E2A6E);
 const Color _kText      = Color(0xFFE8E8F0);
 const Color _kTextDim   = Color(0xFF6B6B88);

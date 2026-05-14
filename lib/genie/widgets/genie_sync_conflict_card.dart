@@ -72,7 +72,7 @@ class GenieSyncConflictCard extends StatelessWidget {
                   label: 'Your offline version',
                   timestamp: conflict.localTimestamp,
                   data: conflict.localVersion,
-                  accentColor: const Color(0xFF3F51B5),
+                  accentColor: const Color(0xFF22BDD8),
                 ),
               ),
               const SizedBox(width: 8),

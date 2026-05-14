@@ -33,12 +33,12 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
-      primaryColor: const Color(0xFF4361EE),
+      primaryColor: const Color(0xFF22BDD8),
       scaffoldBackgroundColor: const Color(0xFF08080F),
       colorScheme: ColorScheme.fromSeed(
-        seedColor: const Color(0xFF4361EE),
+        seedColor: const Color(0xFF22BDD8),
         brightness: Brightness.dark,
-        primary: const Color(0xFF4361EE),
+        primary: const Color(0xFF22BDD8),
         secondary: const Color(0xFF1E2A6E),
         surface: const Color(0xFF0E0E1A),
         error: const Color(0xFFEF4444),
@@ -249,7 +249,7 @@ class AppTheme {
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(6),
-        borderSide: const BorderSide(color: Color(0xFF4361EE), width: 1.5),
+        borderSide: const BorderSide(color: Color(0xFF22BDD8), width: 1.5),
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(6),
@@ -326,7 +326,7 @@ class AppTheme {
     return ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         minimumSize: const Size(double.infinity, 50),
-        backgroundColor: const Color(0xFF4361EE),
+        backgroundColor: const Color(0xFF22BDD8),
         foregroundColor: Colors.white,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(6)),

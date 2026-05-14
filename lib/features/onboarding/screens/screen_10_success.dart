@@ -1,4 +1,4 @@
-﻿import 'dart:math';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
@@ -7,21 +7,21 @@ import '../../../core/utils/responsive.dart';
 import '../providers/onboarding_provider.dart';
 import '../widgets/buttons.dart';
 
-// OS palette — mirrors splash / welcome
+// OS palette � mirrors splash / welcome
 const Color _kBg        = Color(0xFF08080F);
 const Color _kSurface   = Color(0xFF0E0E1A);
 const Color _kBorder    = Color(0xFF1C1C2E);
-const Color _kAccent    = Color(0xFF4361EE);
+const Color _kAccent    = Color(0xFF22BDD8);
 const Color _kAccentDim = Color(0xFF1E2A6E);
 const Color _kText      = Color(0xFFE8E8F0);
 const Color _kTextDim   = Color(0xFF6B6B88);
 
 // Confetti in OS accent palette
 const List<Color> _kConfettiColors = [
-  Color(0xFF4361EE),
+  Color(0xFF22BDD8),
   Color(0xFF10B981),
   Color(0xFF6B6B88),
-  Color(0xFF4361EE),
+  Color(0xFF22BDD8),
   Color(0xFF1E2A6E),
   Color(0xFFE8E8F0),
 ];
@@ -81,7 +81,7 @@ class _SuccessScreenState extends State<SuccessScreen>
       vsync: this,
     )..repeat();
 
-    // Checkmark scale: 0 â†’ 1.2 â†’ 1.0
+    // Checkmark scale: 0 → 1.2 → 1.0
     _checkmarkScale = TweenSequence<double>([
       TweenSequenceItem(
         tween: Tween(begin: 0.0, end: 1.2)
@@ -251,22 +251,22 @@ class _SuccessScreenState extends State<SuccessScreen>
                             setState(() => _currentPage = index),
                         children: const [
                           _FeatureCard(
-                            emoji: 'ðŸŽ¯',
+                            emoji: '🎯',
                             title: 'Your PROMPT Screen',
                             subtitle: 'Everything you need, personalized',
                           ),
                           _FeatureCard(
-                            emoji: 'ðŸ’¸',
+                            emoji: '💸',
                             title: 'GO PAGE Financial Hub',
                             subtitle: 'Manage QPoints and transactions',
                           ),
                           _FeatureCard(
-                            emoji: 'ðŸ›ï¸',
+                            emoji: '🛍️',
                             title: 'MARKET Shopping',
                             subtitle: 'Shop from local businesses',
                           ),
                           _FeatureCard(
-                            emoji: 'ðŸ’¬',
+                            emoji: '💬',
                             title: 'qualChat Connect',
                             subtitle: 'Message anyone in the ecosystem',
                           ),
@@ -287,7 +287,7 @@ class _SuccessScreenState extends State<SuccessScreen>
                         height: 8,
                         decoration: BoxDecoration(
                           color: _currentPage == index
-                              ? const Color(0xFF4361EE)
+                              ? const Color(0xFF22BDD8)
                               : const Color(0xFF1C1C2E),
                           borderRadius: BorderRadius.circular(4),
                         ),

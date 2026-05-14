@@ -156,7 +156,7 @@ class _GenieStepperCardState extends State<GenieStepperCard> {
   Color _cardColor(bool success, bool failed) {
     if (success) return const Color(0xFF4CAF50);
     if (failed) return const Color(0xFFF44336);
-    return const Color(0xFF3F51B5);
+    return const Color(0xFF22BDD8);
   }
 
   IconData _headerIcon(bool success, bool failed) {
@@ -232,7 +232,7 @@ class _StepRow extends StatelessWidget {
       case OutboxStepStatus.compensated:
         return const Color(0xFFFF9800);
       case OutboxStepStatus.running:
-        return const Color(0xFF3F51B5);
+        return const Color(0xFF22BDD8);
       case OutboxStepStatus.pending:
         return Colors.black38;
     }

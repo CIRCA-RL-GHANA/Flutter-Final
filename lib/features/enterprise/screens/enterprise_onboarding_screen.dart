@@ -119,7 +119,7 @@ class _EnterpriseOnboardingScreenState
               const SizedBox(height: 8),
               DropdownButtonFormField<String>(
                 value: _selectedType,
-                dropdownColor: const Color(0xFF1A1A2E),
+                dropdownColor: const Color(0xFF11131C),
                 style: const TextStyle(color: Colors.white),
                 decoration: _inputDecoration('Enterprise Type'),
                 items: _enterpriseTypes
@@ -239,7 +239,7 @@ class _EnterpriseOnboardingScreenState
         labelStyle: const TextStyle(color: Colors.white60),
         hintStyle: const TextStyle(color: Colors.white30),
         filled: true,
-        fillColor: const Color(0xFF1A1A2E),
+        fillColor: const Color(0xFF11131C),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: const BorderSide(color: Color(0xFF2D2D44)),

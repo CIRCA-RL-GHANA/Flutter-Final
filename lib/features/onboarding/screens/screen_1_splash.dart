@@ -21,7 +21,7 @@ class SplashScreen extends StatefulWidget {
 // ── OS palette (independent of consumer theme) ───────────────────────────────
 const Color _kBg       = Color(0xFF08080F); // near-black with blue tint
 const Color _kGrid     = Color(0xFF0E0E1A); // subtle grid lines
-const Color _kAccent   = Color(0xFF4361EE); // electric blue — system authority
+const Color _kAccent   = Color(0xFF22BDD8); // electric blue — system authority
 const Color _kAccentDim = Color(0xFF1E2A6E);
 
 class _SplashScreenState extends State<SplashScreen>

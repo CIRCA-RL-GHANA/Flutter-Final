@@ -155,7 +155,7 @@ class RoleColors {
   static Color forRole(UserRole role) {
     switch (role) {
       case UserRole.owner:
-        return const Color(0xFF4361EE); // Accent Blue — individual entity
+        return const Color(0xFF22BDD8); // Accent Blue — individual entity
       case UserRole.administrator:
         return const Color(0xFF2563EB); // Blue
       case UserRole.branchManager:

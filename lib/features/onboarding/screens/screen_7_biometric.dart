@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/constants/app_strings.dart';
@@ -11,11 +11,11 @@ import '../widgets/buttons.dart';
 import '../widgets/onboarding_header.dart';
 
 
-// OS palette — mirrors splash / welcome
+// OS palette � mirrors splash / welcome
 const Color _kBg        = Color(0xFF08080F);
 const Color _kSurface   = Color(0xFF0E0E1A);
 const Color _kBorder    = Color(0xFF1C1C2E);
-const Color _kAccent    = Color(0xFF4361EE);
+const Color _kAccent    = Color(0xFF22BDD8);
 const Color _kAccentDim = Color(0xFF1E2A6E);
 const Color _kText      = Color(0xFFE8E8F0);
 const Color _kTextDim   = Color(0xFF6B6B88);
@@ -174,12 +174,12 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
                 height: 140,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: const Color(0xFF4361EE).withOpacity(
+                  color: const Color(0xFF22BDD8).withOpacity(
                     0.08 + 0.05 * _animController.value,
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: const Color(0xFF4361EE).withOpacity(
+                      color: const Color(0xFF22BDD8).withOpacity(
                         0.1 + 0.1 * _animController.value,
                       ),
                       blurRadius: 20 + 10 * _animController.value,
@@ -190,7 +190,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
                 child: Icon(
                   _getBiometricIcon(biometric.biometricType),
                   size: 60,
-                  color: const Color(0xFF4361EE),
+                  color: const Color(0xFF22BDD8),
                 ),
               );
             },
@@ -237,7 +237,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
                   onChanged: (value) {
                     biometric.setBiometricEnabled(value);
                   },
-                  activeColor: const Color(0xFF4361EE),
+                  activeColor: const Color(0xFF22BDD8),
                 ),
               ],
             ),
@@ -255,7 +255,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
                 borderRadius: BorderRadius.circular(6),
                 border: Border.all(
                   color: biometric.consentGiven
-                      ? const Color(0xFF4361EE)
+                      ? const Color(0xFF22BDD8)
                       : const Color(0xFF1C1C2E),
                 ),
               ),
@@ -266,7 +266,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
                         ? Icons.check_box
                         : Icons.check_box_outline_blank,
                     color: biometric.consentGiven
-                        ? const Color(0xFF4361EE)
+                        ? const Color(0xFF22BDD8)
                         : const Color(0xFF3A3A52),
                     size: 24,
                   ),
@@ -348,12 +348,12 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
             height: 100,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: const Color(0xFF4361EE).withOpacity(0.1),
+              color: const Color(0xFF22BDD8).withOpacity(0.1),
             ),
             child: const Icon(
               Icons.pin_outlined,
               size: 48,
-              color: const Color(0xFF4361EE),
+              color: const Color(0xFF22BDD8),
             ),
           ),
 

@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/constants/app_strings.dart';
@@ -8,11 +8,11 @@ import '../widgets/buttons.dart';
 import '../widgets/progress_indicators.dart';
 
 
-// OS palette — mirrors splash / welcome
+// OS palette � mirrors splash / welcome
 const Color _kBg        = Color(0xFF08080F);
 const Color _kSurface   = Color(0xFF0E0E1A);
 const Color _kBorder    = Color(0xFF1C1C2E);
-const Color _kAccent    = Color(0xFF4361EE);
+const Color _kAccent    = Color(0xFF22BDD8);
 const Color _kAccentDim = Color(0xFF1E2A6E);
 const Color _kText      = Color(0xFFE8E8F0);
 const Color _kTextDim   = Color(0xFF6B6B88);
@@ -36,7 +36,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
       title: 'Your PROMPT Screen',
       description: 'This is your personalized dashboard. Tap any widget to interact with it.',
       icon: Icons.dashboard_customize_outlined,
-      color: const Color(0xFF4361EE),
+      color: const Color(0xFF22BDD8),
       instruction: 'Tap to explore widgets',
     ),
     _TutorialStep(
@@ -50,7 +50,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
       title: 'Your Role Features',
       description: 'Based on your selected role, you have unique features and widgets.',
       icon: Icons.person_outline,
-      color: const Color(0xFF4361EE),
+      color: const Color(0xFF22BDD8),
       instruction: 'Explore your role-specific tools',
     ),
     _TutorialStep(
@@ -64,7 +64,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
       title: 'Get Help Anytime',
       description: 'Tap the help icon anywhere in the app to get instant assistance.',
       icon: Icons.help_outline,
-      color: const Color(0xFF4361EE),
+      color: const Color(0xFF22BDD8),
       instruction: 'Look for the help icon',
     ),
   ];

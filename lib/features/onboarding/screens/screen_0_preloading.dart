@@ -1,14 +1,14 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
 import '../providers/device_check_provider.dart';
 
 
-// OS palette — mirrors splash / welcome
+// OS palette � mirrors splash / welcome
 const Color _kBg        = Color(0xFF08080F);
 const Color _kSurface   = Color(0xFF0E0E1A);
 const Color _kBorder    = Color(0xFF1C1C2E);
-const Color _kAccent    = Color(0xFF4361EE);
+const Color _kAccent    = Color(0xFF22BDD8);
 const Color _kAccentDim = Color(0xFF1E2A6E);
 const Color _kText      = Color(0xFFE8E8F0);
 const Color _kTextDim   = Color(0xFF6B6B88);
@@ -44,10 +44,10 @@ class _PreLoadingScreenState extends State<PreLoadingScreen> {
     if (!mounted) return;
 
     if (passed) {
-      // All checks passed â†’ go to splash
+      // All checks passed → go to splash
       Navigator.of(context).pushReplacementNamed(AppRoutes.splash);
     } else {
-      // Failed checks â†’ show appropriate error
+      // Failed checks → show appropriate error
       _handleFailure(deviceCheck);
     }
   }
@@ -148,7 +148,7 @@ class _PreLoadingScreenState extends State<PreLoadingScreen> {
                         strokeWidth: 3,
                         backgroundColor: const Color(0xFF08080F),
                         valueColor: const AlwaysStoppedAnimation<Color>(
-                            Color(0xFF4361EE)),
+                            Color(0xFF22BDD8)),
                       ),
                     ),
                     const SizedBox(height: 24),
@@ -286,7 +286,7 @@ class _ErrorDisplay extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: onAction,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF4361EE),
+                  backgroundColor: const Color(0xFF22BDD8),
                   foregroundColor: const Color(0xFF0E0E1A),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(6),

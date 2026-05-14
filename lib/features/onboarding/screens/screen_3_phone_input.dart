@@ -1,4 +1,4 @@
-﻿import 'dart:async';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -12,11 +12,11 @@ import '../widgets/buttons.dart';
 import '../widgets/onboarding_header.dart';
 
 
-// OS palette — mirrors splash / welcome
+// OS palette � mirrors splash / welcome
 const Color _kBg        = Color(0xFF08080F);
 const Color _kSurface   = Color(0xFF0E0E1A);
 const Color _kBorder    = Color(0xFF1C1C2E);
-const Color _kAccent    = Color(0xFF4361EE);
+const Color _kAccent    = Color(0xFF22BDD8);
 const Color _kAccentDim = Color(0xFF1E2A6E);
 const Color _kText      = Color(0xFFE8E8F0);
 const Color _kTextDim   = Color(0xFF6B6B88);
@@ -40,16 +40,16 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
 
   // Country data
   final List<_CountryData> _countries = [
-    const _CountryData('US', 'United States', '+1', 'ðŸ‡ºðŸ‡¸'),
-    const _CountryData('GB', 'United Kingdom', '+44', 'ðŸ‡¬ðŸ‡§'),
-    const _CountryData('GH', 'Ghana', '+233', 'ðŸ‡¬ðŸ‡­'),
-    const _CountryData('NG', 'Nigeria', '+234', 'ðŸ‡³ðŸ‡¬'),
-    const _CountryData('CA', 'Canada', '+1', 'ðŸ‡¨ðŸ‡¦'),
-    const _CountryData('DE', 'Germany', '+49', 'ðŸ‡©ðŸ‡ª'),
-    const _CountryData('FR', 'France', '+33', 'ðŸ‡«ðŸ‡·'),
-    const _CountryData('IN', 'India', '+91', 'ðŸ‡®ðŸ‡³'),
-    const _CountryData('KE', 'Kenya', '+254', 'ðŸ‡°ðŸ‡ª'),
-    const _CountryData('ZA', 'South Africa', '+27', 'ðŸ‡¿ðŸ‡¦'),
+    const _CountryData('US', 'United States', '+1', '🇺🇸'),
+    const _CountryData('GB', 'United Kingdom', '+44', '🇬🇧'),
+    const _CountryData('GH', 'Ghana', '+233', '🇬🇭'),
+    const _CountryData('NG', 'Nigeria', '+234', '🇳🇬'),
+    const _CountryData('CA', 'Canada', '+1', '🇨🇦'),
+    const _CountryData('DE', 'Germany', '+49', '🇩🇪'),
+    const _CountryData('FR', 'France', '+33', '🇫🇷'),
+    const _CountryData('IN', 'India', '+91', '🇮🇳'),
+    const _CountryData('KE', 'Kenya', '+254', '🇰🇪'),
+    const _CountryData('ZA', 'South Africa', '+27', '🇿🇦'),
   ];
 
   late _CountryData _selectedCountry;
@@ -130,12 +130,12 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
     if (!mounted) return;
 
     if (result == NumberCheckResult.existingUser) {
-      // Existing user â†’ welcome back flow
+      // Existing user → welcome back flow
       onboarding.setReturningUser(true);
       Navigator.of(context).pushNamed(AppRoutes.welcomeBack);
     } else if (result == NumberCheckResult.newUser ||
         result == NumberCheckResult.valid) {
-      // New user â†’ send OTP
+      // New user → send OTP
       await phoneAuth.sendOtp();
       if (!mounted) return;
 
@@ -367,7 +367,7 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
                                   color: _validationState ==
                                           _ValidationState.valid
                                       ? const Color(0xFF10B981).withOpacity(0.1)
-                                      : const Color(0xFF4361EE)
+                                      : const Color(0xFF22BDD8)
                                           .withOpacity(0.05),
                                   shape: BoxShape.circle,
                                 ),
@@ -377,7 +377,7 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
                                   color: _validationState ==
                                           _ValidationState.valid
                                       ? const Color(0xFF10B981).withOpacity(0.5)
-                                      : const Color(0xFF4361EE)
+                                      : const Color(0xFF22BDD8)
                                           .withOpacity(0.2),
                                 ),
                               );
@@ -432,7 +432,7 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
       case _ValidationState.empty:
         return const Color(0xFF1C1C2E);
       case _ValidationState.typing:
-        return const Color(0xFF4361EE);
+        return const Color(0xFF22BDD8);
       case _ValidationState.valid:
         return const Color(0xFF10B981);
       case _ValidationState.invalid:
@@ -450,7 +450,7 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
           height: 20,
           child: CircularProgressIndicator(
             strokeWidth: 2,
-            color: const Color(0xFF4361EE),
+            color: const Color(0xFF22BDD8),
           ),
         );
       case _ValidationState.valid:
@@ -641,12 +641,12 @@ class _CountryPickerSheetState extends State<_CountryPickerSheet> {
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       color: isSelected
-                          ? const Color(0xFF4361EE)
+                          ? const Color(0xFF22BDD8)
                           : const Color(0xFF6B6B88),
                     ),
                   ),
                   selected: isSelected,
-                  selectedTileColor: const Color(0xFF4361EE).withOpacity(0.05),
+                  selectedTileColor: const Color(0xFF22BDD8).withOpacity(0.05),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),

@@ -5,7 +5,7 @@ class AppColors {
 
   // Primary Brand Colors
   static const Color primary = Color(0xFF1A237E);
-  static const Color primaryLight = Color(0xFF3F51B5);
+  static const Color primaryLight = Color(0xFF22BDD8);
   static const Color primaryDark = Color(0xFF0F0F23);
   static const Color secondary = Color(0xFF2D1B69);
 
@@ -32,7 +32,7 @@ class AppColors {
   static const Color inputFill = Color(0xFFF3F4F6);
   static const Color inputFillDark = Color(0xFF2A2A3E);
   static const Color inputBorder = Color(0xFFE5E7EB);
-  static const Color inputBorderFocused = Color(0xFF3F51B5);
+  static const Color inputBorderFocused = Color(0xFF22BDD8);
 
   // State Colors
   static const Color success = Color(0xFF10B981);
@@ -70,7 +70,7 @@ class AppColors {
   // Confetti
   static const List<Color> confettiColors = [
     Color(0xFFFFD700),
-    Color(0xFF3F51B5),
+    Color(0xFF22BDD8),
     Color(0xFF10B981),
     Color(0xFFEF4444),
     Color(0xFF8B5CF6),

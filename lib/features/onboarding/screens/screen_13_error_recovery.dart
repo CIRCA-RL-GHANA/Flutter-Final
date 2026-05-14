@@ -1,14 +1,14 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import '../../../core/constants/app_strings.dart';
 import '../../../core/utils/responsive.dart';
 import '../widgets/buttons.dart';
 
 
-// OS palette — mirrors splash / welcome
+// OS palette � mirrors splash / welcome
 const Color _kBg        = Color(0xFF08080F);
 const Color _kSurface   = Color(0xFF0E0E1A);
 const Color _kBorder    = Color(0xFF1C1C2E);
-const Color _kAccent    = Color(0xFF4361EE);
+const Color _kAccent    = Color(0xFF22BDD8);
 const Color _kAccentDim = Color(0xFF1E2A6E);
 const Color _kText      = Color(0xFFE8E8F0);
 const Color _kTextDim   = Color(0xFF6B6B88);
@@ -139,7 +139,7 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
       case ErrorType.accountDuplicate:
         return _ErrorConfig(
           icon: Icons.people_outline_rounded,
-          iconColor: const Color(0xFF4361EE),
+          iconColor: const Color(0xFF22BDD8),
           title: 'Account Already Exists',
           message: widget.errorMessage ??
               'An account with this information already exists.',
@@ -205,7 +205,7 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
       case ErrorType.deviceChange:
         return _ErrorConfig(
           icon: Icons.devices_rounded,
-          iconColor: const Color(0xFF4361EE),
+          iconColor: const Color(0xFF22BDD8),
           title: 'New Device Detected',
           message: 'Transfer your account to this device securely.',
           primaryAction: 'Scan QR Code',
@@ -338,7 +338,7 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
                                           width: 24,
                                           height: 24,
                                           decoration: BoxDecoration(
-                                            color: const Color(0xFF4361EE)
+                                            color: const Color(0xFF22BDD8)
                                                 .withOpacity(0.1),
                                             shape: BoxShape.circle,
                                           ),
@@ -348,7 +348,7 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
                                               style: const TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w600,
-                                                color: const Color(0xFF4361EE),
+                                                color: const Color(0xFF22BDD8),
                                               ),
                                             ),
                                           ),

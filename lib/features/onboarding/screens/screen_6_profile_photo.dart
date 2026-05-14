@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/constants/app_strings.dart';
@@ -11,11 +11,11 @@ import '../widgets/onboarding_header.dart';
 import '../widgets/progress_indicators.dart';
 
 
-// OS palette — mirrors splash / welcome
+// OS palette � mirrors splash / welcome
 const Color _kBg        = Color(0xFF08080F);
 const Color _kSurface   = Color(0xFF0E0E1A);
 const Color _kBorder    = Color(0xFF1C1C2E);
-const Color _kAccent    = Color(0xFF4361EE);
+const Color _kAccent    = Color(0xFF22BDD8);
 const Color _kAccentDim = Color(0xFF1E2A6E);
 const Color _kText      = Color(0xFFE8E8F0);
 const Color _kTextDim   = Color(0xFF6B6B88);
@@ -101,7 +101,7 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
             _PhotoOptionTile(
               icon: Icons.camera_alt_outlined,
               label: AppStrings.takePhoto,
-              color: const Color(0xFF4361EE),
+              color: const Color(0xFF22BDD8),
               onTap: () {
                 Navigator.pop(context);
                 _pickPhoto('camera');
@@ -119,7 +119,7 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
             _PhotoOptionTile(
               icon: Icons.auto_awesome,
               label: AppStrings.generateAiAvatar,
-              color: const Color(0xFF4361EE),
+              color: const Color(0xFF22BDD8),
               onTap: () {
                 Navigator.pop(context);
                 _generateAiAvatar();
@@ -206,7 +206,7 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                                         color: const Color(0xFF0E0E1A),
                                         border: Border.all(
                                           color: profile.hasPhoto
-                                              ? const Color(0xFF4361EE)
+                                              ? const Color(0xFF22BDD8)
                                               : const Color(0xFF1C1C2E),
                                           width: 3,
                                         ),
@@ -230,7 +230,7 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                                       width: 36,
                                       height: 36,
                                       decoration: const BoxDecoration(
-                                        color: const Color(0xFF4361EE),
+                                        color: const Color(0xFF22BDD8),
                                         shape: BoxShape.circle,
                                       ),
                                       child: const Icon(
@@ -249,7 +249,7 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                                   style: const TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w500,
-                                    color: const Color(0xFF4361EE),
+                                    color: const Color(0xFF22BDD8),
                                   ),
                                 ),
                               ],
@@ -351,10 +351,10 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                                     ),
                                     decoration: BoxDecoration(
                                       color:
-                                          const Color(0xFF4361EE).withOpacity(0.1),
+                                          const Color(0xFF22BDD8).withOpacity(0.1),
                                       borderRadius: BorderRadius.circular(6),
                                       border: Border.all(
-                                        color: const Color(0xFF4361EE)
+                                        color: const Color(0xFF22BDD8)
                                             .withOpacity(0.3),
                                       ),
                                     ),
@@ -362,7 +362,7 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                                       '@$suggestion',
                                       style: const TextStyle(
                                         fontSize: 13,
-                                        color: const Color(0xFF4361EE),
+                                        color: const Color(0xFF22BDD8),
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ),

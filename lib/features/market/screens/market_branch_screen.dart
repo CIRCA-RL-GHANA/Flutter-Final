@@ -884,7 +884,7 @@ class _ReturnsTab extends StatelessWidget {
                   child: Container(
                     height: 180,
                     width: double.infinity,
-                    color: const Color(0xFF1A1A2E),
+                    color: const Color(0xFF11131C),
                     child: Stack(
                       alignment: Alignment.center,
                       children: [

@@ -8,7 +8,7 @@ import '../../../core/services/enterprise_service.dart';
 const _kGold = Color(0xFFD4A017);
 const _kCyan = Color(0xFF00BCD4);
 const _kBg = Color(0xFF0A0A0F);
-const _kCard = Color(0xFF1A1A2E);
+const _kCard = Color(0xFF11131C);
 
 class EnterpriseDashboardScreen extends StatefulWidget {
   final String entityId;

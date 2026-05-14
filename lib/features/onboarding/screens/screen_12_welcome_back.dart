@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/constants/app_strings.dart';
@@ -7,11 +7,11 @@ import '../providers/onboarding_provider.dart';
 import '../widgets/buttons.dart';
 
 
-// OS palette — mirrors splash / welcome
+// OS palette � mirrors splash / welcome
 const Color _kBg        = Color(0xFF08080F);
 const Color _kSurface   = Color(0xFF0E0E1A);
 const Color _kBorder    = Color(0xFF1C1C2E);
-const Color _kAccent    = Color(0xFF4361EE);
+const Color _kAccent    = Color(0xFF22BDD8);
 const Color _kAccentDim = Color(0xFF1E2A6E);
 const Color _kText      = Color(0xFFE8E8F0);
 const Color _kTextDim   = Color(0xFF6B6B88);
@@ -50,7 +50,7 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
     if (lastLogin == null) {
       return const _WelcomeContext(
         greeting: AppStrings.welcomeBack,
-        emoji: 'ðŸ‘‹',
+        emoji: '👋',
         showWhatsNew: false,
         daysSince: 0,
       );
@@ -61,28 +61,28 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
     if (daysSince < 7) {
       return _WelcomeContext(
         greeting: AppStrings.welcomeBack,
-        emoji: 'ðŸ‘‹',
+        emoji: '👋',
         showWhatsNew: false,
         daysSince: daysSince,
       );
     } else if (daysSince < 30) {
       return _WelcomeContext(
         greeting: AppStrings.missedYou,
-        emoji: 'ðŸ’™',
+        emoji: '💙',
         showWhatsNew: false,
         daysSince: daysSince,
       );
     } else if (daysSince < 90) {
       return _WelcomeContext(
         greeting: AppStrings.whatsNew,
-        emoji: 'ðŸŽ‰',
+        emoji: '🎉',
         showWhatsNew: true,
         daysSince: daysSince,
       );
     } else {
       return _WelcomeContext(
         greeting: AppStrings.refreshAccount,
-        emoji: 'ðŸ”„',
+        emoji: '🔄',
         showWhatsNew: true,
         daysSince: daysSince,
       );
@@ -177,7 +177,7 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
                             name,
                             style: TextStyle(
                               fontSize: 20,
-                              color: const Color(0xFF4361EE).withOpacity(0.9),
+                              color: const Color(0xFF22BDD8).withOpacity(0.9),
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -372,10 +372,10 @@ class _NewFeatureItem extends StatelessWidget {
             width: 32,
             height: 32,
             decoration: BoxDecoration(
-              color: const Color(0xFF4361EE).withOpacity(0.2),
+              color: const Color(0xFF22BDD8).withOpacity(0.2),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(icon, size: 16, color: const Color(0xFF4361EE)),
+            child: Icon(icon, size: 16, color: const Color(0xFF22BDD8)),
           ),
           const SizedBox(width: 12),
           Text(
@@ -406,7 +406,7 @@ class _StatItem extends StatelessWidget {
           style: const TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
-            color: const Color(0xFF4361EE),
+            color: const Color(0xFF22BDD8),
           ),
         ),
         const SizedBox(height: 4),

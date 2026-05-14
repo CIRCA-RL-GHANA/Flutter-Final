@@ -117,7 +117,7 @@ class GenieHapticRoleSignature {
       case UserRole.branchManager:
         return const Color(0xFFFF9800); // amber — "branch warmth"
       default:
-        return const Color(0xFF3F51B5); // indigo — brand default
+        return const Color(0xFF22BDD8); // indigo — brand default
     }
   }
 

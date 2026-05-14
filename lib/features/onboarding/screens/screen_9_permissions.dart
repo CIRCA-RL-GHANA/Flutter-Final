@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/constants/app_strings.dart';
@@ -8,11 +8,11 @@ import '../providers/onboarding_provider.dart';
 import '../widgets/buttons.dart';
 
 
-// OS palette — mirrors splash / welcome
+// OS palette � mirrors splash / welcome
 const Color _kBg        = Color(0xFF08080F);
 const Color _kSurface   = Color(0xFF0E0E1A);
 const Color _kBorder    = Color(0xFF1C1C2E);
-const Color _kAccent    = Color(0xFF4361EE);
+const Color _kAccent    = Color(0xFF22BDD8);
 const Color _kAccentDim = Color(0xFF1E2A6E);
 const Color _kText      = Color(0xFFE8E8F0);
 const Color _kTextDim   = Color(0xFF6B6B88);
@@ -89,7 +89,7 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                 });
                 return const Center(
                   child: CircularProgressIndicator(
-                    color: const Color(0xFF4361EE),
+                    color: const Color(0xFF22BDD8),
                   ),
                 );
               }
@@ -157,7 +157,7 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                             backgroundColor: const Color(0xFF0E0E1A),
                             valueColor:
                                 const AlwaysStoppedAnimation<Color>(
-                                    const Color(0xFF4361EE)),
+                                    const Color(0xFF22BDD8)),
                             minHeight: 4,
                           ),
                         ),
@@ -216,13 +216,13 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                                 height: 120,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: const Color(0xFF4361EE)
+                                  color: const Color(0xFF22BDD8)
                                       .withOpacity(0.08),
                                 ),
                                 child: Icon(
                                   _getPermissionIconData(currentPerm),
                                   size: 56,
-                                  color: const Color(0xFF4361EE),
+                                  color: const Color(0xFF22BDD8),
                                 ),
                               ),
 
@@ -352,11 +352,11 @@ class _PermissionsScreenState extends State<PermissionsScreen>
   Color _getGroupColor(PermissionGroup group) {
     switch (group) {
       case PermissionGroup.essential:
-        return const Color(0xFF4361EE);
+        return const Color(0xFF22BDD8);
       case PermissionGroup.enhanced:
         return const Color(0xFF10B981);
       case PermissionGroup.premium:
-        return const Color(0xFF4361EE);
+        return const Color(0xFF22BDD8);
     }
   }
 

@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/constants/app_strings.dart';
@@ -10,11 +10,11 @@ import '../widgets/buttons.dart';
 import '../widgets/onboarding_header.dart';
 
 
-// OS palette — mirrors splash / welcome
+// OS palette � mirrors splash / welcome
 const Color _kBg        = Color(0xFF08080F);
 const Color _kSurface   = Color(0xFF0E0E1A);
 const Color _kBorder    = Color(0xFF1C1C2E);
-const Color _kAccent    = Color(0xFF4361EE);
+const Color _kAccent    = Color(0xFF22BDD8);
 const Color _kAccentDim = Color(0xFF1E2A6E);
 const Color _kText      = Color(0xFFE8E8F0);
 const Color _kTextDim   = Color(0xFF6B6B88);
@@ -100,7 +100,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         return Theme(
           data: Theme.of(context).copyWith(
             colorScheme: const ColorScheme.light(
-              primary: const Color(0xFF4361EE),
+              primary: const Color(0xFF22BDD8),
               onPrimary: const Color(0xFF0E0E1A),
               surface: const Color(0xFF0E0E1A),
               onSurface: const Color(0xFFE8E8F0),
@@ -226,7 +226,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 vertical: 8,
                               ),
                               decoration: BoxDecoration(
-                                color: const Color(0xFF4361EE).withOpacity(0.1),
+                                color: const Color(0xFF22BDD8).withOpacity(0.1),
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Row(
@@ -234,7 +234,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   Icon(
                                     Icons.star,
                                     size: 16,
-                                    color: const Color(0xFF4361EE).withOpacity(0.8),
+                                    color: const Color(0xFF22BDD8).withOpacity(0.8),
                                   ),
                                   const SizedBox(width: 8),
                                   const Text(
@@ -407,7 +407,7 @@ class _PrivacyDashboard extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Icon(Icons.shield_outlined, size: 20, color: const Color(0xFF4361EE)),
+              const Icon(Icons.shield_outlined, size: 20, color: const Color(0xFF22BDD8)),
               const SizedBox(width: 8),
               const Text(
                 'Privacy Preferences',
@@ -483,7 +483,7 @@ class _PrivacyToggle extends StatelessWidget {
           Switch.adaptive(
             value: value,
             onChanged: onChanged,
-            activeColor: const Color(0xFF4361EE),
+            activeColor: const Color(0xFF22BDD8),
           ),
         ],
       ),
@@ -506,7 +506,7 @@ class _LegalLink extends StatelessWidget {
         label,
         style: const TextStyle(
           fontSize: 12,
-          color: const Color(0xFF4361EE),
+          color: const Color(0xFF22BDD8),
           decoration: TextDecoration.underline,
         ),
       ),

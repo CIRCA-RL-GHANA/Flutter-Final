@@ -1,4 +1,4 @@
-﻿import 'dart:async';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -10,11 +10,11 @@ import '../providers/onboarding_provider.dart';
 import '../widgets/onboarding_header.dart';
 
 
-// OS palette — mirrors splash / welcome
+// OS palette � mirrors splash / welcome
 const Color _kBg        = Color(0xFF08080F);
 const Color _kSurface   = Color(0xFF0E0E1A);
 const Color _kBorder    = Color(0xFF1C1C2E);
-const Color _kAccent    = Color(0xFF4361EE);
+const Color _kAccent    = Color(0xFF22BDD8);
 const Color _kAccentDim = Color(0xFF1E2A6E);
 const Color _kText      = Color(0xFFE8E8F0);
 const Color _kTextDim   = Color(0xFF6B6B88);
@@ -119,7 +119,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
       _focusNodes[index + 1].requestFocus();
     }
 
-    // Check if all 6 digits are entered â†’ auto-submit
+    // Check if all 6 digits are entered → auto-submit
     final otp = _otpControllers.map((c) => c.text).join();
     if (otp.length == 6) {
       _verifyOtp(otp);
@@ -252,7 +252,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                               const Icon(
                                 Icons.edit,
                                 size: 16,
-                                color: const Color(0xFF4361EE),
+                                color: const Color(0xFF22BDD8),
                               ),
                             ],
                           ),
@@ -331,7 +331,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                         const _SuccessIndicator()
                       else if (_isVerifying)
                         const CircularProgressIndicator(
-                          color: const Color(0xFF4361EE),
+                          color: const Color(0xFF22BDD8),
                         )
                       else ...[
                         // Timer display
@@ -351,7 +351,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                                       backgroundColor: const Color(0xFF0E0E1A),
                                       valueColor:
                                           const AlwaysStoppedAnimation<Color>(
-                                        const Color(0xFF4361EE),
+                                        const Color(0xFF22BDD8),
                                       ),
                                     ),
                                     Text(
@@ -390,7 +390,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600,
                                 color: auth.resendAttemptsRemaining > 0
-                                    ? const Color(0xFF4361EE)
+                                    ? const Color(0xFF22BDD8)
                                     : const Color(0xFF3A3A52),
                               ),
                             ),
@@ -468,7 +468,7 @@ class _OtpDigitField extends StatelessWidget {
             color: isSuccess
                 ? const Color(0xFF10B981)
                 : focusNode.hasFocus
-                    ? const Color(0xFF4361EE)
+                    ? const Color(0xFF22BDD8)
                     : const Color(0xFF1C1C2E),
             width: focusNode.hasFocus || isSuccess ? 2 : 1,
           ),
