@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="none" role="img" aria-label="genie help">
+  <path d="M172 36 L176 50 L190 54 L176 58 L172 72 L168 58 L154 54 L168 50 Z" fill="#22BDD8"/>
+  <path d="M 116 64 A 66 66 0 0 1 176 130" stroke="#22BDD8" stroke-width="17" stroke-linecap="round" fill="none"/>
+  <path d="M 104 64 A 66 66 0 1 0 160 172 C 184 192, 174 218, 142 218 C 112 218, 100 200, 116 192"
+        stroke="#1F2A33" stroke-width="17" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <g fill="#C99B2C">
+    <rect x="83"  y="101" width="24" height="24" rx="5"/>
+    <rect x="113" y="101" width="24" height="24" rx="5"/>
+    <rect x="83"  y="131" width="24" height="24" rx="5"/>
+    <rect x="113" y="131" width="24" height="24" rx="5"/>
+  </g>
+</svg>

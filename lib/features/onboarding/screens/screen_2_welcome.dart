@@ -1,9 +1,9 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/constants/app_strings.dart';
 import '../../../core/utils/responsive.dart';
+import '../../../core/widgets/app_logo.dart';
 import '../providers/onboarding_provider.dart';
 
 /// Screen 2: OS Welcome Screen
@@ -394,60 +394,17 @@ class _OsButton extends StatelessWidget {
   }
 }
 
-// ─── Mini hex mark (consistent with splash) ───────────────────────────────────
+// ─── Mini brand mark (consistent with splash) ────────────────────────────────
 class _MiniHexMark extends StatelessWidget {
   const _MiniHexMark();
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 36,
-      height: 36,
-      child: CustomPaint(painter: _MiniHexPainter()),
+    return const AppLogo.icon(
+      size: 36,
+      variant: AppLogoVariant.dark,
+      semanticsLabel: 'genie help',
     );
   }
 }
 
-class _MiniHexPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final cx = size.width / 2;
-    final cy = size.height / 2;
-    final r  = size.width / 2 - 1;
-
-    Path hexPath(double radius) {
-      final path = Path();
-      for (int i = 0; i < 6; i++) {
-        final a = (pi / 3) * i - pi / 6;
-        final xa = cx + radius * cos(a);
-        final ya = cy + radius * sin(a);
-        if (i == 0) path.moveTo(xa, ya); else path.lineTo(xa, ya);
-      }
-      return path..close();
-    }
-
-    canvas.drawPath(
-      hexPath(r),
-      Paint()
-        ..color = _kAccent.withOpacity(0.50)
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = 1.2,
-    );
-
-    canvas.drawPath(
-      hexPath(r * 0.52),
-      Paint()
-        ..color = _kAccentDim.withOpacity(0.45)
-        ..style = PaintingStyle.fill,
-    );
-
-    canvas.drawCircle(
-      Offset(cx, cy),
-      2.5,
-      Paint()..color = _kAccent,
-    );
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter old) => false;
-}

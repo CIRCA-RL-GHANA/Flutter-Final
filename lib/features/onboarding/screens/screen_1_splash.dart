@@ -1,10 +1,10 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/constants/app_strings.dart';
 import '../../../core/utils/responsive.dart';
+import '../../../core/widgets/app_logo.dart';
 import '../providers/onboarding_provider.dart';
 
 /// Screen 1: OS Boot Splash Screen
@@ -280,79 +280,18 @@ class _SplashScreenState extends State<SplashScreen>
   }
 }
 
-// ─── OS Logo Mark — geometric hexagon node ───────────────────────────────────
+// ─── OS Logo Mark — genie help brand mark ────────────────────────────────────
 class _OsLogoMark extends StatelessWidget {
   const _OsLogoMark();
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 68,
-      height: 68,
-      child: CustomPaint(painter: _HexPainter()),
+    return const AppLogo.icon(
+      size: 84,
+      variant: AppLogoVariant.dark,
+      semanticsLabel: 'genie help',
     );
   }
-}
-
-class _HexPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final cx = size.width / 2;
-    final cy = size.height / 2;
-    final r  = size.width / 2 - 2;
-
-    Path _hexPath(double radius) {
-      final path = Path();
-      for (int i = 0; i < 6; i++) {
-        final a = (pi / 3) * i - pi / 6;
-        final x = cx + radius * cos(a);
-        final y = cy + radius * sin(a);
-        if (i == 0) path.moveTo(x, y); else path.lineTo(x, y);
-      }
-      return path..close();
-    }
-
-    // Outer hex stroke
-    canvas.drawPath(
-      _hexPath(r),
-      Paint()
-        ..color = _kAccent.withOpacity(0.55)
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = 1.4,
-    );
-
-    // Inner hex fill
-    canvas.drawPath(
-      _hexPath(r * 0.55),
-      Paint()
-        ..color = _kAccentDim.withOpacity(0.5)
-        ..style = PaintingStyle.fill,
-    );
-
-    // Spoke axes
-    final spoke = Paint()
-      ..color = _kAccent.withOpacity(0.25)
-      ..strokeWidth = 0.8;
-    final innerR = r * 0.55;
-    for (int i = 0; i < 3; i++) {
-      final a = (pi / 3) * i;
-      canvas.drawLine(
-        Offset(cx + innerR * cos(a), cy + innerR * sin(a)),
-        Offset(cx - innerR * cos(a), cy - innerR * sin(a)),
-        spoke,
-      );
-    }
-
-    // Center node
-    canvas.drawCircle(
-      Offset(cx, cy),
-      3.5,
-      Paint()..color = _kAccent,
-    );
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter old) => false;
 }
 
 // ─── Segmented progress bar ──────────────────────────────────────────────────

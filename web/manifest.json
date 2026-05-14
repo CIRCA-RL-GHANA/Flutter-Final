@@ -6,13 +6,19 @@
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#1A1A2E",
-  "theme_color": "#3F51B5",
+  "background_color": "#08080F",
+  "theme_color": "#08080F",
   "lang": "en",
   "dir": "ltr",
   "prefer_related_applications": false,
   "categories": ["finance", "social", "productivity", "utilities"],
   "icons": [
+    {
+      "src": "icons/genie_help_icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
     {
       "src": "icons/icon_42x42.png",
       "sizes": "42x42",
