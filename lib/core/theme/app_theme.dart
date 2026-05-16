@@ -1,381 +1,289 @@
 ﻿import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'app_colors.dart';
+import '../design/ive_text.dart';
+import '../design/ive_tokens.dart';
 
+/// The application theme.
+///
+/// We ship a single, dark, brand-true ThemeData built on Ive tokens. The
+/// `lightTheme` getter remains for compatibility but currently mirrors the
+/// dark theme — the product is designed dark-first.
 class AppTheme {
   AppTheme._();
 
-  static ThemeData get lightTheme {
-    return ThemeData(
-      useMaterial3: true,
-      brightness: Brightness.light,
-      primaryColor: AppColors.primary,
-      scaffoldBackgroundColor: AppColors.backgroundLight,
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: AppColors.primary,
-        brightness: Brightness.light,
-        primary: AppColors.primary,
-        secondary: AppColors.secondary,
-        surface: AppColors.surfaceLight,
-        error: AppColors.error,
-      ),
-      textTheme: _textTheme,
-      elevatedButtonTheme: _elevatedButtonTheme,
-      outlinedButtonTheme: _outlinedButtonTheme,
-      textButtonTheme: _textButtonTheme,
-      inputDecorationTheme: _inputDecorationTheme,
-      appBarTheme: _appBarTheme,
-      cardTheme: _cardTheme,
-      textSelectionTheme: const TextSelectionThemeData(
-        cursorColor: AppColors.primary,
-        selectionColor: Color(0x3322BDD8),
-        selectionHandleColor: AppColors.primary,
-      ),
-    );
-  }
+  /// Backwards-compatible alias. The product is dark-first.
+  static ThemeData get lightTheme => darkTheme;
 
   static ThemeData get darkTheme {
-    return ThemeData(
+    final base = ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
-      primaryColor: const Color(0xFF22BDD8),
-      scaffoldBackgroundColor: const Color(0xFF08080F),
+      scaffoldBackgroundColor: IveTokens.bg,
+      canvasColor: IveTokens.bg,
+      dividerColor: IveTokens.hairline,
       colorScheme: ColorScheme.fromSeed(
-        seedColor: const Color(0xFF22BDD8),
+        seedColor: IveTokens.accent,
         brightness: Brightness.dark,
-        primary: const Color(0xFF22BDD8),
-        secondary: const Color(0xFFC99B2C), // brand gold
-        surface: const Color(0xFF0E0E1A),
-        error: const Color(0xFFEF4444),
+        primary: IveTokens.accent,
         onPrimary: Colors.white,
-        onSurface: const Color(0xFFE8E8F0),
-        onSecondary: const Color(0xFFE8E8F0),
+        secondary: IveTokens.accent,
+        surface: IveTokens.surface,
+        onSurface: IveTokens.label,
+        error: IveTokens.danger,
+        onError: Colors.white,
       ),
-      textTheme: _textThemeDark,
-      elevatedButtonTheme: _elevatedButtonThemeDark,
-      outlinedButtonTheme: _outlinedButtonTheme,
-      textButtonTheme: _textButtonTheme,
-      inputDecorationTheme: _inputDecorationThemeDark,
-      appBarTheme: _appBarThemeDark,
-      cardTheme: _cardThemeDark,
-      dividerColor: const Color(0xFF1C1C2E),
-      dividerTheme: const DividerThemeData(color: Color(0xFF1C1C2E), thickness: 1),
-      snackBarTheme: const SnackBarThemeData(
-        backgroundColor: Color(0xFF0E0E1A),
-        contentTextStyle: TextStyle(color: Color(0xFFE8E8F0)),
-        behavior: SnackBarBehavior.floating,
+    );
+
+    return base.copyWith(
+      textTheme: IveType.buildTextTheme().apply(
+        bodyColor: IveTokens.label,
+        displayColor: IveTokens.label,
+      ),
+      primaryTextTheme: IveType.buildTextTheme(),
+      appBarTheme: AppBarTheme(
+        backgroundColor: IveTokens.bg.withValues(alpha: 0.92),
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        surfaceTintColor: Colors.transparent,
+        shadowColor: Colors.transparent,
+        centerTitle: false,
+        titleSpacing: IveTokens.s5,
+        iconTheme: const IconThemeData(color: IveTokens.label, size: 22),
+        actionsIconTheme: const IconThemeData(color: IveTokens.label, size: 22),
+        titleTextStyle: IveType.headline,
+        toolbarTextStyle: IveType.headline,
+      ),
+      cardTheme: const CardThemeData(
+        color: IveTokens.surface,
+        elevation: 0,
+        margin: EdgeInsets.zero,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(6)),
-          side: BorderSide(color: Color(0xFF1C1C2E)),
+          borderRadius: IveTokens.brSm,
+          side: BorderSide(color: IveTokens.hairline, width: 1),
+        ),
+        clipBehavior: Clip.antiAlias,
+      ),
+      dialogTheme: DialogThemeData(
+        backgroundColor: IveTokens.surface,
+        surfaceTintColor: Colors.transparent,
+        elevation: 0,
+        titleTextStyle: IveType.title3,
+        contentTextStyle: IveType.callout,
+        shape: const RoundedRectangleBorder(
+          borderRadius: IveTokens.brMd,
+          side: BorderSide(color: IveTokens.hairline),
+        ),
+      ),
+      bottomSheetTheme: const BottomSheetThemeData(
+        backgroundColor: IveTokens.surface,
+        surfaceTintColor: Colors.transparent,
+        elevation: 0,
+        modalElevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(IveTokens.rLg)),
+          side: BorderSide(color: IveTokens.hairline),
+        ),
+      ),
+      snackBarTheme: SnackBarThemeData(
+        backgroundColor: IveTokens.surface,
+        contentTextStyle: IveType.callout.copyWith(color: IveTokens.label),
+        behavior: SnackBarBehavior.floating,
+        elevation: 0,
+        shape: const RoundedRectangleBorder(
+          borderRadius: IveTokens.brSm,
+          side: BorderSide(color: IveTokens.hairline),
+        ),
+      ),
+      dividerTheme: const DividerThemeData(
+        color: IveTokens.hairline,
+        thickness: 1,
+        space: 1,
+      ),
+      iconTheme: const IconThemeData(color: IveTokens.label, size: 22),
+      listTileTheme: ListTileThemeData(
+        iconColor: IveTokens.labelSecondary,
+        textColor: IveTokens.label,
+        titleTextStyle: IveType.headline,
+        subtitleTextStyle: IveType.footnote,
+        contentPadding: const EdgeInsets.symmetric(
+            horizontal: IveTokens.s5, vertical: IveTokens.s2),
+        minVerticalPadding: IveTokens.s3,
+        horizontalTitleGap: IveTokens.s4,
+      ),
+      chipTheme: ChipThemeData(
+        backgroundColor: IveTokens.surface,
+        selectedColor: IveTokens.accent.withValues(alpha: 0.14),
+        labelStyle: IveType.subhead,
+        secondaryLabelStyle: IveType.subhead.copyWith(color: IveTokens.accent),
+        side: const BorderSide(color: IveTokens.hairline),
+        shape: const RoundedRectangleBorder(borderRadius: IveTokens.brXs),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      ),
+      tabBarTheme: TabBarThemeData(
+        labelColor: IveTokens.label,
+        unselectedLabelColor: IveTokens.labelSecondary,
+        labelStyle: IveType.subhead.copyWith(fontWeight: FontWeight.w600),
+        unselectedLabelStyle: IveType.subhead,
+        indicatorColor: IveTokens.accent,
+        indicatorSize: TabBarIndicatorSize.label,
+        dividerColor: IveTokens.hairline,
+        overlayColor: WidgetStatePropertyAll(IveTokens.accentSoft),
+      ),
+      switchTheme: SwitchThemeData(
+        trackColor: WidgetStateProperty.resolveWith((s) =>
+            s.contains(WidgetState.selected)
+                ? IveTokens.accent
+                : IveTokens.surfaceRaised),
+        trackOutlineColor: const WidgetStatePropertyAll(IveTokens.hairline),
+        thumbColor: const WidgetStatePropertyAll(Colors.white),
+      ),
+      checkboxTheme: CheckboxThemeData(
+        side: const BorderSide(color: IveTokens.hairline, width: 1.4),
+        shape: const RoundedRectangleBorder(borderRadius: IveTokens.brXs),
+        fillColor: WidgetStateProperty.resolveWith((s) =>
+            s.contains(WidgetState.selected)
+                ? IveTokens.accent
+                : Colors.transparent),
+      ),
+      radioTheme: RadioThemeData(
+        fillColor: WidgetStateProperty.resolveWith((s) =>
+            s.contains(WidgetState.selected)
+                ? IveTokens.accent
+                : IveTokens.labelTertiary),
+      ),
+      sliderTheme: const SliderThemeData(
+        activeTrackColor: IveTokens.accent,
+        inactiveTrackColor: IveTokens.hairline,
+        thumbColor: IveTokens.accent,
+        overlayColor: IveTokens.accentSoft,
+      ),
+      progressIndicatorTheme: const ProgressIndicatorThemeData(
+        color: IveTokens.accent,
+        linearTrackColor: IveTokens.hairline,
+        circularTrackColor: IveTokens.hairline,
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          minimumSize: const Size(0, IveTokens.tap),
+          backgroundColor: IveTokens.accent,
+          foregroundColor: Colors.white,
+          disabledBackgroundColor: IveTokens.accent.withValues(alpha: 0.4),
+          disabledForegroundColor: Colors.white.withValues(alpha: 0.7),
+          elevation: 0,
+          shape: const RoundedRectangleBorder(borderRadius: IveTokens.brMd),
+          padding: const EdgeInsets.symmetric(
+              horizontal: IveTokens.s5, vertical: IveTokens.s3),
+          textStyle: IveType.bodyEmphasis,
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          minimumSize: const Size(0, IveTokens.tap),
+          foregroundColor: IveTokens.label,
+          side: const BorderSide(color: IveTokens.hairline, width: 1),
+          shape: const RoundedRectangleBorder(borderRadius: IveTokens.brMd),
+          padding: const EdgeInsets.symmetric(
+              horizontal: IveTokens.s5, vertical: IveTokens.s3),
+          textStyle: IveType.bodyEmphasis,
+        ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          foregroundColor: IveTokens.accent,
+          textStyle: IveType.bodyEmphasis,
+          padding: const EdgeInsets.symmetric(
+              horizontal: IveTokens.s3, vertical: IveTokens.s2),
+          shape: const RoundedRectangleBorder(borderRadius: IveTokens.brXs),
+        ),
+      ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: IveTokens.accent,
+        foregroundColor: Colors.white,
+        elevation: 0,
+        focusElevation: 0,
+        hoverElevation: 0,
+        highlightElevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(IveTokens.rLg),
+        ),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: IveTokens.surface,
+        isDense: true,
+        contentPadding: const EdgeInsets.symmetric(
+            horizontal: IveTokens.s4, vertical: IveTokens.s4),
+        hintStyle: IveType.body.copyWith(color: IveTokens.labelTertiary),
+        labelStyle: IveType.subhead,
+        floatingLabelStyle: IveType.subhead.copyWith(color: IveTokens.accent),
+        helperStyle: IveType.footnote,
+        errorStyle: IveType.footnote.copyWith(color: IveTokens.danger),
+        prefixIconColor: IveTokens.labelSecondary,
+        suffixIconColor: IveTokens.labelSecondary,
+        border: const OutlineInputBorder(
+          borderRadius: IveTokens.brSm,
+          borderSide: IveTokens.hairlineSide,
+        ),
+        enabledBorder: const OutlineInputBorder(
+          borderRadius: IveTokens.brSm,
+          borderSide: IveTokens.hairlineSide,
+        ),
+        focusedBorder: const OutlineInputBorder(
+          borderRadius: IveTokens.brSm,
+          borderSide: BorderSide(color: IveTokens.accent, width: 1.5),
+        ),
+        errorBorder: const OutlineInputBorder(
+          borderRadius: IveTokens.brSm,
+          borderSide: BorderSide(color: IveTokens.danger, width: 1),
+        ),
+        focusedErrorBorder: const OutlineInputBorder(
+          borderRadius: IveTokens.brSm,
+          borderSide: BorderSide(color: IveTokens.danger, width: 1.5),
         ),
       ),
       textSelectionTheme: const TextSelectionThemeData(
-        cursorColor: Color(0xFF22BDD8),
+        cursorColor: IveTokens.accent,
         selectionColor: Color(0x3322BDD8),
-        selectionHandleColor: Color(0xFF22BDD8),
+        selectionHandleColor: IveTokens.accent,
       ),
-      dialogTheme: DialogThemeData(
-        backgroundColor: const Color(0xFF0E0E1A),
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(6)),
-          side: BorderSide(color: Color(0xFF1C1C2E)),
-        ),
-        titleTextStyle: GoogleFonts.poppins(
-          fontSize: 16,
-          fontWeight: FontWeight.w700,
-          color: const Color(0xFFE8E8F0),
-        ),
-        contentTextStyle: GoogleFonts.poppins(
-          fontSize: 13,
-          color: const Color(0xFF9A9AB2),
-        ),
-      ),
-    );
-  }
-
-  static TextTheme get _textTheme {
-    return GoogleFonts.poppinsTextTheme().copyWith(
-      displayLarge: GoogleFonts.poppins(
-        fontSize: 32,
-        fontWeight: FontWeight.bold,
-        color: AppColors.textPrimary,
-        letterSpacing: -0.5,
-      ),
-      displayMedium: GoogleFonts.poppins(
-        fontSize: 28,
-        fontWeight: FontWeight.bold,
-        color: AppColors.textPrimary,
-      ),
-      displaySmall: GoogleFonts.poppins(
-        fontSize: 24,
-        fontWeight: FontWeight.w600,
-        color: AppColors.textPrimary,
-      ),
-      headlineMedium: GoogleFonts.poppins(
-        fontSize: 20,
-        fontWeight: FontWeight.w600,
-        color: AppColors.textPrimary,
-      ),
-      headlineSmall: GoogleFonts.poppins(
-        fontSize: 18,
-        fontWeight: FontWeight.w600,
-        color: AppColors.textPrimary,
-      ),
-      titleLarge: GoogleFonts.poppins(
-        fontSize: 16,
-        fontWeight: FontWeight.w600,
-        color: AppColors.textPrimary,
-      ),
-      titleMedium: GoogleFonts.poppins(
-        fontSize: 14,
-        fontWeight: FontWeight.w500,
-        color: AppColors.textPrimary,
-      ),
-      bodyLarge: GoogleFonts.poppins(
-        fontSize: 16,
-        fontWeight: FontWeight.normal,
-        color: AppColors.textSecondary,
-      ),
-      bodyMedium: GoogleFonts.poppins(
-        fontSize: 14,
-        fontWeight: FontWeight.normal,
-        color: AppColors.textSecondary,
-      ),
-      bodySmall: GoogleFonts.poppins(
-        fontSize: 12,
-        fontWeight: FontWeight.normal,
-        color: AppColors.textTertiary,
-      ),
-      labelLarge: GoogleFonts.poppins(
-        fontSize: 14,
-        fontWeight: FontWeight.w600,
-        letterSpacing: 0.5,
-      ),
-    );
-  }
-
-  static TextTheme get _textThemeDark {
-    return _textTheme.apply(
-      bodyColor: AppColors.textPrimaryDark,
-      displayColor: AppColors.textPrimaryDark,
-    );
-  }
-
-  static ElevatedButtonThemeData get _elevatedButtonTheme {
-    return ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        minimumSize: const Size(double.infinity, 56),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: IveTokens.bg,
+        selectedItemColor: IveTokens.accent,
+        unselectedItemColor: IveTokens.labelTertiary,
+        selectedLabelStyle:
+            IveType.caption.copyWith(fontWeight: FontWeight.w600),
+        unselectedLabelStyle: IveType.caption,
+        type: BottomNavigationBarType.fixed,
         elevation: 0,
-        textStyle: GoogleFonts.poppins(
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-        ),
+        showUnselectedLabels: true,
       ),
-    );
-  }
-
-  static OutlinedButtonThemeData get _outlinedButtonTheme {
-    return OutlinedButtonThemeData(
-      style: OutlinedButton.styleFrom(
-        minimumSize: const Size(double.infinity, 56),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        side: const BorderSide(color: AppColors.primary, width: 1.5),
-        textStyle: GoogleFonts.poppins(
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-    );
-  }
-
-  static TextButtonThemeData get _textButtonTheme {
-    return TextButtonThemeData(
-      style: TextButton.styleFrom(
-        textStyle: GoogleFonts.poppins(
-          fontSize: 14,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-    );
-  }
-
-  static InputDecorationTheme get _inputDecorationTheme {
-    return InputDecorationTheme(
-      filled: true,
-      fillColor: AppColors.inputFill,
-      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(16),
-        borderSide: const BorderSide(color: AppColors.inputBorder),
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(16),
-        borderSide: const BorderSide(color: AppColors.inputBorder),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(16),
-        borderSide: const BorderSide(color: AppColors.primary, width: 2),
-      ),
-      disabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(16),
-        borderSide: BorderSide(color: AppColors.inputBorder.withValues(alpha: 0.5)),
-      ),
-      errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(16),
-        borderSide: const BorderSide(color: AppColors.error, width: 1.5),
-      ),
-      focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(16),
-        borderSide: const BorderSide(color: AppColors.error, width: 2),
-      ),
-      labelStyle: GoogleFonts.poppins(
-        fontSize: 14,
-        color: AppColors.textSecondary,
-      ),
-      floatingLabelStyle: GoogleFonts.poppins(
-        fontSize: 13,
-        fontWeight: FontWeight.w500,
-        color: AppColors.primary,
-      ),
-      hintStyle: GoogleFonts.poppins(
-        fontSize: 14,
-        color: AppColors.textSecondary,
-      ),
-      helperStyle: GoogleFonts.poppins(
-        fontSize: 12,
-        color: AppColors.textSecondary,
-      ),
-      prefixIconColor: AppColors.textSecondary,
-      suffixIconColor: AppColors.textSecondary,
-      errorStyle: GoogleFonts.poppins(
-        fontSize: 12,
-        color: AppColors.error,
-      ),
-    );
-  }
-
-  static InputDecorationTheme get _inputDecorationThemeDark {
-    return InputDecorationTheme(
-      filled: true,
-      fillColor: const Color(0xFF0E0E1A),
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(6),
-        borderSide: const BorderSide(color: Color(0xFF1C1C2E)),
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(6),
-        borderSide: const BorderSide(color: Color(0xFF1C1C2E)),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(6),
-        borderSide: const BorderSide(color: Color(0xFF22BDD8), width: 1.5),
-      ),
-      disabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(6),
-        borderSide: const BorderSide(color: Color(0xFF14141F)),
-      ),
-      errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(6),
-        borderSide: const BorderSide(color: Color(0xFFEF4444), width: 1.5),
-      ),
-      focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(6),
-        borderSide: const BorderSide(color: Color(0xFFEF4444), width: 1.5),
-      ),
-      labelStyle: GoogleFonts.poppins(
-        fontSize: 13,
-        color: const Color(0xFF9A9AB2),
-      ),
-      floatingLabelStyle: GoogleFonts.poppins(
-        fontSize: 12,
-        fontWeight: FontWeight.w500,
-        color: const Color(0xFF22BDD8),
-        letterSpacing: 0.3,
-      ),
-      hintStyle: GoogleFonts.poppins(
-        fontSize: 13,
-        color: const Color(0xFF7A7A95),
-      ),
-      helperStyle: GoogleFonts.poppins(
-        fontSize: 11,
-        color: const Color(0xFF7A7A95),
-      ),
-      prefixIconColor: const Color(0xFF9A9AB2),
-      suffixIconColor: const Color(0xFF9A9AB2),
-      errorStyle: GoogleFonts.poppins(
-        fontSize: 11,
-        color: const Color(0xFFEF4444),
-      ),
-    );
-  }
-
-  static AppBarTheme get _appBarTheme {
-    return AppBarTheme(
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      centerTitle: true,
-      titleTextStyle: GoogleFonts.poppins(
-        fontSize: 18,
-        fontWeight: FontWeight.w600,
-        color: AppColors.textPrimary,
-      ),
-      iconTheme: const IconThemeData(color: AppColors.textPrimary),
-    );
-  }
-
-  static AppBarTheme get _appBarThemeDark {
-    return _appBarTheme.copyWith(
-      titleTextStyle: GoogleFonts.poppins(
-        fontSize: 18,
-        fontWeight: FontWeight.w600,
-        color: AppColors.textPrimaryDark,
-      ),
-      iconTheme: const IconThemeData(color: AppColors.textPrimaryDark),
-    );
-  }
-
-  static CardThemeData get _cardTheme {
-    return CardThemeData(
-      elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
-      color: AppColors.surfaceLight,
-    );
-  }
-
-  static CardThemeData get _cardThemeDark {
-    return const CardThemeData(
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(6)),
-        side: BorderSide(color: Color(0xFF1C1C2E)),
-      ),
-      color: Color(0xFF0E0E1A),
-    );
-  }
-
-  static ElevatedButtonThemeData get _elevatedButtonThemeDark {
-    return ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        minimumSize: const Size(double.infinity, 50),
-        backgroundColor: const Color(0xFF22BDD8),
-        foregroundColor: Colors.white,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(6)),
-        ),
+      navigationBarTheme: NavigationBarThemeData(
+        backgroundColor: IveTokens.bg,
+        indicatorColor: IveTokens.accent.withValues(alpha: 0.12),
+        labelTextStyle: WidgetStatePropertyAll(
+            IveType.caption.copyWith(color: IveTokens.label)),
+        iconTheme: const WidgetStatePropertyAll(
+            IconThemeData(color: IveTokens.label, size: 22)),
         elevation: 0,
-        textStyle: GoogleFonts.poppins(
-          fontSize: 13,
-          fontWeight: FontWeight.w600,
-          letterSpacing: 1.5,
+        surfaceTintColor: Colors.transparent,
+        height: 64,
+      ),
+      tooltipTheme: TooltipThemeData(
+        decoration: BoxDecoration(
+          color: IveTokens.surfaceRaised,
+          border: IveTokens.cardBorder,
+          borderRadius: IveTokens.brXs,
         ),
+        textStyle: IveType.footnote,
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+      ),
+      pageTransitionsTheme: const PageTransitionsTheme(
+        builders: {
+          TargetPlatform.android: ZoomPageTransitionsBuilder(),
+          TargetPlatform.iOS:     CupertinoPageTransitionsBuilder(),
+          TargetPlatform.macOS:   CupertinoPageTransitionsBuilder(),
+          TargetPlatform.linux:   ZoomPageTransitionsBuilder(),
+          TargetPlatform.windows: ZoomPageTransitionsBuilder(),
+        },
       ),
     );
   }
