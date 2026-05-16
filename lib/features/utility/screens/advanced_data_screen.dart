@@ -23,7 +23,7 @@ class AdvancedDataScreen extends StatelessWidget {
         final storage = prov.storageAnalytics;
 
         return Scaffold(
-          backgroundColor: const Color(0xFFF8F9FC),
+          backgroundColor: const Color(0xFF08080F),
           appBar: const UtilityAppBar(title: 'Advanced Data'),
           body: ListView(
             padding: const EdgeInsets.fromLTRB(20, 12, 20, 100),

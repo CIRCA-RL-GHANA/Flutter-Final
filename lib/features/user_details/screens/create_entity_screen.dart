@@ -21,7 +21,7 @@ class CreateEntityScreen extends StatelessWidget {
     return Consumer<UserDetailsProvider>(
       builder: (context, udp, _) {
         return Scaffold(
-          backgroundColor: const Color(0xFFF8F9FC),
+          backgroundColor: const Color(0xFF08080F),
           appBar: ModuleHeader(
             title: udp.creationStep == 0 ? 'Create Context' : 'Step ${udp.creationStep} of ${UserDetailsProvider.totalCreationSteps - 1}',
             contextColor: udp.selectedEntityType?.color ?? const Color(0xFF6366F1),

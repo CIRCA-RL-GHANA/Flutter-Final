@@ -27,7 +27,7 @@ class QPointsScreen extends StatelessWidget {
         return SetupRbacGate(
           cardId: 'qpoints',
           child: Scaffold(
-            backgroundColor: const Color(0xFFF8F9FC),
+            backgroundColor: const Color(0xFF08080F),
             appBar: SetupAppBar(
               title: 'Q-Points',
               actions: [

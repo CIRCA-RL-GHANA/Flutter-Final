@@ -27,7 +27,7 @@ class ZonesScreen extends StatelessWidget {
         return SetupRbacGate(
           cardId: 'delivery_zones',
           child: Scaffold(
-            backgroundColor: const Color(0xFFF8F9FC),
+            backgroundColor: const Color(0xFF08080F),
             appBar: SetupAppBar(
               title: 'Delivery Zones',
               actions: [

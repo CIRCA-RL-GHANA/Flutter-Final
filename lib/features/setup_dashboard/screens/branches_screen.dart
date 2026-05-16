@@ -26,7 +26,7 @@ class BranchesScreen extends StatelessWidget {
         return SetupRbacGate(
           cardId: 'branches',
           child: Scaffold(
-            backgroundColor: const Color(0xFFF8F9FC),
+            backgroundColor: const Color(0xFF08080F),
             appBar: SetupAppBar(
               title: 'Branches',
               actions: [

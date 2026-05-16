@@ -25,7 +25,7 @@ class ContextManagementScreen extends StatelessWidget {
         final archived = udp.archivedContexts;
 
         return Scaffold(
-          backgroundColor: const Color(0xFFF8F9FC),
+          backgroundColor: const Color(0xFF08080F),
           appBar: const ModuleHeader(
             title: 'Your Contexts',
             contextColor: Color(0xFF6366F1),

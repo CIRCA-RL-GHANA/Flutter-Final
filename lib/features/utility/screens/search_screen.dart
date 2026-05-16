@@ -78,7 +78,7 @@ class _SearchScreenState extends State<SearchScreen> {
         final hasQuery = prov.searchQuery.isNotEmpty;
 
         return Scaffold(
-          backgroundColor: const Color(0xFFF8F9FC),
+          backgroundColor: const Color(0xFF08080F),
           appBar: UtilityAppBar(
             title: 'Search',
             actions: [

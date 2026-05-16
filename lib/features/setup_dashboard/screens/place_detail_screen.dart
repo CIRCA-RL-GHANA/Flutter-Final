@@ -41,7 +41,7 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
         }
 
         return Scaffold(
-          backgroundColor: const Color(0xFFF8F9FC),
+          backgroundColor: const Color(0xFF08080F),
           appBar: SetupAppBar(title: place.name),
           body: Column(
             children: [

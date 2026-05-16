@@ -39,7 +39,7 @@ class _SecurityScreenState extends State<SecurityScreen> with SingleTickerProvid
     return Consumer<UserDetailsProvider>(
       builder: (context, udp, _) {
         return Scaffold(
-          backgroundColor: const Color(0xFFF8F9FC),
+          backgroundColor: const Color(0xFF08080F),
           appBar: AppBar(
             backgroundColor: Colors.white,
             surfaceTintColor: Colors.transparent,

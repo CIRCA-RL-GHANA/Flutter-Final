@@ -44,7 +44,7 @@ class _SetupDashboardScreenState extends State<SetupDashboardScreen> {
         final rows = _groupCardsIntoRows(filteredCards);
 
         return Scaffold(
-          backgroundColor: const Color(0xFFF8F9FC),
+          backgroundColor: const Color(0xFF08080F),
           appBar: const SetupAppBar(title: 'Setup Dashboard'),
           body: RefreshIndicator(
             color: kSetupColor,

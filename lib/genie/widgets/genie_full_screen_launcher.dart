@@ -8,8 +8,8 @@
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
+import '../../core/design/ive.dart';
 import '../../core/routes/app_routes.dart';
-import '../../core/theme/app_colors.dart';
 import '../../features/prompt/models/rbac_models.dart';
 import '../genie_intent.dart';
 import '../genie_rbac_enforcer.dart';
@@ -62,6 +62,10 @@ class GenieFullScreenLauncher {
         return AppRoutes.eplayHub;
       case GenieModule.community:
         return AppRoutes.communityHub;
+      case GenieModule.fintech:
+        return AppRoutes.fintechLoans;
+      case GenieModule.enterprise:
+        return AppRoutes.enterpriseDashboard;
       default:
         return null;
     }
@@ -72,19 +76,21 @@ class _ModuleMenuSheet extends StatelessWidget {
   final UserRole role;
   const _ModuleMenuSheet({required this.role});
 
-  static const _allModules = [
-    (GenieModule.goPage, 'GO PAGE', 'ðŸ’°', Color(0xFFFFD700)),
-    (GenieModule.market, 'MARKET', 'ðŸ›ï¸', Color(0xFF2563EB)),
-    (GenieModule.eplay, 'e-PLAY', 'ðŸŽµ', Color(0xFF7C3AED)),
-    (GenieModule.community, 'COMMUNITY', 'ðŸŒ', Color(0xFF0891B2)),
-    (GenieModule.myUpdates, 'MY UPDATES', 'ðŸ“°', Color(0xFF8B5CF6)),
-    (GenieModule.setupDashboard, 'SETUP DASHBOARD', 'âš™ï¸', Color(0xFF6366F1)),
-    (GenieModule.alerts, 'ALERTS', 'ðŸ””', Color(0xFFEF4444)),
-    (GenieModule.live, 'LIVE', 'ðŸ“¡', Color(0xFF10B981)),
-    (GenieModule.qualChat, 'qualChat', 'ðŸ’¬', Color(0xFF06B6D4)),
-    (GenieModule.april, 'APRIL', 'âœ¨', Color(0xFFF59E0B)),
-    (GenieModule.userDetails, 'USER DETAILS', 'ðŸ‘¤', Color(0xFF059669)),
-    (GenieModule.utility, 'UTILITY', 'ðŸ”§', Color(0xFF6B7280)),
+  static const _allModules = <(GenieModule, String, IconData, Color)>[
+    (GenieModule.goPage,         'GO PAGE',    Icons.payments_outlined,        Color(0xFFFFD27A)),
+    (GenieModule.market,         'MARKET',     Icons.storefront_outlined,      Color(0xFF6FA8FF)),
+    (GenieModule.eplay,          'e-PLAY',     Icons.graphic_eq_rounded,       Color(0xFFB591FF)),
+    (GenieModule.community,      'COMMUNITY',  Icons.public_outlined,          Color(0xFF4FC4D9)),
+    (GenieModule.myUpdates,      'UPDATES',    Icons.dynamic_feed_outlined,    Color(0xFFB39BFA)),
+    (GenieModule.setupDashboard, 'SETUP',      Icons.tune_rounded,             Color(0xFF8C92FF)),
+    (GenieModule.alerts,         'ALERTS',     Icons.notifications_none,       Color(0xFFFF7373)),
+    (GenieModule.live,           'LIVE',       Icons.sensors_rounded,          Color(0xFF4FD1A1)),
+    (GenieModule.qualChat,       'qualChat',   Icons.chat_bubble_outline,      Color(0xFF4ECFE1)),
+    (GenieModule.april,          'APRIL',      Icons.auto_awesome_outlined,    Color(0xFFFFB14E)),
+    (GenieModule.userDetails,    'PROFILE',    Icons.person_outline,           Color(0xFF4FD0A6)),
+    (GenieModule.utility,        'UTILITY',    Icons.handyman_outlined,        Color(0xFF9BA3AE)),
+    (GenieModule.fintech,        'FINTECH',    Icons.account_balance_outlined, Color(0xFF5BE0C2)),
+    (GenieModule.enterprise,     'ENTERPRISE', Icons.business_center_outlined, Color(0xFFC99B2C)),
   ];
 
   @override
@@ -180,13 +186,13 @@ class _ModuleMenuSheet extends StatelessWidget {
 }
 
 class _ModuleTile extends StatefulWidget {
-  final String emoji;
+  final IconData icon;
   final String label;
   final Color color;
   final VoidCallback onTap;
 
   const _ModuleTile({
-    required this.emoji,
+    required this.icon,
     required this.label,
     required this.color,
     required this.onTap,
@@ -213,27 +219,38 @@ class _ModuleTileState extends State<_ModuleTile> {
         },
         onTapCancel: () => setState(() => _pressed = false),
         child: AnimatedScale(
-          scale: _pressed ? 0.93 : 1.0,
-          duration: const Duration(milliseconds: 80),
+          scale: _pressed ? 0.95 : 1.0,
+          duration: IveTokens.dMicro,
           child: Container(
             decoration: BoxDecoration(
-              color: widget.color.withValues(alpha: 0.07),
-              borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: widget.color.withValues(alpha: 0.2)),
+              color: IveTokens.bg,
+              borderRadius: IveTokens.brSm,
+              border: Border.all(
+                color: _pressed
+                    ? widget.color.withValues(alpha: 0.6)
+                    : IveTokens.hairline,
+                width: 0.5,
+              ),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(widget.emoji, style: const TextStyle(fontSize: 26)),
-                const SizedBox(height: 6),
-                Text(
-                  widget.label,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 10,
-                    fontWeight: FontWeight.w700,
-                    color: widget.color,
-                    height: 1.3,
+                Icon(widget.icon, size: 26, color: widget.color),
+                const SizedBox(height: IveTokens.s2),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 6),
+                  child: Text(
+                    widget.label,
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.4,
+                      color: IveTokens.label,
+                      height: 1.2,
+                    ),
                   ),
                 ),
               ],

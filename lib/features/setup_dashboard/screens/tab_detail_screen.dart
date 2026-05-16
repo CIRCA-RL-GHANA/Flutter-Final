@@ -44,7 +44,7 @@ class _TabDetailScreenState extends State<TabDetailScreen> {
         final transactions = setupProv.getTransactionsForTab(tab.id);
 
         return Scaffold(
-          backgroundColor: const Color(0xFFF8F9FC),
+          backgroundColor: const Color(0xFF08080F),
           appBar: SetupAppBar(title: 'Tab ${tab.tabNumber}'),
           body: Column(
             children: [

@@ -23,7 +23,7 @@ class AccessibilityScreen extends StatelessWidget {
         final presets = udp.accessibilityPresets;
 
         return Scaffold(
-          backgroundColor: const Color(0xFFF8F9FC),
+          backgroundColor: const Color(0xFF08080F),
           appBar: ModuleHeader(
             title: 'Accessibility',
             contextColor: const Color(0xFF06B6D4),

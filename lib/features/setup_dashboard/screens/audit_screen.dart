@@ -31,7 +31,7 @@ class AuditScreen extends StatelessWidget {
         return SetupRbacGate(
           cardId: 'activity_log',
           child: Scaffold(
-            backgroundColor: const Color(0xFFF8F9FC),
+            backgroundColor: const Color(0xFF08080F),
             appBar: SetupAppBar(
               title: 'Activity Log',
               actions: [

@@ -45,7 +45,7 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
         final fuel = setupProv.getFuelForVehicle(vehicle.id);
 
         return Scaffold(
-          backgroundColor: const Color(0xFFF8F9FC),
+          backgroundColor: const Color(0xFF08080F),
           appBar: SetupAppBar(title: '${vehicle.make} ${vehicle.model}'),
           body: Column(
             children: [

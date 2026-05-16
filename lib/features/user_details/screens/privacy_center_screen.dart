@@ -23,7 +23,7 @@ class PrivacyCenterScreen extends StatelessWidget {
         final categories = udp.dataCategories;
 
         return Scaffold(
-          backgroundColor: const Color(0xFFF8F9FC),
+          backgroundColor: const Color(0xFF08080F),
           appBar: const ModuleHeader(
             title: 'Privacy Center',
             contextColor: Color(0xFF8B5CF6),

@@ -27,7 +27,7 @@ class ProfileScreen extends StatelessWidget {
         return SetupRbacGate(
           cardId: 'profile',
           child: Scaffold(
-            backgroundColor: const Color(0xFFF8F9FC),
+            backgroundColor: const Color(0xFF08080F),
             appBar: SetupAppBar(
               title: 'Profile',
               actions: [

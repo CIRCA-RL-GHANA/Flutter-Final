@@ -25,7 +25,7 @@ class UserDetailsMasterScreen extends StatelessWidget {
         final allContexts = ctxProvider.availableContexts;
 
         return Scaffold(
-          backgroundColor: const Color(0xFFF8F9FC),
+          backgroundColor: const Color(0xFF08080F),
           body: CustomScrollView(
             slivers: [
               // â”€â”€â”€ App Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€

@@ -30,7 +30,7 @@ class MyActivityScreen extends StatelessWidget {
         return SetupRbacGate(
           cardId: 'my_activity',
           child: Scaffold(
-            backgroundColor: const Color(0xFFF8F9FC),
+            backgroundColor: const Color(0xFF08080F),
             appBar: SetupAppBar(
               title: 'My Activity',
               actions: [

@@ -23,7 +23,7 @@ class NotificationCenterScreen extends StatelessWidget {
         final filtered = prov.filteredNotifications;
 
         return Scaffold(
-          backgroundColor: const Color(0xFFF8F9FC),
+          backgroundColor: const Color(0xFF08080F),
           appBar: UtilityAppBar(
             title: 'Notifications',
             actions: [

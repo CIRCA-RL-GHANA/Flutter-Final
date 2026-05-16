@@ -22,7 +22,7 @@ class AuditLogScreen extends StatelessWidget {
         final entries = udp.filteredAuditLog;
 
         return Scaffold(
-          backgroundColor: const Color(0xFFF8F9FC),
+          backgroundColor: const Color(0xFF08080F),
           appBar: ModuleHeader(
             title: 'Activity Log',
             contextColor: const Color(0xFF3B82F6),

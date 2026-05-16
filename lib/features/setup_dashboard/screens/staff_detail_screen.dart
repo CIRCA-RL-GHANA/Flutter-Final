@@ -43,7 +43,7 @@ class _StaffDetailScreenState extends State<StaffDetailScreen> {
         }
 
         return Scaffold(
-          backgroundColor: const Color(0xFFF8F9FC),
+          backgroundColor: const Color(0xFF08080F),
           appBar: SetupAppBar(
             title: staff.name,
             actions: [

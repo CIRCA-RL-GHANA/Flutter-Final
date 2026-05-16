@@ -25,7 +25,7 @@ class SystemMonitorScreen extends StatelessWidget {
         final logs = prov.filteredLogs;
 
         return Scaffold(
-          backgroundColor: const Color(0xFFF8F9FC),
+          backgroundColor: const Color(0xFF08080F),
           appBar: UtilityAppBar(
             title: 'System Monitor',
             actions: [

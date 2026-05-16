@@ -41,7 +41,7 @@ class _SocialDetailScreenState extends State<SocialDetailScreen> {
         }
 
         return Scaffold(
-          backgroundColor: const Color(0xFFF8F9FC),
+          backgroundColor: const Color(0xFF08080F),
           appBar: const SetupAppBar(title: 'Post Detail'),
           body: Column(
             children: [

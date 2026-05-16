@@ -2178,7 +2178,7 @@ Future<void> showSetupOtpGuard(
               hintStyle: TextStyle(letterSpacing: 8, color: AppColors.textTertiary),
               counterText: '',
               filled: true,
-              fillColor: Color(0xFFF8F9FC),
+              fillColor: Color(0xFF11131C),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(12)),
                 borderSide: BorderSide(color: kSetupColor),

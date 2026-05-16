@@ -75,7 +75,7 @@ class _TabCreateScreenState extends State<TabCreateScreen> {
     return Consumer2<SetupDashboardProvider, ContextProvider>(
       builder: (context, setupProv, ctxProv, _) {
         return Scaffold(
-          backgroundColor: const Color(0xFFF8F9FC),
+          backgroundColor: const Color(0xFF08080F),
           appBar: SetupAppBar(
             title: 'New Tab',
             actions: [

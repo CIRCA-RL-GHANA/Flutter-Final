@@ -23,7 +23,7 @@ class HelpSupportScreen extends StatelessWidget {
         final tickets = prov.supportTickets;
 
         return Scaffold(
-          backgroundColor: const Color(0xFFF8F9FC),
+          backgroundColor: const Color(0xFF08080F),
           appBar: const UtilityAppBar(title: 'Help & Support'),
           body: ListView(
             padding: const EdgeInsets.fromLTRB(20, 12, 20, 100),

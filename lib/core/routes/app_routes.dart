@@ -180,6 +180,15 @@ import '../../features/community/screens/community_hub_screen.dart';
 import '../../features/community/screens/community_create_screen.dart';
 import '../../features/community/screens/community_detail_screen.dart';
 import '../../features/community/screens/community_members_screen.dart';
+// Fintech Module Screens
+import '../../features/fintech/loans/screens/loan_screens.dart';
+import '../../features/fintech/insurance/screens/insurance_screen.dart';
+import '../../features/fintech/credit_data/screens/credit_data_screen.dart';
+import '../../features/fintech/deposits/screens/deposit_screen.dart';
+// Enterprise Module Screens
+import '../../features/enterprise/screens/enterprise_onboarding_screen.dart';
+import '../../features/enterprise/screens/enterprise_dashboard_screen.dart';
+import '../../features/enterprise/screens/concierge_embed_screen.dart';
 // GO Module Screens
 import '../../features/go/screens/go_financial_screen.dart';
 import '../../features/go/screens/go_context_screen.dart';
@@ -428,6 +437,19 @@ class AppRoutes {
   static const String communityMine = '/community/mine';
   static const String communityDetail = '/community/detail';
   static const String communityMembers = '/community/members';
+
+  // Fintech Module Routes
+  static const String fintechLoans = '/fintech/loans';
+  static const String fintechLoanRepayment = '/fintech/loans/repayment';
+  static const String fintechInsurance = '/fintech/insurance';
+  static const String fintechInsuranceClaims = '/fintech/insurance/claims';
+  static const String fintechCredit = '/fintech/credit';
+  static const String fintechDeposits = '/fintech/deposits';
+
+  // Enterprise Module Routes
+  static const String enterpriseOnboarding = '/enterprise/onboarding';
+  static const String enterpriseDashboard = '/enterprise/dashboard';
+  static const String enterpriseConcierge = '/enterprise/concierge';
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -862,6 +884,32 @@ class AppRoutes {
         return _buildRoute(CommunityDetailScreen(community: settings.arguments as Map<String, dynamic>?), settings);
       case communityMembers:
         return _buildRoute(CommunityMembersScreen(community: settings.arguments as Map<String, dynamic>?), settings);
+
+      // Fintech Module
+      case fintechLoans:
+        return _buildRoute(const LoanApplicationScreen(), settings);
+      case fintechLoanRepayment:
+        return _buildRoute(const LoanRepaymentScreen(), settings);
+      case fintechInsurance:
+        return _buildRoute(const InsuranceScreen(), settings);
+      case fintechInsuranceClaims:
+        return _buildRoute(const ClaimsScreen(), settings);
+      case fintechCredit:
+        return _buildRoute(const CreditDataScreen(), settings);
+      case fintechDeposits:
+        return _buildRoute(const DepositScreen(), settings);
+
+      // Enterprise Module
+      case enterpriseOnboarding:
+        return _buildRoute(const EnterpriseOnboardingScreen(), settings);
+      case enterpriseDashboard: {
+        final entityId = (settings.arguments as String?) ?? 'default';
+        return _buildRoute(EnterpriseDashboardScreen(entityId: entityId), settings);
+      }
+      case enterpriseConcierge: {
+        final entityId = (settings.arguments as String?) ?? 'default';
+        return _buildRoute(ConciergeEmbedScreen(entityId: entityId), settings);
+      }
 
       default:
         return _buildRoute(

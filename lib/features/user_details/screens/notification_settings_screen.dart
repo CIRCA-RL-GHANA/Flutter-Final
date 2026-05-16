@@ -22,7 +22,7 @@ class NotificationSettingsScreen extends StatelessWidget {
         final notif = udp.notifications;
 
         return Scaffold(
-          backgroundColor: const Color(0xFFF8F9FC),
+          backgroundColor: const Color(0xFF08080F),
           appBar: const ModuleHeader(
             title: 'Notifications',
             contextColor: Color(0xFFF59E0B),

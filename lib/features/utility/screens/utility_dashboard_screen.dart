@@ -26,7 +26,7 @@ class UtilityDashboardScreen extends StatelessWidget {
         final quickActions = utilProv.getQuickActions(role);
 
         return Scaffold(
-          backgroundColor: const Color(0xFFF8F9FC),
+          backgroundColor: const Color(0xFF08080F),
           appBar: const UtilityAppBar(title: 'Utility'),
           body: CustomScrollView(
             slivers: [              // â”€â”€â”€ AI Insights â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€

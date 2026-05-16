@@ -41,7 +41,7 @@ class _AvatarEditorScreenState extends State<AvatarEditorScreen> with SingleTick
         final identity = udp.identity;
 
         return Scaffold(
-          backgroundColor: const Color(0xFFF8F9FC),
+          backgroundColor: const Color(0xFF08080F),
           appBar: AppBar(
             backgroundColor: Colors.white,
             surfaceTintColor: Colors.transparent,

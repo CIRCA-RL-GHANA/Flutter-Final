@@ -23,7 +23,7 @@ class AccessibilityCenterScreen extends StatelessWidget {
         final config = prov.accessibilityConfig;
 
         return Scaffold(
-          backgroundColor: const Color(0xFFF8F9FC),
+          backgroundColor: const Color(0xFF08080F),
           appBar: UtilityAppBar(
             title: 'Accessibility',
             actions: [

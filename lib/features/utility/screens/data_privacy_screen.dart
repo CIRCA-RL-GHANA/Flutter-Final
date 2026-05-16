@@ -21,7 +21,7 @@ class DataPrivacyScreen extends StatelessWidget {
     return Consumer<UtilityProvider>(
       builder: (context, prov, _) {
         return Scaffold(
-          backgroundColor: const Color(0xFFF8F9FC),
+          backgroundColor: const Color(0xFF08080F),
           appBar: const UtilityAppBar(title: 'Data & Privacy'),
           body: ListView(
             padding: const EdgeInsets.fromLTRB(20, 12, 20, 100),
