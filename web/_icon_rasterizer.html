@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>icon rasterizer</title></head>
+<body style="background:#08080F;color:#fff;font-family:sans-serif">
+<h3>icon rasterizer</h3>
+<div id="out"></div>
+<script>
+const SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="none">
+  <path d="M 120 54 A 56 56 0 0 1 178 96" stroke="#22BDD8" stroke-width="16" stroke-linecap="round" fill="none"/>
+  <path d="M 178 96 A 56 56 0 1 0 138 165 C 145 195, 130 220, 90 218 C 60 216, 60 188, 95 182" stroke="#C99B2C" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M 198 32 L 202 46 L 216 50 L 202 54 L 198 68 L 194 54 L 180 50 L 194 46 Z" fill="#22BDD8"/>
+  <g fill="#C99B2C">
+    <rect x="104" y="86"  width="22" height="22" rx="5"/>
+    <rect x="130" y="86"  width="22" height="22" rx="5"/>
+    <rect x="104" y="112" width="22" height="22" rx="5"/>
+    <rect x="130" y="112" width="22" height="22" rx="5"/>
+  </g>
+</svg>`;
+
+const SIZES = [42, 56, 81, 108, 120, 152, 180, 192, 256, 384, 512, 1024];
+
+// Render the SVG at given size with optional padding ratio (0..1) and bg color
+async function render(size, padRatio, bg) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    const svgBlob = new Blob([SVG], { type: 'image/svg+xml' });
+    const url = URL.createObjectURL(svgBlob);
+    img.onload = () => {
+      const c = document.createElement('canvas');
+      c.width = size; c.height = size;
+      const ctx = c.getContext('2d');
+      if (bg) { ctx.fillStyle = bg; ctx.fillRect(0, 0, size, size); }
+      const inner = Math.round(size * (1 - padRatio * 2));
+      const off = Math.round((size - inner) / 2);
+      ctx.drawImage(img, off, off, inner, inner);
+      URL.revokeObjectURL(url);
+      resolve(c.toDataURL('image/png'));
+    };
+    img.src = url;
+  });
+}
+
+window.rasterizeAll = async function() {
+  const results = {};
+  // Standard icons: no bg, ~6% transparent padding
+  for (const s of SIZES) {
+    results[`Icon-${s}.png`] = await render(s, 0.06, null);
+  }
+  // Maskable icons: brand bg + 18% padding (safe zone)
+  results['icon_maskable_192x192.png'] = await render(192, 0.18, '#08080F');
+  results['icon_maskable_512x512.png'] = await render(512, 0.18, '#08080F');
+  return results;
+};
+</script>
+</body></html>

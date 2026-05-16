@@ -20,7 +20,7 @@ const _moduleColors = {
   'alerts': Color(0xFFEF4444),
   'qualchat': Color(0xFF06B6D4),
   'april': Color(0xFFF59E0B),
-  'setup': Color(0xFF6366F1),
+  'setup': Color(0xFF22BDD8),
   'utility': Color(0xFF6B7280),
   'user': Color(0xFF059669),
   'genie': Color(0xFFFFD700),

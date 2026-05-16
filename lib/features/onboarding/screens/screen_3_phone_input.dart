@@ -12,15 +12,15 @@ import '../widgets/buttons.dart';
 import '../widgets/onboarding_header.dart';
 
 
-// OS palette — mirrors splash / welcome
+// OS palette ï¿½ mirrors splash / welcome
 const Color _kBg        = Color(0xFF08080F);
 const Color _kSurface   = Color(0xFF0E0E1A);
 const Color _kBorder    = Color(0xFF1C1C2E);
 const Color _kAccent    = Color(0xFF22BDD8);
 const Color _kAccentDim = Color(0xFF1E2A6E);
 const Color _kText      = Color(0xFFE8E8F0);
-const Color _kTextDim   = Color(0xFF6B6B88);
-const Color _kTextMuted = Color(0xFF3A3A52);
+const Color _kTextDim   = Color(0xFF9A9AB2);
+const Color _kTextMuted = Color(0xFF7A7A95);
 /// Screen 3: Phone Number Input (Intelligent)
 /// Frictionless number entry with predictive intelligence
 class PhoneInputScreen extends StatefulWidget {
@@ -250,13 +250,13 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
                                 style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
-                                  color: const Color(0xFF6B6B88),
+                                  color: const Color(0xFF9A9AB2),
                                 ),
                               ),
                               const SizedBox(width: 8),
                               const Icon(
                                 Icons.keyboard_arrow_down,
-                                color: const Color(0xFF3A3A52),
+                                color: const Color(0xFF7A7A95),
                               ),
                             ],
                           ),
@@ -642,7 +642,7 @@ class _CountryPickerSheetState extends State<_CountryPickerSheet> {
                       fontWeight: FontWeight.w600,
                       color: isSelected
                           ? const Color(0xFF22BDD8)
-                          : const Color(0xFF6B6B88),
+                          : const Color(0xFF9A9AB2),
                     ),
                   ),
                   selected: isSelected,

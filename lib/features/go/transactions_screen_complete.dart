@@ -259,7 +259,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
               prefixIcon: const Icon(Icons.search),
               border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
               filled: true,
-              fillColor: Colors.white,
+              fillColor: const Color(0xFF11131C),
             ),
             onChanged: (val) {
               if (val.isEmpty) {

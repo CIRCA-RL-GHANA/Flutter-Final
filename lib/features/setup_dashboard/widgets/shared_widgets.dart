@@ -16,8 +16,12 @@ import '../providers/setup_dashboard_provider.dart';
 
 // ─── Setup Dashboard Module Color ────────────────────────────────────────────
 
-/// The canonical module color for Setup Dashboard (Blue)
-const Color kSetupColor = Color(0xFF3B82F6);
+/// The canonical module color for Setup Dashboard.
+///
+/// Locked to the genie help brand cyan (`Brand.cyan`) for visual continuity
+/// with the onboarding flow. Updating this token automatically refreshes
+/// every Setup Dashboard surface (KPI badges, FABs, RBAC chips, etc.).
+const Color kSetupColor = Color(0xFF22BDD8);
 
 // ─── Setup App Bar ───────────────────────────────────────────────────────────
 

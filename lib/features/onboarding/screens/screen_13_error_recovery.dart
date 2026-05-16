@@ -4,15 +4,15 @@ import '../../../core/utils/responsive.dart';
 import '../widgets/buttons.dart';
 
 
-// OS palette — mirrors splash / welcome
+// OS palette ï¿½ mirrors splash / welcome
 const Color _kBg        = Color(0xFF08080F);
 const Color _kSurface   = Color(0xFF0E0E1A);
 const Color _kBorder    = Color(0xFF1C1C2E);
 const Color _kAccent    = Color(0xFF22BDD8);
 const Color _kAccentDim = Color(0xFF1E2A6E);
 const Color _kText      = Color(0xFFE8E8F0);
-const Color _kTextDim   = Color(0xFF6B6B88);
-const Color _kTextMuted = Color(0xFF3A3A52);
+const Color _kTextDim   = Color(0xFF9A9AB2);
+const Color _kTextMuted = Color(0xFF7A7A95);
 /// Error types for the recovery screen
 enum ErrorType {
   network,
@@ -298,7 +298,7 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
                           config.message,
                           style: const TextStyle(
                             fontSize: 16,
-                            color: const Color(0xFF6B6B88),
+                            color: const Color(0xFF9A9AB2),
                             height: 1.5,
                           ),
                           textAlign: TextAlign.center,
@@ -359,7 +359,7 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
                                             entry.value,
                                             style: const TextStyle(
                                               fontSize: 14,
-                                              color: const Color(0xFF6B6B88),
+                                              color: const Color(0xFF9A9AB2),
                                               height: 1.4,
                                             ),
                                           ),
@@ -406,7 +406,7 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
                       AppStrings.needHelp,
                       style: const TextStyle(
                         fontSize: 12,
-                        color: const Color(0xFF3A3A52),
+                        color: const Color(0xFF7A7A95),
                       ),
                     ),
                   ],

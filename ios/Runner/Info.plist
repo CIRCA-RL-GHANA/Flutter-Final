@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>PROMPT Genie</string>
+	<string>genie help</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>thepg</string>
+	<string>genie help</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -57,19 +57,25 @@
 
 	<!-- Permission Descriptions (required for App Store) -->
 	<key>NSCameraUsageDescription</key>
-	<string>PROMPT Genie needs camera access to take profile photos and scan documents.</string>
+	<string>genie help needs camera access to take profile photos, scan QR codes, and capture documents for verification.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>PROMPT Genie needs photo library access to select profile pictures and upload images.</string>
+	<string>genie help needs photo library access to select profile pictures and upload images to your business listings.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>PROMPT Genie needs to save photos to your photo library.</string>
+	<string>genie help needs to save receipts, QR codes, and shared images to your photo library.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>PROMPT Genie needs your location to show nearby services and provide ride estimates.</string>
+	<string>genie help uses your location to show nearby shops, drivers, and provide accurate ride and delivery estimates.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>PROMPT Genie uses your location in the background to track active rides and deliveries.</string>
+	<string>genie help uses your location in the background to track active rides and deliveries so you and your customers always know the live status.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>PROMPT Genie uses your location for ride tracking and nearby service discovery.</string>
+	<string>genie help uses your location for ride tracking, delivery progress, and nearby service discovery — even when the app is in the background.</string>
 	<key>NSFaceIDUsageDescription</key>
-	<string>PROMPT Genie uses Face ID for secure authentication and transaction approval.</string>
+	<string>genie help uses Face ID to securely unlock your account and authorize transactions without passwords.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>genie help needs microphone access for voice messages in QualChat and voice commands to Genie AI.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>genie help can read your contacts to help you find friends already on genie help and send them money or messages.</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>genie help uses this to deliver personalised recommendations and prevent fraud across the platform.</string>
 
 	<!-- Deep Linking / Universal Links -->
 	<key>FlutterDeepLinkingEnabled</key>
@@ -86,5 +92,26 @@
 	<!-- Status bar -->
 	<key>UIStatusBarHidden</key>
 	<false/>
+
+	<!-- App Store category & export compliance -->
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.finance</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+
+	<!-- URL scheme for Universal Links + custom geniehelp:// scheme -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>app.geniehelp</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>geniehelp</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

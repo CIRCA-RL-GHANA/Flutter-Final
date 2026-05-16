@@ -8,15 +8,15 @@ import '../providers/onboarding_provider.dart';
 import '../widgets/buttons.dart';
 
 
-// OS palette — mirrors splash / welcome
+// OS palette ï¿½ mirrors splash / welcome
 const Color _kBg        = Color(0xFF08080F);
 const Color _kSurface   = Color(0xFF0E0E1A);
 const Color _kBorder    = Color(0xFF1C1C2E);
 const Color _kAccent    = Color(0xFF22BDD8);
 const Color _kAccentDim = Color(0xFF1E2A6E);
 const Color _kText      = Color(0xFFE8E8F0);
-const Color _kTextDim   = Color(0xFF6B6B88);
-const Color _kTextMuted = Color(0xFF3A3A52);
+const Color _kTextDim   = Color(0xFF9A9AB2);
+const Color _kTextMuted = Color(0xFF7A7A95);
 /// Screen 9: Permissions Onboarding
 /// Just-in-time, benefit-focused permission requests
 class PermissionsScreen extends StatefulWidget {
@@ -125,7 +125,7 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                               style: const TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,
-                                color: const Color(0xFF3A3A52),
+                                color: const Color(0xFF7A7A95),
                               ),
                             ),
                             TextButton(
@@ -141,7 +141,7 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                                 'Skip All',
                                 style: TextStyle(
                                   fontSize: 13,
-                                  color: const Color(0xFF3A3A52),
+                                  color: const Color(0xFF7A7A95),
                                 ),
                               ),
                             ),
@@ -247,7 +247,7 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                                     .getBenefitText(currentPerm),
                                 style: const TextStyle(
                                   fontSize: 16,
-                                  color: const Color(0xFF6B6B88),
+                                  color: const Color(0xFF9A9AB2),
                                   height: 1.5,
                                 ),
                                 textAlign: TextAlign.center,
@@ -270,14 +270,14 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                                       _getPermissionIconData(currentPerm),
                                       size: 40,
                                       color:
-                                          const Color(0xFF3A3A52).withOpacity(0.5),
+                                          const Color(0xFF7A7A95).withOpacity(0.5),
                                     ),
                                     const SizedBox(height: 8),
                                     Text(
                                       'Feature Preview',
                                       style: TextStyle(
                                         fontSize: 12,
-                                        color: const Color(0xFF3A3A52),
+                                        color: const Color(0xFF7A7A95),
                                       ),
                                     ),
                                   ],
@@ -312,7 +312,7 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                           AppStrings.enableLater,
                           style: const TextStyle(
                             fontSize: 12,
-                            color: const Color(0xFF3A3A52),
+                            color: const Color(0xFF7A7A95),
                           ),
                         ),
                       ],

@@ -9,15 +9,15 @@ import '../widgets/buttons.dart';
 import '../widgets/onboarding_header.dart';
 
 
-// OS palette — mirrors splash / welcome
+// OS palette ï¿½ mirrors splash / welcome
 const Color _kBg        = Color(0xFF08080F);
 const Color _kSurface   = Color(0xFF0E0E1A);
 const Color _kBorder    = Color(0xFF1C1C2E);
 const Color _kAccent    = Color(0xFF22BDD8);
 const Color _kAccentDim = Color(0xFF1E2A6E);
 const Color _kText      = Color(0xFFE8E8F0);
-const Color _kTextDim   = Color(0xFF6B6B88);
-const Color _kTextMuted = Color(0xFF3A3A52);
+const Color _kTextDim   = Color(0xFF9A9AB2);
+const Color _kTextMuted = Color(0xFF7A7A95);
 /// Screen 8: Role Selection (Multi-Tenant)
 /// Context-aware role assignment with future flexibility
 class RoleSelectionScreen extends StatefulWidget {
@@ -172,7 +172,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
                                 Expanded(
                                   child: Text(
                                     role.selectedCategory == RoleCategory.individual
-                                        ? 'Your individual account gives you Owner access — shop, socialise, and manage your personal finances.'
+                                        ? 'Your individual account gives you Owner access ï¿½ shop, socialise, and manage your personal finances.'
                                         : role.selectedCategory == RoleCategory.business
                                             ? 'Select the staff role you have been invited to join this business entity as.'
                                             : 'You can change your role anytime in settings.',
@@ -254,7 +254,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
   }
 
   Widget _buildBusinessSubRoles(RoleProvider role) {
-    // Owner is NOT listed here — Owner is the individual who created the entity,
+    // Owner is NOT listed here ï¿½ Owner is the individual who created the entity,
     // not an assignable staff role. Business sub-roles are staff positions only.
     final subRoles = [
       _SubRoleData(
@@ -276,7 +276,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
         'Staff',
         'Limited permissions',
         Icons.badge_outlined,
-        const Color(0xFF6B6B88),
+        const Color(0xFF9A9AB2),
       ),
     ];
 
@@ -375,7 +375,7 @@ class _RoleCategoryCard extends StatelessWidget {
                       Icon(
                         Icons.check,
                         size: 14,
-                        color: isSelected ? color : const Color(0xFF3A3A52),
+                        color: isSelected ? color : const Color(0xFF7A7A95),
                       ),
                       const SizedBox(width: 4),
                       Flexible(
@@ -385,7 +385,7 @@ class _RoleCategoryCard extends StatelessWidget {
                             fontSize: 12,
                             color: isSelected
                                 ? const Color(0xFFE8E8F0)
-                                : const Color(0xFF6B6B88),
+                                : const Color(0xFF9A9AB2),
                           ),
                         ),
                       ),
@@ -406,7 +406,7 @@ class _RoleCategoryCard extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
-                    color: isSelected ? Colors.white : const Color(0xFF6B6B88),
+                    color: isSelected ? Colors.white : const Color(0xFF9A9AB2),
                   ),
                 ),
               ),
@@ -495,7 +495,7 @@ class _SubRoleCard extends StatelessWidget {
                       data.description,
                       style: const TextStyle(
                         fontSize: 12,
-                        color: const Color(0xFF3A3A52),
+                        color: const Color(0xFF7A7A95),
                       ),
                     ),
                   ],
@@ -505,7 +505,7 @@ class _SubRoleCard extends StatelessWidget {
                 isSelected
                     ? Icons.radio_button_checked
                     : Icons.radio_button_unchecked,
-                color: isSelected ? data.color : const Color(0xFF3A3A52),
+                color: isSelected ? data.color : const Color(0xFF7A7A95),
                 size: 22,
               ),
             ],

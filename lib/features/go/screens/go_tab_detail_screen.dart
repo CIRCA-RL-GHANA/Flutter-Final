@@ -87,11 +87,11 @@ class _GoTabDetailScreenState extends State<GoTabDetailScreen> {
           ),
           bottomSheet: tab.status != TabStatus.settled ? Container(
             padding: const EdgeInsets.all(16),
-            decoration: const BoxDecoration(color: Colors.white, border: Border(top: BorderSide(color: Color(0xFFE5E7EB)))),
+            decoration: const BoxDecoration(color: Colors.white, border: Border(top: BorderSide(color: Color(0xFF1C1C2E)))),
             child: Row(children: [
               Expanded(child: OutlinedButton(
                 onPressed: () => setState(() => _showSettlement = !_showSettlement),
-                style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFFE5E7EB)), padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+                style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                 child: const Text('Settle'),
               )),
               const SizedBox(width: 12),

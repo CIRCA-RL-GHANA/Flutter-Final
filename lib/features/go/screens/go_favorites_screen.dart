@@ -47,8 +47,8 @@ class _GoFavoritesScreenState extends State<GoFavoritesScreen> {
                   onChanged: (v) => setState(() => _search = v),
                   decoration: InputDecoration(
                     hintText: 'Search favorites...', prefixIcon: const Icon(Icons.search, size: 20),
-                    filled: true, fillColor: Colors.white,
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: Color(0xFFE5E7EB))),
+                    filled: true, fillColor: const Color(0xFF11131C),
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: Color(0xFF1C1C2E))),
                     contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 14),
                   ),
                   style: const TextStyle(fontSize: 13),

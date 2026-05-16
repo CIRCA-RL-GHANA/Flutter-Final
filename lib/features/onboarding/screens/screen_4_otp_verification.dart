@@ -10,15 +10,15 @@ import '../providers/onboarding_provider.dart';
 import '../widgets/onboarding_header.dart';
 
 
-// OS palette — mirrors splash / welcome
+// OS palette ï¿½ mirrors splash / welcome
 const Color _kBg        = Color(0xFF08080F);
 const Color _kSurface   = Color(0xFF0E0E1A);
 const Color _kBorder    = Color(0xFF1C1C2E);
 const Color _kAccent    = Color(0xFF22BDD8);
 const Color _kAccentDim = Color(0xFF1E2A6E);
 const Color _kText      = Color(0xFFE8E8F0);
-const Color _kTextDim   = Color(0xFF6B6B88);
-const Color _kTextMuted = Color(0xFF3A3A52);
+const Color _kTextDim   = Color(0xFF9A9AB2);
+const Color _kTextMuted = Color(0xFF7A7A95);
 /// Screen 4: OTP Verification (Secure)
 /// Maximum security with minimum friction
 class OtpVerificationScreen extends StatefulWidget {
@@ -264,7 +264,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                         AppStrings.enterOtpCode,
                         style: const TextStyle(
                           fontSize: 14,
-                          color: const Color(0xFF6B6B88),
+                          color: const Color(0xFF9A9AB2),
                         ),
                       ),
 
@@ -370,7 +370,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                                 '${AppStrings.resendCode} $_formattedTime',
                                 style: const TextStyle(
                                   fontSize: 13,
-                                  color: const Color(0xFF3A3A52),
+                                  color: const Color(0xFF7A7A95),
                                 ),
                               ),
                             ],
@@ -391,7 +391,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                                 fontWeight: FontWeight.w600,
                                 color: auth.resendAttemptsRemaining > 0
                                     ? const Color(0xFF22BDD8)
-                                    : const Color(0xFF3A3A52),
+                                    : const Color(0xFF7A7A95),
                               ),
                             ),
                           ),
@@ -403,7 +403,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                           'Didn\'t receive a code?',
                           style: TextStyle(
                             fontSize: 14,
-                            color: const Color(0xFF6B6B88),
+                            color: const Color(0xFF9A9AB2),
                           ),
                         ),
                         const SizedBox(height: 12),
@@ -566,20 +566,20 @@ class _AlternativeMethodButton extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Icon(icon, size: 20, color: const Color(0xFF6B6B88)),
+            Icon(icon, size: 20, color: const Color(0xFF9A9AB2)),
             const SizedBox(width: 12),
             Text(
               label,
               style: const TextStyle(
                 fontSize: 14,
-                color: const Color(0xFF6B6B88),
+                color: const Color(0xFF9A9AB2),
               ),
             ),
             const Spacer(),
             const Icon(
               Icons.arrow_forward_ios,
               size: 14,
-              color: const Color(0xFF3A3A52),
+              color: const Color(0xFF7A7A95),
             ),
           ],
         ),

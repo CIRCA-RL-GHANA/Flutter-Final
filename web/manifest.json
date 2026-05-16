@@ -1,17 +1,20 @@
 {
   "name": "genie help",
   "short_name": "geniehelp",
-  "description": "The global operating system for commerce. Payments, logistics, e-commerce, finance, and AI intelligence — unified on one platform.",
+  "id": "/?source=pwa",
+  "description": "The global operating system for commerce. Payments, logistics, e-commerce, finance, and AI intelligence \u2014 unified on one platform.",
   "start_url": "/?utm_source=pwa",
   "scope": "/",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
   "orientation": "portrait",
   "background_color": "#08080F",
   "theme_color": "#08080F",
   "lang": "en",
   "dir": "ltr",
   "prefer_related_applications": false,
-  "categories": ["finance", "social", "productivity", "utilities"],
+  "launch_handler": { "client_mode": "focus-existing" },
+  "categories": ["finance", "social", "productivity", "utilities", "business", "shopping"],
   "icons": [
     {
       "src": "icons/genie_help_icon.svg",

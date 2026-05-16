@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="none" role="img" aria-label="genie help">
-  <path d="M172 36 L176 50 L190 54 L176 58 L172 72 L168 58 L154 54 L168 50 Z" fill="#22BDD8"/>
-  <path d="M 116 64 A 66 66 0 0 1 176 130" stroke="#22BDD8" stroke-width="17" stroke-linecap="round" fill="none"/>
-  <path d="M 104 64 A 66 66 0 1 0 160 172 C 184 192, 174 218, 142 218 C 112 218, 100 200, 116 192"
-        stroke="#1F2A33" stroke-width="17" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M 120 54 A 56 56 0 0 1 178 96" stroke="#22BDD8" stroke-width="16" stroke-linecap="round" fill="none"/>
+  <path d="M 178 96 A 56 56 0 1 0 138 165 C 145 195, 130 220, 90 218 C 60 216, 60 188, 95 182"
+        stroke="#C99B2C" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M 198 32 L 202 46 L 216 50 L 202 54 L 198 68 L 194 54 L 180 50 L 194 46 Z" fill="#22BDD8"/>
   <g fill="#C99B2C">
-    <rect x="83"  y="101" width="24" height="24" rx="5"/>
-    <rect x="113" y="101" width="24" height="24" rx="5"/>
-    <rect x="83"  y="131" width="24" height="24" rx="5"/>
-    <rect x="113" y="131" width="24" height="24" rx="5"/>
+    <rect x="104" y="86"  width="22" height="22" rx="5"/>
+    <rect x="130" y="86"  width="22" height="22" rx="5"/>
+    <rect x="104" y="112" width="22" height="22" rx="5"/>
+    <rect x="130" y="112" width="22" height="22" rx="5"/>
   </g>
 </svg>

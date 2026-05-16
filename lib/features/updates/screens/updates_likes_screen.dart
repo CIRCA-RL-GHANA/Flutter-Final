@@ -113,7 +113,7 @@ class _BodyState extends State<_Body> with SingleTickerProviderStateMixin {
                     hintStyle: const TextStyle(fontSize: 13, color: AppColors.textTertiary),
                     prefixIcon: const Icon(Icons.search, size: 18, color: AppColors.textTertiary),
                     filled: true,
-                    fillColor: Colors.white,
+                    fillColor: const Color(0xFF11131C),
                     contentPadding: const EdgeInsets.symmetric(vertical: 10),
                     border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide(color: AppColors.inputBorder)),
                     enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide(color: AppColors.inputBorder)),

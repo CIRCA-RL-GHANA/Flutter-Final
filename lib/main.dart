@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' hide Consumer;
 import 'package:provider/provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -25,13 +26,15 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
 
-  // Set system UI overlay style
+  // Set system UI overlay style — aligned to brand-dark surfaces
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.light,
-      systemNavigationBarColor: Color(0xFF0F0F23),
+      statusBarBrightness: Brightness.dark,
+      systemNavigationBarColor: Color(0xFF08080F),
       systemNavigationBarIconBrightness: Brightness.light,
+      systemNavigationBarDividerColor: Color(0xFF1C1C2E),
     ),
   );
 
@@ -55,6 +58,12 @@ class PromptGenieApp extends StatelessWidget {
             themeMode: ThemeMode.dark,
             initialRoute: AppRoutes.preLoading,
             onGenerateRoute: AppRoutes.onGenerateRoute,
+            localizationsDelegates: const [
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: const [Locale('en')],
             builder: (context, child) {
               // Apply text scaling limits for accessibility
               return MediaQuery(

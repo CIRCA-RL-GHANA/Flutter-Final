@@ -206,7 +206,7 @@ class _StepAmount extends StatelessWidget {
                 children: [100, 500, 1000, 5000, 10000].map((v) => ActionChip(
                   label: Text('$v', style: const TextStyle(fontSize: 12)),
                   onPressed: () { controller.text = '$v'; onAmountChanged(v.toDouble()); },
-                  backgroundColor: Colors.white, side: const BorderSide(color: Color(0xFFE5E7EB)),
+                  backgroundColor: Colors.white, side: const BorderSide(color: Color(0xFF1C1C2E)),
                 )).toList(),
               ),
               const SizedBox(height: 14),
@@ -464,10 +464,10 @@ class _NavFooter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
-      decoration: const BoxDecoration(color: Colors.white, border: Border(top: BorderSide(color: Color(0xFFE5E7EB)))),
+      decoration: const BoxDecoration(color: Colors.white, border: Border(top: BorderSide(color: Color(0xFF1C1C2E)))),
       child: Row(
         children: [
-          if (onBack != null) Expanded(child: OutlinedButton(onPressed: onBack, style: OutlinedButton.styleFrom(foregroundColor: const Color(0xFF6B7280), side: const BorderSide(color: Color(0xFFE5E7EB)), padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))), child: const Text('Back'))),
+          if (onBack != null) Expanded(child: OutlinedButton(onPressed: onBack, style: OutlinedButton.styleFrom(foregroundColor: const Color(0xFF6B7280), side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))), child: const Text('Back'))),
           if (onBack != null) const SizedBox(width: 12),
           Expanded(child: ElevatedButton(onPressed: onNext, style: ElevatedButton.styleFrom(backgroundColor: onNext != null ? kGoColor : const Color(0xFFE5E7EB), foregroundColor: onNext != null ? Colors.white : const Color(0xFF9CA3AF), padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))), child: Text(nextLabel, style: const TextStyle(fontWeight: FontWeight.w600)))),
         ],
@@ -549,7 +549,7 @@ class _VerifyOption extends StatelessWidget {
         icon: Icon(icon, size: 20),
         label: Text(label),
         onPressed: onTap,
-        style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFFE5E7EB)), padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+        style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
       ),
     );
   }

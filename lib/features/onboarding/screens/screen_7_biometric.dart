@@ -11,15 +11,15 @@ import '../widgets/buttons.dart';
 import '../widgets/onboarding_header.dart';
 
 
-// OS palette — mirrors splash / welcome
+// OS palette ï¿½ mirrors splash / welcome
 const Color _kBg        = Color(0xFF08080F);
 const Color _kSurface   = Color(0xFF0E0E1A);
 const Color _kBorder    = Color(0xFF1C1C2E);
 const Color _kAccent    = Color(0xFF22BDD8);
 const Color _kAccentDim = Color(0xFF1E2A6E);
 const Color _kText      = Color(0xFFE8E8F0);
-const Color _kTextDim   = Color(0xFF6B6B88);
-const Color _kTextMuted = Color(0xFF3A3A52);
+const Color _kTextDim   = Color(0xFF9A9AB2);
+const Color _kTextMuted = Color(0xFF7A7A95);
 /// Screen 7: Biometric Setup (Adaptive)
 /// Security with convenience, not coercion
 class BiometricSetupScreen extends StatefulWidget {
@@ -267,7 +267,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
                         : Icons.check_box_outline_blank,
                     color: biometric.consentGiven
                         ? const Color(0xFF22BDD8)
-                        : const Color(0xFF3A3A52),
+                        : const Color(0xFF7A7A95),
                     size: 24,
                   ),
                   const SizedBox(width: 12),
@@ -276,7 +276,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
                       AppStrings.biometricConsent,
                       style: const TextStyle(
                         fontSize: 13,
-                        color: const Color(0xFF6B6B88),
+                        color: const Color(0xFF9A9AB2),
                       ),
                     ),
                   ),
@@ -292,7 +292,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
             AppStrings.changeAnytime,
             style: const TextStyle(
               fontSize: 12,
-              color: const Color(0xFF3A3A52),
+              color: const Color(0xFF7A7A95),
             ),
           ),
 
@@ -418,7 +418,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
           const SizedBox(height: 8),
           const Text(
             'Your PIN will be used as a fallback authentication method',
-            style: TextStyle(fontSize: 12, color: const Color(0xFF3A3A52)),
+            style: TextStyle(fontSize: 12, color: const Color(0xFF7A7A95)),
             textAlign: TextAlign.center,
           ),
 

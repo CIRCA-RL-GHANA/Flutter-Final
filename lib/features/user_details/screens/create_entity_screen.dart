@@ -421,7 +421,7 @@ class _FormField extends StatelessWidget {
               hintText: hint,
               prefixIcon: Icon(icon, size: 20, color: color),
               filled: true,
-              fillColor: Colors.white,
+              fillColor: const Color(0xFF11131C),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide(color: Colors.grey.withOpacity(0.15)),

@@ -93,8 +93,8 @@ class _GoTransferScreenState extends State<GoTransferScreen> {
             decoration: InputDecoration(
               hintText: 'Search by name, QPID, or phone...',
               prefixIcon: const Icon(Icons.search, size: 20),
-              filled: true, fillColor: Colors.white,
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: Color(0xFFE5E7EB))),
+              filled: true, fillColor: const Color(0xFF11131C),
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: Color(0xFF1C1C2E))),
               contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 14),
             ),
             style: const TextStyle(fontSize: 13),
@@ -182,12 +182,12 @@ class _GoTransferScreenState extends State<GoTransferScreen> {
             Text('Available: ${p.liquidity.available.toStringAsFixed(0)} QP', style: const TextStyle(fontSize: 11, color: kGoColor, fontWeight: FontWeight.w600)),
           ])),
           const SizedBox(height: 10),
-          Wrap(spacing: 8, children: [100, 500, 1000, 5000].map((v) => ActionChip(label: Text('$v'), backgroundColor: Colors.white, side: const BorderSide(color: Color(0xFFE5E7EB)), onPressed: () { _amountCtrl.text = '$v'; setState(() => _amount = v.toDouble()); })).toList()),
+          Wrap(spacing: 8, children: [100, 500, 1000, 5000].map((v) => ActionChip(label: Text('$v'), backgroundColor: Colors.white, side: const BorderSide(color: Color(0xFF1C1C2E)), onPressed: () { _amountCtrl.text = '$v'; setState(() => _amount = v.toDouble()); })).toList()),
           const SizedBox(height: 14),
           // Message
           TextField(
             controller: _messageCtrl, maxLength: 100, maxLines: 2,
-            decoration: InputDecoration(hintText: 'Add a message (optional)', filled: true, fillColor: Colors.white, border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: Color(0xFFE5E7EB)))),
+            decoration: InputDecoration(hintText: 'Add a message (optional)', filled: true, fillColor: const Color(0xFF11131C), border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: Color(0xFF1C1C2E)))),
             style: const TextStyle(fontSize: 13),
           ),
           const SizedBox(height: 8),
@@ -196,7 +196,7 @@ class _GoTransferScreenState extends State<GoTransferScreen> {
             value: _category,
             items: ['Personal', 'Business', 'Gift', 'Repayment', 'Other'].map((c) => DropdownMenuItem(value: c, child: Text(c, style: const TextStyle(fontSize: 13)))).toList(),
             onChanged: (v) => setState(() => _category = v ?? _category),
-            decoration: InputDecoration(labelText: 'Category', filled: true, fillColor: Colors.white, border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: Color(0xFFE5E7EB)))),
+            decoration: InputDecoration(labelText: 'Category', filled: true, fillColor: const Color(0xFF11131C), border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: Color(0xFF1C1C2E)))),
           ),
           const SizedBox(height: 10),
           // Schedule
@@ -304,7 +304,7 @@ class _GoTransferScreenState extends State<GoTransferScreen> {
           );
           if (mounted) setState(() { _processing = false; _success = ok; });
         },
-        style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFFE5E7EB)), padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+        style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
       )),
     );
   }
@@ -331,9 +331,9 @@ class _GoTransferScreenState extends State<GoTransferScreen> {
   Widget _buildFooter(VoidCallback? onBack, VoidCallback? onNext, String label) {
     return Container(
       padding: const EdgeInsets.all(16),
-      decoration: const BoxDecoration(color: Colors.white, border: Border(top: BorderSide(color: Color(0xFFE5E7EB)))),
+      decoration: const BoxDecoration(color: Colors.white, border: Border(top: BorderSide(color: Color(0xFF1C1C2E)))),
       child: Row(children: [
-        if (onBack != null) Expanded(child: OutlinedButton(onPressed: onBack, style: OutlinedButton.styleFrom(foregroundColor: const Color(0xFF6B7280), side: const BorderSide(color: Color(0xFFE5E7EB)), padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))), child: const Text('Back'))),
+        if (onBack != null) Expanded(child: OutlinedButton(onPressed: onBack, style: OutlinedButton.styleFrom(foregroundColor: const Color(0xFF6B7280), side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))), child: const Text('Back'))),
         if (onBack != null) const SizedBox(width: 12),
         Expanded(child: ElevatedButton(onPressed: onNext, style: ElevatedButton.styleFrom(backgroundColor: onNext != null ? kGoColor : const Color(0xFFE5E7EB), foregroundColor: onNext != null ? Colors.white : const Color(0xFF9CA3AF), padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))), child: Text(label, style: const TextStyle(fontWeight: FontWeight.w600)))),
       ]),

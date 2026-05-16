@@ -237,8 +237,8 @@ class _LoanApplicationScreenState extends State<LoanApplicationScreen>
 
   InputDecoration _inputDecoration(String hint) => InputDecoration(
     hintText: hint,
-    filled: true, fillColor: Colors.white,
-    border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: const BorderSide(color: Color(0xFFE5E7EB))),
+    filled: true, fillColor: const Color(0xFF11131C),
+    border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: const BorderSide(color: Color(0xFF1C1C2E))),
     contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
   );
 }

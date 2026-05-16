@@ -8,15 +8,15 @@ import '../widgets/buttons.dart';
 import '../widgets/progress_indicators.dart';
 
 
-// OS palette — mirrors splash / welcome
+// OS palette ï¿½ mirrors splash / welcome
 const Color _kBg        = Color(0xFF08080F);
 const Color _kSurface   = Color(0xFF0E0E1A);
 const Color _kBorder    = Color(0xFF1C1C2E);
 const Color _kAccent    = Color(0xFF22BDD8);
 const Color _kAccentDim = Color(0xFF1E2A6E);
 const Color _kText      = Color(0xFFE8E8F0);
-const Color _kTextDim   = Color(0xFF6B6B88);
-const Color _kTextMuted = Color(0xFF3A3A52);
+const Color _kTextDim   = Color(0xFF9A9AB2);
+const Color _kTextMuted = Color(0xFF7A7A95);
 /// Screen 11: Interactive Tutorial (Optional)
 /// Learn by doing, not by reading
 class TutorialScreen extends StatefulWidget {
@@ -119,7 +119,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
                         'Skip',
                         style: TextStyle(
                           fontSize: 14,
-                          color: const Color(0xFF3A3A52),
+                          color: const Color(0xFF7A7A95),
                         ),
                       ),
                     ),
@@ -161,7 +161,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
                       style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
-                        color: const Color(0xFF3A3A52),
+                        color: const Color(0xFF7A7A95),
                       ),
                     ),
                     const Spacer(),
@@ -273,7 +273,7 @@ class _TutorialStepView extends StatelessWidget {
             step.description,
             style: const TextStyle(
               fontSize: 16,
-              color: const Color(0xFF6B6B88),
+              color: const Color(0xFF9A9AB2),
               height: 1.5,
             ),
             textAlign: TextAlign.center,

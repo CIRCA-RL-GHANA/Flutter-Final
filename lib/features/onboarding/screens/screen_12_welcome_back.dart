@@ -7,15 +7,15 @@ import '../providers/onboarding_provider.dart';
 import '../widgets/buttons.dart';
 
 
-// OS palette — mirrors splash / welcome
+// OS palette ï¿½ mirrors splash / welcome
 const Color _kBg        = Color(0xFF08080F);
 const Color _kSurface   = Color(0xFF0E0E1A);
 const Color _kBorder    = Color(0xFF1C1C2E);
 const Color _kAccent    = Color(0xFF22BDD8);
 const Color _kAccentDim = Color(0xFF1E2A6E);
 const Color _kText      = Color(0xFFE8E8F0);
-const Color _kTextDim   = Color(0xFF6B6B88);
-const Color _kTextMuted = Color(0xFF3A3A52);
+const Color _kTextDim   = Color(0xFF9A9AB2);
+const Color _kTextMuted = Color(0xFF7A7A95);
 /// Screen 12: Existing User Welcome Back
 /// Warm re-engagement with context awareness
 class WelcomeBackScreen extends StatefulWidget {
@@ -446,7 +446,7 @@ class _QuickActionBtn extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Icon(icon, size: 28, color: const Color(0xFF6B6B88)),
+            Icon(icon, size: 28, color: const Color(0xFF9A9AB2)),
             const SizedBox(height: 8),
             Text(
               label,

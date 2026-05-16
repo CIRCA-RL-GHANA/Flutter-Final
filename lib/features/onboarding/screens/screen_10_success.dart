@@ -7,20 +7,20 @@ import '../../../core/utils/responsive.dart';
 import '../providers/onboarding_provider.dart';
 import '../widgets/buttons.dart';
 
-// OS palette — mirrors splash / welcome
+// OS palette ï¿½ mirrors splash / welcome
 const Color _kBg        = Color(0xFF08080F);
 const Color _kSurface   = Color(0xFF0E0E1A);
 const Color _kBorder    = Color(0xFF1C1C2E);
 const Color _kAccent    = Color(0xFF22BDD8);
 const Color _kAccentDim = Color(0xFF1E2A6E);
 const Color _kText      = Color(0xFFE8E8F0);
-const Color _kTextDim   = Color(0xFF6B6B88);
+const Color _kTextDim   = Color(0xFF9A9AB2);
 
 // Confetti in OS accent palette
 const List<Color> _kConfettiColors = [
   Color(0xFF22BDD8),
   Color(0xFF10B981),
-  Color(0xFF6B6B88),
+  Color(0xFF9A9AB2),
   Color(0xFF22BDD8),
   Color(0xFF1E2A6E),
   Color(0xFFE8E8F0),
@@ -134,15 +134,15 @@ class _SuccessScreenState extends State<SuccessScreen>
     return Scaffold(
       body: Stack(
         children: [
-          // Background gradient
+          // Background gradient â€” brand dark with cyan glow ceiling
           Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Color(0xFF1A237E),
-                  Color(0xFF0F0F23),
+                  Color(0xFF11131C),
+                  Color(0xFF08080F),
                 ],
               ),
             ),
@@ -333,7 +333,7 @@ class _SuccessScreenState extends State<SuccessScreen>
                           // Tertiary: Skip to Dashboard
                           SecondaryButton(
                             text: AppStrings.skipToDashboard,
-                            color: const Color(0xFF6B6B88),
+                            color: const Color(0xFF9A9AB2),
                             onPressed: () {
                               Navigator.of(context)
                                   .pushReplacementNamed(AppRoutes.genieHome);

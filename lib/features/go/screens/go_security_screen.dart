@@ -151,7 +151,7 @@ class _GoSecurityScreenState extends State<GoSecurityScreen> with SingleTickerPr
         const SizedBox(height: 8),
         SizedBox(width: double.infinity, child: OutlinedButton(
           onPressed: () {},
-          style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFFE5E7EB))),
+          style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFF1C1C2E))),
           child: const Text('Request Limit Increase'),
         )),
       ])),

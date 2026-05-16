@@ -354,7 +354,7 @@ class AlertsDetailScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    border: const Border(top: BorderSide(color: Color(0xFFE5E7EB))),
+                    border: const Border(top: BorderSide(color: Color(0xFF1C1C2E))),
                     boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 8, offset: const Offset(0, -2))],
                   ),
                   child: SafeArea(

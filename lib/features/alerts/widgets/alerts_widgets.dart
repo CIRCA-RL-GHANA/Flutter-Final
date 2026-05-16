@@ -330,9 +330,9 @@ class ResolvedAlertCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           border: Border(
             left: BorderSide(color: kAlertsResolved, width: 4),
-            top: const BorderSide(color: Color(0xFFE5E7EB)),
-            right: const BorderSide(color: Color(0xFFE5E7EB)),
-            bottom: const BorderSide(color: Color(0xFFE5E7EB)),
+            top: const BorderSide(color: Color(0xFF1C1C2E)),
+            right: const BorderSide(color: Color(0xFF1C1C2E)),
+            bottom: const BorderSide(color: Color(0xFF1C1C2E)),
           ),
         ),
         child: Column(

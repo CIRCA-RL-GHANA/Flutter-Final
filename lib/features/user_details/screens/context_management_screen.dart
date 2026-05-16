@@ -64,7 +64,7 @@ class ContextManagementScreen extends StatelessWidget {
                     hintText: 'Search contexts...',
                     prefixIcon: const Icon(Icons.search, size: 20),
                     filled: true,
-                    fillColor: Colors.white,
+                    fillColor: const Color(0xFF11131C),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide.none,

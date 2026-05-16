@@ -108,7 +108,7 @@ class _GoTaxScreenState extends State<GoTaxScreen> with SingleTickerProviderStat
         icon: const Icon(Icons.download, size: 18),
         label: const Text('Export Tax Report'),
         onPressed: () {},
-        style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFFE5E7EB)), padding: const EdgeInsets.symmetric(vertical: 12)),
+        style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 12)),
       )),
     ]);
   }

@@ -168,7 +168,7 @@ class _GoSellScreenState extends State<GoSellScreen> {
                 ),
               ),
               const SizedBox(height: 10),
-              Wrap(spacing: 8, children: [500, 1000, 5000, 10000].map((v) => ActionChip(label: Text('$v'), onPressed: () { _amountCtrl.text = '$v'; setState(() => _amount = v.toDouble()); }, backgroundColor: Colors.white, side: const BorderSide(color: Color(0xFFE5E7EB)))).toList()),
+              Wrap(spacing: 8, children: [500, 1000, 5000, 10000].map((v) => ActionChip(label: Text('$v'), onPressed: () { _amountCtrl.text = '$v'; setState(() => _amount = v.toDouble()); }, backgroundColor: Colors.white, side: const BorderSide(color: Color(0xFF1C1C2E)))).toList()),
               const SizedBox(height: 14),
               if (_amount >= gw.minSell) GoSectionCard(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 const Text('BREAKDOWN', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF9CA3AF))),
@@ -188,7 +188,7 @@ class _GoSellScreenState extends State<GoSellScreen> {
                 value: _purpose,
                 items: ['Personal withdrawal', 'Business expense', 'Supplier payment', 'Tax payment', 'Other'].map((p) => DropdownMenuItem(value: p, child: Text(p, style: const TextStyle(fontSize: 13)))).toList(),
                 onChanged: (v) => setState(() => _purpose = v ?? _purpose),
-                decoration: InputDecoration(filled: true, fillColor: Colors.white, border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: Color(0xFFE5E7EB)))),
+                decoration: InputDecoration(filled: true, fillColor: const Color(0xFF11131C), border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: Color(0xFF1C1C2E)))),
               ),
             ],
           ),
@@ -287,7 +287,7 @@ class _GoSellScreenState extends State<GoSellScreen> {
             );
             if (mounted) setState(() { _processing = false; _success = ok; });
           },
-          style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFFE5E7EB)), padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+          style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
         ),
       ),
     );
@@ -315,9 +315,9 @@ class _GoSellScreenState extends State<GoSellScreen> {
   Widget _buildFooter(VoidCallback? onBack, VoidCallback? onNext, String label) {
     return Container(
       padding: const EdgeInsets.all(16),
-      decoration: const BoxDecoration(color: Colors.white, border: Border(top: BorderSide(color: Color(0xFFE5E7EB)))),
+      decoration: const BoxDecoration(color: Colors.white, border: Border(top: BorderSide(color: Color(0xFF1C1C2E)))),
       child: Row(children: [
-        if (onBack != null) Expanded(child: OutlinedButton(onPressed: onBack, style: OutlinedButton.styleFrom(foregroundColor: const Color(0xFF6B7280), side: const BorderSide(color: Color(0xFFE5E7EB)), padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))), child: const Text('Back'))),
+        if (onBack != null) Expanded(child: OutlinedButton(onPressed: onBack, style: OutlinedButton.styleFrom(foregroundColor: const Color(0xFF6B7280), side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))), child: const Text('Back'))),
         if (onBack != null) const SizedBox(width: 12),
         Expanded(child: ElevatedButton(onPressed: onNext, style: ElevatedButton.styleFrom(backgroundColor: onNext != null ? kGoColor : const Color(0xFFE5E7EB), foregroundColor: onNext != null ? Colors.white : const Color(0xFF9CA3AF), padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))), child: Text(label, style: const TextStyle(fontWeight: FontWeight.w600)))),
       ]),

@@ -4,16 +4,18 @@ class AppColors {
   AppColors._();
 
   // Primary Brand Colors
-  static const Color primary = Color(0xFF1A237E);
-  static const Color primaryLight = Color(0xFF22BDD8);
+  // Aligned to brand (see lib/core/theme/brand.dart): cyan primary + gold secondary
+  // on near-black surfaces. Do NOT drift these without updating onboarding too.
+  static const Color primary = Color(0xFF22BDD8);      // brand cyan
+  static const Color primaryLight = Color(0xFF22BDD8); // legacy alias — same as primary
   static const Color primaryDark = Color(0xFF0F0F23);
-  static const Color secondary = Color(0xFF2D1B69);
+  static const Color secondary = Color(0xFFC99B2C);    // brand gold
 
-  // Accent / CTA Colors
-  static const Color accent = Color(0xFFFFD700);
-  static const Color accentDark = Color(0xFFFFA000);
-  static const Color ctaGradientStart = Color(0xFFFFD700);
-  static const Color ctaGradientEnd = Color(0xFFFFA000);
+  // Accent / CTA Colors — brand gold ramp (replaces stock yellow→orange)
+  static const Color accent = Color(0xFFC99B2C);            // brand gold
+  static const Color accentDark = Color(0xFFB5871A);        // deeper gold
+  static const Color ctaGradientStart = Color(0xFFE5B743);  // gold bright
+  static const Color ctaGradientEnd = Color(0xFFC99B2C);    // gold
 
   // Background Colors
   static const Color backgroundLight = Color(0xFFF8F9FE);
@@ -46,10 +48,10 @@ class AppColors {
   static const Color validationValid = Color(0xFF10B981);
   static const Color validationInvalid = Color(0xFFEF4444);
 
-  // Onboarding Gradient Colors
-  static const Color splashGradient1 = Color(0xFF0F0F23);
-  static const Color splashGradient2 = Color(0xFF2D1B69);
-  static const Color splashGradient3 = Color(0xFF1A237E);
+  // Onboarding Gradient Colors — brand-dark ramp (matches Brand.bg → bgRaised)
+  static const Color splashGradient1 = Color(0xFF08080F);
+  static const Color splashGradient2 = Color(0xFF11131C);
+  static const Color splashGradient3 = Color(0xFF181B27);
 
   // Role Card Colors
   static const Color roleBuyer = Color(0xFF7C3AED);

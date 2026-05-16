@@ -94,14 +94,14 @@ class _GoBatchScreenState extends State<GoBatchScreen> with SingleTickerProvider
             icon: const Icon(Icons.upload_file, size: 18),
             label: const Text('Upload CSV'),
             onPressed: () {},
-            style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFFE5E7EB)), padding: const EdgeInsets.symmetric(vertical: 12)),
+            style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 12)),
           )),
           const SizedBox(width: 10),
           Expanded(child: OutlinedButton.icon(
             icon: const Icon(Icons.person_add, size: 18),
             label: const Text('Add Manual'),
             onPressed: () {},
-            style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFFE5E7EB)), padding: const EdgeInsets.symmetric(vertical: 12)),
+            style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 12)),
           )),
         ]),
       ])),
@@ -152,7 +152,7 @@ class _GoBatchScreenState extends State<GoBatchScreen> with SingleTickerProvider
         Row(children: [
           Expanded(child: OutlinedButton(
             onPressed: () {},
-            style: OutlinedButton.styleFrom(foregroundColor: kGoNegative, side: const BorderSide(color: Color(0xFFE5E7EB)), padding: const EdgeInsets.symmetric(vertical: 12)),
+            style: OutlinedButton.styleFrom(foregroundColor: kGoNegative, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 12)),
             child: const Text('Reject All'),
           )),
           const SizedBox(width: 10),
@@ -207,7 +207,7 @@ class _BatchCard extends StatelessWidget {
         if (showApproveReject) ...[
           const SizedBox(height: 10),
           Row(children: [
-            Expanded(child: OutlinedButton(onPressed: () {}, style: OutlinedButton.styleFrom(foregroundColor: kGoNegative, side: const BorderSide(color: Color(0xFFE5E7EB)), padding: const EdgeInsets.symmetric(vertical: 8)), child: const Text('Reject', style: TextStyle(fontSize: 12)))),
+            Expanded(child: OutlinedButton(onPressed: () {}, style: OutlinedButton.styleFrom(foregroundColor: kGoNegative, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 8)), child: const Text('Reject', style: TextStyle(fontSize: 12)))),
             const SizedBox(width: 8),
             Expanded(child: ElevatedButton(onPressed: () {}, style: ElevatedButton.styleFrom(backgroundColor: kGoPositive, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 8), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))), child: const Text('Approve', style: TextStyle(fontSize: 12)))),
           ]),

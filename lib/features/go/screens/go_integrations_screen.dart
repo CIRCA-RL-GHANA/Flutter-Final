@@ -121,13 +121,13 @@ class _GoIntegrationsScreenState extends State<GoIntegrationsScreen> with Single
         Row(children: [
           Expanded(child: OutlinedButton(
             onPressed: () {},
-            style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFFE5E7EB))),
+            style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFF1C1C2E))),
             child: const Text('View Docs'),
           )),
           const SizedBox(width: 10),
           Expanded(child: OutlinedButton(
             onPressed: () {},
-            style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFFE5E7EB))),
+            style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFF1C1C2E))),
             child: const Text('Generate Key'),
           )),
         ]),

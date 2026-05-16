@@ -40,8 +40,8 @@ class _GoArchiveScreenState extends State<GoArchiveScreen> with SingleTickerProv
                 onChanged: (v) => setState(() => _searchQuery = v),
                 decoration: InputDecoration(
                   hintText: 'Search archive...', prefixIcon: const Icon(Icons.search, size: 20),
-                  filled: true, fillColor: Colors.white,
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: Color(0xFFE5E7EB))),
+                  filled: true, fillColor: const Color(0xFF11131C),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: Color(0xFF1C1C2E))),
                   contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 14),
                 ),
                 style: const TextStyle(fontSize: 13),
@@ -204,7 +204,7 @@ class _GoArchiveScreenState extends State<GoArchiveScreen> with SingleTickerProv
         icon: const Icon(Icons.delete_sweep, size: 18),
         label: const Text('Request Data Deletion'),
         onPressed: () {},
-        style: OutlinedButton.styleFrom(foregroundColor: kGoNegative, side: const BorderSide(color: Color(0xFFE5E7EB)), padding: const EdgeInsets.symmetric(vertical: 12)),
+        style: OutlinedButton.styleFrom(foregroundColor: kGoNegative, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 12)),
       )),
     ]);
   }

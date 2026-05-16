@@ -125,7 +125,7 @@ class _GOTransferScreenState extends State<GOTransferScreen> {
                   value: _selectedWalletId,
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: Colors.white,
+                    fillColor: const Color(0xFF11131C),
                     border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                   ),
                   items: provider.wallets.map((w) {
@@ -147,7 +147,7 @@ class _GOTransferScreenState extends State<GOTransferScreen> {
                   decoration: InputDecoration(
                     hintText: 'Phone number or username',
                     filled: true,
-                    fillColor: Colors.white,
+                    fillColor: const Color(0xFF11131C),
                     border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                   ),
                 ),
@@ -170,7 +170,7 @@ class _GOTransferScreenState extends State<GOTransferScreen> {
                     hintText: '0.00',
                     prefixText: '\$',
                     filled: true,
-                    fillColor: Colors.white,
+                    fillColor: const Color(0xFF11131C),
                     border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                   ),
                 ),
@@ -196,7 +196,7 @@ class _GOTransferScreenState extends State<GOTransferScreen> {
                   decoration: InputDecoration(
                     hintText: 'Add a note...',
                     filled: true,
-                    fillColor: Colors.white,
+                    fillColor: const Color(0xFF11131C),
                     border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                   ),
                 ),
@@ -344,7 +344,7 @@ class _GOBuyScreenState extends State<GOBuyScreen> {
                     hintText: '0.00',
                     prefixText: '\$',
                     filled: true,
-                    fillColor: Colors.white,
+                    fillColor: const Color(0xFF11131C),
                     border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                   ),
                 ),
@@ -358,7 +358,7 @@ class _GOBuyScreenState extends State<GOBuyScreen> {
                   value: _selectedPaymentMethod,
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: Colors.white,
+                    fillColor: const Color(0xFF11131C),
                     border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                   ),
                   items: const [

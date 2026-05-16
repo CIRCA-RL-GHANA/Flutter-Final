@@ -123,7 +123,7 @@ class _GoReportsScreenState extends State<GoReportsScreen> with SingleTickerProv
           selectedColor: kGoColorLight,
           checkmarkColor: kGoColor,
           backgroundColor: Colors.white,
-          side: const BorderSide(color: Color(0xFFE5E7EB)),
+          side: const BorderSide(color: Color(0xFF1C1C2E)),
         )).toList()),
         const SizedBox(height: 14),
         // Filters
@@ -136,7 +136,7 @@ class _GoReportsScreenState extends State<GoReportsScreen> with SingleTickerProv
           selectedColor: kGoColorLight,
           checkmarkColor: kGoColor,
           backgroundColor: Colors.white,
-          side: const BorderSide(color: Color(0xFFE5E7EB)),
+          side: const BorderSide(color: Color(0xFF1C1C2E)),
         )).toList()),
         const SizedBox(height: 14),
         // Export format

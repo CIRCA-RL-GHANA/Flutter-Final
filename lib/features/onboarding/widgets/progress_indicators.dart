@@ -5,7 +5,7 @@ const Color _kBorder    = Color(0xFF1C1C2E);
 const Color _kAccent    = Color(0xFF22BDD8);
 const Color _kAccentDim = Color(0xFF1E2A6E);
 const Color _kText      = Color(0xFFE8E8F0);
-const Color _kTextDim   = Color(0xFF6B6B88);
+const Color _kTextDim   = Color(0xFF9A9AB2);
 
 /// OS-style progress dots — active = accent pill, completed = accent dim, inactive = border.
 class ProgressDots extends StatelessWidget {

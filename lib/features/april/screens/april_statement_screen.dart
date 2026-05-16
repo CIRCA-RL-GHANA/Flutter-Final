@@ -400,11 +400,12 @@ class _OverallProgressCard extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
-          colors: [Color(0xFF1A237E), Color(0xFF283593)],
+          colors: [Color(0xFF181B27), Color(0xFF11131C)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: const Color(0xFF22273A), width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

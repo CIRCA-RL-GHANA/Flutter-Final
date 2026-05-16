@@ -151,11 +151,12 @@ class _OverviewTab extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             gradient: const LinearGradient(
-              colors: [Color(0xFF1A237E), Color(0xFF283593)],
+              colors: [Color(0xFF181B27), Color(0xFF11131C)],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
             borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: const Color(0xFF22273A), width: 1),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -302,14 +303,14 @@ class _TransactionsTab extends StatelessWidget {
               hintStyle: const TextStyle(fontSize: 14, color: Color(0xFF9CA3AF)),
               prefixIcon: const Icon(Icons.search, color: Color(0xFF9CA3AF)),
               filled: true,
-              fillColor: Colors.white,
+              fillColor: const Color(0xFF11131C),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(color: Color(0xFFE5E7EB)),
+                borderSide: const BorderSide(color: Color(0xFF1C1C2E)),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(color: Color(0xFFE5E7EB)),
+                borderSide: const BorderSide(color: Color(0xFF1C1C2E)),
               ),
               contentPadding: const EdgeInsets.symmetric(vertical: 10),
             ),

@@ -26,6 +26,11 @@ class AppTheme {
       inputDecorationTheme: _inputDecorationTheme,
       appBarTheme: _appBarTheme,
       cardTheme: _cardTheme,
+      textSelectionTheme: const TextSelectionThemeData(
+        cursorColor: AppColors.primary,
+        selectionColor: Color(0x3322BDD8),
+        selectionHandleColor: AppColors.primary,
+      ),
     );
   }
 
@@ -39,7 +44,7 @@ class AppTheme {
         seedColor: const Color(0xFF22BDD8),
         brightness: Brightness.dark,
         primary: const Color(0xFF22BDD8),
-        secondary: const Color(0xFF1E2A6E),
+        secondary: const Color(0xFFC99B2C), // brand gold
         surface: const Color(0xFF0E0E1A),
         error: const Color(0xFFEF4444),
         onPrimary: Colors.white,
@@ -64,6 +69,11 @@ class AppTheme {
           side: BorderSide(color: Color(0xFF1C1C2E)),
         ),
       ),
+      textSelectionTheme: const TextSelectionThemeData(
+        cursorColor: Color(0xFF22BDD8),
+        selectionColor: Color(0x3322BDD8),
+        selectionHandleColor: Color(0xFF22BDD8),
+      ),
       dialogTheme: DialogThemeData(
         backgroundColor: const Color(0xFF0E0E1A),
         shape: const RoundedRectangleBorder(
@@ -77,7 +87,7 @@ class AppTheme {
         ),
         contentTextStyle: GoogleFonts.poppins(
           fontSize: 13,
-          color: const Color(0xFF6B6B88),
+          color: const Color(0xFF9A9AB2),
         ),
       ),
     );
@@ -211,6 +221,10 @@ class AppTheme {
         borderRadius: BorderRadius.circular(16),
         borderSide: const BorderSide(color: AppColors.primary, width: 2),
       ),
+      disabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(color: AppColors.inputBorder.withOpacity(0.5)),
+      ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),
         borderSide: const BorderSide(color: AppColors.error, width: 1.5),
@@ -221,12 +235,23 @@ class AppTheme {
       ),
       labelStyle: GoogleFonts.poppins(
         fontSize: 14,
-        color: AppColors.textTertiary,
+        color: AppColors.textSecondary,
+      ),
+      floatingLabelStyle: GoogleFonts.poppins(
+        fontSize: 13,
+        fontWeight: FontWeight.w500,
+        color: AppColors.primary,
       ),
       hintStyle: GoogleFonts.poppins(
         fontSize: 14,
-        color: AppColors.textTertiary,
+        color: AppColors.textSecondary,
       ),
+      helperStyle: GoogleFonts.poppins(
+        fontSize: 12,
+        color: AppColors.textSecondary,
+      ),
+      prefixIconColor: AppColors.textSecondary,
+      suffixIconColor: AppColors.textSecondary,
       errorStyle: GoogleFonts.poppins(
         fontSize: 12,
         color: AppColors.error,
@@ -251,6 +276,10 @@ class AppTheme {
         borderRadius: BorderRadius.circular(6),
         borderSide: const BorderSide(color: Color(0xFF22BDD8), width: 1.5),
       ),
+      disabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(6),
+        borderSide: const BorderSide(color: Color(0xFF14141F)),
+      ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(6),
         borderSide: const BorderSide(color: Color(0xFFEF4444), width: 1.5),
@@ -261,14 +290,24 @@ class AppTheme {
       ),
       labelStyle: GoogleFonts.poppins(
         fontSize: 13,
-        color: const Color(0xFF6B6B88),
+        color: const Color(0xFF9A9AB2),
+      ),
+      floatingLabelStyle: GoogleFonts.poppins(
+        fontSize: 12,
+        fontWeight: FontWeight.w500,
+        color: const Color(0xFF22BDD8),
+        letterSpacing: 0.3,
       ),
       hintStyle: GoogleFonts.poppins(
         fontSize: 13,
-        color: const Color(0xFF3A3A52),
+        color: const Color(0xFF7A7A95),
       ),
-      prefixIconColor: const Color(0xFF6B6B88),
-      suffixIconColor: const Color(0xFF6B6B88),
+      helperStyle: GoogleFonts.poppins(
+        fontSize: 11,
+        color: const Color(0xFF7A7A95),
+      ),
+      prefixIconColor: const Color(0xFF9A9AB2),
+      suffixIconColor: const Color(0xFF9A9AB2),
       errorStyle: GoogleFonts.poppins(
         fontSize: 11,
         color: const Color(0xFFEF4444),

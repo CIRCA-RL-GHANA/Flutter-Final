@@ -4,15 +4,15 @@ import '../../../core/routes/app_routes.dart';
 import '../providers/device_check_provider.dart';
 
 
-// OS palette — mirrors splash / welcome
+// OS palette ï¿½ mirrors splash / welcome
 const Color _kBg        = Color(0xFF08080F);
 const Color _kSurface   = Color(0xFF0E0E1A);
 const Color _kBorder    = Color(0xFF1C1C2E);
 const Color _kAccent    = Color(0xFF22BDD8);
 const Color _kAccentDim = Color(0xFF1E2A6E);
 const Color _kText      = Color(0xFFE8E8F0);
-const Color _kTextDim   = Color(0xFF6B6B88);
-const Color _kTextMuted = Color(0xFF3A3A52);
+const Color _kTextDim   = Color(0xFF9A9AB2);
+const Color _kTextMuted = Color(0xFF7A7A95);
 /// Screen 0: Pre-Loading Validation (Hidden System Check)
 /// Runs before splash to validate device capability
 class PreLoadingScreen extends StatefulWidget {
@@ -213,7 +213,7 @@ class _CheckStatusRow extends StatelessWidget {
           Text(
             label,
             style: TextStyle(
-              color: isDone ? const Color(0xFF6B6B88) : const Color(0xFF3A3A52),
+              color: isDone ? const Color(0xFF9A9AB2) : const Color(0xFF7A7A95),
               fontSize: 12,
             ),
           ),
@@ -273,7 +273,7 @@ class _ErrorDisplay extends StatelessWidget {
             Text(
               message,
               style: const TextStyle(
-                color: const Color(0xFF6B6B88),
+                color: const Color(0xFF9A9AB2),
                 fontSize: 14,
                 height: 1.5,
               ),
@@ -301,7 +301,7 @@ class _ErrorDisplay extends StatelessWidget {
                 onPressed: onSecondary,
                 child: Text(
                   secondaryLabel!,
-                  style: const TextStyle(color: const Color(0xFF6B6B88)),
+                  style: const TextStyle(color: const Color(0xFF9A9AB2)),
                 ),
               ),
             ],

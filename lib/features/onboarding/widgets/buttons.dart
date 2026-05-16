@@ -6,8 +6,8 @@ const Color _kSurface  = Color(0xFF0E0E1A);
 const Color _kBorder   = Color(0xFF1C1C2E);
 const Color _kAccent   = Color(0xFF22BDD8);
 const Color _kText     = Color(0xFFE8E8F0);
-const Color _kTextDim  = Color(0xFF6B6B88);
-const Color _kTextMuted= Color(0xFF3A3A52);
+const Color _kTextDim  = Color(0xFF9A9AB2);
+const Color _kTextMuted= Color(0xFF7A7A95);
 
 /// Primary OS button — flat electric-blue, uppercase, monospace-ish spacing.
 class PrimaryButton extends StatelessWidget {

@@ -238,7 +238,7 @@ class _AlertsFilterScreenState extends State<AlertsFilterScreen> {
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Colors.white,
-              border: const Border(top: BorderSide(color: Color(0xFFE5E7EB))),
+              border: const Border(top: BorderSide(color: Color(0xFF1C1C2E))),
               boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 8, offset: const Offset(0, -2))],
             ),
             child: SafeArea(
@@ -249,7 +249,7 @@ class _AlertsFilterScreenState extends State<AlertsFilterScreen> {
                       onPressed: () => Navigator.pop(context),
                       style: OutlinedButton.styleFrom(
                         foregroundColor: const Color(0xFF6B7280),
-                        side: const BorderSide(color: Color(0xFFE5E7EB)),
+                        side: const BorderSide(color: Color(0xFF1C1C2E)),
                         padding: const EdgeInsets.symmetric(vertical: 14),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                       ),

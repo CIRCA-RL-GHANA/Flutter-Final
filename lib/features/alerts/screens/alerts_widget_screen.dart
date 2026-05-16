@@ -271,9 +271,9 @@ class _CompactAlertRow extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           border: Border(
             left: BorderSide(color: pColor, width: 3),
-            top: const BorderSide(color: Color(0xFFE5E7EB)),
-            right: const BorderSide(color: Color(0xFFE5E7EB)),
-            bottom: const BorderSide(color: Color(0xFFE5E7EB)),
+            top: const BorderSide(color: Color(0xFF1C1C2E)),
+            right: const BorderSide(color: Color(0xFF1C1C2E)),
+            bottom: const BorderSide(color: Color(0xFF1C1C2E)),
           ),
         ),
         child: Row(

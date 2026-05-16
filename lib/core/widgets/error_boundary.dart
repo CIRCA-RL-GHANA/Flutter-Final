@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../theme/app_colors.dart';
+
 class ErrorBoundary extends StatefulWidget {
   final Widget child;
   final VoidCallback? onError;
@@ -64,7 +66,8 @@ class _ErrorBoundaryState extends State<ErrorBoundary> {
               ElevatedButton(
                 onPressed: _reset,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF3B82F6),
+                  backgroundColor: AppColors.primary,
+                  foregroundColor: Colors.white,
                 ),
                 child: const Text('Try Again'),
               ),
@@ -107,7 +110,8 @@ class ApiError extends StatelessWidget {
           ElevatedButton(
             onPressed: onRetry,
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF3B82F6),
+              backgroundColor: AppColors.primary,
+              foregroundColor: Colors.white,
             ),
             child: const Text('Retry'),
           ),

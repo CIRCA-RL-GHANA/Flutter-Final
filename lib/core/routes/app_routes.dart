@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../../features/onboarding/screens/screen_0_preloading.dart';
 import '../../features/onboarding/screens/screen_1_splash.dart';
 import '../../features/onboarding/screens/screen_2_welcome.dart';
+import '../../features/onboarding/screens/platform_overview_screen.dart';
 import '../../features/onboarding/screens/screen_3_phone_input.dart';
 import '../../features/onboarding/screens/screen_4_otp_verification.dart';
 import '../../features/onboarding/screens/screen_5_registration.dart';
@@ -209,6 +210,7 @@ class AppRoutes {
   static const String preLoading = '/pre-loading';
   static const String splash = '/splash';
   static const String welcome = '/welcome';
+  static const String platformOverview = '/platform-overview';
   static const String phoneInput = '/phone-input';
   static const String otpVerification = '/otp-verification';
   static const String registration = '/registration';
@@ -435,6 +437,8 @@ class AppRoutes {
         return _buildRoute(const SplashScreen(), settings);
       case welcome:
         return _buildRoute(const WelcomeScreen(), settings);
+      case platformOverview:
+        return _buildRoute(const PlatformOverviewScreen(), settings);
       case phoneInput:
         return _buildRoute(const PhoneInputScreen(), settings);
       case otpVerification:

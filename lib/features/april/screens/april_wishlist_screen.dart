@@ -92,14 +92,14 @@ class AprilWishlistScreen extends StatelessWidget {
                           hintStyle: const TextStyle(fontSize: 14, color: Color(0xFF9CA3AF)),
                           prefixIcon: const Icon(Icons.search, color: Color(0xFF9CA3AF), size: 20),
                           filled: true,
-                          fillColor: Colors.white,
+                          fillColor: const Color(0xFF11131C),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
-                            borderSide: const BorderSide(color: Color(0xFFE5E7EB)),
+                            borderSide: const BorderSide(color: Color(0xFF1C1C2E)),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
-                            borderSide: const BorderSide(color: Color(0xFFE5E7EB)),
+                            borderSide: const BorderSide(color: Color(0xFF1C1C2E)),
                           ),
                           contentPadding: const EdgeInsets.symmetric(vertical: 10),
                         ),

@@ -206,7 +206,7 @@ class _GoVerificationScreenState extends State<GoVerificationScreen> with Single
         icon: const Icon(Icons.support_agent, size: 18),
         label: const Text('Contact Support'),
         onPressed: () {},
-        style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFFE5E7EB)), padding: const EdgeInsets.symmetric(vertical: 12)),
+        style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 12)),
       ),
     ]);
   }

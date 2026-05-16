@@ -174,7 +174,7 @@ class GoFavoriteDetailScreen extends StatelessWidget {
       Wrap(spacing: 6, children: [
         Chip(label: const Text('Frequent', style: TextStyle(fontSize: 10)), backgroundColor: kGoColorLight, side: BorderSide.none, padding: EdgeInsets.zero, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
         Chip(label: const Text('Verified', style: TextStyle(fontSize: 10)), backgroundColor: kGoPositive.withOpacity(0.1), side: BorderSide.none, padding: EdgeInsets.zero, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
-        ActionChip(label: const Text('+ Tag', style: TextStyle(fontSize: 10)), onPressed: () {}, backgroundColor: Colors.white, side: const BorderSide(color: Color(0xFFE5E7EB)), padding: EdgeInsets.zero, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
+        ActionChip(label: const Text('+ Tag', style: TextStyle(fontSize: 10)), onPressed: () {}, backgroundColor: Colors.white, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: EdgeInsets.zero, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
       ]),
     ]));
   }

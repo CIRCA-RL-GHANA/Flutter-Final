@@ -24,8 +24,8 @@ const Color _kBorder    = Color(0xFF1C1C2E);
 const Color _kAccent    = Color(0xFF22BDD8);
 const Color _kAccentDim = Color(0xFF1E2A6E);
 const Color _kText      = Color(0xFFE8E8F0);
-const Color _kTextDim   = Color(0xFF6B6B88);
-const Color _kTextMuted = Color(0xFF3A3A52);
+const Color _kTextDim = Color(0xFF9A9AB2);
+const Color _kTextMuted = Color(0xFF7A7A95);
 
 class _WelcomeScreenState extends State<WelcomeScreen>
     with SingleTickerProviderStateMixin {
@@ -111,8 +111,8 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                                   AppStrings.splashSubtitle,
                                   style: TextStyle(
                                     fontSize: 20,
-                                    fontWeight: FontWeight.w300,
-                                    color: _kText.withOpacity(0.30),
+                                    fontWeight: FontWeight.w400,
+                                    color: _kText.withOpacity(0.65),
                                     letterSpacing: 0.3,
                                   ),
                                 ),
@@ -131,8 +131,8 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                                 'COMMERCE OS  ·  v1.0',
                                 style: TextStyle(
                                   fontSize: 9,
-                                  fontWeight: FontWeight.w500,
-                                  color: _kAccent.withOpacity(0.55),
+                                  fontWeight: FontWeight.w600,
+                                  color: _kAccent.withOpacity(0.90),
                                   letterSpacing: 2.2,
                                 ),
                               ),
@@ -188,17 +188,78 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     ),
                   ),
 
+                  // ── Platform Overview link ────────────────────────────
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(24, 4, 24, 0),
+                    child: Semantics(
+                      button: true,
+                      label: 'Platform overview. Learn what genie help is.',
+                      child: GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      onTap: () => Navigator.of(context)
+                          .pushNamed(AppRoutes.platformOverview),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 10),
+                        decoration: BoxDecoration(
+                          color: _kSurface,
+                          border: Border.all(
+                              color: _kAccent.withOpacity(0.30)),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(Icons.menu_book_outlined,
+                                size: 14,
+                                color: _kAccent.withOpacity(0.80)),
+                            const SizedBox(width: 10),
+                            const Expanded(
+                              child: Text(
+                                'PLATFORM OVERVIEW',
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w600,
+                                  color: _kText,
+                                  letterSpacing: 2.0,
+                                ),
+                              ),
+                            ),
+                            Text(
+                              'What is genie help?',
+                              style: TextStyle(
+                                fontSize: 10,
+                                color: _kTextDim,
+                                letterSpacing: 0.2,
+                              ),
+                            ),
+                            const SizedBox(width: 6),
+                            Icon(Icons.chevron_right,
+                                size: 14, color: _kAccent.withOpacity(0.70)),
+                          ],
+                        ),
+                      ),
+                      ),
+                    ),
+                  ),
+
                   // ── Actions ───────────────────────────────────────────
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(24, 16, 24, 8),
-                    child: _OsButton(
-                      label: AppStrings.getStarted,
-                      onTap: _onGetStarted,
+                    padding: const EdgeInsets.fromLTRB(24, 12, 24, 8),
+                    child: Semantics(
+                      button: true,
+                      label: 'Get started. Begin onboarding.',
+                      child: _OsButton(
+                        label: AppStrings.getStarted,
+                        onTap: _onGetStarted,
+                      ),
                     ),
                   ),
 
                   // Return link
-                  GestureDetector(
+                  Semantics(
+                    button: true,
+                    label: 'Already have an account. Log in.',
+                    child: GestureDetector(
                     onTap: _onLogIn,
                     behavior: HitTestBehavior.opaque,
                     child: SizedBox(
@@ -226,6 +287,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                           ],
                         ),
                       ),
+                    ),
                     ),
                   ),
 
