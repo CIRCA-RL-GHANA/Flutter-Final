@@ -889,7 +889,12 @@ class AppRoutes {
       case fintechLoans:
         return _buildRoute(const LoanApplicationScreen(), settings);
       case fintechLoanRepayment:
-        return _buildRoute(const LoanRepaymentScreen(), settings);
+        return _buildRoute(
+          LoanRepaymentScreen(
+            loan: (settings.arguments as Map<String, dynamic>?) ?? const <String, dynamic>{},
+          ),
+          settings,
+        );
       case fintechInsurance:
         return _buildRoute(const InsuranceScreen(), settings);
       case fintechInsuranceClaims:
