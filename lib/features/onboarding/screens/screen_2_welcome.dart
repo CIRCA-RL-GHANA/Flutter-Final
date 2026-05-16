@@ -1,5 +1,6 @@
 ﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../core/design/ive.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/constants/app_strings.dart';
 import '../../../core/utils/responsive.dart';
@@ -18,14 +19,14 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 // â”€â”€ OS palette (mirrors splash) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-const Color _kBg        = Color(0xFF08080F);
-const Color _kSurface   = Color(0xFF0E0E1A);
-const Color _kBorder    = Color(0xFF1C1C2E);
-const Color _kAccent    = Color(0xFF22BDD8);
-const Color _kAccentDim = Color(0xFF1E2A6E);
-const Color _kText      = Color(0xFFE8E8F0);
-const Color _kTextDim = Color(0xFF9A9AB2);
-const Color _kTextMuted = Color(0xFF7A7A95);
+const Color _kBg        = IveTokens.bg;
+const Color _kSurface   = IveTokens.surface;
+const Color _kBorder    = IveTokens.hairline;
+const Color _kAccent    = IveTokens.accent;
+const Color _kAccentDim = IveTokens.accentPressed;
+const Color _kText      = IveTokens.label;
+const Color _kTextDim = IveTokens.labelSecondary;
+const Color _kTextMuted = IveTokens.labelTertiary;
 
 class _WelcomeScreenState extends State<WelcomeScreen>
     with SingleTickerProviderStateMixin {
@@ -248,9 +249,10 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     child: Semantics(
                       button: true,
                       label: 'Get started. Begin onboarding.',
-                      child: _OsButton(
+                      child: IveButton.primary(
                         label: AppStrings.getStarted,
-                        onTap: _onGetStarted,
+                        onPressed: _onGetStarted,
+                        icon: Icons.arrow_forward_rounded,
                       ),
                     ),
                   ),
@@ -424,36 +426,7 @@ class _OsButton extends StatelessWidget {
   const _OsButton({required this.label, required this.onTap});
 
   @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: 50,
-      child: Material(
-        color: _kAccent,
-        borderRadius: BorderRadius.circular(6),
-        child: InkWell(
-          onTap: onTap,
-          borderRadius: BorderRadius.circular(6),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                label.toUpperCase(),
-                style: const TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
-                  letterSpacing: 1.5,
-                ),
-              ),
-              const SizedBox(width: 8),
-              const Icon(Icons.arrow_forward, size: 16, color: Colors.white),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => IveButton.primary(label: label, onPressed: onTap);
 }
 
 // â”€â”€â”€ Mini brand mark (consistent with splash) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€

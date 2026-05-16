@@ -1,4 +1,5 @@
 ﻿import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
 import '../../../core/utils/responsive.dart';
 
 /// Platform Overview Screen
@@ -15,13 +16,13 @@ class PlatformOverviewScreen extends StatelessWidget {
   const PlatformOverviewScreen({super.key});
 
   // â”€â”€ OS palette (mirrors splash/welcome) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-  static const Color _kBg        = Color(0xFF08080F);
-  static const Color _kSurface   = Color(0xFF0E0E1A);
-  static const Color _kBorder    = Color(0xFF1C1C2E);
-  static const Color _kAccent    = Color(0xFF22BDD8);
-  static const Color _kText      = Color(0xFFE8E8F0);
-  static const Color _kTextDim   = Color(0xFF9A9AB2);
-  static const Color _kTextMuted = Color(0xFF7A7A95);
+  static const Color _kBg        = IveTokens.bg;
+  static const Color _kSurface   = IveTokens.surface;
+  static const Color _kBorder    = IveTokens.hairline;
+  static const Color _kAccent    = IveTokens.accent;
+  static const Color _kText      = IveTokens.label;
+  static const Color _kTextDim   = IveTokens.labelSecondary;
+  static const Color _kTextMuted = IveTokens.labelTertiary;
 
   @override
   Widget build(BuildContext context) {

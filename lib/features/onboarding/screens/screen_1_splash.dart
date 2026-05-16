@@ -1,6 +1,7 @@
 ﻿import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:provider/provider.dart';
+import '../../../core/design/ive.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/constants/app_strings.dart';
 import '../../../core/utils/responsive.dart';
@@ -178,25 +179,24 @@ class _SplashScreenState extends State<SplashScreen>
                         children: [
                           Text(
                             AppStrings.splashTitle,
-                            style: const TextStyle(
+                            style: IveType.display.copyWith(
                               fontSize: 42,
                               fontWeight: FontWeight.w700,
-                              color: Colors.white,
-                              letterSpacing: 0.5,
+                              color: IveTokens.label,
+                              letterSpacing: -0.4,
                               height: 1.0,
                             ),
                           ),
-                          const SizedBox(height: 2),
+                          const SizedBox(height: 4),
                           Text(
                             AppStrings.splashSubtitle,
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w300,
-                              color: Colors.white.withValues(alpha: 0.38),
+                            style: IveType.subhead.copyWith(
+                              color: IveTokens.labelTertiary,
                               letterSpacing: 5,
+                              fontWeight: FontWeight.w300,
                             ),
                           ),
-                          const SizedBox(height: 14),
+                          const SizedBox(height: IveTokens.s4),
                           // System badge
                           Container(
                             padding: const EdgeInsets.symmetric(
@@ -204,15 +204,14 @@ class _SplashScreenState extends State<SplashScreen>
                             decoration: BoxDecoration(
                               border: Border.all(
                                   color: _kAccent.withValues(alpha: 0.35)),
-                              borderRadius: BorderRadius.circular(3),
+                              borderRadius: IveTokens.brXs,
                             ),
                             child: Text(
-                              'COMMERCE OS  Â·  v1.0',
-                              style: TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.w500,
-                                color: _kAccent.withValues(alpha: 0.65),
+                              'COMMERCE OS  ·  v1.0',
+                              style: IveType.caption.copyWith(
+                                color: _kAccent.withValues(alpha: 0.75),
                                 letterSpacing: 2.5,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
                           ),
@@ -235,11 +234,10 @@ class _SplashScreenState extends State<SplashScreen>
                               height: 16,
                               child: Text(
                                 _bootLines[_bootLineIndex],
-                                style: TextStyle(
+                                style: IveType.mono.copyWith(
                                   fontSize: 11,
-                                  color: Colors.white.withValues(alpha: 0.30),
+                                  color: IveTokens.labelTertiary,
                                   letterSpacing: 0.3,
-                                  fontFamily: 'monospace',
                                 ),
                               ),
                             ),
@@ -258,9 +256,9 @@ class _SplashScreenState extends State<SplashScreen>
                               alignment: Alignment.centerRight,
                               child: Text(
                                 '${(_loadProgress * 100).toInt()}%',
-                                style: TextStyle(
+                                style: IveType.mono.copyWith(
                                   fontSize: 10,
-                                  color: _kAccent.withValues(alpha: 0.45),
+                                  color: _kAccent.withValues(alpha: 0.55),
                                   letterSpacing: 1,
                                 ),
                               ),
