@@ -10,6 +10,7 @@
 import 'package:flutter/material.dart';
 import '../../core/design/ive.dart';
 import '../../core/routes/app_routes.dart';
+import '../../core/theme/app_colors.dart';
 import '../../features/prompt/models/rbac_models.dart';
 import '../genie_intent.dart';
 import '../genie_rbac_enforcer.dart';
@@ -156,7 +157,7 @@ class _ModuleMenuSheet extends StatelessWidget {
             itemBuilder: (context, index) {
               if (index == accessible.length) {
                 return _ModuleTile(
-                  emoji: 'ðŸ—‚ï¸',
+                  icon: Icons.folder_outlined,
                   label: 'Classic\nDashboard',
                   color: AppColors.textSecondary,
                   onTap: () {
@@ -168,7 +169,7 @@ class _ModuleMenuSheet extends StatelessWidget {
               }
               final m = accessible[index];
               return _ModuleTile(
-                emoji: m.$3,
+                icon: m.$3,
                 label: m.$2,
                 color: m.$4,
                 onTap: () {
