@@ -15,13 +15,13 @@ class IveButton extends StatelessWidget {
     super.key,
     required this.label,
     required this.onPressed,
-    required this._variant,
+    required _IveButtonVariant variant,
     this.icon,
     this.isLoading = false,
     this.isDestructive = false,
     this.expand = true,
     this.compact = false,
-  });
+  }) : _variant = variant;
 
   final String label;
   final VoidCallback? onPressed;
@@ -51,7 +51,7 @@ class IveButton extends StatelessWidget {
         isDestructive: isDestructive,
         expand: expand,
         compact: compact,
-        _variant: _IveButtonVariant.primary,
+        variant: _IveButtonVariant.primary,
       );
 
   factory IveButton.secondary({
@@ -71,7 +71,7 @@ class IveButton extends StatelessWidget {
         isLoading: isLoading,
         expand: expand,
         compact: compact,
-        _variant: _IveButtonVariant.secondary,
+        variant: _IveButtonVariant.secondary,
       );
 
   factory IveButton.text({
@@ -89,7 +89,7 @@ class IveButton extends StatelessWidget {
         isDestructive: isDestructive,
         expand: false,
         compact: true,
-        _variant: _IveButtonVariant.text,
+        variant: _IveButtonVariant.text,
       );
 
   @override
