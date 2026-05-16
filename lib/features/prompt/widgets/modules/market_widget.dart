@@ -1,7 +1,7 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// MARKET Widget (Commerce & Logistics)
 /// Visible to: Owner, Administrator only
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -71,13 +71,13 @@ class MarketWidgetContent extends StatelessWidget {
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: const [
-                _MerchantChip(name: 'Fresh Farm', emoji: '🥬'),
+                _MerchantChip(name: 'Fresh Farm', emoji: 'ðŸ¥¬'),
                 SizedBox(width: 6),
-                _MerchantChip(name: 'TechZone', emoji: '📱'),
+                _MerchantChip(name: 'TechZone', emoji: 'ðŸ“±'),
                 SizedBox(width: 6),
-                _MerchantChip(name: 'StyleHub', emoji: '👗'),
+                _MerchantChip(name: 'StyleHub', emoji: 'ðŸ‘—'),
                 SizedBox(width: 6),
-                _MerchantChip(name: 'BookNest', emoji: '📚'),
+                _MerchantChip(name: 'BookNest', emoji: 'ðŸ“š'),
               ],
             ),
           ),
@@ -101,13 +101,13 @@ class MarketWidgetContent extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [color.withOpacity(0.08), color.withOpacity(0.02)],
+                colors: [color.withValues(alpha: 0.08), color.withValues(alpha: 0.02)],
               ),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Row(
               children: [
-                const Text('🔥', style: TextStyle(fontSize: 14)),
+                const Text('ðŸ”¥', style: TextStyle(fontSize: 14)),
                 const SizedBox(width: 6),
                 Expanded(
                   child: Text(
@@ -170,7 +170,7 @@ class _MarketAction extends StatelessWidget {
           width: 36,
           height: 36,
           decoration: BoxDecoration(
-            color: color.withOpacity(0.08),
+            color: color.withValues(alpha: 0.08),
             borderRadius: BorderRadius.circular(10),
           ),
           child: Icon(icon, size: 18, color: color),

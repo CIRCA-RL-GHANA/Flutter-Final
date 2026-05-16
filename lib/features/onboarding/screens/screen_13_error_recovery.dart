@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import '../../../core/constants/app_strings.dart';
 import '../../../core/utils/responsive.dart';
 import '../widgets/buttons.dart';
 
 
-// OS palette � mirrors splash / welcome
+// OS palette ï¿½ mirrors splash / welcome
 const Color _kBg        = Color(0xFF08080F);
 const Color _kSurface   = Color(0xFF0E0E1A);
 const Color _kBorder    = Color(0xFF1C1C2E);
@@ -269,7 +269,7 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
                           height: 100,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: config.iconColor.withOpacity(0.12),
+                            color: config.iconColor.withValues(alpha: 0.12),
                           ),
                           child: Icon(
                             config.icon,
@@ -339,7 +339,7 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
                                           height: 24,
                                           decoration: BoxDecoration(
                                             color: const Color(0xFF22BDD8)
-                                                .withOpacity(0.1),
+                                                .withValues(alpha: 0.1),
                                             shape: BoxShape.circle,
                                           ),
                                           child: Center(

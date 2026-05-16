@@ -1,7 +1,7 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// Screen 7: Notification Orchestrator
 /// Mode presets, per-module matrix, smart rules, quiet hours
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -34,7 +34,7 @@ class NotificationSettingsScreen extends StatelessWidget {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: AppColors.primary.withOpacity(0.07),
+                    color: AppColors.primary.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -52,7 +52,7 @@ class NotificationSettingsScreen extends StatelessWidget {
                   );
                 },
               ),
-              // ─── Master Toggle ─────────────────────────────
+              // â”€â”€â”€ Master Toggle â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SectionCard(
                 child: SettingsToggle(
                   icon: Icons.notifications,
@@ -65,7 +65,7 @@ class NotificationSettingsScreen extends StatelessWidget {
               ),
 
               if (notif.globalEnabled) ...[
-                // ─── Mode Presets ──────────────────────────────
+                // â”€â”€â”€ Mode Presets â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                 const SizedBox(height: 8),
                 const Text('Notification Mode', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textSecondary)),
                 const SizedBox(height: 10),
@@ -87,7 +87,7 @@ class NotificationSettingsScreen extends StatelessWidget {
                   ),
                 ),
 
-                // ─── Per-Module Matrix ─────────────────────────
+                // â”€â”€â”€ Per-Module Matrix â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                 const SizedBox(height: 16),
                 SectionCard(
                   child: CollapsibleSection(
@@ -104,7 +104,7 @@ class NotificationSettingsScreen extends StatelessWidget {
                   ),
                 ),
 
-                // ─── Quiet Hours ───────────────────────────────
+                // â”€â”€â”€ Quiet Hours â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                 SectionCard(
                   child: Column(
                     children: [
@@ -148,7 +148,7 @@ class NotificationSettingsScreen extends StatelessWidget {
                   ),
                 ),
 
-                // ─── Smart Rules ───────────────────────────────
+                // â”€â”€â”€ Smart Rules â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                 SectionCard(
                   child: CollapsibleSection(
                     title: 'Smart Rules',
@@ -180,7 +180,7 @@ class NotificationSettingsScreen extends StatelessWidget {
                   ),
                 ),
 
-                // ─── Preview ───────────────────────────────────
+                // â”€â”€â”€ Preview â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                 SectionCard(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -222,9 +222,9 @@ class NotificationSettingsScreen extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Mode Card
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _ModeCard extends StatelessWidget {
   final NotificationMode mode;
@@ -242,14 +242,14 @@ class _ModeCard extends StatelessWidget {
         margin: const EdgeInsets.only(right: 8),
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: active ? const Color(0xFFF59E0B).withOpacity(0.1) : Colors.white,
+          color: active ? const Color(0xFFF59E0B).withValues(alpha: 0.1) : Colors.white,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
-            color: active ? const Color(0xFFF59E0B) : Colors.grey.withOpacity(0.15),
+            color: active ? const Color(0xFFF59E0B) : Colors.grey.withValues(alpha: 0.15),
             width: active ? 2 : 1,
           ),
           boxShadow: active
-              ? [BoxShadow(color: const Color(0xFFF59E0B).withOpacity(0.15), blurRadius: 8)]
+              ? [BoxShadow(color: const Color(0xFFF59E0B).withValues(alpha: 0.15), blurRadius: 8)]
               : null,
         ),
         child: Column(
@@ -279,9 +279,9 @@ class _ModeCard extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Module Notification Row
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _ModuleNotifRow extends StatelessWidget {
   final String moduleName;
@@ -352,9 +352,9 @@ class _ModuleNotifRow extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Smart Rule Card
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _SmartRuleCard extends StatelessWidget {
   final SmartNotificationRule rule;
@@ -368,10 +368,10 @@ class _SmartRuleCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: rule.enabled ? const Color(0xFF06B6D4).withOpacity(0.04) : Colors.grey.withOpacity(0.04),
+          color: rule.enabled ? const Color(0xFF06B6D4).withValues(alpha: 0.04) : Colors.grey.withValues(alpha: 0.04),
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
-            color: rule.enabled ? const Color(0xFF06B6D4).withOpacity(0.15) : Colors.grey.withOpacity(0.1),
+            color: rule.enabled ? const Color(0xFF06B6D4).withValues(alpha: 0.15) : Colors.grey.withValues(alpha: 0.1),
           ),
         ),
         child: Row(
@@ -395,7 +395,7 @@ class _SmartRuleCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '→ ${rule.action}',
+                    'â†’ ${rule.action}',
                     style: TextStyle(
                       fontSize: 11,
                       color: rule.enabled ? const Color(0xFF06B6D4) : AppColors.textTertiary,
@@ -419,9 +419,9 @@ class _SmartRuleCard extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Time Picker Button
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _TimePickerButton extends StatelessWidget {
   final String label;
@@ -439,9 +439,9 @@ class _TimePickerButton extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
         decoration: BoxDecoration(
-          color: const Color(0xFF8B5CF6).withOpacity(0.06),
+          color: const Color(0xFF8B5CF6).withValues(alpha: 0.06),
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: const Color(0xFF8B5CF6).withOpacity(0.15)),
+          border: Border.all(color: const Color(0xFF8B5CF6).withValues(alpha: 0.15)),
         ),
         child: Column(
           children: [
@@ -455,9 +455,9 @@ class _TimePickerButton extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Notification Preview
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _NotificationPreview extends StatelessWidget {
   final NotificationMode mode;
@@ -477,7 +477,7 @@ class _NotificationPreview extends StatelessWidget {
             width: 36,
             height: 36,
             decoration: BoxDecoration(
-              color: const Color(0xFF6366F1).withOpacity(0.2),
+              color: const Color(0xFF6366F1).withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(8),
             ),
             child: const Icon(Icons.notifications, size: 18, color: Color(0xFF6366F1)),
@@ -502,7 +502,7 @@ class _NotificationPreview extends StatelessWidget {
           ),
           Text(
             'now',
-            style: TextStyle(fontSize: 10, color: Colors.white.withOpacity(0.5)),
+            style: TextStyle(fontSize: 10, color: Colors.white.withValues(alpha: 0.5)),
           ),
         ],
       ),

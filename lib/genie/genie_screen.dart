@@ -1,15 +1,15 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// GenieScreen – The Universal Modal Interface
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// GenieScreen â€“ The Universal Modal Interface
 ///
 /// Replaces the PromptScreen as the default home of the app.
 /// Layout:
-///   • Top: GlobalHeader (context bar, reused from prompt module)
-///   • Top floating: Pinned tile strip (optional, draggable)
-///   • Center: Scrollable chat thread (ListView.builder)
-///   • Offline banner: subtle yellow bar when offline
-///   • Bottom: Input area (chips + text field + mic button + '+' menu)
-///   • Bottom: Pinned shortcut bar (max 4 role-specific quick actions)
-/// ═══════════════════════════════════════════════════════════════════════════
+///   â€¢ Top: GlobalHeader (context bar, reused from prompt module)
+///   â€¢ Top floating: Pinned tile strip (optional, draggable)
+///   â€¢ Center: Scrollable chat thread (ListView.builder)
+///   â€¢ Offline banner: subtle yellow bar when offline
+///   â€¢ Bottom: Input area (chips + text field + mic button + '+' menu)
+///   â€¢ Bottom: Pinned shortcut bar (max 4 role-specific quick actions)
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -173,7 +173,7 @@ class _GenieScreenState extends State<GenieScreen>
         resizeToAvoidBottomInset: true,
         body: Column(
           children: [
-            // ─── Persistent Global Header ────────────────────────────────
+            // â”€â”€â”€ Persistent Global Header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
             GlobalHeader(
               onContextSwitchTap: () => _controller.executeIntent(
                 const GenieIntent(
@@ -187,17 +187,17 @@ class _GenieScreenState extends State<GenieScreen>
               onSOSTap: _handleSOS,
             ),
 
-            // ─── Offline Banner ──────────────────────────────────────────
+            // â”€â”€â”€ Offline Banner â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
             if (!_controller.isOnline) const _OfflineBanner(),
 
-            // ─── Pinned Floating Tiles ───────────────────────────────────
+            // â”€â”€â”€ Pinned Floating Tiles â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
             if (_controller.pinnedTiles.isNotEmpty)
               _PinnedTileStrip(
                 tiles: _controller.pinnedTiles,
                 onUnpin: (m) => _controller.unpinTile(m),
               ),
 
-            // ─── Chat Thread ─────────────────────────────────────────────
+            // â”€â”€â”€ Chat Thread â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
             Expanded(
               child: _controller.messages.isEmpty
                   ? const _EmptyState()
@@ -216,10 +216,10 @@ class _GenieScreenState extends State<GenieScreen>
                     ),
             ),
 
-            // ─── Typing indicator ─────────────────────────────────────────
+            // â”€â”€â”€ Typing indicator â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
             if (_controller.isProcessing) const _TypingIndicator(),
 
-            // ─── Chip Row ────────────────────────────────────────────────
+            // â”€â”€â”€ Chip Row â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
             if (!_inputExpanded)
               Container(
                 color: Colors.white,
@@ -229,7 +229,7 @@ class _GenieScreenState extends State<GenieScreen>
                 ),
               ),
 
-            // ─── Input Area ───────────────────────────────────────────────
+            // â”€â”€â”€ Input Area â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
             _InputArea(
               controller: _textCtrl,
               focusNode: _inputFocus,
@@ -241,7 +241,7 @@ class _GenieScreenState extends State<GenieScreen>
                   GenieFullScreenLauncher.showModuleMenu(context, role),
             ),
 
-            // ─── Pinned Shortcut Bar ─────────────────────────────────────
+            // â”€â”€â”€ Pinned Shortcut Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
             _PinnedShortcutBar(
               shortcuts: pinnedShortcuts,
               onShortcutTap: (intent) => _controller.executeIntent(intent),
@@ -253,7 +253,7 @@ class _GenieScreenState extends State<GenieScreen>
   }
 }
 
-// ─── Offline Banner ───────────────────────────────────────────────────────────
+// â”€â”€â”€ Offline Banner â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _OfflineBanner extends StatelessWidget {
   const _OfflineBanner();
 
@@ -261,7 +261,7 @@ class _OfflineBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      color: AppColors.warning.withOpacity(0.15),
+      color: AppColors.warning.withValues(alpha: 0.15),
       padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
       child: Row(
         children: const [
@@ -277,7 +277,7 @@ class _OfflineBanner extends StatelessWidget {
   }
 }
 
-// ─── Pinned Tile Strip ────────────────────────────────────────────────────────
+// â”€â”€â”€ Pinned Tile Strip â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _PinnedTileStrip extends StatelessWidget {
   final Map<GenieModule, Map<String, dynamic>> tiles;
   final void Function(GenieModule) onUnpin;
@@ -299,10 +299,10 @@ class _PinnedTileStrip extends StatelessWidget {
               margin: const EdgeInsets.only(right: 8),
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
-                color: AppColors.primaryLight.withOpacity(0.08),
+                color: AppColors.primaryLight.withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(10),
                 border:
-                    Border.all(color: AppColors.primaryLight.withOpacity(0.2)),
+                    Border.all(color: AppColors.primaryLight.withValues(alpha: 0.2)),
               ),
               child: Row(
                 children: [
@@ -327,7 +327,7 @@ class _PinnedTileStrip extends StatelessWidget {
   }
 }
 
-// ─── Typing Indicator ─────────────────────────────────────────────────────────
+// â”€â”€â”€ Typing Indicator â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _TypingIndicator extends StatefulWidget {
   const _TypingIndicator();
 
@@ -405,7 +405,7 @@ class _TypingIndicatorState extends State<_TypingIndicator>
   }
 }
 
-// ─── Input Area ───────────────────────────────────────────────────────────────
+// â”€â”€â”€ Input Area â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _InputArea extends StatelessWidget {
   final TextEditingController controller;
   final FocusNode focusNode;
@@ -433,7 +433,7 @@ class _InputArea extends StatelessWidget {
         border: Border(top: BorderSide(color: AppColors.inputBorder)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 12,
             offset: const Offset(0, -2),
           ),
@@ -497,7 +497,7 @@ class _InputArea extends StatelessWidget {
                         color: AppColors.textPrimary,
                       ),
                       decoration: const InputDecoration(
-                        hintText: 'Ask Genie or tap a shortcut…',
+                        hintText: 'Ask Genie or tap a shortcutâ€¦',
                         hintStyle: TextStyle(
                           color: AppColors.textTertiary,
                           fontSize: 14,
@@ -558,7 +558,7 @@ class _InputArea extends StatelessWidget {
                   boxShadow: isListening
                       ? [
                           BoxShadow(
-                            color: AppColors.error.withOpacity(0.4),
+                            color: AppColors.error.withValues(alpha: 0.4),
                             blurRadius: 12,
                             spreadRadius: 2,
                           )
@@ -579,7 +579,7 @@ class _InputArea extends StatelessWidget {
   }
 }
 
-// ─── Pinned Shortcut Bar ──────────────────────────────────────────────────────
+// â”€â”€â”€ Pinned Shortcut Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _PinnedShortcutBar extends StatelessWidget {
   final List<GeniePinnedShortcut> shortcuts;
   final void Function(GenieIntent) onShortcutTap;
@@ -640,7 +640,7 @@ class _PinnedShortcutBar extends StatelessWidget {
   }
 }
 
-// ─── Empty State ─────────────────────────────────────────────────────────────
+// â”€â”€â”€ Empty State â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _EmptyState extends StatelessWidget {
   const _EmptyState();
 
@@ -648,7 +648,7 @@ class _EmptyState extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Center(
       child: Text(
-        '✨ Say "Hey Genie" or type something…',
+        'âœ¨ Say "Hey Genie" or type somethingâ€¦',
         style: TextStyle(
           color: AppColors.textTertiary,
           fontSize: 14,

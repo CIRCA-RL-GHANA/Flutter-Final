@@ -1,7 +1,7 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// GO PAGE Widget (Financial Hub)
 /// Visible to: Owner, Administrator only
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -113,7 +113,7 @@ class _GoPageWidgetContentState extends State<GoPageWidgetContent>
           // Recent Activity
           const _RecentTransaction(
             title: '+500 QP from Bob',
-            subtitle: 'Transfer • 1h ago',
+            subtitle: 'Transfer â€¢ 1h ago',
             isPositive: true,
           ),
         ],
@@ -135,7 +135,7 @@ class _GoPageAction extends StatelessWidget {
           width: 36,
           height: 36,
           decoration: BoxDecoration(
-            color: RoleColors.forModule(PromptModule.goPage).withOpacity(0.08),
+            color: RoleColors.forModule(PromptModule.goPage).withValues(alpha: 0.08),
             borderRadius: BorderRadius.circular(10),
           ),
           child: Icon(icon, size: 18,

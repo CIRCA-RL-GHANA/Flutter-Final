@@ -1,7 +1,7 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// qualChat Widget (Communications Hub)
 /// Visible to: ALL roles (with Owner-only HeyYa section)
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -45,7 +45,7 @@ class QualChatWidgetContent extends StatelessWidget {
                 width: 28,
                 height: 28,
                 decoration: BoxDecoration(
-                  color: color.withOpacity(0.1),
+                  color: color.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Icon(Icons.edit, size: 14, color: color),
@@ -77,7 +77,7 @@ class QualChatWidgetContent extends StatelessWidget {
           // Recent Chats
           _ChatPreview(
             name: 'Alice',
-            message: 'Payment confirmed ✓',
+            message: 'Payment confirmed âœ“',
             time: '2m',
             unread: 2,
             color: color,
@@ -101,18 +101,18 @@ class QualChatWidgetContent extends StatelessWidget {
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
-                    const Color(0xFFFF6B6B).withOpacity(0.08),
-                    const Color(0xFFFF8E8E).withOpacity(0.04),
+                    const Color(0xFFFF6B6B).withValues(alpha: 0.08),
+                    const Color(0xFFFF8E8E).withValues(alpha: 0.04),
                   ],
                 ),
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(
-                  color: const Color(0xFFFF6B6B).withOpacity(0.15),
+                  color: const Color(0xFFFF6B6B).withValues(alpha: 0.15),
                 ),
               ),
               child: Row(
                 children: [
-                  const Text('💘', style: TextStyle(fontSize: 14)),
+                  const Text('ðŸ’˜', style: TextStyle(fontSize: 14)),
                   const SizedBox(width: 6),
                   Expanded(
                     child: Column(
@@ -127,7 +127,7 @@ class QualChatWidgetContent extends StatelessWidget {
                           ),
                         ),
                         const Text(
-                          '5 Sparks • 2 Matches',
+                          '5 Sparks â€¢ 2 Matches',
                           style: TextStyle(
                             fontSize: 9,
                             color: AppColors.textTertiary,
@@ -204,7 +204,7 @@ class _ChatPreview extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 14,
-            backgroundColor: color.withOpacity(0.15),
+            backgroundColor: color.withValues(alpha: 0.15),
             child: Text(
               name[0],
               style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: color),

@@ -1,10 +1,10 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// GenieQuickCommandBar – Bottom Chip Row
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// GenieQuickCommandBar â€“ Bottom Chip Row
 ///
 /// Horizontally scrollable row of contextual quick-action chips.
 /// Chips are RBAC-filtered and role-specific. Snaps to center on scroll.
-/// Minimum 48×48 dp touch target on each chip.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// Minimum 48Ã—48 dp touch target on each chip.
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
@@ -109,11 +109,11 @@ class _QuickChipState extends State<_QuickChip> {
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
             decoration: BoxDecoration(
               color: _pressed
-                  ? _accentColor.withOpacity(0.15)
-                  : _accentColor.withOpacity(0.08),
+                  ? _accentColor.withValues(alpha: 0.15)
+                  : _accentColor.withValues(alpha: 0.08),
               borderRadius: BorderRadius.circular(24),
               border: Border.all(
-                color: _accentColor.withOpacity(_pressed ? 0.5 : 0.25),
+                color: _accentColor.withValues(alpha: _pressed ? 0.5 : 0.25),
               ),
             ),
             child: Row(

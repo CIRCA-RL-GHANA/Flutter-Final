@@ -1,7 +1,7 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// Screen 6: Privacy Control Center
 /// Data map visualization, control toggles, transparency panel
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -35,7 +35,7 @@ class PrivacyCenterScreen extends StatelessWidget {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: AppColors.primary.withOpacity(0.07),
+                    color: AppColors.primary.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -53,12 +53,12 @@ class PrivacyCenterScreen extends StatelessWidget {
                   );
                 },
               ),
-              // ─── Privacy Score ──────────────────────────────
+              // â”€â”€â”€ Privacy Score â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               _PrivacyScoreCard(score: privacy.privacyScore),
 
               const SizedBox(height: 16),
 
-              // ─── Data Map ──────────────────────────────────
+              // â”€â”€â”€ Data Map â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SectionCard(
                 child: CollapsibleSection(
                   title: 'Your Data Map',
@@ -68,7 +68,7 @@ class PrivacyCenterScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Profile Visibility ────────────────────────
+              // â”€â”€â”€ Profile Visibility â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SectionCard(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,7 +92,7 @@ class PrivacyCenterScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Data Sharing ──────────────────────────────
+              // â”€â”€â”€ Data Sharing â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SectionCard(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,7 +112,7 @@ class PrivacyCenterScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Location Tracking ─────────────────────────
+              // â”€â”€â”€ Location Tracking â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SectionCard(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -136,7 +136,7 @@ class PrivacyCenterScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Toggles ──────────────────────────────────
+              // â”€â”€â”€ Toggles â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SectionCard(
                 child: Column(
                   children: [
@@ -161,7 +161,7 @@ class PrivacyCenterScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Data Export ────────────────────────────────
+              // â”€â”€â”€ Data Export â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SectionCard(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -203,9 +203,9 @@ class PrivacyCenterScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Account Deletion ──────────────────────────
+              // â”€â”€â”€ Account Deletion â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SectionCard(
-                borderColor: const Color(0xFFEF4444).withOpacity(0.15),
+                borderColor: const Color(0xFFEF4444).withValues(alpha: 0.15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -278,9 +278,9 @@ class PrivacyCenterScreen extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Privacy Score Card
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _PrivacyScoreCard extends StatelessWidget {
   final int score;
@@ -306,7 +306,7 @@ class _PrivacyScoreCard extends StatelessWidget {
                 CircularProgressIndicator(
                   value: score / 100,
                   strokeWidth: 6,
-                  backgroundColor: Colors.grey.withOpacity(0.1),
+                  backgroundColor: Colors.grey.withValues(alpha: 0.1),
                   valueColor: AlwaysStoppedAnimation<Color>(color),
                 ),
                 Text(
@@ -336,9 +336,9 @@ class _PrivacyScoreCard extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Data Map Visualization
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _DataMap extends StatelessWidget {
   final List<DataCategory> categories;
@@ -379,8 +379,8 @@ class _DataBubble extends StatelessWidget {
         height: size,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: category.color.withOpacity(0.15),
-          border: Border.all(color: category.color.withOpacity(0.3), width: 1.5),
+          color: category.color.withValues(alpha: 0.15),
+          border: Border.all(color: category.color.withValues(alpha: 0.3), width: 1.5),
         ),
         child: Center(
           child: Text(
@@ -450,9 +450,9 @@ class _DataCategoryDetail extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Radio Option
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _RadioOption<T> extends StatelessWidget {
   final T value;

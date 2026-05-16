@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// LIVE MODULE — Screen 18: Live Analytics Dashboard
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// LIVE MODULE â€” Screen 18: Live Analytics Dashboard
 /// Real-time operations analytics: KPIs, delivery zones,
 /// bottleneck alerts, performance trends, predictive insights
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -57,7 +57,7 @@ class LiveAnalyticsScreen extends StatelessWidget {
                       margin: const EdgeInsets.only(bottom: 12),
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                       decoration: BoxDecoration(
-                        color: kLiveColor.withOpacity(0.07),
+                        color: kLiveColor.withValues(alpha: 0.07),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Row(
@@ -77,7 +77,7 @@ class LiveAnalyticsScreen extends StatelessWidget {
                   },
                 ),
                 // Key Metrics
-                const Text('📊 KEY METRICS',
+                const Text('ðŸ“Š KEY METRICS',
                     style:
                         TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 const SizedBox(height: 8),
@@ -125,7 +125,7 @@ class LiveAnalyticsScreen extends StatelessWidget {
                         child: LiveMetricBadge(
                             label: 'Revenue',
                             value:
-                                '₵${metrics.todayRevenue.toStringAsFixed(0)}',
+                                'â‚µ${metrics.todayRevenue.toStringAsFixed(0)}',
                             icon: Icons.attach_money,
                             color: const Color(0xFF8B5CF6))),
                     const SizedBox(width: 8),
@@ -145,7 +145,7 @@ class LiveAnalyticsScreen extends StatelessWidget {
 
                 // Delivery Zones
                 LiveSectionCard(
-                  title: '🗺️ DELIVERY ZONE PERFORMANCE',
+                  title: 'ðŸ—ºï¸ DELIVERY ZONE PERFORMANCE',
                   icon: Icons.map,
                   iconColor: const Color(0xFF3B82F6),
                   child: Column(
@@ -157,7 +157,7 @@ class LiveAnalyticsScreen extends StatelessWidget {
                 // Bottleneck Alerts
                 if (bottlenecks.isNotEmpty)
                   LiveSectionCard(
-                    title: '⚠️ BOTTLENECK ALERTS',
+                    title: 'âš ï¸ BOTTLENECK ALERTS',
                     icon: Icons.warning,
                     iconColor: const Color(0xFFF59E0B),
                     child: Column(
@@ -169,7 +169,7 @@ class LiveAnalyticsScreen extends StatelessWidget {
 
                 // Predictive Insights
                 LiveSectionCard(
-                  title: '🤖 AI PREDICTIVE INSIGHTS',
+                  title: 'ðŸ¤– AI PREDICTIVE INSIGHTS',
                   icon: Icons.psychology,
                   iconColor: const Color(0xFF8B5CF6),
                   child: Column(
@@ -181,7 +181,7 @@ class LiveAnalyticsScreen extends StatelessWidget {
 
                 // Driver Performance Summary
                 LiveSectionCard(
-                  title: '👥 DRIVER LEADERBOARD',
+                  title: 'ðŸ‘¥ DRIVER LEADERBOARD',
                   icon: Icons.leaderboard,
                   iconColor: const Color(0xFFF59E0B),
                   child: Column(
@@ -209,7 +209,7 @@ class LiveAnalyticsScreen extends StatelessWidget {
 
                 // Performance chart placeholder
                 LiveSectionCard(
-                  title: '📈 HOURLY ORDER VOLUME',
+                  title: 'ðŸ“ˆ HOURLY ORDER VOLUME',
                   icon: Icons.bar_chart,
                   iconColor: kLiveColor,
                   child: Container(
@@ -285,7 +285,7 @@ class _ZoneCard extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 6, vertical: 1),
                           decoration: BoxDecoration(
-                              color: kLiveColor.withOpacity(0.1),
+                              color: kLiveColor.withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(4)),
                           child: const Text('HIGH DEMAND',
                               style: TextStyle(
@@ -296,7 +296,7 @@ class _ZoneCard extends StatelessWidget {
                       ],
                     ],
                   ),
-                  Text('${zone.orderCount} orders • ${zone.intensity} demand',
+                  Text('${zone.orderCount} orders â€¢ ${zone.intensity} demand',
                       style: TextStyle(
                           fontSize: 11, color: AppColors.textTertiary)),
                 ],
@@ -375,7 +375,7 @@ class _InsightCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('🧠', style: TextStyle(fontSize: 16)),
+            const Text('ðŸ§ ', style: TextStyle(fontSize: 16)),
             const SizedBox(width: 8),
             Expanded(
               child: Column(
@@ -407,11 +407,11 @@ class _DriverLeaderboardItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final medal = rank == 1
-        ? '🥇'
+        ? 'ðŸ¥‡'
         : rank == 2
-            ? '🥈'
+            ? 'ðŸ¥ˆ'
             : rank == 3
-                ? '🥉'
+                ? 'ðŸ¥‰'
                 : '$rank';
     return InkWell(
       onTap: onTap,
@@ -428,7 +428,7 @@ class _DriverLeaderboardItem extends StatelessWidget {
             const SizedBox(width: 8),
             CircleAvatar(
               radius: 16,
-              backgroundColor: kLiveColor.withOpacity(0.1),
+              backgroundColor: kLiveColor.withValues(alpha: 0.1),
               child: Text(driver.name.substring(0, 1),
                   style: const TextStyle(
                       fontSize: 12,
@@ -444,7 +444,7 @@ class _DriverLeaderboardItem extends StatelessWidget {
                       style: const TextStyle(
                           fontSize: 13, fontWeight: FontWeight.w600)),
                   Text(
-                      '${driver.todayDeliveries} deliveries • ${driver.onTimeRate.toStringAsFixed(0)}% on-time',
+                      '${driver.todayDeliveries} deliveries â€¢ ${driver.onTimeRate.toStringAsFixed(0)}% on-time',
                       style: TextStyle(
                           fontSize: 11, color: AppColors.textTertiary)),
                 ],

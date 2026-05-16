@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// LIVE MODULE — Screen 11: Driver Home (Shop/Logistics)
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// LIVE MODULE â€” Screen 11: Driver Home (Shop/Logistics)
 /// Driver's main dashboard: active package, earnings, queue,
 /// availability toggle, stats, and quick actions
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -43,7 +43,7 @@ class LiveDriverHomeScreen extends StatelessWidget {
                         children: [
                           CircleAvatar(
                             radius: 22,
-                            backgroundColor: Colors.white.withOpacity(0.2),
+                            backgroundColor: Colors.white.withValues(alpha: 0.2),
                             child: Text(driver.name.substring(0, 1), style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: Colors.white)),
                           ),
                           const SizedBox(width: 12),
@@ -51,8 +51,8 @@ class LiveDriverHomeScreen extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Hey, ${driver.name.split(' ').first}! 👋', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: Colors.white)),
-                                Text(driver.driverType.name, style: TextStyle(fontSize: 12, color: Colors.white.withOpacity(0.8))),
+                                Text('Hey, ${driver.name.split(' ').first}! ðŸ‘‹', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: Colors.white)),
+                                Text(driver.driverType.name, style: TextStyle(fontSize: 12, color: Colors.white.withValues(alpha: 0.8))),
                               ],
                             ),
                           ),
@@ -60,7 +60,7 @@ class LiveDriverHomeScreen extends StatelessWidget {
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                             decoration: BoxDecoration(
-                              color: driver.availability == DriverAvailability.online ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.2),
+                              color: driver.availability == DriverAvailability.online ? Colors.white.withValues(alpha: 0.2) : Colors.black.withValues(alpha: 0.2),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Row(
@@ -75,7 +75,7 @@ class LiveDriverHomeScreen extends StatelessWidget {
                                 ),
                                 const SizedBox(width: 4),
                                 Text(driver.availability == DriverAvailability.online ? 'ONLINE' : 'OFFLINE',
-                                  style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: Colors.white.withOpacity(0.9)),
+                                  style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: Colors.white.withValues(alpha: 0.9)),
                                 ),
                               ],
                             ),
@@ -89,7 +89,7 @@ class LiveDriverHomeScreen extends StatelessWidget {
                         children: [
                           _DriverStat(label: 'Rating', value: '${driver.rating}', icon: Icons.star),
                           _DriverStat(label: 'Today', value: '${driver.todayDeliveries}', icon: Icons.check_circle),
-                          _DriverStat(label: 'Earnings', value: '₵${(driver.todayDeliveries * 18.5).toStringAsFixed(0)}', icon: Icons.account_balance_wallet),
+                          _DriverStat(label: 'Earnings', value: 'â‚µ${(driver.todayDeliveries * 18.5).toStringAsFixed(0)}', icon: Icons.account_balance_wallet),
                           _DriverStat(label: 'On-Time', value: '${driver.onTimeRate.toStringAsFixed(0)}%', icon: Icons.timer),
                         ],
                       ),
@@ -107,9 +107,9 @@ class LiveDriverHomeScreen extends StatelessWidget {
                       margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: kLiveColor.withOpacity(0.07),
+                        color: kLiveColor.withValues(alpha: 0.07),
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: kLiveColor.withOpacity(0.25)),
+                        border: Border.all(color: kLiveColor.withValues(alpha: 0.25)),
                       ),
                       child: Column(
                         children: ai.insights.take(2).map((i) => Row(
@@ -133,7 +133,7 @@ class LiveDriverHomeScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('🚚 ACTIVE DELIVERY', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                        const Text('ðŸšš ACTIVE DELIVERY', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                         const SizedBox(height: 8),
                         LivePackageCard(
                           package: activePackage,
@@ -154,7 +154,7 @@ class LiveDriverHomeScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('⚡ QUICK ACTIONS', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                      const Text('âš¡ QUICK ACTIONS', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                       const SizedBox(height: 8),
                       Row(
                         children: [
@@ -179,7 +179,7 @@ class LiveDriverHomeScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('📋 PACKAGE QUEUE (${pendingPackages.length})', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                      Text('ðŸ“‹ PACKAGE QUEUE (${pendingPackages.length})', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                       TextButton(
                         onPressed: () {},
                         child: const Text('View All', style: TextStyle(fontSize: 12, color: kLiveColor)),
@@ -236,13 +236,13 @@ class _DriverStat extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.only(right: 6),
         padding: const EdgeInsets.symmetric(vertical: 8),
-        decoration: BoxDecoration(color: Colors.white.withOpacity(0.15), borderRadius: BorderRadius.circular(10)),
+        decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(10)),
         child: Column(
           children: [
-            Icon(icon, size: 16, color: Colors.white.withOpacity(0.8)),
+            Icon(icon, size: 16, color: Colors.white.withValues(alpha: 0.8)),
             const SizedBox(height: 2),
             Text(value, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: Colors.white)),
-            Text(label, style: TextStyle(fontSize: 9, color: Colors.white.withOpacity(0.7))),
+            Text(label, style: TextStyle(fontSize: 9, color: Colors.white.withValues(alpha: 0.7))),
           ],
         ),
       ),
@@ -264,7 +264,7 @@ class _QuickAction extends StatelessWidget {
       borderRadius: BorderRadius.circular(12),
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 12),
-        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12), boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 6, offset: const Offset(0, 2))]),
+        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12), boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 6, offset: const Offset(0, 2))]),
         child: Column(
           children: [
             Icon(icon, size: 22, color: color),

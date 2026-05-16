@@ -1,9 +1,9 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SD1.12: CONNECTIONS — Network Management
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD1.12: CONNECTIONS â€” Network Management
 /// Connection list, types, strength, interaction history
 /// RBAC: Owner(personal), Admin(full), BM(branch), SO(full), BSO(branch),
 ///        Monitor/BrMon(view), RO/BRO(own), Driver(own)
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -43,7 +43,7 @@ class ConnectionsScreen extends StatelessWidget {
             ),
           body: CustomScrollView(
             slivers: [
-              // ─── Network KPIs ─────────────────────────────
+              // â”€â”€â”€ Network KPIs â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -69,7 +69,7 @@ class ConnectionsScreen extends StatelessWidget {
                       Expanded(
                         child: KPIBadge(
                           label: 'Net. Value',
-                          value: '₵${(connections.fold<double>(0, (s, c) => s + c.totalValue) / 1000).toStringAsFixed(0)}K',
+                          value: 'â‚µ${(connections.fold<double>(0, (s, c) => s + c.totalValue) / 1000).toStringAsFixed(0)}K',
                           icon: Icons.account_balance_wallet,
                           color: AppColors.success,
                         ),
@@ -79,7 +79,7 @@ class ConnectionsScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Type Filter ──────────────────────────────
+              // â”€â”€â”€ Type Filter â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -100,7 +100,7 @@ class ConnectionsScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Network Health ───────────────────────────
+              // â”€â”€â”€ Network Health â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -111,7 +111,7 @@ class ConnectionsScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(14),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.04),
+                          color: Colors.black.withValues(alpha: 0.04),
                           blurRadius: 10,
                           offset: const Offset(0, 2),
                         ),
@@ -164,7 +164,7 @@ class ConnectionsScreen extends StatelessWidget {
                   child: const SetupSectionTitle(title: 'Your Network', icon: Icons.handshake),
                 ),
               ),
-              // ─── AI Insights ─────────────────────────────────────────
+              // â”€â”€â”€ AI Insights â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Consumer<AIInsightsNotifier>(
                   builder: (context, ai, _) {
@@ -173,7 +173,7 @@ class ConnectionsScreen extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: kSetupColor.withOpacity(0.07),
+                          color: kSetupColor.withValues(alpha: 0.07),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -232,7 +232,7 @@ class _ConnectionCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(14),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -246,7 +246,7 @@ class _ConnectionCard extends StatelessWidget {
                 width: 44,
                 height: 44,
                 decoration: BoxDecoration(
-                  color: _typeColor(connection.type).withOpacity(0.1),
+                  color: _typeColor(connection.type).withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Center(
@@ -270,7 +270,7 @@ class _ConnectionCard extends StatelessWidget {
                       style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textPrimary),
                     ),
                     Text(
-                      '${connection.type.name} · ${connection.category ?? "General"}',
+                      '${connection.type.name} Â· ${connection.category ?? "General"}',
                       style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                     ),
                   ],
@@ -304,7 +304,7 @@ class _ConnectionCard extends StatelessWidget {
                     children: [
                       if (connection.totalOrders > 0)
                         Text(
-                          '${connection.totalOrders} orders · ₵${(connection.totalValue / 1000).toStringAsFixed(0)}K',
+                          '${connection.totalOrders} orders Â· â‚µ${(connection.totalValue / 1000).toStringAsFixed(0)}K',
                           style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: AppColors.textSecondary),
                         ),
                       if (connection.lastInteraction != null)
@@ -346,7 +346,7 @@ class _ConnectionCard extends StatelessWidget {
   }
 }
 
-// ─── Type Filter Chip ────────────────────────────────────────────────────────
+// â”€â”€â”€ Type Filter Chip â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _TypeFilterChip extends StatelessWidget {
   final String label;
@@ -367,9 +367,9 @@ class _TypeFilterChip extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
-        color: isSelected ? c.withOpacity(0.12) : Colors.white,
+        color: isSelected ? c.withValues(alpha: 0.12) : Colors.white,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: isSelected ? c.withOpacity(0.4) : AppColors.inputBorder),
+        border: Border.all(color: isSelected ? c.withValues(alpha: 0.4) : AppColors.inputBorder),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -386,7 +386,7 @@ class _TypeFilterChip extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
             decoration: BoxDecoration(
-              color: c.withOpacity(0.15),
+              color: c.withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Text('$count', style: TextStyle(fontSize: 9, fontWeight: FontWeight.w700, color: c)),
@@ -397,7 +397,7 @@ class _TypeFilterChip extends StatelessWidget {
   }
 }
 
-// ─── Network Stat ────────────────────────────────────────────────────────────
+// â”€â”€â”€ Network Stat â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _NetworkStat extends StatelessWidget {
   final String label;
@@ -411,7 +411,7 @@ class _NetworkStat extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.06),
+        color: color.withValues(alpha: 0.06),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(

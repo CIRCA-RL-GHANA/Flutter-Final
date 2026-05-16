@@ -1,7 +1,7 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// Screen 1: USER DETAILS Master Dashboard
 /// Identity section, multi-context carousel, collapsible sections, footer
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -28,7 +28,7 @@ class UserDetailsMasterScreen extends StatelessWidget {
           backgroundColor: const Color(0xFFF8F9FC),
           body: CustomScrollView(
             slivers: [
-              // ─── App Bar ──────────────────────────────────
+              // â”€â”€â”€ App Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverAppBar(
                 expandedHeight: 0,
                 floating: true,
@@ -87,13 +87,13 @@ class UserDetailsMasterScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              // ─── AI Insights ────────────────────────────────────
+              // â”€â”€â”€ AI Insights â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Consumer<AIInsightsNotifier>(
                   builder: (context, ai, _) {
                     if (ai.insights.isEmpty) return const SizedBox.shrink();
                     return Container(
-                      color: AppColors.primary.withOpacity(0.07),
+                      color: AppColors.primary.withValues(alpha: 0.07),
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                       child: Row(children: [
                         const Icon(Icons.auto_awesome, size: 14, color: AppColors.primary),
@@ -106,7 +106,7 @@ class UserDetailsMasterScreen extends StatelessWidget {
                   },
                 ),
               ),
-              // ─── Identity Section ─────────────────────────
+              // â”€â”€â”€ Identity Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
@@ -114,7 +114,7 @@ class UserDetailsMasterScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Quick Stats ──────────────────────────────
+              // â”€â”€â”€ Quick Stats â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -122,7 +122,7 @@ class UserDetailsMasterScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Multi-Context Carousel ────────────────────
+              // â”€â”€â”€ Multi-Context Carousel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.only(top: 16),
@@ -138,7 +138,7 @@ class UserDetailsMasterScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Personal Information ──────────────────────
+              // â”€â”€â”€ Personal Information â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
@@ -153,7 +153,7 @@ class UserDetailsMasterScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Security Center ──────────────────────────
+              // â”€â”€â”€ Security Center â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -169,7 +169,7 @@ class UserDetailsMasterScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Preferences Hub ──────────────────────────
+              // â”€â”€â”€ Preferences Hub â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -189,14 +189,14 @@ class UserDetailsMasterScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Context-Specific Settings ─────────────────
+              // â”€â”€â”€ Context-Specific Settings â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               if (activeCtx.entityType.toString().contains('business') ||
                   activeCtx.entityType.toString().contains('branch'))
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                     child: SectionCard(
-                      borderColor: contextTypeColor(activeCtx.entityType).withOpacity(0.2),
+                      borderColor: contextTypeColor(activeCtx.entityType).withValues(alpha: 0.2),
                       child: CollapsibleSection(
                         title: '${activeCtx.name} Settings',
                         icon: Icons.settings_outlined,
@@ -208,12 +208,12 @@ class UserDetailsMasterScreen extends StatelessWidget {
                   ),
                 ),
 
-              // ─── Bottom Spacer ────────────────────────────
+              // â”€â”€â”€ Bottom Spacer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               const SliverToBoxAdapter(child: SizedBox(height: 100)),
             ],
           ),
 
-          // ─── Sticky Footer ──────────────────────────────
+          // â”€â”€â”€ Sticky Footer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
           bottomNavigationBar: _StickyFooter(
             onHelp: () {},
             onDownload: () => udp.requestDataExport(),
@@ -241,9 +241,9 @@ class UserDetailsMasterScreen extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Identity Section
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _IdentitySection extends StatelessWidget {
   final UserIdentity identity;
@@ -278,10 +278,36 @@ class _IdentitySection extends StatelessWidget {
                 // Avatar
                 CircleAvatar(
                   radius: 48,
-                  backgroundColor: const Color(0xFF6366F1).withOpacity(0.1),
+                  backgroundColor: const Color(0xFF6366F1).withValues(alpha: 0.1),
                   child: identity.avatarUrl != null
                       ? ClipOval(
-                          child: Image.network(identity.avatarUrl!, fit: BoxFit.cover, width: 96, height: 96),
+                          child: Image.network(
+                            identity.avatarUrl!,
+                            fit: BoxFit.cover,
+                            width: 96,
+                            height: 96,
+                            semanticLabel: 'User avatar',
+                            loadingBuilder: (context, child, progress) {
+                              if (progress == null) return child;
+                              return const SizedBox(
+                                width: 96,
+                                height: 96,
+                                child: Center(
+                                  child: CircularProgressIndicator(strokeWidth: 2),
+                                ),
+                              );
+                            },
+                            errorBuilder: (context, error, stack) => Text(
+                              identity.displayName.isNotEmpty
+                                  ? identity.displayName[0].toUpperCase()
+                                  : 'U',
+                              style: const TextStyle(
+                                fontSize: 36,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF6366F1),
+                              ),
+                            ),
+                          ),
                         )
                       : Text(
                           identity.displayName.isNotEmpty
@@ -376,9 +402,9 @@ class _IdentitySection extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Quick Stats
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _QuickStats extends StatelessWidget {
   final UserIdentity identity;
@@ -434,7 +460,7 @@ class _StatChip extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
-            BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 8, offset: const Offset(0, 2)),
+            BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 8, offset: const Offset(0, 2)),
           ],
         ),
         child: Row(
@@ -457,9 +483,9 @@ class _StatChip extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Multi-Context Carousel
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _ContextCarousel extends StatelessWidget {
   final List<dynamic> contexts;
@@ -542,14 +568,14 @@ class _ContextCard extends StatelessWidget {
         width: 72,
         margin: const EdgeInsets.symmetric(horizontal: 4),
         decoration: BoxDecoration(
-          color: isActive ? color.withOpacity(0.1) : Colors.white,
+          color: isActive ? color.withValues(alpha: 0.1) : Colors.white,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
-            color: isActive ? color : Colors.grey.withOpacity(0.15),
+            color: isActive ? color : Colors.grey.withValues(alpha: 0.15),
             width: isActive ? 2 : 1,
           ),
           boxShadow: isActive
-              ? [BoxShadow(color: color.withOpacity(0.15), blurRadius: 8, offset: const Offset(0, 2))]
+              ? [BoxShadow(color: color.withValues(alpha: 0.15), blurRadius: 8, offset: const Offset(0, 2))]
               : null,
         ),
         child: Column(
@@ -557,7 +583,7 @@ class _ContextCard extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 16,
-              backgroundColor: color.withOpacity(0.15),
+              backgroundColor: color.withValues(alpha: 0.15),
               child: Text(
                 context.name.isNotEmpty ? context.name[0].toUpperCase() : '?',
                 style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: color),
@@ -596,7 +622,7 @@ class _AddContextCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: Colors.grey.withOpacity(0.2), style: BorderStyle.solid),
+          border: Border.all(color: Colors.grey.withValues(alpha: 0.2), style: BorderStyle.solid),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -606,7 +632,7 @@ class _AddContextCard extends StatelessWidget {
               height: 32,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: const Color(0xFF6366F1).withOpacity(0.08),
+                color: const Color(0xFF6366F1).withValues(alpha: 0.08),
               ),
               child: const Icon(Icons.add, size: 18, color: Color(0xFF6366F1)),
             ),
@@ -622,9 +648,9 @@ class _AddContextCard extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Personal Information
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _PersonalInfoContent extends StatelessWidget {
   final UserIdentity identity;
@@ -713,9 +739,9 @@ class _PersonalInfoContent extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Security Preview
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _SecurityPreview extends StatelessWidget {
   final SecuritySettings security;
@@ -798,9 +824,9 @@ class _SecurityRow extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Preferences Hub
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _PreferencesHub extends StatelessWidget {
   final NotificationSettings notifications;
@@ -859,7 +885,7 @@ class _PrefTile extends StatelessWidget {
               width: 36,
               height: 36,
               decoration: BoxDecoration(
-                color: color.withOpacity(0.1),
+                color: color.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Icon(icon, size: 18, color: color),
@@ -882,9 +908,9 @@ class _PrefTile extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Context-Specific Settings
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _ContextSpecificSettings extends StatelessWidget {
   final dynamic entityType;
@@ -910,9 +936,9 @@ class _ContextSpecificSettings extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Sticky Footer
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _StickyFooter extends StatelessWidget {
   final VoidCallback onHelp;
@@ -932,7 +958,7 @@ class _StickyFooter extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.06), blurRadius: 10, offset: const Offset(0, -2)),
+          BoxShadow(color: Colors.black.withValues(alpha: 0.06), blurRadius: 10, offset: const Offset(0, -2)),
         ],
       ),
       child: Row(

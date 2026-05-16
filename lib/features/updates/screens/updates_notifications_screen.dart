@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SCREEN 9 — Notifications Center
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SCREEN 9 â€” Notifications Center
 /// Six filter tabs: All, Likes, Comments, Mentions, Shares, System.
 /// Mark all read, individual actions, notification grouping.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -96,7 +96,7 @@ class _BodyState extends State<_Body> with SingleTickerProviderStateMixin {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kUpdatesColor.withOpacity(0.07),
+                    color: kUpdatesColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -120,7 +120,7 @@ class _BodyState extends State<_Body> with SingleTickerProviderStateMixin {
                 Container(
                   width: double.infinity,
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  color: kUpdatesColor.withOpacity(0.04),
+                  color: kUpdatesColor.withValues(alpha: 0.04),
                   child: Row(
                     children: [
                       Container(
@@ -140,7 +140,7 @@ class _BodyState extends State<_Body> with SingleTickerProviderStateMixin {
               Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 4, offset: const Offset(0, 2))],
+                  boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 4, offset: const Offset(0, 2))],
                 ),
                 child: TabBar(
                   controller: _tabController,
@@ -203,7 +203,7 @@ class _BodyState extends State<_Body> with SingleTickerProviderStateMixin {
                           background: Container(
                             alignment: Alignment.centerRight,
                             padding: const EdgeInsets.only(right: 20),
-                            color: AppColors.error.withOpacity(0.1),
+                            color: AppColors.error.withValues(alpha: 0.1),
                             child: const Icon(Icons.delete_outline, color: AppColors.error),
                           ),
                           onDismissed: (_) {

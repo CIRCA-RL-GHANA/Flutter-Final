@@ -1,4 +1,4 @@
-/// GO Screen 13 — Security Center
+﻿/// GO Screen 13 â€” Security Center
 /// Access control, audit trail, security settings
 
 import 'package:flutter/material.dart';
@@ -33,7 +33,7 @@ class _GoSecurityScreenState extends State<GoSecurityScreen> with SingleTickerPr
               builder: (context, ai, _) {
                 if (ai.insights.isEmpty) return const SizedBox.shrink();
                 return Container(
-                  color: kGoColor.withOpacity(0.07),
+                  color: kGoColor.withValues(alpha: 0.07),
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                   child: Row(
                     children: [
@@ -190,7 +190,7 @@ class _StatusRow extends StatelessWidget {
       Expanded(child: Text(label, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500))),
       Container(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-        decoration: BoxDecoration(color: (isGood ? kGoPositive : kGoWarning).withOpacity(0.1), borderRadius: BorderRadius.circular(8)),
+        decoration: BoxDecoration(color: (isGood ? kGoPositive : kGoWarning).withValues(alpha: 0.1), borderRadius: BorderRadius.circular(8)),
         child: Text(status, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: isGood ? kGoPositive : kGoWarning)),
       ),
     ]),
@@ -204,7 +204,7 @@ class _RecommendCard extends StatelessWidget {
   Widget build(BuildContext context) => Container(
     margin: const EdgeInsets.only(bottom: 10),
     padding: const EdgeInsets.all(14),
-    decoration: BoxDecoration(color: kGoWarning.withOpacity(0.06), borderRadius: BorderRadius.circular(12), border: Border.all(color: kGoWarning.withOpacity(0.2))),
+    decoration: BoxDecoration(color: kGoWarning.withValues(alpha: 0.06), borderRadius: BorderRadius.circular(12), border: Border.all(color: kGoWarning.withValues(alpha: 0.2))),
     child: Row(children: [
       Icon(icon, size: 20, color: kGoWarning),
       const SizedBox(width: 10),

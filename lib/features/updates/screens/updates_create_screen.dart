@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SCREEN 8 — Create Update
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SCREEN 8 â€” Create Update
 /// Full composer: media attach, text with mentions/hashtags, poll builder,
 /// visibility picker, scheduling, preview before publish.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -117,7 +117,7 @@ class _BodyState extends State<_Body> {
               builder: (context, ai, _) {
                 if (ai.insights.isEmpty) return const SizedBox.shrink();
                 return Container(
-                  color: kUpdatesColor.withOpacity(0.07),
+                  color: kUpdatesColor.withValues(alpha: 0.07),
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                   child: Row(children: [
                     const Icon(Icons.auto_awesome, size: 14, color: kUpdatesColor),
@@ -155,9 +155,9 @@ class _BodyState extends State<_Body> {
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
-                        color: kUpdatesColor.withOpacity(0.06),
+                        color: kUpdatesColor.withValues(alpha: 0.06),
                         borderRadius: BorderRadius.circular(14),
-                        border: Border.all(color: kUpdatesColor.withOpacity(0.2)),
+                        border: Border.all(color: kUpdatesColor.withValues(alpha: 0.2)),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -209,9 +209,9 @@ class _BodyState extends State<_Body> {
                           width: 90, height: 90,
                           margin: const EdgeInsets.only(right: 8),
                           decoration: BoxDecoration(
-                            color: kUpdatesColor.withOpacity(0.06),
+                            color: kUpdatesColor.withValues(alpha: 0.06),
                             borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: kUpdatesColor.withOpacity(0.2), style: BorderStyle.solid),
+                            border: Border.all(color: kUpdatesColor.withValues(alpha: 0.2), style: BorderStyle.solid),
                           ),
                           child: const Icon(Icons.add, color: kUpdatesColor),
                         ),
@@ -221,12 +221,12 @@ class _BodyState extends State<_Body> {
                       width: 90, height: 90,
                       margin: const EdgeInsets.only(right: 8),
                       decoration: BoxDecoration(
-                        color: kUpdatesColor.withOpacity(0.08),
+                        color: kUpdatesColor.withValues(alpha: 0.08),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Stack(
                         children: [
-                          Center(child: Icon(_contentTypeIcon(_contentType), size: 24, color: kUpdatesColor.withOpacity(0.3))),
+                          Center(child: Icon(_contentTypeIcon(_contentType), size: 24, color: kUpdatesColor.withValues(alpha: 0.3))),
                           Positioned(
                             top: 4, right: 4,
                             child: GestureDetector(
@@ -254,7 +254,7 @@ class _BodyState extends State<_Body> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: kUpdatesColor.withOpacity(0.2)),
+                    border: Border.all(color: kUpdatesColor.withValues(alpha: 0.2)),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -488,7 +488,7 @@ class _BodyState extends State<_Body> {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
-                  boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 8)],
+                  boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8)],
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -519,11 +519,11 @@ class _BodyState extends State<_Body> {
                       Container(
                         height: 150,
                         decoration: BoxDecoration(
-                          color: kUpdatesColor.withOpacity(0.06),
+                          color: kUpdatesColor.withValues(alpha: 0.06),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Center(
-                          child: Text('${_mediaCount} media attachment(s)', style: TextStyle(color: kUpdatesColor.withOpacity(0.5))),
+                          child: Text('${_mediaCount} media attachment(s)', style: TextStyle(color: kUpdatesColor.withValues(alpha: 0.5))),
                         ),
                       ),
                     ],
@@ -532,9 +532,9 @@ class _BodyState extends State<_Body> {
                       Container(
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: kUpdatesColor.withOpacity(0.04),
+                          color: kUpdatesColor.withValues(alpha: 0.04),
                           borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: kUpdatesColor.withOpacity(0.15)),
+                          border: Border.all(color: kUpdatesColor.withValues(alpha: 0.15)),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -591,7 +591,7 @@ class _BodyState extends State<_Body> {
   String _formatDate(DateTime d) => '${d.day}/${d.month} ${d.hour}:${d.minute.toString().padLeft(2, '0')}';
 }
 
-// ─── Toolbar Button ─────────────────────────────────────────────────────────
+// â”€â”€â”€ Toolbar Button â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _ToolbarButton extends StatelessWidget {
   final IconData icon;

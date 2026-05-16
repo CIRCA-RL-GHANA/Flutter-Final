@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'app_colors.dart';
 
@@ -223,7 +223,7 @@ class AppTheme {
       ),
       disabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),
-        borderSide: BorderSide(color: AppColors.inputBorder.withOpacity(0.5)),
+        borderSide: BorderSide(color: AppColors.inputBorder.withValues(alpha: 0.5)),
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),

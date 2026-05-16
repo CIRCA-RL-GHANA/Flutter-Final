@@ -96,7 +96,7 @@ class _CommunityMembersScreenState extends State<CommunityMembersScreen> {
                 Container(
                   margin: const EdgeInsets.fromLTRB(16, 10, 16, 0),
                   padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(color: kCommunityColor.withOpacity(0.07), borderRadius: BorderRadius.circular(10), border: Border.all(color: kCommunityColor.withOpacity(0.2))),
+                  decoration: BoxDecoration(color: kCommunityColor.withValues(alpha: 0.07), borderRadius: BorderRadius.circular(10), border: Border.all(color: kCommunityColor.withValues(alpha: 0.2))),
                   child: Row(children: [
                     const Icon(Icons.auto_awesome, color: kCommunityColor, size: 14),
                     const SizedBox(width: 8),
@@ -191,7 +191,7 @@ class _CommunityMembersScreenState extends State<CommunityMembersScreen> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: ListTile(
         leading: CircleAvatar(
-          backgroundColor: _color.withOpacity(0.15),
+          backgroundColor: _color.withValues(alpha: 0.15),
           child: Text(name.isNotEmpty ? name[0].toUpperCase() : '?', style: TextStyle(color: _color, fontWeight: FontWeight.bold)),
         ),
         title: Text(name, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14)),
@@ -201,7 +201,7 @@ class _CommunityMembersScreenState extends State<CommunityMembersScreen> {
           children: [
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-              decoration: BoxDecoration(color: roleColor.withOpacity(0.12), borderRadius: BorderRadius.circular(20)),
+              decoration: BoxDecoration(color: roleColor.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(20)),
               child: Text(role.toUpperCase(), style: TextStyle(fontSize: 9, fontWeight: FontWeight.bold, color: roleColor)),
             ),
             if (canModerate && !isOwner) ...[

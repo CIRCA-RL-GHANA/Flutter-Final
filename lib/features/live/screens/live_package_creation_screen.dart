@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// LIVE MODULE — Screen 5: Package Creation & Bundling
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// LIVE MODULE â€” Screen 5: Package Creation & Bundling
 /// Multi-step wizard: Package config, bundle assistant, route preview,
 /// security/verification settings, confirmation
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -70,7 +70,7 @@ class _LivePackageCreationScreenState extends State<LivePackageCreationScreen> {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kLiveColor.withOpacity(0.07),
+                    color: kLiveColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -135,7 +135,7 @@ class _LivePackageCreationScreenState extends State<LivePackageCreationScreen> {
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
             decoration: BoxDecoration(
               color: Colors.white,
-              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 8, offset: const Offset(0, -2))],
+              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 8, offset: const Offset(0, -2))],
             ),
             child: Row(
               children: [
@@ -157,7 +157,7 @@ class _LivePackageCreationScreenState extends State<LivePackageCreationScreen> {
                         setState(() => _step++);
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: const Text('✅ Package created successfully!'), backgroundColor: const Color(0xFF10B981)),
+                          SnackBar(content: const Text('âœ… Package created successfully!'), backgroundColor: const Color(0xFF10B981)),
                         );
                         Navigator.pop(context);
                       }
@@ -169,7 +169,7 @@ class _LivePackageCreationScreenState extends State<LivePackageCreationScreen> {
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     ),
                     child: Text(
-                      _step == 0 ? 'CONTINUE TO SECURITY' : _step == 1 ? 'REVIEW PACKAGE' : '✅ CREATE PACKAGE',
+                      _step == 0 ? 'CONTINUE TO SECURITY' : _step == 1 ? 'REVIEW PACKAGE' : 'âœ… CREATE PACKAGE',
                       style: const TextStyle(fontWeight: FontWeight.w700),
                     ),
                   ),
@@ -183,7 +183,7 @@ class _LivePackageCreationScreenState extends State<LivePackageCreationScreen> {
   }
 }
 
-// ─── Step 1: Package Configuration ─────────────────────────────────────────────
+// â”€â”€â”€ Step 1: Package Configuration â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _PackageConfigStep extends StatelessWidget {
   final PackageType selectedType;
@@ -237,7 +237,7 @@ class _PackageConfigStep extends StatelessWidget {
 
         // Bundle Assistant
         LiveSectionCard(
-          title: '🧩 BUNDLE ASSISTANT',
+          title: 'ðŸ§© BUNDLE ASSISTANT',
           icon: Icons.auto_awesome,
           iconColor: const Color(0xFFF59E0B),
           child: Column(
@@ -276,8 +276,8 @@ class _PackageConfigStep extends StatelessWidget {
           iconColor: const Color(0xFFF97316),
           child: Column(
             children: [
-              _PackageToggle(label: '❄️ Cold chain required', value: coldChain, onChanged: onColdChainChanged),
-              _PackageToggle(label: '📦 Fragile — handle with care', value: fragile, onChanged: onFragileChanged),
+              _PackageToggle(label: 'â„ï¸ Cold chain required', value: coldChain, onChanged: onColdChainChanged),
+              _PackageToggle(label: 'ðŸ“¦ Fragile â€” handle with care', value: fragile, onChanged: onFragileChanged),
             ],
           ),
         ),
@@ -299,7 +299,7 @@ class _PackageConfigStep extends StatelessWidget {
                 children: [
                   Icon(Icons.route, size: 32, color: AppColors.textTertiary),
                   const SizedBox(height: 4),
-                  Text('${selectedOrderIds.length} stop${selectedOrderIds.length == 1 ? '' : 's'} • Est. 45 min', style: TextStyle(fontSize: 12, color: AppColors.textTertiary)),
+                  Text('${selectedOrderIds.length} stop${selectedOrderIds.length == 1 ? '' : 's'} â€¢ Est. 45 min', style: TextStyle(fontSize: 12, color: AppColors.textTertiary)),
                 ],
               ),
             ),
@@ -310,7 +310,7 @@ class _PackageConfigStep extends StatelessWidget {
   }
 }
 
-// ─── Step 2: Security & Verification ──────────────────────────────────────────
+// â”€â”€â”€ Step 2: Security & Verification â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _SecurityStep extends StatelessWidget {
   final bool requireSignature;
@@ -344,10 +344,10 @@ class _SecurityStep extends StatelessWidget {
           iconColor: const Color(0xFF10B981),
           child: Column(
             children: [
-              _PackageToggle(label: '✍️ Require digital signature', value: requireSignature, onChanged: onSignatureChanged),
-              _PackageToggle(label: '📸 Require proof-of-delivery photo', value: requirePhoto, onChanged: onPhotoChanged),
-              _PackageToggle(label: '🔢 PIN verification', value: pinVerification, onChanged: onPinChanged),
-              _PackageToggle(label: '🔐 Biometric verification', value: biometricVerification, onChanged: onBiometricChanged),
+              _PackageToggle(label: 'âœï¸ Require digital signature', value: requireSignature, onChanged: onSignatureChanged),
+              _PackageToggle(label: 'ðŸ“¸ Require proof-of-delivery photo', value: requirePhoto, onChanged: onPhotoChanged),
+              _PackageToggle(label: 'ðŸ”¢ PIN verification', value: pinVerification, onChanged: onPinChanged),
+              _PackageToggle(label: 'ðŸ” Biometric verification', value: biometricVerification, onChanged: onBiometricChanged),
             ],
           ),
         ),
@@ -396,7 +396,7 @@ class _SecurityStep extends StatelessWidget {
                   children: [
                     const Icon(Icons.security, size: 14, color: Color(0xFFF59E0B)),
                     const SizedBox(width: 6),
-                    Text('Standard coverage up to ₵5,000', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Color(0xFF92400E))),
+                    Text('Standard coverage up to â‚µ5,000', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Color(0xFF92400E))),
                   ],
                 ),
               ),
@@ -410,7 +410,7 @@ class _SecurityStep extends StatelessWidget {
   }
 }
 
-// ─── Step 3: Confirmation ────────────────────────────────────────────────────
+// â”€â”€â”€ Step 3: Confirmation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _ConfirmationStep extends StatelessWidget {
   final PackageType selectedType;
@@ -436,7 +436,7 @@ class _ConfirmationStep extends StatelessWidget {
             children: [
               Container(
                 padding: const EdgeInsets.all(14),
-                decoration: BoxDecoration(shape: BoxShape.circle, color: kLiveColor.withOpacity(0.1)),
+                decoration: BoxDecoration(shape: BoxShape.circle, color: kLiveColor.withValues(alpha: 0.1)),
                 child: const Icon(Icons.inventory_2, size: 36, color: kLiveColor),
               ),
               const SizedBox(height: 12),
@@ -455,7 +455,7 @@ class _ConfirmationStep extends StatelessWidget {
               _SummaryRow(label: 'Package type', value: selectedType.name.toUpperCase()),
               _SummaryRow(label: 'Orders bundled', value: '${bundledOrders.length}'),
               _SummaryRow(label: 'Total stops', value: '${bundledOrders.length + 1}'),
-              _SummaryRow(label: 'Total value', value: '₵${totalValue.toStringAsFixed(2)}'),
+              _SummaryRow(label: 'Total value', value: 'â‚µ${totalValue.toStringAsFixed(2)}'),
               const _SummaryRow(label: 'Est. distance', value: '8.3 km'),
               const _SummaryRow(label: 'Est. duration', value: '45 min'),
             ],
@@ -474,12 +474,12 @@ class _ConfirmationStep extends StatelessWidget {
                   children: [
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                      decoration: BoxDecoration(color: kLiveColor.withOpacity(0.1), borderRadius: BorderRadius.circular(4)),
+                      decoration: BoxDecoration(color: kLiveColor.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(4)),
                       child: Text('#${o.id}', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: kLiveColor)),
                     ),
                     const SizedBox(width: 8),
                     Expanded(child: Text(o.customerName, style: const TextStyle(fontSize: 13))),
-                    Text('₵${o.total.toStringAsFixed(0)}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
+                    Text('â‚µ${o.total.toStringAsFixed(0)}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
                   ],
                 ),
               )).toList(),
@@ -505,7 +505,7 @@ class _ConfirmationStep extends StatelessWidget {
   }
 }
 
-// ─── Shared Helpers ──────────────────────────────────────────────────────────
+// â”€â”€â”€ Shared Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _OrderBundleItem extends StatelessWidget {
   final LiveOrder order;
@@ -523,7 +523,7 @@ class _OrderBundleItem extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
           decoration: BoxDecoration(
-            color: selected ? kLiveColor.withOpacity(0.05) : Colors.white,
+            color: selected ? kLiveColor.withValues(alpha: 0.05) : Colors.white,
             borderRadius: BorderRadius.circular(10),
             border: Border.all(color: selected ? kLiveColor : const Color(0xFFE5E7EB)),
           ),
@@ -535,15 +535,15 @@ class _OrderBundleItem extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('#${order.id} — ${order.customerName}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-                    Text('${order.items.length} items • ₵${order.total.toStringAsFixed(0)}', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                    Text('#${order.id} â€” ${order.customerName}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
+                    Text('${order.items.length} items â€¢ â‚µ${order.total.toStringAsFixed(0)}', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                   ],
                 ),
               ),
               if (order.priority == OrderPriority.urgent)
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                  decoration: BoxDecoration(color: kLiveColor.withOpacity(0.1), borderRadius: BorderRadius.circular(4)),
+                  decoration: BoxDecoration(color: kLiveColor.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(4)),
                   child: const Text('URGENT', style: TextStyle(fontSize: 9, fontWeight: FontWeight.w700, color: kLiveColor)),
                 ),
             ],

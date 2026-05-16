@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// U6: ACCESSIBILITY CENTER Screen
 /// Text scaling, bold text, high contrast, reduce motion, color blindness,
 /// screen reader, touch targets, presets
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -45,7 +45,7 @@ class AccessibilityCenterScreen extends StatelessWidget {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kUtilityColor.withOpacity(0.07),
+                    color: kUtilityColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -63,7 +63,7 @@ class AccessibilityCenterScreen extends StatelessWidget {
                   );
                 },
               ),
-              // ─── Quick Presets ─────────────────────────────
+              // â”€â”€â”€ Quick Presets â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               const UtilitySectionTitle(
                 title: 'Quick Presets',
                 icon: Icons.auto_awesome,
@@ -90,7 +90,7 @@ class AccessibilityCenterScreen extends StatelessWidget {
 
               const SizedBox(height: 16),
 
-              // ─── Vision ───────────────────────────────────
+              // â”€â”€â”€ Vision â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               const UtilitySectionTitle(
                 title: 'Vision',
                 icon: Icons.visibility,
@@ -149,7 +149,7 @@ class AccessibilityCenterScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Motion ───────────────────────────────────
+              // â”€â”€â”€ Motion â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               const UtilitySectionTitle(
                 title: 'Motion',
                 icon: Icons.animation,
@@ -170,7 +170,7 @@ class AccessibilityCenterScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Interaction ──────────────────────────────
+              // â”€â”€â”€ Interaction â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               const UtilitySectionTitle(
                 title: 'Interaction',
                 icon: Icons.touch_app,
@@ -220,7 +220,7 @@ class AccessibilityCenterScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Audio ────────────────────────────────────
+              // â”€â”€â”€ Audio â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               const UtilitySectionTitle(
                 title: 'Audio & Screen Reader',
                 icon: Icons.record_voice_over,
@@ -306,7 +306,7 @@ class AccessibilityCenterScreen extends StatelessWidget {
   }
 }
 
-// ─── Preset Card ─────────────────────────────────────────────────────────────
+// â”€â”€â”€ Preset Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _PresetCard extends StatelessWidget {
   final AccessibilityPreset preset;
@@ -326,7 +326,7 @@ class _PresetCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(14),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.04),
+              color: Colors.black.withValues(alpha: 0.04),
               blurRadius: 10,
               offset: const Offset(0, 2),
             ),
@@ -354,7 +354,7 @@ class _PresetCard extends StatelessWidget {
   }
 }
 
-// ─── Accessibility Slider ────────────────────────────────────────────────────
+// â”€â”€â”€ Accessibility Slider â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _AccessibilitySlider extends StatelessWidget {
   final String label;
@@ -389,7 +389,7 @@ class _AccessibilitySlider extends StatelessWidget {
                 width: 36,
                 height: 36,
                 decoration: BoxDecoration(
-                  color: const Color(0xFF6366F1).withOpacity(0.1),
+                  color: const Color(0xFF6366F1).withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Icon(icon, size: 18, color: const Color(0xFF6366F1)),
@@ -406,7 +406,7 @@ class _AccessibilitySlider extends StatelessWidget {
             max: max,
             divisions: divisions,
             activeColor: const Color(0xFF6366F1),
-            inactiveColor: const Color(0xFF6366F1).withOpacity(0.15),
+            inactiveColor: const Color(0xFF6366F1).withValues(alpha: 0.15),
             onChanged: onChanged,
           ),
         ],

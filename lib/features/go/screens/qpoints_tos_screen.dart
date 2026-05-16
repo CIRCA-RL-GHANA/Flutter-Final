@@ -1,4 +1,4 @@
-/// Q Points Terms of Service Screen
+﻿/// Q Points Terms of Service Screen
 /// 
 /// Fully compliant with the Q Points ToS (v1.0.0, effective April 27, 2026).
 /// Legal requirements enforced by UI:
@@ -144,7 +144,7 @@ class _QPointsTosScreenState extends State<QPointsTosScreen> {
                 children: [
                   CircularProgressIndicator(color: kQpColor),
                   SizedBox(height: 16),
-                  Text('Loading Terms of Service…',
+                  Text('Loading Terms of Serviceâ€¦',
                       style: TextStyle(color: Colors.grey)),
                 ],
               ),
@@ -179,14 +179,14 @@ class _QPointsTosScreenState extends State<QPointsTosScreen> {
 
           return Column(
             children: [
-              // ── Version banner ───────────────────────────────────────────
+              // â”€â”€ Version banner â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               _VersionBanner(tos: tos),
 
-              // ── Scroll-to-read instruction ───────────────────────────────
+              // â”€â”€ Scroll-to-read instruction â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               if (!provider.hasScrolledToBottom)
                 const _ScrollPromptBanner(),
 
-              // ── ToS Body (scrollable) ────────────────────────────────────
+              // â”€â”€ ToS Body (scrollable) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               Expanded(
                 child: _TosBody(
                   tos: tos,
@@ -194,7 +194,7 @@ class _QPointsTosScreenState extends State<QPointsTosScreen> {
                 ),
               ),
 
-              // ── After scroll: Checkboxes + Buttons ───────────────────────
+              // â”€â”€ After scroll: Checkboxes + Buttons â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               _ConsentFooter(
                 provider: provider,
                 onAccept: () => _handleAccept(provider),
@@ -208,9 +208,9 @@ class _QPointsTosScreenState extends State<QPointsTosScreen> {
   }
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Sub-widgets
-// ─────────────────────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _VersionBanner extends StatelessWidget {
   final QPointsTosContent tos;
@@ -220,7 +220,7 @@ class _VersionBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      color: kQpColor.withOpacity(0.12),
+      color: kQpColor.withValues(alpha: 0.12),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       child: Row(
         children: [
@@ -228,7 +228,7 @@ class _VersionBanner extends StatelessWidget {
           const SizedBox(width: 8),
           Expanded(
             child: Text(
-              'Version ${tos.version} · Effective ${tos.effectiveDate} · '
+              'Version ${tos.version} Â· Effective ${tos.effectiveDate} Â· '
               'Governed by: Republic of Ghana law',
               style: const TextStyle(
                 fontSize: 12,
@@ -306,7 +306,7 @@ class _TosBody extends StatelessWidget {
               ),
               const SizedBox(height: 6),
               Text(
-                'genie help Ltd. · ${tos.effectiveDate}',
+                'genie help Ltd. Â· ${tos.effectiveDate}',
                 style: const TextStyle(fontSize: 12, color: Colors.grey),
               ),
               const Divider(height: 24),
@@ -363,7 +363,7 @@ class _TosBody extends StatelessWidget {
 
               Center(
                 child: Text(
-                  '↑ Scroll up to re-read any section · ↓ Continue below to accept',
+                  'â†‘ Scroll up to re-read any section Â· â†“ Continue below to accept',
                   style: TextStyle(
                     fontSize: 12,
                     color: Colors.grey.shade500,
@@ -397,13 +397,13 @@ class _TosBody extends StatelessWidget {
             ),
           ),
         ));
-      } else if (line.startsWith('•')) {
+      } else if (line.startsWith('â€¢')) {
         widgets.add(Padding(
           padding: const EdgeInsets.only(left: 12, top: 2),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('•  ', style: TextStyle(color: kQpColor, fontSize: 13)),
+              const Text('â€¢  ', style: TextStyle(color: kQpColor, fontSize: 13)),
               Expanded(
                 child: Text(
                   line.substring(1).trim(),
@@ -495,7 +495,7 @@ class _RiskHighlightBox extends StatelessWidget {
             detail:
                 'The Company has no legal obligation to repurchase Q Points for fiat or to guarantee a market. '
                 'The AI Participant maintains standing buy and sell orders at \$1.00 as an operational last-resort feature, '
-                'meaning it may fill your order if no peer counterparty is available — but this is not a legal guarantee of redemption. '
+                'meaning it may fill your order if no peer counterparty is available â€” but this is not a legal guarantee of redemption. '
                 'The AI Participant may be suspended at any time without notice.',
           ),
         ],
@@ -563,7 +563,7 @@ class _ConsentFooter extends StatelessWidget {
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.08),
+            color: Colors.black.withValues(alpha: 0.08),
             blurRadius: 8,
             offset: const Offset(0, -2),
           ),

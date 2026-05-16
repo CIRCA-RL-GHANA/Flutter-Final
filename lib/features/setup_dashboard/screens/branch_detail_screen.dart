@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SD2.1-DETAIL: BRANCH DETAIL — 4-Tab Deep View
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD2.1-DETAIL: BRANCH DETAIL â€” 4-Tab Deep View
 /// Tabs: Overview, Staff, Vehicles, Performance
 /// RBAC: Admin(fullAccess), Monitor(viewOnly)
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -53,7 +53,7 @@ class _BranchDetailScreenState extends State<BranchDetailScreen> {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kSetupColor.withOpacity(0.07),
+                    color: kSetupColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -114,7 +114,7 @@ class _BranchHeader extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 12, offset: const Offset(0, 4))],
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 12, offset: const Offset(0, 4))],
       ),
       child: Row(
         children: [
@@ -122,7 +122,7 @@ class _BranchHeader extends StatelessWidget {
             width: 56,
             height: 56,
             decoration: BoxDecoration(
-              color: _statusColor.withOpacity(0.1),
+              color: _statusColor.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(14),
             ),
             child: Icon(Icons.business, size: 28, color: _statusColor),
@@ -133,12 +133,12 @@ class _BranchHeader extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(branch.name, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
-                Text('${branch.type} · ${branch.area ?? 'N/A'}', style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                Text('${branch.type} Â· ${branch.area ?? 'N/A'}', style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                 const SizedBox(height: 4),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                   decoration: BoxDecoration(
-                    color: _statusColor.withOpacity(0.1),
+                    color: _statusColor.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Text(
@@ -182,7 +182,7 @@ class _OverviewTab extends StatelessWidget {
       children: [
         Row(
           children: [
-            Expanded(child: SetupStatCard(label: 'Revenue', value: '₵${(branch.monthlyRevenue / 1000).toStringAsFixed(0)}K', icon: Icons.attach_money, color: AppColors.success)),
+            Expanded(child: SetupStatCard(label: 'Revenue', value: 'â‚µ${(branch.monthlyRevenue / 1000).toStringAsFixed(0)}K', icon: Icons.attach_money, color: AppColors.success)),
             const SizedBox(width: 10),
             Expanded(child: SetupStatCard(label: 'Staff', value: '${branch.staffCount}', icon: Icons.people)),
             const SizedBox(width: 10),
@@ -206,7 +206,7 @@ class _OverviewTab extends StatelessWidget {
               SetupInfoRow(label: 'Type', value: branch.type),
               SetupInfoRow(label: 'Manager', value: branch.managerName ?? 'Unassigned'),
               SetupInfoRow(label: 'Area', value: branch.area ?? 'N/A'),
-              SetupInfoRow(label: 'Monthly Revenue', value: '₵${branch.monthlyRevenue.toStringAsFixed(0)}'),
+              SetupInfoRow(label: 'Monthly Revenue', value: 'â‚µ${branch.monthlyRevenue.toStringAsFixed(0)}'),
             ],
           ),
         ),
@@ -239,13 +239,13 @@ class _StaffTab extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(14),
-            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 10, offset: const Offset(0, 2))],
+            boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 10, offset: const Offset(0, 2))],
           ),
           child: Row(
             children: [
               CircleAvatar(
                 radius: 18,
-                backgroundColor: kSetupColor.withOpacity(0.1),
+                backgroundColor: kSetupColor.withValues(alpha: 0.1),
                 child: Text(s.name[0], style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: kSetupColor)),
               ),
               const SizedBox(width: 12),
@@ -348,9 +348,9 @@ class _PerformanceTab extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 12),
-              SetupInfoRow(label: 'Products', value: '₵${(branch.monthlyRevenue * 0.65).toStringAsFixed(0)}'),
-              SetupInfoRow(label: 'Services', value: '₵${(branch.monthlyRevenue * 0.25).toStringAsFixed(0)}'),
-              SetupInfoRow(label: 'Other', value: '₵${(branch.monthlyRevenue * 0.10).toStringAsFixed(0)}'),
+              SetupInfoRow(label: 'Products', value: 'â‚µ${(branch.monthlyRevenue * 0.65).toStringAsFixed(0)}'),
+              SetupInfoRow(label: 'Services', value: 'â‚µ${(branch.monthlyRevenue * 0.25).toStringAsFixed(0)}'),
+              SetupInfoRow(label: 'Other', value: 'â‚µ${(branch.monthlyRevenue * 0.10).toStringAsFixed(0)}'),
             ],
           ),
         ),

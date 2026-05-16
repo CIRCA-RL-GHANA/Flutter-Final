@@ -1,19 +1,19 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../theme/brand.dart';
 
 /// Visual hierarchy variants for [BrandButton].
 enum BrandButtonVariant {
-  /// Primary CTA — filled cyan gradient with glow.
+  /// Primary CTA â€” filled cyan gradient with glow.
   primary,
 
-  /// Secondary — transparent fill, cyan outline.
+  /// Secondary â€” transparent fill, cyan outline.
   secondary,
 
-  /// Tertiary — text-only, cyan label, no fill or border.
+  /// Tertiary â€” text-only, cyan label, no fill or border.
   ghost,
 
-  /// Destructive — danger-tinted fill.
+  /// Destructive â€” danger-tinted fill.
   danger,
 }
 
@@ -185,7 +185,7 @@ class _BrandButtonState extends State<BrandButton> {
           boxShadow: _enabled
               ? [
                   BoxShadow(
-                    color: Brand.cyan.withOpacity(_hovered ? 0.38 : 0.24),
+                    color: Brand.cyan.withValues(alpha: _hovered ? 0.38 : 0.24),
                     blurRadius: _hovered ? 28 : 18,
                     offset: const Offset(0, 6),
                   ),
@@ -195,11 +195,11 @@ class _BrandButtonState extends State<BrandButton> {
       case BrandButtonVariant.secondary:
         return BoxDecoration(
           color: _hovered
-              ? Brand.cyan.withOpacity(0.08)
+              ? Brand.cyan.withValues(alpha: 0.08)
               : Colors.transparent,
           border: Border.all(
             color: _enabled
-                ? Brand.cyan.withOpacity(_hovered ? 1.0 : 0.7)
+                ? Brand.cyan.withValues(alpha: _hovered ? 1.0 : 0.7)
                 : Brand.outline,
             width: 1.5,
           ),
@@ -207,7 +207,7 @@ class _BrandButtonState extends State<BrandButton> {
         );
       case BrandButtonVariant.ghost:
         return BoxDecoration(
-          color: _hovered ? Brand.cyan.withOpacity(0.06) : Colors.transparent,
+          color: _hovered ? Brand.cyan.withValues(alpha: 0.06) : Colors.transparent,
           borderRadius: radius,
         );
       case BrandButtonVariant.danger:
@@ -217,7 +217,7 @@ class _BrandButtonState extends State<BrandButton> {
           boxShadow: _enabled
               ? [
                   BoxShadow(
-                    color: Brand.danger.withOpacity(_hovered ? 0.36 : 0.22),
+                    color: Brand.danger.withValues(alpha: _hovered ? 0.36 : 0.22),
                     blurRadius: _hovered ? 24 : 16,
                     offset: const Offset(0, 6),
                   ),

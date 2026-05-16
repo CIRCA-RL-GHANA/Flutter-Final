@@ -1,4 +1,4 @@
-/// Enterprise › Dashboard Screen
+﻿/// Enterprise â€º Dashboard Screen
 /// Central hub for managing API keys, multi-channel integrations,
 /// fulfillment tasks, and concierge sessions.
 
@@ -111,7 +111,7 @@ class _EnterpriseDashboardScreenState extends State<EnterpriseDashboardScreen>
     );
   }
 
-  // ─── Overview Tab ─────────────────────────────────────────────────────────
+  // â”€â”€â”€ Overview Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   Widget _buildOverview() {
     if (_profile == null) {
       return const Center(
@@ -127,7 +127,7 @@ class _EnterpriseDashboardScreenState extends State<EnterpriseDashboardScreen>
       children: [
         _statCard('Status', status.toUpperCase(), icon: Icons.verified, iconColor: statusColor),
         const SizedBox(height: 12),
-        _statCard('Type', (_profile!['enterpriseType'] as String? ?? '—').replaceAll('_', ' ').toUpperCase(),
+        _statCard('Type', (_profile!['enterpriseType'] as String? ?? 'â€”').replaceAll('_', ' ').toUpperCase(),
             icon: Icons.business),
         const SizedBox(height: 12),
         _statCard('API Keys', '${_apiKeys.length} active', icon: Icons.vpn_key),
@@ -156,7 +156,7 @@ class _EnterpriseDashboardScreenState extends State<EnterpriseDashboardScreen>
     );
   }
 
-  // ─── API Keys Tab ─────────────────────────────────────────────────────────
+  // â”€â”€â”€ API Keys Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   Widget _buildApiKeys() {
     return ListView(
       padding: const EdgeInsets.all(16),
@@ -184,10 +184,10 @@ class _EnterpriseDashboardScreenState extends State<EnterpriseDashboardScreen>
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         child: ListTile(
           leading: const Icon(Icons.vpn_key, color: _kGold),
-          title: Text(key['label'] as String? ?? '—',
+          title: Text(key['label'] as String? ?? 'â€”',
               style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
           subtitle: Text(
-            'Prefix: ${key['keyPrefix'] ?? '—'} • ${(key['isActive'] == true) ? 'Active' : 'Inactive'}',
+            'Prefix: ${key['keyPrefix'] ?? 'â€”'} â€¢ ${(key['isActive'] == true) ? 'Active' : 'Inactive'}',
             style: const TextStyle(color: Colors.white54, fontSize: 12),
           ),
           trailing: IconButton(
@@ -273,7 +273,7 @@ class _EnterpriseDashboardScreenState extends State<EnterpriseDashboardScreen>
     );
   }
 
-  // ─── Channels Tab ─────────────────────────────────────────────────────────
+  // â”€â”€â”€ Channels Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   Widget _buildChannels() {
     return ListView(
       padding: const EdgeInsets.all(16),
@@ -301,10 +301,10 @@ class _EnterpriseDashboardScreenState extends State<EnterpriseDashboardScreen>
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         child: ListTile(
           leading: const Icon(Icons.sync_alt, color: _kCyan),
-          title: Text(ch['channelName'] as String? ?? '—',
+          title: Text(ch['channelName'] as String? ?? 'â€”',
               style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
           subtitle: Text(
-            '${(ch['channelType'] as String? ?? '').toUpperCase()} • ${ch['syncStatus'] ?? 'idle'}',
+            '${(ch['channelType'] as String? ?? '').toUpperCase()} â€¢ ${ch['syncStatus'] ?? 'idle'}',
             style: const TextStyle(color: Colors.white54, fontSize: 12),
           ),
           trailing: IconButton(
@@ -379,7 +379,7 @@ class _EnterpriseDashboardScreenState extends State<EnterpriseDashboardScreen>
     );
   }
 
-  // ─── Fulfillment Tab ──────────────────────────────────────────────────────
+  // â”€â”€â”€ Fulfillment Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   Widget _buildFulfillment() {
     return ListView(
       padding: const EdgeInsets.all(16),
@@ -408,17 +408,17 @@ class _EnterpriseDashboardScreenState extends State<EnterpriseDashboardScreen>
       child: ListTile(
         leading: const Icon(Icons.local_shipping, color: _kGold),
         title: Text(
-          'Order: ${task['orderId'] ?? '—'}',
+          'Order: ${task['orderId'] ?? 'â€”'}',
           style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         subtitle: Text(
-          '${(task['provider'] as String? ?? '').replaceAll('_', ' ')} • ${task['trackingId'] ?? 'No tracking'}',
+          '${(task['provider'] as String? ?? '').replaceAll('_', ' ')} â€¢ ${task['trackingId'] ?? 'No tracking'}',
           style: const TextStyle(color: Colors.white54, fontSize: 12),
         ),
         trailing: Chip(
           label: Text(status.replaceAll('_', ' ').toUpperCase(),
               style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
-          backgroundColor: statusColor.withOpacity(0.15),
+          backgroundColor: statusColor.withValues(alpha: 0.15),
           side: BorderSide(color: statusColor),
           labelStyle: TextStyle(color: statusColor),
         ),

@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SD1.4-DETAIL: DISCOUNT TIER DETAIL — 4-Tab Deep View
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD1.4-DETAIL: DISCOUNT TIER DETAIL â€” 4-Tab Deep View
 /// Tabs: Overview, Eligible Products, Performance, Settings
 /// RBAC: Admin(full), BM(branch), SO(full), BSO(branch), Monitor(viewOnly)
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -51,7 +51,7 @@ class _DiscountDetailScreenState extends State<DiscountDetailScreen> {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kSetupColor.withOpacity(0.07),
+                    color: kSetupColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -94,7 +94,7 @@ class _DiscountDetailScreenState extends State<DiscountDetailScreen> {
   }
 }
 
-// ─── Header ──────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _DiscountHeader extends StatelessWidget {
   final DiscountTier discount;
@@ -108,12 +108,12 @@ class _DiscountHeader extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            kSetupColor.withOpacity(0.08),
-            kSetupColor.withOpacity(0.02),
+            kSetupColor.withValues(alpha: 0.08),
+            kSetupColor.withValues(alpha: 0.02),
           ],
         ),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: kSetupColor.withOpacity(0.15)),
+        border: Border.all(color: kSetupColor.withValues(alpha: 0.15)),
       ),
       child: Row(
         children: [
@@ -121,7 +121,7 @@ class _DiscountHeader extends StatelessWidget {
             width: 48,
             height: 48,
             decoration: BoxDecoration(
-              color: kSetupColor.withOpacity(0.15),
+              color: kSetupColor.withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(14),
             ),
             child: const Icon(Icons.local_offer, color: kSetupColor, size: 24),
@@ -147,7 +147,7 @@ class _DiscountHeader extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '${discount.valueDisplay} · ${discount.productScope} · ${discount.customerCount} customers',
+                  '${discount.valueDisplay} Â· ${discount.productScope} Â· ${discount.customerCount} customers',
                   style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
                 ),
                 if (discount.code != null) ...[
@@ -157,7 +157,7 @@ class _DiscountHeader extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w600,
-                      color: kSetupColor.withOpacity(0.8),
+                      color: kSetupColor.withValues(alpha: 0.8),
                     ),
                   ),
                 ],
@@ -203,7 +203,7 @@ class _StatusChip extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Text(
@@ -214,7 +214,7 @@ class _StatusChip extends StatelessWidget {
   }
 }
 
-// ─── Overview Tab ────────────────────────────────────────────────────────────
+// â”€â”€â”€ Overview Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _OverviewTab extends StatelessWidget {
   final DiscountTier discount;
@@ -239,7 +239,7 @@ class _OverviewTab extends StatelessWidget {
             Expanded(
               child: KPIBadge(
                 label: 'Revenue Impact',
-                value: '+₵${discount.revenueImpact.toStringAsFixed(0)}',
+                value: '+â‚µ${discount.revenueImpact.toStringAsFixed(0)}',
                 icon: Icons.trending_up,
                 color: AppColors.success,
               ),
@@ -269,12 +269,12 @@ class _OverviewTab extends StatelessWidget {
               if (discount.minimumPurchase != null)
                 SetupInfoRow(
                   label: 'Min Purchase',
-                  value: '₵${discount.minimumPurchase!.toStringAsFixed(0)}',
+                  value: 'â‚µ${discount.minimumPurchase!.toStringAsFixed(0)}',
                 ),
               if (discount.maximumDiscount != null)
                 SetupInfoRow(
                   label: 'Max Discount',
-                  value: '₵${discount.maximumDiscount!.toStringAsFixed(0)}',
+                  value: 'â‚µ${discount.maximumDiscount!.toStringAsFixed(0)}',
                 ),
             ],
           ),
@@ -326,7 +326,7 @@ class _OverviewTab extends StatelessWidget {
   }
 }
 
-// ─── Eligible Products Tab ───────────────────────────────────────────────────
+// â”€â”€â”€ Eligible Products Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _EligibleProductsTab extends StatelessWidget {
   final DiscountTier discount;
@@ -343,7 +343,7 @@ class _EligibleProductsTab extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                color: kSetupColor.withOpacity(0.06),
+                color: kSetupColor.withValues(alpha: 0.06),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Row(
@@ -374,7 +374,7 @@ class _EligibleProductsTab extends StatelessWidget {
                         width: 40,
                         height: 40,
                         decoration: BoxDecoration(
-                          color: kSetupColor.withOpacity(0.1),
+                          color: kSetupColor.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: const Icon(Icons.inventory_2, size: 20, color: kSetupColor),
@@ -393,7 +393,7 @@ class _EligibleProductsTab extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              '₵${p.currentPrice.toStringAsFixed(0)} · Stock: ${p.stock}',
+                              'â‚µ${p.currentPrice.toStringAsFixed(0)} Â· Stock: ${p.stock}',
                               style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
                             ),
                           ],
@@ -418,7 +418,7 @@ class _EligibleProductsTab extends StatelessWidget {
   }
 }
 
-// ─── Performance Tab ─────────────────────────────────────────────────────────
+// â”€â”€â”€ Performance Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _PerformanceTab extends StatelessWidget {
   final DiscountTier discount;
@@ -445,7 +445,7 @@ class _PerformanceTab extends StatelessWidget {
             Expanded(
               child: KPIBadge(
                 label: 'Revenue +',
-                value: '₵${discount.revenueImpact.toStringAsFixed(0)}',
+                value: 'â‚µ${discount.revenueImpact.toStringAsFixed(0)}',
                 icon: Icons.monetization_on,
                 color: AppColors.success,
                 changePercent: 12,
@@ -480,8 +480,8 @@ class _PerformanceTab extends StatelessWidget {
               const SetupSectionTitle(title: 'Customer Insights', icon: Icons.people),
               const SetupInfoRow(label: 'New Customers', value: '89 (36%)'),
               const SetupInfoRow(label: 'Repeat Customers', value: '156 (64%)'),
-              const SetupInfoRow(label: 'Avg Savings/Customer', value: '₵51'),
-              const SetupInfoRow(label: 'Avg Order Value', value: '₵508 (+₵45)'),
+              const SetupInfoRow(label: 'Avg Savings/Customer', value: 'â‚µ51'),
+              const SetupInfoRow(label: 'Avg Order Value', value: 'â‚µ508 (+â‚µ45)'),
             ],
           ),
         ),
@@ -499,7 +499,7 @@ class _PerformanceTab extends StatelessWidget {
                   child: _PerformanceBar(
                     label: e.value,
                     value: vals[e.key],
-                    display: '₵${(vals[e.key] * 2500).toStringAsFixed(0)}',
+                    display: 'â‚µ${(vals[e.key] * 2500).toStringAsFixed(0)}',
                   ),
                 );
               }),
@@ -512,7 +512,7 @@ class _PerformanceTab extends StatelessWidget {
   }
 }
 
-// ─── Settings Tab ────────────────────────────────────────────────────────────
+// â”€â”€â”€ Settings Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _SettingsTab extends StatelessWidget {
   final DiscountTier discount;
@@ -566,7 +566,7 @@ class _SettingsTab extends StatelessWidget {
           cardId: 'discounts',
           requireDelete: true,
           child: SetupSectionCard(
-            borderColor: AppColors.error.withOpacity(0.3),
+            borderColor: AppColors.error.withValues(alpha: 0.3),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -599,7 +599,7 @@ class _SettingsTab extends StatelessWidget {
   }
 }
 
-// ─── Helper Widgets ──────────────────────────────────────────────────────────
+// â”€â”€â”€ Helper Widgets â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _PerformanceBar extends StatelessWidget {
   final String label;
@@ -628,7 +628,7 @@ class _PerformanceBar extends StatelessWidget {
             borderRadius: BorderRadius.circular(3),
             child: LinearProgressIndicator(
               value: value.clamp(0.0, 1.0),
-              backgroundColor: kSetupColor.withOpacity(0.1),
+              backgroundColor: kSetupColor.withValues(alpha: 0.1),
               valueColor: AlwaysStoppedAnimation<Color>(
                 value > 0.7 ? AppColors.success : kSetupColor,
               ),

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:thepg/core/providers/service_providers.dart';
 import '../widgets/market_widgets.dart';
@@ -60,7 +60,7 @@ class _MarketCommerceScreenState extends ConsumerState<MarketCommerceScreen>
             builder: (context, ai, _) {
               if (ai.insights.isEmpty) return const SizedBox.shrink();
               return Container(
-                color: kMarketColor.withOpacity(0.07),
+                color: kMarketColor.withValues(alpha: 0.07),
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                 child: Row(children: [
                   const Icon(Icons.auto_awesome, size: 14, color: kMarketColor),

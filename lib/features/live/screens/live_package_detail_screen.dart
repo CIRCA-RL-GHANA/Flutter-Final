@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// LIVE MODULE — Screen 10: Package Detail & Management
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// LIVE MODULE â€” Screen 10: Package Detail & Management
 /// Full package detail: multi-stop progress, driver info,
 /// security settings, timeline, live tracking
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -42,7 +42,7 @@ class LivePackageDetailScreen extends StatelessWidget {
                     margin: const EdgeInsets.only(bottom: 12),
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     decoration: BoxDecoration(
-                      color: kLiveColor.withOpacity(0.07),
+                      color: kLiveColor.withValues(alpha: 0.07),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Row(
@@ -72,7 +72,7 @@ class LivePackageDetailScreen extends StatelessWidget {
                   children: [
                     Container(
                       padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white.withOpacity(0.2)),
+                      decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white.withValues(alpha: 0.2)),
                       child: const Icon(Icons.inventory_2, color: Colors.white, size: 24),
                     ),
                     const SizedBox(width: 12),
@@ -81,14 +81,14 @@ class LivePackageDetailScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(pkg.status.name.toUpperCase(), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: Colors.white)),
-                          Text('${pkg.type.name} • ${pkg.stops.length} stops', style: TextStyle(fontSize: 12, color: Colors.white.withOpacity(0.8))),
+                          Text('${pkg.type.name} â€¢ ${pkg.stops.length} stops', style: TextStyle(fontSize: 12, color: Colors.white.withValues(alpha: 0.8))),
                         ],
                       ),
                     ),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                      decoration: BoxDecoration(color: Colors.white.withOpacity(0.2), borderRadius: BorderRadius.circular(8)),
-                      child: Text('₵${pkg.driverEarnings.toStringAsFixed(0)}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: Colors.white)),
+                      decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.2), borderRadius: BorderRadius.circular(8)),
+                      child: Text('â‚µ${pkg.driverEarnings.toStringAsFixed(0)}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: Colors.white)),
                     ),
                   ],
                 ),
@@ -106,7 +106,7 @@ class LivePackageDetailScreen extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 20,
-                        backgroundColor: kLiveColor.withOpacity(0.1),
+                        backgroundColor: kLiveColor.withValues(alpha: 0.1),
                         child: Text(driver.name.substring(0, 1), style: const TextStyle(fontWeight: FontWeight.w700, color: kLiveColor)),
                       ),
                       const SizedBox(width: 12),
@@ -232,7 +232,7 @@ class LivePackageDetailScreen extends StatelessWidget {
                         children: [
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                            decoration: BoxDecoration(color: kLiveColor.withOpacity(0.1), borderRadius: BorderRadius.circular(4)),
+                            decoration: BoxDecoration(color: kLiveColor.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(4)),
                             child: Text('#${entry.value}', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: kLiveColor)),
                           ),
                           const SizedBox(width: 8),
@@ -272,7 +272,7 @@ class LivePackageDetailScreen extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
             decoration: BoxDecoration(
               color: Colors.white,
-              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 8, offset: const Offset(0, -2))],
+              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 8, offset: const Offset(0, -2))],
             ),
             child: Row(
               children: [

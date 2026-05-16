@@ -1,9 +1,9 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SD0: SETUP DASHBOARD HUB — Master Entry Point
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD0: SETUP DASHBOARD HUB â€” Master Entry Point
 /// 6-row adaptive card matrix with role-based filtering
 /// Rows: Operations, Finance & Staff, Logistics, Engagement,
 ///        Branch Identity, Personal & History
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -53,7 +53,7 @@ class _SetupDashboardScreenState extends State<SetupDashboardScreen> {
             },
             child: CustomScrollView(
               slivers: [
-                // ─── Header Banner ────────────────────────────
+                // â”€â”€â”€ Header Banner â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -61,8 +61,8 @@ class _SetupDashboardScreenState extends State<SetupDashboardScreen> {
                   ),
                 ),
 
-                // ─── Search Bar ───────────────────────────────
-              // ─── AI Insights ─────────────────────────────────────────
+                // â”€â”€â”€ Search Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // â”€â”€â”€ AI Insights â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Consumer<AIInsightsNotifier>(
                   builder: (context, ai, _) {
@@ -71,7 +71,7 @@ class _SetupDashboardScreenState extends State<SetupDashboardScreen> {
                       padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: kSetupColor.withOpacity(0.07),
+                          color: kSetupColor.withValues(alpha: 0.07),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -102,7 +102,7 @@ class _SetupDashboardScreenState extends State<SetupDashboardScreen> {
                   ),
                 ),
 
-                // ─── Card Rows ────────────────────────────────
+                // â”€â”€â”€ Card Rows â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                 ...rows.entries.map((entry) {
                   final rowCards = entry.value;
                   if (rowCards.isEmpty) return const SliverToBoxAdapter(child: SizedBox.shrink());
@@ -154,7 +154,7 @@ class _SetupDashboardScreenState extends State<SetupDashboardScreen> {
                   );
                 }),
 
-                // ─── Empty State ──────────────────────────
+                // â”€â”€â”€ Empty State â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                 if (filteredCards.isEmpty && _searchQuery.isNotEmpty)
                   SliverToBoxAdapter(
                     child: Padding(
@@ -167,12 +167,12 @@ class _SetupDashboardScreenState extends State<SetupDashboardScreen> {
                     ),
                   ),
 
-                // ─── SOS Button (Owner/Admin/BranchManager only) ──
+                // â”€â”€â”€ SOS Button (Owner/Admin/BranchManager only) â”€â”€
                 SliverToBoxAdapter(
                   child: SetupSOSButton(onPressed: () {}),
                 ),
 
-                // ─── Bottom Spacer ────────────────────────────
+                // â”€â”€â”€ Bottom Spacer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                 const SliverToBoxAdapter(child: SizedBox(height: 100)),
               ],
             ),
@@ -232,7 +232,7 @@ class _SetupDashboardScreenState extends State<SetupDashboardScreen> {
   }
 }
 
-// ─── Header Banner ───────────────────────────────────────────────────────────
+// â”€â”€â”€ Header Banner â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _HeaderBanner extends StatelessWidget {
   final DashboardHeaderInfo header;
@@ -249,12 +249,12 @@ class _HeaderBanner extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            kSetupColor.withOpacity(0.08),
-            kSetupColor.withOpacity(0.02),
+            kSetupColor.withValues(alpha: 0.08),
+            kSetupColor.withValues(alpha: 0.02),
           ],
         ),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: kSetupColor.withOpacity(0.15)),
+        border: Border.all(color: kSetupColor.withValues(alpha: 0.15)),
       ),
       child: Row(
         children: [
@@ -263,7 +263,7 @@ class _HeaderBanner extends StatelessWidget {
             width: 48,
             height: 48,
             decoration: BoxDecoration(
-              color: kSetupColor.withOpacity(0.15),
+              color: kSetupColor.withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(14),
             ),
             child: Center(
@@ -293,7 +293,7 @@ class _HeaderBanner extends StatelessWidget {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  '${header.roleName} · ${header.branchName}',
+                  '${header.roleName} Â· ${header.branchName}',
                   style: const TextStyle(
                     fontSize: 12,
                     color: AppColors.textSecondary,
@@ -310,7 +310,7 @@ class _HeaderBanner extends StatelessWidget {
   }
 }
 
-// ─── Sync Badge ──────────────────────────────────────────────────────────────
+// â”€â”€â”€ Sync Badge â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _SyncBadge extends StatelessWidget {
   final SyncState state;
@@ -343,9 +343,9 @@ class _SyncBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: color.withOpacity(0.2)),
+        border: Border.all(color: color.withValues(alpha: 0.2)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -366,7 +366,7 @@ class _SyncBadge extends StatelessWidget {
   }
 }
 
-// ─── Search Bar ──────────────────────────────────────────────────────────────
+// â”€â”€â”€ Search Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _SearchBar extends StatelessWidget {
   final ValueChanged<String> onChanged;

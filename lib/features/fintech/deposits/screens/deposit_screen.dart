@@ -1,4 +1,4 @@
-/// Fintech › Deposits — Term Deposit Screen
+﻿/// Fintech â€º Deposits â€” Term Deposit Screen
 /// User picks a bank, amount, and term length to lock Q-Points.
 
 import 'package:flutter/material.dart';
@@ -85,7 +85,7 @@ class _DepositScreenState extends State<DepositScreen> {
             builder: (context, ai, _) {
               if (ai.insights.isEmpty) return const SizedBox.shrink();
               return Container(
-                color: _kIndigo.withOpacity(0.06),
+                color: _kIndigo.withValues(alpha: 0.06),
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                 child: Row(children: [
                   const Icon(Icons.auto_awesome, size: 14, color: _kIndigo),
@@ -210,19 +210,19 @@ class _DepositTile extends StatelessWidget {
       child: Row(children: [
         Container(
           width: 44, height: 44,
-          decoration: BoxDecoration(color: _kIndigo.withOpacity(0.1), shape: BoxShape.circle),
+          decoration: BoxDecoration(color: _kIndigo.withValues(alpha: 0.1), shape: BoxShape.circle),
           child: const Icon(Icons.lock, color: _kIndigo, size: 20),
         ),
         const SizedBox(width: 12),
         Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text('$locked QP locked', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
-          Text('$interest% p.a. · matures ${maturity.substring(0, maturity.length > 10 ? 10 : maturity.length)}',
+          Text('$interest% p.a. Â· matures ${maturity.substring(0, maturity.length > 10 ? 10 : maturity.length)}',
             style: const TextStyle(color: Colors.grey, fontSize: 12)),
         ])),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
           decoration: BoxDecoration(
-            color: (status == 'active' ? Colors.green : Colors.grey).withOpacity(0.1),
+            color: (status == 'active' ? Colors.green : Colors.grey).withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Text(status, style: TextStyle(

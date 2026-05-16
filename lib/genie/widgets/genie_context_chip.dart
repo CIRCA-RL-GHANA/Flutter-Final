@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// GenieContextChip – Compact Role/Context Display in the Header
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// GenieContextChip â€“ Compact Role/Context Display in the Header
 /// Shows the active context badge with a switch button. Reuses the existing
 /// ContextProvider so it stays in sync with the rest of the app.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -34,7 +34,7 @@ class GenieContextChip extends StatelessWidget {
                 label: 'Profile avatar for ${ctx.name}',
                 child: CircleAvatar(
                   radius: 18,
-                  backgroundColor: AppColors.primaryLight.withOpacity(0.15),
+                  backgroundColor: AppColors.primaryLight.withValues(alpha: 0.15),
                   backgroundImage: ctx.avatarUrl != null
                       ? NetworkImage(ctx.avatarUrl!)
                       : null,
@@ -154,7 +154,7 @@ class _RolePill extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.12),
+        color: color.withValues(alpha: 0.12),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Text(

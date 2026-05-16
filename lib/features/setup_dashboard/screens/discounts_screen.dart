@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SD1.4: DISCOUNTS — Tier Management
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD1.4: DISCOUNTS â€” Tier Management
 /// Active discount tiers, create/edit, revenue impact tracking
 /// RBAC: Admin(full), BM(branch), SO(full), BSO(branch), Monitor/BrMon(view)
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -42,7 +42,7 @@ class DiscountsScreen extends StatelessWidget {
             ),
           body: CustomScrollView(
             slivers: [
-              // ─── Summary KPIs ─────────────────────────────
+              // â”€â”€â”€ Summary KPIs â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -68,7 +68,7 @@ class DiscountsScreen extends StatelessWidget {
                       Expanded(
                         child: KPIBadge(
                           label: 'Revenue Impact',
-                          value: '+₵${discounts.fold<double>(0, (s, d) => s + d.revenueImpact).toStringAsFixed(0)}',
+                          value: '+â‚µ${discounts.fold<double>(0, (s, d) => s + d.revenueImpact).toStringAsFixed(0)}',
                           icon: Icons.trending_up,
                           color: AppColors.success,
                         ),
@@ -78,7 +78,7 @@ class DiscountsScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Status Filter Chips ──────────────────────
+              // â”€â”€â”€ Status Filter Chips â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -113,7 +113,7 @@ class DiscountsScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Discount List ────────────────────────────
+              // â”€â”€â”€ Discount List â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
@@ -124,7 +124,7 @@ class DiscountsScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── AI Insights ─────────────────────────────────────────
+              // â”€â”€â”€ AI Insights â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Consumer<AIInsightsNotifier>(
                   builder: (context, ai, _) {
@@ -133,7 +133,7 @@ class DiscountsScreen extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: kSetupColor.withOpacity(0.07),
+                          color: kSetupColor.withValues(alpha: 0.07),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -173,7 +173,7 @@ class DiscountsScreen extends StatelessWidget {
   }
 }
 
-// ─── Discount Card ───────────────────────────────────────────────────────────
+// â”€â”€â”€ Discount Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _DiscountCard extends StatelessWidget {
   final DiscountTier discount;
@@ -194,7 +194,7 @@ class _DiscountCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(14),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -209,7 +209,7 @@ class _DiscountCard extends StatelessWidget {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: kSetupColor.withOpacity(0.1),
+                  color: kSetupColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: const Icon(Icons.local_offer, size: 22, color: kSetupColor),
@@ -249,14 +249,14 @@ class _DiscountCard extends StatelessWidget {
                 label: 'Value',
                 value: discount.type == DiscountType.percentage
                     ? '${discount.value.toStringAsFixed(0)}%'
-                    : '₵${discount.value.toStringAsFixed(0)}',
+                    : 'â‚µ${discount.value.toStringAsFixed(0)}',
               ),
               _DiscountStat(label: 'Customers', value: '${discount.customerCount}'),
               _DiscountStat(
                 label: 'Revenue',
                 value: discount.revenueImpact > 0
-                    ? '+₵${discount.revenueImpact.toStringAsFixed(0)}'
-                    : '—',
+                    ? '+â‚µ${discount.revenueImpact.toStringAsFixed(0)}'
+                    : 'â€”',
               ),
             ],
           ),
@@ -269,7 +269,7 @@ class _DiscountCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
-                'Min. purchase: ₵${discount.minimumPurchase!.toStringAsFixed(0)}',
+                'Min. purchase: â‚µ${discount.minimumPurchase!.toStringAsFixed(0)}',
                 style: const TextStyle(fontSize: 11, color: kSetupColor, fontWeight: FontWeight.w500),
               ),
             ),
@@ -307,7 +307,7 @@ class _DiscountCard extends StatelessWidget {
   }
 }
 
-// ─── Discount Stat ───────────────────────────────────────────────────────────
+// â”€â”€â”€ Discount Stat â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _DiscountStat extends StatelessWidget {
   final String label;
@@ -336,7 +336,7 @@ class _DiscountStat extends StatelessWidget {
   }
 }
 
-// ─── Status Filter Chip ──────────────────────────────────────────────────────
+// â”€â”€â”€ Status Filter Chip â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _StatusChip extends StatelessWidget {
   final String label;

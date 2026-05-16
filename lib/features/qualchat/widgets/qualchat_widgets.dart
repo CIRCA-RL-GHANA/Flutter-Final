@@ -1,13 +1,13 @@
-/// qualChat Module — Shared Widgets
+﻿/// qualChat Module â€” Shared Widgets
 /// Reusable UI components for all qualChat screens
 /// Module Color: Cyan 0xFF06B6D4
 
 import 'package:flutter/material.dart';
 import '../models/qualchat_models.dart';
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  MODULE COLORS
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 const Color kChatColor = Color(0xFF06B6D4);
 const Color kChatColorLight = Color(0xFFCFFAFE);
@@ -15,9 +15,9 @@ const Color kChatColorDark = Color(0xFF0E7490);
 const Color kChatAccent = Color(0xFFEC4899);
 const Color kChatSocial = Color(0xFFEC4899);
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  APP BAR
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class QualChatAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -76,9 +76,9 @@ class QualChatAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  PRESENCE DOT
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class PresenceDot extends StatelessWidget {
   final PresenceStatus status;
@@ -111,9 +111,9 @@ class PresenceDot extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  PRESENCE STAT CARD
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class PresenceStatCard extends StatelessWidget {
   final int count;
@@ -181,9 +181,9 @@ class PresenceStatCard extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  CONVERSATION CARD
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class ConversationCard extends StatelessWidget {
   final Conversation conversation;
@@ -206,7 +206,7 @@ class ConversationCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
-          color: c.unreadCount > 0 ? kChatColorLight.withOpacity(0.3) : Colors.white,
+          color: c.unreadCount > 0 ? kChatColorLight.withValues(alpha: 0.3) : Colors.white,
           border: const Border(
             bottom: BorderSide(color: Color(0xFFF3F4F6)),
           ),
@@ -218,7 +218,7 @@ class ConversationCard extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 24,
-                  backgroundColor: kChatColor.withOpacity(0.1),
+                  backgroundColor: kChatColor.withValues(alpha: 0.1),
                   child: Text(
                     c.title.isNotEmpty ? c.title[0] : '?',
                     style: const TextStyle(
@@ -351,9 +351,9 @@ class ConversationCard extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  HEY YA CARD
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class HeyYaCard extends StatelessWidget {
   final HeyYaRequest request;
@@ -385,7 +385,7 @@ class HeyYaCard extends StatelessWidget {
           border: Border.all(color: const Color(0xFFE5E7EB)),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.04),
+              color: Colors.black.withValues(alpha: 0.04),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -399,7 +399,7 @@ class HeyYaCard extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 28,
-                  backgroundColor: kChatSocial.withOpacity(0.1),
+                  backgroundColor: kChatSocial.withValues(alpha: 0.1),
                   child: Text(
                     r.person.name[0],
                     style: const TextStyle(
@@ -424,7 +424,7 @@ class HeyYaCard extends StatelessWidget {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        '🏙️ ${r.person.role} • ${r.person.distanceKm?.toStringAsFixed(0) ?? '?'}km away',
+                        'ðŸ™ï¸ ${r.person.role} â€¢ ${r.person.distanceKm?.toStringAsFixed(0) ?? '?'}km away',
                         style: const TextStyle(
                           fontSize: 12,
                           color: Color(0xFF6B7280),
@@ -437,11 +437,11 @@ class HeyYaCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: kChatSocial.withOpacity(0.1),
+                    color: kChatSocial.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(
-                    '💘 ${r.matchPercentage}%',
+                    'ðŸ’˜ ${r.matchPercentage}%',
                     style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w700,
@@ -458,7 +458,7 @@ class HeyYaCard extends StatelessWidget {
             if (r.message != null) ...[
               const SizedBox(height: 12),
               Text(
-                '💬 "${r.message}"',
+                'ðŸ’¬ "${r.message}"',
                 style: const TextStyle(
                   fontSize: 13,
                   color: Color(0xFF6B7280),
@@ -473,7 +473,7 @@ class HeyYaCard extends StatelessWidget {
                 _StatusBadge(status: r.status),
                 const SizedBox(width: 8),
                 Text(
-                  '⏰ ${r.isSentByMe ? "Sent" : "Received"} ${_timeAgo(r.sentAt)}',
+                  'â° ${r.isSentByMe ? "Sent" : "Received"} ${_timeAgo(r.sentAt)}',
                   style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF)),
                 ),
               ],
@@ -484,7 +484,7 @@ class HeyYaCard extends StatelessWidget {
               children: [
                 _ActionChip(label: 'View Journey', icon: Icons.timeline, onTap: onTimeline),
                 const SizedBox(width: 8),
-                _ActionChip(label: 'Plan Date 📅', icon: Icons.event_outlined, onTap: onFollowUp),
+                _ActionChip(label: 'Plan Date ðŸ“…', icon: Icons.event_outlined, onTap: onFollowUp),
                 const Spacer(),
                 IconButton(
                   icon: const Icon(Icons.more_horiz, color: Color(0xFF9CA3AF)),
@@ -513,23 +513,23 @@ class _IntentBadge extends StatelessWidget {
   const _IntentBadge({required this.intent});
 
   static const _icons = {
-    HeyYaIntent.coffee: ('☕', 'Coffee'),
-    HeyYaIntent.dinner: ('🍽️', 'Dinner'),
-    HeyYaIntent.walk: ('🚶', 'Walk'),
-    HeyYaIntent.movie: ('🎬', 'Movie Night'),
-    HeyYaIntent.videoCall: ('📹', 'Video Date'),
-    HeyYaIntent.any: ('💫', 'Open to Anything'),
+    HeyYaIntent.coffee: ('â˜•', 'Coffee'),
+    HeyYaIntent.dinner: ('ðŸ½ï¸', 'Dinner'),
+    HeyYaIntent.walk: ('ðŸš¶', 'Walk'),
+    HeyYaIntent.movie: ('ðŸŽ¬', 'Movie Night'),
+    HeyYaIntent.videoCall: ('ðŸ“¹', 'Video Date'),
+    HeyYaIntent.any: ('ðŸ’«', 'Open to Anything'),
   };
 
   @override
   Widget build(BuildContext context) {
-    final info = _icons[intent] ?? ('💫', 'Open to Anything');
+    final info = _icons[intent] ?? ('ðŸ’«', 'Open to Anything');
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: kChatSocial.withOpacity(0.06),
+        color: kChatSocial.withValues(alpha: 0.06),
         borderRadius: BorderRadius.circular(6),
-        border: Border.all(color: kChatSocial.withOpacity(0.2)),
+        border: Border.all(color: kChatSocial.withValues(alpha: 0.2)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -622,25 +622,25 @@ class _StatusBadge extends StatelessWidget {
     Color color;
     switch (status) {
       case HeyYaStatus.pending:
-        text = '🟡 Pending';
+        text = 'ðŸŸ¡ Pending';
         color = const Color(0xFFF59E0B);
       case HeyYaStatus.accepted:
-        text = '� Matched';
+        text = 'ï¿½ Matched';
         color = const Color(0xFF10B981);
       case HeyYaStatus.expired:
-        text = '🔴 Expired';
+        text = 'ðŸ”´ Expired';
         color = const Color(0xFFEF4444);
       case HeyYaStatus.rejected:
-        text = '❌ Passed';
+        text = 'âŒ Passed';
         color = const Color(0xFFEF4444);
       case HeyYaStatus.withdrawn:
-        text = '↩️ Withdrawn';
+        text = 'â†©ï¸ Withdrawn';
         color = const Color(0xFF6B7280);
     }
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Text(
@@ -684,9 +684,9 @@ class _ActionChip extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  SECTION CARD (titled container)
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class QualChatSectionCard extends StatelessWidget {
   final String title;
@@ -749,9 +749,9 @@ class QualChatSectionCard extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  EMPTY STATE
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class QualChatEmptyState extends StatelessWidget {
   final IconData icon;
@@ -777,7 +777,7 @@ class QualChatEmptyState extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, size: 64, color: kChatColor.withOpacity(0.3)),
+            Icon(icon, size: 64, color: kChatColor.withValues(alpha: 0.3)),
             const SizedBox(height: 16),
             Text(
               title,
@@ -816,9 +816,9 @@ class QualChatEmptyState extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  CHAT BUBBLE
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class ChatBubble extends StatelessWidget {
   final ChatMessage message;
@@ -866,7 +866,7 @@ class ChatBubble extends StatelessWidget {
                 padding: const EdgeInsets.all(10),
                 margin: const EdgeInsets.only(bottom: 6),
                 decoration: BoxDecoration(
-                  color: isMine ? Colors.white.withOpacity(0.2) : Colors.white,
+                  color: isMine ? Colors.white.withValues(alpha: 0.2) : Colors.white,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(
@@ -952,26 +952,26 @@ class ChatBubble extends StatelessWidget {
   String _reactionEmoji(MessageReaction r) {
     switch (r) {
       case MessageReaction.smile:
-        return '😊';
+        return 'ðŸ˜Š';
       case MessageReaction.heart:
-        return '❤️';
+        return 'â¤ï¸';
       case MessageReaction.thumbsUp:
-        return '👍';
+        return 'ðŸ‘';
       case MessageReaction.fire:
-        return '🔥';
+        return 'ðŸ”¥';
       case MessageReaction.surprised:
-        return '😮';
+        return 'ðŸ˜®';
       case MessageReaction.sad:
-        return '😢';
+        return 'ðŸ˜¢';
       case MessageReaction.celebration:
-        return '🎉';
+        return 'ðŸŽ‰';
     }
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  USER LIST ITEM
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class UserListItem extends StatelessWidget {
   final ChatUser user;
@@ -993,7 +993,7 @@ class UserListItem extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 22,
-            backgroundColor: kChatColor.withOpacity(0.1),
+            backgroundColor: kChatColor.withValues(alpha: 0.1),
             child: Text(
               user.name[0],
               style: const TextStyle(
@@ -1025,7 +1025,7 @@ class UserListItem extends StatelessWidget {
             style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
           ),
           if (user.statusMessage != null) ...[
-            const Text(' • ', style: TextStyle(fontSize: 12, color: Color(0xFF9CA3AF))),
+            const Text(' â€¢ ', style: TextStyle(fontSize: 12, color: Color(0xFF9CA3AF))),
             Flexible(
               child: Text(
                 user.statusMessage!,
@@ -1041,9 +1041,9 @@ class UserListItem extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  MODE TOGGLE
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class ModeToggle extends StatelessWidget {
   final ChatMode mode;
@@ -1063,13 +1063,13 @@ class ModeToggle extends StatelessWidget {
       child: Row(
         children: [
           _ModeButton(
-            label: 'Social 💖',
+            label: 'Social ðŸ’–',
             isSelected: mode == ChatMode.social,
             color: kChatSocial,
             onTap: () => onChanged(ChatMode.social),
           ),
           _ModeButton(
-            label: 'Professional 💼',
+            label: 'Professional ðŸ’¼',
             isSelected: mode == ChatMode.professional,
             color: kChatColor,
             onTap: () => onChanged(ChatMode.professional),
@@ -1120,9 +1120,9 @@ class _ModeButton extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  HELPERS
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 String _timeAgo(DateTime dt) {
   final diff = DateTime.now().difference(dt);

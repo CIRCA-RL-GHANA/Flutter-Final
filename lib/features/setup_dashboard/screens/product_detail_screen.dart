@@ -1,9 +1,9 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SD1.1-DETAIL: PRODUCT DETAIL — 5-Tab Deep View
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD1.1-DETAIL: PRODUCT DETAIL â€” 5-Tab Deep View
 /// Tabs: Overview, Inventory, Pricing, Media, Analytics
 /// RBAC: Owner/Admin(fullAccess), BM(branchScoped), Monitor(viewOnly),
 ///        Driver(viewOnly), Others(hidden)
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -46,13 +46,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           appBar: SetupAppBar(title: product.name),
           body: Column(
             children: [
-              // ─── Product Header ────────────────────────────
+              // â”€â”€â”€ Product Header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               _ProductHeader(product: product),
               const SizedBox(height: 12),              Consumer<AIInsightsNotifier>(
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kSetupColor.withOpacity(0.07),
+                    color: kSetupColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -69,14 +69,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     ),
                   );
                 },
-              ),              // ─── Tab Bar ──────────────────────────────────
+              ),              // â”€â”€â”€ Tab Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SetupDetailTabBar(
                 tabs: _tabs,
                 selectedIndex: _tabIndex,
                 onTabChanged: (i) => setState(() => _tabIndex = i),
               ),
               const SizedBox(height: 12),
-              // ─── Tab Content ──────────────────────────────
+              // â”€â”€â”€ Tab Content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               Expanded(
                 child: IndexedStack(
                   index: _tabIndex,
@@ -97,7 +97,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   }
 }
 
-// ─── Product Header ──────────────────────────────────────────────────────────
+// â”€â”€â”€ Product Header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _ProductHeader extends StatelessWidget {
   final Product product;
@@ -113,7 +113,7 @@ class _ProductHeader extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 12,
             offset: const Offset(0, 4),
           ),
@@ -126,7 +126,7 @@ class _ProductHeader extends StatelessWidget {
             width: 64,
             height: 64,
             decoration: BoxDecoration(
-              color: kSetupColor.withOpacity(0.1),
+              color: kSetupColor.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(14),
             ),
             child: const Icon(Icons.inventory_2, size: 30, color: kSetupColor),
@@ -146,7 +146,7 @@ class _ProductHeader extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '${product.category} · ${product.brand}',
+                  '${product.category} Â· ${product.brand}',
                   style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
                 ),
                 const SizedBox(height: 6),
@@ -206,7 +206,7 @@ class _StockBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(6),
       ),
       child: Text(
@@ -217,7 +217,7 @@ class _StockBadge extends StatelessWidget {
   }
 }
 
-// ─── Overview Tab ────────────────────────────────────────────────────────────
+// â”€â”€â”€ Overview Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _OverviewTab extends StatelessWidget {
   final Product product;
@@ -231,7 +231,7 @@ class _OverviewTab extends StatelessWidget {
         // KPI Row
         Row(
           children: [
-            Expanded(child: SetupStatCard(label: 'Price', value: '₵${product.currentPrice.toStringAsFixed(0)}', icon: Icons.attach_money)),
+            Expanded(child: SetupStatCard(label: 'Price', value: 'â‚µ${product.currentPrice.toStringAsFixed(0)}', icon: Icons.attach_money)),
             const SizedBox(width: 10),
             Expanded(child: SetupStatCard(label: 'Stock', value: '${product.stock}', icon: Icons.inventory)),
             const SizedBox(width: 10),
@@ -283,7 +283,7 @@ class _OverviewTab extends StatelessWidget {
                     label: Text(tag, style: const TextStyle(fontSize: 11)),
                     padding: EdgeInsets.zero,
                     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    backgroundColor: kSetupColor.withOpacity(0.08),
+                    backgroundColor: kSetupColor.withValues(alpha: 0.08),
                     labelStyle: const TextStyle(color: kSetupColor),
                     side: BorderSide.none,
                   )).toList(),
@@ -296,7 +296,7 @@ class _OverviewTab extends StatelessWidget {
   }
 }
 
-// ─── Inventory Tab ───────────────────────────────────────────────────────────
+// â”€â”€â”€ Inventory Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _InventoryTab extends StatelessWidget {
   final Product product;
@@ -371,7 +371,7 @@ class _InventoryTab extends StatelessWidget {
   }
 }
 
-// ─── Pricing Tab ─────────────────────────────────────────────────────────────
+// â”€â”€â”€ Pricing Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _PricingTab extends StatelessWidget {
   final Product product;
@@ -398,10 +398,10 @@ class _PricingTab extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 12),
-              SetupInfoRow(label: 'Base Price', value: '₵${product.basePrice.toStringAsFixed(2)}'),
+              SetupInfoRow(label: 'Base Price', value: 'â‚µ${product.basePrice.toStringAsFixed(2)}'),
               SetupInfoRow(
                 label: 'Current Price',
-                value: '₵${product.currentPrice.toStringAsFixed(2)}',
+                value: 'â‚µ${product.currentPrice.toStringAsFixed(2)}',
                 valueColor: kSetupColor,
               ),
               if (discount > 0)
@@ -469,7 +469,7 @@ class _PriceHistoryRow extends StatelessWidget {
             )),
           ),
           Text(
-            '₵${price.toStringAsFixed(2)}',
+            'â‚µ${price.toStringAsFixed(2)}',
             style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w600,
@@ -482,7 +482,7 @@ class _PriceHistoryRow extends StatelessWidget {
   }
 }
 
-// ─── Media Tab ───────────────────────────────────────────────────────────────
+// â”€â”€â”€ Media Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _MediaTab extends StatelessWidget {
   final Product product;
@@ -553,7 +553,7 @@ class _MediaTab extends StatelessWidget {
   }
 }
 
-// ─── Analytics Tab ───────────────────────────────────────────────────────────
+// â”€â”€â”€ Analytics Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _AnalyticsTab extends StatelessWidget {
   final Product product;
@@ -571,7 +571,7 @@ class _AnalyticsTab extends StatelessWidget {
             const SizedBox(width: 10),
             Expanded(child: SetupStatCard(label: 'Conversion', value: '12%', icon: Icons.trending_up, color: AppColors.success)),
             const SizedBox(width: 10),
-            Expanded(child: SetupStatCard(label: 'Revenue', value: '₵42K', icon: Icons.attach_money, color: const Color(0xFF8B5CF6))),
+            Expanded(child: SetupStatCard(label: 'Revenue', value: 'â‚µ42K', icon: Icons.attach_money, color: const Color(0xFF8B5CF6))),
           ],
         ),
         const SizedBox(height: 16),
@@ -636,7 +636,7 @@ class _BuyerRow extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 14,
-            backgroundColor: kSetupColor.withOpacity(0.1),
+            backgroundColor: kSetupColor.withValues(alpha: 0.1),
             child: Text(name[0], style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: kSetupColor)),
           ),
           const SizedBox(width: 10),
@@ -649,7 +649,7 @@ class _BuyerRow extends StatelessWidget {
               ],
             ),
           ),
-          Text('₵${amount.toStringAsFixed(0)}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: kSetupColor)),
+          Text('â‚µ${amount.toStringAsFixed(0)}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: kSetupColor)),
         ],
       ),
     );
@@ -668,7 +668,7 @@ class _MiniChartPainter extends CustomPainter {
       ..shader = LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-        colors: [kSetupColor.withOpacity(0.3), kSetupColor.withOpacity(0.0)],
+        colors: [kSetupColor.withValues(alpha: 0.3), kSetupColor.withValues(alpha: 0.0)],
       ).createShader(Rect.fromLTWH(0, 0, size.width, size.height));
 
     final points = [0.6, 0.4, 0.7, 0.3, 0.8, 0.5, 0.9, 0.6, 0.75, 0.85];

@@ -1,4 +1,4 @@
-/// Alerts Screen 9 — Templates Library
+﻿/// Alerts Screen 9 â€” Templates Library
 /// Template grid (resolution/alert/communication/workflow),
 /// variable support, version control
 
@@ -57,10 +57,10 @@ class _AlertsTemplatesScreenState extends State<AlertsTemplatesScreen> with Sing
               tabAlignment: TabAlignment.start,
               tabs: [
                 Tab(text: 'All (${provider.templates.length})'),
-                Tab(text: '✅ Resolution (${provider.templatesByType(AlertTemplateType.resolution).length})'),
-                Tab(text: '🚨 Alert (${provider.templatesByType(AlertTemplateType.alert).length})'),
-                Tab(text: '📧 Comms (${provider.templatesByType(AlertTemplateType.communication).length})'),
-                Tab(text: '🔄 Workflow (${provider.templatesByType(AlertTemplateType.workflow).length})'),
+                Tab(text: 'âœ… Resolution (${provider.templatesByType(AlertTemplateType.resolution).length})'),
+                Tab(text: 'ðŸš¨ Alert (${provider.templatesByType(AlertTemplateType.alert).length})'),
+                Tab(text: 'ðŸ“§ Comms (${provider.templatesByType(AlertTemplateType.communication).length})'),
+                Tab(text: 'ðŸ”„ Workflow (${provider.templatesByType(AlertTemplateType.workflow).length})'),
               ],
             ),
           ),
@@ -70,7 +70,7 @@ class _AlertsTemplatesScreenState extends State<AlertsTemplatesScreen> with Sing
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kAlertsColor.withOpacity(0.07),
+                    color: kAlertsColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(children: [
                       const Icon(Icons.auto_awesome, size: 14, color: kAlertsColor),
@@ -164,9 +164,9 @@ class _AlertsTemplatesScreenState extends State<AlertsTemplatesScreen> with Sing
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Template List
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _TemplateList extends StatelessWidget {
   final List<AlertTemplate> templates;
@@ -194,9 +194,9 @@ class _TemplateList extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Expandable Template Card
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _ExpandableTemplateCard extends StatefulWidget {
   final AlertTemplate template;

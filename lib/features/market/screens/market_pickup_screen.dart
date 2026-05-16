@@ -1,7 +1,7 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// MARKET MODULE — Screen 8: Self-Pickup Process
-/// 5 Phases: Preparation → Arrival → Verification → Handoff → Complete
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// MARKET MODULE â€” Screen 8: Self-Pickup Process
+/// 5 Phases: Preparation â†’ Arrival â†’ Verification â†’ Handoff â†’ Complete
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -46,7 +46,7 @@ class _MarketPickupScreenState extends State<MarketPickupScreen> {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kMarketColor.withOpacity(0.07),
+                    color: kMarketColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -174,7 +174,7 @@ class _MarketPickupScreenState extends State<MarketPickupScreen> {
       ),
       decoration: BoxDecoration(
         color: Colors.white,
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, -2))],
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10, offset: const Offset(0, -2))],
       ),
       child: Row(
         children: [
@@ -258,7 +258,7 @@ class _MarketPickupScreenState extends State<MarketPickupScreen> {
   }
 }
 
-// ── Phase 1: Preparation ───────────────────────────────────────────
+// â”€â”€ Phase 1: Preparation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _PreparationPhase extends StatelessWidget {
   final MarketOrder order;
 
@@ -334,7 +334,7 @@ class _PreparationPhase extends StatelessWidget {
   }
 }
 
-// ── Phase 2: Arrival ───────────────────────────────────────────────
+// â”€â”€ Phase 2: Arrival â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _ArrivalPhase extends StatelessWidget {
   final MarketOrder order;
 
@@ -425,7 +425,7 @@ class _ArrivalPhase extends StatelessWidget {
   }
 }
 
-// ── Phase 3: Verification ──────────────────────────────────────────
+// â”€â”€ Phase 3: Verification â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _VerificationPhase extends StatelessWidget {
   final MarketOrder order;
 
@@ -527,7 +527,7 @@ class _VerificationStep extends StatelessWidget {
   }
 }
 
-// ── Phase 4: Handoff ───────────────────────────────────────────────
+// â”€â”€ Phase 4: Handoff â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _HandoffPhase extends StatelessWidget {
   final MarketOrder order;
 
@@ -578,7 +578,7 @@ class _HandoffPhase extends StatelessWidget {
         Card(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
           elevation: 0,
-          color: AppColors.error.withOpacity(0.05),
+          color: AppColors.error.withValues(alpha: 0.05),
           child: ListTile(
             leading: const Icon(Icons.report_problem, color: AppColors.error),
             title: const Text('Report an issue', style: TextStyle(fontSize: 14)),
@@ -592,7 +592,7 @@ class _HandoffPhase extends StatelessWidget {
   }
 }
 
-// ── Phase 5: Complete ──────────────────────────────────────────────
+// â”€â”€ Phase 5: Complete â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _CompletePhase extends StatelessWidget {
   final MarketOrder order;
 
@@ -680,7 +680,7 @@ class _CompletePhase extends StatelessWidget {
                   ),
                   Text(
                     'From this pickup order',
-                    style: TextStyle(fontSize: 12, color: Colors.white.withOpacity(0.8)),
+                    style: TextStyle(fontSize: 12, color: Colors.white.withValues(alpha: 0.8)),
                   ),
                 ],
               ),

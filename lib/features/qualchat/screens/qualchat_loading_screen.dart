@@ -1,4 +1,4 @@
-/// qualChat Screen 0 — Loading & Permission Gate
+﻿/// qualChat Screen 0 â€” Loading & Permission Gate
 /// Seamless entry with zero-error authentication
 
 import 'package:flutter/material.dart';
@@ -86,7 +86,7 @@ class _QualChatLoadingScreenState extends State<QualChatLoadingScreen>
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: Colors.white.withOpacity(0.15),
+                    color: Colors.white.withValues(alpha: 0.15),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(children: [
                       const Icon(Icons.auto_awesome, size: 14, color: Colors.white),
@@ -125,7 +125,7 @@ class _QualChatLoadingScreenState extends State<QualChatLoadingScreen>
           width: 100,
           height: 100,
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.2),
+            color: Colors.white.withValues(alpha: 0.2),
             shape: BoxShape.circle,
           ),
           child: const Icon(
@@ -181,7 +181,7 @@ class _QualChatLoadingScreenState extends State<QualChatLoadingScreen>
           width: 80,
           height: 80,
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.2),
+            color: Colors.white.withValues(alpha: 0.2),
             shape: BoxShape.circle,
           ),
           child: const Icon(Icons.error_outline, size: 40, color: Colors.white),

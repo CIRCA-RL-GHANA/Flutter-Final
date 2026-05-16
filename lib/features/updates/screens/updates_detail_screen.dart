@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SCREEN 2 — Update Details & Comments
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SCREEN 2 â€” Update Details & Comments
 /// Full update view with engagement metrics, comments module (sort, reply,
 /// nested threads), and quick-compose input.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -82,7 +82,7 @@ class _BodyState extends State<_Body> {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kUpdatesColor.withOpacity(0.07),
+                    color: kUpdatesColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -185,7 +185,7 @@ class _BodyState extends State<_Body> {
   }
 }
 
-// ─── Engagement Strip ───────────────────────────────────────────────────────
+// â”€â”€â”€ Engagement Strip â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _EngagementStrip extends StatelessWidget {
   final dynamic update;
@@ -199,7 +199,7 @@ class _EngagementStrip extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 6)],
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 6)],
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -267,7 +267,7 @@ class _MetricTap extends StatelessWidget {
   }
 }
 
-// ─── Comments Header ────────────────────────────────────────────────────────
+// â”€â”€â”€ Comments Header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _CommentsHeader extends StatelessWidget {
   final UpdatesProvider prov;
@@ -299,7 +299,7 @@ class _CommentsHeader extends StatelessWidget {
   }
 }
 
-// ─── Comment Input ──────────────────────────────────────────────────────────
+// â”€â”€â”€ Comment Input â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _CommentInput extends StatelessWidget {
   final TextEditingController controller;
@@ -311,13 +311,13 @@ class _CommentInput extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(14, 8, 14, 8 + MediaQuery.of(context).viewPadding.bottom),
       decoration: BoxDecoration(
         color: Colors.white,
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.06), blurRadius: 8, offset: const Offset(0, -2))],
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.06), blurRadius: 8, offset: const Offset(0, -2))],
       ),
       child: Row(
         children: [
           CircleAvatar(
             radius: 16,
-            backgroundColor: kUpdatesColor.withOpacity(0.12),
+            backgroundColor: kUpdatesColor.withValues(alpha: 0.12),
             child: const Text('Y', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: kUpdatesColor)),
           ),
           const SizedBox(width: 8),

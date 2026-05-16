@@ -1,7 +1,7 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// ALERTS Widget (Resolution Log)
 /// Visible to: ALL roles EXCEPT Owner
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -37,7 +37,7 @@ class AlertsWidgetContent extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
-                  color: AppColors.success.withOpacity(0.1),
+                  color: AppColors.success.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: const Text(
@@ -56,7 +56,7 @@ class AlertsWidgetContent extends StatelessWidget {
 
           // Filter Summary
           Text(
-            'Last 7 days • 12 resolved • 2 pending',
+            'Last 7 days â€¢ 12 resolved â€¢ 2 pending',
             style: TextStyle(
               fontSize: 10,
               color: AppColors.textTertiary,
@@ -150,7 +150,7 @@ class _AlertItem extends StatelessWidget {
           if (isResolved && resolver.isNotEmpty)
             CircleAvatar(
               radius: 10,
-              backgroundColor: AppColors.primaryLight.withOpacity(0.15),
+              backgroundColor: AppColors.primaryLight.withValues(alpha: 0.15),
               child: Text(
                 resolver[0],
                 style: const TextStyle(fontSize: 9, fontWeight: FontWeight.bold),
@@ -177,7 +177,7 @@ class _DistributionBar extends StatelessWidget {
           Container(
             height: 6,
             decoration: BoxDecoration(
-              color: color.withOpacity(0.7),
+              color: color.withValues(alpha: 0.7),
               borderRadius: BorderRadius.circular(3),
             ),
           ),

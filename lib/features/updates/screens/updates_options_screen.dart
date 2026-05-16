@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SCREEN 7 / 7A — Options Menu + Report Flow
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SCREEN 7 / 7A â€” Options Menu + Report Flow
 /// Bottom sheet options menu (save, copy link, mute, follow, report).
 /// Report flow: 4-step wizard (reason, details, evidence, submit).
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -44,7 +44,7 @@ class _Body extends StatelessWidget {
                   builder: (context, ai, _) {
                     if (ai.insights.isEmpty) return const SizedBox.shrink();
                     return Container(
-                      color: kUpdatesColor.withOpacity(0.07),
+                      color: kUpdatesColor.withValues(alpha: 0.07),
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                       child: Row(children: [
                         const Icon(Icons.auto_awesome, size: 14, color: kUpdatesColor),
@@ -62,13 +62,13 @@ class _Body extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12),
-                    boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 6)],
+                    boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 6)],
                   ),
                   child: Row(
                     children: [
                       CircleAvatar(
                         radius: 20,
-                        backgroundColor: kUpdatesColor.withOpacity(0.12),
+                        backgroundColor: kUpdatesColor.withValues(alpha: 0.12),
                         child: Text(update.entityName.substring(0, 1), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: kUpdatesColor)),
                       ),
                       const SizedBox(width: 10),
@@ -269,7 +269,7 @@ class _Body extends StatelessWidget {
   }
 }
 
-// ─── Option Tile ────────────────────────────────────────────────────────────
+// â”€â”€â”€ Option Tile â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _OptionTile extends StatelessWidget {
   final IconData icon;
@@ -286,7 +286,7 @@ class _OptionTile extends StatelessWidget {
       contentPadding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
       leading: Container(
         width: 36, height: 36,
-        decoration: BoxDecoration(color: (color ?? kUpdatesColor).withOpacity(0.08), borderRadius: BorderRadius.circular(8)),
+        decoration: BoxDecoration(color: (color ?? kUpdatesColor).withValues(alpha: 0.08), borderRadius: BorderRadius.circular(8)),
         child: Icon(icon, size: 18, color: color ?? kUpdatesColor),
       ),
       title: Text(label, style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: color ?? AppColors.textPrimary)),
@@ -297,7 +297,7 @@ class _OptionTile extends StatelessWidget {
   }
 }
 
-// ─── Screen 7A: Report Flow ─────────────────────────────────────────────────
+// â”€â”€â”€ Screen 7A: Report Flow â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _ReportFlow extends StatefulWidget {
   const _ReportFlow();
@@ -372,7 +372,7 @@ class _ReportFlowState extends State<_ReportFlow> {
             padding: EdgeInsets.fromLTRB(16, 12, 16, 12 + MediaQuery.of(context).viewPadding.bottom),
             decoration: BoxDecoration(
               color: Colors.white,
-              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 8, offset: const Offset(0, -2))],
+              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8, offset: const Offset(0, -2))],
             ),
             child: Row(
               children: [
@@ -447,7 +447,7 @@ class _ReportFlowState extends State<_ReportFlow> {
   }
 }
 
-// ─── Report Steps ───────────────────────────────────────────────────────────
+// â”€â”€â”€ Report Steps â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _StepReason extends StatelessWidget {
   final ReportReason? selectedReason;
@@ -470,7 +470,7 @@ class _StepReason extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: selectedReason == r ? kUpdatesColor.withOpacity(0.06) : Colors.white,
+                color: selectedReason == r ? kUpdatesColor.withValues(alpha: 0.06) : Colors.white,
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: selectedReason == r ? kUpdatesColor : Colors.grey.shade200),
               ),
@@ -526,7 +526,7 @@ class _StepDetails extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 8),
-        const Text('Optional — but helpful for our review team.', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+        const Text('Optional â€” but helpful for our review team.', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
       ],
     );
   }
@@ -554,7 +554,7 @@ class _StepEvidence extends StatelessWidget {
           ),
           child: Column(
             children: [
-              Icon(Icons.cloud_upload_outlined, size: 40, color: kUpdatesColor.withOpacity(0.4)),
+              Icon(Icons.cloud_upload_outlined, size: 40, color: kUpdatesColor.withValues(alpha: 0.4)),
               const SizedBox(height: 8),
               const Text('Tap to upload', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: kUpdatesColor)),
               const Text('PNG, JPG up to 5MB', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
@@ -618,7 +618,7 @@ class _StepReview extends StatelessWidget {
           decoration: BoxDecoration(
             color: const Color(0xFFFEF3C7),
             borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: const Color(0xFFF59E0B).withOpacity(0.3)),
+            border: Border.all(color: const Color(0xFFF59E0B).withValues(alpha: 0.3)),
           ),
           child: const Row(
             children: [

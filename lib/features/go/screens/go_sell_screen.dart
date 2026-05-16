@@ -1,4 +1,4 @@
-/// GO Screen 2B — Sell QPoints Flow
+﻿/// GO Screen 2B â€” Sell QPoints Flow
 /// Mirror of Buy flow with sell-specific differences:
 /// Destination selection, minimum 500 QP, processing time warning,
 /// additional verification for large amounts
@@ -42,7 +42,7 @@ class _GoSellScreenState extends State<GoSellScreen> {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kGoColor.withOpacity(0.07),
+                    color: kGoColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -103,7 +103,7 @@ class _GoSellScreenState extends State<GoSellScreen> {
                         const SizedBox(width: 8),
                         Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                           Text(gw.name, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
-                          Text('Rate: 1 QP = ${gw.sellRate} GHS • Min: ${gw.minSell.toStringAsFixed(0)} QP', style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
+                          Text('Rate: 1 QP = ${gw.sellRate} GHS â€¢ Min: ${gw.minSell.toStringAsFixed(0)} QP', style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
                           Text('Processing: ${gw.processingTime}', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
                         ])),
                       ],
@@ -113,7 +113,7 @@ class _GoSellScreenState extends State<GoSellScreen> {
               }),
               const SizedBox(height: 10),
               GoSectionCard(
-                borderColor: kGoWarning.withOpacity(0.3),
+                borderColor: kGoWarning.withValues(alpha: 0.3),
                 child: const Row(
                   children: [
                     Icon(Icons.info_outline, size: 18, color: kGoWarning),
@@ -224,7 +224,7 @@ class _GoSellScreenState extends State<GoSellScreen> {
               if (_amount > 10000) ...[
                 const SizedBox(height: 10),
                 GoSectionCard(
-                  borderColor: kGoWarning.withOpacity(0.3),
+                  borderColor: kGoWarning.withValues(alpha: 0.3),
                   child: const Row(children: [
                     Icon(Icons.warning_amber, size: 18, color: kGoWarning),
                     SizedBox(width: 10),

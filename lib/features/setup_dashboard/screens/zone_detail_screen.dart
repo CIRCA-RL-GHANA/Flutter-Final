@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SD2.3-DETAIL: ZONE DETAIL — 4-Tab Deep View
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD2.3-DETAIL: ZONE DETAIL â€” 4-Tab Deep View
 /// Tabs: Overview, Coverage, Vehicles, Analytics
 /// RBAC: Admin(fullAccess), BranchManager(branchScoped), Monitor(viewOnly)
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -51,7 +51,7 @@ class _ZoneDetailScreenState extends State<ZoneDetailScreen> {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kSetupColor.withOpacity(0.07),
+                    color: kSetupColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -112,7 +112,7 @@ class _ZoneHeader extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 12, offset: const Offset(0, 4))],
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 12, offset: const Offset(0, 4))],
       ),
       child: Row(
         children: [
@@ -120,7 +120,7 @@ class _ZoneHeader extends StatelessWidget {
             width: 56,
             height: 56,
             decoration: BoxDecoration(
-              color: _statusColor.withOpacity(0.1),
+              color: _statusColor.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(14),
             ),
             child: Icon(Icons.map, size: 28, color: _statusColor),
@@ -146,7 +146,7 @@ class _ZoneHeader extends StatelessWidget {
                       style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: _statusColor),
                     ),
                     const SizedBox(width: 12),
-                    Text('₵${zone.fee.toStringAsFixed(2)} fee', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                    Text('â‚µ${zone.fee.toStringAsFixed(2)} fee', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                   ],
                 ),
               ],
@@ -174,7 +174,7 @@ class _OverviewTab extends StatelessWidget {
             const SizedBox(width: 10),
             Expanded(child: SetupStatCard(label: 'Deliveries', value: '${zone.dailyDeliveries}', icon: Icons.delivery_dining, color: AppColors.success)),
             const SizedBox(width: 10),
-            Expanded(child: SetupStatCard(label: 'Coverage', value: '${zone.coverageKm2.toStringAsFixed(0)} km²', icon: Icons.straighten, color: kSetupColor)),
+            Expanded(child: SetupStatCard(label: 'Coverage', value: '${zone.coverageKm2.toStringAsFixed(0)} kmÂ²', icon: Icons.straighten, color: kSetupColor)),
           ],
         ),
         const SizedBox(height: 16),
@@ -201,8 +201,8 @@ class _OverviewTab extends StatelessWidget {
                   ZoneStatus.partial => AppColors.warning,
                 },
               ),
-              SetupInfoRow(label: 'Delivery Fee', value: '₵${zone.fee.toStringAsFixed(2)}'),
-              SetupInfoRow(label: 'Minimum Order', value: '₵${zone.minimumOrder.toStringAsFixed(2)}'),
+              SetupInfoRow(label: 'Delivery Fee', value: 'â‚µ${zone.fee.toStringAsFixed(2)}'),
+              SetupInfoRow(label: 'Minimum Order', value: 'â‚µ${zone.minimumOrder.toStringAsFixed(2)}'),
               SetupInfoRow(label: 'Est. Time', value: zone.estimatedTime),
               SetupInfoRow(label: 'Population Served', value: '${zone.populationServed}'),
             ],
@@ -225,18 +225,18 @@ class _CoverageTab extends StatelessWidget {
         Container(
           height: 200,
           decoration: BoxDecoration(
-            color: kSetupColor.withOpacity(0.06),
+            color: kSetupColor.withValues(alpha: 0.06),
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: kSetupColor.withOpacity(0.15)),
+            border: Border.all(color: kSetupColor.withValues(alpha: 0.15)),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.map, size: 48, color: kSetupColor.withOpacity(0.4)),
+              Icon(Icons.map, size: 48, color: kSetupColor.withValues(alpha: 0.4)),
               const SizedBox(height: 8),
-              Text('Zone Coverage Map', style: TextStyle(fontSize: 13, color: kSetupColor.withOpacity(0.6), fontWeight: FontWeight.w600)),
+              Text('Zone Coverage Map', style: TextStyle(fontSize: 13, color: kSetupColor.withValues(alpha: 0.6), fontWeight: FontWeight.w600)),
               const SizedBox(height: 4),
-              Text('Map view coming soon', style: TextStyle(fontSize: 11, color: kSetupColor.withOpacity(0.4))),
+              Text('Map view coming soon', style: TextStyle(fontSize: 11, color: kSetupColor.withValues(alpha: 0.4))),
             ],
           ),
         ),
@@ -253,7 +253,7 @@ class _CoverageTab extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 12),
-              SetupInfoRow(label: 'Coverage Area', value: '${zone.coverageKm2.toStringAsFixed(1)} km²'),
+              SetupInfoRow(label: 'Coverage Area', value: '${zone.coverageKm2.toStringAsFixed(1)} kmÂ²'),
               SetupInfoRow(label: 'Population', value: '${zone.populationServed}'),
               SetupInfoRow(label: 'Daily Deliveries', value: '${zone.dailyDeliveries}'),
               SetupInfoRow(label: 'Active Vehicles', value: '${zone.vehicleCount}'),
@@ -291,7 +291,7 @@ class _VehiclesTab extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(14),
-            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 10, offset: const Offset(0, 2))],
+            boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 10, offset: const Offset(0, 2))],
           ),
           child: Row(
             children: [
@@ -299,7 +299,7 @@ class _VehiclesTab extends StatelessWidget {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: colors[i % colors.length].withOpacity(0.1),
+                  color: colors[i % colors.length].withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Icon(Icons.local_shipping, size: 20, color: colors[i % colors.length]),
@@ -317,7 +317,7 @@ class _VehiclesTab extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                 decoration: BoxDecoration(
-                  color: colors[i % colors.length].withOpacity(0.1),
+                  color: colors[i % colors.length].withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: Text(

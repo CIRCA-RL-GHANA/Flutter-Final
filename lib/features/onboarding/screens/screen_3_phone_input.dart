@@ -1,4 +1,4 @@
-import 'dart:async';
+﻿import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -12,7 +12,7 @@ import '../widgets/buttons.dart';
 import '../widgets/onboarding_header.dart';
 
 
-// OS palette � mirrors splash / welcome
+// OS palette ï¿½ mirrors splash / welcome
 const Color _kBg        = Color(0xFF08080F);
 const Color _kSurface   = Color(0xFF0E0E1A);
 const Color _kBorder    = Color(0xFF1C1C2E);
@@ -40,16 +40,16 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
 
   // Country data
   final List<_CountryData> _countries = [
-    const _CountryData('US', 'United States', '+1', '🇺🇸'),
-    const _CountryData('GB', 'United Kingdom', '+44', '🇬🇧'),
-    const _CountryData('GH', 'Ghana', '+233', '🇬🇭'),
-    const _CountryData('NG', 'Nigeria', '+234', '🇳🇬'),
-    const _CountryData('CA', 'Canada', '+1', '🇨🇦'),
-    const _CountryData('DE', 'Germany', '+49', '🇩🇪'),
-    const _CountryData('FR', 'France', '+33', '🇫🇷'),
-    const _CountryData('IN', 'India', '+91', '🇮🇳'),
-    const _CountryData('KE', 'Kenya', '+254', '🇰🇪'),
-    const _CountryData('ZA', 'South Africa', '+27', '🇿🇦'),
+    const _CountryData('US', 'United States', '+1', 'ðŸ‡ºðŸ‡¸'),
+    const _CountryData('GB', 'United Kingdom', '+44', 'ðŸ‡¬ðŸ‡§'),
+    const _CountryData('GH', 'Ghana', '+233', 'ðŸ‡¬ðŸ‡­'),
+    const _CountryData('NG', 'Nigeria', '+234', 'ðŸ‡³ðŸ‡¬'),
+    const _CountryData('CA', 'Canada', '+1', 'ðŸ‡¨ðŸ‡¦'),
+    const _CountryData('DE', 'Germany', '+49', 'ðŸ‡©ðŸ‡ª'),
+    const _CountryData('FR', 'France', '+33', 'ðŸ‡«ðŸ‡·'),
+    const _CountryData('IN', 'India', '+91', 'ðŸ‡®ðŸ‡³'),
+    const _CountryData('KE', 'Kenya', '+254', 'ðŸ‡°ðŸ‡ª'),
+    const _CountryData('ZA', 'South Africa', '+27', 'ðŸ‡¿ðŸ‡¦'),
   ];
 
   late _CountryData _selectedCountry;
@@ -130,12 +130,12 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
     if (!mounted) return;
 
     if (result == NumberCheckResult.existingUser) {
-      // Existing user → welcome back flow
+      // Existing user â†’ welcome back flow
       onboarding.setReturningUser(true);
       Navigator.of(context).pushNamed(AppRoutes.welcomeBack);
     } else if (result == NumberCheckResult.newUser ||
         result == NumberCheckResult.valid) {
-      // New user → send OTP
+      // New user â†’ send OTP
       await phoneAuth.sendOtp();
       if (!mounted) return;
 
@@ -366,9 +366,9 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
                                 decoration: BoxDecoration(
                                   color: _validationState ==
                                           _ValidationState.valid
-                                      ? const Color(0xFF10B981).withOpacity(0.1)
+                                      ? const Color(0xFF10B981).withValues(alpha: 0.1)
                                       : const Color(0xFF22BDD8)
-                                          .withOpacity(0.05),
+                                          .withValues(alpha: 0.05),
                                   shape: BoxShape.circle,
                                 ),
                                 child: Icon(
@@ -376,9 +376,9 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
                                   size: 80,
                                   color: _validationState ==
                                           _ValidationState.valid
-                                      ? const Color(0xFF10B981).withOpacity(0.5)
+                                      ? const Color(0xFF10B981).withValues(alpha: 0.5)
                                       : const Color(0xFF22BDD8)
-                                          .withOpacity(0.2),
+                                          .withValues(alpha: 0.2),
                                 ),
                               );
                             },
@@ -646,7 +646,7 @@ class _CountryPickerSheetState extends State<_CountryPickerSheet> {
                     ),
                   ),
                   selected: isSelected,
-                  selectedTileColor: const Color(0xFF22BDD8).withOpacity(0.05),
+                  selectedTileColor: const Color(0xFF22BDD8).withValues(alpha: 0.05),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),

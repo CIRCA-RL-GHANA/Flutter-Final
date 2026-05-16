@@ -1,7 +1,7 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// e-PLAY MODULE — Creator Studio Screen
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// e-PLAY MODULE â€” Creator Studio Screen
 /// Creators open their "digital branch", upload content, manage royalties.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -72,7 +72,7 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
     );
   }
 
-  // ── Onboarding: Open digital branch ──────────────────────────────────────
+  // â”€â”€ Onboarding: Open digital branch â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   Widget _buildOnboarding(EPlayProvider eplay) {
     return SingleChildScrollView(
@@ -83,20 +83,20 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
           const SizedBox(height: 24),
           Container(
             width: 100, height: 100,
-            decoration: BoxDecoration(color: kEPlayColor.withOpacity(0.12), shape: BoxShape.circle),
+            decoration: BoxDecoration(color: kEPlayColor.withValues(alpha: 0.12), shape: BoxShape.circle),
             child: const Icon(Icons.storefront, color: kEPlayColor, size: 50),
           ),
           const SizedBox(height: 20),
           const Text('Open Your Digital Branch', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppColors.textPrimary), textAlign: TextAlign.center),
           const SizedBox(height: 10),
           const Text(
-            'Sell music, movies, podcasts, e-books and shows directly to your audience. You keep 85% — Genie keeps 15%.',
+            'Sell music, movies, podcasts, e-books and shows directly to your audience. You keep 85% â€” Genie keeps 15%.',
             style: TextStyle(fontSize: 14, color: AppColors.textSecondary, height: 1.6),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 32),
           _onboardingStat('85%', 'Creator royalty'),
-          _onboardingStat('∞',   'Content you can upload'),
+          _onboardingStat('âˆž',   'Content you can upload'),
           _onboardingStat('DRM', 'IP protected by default'),
           _onboardingStat('QP',  'Micro-payment ready'),
           const SizedBox(height: 40),
@@ -129,7 +129,7 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
       child: Row(children: [
         Container(
           width: 48, height: 48,
-          decoration: BoxDecoration(color: kEPlayColor.withOpacity(0.1), borderRadius: BorderRadius.circular(12)),
+          decoration: BoxDecoration(color: kEPlayColor.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(12)),
           child: Center(child: Text(value, style: const TextStyle(color: kEPlayColor, fontWeight: FontWeight.bold, fontSize: 14))),
         ),
         const SizedBox(width: 16),
@@ -138,7 +138,7 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
     );
   }
 
-  // ── Creator Studio ────────────────────────────────────────────────────────
+  // â”€â”€ Creator Studio â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   Widget _buildStudio(AIInsightsNotifier ai, EPlayProvider eplay) {
     return TabBarView(
@@ -162,11 +162,11 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
         child: ListTile(
           leading: Container(
             width: 44, height: 44,
-            decoration: BoxDecoration(color: kEPlayColor.withOpacity(0.1), borderRadius: BorderRadius.circular(10)),
+            decoration: BoxDecoration(color: kEPlayColor.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(10)),
             child: const Icon(Icons.music_note, color: kEPlayColor),
           ),
           title: Text(items[i], style: const TextStyle(fontWeight: FontWeight.w600)),
-          subtitle: const Text('Published · ₵5 QP', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+          subtitle: const Text('Published Â· â‚µ5 QP', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
           trailing: PopupMenuButton(
             itemBuilder: (_) => const [
               PopupMenuItem(value: 'edit', child: Text('Edit')),
@@ -231,7 +231,7 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
             child: ElevatedButton.icon(
               onPressed: _uploading ? null : () => setState(() => _uploading = !_uploading),
               icon: _uploading ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2)) : const Icon(Icons.upload),
-              label: Text(_uploading ? 'Uploading…' : 'Upload & Publish'),
+              label: Text(_uploading ? 'Uploadingâ€¦' : 'Upload & Publish'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: kEPlayColor, foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(vertical: 15),
@@ -252,17 +252,17 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
           Container(
             margin: const EdgeInsets.only(bottom: 16),
             padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(color: kEPlayColor.withOpacity(0.08), borderRadius: BorderRadius.circular(12), border: Border.all(color: kEPlayColor.withOpacity(0.2))),
+            decoration: BoxDecoration(color: kEPlayColor.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(12), border: Border.all(color: kEPlayColor.withValues(alpha: 0.2))),
             child: Row(children: [
               const Icon(Icons.auto_awesome, color: kEPlayColor, size: 16),
               const SizedBox(width: 8),
               Expanded(child: Text(ai.insights.first['title'] ?? '', style: const TextStyle(fontSize: 12))),
             ]),
           ),
-        _analyticsCard('Total Earnings', '₵127 QP', Icons.account_balance_wallet, Colors.teal),
+        _analyticsCard('Total Earnings', 'â‚µ127 QP', Icons.account_balance_wallet, Colors.teal),
         _analyticsCard('Total Plays',    '4,820',    Icons.play_circle,             kEPlayColor),
         _analyticsCard('Unique Buyers',  '312',      Icons.people,                  AppColors.success),
-        _analyticsCard('Avg. Rating',    '4.7 ★',    Icons.star,                    AppColors.warning),
+        _analyticsCard('Avg. Rating',    '4.7 â˜…',    Icons.star,                    AppColors.warning),
       ],
     );
   }
@@ -272,7 +272,7 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
       margin: const EdgeInsets.only(bottom: 12),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
       child: ListTile(
-        leading: Container(width: 44, height: 44, decoration: BoxDecoration(color: color.withOpacity(0.12), borderRadius: BorderRadius.circular(12)), child: Icon(icon, color: color)),
+        leading: Container(width: 44, height: 44, decoration: BoxDecoration(color: color.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(12)), child: Icon(icon, color: color)),
         title: Text(label, style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
         trailing: Text(value, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: color)),
       ),

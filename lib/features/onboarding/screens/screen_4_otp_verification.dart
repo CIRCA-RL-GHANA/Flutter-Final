@@ -1,4 +1,4 @@
-import 'dart:async';
+﻿import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +10,7 @@ import '../providers/onboarding_provider.dart';
 import '../widgets/onboarding_header.dart';
 
 
-// OS palette � mirrors splash / welcome
+// OS palette ï¿½ mirrors splash / welcome
 const Color _kBg        = Color(0xFF08080F);
 const Color _kSurface   = Color(0xFF0E0E1A);
 const Color _kBorder    = Color(0xFF1C1C2E);
@@ -119,7 +119,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
       _focusNodes[index + 1].requestFocus();
     }
 
-    // Check if all 6 digits are entered → auto-submit
+    // Check if all 6 digits are entered â†’ auto-submit
     final otp = _otpControllers.map((c) => c.text).join();
     if (otp.length == 6) {
       _verifyOtp(otp);
@@ -461,7 +461,7 @@ class _OtpDigitField extends StatelessWidget {
         duration: const Duration(milliseconds: 200),
         decoration: BoxDecoration(
           color: isSuccess
-              ? const Color(0xFF10B981).withOpacity(0.1)
+              ? const Color(0xFF10B981).withValues(alpha: 0.1)
               : const Color(0xFF0E0E1A),
           borderRadius: BorderRadius.circular(12),
           border: Border.all(

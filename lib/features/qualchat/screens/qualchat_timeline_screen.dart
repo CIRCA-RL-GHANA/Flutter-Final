@@ -1,4 +1,4 @@
-/// qualChat Screen 3 — Hey Ya Journey (Owner Only)
+﻿/// qualChat Screen 3 â€” Hey Ya Journey (Owner Only)
 /// Dating timeline: track your connection journey and plan a date
 
 import 'package:flutter/material.dart';
@@ -13,23 +13,23 @@ class QualChatTimelineScreen extends StatelessWidget {
 
   String _intentLabel(HeyYaIntent intent) {
     const labels = {
-      HeyYaIntent.coffee: 'Coffee ☕',
-      HeyYaIntent.dinner: 'Dinner 🍽️',
-      HeyYaIntent.walk: 'Walk 🚶',
-      HeyYaIntent.movie: 'Movie Night 🎬',
-      HeyYaIntent.videoCall: 'Video Date 📹',
-      HeyYaIntent.any: 'Open to Anything 💫',
+      HeyYaIntent.coffee: 'Coffee â˜•',
+      HeyYaIntent.dinner: 'Dinner ðŸ½ï¸',
+      HeyYaIntent.walk: 'Walk ðŸš¶',
+      HeyYaIntent.movie: 'Movie Night ðŸŽ¬',
+      HeyYaIntent.videoCall: 'Video Date ðŸ“¹',
+      HeyYaIntent.any: 'Open to Anything ðŸ’«',
     };
     return labels[intent] ?? 'Open to Anything';
   }
 
   String _statusLabel(HeyYaStatus status) {
     const labels = {
-      HeyYaStatus.pending: '⏳ Awaiting response',
-      HeyYaStatus.accepted: '💘 Matched!',
-      HeyYaStatus.expired: '⌛ Expired',
-      HeyYaStatus.rejected: '💔 Passed',
-      HeyYaStatus.withdrawn: '↩️ Withdrawn',
+      HeyYaStatus.pending: 'â³ Awaiting response',
+      HeyYaStatus.accepted: 'ðŸ’˜ Matched!',
+      HeyYaStatus.expired: 'âŒ› Expired',
+      HeyYaStatus.rejected: 'ðŸ’” Passed',
+      HeyYaStatus.withdrawn: 'â†©ï¸ Withdrawn',
     };
     return labels[status] ?? status.name;
   }
@@ -41,7 +41,7 @@ class QualChatTimelineScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FE),
       appBar: QualChatAppBar(
-        title: 'Dating Journey 💘',
+        title: 'Dating Journey ðŸ’˜',
         actions: [
           TextButton(
             onPressed: () {},
@@ -55,7 +55,7 @@ class QualChatTimelineScreen extends StatelessWidget {
             builder: (context, ai, _) {
               if (ai.insights.isEmpty) return const SizedBox.shrink();
               return Container(
-                color: kChatColor.withOpacity(0.07),
+                color: kChatColor.withValues(alpha: 0.07),
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                 child: Row(children: [
                   const Icon(Icons.auto_awesome, size: 14, color: kChatColor),
@@ -80,7 +80,7 @@ class QualChatTimelineScreen extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 28,
-                  backgroundColor: kChatSocial.withOpacity(0.1),
+                  backgroundColor: kChatSocial.withValues(alpha: 0.1),
                   child: Text(
                     request.person.name[0],
                     style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: kChatSocial),
@@ -97,12 +97,12 @@ class QualChatTimelineScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Match Score: ${request.matchPercentage}% 💘',
+                        'Match Score: ${request.matchPercentage}% ðŸ’˜',
                         style: const TextStyle(fontSize: 13, color: kChatSocial),
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        '📅 Intent: ${_intentLabel(request.intent)}',
+                        'ðŸ“… Intent: ${_intentLabel(request.intent)}',
                         style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
                       ),
                       const SizedBox(height: 2),
@@ -154,7 +154,7 @@ class QualChatTimelineScreen extends StatelessWidget {
           border: Border(top: BorderSide(color: const Color(0xFFE5E7EB))),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 10,
               offset: const Offset(0, -2),
             ),
@@ -165,28 +165,28 @@ class QualChatTimelineScreen extends StatelessWidget {
           children: [
             Text(
               request.status == HeyYaStatus.accepted
-                  ? '💘 You matched! Ready to plan your date?'
-                  : 'Still into ${request.person.name}? 😊',
+                  ? 'ðŸ’˜ You matched! Ready to plan your date?'
+                  : 'Still into ${request.person.name}? ðŸ˜Š',
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 12),
             Row(
               children: [
-                _ActionButton(icon: '💌', label: 'Say Hi', onTap: () {}),
+                _ActionButton(icon: 'ðŸ’Œ', label: 'Say Hi', onTap: () {}),
                 const SizedBox(width: 8),
-                _ActionButton(icon: '📅', label: 'Plan Date', onTap: () {}, isPrimary: true),
+                _ActionButton(icon: 'ðŸ“…', label: 'Plan Date', onTap: () {}, isPrimary: true),
                 const SizedBox(width: 8),
-                _ActionButton(icon: '🎤', label: 'Voice Note', onTap: () {}),
+                _ActionButton(icon: 'ðŸŽ¤', label: 'Voice Note', onTap: () {}),
               ],
             ),
             const SizedBox(height: 8),
             Row(
               children: [
-                _ActionButton(icon: '✅', label: 'Accept', onTap: () {}, isPrimary: request.status == HeyYaStatus.pending && !request.isSentByMe),
+                _ActionButton(icon: 'âœ…', label: 'Accept', onTap: () {}, isPrimary: request.status == HeyYaStatus.pending && !request.isSentByMe),
                 const SizedBox(width: 8),
-                _ActionButton(icon: '🔄', label: 'Re-spark', onTap: () {}),
+                _ActionButton(icon: 'ðŸ”„', label: 'Re-spark', onTap: () {}),
                 const SizedBox(width: 8),
-                _ActionButton(icon: '❌', label: 'Withdraw', onTap: () {}, isDestructive: true),
+                _ActionButton(icon: 'âŒ', label: 'Withdraw', onTap: () {}, isDestructive: true),
               ],
             ),
           ],
@@ -225,7 +225,7 @@ class _TimelineItem extends StatelessWidget {
                   Expanded(
                     child: Container(
                       width: 2,
-                      color: kChatSocial.withOpacity(0.3),
+                      color: kChatSocial.withValues(alpha: 0.3),
                     ),
                   ),
               ],
@@ -261,7 +261,7 @@ class _TimelineItem extends StatelessWidget {
                   ],
                   const SizedBox(height: 4),
                   Text(
-                    '⏰ ${_formatDateTime(event.timestamp)}',
+                    'â° ${_formatDateTime(event.timestamp)}',
                     style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF)),
                   ),
                 ],
@@ -306,18 +306,18 @@ class _PendingTimelineItem extends StatelessWidget {
                       border: Border.all(color: Colors.white, width: 2),
                     ),
                   ),
-                  Container(width: 2, height: 16, color: const Color(0xFFF59E0B).withOpacity(0.3)),
+                  Container(width: 2, height: 16, color: const Color(0xFFF59E0B).withValues(alpha: 0.3)),
                 ],
               ),
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
-                color: const Color(0xFFF59E0B).withOpacity(0.1),
+                color: const Color(0xFFF59E0B).withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: const Text(
-                '⏳ PENDING RESPONSE',
+                'â³ PENDING RESPONSE',
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
@@ -336,11 +336,11 @@ class _PendingTimelineItem extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFEF4444).withOpacity(0.1),
+                  color: const Color(0xFFEF4444).withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
-                  '⏰ Expires in: ${remaining.inDays}d ${remaining.inHours % 24}h',
+                  'â° Expires in: ${remaining.inDays}d ${remaining.inHours % 24}h',
                   style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -383,7 +383,7 @@ class _ActionButton extends StatelessWidget {
             color: isPrimary
                 ? kChatSocial
                 : isDestructive
-                    ? const Color(0xFFEF4444).withOpacity(0.1)
+                    ? const Color(0xFFEF4444).withValues(alpha: 0.1)
                     : const Color(0xFFF3F4F6),
             borderRadius: BorderRadius.circular(10),
           ),

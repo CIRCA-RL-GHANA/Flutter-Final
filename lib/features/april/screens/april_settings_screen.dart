@@ -1,4 +1,4 @@
-/// APRIL Screen 6 — APRIL Settings
+﻿/// APRIL Screen 6 â€” APRIL Settings
 /// 7 sections: General, Voice, Plugins, Notifications, Privacy, Advanced, Help
 
 import 'package:flutter/material.dart';
@@ -16,11 +16,11 @@ class AprilSettingsScreen extends StatelessWidget {
       builder: (context, provider, _) {
         return Scaffold(
           backgroundColor: const Color(0xFFF8F9FE),
-          appBar: const AprilAppBar(title: '⚙️ APRIL Settings'),
+          appBar: const AprilAppBar(title: 'âš™ï¸ APRIL Settings'),
           body: ListView(
             padding: const EdgeInsets.all(16),
             children: [
-              // ──── AI SETTINGS SUGGESTION ────
+              // â”€â”€â”€â”€ AI SETTINGS SUGGESTION â”€â”€â”€â”€
               Consumer<AIInsightsNotifier>(
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
@@ -28,7 +28,7 @@ class AprilSettingsScreen extends StatelessWidget {
                     margin: const EdgeInsets.only(bottom: 12),
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF007AFF).withOpacity(0.07),
+                      color: const Color(0xFF007AFF).withValues(alpha: 0.07),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Row(children: [
@@ -39,9 +39,9 @@ class AprilSettingsScreen extends StatelessWidget {
                   );
                 },
               ),
-              // ──── GENERAL ────
+              // â”€â”€â”€â”€ GENERAL â”€â”€â”€â”€
               _SettingsSection(
-                title: '🏠 General',
+                title: 'ðŸ  General',
                 children: [
                   _SettingsToggle(
                     label: 'Dark Mode',
@@ -71,9 +71,9 @@ class AprilSettingsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // ──── VOICE ────
+              // â”€â”€â”€â”€ VOICE â”€â”€â”€â”€
               _SettingsSection(
-                title: '🎤 Voice',
+                title: 'ðŸŽ¤ Voice',
                 children: [
                   _SettingsToggle(
                     label: 'Voice Activation',
@@ -104,7 +104,7 @@ class AprilSettingsScreen extends StatelessWidget {
                     trailing: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF3B82F6).withOpacity(0.1),
+                        color: const Color(0xFF3B82F6).withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: const Text('New', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: Color(0xFF3B82F6))),
@@ -114,9 +114,9 @@ class AprilSettingsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // ──── PLUGINS ────
+              // â”€â”€â”€â”€ PLUGINS â”€â”€â”€â”€
               _SettingsSection(
-                title: '📦 Plugins',
+                title: 'ðŸ“¦ Plugins',
                 children: [
                   _SettingsToggle(
                     label: 'Planner Plugin',
@@ -156,9 +156,9 @@ class AprilSettingsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // ──── NOTIFICATIONS ────
+              // â”€â”€â”€â”€ NOTIFICATIONS â”€â”€â”€â”€
               _SettingsSection(
-                title: '🔔 Notifications',
+                title: 'ðŸ”” Notifications',
                 children: [
                   _SettingsToggle(
                     label: 'Push Notifications',
@@ -192,9 +192,9 @@ class AprilSettingsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // ──── PRIVACY ────
+              // â”€â”€â”€â”€ PRIVACY â”€â”€â”€â”€
               _SettingsSection(
-                title: '🔒 Privacy & Security',
+                title: 'ðŸ”’ Privacy & Security',
                 children: [
                   _SettingsToggle(
                     label: 'Biometric Lock',
@@ -227,9 +227,9 @@ class AprilSettingsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // ──── ADVANCED ────
+              // â”€â”€â”€â”€ ADVANCED â”€â”€â”€â”€
               _SettingsSection(
-                title: '🔧 Advanced',
+                title: 'ðŸ”§ Advanced',
                 children: [
                   _SettingsTile(
                     label: 'Backup Frequency',
@@ -260,9 +260,9 @@ class AprilSettingsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // ──── HELP ────
+              // â”€â”€â”€â”€ HELP â”€â”€â”€â”€
               _SettingsSection(
-                title: '❓ Help & Support',
+                title: 'â“ Help & Support',
                 children: [
                   _SettingsTile(label: 'Getting Started', subtitle: 'Learn how to use APRIL', icon: Icons.school, onTap: () {}),
                   _SettingsTile(label: 'FAQs', subtitle: 'Common questions answered', icon: Icons.quiz, onTap: () {}),
@@ -349,9 +349,9 @@ class AprilSettingsScreen extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // SHARED SETTINGS WIDGETS
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _SettingsSection extends StatelessWidget {
   final String title;

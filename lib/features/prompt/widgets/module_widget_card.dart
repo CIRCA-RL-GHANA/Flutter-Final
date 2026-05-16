@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// Module Widget Card
 /// The universal wrapper for all 10 module widgets on the PROMPT screen.
 /// Handles 6 states, gestures, accessibility, view-only overlay, shimmer.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -136,7 +136,7 @@ class _ModuleWidgetCardState extends State<ModuleWidgetCard>
   }
 }
 
-// ─── Normal Card ──────────────────────────────────────────────────────────────
+// â”€â”€â”€ Normal Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _NormalCard extends StatelessWidget {
   final ModuleInfo info;
@@ -157,10 +157,10 @@ class _NormalCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: info.color.withOpacity(0.12), width: 1),
+          border: Border.all(color: info.color.withValues(alpha: 0.12), width: 1),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.04),
+              color: Colors.black.withValues(alpha: 0.04),
               blurRadius: 12,
               offset: const Offset(0, 4),
             ),
@@ -194,7 +194,7 @@ class _NormalCard extends StatelessWidget {
   }
 }
 
-// ─── Loading (Shimmer) Card ──────────────────────────────────────────────────
+// â”€â”€â”€ Loading (Shimmer) Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _LoadingCard extends StatefulWidget {
   final ModuleInfo info;
@@ -232,7 +232,7 @@ class _LoadingCardState extends State<_LoadingCard>
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 12,
             offset: const Offset(0, 4),
           ),
@@ -284,7 +284,7 @@ class _LoadingCardState extends State<_LoadingCard>
   }
 }
 
-// ─── Error Card ─────────────────────────────────────────────────────────────
+// â”€â”€â”€ Error Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _ErrorCard extends StatelessWidget {
   final ModuleInfo info;
@@ -299,10 +299,10 @@ class _ErrorCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: AppColors.error.withOpacity(0.4), width: 1.5),
+        border: Border.all(color: AppColors.error.withValues(alpha: 0.4), width: 1.5),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 12,
             offset: const Offset(0, 4),
           ),
@@ -340,7 +340,7 @@ class _ErrorCard extends StatelessWidget {
   }
 }
 
-// ─── Empty Card ─────────────────────────────────────────────────────────────
+// â”€â”€â”€ Empty Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _EmptyCard extends StatelessWidget {
   final ModuleInfo info;
@@ -358,7 +358,7 @@ class _EmptyCard extends StatelessWidget {
         border: Border.all(color: AppColors.inputBorder),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.02),
+            color: Colors.black.withValues(alpha: 0.02),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -367,7 +367,7 @@ class _EmptyCard extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(info.icon, color: info.color.withOpacity(0.4), size: 36),
+          Icon(info.icon, color: info.color.withValues(alpha: 0.4), size: 36),
           const SizedBox(height: 8),
           Text(
             info.name,
@@ -402,7 +402,7 @@ class _EmptyCard extends StatelessWidget {
   }
 }
 
-// ─── Disabled Card ──────────────────────────────────────────────────────────
+// â”€â”€â”€ Disabled Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _DisabledCard extends StatelessWidget {
   final ModuleInfo info;

@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SD1.3: CUSTOMER TABS — Credit Account Management
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD1.3: CUSTOMER TABS â€” Credit Account Management
 /// Tab list, credit utilization, transaction history, payment tracking
 /// RBAC: Admin(full), BM(branch), Monitor/BrMon(view)
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -45,7 +45,7 @@ class TabsScreen extends StatelessWidget {
             ),
           body: CustomScrollView(
             slivers: [
-              // ─── Summary ──────────────────────────────────
+              // â”€â”€â”€ Summary â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -62,7 +62,7 @@ class TabsScreen extends StatelessWidget {
                       Expanded(
                         child: KPIBadge(
                           label: 'Total Credit',
-                          value: '₵${setupProv.totalCredit.toStringAsFixed(0)}',
+                          value: 'â‚µ${setupProv.totalCredit.toStringAsFixed(0)}',
                           icon: Icons.account_balance_wallet,
                           color: kSetupColor,
                         ),
@@ -81,7 +81,7 @@ class TabsScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Tab List ─────────────────────────────────
+              // â”€â”€â”€ Tab List â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
@@ -92,7 +92,7 @@ class TabsScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── AI Insights ─────────────────────────────────────────
+              // â”€â”€â”€ AI Insights â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Consumer<AIInsightsNotifier>(
                   builder: (context, ai, _) {
@@ -101,7 +101,7 @@ class TabsScreen extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: kSetupColor.withOpacity(0.07),
+                          color: kSetupColor.withValues(alpha: 0.07),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -133,7 +133,7 @@ class TabsScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Recent Transactions ──────────────────────
+              // â”€â”€â”€ Recent Transactions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -166,7 +166,7 @@ class TabsScreen extends StatelessWidget {
   }
 }
 
-// ─── Tab Card ────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Tab Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _TabCard extends StatelessWidget {
   final CustomerTab tab;
@@ -186,11 +186,11 @@ class _TabCard extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(14),
         border: tab.isOverdue
-            ? Border.all(color: AppColors.error.withOpacity(0.3))
+            ? Border.all(color: AppColors.error.withValues(alpha: 0.3))
             : null,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -204,7 +204,7 @@ class _TabCard extends StatelessWidget {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: kSetupColor.withOpacity(0.1),
+                  color: kSetupColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Center(
@@ -253,7 +253,7 @@ class _TabCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '₵${tab.amountUsed.toStringAsFixed(0)} / ₵${tab.creditLimit.toStringAsFixed(0)}',
+                    'â‚µ${tab.amountUsed.toStringAsFixed(0)} / â‚µ${tab.creditLimit.toStringAsFixed(0)}',
                     style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
@@ -294,7 +294,7 @@ class _TabCard extends StatelessWidget {
                 ),
                 const SizedBox(width: 4),
                 Text(
-                  tab.autoPayEnabled ? 'Auto-pay enabled' : 'Next: ₵${tab.nextPaymentAmount.toStringAsFixed(0)}',
+                  tab.autoPayEnabled ? 'Auto-pay enabled' : 'Next: â‚µ${tab.nextPaymentAmount.toStringAsFixed(0)}',
                   style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                 ),
               ],
@@ -343,7 +343,7 @@ class _TabCard extends StatelessWidget {
   }
 }
 
-// ─── Transaction Item ────────────────────────────────────────────────────────
+// â”€â”€â”€ Transaction Item â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _TransactionItem extends StatelessWidget {
   final TabTransaction transaction;
@@ -360,7 +360,7 @@ class _TransactionItem extends StatelessWidget {
             height: 36,
             decoration: BoxDecoration(
               color: (transaction.isPayment ? AppColors.success : kSetupColor)
-                  .withOpacity(0.1),
+                  .withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(
@@ -393,7 +393,7 @@ class _TransactionItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                '${transaction.isPayment ? "+" : "-"}₵${transaction.amount.toStringAsFixed(0)}',
+                '${transaction.isPayment ? "+" : "-"}â‚µ${transaction.amount.toStringAsFixed(0)}',
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w700,

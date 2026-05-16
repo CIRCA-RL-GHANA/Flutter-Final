@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// e-PLAY MODULE — Asset Detail Screen
-/// DRM content detail page: purchase → adds to cloud locker.
-/// No file is downloaded — access lives in the server-side license.
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// e-PLAY MODULE â€” Asset Detail Screen
+/// DRM content detail page: purchase â†’ adds to cloud locker.
+/// No file is downloaded â€” access lives in the server-side license.
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +35,7 @@ class _EPlayAssetDetailScreenState extends State<EPlayAssetDetailScreen> {
           backgroundColor: AppColors.backgroundDark,
           body: CustomScrollView(
             slivers: [
-              // ── Hero ─────────────────────────────────────────────────
+              // â”€â”€ Hero â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverAppBar(
                 expandedHeight: 280,
                 pinned: true,
@@ -54,7 +54,7 @@ class _EPlayAssetDetailScreenState extends State<EPlayAssetDetailScreen> {
                           width: 120,
                           height: 120,
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.15),
+                            color: Colors.white.withValues(alpha: 0.15),
                             borderRadius: BorderRadius.circular(24),
                           ),
                           child: Icon(_iconForType(_asset['type'] as String? ?? 'music'), color: Colors.white, size: 56),
@@ -76,7 +76,7 @@ class _EPlayAssetDetailScreenState extends State<EPlayAssetDetailScreen> {
                 ),
               ),
 
-              // ── Body ─────────────────────────────────────────────────
+              // â”€â”€ Body â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Container(
                   decoration: const BoxDecoration(
@@ -106,9 +106,9 @@ class _EPlayAssetDetailScreenState extends State<EPlayAssetDetailScreen> {
                       Container(
                         padding: const EdgeInsets.all(14),
                         decoration: BoxDecoration(
-                          color: kEPlayColor.withOpacity(0.07),
+                          color: kEPlayColor.withValues(alpha: 0.07),
                           borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: kEPlayColor.withOpacity(0.2)),
+                          border: Border.all(color: kEPlayColor.withValues(alpha: 0.2)),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,7 +120,7 @@ class _EPlayAssetDetailScreenState extends State<EPlayAssetDetailScreen> {
                             ]),
                             const SizedBox(height: 6),
                             const Text(
-                              'Your purchase grants perpetual cloud access — not a file download. Stream this content anytime from any device. Optionally pin for offline use.',
+                              'Your purchase grants perpetual cloud access â€” not a file download. Stream this content anytime from any device. Optionally pin for offline use.',
                               style: TextStyle(fontSize: 12, color: AppColors.textSecondary, height: 1.5),
                             ),
                           ],
@@ -133,7 +133,7 @@ class _EPlayAssetDetailScreenState extends State<EPlayAssetDetailScreen> {
                         Container(
                           margin: const EdgeInsets.only(bottom: 16),
                           padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(color: Colors.amber.withOpacity(0.1), borderRadius: BorderRadius.circular(10), border: Border.all(color: Colors.amber.withOpacity(0.3))),
+                          decoration: BoxDecoration(color: Colors.amber.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(10), border: Border.all(color: Colors.amber.withValues(alpha: 0.3))),
                           child: Row(children: [
                             const Icon(Icons.auto_awesome, color: Colors.amber, size: 16),
                             const SizedBox(width: 8),
@@ -145,7 +145,7 @@ class _EPlayAssetDetailScreenState extends State<EPlayAssetDetailScreen> {
                       const Text('About this content', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                       const SizedBox(height: 8),
                       const Text(
-                        'Experience authentic African creativity. This content is protected by e-Play DRM — accessible only within the Genie app for the authenticated license holder.',
+                        'Experience authentic African creativity. This content is protected by e-Play DRM â€” accessible only within the Genie app for the authenticated license holder.',
                         style: TextStyle(fontSize: 13, color: AppColors.textSecondary, height: 1.6),
                       ),
                       const SizedBox(height: 20),
@@ -164,7 +164,7 @@ class _EPlayAssetDetailScreenState extends State<EPlayAssetDetailScreen> {
                       _accessRow(Icons.lock_open, 'Perpetual Cloud Access', 'Stream forever after purchase'),
                       _accessRow(Icons.phone_android, 'Cross-device', 'Access from any Genie login'),
                       _accessRow(Icons.download_done, 'Offline Pin', 'Pin for temporary offline use'),
-                      _accessRow(Icons.block, 'No Resale', 'DRM-protected — not transferable'),
+                      _accessRow(Icons.block, 'No Resale', 'DRM-protected â€” not transferable'),
 
                       const SizedBox(height: 32),
 
@@ -186,7 +186,7 @@ class _EPlayAssetDetailScreenState extends State<EPlayAssetDetailScreen> {
                             : ElevatedButton.icon(
                                 onPressed: _purchasing ? null : _purchase,
                                 icon: _purchasing ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2)) : const Icon(Icons.add_shopping_cart),
-                                label: Text(_purchasing ? 'Processing…' : 'Add to Cloud Locker'),
+                                label: Text(_purchasing ? 'Processingâ€¦' : 'Add to Cloud Locker'),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: kEPlayColor,
                                   foregroundColor: Colors.white,
@@ -244,7 +244,7 @@ class _EPlayAssetDetailScreenState extends State<EPlayAssetDetailScreen> {
   Widget _typeBadge(String type, Color color) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-      decoration: BoxDecoration(color: color.withOpacity(0.1), borderRadius: BorderRadius.circular(8), border: Border.all(color: color.withOpacity(0.3))),
+      decoration: BoxDecoration(color: color.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(8), border: Border.all(color: color.withValues(alpha: 0.3))),
       child: Text(type.toUpperCase(), style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: color)),
     );
   }

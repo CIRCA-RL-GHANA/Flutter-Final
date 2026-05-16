@@ -1,4 +1,4 @@
-/// Fintech › Insurance — Policy Purchase & Claims Screen
+﻿/// Fintech â€º Insurance â€” Policy Purchase & Claims Screen
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -104,7 +104,7 @@ class _InsuranceScreenState extends State<InsuranceScreen>
         Consumer<AIInsightsNotifier>(builder: (context, ai, _) {
           if (ai.insights.isEmpty) return const SizedBox.shrink();
           return Container(
-            color: _kTeal.withOpacity(0.06),
+            color: _kTeal.withValues(alpha: 0.06),
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
             child: Row(children: [
               const Icon(Icons.auto_awesome, size: 14, color: _kTeal),
@@ -170,7 +170,7 @@ class _InsuranceScreenState extends State<InsuranceScreen>
   }
 }
 
-// ─── Sub-widgets ──────────────────────────────────────────────────────────────
+// â”€â”€â”€ Sub-widgets â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _PolicyTypeSelector extends StatelessWidget {
   final String selected;
@@ -271,14 +271,14 @@ class PolicyCard extends StatelessWidget {
           ]),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-            decoration: BoxDecoration(color: (status == 'active' ? Colors.green : Colors.grey).withOpacity(0.1), borderRadius: BorderRadius.circular(20)),
+            decoration: BoxDecoration(color: (status == 'active' ? Colors.green : Colors.grey).withValues(alpha: 0.1), borderRadius: BorderRadius.circular(20)),
             child: Text(status, style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: status == 'active' ? Colors.green : Colors.grey)),
           ),
         ]),
         const SizedBox(height: 6),
         Text('Coverage: $coverage QP', style: const TextStyle(color: Colors.grey, fontSize: 12)),
         if (status == 'active')
-          TextButton(onPressed: onFileClaim, child: const Text('File a Claim →', style: TextStyle(color: _kTeal))),
+          TextButton(onPressed: onFileClaim, child: const Text('File a Claim â†’', style: TextStyle(color: _kTeal))),
       ]),
     );
   }
@@ -305,7 +305,7 @@ class _ClaimTile extends StatelessWidget {
         ])),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-          decoration: BoxDecoration(color: _claimStatusColor(status).withOpacity(0.1), borderRadius: BorderRadius.circular(20)),
+          decoration: BoxDecoration(color: _claimStatusColor(status).withValues(alpha: 0.1), borderRadius: BorderRadius.circular(20)),
           child: Text(status.replaceAll('_', ' '), style: TextStyle(fontSize: 11, color: _claimStatusColor(status), fontWeight: FontWeight.w600)),
         ),
       ]),
@@ -323,7 +323,7 @@ class _ClaimTile extends StatelessWidget {
   }
 }
 
-// ─── File Claim Bottom Sheet ──────────────────────────────────────────────────
+// â”€â”€â”€ File Claim Bottom Sheet â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class ClaimsScreen extends StatefulWidget {
   const ClaimsScreen({super.key});

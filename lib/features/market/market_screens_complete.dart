@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class MarketCategoriesScreen extends StatelessWidget {
@@ -80,7 +80,7 @@ class StoreDetailsScreen extends StatelessWidget {
                 Row(
                   children: [
                     const Icon(Icons.star, color: Colors.amber, size: 20),
-                    const Text(' 4.7 • 2,341 reviews'),
+                    const Text(' 4.7 â€¢ 2,341 reviews'),
                   ],
                 ),
                 const SizedBox(height: 16),
@@ -175,7 +175,7 @@ class ProductDetailsScreen extends StatelessWidget {
                 Row(
                   children: [
                     const Icon(Icons.star, color: Colors.amber, size: 20),
-                    Text(' $rating • $reviews reviews'),
+                    Text(' $rating â€¢ $reviews reviews'),
                   ],
                 ),
                 const SizedBox(height: 16),
@@ -484,7 +484,7 @@ class OrderHistoryScreen extends StatelessWidget {
             margin: const EdgeInsets.only(bottom: 12),
             child: ListTile(
               title: Text(order['id'] as String, style: const TextStyle(fontWeight: FontWeight.bold)),
-              subtitle: Text('${order['items']} items • ${order['date']}'),
+              subtitle: Text('${order['items']} items â€¢ ${order['date']}'),
               trailing: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -492,7 +492,7 @@ class OrderHistoryScreen extends StatelessWidget {
                   Text(order['total'] as String, style: const TextStyle(fontWeight: FontWeight.bold)),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(color: statusColor.withOpacity(0.2), borderRadius: BorderRadius.circular(4)),
+                    decoration: BoxDecoration(color: statusColor.withValues(alpha: 0.2), borderRadius: BorderRadius.circular(4)),
                     child: Text(order['status'] as String, style: TextStyle(color: statusColor, fontSize: 12)),
                   ),
                 ],

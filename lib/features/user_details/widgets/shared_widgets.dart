@@ -1,13 +1,13 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// Shared Widgets for User Details Module
 /// Reusable components: collapsible sections, edit fields, status badges, etc.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../core/theme/app_colors.dart';
 
-// ─── Collapsible Section ─────────────────────────────────────────────────────
+// â”€â”€â”€ Collapsible Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class CollapsibleSection extends StatefulWidget {
   final String title;
@@ -109,7 +109,7 @@ class _CollapsibleSectionState extends State<CollapsibleSection>
   }
 }
 
-// ─── Detail Row ──────────────────────────────────────────────────────────────
+// â”€â”€â”€ Detail Row â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class DetailRow extends StatelessWidget {
   final IconData icon;
@@ -174,7 +174,7 @@ class DetailRow extends StatelessWidget {
   }
 }
 
-// ─── Status Badge ────────────────────────────────────────────────────────────
+// â”€â”€â”€ Status Badge â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class StatusBadge extends StatelessWidget {
   final String label;
@@ -193,9 +193,9 @@ class StatusBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: color.withOpacity(0.2)),
+        border: Border.all(color: color.withValues(alpha: 0.2)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -218,7 +218,7 @@ class StatusBadge extends StatelessWidget {
   }
 }
 
-// ─── Settings Toggle ─────────────────────────────────────────────────────────
+// â”€â”€â”€ Settings Toggle â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class SettingsToggle extends StatelessWidget {
   final String label;
@@ -283,7 +283,7 @@ class SettingsToggle extends StatelessWidget {
   }
 }
 
-// ─── Section Card ────────────────────────────────────────────────────────────
+// â”€â”€â”€ Section Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class SectionCard extends StatelessWidget {
   final Widget child;
@@ -309,7 +309,7 @@ class SectionCard extends StatelessWidget {
         border: borderColor != null ? Border.all(color: borderColor!) : null,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -320,7 +320,7 @@ class SectionCard extends StatelessWidget {
   }
 }
 
-// ─── Module Header (Back + Title + Actions) ──────────────────────────────────
+// â”€â”€â”€ Module Header (Back + Title + Actions) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class ModuleHeader extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -377,7 +377,7 @@ class ModuleHeader extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-// ─── Edit Field Modal ────────────────────────────────────────────────────────
+// â”€â”€â”€ Edit Field Modal â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class EditFieldModal extends StatefulWidget {
   final String title;
@@ -487,7 +487,7 @@ class _EditFieldModalState extends State<EditFieldModal> {
   }
 }
 
-// ─── Context Type Gradient ───────────────────────────────────────────────────
+// â”€â”€â”€ Context Type Gradient â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 Color contextTypeColor(dynamic entityType) {
   final name = entityType.toString().split('.').last;
@@ -504,6 +504,6 @@ LinearGradient contextTypeGradient(dynamic entityType) {
   return LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
-    colors: [c.withOpacity(0.08), c.withOpacity(0.02)],
+    colors: [c.withValues(alpha: 0.08), c.withValues(alpha: 0.02)],
   );
 }

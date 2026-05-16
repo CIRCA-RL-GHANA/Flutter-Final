@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// LIVE MODULE — Screen 12: Package Acceptance Flow
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// LIVE MODULE â€” Screen 12: Package Acceptance Flow
 /// Driver accepts/declines assigned packages, reviews details,
 /// confirms pickup readiness, and starts navigation
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -46,7 +46,7 @@ class _LivePackageAcceptanceScreenState extends State<LivePackageAcceptanceScree
                     margin: const EdgeInsets.only(bottom: 12),
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     decoration: BoxDecoration(
-                      color: kLiveColor.withOpacity(0.07),
+                      color: kLiveColor.withValues(alpha: 0.07),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Row(
@@ -87,8 +87,8 @@ class _LivePackageAcceptanceScreenState extends State<LivePackageAcceptanceScree
                     ),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                      decoration: BoxDecoration(color: Colors.white.withOpacity(0.2), borderRadius: BorderRadius.circular(8)),
-                      child: Text('₵${(pkg.driverEarnings * 0.08).toStringAsFixed(0)} earnings', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white)),
+                      decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.2), borderRadius: BorderRadius.circular(8)),
+                      child: Text('â‚µ${(pkg.driverEarnings * 0.08).toStringAsFixed(0)} earnings', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white)),
                     ),
                   ],
                 ),
@@ -110,14 +110,14 @@ class _LivePackageAcceptanceScreenState extends State<LivePackageAcceptanceScree
                         const SizedBox(width: 8),
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                          decoration: BoxDecoration(color: kLiveColor.withOpacity(0.1), borderRadius: BorderRadius.circular(4)),
+                          decoration: BoxDecoration(color: kLiveColor.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(4)),
                           child: Text(pkg.type.name.toUpperCase(), style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: kLiveColor)),
                         ),
                       ],
                     ),
                     const SizedBox(height: 8),
                     _InfoRow(icon: Icons.route, label: '${pkg.stops.length} stops'),
-                    _InfoRow(icon: Icons.attach_money, label: 'Value: ₵${pkg.driverEarnings.toStringAsFixed(0)}'),
+                    _InfoRow(icon: Icons.attach_money, label: 'Value: â‚µ${pkg.driverEarnings.toStringAsFixed(0)}'),
                     _InfoRow(icon: Icons.timer, label: 'Est. duration: 45 min'),
                     _InfoRow(icon: Icons.straighten, label: 'Est. distance: 8.3 km'),
                   ],
@@ -174,10 +174,10 @@ class _LivePackageAcceptanceScreenState extends State<LivePackageAcceptanceScree
                   spacing: 6,
                   runSpacing: 6,
                   children: [
-                    if (pkg.pinRequired) const _VerifyChip(label: '🔢 PIN', active: true),
-                    if (pkg.signatureRequired) const _VerifyChip(label: '✍️ Signature', active: true),
-                    if (pkg.photoRequired) const _VerifyChip(label: '📸 Photo', active: true),
-                    if (pkg.biometricRequired) const _VerifyChip(label: '🔐 Biometric', active: true),
+                    if (pkg.pinRequired) const _VerifyChip(label: 'ðŸ”¢ PIN', active: true),
+                    if (pkg.signatureRequired) const _VerifyChip(label: 'âœï¸ Signature', active: true),
+                    if (pkg.photoRequired) const _VerifyChip(label: 'ðŸ“¸ Photo', active: true),
+                    if (pkg.biometricRequired) const _VerifyChip(label: 'ðŸ” Biometric', active: true),
                   ],
                 ),
               ),
@@ -203,7 +203,7 @@ class _LivePackageAcceptanceScreenState extends State<LivePackageAcceptanceScree
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
             decoration: BoxDecoration(
               color: Colors.white,
-              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 8, offset: const Offset(0, -2))],
+              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 8, offset: const Offset(0, -2))],
             ),
             child: Row(
               children: [
@@ -257,7 +257,7 @@ class _AcceptedView extends StatelessWidget {
             children: [
               Container(
                 padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(shape: BoxShape.circle, color: const Color(0xFF10B981).withOpacity(0.1)),
+                decoration: BoxDecoration(shape: BoxShape.circle, color: const Color(0xFF10B981).withValues(alpha: 0.1)),
                 child: const Icon(Icons.check_circle, size: 64, color: Color(0xFF10B981)),
               ),
               const SizedBox(height: 20),

@@ -1,4 +1,4 @@
-/// qualChat Screen 10 — Chat Thread (Enhanced)
+﻿/// qualChat Screen 10 â€” Chat Thread (Enhanced)
 /// Immersive conversation: messages, composer, reactions, attachments, header menu
 
 import 'package:flutter/material.dart';
@@ -63,7 +63,7 @@ class _QualChatThreadScreenState extends State<QualChatThreadScreen> {
                   children: [
                     CircleAvatar(
                       radius: 18,
-                      backgroundColor: kChatColor.withOpacity(0.15),
+                      backgroundColor: kChatColor.withValues(alpha: 0.15),
                       child: Text(
                         conversation.title[0].toUpperCase(),
                         style: const TextStyle(fontWeight: FontWeight.w700, color: kChatColor, fontSize: 16),
@@ -141,13 +141,13 @@ class _QualChatThreadScreenState extends State<QualChatThreadScreen> {
                   }
                 },
                 itemBuilder: (_) => const [
-                  PopupMenuItem(value: 'search', child: Text('🔍 Search in Chat')),
-                  PopupMenuItem(value: 'mute', child: Text('🔇 Mute Notifications')),
-                  PopupMenuItem(value: 'pin', child: Text('📌 Pin Conversation')),
-                  PopupMenuItem(value: 'archive', child: Text('📦 Archive Chat')),
+                  PopupMenuItem(value: 'search', child: Text('ðŸ” Search in Chat')),
+                  PopupMenuItem(value: 'mute', child: Text('ðŸ”‡ Mute Notifications')),
+                  PopupMenuItem(value: 'pin', child: Text('ðŸ“Œ Pin Conversation')),
+                  PopupMenuItem(value: 'archive', child: Text('ðŸ“¦ Archive Chat')),
                   PopupMenuDivider(),
-                  PopupMenuItem(value: 'report', child: Text('🚩 Report')),
-                  PopupMenuItem(value: 'block', child: Text('🚫 Block User')),
+                  PopupMenuItem(value: 'report', child: Text('ðŸš© Report')),
+                  PopupMenuItem(value: 'block', child: Text('ðŸš« Block User')),
                 ],
               ),
             ],
@@ -165,10 +165,10 @@ class _QualChatThreadScreenState extends State<QualChatThreadScreen> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(Icons.chat_bubble_outline, size: 64, color: kChatColor.withOpacity(0.3)),
+                            Icon(Icons.chat_bubble_outline, size: 64, color: kChatColor.withValues(alpha: 0.3)),
                             const SizedBox(height: 16),
                             const Text(
-                              'Start a conversation! 💬',
+                              'Start a conversation! ðŸ’¬',
                               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Color(0xFF6B7280)),
                             ),
                             const SizedBox(height: 4),
@@ -266,11 +266,11 @@ class _QualChatThreadScreenState extends State<QualChatThreadScreen> {
           mainAxisSize: MainAxisSize.min,
           children: ChatReportReason.values.map((reason) {
             final labels = {
-              ChatReportReason.spam: '🚫 Spam',
-              ChatReportReason.harassment: '😠 Harassment',
-              ChatReportReason.inappropriate: '⚠️ Inappropriate Content',
-              ChatReportReason.impersonation: '🎭 Impersonation',
-              ChatReportReason.other: '📝 Other',
+              ChatReportReason.spam: 'ðŸš« Spam',
+              ChatReportReason.harassment: 'ðŸ˜  Harassment',
+              ChatReportReason.inappropriate: 'âš ï¸ Inappropriate Content',
+              ChatReportReason.impersonation: 'ðŸŽ­ Impersonation',
+              ChatReportReason.other: 'ðŸ“ Other',
             };
             return ListTile(
               title: Text(labels[reason]!, style: const TextStyle(fontSize: 14)),
@@ -296,12 +296,12 @@ class _AISentimentBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     final label = insight?.label as String? ?? '';
     final type = insight?.type as String? ?? '';
-    final emoji = type == 'positive' ? '😊' : type == 'negative' ? '😟' : '🤝';
+    final emoji = type == 'positive' ? 'ðŸ˜Š' : type == 'negative' ? 'ðŸ˜Ÿ' : 'ðŸ¤';
     if (label.isEmpty) return const SizedBox.shrink();
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 7),
-      color: kChatColor.withOpacity(0.06),
+      color: kChatColor.withValues(alpha: 0.06),
       child: Row(
         children: [
           Text(emoji, style: const TextStyle(fontSize: 14)),
@@ -344,9 +344,9 @@ class _AISmartReplyStrip extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
             decoration: BoxDecoration(
-              color: kChatColor.withOpacity(0.08),
+              color: kChatColor.withValues(alpha: 0.08),
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: kChatColor.withOpacity(0.3)),
+              border: Border.all(color: kChatColor.withValues(alpha: 0.3)),
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
@@ -414,7 +414,7 @@ class _SmartComposer extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border(top: BorderSide(color: Colors.grey.shade200)),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 8, offset: const Offset(0, -2))],
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8, offset: const Offset(0, -2))],
       ),
       child: SafeArea(
         child: Row(
@@ -501,7 +501,7 @@ class _AttachmentOption extends StatelessWidget {
             width: 48,
             height: 48,
             decoration: BoxDecoration(
-              color: color.withOpacity(0.1),
+              color: color.withValues(alpha: 0.1),
               shape: BoxShape.circle,
             ),
             child: Icon(icon, color: color),

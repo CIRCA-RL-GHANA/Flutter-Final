@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/constants/app_strings.dart';
@@ -17,7 +17,7 @@ class WelcomeScreen extends StatefulWidget {
   State<WelcomeScreen> createState() => _WelcomeScreenState();
 }
 
-// ── OS palette (mirrors splash) ───────────────────────────────────────────────
+// â”€â”€ OS palette (mirrors splash) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const Color _kBg        = Color(0xFF08080F);
 const Color _kSurface   = Color(0xFF0E0E1A);
 const Color _kBorder    = Color(0xFF1C1C2E);
@@ -83,7 +83,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // ── System header ─────────────────────────────────────
+                  // â”€â”€ System header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                   Padding(
                     padding: const EdgeInsets.fromLTRB(24, 28, 24, 0),
                     child: Row(
@@ -112,7 +112,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                                   style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.w400,
-                                    color: _kText.withOpacity(0.65),
+                                    color: _kText.withValues(alpha: 0.65),
                                     letterSpacing: 0.3,
                                   ),
                                 ),
@@ -124,15 +124,15 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                                   horizontal: 7, vertical: 3),
                               decoration: BoxDecoration(
                                 border: Border.all(
-                                    color: _kAccent.withOpacity(0.30)),
+                                    color: _kAccent.withValues(alpha: 0.30)),
                                 borderRadius: BorderRadius.circular(3),
                               ),
                               child: Text(
-                                'COMMERCE OS  ·  v1.0',
+                                'COMMERCE OS  Â·  v1.0',
                                 style: TextStyle(
                                   fontSize: 9,
                                   fontWeight: FontWeight.w600,
-                                  color: _kAccent.withOpacity(0.90),
+                                  color: _kAccent.withValues(alpha: 0.90),
                                   letterSpacing: 2.2,
                                 ),
                               ),
@@ -145,12 +145,12 @@ class _WelcomeScreenState extends State<WelcomeScreen>
 
                   const SizedBox(height: 32),
 
-                  // ── Divider ────────────────────────────────────────────
+                  // â”€â”€ Divider â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                   Container(height: 1, color: _kBorder),
 
                   const SizedBox(height: 28),
 
-                  // ── Descriptor ────────────────────────────────────────
+                  // â”€â”€ Descriptor â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24),
                     child: Column(
@@ -167,7 +167,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          'Payments · Logistics · Commerce · Finance · AI',
+                          'Payments Â· Logistics Â· Commerce Â· Finance Â· AI',
                           style: TextStyle(
                             fontSize: 12,
                             color: _kTextDim,
@@ -180,7 +180,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
 
                   const SizedBox(height: 28),
 
-                  // ── Module manifest grid ───────────────────────────────
+                  // â”€â”€ Module manifest grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -188,7 +188,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     ),
                   ),
 
-                  // ── Platform Overview link ────────────────────────────
+                  // â”€â”€ Platform Overview link â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                   Padding(
                     padding: const EdgeInsets.fromLTRB(24, 4, 24, 0),
                     child: Semantics(
@@ -204,14 +204,14 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                         decoration: BoxDecoration(
                           color: _kSurface,
                           border: Border.all(
-                              color: _kAccent.withOpacity(0.30)),
+                              color: _kAccent.withValues(alpha: 0.30)),
                           borderRadius: BorderRadius.circular(6),
                         ),
                         child: Row(
                           children: [
                             Icon(Icons.menu_book_outlined,
                                 size: 14,
-                                color: _kAccent.withOpacity(0.80)),
+                                color: _kAccent.withValues(alpha: 0.80)),
                             const SizedBox(width: 10),
                             const Expanded(
                               child: Text(
@@ -234,7 +234,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                             ),
                             const SizedBox(width: 6),
                             Icon(Icons.chevron_right,
-                                size: 14, color: _kAccent.withOpacity(0.70)),
+                                size: 14, color: _kAccent.withValues(alpha: 0.70)),
                           ],
                         ),
                       ),
@@ -242,7 +242,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     ),
                   ),
 
-                  // ── Actions ───────────────────────────────────────────
+                  // â”€â”€ Actions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                   Padding(
                     padding: const EdgeInsets.fromLTRB(24, 12, 24, 8),
                     child: Semantics(
@@ -302,8 +302,8 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   }
 }
 
-// ─── Module manifest grid ─────────────────────────────────────────────────────
-// Shows the installed modules of the OS — commerce, payments, logistics, etc.
+// â”€â”€â”€ Module manifest grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// Shows the installed modules of the OS â€” commerce, payments, logistics, etc.
 
 class _Module {
   final String code;
@@ -320,14 +320,14 @@ class _Module {
 }
 
 const _kModules = [
-  _Module(code: 'GO',   label: 'GO Wallet',   desc: 'Send · Pay · Top up',    icon: Icons.account_balance_wallet_outlined),
-  _Module(code: 'MKT',  label: 'Market',       desc: 'Buy · Sell · Deliver',   icon: Icons.storefront_outlined),
-  _Module(code: 'LIV',  label: 'Live',         desc: 'Ride · Track · Deliver', icon: Icons.near_me_outlined),
-  _Module(code: 'QC',   label: 'QualChat',     desc: 'Comm · Signal · Relay',  icon: Icons.chat_bubble_outline),
-  _Module(code: 'APR',  label: 'APRIL',        desc: 'Plan · Budget · Earn',   icon: Icons.event_note_outlined),
-  _Module(code: 'UPD',  label: 'Updates',      desc: 'Follow · Post · React',  icon: Icons.dynamic_feed_outlined),
-  _Module(code: 'ENT',  label: 'Enterprise',   desc: 'API · Webhooks · RBAC',  icon: Icons.hub_outlined),
-  _Module(code: 'FIN',  label: 'Fintech',      desc: 'Loans · Insurance · FI', icon: Icons.account_balance_outlined),
+  _Module(code: 'GO',   label: 'GO Wallet',   desc: 'Send Â· Pay Â· Top up',    icon: Icons.account_balance_wallet_outlined),
+  _Module(code: 'MKT',  label: 'Market',       desc: 'Buy Â· Sell Â· Deliver',   icon: Icons.storefront_outlined),
+  _Module(code: 'LIV',  label: 'Live',         desc: 'Ride Â· Track Â· Deliver', icon: Icons.near_me_outlined),
+  _Module(code: 'QC',   label: 'QualChat',     desc: 'Comm Â· Signal Â· Relay',  icon: Icons.chat_bubble_outline),
+  _Module(code: 'APR',  label: 'APRIL',        desc: 'Plan Â· Budget Â· Earn',   icon: Icons.event_note_outlined),
+  _Module(code: 'UPD',  label: 'Updates',      desc: 'Follow Â· Post Â· React',  icon: Icons.dynamic_feed_outlined),
+  _Module(code: 'ENT',  label: 'Enterprise',   desc: 'API Â· Webhooks Â· RBAC',  icon: Icons.hub_outlined),
+  _Module(code: 'FIN',  label: 'Fintech',      desc: 'Loans Â· Insurance Â· FI', icon: Icons.account_balance_outlined),
 ];
 
 class _ModuleGrid extends StatelessWidget {
@@ -375,7 +375,7 @@ class _ModuleCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Icon(module.icon, size: 18, color: _kAccent.withOpacity(0.70)),
+          Icon(module.icon, size: 18, color: _kAccent.withValues(alpha: 0.70)),
           const SizedBox(width: 10),
           Expanded(
             child: Column(
@@ -402,12 +402,12 @@ class _ModuleCard extends StatelessWidget {
               ],
             ),
           ),
-          // Status dot — online
+          // Status dot â€” online
           Container(
             width: 5,
             height: 5,
             decoration: BoxDecoration(
-              color: const Color(0xFF10B981).withOpacity(0.70),
+              color: const Color(0xFF10B981).withValues(alpha: 0.70),
               shape: BoxShape.circle,
             ),
           ),
@@ -417,7 +417,7 @@ class _ModuleCard extends StatelessWidget {
   }
 }
 
-// ─── OS primary button ────────────────────────────────────────────────────────
+// â”€â”€â”€ OS primary button â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _OsButton extends StatelessWidget {
   final String label;
   final VoidCallback onTap;
@@ -456,7 +456,7 @@ class _OsButton extends StatelessWidget {
   }
 }
 
-// ─── Mini brand mark (consistent with splash) ────────────────────────────────
+// â”€â”€â”€ Mini brand mark (consistent with splash) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _MiniHexMark extends StatelessWidget {
   const _MiniHexMark();
 

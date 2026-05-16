@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Transaction {
@@ -314,7 +314,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
 
     return ListTile(
       leading: CircleAvatar(
-        backgroundColor: color.withOpacity(0.2),
+        backgroundColor: color.withValues(alpha: 0.2),
         child: Icon(
           txn.type == 'credit'
               ? Icons.arrow_downward

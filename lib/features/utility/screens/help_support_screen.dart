@@ -1,7 +1,7 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// U4: HELP & SUPPORT Screen
 /// FAQ articles, support tickets, contact options, search help
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -32,7 +32,7 @@ class HelpSupportScreen extends StatelessWidget {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kUtilityColor.withOpacity(0.07),
+                    color: kUtilityColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -50,14 +50,14 @@ class HelpSupportScreen extends StatelessWidget {
                   );
                 },
               ),
-              // ─── Search Help ───────────────────────────────
+              // â”€â”€â”€ Search Help â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(14),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.04),
+                      color: Colors.black.withValues(alpha: 0.04),
                       blurRadius: 10,
                       offset: const Offset(0, 2),
                     ),
@@ -77,7 +77,7 @@ class HelpSupportScreen extends StatelessWidget {
 
               const SizedBox(height: 16),
 
-              // ─── Contact Options ──────────────────────────
+              // â”€â”€â”€ Contact Options â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               const UtilitySectionTitle(
                 title: 'Contact Us',
                 icon: Icons.headset_mic,
@@ -98,7 +98,7 @@ class HelpSupportScreen extends StatelessWidget {
 
               const SizedBox(height: 16),
 
-              // ─── Category Chips ───────────────────────────
+              // â”€â”€â”€ Category Chips â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               const UtilitySectionTitle(
                 title: 'Help Articles',
                 icon: Icons.article,
@@ -128,7 +128,7 @@ class HelpSupportScreen extends StatelessWidget {
 
               const SizedBox(height: 12),
 
-              // ─── Articles List ────────────────────────────
+              // â”€â”€â”€ Articles List â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               if (articles.isEmpty)
                 const Padding(
                   padding: EdgeInsets.only(top: 20),
@@ -141,7 +141,7 @@ class HelpSupportScreen extends StatelessWidget {
               else
                 ...articles.map((article) => _ArticleCard(article: article)),
 
-              // ─── Support Tickets ──────────────────────────
+              // â”€â”€â”€ Support Tickets â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               if (tickets.isNotEmpty) ...[
                 const SizedBox(height: 16),
                 const UtilitySectionTitle(
@@ -171,7 +171,7 @@ class HelpSupportScreen extends StatelessWidget {
   }
 }
 
-// ─── Contact Card ────────────────────────────────────────────────────────────
+// â”€â”€â”€ Contact Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _ContactCard extends StatelessWidget {
   final ContactOption option;
@@ -189,7 +189,7 @@ class _ContactCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(14),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.04),
+              color: Colors.black.withValues(alpha: 0.04),
               blurRadius: 10,
               offset: const Offset(0, 2),
             ),
@@ -217,7 +217,7 @@ class _ContactCard extends StatelessWidget {
   }
 }
 
-// ─── Category Chip ───────────────────────────────────────────────────────────
+// â”€â”€â”€ Category Chip â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _HelpCategoryChip extends StatelessWidget {
   final String label;
@@ -259,7 +259,7 @@ class _HelpCategoryChip extends StatelessWidget {
   }
 }
 
-// ─── Article Card ────────────────────────────────────────────────────────────
+// â”€â”€â”€ Article Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _ArticleCard extends StatefulWidget {
   final HelpArticle article;
@@ -288,11 +288,11 @@ class _ArticleCardState extends State<_ArticleCard> {
             color: Colors.white,
             borderRadius: BorderRadius.circular(14),
             border: widget.article.isPinned
-                ? Border.all(color: const Color(0xFF10B981).withOpacity(0.2))
+                ? Border.all(color: const Color(0xFF10B981).withValues(alpha: 0.2))
                 : null,
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.03),
+                color: Colors.black.withValues(alpha: 0.03),
                 blurRadius: 8,
                 offset: const Offset(0, 2),
               ),
@@ -363,7 +363,7 @@ class _ArticleCardState extends State<_ArticleCard> {
   }
 }
 
-// ─── Ticket Card ─────────────────────────────────────────────────────────────
+// â”€â”€â”€ Ticket Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _TicketCard extends StatelessWidget {
   final SupportTicket ticket;
@@ -393,7 +393,7 @@ class _TicketCard extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              '#${ticket.id} · ${ticket.messages.length} message${ticket.messages.length != 1 ? 's' : ''}',
+              '#${ticket.id} Â· ${ticket.messages.length} message${ticket.messages.length != 1 ? 's' : ''}',
               style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
             ),
             if (ticket.assignedAgent != null) ...[

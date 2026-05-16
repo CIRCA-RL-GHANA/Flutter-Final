@@ -1,7 +1,7 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// USER DETAILS Widget (Profile & Entities)
 /// Visible to: ALL roles
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -51,15 +51,15 @@ class UserDetailsWidgetContent extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: color.withOpacity(0.06),
+              color: color.withValues(alpha: 0.06),
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: color.withOpacity(0.12)),
+              border: Border.all(color: color.withValues(alpha: 0.12)),
             ),
             child: Row(
               children: [
                 CircleAvatar(
                   radius: 20,
-                  backgroundColor: color.withOpacity(0.15),
+                  backgroundColor: color.withValues(alpha: 0.15),
                   child: Text(
                     activeContext.name.isNotEmpty
                         ? activeContext.name[0].toUpperCase()
@@ -151,7 +151,7 @@ class UserDetailsWidgetContent extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
-              color: AppColors.success.withOpacity(0.06),
+              color: AppColors.success.withValues(alpha: 0.06),
               borderRadius: BorderRadius.circular(6),
             ),
             child: Row(
@@ -160,7 +160,7 @@ class UserDetailsWidgetContent extends StatelessWidget {
                 const SizedBox(width: 4),
                 const Expanded(
                   child: Text(
-                    '2FA on • Last login: Today',
+                    '2FA on â€¢ Last login: Today',
                     style: TextStyle(fontSize: 9, color: AppColors.textTertiary),
                   ),
                 ),
@@ -188,7 +188,7 @@ class _QuickSetting extends StatelessWidget {
           width: 32,
           height: 32,
           decoration: BoxDecoration(
-            color: color.withOpacity(0.08),
+            color: color.withValues(alpha: 0.08),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Icon(icon, size: 16, color: color),

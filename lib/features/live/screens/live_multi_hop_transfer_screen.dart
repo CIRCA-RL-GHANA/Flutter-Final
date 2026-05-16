@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// LIVE MODULE — Screen 15: Multi-Hop Transfer Flow
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// LIVE MODULE â€” Screen 15: Multi-Hop Transfer Flow
 /// Package hand-off between drivers: scan verification,
 /// condition check, chain-of-custody log, transfer confirmation
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -63,7 +63,7 @@ class _LiveMultiHopTransferScreenState extends State<LiveMultiHopTransferScreen>
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kLiveColor.withOpacity(0.07),
+                    color: kLiveColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -114,7 +114,7 @@ class _LiveMultiHopTransferScreenState extends State<LiveMultiHopTransferScreen>
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
             decoration: BoxDecoration(
               color: Colors.white,
-              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 8, offset: const Offset(0, -2))],
+              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 8, offset: const Offset(0, -2))],
             ),
             child: Row(
               children: [
@@ -138,7 +138,7 @@ class _LiveMultiHopTransferScreenState extends State<LiveMultiHopTransferScreen>
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     ),
                     child: Text(
-                      _step == 0 ? 'NEXT: VERIFY' : _step == 1 ? 'NEXT: HANDOFF' : '✅ COMPLETE TRANSFER',
+                      _step == 0 ? 'NEXT: VERIFY' : _step == 1 ? 'NEXT: HANDOFF' : 'âœ… COMPLETE TRANSFER',
                       style: const TextStyle(fontWeight: FontWeight.w700),
                     ),
                   ),
@@ -184,7 +184,7 @@ class _ScanStep extends StatelessWidget {
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: scanned ? const Color(0xFF10B981).withOpacity(0.1) : const Color(0xFF8B5CF6).withOpacity(0.1),
+                  color: scanned ? const Color(0xFF10B981).withValues(alpha: 0.1) : const Color(0xFF8B5CF6).withValues(alpha: 0.1),
                 ),
                 child: Icon(
                   scanned ? Icons.check_circle : Icons.qr_code_scanner,
@@ -193,7 +193,7 @@ class _ScanStep extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
-              Text(scanned ? 'PACKAGE SCANNED ✅' : 'SCAN PACKAGE QR CODE', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: scanned ? const Color(0xFF10B981) : AppColors.textPrimary)),
+              Text(scanned ? 'PACKAGE SCANNED âœ…' : 'SCAN PACKAGE QR CODE', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: scanned ? const Color(0xFF10B981) : AppColors.textPrimary)),
               const SizedBox(height: 4),
               Text('Scan the QR code on package ${package.id}', style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
             ],
@@ -206,7 +206,7 @@ class _ScanStep extends StatelessWidget {
             decoration: BoxDecoration(
               color: const Color(0xFFF3F4F6),
               borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: const Color(0xFF8B5CF6).withOpacity(0.3), width: 2),
+              border: Border.all(color: const Color(0xFF8B5CF6).withValues(alpha: 0.3), width: 2),
             ),
             child: Center(
               child: Column(
@@ -241,7 +241,7 @@ class _ScanStep extends StatelessWidget {
                 _TransferInfoRow(label: 'Package ID', value: package.id),
                 _TransferInfoRow(label: 'Type', value: package.type.name.toUpperCase()),
                 _TransferInfoRow(label: 'Stops remaining', value: '${package.stops.where((s) => s.status != StopStatus.completed).length}'),
-                _TransferInfoRow(label: 'Value', value: '₵${package.driverEarnings.toStringAsFixed(0)}'),
+                _TransferInfoRow(label: 'Value', value: 'â‚µ${package.driverEarnings.toStringAsFixed(0)}'),
               ],
             ),
           ),
@@ -326,7 +326,7 @@ class _HandoffStep extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 22,
-                backgroundColor: const Color(0xFF3B82F6).withOpacity(0.1),
+                backgroundColor: const Color(0xFF3B82F6).withValues(alpha: 0.1),
                 child: const Text('SC', style: TextStyle(fontWeight: FontWeight.w700, color: Color(0xFF3B82F6))),
               ),
               const SizedBox(width: 12),
@@ -341,7 +341,7 @@ class _HandoffStep extends StatelessWidget {
                         const SizedBox(width: 2),
                         Text('4.7', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                         const SizedBox(width: 8),
-                        Text('ID verified ✅', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                        Text('ID verified âœ…', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                       ],
                     ),
                   ],
@@ -420,11 +420,11 @@ class _TransferCompleteView extends StatelessWidget {
             children: [
               Container(
                 padding: const EdgeInsets.all(24),
-                decoration: BoxDecoration(shape: BoxShape.circle, color: const Color(0xFF10B981).withOpacity(0.1)),
+                decoration: BoxDecoration(shape: BoxShape.circle, color: const Color(0xFF10B981).withValues(alpha: 0.1)),
                 child: const Icon(Icons.handshake, size: 64, color: Color(0xFF10B981)),
               ),
               const SizedBox(height: 20),
-              const Text('🤝 TRANSFER COMPLETE!', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
+              const Text('ðŸ¤ TRANSFER COMPLETE!', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
               const SizedBox(height: 8),
               Text('Package ${package.id} handed off successfully', style: TextStyle(fontSize: 14, color: AppColors.textSecondary)),
               const SizedBox(height: 4),
@@ -516,7 +516,7 @@ class _CustodyEntry extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(name, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-                Text('$time — $action', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                Text('$time â€” $action', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
               ],
             ),
           ),

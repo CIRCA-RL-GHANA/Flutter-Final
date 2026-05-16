@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Investment {
@@ -309,7 +309,7 @@ class _InvestmentsDashboardState extends State<InvestmentsDashboard> {
       margin: const EdgeInsets.only(bottom: 12),
       child: ListTile(
         leading: CircleAvatar(
-          backgroundColor: color.withOpacity(0.2),
+          backgroundColor: color.withValues(alpha: 0.2),
           child: Icon(Icons.trending_up, color: color),
         ),
         title: Text(inv.name),

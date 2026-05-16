@@ -1,4 +1,4 @@
-/// APRIL Screen 1 — ActionCore Dashboard (Home Hub)
+﻿/// APRIL Screen 1 â€” ActionCore Dashboard (Home Hub)
 /// Master header, voice center, notifications, plugin grid, command bar, status
 
 import 'package:flutter/material.dart';
@@ -20,7 +20,7 @@ class AprilDashboardScreen extends StatelessWidget {
           backgroundColor: const Color(0xFFF8F9FE),
           body: CustomScrollView(
             slivers: [
-              // ──── MASTER HEADER (Sticky) ────
+              // â”€â”€â”€â”€ MASTER HEADER (Sticky) â”€â”€â”€â”€
               SliverAppBar(
                 pinned: true,
                 expandedHeight: 140,
@@ -50,7 +50,7 @@ class AprilDashboardScreen extends StatelessWidget {
                                 width: 40,
                                 height: 40,
                                 decoration: BoxDecoration(
-                                  color: kAprilColor.withOpacity(0.15),
+                                  color: kAprilColor.withValues(alpha: 0.15),
                                   shape: BoxShape.circle,
                                 ),
                                 child: const Icon(Icons.person, color: kAprilColorDark),
@@ -68,7 +68,7 @@ class AprilDashboardScreen extends StatelessWidget {
                                       Container(
                                         padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                                         decoration: BoxDecoration(
-                                          color: kAprilColor.withOpacity(0.15),
+                                          color: kAprilColor.withValues(alpha: 0.15),
                                           borderRadius: BorderRadius.circular(4),
                                         ),
                                         child: const Text('Owner', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: kAprilColorDark)),
@@ -99,7 +99,7 @@ class AprilDashboardScreen extends StatelessWidget {
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-                              const Text(' • ', style: TextStyle(color: Color(0xFF9CA3AF))),
+                              const Text(' â€¢ ', style: TextStyle(color: Color(0xFF9CA3AF))),
                               Text(
                                 'Last sync: ${_timeAgo(provider.lastSync)}',
                                 style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280)),
@@ -117,9 +117,9 @@ class AprilDashboardScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(16),
                 sliver: SliverList(
                   delegate: SliverChildListDelegate([
-                    // ──── VOICE COMMAND CENTER ────
+                    // â”€â”€â”€â”€ VOICE COMMAND CENTER â”€â”€â”€â”€
                     AprilSectionCard(
-                      title: '🎤 Voice Command Center',
+                      title: 'ðŸŽ¤ Voice Command Center',
                       child: Column(
                         children: [
                           const SizedBox(height: 8),
@@ -185,9 +185,9 @@ class AprilDashboardScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
 
-                    // ──── SMART NOTIFICATIONS PANEL ────
+                    // â”€â”€â”€â”€ SMART NOTIFICATIONS PANEL â”€â”€â”€â”€
                     AprilSectionCard(
-                      title: '🔔 Notifications',
+                      title: 'ðŸ”” Notifications',
                       trailing: provider.unreadNotificationCount > 0
                           ? Container(
                               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
@@ -206,7 +206,7 @@ class AprilDashboardScreen extends StatelessWidget {
                           if (provider.notifications.isEmpty)
                             const Padding(
                               padding: EdgeInsets.symmetric(vertical: 16),
-                              child: Text('All caught up! 🎉', style: TextStyle(color: Color(0xFF6B7280))),
+                              child: Text('All caught up! ðŸŽ‰', style: TextStyle(color: Color(0xFF6B7280))),
                             )
                           else
                             ...provider.notifications.map((n) => AprilNotificationCard(
@@ -230,13 +230,13 @@ class AprilDashboardScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
 
-                    // ──── AI INSIGHTS PANEL ────
+                    // â”€â”€â”€â”€ AI INSIGHTS PANEL â”€â”€â”€â”€
                     Consumer<AIInsightsNotifier>(
                       builder: (ctx, aiNotifier, _) {
                         final insights = aiNotifier.insights;
                         if (insights.isEmpty) return const SizedBox.shrink();
                         return AprilSectionCard(
-                          title: '✨ AI Insights',
+                          title: 'âœ¨ AI Insights',
                           child: Column(
                             children: [
                               ...insights.take(2).map(
@@ -252,9 +252,9 @@ class AprilDashboardScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
 
-                    // ──── PLUGIN QUICK ACCESS GRID ────
+                    // â”€â”€â”€â”€ PLUGIN QUICK ACCESS GRID â”€â”€â”€â”€
                     const Text(
-                      '📦 Plugins',
+                      'ðŸ“¦ Plugins',
                       style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
                     ),
                     const SizedBox(height: 12),
@@ -283,9 +283,9 @@ class AprilDashboardScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
 
-                    // ──── QUICK COMMAND BAR ────
+                    // â”€â”€â”€â”€ QUICK COMMAND BAR â”€â”€â”€â”€
                     AprilSectionCard(
-                      title: '⚡ Quick Command',
+                      title: 'âš¡ Quick Command',
                       child: Column(
                         children: [
                           TextField(
@@ -316,7 +316,7 @@ class AprilDashboardScreen extends StatelessWidget {
                                       child: Container(
                                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                                         decoration: BoxDecoration(
-                                          color: kAprilColor.withOpacity(0.08),
+                                          color: kAprilColor.withValues(alpha: 0.08),
                                           borderRadius: BorderRadius.circular(8),
                                         ),
                                         child: Text(t, style: const TextStyle(fontSize: 11, color: kAprilColorDark)),
@@ -329,7 +329,7 @@ class AprilDashboardScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
 
-                    // ──── SYSTEM STATUS FOOTER ────
+                    // â”€â”€â”€â”€ SYSTEM STATUS FOOTER â”€â”€â”€â”€
                     Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
@@ -360,7 +360,7 @@ class AprilDashboardScreen extends StatelessWidget {
                               GestureDetector(
                                 onTap: () {},
                                 child: const Text(
-                                  '🛑 Emergency Stop',
+                                  'ðŸ›‘ Emergency Stop',
                                   style: TextStyle(fontSize: 11, color: Color(0xFFEF4444), fontWeight: FontWeight.w600),
                                 ),
                               ),
@@ -382,9 +382,9 @@ class AprilDashboardScreen extends StatelessWidget {
 
   String _greeting(String name) {
     final hour = DateTime.now().hour;
-    if (hour < 12) return 'Good morning, $name! ☀️';
-    if (hour < 17) return 'Good afternoon, $name! 🌤️';
-    return 'Good evening, $name! 🌙';
+    if (hour < 12) return 'Good morning, $name! â˜€ï¸';
+    if (hour < 17) return 'Good afternoon, $name! ðŸŒ¤ï¸';
+    return 'Good evening, $name! ðŸŒ™';
   }
 
   String _timeAgo(DateTime dt) {

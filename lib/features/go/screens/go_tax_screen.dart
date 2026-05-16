@@ -1,4 +1,4 @@
-/// GO Screen 11 — Tax & Compliance
+﻿/// GO Screen 11 â€” Tax & Compliance
 /// Transaction categorization, report generator, regulatory dashboard
 
 import 'package:flutter/material.dart';
@@ -34,7 +34,7 @@ class _GoTaxScreenState extends State<GoTaxScreen> with SingleTickerProviderStat
               builder: (context, ai, _) {
                 if (ai.insights.isEmpty) return const SizedBox.shrink();
                 return Container(
-                  color: kGoColor.withOpacity(0.07),
+                  color: kGoColor.withValues(alpha: 0.07),
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                   child: Row(
                     children: [
@@ -147,7 +147,7 @@ class _GoTaxScreenState extends State<GoTaxScreen> with SingleTickerProviderStat
   Widget _buildDocuments(GoProvider p) {
     final docs = [
       ('Tax Certificate 2024', 'PDF', '2.3 MB', Icons.picture_as_pdf, kGoNegative),
-      ('KYC Verification', 'Verified', '—', Icons.verified, kGoPositive),
+      ('KYC Verification', 'Verified', 'â€”', Icons.verified, kGoPositive),
       ('AML Report Q4', 'PDF', '1.1 MB', Icons.picture_as_pdf, kGoNegative),
       ('Transaction Summary', 'CSV', '456 KB', Icons.table_chart, kGoInfo),
       ('Compliance Audit', 'PDF', '3.7 MB', Icons.picture_as_pdf, kGoNegative),
@@ -175,7 +175,7 @@ class _GoTaxScreenState extends State<GoTaxScreen> with SingleTickerProviderStat
         child: ListTile(
           leading: Icon(d.$4, color: d.$5, size: 24),
           title: Text(d.$1, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-          subtitle: Text('${d.$2} • ${d.$3}', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+          subtitle: Text('${d.$2} â€¢ ${d.$3}', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
           trailing: IconButton(icon: const Icon(Icons.download, size: 18, color: kGoColor), onPressed: () {}),
           dense: true,
         ),
@@ -232,7 +232,7 @@ class _ComplianceBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
-    decoration: BoxDecoration(color: color.withOpacity(0.1), borderRadius: BorderRadius.circular(8)),
+    decoration: BoxDecoration(color: color.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(8)),
     child: Text(label, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: color)),
   );
 }
@@ -260,7 +260,7 @@ class _ComplianceRow extends StatelessWidget {
           Text(check.title, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
           Text(check.description, style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
         ])),
-        Container(padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3), decoration: BoxDecoration(color: c.withOpacity(0.1), borderRadius: BorderRadius.circular(8)), child: Text(check.status.name, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: c))),
+        Container(padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3), decoration: BoxDecoration(color: c.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(8)), child: Text(check.status.name, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: c))),
       ]),
     );
   }

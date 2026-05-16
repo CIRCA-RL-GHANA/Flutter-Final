@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// LIVE MODULE — Screen 1: Live Dashboard (Main Operations View)
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// LIVE MODULE â€” Screen 1: Live Dashboard (Main Operations View)
 /// Central command center: Tab bar (Orders/Returns/Packages),
 /// operations overview, urgent actions, predictive insights, controls
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -66,13 +66,13 @@ class _LiveDashboardScreenState extends State<LiveDashboardScreen> with SingleTi
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: kLiveColor,
-                    boxShadow: [BoxShadow(color: kLiveColor.withOpacity(0.4), blurRadius: 6, spreadRadius: 1)],
+                    boxShadow: [BoxShadow(color: kLiveColor.withValues(alpha: 0.4), blurRadius: 6, spreadRadius: 1)],
                   ),
                 ),
               ],
             ),
             leadingWidth: 70,
-            title: const Text('LIVE • Operations', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: AppColors.textPrimary)),
+            title: const Text('LIVE â€¢ Operations', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: AppColors.textPrimary)),
             actions: [
               IconButton(icon: const Icon(Icons.business, size: 20), color: AppColors.textSecondary, onPressed: () {}),
               IconButton(
@@ -111,7 +111,7 @@ class _LiveDashboardScreenState extends State<LiveDashboardScreen> with SingleTi
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kLiveColor.withOpacity(0.07),
+                    color: kLiveColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -147,7 +147,7 @@ class _LiveDashboardScreenState extends State<LiveDashboardScreen> with SingleTi
   }
 }
 
-// ─── Orders View ─────────────────────────────────────────────────────────────
+// â”€â”€â”€ Orders View â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _OrdersView extends StatelessWidget {
   final LiveProvider prov;
@@ -194,7 +194,7 @@ class _OrdersView extends StatelessWidget {
                 ),
                 LiveMetricBadge(
                   label: "Today's Revenue",
-                  value: '₵${prov.metrics.todayRevenue.toStringAsFixed(0)}',
+                  value: 'â‚µ${prov.metrics.todayRevenue.toStringAsFixed(0)}',
                   icon: Icons.attach_money,
                   color: const Color(0xFF8B5CF6),
                 ),
@@ -222,7 +222,7 @@ class _OrdersView extends StatelessWidget {
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                             decoration: BoxDecoration(
-                              color: kLiveColor.withOpacity(0.1),
+                              color: kLiveColor.withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(6),
                             ),
                             child: Text(act, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: kLiveColor)),
@@ -302,7 +302,7 @@ class _OrdersView extends StatelessWidget {
   }
 }
 
-// ─── Returns View ────────────────────────────────────────────────────────────
+// â”€â”€â”€ Returns View â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _ReturnsView extends StatelessWidget {
   final LiveProvider prov;
@@ -347,7 +347,7 @@ class _ReturnsView extends StatelessWidget {
                 child: OutlinedButton.icon(
                   onPressed: () {},
                   icon: const Icon(Icons.auto_awesome, size: 16),
-                  label: const Text('AUTO-APPROVE <₵50'),
+                  label: const Text('AUTO-APPROVE <â‚µ50'),
                   style: OutlinedButton.styleFrom(foregroundColor: kLiveColor, padding: const EdgeInsets.symmetric(vertical: 12)),
                 ),
               ),
@@ -359,7 +359,7 @@ class _ReturnsView extends StatelessWidget {
   }
 }
 
-// ─── Packages View ───────────────────────────────────────────────────────────
+// â”€â”€â”€ Packages View â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _PackagesView extends StatelessWidget {
   final LiveProvider prov;

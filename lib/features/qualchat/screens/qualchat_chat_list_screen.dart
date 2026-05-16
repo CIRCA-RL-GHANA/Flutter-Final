@@ -1,4 +1,4 @@
-/// qualChat Screen 8 — Chat List (Enhanced)
+﻿/// qualChat Screen 8 â€” Chat List (Enhanced)
 /// Smart inbox: tabs, pinned, search, swipe actions, FAB
 
 import 'package:flutter/material.dart';
@@ -26,10 +26,10 @@ class QualChatChatListScreen extends StatelessWidget {
                 icon: const Icon(Icons.filter_list),
                 onSelected: (_) {},
                 itemBuilder: (_) => const [
-                  PopupMenuItem(value: 'pinned', child: Text('📌 Pinned')),
-                  PopupMenuItem(value: 'online', child: Text('🟢 Online')),
-                  PopupMenuItem(value: 'unread', child: Text('💬 Unread')),
-                  PopupMenuItem(value: 'recent', child: Text('⏰ Recent')),
+                  PopupMenuItem(value: 'pinned', child: Text('ðŸ“Œ Pinned')),
+                  PopupMenuItem(value: 'online', child: Text('ðŸŸ¢ Online')),
+                  PopupMenuItem(value: 'unread', child: Text('ðŸ’¬ Unread')),
+                  PopupMenuItem(value: 'recent', child: Text('â° Recent')),
                 ],
               ),
             ],
@@ -44,8 +44,8 @@ class QualChatChatListScreen extends StatelessWidget {
                     final isSelected = provider.chatTab == tab;
                     final labels = {
                       ChatListTab.all: 'All',
-                      ChatListTab.unread: 'Unread 🔵',
-                      ChatListTab.priority: 'Priority ⚠️',
+                      ChatListTab.unread: 'Unread ðŸ”µ',
+                      ChatListTab.priority: 'Priority âš ï¸',
                       ChatListTab.groups: 'Groups',
                     };
                     return Expanded(
@@ -81,7 +81,7 @@ class QualChatChatListScreen extends StatelessWidget {
                     margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
                     decoration: BoxDecoration(
-                      color: kChatColor.withOpacity(0.06),
+                      color: kChatColor.withValues(alpha: 0.06),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Row(
@@ -125,8 +125,8 @@ class QualChatChatListScreen extends StatelessWidget {
                     ? const QualChatEmptyState(
                         icon: Icons.chat_bubble_outline,
                         title: 'No conversations',
-                        message: 'Your inbox is empty 💫\nStart your first chat!',
-                        ctaLabel: '✨ New Chat',
+                        message: 'Your inbox is empty ðŸ’«\nStart your first chat!',
+                        ctaLabel: 'âœ¨ New Chat',
                       )
                     : RefreshIndicator(
                         color: kChatColor,
@@ -135,7 +135,7 @@ class QualChatChatListScreen extends StatelessWidget {
                           children: [
                             // Pinned
                             if (pinned.isNotEmpty) ...[
-                              _SectionHeader(title: '📌 PINNED', count: pinned.length),
+                              _SectionHeader(title: 'ðŸ“Œ PINNED', count: pinned.length),
                               ...pinned.map((c) => _SwipeableConversation(
                                 conversation: c,
                                 onTap: () {
@@ -146,7 +146,7 @@ class QualChatChatListScreen extends StatelessWidget {
                             ],
                             // Recent
                             if (unpinned.isNotEmpty) ...[
-                              _SectionHeader(title: '💬 RECENT CONVERSATIONS', count: unpinned.length),
+                              _SectionHeader(title: 'ðŸ’¬ RECENT CONVERSATIONS', count: unpinned.length),
                               ...unpinned.where((c) => c.type == ChatType.individual).map((c) =>
                                 _SwipeableConversation(
                                   conversation: c,
@@ -160,7 +160,7 @@ class QualChatChatListScreen extends StatelessWidget {
                             // Groups
                             if (unpinned.where((c) => c.type == ChatType.group).isNotEmpty) ...[
                               _SectionHeader(
-                                title: '👥 GROUPS',
+                                title: 'ðŸ‘¥ GROUPS',
                                 count: unpinned.where((c) => c.type == ChatType.group).length,
                               ),
                               ...unpinned.where((c) => c.type == ChatType.group).map((c) =>

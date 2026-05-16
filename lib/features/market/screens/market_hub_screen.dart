@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// MARKET MODULE — Screen 1: Market Hub (Immersive Discovery)
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// MARKET MODULE â€” Screen 1: Market Hub (Immersive Discovery)
 /// Video background, category navigation, merchant discovery,
 /// AI optimization panel, quick actions, deal carousel
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -51,7 +51,7 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
           body: CustomScrollView(
             controller: _scrollController,
             slivers: [
-              // ── Video Background / Hero Section ──
+              // â”€â”€ Video Background / Hero Section â”€â”€
               SliverAppBar(
                 expandedHeight: 280,
                 pinned: true,
@@ -128,7 +128,7 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
                                     ),
                                   ),
                                   const SizedBox(width: 8),
-                                  Icon(Icons.volume_off, color: Colors.white.withOpacity(0.7), size: 18),
+                                  Icon(Icons.volume_off, color: Colors.white.withValues(alpha: 0.7), size: 18),
                                 ],
                               ),
                               const SizedBox(height: 8),
@@ -144,7 +144,7 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
                               Text(
                                 prov.featuredMerchants[_featuredIndex % prov.featuredMerchants.length].description ?? '',
                                 style: TextStyle(
-                                  color: Colors.white.withOpacity(0.8),
+                                  color: Colors.white.withValues(alpha: 0.8),
                                   fontSize: 13,
                                 ),
                                 maxLines: 2,
@@ -163,7 +163,7 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
                             Text(
                               'Shopping as: Wizdom Shop',
                               style: TextStyle(
-                                color: Colors.white.withOpacity(0.8),
+                                color: Colors.white.withValues(alpha: 0.8),
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,
                               ),
@@ -176,7 +176,7 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
                                 Text(
                                   '14,250 QP',
                                   style: TextStyle(
-                                    color: Colors.white.withOpacity(0.9),
+                                    color: Colors.white.withValues(alpha: 0.9),
                                     fontSize: 12,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -187,7 +187,7 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
                                 Text(
                                   '\$500 Credit',
                                   style: TextStyle(
-                                    color: Colors.white.withOpacity(0.9),
+                                    color: Colors.white.withValues(alpha: 0.9),
                                     fontSize: 12,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -202,7 +202,7 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
                 ),
               ),
 
-              // ── Category Navigation ──
+              // â”€â”€ Category Navigation â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.only(top: 16, bottom: 8),
@@ -213,7 +213,7 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
                 ),
               ),
 
-              // ── Live Merchant Counter ──
+              // â”€â”€ Live Merchant Counter â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -227,7 +227,7 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
                           color: kMarketColor,
                           boxShadow: [
                             BoxShadow(
-                              color: kMarketColor.withOpacity(0.5),
+                              color: kMarketColor.withValues(alpha: 0.5),
                               blurRadius: 4,
                             ),
                           ],
@@ -247,22 +247,22 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
                 ),
               ),
 
-              // ── Quick Actions Grid ──
+              // â”€â”€ Quick Actions Grid â”€â”€
               SliverToBoxAdapter(
                 child: _buildQuickActions(context, prov),
               ),
 
-              // ── AI Optimization Panel ──
+              // â”€â”€ AI Optimization Panel â”€â”€
               SliverToBoxAdapter(
                 child: _buildAIPanel(prov),
               ),
 
-              // ── My Transactions Button ──
+              // â”€â”€ My Transactions Button â”€â”€
               SliverToBoxAdapter(
                 child: _buildTransactionButton(context, prov),
               ),
 
-              // ── Deals Carousel ──
+              // â”€â”€ Deals Carousel â”€â”€
               if (prov.merchantDeals.isNotEmpty) ...[
                 const SliverToBoxAdapter(
                   child: MarketSectionTitle(
@@ -276,7 +276,7 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
                 ),
               ],
 
-              // ── Merchant Discovery ──
+              // â”€â”€ Merchant Discovery â”€â”€
               const SliverToBoxAdapter(
                 child: MarketSectionTitle(
                   title: 'Discover Merchants',
@@ -322,7 +322,7 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
                   backgroundColor: kMarketColor,
                   icon: const Icon(Icons.shopping_cart, color: Colors.white),
                   label: Text(
-                    '${prov.cartItemCount} items • ${prov.cartSummary.totalDisplay}',
+                    '${prov.cartItemCount} items â€¢ ${prov.cartSummary.totalDisplay}',
                     style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
                   ),
                 )
@@ -360,7 +360,7 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
                     borderRadius: BorderRadius.circular(14),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.04),
+                        color: Colors.black.withValues(alpha: 0.04),
                         blurRadius: 8,
                         offset: const Offset(0, 2),
                       ),
@@ -371,7 +371,7 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
                       Container(
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: kMarketColor.withOpacity(0.1),
+                          color: kMarketColor.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Icon(icon, size: 22, color: kMarketColor),
@@ -407,12 +407,12 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                const Color(0xFF8B5CF6).withOpacity(0.08),
-                kMarketColor.withOpacity(0.06),
+                const Color(0xFF8B5CF6).withValues(alpha: 0.08),
+                kMarketColor.withValues(alpha: 0.06),
               ],
             ),
             borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: const Color(0xFF8B5CF6).withOpacity(0.15)),
+            border: Border.all(color: const Color(0xFF8B5CF6).withValues(alpha: 0.15)),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -484,7 +484,7 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
             borderRadius: BorderRadius.circular(14),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.04),
+                color: Colors.black.withValues(alpha: 0.04),
                 blurRadius: 8,
                 offset: const Offset(0, 2),
               ),
@@ -495,7 +495,7 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
               Container(
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: kMarketColor.withOpacity(0.1),
+                  color: kMarketColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: const Icon(Icons.receipt_long, size: 24, color: kMarketColor),
@@ -574,7 +574,7 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
                 Text(
                   deal.title,
                   style: TextStyle(
-                    color: Colors.white.withOpacity(0.9),
+                    color: Colors.white.withValues(alpha: 0.9),
                     fontSize: 13,
                     fontWeight: FontWeight.w500,
                   ),
@@ -588,7 +588,7 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.2),
+                          color: Colors.white.withValues(alpha: 0.2),
                           borderRadius: BorderRadius.circular(6),
                         ),
                         child: Text(
@@ -606,7 +606,7 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
                       Text(
                         _timeRemaining(deal.expiresAt!),
                         style: TextStyle(
-                          color: Colors.white.withOpacity(0.8),
+                          color: Colors.white.withValues(alpha: 0.8),
                           fontSize: 11,
                         ),
                       ),
@@ -618,7 +618,7 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
                     borderRadius: BorderRadius.circular(4),
                     child: LinearProgressIndicator(
                       value: deal.redemptionProgress,
-                      backgroundColor: Colors.white.withOpacity(0.2),
+                      backgroundColor: Colors.white.withValues(alpha: 0.2),
                       valueColor: const AlwaysStoppedAnimation(Colors.white),
                       minHeight: 3,
                     ),
@@ -653,7 +653,7 @@ class _TransactionBadge extends StatelessWidget {
       margin: const EdgeInsets.only(right: 6),
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(6),
       ),
       child: Text(

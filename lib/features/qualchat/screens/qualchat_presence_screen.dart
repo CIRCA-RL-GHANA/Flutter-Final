@@ -1,4 +1,4 @@
-/// qualChat Screen 6 — Presence Dashboard (Enhanced)
+﻿/// qualChat Screen 6 â€” Presence Dashboard (Enhanced)
 /// Real-Time Operations Center: presence, heatmap, user cards
 
 import 'package:flutter/material.dart';
@@ -37,7 +37,7 @@ class QualChatPresenceScreen extends StatelessWidget {
                   builder: (context, ai, _) {
                     if (ai.insights.isEmpty) return const SizedBox.shrink();
                     return Container(
-                      color: kChatColor.withOpacity(0.07),
+                      color: kChatColor.withValues(alpha: 0.07),
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                       width: double.infinity,
                       child: Row(
@@ -111,9 +111,9 @@ class QualChatPresenceScreen extends StatelessWidget {
                     children: PresenceFilter.values.map((f) {
                       final isSelected = provider.presenceFilter == f;
                       final labels = {
-                        PresenceFilter.individual: '👤 Individual',
-                        PresenceFilter.entity: '🏢 Entity',
-                        PresenceFilter.all: '🌐 All',
+                        PresenceFilter.individual: 'ðŸ‘¤ Individual',
+                        PresenceFilter.entity: 'ðŸ¢ Entity',
+                        PresenceFilter.all: 'ðŸŒ All',
                       };
                       return Expanded(
                         child: GestureDetector(
@@ -154,17 +154,17 @@ class QualChatPresenceScreen extends StatelessWidget {
                           onTap: () => provider.setStatusFilter(null),
                         ),
                         _FilterChip2(
-                          label: '🟢 Online',
+                          label: 'ðŸŸ¢ Online',
                           isSelected: provider.statusFilter == PresenceStatus.online,
                           onTap: () => provider.setStatusFilter(PresenceStatus.online),
                         ),
                         _FilterChip2(
-                          label: '🟡 Idle',
+                          label: 'ðŸŸ¡ Idle',
                           isSelected: provider.statusFilter == PresenceStatus.idle,
                           onTap: () => provider.setStatusFilter(PresenceStatus.idle),
                         ),
                         _FilterChip2(
-                          label: '🔴 Offline',
+                          label: 'ðŸ”´ Offline',
                           isSelected: provider.statusFilter == PresenceStatus.offline,
                           onTap: () => provider.setStatusFilter(PresenceStatus.offline),
                         ),
@@ -272,7 +272,7 @@ class _FilterChip2 extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(
-            color: isSelected ? kChatColor.withOpacity(0.1) : const Color(0xFFF3F4F6),
+            color: isSelected ? kChatColor.withValues(alpha: 0.1) : const Color(0xFFF3F4F6),
             borderRadius: BorderRadius.circular(16),
             border: isSelected ? Border.all(color: kChatColor) : null,
           ),
@@ -342,7 +342,7 @@ class _ExpandableUserCardState extends State<_ExpandableUserCard> {
               _InfoRow('Status', u.statusMessage ?? 'Available'),
               _InfoRow('Average response', '${u.avgResponseMinutes} minutes'),
               _InfoRow('Department', u.department ?? 'N/A'),
-              const _InfoRow('Preferred contact', '💬 Chat first'),
+              const _InfoRow('Preferred contact', 'ðŸ’¬ Chat first'),
               const SizedBox(height: 8),
               Row(
                 children: [
@@ -402,7 +402,7 @@ class _QuickAction extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 8),
           decoration: BoxDecoration(
-            color: kChatColor.withOpacity(0.1),
+            color: kChatColor.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Column(

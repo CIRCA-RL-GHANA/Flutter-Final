@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// LIVE MODULE — Screen 7: Return Review Interface
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// LIVE MODULE â€” Screen 7: Return Review Interface
 /// Detailed return review with evidence gallery, customer history,
 /// adjudication options, and resolution workflow
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -55,7 +55,7 @@ class _LiveReturnReviewScreenState extends State<LiveReturnReviewScreen> {
                     margin: const EdgeInsets.only(bottom: 12),
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     decoration: BoxDecoration(
-                      color: kLiveColor.withOpacity(0.07),
+                      color: kLiveColor.withValues(alpha: 0.07),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Row(
@@ -139,7 +139,7 @@ class _LiveReturnReviewScreenState extends State<LiveReturnReviewScreen> {
                       children: [
                         Text('Order #${ret.originalOrderId}', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                         const SizedBox(width: 12),
-                        Text('₵${ret.itemPrice.toStringAsFixed(2)}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: kLiveColor)),
+                        Text('â‚µ${ret.itemPrice.toStringAsFixed(2)}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: kLiveColor)),
                       ],
                     ),
                     const SizedBox(height: 8),
@@ -209,7 +209,7 @@ class _LiveReturnReviewScreenState extends State<LiveReturnReviewScreen> {
 
               // AI Analysis
               LiveSectionCard(
-                title: '🤖 AI ANALYSIS',
+                title: 'ðŸ¤– AI ANALYSIS',
                 icon: Icons.psychology,
                 iconColor: const Color(0xFF10B981),
                 child: Column(
@@ -223,7 +223,7 @@ class _LiveReturnReviewScreenState extends State<LiveReturnReviewScreen> {
                         children: [
                           const Text('AI Recommendation: APPROVE', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: Color(0xFF059669))),
                           const SizedBox(height: 4),
-                          Text('Confidence: 87% • Evidence quality: Good • Customer history: Low risk', style: TextStyle(fontSize: 11, color: AppColors.textSecondary)),
+                          Text('Confidence: 87% â€¢ Evidence quality: Good â€¢ Customer history: Low risk', style: TextStyle(fontSize: 11, color: AppColors.textSecondary)),
                         ],
                       ),
                     ),
@@ -284,7 +284,7 @@ class _LiveReturnReviewScreenState extends State<LiveReturnReviewScreen> {
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
             decoration: BoxDecoration(
               color: Colors.white,
-              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 8, offset: const Offset(0, -2))],
+              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 8, offset: const Offset(0, -2))],
             ),
             child: Row(
               children: [
@@ -313,7 +313,7 @@ class _LiveReturnReviewScreenState extends State<LiveReturnReviewScreen> {
                     onPressed: () {
                       HapticFeedback.heavyImpact();
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('✅ Return approved!'), backgroundColor: Color(0xFF10B981)),
+                        const SnackBar(content: Text('âœ… Return approved!'), backgroundColor: Color(0xFF10B981)),
                       );
                       Navigator.pop(context);
                     },

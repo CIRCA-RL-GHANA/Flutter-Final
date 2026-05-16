@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// LIVE Widget (Real-Time Operations)
 /// Visible to: Branch Manager, Branch Response Officer, Driver, Response Officer
 /// Role-specific views per spec
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -47,7 +47,7 @@ class LiveWidgetContent extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
-                  color: AppColors.success.withOpacity(0.1),
+                  color: AppColors.success.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: const Text(
@@ -75,7 +75,7 @@ class LiveWidgetContent extends StatelessWidget {
   }
 }
 
-// ─── Branch Manager / Response Officer View ─────────────────────────────────
+// â”€â”€â”€ Branch Manager / Response Officer View â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _ManagerView extends StatelessWidget {
   final Color color;
@@ -100,14 +100,14 @@ class _ManagerView extends StatelessWidget {
           // Incoming Orders
           _LiveItem(
             title: 'Order #ORD-2041',
-            subtitle: 'Alice • 3 items',
+            subtitle: 'Alice â€¢ 3 items',
             trailing: 'ASSIGN',
             color: color,
           ),
           const SizedBox(height: 6),
           const _LiveItem(
             title: 'Order #ORD-2042',
-            subtitle: 'Bob • 1 item',
+            subtitle: 'Bob â€¢ 1 item',
             trailing: 'SELF-PICKUP',
             color: AppColors.success,
           ),
@@ -118,7 +118,7 @@ class _ManagerView extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: color.withOpacity(0.06),
+              color: color.withValues(alpha: 0.06),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -145,7 +145,7 @@ class _ManagerView extends StatelessWidget {
   }
 }
 
-// ─── Driver View ─────────────────────────────────────────────────────────────
+// â”€â”€â”€ Driver View â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _DriverView extends StatelessWidget {
   final DriverType? driverType;
@@ -163,7 +163,7 @@ class _DriverView extends StatelessWidget {
             // Transport driver view
             _LiveItem(
               title: 'Ride #R-901',
-              subtitle: '2.3km • ₵12.50',
+              subtitle: '2.3km â€¢ â‚µ12.50',
               trailing: 'ACCEPT',
               color: color,
             ),
@@ -195,7 +195,7 @@ class _DriverView extends StatelessWidget {
             // Shop/Logistics driver view
             _LiveItem(
               title: 'Package #P-789',
-              subtitle: '2 stops • 8.3 miles',
+              subtitle: '2 stops â€¢ 8.3 miles',
               trailing: 'START',
               color: color,
             ),
@@ -216,7 +216,7 @@ class _DriverView extends StatelessWidget {
                   ),
                   const Spacer(),
                   const Text(
-                    'Verified ✓',
+                    'Verified âœ“',
                     style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600,
                         color: AppColors.textPrimary),
                   ),
@@ -231,9 +231,9 @@ class _DriverView extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
-              color: AppColors.error.withOpacity(0.08),
+              color: AppColors.error.withValues(alpha: 0.08),
               borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: AppColors.error.withOpacity(0.2)),
+              border: Border.all(color: AppColors.error.withValues(alpha: 0.2)),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -257,7 +257,7 @@ class _DriverView extends StatelessWidget {
   }
 }
 
-// ─── Shared Components ──────────────────────────────────────────────────────
+// â”€â”€â”€ Shared Components â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _LivePulse extends StatefulWidget {
   final Color color;
@@ -296,7 +296,7 @@ class _LivePulseState extends State<_LivePulse>
           height: 18,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: widget.color.withOpacity(0.15 + 0.1 * _controller.value),
+            color: widget.color.withValues(alpha: 0.15 + 0.1 * _controller.value),
           ),
           child: Center(
             child: Container(
@@ -327,9 +327,9 @@ class _MiniTab extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 4),
         decoration: BoxDecoration(
-          color: isSelected ? color.withOpacity(0.1) : Colors.transparent,
+          color: isSelected ? color.withValues(alpha: 0.1) : Colors.transparent,
           borderRadius: BorderRadius.circular(6),
-          border: isSelected ? Border.all(color: color.withOpacity(0.3)) : null,
+          border: isSelected ? Border.all(color: color.withValues(alpha: 0.3)) : null,
         ),
         child: Text(
           label,
@@ -374,7 +374,7 @@ class _LiveItem extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
             decoration: BoxDecoration(
-              color: color.withOpacity(0.1),
+              color: color.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(6),
             ),
             child: Text(

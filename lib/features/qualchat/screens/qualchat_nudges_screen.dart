@@ -1,4 +1,4 @@
-/// qualChat Screen 11 — Smart Nudges
+﻿/// qualChat Screen 11 â€” Smart Nudges
 /// AI wingmate: swipe deck, nudge types, AI decision mode, settings
 
 import 'package:flutter/material.dart';
@@ -33,7 +33,7 @@ class QualChatNudgesScreen extends StatelessWidget {
               ? const QualChatEmptyState(
                   icon: Icons.auto_awesome,
                   title: 'All caught up!',
-                  message: "No nudges right now. We'll notify you when there's something to act on 🌟",
+                  message: "No nudges right now. We'll notify you when there's something to act on ðŸŒŸ",
                 )
               : Column(
                   children: [
@@ -41,7 +41,7 @@ class QualChatNudgesScreen extends StatelessWidget {
                       builder: (context, ai, _) {
                         if (ai.insights.isEmpty) return const SizedBox.shrink();
                         return Container(
-                          color: kChatColor.withOpacity(0.07),
+                          color: kChatColor.withValues(alpha: 0.07),
                           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                           child: Row(
                             children: [
@@ -65,7 +65,7 @@ class QualChatNudgesScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
-                          colors: [kChatColor.withOpacity(0.08), kChatColorLight],
+                          colors: [kChatColor.withValues(alpha: 0.08), kChatColorLight],
                         ),
                         borderRadius: BorderRadius.circular(14),
                       ),
@@ -78,11 +78,11 @@ class QualChatNudgesScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 const Text(
-                                  'AI Wingmate Active 🤖',
+                                  'AI Wingmate Active ðŸ¤–',
                                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
                                 ),
                                 Text(
-                                  '${nudges.length} nudges to review • ${currentIndex + 1} of ${nudges.length}',
+                                  '${nudges.length} nudges to review â€¢ ${currentIndex + 1} of ${nudges.length}',
                                   style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
                                 ),
                               ],
@@ -122,14 +122,14 @@ class QualChatNudgesScreen extends StatelessWidget {
                       ),
                     ),
 
-                    // Swipe deck — current nudge
+                    // Swipe deck â€” current nudge
                     Expanded(
                       child: currentIndex < nudges.length
                           ? _NudgeCard(nudge: nudges[currentIndex])
                           : const QualChatEmptyState(
                               icon: Icons.check_circle_outline,
                               title: 'All reviewed!',
-                              message: 'You\'ve gone through all nudges. Nice work! 🎉',
+                              message: 'You\'ve gone through all nudges. Nice work! ðŸŽ‰',
                             ),
                     ),
 
@@ -223,11 +223,11 @@ class QualChatNudgesScreen extends StatelessWidget {
             // Nudge type toggles
             ...NudgeType.values.map((type) {
               final labels = {
-                NudgeType.followUp: '📎 Follow-ups',
-                NudgeType.reEngagement: '🤝 Re-engagement',
-                NudgeType.profileUpdate: '📝 Profile Updates',
-                NudgeType.compatibility: '💫 Compatibility',
-                NudgeType.activity: '⚡ Activity',
+                NudgeType.followUp: 'ðŸ“Ž Follow-ups',
+                NudgeType.reEngagement: 'ðŸ¤ Re-engagement',
+                NudgeType.profileUpdate: 'ðŸ“ Profile Updates',
+                NudgeType.compatibility: 'ðŸ’« Compatibility',
+                NudgeType.activity: 'âš¡ Activity',
               };
               return SwitchListTile(
                 title: Text(labels[type] ?? type.name, style: const TextStyle(fontSize: 14)),
@@ -284,11 +284,11 @@ class _NudgeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final typeIcons = {
-      NudgeType.followUp: '📎',
-      NudgeType.reEngagement: '🤝',
-      NudgeType.profileUpdate: '📝',
-      NudgeType.compatibility: '💫',
-      NudgeType.activity: '⚡',
+      NudgeType.followUp: 'ðŸ“Ž',
+      NudgeType.reEngagement: 'ðŸ¤',
+      NudgeType.profileUpdate: 'ðŸ“',
+      NudgeType.compatibility: 'ðŸ’«',
+      NudgeType.activity: 'âš¡',
     };
     final priority = nudge.matchPercentage >= 90
         ? TaskPriority.high
@@ -307,7 +307,7 @@ class _NudgeCard extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.06), blurRadius: 16, offset: const Offset(0, 4)),
+          BoxShadow(color: Colors.black.withValues(alpha: 0.06), blurRadius: 16, offset: const Offset(0, 4)),
         ],
       ),
       child: Column(
@@ -319,7 +319,7 @@ class _NudgeCard extends StatelessWidget {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  (priorityColors[priority] ?? kChatColor).withOpacity(0.08),
+                  (priorityColors[priority] ?? kChatColor).withValues(alpha: 0.08),
                   Colors.white,
                 ],
                 begin: Alignment.topLeft,
@@ -332,7 +332,7 @@ class _NudgeCard extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Text(typeIcons[nudge.type] ?? '💬', style: const TextStyle(fontSize: 28)),
+                Text(typeIcons[nudge.type] ?? 'ðŸ’¬', style: const TextStyle(fontSize: 28)),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Column(
@@ -348,7 +348,7 @@ class _NudgeCard extends StatelessWidget {
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                             decoration: BoxDecoration(
-                              color: (priorityColors[priority] ?? kChatColor).withOpacity(0.15),
+                              color: (priorityColors[priority] ?? kChatColor).withValues(alpha: 0.15),
                               borderRadius: BorderRadius.circular(6),
                             ),
                             child: Text(
@@ -388,16 +388,16 @@ class _NudgeCard extends StatelessWidget {
               margin: const EdgeInsets.fromLTRB(20, 8, 20, 8),
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                color: kChatColor.withOpacity(0.05),
+                color: kChatColor.withValues(alpha: 0.05),
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: kChatColor.withOpacity(0.2)),
+                border: Border.all(color: kChatColor.withValues(alpha: 0.2)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.auto_awesome, size: 16, color: kChatColor.withOpacity(0.7)),
+                      Icon(Icons.auto_awesome, size: 16, color: kChatColor.withValues(alpha: 0.7)),
                       const SizedBox(width: 6),
                       const Text(
                         'AI Suggestion',
@@ -421,7 +421,7 @@ class _NudgeCard extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 18,
-                  backgroundColor: kChatColor.withOpacity(0.15),
+                  backgroundColor: kChatColor.withValues(alpha: 0.15),
                   child: Text(
                     nudge.person.name[0].toUpperCase(),
                     style: const TextStyle(fontWeight: FontWeight.w700, color: kChatColor),
@@ -505,8 +505,8 @@ class _ActionCircle extends StatelessWidget {
             height: size,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: color.withOpacity(0.1),
-              border: Border.all(color: color.withOpacity(0.4), width: 2),
+              color: color.withValues(alpha: 0.1),
+              border: Border.all(color: color.withValues(alpha: 0.4), width: 2),
             ),
             child: Icon(icon, color: color, size: size * 0.45),
           ),

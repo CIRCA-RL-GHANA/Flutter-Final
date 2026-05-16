@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// LIVE MODULE — Screen 4: Driver Assignment Flow
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// LIVE MODULE â€” Screen 4: Driver Assignment Flow
 /// Intelligent driver matching: recommended driver, alternatives,
 /// driver map view, assignment settings, confirmation
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -54,7 +54,7 @@ class _LiveDriverAssignmentScreenState extends State<LiveDriverAssignmentScreen>
         return Scaffold(
           backgroundColor: AppColors.backgroundLight,
           appBar: LiveAppBar(
-            title: 'Assign Driver • Order #${order.id}',
+            title: 'Assign Driver â€¢ Order #${order.id}',
             actions: [
               IconButton(
                 icon: const Icon(Icons.close, size: 20),
@@ -73,7 +73,7 @@ class _LiveDriverAssignmentScreenState extends State<LiveDriverAssignmentScreen>
                     margin: const EdgeInsets.only(bottom: 12),
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     decoration: BoxDecoration(
-                      color: kLiveColor.withOpacity(0.07),
+                      color: kLiveColor.withValues(alpha: 0.07),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Row(
@@ -116,7 +116,7 @@ class _LiveDriverAssignmentScreenState extends State<LiveDriverAssignmentScreen>
               // Alternatives
               if (prov.availableDrivers.length > 1) ...[
                 const SizedBox(height: 8),
-                const Text('🥈 ALTERNATIVES', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: AppColors.textSecondary)),
+                const Text('ðŸ¥ˆ ALTERNATIVES', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: AppColors.textSecondary)),
                 const SizedBox(height: 8),
                 ...prov.availableDrivers.skip(1).map((d) => LiveDriverCard(
                   driver: d,
@@ -251,12 +251,12 @@ class _AssignmentConfirmation extends StatelessWidget {
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: const Color(0xFF10B981).withOpacity(0.1),
+                    color: const Color(0xFF10B981).withValues(alpha: 0.1),
                   ),
                   child: const Icon(Icons.check_circle, size: 48, color: Color(0xFF10B981)),
                 ),
                 const SizedBox(height: 16),
-                Text('🎉 ORDER #${order.id} ASSIGNED!', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800)),
+                Text('ðŸŽ‰ ORDER #${order.id} ASSIGNED!', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800)),
                 const SizedBox(height: 4),
                 Text('To: ${driver.name}', style: const TextStyle(fontSize: 15, color: AppColors.textSecondary)),
                 const SizedBox(height: 4),
@@ -273,9 +273,9 @@ class _AssignmentConfirmation extends StatelessWidget {
             iconColor: const Color(0xFF3B82F6),
             child: Column(
               children: [
-                _DetailRow(label: 'Order value', value: '₵${order.total.toStringAsFixed(0)}'),
-                const _DetailRow(label: 'Driver earnings', value: '₵43.50'),
-                const _DetailRow(label: 'Priority bonus', value: '₵4.35'),
+                _DetailRow(label: 'Order value', value: 'â‚µ${order.total.toStringAsFixed(0)}'),
+                const _DetailRow(label: 'Driver earnings', value: 'â‚µ43.50'),
+                const _DetailRow(label: 'Priority bonus', value: 'â‚µ4.35'),
                 const _DetailRow(label: 'Customer notified', value: 'Yes'),
                 const _DetailRow(label: 'Live tracking enabled', value: 'Yes'),
               ],
@@ -332,7 +332,7 @@ class _DetailRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text('• $label', style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+          Text('â€¢ $label', style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
           Text(value, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
         ],
       ),

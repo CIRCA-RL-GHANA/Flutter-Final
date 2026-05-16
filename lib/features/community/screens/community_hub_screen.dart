@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// COMMUNITY MODULE — Hub Screen
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// COMMUNITY MODULE â€” Hub Screen
 /// Discover all 7 UGO community archetypes:
-/// Library · Playlist · Theater · Fair · Hub · Hangout · Journal
-/// ═══════════════════════════════════════════════════════════════════════════
+/// Library Â· Playlist Â· Theater Â· Fair Â· Hub Â· Hangout Â· Journal
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -55,7 +55,7 @@ class _CommunityHubScreenState extends State<CommunityHubScreen> {
           backgroundColor: AppColors.backgroundLight,
           body: CustomScrollView(
             slivers: [
-              // ── SliverAppBar ──────────────────────────────────────────
+              // â”€â”€ SliverAppBar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverAppBar(
                 expandedHeight: 180,
                 pinned: true,
@@ -101,16 +101,16 @@ class _CommunityHubScreenState extends State<CommunityHubScreen> {
                 ),
               ),
 
-              // ── AI insight ────────────────────────────────────────────
+              // â”€â”€ AI insight â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               if (ai.insights.isNotEmpty)
                 SliverToBoxAdapter(
                   child: Container(
                     margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: kCommunityColor.withOpacity(0.08),
+                      color: kCommunityColor.withValues(alpha: 0.08),
                       borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: kCommunityColor.withOpacity(0.2)),
+                      border: Border.all(color: kCommunityColor.withValues(alpha: 0.2)),
                     ),
                     child: Row(children: [
                       const Icon(Icons.auto_awesome, color: kCommunityColor, size: 16),
@@ -120,7 +120,7 @@ class _CommunityHubScreenState extends State<CommunityHubScreen> {
                   ),
                 ),
 
-              // ── 7 archetypes grid ──────────────────────────────────────
+              // â”€â”€ 7 archetypes grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               const SliverToBoxAdapter(
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(16, 18, 16, 8),
@@ -143,7 +143,7 @@ class _CommunityHubScreenState extends State<CommunityHubScreen> {
                 ),
               ),
 
-              // ── Trending ───────────────────────────────────────────────
+              // â”€â”€ Trending â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(16, 20, 16, 8),
@@ -188,9 +188,9 @@ class _CommunityHubScreenState extends State<CommunityHubScreen> {
       child: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight,
-            colors: [color.withOpacity(0.85), color]),
+            colors: [color.withValues(alpha: 0.85), color]),
           borderRadius: BorderRadius.circular(14),
-          boxShadow: [BoxShadow(color: color.withOpacity(0.3), blurRadius: 8, offset: const Offset(0, 3))],
+          boxShadow: [BoxShadow(color: color.withValues(alpha: 0.3), blurRadius: 8, offset: const Offset(0, 3))],
         ),
         padding: const EdgeInsets.all(14),
         child: Column(
@@ -213,10 +213,10 @@ class _CommunityHubScreenState extends State<CommunityHubScreen> {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
       decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(14),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 6, offset: const Offset(0, 2))]),
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 6, offset: const Offset(0, 2))]),
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-        leading: Container(width: 44, height: 44, decoration: BoxDecoration(color: color.withOpacity(0.12), borderRadius: BorderRadius.circular(12)),
+        leading: Container(width: 44, height: 44, decoration: BoxDecoration(color: color.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(12)),
           child: Icon(arch['icon'] as IconData, color: color)),
         title: Text(community['name']!, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14)),
         subtitle: Text((arch['label'] as String), style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),

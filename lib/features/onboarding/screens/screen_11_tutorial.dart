@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/constants/app_strings.dart';
@@ -8,7 +8,7 @@ import '../widgets/buttons.dart';
 import '../widgets/progress_indicators.dart';
 
 
-// OS palette � mirrors splash / welcome
+// OS palette ï¿½ mirrors splash / welcome
 const Color _kBg        = Color(0xFF08080F);
 const Color _kSurface   = Color(0xFF0E0E1A);
 const Color _kBorder    = Color(0xFF1C1C2E);
@@ -226,7 +226,7 @@ class _TutorialStepView extends StatelessWidget {
             height: 200,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: step.color.withOpacity(0.08),
+              color: step.color.withValues(alpha: 0.08),
             ),
             child: Stack(
               alignment: Alignment.center,
@@ -238,7 +238,7 @@ class _TutorialStepView extends StatelessWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: step.color.withOpacity(0.15),
+                      color: step.color.withValues(alpha: 0.15),
                       width: 2,
                     ),
                   ),
@@ -285,9 +285,9 @@ class _TutorialStepView extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
             decoration: BoxDecoration(
-              color: step.color.withOpacity(0.08),
+              color: step.color.withValues(alpha: 0.08),
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: step.color.withOpacity(0.2)),
+              border: Border.all(color: step.color.withValues(alpha: 0.2)),
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,

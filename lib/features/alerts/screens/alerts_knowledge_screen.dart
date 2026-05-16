@@ -1,4 +1,4 @@
-/// Alerts Screen 7 — Knowledge Base Integration
+﻿/// Alerts Screen 7 â€” Knowledge Base Integration
 /// AI-suggested solutions, similarity scores, feedback loop
 
 import 'package:flutter/material.dart';
@@ -39,7 +39,7 @@ class AlertsKnowledgeScreen extends StatelessWidget {
                   builder: (context, ai, _) {
                     if (ai.insights.isEmpty) return const SizedBox.shrink();
                     return Container(
-                      color: kAlertsColor.withOpacity(0.07),
+                      color: kAlertsColor.withValues(alpha: 0.07),
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                       child: Row(children: [
                         const Icon(Icons.auto_awesome, size: 14, color: kAlertsColor),
@@ -51,7 +51,7 @@ class AlertsKnowledgeScreen extends StatelessWidget {
                     );
                   },
                 ),
-                // ──── CONTEXT BANNER ────
+                // â”€â”€â”€â”€ CONTEXT BANNER â”€â”€â”€â”€
                 if (alert != null) ...[
                   Container(
                     padding: const EdgeInsets.all(12),
@@ -78,29 +78,29 @@ class AlertsKnowledgeScreen extends StatelessWidget {
                   const SizedBox(height: 16),
                 ],
 
-                // ──── CATEGORY TABS ────
+                // â”€â”€â”€â”€ CATEGORY TABS â”€â”€â”€â”€
                 SizedBox(
                   height: 36,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: [
                       _KbFilterChip(label: 'All', isSelected: true, onTap: () {}),
-                      _KbFilterChip(label: '📚 Articles', isSelected: false, onTap: () {}),
-                      _KbFilterChip(label: '✅ Past Fixes', isSelected: false, onTap: () {}),
-                      _KbFilterChip(label: '🌐 Community', isSelected: false, onTap: () {}),
+                      _KbFilterChip(label: 'ðŸ“š Articles', isSelected: false, onTap: () {}),
+                      _KbFilterChip(label: 'âœ… Past Fixes', isSelected: false, onTap: () {}),
+                      _KbFilterChip(label: 'ðŸŒ Community', isSelected: false, onTap: () {}),
                     ],
                   ),
                 ),
                 const SizedBox(height: 16),
 
-                // ──── RESULTS COUNT ────
+                // â”€â”€â”€â”€ RESULTS COUNT â”€â”€â”€â”€
                 Text(
                   '${items.length} article${items.length == 1 ? '' : 's'} found',
                   style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280)),
                 ),
                 const SizedBox(height: 12),
 
-                // ──── KNOWLEDGE ITEMS ────
+                // â”€â”€â”€â”€ KNOWLEDGE ITEMS â”€â”€â”€â”€
                 if (items.isEmpty)
                   const AlertsEmptyState(
                     icon: Icons.library_books,
@@ -115,7 +115,7 @@ class AlertsKnowledgeScreen extends StatelessWidget {
 
                 const SizedBox(height: 16),
 
-                // ──── FEEDBACK PROMPT ────
+                // â”€â”€â”€â”€ FEEDBACK PROMPT â”€â”€â”€â”€
                 Container(
                   padding: const EdgeInsets.all(14),
                   decoration: BoxDecoration(
@@ -130,7 +130,7 @@ class AlertsKnowledgeScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           _FeedbackButton(icon: Icons.thumb_up, label: 'Helpful', onTap: () {
-                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Thanks for your feedback! 👍'), backgroundColor: kAlertsResolved));
+                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Thanks for your feedback! ðŸ‘'), backgroundColor: kAlertsResolved));
                           }),
                           const SizedBox(width: 12),
                           _FeedbackButton(icon: Icons.thumb_down, label: 'Not Helpful', onTap: () {
@@ -171,7 +171,7 @@ class AlertsKnowledgeScreen extends StatelessWidget {
                   Expanded(child: Text(item.title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700))),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(color: kAlertsResolved.withOpacity(0.1), borderRadius: BorderRadius.circular(6)),
+                    decoration: BoxDecoration(color: kAlertsResolved.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(6)),
                     child: Text('${(item.similarityScore * 100).toInt()}% match', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: kAlertsResolved)),
                   ),
                 ],
@@ -218,9 +218,9 @@ class AlertsKnowledgeScreen extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // KB Filter Chip
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _KbFilterChip extends StatelessWidget {
   final String label;
@@ -246,9 +246,9 @@ class _KbFilterChip extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Feedback Button
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _FeedbackButton extends StatelessWidget {
   final IconData icon;

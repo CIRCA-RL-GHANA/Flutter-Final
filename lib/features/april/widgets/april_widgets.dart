@@ -1,13 +1,13 @@
-/// APRIL Module — Shared Widgets
+﻿/// APRIL Module â€” Shared Widgets
 /// Personal Assistant & Command Core
 /// Module Color: Gold 0xFFFFD700
 
 import 'package:flutter/material.dart';
 import '../models/april_models.dart';
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  COLOR CONSTANTS
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 const Color kAprilColor = Color(0xFFFFD700);
 const Color kAprilColorLight = Color(0xFFFFF8E1);
@@ -17,9 +17,9 @@ const Color kAprilVoice = Color(0xFFFF453A);
 const Color kAprilSuccess = Color(0xFF0F9D58);
 const Color kAprilProcessing = Color(0xFFFFB800);
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  APRIL APP BAR
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class AprilAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -73,9 +73,9 @@ class AprilAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  SECTION CARD
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class AprilSectionCard extends StatelessWidget {
   final String title;
@@ -91,7 +91,7 @@ class AprilSectionCard extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 8, offset: const Offset(0, 2)),
+          BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8, offset: const Offset(0, 2)),
         ],
       ),
       child: Padding(
@@ -119,9 +119,9 @@ class AprilSectionCard extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  EMPTY STATE
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class AprilEmptyState extends StatelessWidget {
   final IconData icon;
@@ -151,7 +151,7 @@ class AprilEmptyState extends StatelessWidget {
               width: 72,
               height: 72,
               decoration: BoxDecoration(
-                color: kAprilColor.withOpacity(0.1),
+                color: kAprilColor.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
               child: Icon(icon, size: 36, color: kAprilColor),
@@ -184,9 +184,9 @@ class AprilEmptyState extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  VOICE BUTTON
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class AprilVoiceButton extends StatelessWidget {
   final VoiceState state;
@@ -230,7 +230,7 @@ class AprilVoiceButton extends StatelessWidget {
           shape: BoxShape.circle,
           boxShadow: [
             BoxShadow(
-              color: (colors[state] ?? kAprilAccent).withOpacity(0.3),
+              color: (colors[state] ?? kAprilAccent).withValues(alpha: 0.3),
               blurRadius: 16,
               offset: const Offset(0, 4),
             ),
@@ -247,9 +247,9 @@ class AprilVoiceButton extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  PLUGIN CARD (Quick Access)
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class PluginCard extends StatelessWidget {
   final AprilPlugin plugin;
@@ -272,10 +272,10 @@ class PluginCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pluginData = {
-      AprilPlugin.planner: {'icon': Icons.account_balance_wallet, 'emoji': '📊', 'name': 'Planner'},
-      AprilPlugin.calendar: {'icon': Icons.calendar_month, 'emoji': '📅', 'name': 'Calendar'},
-      AprilPlugin.wishlist: {'icon': Icons.card_giftcard, 'emoji': '🎁', 'name': 'Wishlist'},
-      AprilPlugin.statement: {'icon': Icons.description, 'emoji': '📝', 'name': 'Statement'},
+      AprilPlugin.planner: {'icon': Icons.account_balance_wallet, 'emoji': 'ðŸ“Š', 'name': 'Planner'},
+      AprilPlugin.calendar: {'icon': Icons.calendar_month, 'emoji': 'ðŸ“…', 'name': 'Calendar'},
+      AprilPlugin.wishlist: {'icon': Icons.card_giftcard, 'emoji': 'ðŸŽ', 'name': 'Wishlist'},
+      AprilPlugin.statement: {'icon': Icons.description, 'emoji': 'ðŸ“', 'name': 'Statement'},
     };
     final data = pluginData[plugin]!;
     final syncColors = {
@@ -293,7 +293,7 @@ class PluginCard extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(14),
           boxShadow: [
-            BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 8, offset: const Offset(0, 2)),
+            BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8, offset: const Offset(0, 2)),
           ],
         ),
         child: Stack(
@@ -357,9 +357,9 @@ class PluginCard extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  PENDING ACTION TILE
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class PendingActionTile extends StatelessWidget {
   final PendingAction action;
@@ -424,9 +424,9 @@ class PendingActionTile extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  NOTIFICATION CARD
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class AprilNotificationCard extends StatelessWidget {
   final AprilNotification notification;
@@ -544,9 +544,9 @@ class AprilNotificationCard extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  TRANSACTION CARD
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class TransactionCard extends StatelessWidget {
   final Transaction transaction;
@@ -557,21 +557,21 @@ class TransactionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final categoryEmojis = {
-      TransactionCategory.dining: '🍔',
-      TransactionCategory.groceries: '🛒',
-      TransactionCategory.transport: '🚗',
-      TransactionCategory.entertainment: '🎬',
-      TransactionCategory.utilities: '💡',
-      TransactionCategory.housing: '🏠',
-      TransactionCategory.healthcare: '🏥',
-      TransactionCategory.education: '📚',
-      TransactionCategory.shopping: '🛍️',
-      TransactionCategory.salary: '💵',
-      TransactionCategory.freelance: '💻',
-      TransactionCategory.investment: '📈',
-      TransactionCategory.subscription: '📱',
-      TransactionCategory.insurance: '🛡️',
-      TransactionCategory.other: '📋',
+      TransactionCategory.dining: 'ðŸ”',
+      TransactionCategory.groceries: 'ðŸ›’',
+      TransactionCategory.transport: 'ðŸš—',
+      TransactionCategory.entertainment: 'ðŸŽ¬',
+      TransactionCategory.utilities: 'ðŸ’¡',
+      TransactionCategory.housing: 'ðŸ ',
+      TransactionCategory.healthcare: 'ðŸ¥',
+      TransactionCategory.education: 'ðŸ“š',
+      TransactionCategory.shopping: 'ðŸ›ï¸',
+      TransactionCategory.salary: 'ðŸ’µ',
+      TransactionCategory.freelance: 'ðŸ’»',
+      TransactionCategory.investment: 'ðŸ“ˆ',
+      TransactionCategory.subscription: 'ðŸ“±',
+      TransactionCategory.insurance: 'ðŸ›¡ï¸',
+      TransactionCategory.other: 'ðŸ“‹',
     };
     final isIncome = transaction.type == TransactionType.income;
 
@@ -584,7 +584,7 @@ class TransactionCard extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
-            BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 6, offset: const Offset(0, 2)),
+            BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 6, offset: const Offset(0, 2)),
           ],
         ),
         child: Row(
@@ -593,12 +593,12 @@ class TransactionCard extends StatelessWidget {
               width: 44,
               height: 44,
               decoration: BoxDecoration(
-                color: (isIncome ? const Color(0xFF10B981) : kAprilColor).withOpacity(0.1),
+                color: (isIncome ? const Color(0xFF10B981) : kAprilColor).withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Center(
                 child: Text(
-                  categoryEmojis[transaction.category] ?? '📋',
+                  categoryEmojis[transaction.category] ?? 'ðŸ“‹',
                   style: const TextStyle(fontSize: 20),
                 ),
               ),
@@ -636,7 +636,7 @@ class TransactionCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  '${isIncome ? '+' : '-'} ₵${transaction.amount.toStringAsFixed(2)}',
+                  '${isIncome ? '+' : '-'} â‚µ${transaction.amount.toStringAsFixed(2)}',
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w700,
@@ -664,9 +664,9 @@ class TransactionCard extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  BUDGET PROGRESS BAR
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class BudgetProgressBar extends StatelessWidget {
   final BudgetCategory budget;
@@ -692,7 +692,7 @@ class BudgetProgressBar extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
-            BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 6, offset: const Offset(0, 2)),
+            BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 6, offset: const Offset(0, 2)),
           ],
         ),
         child: Column(
@@ -703,7 +703,7 @@ class BudgetProgressBar extends StatelessWidget {
               children: [
                 Text(budget.name, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
                 Text(
-                  '₵${budget.spent.toStringAsFixed(0)} / ₵${budget.limit.toStringAsFixed(0)}',
+                  'â‚µ${budget.spent.toStringAsFixed(0)} / â‚µ${budget.limit.toStringAsFixed(0)}',
                   style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
@@ -725,7 +725,7 @@ class BudgetProgressBar extends StatelessWidget {
             if (budget.status == BudgetStatus.overBudget) ...[
               const SizedBox(height: 4),
               Text(
-                'Over by ₵${(-budget.remaining).toStringAsFixed(0)}',
+                'Over by â‚µ${(-budget.remaining).toStringAsFixed(0)}',
                 style: const TextStyle(fontSize: 11, color: Color(0xFFEF4444), fontWeight: FontWeight.w500),
               ),
             ],
@@ -736,9 +736,9 @@ class BudgetProgressBar extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  CALENDAR EVENT TILE
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class CalendarEventTile extends StatelessWidget {
   final CalendarEvent event;
@@ -759,13 +759,13 @@ class CalendarEventTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final color = _eventColors[event.colorIndex % _eventColors.length];
     final typeEmojis = {
-      EventType.meeting: '👥',
-      EventType.call: '📞',
-      EventType.personal: '🍽️',
-      EventType.travel: '✈️',
-      EventType.deadline: '⏰',
-      EventType.reminder: '🔔',
-      EventType.allDay: '📅',
+      EventType.meeting: 'ðŸ‘¥',
+      EventType.call: 'ðŸ“ž',
+      EventType.personal: 'ðŸ½ï¸',
+      EventType.travel: 'âœˆï¸',
+      EventType.deadline: 'â°',
+      EventType.reminder: 'ðŸ””',
+      EventType.allDay: 'ðŸ“…',
     };
 
     return GestureDetector(
@@ -778,7 +778,7 @@ class CalendarEventTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           border: Border(left: BorderSide(color: color, width: 4)),
           boxShadow: [
-            BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 6, offset: const Offset(0, 2)),
+            BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 6, offset: const Offset(0, 2)),
           ],
         ),
         child: Row(
@@ -808,7 +808,7 @@ class CalendarEventTile extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Text(typeEmojis[event.type] ?? '📅', style: const TextStyle(fontSize: 14)),
+                      Text(typeEmojis[event.type] ?? 'ðŸ“…', style: const TextStyle(fontSize: 14)),
                       const SizedBox(width: 6),
                       Expanded(
                         child: Text(
@@ -849,9 +849,9 @@ class CalendarEventTile extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  WISHLIST ITEM CARD
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class WishlistItemCard extends StatelessWidget {
   final WishlistItem item;
@@ -890,7 +890,7 @@ class WishlistItemCard extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(14),
           boxShadow: [
-            BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 8, offset: const Offset(0, 2)),
+            BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8, offset: const Offset(0, 2)),
           ],
         ),
         child: Column(
@@ -900,14 +900,14 @@ class WishlistItemCard extends StatelessWidget {
             Container(
               height: 100,
               decoration: BoxDecoration(
-                color: kAprilColor.withOpacity(0.08),
+                color: kAprilColor.withValues(alpha: 0.08),
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(14),
                   topRight: Radius.circular(14),
                 ),
               ),
               child: Center(
-                child: Icon(Icons.image_outlined, size: 36, color: kAprilColor.withOpacity(0.4)),
+                child: Icon(Icons.image_outlined, size: 36, color: kAprilColor.withValues(alpha: 0.4)),
               ),
             ),
             Padding(
@@ -939,7 +939,7 @@ class WishlistItemCard extends StatelessWidget {
                   ],
                   const SizedBox(height: 6),
                   Text(
-                    '₵${item.price.toStringAsFixed(2)}',
+                    'â‚µ${item.price.toStringAsFixed(2)}',
                     style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFF1A1A1A)),
                   ),
                   // Savings progress
@@ -971,7 +971,7 @@ class WishlistItemCard extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                     decoration: BoxDecoration(
-                      color: (availabilityColors[item.availability] ?? const Color(0xFF9CA3AF)).withOpacity(0.1),
+                      color: (availabilityColors[item.availability] ?? const Color(0xFF9CA3AF)).withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(4),
                     ),
                     child: Text(
@@ -993,9 +993,9 @@ class WishlistItemCard extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  STATEMENT CARD WIDGET
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class StatementCardWidget extends StatelessWidget {
   final StatementCardData card;
@@ -1014,7 +1014,7 @@ class StatementCardWidget extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(14),
           boxShadow: [
-            BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 8, offset: const Offset(0, 2)),
+            BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8, offset: const Offset(0, 2)),
           ],
         ),
         child: Column(
@@ -1088,7 +1088,7 @@ class StatementCardWidget extends StatelessWidget {
                 children: card.highlights.map((h) => Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                   decoration: BoxDecoration(
-                    color: kAprilColor.withOpacity(0.08),
+                    color: kAprilColor.withValues(alpha: 0.08),
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Text(

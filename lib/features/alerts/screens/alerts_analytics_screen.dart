@@ -1,4 +1,4 @@
-/// Alerts Screen 6 — Analytics Dashboard
+﻿/// Alerts Screen 6 â€” Analytics Dashboard
 /// Volume trends, SLA compliance, category distribution,
 /// team workload, resolver leaderboard
 
@@ -24,7 +24,7 @@ class AlertsAnalyticsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // ──── AI ANALYTICS INSIGHT ────
+                // â”€â”€â”€â”€ AI ANALYTICS INSIGHT â”€â”€â”€â”€
                 Consumer<AIInsightsNotifier>(
                   builder: (context, ai, _) {
                     if (ai.insights.isEmpty) return const SizedBox.shrink();
@@ -32,7 +32,7 @@ class AlertsAnalyticsScreen extends StatelessWidget {
                       margin: const EdgeInsets.only(bottom: 12),
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                       decoration: BoxDecoration(
-                        color: kAlertsColor.withOpacity(0.07),
+                        color: kAlertsColor.withValues(alpha: 0.07),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Row(children: [
@@ -43,11 +43,11 @@ class AlertsAnalyticsScreen extends StatelessWidget {
                     );
                   },
                 ),
-                // ──── KEY METRICS ────
+                // â”€â”€â”€â”€ KEY METRICS â”€â”€â”€â”€
                 Row(
                   children: [
                     _MetricCard(
-                      emoji: '📊',
+                      emoji: 'ðŸ“Š',
                       label: 'Total',
                       value: '${provider.totalCount}',
                       sub: 'alerts',
@@ -55,7 +55,7 @@ class AlertsAnalyticsScreen extends StatelessWidget {
                     ),
                     const SizedBox(width: 10),
                     _MetricCard(
-                      emoji: '⏱️',
+                      emoji: 'â±ï¸',
                       label: 'Avg Resolution',
                       value: '${provider.avgResolutionTime.inHours}h ${provider.avgResolutionTime.inMinutes % 60}m',
                       sub: 'time',
@@ -67,7 +67,7 @@ class AlertsAnalyticsScreen extends StatelessWidget {
                 Row(
                   children: [
                     _MetricCard(
-                      emoji: '✅',
+                      emoji: 'âœ…',
                       label: 'SLA Compliance',
                       value: '${provider.slaCompliancePercent}%',
                       sub: 'on-time',
@@ -75,7 +75,7 @@ class AlertsAnalyticsScreen extends StatelessWidget {
                     ),
                     const SizedBox(width: 10),
                     _MetricCard(
-                      emoji: '🔴',
+                      emoji: 'ðŸ”´',
                       label: 'Pending',
                       value: '${provider.pendingCount}',
                       sub: 'open alerts',
@@ -85,9 +85,9 @@ class AlertsAnalyticsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
 
-                // ──── VOLUME TRENDS ────
+                // â”€â”€â”€â”€ VOLUME TRENDS â”€â”€â”€â”€
                 AlertsSectionCard(
-                  title: '📈 Alert Volume (7 Days)',
+                  title: 'ðŸ“ˆ Alert Volume (7 Days)',
                   child: SizedBox(
                     height: 160,
                     child: _BarChart(data: provider.volumeByDay),
@@ -95,9 +95,9 @@ class AlertsAnalyticsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
 
-                // ──── CATEGORY DISTRIBUTION ────
+                // â”€â”€â”€â”€ CATEGORY DISTRIBUTION â”€â”€â”€â”€
                 AlertsSectionCard(
-                  title: '🗂️ Category Distribution',
+                  title: 'ðŸ—‚ï¸ Category Distribution',
                   child: Column(
                     children: provider.categoryDistribution.map((dp) {
                       final maxCount = provider.categoryDistribution.fold<int>(0, (m, d) => d.count > m ? d.count : m);
@@ -111,9 +111,9 @@ class AlertsAnalyticsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
 
-                // ──── SLA COMPLIANCE GAUGE ────
+                // â”€â”€â”€â”€ SLA COMPLIANCE GAUGE â”€â”€â”€â”€
                 AlertsSectionCard(
-                  title: '⏱️ SLA Compliance',
+                  title: 'â±ï¸ SLA Compliance',
                   child: Column(
                     children: [
                       SizedBox(
@@ -165,9 +165,9 @@ class AlertsAnalyticsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
 
-                // ──── ISSUE DISTRIBUTION DONUT ────
+                // â”€â”€â”€â”€ ISSUE DISTRIBUTION DONUT â”€â”€â”€â”€
                 AlertsSectionCard(
-                  title: '🍩 Issue Mix',
+                  title: 'ðŸ© Issue Mix',
                   child: Row(
                     children: [
                       MiniDonutChart(data: provider.issueDistribution, size: 80),
@@ -199,9 +199,9 @@ class AlertsAnalyticsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
 
-                // ──── RESOLVER LEADERBOARD ────
+                // â”€â”€â”€â”€ RESOLVER LEADERBOARD â”€â”€â”€â”€
                 AlertsSectionCard(
-                  title: '🏆 Top Resolvers',
+                  title: 'ðŸ† Top Resolvers',
                   child: Column(
                     children: [
                       for (int i = 0; i < provider.topResolvers.length; i++)
@@ -214,9 +214,9 @@ class AlertsAnalyticsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
 
-                // ──── TEAM WORKLOAD ────
+                // â”€â”€â”€â”€ TEAM WORKLOAD â”€â”€â”€â”€
                 AlertsSectionCard(
-                  title: '👥 Team Workload',
+                  title: 'ðŸ‘¥ Team Workload',
                   child: Column(
                     children: provider.staff.map((s) => Container(
                       margin: const EdgeInsets.only(bottom: 8),
@@ -226,7 +226,7 @@ class AlertsAnalyticsScreen extends StatelessWidget {
                             width: 32,
                             height: 32,
                             decoration: BoxDecoration(
-                              color: kAlertsColor.withOpacity(0.1),
+                              color: kAlertsColor.withValues(alpha: 0.1),
                               shape: BoxShape.circle,
                             ),
                             child: Center(child: Text(s.name[0], style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: kAlertsColor))),
@@ -266,9 +266,9 @@ class AlertsAnalyticsScreen extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Metric Card
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _MetricCard extends StatelessWidget {
   final String emoji;
@@ -309,9 +309,9 @@ class _MetricCard extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Bar Chart
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _BarChart extends StatelessWidget {
   final List<AlertAnalyticsPoint> data;
@@ -335,7 +335,7 @@ class _BarChart extends StatelessWidget {
                 Container(
                   height: height,
                   decoration: BoxDecoration(
-                    color: kAlertsColor.withOpacity(0.7),
+                    color: kAlertsColor.withValues(alpha: 0.7),
                     borderRadius: BorderRadius.circular(4),
                   ),
                 ),
@@ -350,9 +350,9 @@ class _BarChart extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Distribution Bar
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _DistributionBar extends StatelessWidget {
   final String label;
@@ -385,9 +385,9 @@ class _DistributionBar extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Legend Dot
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _LegendDot extends StatelessWidget {
   final Color color;

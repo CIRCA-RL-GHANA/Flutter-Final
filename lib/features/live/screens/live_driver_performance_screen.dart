@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// LIVE MODULE — Screen 19: Driver Performance Detail
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// LIVE MODULE â€” Screen 19: Driver Performance Detail
 /// Individual driver analytics: delivery history, ratings,
 /// performance trends, feedback, and management actions
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -45,12 +45,12 @@ class LiveDriverPerformanceScreen extends StatelessWidget {
                       const SizedBox(height: 8),
                       CircleAvatar(
                         radius: 32,
-                        backgroundColor: Colors.white.withOpacity(0.2),
+                        backgroundColor: Colors.white.withValues(alpha: 0.2),
                         child: Text(driver.name.substring(0, 1), style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w800, color: Colors.white)),
                       ),
                       const SizedBox(height: 8),
                       Text(driver.name, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: Colors.white)),
-                      Text(driver.driverType.name, style: TextStyle(fontSize: 13, color: Colors.white.withOpacity(0.8))),
+                      Text(driver.driverType.name, style: TextStyle(fontSize: 13, color: Colors.white.withValues(alpha: 0.8))),
                       const SizedBox(height: 12),
 
                       // Stats row
@@ -75,9 +75,9 @@ class LiveDriverPerformanceScreen extends StatelessWidget {
                       margin: const EdgeInsets.fromLTRB(16, 0, 16, 8),
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: kLiveColor.withOpacity(0.07),
+                        color: kLiveColor.withValues(alpha: 0.07),
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: kLiveColor.withOpacity(0.2)),
+                        border: Border.all(color: kLiveColor.withValues(alpha: 0.2)),
                       ),
                       child: Row(
                         children: [
@@ -130,7 +130,7 @@ class LiveDriverPerformanceScreen extends StatelessWidget {
                               runSpacing: 6,
                               children: driver.specialties.map((s) => Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                                decoration: BoxDecoration(color: kLiveColor.withOpacity(0.1), borderRadius: BorderRadius.circular(8)),
+                                decoration: BoxDecoration(color: kLiveColor.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(8)),
                                 child: Text(s, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: kLiveColor)),
                               )).toList(),
                             ),
@@ -161,7 +161,7 @@ class LiveDriverPerformanceScreen extends StatelessWidget {
 
                       // Performance Chart placeholder
                       LiveSectionCard(
-                        title: '📈 DELIVERY TRENDS (7 DAYS)',
+                        title: 'ðŸ“ˆ DELIVERY TRENDS (7 DAYS)',
                         icon: Icons.trending_up,
                         iconColor: const Color(0xFF10B981),
                         child: Container(
@@ -182,7 +182,7 @@ class LiveDriverPerformanceScreen extends StatelessWidget {
 
                       // Recent Feedback
                       LiveSectionCard(
-                        title: '💬 RECENT FEEDBACK',
+                        title: 'ðŸ’¬ RECENT FEEDBACK',
                         icon: Icons.feedback,
                         iconColor: const Color(0xFF8B5CF6),
                         child: Column(
@@ -264,13 +264,13 @@ class _HeaderStat extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.only(right: 6),
         padding: const EdgeInsets.symmetric(vertical: 8),
-        decoration: BoxDecoration(color: Colors.white.withOpacity(0.15), borderRadius: BorderRadius.circular(10)),
+        decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(10)),
         child: Column(
           children: [
-            Icon(icon, size: 16, color: Colors.white.withOpacity(0.8)),
+            Icon(icon, size: 16, color: Colors.white.withValues(alpha: 0.8)),
             const SizedBox(height: 2),
             Text(value, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: Colors.white)),
-            Text(label, style: TextStyle(fontSize: 9, color: Colors.white.withOpacity(0.7))),
+            Text(label, style: TextStyle(fontSize: 9, color: Colors.white.withValues(alpha: 0.7))),
           ],
         ),
       ),

@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// LIVE MODULE — Screen 8: Return Rejection Flow
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// LIVE MODULE â€” Screen 8: Return Rejection Flow
 /// Structured rejection with required reason, evidence review,
 /// customer communication template, and appeal info
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -51,7 +51,7 @@ class _LiveReturnRejectionScreenState extends State<LiveReturnRejectionScreen> {
                     margin: const EdgeInsets.only(bottom: 12),
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     decoration: BoxDecoration(
-                      color: kLiveColor.withOpacity(0.07),
+                      color: kLiveColor.withValues(alpha: 0.07),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Row(
@@ -76,7 +76,7 @@ class _LiveReturnRejectionScreenState extends State<LiveReturnRejectionScreen> {
                 decoration: BoxDecoration(
                   color: const Color(0xFFFEE2E2),
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: kLiveColor.withOpacity(0.3)),
+                  border: Border.all(color: kLiveColor.withValues(alpha: 0.3)),
                 ),
                 child: Row(
                   children: [
@@ -87,7 +87,7 @@ class _LiveReturnRejectionScreenState extends State<LiveReturnRejectionScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text('Rejecting return for:', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: kLiveColor)),
-                          Text('${ret.itemName} — ₵${ret.itemPrice.toStringAsFixed(2)}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700)),
+                          Text('${ret.itemName} â€” â‚µ${ret.itemPrice.toStringAsFixed(2)}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700)),
                           Text('Customer: ${ret.customerName}', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                         ],
                       ),
@@ -165,9 +165,9 @@ class _LiveReturnRejectionScreenState extends State<LiveReturnRejectionScreen> {
                     children: [
                       const Text('Customer Appeal Rights', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Color(0xFF6B21A8))),
                       const SizedBox(height: 4),
-                      Text('• Customer can appeal within 7 days', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
-                      Text('• Appeal goes to senior response officer', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
-                      Text('• Customer will be notified of their options', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                      Text('â€¢ Customer can appeal within 7 days', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                      Text('â€¢ Appeal goes to senior response officer', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                      Text('â€¢ Customer will be notified of their options', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                     ],
                   ),
                 ),
@@ -180,7 +180,7 @@ class _LiveReturnRejectionScreenState extends State<LiveReturnRejectionScreen> {
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
             decoration: BoxDecoration(
               color: Colors.white,
-              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 8, offset: const Offset(0, -2))],
+              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 8, offset: const Offset(0, -2))],
             ),
             child: Row(
               children: [
@@ -200,7 +200,7 @@ class _LiveReturnRejectionScreenState extends State<LiveReturnRejectionScreen> {
                         : () {
                             HapticFeedback.heavyImpact();
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('❌ Return rejected. Customer notified.'), backgroundColor: kLiveColor),
+                              const SnackBar(content: Text('âŒ Return rejected. Customer notified.'), backgroundColor: kLiveColor),
                             );
                             Navigator.pop(context);
                             Navigator.pop(context);

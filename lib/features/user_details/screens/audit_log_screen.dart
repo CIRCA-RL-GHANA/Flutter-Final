@@ -1,7 +1,7 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// Screen 9: Activity & Audit Log
 /// Timeline, filter matrix, export, anomaly highlighting
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -40,7 +40,7 @@ class AuditLogScreen extends StatelessWidget {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: AppColors.primary.withOpacity(0.07),
+                    color: AppColors.primary.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -59,7 +59,7 @@ class AuditLogScreen extends StatelessWidget {
                 },
               ),
 
-              // ─── Time Filter ─────────────────────────────
+              // â”€â”€â”€ Time Filter â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
                 child: SizedBox(
@@ -98,7 +98,7 @@ class AuditLogScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Action Filters ──────────────────────────
+              // â”€â”€â”€ Action Filters â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
                 child: SizedBox(
@@ -135,7 +135,7 @@ class AuditLogScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Module Filter ───────────────────────────
+              // â”€â”€â”€ Module Filter â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 8, 20, 4),
                 child: Row(
@@ -168,7 +168,7 @@ class AuditLogScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Results Count ───────────────────────────
+              // â”€â”€â”€ Results Count â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 4, 20, 4),
                 child: Row(
@@ -196,14 +196,14 @@ class AuditLogScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Timeline ────────────────────────────────
+              // â”€â”€â”€ Timeline â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               Expanded(
                 child: entries.isEmpty
                     ? Center(
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Icon(Icons.history, size: 48, color: AppColors.textTertiary.withOpacity(0.4)),
+                            Icon(Icons.history, size: 48, color: AppColors.textTertiary.withValues(alpha: 0.4)),
                             const SizedBox(height: 12),
                             const Text('No activity found', style: TextStyle(color: AppColors.textTertiary)),
                             const Text('Try adjusting filters', style: TextStyle(fontSize: 12, color: AppColors.textTertiary)),
@@ -302,9 +302,9 @@ class AuditLogScreen extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Timeline Entry
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _TimelineEntry extends StatelessWidget {
   final AuditLogEntry entry;
@@ -329,7 +329,7 @@ class _TimelineEntry extends StatelessWidget {
                   height: 24,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: entry.actionColor.withOpacity(0.15),
+                    color: entry.actionColor.withValues(alpha: 0.15),
                     border: hasAnomaly
                         ? Border.all(color: entry.actionColor, width: 2)
                         : null,
@@ -340,7 +340,7 @@ class _TimelineEntry extends StatelessWidget {
                   Expanded(
                     child: Container(
                       width: 1.5,
-                      color: Colors.grey.withOpacity(0.15),
+                      color: Colors.grey.withValues(alpha: 0.15),
                     ),
                   ),
               ],
@@ -354,13 +354,13 @@ class _TimelineEntry extends StatelessWidget {
               margin: const EdgeInsets.only(bottom: 12),
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: hasAnomaly ? entry.actionColor.withOpacity(0.04) : Colors.white,
+                color: hasAnomaly ? entry.actionColor.withValues(alpha: 0.04) : Colors.white,
                 borderRadius: BorderRadius.circular(12),
                 border: hasAnomaly
-                    ? Border.all(color: entry.actionColor.withOpacity(0.2))
+                    ? Border.all(color: entry.actionColor.withValues(alpha: 0.2))
                     : null,
                 boxShadow: [
-                  BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 6, offset: const Offset(0, 1)),
+                  BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 6, offset: const Offset(0, 1)),
                 ],
               ),
               child: Column(
@@ -412,13 +412,13 @@ class _TimelineEntry extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                       decoration: BoxDecoration(
-                        color: entry.actionColor.withOpacity(0.1),
+                        color: entry.actionColor.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(4),
                       ),
                       child: Text(
                         entry.anomaly == AuditAnomaly.securityConcern
-                            ? '⚠ Security Concern'
-                            : '⚡ Unusual Activity',
+                            ? 'âš  Security Concern'
+                            : 'âš¡ Unusual Activity',
                         style: TextStyle(
                           fontSize: 10,
                           fontWeight: FontWeight.w700,
@@ -462,9 +462,9 @@ class _MetaTag extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Export Option
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _ExportOption extends StatelessWidget {
   final AuditExportFormat format;

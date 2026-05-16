@@ -1,7 +1,7 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// Screen 5: Security Deep Dive
 /// 4 tabs: Auth Methods, Devices & Sessions, Emergency, Advanced
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -77,7 +77,7 @@ class _SecurityScreenState extends State<SecurityScreen> with SingleTickerProvid
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: AppColors.primary.withOpacity(0.07),
+                    color: AppColors.primary.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(children: [
                       const Icon(Icons.auto_awesome, size: 14, color: AppColors.primary),
@@ -108,9 +108,9 @@ class _SecurityScreenState extends State<SecurityScreen> with SingleTickerProvid
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Tab 1: Auth Methods
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _AuthMethodsTab extends StatelessWidget {
   final SecuritySettings security;
@@ -137,7 +137,7 @@ class _AuthMethodsTab extends StatelessWidget {
                         CircularProgressIndicator(
                           value: security.passwordHealthScore / 100,
                           strokeWidth: 5,
-                          backgroundColor: Colors.grey.withOpacity(0.1),
+                          backgroundColor: Colors.grey.withValues(alpha: 0.1),
                           valueColor: AlwaysStoppedAnimation<Color>(
                             security.passwordHealthScore >= 80
                                 ? const Color(0xFF10B981)
@@ -254,14 +254,14 @@ class _AuthMethodCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: SectionCard(
-        borderColor: isPrimary ? const Color(0xFF10B981).withOpacity(0.3) : null,
+        borderColor: isPrimary ? const Color(0xFF10B981).withValues(alpha: 0.3) : null,
         child: Row(
           children: [
             Container(
               width: 44,
               height: 44,
               decoration: BoxDecoration(
-                color: (isPrimary ? const Color(0xFF10B981) : const Color(0xFF6366F1)).withOpacity(0.1),
+                color: (isPrimary ? const Color(0xFF10B981) : const Color(0xFF6366F1)).withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(method.icon, size: 22, color: isPrimary ? const Color(0xFF10B981) : const Color(0xFF6366F1)),
@@ -291,9 +291,9 @@ class _AuthMethodCard extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Tab 2: Devices & Sessions
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _DevicesTab extends StatelessWidget {
   final SecuritySettings security;
@@ -371,14 +371,14 @@ class _SessionCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: SectionCard(
-        borderColor: session.isCurrent ? const Color(0xFF10B981).withOpacity(0.3) : null,
+        borderColor: session.isCurrent ? const Color(0xFF10B981).withValues(alpha: 0.3) : null,
         child: Row(
           children: [
             Container(
               width: 44,
               height: 44,
               decoration: BoxDecoration(
-                color: (session.isCurrent ? const Color(0xFF10B981) : const Color(0xFF3B82F6)).withOpacity(0.1),
+                color: (session.isCurrent ? const Color(0xFF10B981) : const Color(0xFF3B82F6)).withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(session.deviceIcon, size: 22, color: session.isCurrent ? const Color(0xFF10B981) : const Color(0xFF3B82F6)),
@@ -403,7 +403,7 @@ class _SessionCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    '${session.os} • ${session.location}',
+                    '${session.os} â€¢ ${session.location}',
                     style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                   ),
                 ],
@@ -450,7 +450,7 @@ class _SecurityEventCard extends StatelessWidget {
                 Text(event.description, style: const TextStyle(fontSize: 13, color: AppColors.textPrimary)),
                 if (event.deviceName != null || event.location != null)
                   Text(
-                    [event.deviceName, event.location].whereType<String>().join(' • '),
+                    [event.deviceName, event.location].whereType<String>().join(' â€¢ '),
                     style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                   ),
               ],
@@ -462,9 +462,9 @@ class _SecurityEventCard extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Tab 3: Emergency
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _EmergencyTab extends StatelessWidget {
   final dynamic identity;
@@ -496,7 +496,7 @@ class _EmergencyTab extends StatelessWidget {
                       width: 44,
                       height: 44,
                       decoration: BoxDecoration(
-                        color: const Color(0xFFEF4444).withOpacity(0.1),
+                        color: const Color(0xFFEF4444).withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: const Icon(Icons.emergency, size: 22, color: Color(0xFFEF4444)),
@@ -507,7 +507,7 @@ class _EmergencyTab extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(ec.name, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textPrimary)),
-                          Text('${ec.relationship} • ${ec.phone}', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                          Text('${ec.relationship} â€¢ ${ec.phone}', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                         ],
                       ),
                     ),
@@ -575,9 +575,9 @@ class _EmergencyTab extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Tab 4: Advanced Security
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _AdvancedTab extends StatelessWidget {
   final SecuritySettings security;
@@ -652,7 +652,7 @@ class _AdvancedTab extends StatelessWidget {
 
         // Danger Zone
         SectionCard(
-          borderColor: const Color(0xFFEF4444).withOpacity(0.2),
+          borderColor: const Color(0xFFEF4444).withValues(alpha: 0.2),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -708,7 +708,7 @@ class _MetricBox extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.06),
+        color: color.withValues(alpha: 0.06),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(

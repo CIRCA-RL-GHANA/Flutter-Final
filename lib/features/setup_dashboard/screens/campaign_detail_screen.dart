@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SD2.4-DETAIL: CAMPAIGN DETAIL — 4-Tab Deep View
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD2.4-DETAIL: CAMPAIGN DETAIL â€” 4-Tab Deep View
 /// Tabs: Overview, Audience, Performance, A/B Testing
 /// RBAC: Admin/SocialOfficer(fullAccess), Monitor(viewOnly)
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -51,7 +51,7 @@ class _CampaignDetailScreenState extends State<CampaignDetailScreen> {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kSetupColor.withOpacity(0.07),
+                    color: kSetupColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -122,7 +122,7 @@ class _CampaignHeader extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 12, offset: const Offset(0, 4))],
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 12, offset: const Offset(0, 4))],
       ),
       child: Row(
         children: [
@@ -130,7 +130,7 @@ class _CampaignHeader extends StatelessWidget {
             width: 56,
             height: 56,
             decoration: BoxDecoration(
-              color: _statusColor.withOpacity(0.1),
+              color: _statusColor.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(14),
             ),
             child: Icon(_statusIcon, size: 28, color: _statusColor),
@@ -148,7 +148,7 @@ class _CampaignHeader extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                       decoration: BoxDecoration(
-                        color: _statusColor.withOpacity(0.1),
+                        color: _statusColor.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: Text(
@@ -158,7 +158,7 @@ class _CampaignHeader extends StatelessWidget {
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      '₵${campaign.budget.toStringAsFixed(0)}',
+                      'â‚µ${campaign.budget.toStringAsFixed(0)}',
                       style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.textSecondary),
                     ),
                   ],
@@ -213,8 +213,8 @@ class _OverviewTab extends StatelessWidget {
               SetupInfoRow(label: 'Campaign ID', value: campaign.id),
               SetupInfoRow(label: 'Type', value: campaign.type.name),
               SetupInfoRow(label: 'Goal', value: campaign.goal.name),
-              SetupInfoRow(label: 'Budget', value: '₵${campaign.budget.toStringAsFixed(0)}'),
-              SetupInfoRow(label: 'Spent', value: '₵${campaign.spent.toStringAsFixed(0)}'),
+              SetupInfoRow(label: 'Budget', value: 'â‚µ${campaign.budget.toStringAsFixed(0)}'),
+              SetupInfoRow(label: 'Spent', value: 'â‚µ${campaign.spent.toStringAsFixed(0)}'),
               SetupInfoRow(label: 'ROI', value: '${campaign.roi.toStringAsFixed(1)}%', valueColor: campaign.roi > 100 ? AppColors.success : AppColors.warning),
               if (campaign.daysLeft > 0)
                 SetupInfoRow(label: 'Days Left', value: '${campaign.daysLeft}'),
@@ -249,8 +249,8 @@ class _OverviewTab extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('₵${campaign.spent.toStringAsFixed(0)} spent', style: const TextStyle(fontSize: 11, color: AppColors.textSecondary)),
-                  Text('₵${campaign.budget.toStringAsFixed(0)} total', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                  Text('â‚µ${campaign.spent.toStringAsFixed(0)} spent', style: const TextStyle(fontSize: 11, color: AppColors.textSecondary)),
+                  Text('â‚µ${campaign.budget.toStringAsFixed(0)} total', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                 ],
               ),
             ],
@@ -388,7 +388,7 @@ class _PerformanceTab extends StatelessWidget {
               Container(
                 height: 140,
                 decoration: BoxDecoration(
-                  color: kSetupColor.withOpacity(0.04),
+                  color: kSetupColor.withValues(alpha: 0.04),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: CustomPaint(
@@ -464,7 +464,7 @@ class _TrendPainter extends CustomPainter {
       ..shader = LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-        colors: [color.withOpacity(0.2), color.withOpacity(0.0)],
+        colors: [color.withValues(alpha: 0.2), color.withValues(alpha: 0.0)],
       ).createShader(Rect.fromLTWH(0, 0, size.width, size.height));
     canvas.drawPath(fillPath, fillPaint);
   }
@@ -557,9 +557,9 @@ class _TestVariant extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.04),
+        color: color.withValues(alpha: 0.04),
         borderRadius: BorderRadius.circular(10),
-        border: isWinning ? Border.all(color: color.withOpacity(0.3)) : null,
+        border: isWinning ? Border.all(color: color.withValues(alpha: 0.3)) : null,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -572,7 +572,7 @@ class _TestVariant extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(
-                    color: AppColors.success.withOpacity(0.1),
+                    color: AppColors.success.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: const Text('WINNING', style: TextStyle(fontSize: 9, fontWeight: FontWeight.w700, color: AppColors.success)),

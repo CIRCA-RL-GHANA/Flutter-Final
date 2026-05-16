@@ -1,12 +1,12 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// GenieStepperCard
 ///
 /// Inline stepper card that displays real-time orchestration progress.
 /// Subscribes to [GenieOutbox.progressStream] and highlights the current step.
 /// Provides a Cancel button that triggers rollback via [onCancel].
 ///
-/// Recommendation 4 — User-Visible Progress with rollback.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// Recommendation 4 â€” User-Visible Progress with rollback.
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'dart:async';
 import 'package:flutter/material.dart';
@@ -77,10 +77,10 @@ class _GenieStepperCardState extends State<GenieStepperCard> {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: _cardColor(success, failed).withOpacity(0.10),
+        color: _cardColor(success, failed).withValues(alpha: 0.10),
         borderRadius: BorderRadius.circular(14),
         border: Border.all(
-            color: _cardColor(success, failed).withOpacity(0.35)),
+            color: _cardColor(success, failed).withValues(alpha: 0.35)),
       ),
       padding: const EdgeInsets.all(14),
       child: Column(
@@ -136,7 +136,7 @@ class _GenieStepperCardState extends State<GenieStepperCard> {
               padding:
                   const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
               decoration: BoxDecoration(
-                color: _cardColor(success, failed).withOpacity(0.08),
+                color: _cardColor(success, failed).withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
@@ -191,8 +191,8 @@ class _StepRow extends StatelessWidget {
             height: 24,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: isCurrent ? color : color.withOpacity(0.18),
-              border: Border.all(color: color.withOpacity(0.6)),
+              color: isCurrent ? color : color.withValues(alpha: 0.18),
+              border: Border.all(color: color.withValues(alpha: 0.6)),
             ),
             child: Center(
               child: _stepIcon(),

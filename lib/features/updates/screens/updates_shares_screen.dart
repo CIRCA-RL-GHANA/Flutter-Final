@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SCREEN 4 — Shares List & Actions
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SCREEN 4 â€” Shares List & Actions
 /// Two-pane layout: share history (who shared, platform, reach) and
 /// share actions (copy link, platform icons, QR code).
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -44,7 +44,7 @@ class _Body extends StatelessWidget {
                   builder: (context, ai, _) {
                     if (ai.insights.isEmpty) return const SizedBox.shrink();
                     return Container(
-                      color: kUpdatesColor.withOpacity(0.07),
+                      color: kUpdatesColor.withValues(alpha: 0.07),
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                       child: Row(children: [
                         const Icon(Icons.auto_awesome, size: 14, color: kUpdatesColor),
@@ -179,7 +179,7 @@ class _Body extends StatelessWidget {
   }
 }
 
-// ─── Share Stats Banner ─────────────────────────────────────────────────────
+// â”€â”€â”€ Share Stats Banner â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _ShareStatsBanner extends StatelessWidget {
   final ShareStats stats;
@@ -191,20 +191,20 @@ class _ShareStatsBanner extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [kUpdatesColor.withOpacity(0.08), kUpdatesAccent.withOpacity(0.06)],
+          colors: [kUpdatesColor.withValues(alpha: 0.08), kUpdatesAccent.withValues(alpha: 0.06)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: kUpdatesColor.withOpacity(0.15)),
+        border: Border.all(color: kUpdatesColor.withValues(alpha: 0.15)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           _StatColumn(value: '${stats.totalShares}', label: 'Total Shares', icon: Icons.shortcut),
-          Container(width: 1, height: 40, color: kUpdatesColor.withOpacity(0.15)),
+          Container(width: 1, height: 40, color: kUpdatesColor.withValues(alpha: 0.15)),
           _StatColumn(value: '${(stats.totalShares * 3.5).round()}', label: 'Est. Reach', icon: Icons.visibility),
-          Container(width: 1, height: 40, color: kUpdatesColor.withOpacity(0.15)),
+          Container(width: 1, height: 40, color: kUpdatesColor.withValues(alpha: 0.15)),
           _StatColumn(value: '${stats.platformBreakdown.length}', label: 'Platforms', icon: Icons.devices),
         ],
       ),
@@ -231,7 +231,7 @@ class _StatColumn extends StatelessWidget {
   }
 }
 
-// ─── Share Action ───────────────────────────────────────────────────────────
+// â”€â”€â”€ Share Action â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _ShareAction extends StatelessWidget {
   final IconData icon;
@@ -246,7 +246,7 @@ class _ShareAction extends StatelessWidget {
       contentPadding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
       leading: Container(
         width: 36, height: 36,
-        decoration: BoxDecoration(color: kUpdatesColor.withOpacity(0.08), borderRadius: BorderRadius.circular(8)),
+        decoration: BoxDecoration(color: kUpdatesColor.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(8)),
         child: Icon(icon, size: 18, color: kUpdatesColor),
       ),
       title: Text(label, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
@@ -257,7 +257,7 @@ class _ShareAction extends StatelessWidget {
   }
 }
 
-// ─── Share History Item ─────────────────────────────────────────────────────
+// â”€â”€â”€ Share History Item â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _ShareHistoryItem extends StatelessWidget {
   final UpdateShare share;
@@ -271,7 +271,7 @@ class _ShareHistoryItem extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 18,
-            backgroundColor: kUpdatesColor.withOpacity(0.12),
+            backgroundColor: kUpdatesColor.withValues(alpha: 0.12),
             child: Text(share.username.substring(0, 1), style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: kUpdatesColor)),
           ),
           const SizedBox(width: 10),
@@ -285,7 +285,7 @@ class _ShareHistoryItem extends StatelessWidget {
                     Icon(_platformIconStr(share.platform), size: 12, color: AppColors.textTertiary),
                     const SizedBox(width: 3),
                     Text('via ${share.platform}', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
-                    const Text(' • ', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                    const Text(' â€¢ ', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                     Text(_timeAgo(share.sharedAt), style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                   ],
                 ),
@@ -294,7 +294,7 @@ class _ShareHistoryItem extends StatelessWidget {
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-            decoration: BoxDecoration(color: const Color(0xFF10B981).withOpacity(0.08), borderRadius: BorderRadius.circular(10)),
+            decoration: BoxDecoration(color: const Color(0xFF10B981).withValues(alpha: 0.08), borderRadius: BorderRadius.circular(10)),
             child: Text('${share.followerCount} reach', style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: Color(0xFF10B981))),
           ),
         ],
@@ -303,7 +303,7 @@ class _ShareHistoryItem extends StatelessWidget {
   }
 }
 
-// ─── Helpers ────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 IconData _platformIconStr(String p) => switch (p) {
       'QualChat' => Icons.group,

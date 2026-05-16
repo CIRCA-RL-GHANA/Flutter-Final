@@ -1,7 +1,7 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// MARKET MODULE — Screen 9: Return Request & Evidence
-/// 4 Steps: Order Selection → Evidence Collection → Details → Review
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// MARKET MODULE â€” Screen 9: Return Request & Evidence
+/// 4 Steps: Order Selection â†’ Evidence Collection â†’ Details â†’ Review
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -51,7 +51,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kMarketColor.withOpacity(0.07),
+                    color: kMarketColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -155,7 +155,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
     );
   }
 
-  // ── Step 1: Item Selection ─────────────────────────────────────
+  // â”€â”€ Step 1: Item Selection â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   Widget _buildItemSelection(MarketOrder order) {
     return ListView(
       padding: const EdgeInsets.all(16),
@@ -230,7 +230,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
                           style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
                         ),
                         Text(
-                          'Qty: ${item.quantity} • \$${item.total.toStringAsFixed(2)}',
+                          'Qty: ${item.quantity} â€¢ \$${item.total.toStringAsFixed(2)}',
                           style: TextStyle(fontSize: 12, color: AppColors.textTertiary),
                         ),
                       ],
@@ -245,7 +245,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
     );
   }
 
-  // ── Step 2: Evidence Collection ────────────────────────────────
+  // â”€â”€ Step 2: Evidence Collection â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   Widget _buildEvidenceCollection() {
     return ListView(
       padding: const EdgeInsets.all(16),
@@ -324,7 +324,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
         Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: AppColors.info.withOpacity(0.08),
+            color: AppColors.info.withValues(alpha: 0.08),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Column(
@@ -349,7 +349,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
     );
   }
 
-  // ── Step 3: Details ────────────────────────────────────────────
+  // â”€â”€ Step 3: Details â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   Widget _buildDetailsStep() {
     return ListView(
       padding: const EdgeInsets.all(16),
@@ -408,7 +408,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
     );
   }
 
-  // ── Step 4: Review ─────────────────────────────────────────────
+  // â”€â”€ Step 4: Review â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   Widget _buildReviewStep(MarketOrder order) {
     final selectedItemsList = order.items
         .where((i) => _selectedItems.contains(i.productId))
@@ -484,7 +484,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
         Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: AppColors.warning.withOpacity(0.08),
+            color: AppColors.warning.withValues(alpha: 0.08),
             borderRadius: BorderRadius.circular(10),
           ),
           child: Row(
@@ -495,7 +495,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
               Expanded(
                 child: Text(
                   'Returns are reviewed within 24-48 hours. If approved, refund will be processed within 3-5 business days.',
-                  style: TextStyle(fontSize: 12, color: AppColors.warning.withOpacity(0.8)),
+                  style: TextStyle(fontSize: 12, color: AppColors.warning.withValues(alpha: 0.8)),
                 ),
               ),
             ],
@@ -522,7 +522,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
       ),
       decoration: BoxDecoration(
         color: Colors.white,
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, -2))],
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10, offset: const Offset(0, -2))],
       ),
       child: Row(
         children: [
@@ -555,7 +555,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: _step == 3 ? AppColors.warning : kMarketColor,
                 foregroundColor: Colors.white,
-                disabledBackgroundColor: kMarketColor.withOpacity(0.4),
+                disabledBackgroundColor: kMarketColor.withValues(alpha: 0.4),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 padding: const EdgeInsets.symmetric(vertical: 14),
                 elevation: 0,
@@ -584,7 +584,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
               width: 72,
               height: 72,
               decoration: BoxDecoration(
-                color: AppColors.warning.withOpacity(0.1),
+                color: AppColors.warning.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
               child: const Icon(Icons.assignment_return, size: 40, color: AppColors.warning),

@@ -1,7 +1,7 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// Screen 3: Create / Edit Entity Form
-/// 5-step stepper: Type → Core Info → Verification → Role → Review
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 5-step stepper: Type â†’ Core Info â†’ Verification â†’ Role â†’ Review
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -42,7 +42,7 @@ class CreateEntityScreen extends StatelessWidget {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: AppColors.primary.withOpacity(0.07),
+                    color: AppColors.primary.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -142,9 +142,9 @@ class CreateEntityScreen extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Step Progress
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _StepProgress extends StatelessWidget {
   final int currentStep;
@@ -169,7 +169,7 @@ class _StepProgress extends StatelessWidget {
                 height: 28,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: isComplete ? color : (isCurrent ? color.withOpacity(0.15) : Colors.grey.withOpacity(0.1)),
+                  color: isComplete ? color : (isCurrent ? color.withValues(alpha: 0.15) : Colors.grey.withValues(alpha: 0.1)),
                   border: Border.all(
                     color: isCurrent ? color : Colors.transparent,
                     width: 2,
@@ -193,7 +193,7 @@ class _StepProgress extends StatelessWidget {
                   child: Container(
                     height: 2,
                     margin: const EdgeInsets.symmetric(horizontal: 4),
-                    color: isComplete ? color : Colors.grey.withOpacity(0.15),
+                    color: isComplete ? color : Colors.grey.withValues(alpha: 0.15),
                   ),
                 ),
             ],
@@ -204,9 +204,9 @@ class _StepProgress extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Step 1: Entity Type Selection
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _Step1TypeSelection extends StatelessWidget {
   const _Step1TypeSelection({super.key});
@@ -253,15 +253,15 @@ class _TypeCard extends StatelessWidget {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         decoration: BoxDecoration(
-          color: selected ? type.color.withOpacity(0.06) : Colors.white,
+          color: selected ? type.color.withValues(alpha: 0.06) : Colors.white,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: selected ? type.color : Colors.grey.withOpacity(0.15),
+            color: selected ? type.color : Colors.grey.withValues(alpha: 0.15),
             width: selected ? 2 : 1,
           ),
           boxShadow: selected
-              ? [BoxShadow(color: type.color.withOpacity(0.1), blurRadius: 8)]
-              : [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 6)],
+              ? [BoxShadow(color: type.color.withValues(alpha: 0.1), blurRadius: 8)]
+              : [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 6)],
         ),
         child: InkWell(
           onTap: onTap,
@@ -274,7 +274,7 @@ class _TypeCard extends StatelessWidget {
                   width: 48,
                   height: 48,
                   decoration: BoxDecoration(
-                    color: type.color.withOpacity(0.12),
+                    color: type.color.withValues(alpha: 0.12),
                     borderRadius: BorderRadius.circular(14),
                   ),
                   child: Icon(type.icon, size: 24, color: type.color),
@@ -311,9 +311,9 @@ class _TypeCard extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Step 2: Core Info
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _Step2CoreInfo extends StatelessWidget {
   const _Step2CoreInfo({super.key});
@@ -375,7 +375,7 @@ class _Step2CoreInfo extends StatelessWidget {
                 label: Text(bt.toString().split('.').last),
                 selected: selected,
                 onSelected: (_) => udp.updateEntityFields(branchType: bt),
-                selectedColor: color.withOpacity(0.15),
+                selectedColor: color.withValues(alpha: 0.15),
               );
             }).toList(),
           ),
@@ -424,7 +424,7 @@ class _FormField extends StatelessWidget {
               fillColor: const Color(0xFF11131C),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: Colors.grey.withOpacity(0.15)),
+                borderSide: BorderSide(color: Colors.grey.withValues(alpha: 0.15)),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -432,7 +432,7 @@ class _FormField extends StatelessWidget {
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: Colors.grey.withOpacity(0.15)),
+                borderSide: BorderSide(color: Colors.grey.withValues(alpha: 0.15)),
               ),
               contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 14),
             ),
@@ -443,9 +443,9 @@ class _FormField extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Step 3: Verification
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _Step3Verification extends StatelessWidget {
   const _Step3Verification({super.key});
@@ -479,7 +479,7 @@ class _Step3Verification extends StatelessWidget {
             HapticFeedback.selectionClick();
             udp.sendEmailVerification();
           },
-          actionLabel: udp.emailVerificationSent ? 'Sent ✓' : 'Send Code',
+          actionLabel: udp.emailVerificationSent ? 'Sent âœ“' : 'Send Code',
         ),
         _VerificationStep(
           title: 'Phone Verification',
@@ -491,7 +491,7 @@ class _Step3Verification extends StatelessWidget {
             HapticFeedback.selectionClick();
             udp.sendPhoneVerification();
           },
-          actionLabel: udp.phoneVerificationSent ? 'Sent ✓' : 'Send Code',
+          actionLabel: udp.phoneVerificationSent ? 'Sent âœ“' : 'Send Code',
         ),
         _VerificationStep(
           title: 'Document Upload',
@@ -503,7 +503,7 @@ class _Step3Verification extends StatelessWidget {
             HapticFeedback.selectionClick();
             udp.setDocumentUploaded(true);
           },
-          actionLabel: udp.documentUploaded ? 'Uploaded ✓' : 'Upload',
+          actionLabel: udp.documentUploaded ? 'Uploaded âœ“' : 'Upload',
         ),
         _VerificationStep(
           title: 'Address Verification',
@@ -515,7 +515,7 @@ class _Step3Verification extends StatelessWidget {
             HapticFeedback.selectionClick();
             udp.setAddressVerified(true);
           },
-          actionLabel: udp.addressVerified ? 'Verified ✓' : 'Verify',
+          actionLabel: udp.addressVerified ? 'Verified âœ“' : 'Verify',
         ),
       ],
     );
@@ -546,14 +546,14 @@ class _VerificationStep extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: SectionCard(
-        borderColor: completed ? const Color(0xFF10B981).withOpacity(0.3) : null,
+        borderColor: completed ? const Color(0xFF10B981).withValues(alpha: 0.3) : null,
         child: Row(
           children: [
             Container(
               width: 44,
               height: 44,
               decoration: BoxDecoration(
-                color: (completed ? const Color(0xFF10B981) : color).withOpacity(0.1),
+                color: (completed ? const Color(0xFF10B981) : color).withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(
@@ -590,9 +590,9 @@ class _VerificationStep extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Step 4: Role Assignment
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _Step4RoleAssignment extends StatelessWidget {
   const _Step4RoleAssignment({super.key});
@@ -632,10 +632,10 @@ class _Step4RoleAssignment extends StatelessWidget {
                 duration: const Duration(milliseconds: 200),
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
-                  color: selected ? color.withOpacity(0.06) : Colors.white,
+                  color: selected ? color.withValues(alpha: 0.06) : Colors.white,
                   borderRadius: BorderRadius.circular(14),
                   border: Border.all(
-                    color: selected ? color : Colors.grey.withOpacity(0.15),
+                    color: selected ? color : Colors.grey.withValues(alpha: 0.15),
                     width: selected ? 2 : 1,
                   ),
                 ),
@@ -645,7 +645,7 @@ class _Step4RoleAssignment extends StatelessWidget {
                       width: 40,
                       height: 40,
                       decoration: BoxDecoration(
-                        color: RoleColors.forRole(role).withOpacity(0.1),
+                        color: RoleColors.forRole(role).withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Icon(Icons.person_outline, size: 20, color: RoleColors.forRole(role)),
@@ -692,9 +692,9 @@ class _Step4RoleAssignment extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Step Navigation
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _StepNavigation extends StatelessWidget {
   final int step;
@@ -726,7 +726,7 @@ class _StepNavigation extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.06), blurRadius: 10, offset: const Offset(0, -2)),
+          BoxShadow(color: Colors.black.withValues(alpha: 0.06), blurRadius: 10, offset: const Offset(0, -2)),
         ],
       ),
       child: Row(
@@ -751,7 +751,7 @@ class _StepNavigation extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: color,
                 foregroundColor: Colors.white,
-                disabledBackgroundColor: color.withOpacity(0.3),
+                disabledBackgroundColor: color.withValues(alpha: 0.3),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 padding: const EdgeInsets.symmetric(vertical: 14),
               ),

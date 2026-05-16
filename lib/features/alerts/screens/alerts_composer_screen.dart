@@ -1,5 +1,5 @@
-/// Alerts Screen 4 — Alert Composer (Create New Alert)
-/// Stepped wizard: Type → Describe → Assignment → Review
+﻿/// Alerts Screen 4 â€” Alert Composer (Create New Alert)
+/// Stepped wizard: Type â†’ Describe â†’ Assignment â†’ Review
 /// Admin/Branch Manager only
 
 import 'package:flutter/material.dart';
@@ -49,7 +49,7 @@ class _AlertsComposerScreenState extends State<AlertsComposerScreen> {
               children: [
                 const Text('New Alert', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
                 Text(
-                  'Step ${_step + 1} of 4 — ${_stepLabel(_step)}',
+                  'Step ${_step + 1} of 4 â€” ${_stepLabel(_step)}',
                   style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
                 ),
               ],
@@ -61,7 +61,7 @@ class _AlertsComposerScreenState extends State<AlertsComposerScreen> {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kAlertsColor.withOpacity(0.07),
+                    color: kAlertsColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -80,7 +80,7 @@ class _AlertsComposerScreenState extends State<AlertsComposerScreen> {
                 },
               ),
 
-              // ──── STEP INDICATOR ────
+              // â”€â”€â”€â”€ STEP INDICATOR â”€â”€â”€â”€
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 color: Colors.white,
@@ -98,7 +98,7 @@ class _AlertsComposerScreenState extends State<AlertsComposerScreen> {
                 ),
               ),
 
-              // ──── STEP CONTENT ────
+              // â”€â”€â”€â”€ STEP CONTENT â”€â”€â”€â”€
               Expanded(
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.all(16),
@@ -111,13 +111,13 @@ class _AlertsComposerScreenState extends State<AlertsComposerScreen> {
             ],
           ),
 
-          // ──── NAVIGATION FOOTER ────
+          // â”€â”€â”€â”€ NAVIGATION FOOTER â”€â”€â”€â”€
           bottomNavigationBar: Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Colors.white,
               border: const Border(top: BorderSide(color: Color(0xFF1C1C2E))),
-              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 8, offset: const Offset(0, -2))],
+              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 8, offset: const Offset(0, -2))],
             ),
             child: SafeArea(
               child: Row(
@@ -193,9 +193,9 @@ class _AlertsComposerScreenState extends State<AlertsComposerScreen> {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Step 1: Type & Priority
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _StepType extends StatelessWidget {
   final AlertCategory category;
@@ -212,7 +212,7 @@ class _StepType extends StatelessWidget {
       children: [
         // Category selection
         AlertsSectionCard(
-          title: '📂 Issue Category',
+          title: 'ðŸ“‚ Issue Category',
           child: Wrap(
             spacing: 8,
             runSpacing: 8,
@@ -223,7 +223,7 @@ class _StepType extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
                   decoration: BoxDecoration(
-                    color: isActive ? kAlertsColor.withOpacity(0.1) : Colors.white,
+                    color: isActive ? kAlertsColor.withValues(alpha: 0.1) : Colors.white,
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: isActive ? kAlertsColor : const Color(0xFFE5E7EB)),
                   ),
@@ -244,13 +244,13 @@ class _StepType extends StatelessWidget {
 
         // Priority selection
         AlertsSectionCard(
-          title: '🚩 Priority Level',
+          title: 'ðŸš© Priority Level',
           child: Column(
             children: [
-              _PriorityOption(label: '🚨 Critical — Immediate action required', value: AlertPriority.critical, current: priority, color: kAlertsCritical, onTap: () => onPriorityChanged(AlertPriority.critical)),
-              _PriorityOption(label: '🔥 High — Needs urgent attention', value: AlertPriority.high, current: priority, color: kAlertsColor, onTap: () => onPriorityChanged(AlertPriority.high)),
-              _PriorityOption(label: '⚠️ Medium — Standard response time', value: AlertPriority.medium, current: priority, color: kAlertsWarning, onTap: () => onPriorityChanged(AlertPriority.medium)),
-              _PriorityOption(label: 'ℹ️ Low — Can be scheduled', value: AlertPriority.low, current: priority, color: kAlertsInfo, onTap: () => onPriorityChanged(AlertPriority.low)),
+              _PriorityOption(label: 'ðŸš¨ Critical â€” Immediate action required', value: AlertPriority.critical, current: priority, color: kAlertsCritical, onTap: () => onPriorityChanged(AlertPriority.critical)),
+              _PriorityOption(label: 'ðŸ”¥ High â€” Needs urgent attention', value: AlertPriority.high, current: priority, color: kAlertsColor, onTap: () => onPriorityChanged(AlertPriority.high)),
+              _PriorityOption(label: 'âš ï¸ Medium â€” Standard response time', value: AlertPriority.medium, current: priority, color: kAlertsWarning, onTap: () => onPriorityChanged(AlertPriority.medium)),
+              _PriorityOption(label: 'â„¹ï¸ Low â€” Can be scheduled', value: AlertPriority.low, current: priority, color: kAlertsInfo, onTap: () => onPriorityChanged(AlertPriority.low)),
             ],
           ),
         ),
@@ -259,8 +259,8 @@ class _StepType extends StatelessWidget {
   }
 
   String _emoji(AlertCategory c) {
-    const map = { AlertCategory.payment: '💳', AlertCategory.shipment: '📦', AlertCategory.system: '⚙️', AlertCategory.driverRide: '🚗', AlertCategory.returnRefund: '↩️', AlertCategory.account: '👤', AlertCategory.security: '🔒', AlertCategory.other: '📋' };
-    return map[c] ?? '📋';
+    const map = { AlertCategory.payment: 'ðŸ’³', AlertCategory.shipment: 'ðŸ“¦', AlertCategory.system: 'âš™ï¸', AlertCategory.driverRide: 'ðŸš—', AlertCategory.returnRefund: 'â†©ï¸', AlertCategory.account: 'ðŸ‘¤', AlertCategory.security: 'ðŸ”’', AlertCategory.other: 'ðŸ“‹' };
+    return map[c] ?? 'ðŸ“‹';
   }
 
   String _label(AlertCategory c) {
@@ -287,7 +287,7 @@ class _PriorityOption extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 8),
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: isActive ? color.withOpacity(0.1) : Colors.white,
+          color: isActive ? color.withValues(alpha: 0.1) : Colors.white,
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: isActive ? color : const Color(0xFFE5E7EB)),
         ),
@@ -303,9 +303,9 @@ class _PriorityOption extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Step 2: Describe
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _StepDescribe extends StatelessWidget {
   final TextEditingController titleController;
@@ -319,7 +319,7 @@ class _StepDescribe extends StatelessWidget {
     return Column(
       children: [
         AlertsSectionCard(
-          title: '✏️ Alert Details',
+          title: 'âœï¸ Alert Details',
           child: Column(
             children: [
               _FormField(label: 'Title', hint: 'Brief, descriptive title...', controller: titleController),
@@ -334,7 +334,7 @@ class _StepDescribe extends StatelessWidget {
 
         // Quick templates
         AlertsSectionCard(
-          title: '📝 Quick Templates',
+          title: 'ðŸ“ Quick Templates',
           child: Column(
             children: [
               _TemplateChip(label: 'Payment issue template', onTap: () {
@@ -419,9 +419,9 @@ class _TemplateChip extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Step 3: Assignment
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _StepAssignment extends StatelessWidget {
   final List<AlertStaffMember> staff;
@@ -435,7 +435,7 @@ class _StepAssignment extends StatelessWidget {
     return Column(
       children: [
         AlertsSectionCard(
-          title: '👤 Assign To',
+          title: 'ðŸ‘¤ Assign To',
           child: Column(
             children: [
               // Auto-assign option
@@ -445,7 +445,7 @@ class _StepAssignment extends StatelessWidget {
                   margin: const EdgeInsets.only(bottom: 8),
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: selectedAssignee == null ? kAlertsColor.withOpacity(0.1) : Colors.white,
+                    color: selectedAssignee == null ? kAlertsColor.withValues(alpha: 0.1) : Colors.white,
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: selectedAssignee == null ? kAlertsColor : const Color(0xFFE5E7EB)),
                   ),
@@ -481,9 +481,9 @@ class _StepAssignment extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Step 4: Review
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _StepReview extends StatelessWidget {
   final AlertCategory category;
@@ -498,7 +498,7 @@ class _StepReview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertsSectionCard(
-      title: '📋 Review Alert',
+      title: 'ðŸ“‹ Review Alert',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -523,8 +523,8 @@ class _StepReview extends StatelessWidget {
   }
 
   String _emoji(AlertCategory c) {
-    const map = { AlertCategory.payment: '💳', AlertCategory.shipment: '📦', AlertCategory.system: '⚙️', AlertCategory.driverRide: '🚗', AlertCategory.returnRefund: '↩️', AlertCategory.account: '👤', AlertCategory.security: '🔒', AlertCategory.other: '📋' };
-    return map[c] ?? '📋';
+    const map = { AlertCategory.payment: 'ðŸ’³', AlertCategory.shipment: 'ðŸ“¦', AlertCategory.system: 'âš™ï¸', AlertCategory.driverRide: 'ðŸš—', AlertCategory.returnRefund: 'â†©ï¸', AlertCategory.account: 'ðŸ‘¤', AlertCategory.security: 'ðŸ”’', AlertCategory.other: 'ðŸ“‹' };
+    return map[c] ?? 'ðŸ“‹';
   }
 
   String _catLabel(AlertCategory c) {
@@ -534,10 +534,10 @@ class _StepReview extends StatelessWidget {
 
   String _priorityLabel(AlertPriority p) {
     switch (p) {
-      case AlertPriority.critical: return '🚨 Critical';
-      case AlertPriority.high: return '🔥 High';
-      case AlertPriority.medium: return '⚠️ Medium';
-      case AlertPriority.low: return 'ℹ️ Low';
+      case AlertPriority.critical: return 'ðŸš¨ Critical';
+      case AlertPriority.high: return 'ðŸ”¥ High';
+      case AlertPriority.medium: return 'âš ï¸ Medium';
+      case AlertPriority.low: return 'â„¹ï¸ Low';
     }
   }
 }

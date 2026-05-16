@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// e-PLAY MODULE — Cloud Locker Screen
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// e-PLAY MODULE â€” Cloud Locker Screen
 /// The user's personal library of purchased / licensed digital content.
 /// Content is never on-device unless pinned for temporary offline cache.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -75,15 +75,15 @@ class _EPlayLockerScreenState extends State<EPlayLockerScreen> with SingleTicker
           ),
           body: Column(
             children: [
-              // ── AI insight ──────────────────────────────────────────────
+              // â”€â”€ AI insight â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               if (ai.insights.isNotEmpty)
                 Container(
                   margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: kEPlayColor.withOpacity(0.08),
+                    color: kEPlayColor.withValues(alpha: 0.08),
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: kEPlayColor.withOpacity(0.2)),
+                    border: Border.all(color: kEPlayColor.withValues(alpha: 0.2)),
                   ),
                   child: Row(children: [
                     const Icon(Icons.auto_awesome, color: kEPlayColor, size: 16),
@@ -92,12 +92,12 @@ class _EPlayLockerScreenState extends State<EPlayLockerScreen> with SingleTicker
                   ]),
                 ),
 
-              // ── Stats bar ───────────────────────────────────────────────
+              // â”€â”€ Stats bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               Container(
                 margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
                 padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(colors: [kEPlayColor.withOpacity(0.12), kEPlayColorDark.withOpacity(0.07)]),
+                  gradient: LinearGradient(colors: [kEPlayColor.withValues(alpha: 0.12), kEPlayColorDark.withValues(alpha: 0.07)]),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
@@ -111,7 +111,7 @@ class _EPlayLockerScreenState extends State<EPlayLockerScreen> with SingleTicker
                 ),
               ),
 
-              // ── Tab content ─────────────────────────────────────────────
+              // â”€â”€ Tab content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               Expanded(
                 child: eplay.isLockerLoading
                     ? const Center(child: CircularProgressIndicator())
@@ -174,7 +174,7 @@ class _EPlayLockerScreenState extends State<EPlayLockerScreen> with SingleTicker
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(14),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 6, offset: const Offset(0, 2))],
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 6, offset: const Offset(0, 2))],
       ),
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),

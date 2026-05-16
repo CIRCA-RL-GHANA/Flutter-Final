@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SD3.1: PROFILE — User/Entity Profile
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD3.1: PROFILE â€” User/Entity Profile
 /// Profile info, completeness, skills, social links, rating
 /// RBAC: All roles (personal/entity/branch scope varies)
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -43,7 +43,7 @@ class ProfileScreen extends StatelessWidget {
             ),
           body: CustomScrollView(
             slivers: [
-              // ─── Profile Header ───────────────────────────
+              // â”€â”€â”€ Profile Header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -55,7 +55,7 @@ class ProfileScreen extends StatelessWidget {
                           width: 80,
                           height: 80,
                           decoration: BoxDecoration(
-                            color: kSetupColor.withOpacity(0.1),
+                            color: kSetupColor.withValues(alpha: 0.1),
                             shape: BoxShape.circle,
                           ),
                           child: Center(
@@ -86,7 +86,7 @@ class ProfileScreen extends StatelessWidget {
                         ],
                         const SizedBox(height: 4),
                         Text(
-                          '${profile.title} · ${profile.company}',
+                          '${profile.title} Â· ${profile.company}',
                           style: const TextStyle(fontSize: 14, color: AppColors.textSecondary),
                         ),
                         const SizedBox(height: 12),
@@ -130,8 +130,8 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Contact Info ─────────────────────────────
-              // ─── AI Insights ─────────────────────────────────────────
+              // â”€â”€â”€ Contact Info â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // â”€â”€â”€ AI Insights â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Consumer<AIInsightsNotifier>(
                   builder: (context, ai, _) {
@@ -140,7 +140,7 @@ class ProfileScreen extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: kSetupColor.withOpacity(0.07),
+                          color: kSetupColor.withValues(alpha: 0.07),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -195,7 +195,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Bio ──────────────────────────────────────
+              // â”€â”€â”€ Bio â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               if (profile.bio != null)
                 SliverToBoxAdapter(
                   child: Padding(
@@ -215,7 +215,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
 
-              // ─── Skills ───────────────────────────────────
+              // â”€â”€â”€ Skills â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               if (profile.skills.isNotEmpty)
                 SliverToBoxAdapter(
                   child: Padding(
@@ -231,7 +231,7 @@ class ProfileScreen extends StatelessWidget {
                             return Container(
                               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                               decoration: BoxDecoration(
-                                color: kSetupColor.withOpacity(0.1),
+                                color: kSetupColor.withValues(alpha: 0.1),
                                 borderRadius: BorderRadius.circular(16),
                               ),
                               child: Text(
@@ -246,7 +246,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
 
-              // ─── Social Links ──────────────────────────
+              // â”€â”€â”€ Social Links â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               if (profile.socialLinks.isNotEmpty)
                 SliverToBoxAdapter(
                   child: Padding(
@@ -271,7 +271,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
 
-              // ─── Activity Summary ─────────────────────────
+              // â”€â”€â”€ Activity Summary â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -286,7 +286,7 @@ class ProfileScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(14),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.04),
+                              color: Colors.black.withValues(alpha: 0.04),
                               blurRadius: 10,
                               offset: const Offset(0, 2),
                             ),
@@ -325,7 +325,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── SOS Button (Owner / Admin / BranchManager only) ─────
+              // â”€â”€â”€ SOS Button (Owner / Admin / BranchManager only) â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: SetupSOSButton(
                   onPressed: () {},
@@ -360,7 +360,7 @@ class ProfileScreen extends StatelessWidget {
   }
 }
 
-// ─── Profile Stat ────────────────────────────────────────────────────────────
+// â”€â”€â”€ Profile Stat â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _ProfileStat extends StatelessWidget {
   final String label;
@@ -374,7 +374,7 @@ class _ProfileStat extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: kSetupColor.withOpacity(0.06),
+        color: kSetupColor.withValues(alpha: 0.06),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(

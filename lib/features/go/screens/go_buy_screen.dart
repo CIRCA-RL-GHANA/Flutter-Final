@@ -1,4 +1,4 @@
-/// GO Screen 2A — Buy QPoints Flow (5-Step Process)
+﻿/// GO Screen 2A â€” Buy QPoints Flow (5-Step Process)
 /// Step 1: Gateway Selection, Step 2: Amount, Step 3: Review,
 /// Step 4: Security, Step 5: Processing/Confirmation
 
@@ -42,7 +42,7 @@ class _GoBuyScreenState extends State<GoBuyScreen> {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kGoColor.withOpacity(0.07),
+                    color: kGoColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -90,7 +90,7 @@ class _GoBuyScreenState extends State<GoBuyScreen> {
   }
 }
 
-// ── Step 1: Gateway Selection ──────────
+// â”€â”€ Step 1: Gateway Selection â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _StepGateway extends StatelessWidget {
   final List<PaymentGateway> gateways;
   final String? selectedId;
@@ -130,11 +130,11 @@ class _StepGateway extends StatelessWidget {
                             Row(children: [
                               Text(gw.name, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
                               const SizedBox(width: 8),
-                              Container(padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2), decoration: BoxDecoration(color: gw.statusColor.withOpacity(0.12), borderRadius: BorderRadius.circular(6)), child: Text(gw.statusLabel, style: TextStyle(fontSize: 10, color: gw.statusColor, fontWeight: FontWeight.w600))),
+                              Container(padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2), decoration: BoxDecoration(color: gw.statusColor.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(6)), child: Text(gw.statusLabel, style: TextStyle(fontSize: 10, color: gw.statusColor, fontWeight: FontWeight.w600))),
                             ]),
                             const SizedBox(height: 4),
-                            Text('Rate: 1 QP = ${gw.buyRate} GHS • Fee: ${gw.feePercent}%${gw.flatFee > 0 ? ' + ${gw.flatFee.toStringAsFixed(0)} QP' : ''}', style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
-                            Text('Limits: ${gw.minBuy.toStringAsFixed(0)}-${gw.maxBuy.toStringAsFixed(0)} QP • ${gw.processingTime}', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                            Text('Rate: 1 QP = ${gw.buyRate} GHS â€¢ Fee: ${gw.feePercent}%${gw.flatFee > 0 ? ' + ${gw.flatFee.toStringAsFixed(0)} QP' : ''}', style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
+                            Text('Limits: ${gw.minBuy.toStringAsFixed(0)}-${gw.maxBuy.toStringAsFixed(0)} QP â€¢ ${gw.processingTime}', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
                             if (gw.status == GatewayStatus.live) Text('Balance: ${gw.balance.toStringAsFixed(0)} ${gw.currency}', style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
                           ],
                         ),
@@ -152,7 +152,7 @@ class _StepGateway extends StatelessWidget {
   }
 }
 
-// ── Step 2: Amount ──────────
+// â”€â”€ Step 2: Amount â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _StepAmount extends StatelessWidget {
   final PaymentGateway gateway;
   final TextEditingController controller;
@@ -249,7 +249,7 @@ class _StepAmount extends StatelessWidget {
                       const SizedBox(width: 8),
                       Expanded(child: Text(fs.label, style: const TextStyle(fontSize: 13))),
                       if (fs.balance != null) Text('${fs.balance!.toStringAsFixed(0)} GHS', style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
-                      if (fs.lastFour != null) Text('•••• ${fs.lastFour}', style: const TextStyle(fontSize: 12, color: Color(0xFF9CA3AF))),
+                      if (fs.lastFour != null) Text('â€¢â€¢â€¢â€¢ ${fs.lastFour}', style: const TextStyle(fontSize: 12, color: Color(0xFF9CA3AF))),
                     ],
                   ),
                 ),
@@ -263,7 +263,7 @@ class _StepAmount extends StatelessWidget {
   }
 }
 
-// ── Step 3: Review ──────────
+// â”€â”€ Step 3: Review â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _StepReview extends StatelessWidget {
   final PaymentGateway gateway;
   final double amount;
@@ -343,7 +343,7 @@ class _StepReview extends StatelessWidget {
   }
 }
 
-// ── Step 4: Verify ──────────
+// â”€â”€ Step 4: Verify â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _StepVerify extends StatelessWidget {
   final VoidCallback onBack;
   final VoidCallback onVerified;
@@ -376,7 +376,7 @@ class _StepVerify extends StatelessWidget {
   }
 }
 
-// ── Step 5: Result ──────────
+// â”€â”€ Step 5: Result â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _StepResult extends StatelessWidget {
   final bool processing;
   final bool? success;
@@ -397,7 +397,7 @@ class _StepResult extends StatelessWidget {
             SizedBox(height: 16),
             Text('Processing...', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
             SizedBox(height: 8),
-            Text('Validating → Converting → Crediting', style: TextStyle(fontSize: 12, color: Color(0xFF9CA3AF))),
+            Text('Validating â†’ Converting â†’ Crediting', style: TextStyle(fontSize: 12, color: Color(0xFF9CA3AF))),
           ],
         ),
       );
@@ -452,7 +452,7 @@ class _StepResult extends StatelessWidget {
   }
 }
 
-// ── Helpers ──────────
+// â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _NavFooter extends StatelessWidget {
   final VoidCallback? onBack;
@@ -527,7 +527,7 @@ class _ReviewParty extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CircleAvatar(radius: 18, backgroundColor: color.withOpacity(0.12), child: Icon(icon, size: 18, color: color)),
+        CircleAvatar(radius: 18, backgroundColor: color.withValues(alpha: 0.12), child: Icon(icon, size: 18, color: color)),
         const SizedBox(height: 4),
         Text(label, style: const TextStyle(fontSize: 9, fontWeight: FontWeight.w600)),
       ],

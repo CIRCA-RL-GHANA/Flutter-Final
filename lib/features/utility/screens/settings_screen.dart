@@ -1,7 +1,7 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// U1: SETTINGS & PREFERENCES Screen
 /// Theme, language, date/time format, haptics, sounds, updates, analytics
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -31,7 +31,7 @@ class SettingsScreen extends StatelessWidget {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kUtilityColor.withOpacity(0.07),
+                    color: kUtilityColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -49,7 +49,7 @@ class SettingsScreen extends StatelessWidget {
                   );
                 },
               ),
-              // ─── Appearance ────────────────────────────────
+              // â”€â”€â”€ Appearance â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               const UtilitySectionTitle(
                 title: 'Appearance',
                 icon: Icons.palette_outlined,
@@ -101,7 +101,7 @@ class SettingsScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Regional ──────────────────────────────────
+              // â”€â”€â”€ Regional â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               const UtilitySectionTitle(
                 title: 'Regional',
                 icon: Icons.language,
@@ -137,7 +137,7 @@ class SettingsScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Feedback ──────────────────────────────────
+              // â”€â”€â”€ Feedback â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               const UtilitySectionTitle(
                 title: 'Feedback',
                 icon: Icons.vibration,
@@ -167,7 +167,7 @@ class SettingsScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Data & Updates ────────────────────────────
+              // â”€â”€â”€ Data & Updates â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               const UtilitySectionTitle(
                 title: 'Data & Updates',
                 icon: Icons.system_update,
@@ -206,7 +206,7 @@ class SettingsScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── About ────────────────────────────────────
+              // â”€â”€â”€ About â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               const UtilitySectionTitle(
                 title: 'About',
                 icon: Icons.info_outline,
@@ -247,7 +247,7 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  // ─── Pickers ───────────────────────────────────────────────────────────────
+  // â”€â”€â”€ Pickers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   String _themeLabel(ThemePreference t) {
     switch (t) {
@@ -372,7 +372,7 @@ class SettingsScreen extends StatelessWidget {
   }
 }
 
-// ─── Slider Tile ─────────────────────────────────────────────────────────────
+// â”€â”€â”€ Slider Tile â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _SliderTile extends StatelessWidget {
   final String label;
@@ -409,7 +409,7 @@ class _SliderTile extends StatelessWidget {
                 width: 36,
                 height: 36,
                 decoration: BoxDecoration(
-                  color: iconColor.withOpacity(0.1),
+                  color: iconColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Icon(icon, size: 18, color: iconColor),
@@ -440,7 +440,7 @@ class _SliderTile extends StatelessWidget {
             max: max,
             divisions: divisions,
             activeColor: iconColor,
-            inactiveColor: iconColor.withOpacity(0.15),
+            inactiveColor: iconColor.withValues(alpha: 0.15),
             onChanged: onChanged,
           ),
         ],
@@ -449,7 +449,7 @@ class _SliderTile extends StatelessWidget {
   }
 }
 
-// ─── Generic Option Sheet ────────────────────────────────────────────────────
+// â”€â”€â”€ Generic Option Sheet â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _OptionSheet<T> extends StatelessWidget {
   final String title;

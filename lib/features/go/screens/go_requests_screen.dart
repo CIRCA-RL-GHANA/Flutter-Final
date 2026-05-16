@@ -1,4 +1,4 @@
-/// GO Screen 6 — Request Center
+﻿/// GO Screen 6 â€” Request Center
 /// 3-tab interface: My Requests, Pending Approval, Templates
 /// 8 request types, creation flow, status pipeline
 
@@ -53,7 +53,7 @@ class _GoRequestsScreenState extends State<GoRequestsScreen> with SingleTickerPr
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kGoColor.withOpacity(0.07),
+                    color: kGoColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -210,7 +210,7 @@ class _CountBadge extends StatelessWidget {
   Widget build(BuildContext context) => Expanded(
     child: Container(
       padding: const EdgeInsets.symmetric(vertical: 8),
-      decoration: BoxDecoration(color: color.withOpacity(0.08), borderRadius: BorderRadius.circular(8)),
+      decoration: BoxDecoration(color: color.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(8)),
       child: Column(children: [
         Text('$count', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: color)),
         Text(label, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: color)),

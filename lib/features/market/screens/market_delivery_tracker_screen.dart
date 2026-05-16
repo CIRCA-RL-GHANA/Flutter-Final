@@ -1,7 +1,7 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// MARKET MODULE — Screen 10: Delivery Tracker & PIN Verification
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// MARKET MODULE â€” Screen 10: Delivery Tracker & PIN Verification
 /// Live map, delivery timeline, driver info, PIN handoff, safety features
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -43,7 +43,7 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
                   icon: Container(
                     padding: const EdgeInsets.all(6),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.9),
+                      color: Colors.white.withValues(alpha: 0.9),
                       shape: BoxShape.circle,
                     ),
                     child: const Icon(Icons.arrow_back, size: 20, color: AppColors.textPrimary),
@@ -55,7 +55,7 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
                     icon: Container(
                       padding: const EdgeInsets.all(6),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.9),
+                        color: Colors.white.withValues(alpha: 0.9),
                         shape: BoxShape.circle,
                       ),
                       child: const Icon(Icons.phone, size: 20, color: AppColors.textPrimary),
@@ -90,7 +90,7 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(12),
-                            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.15), blurRadius: 8)],
+                            boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.15), blurRadius: 8)],
                           ),
                           child: Column(
                             children: [
@@ -113,7 +113,7 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
                   builder: (context, ai, _) {
                     if (ai.insights.isEmpty) return const SizedBox.shrink();
                     return Container(
-                      color: kMarketColor.withOpacity(0.07),
+                      color: kMarketColor.withValues(alpha: 0.07),
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                       child: Row(children: [
                         const Icon(Icons.auto_awesome, size: 14, color: kMarketColor),
@@ -169,16 +169,16 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: statusColor.withOpacity(0.08),
+        color: statusColor.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: statusColor.withOpacity(0.3)),
+        border: Border.all(color: statusColor.withValues(alpha: 0.3)),
       ),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: statusColor.withOpacity(0.15),
+              color: statusColor.withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Icon(statusIcon, size: 28, color: statusColor),
@@ -198,7 +198,7 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  '${tracking.distanceMiles.toStringAsFixed(1)} mi away • ${tracking.etaMinutes} min ETA',
+                  '${tracking.distanceMiles.toStringAsFixed(1)} mi away â€¢ ${tracking.etaMinutes} min ETA',
                   style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
                 ),
               ],
@@ -378,7 +378,7 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
           Text(
             'Share this PIN with the driver to confirm delivery',
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 12, color: Colors.white.withOpacity(0.7)),
+            style: TextStyle(fontSize: 12, color: Colors.white.withValues(alpha: 0.7)),
           ),
         ],
       ),

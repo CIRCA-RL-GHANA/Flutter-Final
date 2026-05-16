@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// MARKET MODULE — Screen 1.2: Advanced Filters
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// MARKET MODULE â€” Screen 1.2: Advanced Filters
 /// Bottom-sheet style screen with price range, delivery options,
 /// dietary preferences, merchant attributes, sort, save filter sets
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -59,7 +59,7 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kMarketColor.withOpacity(0.07),
+                    color: kMarketColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -77,7 +77,7 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
                   );
                 },
               ),
-          // ── Price Range ──
+          // â”€â”€ Price Range â”€â”€
           const _SectionHeader(title: 'Price Range', expanded: true),
           Row(
             children: [
@@ -101,7 +101,7 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
           ),
           const SizedBox(height: 8),
 
-          // ── Delivery Options ──
+          // â”€â”€ Delivery Options â”€â”€
           const _SectionHeader(title: 'Delivery Options'),
           _FilterTile(
             label: 'Delivery only',
@@ -136,7 +136,7 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
           ),
           const SizedBox(height: 8),
 
-          // ── Dietary & Preferences ──
+          // â”€â”€ Dietary & Preferences â”€â”€
           const _SectionHeader(title: 'Dietary & Preferences'),
           Wrap(
             spacing: 8,
@@ -150,7 +150,7 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                   decoration: BoxDecoration(
-                    color: isActive ? kMarketColor.withOpacity(0.1) : Colors.white,
+                    color: isActive ? kMarketColor.withValues(alpha: 0.1) : Colors.white,
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(color: isActive ? kMarketColor : AppColors.inputBorder),
                   ),
@@ -178,7 +178,7 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
           ),
           const SizedBox(height: 16),
 
-          // ── Merchant Attributes ──
+          // â”€â”€ Merchant Attributes â”€â”€
           const _SectionHeader(title: 'Merchant Attributes'),
           SwitchListTile(
             dense: true,
@@ -206,7 +206,7 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
           ),
           const SizedBox(height: 8),
 
-          // ── Rating ──
+          // â”€â”€ Rating â”€â”€
           const _SectionHeader(title: 'Minimum Rating'),
           Row(
             children: List.generate(5, (i) {
@@ -218,7 +218,7 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
                     margin: const EdgeInsets.symmetric(horizontal: 3),
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     decoration: BoxDecoration(
-                      color: _minRating >= starVal ? kMarketColor.withOpacity(0.1) : Colors.white,
+                      color: _minRating >= starVal ? kMarketColor.withValues(alpha: 0.1) : Colors.white,
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(
                         color: _minRating >= starVal ? kMarketColor : AppColors.inputBorder,
@@ -248,7 +248,7 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
           ),
           const SizedBox(height: 16),
 
-          // ── Sort Options ──
+          // â”€â”€ Sort Options â”€â”€
           const _SectionHeader(title: 'Sort By'),
           ..._sortOptions.map((opt) {
             final (sort, label, icon) = opt;
@@ -270,7 +270,7 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
           }),
           const SizedBox(height: 16),
 
-          // ── Save Filter ──
+          // â”€â”€ Save Filter â”€â”€
           OutlinedButton.icon(
             onPressed: _saveFilter,
             icon: const Icon(Icons.bookmark_border, size: 18),
@@ -286,14 +286,14 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
           const SizedBox(height: 80),
         ],
       ),
-      // ── Sticky Footer ──
+      // â”€â”€ Sticky Footer â”€â”€
       bottomNavigationBar: Container(
         padding: const EdgeInsets.fromLTRB(16, 12, 16, 28),
         decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.08),
+              color: Colors.black.withValues(alpha: 0.08),
               blurRadius: 10,
               offset: const Offset(0, -2),
             ),
@@ -417,17 +417,17 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
   String _dietaryEmoji(DietaryPreference d) {
     switch (d) {
       case DietaryPreference.vegetarian:
-        return '🥬';
+        return 'ðŸ¥¬';
       case DietaryPreference.vegan:
-        return '🌱';
+        return 'ðŸŒ±';
       case DietaryPreference.glutenFree:
-        return '🌾';
+        return 'ðŸŒ¾';
       case DietaryPreference.halal:
-        return '☪';
+        return 'â˜ª';
       case DietaryPreference.kosher:
-        return '✡';
+        return 'âœ¡';
       case DietaryPreference.organic:
-        return '🌿';
+        return 'ðŸŒ¿';
     }
   }
 
@@ -478,7 +478,7 @@ class _FilterTile extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 8),
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
         decoration: BoxDecoration(
-          color: active ? kMarketColor.withOpacity(0.08) : Colors.white,
+          color: active ? kMarketColor.withValues(alpha: 0.08) : Colors.white,
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: active ? kMarketColor : AppColors.inputBorder),
         ),
@@ -521,7 +521,7 @@ class _PricePreset extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 3),
           padding: const EdgeInsets.symmetric(vertical: 10),
           decoration: BoxDecoration(
-            color: active ? kMarketColor.withOpacity(0.1) : Colors.white,
+            color: active ? kMarketColor.withValues(alpha: 0.1) : Colors.white,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: active ? kMarketColor : AppColors.inputBorder),
           ),

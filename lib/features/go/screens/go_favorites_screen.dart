@@ -1,4 +1,4 @@
-/// GO Screen 7 — Favorites Hub
+﻿/// GO Screen 7 â€” Favorites Hub
 /// Categorized grid (People/Businesses/Services/Internal),
 /// entity cards, relationship insights, bulk management, discovery
 
@@ -58,7 +58,7 @@ class _GoFavoritesScreenState extends State<GoFavoritesScreen> {
                 builder: (context, ai, _) {
                   if (ai.recommendations.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kGoColor.withOpacity(0.07),
+                    color: kGoColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -156,13 +156,13 @@ class _FavoriteGridCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.all(14),
-        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(14), border: Border.all(color: const Color(0xFFE5E7EB)), boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 6, offset: const Offset(0, 2))]),
+        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(14), border: Border.all(color: const Color(0xFFE5E7EB)), boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 6, offset: const Offset(0, 2))]),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CircleAvatar(
               radius: 26,
-              backgroundColor: _catColor.withOpacity(0.15),
+              backgroundColor: _catColor.withValues(alpha: 0.15),
               child: Text(fav.name.substring(0, 1), style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: _catColor)),
             ),
             const SizedBox(height: 10),
@@ -171,7 +171,7 @@ class _FavoriteGridCard extends StatelessWidget {
             const SizedBox(height: 6),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-              decoration: BoxDecoration(color: _catColor.withOpacity(0.1), borderRadius: BorderRadius.circular(8)),
+              decoration: BoxDecoration(color: _catColor.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(8)),
               child: Text(fav.category.name, style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600, color: _catColor)),
             ),
             const SizedBox(height: 4),

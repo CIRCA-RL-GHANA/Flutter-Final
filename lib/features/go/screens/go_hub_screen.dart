@@ -1,4 +1,4 @@
-/// GO Screen 1 — GO Page Hub (Unified Financial Command Center)
+﻿/// GO Screen 1 â€” GO Page Hub (Unified Financial Command Center)
 /// 10 sections: Context Bar, Financial Pulse, Quick Actions, Exchange Hub,
 /// Party Info, Health Score, Recent Activity, Upcoming Events, Favorites, AI Insights
 
@@ -30,10 +30,10 @@ class _GoHubScreenState extends State<GoHubScreen> {
           body: SafeArea(
             child: Column(
               children: [
-                // ── SECTION 1: Persistent Context Bar ──────────
+                // â”€â”€ SECTION 1: Persistent Context Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                 _ContextBar(provider: provider, ctx: ctx),
 
-                // ── Scrollable Content ──────────
+                // â”€â”€ Scrollable Content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                 Expanded(
                   child: RefreshIndicator(
                     color: kGoColor,
@@ -43,47 +43,47 @@ class _GoHubScreenState extends State<GoHubScreen> {
                       children: [
                         const SizedBox(height: 12),
 
-                        // ── SECTION 2: Master Financial Pulse ──────────
+                        // â”€â”€ SECTION 2: Master Financial Pulse â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                         _buildPulseSection(provider),
                         const SizedBox(height: 16),
 
-                        // ── SECTION 3: Quick Actions ──────────
+                        // â”€â”€ SECTION 3: Quick Actions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                         GoSectionHeader(title: 'Quick Actions', icon: Icons.flash_on),
                         _buildQuickActions(context),
                         const SizedBox(height: 16),
 
-                        // ── SECTION 4: Live Exchange Hub ──────────
+                        // â”€â”€ SECTION 4: Live Exchange Hub â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                         GoSectionHeader(title: 'Live Exchange Hub', icon: Icons.currency_exchange, actionLabel: 'Set Alert', onAction: () => _showRateAlertSheet(context)),
                         _buildExchangeHub(provider),
                         const SizedBox(height: 16),
 
-                        // ── SECTION 5: Party Info ──────────
+                        // â”€â”€ SECTION 5: Party Info â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                         GoSectionHeader(title: 'Transaction Flow', icon: Icons.account_tree_outlined),
                         _buildPartyInfo(),
                         const SizedBox(height: 16),
 
-                        // ── SECTION 6: Financial Health ──────────
+                        // â”€â”€ SECTION 6: Financial Health â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                         GoSectionHeader(title: 'Financial Health', icon: Icons.favorite_border),
                         _buildHealthSection(provider),
                         const SizedBox(height: 16),
 
-                        // ── SECTION 7: Recent Activity ──────────
+                        // â”€â”€ SECTION 7: Recent Activity â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                         GoSectionHeader(title: 'Recent Activity', icon: Icons.history, actionLabel: 'View All', onAction: () {}),
                         _buildActivitySection(provider),
                         const SizedBox(height: 16),
 
-                        // ── SECTION 8: Upcoming Events ──────────
+                        // â”€â”€ SECTION 8: Upcoming Events â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                         GoSectionHeader(title: 'Upcoming (Next 7 days)', icon: Icons.event),
                         _buildUpcomingSection(provider),
                         const SizedBox(height: 16),
 
-                        // ── SECTION 9: Quick Access Favorites ──────────
+                        // â”€â”€ SECTION 9: Quick Access Favorites â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                         GoSectionHeader(title: 'Favorite Receivers', icon: Icons.star, actionLabel: 'See All', onAction: () => Navigator.pushNamed(context, '/go/favorites')),
                         _buildFavorites(context, provider),
                         const SizedBox(height: 16),
 
-                        // ── SECTION 10: AI Insights ──────────
-                        GoSectionHeader(title: 'AI Insights 🔮', icon: Icons.auto_awesome),
+                        // â”€â”€ SECTION 10: AI Insights â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                        GoSectionHeader(title: 'AI Insights ðŸ”®', icon: Icons.auto_awesome),
                         _buildInsights(provider),
                         const SizedBox(height: 32),
                       ],
@@ -98,7 +98,7 @@ class _GoHubScreenState extends State<GoHubScreen> {
     );
   }
 
-  // ── Section 2: Financial Pulse ──────────
+  // â”€â”€ Section 2: Financial Pulse â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   Widget _buildPulseSection(GoProvider provider) {
     final liq = provider.liquidity;
     return GoSectionCard(
@@ -130,7 +130,7 @@ class _GoHubScreenState extends State<GoHubScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   margin: const EdgeInsets.only(bottom: 4),
                   decoration: BoxDecoration(color: kGoColorLight, borderRadius: BorderRadius.circular(6)),
-                  child: Text('▲${provider.change24h}%', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: kGoColorDark)),
+                  child: Text('â–²${provider.change24h}%', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: kGoColorDark)),
                 ),
               ],
             ),
@@ -169,7 +169,7 @@ class _GoHubScreenState extends State<GoHubScreen> {
     );
   }
 
-  // ── Section 3: Quick Actions ──────────
+  // â”€â”€ Section 3: Quick Actions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   Widget _buildQuickActions(BuildContext context) {
     return GridView.count(
       crossAxisCount: 3,
@@ -189,7 +189,7 @@ class _GoHubScreenState extends State<GoHubScreen> {
     );
   }
 
-  // ── Section 4: Exchange Hub ──────────
+  // â”€â”€ Section 4: Exchange Hub â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   Widget _buildExchangeHub(GoProvider provider) {
     final live = provider.liveGateways;
     return GoSectionCard(
@@ -217,7 +217,7 @@ class _GoHubScreenState extends State<GoHubScreen> {
     );
   }
 
-  // ── Section 5: Party Info ──────────
+  // â”€â”€ Section 5: Party Info â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   Widget _buildPartyInfo() {
     return GoSectionCard(
       child: Row(
@@ -245,7 +245,7 @@ class _GoHubScreenState extends State<GoHubScreen> {
     );
   }
 
-  // ── Section 6: Health ──────────
+  // â”€â”€ Section 6: Health â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   Widget _buildHealthSection(GoProvider provider) {
     return GoSectionCard(
       child: Row(
@@ -276,7 +276,7 @@ class _GoHubScreenState extends State<GoHubScreen> {
                   ),
                 )),
                 const SizedBox(height: 4),
-                Text('💡 ${provider.healthRecommendation}', style: const TextStyle(fontSize: 10, color: kGoColorDark, fontStyle: FontStyle.italic)),
+                Text('ðŸ’¡ ${provider.healthRecommendation}', style: const TextStyle(fontSize: 10, color: kGoColorDark, fontStyle: FontStyle.italic)),
               ],
             ),
           ),
@@ -285,7 +285,7 @@ class _GoHubScreenState extends State<GoHubScreen> {
     );
   }
 
-  // ── Section 7: Activity ──────────
+  // â”€â”€ Section 7: Activity â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   Widget _buildActivitySection(GoProvider provider) {
     return Column(
       children: [
@@ -321,7 +321,7 @@ class _GoHubScreenState extends State<GoHubScreen> {
     );
   }
 
-  // ── Section 8: Upcoming ──────────
+  // â”€â”€ Section 8: Upcoming â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   Widget _buildUpcomingSection(GoProvider provider) {
     return GoSectionCard(
       child: Column(
@@ -354,7 +354,7 @@ class _GoHubScreenState extends State<GoHubScreen> {
     );
   }
 
-  // ── Section 9: Favorites ──────────
+  // â”€â”€ Section 9: Favorites â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   Widget _buildFavorites(BuildContext context, GoProvider provider) {
     return SizedBox(
       height: 80,
@@ -368,7 +368,7 @@ class _GoHubScreenState extends State<GoHubScreen> {
     );
   }
 
-  // ── Section 10: Insights ──────────
+  // â”€â”€ Section 10: Insights â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   Widget _buildInsights(GoProvider provider) {
     return Consumer<AIInsightsNotifier>(
       builder: (context, ai, _) {
@@ -448,9 +448,9 @@ class _GoHubScreenState extends State<GoHubScreen> {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Context Bar (Section 1)
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _ContextBar extends StatelessWidget {
   final GoProvider provider;
@@ -513,9 +513,9 @@ class _ContextBar extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Liquidity Box
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _LiquidityBox extends StatelessWidget {
   final String label;
@@ -529,7 +529,7 @@ class _LiquidityBox extends StatelessWidget {
     return Expanded(
       child: Container(
         padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(color: color.withOpacity(0.08), borderRadius: BorderRadius.circular(8)),
+        decoration: BoxDecoration(color: color.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(8)),
         child: Column(
           children: [
             Text(label, style: TextStyle(fontSize: 10, color: color, fontWeight: FontWeight.w600)),
@@ -545,9 +545,9 @@ class _LiquidityBox extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Rate Column
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _RateColumn extends StatelessWidget {
   final String title;
@@ -580,9 +580,9 @@ class _RateColumn extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Party Node
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _PartyNode extends StatelessWidget {
   final String label;
@@ -595,7 +595,7 @@ class _PartyNode extends StatelessWidget {
     return Container(
       width: 52,
       padding: const EdgeInsets.all(6),
-      decoration: BoxDecoration(color: color.withOpacity(0.1), borderRadius: BorderRadius.circular(8), border: Border.all(color: color.withOpacity(0.3))),
+      decoration: BoxDecoration(color: color.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(8), border: Border.all(color: color.withValues(alpha: 0.3))),
       child: Column(
         children: [
           Text(label, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: color)),
@@ -606,9 +606,9 @@ class _PartyNode extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Fav Avatar
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _FavAvatar extends StatelessWidget {
   final FavoriteEntity entity;

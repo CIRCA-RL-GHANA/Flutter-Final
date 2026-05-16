@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// e-PLAY MODULE — In-App Player Screen
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// e-PLAY MODULE â€” In-App Player Screen
 /// Unified player/reader for music, movies, podcasts, e-books, shows.
 /// Stream token is fetched from the server; no raw file URL is ever exposed.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -58,7 +58,7 @@ class _EPlayPlayerScreenState extends State<EPlayPlayerScreen> with TickerProvid
               children: [
                 Text(_asset['title'] as String? ?? '', style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold)),
                 if (_isPreview)
-                  const Text('Preview Mode — 90 seconds', style: TextStyle(color: Colors.white60, fontSize: 11)),
+                  const Text('Preview Mode â€” 90 seconds', style: TextStyle(color: Colors.white60, fontSize: 11)),
               ],
             ),
             actions: [
@@ -71,7 +71,7 @@ class _EPlayPlayerScreenState extends State<EPlayPlayerScreen> with TickerProvid
               children: [
                 const Spacer(),
 
-                // ── Artwork ────────────────────────────────────────────
+                // â”€â”€ Artwork â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                 Center(
                   child: AnimatedBuilder(
                     animation: _pulseCtrl,
@@ -85,9 +85,9 @@ class _EPlayPlayerScreenState extends State<EPlayPlayerScreen> with TickerProvid
                       width: 220,
                       height: 220,
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.12),
+                        color: Colors.white.withValues(alpha: 0.12),
                         borderRadius: BorderRadius.circular(_type == 'ebook' ? 12 : 110),
-                        boxShadow: [BoxShadow(color: colors[0].withOpacity(0.6), blurRadius: 40, spreadRadius: 10)],
+                        boxShadow: [BoxShadow(color: colors[0].withValues(alpha: 0.6), blurRadius: 40, spreadRadius: 10)],
                       ),
                       child: Icon(_iconForType(_type), color: Colors.white, size: 100),
                     ),
@@ -95,12 +95,12 @@ class _EPlayPlayerScreenState extends State<EPlayPlayerScreen> with TickerProvid
                 ),
                 const Spacer(),
 
-                // ── DRM indicator ──────────────────────────────────────
+                // â”€â”€ DRM indicator â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 32),
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.1),
+                    color: Colors.white.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Row(
@@ -109,7 +109,7 @@ class _EPlayPlayerScreenState extends State<EPlayPlayerScreen> with TickerProvid
                       const Icon(Icons.security, color: Colors.white70, size: 14),
                       const SizedBox(width: 6),
                       Text(
-                        _isPreview ? 'Preview — Purchase to unlock full access' : 'e-Play DRM · Cloud Stream',
+                        _isPreview ? 'Preview â€” Purchase to unlock full access' : 'e-Play DRM Â· Cloud Stream',
                         style: const TextStyle(color: Colors.white70, fontSize: 11),
                       ),
                     ],
@@ -117,7 +117,7 @@ class _EPlayPlayerScreenState extends State<EPlayPlayerScreen> with TickerProvid
                 ),
                 const SizedBox(height: 32),
 
-                // ── Progress bar ───────────────────────────────────────
+                // â”€â”€ Progress bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Column(
@@ -149,7 +149,7 @@ class _EPlayPlayerScreenState extends State<EPlayPlayerScreen> with TickerProvid
                 ),
                 const SizedBox(height: 16),
 
-                // ── Controls ───────────────────────────────────────────
+                // â”€â”€ Controls â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -166,7 +166,7 @@ class _EPlayPlayerScreenState extends State<EPlayPlayerScreen> with TickerProvid
                       child: Container(
                         width: 72,
                         height: 72,
-                        decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle, boxShadow: [BoxShadow(color: Colors.white.withOpacity(0.3), blurRadius: 20)]),
+                        decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle, boxShadow: [BoxShadow(color: Colors.white.withValues(alpha: 0.3), blurRadius: 20)]),
                         child: Icon(_isPlaying ? Icons.pause : Icons.play_arrow, color: colors[0], size: 40),
                       ),
                     ),
@@ -175,13 +175,13 @@ class _EPlayPlayerScreenState extends State<EPlayPlayerScreen> with TickerProvid
                 ),
                 const SizedBox(height: 32),
 
-                // ── AI insight ─────────────────────────────────────────
+                // â”€â”€ AI insight â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                 if (ai.insights.isNotEmpty)
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24),
                     child: Container(
                       padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(color: Colors.white.withOpacity(0.1), borderRadius: BorderRadius.circular(10)),
+                      decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(10)),
                       child: Row(children: [
                         const Icon(Icons.auto_awesome, color: Colors.white70, size: 14),
                         const SizedBox(width: 8),

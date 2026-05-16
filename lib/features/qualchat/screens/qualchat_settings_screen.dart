@@ -1,4 +1,4 @@
-/// qualChat Screen 13 — Settings
+﻿/// qualChat Screen 13 â€” Settings
 /// Centralized config: notifications, privacy, media, appearance, accessibility, advanced
 
 import 'package:flutter/material.dart';
@@ -27,7 +27,7 @@ class QualChatSettingsScreen extends StatelessWidget {
                     margin: const EdgeInsets.only(bottom: 12),
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     decoration: BoxDecoration(
-                      color: kChatColor.withOpacity(0.07),
+                      color: kChatColor.withValues(alpha: 0.07),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Row(
@@ -46,11 +46,11 @@ class QualChatSettingsScreen extends StatelessWidget {
                   );
                 },
               ),
-              // ──── NOTIFICATIONS ────
+              // â”€â”€â”€â”€ NOTIFICATIONS â”€â”€â”€â”€
               _SettingsSection(
                 icon: Icons.notifications,
                 title: 'Notifications',
-                emoji: '🔔',
+                emoji: 'ðŸ””',
                 children: [
                   _SettingsToggle(
                     title: 'Message Notifications',
@@ -92,11 +92,11 @@ class QualChatSettingsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // ──── PRIVACY ────
+              // â”€â”€â”€â”€ PRIVACY â”€â”€â”€â”€
               _SettingsSection(
                 icon: Icons.shield,
                 title: 'Privacy',
-                emoji: '🔒',
+                emoji: 'ðŸ”’',
                 children: [
                   _SettingsToggle(
                     title: 'Read Receipts',
@@ -132,11 +132,11 @@ class QualChatSettingsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // ──── MEDIA ────
+              // â”€â”€â”€â”€ MEDIA â”€â”€â”€â”€
               _SettingsSection(
                 icon: Icons.photo_library,
                 title: 'Media & Storage',
-                emoji: '📸',
+                emoji: 'ðŸ“¸',
                 children: [
                   _SettingsToggle(
                     title: 'Auto-download Media',
@@ -170,11 +170,11 @@ class QualChatSettingsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // ──── APPEARANCE ────
+              // â”€â”€â”€â”€ APPEARANCE â”€â”€â”€â”€
               _SettingsSection(
                 icon: Icons.palette,
                 title: 'Appearance',
-                emoji: '🎨',
+                emoji: 'ðŸŽ¨',
                 children: [
                   // Font size
                   Padding(
@@ -221,7 +221,7 @@ class QualChatSettingsScreen extends StatelessWidget {
                                   margin: const EdgeInsets.symmetric(horizontal: 4),
                                   padding: const EdgeInsets.all(8),
                                   decoration: BoxDecoration(
-                                    color: colors[i].withOpacity(0.1),
+                                    color: colors[i].withValues(alpha: 0.1),
                                     borderRadius: BorderRadius.circular(10),
                                     border: provider.themeIndex == i
                                         ? Border.all(color: colors[i], width: 2)
@@ -275,11 +275,11 @@ class QualChatSettingsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // ──── ACCESSIBILITY ────
+              // â”€â”€â”€â”€ ACCESSIBILITY â”€â”€â”€â”€
               _SettingsSection(
                 icon: Icons.accessibility,
                 title: 'Accessibility',
-                emoji: '♿',
+                emoji: 'â™¿',
                 children: [
                   _SettingsToggle(
                     title: 'High Contrast',
@@ -303,11 +303,11 @@ class QualChatSettingsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // ──── ADVANCED ────
+              // â”€â”€â”€â”€ ADVANCED â”€â”€â”€â”€
               _SettingsSection(
                 icon: Icons.settings,
                 title: 'Advanced',
-                emoji: '⚙️',
+                emoji: 'âš™ï¸',
                 children: [
                   _SettingsAction(
                     title: 'Export Chat History',
@@ -386,7 +386,7 @@ class _SettingsSection extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 8, offset: const Offset(0, 2))],
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8, offset: const Offset(0, 2))],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

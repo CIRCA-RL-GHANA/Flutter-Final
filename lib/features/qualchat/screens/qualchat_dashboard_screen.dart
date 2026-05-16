@@ -1,4 +1,4 @@
-/// qualChat Screen 1 — Dashboard (Enhanced)
+﻿/// qualChat Screen 1 â€” Dashboard (Enhanced)
 /// Mode toggle, Vibe Check (Owner), Presence Hub, Insights, Archive
 
 import 'package:flutter/material.dart';
@@ -39,9 +39,9 @@ class QualChatDashboardScreen extends StatelessWidget {
                 Container(
                   width: double.infinity,
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  color: kChatColor.withOpacity(0.05),
+                  color: kChatColor.withValues(alpha: 0.05),
                   child: Text(
-                    'Role: Owner • Context: Personal • Mode: ${provider.mode == ChatMode.social ? "Social" : "Professional"}',
+                    'Role: Owner â€¢ Context: Personal â€¢ Mode: ${provider.mode == ChatMode.social ? "Social" : "Professional"}',
                     style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
                   ),
                 ),
@@ -54,9 +54,9 @@ class QualChatDashboardScreen extends StatelessWidget {
                       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                       decoration: BoxDecoration(
-                        color: kChatColor.withOpacity(0.06),
+                        color: kChatColor.withValues(alpha: 0.06),
                         borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: kChatColor.withOpacity(0.2)),
+                        border: Border.all(color: kChatColor.withValues(alpha: 0.2)),
                       ),
                       child: Row(
                         children: [
@@ -142,18 +142,18 @@ class QualChatDashboardScreen extends StatelessWidget {
     );
   }
 
-  // ──── SECTION A: VIBE CHECK ────
+  // â”€â”€â”€â”€ SECTION A: VIBE CHECK â”€â”€â”€â”€
 
   Widget _buildVibeCheckSection(BuildContext context, QualChatProvider provider) {
     return QualChatSectionCard(
-      title: 'My Hey Yas 💖',
-      trailing: '⟳',
+      title: 'My Hey Yas ðŸ’–',
+      trailing: 'âŸ³',
       onTrailingTap: () {},
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            'Vibe Status: Sparkling Ready ✨',
+            'Vibe Status: Sparkling Ready âœ¨',
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
@@ -164,7 +164,7 @@ class QualChatDashboardScreen extends StatelessWidget {
 
           // Connection success rate chart
           const Text(
-            '🎯 Connection Success Rate',
+            'ðŸŽ¯ Connection Success Rate',
             style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: Color(0xFF1A1A1A)),
           ),
           const SizedBox(height: 8),
@@ -177,7 +177,7 @@ class QualChatDashboardScreen extends StatelessWidget {
                     margin: const EdgeInsets.symmetric(horizontal: 2),
                     decoration: BoxDecoration(
                       color: c.isSuccess
-                          ? kChatSocial.withOpacity(0.7)
+                          ? kChatSocial.withValues(alpha: 0.7)
                           : const Color(0xFFE5E7EB),
                       borderRadius: BorderRadius.circular(4),
                     ),
@@ -200,16 +200,16 @@ class QualChatDashboardScreen extends StatelessWidget {
                 'Active Sparks: ${provider.activeSparks}',
                 style: const TextStyle(fontSize: 13, color: Color(0xFF1A1A1A)),
               ),
-              const Text(' • ', style: TextStyle(color: Color(0xFF9CA3AF))),
+              const Text(' â€¢ ', style: TextStyle(color: Color(0xFF9CA3AF))),
               Text(
-                'Matches: ${provider.matchCount} 💘',
+                'Matches: ${provider.matchCount} ðŸ’˜',
                 style: const TextStyle(fontSize: 13, color: Color(0xFF1A1A1A)),
               ),
             ],
           ),
           const SizedBox(height: 4),
           Text(
-            'Energy Level: ${provider.energyLevel}% ⚡',
+            'Energy Level: ${provider.energyLevel}% âš¡',
             style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280)),
           ),
           const SizedBox(height: 16),
@@ -219,15 +219,15 @@ class QualChatDashboardScreen extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: kChatSocial.withOpacity(0.05),
+                color: kChatSocial.withValues(alpha: 0.05),
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: kChatSocial.withOpacity(0.2)),
+                border: Border.all(color: kChatSocial.withValues(alpha: 0.2)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '🥺 ${QualChatProvider.nudges.first.prompt}',
+                    'ðŸ¥º ${QualChatProvider.nudges.first.prompt}',
                     style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
@@ -261,7 +261,7 @@ class QualChatDashboardScreen extends StatelessWidget {
               Expanded(
                 child: OutlinedButton.icon(
                   onPressed: () => Navigator.pushNamed(context, '/qualchat/hey-yas'),
-                  icon: const Text('✨'),
+                  icon: const Text('âœ¨'),
                   label: const Text('Send Hey Ya'),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: kChatSocial,
@@ -274,7 +274,7 @@ class QualChatDashboardScreen extends StatelessWidget {
               Expanded(
                 child: OutlinedButton.icon(
                   onPressed: () => Navigator.pushNamed(context, '/qualchat/action-center'),
-                  icon: const Text('📊'),
+                  icon: const Text('ðŸ“Š'),
                   label: const Text('Analytics'),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: kChatColor,
@@ -290,12 +290,12 @@ class QualChatDashboardScreen extends StatelessWidget {
     );
   }
 
-  // ──── SECTION B: PRESENCE ────
+  // â”€â”€â”€â”€ SECTION B: PRESENCE â”€â”€â”€â”€
 
   Widget _buildPresenceSection(BuildContext context, QualChatProvider provider) {
     const stats = QualChatProvider.presenceStats;
     return QualChatSectionCard(
-      title: '👥 Presence Dashboard',
+      title: 'ðŸ‘¥ Presence Dashboard',
       child: Column(
         children: [
           Row(
@@ -407,12 +407,12 @@ class QualChatDashboardScreen extends StatelessWidget {
     );
   }
 
-  // ──── SECTION C: INSIGHTS ────
+  // â”€â”€â”€â”€ SECTION C: INSIGHTS â”€â”€â”€â”€
 
   Widget _buildInsightsSection(BuildContext context) {
     return QualChatSectionCard(
-      title: '🧠 Conversation Insights',
-      trailing: 'ⓘ',
+      title: 'ðŸ§  Conversation Insights',
+      trailing: 'â“˜',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -454,10 +454,10 @@ class QualChatDashboardScreen extends StatelessWidget {
           const SizedBox(height: 12),
           Row(
             children: const [
-              Text('Sentiment Trend: 📈 Positive',
+              Text('Sentiment Trend: ðŸ“ˆ Positive',
                   style: TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
               SizedBox(width: 16),
-              Text('Response Time: ⏱️ Avg 12m',
+              Text('Response Time: â±ï¸ Avg 12m',
                   style: TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
             ],
           ),
@@ -469,11 +469,11 @@ class QualChatDashboardScreen extends StatelessWidget {
           const SizedBox(height: 8),
           Row(
             children: [
-              _MediaThumb(icon: Icons.photo, label: '📸'),
+              _MediaThumb(icon: Icons.photo, label: 'ðŸ“¸'),
               const SizedBox(width: 8),
-              _MediaThumb(icon: Icons.videocam, label: '📹'),
+              _MediaThumb(icon: Icons.videocam, label: 'ðŸ“¹'),
               const SizedBox(width: 8),
-              _MediaThumb(icon: Icons.attach_file, label: '📎'),
+              _MediaThumb(icon: Icons.attach_file, label: 'ðŸ“Ž'),
               const SizedBox(width: 8),
               Container(
                 width: 48,
@@ -494,7 +494,7 @@ class QualChatDashboardScreen extends StatelessWidget {
               Expanded(
                 child: OutlinedButton(
                   onPressed: () => Navigator.pushNamed(context, '/qualchat/archived'),
-                  child: const Text('📁 Archive Manager'),
+                  child: const Text('ðŸ“ Archive Manager'),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: kChatColor,
                     side: const BorderSide(color: kChatColor),
@@ -506,7 +506,7 @@ class QualChatDashboardScreen extends StatelessWidget {
               Expanded(
                 child: OutlinedButton(
                   onPressed: () {},
-                  child: const Text('📊 Full Report'),
+                  child: const Text('ðŸ“Š Full Report'),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: kChatColor,
                     side: const BorderSide(color: kChatColor),
@@ -521,16 +521,16 @@ class QualChatDashboardScreen extends StatelessWidget {
     );
   }
 
-  // ──── SECTION D: ARCHIVE ────
+  // â”€â”€â”€â”€ SECTION D: ARCHIVE â”€â”€â”€â”€
 
   Widget _buildArchiveSection(BuildContext context, QualChatProvider provider) {
     return QualChatSectionCard(
-      title: '🗃️ Archived Conversations',
+      title: 'ðŸ—ƒï¸ Archived Conversations',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            '${QualChatProvider.archivedChats.length} threads hidden • Last archived: Today',
+            '${QualChatProvider.archivedChats.length} threads hidden â€¢ Last archived: Today',
             style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
           ),
           const SizedBox(height: 12),
@@ -541,7 +541,7 @@ class QualChatDashboardScreen extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 16,
-                    backgroundColor: kChatColor.withOpacity(0.1),
+                    backgroundColor: kChatColor.withValues(alpha: 0.1),
                     child: Text(
                       a.conversation.title[0],
                       style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: kChatColor),
@@ -588,7 +588,7 @@ class QualChatDashboardScreen extends StatelessWidget {
   }
 }
 
-// ──── HELPER WIDGETS ────
+// â”€â”€â”€â”€ HELPER WIDGETS â”€â”€â”€â”€
 
 class _QuickButton extends StatelessWidget {
   final String label;
@@ -603,7 +603,7 @@ class _QuickButton extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
         decoration: BoxDecoration(
-          border: Border.all(color: kChatSocial.withOpacity(0.3)),
+          border: Border.all(color: kChatSocial.withValues(alpha: 0.3)),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Text(
@@ -626,7 +626,7 @@ class _MediaThumb extends StatelessWidget {
       width: 48,
       height: 48,
       decoration: BoxDecoration(
-        color: kChatColor.withOpacity(0.1),
+        color: kChatColor.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Center(child: Text(label, style: const TextStyle(fontSize: 20))),
@@ -650,7 +650,7 @@ class _SmallAction extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border.all(
             color: isDestructive
-                ? const Color(0xFFEF4444).withOpacity(0.3)
+                ? const Color(0xFFEF4444).withValues(alpha: 0.3)
                 : const Color(0xFFE5E7EB),
           ),
           borderRadius: BorderRadius.circular(8),

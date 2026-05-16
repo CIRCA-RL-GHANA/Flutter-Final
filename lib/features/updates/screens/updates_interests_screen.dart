@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SCREEN 10 — Interests Management
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SCREEN 10 â€” Interests Management
 /// Category-based interest grid, weight sliders, feed preview toggle,
 /// suggestion AI, follow/unfollow interests.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -54,7 +54,7 @@ class _BodyState extends State<_Body> {
                 child: Center(
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                    decoration: BoxDecoration(color: kUpdatesColor.withOpacity(0.08), borderRadius: BorderRadius.circular(12)),
+                    decoration: BoxDecoration(color: kUpdatesColor.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(12)),
                     child: Text('$followingCount following', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: kUpdatesColor)),
                   ),
                 ),
@@ -67,7 +67,7 @@ class _BodyState extends State<_Body> {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kUpdatesColor.withOpacity(0.07),
+                    color: kUpdatesColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -92,7 +92,7 @@ class _BodyState extends State<_Body> {
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [kUpdatesColor.withOpacity(0.06), kUpdatesAccent.withOpacity(0.04)],
+                    colors: [kUpdatesColor.withValues(alpha: 0.06), kUpdatesAccent.withValues(alpha: 0.04)],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
@@ -180,7 +180,7 @@ class _BodyState extends State<_Body> {
       };
 }
 
-// ─── Category Chip ──────────────────────────────────────────────────────────
+// â”€â”€â”€ Category Chip â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _CategoryChip extends StatelessWidget {
   final String label;
@@ -213,7 +213,7 @@ class _CategoryChip extends StatelessWidget {
   }
 }
 
-// ─── Interest Card ──────────────────────────────────────────────────────────
+// â”€â”€â”€ Interest Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _InterestCard extends StatefulWidget {
   final UserInterest interest;
@@ -242,9 +242,9 @@ class _InterestCardState extends State<_InterestCard> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
         border: widget.interest.isFollowing
-            ? Border.all(color: kUpdatesColor.withOpacity(0.3))
+            ? Border.all(color: kUpdatesColor.withValues(alpha: 0.3))
             : null,
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 4)],
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 4)],
       ),
       child: Column(
         children: [
@@ -253,7 +253,7 @@ class _InterestCardState extends State<_InterestCard> {
               Container(
                 width: 40, height: 40,
                 decoration: BoxDecoration(
-                  color: kUpdatesColor.withOpacity(widget.interest.isFollowing ? 0.12 : 0.06),
+                  color: kUpdatesColor.withValues(alpha: widget.interest.isFollowing ? 0.12 : 0.06),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Icon(
@@ -272,7 +272,7 @@ class _InterestCardState extends State<_InterestCard> {
                       children: [
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
-                          decoration: BoxDecoration(color: kUpdatesColor.withOpacity(0.06), borderRadius: BorderRadius.circular(6)),
+                          decoration: BoxDecoration(color: kUpdatesColor.withValues(alpha: 0.06), borderRadius: BorderRadius.circular(6)),
                           child: Text(widget.interest.category.name, style: const TextStyle(fontSize: 9, fontWeight: FontWeight.w500, color: kUpdatesColor)),
                         ),
                         const SizedBox(width: 6),
@@ -314,7 +314,7 @@ class _InterestCardState extends State<_InterestCard> {
                   child: SliderTheme(
                     data: SliderThemeData(
                       activeTrackColor: kUpdatesColor,
-                      inactiveTrackColor: kUpdatesColor.withOpacity(0.1),
+                      inactiveTrackColor: kUpdatesColor.withValues(alpha: 0.1),
                       thumbColor: kUpdatesColor,
                       trackHeight: 3,
                       thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 6),

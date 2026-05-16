@@ -1,4 +1,4 @@
-/// GO Screen 4 — My Tabs
+﻿/// GO Screen 4 â€” My Tabs
 /// Credit health dashboard, filter bar, accordion tab cards,
 /// bulk operations, analytics panel
 
@@ -54,7 +54,7 @@ class _GoTabsScreenState extends State<GoTabsScreen> with SingleTickerProviderSt
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kGoColor.withOpacity(0.07),
+                    color: kGoColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -173,7 +173,7 @@ class _SummaryBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
     padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
-    decoration: BoxDecoration(color: color.withOpacity(0.08), borderRadius: BorderRadius.circular(10)),
+    decoration: BoxDecoration(color: color.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(10)),
     child: Column(children: [
       Text(label, style: TextStyle(fontSize: 9, fontWeight: FontWeight.w700, color: color)),
       const SizedBox(height: 4),

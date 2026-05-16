@@ -1,4 +1,4 @@
-/// APRIL Screen 5 — Personal Statement Dashboard
+﻿/// APRIL Screen 5 â€” Personal Statement Dashboard
 /// 7 modular statement cards, version control, completion tracking
 
 import 'package:flutter/material.dart';
@@ -18,7 +18,7 @@ class AprilStatementScreen extends StatelessWidget {
         return Scaffold(
           backgroundColor: const Color(0xFFF8F9FE),
           appBar: AprilAppBar(
-            title: '📝 Personal Statement',
+            title: 'ðŸ“ Personal Statement',
             actions: [
               IconButton(icon: const Icon(Icons.share, size: 22), onPressed: () => _showShareSheet(context)),
               IconButton(icon: const Icon(Icons.history, size: 22), onPressed: () => _showVersionHistory(context, provider)),
@@ -50,17 +50,17 @@ class AprilStatementScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
-                        colors: [kAprilAccent.withOpacity(0.05), kAprilAccent.withOpacity(0.1)],
+                        colors: [kAprilAccent.withValues(alpha: 0.05), kAprilAccent.withValues(alpha: 0.1)],
                       ),
                       borderRadius: BorderRadius.circular(14),
-                      border: Border.all(color: kAprilAccent.withOpacity(0.2)),
+                      border: Border.all(color: kAprilAccent.withValues(alpha: 0.2)),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Row(
                           children: [
-                            Text('🤖', style: TextStyle(fontSize: 20)),
+                            Text('ðŸ¤–', style: TextStyle(fontSize: 20)),
                             SizedBox(width: 8),
                             Text('AI Writing Assistant', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700)),
                           ],
@@ -80,7 +80,7 @@ class AprilStatementScreen extends StatelessWidget {
                               child: Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                                 decoration: BoxDecoration(
-                                  color: kAprilAccent.withOpacity(0.08),
+                                  color: kAprilAccent.withValues(alpha: 0.08),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Row(
@@ -103,10 +103,10 @@ class AprilStatementScreen extends StatelessWidget {
                           spacing: 8,
                           runSpacing: 8,
                           children: [
-                            _AIActionChip(label: '✍️ Draft section', onTap: () {}),
-                            _AIActionChip(label: '🔍 Review & refine', onTap: () {}),
-                            _AIActionChip(label: '📊 Suggest highlights', onTap: () {}),
-                            _AIActionChip(label: '🌐 Translate', onTap: () {}),
+                            _AIActionChip(label: 'âœï¸ Draft section', onTap: () {}),
+                            _AIActionChip(label: 'ðŸ” Review & refine', onTap: () {}),
+                            _AIActionChip(label: 'ðŸ“Š Suggest highlights', onTap: () {}),
+                            _AIActionChip(label: 'ðŸŒ Translate', onTap: () {}),
                           ],
                         ),
                       ],
@@ -141,7 +141,7 @@ class AprilStatementScreen extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF10B981).withOpacity(0.1),
+                        color: const Color(0xFF10B981).withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: const Text('Protected', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: Color(0xFF10B981))),
@@ -159,13 +159,13 @@ class AprilStatementScreen extends StatelessWidget {
 
   void _showCardEditor(BuildContext context, StatementCardData card) {
     final emojis = {
-      StatementCard.lifestyle: '🏠',
-      StatementCard.family: '👨‍👩‍👧‍👦',
-      StatementCard.career: '💼',
-      StatementCard.financial: '💰',
-      StatementCard.health: '🏥',
-      StatementCard.legal: '⚖️',
-      StatementCard.growth: '🌱',
+      StatementCard.lifestyle: 'ðŸ ',
+      StatementCard.family: 'ðŸ‘¨â€ðŸ‘©â€ðŸ‘§â€ðŸ‘¦',
+      StatementCard.career: 'ðŸ’¼',
+      StatementCard.financial: 'ðŸ’°',
+      StatementCard.health: 'ðŸ¥',
+      StatementCard.legal: 'âš–ï¸',
+      StatementCard.growth: 'ðŸŒ±',
     };
 
     showModalBottomSheet(
@@ -192,7 +192,7 @@ class AprilStatementScreen extends StatelessWidget {
               padding: const EdgeInsets.all(16),
               child: Row(
                 children: [
-                  Text(emojis[card.type] ?? '📄', style: const TextStyle(fontSize: 24)),
+                  Text(emojis[card.type] ?? 'ðŸ“„', style: const TextStyle(fontSize: 24)),
                   const SizedBox(width: 10),
                   Expanded(
                     child: Column(
@@ -237,7 +237,7 @@ class AprilStatementScreen extends StatelessWidget {
                       children: card.highlights.map((h) => Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         decoration: BoxDecoration(
-                          color: kAprilColor.withOpacity(0.1),
+                          color: kAprilColor.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(h, style: const TextStyle(fontSize: 12, color: kAprilColorDark)),
@@ -319,7 +319,7 @@ class AprilStatementScreen extends StatelessWidget {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: kAprilColor.withOpacity(0.1),
+                  color: kAprilColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Center(child: Text(v.versionNumber.toString(), style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: kAprilColorDark))),
@@ -386,9 +386,9 @@ class AprilStatementScreen extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Overall Progress Card
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 class _OverallProgressCard extends StatelessWidget {
   final AprilProvider provider;
   const _OverallProgressCard({required this.provider});
@@ -437,15 +437,15 @@ class _OverallProgressCard extends StatelessWidget {
                   children: [
                     Text(
                       percent >= 80
-                          ? 'Almost complete! 🎯'
+                          ? 'Almost complete! ðŸŽ¯'
                           : percent >= 50
-                              ? 'Good progress! Keep going 💪'
-                              : 'Let\'s build your story 📝',
+                              ? 'Good progress! Keep going ðŸ’ª'
+                              : 'Let\'s build your story ðŸ“',
                       style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      '${provider.statementCards.length} sections • ${provider.statementCards.where((c) => c.completionPercent == 100).length} complete',
+                      '${provider.statementCards.length} sections â€¢ ${provider.statementCards.where((c) => c.completionPercent == 100).length} complete',
                       style: const TextStyle(color: Colors.white60, fontSize: 12),
                     ),
                   ],
@@ -473,7 +473,7 @@ class _AIActionChip extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: kAprilAccent.withOpacity(0.3)),
+          border: Border.all(color: kAprilAccent.withValues(alpha: 0.3)),
         ),
         child: Text(label, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500)),
       ),

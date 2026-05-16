@@ -1,5 +1,5 @@
-/// Enterprise › Concierge Embed Screen
-/// Allows enterprise accounts to test and manage their AI Concierge sessions —
+﻿/// Enterprise â€º Concierge Embed Screen
+/// Allows enterprise accounts to test and manage their AI Concierge sessions â€”
 /// open a session, send messages, and view the response thread.
 
 import 'package:flutter/material.dart';
@@ -66,7 +66,7 @@ class _ConciergeEmbedScreenState extends State<ConciergeEmbedScreen> {
         if (res.success && res.data != null) {
           _messages.add({
             'role': 'assistant',
-            'content': res.data!['reply'] as String? ?? '…',
+            'content': res.data!['reply'] as String? ?? 'â€¦',
             'detectedIntent': res.data!['detectedIntent'],
           });
         }
@@ -190,7 +190,7 @@ class _ConciergeEmbedScreenState extends State<ConciergeEmbedScreen> {
                         strokeWidth: 2, color: _kCyan),
                   ),
                   const SizedBox(width: 8),
-                  const Text('Genie is typing…',
+                  const Text('Genie is typingâ€¦',
                       style: TextStyle(color: Colors.white38, fontSize: 12)),
                 ],
               ),
@@ -210,10 +210,10 @@ class _ConciergeEmbedScreenState extends State<ConciergeEmbedScreen> {
         constraints: BoxConstraints(
             maxWidth: MediaQuery.of(context).size.width * 0.75),
         decoration: BoxDecoration(
-          color: isUser ? _kGold.withOpacity(0.15) : _kCard,
+          color: isUser ? _kGold.withValues(alpha: 0.15) : _kCard,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
-              color: isUser ? _kGold.withOpacity(0.4) : const Color(0xFF2D2D44)),
+              color: isUser ? _kGold.withValues(alpha: 0.4) : const Color(0xFF2D2D44)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -251,7 +251,7 @@ class _ConciergeEmbedScreenState extends State<ConciergeEmbedScreen> {
                   style: const TextStyle(color: Colors.white),
                   onSubmitted: (_) => _send(),
                   decoration: InputDecoration(
-                    hintText: 'Ask the concierge…',
+                    hintText: 'Ask the conciergeâ€¦',
                     hintStyle: const TextStyle(color: Colors.white30),
                     filled: true,
                     fillColor: const Color(0xFF0A0A0F),

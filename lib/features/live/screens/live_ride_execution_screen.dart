@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// LIVE MODULE — Screen 17: Ride Execution & Security
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// LIVE MODULE â€” Screen 17: Ride Execution & Security
 /// Full ride flow: passenger pickup, identity verification,
 /// live navigation, trip details, fare display, completion
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -110,7 +110,7 @@ class _LiveRideExecutionScreenState extends State<LiveRideExecutionScreen> {
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
             decoration: BoxDecoration(
               color: Colors.white,
-              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 8, offset: const Offset(0, -2))],
+              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 8, offset: const Offset(0, -2))],
             ),
             child: _phase == 0
                 ? SizedBox(
@@ -212,7 +212,7 @@ class _EnRouteView extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 22,
-                backgroundColor: const Color(0xFF3B82F6).withOpacity(0.1),
+                backgroundColor: const Color(0xFF3B82F6).withValues(alpha: 0.1),
                 child: Text(ride.passengerName.substring(0, 1), style: const TextStyle(fontWeight: FontWeight.w700, color: Color(0xFF3B82F6))),
               ),
               const SizedBox(width: 12),
@@ -255,7 +255,7 @@ class _EnRouteView extends StatelessWidget {
               _TripDetailRow(icon: Icons.location_on, label: 'Destination', value: ride.dropoffAddress, color: kLiveColor),
               _TripDetailRow(icon: Icons.straighten, label: 'Distance', value: '${ride.distanceKm.toStringAsFixed(1)} km', color: AppColors.textSecondary),
               _TripDetailRow(icon: Icons.timer, label: 'Duration', value: '${ride.etaMinutes} min', color: AppColors.textSecondary),
-              _TripDetailRow(icon: Icons.attach_money, label: 'Fare', value: '₵${ride.fare.toStringAsFixed(0)}', color: const Color(0xFFF59E0B)),
+              _TripDetailRow(icon: Icons.attach_money, label: 'Fare', value: 'â‚µ${ride.fare.toStringAsFixed(0)}', color: const Color(0xFFF59E0B)),
             ],
           ),
         ),
@@ -299,7 +299,7 @@ class _VerifyView extends StatelessWidget {
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: verified ? const Color(0xFF10B981).withOpacity(0.1) : const Color(0xFF8B5CF6).withOpacity(0.1),
+                  color: verified ? const Color(0xFF10B981).withValues(alpha: 0.1) : const Color(0xFF8B5CF6).withValues(alpha: 0.1),
                 ),
                 child: Icon(
                   verified ? Icons.check_circle : Icons.person_pin,
@@ -309,7 +309,7 @@ class _VerifyView extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               Text(
-                verified ? 'IDENTITY VERIFIED ✅' : 'VERIFY PASSENGER IDENTITY',
+                verified ? 'IDENTITY VERIFIED âœ…' : 'VERIFY PASSENGER IDENTITY',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: verified ? const Color(0xFF10B981) : AppColors.textPrimary),
               ),
               const SizedBox(height: 4),
@@ -393,10 +393,10 @@ class _InTripView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               _TripStat(label: 'Distance', value: '${ride.distanceKm.toStringAsFixed(1)} km'),
-              Container(width: 1, height: 30, color: Colors.white.withOpacity(0.3)),
+              Container(width: 1, height: 30, color: Colors.white.withValues(alpha: 0.3)),
               _TripStat(label: 'ETA', value: '${ride.etaMinutes} min'),
-              Container(width: 1, height: 30, color: Colors.white.withOpacity(0.3)),
-              _TripStat(label: 'Fare', value: '₵${ride.fare.toStringAsFixed(0)}'),
+              Container(width: 1, height: 30, color: Colors.white.withValues(alpha: 0.3)),
+              _TripStat(label: 'Fare', value: 'â‚µ${ride.fare.toStringAsFixed(0)}'),
             ],
           ),
         ),
@@ -476,22 +476,22 @@ class _RideCompleteView extends StatelessWidget {
             children: [
               Container(
                 padding: const EdgeInsets.all(24),
-                decoration: BoxDecoration(shape: BoxShape.circle, color: const Color(0xFF10B981).withOpacity(0.1)),
+                decoration: BoxDecoration(shape: BoxShape.circle, color: const Color(0xFF10B981).withValues(alpha: 0.1)),
                 child: const Icon(Icons.celebration, size: 64, color: Color(0xFF10B981)),
               ),
               const SizedBox(height: 20),
-              const Text('🎉 TRIP COMPLETED!', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
+              const Text('ðŸŽ‰ TRIP COMPLETED!', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
               const SizedBox(height: 8),
               Text(ride.passengerName, style: TextStyle(fontSize: 15, color: AppColors.textSecondary)),
               const SizedBox(height: 16),
               Container(
                 padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(14), boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 8)]),
+                decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(14), boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8)]),
                 child: Column(
                   children: [
                     const Text('EARNINGS', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.textTertiary)),
                     const SizedBox(height: 4),
-                    Text('₵${ride.fare.toStringAsFixed(0)}', style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w900, color: Color(0xFF10B981))),
+                    Text('â‚µ${ride.fare.toStringAsFixed(0)}', style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w900, color: Color(0xFF10B981))),
                     const SizedBox(height: 8),
                     _CompletionRow(label: 'Distance', value: '${ride.distanceKm.toStringAsFixed(1)} km'),
                     _CompletionRow(label: 'Duration', value: '${ride.etaMinutes} min'),
@@ -593,7 +593,7 @@ class _TripStat extends StatelessWidget {
     return Column(
       children: [
         Text(value, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: Colors.white)),
-        Text(label, style: TextStyle(fontSize: 10, color: Colors.white.withOpacity(0.7))),
+        Text(label, style: TextStyle(fontSize: 10, color: Colors.white.withValues(alpha: 0.7))),
       ],
     );
   }

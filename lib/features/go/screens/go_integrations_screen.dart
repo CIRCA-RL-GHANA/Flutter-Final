@@ -1,4 +1,4 @@
-/// GO Screen 14 — Integrations Hub
+﻿/// GO Screen 14 â€” Integrations Hub
 /// Accounting, banking, business, custom integrations
 
 import 'package:flutter/material.dart';
@@ -49,7 +49,7 @@ class _GoIntegrationsScreenState extends State<GoIntegrationsScreen> with Single
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kGoColor.withOpacity(0.07),
+                    color: kGoColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -113,7 +113,7 @@ class _GoIntegrationsScreenState extends State<GoIntegrationsScreen> with Single
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(color: const Color(0xFFF3F4F6), borderRadius: BorderRadius.circular(8)),
           child: Row(children: [
-            const Expanded(child: Text('API Key: ••••••••••••a7f3', style: TextStyle(fontSize: 12, fontFamily: 'monospace'))),
+            const Expanded(child: Text('API Key: â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢a7f3', style: TextStyle(fontSize: 12, fontFamily: 'monospace'))),
             IconButton(icon: const Icon(Icons.copy, size: 16, color: kGoColor), onPressed: () {}),
           ]),
         ),
@@ -156,7 +156,7 @@ class _StatBadge extends StatelessWidget {
   Widget build(BuildContext context) => Expanded(
     child: Container(
       padding: const EdgeInsets.symmetric(vertical: 10),
-      decoration: BoxDecoration(color: color.withOpacity(0.08), borderRadius: BorderRadius.circular(8)),
+      decoration: BoxDecoration(color: color.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(8)),
       child: Column(children: [
         Text(value, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: color)),
         Text(label, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: color)),
@@ -195,7 +195,7 @@ class _IntegrationCard extends StatelessWidget {
           Column(children: [
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-              decoration: BoxDecoration(color: (connected ? kGoPositive : const Color(0xFF9CA3AF)).withOpacity(0.1), borderRadius: BorderRadius.circular(8)),
+              decoration: BoxDecoration(color: (connected ? kGoPositive : const Color(0xFF9CA3AF)).withValues(alpha: 0.1), borderRadius: BorderRadius.circular(8)),
               child: Text(connected ? 'Connected' : 'Available', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: connected ? kGoPositive : const Color(0xFF9CA3AF))),
             ),
             const SizedBox(height: 6),

@@ -1,4 +1,4 @@
-/// GO Dashboard Screen — Main Financial Hub
+﻿/// GO Dashboard Screen â€” Main Financial Hub
 /// P2P, Wallets, Investments, Cards, Quick Actions
 /// Complete production implementation with search, error handling, real-time updates
 
@@ -99,25 +99,25 @@ class _GODashboardScreenState extends State<GODashboardScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // ─── Balance Summary Card ───────────────────────────
+                          // â”€â”€â”€ Balance Summary Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                           _buildBalanceCard(provider),
 
-                          // ─── AI Insights Banner ─────────────────────────────
+                          // â”€â”€â”€ AI Insights Banner â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                           _buildAIInsightsBanner(),
 
-                          // ─── Quick Action Buttons ───────────────────────────
+                          // â”€â”€â”€ Quick Action Buttons â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                           _buildQuickActions(context),
 
-                          // ─── Active Wallets ──────────────────────────────────
+                          // â”€â”€â”€ Active Wallets â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                           _buildWalletsSection(provider),
 
-                          // ─── Latest Cards ───────────────────────────────────
+                          // â”€â”€â”€ Latest Cards â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                           _buildCardsSection(provider),
 
-                          // ─── Recent Transactions ────────────────────────────
+                          // â”€â”€â”€ Recent Transactions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                           _buildRecentTransactions(provider),
 
-                          // ─── Quick Recipients ───────────────────────────────
+                          // â”€â”€â”€ Quick Recipients â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                           _buildFavoriteRecipients(provider),
 
                           const SizedBox(height: 24),
@@ -142,7 +142,7 @@ class _GODashboardScreenState extends State<GODashboardScreen> {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF2563EB).withOpacity(0.4),
+            color: const Color(0xFF2563EB).withValues(alpha: 0.4),
             blurRadius: 12,
             offset: const Offset(0, 4),
           ),
@@ -176,11 +176,11 @@ class _GODashboardScreenState extends State<GODashboardScreen> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.2),
+                  color: Colors.white.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: const Text(
-                  '↑ 2.4%',
+                  'â†‘ 2.4%',
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -508,9 +508,9 @@ class _GODashboardScreenState extends State<GODashboardScreen> {
     );
   }}
 
-// ────────────────────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // COMPONENTS
-// ────────────────────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _QuickActionButton extends StatelessWidget {
   final IconData icon;
@@ -536,7 +536,7 @@ class _QuickActionButton extends StatelessWidget {
             width: 60,
             height: 60,
             decoration: BoxDecoration(
-              color: color.withOpacity(0.1),
+              color: color.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(16),
             ),
             child: Icon(icon, color: color, size: 28),
@@ -642,7 +642,7 @@ class _CardItem extends StatelessWidget {
             ),
           ),
           Text(
-            '•••• ${card.lastFour}',
+            'â€¢â€¢â€¢â€¢ ${card.lastFour}',
             style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w700,
@@ -690,7 +690,7 @@ class _TransactionTile extends StatelessWidget {
             width: 44,
             height: 44,
             decoration: BoxDecoration(
-              color: color.withOpacity(0.1),
+              color: color.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(

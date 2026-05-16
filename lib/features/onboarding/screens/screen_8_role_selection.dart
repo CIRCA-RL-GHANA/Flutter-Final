@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/constants/app_strings.dart';
@@ -9,7 +9,7 @@ import '../widgets/buttons.dart';
 import '../widgets/onboarding_header.dart';
 
 
-// OS palette � mirrors splash / welcome
+// OS palette ï¿½ mirrors splash / welcome
 const Color _kBg        = Color(0xFF08080F);
 const Color _kSurface   = Color(0xFF0E0E1A);
 const Color _kBorder    = Color(0xFF1C1C2E);
@@ -155,10 +155,10 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
                           Container(
                             padding: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
-                              color: const Color(0xFF22BDD8).withOpacity(0.08),
+                              color: const Color(0xFF22BDD8).withValues(alpha: 0.08),
                               borderRadius: BorderRadius.circular(12),
                               border: Border.all(
-                                color: const Color(0xFF22BDD8).withOpacity(0.2),
+                                color: const Color(0xFF22BDD8).withValues(alpha: 0.2),
                               ),
                             ),
                             child: Row(
@@ -172,7 +172,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
                                 Expanded(
                                   child: Text(
                                     role.selectedCategory == RoleCategory.individual
-                                        ? 'Your individual account gives you Owner access � shop, socialise, and manage your personal finances.'
+                                        ? 'Your individual account gives you Owner access ï¿½ shop, socialise, and manage your personal finances.'
                                         : role.selectedCategory == RoleCategory.business
                                             ? 'Select the staff role you have been invited to join this business entity as.'
                                             : 'You can change your role anytime in settings.',
@@ -254,7 +254,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
   }
 
   Widget _buildBusinessSubRoles(RoleProvider role) {
-    // Owner is NOT listed here � Owner is the individual who created the entity,
+    // Owner is NOT listed here ï¿½ Owner is the individual who created the entity,
     // not an assignable staff role. Business sub-roles are staff positions only.
     final subRoles = [
       _SubRoleData(
@@ -329,7 +329,7 @@ class _RoleCategoryCard extends StatelessWidget {
           duration: const Duration(milliseconds: 300),
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: isSelected ? color.withOpacity(0.08) : const Color(0xFF0E0E1A),
+            color: isSelected ? color.withValues(alpha: 0.08) : const Color(0xFF0E0E1A),
             borderRadius: BorderRadius.circular(6),
             border: Border.all(
               color: isSelected ? color : const Color(0xFF1C1C2E),
@@ -338,7 +338,7 @@ class _RoleCategoryCard extends StatelessWidget {
             boxShadow: isSelected
                 ? [
                     BoxShadow(
-                      color: color.withOpacity(0.15),
+                      color: color.withValues(alpha: 0.15),
                       blurRadius: 12,
                       offset: const Offset(0, 4),
                     ),
@@ -351,7 +351,7 @@ class _RoleCategoryCard extends StatelessWidget {
                 width: 56,
                 height: 56,
                 decoration: BoxDecoration(
-                  color: color.withOpacity(0.12),
+                  color: color.withValues(alpha: 0.12),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(icon, size: 28, color: color),
@@ -456,7 +456,7 @@ class _SubRoleCard extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
           decoration: BoxDecoration(
             color: isSelected
-                ? data.color.withOpacity(0.06)
+                ? data.color.withValues(alpha: 0.06)
                 : const Color(0xFF0E0E1A),
             borderRadius: BorderRadius.circular(14),
             border: Border.all(
@@ -470,7 +470,7 @@ class _SubRoleCard extends StatelessWidget {
                 width: 44,
                 height: 44,
                 decoration: BoxDecoration(
-                  color: data.color.withOpacity(0.12),
+                  color: data.color.withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Icon(data.icon, size: 22, color: data.color),

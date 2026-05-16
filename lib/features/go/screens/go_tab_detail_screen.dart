@@ -1,4 +1,4 @@
-/// GO Screen 5 — Tab Detail
+﻿/// GO Screen 5 â€” Tab Detail
 /// Tab identity card, financial snapshot, transaction timeline,
 /// settlement interface, negotiation tools, documents, audit trail
 
@@ -44,7 +44,7 @@ class _GoTabDetailScreenState extends State<GoTabDetailScreen> {
                     padding: const EdgeInsets.only(bottom: 14),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: kGoColor.withOpacity(0.07),
+                        color: kGoColor.withValues(alpha: 0.07),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -65,22 +65,22 @@ class _GoTabDetailScreenState extends State<GoTabDetailScreen> {
                   );
                 },
               ),
-              // 1 — Identity card
+              // 1 â€” Identity card
               _buildIdentityCard(tab),
               const SizedBox(height: 14),
-              // 2 — Financial snapshot
+              // 2 â€” Financial snapshot
               _buildFinancialSnapshot(tab),
               const SizedBox(height: 14),
-              // 3 — Timeline
+              // 3 â€” Timeline
               _buildTimeline(timeline),
               const SizedBox(height: 14),
-              // 4 — Settlement
+              // 4 â€” Settlement
               _buildSettlement(tab),
               const SizedBox(height: 14),
-              // 5 — Actions
+              // 5 â€” Actions
               _buildActions(tab),
               const SizedBox(height: 14),
-              // 6 — Audit
+              // 6 â€” Audit
               _buildAudit(tab),
               const SizedBox(height: 80),
             ],
@@ -124,7 +124,7 @@ class _GoTabDetailScreenState extends State<GoTabDetailScreen> {
           const SizedBox(height: 10),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-            decoration: BoxDecoration(color: _riskColor(tab.risk).withOpacity(0.1), borderRadius: BorderRadius.circular(8)),
+            decoration: BoxDecoration(color: _riskColor(tab.risk).withValues(alpha: 0.1), borderRadius: BorderRadius.circular(8)),
             child: Row(children: [
               Icon(Icons.warning_amber, size: 14, color: _riskColor(tab.risk)),
               const SizedBox(width: 6),
@@ -172,7 +172,7 @@ class _GoTabDetailScreenState extends State<GoTabDetailScreen> {
         Text('Due: ${_formatDate(tab.dueDate)}', style: TextStyle(fontSize: 11, color: tab.status == TabStatus.overdue ? kGoNegative : const Color(0xFF9CA3AF))),
         if (tab.status == TabStatus.overdue) ...[
           const SizedBox(width: 6),
-          Container(padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1), decoration: BoxDecoration(color: kGoNegative.withOpacity(0.1), borderRadius: BorderRadius.circular(4)), child: const Text('OVERDUE', style: TextStyle(fontSize: 9, fontWeight: FontWeight.w700, color: kGoNegative))),
+          Container(padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1), decoration: BoxDecoration(color: kGoNegative.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(4)), child: const Text('OVERDUE', style: TextStyle(fontSize: 9, fontWeight: FontWeight.w700, color: kGoNegative))),
         ],
       ]),
     ],
@@ -194,7 +194,7 @@ class _GoTabDetailScreenState extends State<GoTabDetailScreen> {
 
   Widget _buildSettlement(GoTab tab) {
     if (!_showSettlement) return const SizedBox.shrink();
-    return GoSectionCard(borderColor: kGoColor.withOpacity(0.3), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+    return GoSectionCard(borderColor: kGoColor.withValues(alpha: 0.3), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       const GoSectionHeader(title: 'Settle Tab', icon: Icons.check_circle_outline),
       const SizedBox(height: 10),
       Row(children: [
@@ -260,7 +260,7 @@ class _StatusBadge extends StatelessWidget {
       case TabStatus.frozen: c = kGoInfo; t = 'Frozen';
       case TabStatus.closed: c = const Color(0xFF9CA3AF); t = 'Closed';
     }
-    return Container(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4), decoration: BoxDecoration(color: c.withOpacity(0.1), borderRadius: BorderRadius.circular(12)), child: Text(t, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: c)));
+    return Container(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4), decoration: BoxDecoration(color: c.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(12)), child: Text(t, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: c)));
   }
 }
 
@@ -270,7 +270,7 @@ class _SnapCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
     padding: const EdgeInsets.all(10),
-    decoration: BoxDecoration(color: color.withOpacity(0.06), borderRadius: BorderRadius.circular(8)),
+    decoration: BoxDecoration(color: color.withValues(alpha: 0.06), borderRadius: BorderRadius.circular(8)),
     child: Column(children: [
       Text(label, style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600, color: color)),
       const SizedBox(height: 2),
@@ -331,7 +331,7 @@ class _ActionBtn extends StatelessWidget {
     onTap: onTap,
     child: Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      decoration: BoxDecoration(color: (color ?? kGoColor).withOpacity(0.08), borderRadius: BorderRadius.circular(8)),
+      decoration: BoxDecoration(color: (color ?? kGoColor).withValues(alpha: 0.08), borderRadius: BorderRadius.circular(8)),
       child: Row(mainAxisSize: MainAxisSize.min, children: [
         Icon(icon, size: 14, color: color ?? kGoColor),
         const SizedBox(width: 4),

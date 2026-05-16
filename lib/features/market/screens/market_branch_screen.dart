@@ -1,7 +1,7 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// MARKET MODULE — Screen 2: Branch Main View
-/// Merchant profile with 5 tabs: Updates · Deals · Shop · Info · Returns
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// MARKET MODULE â€” Screen 2: Branch Main View
+/// Merchant profile with 5 tabs: Updates Â· Deals Â· Shop Â· Info Â· Returns
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -59,7 +59,7 @@ class _MarketBranchScreenState extends State<MarketBranchScreen>
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kMarketColor.withOpacity(0.07),
+                    color: kMarketColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(children: [
                       const Icon(Icons.auto_awesome, size: 14, color: kMarketColor),
@@ -124,7 +124,7 @@ class _MarketBranchScreenState extends State<MarketBranchScreen>
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [kMarketColorDark, kMarketColor.withOpacity(0.8)],
+                  colors: [kMarketColorDark, kMarketColor.withValues(alpha: 0.8)],
                 ),
               ),
               child: const Icon(Icons.storefront, size: 60, color: Colors.white24),
@@ -135,7 +135,7 @@ class _MarketBranchScreenState extends State<MarketBranchScreen>
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [Colors.transparent, Colors.black.withOpacity(0.6)],
+                  colors: [Colors.transparent, Colors.black.withValues(alpha: 0.6)],
                 ),
               ),
             ),
@@ -156,7 +156,7 @@ class _MarketBranchScreenState extends State<MarketBranchScreen>
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(14),
-                          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.2), blurRadius: 8)],
+                          boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.2), blurRadius: 8)],
                         ),
                         child: const Icon(Icons.store, size: 28, color: kMarketColor),
                       ),
@@ -196,7 +196,7 @@ class _MarketBranchScreenState extends State<MarketBranchScreen>
                               style: TextStyle(
                                 fontSize: 11,
                                 letterSpacing: 0.8,
-                                color: Colors.white.withOpacity(0.8),
+                                color: Colors.white.withValues(alpha: 0.8),
                               ),
                             ),
                           ],
@@ -229,7 +229,7 @@ class _MarketBranchScreenState extends State<MarketBranchScreen>
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                         decoration: BoxDecoration(
-                          color: merchant.statusColor.withOpacity(0.25),
+                          color: merchant.statusColor.withValues(alpha: 0.25),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
@@ -270,7 +270,7 @@ class _MarketBranchScreenState extends State<MarketBranchScreen>
   }
 }
 
-// ── Stat pill ──────────────────────────────────────────────────────
+// â”€â”€ Stat pill â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _StatPill extends StatelessWidget {
   final IconData icon;
   final String label;
@@ -291,7 +291,7 @@ class _StatPill extends StatelessWidget {
   }
 }
 
-// ── Tab 1: Updates ─────────────────────────────────────────────────
+// â”€â”€ Tab 1: Updates â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _UpdatesTab extends StatelessWidget {
   final MarketProvider prov;
   final Merchant merchant;
@@ -417,7 +417,7 @@ class _PostAction extends StatelessWidget {
   }
 }
 
-// ── Tab 2: Deals ───────────────────────────────────────────────────
+// â”€â”€ Tab 2: Deals â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _DealsTab extends StatelessWidget {
   final MarketProvider prov;
   final Merchant merchant;
@@ -462,7 +462,7 @@ class _DealsTab extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
+                        color: Colors.white.withValues(alpha: 0.2),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Icon(
@@ -490,7 +490,7 @@ class _DealsTab extends StatelessWidget {
                           ),
                           Text(
                             deal.description ?? '',
-                            style: TextStyle(fontSize: 12, color: Colors.white.withOpacity(0.85)),
+                            style: TextStyle(fontSize: 12, color: Colors.white.withValues(alpha: 0.85)),
                           ),
                         ],
                       ),
@@ -502,7 +502,7 @@ class _DealsTab extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
+                    color: Colors.white.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Text(
@@ -519,16 +519,16 @@ class _DealsTab extends StatelessWidget {
                 if (deal.minimumOrder != null && deal.minimumOrder! > 0)
                   Text(
                     'Min order: \$${deal.minimumOrder!.toStringAsFixed(0)}',
-                    style: TextStyle(fontSize: 11, color: Colors.white.withOpacity(0.7)),
+                    style: TextStyle(fontSize: 11, color: Colors.white.withValues(alpha: 0.7)),
                   ),
                 Row(
                   children: [
                     if (deal.expiresAt != null) ...[
-                      Icon(Icons.schedule, size: 13, color: Colors.white.withOpacity(0.7)),
+                      Icon(Icons.schedule, size: 13, color: Colors.white.withValues(alpha: 0.7)),
                       const SizedBox(width: 4),
                       Text(
                         'Expires in ${_remainingTime(deal.expiresAt!)}',
-                        style: TextStyle(fontSize: 11, color: Colors.white.withOpacity(0.7)),
+                        style: TextStyle(fontSize: 11, color: Colors.white.withValues(alpha: 0.7)),
                       ),
                     ],
                     const Spacer(),
@@ -536,7 +536,7 @@ class _DealsTab extends StatelessWidget {
                     if (deal.maxRedemptions != null && deal.maxRedemptions! > 0) ...[
                       Text(
                         '${deal.currentRedemptions}/${deal.maxRedemptions!} used',
-                        style: TextStyle(fontSize: 11, color: Colors.white.withOpacity(0.7)),
+                        style: TextStyle(fontSize: 11, color: Colors.white.withValues(alpha: 0.7)),
                       ),
                     ],
                   ],
@@ -573,7 +573,7 @@ class _DealsTab extends StatelessWidget {
   }
 }
 
-// ── Tab 3: Shop ────────────────────────────────────────────────────
+// â”€â”€ Tab 3: Shop â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _ShopTab extends StatelessWidget {
   final MarketProvider prov;
   final Merchant merchant;
@@ -699,7 +699,7 @@ class _ShopTab extends StatelessWidget {
   }
 }
 
-// ── Tab 4: Info ────────────────────────────────────────────────────
+// â”€â”€ Tab 4: Info â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _InfoTab extends StatelessWidget {
   final Merchant merchant;
 
@@ -845,7 +845,7 @@ class _InfoTab extends StatelessWidget {
   }
 }
 
-// ── Tab 5: Rejected Returns ────────────────────────────────────────
+// â”€â”€ Tab 5: Rejected Returns â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _ReturnsTab extends StatelessWidget {
   final MarketProvider prov;
 
@@ -888,7 +888,7 @@ class _ReturnsTab extends StatelessWidget {
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
-                        Icon(Icons.play_circle_fill, size: 48, color: Colors.white.withOpacity(0.8)),
+                        Icon(Icons.play_circle_fill, size: 48, color: Colors.white.withValues(alpha: 0.8)),
                         Positioned(
                           bottom: 8,
                           right: 8,
@@ -910,7 +910,7 @@ class _ReturnsTab extends StatelessWidget {
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                             decoration: BoxDecoration(
-                              color: AppColors.error.withOpacity(0.8),
+                              color: AppColors.error.withValues(alpha: 0.8),
                               borderRadius: BorderRadius.circular(4),
                             ),
                             child: const Text(

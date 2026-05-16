@@ -1,4 +1,4 @@
-/// Alerts Screen 2 — Comprehensive Filter System
+﻿/// Alerts Screen 2 â€” Comprehensive Filter System
 /// Full-screen modal with accordion sections (Time Intelligence,
 /// People & Assignment, Issue Taxonomy, Status & Workflow, AI Filters),
 /// filter presets, sticky footer
@@ -74,7 +74,7 @@ class _AlertsFilterScreenState extends State<AlertsFilterScreen> {
                   builder: (context, ai, _) {
                     if (ai.insights.isEmpty) return const SizedBox.shrink();
                     return Container(
-                      color: kAlertsColor.withOpacity(0.07),
+                      color: kAlertsColor.withValues(alpha: 0.07),
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                       child: Row(children: [
                         const Icon(Icons.auto_awesome, size: 14, color: kAlertsColor),
@@ -86,9 +86,9 @@ class _AlertsFilterScreenState extends State<AlertsFilterScreen> {
                     );
                   },
                 ),
-                // ──── FILTER PRESETS ────
+                // â”€â”€â”€â”€ FILTER PRESETS â”€â”€â”€â”€
                 AlertsSectionCard(
-                  title: '⚡ Quick Presets',
+                  title: 'âš¡ Quick Presets',
                   child: Wrap(
                     spacing: 8,
                     runSpacing: 8,
@@ -116,7 +116,7 @@ class _AlertsFilterScreenState extends State<AlertsFilterScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                // ──── TIME INTELLIGENCE ────
+                // â”€â”€â”€â”€ TIME INTELLIGENCE â”€â”€â”€â”€
                 _FilterAccordion(
                   icon: Icons.schedule,
                   title: 'Time Intelligence',
@@ -131,32 +131,32 @@ class _AlertsFilterScreenState extends State<AlertsFilterScreen> {
                 ),
                 const SizedBox(height: 12),
 
-                // ──── PRIORITY LEVEL ────
+                // â”€â”€â”€â”€ PRIORITY LEVEL â”€â”€â”€â”€
                 _FilterAccordion(
                   icon: Icons.flag,
                   title: 'Priority Level',
                   child: Column(
                     children: [
                       _CheckTile(
-                        label: '🚨 Critical',
+                        label: 'ðŸš¨ Critical',
                         isSelected: _priority == AlertPriority.critical,
                         color: kAlertsCritical,
                         onTap: () => setState(() => _priority = _priority == AlertPriority.critical ? null : AlertPriority.critical),
                       ),
                       _CheckTile(
-                        label: '🔥 High',
+                        label: 'ðŸ”¥ High',
                         isSelected: _priority == AlertPriority.high,
                         color: kAlertsColor,
                         onTap: () => setState(() => _priority = _priority == AlertPriority.high ? null : AlertPriority.high),
                       ),
                       _CheckTile(
-                        label: '⚠️ Medium',
+                        label: 'âš ï¸ Medium',
                         isSelected: _priority == AlertPriority.medium,
                         color: kAlertsWarning,
                         onTap: () => setState(() => _priority = _priority == AlertPriority.medium ? null : AlertPriority.medium),
                       ),
                       _CheckTile(
-                        label: 'ℹ️ Low',
+                        label: 'â„¹ï¸ Low',
                         isSelected: _priority == AlertPriority.low,
                         color: kAlertsInfo,
                         onTap: () => setState(() => _priority = _priority == AlertPriority.low ? null : AlertPriority.low),
@@ -166,7 +166,7 @@ class _AlertsFilterScreenState extends State<AlertsFilterScreen> {
                 ),
                 const SizedBox(height: 12),
 
-                // ──── ISSUE TAXONOMY ────
+                // â”€â”€â”€â”€ ISSUE TAXONOMY â”€â”€â”€â”€
                 _FilterAccordion(
                   icon: Icons.category,
                   title: 'Issue Taxonomy',
@@ -180,7 +180,7 @@ class _AlertsFilterScreenState extends State<AlertsFilterScreen> {
                         child: Container(
                           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                           decoration: BoxDecoration(
-                            color: isActive ? kAlertsColor.withOpacity(0.1) : Colors.white,
+                            color: isActive ? kAlertsColor.withValues(alpha: 0.1) : Colors.white,
                             borderRadius: BorderRadius.circular(8),
                             border: Border.all(color: isActive ? kAlertsColor : const Color(0xFFE5E7EB)),
                           ),
@@ -199,7 +199,7 @@ class _AlertsFilterScreenState extends State<AlertsFilterScreen> {
                 ),
                 const SizedBox(height: 12),
 
-                // ──── STATUS & WORKFLOW ────
+                // â”€â”€â”€â”€ STATUS & WORKFLOW â”€â”€â”€â”€
                 _FilterAccordion(
                   icon: Icons.assignment,
                   title: 'Status & Workflow',
@@ -214,7 +214,7 @@ class _AlertsFilterScreenState extends State<AlertsFilterScreen> {
                 ),
                 const SizedBox(height: 12),
 
-                // ──── PEOPLE & ASSIGNMENT ────
+                // â”€â”€â”€â”€ PEOPLE & ASSIGNMENT â”€â”€â”€â”€
                 _FilterAccordion(
                   icon: Icons.people,
                   title: 'People & Assignment',
@@ -233,13 +233,13 @@ class _AlertsFilterScreenState extends State<AlertsFilterScreen> {
             ),
           ),
 
-          // ──── STICKY FOOTER ────
+          // â”€â”€â”€â”€ STICKY FOOTER â”€â”€â”€â”€
           bottomNavigationBar: Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Colors.white,
               border: const Border(top: BorderSide(color: Color(0xFF1C1C2E))),
-              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 8, offset: const Offset(0, -2))],
+              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 8, offset: const Offset(0, -2))],
             ),
             child: SafeArea(
               child: Row(
@@ -311,7 +311,7 @@ class _AlertsFilterScreenState extends State<AlertsFilterScreen> {
   }
 
   void _applyPreset(AlertFilterPreset preset) {
-    // Apply preset logic — simplified for demo
+    // Apply preset logic â€” simplified for demo
     setState(() {
       _priority = null;
       _category = null;
@@ -330,8 +330,8 @@ class _AlertsFilterScreenState extends State<AlertsFilterScreen> {
   }
 
   String _catEmoji(AlertCategory c) {
-    const map = { AlertCategory.payment: '💳', AlertCategory.shipment: '📦', AlertCategory.system: '⚙️', AlertCategory.driverRide: '🚗', AlertCategory.returnRefund: '↩️', AlertCategory.account: '👤', AlertCategory.security: '🔒', AlertCategory.other: '📋' };
-    return map[c] ?? '📋';
+    const map = { AlertCategory.payment: 'ðŸ’³', AlertCategory.shipment: 'ðŸ“¦', AlertCategory.system: 'âš™ï¸', AlertCategory.driverRide: 'ðŸš—', AlertCategory.returnRefund: 'â†©ï¸', AlertCategory.account: 'ðŸ‘¤', AlertCategory.security: 'ðŸ”’', AlertCategory.other: 'ðŸ“‹' };
+    return map[c] ?? 'ðŸ“‹';
   }
 
   String _catLabel(AlertCategory c) {
@@ -341,14 +341,14 @@ class _AlertsFilterScreenState extends State<AlertsFilterScreen> {
 
   String _statusLabel(AlertStatus s) {
     switch (s) {
-      case AlertStatus.newAlert: return '🆕 New';
-      case AlertStatus.assigned: return '👤 Assigned';
-      case AlertStatus.inProgress: return '🔄 In Progress';
-      case AlertStatus.escalated: return '⚠️ Escalated';
-      case AlertStatus.resolved: return '✅ Resolved';
-      case AlertStatus.verified: return '🔒 Verified';
-      case AlertStatus.closed: return '📁 Closed';
-      case AlertStatus.archived: return '🗃️ Archived';
+      case AlertStatus.newAlert: return 'ðŸ†• New';
+      case AlertStatus.assigned: return 'ðŸ‘¤ Assigned';
+      case AlertStatus.inProgress: return 'ðŸ”„ In Progress';
+      case AlertStatus.escalated: return 'âš ï¸ Escalated';
+      case AlertStatus.resolved: return 'âœ… Resolved';
+      case AlertStatus.verified: return 'ðŸ”’ Verified';
+      case AlertStatus.closed: return 'ðŸ“ Closed';
+      case AlertStatus.archived: return 'ðŸ—ƒï¸ Archived';
     }
   }
 
@@ -366,9 +366,9 @@ class _AlertsFilterScreenState extends State<AlertsFilterScreen> {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Filter Accordion
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _FilterAccordion extends StatelessWidget {
   final IconData icon;
@@ -400,9 +400,9 @@ class _FilterAccordion extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Radio Tile
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _RadioTile<T> extends StatelessWidget {
   final String label;
@@ -421,7 +421,7 @@ class _RadioTile<T> extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 4),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
-          color: isSelected ? kAlertsColor.withOpacity(0.05) : Colors.transparent,
+          color: isSelected ? kAlertsColor.withValues(alpha: 0.05) : Colors.transparent,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Row(
@@ -440,9 +440,9 @@ class _RadioTile<T> extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Check Tile
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _CheckTile extends StatelessWidget {
   final String label;
@@ -460,7 +460,7 @@ class _CheckTile extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 4),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
-          color: isSelected ? color.withOpacity(0.05) : Colors.transparent,
+          color: isSelected ? color.withValues(alpha: 0.05) : Colors.transparent,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Row(
@@ -479,9 +479,9 @@ class _CheckTile extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Toggle Tile
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _ToggleTile extends StatelessWidget {
   final String label;

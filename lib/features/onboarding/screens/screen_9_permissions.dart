@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/constants/app_strings.dart';
@@ -8,7 +8,7 @@ import '../providers/onboarding_provider.dart';
 import '../widgets/buttons.dart';
 
 
-// OS palette � mirrors splash / welcome
+// OS palette ï¿½ mirrors splash / welcome
 const Color _kBg        = Color(0xFF08080F);
 const Color _kSurface   = Color(0xFF0E0E1A);
 const Color _kBorder    = Color(0xFF1C1C2E);
@@ -194,7 +194,7 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                                 decoration: BoxDecoration(
                                   color: _getGroupColor(
                                           permProvider.currentGroup)
-                                      .withOpacity(0.1),
+                                      .withValues(alpha: 0.1),
                                   borderRadius: BorderRadius.circular(6),
                                 ),
                                 child: Text(
@@ -217,7 +217,7 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: const Color(0xFF22BDD8)
-                                      .withOpacity(0.08),
+                                      .withValues(alpha: 0.08),
                                 ),
                                 child: Icon(
                                   _getPermissionIconData(currentPerm),
@@ -270,7 +270,7 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                                       _getPermissionIconData(currentPerm),
                                       size: 40,
                                       color:
-                                          const Color(0xFF7A7A95).withOpacity(0.5),
+                                          const Color(0xFF7A7A95).withValues(alpha: 0.5),
                                     ),
                                     const SizedBox(height: 8),
                                     Text(

@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SD1.1-CREATE: PRODUCT CREATE WIZARD — 7-Step Form
-/// Steps: Basic Info → Pricing → Inventory → Media → Variants → SEO → Review
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD1.1-CREATE: PRODUCT CREATE WIZARD â€” 7-Step Form
+/// Steps: Basic Info â†’ Pricing â†’ Inventory â†’ Media â†’ Variants â†’ SEO â†’ Review
 /// RBAC: Admin(full), BM(branch), SO(full), BSO(branch)
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -113,7 +113,7 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kSetupColor.withOpacity(0.07),
+                    color: kSetupColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -198,7 +198,7 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
   }
 }
 
-// ─── Step Indicator ──────────────────────────────────────────────────────────
+// â”€â”€â”€ Step Indicator â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _StepIndicator extends StatelessWidget {
   final int currentStep;
@@ -222,7 +222,7 @@ class _StepIndicator extends StatelessWidget {
             borderRadius: BorderRadius.circular(4),
             child: LinearProgressIndicator(
               value: (currentStep + 1) / stepCount,
-              backgroundColor: kSetupColor.withOpacity(0.1),
+              backgroundColor: kSetupColor.withValues(alpha: 0.1),
               valueColor: const AlwaysStoppedAnimation<Color>(kSetupColor),
               minHeight: 4,
             ),
@@ -256,7 +256,7 @@ class _StepIndicator extends StatelessWidget {
   }
 }
 
-// ─── Step 1: Basic Info ──────────────────────────────────────────────────────
+// â”€â”€â”€ Step 1: Basic Info â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _BasicInfoStep extends StatelessWidget {
   final TextEditingController nameCtrl;
@@ -332,7 +332,7 @@ class _BasicInfoStep extends StatelessWidget {
   }
 }
 
-// ─── Step 2: Pricing ─────────────────────────────────────────────────────────
+// â”€â”€â”€ Step 2: Pricing â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _PricingStep extends StatelessWidget {
   final TextEditingController priceCtrl;
@@ -351,22 +351,22 @@ class _PricingStep extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       children: [
         SetupFormField(
-          label: 'Selling Price (₵)',
+          label: 'Selling Price (â‚µ)',
           hint: '0.00',
           controller: priceCtrl,
           keyboardType: TextInputType.number,
         ),
         const SizedBox(height: 14),
         SetupFormField(
-          label: 'Compare-at Price (₵)',
-          hint: '0.00 — Show strikethrough for discounts',
+          label: 'Compare-at Price (â‚µ)',
+          hint: '0.00 â€” Show strikethrough for discounts',
           controller: comparePriceCtrl,
           keyboardType: TextInputType.number,
         ),
         const SizedBox(height: 14),
         SetupFormField(
-          label: 'Cost per Item (₵)',
-          hint: '0.00 — Used for margin calculations',
+          label: 'Cost per Item (â‚µ)',
+          hint: '0.00 â€” Used for margin calculations',
           controller: costCtrl,
           keyboardType: TextInputType.number,
         ),
@@ -374,9 +374,9 @@ class _PricingStep extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: AppColors.info.withOpacity(0.06),
+            color: AppColors.info.withValues(alpha: 0.06),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: AppColors.info.withOpacity(0.15)),
+            border: Border.all(color: AppColors.info.withValues(alpha: 0.15)),
           ),
           child: Row(
             children: [
@@ -385,7 +385,7 @@ class _PricingStep extends StatelessWidget {
               Expanded(
                 child: Text(
                   'Margin will be auto-calculated when both price and cost are provided.',
-                  style: TextStyle(fontSize: 12, color: AppColors.info.withOpacity(0.8)),
+                  style: TextStyle(fontSize: 12, color: AppColors.info.withValues(alpha: 0.8)),
                 ),
               ),
             ],
@@ -397,7 +397,7 @@ class _PricingStep extends StatelessWidget {
   }
 }
 
-// ─── Step 3: Inventory ───────────────────────────────────────────────────────
+// â”€â”€â”€ Step 3: Inventory â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _InventoryStep extends StatelessWidget {
   final TextEditingController stockCtrl;
@@ -440,7 +440,7 @@ class _InventoryStep extends StatelessWidget {
           const SizedBox(height: 14),
           SetupFormField(
             label: 'Low Stock Threshold',
-            hint: '10 — Alert when stock falls below this',
+            hint: '10 â€” Alert when stock falls below this',
             controller: lowStockCtrl,
             keyboardType: TextInputType.number,
           ),
@@ -464,7 +464,7 @@ class _InventoryStep extends StatelessWidget {
   }
 }
 
-// ─── Step 4: Media ───────────────────────────────────────────────────────────
+// â”€â”€â”€ Step 4: Media â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _MediaStep extends StatelessWidget {
   const _MediaStep();
@@ -483,7 +483,7 @@ class _MediaStep extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(14),
             border: Border.all(
-              color: kSetupColor.withOpacity(0.3),
+              color: kSetupColor.withValues(alpha: 0.3),
               style: BorderStyle.solid,
             ),
           ),
@@ -491,7 +491,7 @@ class _MediaStep extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.cloud_upload_outlined, size: 40, color: kSetupColor.withOpacity(0.4)),
+                Icon(Icons.cloud_upload_outlined, size: 40, color: kSetupColor.withValues(alpha: 0.4)),
                 const SizedBox(height: 8),
                 const Text(
                   'Tap to upload images',
@@ -499,7 +499,7 @@ class _MediaStep extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'PNG, JPG up to 5MB · Max 8 images',
+                  'PNG, JPG up to 5MB Â· Max 8 images',
                   style: TextStyle(fontSize: 11, color: AppColors.textTertiary),
                 ),
               ],
@@ -520,7 +520,7 @@ class _MediaStep extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.video_library, size: 28, color: AppColors.textTertiary.withOpacity(0.5)),
+                Icon(Icons.video_library, size: 28, color: AppColors.textTertiary.withValues(alpha: 0.5)),
                 const SizedBox(height: 4),
                 const Text(
                   'Add product video (optional)',
@@ -536,7 +536,7 @@ class _MediaStep extends StatelessWidget {
   }
 }
 
-// ─── Step 5: Variants ────────────────────────────────────────────────────────
+// â”€â”€â”€ Step 5: Variants â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _VariantsStep extends StatelessWidget {
   const _VariantsStep();
@@ -549,9 +549,9 @@ class _VariantsStep extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: kSetupColor.withOpacity(0.06),
+            color: kSetupColor.withValues(alpha: 0.06),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: kSetupColor.withOpacity(0.15)),
+            border: Border.all(color: kSetupColor.withValues(alpha: 0.15)),
           ),
           child: Row(
             children: [
@@ -614,7 +614,7 @@ class _VariantsStep extends StatelessWidget {
   }
 }
 
-// ─── Step 6: SEO ─────────────────────────────────────────────────────────────
+// â”€â”€â”€ Step 6: SEO â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _SEOStep extends StatelessWidget {
   final TextEditingController metaTitleCtrl;
@@ -654,9 +654,9 @@ class _SEOStep extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: AppColors.success.withOpacity(0.06),
+            color: AppColors.success.withValues(alpha: 0.06),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: AppColors.success.withOpacity(0.15)),
+            border: Border.all(color: AppColors.success.withValues(alpha: 0.15)),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -696,7 +696,7 @@ class _SEOStep extends StatelessWidget {
   }
 }
 
-// ─── Step 7: Review ──────────────────────────────────────────────────────────
+// â”€â”€â”€ Step 7: Review â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _ReviewStep extends StatelessWidget {
   final String name;
@@ -725,9 +725,9 @@ class _ReviewStep extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: kSetupColor.withOpacity(0.06),
+            color: kSetupColor.withValues(alpha: 0.06),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: kSetupColor.withOpacity(0.15)),
+            border: Border.all(color: kSetupColor.withValues(alpha: 0.15)),
           ),
           child: Row(
             children: [
@@ -747,11 +747,11 @@ class _ReviewStep extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SetupSectionTitle(title: 'Product Summary', icon: Icons.inventory_2),
-              SetupInfoRow(label: 'Name', value: name.isNotEmpty ? name : '—'),
-              SetupInfoRow(label: 'SKU', value: sku.isNotEmpty ? sku : '—'),
+              SetupInfoRow(label: 'Name', value: name.isNotEmpty ? name : 'â€”'),
+              SetupInfoRow(label: 'SKU', value: sku.isNotEmpty ? sku : 'â€”'),
               SetupInfoRow(label: 'Category', value: category),
-              SetupInfoRow(label: 'Price', value: price.isNotEmpty ? '₵$price' : '—'),
-              SetupInfoRow(label: 'Stock', value: stock.isNotEmpty ? stock : '—'),
+              SetupInfoRow(label: 'Price', value: price.isNotEmpty ? 'â‚µ$price' : 'â€”'),
+              SetupInfoRow(label: 'Stock', value: stock.isNotEmpty ? stock : 'â€”'),
             ],
           ),
         ),
@@ -791,7 +791,7 @@ class _ReviewStep extends StatelessWidget {
   }
 }
 
-// ─── Wizard Nav Bar ──────────────────────────────────────────────────────────
+// â”€â”€â”€ Wizard Nav Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _WizardNavBar extends StatelessWidget {
   final int currentStep;
@@ -819,7 +819,7 @@ class _WizardNavBar extends StatelessWidget {
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.06),
+            color: Colors.black.withValues(alpha: 0.06),
             blurRadius: 10,
             offset: const Offset(0, -2),
           ),
@@ -865,7 +865,7 @@ class _WizardNavBar extends StatelessWidget {
   }
 }
 
-// ─── Shared Helpers ──────────────────────────────────────────────────────────
+// â”€â”€â”€ Shared Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _SwitchTile extends StatelessWidget {
   final String title;

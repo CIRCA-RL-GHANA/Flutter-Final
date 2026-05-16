@@ -1,11 +1,11 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// GenieFullScreenLauncher – Modal + Full-Screen Module Navigation
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// GenieFullScreenLauncher â€“ Modal + Full-Screen Module Navigation
 ///
 /// When an intent sets requiresFullScreen=true Genie can:
 ///   1. Push the module's named route (full-screen mode).
 ///   2. Show a bottom-sheet overlay for semi-immersive depth.
 /// Also renders the '+' expand menu that lists all accessible modules.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import '../../core/routes/app_routes.dart';
@@ -73,18 +73,18 @@ class _ModuleMenuSheet extends StatelessWidget {
   const _ModuleMenuSheet({required this.role});
 
   static const _allModules = [
-    (GenieModule.goPage, 'GO PAGE', '💰', Color(0xFFFFD700)),
-    (GenieModule.market, 'MARKET', '🛍️', Color(0xFF2563EB)),
-    (GenieModule.eplay, 'e-PLAY', '🎵', Color(0xFF7C3AED)),
-    (GenieModule.community, 'COMMUNITY', '🌍', Color(0xFF0891B2)),
-    (GenieModule.myUpdates, 'MY UPDATES', '📰', Color(0xFF8B5CF6)),
-    (GenieModule.setupDashboard, 'SETUP DASHBOARD', '⚙️', Color(0xFF6366F1)),
-    (GenieModule.alerts, 'ALERTS', '🔔', Color(0xFFEF4444)),
-    (GenieModule.live, 'LIVE', '📡', Color(0xFF10B981)),
-    (GenieModule.qualChat, 'qualChat', '💬', Color(0xFF06B6D4)),
-    (GenieModule.april, 'APRIL', '✨', Color(0xFFF59E0B)),
-    (GenieModule.userDetails, 'USER DETAILS', '👤', Color(0xFF059669)),
-    (GenieModule.utility, 'UTILITY', '🔧', Color(0xFF6B7280)),
+    (GenieModule.goPage, 'GO PAGE', 'ðŸ’°', Color(0xFFFFD700)),
+    (GenieModule.market, 'MARKET', 'ðŸ›ï¸', Color(0xFF2563EB)),
+    (GenieModule.eplay, 'e-PLAY', 'ðŸŽµ', Color(0xFF7C3AED)),
+    (GenieModule.community, 'COMMUNITY', 'ðŸŒ', Color(0xFF0891B2)),
+    (GenieModule.myUpdates, 'MY UPDATES', 'ðŸ“°', Color(0xFF8B5CF6)),
+    (GenieModule.setupDashboard, 'SETUP DASHBOARD', 'âš™ï¸', Color(0xFF6366F1)),
+    (GenieModule.alerts, 'ALERTS', 'ðŸ””', Color(0xFFEF4444)),
+    (GenieModule.live, 'LIVE', 'ðŸ“¡', Color(0xFF10B981)),
+    (GenieModule.qualChat, 'qualChat', 'ðŸ’¬', Color(0xFF06B6D4)),
+    (GenieModule.april, 'APRIL', 'âœ¨', Color(0xFFF59E0B)),
+    (GenieModule.userDetails, 'USER DETAILS', 'ðŸ‘¤', Color(0xFF059669)),
+    (GenieModule.utility, 'UTILITY', 'ðŸ”§', Color(0xFF6B7280)),
   ];
 
   @override
@@ -150,7 +150,7 @@ class _ModuleMenuSheet extends StatelessWidget {
             itemBuilder: (context, index) {
               if (index == accessible.length) {
                 return _ModuleTile(
-                  emoji: '🗂️',
+                  emoji: 'ðŸ—‚ï¸',
                   label: 'Classic\nDashboard',
                   color: AppColors.textSecondary,
                   onTap: () {
@@ -217,9 +217,9 @@ class _ModuleTileState extends State<_ModuleTile> {
           duration: const Duration(milliseconds: 80),
           child: Container(
             decoration: BoxDecoration(
-              color: widget.color.withOpacity(0.07),
+              color: widget.color.withValues(alpha: 0.07),
               borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: widget.color.withOpacity(0.2)),
+              border: Border.all(color: widget.color.withValues(alpha: 0.2)),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

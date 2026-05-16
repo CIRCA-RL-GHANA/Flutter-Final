@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SCREEN 1 — Main Updates Feed
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SCREEN 1 â€” Main Updates Feed
 /// The primary social feed with filter bar, update cards, compose FAB,
 /// notification badge, and infinite-scroll-style list.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -51,7 +51,7 @@ class _Body extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: kUpdatesColor,
-                boxShadow: [BoxShadow(color: kUpdatesColor.withOpacity(0.3), blurRadius: 4)],
+                boxShadow: [BoxShadow(color: kUpdatesColor.withValues(alpha: 0.3), blurRadius: 4)],
               ),
             ),
           ],
@@ -117,16 +117,16 @@ class _Body extends StatelessWidget {
                   margin: const EdgeInsets.fromLTRB(14, 8, 14, 0),
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
                   decoration: BoxDecoration(
-                    color: kUpdatesColor.withOpacity(0.07),
+                    color: kUpdatesColor.withValues(alpha: 0.07),
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: kUpdatesColor.withOpacity(0.18)),
+                    border: Border.all(color: kUpdatesColor.withValues(alpha: 0.18)),
                   ),
                   child: Row(
                     children: [
                       Icon(Icons.auto_awesome, size: 14, color: kUpdatesColor),
                       const SizedBox(width: 6),
                       Text(
-                        'AI — Personalised feed order',
+                        'AI â€” Personalised feed order',
                         style: TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.w600,

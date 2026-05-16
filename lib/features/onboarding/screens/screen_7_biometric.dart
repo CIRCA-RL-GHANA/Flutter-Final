@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/constants/app_strings.dart';
@@ -11,7 +11,7 @@ import '../widgets/buttons.dart';
 import '../widgets/onboarding_header.dart';
 
 
-// OS palette � mirrors splash / welcome
+// OS palette ï¿½ mirrors splash / welcome
 const Color _kBg        = Color(0xFF08080F);
 const Color _kSurface   = Color(0xFF0E0E1A);
 const Color _kBorder    = Color(0xFF1C1C2E);
@@ -174,12 +174,12 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
                 height: 140,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: const Color(0xFF22BDD8).withOpacity(
+                  color: const Color(0xFF22BDD8).withValues(alpha: 
                     0.08 + 0.05 * _animController.value,
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: const Color(0xFF22BDD8).withOpacity(
+                      color: const Color(0xFF22BDD8).withValues(alpha: 
                         0.1 + 0.1 * _animController.value,
                       ),
                       blurRadius: 20 + 10 * _animController.value,
@@ -348,7 +348,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
             height: 100,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: const Color(0xFF22BDD8).withOpacity(0.1),
+              color: const Color(0xFF22BDD8).withValues(alpha: 0.1),
             ),
             child: const Icon(
               Icons.pin_outlined,
@@ -476,7 +476,7 @@ class _BenefitRow extends StatelessWidget {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              color: const Color(0xFF10B981).withOpacity(0.1),
+              color: const Color(0xFF10B981).withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(icon, size: 20, color: const Color(0xFF10B981)),

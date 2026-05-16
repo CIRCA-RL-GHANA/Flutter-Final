@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// LIVE MODULE — Screen 13: Delivery Verification Flow
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// LIVE MODULE â€” Screen 13: Delivery Verification Flow
 /// Multi-method verification: PIN entry, photo capture,
 /// signature, biometric, proof of delivery, and confirmation
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -128,7 +128,7 @@ class _LiveDeliveryVerificationScreenState extends State<LiveDeliveryVerificatio
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
             decoration: BoxDecoration(
               color: Colors.white,
-              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 8, offset: const Offset(0, -2))],
+              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 8, offset: const Offset(0, -2))],
             ),
             child: Row(
               children: [
@@ -157,7 +157,7 @@ class _LiveDeliveryVerificationScreenState extends State<LiveDeliveryVerificatio
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     ),
                     child: Text(
-                      _step == 0 ? 'NEXT: TAKE PHOTO' : _step == 1 ? 'NEXT: SIGNATURE' : '✅ COMPLETE DELIVERY',
+                      _step == 0 ? 'NEXT: TAKE PHOTO' : _step == 1 ? 'NEXT: SIGNATURE' : 'âœ… COMPLETE DELIVERY',
                       style: const TextStyle(fontWeight: FontWeight.w700),
                     ),
                   ),
@@ -203,7 +203,7 @@ class _PinStep extends StatelessWidget {
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: verified ? const Color(0xFF10B981).withOpacity(0.1) : kLiveColor.withOpacity(0.1),
+                  color: verified ? const Color(0xFF10B981).withValues(alpha: 0.1) : kLiveColor.withValues(alpha: 0.1),
                 ),
                 child: Icon(
                   verified ? Icons.check_circle : Icons.dialpad,
@@ -213,7 +213,7 @@ class _PinStep extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               Text(
-                verified ? 'PIN VERIFIED ✅' : 'ENTER CUSTOMER PIN',
+                verified ? 'PIN VERIFIED âœ…' : 'ENTER CUSTOMER PIN',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: verified ? const Color(0xFF10B981) : AppColors.textPrimary),
               ),
               const SizedBox(height: 4),
@@ -230,7 +230,7 @@ class _PinStep extends StatelessWidget {
             maxLength: 4,
             style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w800, letterSpacing: 16),
             decoration: InputDecoration(
-              hintText: '• • • •',
+              hintText: 'â€¢ â€¢ â€¢ â€¢',
               counterText: '',
               filled: true,
               fillColor: const Color(0xFF11131C),
@@ -271,7 +271,7 @@ class _PhotoStep extends StatelessWidget {
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: taken ? const Color(0xFF10B981).withOpacity(0.1) : const Color(0xFF3B82F6).withOpacity(0.1),
+                  color: taken ? const Color(0xFF10B981).withValues(alpha: 0.1) : const Color(0xFF3B82F6).withValues(alpha: 0.1),
                 ),
                 child: Icon(
                   taken ? Icons.check_circle : Icons.camera_alt,
@@ -281,7 +281,7 @@ class _PhotoStep extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               Text(
-                taken ? 'PHOTO CAPTURED ✅' : 'PROOF OF DELIVERY PHOTO',
+                taken ? 'PHOTO CAPTURED âœ…' : 'PROOF OF DELIVERY PHOTO',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: taken ? const Color(0xFF10B981) : AppColors.textPrimary),
               ),
               const SizedBox(height: 4),
@@ -351,7 +351,7 @@ class _SignatureStep extends StatelessWidget {
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: collected ? const Color(0xFF10B981).withOpacity(0.1) : const Color(0xFF8B5CF6).withOpacity(0.1),
+                  color: collected ? const Color(0xFF10B981).withValues(alpha: 0.1) : const Color(0xFF8B5CF6).withValues(alpha: 0.1),
                 ),
                 child: Icon(
                   collected ? Icons.check_circle : Icons.edit,
@@ -361,7 +361,7 @@ class _SignatureStep extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               Text(
-                collected ? 'SIGNATURE COLLECTED ✅' : 'DIGITAL SIGNATURE',
+                collected ? 'SIGNATURE COLLECTED âœ…' : 'DIGITAL SIGNATURE',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: collected ? const Color(0xFF10B981) : AppColors.textPrimary),
               ),
               const SizedBox(height: 4),
@@ -431,11 +431,11 @@ class _CompletionView extends StatelessWidget {
             children: [
               Container(
                 padding: const EdgeInsets.all(24),
-                decoration: BoxDecoration(shape: BoxShape.circle, color: const Color(0xFF10B981).withOpacity(0.1)),
+                decoration: BoxDecoration(shape: BoxShape.circle, color: const Color(0xFF10B981).withValues(alpha: 0.1)),
                 child: const Icon(Icons.celebration, size: 64, color: Color(0xFF10B981)),
               ),
               const SizedBox(height: 20),
-              const Text('🎉 DELIVERY VERIFIED!', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
+              const Text('ðŸŽ‰ DELIVERY VERIFIED!', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
               const SizedBox(height: 8),
               Text('Package ${package.id} delivered successfully', style: TextStyle(fontSize: 14, color: AppColors.textSecondary)),
               const SizedBox(height: 4),

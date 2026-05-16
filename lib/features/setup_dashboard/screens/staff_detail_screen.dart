@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SD1.5-DETAIL: STAFF DETAIL — 4-Tab Deep View
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD1.5-DETAIL: STAFF DETAIL â€” 4-Tab Deep View
 /// Tabs: Overview, Schedule, Tasks, Performance
 /// RBAC: Owner/Admin(fullAccess), BM(branchScoped), Monitor(viewOnly)
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -47,7 +47,7 @@ class _StaffDetailScreenState extends State<StaffDetailScreen> {
           appBar: SetupAppBar(
             title: staff.name,
             actions: [
-              // Edit role action — gated by OTP for Branch Manager
+              // Edit role action â€” gated by OTP for Branch Manager
               SetupActionGuard(
                 cardId: 'staff',
                 child: _RoleChangeButton(
@@ -69,7 +69,7 @@ class _StaffDetailScreenState extends State<StaffDetailScreen> {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kSetupColor.withOpacity(0.07),
+                    color: kSetupColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -131,7 +131,7 @@ class _StaffHeader extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 12, offset: const Offset(0, 4))],
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 12, offset: const Offset(0, 4))],
       ),
       child: Row(
         children: [
@@ -139,7 +139,7 @@ class _StaffHeader extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 28,
-                backgroundColor: kSetupColor.withOpacity(0.1),
+                backgroundColor: kSetupColor.withValues(alpha: 0.1),
                 child: Text(staff.name[0], style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w700, color: kSetupColor)),
               ),
               Positioned(
@@ -163,7 +163,7 @@ class _StaffHeader extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(staff.name, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
-                Text('${staff.role} · ${staff.department}', style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                Text('${staff.role} Â· ${staff.department}', style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                 const SizedBox(height: 4),
                 if (staff.branch?.isNotEmpty ?? false)
                   Text(staff.branch!, style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
@@ -265,7 +265,7 @@ class _ScheduleTab extends StatelessWidget {
                         child: Container(
                           height: 28,
                           decoration: BoxDecoration(
-                            color: isWeekend ? Colors.grey.shade100 : kSetupColor.withOpacity(0.08),
+                            color: isWeekend ? Colors.grey.shade100 : kSetupColor.withValues(alpha: 0.08),
                             borderRadius: BorderRadius.circular(6),
                           ),
                           alignment: Alignment.center,
@@ -368,7 +368,7 @@ class _SampleTask extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 8, offset: const Offset(0, 2))],
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 8, offset: const Offset(0, 2))],
       ),
       child: Row(
         children: [
@@ -470,7 +470,7 @@ class _MetricBar extends StatelessWidget {
   }
 }
 
-// ─── Role Change Button ───────────────────────────────────────────────────────
+// â”€â”€â”€ Role Change Button â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 /// Renders "Change Role" icon in the staff detail app bar.
 /// For Branch Managers, wraps in [SetupOtpGate] requiring Admin OTP.
@@ -514,7 +514,7 @@ class _RoleChangeButton extends StatelessWidget {
   }
 }
 
-// ─── Role Picker Sheet ────────────────────────────────────────────────────────
+// â”€â”€â”€ Role Picker Sheet â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _RolePickerSheet extends StatelessWidget {
   const _RolePickerSheet({required this.staff});
@@ -549,7 +549,7 @@ class _RolePickerSheet extends StatelessWidget {
           (role) => ListTile(
             leading: CircleAvatar(
               radius: 16,
-              backgroundColor: RoleColors.forRole(role).withOpacity(0.15),
+              backgroundColor: RoleColors.forRole(role).withValues(alpha: 0.15),
               child: Icon(Icons.person, size: 16, color: RoleColors.forRole(role)),
             ),
             title: Text(

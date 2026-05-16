@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../widgets/updates_widgets.dart';
@@ -64,7 +64,7 @@ class _UpdatesSocialFeedScreenState extends State<UpdatesSocialFeedScreen> {
             builder: (context, ai, _) {
               if (ai.insights.isEmpty) return const SizedBox.shrink();
               return Container(
-                color: kUpdatesColor.withOpacity(0.07),
+                color: kUpdatesColor.withValues(alpha: 0.07),
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                 child: Row(children: [
                   const Icon(Icons.auto_awesome, size: 14, color: kUpdatesColor),

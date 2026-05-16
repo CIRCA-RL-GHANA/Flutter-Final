@@ -1,4 +1,4 @@
-/// qualChat Screen 12 — Action Center
+﻿/// qualChat Screen 12 â€” Action Center
 /// Task manager: priority sections, AI suggestions, profile completeness, analytics
 
 import 'package:flutter/material.dart';
@@ -49,7 +49,7 @@ class QualChatActionCenterScreen extends StatelessWidget {
                     margin: const EdgeInsets.only(bottom: 12),
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     decoration: BoxDecoration(
-                      color: kChatColor.withOpacity(0.07),
+                      color: kChatColor.withValues(alpha: 0.07),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Row(
@@ -70,7 +70,7 @@ class QualChatActionCenterScreen extends StatelessWidget {
               ),
               // Profile completeness bar
               QualChatSectionCard(
-                title: '🎯 Profile Completeness',
+                title: 'ðŸŽ¯ Profile Completeness',
                 trailing: '$completeness%',
                 child: Column(
                   children: [
@@ -92,7 +92,7 @@ class QualChatActionCenterScreen extends StatelessWidget {
                     const SizedBox(height: 8),
                     Text(
                       completeness >= 90
-                          ? 'Excellent! Your profile is nearly complete 🌟'
+                          ? 'Excellent! Your profile is nearly complete ðŸŒŸ'
                           : completeness >= 70
                               ? 'Good progress! A few more items to go'
                               : 'Complete your profile to get better results',
@@ -104,37 +104,37 @@ class QualChatActionCenterScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // ──── ACT NOW ────
+              // â”€â”€â”€â”€ ACT NOW â”€â”€â”€â”€
               if (actNow.isNotEmpty) ...[
                 _SectionLabel(
-                    title: '🔥 ACT NOW',
+                    title: 'ðŸ”¥ ACT NOW',
                     count: actNow.length,
                     color: const Color(0xFFEF4444)),
                 ...actNow.map((task) => _TaskCard(task: task)),
                 const SizedBox(height: 16),
               ],
 
-              // ──── CONSIDER LATER ────
+              // â”€â”€â”€â”€ CONSIDER LATER â”€â”€â”€â”€
               if (considerLater.isNotEmpty) ...[
                 _SectionLabel(
-                    title: '💡 CONSIDER LATER',
+                    title: 'ðŸ’¡ CONSIDER LATER',
                     count: considerLater.length,
                     color: const Color(0xFFF59E0B)),
                 ...considerLater.map((task) => _TaskCard(task: task)),
                 const SizedBox(height: 16),
               ],
 
-              // ──── AI SUGGESTIONS ────
+              // â”€â”€â”€â”€ AI SUGGESTIONS â”€â”€â”€â”€
               if (suggestions.isNotEmpty) ...[
                 const _SectionLabel(
-                    title: '🤖 AI SUGGESTIONS', count: 0, color: kChatColor),
+                    title: 'ðŸ¤– AI SUGGESTIONS', count: 0, color: kChatColor),
                 ...suggestions.map((s) => _AISuggestionCard(suggestion: s)),
                 const SizedBox(height: 16),
               ],
 
               // Quick analytics
               QualChatSectionCard(
-                title: '📊 Task Analytics',
+                title: 'ðŸ“Š Task Analytics',
                 child: Row(
                   children: [
                     _MiniStat(
@@ -186,28 +186,28 @@ class QualChatActionCenterScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            const Text('📊 Full Task Analytics',
+            const Text('ðŸ“Š Full Task Analytics',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
             const SizedBox(height: 20),
             _AnalyticsRow(
-                label: '✅ Completed',
+                label: 'âœ… Completed',
                 value: '${analytics.completedThisWeek}',
                 color: const Color(0xFF10B981)),
             _AnalyticsRow(
-                label: '📋 Total',
+                label: 'ðŸ“‹ Total',
                 value: '${analytics.totalThisWeek}',
                 color: kChatColor),
             _AnalyticsRow(
-                label: '📊 Most Common',
+                label: 'ðŸ“Š Most Common',
                 value: analytics.mostCommonTask,
                 color: const Color(0xFFF59E0B)),
             _AnalyticsRow(
-                label: '📅 Top Day',
+                label: 'ðŸ“… Top Day',
                 value: analytics.mostProductiveDay,
                 color: const Color(0xFFEF4444)),
             const Divider(height: 24),
             _AnalyticsRow(
-                label: '⏱️ Avg Completion',
+                label: 'â±ï¸ Avg Completion',
                 value: '${analytics.avgCompletionDays} days',
                 color: const Color(0xFF6B7280)),
             const SizedBox(height: 16),
@@ -244,7 +244,7 @@ class _SectionLabel extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               decoration: BoxDecoration(
-                  color: color.withOpacity(0.15),
+                  color: color.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(8)),
               child: Text('$count',
                   style: TextStyle(
@@ -276,10 +276,10 @@ class _TaskCard extends StatelessWidget {
       TaskType.social: Icons.people,
     };
     final statusIcons = {
-      TaskStatus.actNow: '🔥',
-      TaskStatus.considerLater: '💡',
-      TaskStatus.completed: '✅',
-      TaskStatus.dismissed: '❌',
+      TaskStatus.actNow: 'ðŸ”¥',
+      TaskStatus.considerLater: 'ðŸ’¡',
+      TaskStatus.completed: 'âœ…',
+      TaskStatus.dismissed: 'âŒ',
     };
 
     return Container(
@@ -293,7 +293,7 @@ class _TaskCard extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-              color: Colors.black.withOpacity(0.03),
+              color: Colors.black.withValues(alpha: 0.03),
               blurRadius: 8,
               offset: const Offset(0, 2))
         ],
@@ -316,7 +316,7 @@ class _TaskCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  statusIcons[task.status] ?? '⏳',
+                  statusIcons[task.status] ?? 'â³',
                   style: const TextStyle(fontSize: 16),
                 ),
               ],
@@ -336,7 +336,7 @@ class _TaskCard extends StatelessWidget {
                 const Spacer(),
                 if (task.dueDate != null)
                   Text(
-                    '📅 ${task.dueDate!.day}/${task.dueDate!.month}',
+                    'ðŸ“… ${task.dueDate!.day}/${task.dueDate!.month}',
                     style: TextStyle(
                       fontSize: 11,
                       color: task.dueDate!.isBefore(DateTime.now())
@@ -387,7 +387,7 @@ class _TaskAction extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         decoration: BoxDecoration(
-          color: color.withOpacity(0.1),
+          color: color.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Text(label,
@@ -409,12 +409,12 @@ class _AISuggestionCard extends StatelessWidget {
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [kChatColor.withOpacity(0.05), Colors.white],
+          colors: [kChatColor.withValues(alpha: 0.05), Colors.white],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: kChatColor.withOpacity(0.2)),
+        border: Border.all(color: kChatColor.withValues(alpha: 0.2)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

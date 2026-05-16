@@ -1,9 +1,9 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SD2.1: AUDIT LOG — Activity & Compliance Tracking
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD2.1: AUDIT LOG â€” Activity & Compliance Tracking
 /// Filterable audit trail, action types, outcomes, user tracking
 /// RBAC: Owner(personal), Admin(full), BM(branch), Monitor/BrMon(view),
 ///        RO/BRO(view)
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -43,7 +43,7 @@ class AuditScreen extends StatelessWidget {
                   onExport: () {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
-                        content: Text('Exporting audit log…'),
+                        content: Text('Exporting audit logâ€¦'),
                         behavior: SnackBarBehavior.floating,
                       ),
                     );
@@ -60,7 +60,7 @@ class AuditScreen extends StatelessWidget {
               Expanded(
                 child: CustomScrollView(
             slivers: [
-              // ─── KPI Summary ──────────────────────────────
+              // â”€â”€â”€ KPI Summary â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -78,7 +78,7 @@ class AuditScreen extends StatelessWidget {
                         child: KPIBadge(
                           label: 'Success Rate',
                           value: entries.isEmpty
-                              ? '—'
+                              ? 'â€”'
                               : '${(entries.where((e) => e.outcome == AuditOutcome.success).length * 100 / entries.length).round()}%',
                           icon: Icons.check_circle,
                           color: AppColors.success,
@@ -100,7 +100,7 @@ class AuditScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Filter Chips ─────────────────────────────
+              // â”€â”€â”€ Filter Chips â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.only(top: 12),
@@ -115,7 +115,7 @@ class AuditScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Action Type Filter ───────────────────────
+              // â”€â”€â”€ Action Type Filter â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
@@ -140,7 +140,7 @@ class AuditScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Anomaly Alert ────────────────────────────
+              // â”€â”€â”€ Anomaly Alert â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               if (entries.where((e) => e.outcome == AuditOutcome.suspicious).isNotEmpty)
                 SliverToBoxAdapter(
                   child: Padding(
@@ -148,16 +148,16 @@ class AuditScreen extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: AppColors.warning.withOpacity(0.08),
+                        color: AppColors.warning.withValues(alpha: 0.08),
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: AppColors.warning.withOpacity(0.3)),
+                        border: Border.all(color: AppColors.warning.withValues(alpha: 0.3)),
                       ),
                       child: Row(
                         children: [
                           Container(
                             padding: const EdgeInsets.all(6),
                             decoration: BoxDecoration(
-                              color: AppColors.warning.withOpacity(0.15),
+                              color: AppColors.warning.withValues(alpha: 0.15),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: const Icon(Icons.shield, size: 18, color: AppColors.warning),
@@ -172,7 +172,7 @@ class AuditScreen extends StatelessWidget {
                                   style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: AppColors.warning),
                                 ),
                                 Text(
-                                  '${entries.where((e) => e.outcome == AuditOutcome.suspicious).length} suspicious activities flagged — review recommended',
+                                  '${entries.where((e) => e.outcome == AuditOutcome.suspicious).length} suspicious activities flagged â€” review recommended',
                                   style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
                                 ),
                               ],
@@ -185,7 +185,7 @@ class AuditScreen extends StatelessWidget {
                   ),
                 ),
 
-              // ─── Audit List ───────────────────────────────
+              // â”€â”€â”€ Audit List â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               if (entries.isEmpty)
                 const SliverFillRemaining(
                   child: SetupEmptyState(
@@ -195,7 +195,7 @@ class AuditScreen extends StatelessWidget {
                   ),
                 )
               else
-              // ─── AI Insights ─────────────────────────────────────────
+              // â”€â”€â”€ AI Insights â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Consumer<AIInsightsNotifier>(
                   builder: (context, ai, _) {
@@ -204,7 +204,7 @@ class AuditScreen extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: kSetupColor.withOpacity(0.07),
+                          color: kSetupColor.withValues(alpha: 0.07),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -260,7 +260,7 @@ class AuditScreen extends StatelessWidget {
   }
 }
 
-// ─── Audit Entry Card ────────────────────────────────────────────────────────
+// â”€â”€â”€ Audit Entry Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _AuditEntryCard extends StatelessWidget {
   final AuditEntry entry;
@@ -268,7 +268,7 @@ class _AuditEntryCard extends StatelessWidget {
   const _AuditEntryCard({required this.entry, this.isRedacted = false});
 
   // PII masking helpers
-  String get _displayUser => isRedacted ? '● ● ● ● ●' : entry.userName;
+  String get _displayUser => isRedacted ? 'â— â— â— â— â—' : entry.userName;
   String get _displayRole => isRedacted ? 'Redacted' : entry.userRole;
   String? get _displayIp => isRedacted ? null : entry.ipAddress;
   String? get _displayDevice => isRedacted ? null : entry.deviceInfo;
@@ -282,13 +282,13 @@ class _AuditEntryCard extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(14),
         border: entry.outcome == AuditOutcome.suspicious
-            ? Border.all(color: AppColors.warning.withOpacity(0.3))
+            ? Border.all(color: AppColors.warning.withValues(alpha: 0.3))
             : entry.outcome == AuditOutcome.failure
-                ? Border.all(color: AppColors.error.withOpacity(0.3))
+                ? Border.all(color: AppColors.error.withValues(alpha: 0.3))
                 : null,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -303,7 +303,7 @@ class _AuditEntryCard extends StatelessWidget {
                 width: 36,
                 height: 36,
                 decoration: BoxDecoration(
-                  color: _actionColor(entry.action).withOpacity(0.1),
+                  color: _actionColor(entry.action).withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Icon(
@@ -326,7 +326,7 @@ class _AuditEntryCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '${_displayUser} · ${_displayRole}',
+                      '${_displayUser} Â· ${_displayRole}',
                       style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                     ),
                   ],
@@ -426,7 +426,7 @@ class _AuditEntryCard extends StatelessWidget {
   }
 }
 
-// ─── Action Type Chip ────────────────────────────────────────────────────────
+// â”€â”€â”€ Action Type Chip â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _ActionTypeChip extends StatelessWidget {
   final String label;
@@ -447,10 +447,10 @@ class _ActionTypeChip extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
-        color: isSelected ? chipColor.withOpacity(0.12) : Colors.white,
+        color: isSelected ? chipColor.withValues(alpha: 0.12) : Colors.white,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: isSelected ? chipColor.withOpacity(0.4) : AppColors.inputBorder,
+          color: isSelected ? chipColor.withValues(alpha: 0.4) : AppColors.inputBorder,
           width: 1,
         ),
       ),

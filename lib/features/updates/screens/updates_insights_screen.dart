@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SCREEN 12 — Update Insights (Business Roles)
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SCREEN 12 â€” Update Insights (Business Roles)
 /// Reach, impressions, engagement rate, time-based analytics, AI insights,
 /// audience demographics, content performance, ROI metrics.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -53,7 +53,7 @@ class _BodyState extends State<_Body> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     decoration: BoxDecoration(
-                      color: kUpdatesColor.withOpacity(0.08),
+                      color: kUpdatesColor.withValues(alpha: 0.08),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Row(
@@ -90,7 +90,7 @@ class _BodyState extends State<_Body> {
                   builder: (context, ai, _) {
                     if (ai.insights.isEmpty) return const SizedBox.shrink();
                     return Container(
-                      color: kUpdatesColor.withOpacity(0.07),
+                      color: kUpdatesColor.withValues(alpha: 0.07),
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                       child: Row(children: [
                         const Icon(Icons.auto_awesome, size: 14, color: kUpdatesColor),
@@ -121,7 +121,7 @@ class _BodyState extends State<_Body> {
                   child: Container(
                     height: 180,
                     decoration: BoxDecoration(
-                      color: const Color(0xFF3B82F6).withOpacity(0.04),
+                      color: const Color(0xFF3B82F6).withValues(alpha: 0.04),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: CustomPaint(
@@ -177,9 +177,9 @@ class _BodyState extends State<_Body> {
                       margin: const EdgeInsets.only(bottom: 8),
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        color: kUpdatesColor.withOpacity(0.04),
+                        color: kUpdatesColor.withValues(alpha: 0.04),
                         borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: kUpdatesColor.withOpacity(0.12)),
+                        border: Border.all(color: kUpdatesColor.withValues(alpha: 0.12)),
                       ),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -211,7 +211,7 @@ class _BodyState extends State<_Body> {
                           Container(
                             width: 22, height: 22,
                             decoration: BoxDecoration(
-                              color: const Color(0xFF10B981).withOpacity(0.12),
+                              color: const Color(0xFF10B981).withValues(alpha: 0.12),
                               shape: BoxShape.circle,
                             ),
                             child: Center(
@@ -261,7 +261,7 @@ class _BodyState extends State<_Body> {
       };
 }
 
-// ─── Overview Metrics ───────────────────────────────────────────────────────
+// â”€â”€â”€ Overview Metrics â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _OverviewMetrics extends StatelessWidget {
   final UpdateInsight insight;
@@ -294,7 +294,7 @@ class _MetricCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 6)],
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 6)],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -306,7 +306,7 @@ class _MetricCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
                 decoration: BoxDecoration(
-                  color: AppColors.success.withOpacity(0.08),
+                  color: AppColors.success.withValues(alpha: 0.08),
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: Text(change, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: AppColors.success)),
@@ -322,7 +322,7 @@ class _MetricCard extends StatelessWidget {
   }
 }
 
-// ─── Engagement Rate Card ───────────────────────────────────────────────────
+// â”€â”€â”€ Engagement Rate Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _EngagementRateCard extends StatelessWidget {
   final UpdateInsight insight;
@@ -334,12 +334,12 @@ class _EngagementRateCard extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [kUpdatesColor.withOpacity(0.08), kUpdatesAccent.withOpacity(0.06)],
+          colors: [kUpdatesColor.withValues(alpha: 0.08), kUpdatesAccent.withValues(alpha: 0.06)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: kUpdatesColor.withOpacity(0.15)),
+        border: Border.all(color: kUpdatesColor.withValues(alpha: 0.15)),
       ),
       child: Row(
         children: [
@@ -353,7 +353,7 @@ class _EngagementRateCard extends StatelessWidget {
                   width: 72, height: 72,
                   child: CircularProgressIndicator(
                     value: insight.engagementRate / 100,
-                    backgroundColor: Colors.white.withOpacity(0.4),
+                    backgroundColor: Colors.white.withValues(alpha: 0.4),
                     valueColor: const AlwaysStoppedAnimation(kUpdatesColor),
                     strokeWidth: 6,
                   ),
@@ -387,7 +387,7 @@ class _EngagementRateCard extends StatelessWidget {
   }
 }
 
-// ─── Audience Row ───────────────────────────────────────────────────────────
+// â”€â”€â”€ Audience Row â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _AudienceRow extends StatelessWidget {
   final String label;
@@ -425,7 +425,7 @@ class _AudienceRow extends StatelessWidget {
   }
 }
 
-// ─── Content Type Row ───────────────────────────────────────────────────────
+// â”€â”€â”€ Content Type Row â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _ContentTypeRow extends StatelessWidget {
   final String type;
@@ -463,7 +463,7 @@ class _ContentTypeRow extends StatelessWidget {
   }
 }
 
-// ─── Time Slot ──────────────────────────────────────────────────────────────
+// â”€â”€â”€ Time Slot â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _TimeSlot extends StatelessWidget {
   final String day;
@@ -486,7 +486,7 @@ class _TimeSlot extends StatelessWidget {
           Expanded(child: Text(time, style: const TextStyle(fontSize: 12, color: AppColors.textSecondary))),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-            decoration: BoxDecoration(color: color.withOpacity(0.08), borderRadius: BorderRadius.circular(8)),
+            decoration: BoxDecoration(color: color.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(8)),
             child: Text(engagement, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: color)),
           ),
         ],
@@ -495,18 +495,18 @@ class _TimeSlot extends StatelessWidget {
   }
 }
 
-// ─── Simple Chart Painter ───────────────────────────────────────────────────
+// â”€â”€â”€ Simple Chart Painter â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _ChartPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = kUpdatesColor.withOpacity(0.3)
+      ..color = kUpdatesColor.withValues(alpha: 0.3)
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 
     final fillPaint = Paint()
-      ..color = kUpdatesColor.withOpacity(0.06)
+      ..color = kUpdatesColor.withValues(alpha: 0.06)
       ..style = PaintingStyle.fill;
 
     final points = [

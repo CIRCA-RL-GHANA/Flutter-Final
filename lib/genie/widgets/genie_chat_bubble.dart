@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// GenieChatBubble – Individual Message Bubble in the Conversation Thread
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// GenieChatBubble â€“ Individual Message Bubble in the Conversation Thread
 /// Handles user bubbles (right-aligned) and Genie bubbles (left-aligned).
 /// Supports swipe-to-dismiss and swipe-to-act gestures.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
@@ -81,12 +81,12 @@ class _GenieChatBubbleState extends State<GenieChatBubble>
             return false;
           },
           background: _SwipeBackground(
-            color: AppColors.success.withOpacity(0.15),
+            color: AppColors.success.withValues(alpha: 0.15),
             icon: Icons.check,
             alignment: Alignment.centerLeft,
           ),
           secondaryBackground: _SwipeBackground(
-            color: AppColors.textTertiary.withOpacity(0.15),
+            color: AppColors.textTertiary.withValues(alpha: 0.15),
             icon: Icons.close,
             alignment: Alignment.centerRight,
           ),
@@ -121,7 +121,7 @@ class _GenieChatBubbleState extends State<GenieChatBubble>
   }
 }
 
-// ─── Text Bubble ─────────────────────────────────────────────────────────────
+// â”€â”€â”€ Text Bubble â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _TextBubble extends StatelessWidget {
   final GenieMessage message;
   const _TextBubble({required this.message});
@@ -141,7 +141,7 @@ class _TextBubble extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.06),
+            color: Colors.black.withValues(alpha: 0.06),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -162,7 +162,7 @@ class _TextBubble extends StatelessWidget {
   }
 }
 
-// ─── Card Bubble (wraps inline card) ─────────────────────────────────────────
+// â”€â”€â”€ Card Bubble (wraps inline card) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _CardBubble extends StatelessWidget {
   final GenieMessage message;
   const _CardBubble({required this.message});
@@ -189,7 +189,7 @@ class _CardBubble extends StatelessWidget {
   }
 }
 
-// ─── Genie Avatar ─────────────────────────────────────────────────────────────
+// â”€â”€â”€ Genie Avatar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _GenieAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -205,7 +205,7 @@ class _GenieAvatar extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: AppColors.accent.withOpacity(0.3),
+            color: AppColors.accent.withValues(alpha: 0.3),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -216,7 +216,7 @@ class _GenieAvatar extends StatelessWidget {
   }
 }
 
-// ─── Swipe Background ─────────────────────────────────────────────────────────
+// â”€â”€â”€ Swipe Background â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _SwipeBackground extends StatelessWidget {
   final Color color;
   final IconData icon;

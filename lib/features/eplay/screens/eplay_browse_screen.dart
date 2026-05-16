@@ -1,7 +1,7 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// e-PLAY MODULE — Browse Screen
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// e-PLAY MODULE â€” Browse Screen
 /// Filterable content catalogue by type (music / movie / podcast / ebook / show)
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -80,11 +80,11 @@ class _EPlayBrowseScreenState extends State<EPlayBrowseScreen> {
                   onChanged: (v) => setState(() => _searchQuery = v),
                   style: const TextStyle(color: Colors.white),
                   decoration: InputDecoration(
-                    hintText: 'Search titles, creators…',
+                    hintText: 'Search titles, creatorsâ€¦',
                     hintStyle: const TextStyle(color: Colors.white54),
                     prefixIcon: const Icon(Icons.search, color: Colors.white54),
                     filled: true,
-                    fillColor: Colors.white.withOpacity(0.15),
+                    fillColor: Colors.white.withValues(alpha: 0.15),
                     border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
                     contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 12),
                   ),
@@ -94,15 +94,15 @@ class _EPlayBrowseScreenState extends State<EPlayBrowseScreen> {
           ),
           body: Column(
             children: [
-              // ── AI insight ──────────────────────────────────────────────
+              // â”€â”€ AI insight â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               if (ai.insights.isNotEmpty)
                 Container(
                   margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: kEPlayColor.withOpacity(0.08),
+                    color: kEPlayColor.withValues(alpha: 0.08),
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: kEPlayColor.withOpacity(0.2)),
+                    border: Border.all(color: kEPlayColor.withValues(alpha: 0.2)),
                   ),
                   child: Row(children: [
                     const Icon(Icons.auto_awesome, color: kEPlayColor, size: 16),
@@ -111,7 +111,7 @@ class _EPlayBrowseScreenState extends State<EPlayBrowseScreen> {
                   ]),
                 ),
 
-              // ── Type filter chips ────────────────────────────────────
+              // â”€â”€ Type filter chips â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SizedBox(
                 height: 50,
                 child: ListView.builder(
@@ -147,7 +147,7 @@ class _EPlayBrowseScreenState extends State<EPlayBrowseScreen> {
                 ),
               ),
 
-              // ── Grid ────────────────────────────────────────────────
+              // â”€â”€ Grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               Expanded(
                 child: eplay.isBrowseLoading && items.isEmpty
                     ? const Center(child: CircularProgressIndicator())
@@ -180,7 +180,7 @@ class _EPlayBrowseScreenState extends State<EPlayBrowseScreen> {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(14),
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.06), blurRadius: 8, offset: const Offset(0, 2))],
+          boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.06), blurRadius: 8, offset: const Offset(0, 2))],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

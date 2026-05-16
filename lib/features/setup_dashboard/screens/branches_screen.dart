@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SD1.9: BRANCHES — Multi-Location Management
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD1.9: BRANCHES â€” Multi-Location Management
 /// Branch list, online status, revenue, staff/vehicle counts
 /// RBAC: Admin(full), Monitor(view)
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -81,7 +81,7 @@ class BranchesScreen extends StatelessWidget {
                   child: const SetupSectionTitle(title: 'All Branches', icon: Icons.business),
                 ),
               ),
-              // ─── AI Insights ─────────────────────────────────────────
+              // â”€â”€â”€ AI Insights â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Consumer<AIInsightsNotifier>(
                   builder: (context, ai, _) {
@@ -90,7 +90,7 @@ class BranchesScreen extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: kSetupColor.withOpacity(0.07),
+                          color: kSetupColor.withValues(alpha: 0.07),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -149,7 +149,7 @@ class _BranchCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(14),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -164,7 +164,7 @@ class _BranchCard extends StatelessWidget {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: kSetupColor.withOpacity(0.1),
+                  color: kSetupColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: const Icon(Icons.business, size: 22, color: kSetupColor),
@@ -183,7 +183,7 @@ class _BranchCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '${branch.type} · ${branch.managerName}',
+                      '${branch.type} Â· ${branch.managerName}',
                       style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                     ),
                   ],
@@ -203,7 +203,7 @@ class _BranchCard extends StatelessWidget {
               _BranchStat(label: 'Vehicles', value: '${branch.vehicleCount}', icon: Icons.local_shipping),
               _BranchStat(
                 label: 'Revenue',
-                value: '₵${(branch.monthlyRevenue / 1000).toStringAsFixed(0)}K',
+                value: 'â‚µ${(branch.monthlyRevenue / 1000).toStringAsFixed(0)}K',
                 icon: Icons.attach_money,
               ),
               if (branch.rating > 0)

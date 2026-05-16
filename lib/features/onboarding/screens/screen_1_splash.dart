@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
@@ -8,7 +8,7 @@ import '../../../core/widgets/app_logo.dart';
 import '../providers/onboarding_provider.dart';
 
 /// Screen 1: OS Boot Splash Screen
-/// Communicates scale and authority — genie help as global commerce infrastructure.
+/// Communicates scale and authority â€” genie help as global commerce infrastructure.
 /// Aesthetic: dark system boot, geometric logo mark, sequential init messages,
 /// segmented progress bar. No consumer sparkles.
 class SplashScreen extends StatefulWidget {
@@ -18,10 +18,10 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-// ── OS palette (independent of consumer theme) ───────────────────────────────
+// â”€â”€ OS palette (independent of consumer theme) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const Color _kBg       = Color(0xFF08080F); // near-black with blue tint
 const Color _kGrid     = Color(0xFF0E0E1A); // subtle grid lines
-const Color _kAccent   = Color(0xFF22BDD8); // electric blue — system authority
+const Color _kAccent   = Color(0xFF22BDD8); // electric blue â€” system authority
 const Color _kAccentDim = Color(0xFF1E2A6E);
 
 class _SplashScreenState extends State<SplashScreen>
@@ -145,7 +145,7 @@ class _SplashScreenState extends State<SplashScreen>
         label: AppStrings.splashLoading,
         child: Stack(
           children: [
-            // ── Background: scrolling topology grid ───────────────────────
+            // â”€â”€ Background: scrolling topology grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
             AnimatedBuilder(
               animation: _gridController,
               builder: (_, __) => CustomPaint(
@@ -154,7 +154,7 @@ class _SplashScreenState extends State<SplashScreen>
               ),
             ),
 
-            // ── Main content ──────────────────────────────────────────────
+            // â”€â”€ Main content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
             AnimatedBuilder(
               animation: _bootController,
               builder: (_, __) {
@@ -192,7 +192,7 @@ class _SplashScreenState extends State<SplashScreen>
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w300,
-                              color: Colors.white.withOpacity(0.38),
+                              color: Colors.white.withValues(alpha: 0.38),
                               letterSpacing: 5,
                             ),
                           ),
@@ -203,15 +203,15 @@ class _SplashScreenState extends State<SplashScreen>
                                 horizontal: 10, vertical: 5),
                             decoration: BoxDecoration(
                               border: Border.all(
-                                  color: _kAccent.withOpacity(0.35)),
+                                  color: _kAccent.withValues(alpha: 0.35)),
                               borderRadius: BorderRadius.circular(3),
                             ),
                             child: Text(
-                              'COMMERCE OS  ·  v1.0',
+                              'COMMERCE OS  Â·  v1.0',
                               style: TextStyle(
                                 fontSize: 10,
                                 fontWeight: FontWeight.w500,
-                                color: _kAccent.withOpacity(0.65),
+                                color: _kAccent.withValues(alpha: 0.65),
                                 letterSpacing: 2.5,
                               ),
                             ),
@@ -222,7 +222,7 @@ class _SplashScreenState extends State<SplashScreen>
 
                     const Spacer(flex: 3),
 
-                    // ── Boot footer ───────────────────────────────────────
+                    // â”€â”€ Boot footer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                     Opacity(
                       opacity: _footerOpacity.value,
                       child: Padding(
@@ -237,7 +237,7 @@ class _SplashScreenState extends State<SplashScreen>
                                 _bootLines[_bootLineIndex],
                                 style: TextStyle(
                                   fontSize: 11,
-                                  color: Colors.white.withOpacity(0.30),
+                                  color: Colors.white.withValues(alpha: 0.30),
                                   letterSpacing: 0.3,
                                   fontFamily: 'monospace',
                                 ),
@@ -253,14 +253,14 @@ class _SplashScreenState extends State<SplashScreen>
 
                             const SizedBox(height: 5),
 
-                            // Percentage — right aligned
+                            // Percentage â€” right aligned
                             Align(
                               alignment: Alignment.centerRight,
                               child: Text(
                                 '${(_loadProgress * 100).toInt()}%',
                                 style: TextStyle(
                                   fontSize: 10,
-                                  color: _kAccent.withOpacity(0.45),
+                                  color: _kAccent.withValues(alpha: 0.45),
                                   letterSpacing: 1,
                                 ),
                               ),
@@ -280,7 +280,7 @@ class _SplashScreenState extends State<SplashScreen>
   }
 }
 
-// ─── OS Logo Mark — genie help brand mark ────────────────────────────────────
+// â”€â”€â”€ OS Logo Mark â€” genie help brand mark â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _OsLogoMark extends StatelessWidget {
   const _OsLogoMark();
 
@@ -294,7 +294,7 @@ class _OsLogoMark extends StatelessWidget {
   }
 }
 
-// ─── Segmented progress bar ──────────────────────────────────────────────────
+// â”€â”€â”€ Segmented progress bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _SegmentedBar extends StatelessWidget {
   final double progress;
   final int segments;
@@ -311,7 +311,7 @@ class _SegmentedBar extends StatelessWidget {
             height: 2,
             margin: EdgeInsets.only(right: i < segments - 1 ? 3 : 0),
             decoration: BoxDecoration(
-              color: filled ? _kAccent : _kAccent.withOpacity(0.10),
+              color: filled ? _kAccent : _kAccent.withValues(alpha: 0.10),
               borderRadius: BorderRadius.circular(1),
             ),
           ),
@@ -321,8 +321,8 @@ class _SegmentedBar extends StatelessWidget {
   }
 }
 
-// ─── Background grid painter ─────────────────────────────────────────────────
-// Slow-scrolling topology grid — suggests global infrastructure scale.
+// â”€â”€â”€ Background grid painter â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// Slow-scrolling topology grid â€” suggests global infrastructure scale.
 class _GridPainter extends CustomPainter {
   final double progress;
   const _GridPainter({required this.progress});
@@ -354,7 +354,7 @@ class _GridPainter extends CustomPainter {
     }
 
     // Sparse accent nodes at grid intersections
-    final node = Paint()..color = _kAccent.withOpacity(0.10);
+    final node = Paint()..color = _kAccent.withValues(alpha: 0.10);
     for (int x = 0; x <= cols; x++) {
       for (int y = 0; y <= rows; y++) {
         if ((x + y) % 5 == 0) {

@@ -1,5 +1,5 @@
-/// qualChat Screen 14 — Onboarding Flow
-/// 4-step flow: Welcome & Permissions → Role Config → Profile Setup → Quick Tour
+﻿/// qualChat Screen 14 â€” Onboarding Flow
+/// 4-step flow: Welcome & Permissions â†’ Role Config â†’ Profile Setup â†’ Quick Tour
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +24,7 @@ class QualChatOnboardingScreen extends StatelessWidget {
                   builder: (context, ai, _) {
                     if (ai.insights.isEmpty) return const SizedBox.shrink();
                     return Container(
-                      color: const Color(0xFF06B6D4).withOpacity(0.07),
+                      color: const Color(0xFF06B6D4).withValues(alpha: 0.07),
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                       child: Row(children: [
                         const Icon(Icons.auto_awesome, size: 14, color: Color(0xFF06B6D4)),
@@ -87,7 +87,7 @@ class QualChatOnboardingScreen extends StatelessWidget {
   }
 }
 
-// ──── Step 0: Welcome & Permissions ────
+// â”€â”€â”€â”€ Step 0: Welcome & Permissions â”€â”€â”€â”€
 class _WelcomeStep extends StatelessWidget {
   const _WelcomeStep({super.key});
 
@@ -103,7 +103,7 @@ class _WelcomeStep extends StatelessWidget {
             height: 120,
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [kChatColor.withOpacity(0.1), kChatColorLight],
+                colors: [kChatColor.withValues(alpha: 0.1), kChatColorLight],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -113,7 +113,7 @@ class _WelcomeStep extends StatelessWidget {
           ),
           const SizedBox(height: 32),
           const Text(
-            'Welcome to qualChat! 💬',
+            'Welcome to qualChat! ðŸ’¬',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800, color: Color(0xFF1A1A1A)),
             textAlign: TextAlign.center,
           ),
@@ -167,7 +167,7 @@ class _PermissionItem extends StatelessWidget {
         color: granted ? const Color(0xFFECFDF5) : const Color(0xFFF3F4F6),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: granted ? const Color(0xFF10B981).withOpacity(0.3) : const Color(0xFFE5E7EB),
+          color: granted ? const Color(0xFF10B981).withValues(alpha: 0.3) : const Color(0xFFE5E7EB),
         ),
       ),
       child: Row(
@@ -201,7 +201,7 @@ class _PermissionItem extends StatelessWidget {
   }
 }
 
-// ──── Step 1: Role Configuration ────
+// â”€â”€â”€â”€ Step 1: Role Configuration â”€â”€â”€â”€
 class _RoleConfigStep extends StatelessWidget {
   final QualChatProvider provider;
   const _RoleConfigStep({super.key, required this.provider});
@@ -214,7 +214,7 @@ class _RoleConfigStep extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            'How will you use qualChat? 🎯',
+            'How will you use qualChat? ðŸŽ¯',
             style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: Color(0xFF1A1A1A)),
           ),
           const SizedBox(height: 8),
@@ -227,11 +227,11 @@ class _RoleConfigStep extends StatelessWidget {
           ...ChatUsageType.values.map((type) {
             final isSelected = provider.selectedUsageType == type;
             final configs = {
-              ChatUsageType.socialDating: {'emoji': '💖', 'title': 'Social & Dating', 'desc': 'Connect with new people, find matches, build relationships'},
-              ChatUsageType.professionalNetworking: {'emoji': '💼', 'title': 'Professional Networking', 'desc': 'Business communication, networking'},
-              ChatUsageType.teamCommunications: {'emoji': '👥', 'title': 'Team Communications', 'desc': 'Team collaboration and group messaging'},
-              ChatUsageType.driverConnections: {'emoji': '🚗', 'title': 'Driver Connections', 'desc': 'Connect with drivers and coordinate rides'},
-              ChatUsageType.monitoring: {'emoji': '📊', 'title': 'Monitoring', 'desc': 'Monitor and manage communications'},
+              ChatUsageType.socialDating: {'emoji': 'ðŸ’–', 'title': 'Social & Dating', 'desc': 'Connect with new people, find matches, build relationships'},
+              ChatUsageType.professionalNetworking: {'emoji': 'ðŸ’¼', 'title': 'Professional Networking', 'desc': 'Business communication, networking'},
+              ChatUsageType.teamCommunications: {'emoji': 'ðŸ‘¥', 'title': 'Team Communications', 'desc': 'Team collaboration and group messaging'},
+              ChatUsageType.driverConnections: {'emoji': 'ðŸš—', 'title': 'Driver Connections', 'desc': 'Connect with drivers and coordinate rides'},
+              ChatUsageType.monitoring: {'emoji': 'ðŸ“Š', 'title': 'Monitoring', 'desc': 'Monitor and manage communications'},
             };
             final config = configs[type]!;
 
@@ -241,14 +241,14 @@ class _RoleConfigStep extends StatelessWidget {
                 margin: const EdgeInsets.only(bottom: 16),
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: isSelected ? kChatColor.withOpacity(0.08) : Colors.white,
+                  color: isSelected ? kChatColor.withValues(alpha: 0.08) : Colors.white,
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(
                     color: isSelected ? kChatColor : const Color(0xFFE5E7EB),
                     width: isSelected ? 2 : 1,
                   ),
                   boxShadow: isSelected
-                      ? [BoxShadow(color: kChatColor.withOpacity(0.1), blurRadius: 12)]
+                      ? [BoxShadow(color: kChatColor.withValues(alpha: 0.1), blurRadius: 12)]
                       : null,
                 ),
                 child: Row(
@@ -288,7 +288,7 @@ class _RoleConfigStep extends StatelessWidget {
   }
 }
 
-// ──── Step 2: Profile Setup ────
+// â”€â”€â”€â”€ Step 2: Profile Setup â”€â”€â”€â”€
 class _ProfileSetupStep extends StatelessWidget {
   final QualChatProvider provider;
   const _ProfileSetupStep({super.key, required this.provider});
@@ -301,7 +301,7 @@ class _ProfileSetupStep extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            'Set up your profile ✨',
+            'Set up your profile âœ¨',
             style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: Color(0xFF1A1A1A)),
           ),
           const SizedBox(height: 8),
@@ -320,7 +320,7 @@ class _ProfileSetupStep extends StatelessWidget {
                   height: 100,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: kChatColor.withOpacity(0.1),
+                    color: kChatColor.withValues(alpha: 0.1),
                     border: Border.all(color: kChatColor, width: 3),
                   ),
                   child: const Icon(Icons.person, size: 48, color: kChatColor),
@@ -373,7 +373,7 @@ class _ProfileSetupStep extends StatelessWidget {
 
           // Vibe tags
           const Text(
-            'Select your vibes 🎵',
+            'Select your vibes ðŸŽµ',
             style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
           ),
           const SizedBox(height: 8),
@@ -383,15 +383,15 @@ class _ProfileSetupStep extends StatelessWidget {
             children: VibeTag.values.map((tag) {
               final isSelected = provider.selectedVibeTags.contains(tag);
               final tagEmojis = {
-                VibeTag.adventurous: '🏔️',
-                VibeTag.creative: '🎨',
-                VibeTag.nerdy: '🤓',
-                VibeTag.foodie: '🍕',
-                VibeTag.musical: '🎵',
-                VibeTag.pets: '🐾',
-                VibeTag.travel: '✈️',
-                VibeTag.gaming: '🎮',
-                VibeTag.calm: '😌',
+                VibeTag.adventurous: 'ðŸ”ï¸',
+                VibeTag.creative: 'ðŸŽ¨',
+                VibeTag.nerdy: 'ðŸ¤“',
+                VibeTag.foodie: 'ðŸ•',
+                VibeTag.musical: 'ðŸŽµ',
+                VibeTag.pets: 'ðŸ¾',
+                VibeTag.travel: 'âœˆï¸',
+                VibeTag.gaming: 'ðŸŽ®',
+                VibeTag.calm: 'ðŸ˜Œ',
               };
               return GestureDetector(
                 onTap: () => provider.toggleVibeTag(tag),
@@ -425,11 +425,11 @@ class _ProfileSetupStep extends StatelessWidget {
             decoration: BoxDecoration(
               color: const Color(0xFFF0F9FF),
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: kChatColor.withOpacity(0.2)),
+              border: Border.all(color: kChatColor.withValues(alpha: 0.2)),
             ),
             child: Row(
               children: [
-                Icon(Icons.info_outline, size: 20, color: kChatColor.withOpacity(0.7)),
+                Icon(Icons.info_outline, size: 20, color: kChatColor.withValues(alpha: 0.7)),
                 const SizedBox(width: 10),
                 const Expanded(
                   child: Text(
@@ -446,7 +446,7 @@ class _ProfileSetupStep extends StatelessWidget {
   }
 }
 
-// ──── Step 3: Quick Tour ────
+// â”€â”€â”€â”€ Step 3: Quick Tour â”€â”€â”€â”€
 class _QuickTourStep extends StatelessWidget {
   const _QuickTourStep({super.key});
 
@@ -457,7 +457,7 @@ class _QuickTourStep extends StatelessWidget {
       child: Column(
         children: [
           const Text(
-            'You\'re all set! 🎉',
+            'You\'re all set! ðŸŽ‰',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800, color: Color(0xFF1A1A1A)),
             textAlign: TextAlign.center,
           ),
@@ -510,17 +510,17 @@ class _QuickTourStep extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [kChatColor.withOpacity(0.08), kChatColorLight],
+                colors: [kChatColor.withValues(alpha: 0.08), kChatColorLight],
               ),
               borderRadius: BorderRadius.circular(14),
             ),
             child: const Row(
               children: [
-                Text('💡', style: TextStyle(fontSize: 24)),
+                Text('ðŸ’¡', style: TextStyle(fontSize: 24)),
                 SizedBox(width: 12),
                 Expanded(
                   child: Text(
-                    'Tip: Use the mode toggle on your dashboard to switch between Social 💖 and Professional 💼 modes anytime!',
+                    'Tip: Use the mode toggle on your dashboard to switch between Social ðŸ’– and Professional ðŸ’¼ modes anytime!',
                     style: TextStyle(fontSize: 13, color: Color(0xFF374151)),
                   ),
                 ),
@@ -548,7 +548,7 @@ class _TourFeature extends StatelessWidget {
           width: 48,
           height: 48,
           decoration: BoxDecoration(
-            color: color.withOpacity(0.1),
+            color: color.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Icon(icon, color: color),
@@ -629,7 +629,7 @@ class _StepNavigation extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 14),
               ),
               child: Text(
-                isLast ? 'Get Started 🚀' : 'Continue',
+                isLast ? 'Get Started ðŸš€' : 'Continue',
                 style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
               ),
             ),

@@ -1,7 +1,7 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// MARKET MODULE — Screen 5: Cart & Bundling
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// MARKET MODULE â€” Screen 5: Cart & Bundling
 /// AI bundling suggestions, per-item controls, financial summary, promo
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -69,9 +69,9 @@ class MarketCartScreen extends StatelessWidget {
                         return Container(
                           padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
-                            color: kMarketColor.withOpacity(0.05),
+                            color: kMarketColor.withValues(alpha: 0.05),
                             borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: kMarketColor.withOpacity(0.2)),
+                            border: Border.all(color: kMarketColor.withValues(alpha: 0.2)),
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,7 +89,7 @@ class MarketCartScreen extends StatelessWidget {
                                 runSpacing: 4,
                                 children: ai.recommendations.take(4).map((r) => Chip(
                                   label: Text(r['name'] as String? ?? '', style: const TextStyle(fontSize: 11)),
-                                  backgroundColor: kMarketColor.withOpacity(0.08),
+                                  backgroundColor: kMarketColor.withValues(alpha: 0.08),
                                   side: BorderSide.none,
                                   padding: EdgeInsets.zero,
                                 )).toList(),
@@ -186,7 +186,7 @@ class MarketCartScreen extends StatelessWidget {
                 const SizedBox(height: 2),
                 Text(
                   bundle.description,
-                  style: TextStyle(fontSize: 12, color: Colors.white.withOpacity(0.85)),
+                  style: TextStyle(fontSize: 12, color: Colors.white.withValues(alpha: 0.85)),
                 ),
                 const SizedBox(height: 4),
                 Text(
@@ -334,7 +334,7 @@ class MarketCartScreen extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         color: Colors.white,
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, -2))],
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10, offset: const Offset(0, -2))],
       ),
       child: Row(
         children: [
@@ -440,7 +440,7 @@ class MarketCartScreen extends StatelessWidget {
   }
 }
 
-// ── Cart Item Tile ─────────────────────────────────────────────────
+// â”€â”€ Cart Item Tile â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _CartItemTile extends StatelessWidget {
   final CartItem item;
   final MarketProvider prov;
@@ -543,7 +543,7 @@ class _CartItemTile extends StatelessWidget {
   }
 }
 
-// ── Summary Row ────────────────────────────────────────────────────
+// â”€â”€ Summary Row â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _SummaryRow extends StatelessWidget {
   final String label;
   final String value;

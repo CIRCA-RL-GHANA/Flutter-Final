@@ -1,4 +1,4 @@
-/// qualChat Screen 7 — New Chat (Enhanced)
+﻿/// qualChat Screen 7 â€” New Chat (Enhanced)
 /// Intelligent recipient selection: individual + group creation
 
 import 'package:flutter/material.dart';
@@ -33,7 +33,7 @@ class QualChatNewChatScreen extends StatelessWidget {
                 builder: (context, ai, _) {
                   if (ai.recommendations.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kChatColor.withOpacity(0.07),
+                    color: kChatColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -57,13 +57,13 @@ class QualChatNewChatScreen extends StatelessWidget {
                 child: Row(
                   children: [
                     _TypeChip(
-                      label: '👤 Individual',
+                      label: 'ðŸ‘¤ Individual',
                       isSelected: provider.newChatType == ChatType.individual,
                       onTap: () => provider.setNewChatType(ChatType.individual),
                     ),
                     const SizedBox(width: 8),
                     _TypeChip(
-                      label: '👥 Group',
+                      label: 'ðŸ‘¥ Group',
                       isSelected: provider.newChatType == ChatType.group,
                       onTap: () => provider.setNewChatType(ChatType.group),
                     ),
@@ -121,12 +121,12 @@ class QualChatNewChatScreen extends StatelessWidget {
             child: Row(
               children: RecipientFilter.values.map((f) {
                 final labels = {
-                  RecipientFilter.online: '👤 Online',
-                  RecipientFilter.favorites: '🌟 Favorites',
-                  RecipientFilter.recent: '👥 Recent',
-                  RecipientFilter.department: '🏢 Department',
-                  RecipientFilter.nearby: '📍 Nearby',
-                  RecipientFilter.recommended: '🎯 Recommended',
+                  RecipientFilter.online: 'ðŸ‘¤ Online',
+                  RecipientFilter.favorites: 'ðŸŒŸ Favorites',
+                  RecipientFilter.recent: 'ðŸ‘¥ Recent',
+                  RecipientFilter.department: 'ðŸ¢ Department',
+                  RecipientFilter.nearby: 'ðŸ“ Nearby',
+                  RecipientFilter.recommended: 'ðŸŽ¯ Recommended',
                 };
                 return Padding(
                   padding: const EdgeInsets.only(right: 6),
@@ -135,7 +135,7 @@ class QualChatNewChatScreen extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                       decoration: BoxDecoration(
-                        color: provider.recipientFilter == f ? kChatColor.withOpacity(0.1) : const Color(0xFFF3F4F6),
+                        color: provider.recipientFilter == f ? kChatColor.withValues(alpha: 0.1) : const Color(0xFFF3F4F6),
                         borderRadius: BorderRadius.circular(16),
                         border: provider.recipientFilter == f ? Border.all(color: kChatColor) : null,
                       ),
@@ -180,7 +180,7 @@ class QualChatNewChatScreen extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       if (u.presence == PresenceStatus.online)
-                        const Text('💬', style: TextStyle(fontSize: 14)),
+                        const Text('ðŸ’¬', style: TextStyle(fontSize: 14)),
                       const SizedBox(width: 4),
                       Text(
                         _timeAgo(u.lastSeen),
@@ -236,7 +236,7 @@ class QualChatNewChatScreen extends StatelessWidget {
                   contentPadding: EdgeInsets.zero,
                   leading: CircleAvatar(
                     radius: 18,
-                    backgroundColor: kChatColor.withOpacity(0.1),
+                    backgroundColor: kChatColor.withValues(alpha: 0.1),
                     child: Text(m.name[0], style: const TextStyle(color: kChatColor, fontWeight: FontWeight.w700)),
                   ),
                   title: Text(m.name, style: const TextStyle(fontSize: 14)),
@@ -259,7 +259,7 @@ class QualChatNewChatScreen extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 18,
-                      backgroundColor: kChatColor.withOpacity(0.1),
+                      backgroundColor: kChatColor.withValues(alpha: 0.1),
                       child: Text(u.name[0], style: const TextStyle(color: kChatColor, fontWeight: FontWeight.w700)),
                     ),
                     Positioned(right: 0, bottom: 0, child: PresenceDot(status: u.presence, size: 10)),
@@ -368,9 +368,9 @@ class _SelectedRecipientCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: kChatColor.withOpacity(0.05),
+        color: kChatColor.withValues(alpha: 0.05),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: kChatColor.withOpacity(0.2)),
+        border: Border.all(color: kChatColor.withValues(alpha: 0.2)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -385,7 +385,7 @@ class _SelectedRecipientCard extends StatelessWidget {
               PresenceDot(status: user.presence),
               const SizedBox(width: 6),
               Text(
-                '${user.presence.name[0].toUpperCase()}${user.presence.name.substring(1)} • ${user.role}',
+                '${user.presence.name[0].toUpperCase()}${user.presence.name.substring(1)} â€¢ ${user.role}',
                 style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
               ),
             ],

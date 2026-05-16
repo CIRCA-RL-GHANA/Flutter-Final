@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SD1.5-DETAIL: CONNECTION DETAIL — 4-Tab Deep View
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD1.5-DETAIL: CONNECTION DETAIL â€” 4-Tab Deep View
 /// Tabs: Overview, Transactions, Communication, Notes
 /// RBAC: Admin(full), BM(branch), SO(full), BSO(branch), Monitor(viewOnly)
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -51,7 +51,7 @@ class _ConnectionDetailScreenState extends State<ConnectionDetailScreen> {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kSetupColor.withOpacity(0.07),
+                    color: kSetupColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -94,7 +94,7 @@ class _ConnectionDetailScreenState extends State<ConnectionDetailScreen> {
   }
 }
 
-// ─── Header ──────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _ConnectionHeader extends StatelessWidget {
   final Connection conn;
@@ -114,12 +114,12 @@ class _ConnectionHeader extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            kSetupColor.withOpacity(0.08),
-            kSetupColor.withOpacity(0.02),
+            kSetupColor.withValues(alpha: 0.08),
+            kSetupColor.withValues(alpha: 0.02),
           ],
         ),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: kSetupColor.withOpacity(0.15)),
+        border: Border.all(color: kSetupColor.withValues(alpha: 0.15)),
       ),
       child: Row(
         children: [
@@ -131,7 +131,7 @@ class _ConnectionHeader extends StatelessWidget {
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [kSetupColor, kSetupColor.withOpacity(0.7)],
+                colors: [kSetupColor, kSetupColor.withValues(alpha: 0.7)],
               ),
               borderRadius: BorderRadius.circular(14),
             ),
@@ -168,7 +168,7 @@ class _ConnectionHeader extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                       decoration: BoxDecoration(
-                        color: statusColor.withOpacity(0.1),
+                        color: statusColor.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
@@ -184,7 +184,7 @@ class _ConnectionHeader extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '${conn.type.name} · ${conn.category} · ★ ${conn.rating.toStringAsFixed(1)}',
+                  '${conn.type.name} Â· ${conn.category} Â· â˜… ${conn.rating.toStringAsFixed(1)}',
                   style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
                 ),
                 const SizedBox(height: 2),
@@ -193,7 +193,7 @@ class _ConnectionHeader extends StatelessWidget {
                   'Connected since ${conn.connectedSince!.day}/${conn.connectedSince!.month}/${conn.connectedSince!.year}',
                   style: TextStyle(
                     fontSize: 11,
-                    color: kSetupColor.withOpacity(0.7),
+                    color: kSetupColor.withValues(alpha: 0.7),
                   ),
                 ),
               ],
@@ -205,7 +205,7 @@ class _ConnectionHeader extends StatelessWidget {
   }
 }
 
-// ─── Overview Tab ────────────────────────────────────────────────────────────
+// â”€â”€â”€ Overview Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _OverviewTab extends StatelessWidget {
   final Connection conn;
@@ -230,7 +230,7 @@ class _OverviewTab extends StatelessWidget {
             Expanded(
               child: KPIBadge(
                 label: 'Total Value',
-                value: '₵${conn.totalValue.toStringAsFixed(0)}',
+                value: 'â‚µ${conn.totalValue.toStringAsFixed(0)}',
                 icon: Icons.monetization_on,
                 color: AppColors.success,
               ),
@@ -260,7 +260,7 @@ class _OverviewTab extends StatelessWidget {
               const SetupSectionTitle(title: 'Contact Information', icon: Icons.contact_page),
               SetupInfoRow(label: 'Type', value: conn.type.name),
               SetupInfoRow(label: 'Category', value: conn.category ?? 'N/A'),
-              SetupInfoRow(label: 'Rating', value: '★ ${conn.rating.toStringAsFixed(1)} / 5.0'),
+              SetupInfoRow(label: 'Rating', value: 'â˜… ${conn.rating.toStringAsFixed(1)} / 5.0'),
             ],
           ),
         ),
@@ -283,8 +283,8 @@ class _OverviewTab extends StatelessWidget {
               SetupInfoRow(
                 label: 'Avg Order Value',
                 value: conn.totalOrders > 0
-                    ? '₵${(conn.totalValue / conn.totalOrders).toStringAsFixed(0)}'
-                    : '₵0',
+                    ? 'â‚µ${(conn.totalValue / conn.totalOrders).toStringAsFixed(0)}'
+                    : 'â‚µ0',
               ),
               const SizedBox(height: 8),
               _StrengthIndicator(value: conn.strengthPercent),
@@ -298,7 +298,7 @@ class _OverviewTab extends StatelessWidget {
   }
 }
 
-// ─── Transactions Tab ────────────────────────────────────────────────────────
+// â”€â”€â”€ Transactions Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _TransactionsTab extends StatelessWidget {
   final Connection conn;
@@ -335,7 +335,7 @@ class _TransactionsTab extends StatelessWidget {
             Expanded(
               child: KPIBadge(
                 label: 'Total Spent',
-                value: '₵${conn.totalValue.toStringAsFixed(0)}',
+                value: 'â‚µ${conn.totalValue.toStringAsFixed(0)}',
                 icon: Icons.monetization_on,
                 color: AppColors.success,
               ),
@@ -358,7 +358,7 @@ class _TransactionsTab extends StatelessWidget {
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: (isCompleted ? AppColors.success : AppColors.warning).withOpacity(0.1),
+                    color: (isCompleted ? AppColors.success : AppColors.warning).withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Icon(
@@ -381,14 +381,14 @@ class _TransactionsTab extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '$items items · $status',
+                        '$items items Â· $status',
                         style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
                       ),
                     ],
                   ),
                 ),
                 Text(
-                  '₵${amount.toStringAsFixed(0)}',
+                  'â‚µ${amount.toStringAsFixed(0)}',
                   style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w700,
@@ -405,7 +405,7 @@ class _TransactionsTab extends StatelessWidget {
   }
 }
 
-// ─── Communication Tab ───────────────────────────────────────────────────────
+// â”€â”€â”€ Communication Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _CommunicationTab extends StatelessWidget {
   final Connection conn;
@@ -465,7 +465,7 @@ class _CommunicationTab extends StatelessWidget {
                         width: 28,
                         height: 28,
                         decoration: BoxDecoration(
-                          color: (isSent ? kSetupColor : AppColors.textTertiary).withOpacity(0.15),
+                          color: (isSent ? kSetupColor : AppColors.textTertiary).withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Center(
@@ -529,7 +529,7 @@ class _CommunicationTab extends StatelessWidget {
   }
 }
 
-// ─── Notes Tab ───────────────────────────────────────────────────────────────
+// â”€â”€â”€ Notes Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _NotesTab extends StatelessWidget {
   final Connection conn;
@@ -538,7 +538,7 @@ class _NotesTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final notes = [
-      {'title': 'Pricing Discussion', 'date': 'Jan 15, 2025', 'content': 'Agreed on 5% discount for bulk orders above ₵5,000. Review in Q2.'},
+      {'title': 'Pricing Discussion', 'date': 'Jan 15, 2025', 'content': 'Agreed on 5% discount for bulk orders above â‚µ5,000. Review in Q2.'},
       {'title': 'Delivery Preferences', 'date': 'Jan 8, 2025', 'content': 'Prefers morning deliveries (8-10 AM). Loading dock B at warehouse.'},
       {'title': 'Payment Terms', 'date': 'Dec 20, 2024', 'content': 'Net-30 approved. Auto-reminder set for day 25.'},
     ];
@@ -550,9 +550,9 @@ class _NotesTab extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: kSetupColor.withOpacity(0.06),
+            color: kSetupColor.withValues(alpha: 0.06),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: kSetupColor.withOpacity(0.12)),
+            border: Border.all(color: kSetupColor.withValues(alpha: 0.12)),
           ),
           child: Row(
             children: [
@@ -610,7 +610,7 @@ class _NotesTab extends StatelessWidget {
   }
 }
 
-// ─── Helper Widgets ──────────────────────────────────────────────────────────
+// â”€â”€â”€ Helper Widgets â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _StrengthIndicator extends StatelessWidget {
   final double value;
@@ -644,7 +644,7 @@ class _StrengthIndicator extends StatelessWidget {
           borderRadius: BorderRadius.circular(3),
           child: LinearProgressIndicator(
             value: value / 100,
-            backgroundColor: color.withOpacity(0.1),
+            backgroundColor: color.withValues(alpha: 0.1),
             valueColor: AlwaysStoppedAnimation<Color>(color),
             minHeight: 6,
           ),

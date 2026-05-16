@@ -1,12 +1,12 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// GenieHapticPulseRing
 ///
 /// Visual pulse ring that animates in sync with [GenieHapticRoleSignature].
 /// Wraps any child widget (avatar, input field, card) with a colour-matched
 /// glow that fires once per role-signature event and fades out gracefully.
 ///
-/// Recommendation 1 — "Visual Pulse" fallback for devices without vibration.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// Recommendation 1 â€” "Visual Pulse" fallback for devices without vibration.
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 
@@ -90,7 +90,7 @@ class _GenieHapticPulseRingState extends State<GenieHapticPulseRing>
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
-                          color: _color.withOpacity(0.65),
+                          color: _color.withValues(alpha: 0.65),
                           blurRadius: 18,
                           spreadRadius: 6,
                         ),
@@ -100,7 +100,7 @@ class _GenieHapticPulseRingState extends State<GenieHapticPulseRing>
                   ),
                 ),
               ),
-            // The actual content — always rendered above the ring
+            // The actual content â€” always rendered above the ring
             child!,
           ],
         );

@@ -1,4 +1,4 @@
-/// Alerts Screen 5 — Resolution Workspace
+﻿/// Alerts Screen 5 â€” Resolution Workspace
 /// Method selection, templates, composer, verification panel
 
 import 'package:flutter/material.dart';
@@ -64,7 +64,7 @@ class _AlertsResolutionScreenState extends State<AlertsResolutionScreen> {
                   builder: (context, ai, _) {
                     if (ai.insights.isEmpty) return const SizedBox.shrink();
                     return Container(
-                      color: kAlertsColor.withOpacity(0.07),
+                      color: kAlertsColor.withValues(alpha: 0.07),
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                       child: Row(children: [
                         const Icon(Icons.auto_awesome, size: 14, color: kAlertsColor),
@@ -76,13 +76,13 @@ class _AlertsResolutionScreenState extends State<AlertsResolutionScreen> {
                     );
                   },
                 ),
-                // ──── ALERT CONTEXT ────
+                // â”€â”€â”€â”€ ALERT CONTEXT â”€â”€â”€â”€
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
                     color: kAlertsColorLight,
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: kAlertsColor.withOpacity(0.2)),
+                    border: Border.all(color: kAlertsColor.withValues(alpha: 0.2)),
                   ),
                   child: Row(
                     children: [
@@ -102,10 +102,10 @@ class _AlertsResolutionScreenState extends State<AlertsResolutionScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                // ──── TEMPLATES (TOGGLE) ────
+                // â”€â”€â”€â”€ TEMPLATES (TOGGLE) â”€â”€â”€â”€
                 if (_showTemplates) ...[
                   AlertsSectionCard(
-                    title: '📝 Resolution Templates',
+                    title: 'ðŸ“ Resolution Templates',
                     child: Column(
                       children: provider.templatesByType(AlertTemplateType.resolution).map((tpl) => GestureDetector(
                         onTap: () {
@@ -134,9 +134,9 @@ class _AlertsResolutionScreenState extends State<AlertsResolutionScreen> {
                   const SizedBox(height: 16),
                 ],
 
-                // ──── RESOLUTION METHOD ────
+                // â”€â”€â”€â”€ RESOLUTION METHOD â”€â”€â”€â”€
                 AlertsSectionCard(
-                  title: '🔧 Resolution Method',
+                  title: 'ðŸ”§ Resolution Method',
                   child: Wrap(
                     spacing: 8,
                     runSpacing: 8,
@@ -147,7 +147,7 @@ class _AlertsResolutionScreenState extends State<AlertsResolutionScreen> {
                         child: Container(
                           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                           decoration: BoxDecoration(
-                            color: isActive ? kAlertsResolved.withOpacity(0.1) : Colors.white,
+                            color: isActive ? kAlertsResolved.withValues(alpha: 0.1) : Colors.white,
                             borderRadius: BorderRadius.circular(8),
                             border: Border.all(color: isActive ? kAlertsResolved : const Color(0xFFE5E7EB)),
                           ),
@@ -159,9 +159,9 @@ class _AlertsResolutionScreenState extends State<AlertsResolutionScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                // ──── RESOLUTION DETAILS ────
+                // â”€â”€â”€â”€ RESOLUTION DETAILS â”€â”€â”€â”€
                 AlertsSectionCard(
-                  title: '✍️ Resolution Details',
+                  title: 'âœï¸ Resolution Details',
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -217,9 +217,9 @@ class _AlertsResolutionScreenState extends State<AlertsResolutionScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                // ──── CUSTOMER NOTIFICATION ────
+                // â”€â”€â”€â”€ CUSTOMER NOTIFICATION â”€â”€â”€â”€
                 AlertsSectionCard(
-                  title: '📨 Customer Notification',
+                  title: 'ðŸ“¨ Customer Notification',
                   child: Wrap(
                     spacing: 8,
                     runSpacing: 8,
@@ -230,7 +230,7 @@ class _AlertsResolutionScreenState extends State<AlertsResolutionScreen> {
                         child: Container(
                           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                           decoration: BoxDecoration(
-                            color: isActive ? kAlertsInfo.withOpacity(0.1) : Colors.white,
+                            color: isActive ? kAlertsInfo.withValues(alpha: 0.1) : Colors.white,
                             borderRadius: BorderRadius.circular(8),
                             border: Border.all(color: isActive ? kAlertsInfo : const Color(0xFFE5E7EB)),
                           ),
@@ -242,9 +242,9 @@ class _AlertsResolutionScreenState extends State<AlertsResolutionScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                // ──── KNOWLEDGE BASE SUGGESTION ────
+                // â”€â”€â”€â”€ KNOWLEDGE BASE SUGGESTION â”€â”€â”€â”€
                 AlertsSectionCard(
-                  title: '💡 Related Knowledge',
+                  title: 'ðŸ’¡ Related Knowledge',
                   trailing: GestureDetector(
                     onTap: () => Navigator.pushNamed(context, '/alerts/knowledge', arguments: alert.id),
                     child: const Text('View All', style: TextStyle(fontSize: 12, color: kAlertsInfo)),
@@ -259,13 +259,13 @@ class _AlertsResolutionScreenState extends State<AlertsResolutionScreen> {
             ),
           ),
 
-          // ──── SUBMIT FOOTER ────
+          // â”€â”€â”€â”€ SUBMIT FOOTER â”€â”€â”€â”€
           bottomNavigationBar: Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Colors.white,
               border: const Border(top: BorderSide(color: Color(0xFF1C1C2E))),
-              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 8, offset: const Offset(0, -2))],
+              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 8, offset: const Offset(0, -2))],
             ),
             child: SafeArea(
               child: ElevatedButton(
@@ -306,7 +306,7 @@ class _AlertsResolutionScreenState extends State<AlertsResolutionScreen> {
     provider.resolveAlert(alert.id, resolution);
 
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Alert resolved successfully! ✅'), backgroundColor: kAlertsResolved),
+      const SnackBar(content: Text('Alert resolved successfully! âœ…'), backgroundColor: kAlertsResolved),
     );
     Navigator.popUntil(context, (route) => route.settings.name == '/alerts' || route.isFirst);
   }
@@ -322,21 +322,21 @@ class _AlertsResolutionScreenState extends State<AlertsResolutionScreen> {
 
   String _methodLabel(ResolutionMethod m) {
     switch (m) {
-      case ResolutionMethod.fixed: return '✅ Fixed';
-      case ResolutionMethod.workaround: return '🔧 Workaround';
-      case ResolutionMethod.cannotReproduce: return '❓ Can\'t Reproduce';
-      case ResolutionMethod.duplicate: return '📋 Duplicate';
-      case ResolutionMethod.byDesign: return '📐 By Design';
-      case ResolutionMethod.wontFix: return '🚫 Won\'t Fix';
+      case ResolutionMethod.fixed: return 'âœ… Fixed';
+      case ResolutionMethod.workaround: return 'ðŸ”§ Workaround';
+      case ResolutionMethod.cannotReproduce: return 'â“ Can\'t Reproduce';
+      case ResolutionMethod.duplicate: return 'ðŸ“‹ Duplicate';
+      case ResolutionMethod.byDesign: return 'ðŸ“ By Design';
+      case ResolutionMethod.wontFix: return 'ðŸš« Won\'t Fix';
     }
   }
 
   String _notifyLabel(CustomerNotifyMethod m) {
     switch (m) {
-      case CustomerNotifyMethod.sms: return '📱 SMS';
-      case CustomerNotifyMethod.email: return '📧 Email';
-      case CustomerNotifyMethod.inApp: return '🔔 In-App';
-      case CustomerNotifyMethod.none: return '🔇 None';
+      case CustomerNotifyMethod.sms: return 'ðŸ“± SMS';
+      case CustomerNotifyMethod.email: return 'ðŸ“§ Email';
+      case CustomerNotifyMethod.inApp: return 'ðŸ”” In-App';
+      case CustomerNotifyMethod.none: return 'ðŸ”‡ None';
     }
   }
 }

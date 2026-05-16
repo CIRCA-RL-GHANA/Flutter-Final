@@ -1,7 +1,7 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// APRIL Widget (Personal Assistant)
 /// Visible to: Owner ONLY (completely hidden for other roles)
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -26,7 +26,7 @@ class AprilWidgetContent extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            color.withOpacity(0.05),
+            color.withValues(alpha: 0.05),
             Colors.white,
           ],
         ),
@@ -42,7 +42,7 @@ class AprilWidgetContent extends StatelessWidget {
                 width: 28,
                 height: 28,
                 decoration: BoxDecoration(
-                  color: color.withOpacity(0.15),
+                  color: color.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Icon(Icons.assistant, size: 16, color: color),
@@ -67,7 +67,7 @@ class AprilWidgetContent extends StatelessWidget {
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                      color: color.withOpacity(0.3),
+                      color: color.withValues(alpha: 0.3),
                       blurRadius: 8,
                       offset: const Offset(0, 2),
                     ),
@@ -96,7 +96,7 @@ class AprilWidgetContent extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
-              color: AppColors.warning.withOpacity(0.08),
+              color: AppColors.warning.withValues(alpha: 0.08),
               borderRadius: BorderRadius.circular(6),
             ),
             child: const Text(
@@ -122,9 +122,9 @@ class AprilWidgetContent extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: AppColors.info.withOpacity(0.06),
+              color: AppColors.info.withValues(alpha: 0.06),
               borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: AppColors.info.withOpacity(0.12)),
+              border: Border.all(color: AppColors.info.withValues(alpha: 0.12)),
             ),
             child: Row(
               children: [
@@ -132,7 +132,7 @@ class AprilWidgetContent extends StatelessWidget {
                 const SizedBox(width: 6),
                 const Expanded(
                   child: Text(
-                    'Bill due tomorrow: ₵150',
+                    'Bill due tomorrow: â‚µ150',
                     style: TextStyle(fontSize: 10, color: AppColors.textSecondary),
                   ),
                 ),
@@ -148,10 +148,10 @@ class AprilWidgetContent extends StatelessWidget {
   String _getGreeting() {
     final hour = DateTime.now().hour;
     final emoji = hour < 12
-        ? '🌤️'
+        ? 'ðŸŒ¤ï¸'
         : hour < 18
-            ? '☀️'
-            : '🌙';
+            ? 'â˜€ï¸'
+            : 'ðŸŒ™';
     final period = hour < 12
         ? 'morning'
         : hour < 18

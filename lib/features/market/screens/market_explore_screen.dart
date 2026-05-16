@@ -1,7 +1,7 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// MARKET MODULE — Screen 1.5: Explore All Merchants
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// MARKET MODULE â€” Screen 1.5: Explore All Merchants
 /// Full-screen immersive grid with map/grid toggle, masonry merchant cards
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -105,7 +105,7 @@ class _MarketExploreScreenState extends State<MarketExploreScreen> {
                 )
               : CustomScrollView(
                   slivers: [
-                    // ─── AI Personalized Recommendations Banner ────
+                    // â”€â”€â”€ AI Personalized Recommendations Banner â”€â”€â”€â”€
                     SliverToBoxAdapter(
                       child: Consumer<AIInsightsNotifier>(
                         builder: (ctx, notifier, _) {
@@ -115,10 +115,10 @@ class _MarketExploreScreenState extends State<MarketExploreScreen> {
                             margin: const EdgeInsets.fromLTRB(16, 8, 16, 0),
                             padding: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
-                              color: const Color(0xFF8B5CF6).withOpacity(0.06),
+                              color: const Color(0xFF8B5CF6).withValues(alpha: 0.06),
                               borderRadius: BorderRadius.circular(12),
                               border: Border.all(
-                                color: const Color(0xFF8B5CF6).withOpacity(0.15),
+                                color: const Color(0xFF8B5CF6).withValues(alpha: 0.15),
                               ),
                             ),
                             child: Column(
@@ -148,8 +148,8 @@ class _MarketExploreScreenState extends State<MarketExploreScreen> {
                                       onTap: () => Navigator.pushNamed(context, AppRoutes.marketSearch),
                                       child: Chip(
                                         label: Text(name, style: const TextStyle(fontSize: 11)),
-                                        backgroundColor: const Color(0xFF8B5CF6).withOpacity(0.1),
-                                        side: BorderSide(color: const Color(0xFF8B5CF6).withOpacity(0.2)),
+                                        backgroundColor: const Color(0xFF8B5CF6).withValues(alpha: 0.1),
+                                        side: BorderSide(color: const Color(0xFF8B5CF6).withValues(alpha: 0.2)),
                                         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                         visualDensity: VisualDensity.compact,
                                       ),
@@ -241,7 +241,7 @@ class _MarketExploreScreenState extends State<MarketExploreScreen> {
                         color: Colors.white,
                         shape: BoxShape.circle,
                         boxShadow: [
-                          BoxShadow(color: Colors.black.withOpacity(0.15), blurRadius: 6),
+                          BoxShadow(color: Colors.black.withValues(alpha: 0.15), blurRadius: 6),
                         ],
                       ),
                       child: Icon(
@@ -257,7 +257,7 @@ class _MarketExploreScreenState extends State<MarketExploreScreen> {
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(6),
                         boxShadow: [
-                          BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 4),
+                          BoxShadow(color: Colors.black.withValues(alpha: 0.1), blurRadius: 4),
                         ],
                       ),
                       child: Text(

@@ -1,7 +1,7 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// COMMUNITY MODULE — Create Community Screen
-/// User picks type → fills details → creates a community space.
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// COMMUNITY MODULE â€” Create Community Screen
+/// User picks type â†’ fills details â†’ creates a community space.
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +17,7 @@ const _types = [
   {'type': 'theater',  'label': 'Theater',  'icon': Icons.theaters,        'color': 0xFFDC2626, 'hint': 'Synchronized movie/show viewing groups'},
   {'type': 'fair',     'label': 'Fair',     'icon': Icons.storefront,      'color': 0xFFD97706, 'hint': 'Pop-up marketplace or artist showcase'},
   {'type': 'hub',      'label': 'Hub',      'icon': Icons.hub,             'color': 0xFF2563EB, 'hint': 'Topical forum, knowledge base, discussion'},
-  {'type': 'hangout',  'label': 'Hangout',  'icon': Icons.event,           'color': 0xFF059669, 'hint': 'Schedule events — virtual or physical'},
+  {'type': 'hangout',  'label': 'Hangout',  'icon': Icons.event,           'color': 0xFF059669, 'hint': 'Schedule events â€” virtual or physical'},
   {'type': 'journal',  'label': 'Journal',  'icon': Icons.book,            'color': 0xFF6366F1, 'hint': 'Blog, shared notes, community documentation'},
 ];
 
@@ -75,7 +75,7 @@ class _CommunityCreateScreenState extends State<CommunityCreateScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // ── Step 1: Pick type ─────────────────────────────────
+                // â”€â”€ Step 1: Pick type â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                 const Text('Choose Type', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 4),
                 const Text('Each type enables a different way to connect.', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
@@ -100,7 +100,7 @@ class _CommunityCreateScreenState extends State<CommunityCreateScreen> {
                           color: isSelected ? c : Colors.white,
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(color: isSelected ? c : AppColors.inputBorder, width: 2),
-                          boxShadow: isSelected ? [BoxShadow(color: c.withOpacity(0.3), blurRadius: 8, offset: const Offset(0, 3))] : [],
+                          boxShadow: isSelected ? [BoxShadow(color: c.withValues(alpha: 0.3), blurRadius: 8, offset: const Offset(0, 3))] : [],
                         ),
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                         child: Row(children: [
@@ -117,7 +117,7 @@ class _CommunityCreateScreenState extends State<CommunityCreateScreen> {
                   const SizedBox(height: 8),
                   Container(
                     padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(color: color.withOpacity(0.08), borderRadius: BorderRadius.circular(10), border: Border.all(color: color.withOpacity(0.2))),
+                    decoration: BoxDecoration(color: color.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(10), border: Border.all(color: color.withValues(alpha: 0.2))),
                     child: Row(children: [
                       Icon(Icons.info_outline, color: color, size: 16),
                       const SizedBox(width: 8),
@@ -128,12 +128,12 @@ class _CommunityCreateScreenState extends State<CommunityCreateScreen> {
 
                 const SizedBox(height: 24),
 
-                // ── AI insight ────────────────────────────────────────
+                // â”€â”€ AI insight â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                 if (ai.insights.isNotEmpty)
                   Container(
                     margin: const EdgeInsets.only(bottom: 16),
                     padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(color: kCommunityColor.withOpacity(0.07), borderRadius: BorderRadius.circular(10), border: Border.all(color: kCommunityColor.withOpacity(0.2))),
+                    decoration: BoxDecoration(color: kCommunityColor.withValues(alpha: 0.07), borderRadius: BorderRadius.circular(10), border: Border.all(color: kCommunityColor.withValues(alpha: 0.2))),
                     child: Row(children: [
                       const Icon(Icons.auto_awesome, color: kCommunityColor, size: 16),
                       const SizedBox(width: 8),
@@ -141,7 +141,7 @@ class _CommunityCreateScreenState extends State<CommunityCreateScreen> {
                     ]),
                   ),
 
-                // ── Step 2: Details ────────────────────────────────────
+                // â”€â”€ Step 2: Details â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                 const Text('Details', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 12),
 
@@ -215,7 +215,7 @@ class _CommunityCreateScreenState extends State<CommunityCreateScreen> {
                     icon: _creating
                         ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
                         : const Icon(Icons.check_circle_outline),
-                    label: Text(_creating ? 'Creating…' : 'Create Community'),
+                    label: Text(_creating ? 'Creatingâ€¦' : 'Create Community'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: color,
                       disabledBackgroundColor: AppColors.inputBorder,

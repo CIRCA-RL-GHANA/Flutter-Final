@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// SETUP DASHBOARD Widget (Operations Center)
 /// Visible to: Owner, Admin (full), Branch Manager (branch-scoped),
 /// Social Officer (engagement emphasis), Monitor (view-only)
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import '../../../../core/routes/app_routes.dart';
@@ -28,7 +28,7 @@ class SetupDashboardWidgetContent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Header — branch-scoped roles get narrower title
+          // Header â€” branch-scoped roles get narrower title
           Row(
             children: [
               Icon(Icons.settings_applications, size: 18, color: color),
@@ -78,7 +78,7 @@ class SetupDashboardWidgetContent extends StatelessWidget {
 
   List<Widget> _getRows(Color color) {
     switch (role) {
-      // ── Owner: personal features only ──────────────────────────────────
+      // â”€â”€ Owner: personal features only â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
       case UserRole.owner:
         return [
           _MatrixRow(icon: Icons.person_outline,  label: 'Profile',      value: 'Personal',     color: color),
@@ -87,7 +87,7 @@ class SetupDashboardWidgetContent extends StatelessWidget {
           _MatrixRow(icon: Icons.track_changes,   label: 'My Activity',  value: 'Today',        color: color),
         ];
 
-      // ── Administrator: full business suite ─────────────────────────────
+      // â”€â”€ Administrator: full business suite â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
       case UserRole.administrator:
         return [
           _MatrixRow(icon: Icons.inventory_2,     label: 'Products',   value: '1,245',  color: color),
@@ -96,7 +96,7 @@ class SetupDashboardWidgetContent extends StatelessWidget {
           _MatrixRow(icon: Icons.stars_outlined,  label: 'Q-Points',   value: 'Entity', color: color),
         ];
 
-      // ── Branch Manager: branch-scoped ops ──────────────────────────────
+      // â”€â”€ Branch Manager: branch-scoped ops â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
       case UserRole.branchManager:
         return [
           _MatrixRow(icon: Icons.inventory_2,      label: 'Products',   value: '487 SKUs', color: color),
@@ -105,7 +105,7 @@ class SetupDashboardWidgetContent extends StatelessWidget {
           _MatrixRow(icon: Icons.bar_chart,        label: 'My Activity', value: 'Today',   color: color),
         ];
 
-      // ── Social Officer: engagement emphasis ────────────────────────────
+      // â”€â”€ Social Officer: engagement emphasis â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
       case UserRole.socialOfficer:
         return [
           _MatrixRow(icon: Icons.campaign,         label: 'Marketing',    value: '5 active',  color: color, emphasized: true),
@@ -114,7 +114,7 @@ class SetupDashboardWidgetContent extends StatelessWidget {
           _MatrixRow(icon: Icons.dynamic_feed,     label: 'Social',       value: '3 posts',   color: color),
         ];
 
-      // ── Branch Social Officer: branch engagement ────────────────────────
+      // â”€â”€ Branch Social Officer: branch engagement â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
       case UserRole.branchSocialOfficer:
         return [
           _MatrixRow(icon: Icons.campaign,         label: 'Marketing',    value: 'Branch',    color: color, emphasized: true),
@@ -123,7 +123,7 @@ class SetupDashboardWidgetContent extends StatelessWidget {
           _MatrixRow(icon: Icons.dynamic_feed,     label: 'Social',       value: 'Branch',    color: color),
         ];
 
-      // ── Monitor: view-only oversight ───────────────────────────────────
+      // â”€â”€ Monitor: view-only oversight â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
       case UserRole.monitor:
         return [
           _MatrixRow(icon: Icons.visibility_outlined, label: 'Activity Log', value: 'View Only', color: color),
@@ -132,7 +132,7 @@ class SetupDashboardWidgetContent extends StatelessWidget {
           _MatrixRow(icon: Icons.people,              label: 'Staff',        value: 'View Only', color: color),
         ];
 
-      // ── Branch Monitor: branch view-only ───────────────────────────────
+      // â”€â”€ Branch Monitor: branch view-only â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
       case UserRole.branchMonitor:
         return [
           _MatrixRow(icon: Icons.visibility_outlined, label: 'Activity Log', value: 'Branch',    color: color),
@@ -141,7 +141,7 @@ class SetupDashboardWidgetContent extends StatelessWidget {
           _MatrixRow(icon: Icons.people,              label: 'Staff',        value: 'View Only', color: color),
         ];
 
-      // ── Response Officer: operational focus ────────────────────────────
+      // â”€â”€ Response Officer: operational focus â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
       case UserRole.responseOfficer:
         return [
           _MatrixRow(icon: Icons.local_shipping,   label: 'Vehicles',      value: 'Fleet',      color: color),
@@ -150,7 +150,7 @@ class SetupDashboardWidgetContent extends StatelessWidget {
           _MatrixRow(icon: Icons.track_changes,    label: 'My Activity',   value: 'Today',      color: color),
         ];
 
-      // ── Branch Response Officer: branch ops ────────────────────────────
+      // â”€â”€ Branch Response Officer: branch ops â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
       case UserRole.branchResponseOfficer:
         return [
           _MatrixRow(icon: Icons.local_shipping,   label: 'Vehicles',      value: 'Branch',     color: color),
@@ -159,7 +159,7 @@ class SetupDashboardWidgetContent extends StatelessWidget {
           _MatrixRow(icon: Icons.track_changes,    label: 'My Activity',   value: 'Today',      color: color),
         ];
 
-      // ── Driver: personal ops ───────────────────────────────────────────
+      // â”€â”€ Driver: personal ops â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
       case UserRole.driver:
         return [
           _MatrixRow(icon: Icons.local_shipping,   label: 'My Vehicle',    value: 'Assigned',   color: color),
@@ -168,7 +168,7 @@ class SetupDashboardWidgetContent extends StatelessWidget {
           _MatrixRow(icon: Icons.track_changes,    label: 'My Activity',   value: 'Today',      color: color),
         ];
 
-      // ── none / fallback ────────────────────────────────────────────────
+      // â”€â”€ none / fallback â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
       default:
         return [
           _MatrixRow(icon: Icons.person_outline,   label: 'Profile',       value: 'Personal',   color: color),
@@ -203,11 +203,11 @@ class _MatrixRow extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         decoration: BoxDecoration(
           color: emphasized
-              ? color.withOpacity(0.08)
+              ? color.withValues(alpha: 0.08)
               : AppColors.inputFill,
           borderRadius: BorderRadius.circular(8),
           border: emphasized
-              ? Border.all(color: color.withOpacity(0.2))
+              ? Border.all(color: color.withValues(alpha: 0.2))
               : null,
         ),
         child: Row(

@@ -1,4 +1,4 @@
-/// Alerts Screen 8 — Bulk Alert Management
+﻿/// Alerts Screen 8 â€” Bulk Alert Management
 /// Bulk assign, status change, tags, export, merge
 /// Progress indicator, undo
 
@@ -45,7 +45,7 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kAlertsColor.withOpacity(0.07),
+                    color: kAlertsColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -64,7 +64,7 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
                 },
               ),
 
-              // ──── SELECTION BANNER ────
+              // â”€â”€â”€â”€ SELECTION BANNER â”€â”€â”€â”€
               Container(
                 padding: const EdgeInsets.all(14),
                 color: kAlertsColorLight,
@@ -85,7 +85,7 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
                 ),
               ),
 
-              // ──── ACTION GRID ────
+              // â”€â”€â”€â”€ ACTION GRID â”€â”€â”€â”€
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(
@@ -146,7 +146,7 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
                 ),
               ),
 
-              // ──── ACTION PANEL ────
+              // â”€â”€â”€â”€ ACTION PANEL â”€â”€â”€â”€
               if (_selectedAction != null)
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -155,7 +155,7 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
 
               const SizedBox(height: 12),
 
-              // ──── SELECTED ALERTS LIST ────
+              // â”€â”€â”€â”€ SELECTED ALERTS LIST â”€â”€â”€â”€
               Expanded(
                 child: selectedAlerts.isEmpty
                     ? const AlertsEmptyState(
@@ -186,14 +186,14 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
             ],
           ),
 
-          // ──── EXECUTE FOOTER ────
+          // â”€â”€â”€â”€ EXECUTE FOOTER â”€â”€â”€â”€
           bottomNavigationBar: _selectedAction != null && provider.selectedCount > 0
               ? Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     border: const Border(top: BorderSide(color: Color(0xFF1C1C2E))),
-                    boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 8, offset: const Offset(0, -2))],
+                    boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 8, offset: const Offset(0, -2))],
                   ),
                   child: SafeArea(
                     child: ElevatedButton(
@@ -221,7 +221,7 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
     switch (_selectedAction!) {
       case BulkActionType.assign:
         return AlertsSectionCard(
-          title: '👤 Assign To',
+          title: 'ðŸ‘¤ Assign To',
           child: Column(
             children: provider.staff.take(4).map((s) => StaffPickerTile(staff: s, onTap: () {
               provider.bulkAssign(s.name);
@@ -232,7 +232,7 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
         );
       case BulkActionType.changeStatus:
         return AlertsSectionCard(
-          title: '🔄 Change Status',
+          title: 'ðŸ”„ Change Status',
           child: Wrap(
             spacing: 8,
             runSpacing: 8,
@@ -250,7 +250,7 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
         );
       case BulkActionType.export:
         return AlertsSectionCard(
-          title: '📥 Export Format',
+          title: 'ðŸ“¥ Export Format',
           child: Row(
             children: [
               _ExportChip(label: 'CSV', icon: Icons.table_chart, onTap: () => _showExportSuccess(context)),
@@ -263,7 +263,7 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
         );
       default:
         return AlertsSectionCard(
-          title: '🔧 ${_actionLabel(_selectedAction!)}',
+          title: 'ðŸ”§ ${_actionLabel(_selectedAction!)}',
           child: const Text('Feature coming soon', style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
         );
     }
@@ -283,7 +283,7 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
 
   void _showExportSuccess(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Export started — check downloads'), backgroundColor: kAlertsResolved),
+      const SnackBar(content: Text('Export started â€” check downloads'), backgroundColor: kAlertsResolved),
     );
   }
 
@@ -311,9 +311,9 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Bulk Action Button
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _BulkActionButton extends StatelessWidget {
   final IconData icon;
@@ -332,7 +332,7 @@ class _BulkActionButton extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: isSelected ? kAlertsColor.withOpacity(0.1) : Colors.white,
+            color: isSelected ? kAlertsColor.withValues(alpha: 0.1) : Colors.white,
             borderRadius: BorderRadius.circular(12),
             border: Border.all(color: isSelected ? kAlertsColor : const Color(0xFFE5E7EB)),
           ),
@@ -349,9 +349,9 @@ class _BulkActionButton extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Compact Selected Alert
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _CompactSelectedAlert extends StatelessWidget {
   final AlertItem alert;
@@ -382,9 +382,9 @@ class _CompactSelectedAlert extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Export Chip
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _ExportChip extends StatelessWidget {
   final String label;

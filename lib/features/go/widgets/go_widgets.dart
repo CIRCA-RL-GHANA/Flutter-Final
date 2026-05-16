@@ -1,13 +1,13 @@
-/// GO Module — Shared Reusable UI Components
+﻿/// GO Module â€” Shared Reusable UI Components
 /// Module Color: Emerald Green (0xFF10B981)
 /// Visibility: Owner + Administrator only
 
 import 'package:flutter/material.dart';
 import '../models/go_models.dart';
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // COLOR CONSTANTS
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 const kGoColor = Color(0xFF10B981);
 const kGoColorLight = Color(0xFFD1FAE5);
@@ -23,9 +23,9 @@ const kGoInfoLight = Color(0xFFDBEAFE);
 const kGoPurple = Color(0xFF7C3AED);
 const kGoPurpleLight = Color(0xFFEDE9FE);
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // GO APP BAR
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class GoAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -61,9 +61,9 @@ class GoAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // SECTION CARD
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class GoSectionCard extends StatelessWidget {
   final Widget child;
@@ -87,9 +87,9 @@ class GoSectionCard extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // EMPTY STATE
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class GoEmptyState extends StatelessWidget {
   final IconData icon;
@@ -128,9 +128,9 @@ class GoEmptyState extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // CONTEXT CHIP
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class GoContextChip extends StatelessWidget {
   final FinancialContext context;
@@ -148,14 +148,14 @@ class GoContextChip extends StatelessWidget {
         decoration: BoxDecoration(
           color: kGoColorLight,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: kGoColor.withOpacity(0.3)),
+          border: Border.all(color: kGoColor.withValues(alpha: 0.3)),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(ctx.typeEmoji, style: const TextStyle(fontSize: 14)),
             const SizedBox(width: 6),
-            Text('${ctx.name} • ${ctx.role}', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: kGoColorDark)),
+            Text('${ctx.name} â€¢ ${ctx.role}', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: kGoColorDark)),
             const SizedBox(width: 4),
             const Icon(Icons.keyboard_arrow_down, size: 16, color: kGoColorDark),
           ],
@@ -165,9 +165,9 @@ class GoContextChip extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // METRIC CARD (Small stat box)
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class GoMetricCard extends StatelessWidget {
   final String label;
@@ -213,9 +213,9 @@ class GoMetricCard extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // GATEWAY STATUS ROW
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class GatewayStatusRow extends StatelessWidget {
   final PaymentGateway gateway;
@@ -252,9 +252,9 @@ class GatewayStatusRow extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // QUICK ACTION BUTTON
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class GoQuickAction extends StatelessWidget {
   final IconData icon;
@@ -307,9 +307,9 @@ class GoQuickAction extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // TRANSACTION ROW
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class GoTransactionRow extends StatelessWidget {
   final GoTransaction transaction;
@@ -350,7 +350,7 @@ class GoTransactionRow extends StatelessWidget {
                     children: [
                       Text(transaction.typeLabel, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
                       const SizedBox(height: 2),
-                      Text('${transaction.fromEntity} → ${transaction.toEntity}', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF)), overflow: TextOverflow.ellipsis),
+                      Text('${transaction.fromEntity} â†’ ${transaction.toEntity}', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF)), overflow: TextOverflow.ellipsis),
                     ],
                   ),
                 ),
@@ -367,7 +367,7 @@ class GoTransactionRow extends StatelessWidget {
             ),
             if (transaction.feeAmount != null) ...[
               const SizedBox(height: 6),
-              Text('Fee: ${transaction.feeAmount!.toStringAsFixed(2)} QP • Net: ${transaction.netAmount?.toStringAsFixed(2) ?? '-'} QP',
+              Text('Fee: ${transaction.feeAmount!.toStringAsFixed(2)} QP â€¢ Net: ${transaction.netAmount?.toStringAsFixed(2) ?? '-'} QP',
                 style: const TextStyle(fontSize: 10, color: Color(0xFF9CA3AF))),
             ],
           ],
@@ -377,9 +377,9 @@ class GoTransactionRow extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // TAB CARD (Credit tab overview)
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class GoTabCard extends StatelessWidget {
   final GoTab tab;
@@ -411,11 +411,11 @@ class GoTabCard extends StatelessWidget {
                       children: [
                         Text(tab.id, style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF), fontWeight: FontWeight.w500)),
                         const SizedBox(width: 6),
-                        Text('• ${tab.entityName} • ${tab.entityRole}', style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
+                        Text('â€¢ ${tab.entityName} â€¢ ${tab.entityRole}', style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
                         const Spacer(),
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                          decoration: BoxDecoration(color: tab.statusColor.withOpacity(0.12), borderRadius: BorderRadius.circular(6)),
+                          decoration: BoxDecoration(color: tab.statusColor.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(6)),
                           child: Text(tab.statusLabel, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: tab.statusColor)),
                         ),
                       ],
@@ -442,7 +442,7 @@ class GoTabCard extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 4),
-                    Text(tab.isOverdue ? '⚠️ Overdue by ${(-tab.daysUntilDue)} days' : 'Due: ${tab.daysUntilDue}d',
+                    Text(tab.isOverdue ? 'âš ï¸ Overdue by ${(-tab.daysUntilDue)} days' : 'Due: ${tab.daysUntilDue}d',
                       style: TextStyle(fontSize: 11, color: tab.isOverdue ? kGoNegative : const Color(0xFF9CA3AF), fontWeight: tab.isOverdue ? FontWeight.w600 : FontWeight.w400)),
                   ],
                 ),
@@ -455,9 +455,9 @@ class GoTabCard extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // REQUEST CARD
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class GoRequestCard extends StatelessWidget {
   final GoRequest request;
@@ -487,7 +487,7 @@ class GoRequestCard extends StatelessWidget {
                 Expanded(child: Text(request.typeLabel, style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF), fontWeight: FontWeight.w500))),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                  decoration: BoxDecoration(color: request.statusColor.withOpacity(0.12), borderRadius: BorderRadius.circular(6)),
+                  decoration: BoxDecoration(color: request.statusColor.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(6)),
                   child: Text(request.statusLabel, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: request.statusColor)),
                 ),
               ],
@@ -495,7 +495,7 @@ class GoRequestCard extends StatelessWidget {
             const SizedBox(height: 6),
             Text(request.title, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
             const SizedBox(height: 4),
-            Text('by ${request.submittedBy} • ${request.id}', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+            Text('by ${request.submittedBy} â€¢ ${request.id}', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
           ],
         ),
       ),
@@ -503,9 +503,9 @@ class GoRequestCard extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // FAVORITE ENTITY CARD
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class GoFavoriteCard extends StatelessWidget {
   final FavoriteEntity entity;
@@ -541,7 +541,7 @@ class GoFavoriteCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(entity.name, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-                      Text('${entity.handle} • ${entity.role}', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                      Text('${entity.handle} â€¢ ${entity.role}', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
                     ],
                   ),
                 ),
@@ -571,7 +571,7 @@ class GoFavoriteCard extends StatelessWidget {
                 if (entity.isMutualFavorite) Container(
                   padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(color: kGoColorLight, borderRadius: BorderRadius.circular(6)),
-                  child: const Text('Mutual ❤️', style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600, color: kGoColorDark)),
+                  child: const Text('Mutual â¤ï¸', style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600, color: kGoColorDark)),
                 ),
               ],
             ),
@@ -599,9 +599,9 @@ class _MiniStat extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // HEALTH SCORE ARC
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class GoHealthGauge extends StatelessWidget {
   final int score;
@@ -641,9 +641,9 @@ class GoHealthGauge extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // SECTION HEADER WITH ACTION
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class GoSectionHeader extends StatelessWidget {
   final String title;
@@ -672,9 +672,9 @@ class GoSectionHeader extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // STEP INDICATOR (For wizard flows)
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class GoStepIndicator extends StatelessWidget {
   final int currentStep;
@@ -714,9 +714,9 @@ class GoStepIndicator extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // AUDIT ENTRY ROW
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class GoAuditRow extends StatelessWidget {
   final AuditEntry entry;
@@ -743,7 +743,7 @@ class GoAuditRow extends StatelessWidget {
               children: [
                 Text(entry.action, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500)),
                 const SizedBox(height: 2),
-                Text('${entry.actor}${entry.ipAddress != null ? ' • ${entry.ipAddress}' : ''}',
+                Text('${entry.actor}${entry.ipAddress != null ? ' â€¢ ${entry.ipAddress}' : ''}',
                   style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
               ],
             ),
@@ -762,9 +762,9 @@ class GoAuditRow extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // MINI DONUT CHART (Reusable)
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class GoDonutChart extends StatelessWidget {
   final List<double> values;

@@ -1,7 +1,7 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// MARKET MODULE — Screen 6: Order Summary & Payment
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// MARKET MODULE â€” Screen 6: Order Summary & Payment
 /// Progress indicator, payment method selection, order review, terms
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -120,7 +120,7 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
     );
   }
 
-  // ── Step 1: Review ───────────────────────────────────────────────
+  // â”€â”€ Step 1: Review â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   Widget _buildReviewStep(MarketProvider prov, CartSummary? summary) {
     return ListView(
       padding: const EdgeInsets.all(16),
@@ -227,7 +227,7 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
     );
   }
 
-  // ── Step 2: Payment ──────────────────────────────────────────────
+  // â”€â”€ Step 2: Payment â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   Widget _buildPaymentStep(MarketProvider prov) {
     _selectedPaymentId ??= prov.defaultPaymentMethod.id;
     return ListView(
@@ -241,9 +241,9 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
               margin: const EdgeInsets.only(bottom: 16),
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
               decoration: BoxDecoration(
-                color: const Color(0xFF10B981).withOpacity(0.07),
+                color: const Color(0xFF10B981).withValues(alpha: 0.07),
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: const Color(0xFF10B981).withOpacity(0.3)),
+                border: Border.all(color: const Color(0xFF10B981).withValues(alpha: 0.3)),
               ),
               child: Row(
                 children: [
@@ -251,7 +251,7 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
                   const SizedBox(width: 8),
                   const Expanded(
                     child: Text(
-                      'AI fraud protection active — your payment is being monitored',
+                      'AI fraud protection active â€” your payment is being monitored',
                       style: TextStyle(fontSize: 12, color: Color(0xFF10B981), fontWeight: FontWeight.w500),
                     ),
                   ),
@@ -352,7 +352,7 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
     );
   }
 
-  // ── Step 3: Confirm ──────────────────────────────────────────────
+  // â”€â”€ Step 3: Confirm â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   Widget _buildConfirmStep(MarketProvider prov, CartSummary? summary) {
     final selectedPayment = prov.paymentMethods
         .where((m) => m.id == _selectedPaymentId)
@@ -439,7 +439,7 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
       ),
       decoration: BoxDecoration(
         color: Colors.white,
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, -2))],
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10, offset: const Offset(0, -2))],
       ),
       child: Row(
         children: [
@@ -472,7 +472,7 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: kMarketColor,
                 foregroundColor: Colors.white,
-                disabledBackgroundColor: kMarketColor.withOpacity(0.4),
+                disabledBackgroundColor: kMarketColor.withValues(alpha: 0.4),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 padding: const EdgeInsets.symmetric(vertical: 14),
                 elevation: 0,
@@ -522,7 +522,7 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
               width: 72,
               height: 72,
               decoration: BoxDecoration(
-                color: order != null ? kMarketColorLight : AppColors.error.withOpacity(0.1),
+                color: order != null ? kMarketColorLight : AppColors.error.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
               child: Icon(order != null ? Icons.check : Icons.error_outline,

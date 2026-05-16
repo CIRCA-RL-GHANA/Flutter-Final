@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// U3: OMNISCIENT SEARCH Screen
 /// Cross-module search with category filters, recent searches,
 /// quick suggestions, real-time results
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -65,7 +65,7 @@ class _SearchScreenState extends State<SearchScreen> {
         if (mounted) setState(() => _aiResults = (ranked as List?)?.cast<Map<String, dynamic>>() ?? []);
       }
     } catch (_) {
-      // AI ranking is best-effort — fall back to standard results silently
+      // AI ranking is best-effort â€” fall back to standard results silently
     } finally {
       if (mounted) setState(() => _aiLoading = false);
     }
@@ -99,7 +99,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kUtilityColor.withOpacity(0.07),
+                    color: kUtilityColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -118,7 +118,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 },
               ),
 
-              // ─── Search Bar ────────────────────────────────
+              // â”€â”€â”€ Search Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
                 child: Container(
@@ -127,7 +127,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     borderRadius: BorderRadius.circular(14),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.04),
+                        color: Colors.black.withValues(alpha: 0.04),
                         blurRadius: 10,
                         offset: const Offset(0, 2),
                       ),
@@ -155,7 +155,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
               ),
 
-              // ─── Category Chips ───────────────────────────
+              // â”€â”€â”€ Category Chips â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               const SizedBox(height: 12),
               UtilityFilterChipRow(
                 labels: SearchCategory.values.map((c) => _categoryLabel(c)).toList(),
@@ -166,7 +166,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
               const SizedBox(height: 8),
 
-              // ─── AI Search Banner ────────────────────────
+              // â”€â”€â”€ AI Search Banner â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               if (hasQuery)
                 _AISearchBanner(
                   isLoading: _aiLoading,
@@ -178,7 +178,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   },
                 ),
 
-              // ─── Content ──────────────────────────────────
+              // â”€â”€â”€ Content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               Expanded(
                 child: hasQuery
                     ? _SearchResults(
@@ -208,7 +208,7 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 }
 
-// ─── Search Idle View ────────────────────────────────────────────────────────
+// â”€â”€â”€ Search Idle View â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _SearchIdleView extends StatelessWidget {
   final UtilityProvider prov;
@@ -299,7 +299,7 @@ class _SearchIdleView extends StatelessWidget {
   }
 }
 
-// ─── AI Search Banner ───────────────────────────────────────────────────────
+// â”€â”€â”€ AI Search Banner â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _AISearchBanner extends StatelessWidget {
   final bool isLoading;
@@ -329,7 +329,7 @@ class _AISearchBanner extends StatelessWidget {
               child: CircularProgressIndicator(strokeWidth: 1.5, color: Color(0xFF8B5CF6)),
             ),
             SizedBox(width: 8),
-            Text('AI re-ranking…', style: TextStyle(fontSize: 11, color: Color(0xFF8B5CF6))),
+            Text('AI re-rankingâ€¦', style: TextStyle(fontSize: 11, color: Color(0xFF8B5CF6))),
           ],
         ),
       );
@@ -372,7 +372,7 @@ class _AISearchBanner extends StatelessWidget {
   }
 }
 
-// ─── Search Results ──────────────────────────────────────────────────────────
+// â”€â”€â”€ Search Results â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _SearchResults extends StatelessWidget {
   final List<SearchResult> results;

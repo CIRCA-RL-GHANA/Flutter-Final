@@ -1,7 +1,7 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// MARKET MODULE — Screen 11: Ride Hailing & Execution
-/// 6 Parts: Request → Matching → Active → In-Ride → Arrival → Post-Ride
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// MARKET MODULE â€” Screen 11: Ride Hailing & Execution
+/// 6 Parts: Request â†’ Matching â†’ Active â†’ In-Ride â†’ Arrival â†’ Post-Ride
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -80,7 +80,7 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
     }
   }
 
-  // ── Phase 0: Request ───────────────────────────────────────────
+  // â”€â”€ Phase 0: Request â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   Widget _buildRequestPhase(BuildContext context, MarketProvider prov) {
     return Column(
       children: [
@@ -88,7 +88,7 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
           builder: (context, ai, _) {
             if (ai.insights.isEmpty) return const SizedBox.shrink();
             return Container(
-              color: kMarketColor.withOpacity(0.07),
+              color: kMarketColor.withValues(alpha: 0.07),
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
               child: Row(children: [
                 const Icon(Icons.auto_awesome, size: 14, color: kMarketColor),
@@ -282,7 +282,7 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
           ),
           decoration: BoxDecoration(
             color: Colors.white,
-            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, -2))],
+            boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10, offset: const Offset(0, -2))],
           ),
           child: SizedBox(
             width: double.infinity,
@@ -299,7 +299,7 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: kMarketColor,
                 foregroundColor: Colors.white,
-                disabledBackgroundColor: kMarketColor.withOpacity(0.4),
+                disabledBackgroundColor: kMarketColor.withValues(alpha: 0.4),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 elevation: 0,
@@ -315,7 +315,7 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
     );
   }
 
-  // ── Phase 1: Matching ──────────────────────────────────────────
+  // â”€â”€ Phase 1: Matching â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   Widget _buildMatchingPhase(BuildContext context, MarketProvider prov) {
     return Scaffold(
       appBar: const MarketAppBar(title: 'Finding a Driver'),
@@ -387,7 +387,7 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
     );
   }
 
-  // ── Phase 2: Driver Assigned ───────────────────────────────────
+  // â”€â”€ Phase 2: Driver Assigned â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   Widget _buildDriverAssignedPhase(BuildContext context, MarketProvider prov, RideRequest ride) {
     return Scaffold(
       body: Column(
@@ -422,7 +422,7 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
-                              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 4)],
+                              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.1), blurRadius: 4)],
                             ),
                             child: const Icon(Icons.arrow_back, size: 20),
                           ),
@@ -433,7 +433,7 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
-                            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 4)],
+                            boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.1), blurRadius: 4)],
                           ),
                           child: Text(
                             'Arriving in ${ride.estimatedMinutes} min',
@@ -453,7 +453,7 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10)],
+              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10)],
             ),
             child: Column(
               children: [
@@ -593,7 +593,7 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
     );
   }
 
-  // ── Phase 3: In Ride ───────────────────────────────────────────
+  // â”€â”€ Phase 3: In Ride â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   Widget _buildInRidePhase(BuildContext context, MarketProvider prov, RideRequest ride) {
     return Scaffold(
       body: Column(
@@ -638,7 +638,7 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
-                            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 4)],
+                            boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.1), blurRadius: 4)],
                           ),
                           child: Text(
                             '${ride.estimatedMinutes} min left',
@@ -658,7 +658,7 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10)],
+              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10)],
             ),
             child: Column(
               children: [
@@ -705,7 +705,7 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
     );
   }
 
-  // ── Phase 4: Arrival ───────────────────────────────────────────
+  // â”€â”€ Phase 4: Arrival â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   Widget _buildArrivalPhase(BuildContext context, MarketProvider prov, RideRequest ride) {
     return Scaffold(
       body: Center(
@@ -741,7 +741,7 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(16),
-                  boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 8)],
+                  boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 8)],
                 ),
                 child: Column(
                   children: [
@@ -804,7 +804,7 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
     );
   }
 
-  // ── Phase 5: Post Ride ─────────────────────────────────────────
+  // â”€â”€ Phase 5: Post Ride â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   Widget _buildPostRidePhase(BuildContext context, MarketProvider prov) {
     return Scaffold(
       body: SafeArea(

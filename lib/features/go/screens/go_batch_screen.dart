@@ -1,4 +1,4 @@
-/// GO Screen 9 — Batch Operations
+﻿/// GO Screen 9 â€” Batch Operations
 /// Batch transfer creator, payment run manager, bulk approval interface
 
 import 'package:flutter/material.dart';
@@ -34,7 +34,7 @@ class _GoBatchScreenState extends State<GoBatchScreen> with SingleTickerProvider
               builder: (context, ai, _) {
                 if (ai.insights.isEmpty) return const SizedBox.shrink();
                 return Container(
-                  color: kGoColor.withOpacity(0.07),
+                  color: kGoColor.withValues(alpha: 0.07),
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                   child: Row(
                     children: [
@@ -142,7 +142,7 @@ class _GoBatchScreenState extends State<GoBatchScreen> with SingleTickerProvider
     final pending = p.batchOperations.where((b) => b.status == TransactionStatus.pending).toList();
     return ListView(padding: const EdgeInsets.all(16), children: [
       if (pending.isNotEmpty) ...[
-        GoSectionCard(borderColor: kGoWarning.withOpacity(0.3), child: Row(children: [
+        GoSectionCard(borderColor: kGoWarning.withValues(alpha: 0.3), child: Row(children: [
           const Icon(Icons.warning_amber, color: kGoWarning, size: 20),
           const SizedBox(width: 10),
           Expanded(child: Text('${pending.length} operations pending approval', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: Color(0xFF92400E)))),
@@ -192,7 +192,7 @@ class _BatchCard extends StatelessWidget {
           const SizedBox(width: 10),
           Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(batch.label ?? batch.typeLabel, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-            Text('${batch.itemCount} items • ${batch.totalAmount.toStringAsFixed(0)} QP', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+            Text('${batch.itemCount} items â€¢ ${batch.totalAmount.toStringAsFixed(0)} QP', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
           ])),
           _StatusChip(status: batch.status.name),
         ]),
@@ -243,7 +243,7 @@ class _StatusChip extends StatelessWidget {
     }
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-      decoration: BoxDecoration(color: c.withOpacity(0.1), borderRadius: BorderRadius.circular(8)),
+      decoration: BoxDecoration(color: c.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(8)),
       child: Text(status, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: c)),
     );
   }

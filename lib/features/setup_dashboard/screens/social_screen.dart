@@ -1,9 +1,9 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SD1.11: SOCIAL — Social Media & Updates
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD1.11: SOCIAL â€” Social Media & Updates
 /// Post feed, scheduled content, engagement metrics
 /// RBAC: Owner(personal), Admin(full), BM(branch), SO(full), BSO(branch),
 ///        Monitor/BrMon(view), RO/BRO(view), Driver(view)
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -43,7 +43,7 @@ class SocialScreen extends StatelessWidget {
             ),
           body: CustomScrollView(
             slivers: [
-              // ─── Engagement KPIs ──────────────────────────
+              // â”€â”€â”€ Engagement KPIs â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -71,7 +71,7 @@ class SocialScreen extends StatelessWidget {
                           label: 'Avg. Engage',
                           value: (() {
                             final published = posts.where((p) => p.status == PostStatus.published).toList();
-                            if (published.isEmpty) return '—';
+                            if (published.isEmpty) return 'â€”';
                             final avg = published.fold<double>(0, (s, p) => s + p.engagementRate) / published.length;
                             return '${avg.toStringAsFixed(1)}%';
                           })(),
@@ -84,7 +84,7 @@ class SocialScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Status Filter ────────────────────────────
+              // â”€â”€â”€ Status Filter â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -105,7 +105,7 @@ class SocialScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Platform Distribution ────────────────────
+              // â”€â”€â”€ Platform Distribution â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -116,7 +116,7 @@ class SocialScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(14),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.04),
+                          color: Colors.black.withValues(alpha: 0.04),
                           blurRadius: 10,
                           offset: const Offset(0, 2),
                         ),
@@ -138,7 +138,7 @@ class SocialScreen extends StatelessWidget {
                             return Container(
                               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                               decoration: BoxDecoration(
-                                color: kSetupColor.withOpacity(0.06),
+                                color: kSetupColor.withValues(alpha: 0.06),
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: Row(
@@ -164,7 +164,7 @@ class SocialScreen extends StatelessWidget {
                   child: const SetupSectionTitle(title: 'Posts', icon: Icons.forum),
                 ),
               ),
-              // ─── AI Insights ─────────────────────────────────────────
+              // â”€â”€â”€ AI Insights â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Consumer<AIInsightsNotifier>(
                   builder: (context, ai, _) {
@@ -173,7 +173,7 @@ class SocialScreen extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: kSetupColor.withOpacity(0.07),
+                          color: kSetupColor.withValues(alpha: 0.07),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -232,7 +232,7 @@ class _PostCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(14),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -272,7 +272,7 @@ class _PostCard extends StatelessWidget {
               height: 120,
               width: double.infinity,
               decoration: BoxDecoration(
-                color: kSetupColor.withOpacity(0.06),
+                color: kSetupColor.withValues(alpha: 0.06),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Center(
@@ -282,12 +282,12 @@ class _PostCard extends StatelessWidget {
                     Icon(
                       post.mediaType == 'Video' ? Icons.play_circle : Icons.image,
                       size: 28,
-                      color: kSetupColor.withOpacity(0.4),
+                      color: kSetupColor.withValues(alpha: 0.4),
                     ),
                     const SizedBox(width: 8),
                     Text(
                       post.mediaType ?? 'Media',
-                      style: TextStyle(fontSize: 13, color: kSetupColor.withOpacity(0.5)),
+                      style: TextStyle(fontSize: 13, color: kSetupColor.withValues(alpha: 0.5)),
                     ),
                   ],
                 ),
@@ -360,7 +360,7 @@ class _PostStat extends StatelessWidget {
   }
 }
 
-// ─── Content Type Chip ───────────────────────────────────────────────────────
+// â”€â”€â”€ Content Type Chip â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _ContentTypeChip extends StatelessWidget {
   final String label;
@@ -381,10 +381,10 @@ class _ContentTypeChip extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
-        color: isSelected ? c.withOpacity(0.12) : Colors.white,
+        color: isSelected ? c.withValues(alpha: 0.12) : Colors.white,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: isSelected ? c.withOpacity(0.4) : AppColors.inputBorder,
+          color: isSelected ? c.withValues(alpha: 0.4) : AppColors.inputBorder,
         ),
       ),
       child: Row(
@@ -402,7 +402,7 @@ class _ContentTypeChip extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
             decoration: BoxDecoration(
-              color: c.withOpacity(0.15),
+              color: c.withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Text(

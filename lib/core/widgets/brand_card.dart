@@ -1,4 +1,4 @@
-import 'dart:ui';
+﻿import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import '../theme/brand.dart';
@@ -6,7 +6,7 @@ import '../theme/brand.dart';
 /// A premium card surface with hairline border, subtle gradient,
 /// optional glassmorphism blur, and depth-tuned shadow.
 ///
-/// Use as the canonical container for any grouped content — feature cards,
+/// Use as the canonical container for any grouped content â€” feature cards,
 /// settings rows, summaries, modals.
 class BrandCard extends StatelessWidget {
   const BrandCard({
@@ -36,12 +36,12 @@ class BrandCard extends StatelessWidget {
         radius: radius,
         elevation: 2,
         glow: true,
-        border: Border.all(color: Brand.cyan.withOpacity(0.45), width: 1.5),
+        border: Border.all(color: Brand.cyan.withValues(alpha: 0.45), width: 1.5),
         onTap: onTap,
         child: child,
       );
 
-  /// Glassmorphism variant — backdrop-blurred translucent fill.
+  /// Glassmorphism variant â€” backdrop-blurred translucent fill.
   factory BrandCard.glass({
     Key? key,
     required Widget child,
@@ -81,7 +81,7 @@ class BrandCard extends StatelessWidget {
     if (!glow) return base;
     return [
       ...(base ?? const <BoxShadow>[]),
-      BoxShadow(color: Brand.cyan.withOpacity(0.18), blurRadius: 32, spreadRadius: 0),
+      BoxShadow(color: Brand.cyan.withValues(alpha: 0.18), blurRadius: 32, spreadRadius: 0),
     ];
   }
 
@@ -94,7 +94,7 @@ class BrandCard extends StatelessWidget {
       curve: Brand.curveStandard,
       padding: padding,
       decoration: BoxDecoration(
-        color: glass ? Brand.bgElevated.withOpacity(0.55) : Brand.bgElevated,
+        color: glass ? Brand.bgElevated.withValues(alpha: 0.55) : Brand.bgElevated,
         gradient: gradient,
         borderRadius: br,
         border: border ?? Border.all(color: Brand.outline, width: 1),
@@ -120,8 +120,8 @@ class BrandCard extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         borderRadius: br,
-        splashColor: Brand.cyan.withOpacity(0.08),
-        highlightColor: Brand.cyan.withOpacity(0.04),
+        splashColor: Brand.cyan.withValues(alpha: 0.08),
+        highlightColor: Brand.cyan.withValues(alpha: 0.04),
         child: content,
       ),
     );

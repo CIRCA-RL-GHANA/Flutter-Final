@@ -1,4 +1,4 @@
-/// GO Screen 10 — Financial Planner
+﻿/// GO Screen 10 â€” Financial Planner
 /// Cash flow forecast, budget manager, goal setting
 
 import 'package:flutter/material.dart';
@@ -34,7 +34,7 @@ class _GoPlannerScreenState extends State<GoPlannerScreen> with SingleTickerProv
               builder: (context, ai, _) {
                 if (ai.insights.isEmpty) return const SizedBox.shrink();
                 return Container(
-                  color: kGoColor.withOpacity(0.07),
+                  color: kGoColor.withValues(alpha: 0.07),
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   child: Row(
                     children: [
@@ -103,7 +103,7 @@ class _GoPlannerScreenState extends State<GoPlannerScreen> with SingleTickerProv
                 ]),
                 const SizedBox(height: 2),
                 Row(children: [
-                  Expanded(flex: (point.expense / maxVal * 100).round().clamp(1, 100).toInt(), child: Container(height: 6, decoration: BoxDecoration(color: kGoNegative.withOpacity(0.6), borderRadius: BorderRadius.circular(3)))),
+                  Expanded(flex: (point.expense / maxVal * 100).round().clamp(1, 100).toInt(), child: Container(height: 6, decoration: BoxDecoration(color: kGoNegative.withValues(alpha: 0.6), borderRadius: BorderRadius.circular(3)))),
                   Expanded(flex: (100 - (point.expense / maxVal * 100).round()).clamp(1, 100).toInt(), child: const SizedBox()),
                 ]),
               ])),
@@ -115,12 +115,12 @@ class _GoPlannerScreenState extends State<GoPlannerScreen> with SingleTickerProv
         Row(children: [
           const _LegendDot(color: kGoPositive, label: 'Inflow'),
           const SizedBox(width: 16),
-          _LegendDot(color: kGoNegative.withOpacity(0.6), label: 'Outflow'),
+          _LegendDot(color: kGoNegative.withValues(alpha: 0.6), label: 'Outflow'),
         ]),
       ])),
       const SizedBox(height: 14),
       // AI Prediction
-      GoSectionCard(borderColor: kGoInfo.withOpacity(0.3), child: const Row(children: [
+      GoSectionCard(borderColor: kGoInfo.withValues(alpha: 0.3), child: const Row(children: [
         Icon(Icons.auto_awesome, size: 18, color: kGoInfo),
         SizedBox(width: 10),
         Expanded(child: Text('AI Prediction: Your net cash flow is expected to be positive for the next 30 days. Consider allocating surplus to savings goals.', style: TextStyle(fontSize: 12, color: Color(0xFF1E40AF)))),
@@ -187,7 +187,7 @@ class _SummaryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
     padding: const EdgeInsets.all(14),
-    decoration: BoxDecoration(color: color.withOpacity(0.08), borderRadius: BorderRadius.circular(12)),
+    decoration: BoxDecoration(color: color.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(12)),
     child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text(label, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: color)),
       const SizedBox(height: 4),

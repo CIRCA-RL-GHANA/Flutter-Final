@@ -1,7 +1,7 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// MARKET MODULE — Screen 3.1: Product Filters
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// MARKET MODULE â€” Screen 3.1: Product Filters
 /// Advanced product filtering: price, dietary, availability, category
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -49,7 +49,7 @@ class _MarketProductFiltersScreenState extends State<MarketProductFiltersScreen>
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kMarketColor.withOpacity(0.07),
+                    color: kMarketColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -105,8 +105,8 @@ class _MarketProductFiltersScreenState extends State<MarketProductFiltersScreen>
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           _PricePreset(label: 'Under \$10', onTap: () => setState(() => _priceRange = const RangeValues(0, 10))),
-                          _PricePreset(label: '\$10–\$25', onTap: () => setState(() => _priceRange = const RangeValues(10, 25))),
-                          _PricePreset(label: '\$25–\$50', onTap: () => setState(() => _priceRange = const RangeValues(25, 50))),
+                          _PricePreset(label: '\$10â€“\$25', onTap: () => setState(() => _priceRange = const RangeValues(10, 25))),
+                          _PricePreset(label: '\$25â€“\$50', onTap: () => setState(() => _priceRange = const RangeValues(25, 50))),
                           _PricePreset(label: '\$50+', onTap: () => setState(() => _priceRange = const RangeValues(50, 200))),
                         ],
                       ),
@@ -266,7 +266,7 @@ class _MarketProductFiltersScreenState extends State<MarketProductFiltersScreen>
             ),
             decoration: BoxDecoration(
               color: Colors.white,
-              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, -2))],
+              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10, offset: const Offset(0, -2))],
             ),
             child: Row(
               children: [
@@ -334,17 +334,17 @@ class _MarketProductFiltersScreenState extends State<MarketProductFiltersScreen>
   String _dietaryLabel(DietaryPreference d) {
     switch (d) {
       case DietaryPreference.vegetarian:
-        return '🥬 Vegetarian';
+        return 'ðŸ¥¬ Vegetarian';
       case DietaryPreference.vegan:
-        return '🌱 Vegan';
+        return 'ðŸŒ± Vegan';
       case DietaryPreference.glutenFree:
-        return '🌾 Gluten-free';
+        return 'ðŸŒ¾ Gluten-free';
       case DietaryPreference.halal:
-        return '🕌 Halal';
+        return 'ðŸ•Œ Halal';
       case DietaryPreference.kosher:
-        return '✡ Kosher';
+        return 'âœ¡ Kosher';
       case DietaryPreference.organic:
-        return '🌿 Organic';
+        return 'ðŸŒ¿ Organic';
     }
   }
 

@@ -1,24 +1,24 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// LIVE MODULE — Shared Widgets
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// LIVE MODULE â€” Shared Widgets
 /// Reusable UI components: LiveAppBar, LiveOrderCard, LivePackageCard,
 /// LiveReturnCard, LiveDriverCard, LiveMetricBadge, LiveTimeline,
 /// LiveVerificationWidget, LiveSectionCard, LiveEmptyState, etc.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../core/theme/app_colors.dart';
 import '../models/live_models.dart';
 
-// ─── LIVE Module Color ───────────────────────────────────────────────────────
+// â”€â”€â”€ LIVE Module Color â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-/// The canonical module color for LIVE (Vibrant Red-Orange — Operations)
+/// The canonical module color for LIVE (Vibrant Red-Orange â€” Operations)
 const Color kLiveColor = Color(0xFFEF4444);
 const Color kLiveColorLight = Color(0xFFFEE2E2);
 const Color kLiveColorDark = Color(0xFF991B1B);
 const Color kLiveAccent = Color(0xFFF97316);
 
-// ─── Live App Bar ────────────────────────────────────────────────────────────
+// â”€â”€â”€ Live App Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class LiveAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -62,7 +62,7 @@ class LiveAppBar extends StatelessWidget implements PreferredSizeWidget {
                     color: kLiveColor,
                     boxShadow: [
                       BoxShadow(
-                        color: kLiveColor.withOpacity(0.4),
+                        color: kLiveColor.withValues(alpha: 0.4),
                         blurRadius: 6,
                         spreadRadius: 1,
                       ),
@@ -87,7 +87,7 @@ class LiveAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-// ─── Live Order Card ─────────────────────────────────────────────────────────
+// â”€â”€â”€ Live Order Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class LiveOrderCard extends StatelessWidget {
   final LiveOrder order;
@@ -116,12 +116,12 @@ class LiveOrderCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
             color: order.priority == OrderPriority.urgent
-                ? kLiveColor.withOpacity(0.3)
+                ? kLiveColor.withValues(alpha: 0.3)
                 : Colors.grey.shade200,
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.04),
+              color: Colors.black.withValues(alpha: 0.04),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -146,7 +146,7 @@ class LiveOrderCard extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                       decoration: BoxDecoration(
-                        color: kLiveColor.withOpacity(0.1),
+                        color: kLiveColor.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: Row(
@@ -260,7 +260,7 @@ class LiveOrderCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: const Color(0xFFF0FDF4),
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: const Color(0xFF10B981).withOpacity(0.2)),
+                    border: Border.all(color: const Color(0xFF10B981).withValues(alpha: 0.2)),
                   ),
                   child: Row(
                     children: [
@@ -287,7 +287,7 @@ class LiveOrderCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: const Color(0xFFFEF3C7),
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: const Color(0xFFF59E0B).withOpacity(0.2)),
+                    border: Border.all(color: const Color(0xFFF59E0B).withValues(alpha: 0.2)),
                   ),
                   child: Row(
                     children: [
@@ -334,7 +334,7 @@ class LiveOrderCard extends StatelessWidget {
   }
 }
 
-// ─── Live Package Card ───────────────────────────────────────────────────────
+// â”€â”€â”€ Live Package Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class LivePackageCard extends StatelessWidget {
   final LivePackage package;
@@ -362,7 +362,7 @@ class LivePackageCard extends StatelessWidget {
           border: Border.all(color: Colors.grey.shade200),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.04),
+              color: Colors.black.withValues(alpha: 0.04),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -462,7 +462,7 @@ class LivePackageCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: const Color(0xFFEFF6FF),
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: const Color(0xFF3B82F6).withOpacity(0.2)),
+                    border: Border.all(color: const Color(0xFF3B82F6).withValues(alpha: 0.2)),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -518,7 +518,7 @@ class LivePackageCard extends StatelessWidget {
   }
 }
 
-// ─── Live Return Card ────────────────────────────────────────────────────────
+// â”€â”€â”€ Live Return Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class LiveReturnCard extends StatelessWidget {
   final LiveReturn ret;
@@ -546,7 +546,7 @@ class LiveReturnCard extends StatelessWidget {
           border: Border.all(color: Colors.grey.shade200),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.04),
+              color: Colors.black.withValues(alpha: 0.04),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -593,7 +593,7 @@ class LiveReturnCard extends StatelessWidget {
                 children: [
                   Icon(Icons.shopping_bag_outlined, size: 16, color: AppColors.textSecondary),
                   const SizedBox(width: 4),
-                  Text('${ret.itemName} • ₵${ret.itemPrice.toStringAsFixed(0)}', style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+                  Text('${ret.itemName} â€¢ â‚µ${ret.itemPrice.toStringAsFixed(0)}', style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
                 ],
               ),
               const SizedBox(height: 4),
@@ -604,7 +604,7 @@ class LiveReturnCard extends StatelessWidget {
                   const SizedBox(width: 4),
                   Expanded(
                     child: Text(
-                      '${ret.reason}${ret.reasonDetail != null ? " • \"${ret.reasonDetail}\"" : ""}',
+                      '${ret.reason}${ret.reasonDetail != null ? " â€¢ \"${ret.reasonDetail}\"" : ""}',
                       style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -646,7 +646,7 @@ class LiveReturnCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Text(
-                    'Reviewer: ${ret.reviewerName} • Started ${ret.reviewStartedAt != null ? "${DateTime.now().difference(ret.reviewStartedAt!).inMinutes}min ago" : ""}',
+                    'Reviewer: ${ret.reviewerName} â€¢ Started ${ret.reviewStartedAt != null ? "${DateTime.now().difference(ret.reviewStartedAt!).inMinutes}min ago" : ""}',
                     style: const TextStyle(fontSize: 11, color: Color(0xFF92400E)),
                   ),
                 ),
@@ -709,7 +709,7 @@ class LiveReturnCard extends StatelessWidget {
   }
 }
 
-// ─── Live Driver Card ────────────────────────────────────────────────────────
+// â”€â”€â”€ Live Driver Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class LiveDriverCard extends StatelessWidget {
   final LiveDriver driver;
@@ -735,12 +735,12 @@ class LiveDriverCard extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: isRecommended ? const Color(0xFF10B981).withOpacity(0.3) : Colors.grey.shade200,
+          color: isRecommended ? const Color(0xFF10B981).withValues(alpha: 0.3) : Colors.grey.shade200,
           width: isRecommended ? 2 : 1,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -763,7 +763,7 @@ class LiveDriverCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: const Text(
-                        '🥇 RECOMMENDED',
+                        'ðŸ¥‡ RECOMMENDED',
                         style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white),
                       ),
                     ),
@@ -775,7 +775,7 @@ class LiveDriverCard extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 20,
-                  backgroundColor: const Color(0xFF3B82F6).withOpacity(0.1),
+                  backgroundColor: const Color(0xFF3B82F6).withValues(alpha: 0.1),
                   child: Text(
                     driver.name.split(' ').map((n) => n[0]).take(2).join(),
                     style: const TextStyle(fontWeight: FontWeight.w700, color: Color(0xFF3B82F6)),
@@ -794,7 +794,7 @@ class LiveDriverCard extends StatelessWidget {
                         children: [
                           Icon(Icons.star, size: 14, color: const Color(0xFFF59E0B)),
                           Text(' ${driver.rating} ', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
-                          Text('• ${driver.distanceMiles}mi away', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                          Text('â€¢ ${driver.distanceMiles}mi away', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                         ],
                       ),
                     ],
@@ -865,7 +865,7 @@ class LiveDriverCard extends StatelessWidget {
   }
 }
 
-// ─── Live Metric Badge ───────────────────────────────────────────────────────
+// â”€â”€â”€ Live Metric Badge â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class LiveMetricBadge extends StatelessWidget {
   final String label;
@@ -888,9 +888,9 @@ class LiveMetricBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.08),
+        color: color.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: color.withOpacity(0.15)),
+        border: Border.all(color: color.withValues(alpha: 0.15)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -907,7 +907,7 @@ class LiveMetricBadge extends StatelessWidget {
           Text(value, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: color)),
           if (trend != null) ...[
             const SizedBox(height: 2),
-            Text(trend!, style: TextStyle(fontSize: 10, color: color.withOpacity(0.7))),
+            Text(trend!, style: TextStyle(fontSize: 10, color: color.withValues(alpha: 0.7))),
           ],
         ],
       ),
@@ -915,7 +915,7 @@ class LiveMetricBadge extends StatelessWidget {
   }
 }
 
-// ─── Live Timeline Widget ────────────────────────────────────────────────────
+// â”€â”€â”€ Live Timeline Widget â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class LiveTimelineWidget extends StatelessWidget {
   final List<OrderTimelineEntry> entries;
@@ -953,7 +953,7 @@ class LiveTimelineWidget extends StatelessWidget {
                     Container(
                       width: 2,
                       height: 28,
-                      color: entries[i].isCompleted ? const Color(0xFF10B981).withOpacity(0.3) : Colors.grey.shade200,
+                      color: entries[i].isCompleted ? const Color(0xFF10B981).withValues(alpha: 0.3) : Colors.grey.shade200,
                     ),
                 ],
               ),
@@ -991,7 +991,7 @@ class LiveTimelineWidget extends StatelessWidget {
                   shape: BoxShape.circle,
                   color: kLiveColor,
                   boxShadow: [
-                    BoxShadow(color: kLiveColor.withOpacity(0.4), blurRadius: 6),
+                    BoxShadow(color: kLiveColor.withValues(alpha: 0.4), blurRadius: 6),
                   ],
                 ),
               ),
@@ -1014,7 +1014,7 @@ class LiveTimelineWidget extends StatelessWidget {
   }
 }
 
-// ─── Live Section Card ───────────────────────────────────────────────────────
+// â”€â”€â”€ Live Section Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class LiveSectionCard extends StatelessWidget {
   final String title;
@@ -1041,7 +1041,7 @@ class LiveSectionCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -1079,7 +1079,7 @@ class LiveSectionCard extends StatelessWidget {
   }
 }
 
-// ─── Live Empty State ────────────────────────────────────────────────────────
+// â”€â”€â”€ Live Empty State â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class LiveEmptyState extends StatelessWidget {
   final IconData icon;
@@ -1179,7 +1179,7 @@ class LiveEmptyState extends StatelessWidget {
   }
 }
 
-// ─── Verification PIN Display ────────────────────────────────────────────────
+// â”€â”€â”€ Verification PIN Display â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class PinDisplayWidget extends StatelessWidget {
   final String pin;
@@ -1212,7 +1212,7 @@ class PinDisplayWidget extends StatelessWidget {
               width: 36,
               height: 44,
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.2),
+                color: Colors.white.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Center(
@@ -1250,7 +1250,7 @@ class PinDisplayWidget extends StatelessWidget {
   }
 }
 
-// ─── Private Helpers ─────────────────────────────────────────────────────────
+// â”€â”€â”€ Private Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _PriorityBadge extends StatelessWidget {
   final OrderPriority priority;
@@ -1263,7 +1263,7 @@ class _PriorityBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(6),
       ),
       child: Text(
@@ -1294,7 +1294,7 @@ class _StatusBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(6),
       ),
       child: Text(
@@ -1350,7 +1350,7 @@ class _LiveActionChip extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
         decoration: BoxDecoration(
-          border: Border.all(color: kLiveColor.withOpacity(0.3)),
+          border: Border.all(color: kLiveColor.withValues(alpha: 0.3)),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Row(
@@ -1380,7 +1380,7 @@ class _AvailabilityDot extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: color,
-        boxShadow: [BoxShadow(color: color.withOpacity(0.4), blurRadius: 4)],
+        boxShadow: [BoxShadow(color: color.withValues(alpha: 0.4), blurRadius: 4)],
       ),
     );
   }

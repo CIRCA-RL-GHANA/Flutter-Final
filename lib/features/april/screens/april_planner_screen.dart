@@ -1,4 +1,4 @@
-/// APRIL Screen 2 — Planner Command Center (Financial Dashboard)
+﻿/// APRIL Screen 2 â€” Planner Command Center (Financial Dashboard)
 /// 4 tabs: Overview, Transactions, Budgets, Analytics
 
 import 'package:flutter/material.dart';
@@ -43,7 +43,7 @@ class _AprilPlannerScreenState extends State<AprilPlannerScreen> with SingleTick
         return Scaffold(
           backgroundColor: const Color(0xFFF8F9FE),
           appBar: AprilAppBar(
-            title: '💰 Planner',
+            title: 'ðŸ’° Planner',
             actions: [
               IconButton(icon: const Icon(Icons.download, size: 22), onPressed: () {}),
             ],
@@ -109,10 +109,10 @@ class _AprilPlannerScreenState extends State<AprilPlannerScreen> with SingleTick
               spacing: 8,
               runSpacing: 8,
               children: [
-                const _QuickAddChip(label: '☕ Coffee', amount: '15.00', category: TransactionCategory.dining),
-                const _QuickAddChip(label: '🚕 Ride', amount: '25.00', category: TransactionCategory.transport),
-                const _QuickAddChip(label: '🛒 Groceries', amount: '120.00', category: TransactionCategory.groceries),
-                const _QuickAddChip(label: '💊 Medicine', amount: '45.00', category: TransactionCategory.healthcare),
+                const _QuickAddChip(label: 'â˜• Coffee', amount: '15.00', category: TransactionCategory.dining),
+                const _QuickAddChip(label: 'ðŸš• Ride', amount: '25.00', category: TransactionCategory.transport),
+                const _QuickAddChip(label: 'ðŸ›’ Groceries', amount: '120.00', category: TransactionCategory.groceries),
+                const _QuickAddChip(label: 'ðŸ’Š Medicine', amount: '45.00', category: TransactionCategory.healthcare),
               ],
             ),
             const SizedBox(height: 16),
@@ -133,9 +133,9 @@ class _AprilPlannerScreenState extends State<AprilPlannerScreen> with SingleTick
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Tab 1: OVERVIEW
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 class _OverviewTab extends StatelessWidget {
   final AprilProvider provider;
   const _OverviewTab({required this.provider});
@@ -164,17 +164,17 @@ class _OverviewTab extends StatelessWidget {
               const Text('Current Balance', style: TextStyle(color: Colors.white70, fontSize: 13)),
               const SizedBox(height: 4),
               Text(
-                '₵${summary.currentBalance.toStringAsFixed(2)}',
+                'â‚µ${summary.currentBalance.toStringAsFixed(2)}',
                 style: const TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.w800),
               ),
               const SizedBox(height: 16),
               Row(
                 children: [
-                  _BalanceStat(label: 'Income', value: '₵${summary.totalIncome.toStringAsFixed(0)}', icon: Icons.arrow_upward, color: const Color(0xFF10B981)),
+                  _BalanceStat(label: 'Income', value: 'â‚µ${summary.totalIncome.toStringAsFixed(0)}', icon: Icons.arrow_upward, color: const Color(0xFF10B981)),
                   const SizedBox(width: 20),
-                  _BalanceStat(label: 'Expenses', value: '₵${summary.totalExpenses.toStringAsFixed(0)}', icon: Icons.arrow_downward, color: const Color(0xFFEF4444)),
+                  _BalanceStat(label: 'Expenses', value: 'â‚µ${summary.totalExpenses.toStringAsFixed(0)}', icon: Icons.arrow_downward, color: const Color(0xFFEF4444)),
                   const SizedBox(width: 20),
-                  _BalanceStat(label: 'Savings', value: '₵${summary.savingsRate.toStringAsFixed(0)}%', icon: Icons.savings, color: kAprilColor),
+                  _BalanceStat(label: 'Savings', value: 'â‚µ${summary.savingsRate.toStringAsFixed(0)}%', icon: Icons.savings, color: kAprilColor),
                 ],
               ),
             ],
@@ -199,18 +199,18 @@ class _OverviewTab extends StatelessWidget {
         // Monthly Summary Row
         Row(
           children: [
-            Expanded(child: _SummaryMini(emoji: '📊', title: 'Transactions', value: '${provider.transactions.length}')),
+            Expanded(child: _SummaryMini(emoji: 'ðŸ“Š', title: 'Transactions', value: '${provider.transactions.length}')),
             const SizedBox(width: 12),
-            Expanded(child: _SummaryMini(emoji: '📅', title: 'Bills Due', value: '${provider.upcomingBills.length}')),
+            Expanded(child: _SummaryMini(emoji: 'ðŸ“…', title: 'Bills Due', value: '${provider.upcomingBills.length}')),
             const SizedBox(width: 12),
-            Expanded(child: _SummaryMini(emoji: '🎯', title: 'Budgets', value: '${provider.budgetCategories.length}')),
+            Expanded(child: _SummaryMini(emoji: 'ðŸŽ¯', title: 'Budgets', value: '${provider.budgetCategories.length}')),
           ],
         ),
         const SizedBox(height: 16),
 
         // Upcoming Bills
         AprilSectionCard(
-          title: '📅 Upcoming Bills',
+          title: 'ðŸ“… Upcoming Bills',
           trailing: TextButton(
             onPressed: () {},
             child: const Text('See all', style: TextStyle(fontSize: 12, color: kAprilColorDark)),
@@ -225,8 +225,8 @@ class _OverviewTab extends StatelessWidget {
                     height: 36,
                     decoration: BoxDecoration(
                       color: bill.isOverdue
-                          ? const Color(0xFFEF4444).withOpacity(0.1)
-                          : kAprilColor.withOpacity(0.1),
+                          ? const Color(0xFFEF4444).withValues(alpha: 0.1)
+                          : kAprilColor.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Icon(
@@ -254,7 +254,7 @@ class _OverviewTab extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '₵${bill.amount.toStringAsFixed(2)}',
+                    'â‚µ${bill.amount.toStringAsFixed(2)}',
                     style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
                   ),
                 ],
@@ -266,7 +266,7 @@ class _OverviewTab extends StatelessWidget {
 
         // Recent Transactions
         AprilSectionCard(
-          title: '🧾 Recent Transactions',
+          title: 'ðŸ§¾ Recent Transactions',
           trailing: TextButton(
             onPressed: () {},
             child: const Text('View all', style: TextStyle(fontSize: 12, color: kAprilColorDark)),
@@ -281,9 +281,9 @@ class _OverviewTab extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Tab 2: TRANSACTIONS
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 class _TransactionsTab extends StatelessWidget {
   final AprilProvider provider;
   const _TransactionsTab({required this.provider});
@@ -358,22 +358,22 @@ class _TransactionsTab extends StatelessWidget {
 
   String _categoryLabel(TransactionCategory c) {
     switch (c) {
-      case TransactionCategory.dining: return '🍽️ Dining';
-      case TransactionCategory.groceries: return '🛒 Groceries';
-      case TransactionCategory.transport: return '🚗 Transport';
-      case TransactionCategory.healthcare: return '💊 Health';
-      case TransactionCategory.entertainment: return '🎬 Fun';
-      case TransactionCategory.shopping: return '🛍️ Shop';
-      case TransactionCategory.utilities: return '📄 Bills';
-      case TransactionCategory.education: return '📚 Edu';
+      case TransactionCategory.dining: return 'ðŸ½ï¸ Dining';
+      case TransactionCategory.groceries: return 'ðŸ›’ Groceries';
+      case TransactionCategory.transport: return 'ðŸš— Transport';
+      case TransactionCategory.healthcare: return 'ðŸ’Š Health';
+      case TransactionCategory.entertainment: return 'ðŸŽ¬ Fun';
+      case TransactionCategory.shopping: return 'ðŸ›ï¸ Shop';
+      case TransactionCategory.utilities: return 'ðŸ“„ Bills';
+      case TransactionCategory.education: return 'ðŸ“š Edu';
       default: return c.name;
     }
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Tab 3: BUDGETS
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 class _BudgetsTab extends StatelessWidget {
   final AprilProvider provider;
   const _BudgetsTab({required this.provider});
@@ -398,7 +398,7 @@ class _BudgetsTab extends StatelessWidget {
                 children: [
                   const Text('Total Budget', style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
                   Text(
-                    '₵${provider.budgetCategories.fold<double>(0, (sum, b) => sum + b.limit).toStringAsFixed(0)}',
+                    'â‚µ${provider.budgetCategories.fold<double>(0, (sum, b) => sum + b.limit).toStringAsFixed(0)}',
                     style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
                   ),
                 ],
@@ -409,7 +409,7 @@ class _BudgetsTab extends StatelessWidget {
                 children: [
                   const Text('Total Spent', style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
                   Text(
-                    '₵${provider.budgetCategories.fold<double>(0, (sum, b) => sum + b.spent).toStringAsFixed(0)}',
+                    'â‚µ${provider.budgetCategories.fold<double>(0, (sum, b) => sum + b.spent).toStringAsFixed(0)}',
                     style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFFEF4444)),
                   ),
                 ],
@@ -443,13 +443,13 @@ class _BudgetsTab extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: kAprilAccent.withOpacity(0.05),
+            color: kAprilAccent.withValues(alpha: 0.05),
             borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: kAprilAccent.withOpacity(0.2)),
+            border: Border.all(color: kAprilAccent.withValues(alpha: 0.2)),
           ),
           child: Row(
             children: [
-              const Text('💡', style: TextStyle(fontSize: 24)),
+              const Text('ðŸ’¡', style: TextStyle(fontSize: 24)),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(
@@ -473,9 +473,9 @@ class _BudgetsTab extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Tab 4: ANALYTICS
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 class _AnalyticsTab extends StatelessWidget {
   final AprilProvider provider;
   const _AnalyticsTab({required this.provider});
@@ -533,7 +533,7 @@ class _AnalyticsTab extends StatelessWidget {
 
         // Spending Trend
         AprilSectionCard(
-          title: '📈 Spending Trend',
+          title: 'ðŸ“ˆ Spending Trend',
           child: SizedBox(
             height: 160,
             child: Row(
@@ -556,7 +556,7 @@ class _AnalyticsTab extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: dp.label == provider.spendingData.last.label
                               ? kAprilColor
-                              : kAprilColor.withOpacity(0.3),
+                              : kAprilColor.withValues(alpha: 0.3),
                           borderRadius: BorderRadius.circular(4),
                         ),
                       ),
@@ -573,14 +573,14 @@ class _AnalyticsTab extends StatelessWidget {
 
         // Improvement Tips
         AprilSectionCard(
-          title: '🎯 Improvement Tips',
+          title: 'ðŸŽ¯ Improvement Tips',
           child: Column(
             children: fh.tips.map((tip) => Padding(
               padding: const EdgeInsets.only(bottom: 8),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('•', style: TextStyle(fontSize: 16, color: kAprilColorDark)),
+                  const Text('â€¢', style: TextStyle(fontSize: 16, color: kAprilColorDark)),
                   const SizedBox(width: 8),
                   Expanded(child: Text(tip, style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280)))),
                 ],
@@ -600,9 +600,9 @@ class _AnalyticsTab extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // SHARED MINI WIDGETS
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _BalanceStat extends StatelessWidget {
   final String label, value;
@@ -697,11 +697,11 @@ class _QuickAddChip extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
         decoration: BoxDecoration(
-          color: kAprilColor.withOpacity(0.1),
+          color: kAprilColor.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: kAprilColor.withOpacity(0.3)),
+          border: Border.all(color: kAprilColor.withValues(alpha: 0.3)),
         ),
-        child: Text('$label ₵$amount', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500)),
+        child: Text('$label â‚µ$amount', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500)),
       ),
     );
   }

@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SCREEN 3 — Likes List
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SCREEN 3 â€” Likes List
 /// Shows who liked an update: search/filter, mutual connections, online
 /// indicators, follow buttons, reaction type badges.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -70,7 +70,7 @@ class _BodyState extends State<_Body> with SingleTickerProviderStateMixin {
                 child: Center(
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                    decoration: BoxDecoration(color: kUpdatesColor.withOpacity(0.08), borderRadius: BorderRadius.circular(12)),
+                    decoration: BoxDecoration(color: kUpdatesColor.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(12)),
                     child: Text('${prov.likers.length}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: kUpdatesColor)),
                   ),
                 ),
@@ -83,7 +83,7 @@ class _BodyState extends State<_Body> with SingleTickerProviderStateMixin {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kUpdatesColor.withOpacity(0.07),
+                    color: kUpdatesColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -156,15 +156,15 @@ class _BodyState extends State<_Body> with SingleTickerProviderStateMixin {
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.symmetric(horizontal: 14),
                   children: [
-                    const _ReactionChip(emoji: '❤️', label: 'All', isSelected: true),
+                    const _ReactionChip(emoji: 'â¤ï¸', label: 'All', isSelected: true),
                     const SizedBox(width: 6),
-                    const _ReactionChip(emoji: '👍', label: 'Like', isSelected: false),
+                    const _ReactionChip(emoji: 'ðŸ‘', label: 'Like', isSelected: false),
                     const SizedBox(width: 6),
-                    const _ReactionChip(emoji: '🔥', label: 'Fire', isSelected: false),
+                    const _ReactionChip(emoji: 'ðŸ”¥', label: 'Fire', isSelected: false),
                     const SizedBox(width: 6),
-                    const _ReactionChip(emoji: '😂', label: 'Laugh', isSelected: false),
+                    const _ReactionChip(emoji: 'ðŸ˜‚', label: 'Laugh', isSelected: false),
                     const SizedBox(width: 6),
-                    const _ReactionChip(emoji: '😮', label: 'Wow', isSelected: false),
+                    const _ReactionChip(emoji: 'ðŸ˜®', label: 'Wow', isSelected: false),
                   ],
                 ),
               ),
@@ -234,7 +234,7 @@ class _ReactionChip extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
-        color: isSelected ? kUpdatesColor.withOpacity(0.1) : Colors.white,
+        color: isSelected ? kUpdatesColor.withValues(alpha: 0.1) : Colors.white,
         borderRadius: BorderRadius.circular(18),
         border: Border.all(color: isSelected ? kUpdatesColor : Colors.grey.shade200),
       ),

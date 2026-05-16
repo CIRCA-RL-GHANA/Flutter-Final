@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// LIVE MODULE — Screen 22: Live Module Settings
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// LIVE MODULE â€” Screen 22: Live Module Settings
 /// Configuration: auto-assign, bundles, returns, verification defaults,
 /// thresholds, driver policies, performance targets
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -39,7 +39,7 @@ class _LiveSettingsScreenState extends State<LiveSettingsScreen> {
                     margin: const EdgeInsets.only(bottom: 12),
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     decoration: BoxDecoration(
-                      color: kLiveColor.withOpacity(0.07),
+                      color: kLiveColor.withValues(alpha: 0.07),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Row(
@@ -89,7 +89,7 @@ class _LiveSettingsScreenState extends State<LiveSettingsScreen> {
                       value: s.minimumDriverRating,
                       min: 3.0,
                       max: 5.0,
-                      suffix: '★',
+                      suffix: 'â˜…',
                       divisions: 20,
                       onChanged: (v) => prov.updateSettings(s.copyWith(minimumDriverRating: v)),
                     ),
@@ -254,7 +254,7 @@ class _LiveSettingsScreenState extends State<LiveSettingsScreen> {
                       value: s.customerRatingTarget,
                       min: 3.0,
                       max: 5.0,
-                      suffix: '★',
+                      suffix: 'â˜…',
                       divisions: 20,
                       onChanged: (v) => prov.updateSettings(s.copyWith(customerRatingTarget: v)),
                     ),
@@ -276,12 +276,12 @@ class _LiveSettingsScreenState extends State<LiveSettingsScreen> {
                 decoration: BoxDecoration(
                   color: const Color(0xFFFEE2E2),
                   borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: kLiveColor.withOpacity(0.3)),
+                  border: Border.all(color: kLiveColor.withValues(alpha: 0.3)),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('⚠️ DANGER ZONE', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w800, color: kLiveColor)),
+                    const Text('âš ï¸ DANGER ZONE', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w800, color: kLiveColor)),
                     const SizedBox(height: 8),
                     SizedBox(
                       width: double.infinity,
@@ -314,10 +314,10 @@ class _LiveSettingsScreenState extends State<LiveSettingsScreen> {
   }
 
   (String, String, String) _verificationInfo(DefaultVerification method) => switch (method) {
-        DefaultVerification.biometricOnly => ('🔐', 'Biometric Only', 'Fingerprint or face verification'),
-        DefaultVerification.pinOnly => ('🔑', 'PIN Only', 'Customer enters a delivery PIN'),
-        DefaultVerification.biometricAndPin => ('🛡️', 'Biometric + PIN', 'Full multi-factor verification'),
-        DefaultVerification.photoSignature => ('📸', 'Photo + Signature', 'Photo proof with digital signature'),
+        DefaultVerification.biometricOnly => ('ðŸ”', 'Biometric Only', 'Fingerprint or face verification'),
+        DefaultVerification.pinOnly => ('ðŸ”‘', 'PIN Only', 'Customer enters a delivery PIN'),
+        DefaultVerification.biometricAndPin => ('ðŸ›¡ï¸', 'Biometric + PIN', 'Full multi-factor verification'),
+        DefaultVerification.photoSignature => ('ðŸ“¸', 'Photo + Signature', 'Photo proof with digital signature'),
       };
 }
 
@@ -396,7 +396,7 @@ class _SliderSetting extends StatelessWidget {
               Expanded(child: Text(label, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500))),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                decoration: BoxDecoration(color: kLiveColor.withOpacity(0.1), borderRadius: BorderRadius.circular(6)),
+                decoration: BoxDecoration(color: kLiveColor.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(6)),
                 child: Text('${value.toStringAsFixed(value == value.roundToDouble() ? 0 : 1)} $suffix', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: kLiveColor)),
               ),
             ],
@@ -404,9 +404,9 @@ class _SliderSetting extends StatelessWidget {
           SliderTheme(
             data: SliderThemeData(
               activeTrackColor: kLiveColor,
-              inactiveTrackColor: kLiveColor.withOpacity(0.15),
+              inactiveTrackColor: kLiveColor.withValues(alpha: 0.15),
               thumbColor: kLiveColor,
-              overlayColor: kLiveColor.withOpacity(0.1),
+              overlayColor: kLiveColor.withValues(alpha: 0.1),
               trackHeight: 3,
             ),
             child: Slider(

@@ -1,4 +1,4 @@
-/// GO Screen 15 — Archive & History
+﻿/// GO Screen 15 â€” Archive & History
 /// Transaction archive, historical analysis, compliance storage
 
 import 'package:flutter/material.dart';
@@ -51,7 +51,7 @@ class _GoArchiveScreenState extends State<GoArchiveScreen> with SingleTickerProv
               builder: (context, ai, _) {
                 if (ai.insights.isEmpty) return const SizedBox.shrink();
                 return Container(
-                  color: kGoColor.withOpacity(0.07),
+                  color: kGoColor.withValues(alpha: 0.07),
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                   child: Row(
                     children: [
@@ -171,7 +171,7 @@ class _GoArchiveScreenState extends State<GoArchiveScreen> with SingleTickerProv
 
   Widget _buildComplianceStorage(GoProvider p) {
     return ListView(padding: const EdgeInsets.all(16), children: [
-      GoSectionCard(borderColor: kGoInfo.withOpacity(0.3), child: const Row(children: [
+      GoSectionCard(borderColor: kGoInfo.withValues(alpha: 0.3), child: const Row(children: [
         Icon(Icons.info_outline, size: 18, color: kGoInfo),
         SizedBox(width: 10),
         Expanded(child: Text('All transaction records are retained for 7 years in compliance with regulatory requirements.', style: TextStyle(fontSize: 12, color: Color(0xFF1E40AF)))),
@@ -235,7 +235,7 @@ class _ArchiveCard extends StatelessWidget {
           Text('${record.totalValue.toStringAsFixed(0)} QP', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: kGoColor)),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
-            decoration: BoxDecoration(color: const Color(0xFF9CA3AF).withOpacity(0.1), borderRadius: BorderRadius.circular(4)),
+            decoration: BoxDecoration(color: const Color(0xFF9CA3AF).withValues(alpha: 0.1), borderRadius: BorderRadius.circular(4)),
             child: Text(record.type, style: const TextStyle(fontSize: 9, color: Color(0xFF9CA3AF))),
           ),
         ]),
@@ -270,7 +270,7 @@ class _TopPartyRow extends StatelessWidget {
     child: Row(children: [
       Container(
         width: 24, height: 24,
-        decoration: BoxDecoration(color: rank <= 3 ? kGoColor.withOpacity(0.1) : const Color(0xFFF3F4F6), borderRadius: BorderRadius.circular(6)),
+        decoration: BoxDecoration(color: rank <= 3 ? kGoColor.withValues(alpha: 0.1) : const Color(0xFFF3F4F6), borderRadius: BorderRadius.circular(6)),
         alignment: Alignment.center,
         child: Text('$rank', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: rank <= 3 ? kGoColor : const Color(0xFF9CA3AF))),
       ),

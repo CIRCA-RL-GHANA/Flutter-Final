@@ -1,7 +1,7 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// MY UPDATES Widget (Social Feed)
 /// Visible to: Owner, Administrator only
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -74,7 +74,7 @@ class MyUpdatesWidgetContent extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 12,
-                      backgroundColor: color.withOpacity(0.2),
+                      backgroundColor: color.withValues(alpha: 0.2),
                       child: const Text('W', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
                     ),
                     const SizedBox(width: 6),
@@ -95,7 +95,7 @@ class MyUpdatesWidgetContent extends StatelessWidget {
                 ),
                 const SizedBox(height: 6),
                 const Text(
-                  'New arrivals just dropped! 🎉 Check out our latest collection...',
+                  'New arrivals just dropped! ðŸŽ‰ Check out our latest collection...',
                   style: TextStyle(fontSize: 11, color: AppColors.textSecondary),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -133,9 +133,9 @@ class _FilterChip extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
-        color: isSelected ? color.withOpacity(0.12) : AppColors.inputFill,
+        color: isSelected ? color.withValues(alpha: 0.12) : AppColors.inputFill,
         borderRadius: BorderRadius.circular(14),
-        border: isSelected ? Border.all(color: color.withOpacity(0.3)) : null,
+        border: isSelected ? Border.all(color: color.withValues(alpha: 0.3)) : null,
       ),
       child: Text(
         label,
@@ -160,7 +160,7 @@ class _EngagementStat extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(icon, size: 14, color: color.withOpacity(0.6)),
+        Icon(icon, size: 14, color: color.withValues(alpha: 0.6)),
         const SizedBox(width: 3),
         Text(
           count,

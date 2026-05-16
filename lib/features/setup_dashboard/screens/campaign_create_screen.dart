@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SD1.10-CREATE: CAMPAIGN CREATE WIZARD — 5-Step Form
-/// Steps: Type → Audience → Budget → Content → Review
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD1.10-CREATE: CAMPAIGN CREATE WIZARD â€” 5-Step Form
+/// Steps: Type â†’ Audience â†’ Budget â†’ Content â†’ Review
 /// RBAC: Admin(full), BM(branch), SO(full), BSO(branch)
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -93,7 +93,7 @@ class _CampaignCreateScreenState extends State<CampaignCreateScreen> {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kSetupColor.withOpacity(0.07),
+                    color: kSetupColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -176,7 +176,7 @@ class _CampaignCreateScreenState extends State<CampaignCreateScreen> {
   }
 }
 
-// ─── Step Indicator ──────────────────────────────────────────────────────────
+// â”€â”€â”€ Step Indicator â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _CampaignStepIndicator extends StatelessWidget {
   final int currentStep;
@@ -199,7 +199,7 @@ class _CampaignStepIndicator extends StatelessWidget {
             borderRadius: BorderRadius.circular(4),
             child: LinearProgressIndicator(
               value: (currentStep + 1) / stepCount,
-              backgroundColor: kSetupColor.withOpacity(0.1),
+              backgroundColor: kSetupColor.withValues(alpha: 0.1),
               valueColor: const AlwaysStoppedAnimation<Color>(kSetupColor),
               minHeight: 4,
             ),
@@ -224,7 +224,7 @@ class _CampaignStepIndicator extends StatelessWidget {
   }
 }
 
-// ─── Step 1: Type ────────────────────────────────────────────────────────────
+// â”€â”€â”€ Step 1: Type â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _TypeStep extends StatelessWidget {
   final TextEditingController nameCtrl;
@@ -311,7 +311,7 @@ class _TypeStep extends StatelessWidget {
   }
 }
 
-// ─── Step 2: Audience ────────────────────────────────────────────────────────
+// â”€â”€â”€ Step 2: Audience â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _AudienceStep extends StatelessWidget {
   final Set<String> selectedAudiences;
@@ -339,7 +339,7 @@ class _AudienceStep extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: kSetupColor.withOpacity(0.06),
+            color: kSetupColor.withValues(alpha: 0.06),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Row(
@@ -368,10 +368,10 @@ class _AudienceStep extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
-                  color: isSelected ? kSetupColor.withOpacity(0.06) : Colors.white,
+                  color: isSelected ? kSetupColor.withValues(alpha: 0.06) : Colors.white,
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: isSelected ? kSetupColor.withOpacity(0.3) : Colors.grey.shade200,
+                    color: isSelected ? kSetupColor.withValues(alpha: 0.3) : Colors.grey.shade200,
                   ),
                 ),
                 child: Row(
@@ -415,7 +415,7 @@ class _AudienceStep extends StatelessWidget {
   }
 }
 
-// ─── Step 3: Budget ──────────────────────────────────────────────────────────
+// â”€â”€â”€ Step 3: Budget â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _BudgetStep extends StatelessWidget {
   final TextEditingController budgetCtrl;
@@ -442,7 +442,7 @@ class _BudgetStep extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       children: [
         SetupFormField(
-          label: 'Total Budget (₵)',
+          label: 'Total Budget (â‚µ)',
           hint: '0.00',
           controller: budgetCtrl,
           keyboardType: TextInputType.number,
@@ -524,9 +524,9 @@ class _BudgetStep extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: AppColors.info.withOpacity(0.06),
+            color: AppColors.info.withValues(alpha: 0.06),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: AppColors.info.withOpacity(0.15)),
+            border: Border.all(color: AppColors.info.withValues(alpha: 0.15)),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -539,9 +539,9 @@ class _BudgetStep extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 8),
-              const SetupInfoRow(label: 'Est. Reach', value: '5,000 – 12,000'),
-              const SetupInfoRow(label: 'Est. Clicks', value: '250 – 600'),
-              const SetupInfoRow(label: 'Est. Cost/Click', value: '₵0.15 – ₵0.40'),
+              const SetupInfoRow(label: 'Est. Reach', value: '5,000 â€“ 12,000'),
+              const SetupInfoRow(label: 'Est. Clicks', value: '250 â€“ 600'),
+              const SetupInfoRow(label: 'Est. Cost/Click', value: 'â‚µ0.15 â€“ â‚µ0.40'),
             ],
           ),
         ),
@@ -551,7 +551,7 @@ class _BudgetStep extends StatelessWidget {
   }
 }
 
-// ─── Step 4: Content ─────────────────────────────────────────────────────────
+// â”€â”€â”€ Step 4: Content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _ContentStep extends StatelessWidget {
   final TextEditingController headlineCtrl;
@@ -592,13 +592,13 @@ class _ContentStep extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: kSetupColor.withOpacity(0.3)),
+            border: Border.all(color: kSetupColor.withValues(alpha: 0.3)),
           ),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.cloud_upload_outlined, size: 36, color: kSetupColor.withOpacity(0.4)),
+                Icon(Icons.cloud_upload_outlined, size: 36, color: kSetupColor.withValues(alpha: 0.4)),
                 const SizedBox(height: 8),
                 const Text(
                   'Upload banner or creative',
@@ -606,7 +606,7 @@ class _ContentStep extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'PNG, JPG · Recommended 1200×628',
+                  'PNG, JPG Â· Recommended 1200Ã—628',
                   style: TextStyle(fontSize: 11, color: AppColors.textTertiary),
                 ),
               ],
@@ -645,7 +645,7 @@ class _ContentStep extends StatelessWidget {
   }
 }
 
-// ─── Step 5: Review ──────────────────────────────────────────────────────────
+// â”€â”€â”€ Step 5: Review â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _CampaignReviewStep extends StatelessWidget {
   final String name;
@@ -672,9 +672,9 @@ class _CampaignReviewStep extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: kSetupColor.withOpacity(0.06),
+            color: kSetupColor.withValues(alpha: 0.06),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: kSetupColor.withOpacity(0.15)),
+            border: Border.all(color: kSetupColor.withValues(alpha: 0.15)),
           ),
           child: const Row(
             children: [
@@ -694,10 +694,10 @@ class _CampaignReviewStep extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SetupSectionTitle(title: 'Campaign Summary', icon: Icons.campaign),
-              SetupInfoRow(label: 'Name', value: name.isNotEmpty ? name : '—'),
+              SetupInfoRow(label: 'Name', value: name.isNotEmpty ? name : 'â€”'),
               SetupInfoRow(label: 'Type', value: type.name),
               SetupInfoRow(label: 'Goal', value: goal.name),
-              SetupInfoRow(label: 'Budget', value: budget.isNotEmpty ? '₵$budget' : '—'),
+              SetupInfoRow(label: 'Budget', value: budget.isNotEmpty ? 'â‚µ$budget' : 'â€”'),
               SetupInfoRow(label: 'Channel', value: channel),
               SetupInfoRow(label: 'Audiences', value: audiences.join(', ')),
             ],
@@ -709,9 +709,9 @@ class _CampaignReviewStep extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SetupSectionTitle(title: 'Estimated Results', icon: Icons.analytics),
-              const SetupInfoRow(label: 'Reach', value: '5,000 – 12,000'),
-              const SetupInfoRow(label: 'Engagement', value: '3.5% – 5.2%'),
-              const SetupInfoRow(label: 'Conversions', value: '50 – 150'),
+              const SetupInfoRow(label: 'Reach', value: '5,000 â€“ 12,000'),
+              const SetupInfoRow(label: 'Engagement', value: '3.5% â€“ 5.2%'),
+              const SetupInfoRow(label: 'Conversions', value: '50 â€“ 150'),
             ],
           ),
         ),
@@ -721,7 +721,7 @@ class _CampaignReviewStep extends StatelessWidget {
   }
 }
 
-// ─── Nav Bar ─────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Nav Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _CampaignNavBar extends StatelessWidget {
   final int currentStep;
@@ -749,7 +749,7 @@ class _CampaignNavBar extends StatelessWidget {
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.06),
+            color: Colors.black.withValues(alpha: 0.06),
             blurRadius: 10,
             offset: const Offset(0, -2),
           ),
@@ -795,7 +795,7 @@ class _CampaignNavBar extends StatelessWidget {
   }
 }
 
-// ─── Shared Widgets ──────────────────────────────────────────────────────────
+// â”€â”€â”€ Shared Widgets â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _SelectionTile extends StatelessWidget {
   final String title;
@@ -820,10 +820,10 @@ class _SelectionTile extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: isSelected ? kSetupColor.withOpacity(0.06) : Colors.white,
+            color: isSelected ? kSetupColor.withValues(alpha: 0.06) : Colors.white,
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              color: isSelected ? kSetupColor.withOpacity(0.3) : Colors.grey.shade200,
+              color: isSelected ? kSetupColor.withValues(alpha: 0.3) : Colors.grey.shade200,
               width: isSelected ? 1.5 : 1,
             ),
           ),

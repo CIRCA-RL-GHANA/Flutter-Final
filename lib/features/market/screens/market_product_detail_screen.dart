@@ -1,7 +1,7 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// MARKET MODULE — Screen 4: Product Detail
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// MARKET MODULE â€” Screen 4: Product Detail
 /// Media gallery, customization, quantity, fulfillment, nutrition, reviews
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -69,7 +69,7 @@ class _MarketProductDetailScreenState extends State<MarketProductDetailScreen> {
         icon: Container(
           padding: const EdgeInsets.all(6),
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.9),
+            color: Colors.white.withValues(alpha: 0.9),
             shape: BoxShape.circle,
           ),
           child: const Icon(Icons.arrow_back, size: 20, color: AppColors.textPrimary),
@@ -81,7 +81,7 @@ class _MarketProductDetailScreenState extends State<MarketProductDetailScreen> {
           icon: Container(
             padding: const EdgeInsets.all(6),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.9),
+              color: Colors.white.withValues(alpha: 0.9),
               shape: BoxShape.circle,
             ),
             child: const Icon(Icons.favorite_border, size: 20, color: AppColors.textPrimary),
@@ -92,7 +92,7 @@ class _MarketProductDetailScreenState extends State<MarketProductDetailScreen> {
           icon: Container(
             padding: const EdgeInsets.all(6),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.9),
+              color: Colors.white.withValues(alpha: 0.9),
               shape: BoxShape.circle,
             ),
             child: const Icon(Icons.share, size: 20, color: AppColors.textPrimary),
@@ -129,7 +129,7 @@ class _MarketProductDetailScreenState extends State<MarketProductDetailScreen> {
                       width: i == _currentImage ? 20 : 6,
                       height: 6,
                       decoration: BoxDecoration(
-                        color: i == _currentImage ? kMarketColor : Colors.grey.withOpacity(0.5),
+                        color: i == _currentImage ? kMarketColor : Colors.grey.withValues(alpha: 0.5),
                         borderRadius: BorderRadius.circular(3),
                       ),
                     );
@@ -205,8 +205,8 @@ class _MarketProductDetailScreenState extends State<MarketProductDetailScreen> {
                       color: product.availability == ProductAvailability.inStock
                           ? kMarketColorLight
                           : product.availability == ProductAvailability.lowStock
-                              ? AppColors.warning.withOpacity(0.1)
-                              : AppColors.error.withOpacity(0.1),
+                              ? AppColors.warning.withValues(alpha: 0.1)
+                              : AppColors.error.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(6),
                     ),
                     child: Text(
@@ -249,7 +249,7 @@ class _MarketProductDetailScreenState extends State<MarketProductDetailScreen> {
                   labelStyle: const TextStyle(fontSize: 11),
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   visualDensity: VisualDensity.compact,
-                  side: BorderSide(color: kMarketColor.withOpacity(0.3)),
+                  side: BorderSide(color: kMarketColor.withValues(alpha: 0.3)),
                   backgroundColor: kMarketColorLight,
                 );
               }).toList(),
@@ -455,7 +455,7 @@ class _MarketProductDetailScreenState extends State<MarketProductDetailScreen> {
           ),
           const SizedBox(height: 100),
 
-          // ─── AI Similar Products ───────────────────────────────
+          // â”€â”€â”€ AI Similar Products â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
           Consumer<AIInsightsNotifier>(
             builder: (ctx, notifier, _) {
               final recs = notifier.recommendations;
@@ -470,7 +470,7 @@ class _MarketProductDetailScreenState extends State<MarketProductDetailScreen> {
                         Icon(Icons.auto_awesome, size: 16, color: Color(0xFF8B5CF6)),
                         SizedBox(width: 6),
                         Text(
-                          'AI — You might also like',
+                          'AI â€” You might also like',
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w700,
@@ -494,10 +494,10 @@ class _MarketProductDetailScreenState extends State<MarketProductDetailScreen> {
                           width: 130,
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF8B5CF6).withOpacity(0.06),
+                            color: const Color(0xFF8B5CF6).withValues(alpha: 0.06),
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(
-                              color: const Color(0xFF8B5CF6).withOpacity(0.15),
+                              color: const Color(0xFF8B5CF6).withValues(alpha: 0.15),
                             ),
                           ),
                           child: Column(
@@ -558,7 +558,7 @@ class _MarketProductDetailScreenState extends State<MarketProductDetailScreen> {
       ),
       decoration: BoxDecoration(
         color: Colors.white,
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, -2))],
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10, offset: const Offset(0, -2))],
       ),
       child: Row(
         children: [
@@ -572,7 +572,7 @@ class _MarketProductDetailScreenState extends State<MarketProductDetailScreen> {
                 style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: kMarketColorDark),
               ),
               Text(
-                '$_quantity × \$${unitPrice.toStringAsFixed(2)}',
+                '$_quantity Ã— \$${unitPrice.toStringAsFixed(2)}',
                 style: TextStyle(fontSize: 12, color: AppColors.textTertiary),
               ),
             ],
@@ -608,7 +608,7 @@ class _MarketProductDetailScreenState extends State<MarketProductDetailScreen> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: kMarketColor,
                 foregroundColor: Colors.white,
-                disabledBackgroundColor: AppColors.textTertiary.withOpacity(0.3),
+                disabledBackgroundColor: AppColors.textTertiary.withValues(alpha: 0.3),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 elevation: 0,
@@ -623,17 +623,17 @@ class _MarketProductDetailScreenState extends State<MarketProductDetailScreen> {
   String _dietaryLabel(DietaryPreference d) {
     switch (d) {
       case DietaryPreference.vegetarian:
-        return '🥬 Vegetarian';
+        return 'ðŸ¥¬ Vegetarian';
       case DietaryPreference.vegan:
-        return '🌱 Vegan';
+        return 'ðŸŒ± Vegan';
       case DietaryPreference.glutenFree:
-        return '🌾 Gluten-free';
+        return 'ðŸŒ¾ Gluten-free';
       case DietaryPreference.halal:
-        return '🕌 Halal';
+        return 'ðŸ•Œ Halal';
       case DietaryPreference.kosher:
-        return '✡ Kosher';
+        return 'âœ¡ Kosher';
       case DietaryPreference.organic:
-        return '🌿 Organic';
+        return 'ðŸŒ¿ Organic';
     }
   }
 }

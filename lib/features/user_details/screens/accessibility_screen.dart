@@ -1,7 +1,7 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// Screen 8: Accessibility Suite
 /// Vision, Hearing, Motor, Cognitive sections + Preset management
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -42,7 +42,7 @@ class AccessibilityScreen extends StatelessWidget {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: AppColors.primary.withOpacity(0.07),
+                    color: AppColors.primary.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -60,7 +60,7 @@ class AccessibilityScreen extends StatelessWidget {
                   );
                 },
               ),
-              // ─── Quick Presets ──────────────────────────────
+              // â”€â”€â”€ Quick Presets â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               const Text('Quick Presets', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textSecondary)),
               const SizedBox(height: 10),
               SizedBox(
@@ -85,7 +85,7 @@ class AccessibilityScreen extends StatelessWidget {
 
               const SizedBox(height: 16),
 
-              // ─── Vision ────────────────────────────────────
+              // â”€â”€â”€ Vision â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SectionCard(
                 child: CollapsibleSection(
                   title: 'Vision',
@@ -126,7 +126,7 @@ class AccessibilityScreen extends StatelessWidget {
                         width: double.infinity,
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: a11y.highContrast ? Colors.black : Colors.grey.withOpacity(0.05),
+                          color: a11y.highContrast ? Colors.black : Colors.grey.withValues(alpha: 0.05),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Text(
@@ -161,7 +161,7 @@ class AccessibilityScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Hearing ───────────────────────────────────
+              // â”€â”€â”€ Hearing â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SectionCard(
                 child: CollapsibleSection(
                   title: 'Hearing',
@@ -218,7 +218,7 @@ class AccessibilityScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Motor ────────────────────────────────────
+              // â”€â”€â”€ Motor â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SectionCard(
                 child: CollapsibleSection(
                   title: 'Motor',
@@ -275,7 +275,7 @@ class AccessibilityScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Cognitive ─────────────────────────────────
+              // â”€â”€â”€ Cognitive â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SectionCard(
                 child: CollapsibleSection(
                   title: 'Cognitive',
@@ -392,9 +392,9 @@ class AccessibilityScreen extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Preset Card
-// ═══════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _PresetCard extends StatelessWidget {
   final AccessibilityPreset preset;
@@ -421,10 +421,10 @@ class _PresetCard extends StatelessWidget {
         margin: const EdgeInsets.only(right: 8),
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: active ? const Color(0xFF06B6D4).withOpacity(0.1) : Colors.white,
+          color: active ? const Color(0xFF06B6D4).withValues(alpha: 0.1) : Colors.white,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
-            color: active ? const Color(0xFF06B6D4) : Colors.grey.withOpacity(0.15),
+            color: active ? const Color(0xFF06B6D4) : Colors.grey.withValues(alpha: 0.15),
             width: active ? 2 : 1,
           ),
         ),

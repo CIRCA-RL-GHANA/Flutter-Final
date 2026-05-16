@@ -1,10 +1,10 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// GenieInlineCard – Rich Module Cards Rendered Inside the Chat Thread
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// GenieInlineCard â€“ Rich Module Cards Rendered Inside the Chat Thread
 ///
 /// Each card type renders a functional micro-widget. Cards reuse module
 /// color identities and expose action buttons that feed back into the
 /// GenieController. Pinch-out triggers full-screen navigation.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
@@ -93,7 +93,7 @@ class GenieInlineCard extends StatelessWidget {
   }
 }
 
-// ─── Card Shell ───────────────────────────────────────────────────────────────
+// â”€â”€â”€ Card Shell â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _CardShell extends StatelessWidget {
   final Color accentColor;
   final Widget child;
@@ -113,10 +113,10 @@ class _CardShell extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: accentColor.withOpacity(0.2), width: 1.5),
+        border: Border.all(color: accentColor.withValues(alpha: 0.2), width: 1.5),
         boxShadow: [
           BoxShadow(
-            color: accentColor.withOpacity(0.08),
+            color: accentColor.withValues(alpha: 0.08),
             blurRadius: 16,
             offset: const Offset(0, 4),
           ),
@@ -130,7 +130,7 @@ class _CardShell extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
               decoration: BoxDecoration(
-                color: accentColor.withOpacity(0.08),
+                color: accentColor.withValues(alpha: 0.08),
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(15),
                   topRight: Radius.circular(15),
@@ -166,7 +166,7 @@ class _CardShell extends StatelessWidget {
   }
 }
 
-// ─── Action Button ────────────────────────────────────────────────────────────
+// â”€â”€â”€ Action Button â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _CardActionButton extends StatelessWidget {
   final String label;
   final Color color;
@@ -198,9 +198,9 @@ class _CardActionButton extends StatelessWidget {
           constraints: const BoxConstraints(minHeight: 48, minWidth: 48),
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           decoration: BoxDecoration(
-            color: color.withOpacity(0.1),
+            color: color.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: color.withOpacity(0.3)),
+            border: Border.all(color: color.withValues(alpha: 0.3)),
           ),
           child: Text(
             label,
@@ -216,7 +216,7 @@ class _CardActionButton extends StatelessWidget {
   }
 }
 
-// ─── Balance Card ────────────────────────────────────────────────────────────
+// â”€â”€â”€ Balance Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _BalanceCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _BalanceCard({required this.data});
@@ -249,7 +249,7 @@ class _BalanceCard extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              '≈ \$${(balance * rate).toStringAsFixed(2)} USD · Rate: \$$rate',
+              'â‰ˆ \$${(balance * rate).toStringAsFixed(2)} USD Â· Rate: \$$rate',
               style: const TextStyle(
                 fontSize: 12,
                 color: AppColors.textSecondary,
@@ -289,7 +289,7 @@ class _BalanceCard extends StatelessWidget {
   }
 }
 
-// ─── Transaction Card ─────────────────────────────────────────────────────────
+// â”€â”€â”€ Transaction Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _TransactionCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _TransactionCard({required this.data});
@@ -301,7 +301,7 @@ class _TransactionCard extends StatelessWidget {
 
     return _CardShell(
       accentColor: color,
-      moduleLabel: 'GO PAGE · TRANSACTIONS',
+      moduleLabel: 'GO PAGE Â· TRANSACTIONS',
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8),
         child: Column(
@@ -312,7 +312,7 @@ class _TransactionCard extends StatelessWidget {
               leading: CircleAvatar(
                 radius: 16,
                 backgroundColor: (isReceived ? AppColors.success : AppColors.error)
-                    .withOpacity(0.12),
+                    .withValues(alpha: 0.12),
                 child: Icon(
                   isReceived ? Icons.arrow_downward : Icons.arrow_upward,
                   size: 14,
@@ -343,7 +343,7 @@ class _TransactionCard extends StatelessWidget {
   }
 }
 
-// ─── Order Summary Card ───────────────────────────────────────────────────────
+// â”€â”€â”€ Order Summary Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _OrderSummaryCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _OrderSummaryCard({required this.data});
@@ -356,7 +356,7 @@ class _OrderSummaryCard extends StatelessWidget {
 
     return _CardShell(
       accentColor: color,
-      moduleLabel: 'MARKET · CART',
+      moduleLabel: 'MARKET Â· CART',
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(
@@ -382,7 +382,7 @@ class _OrderSummaryCard extends StatelessWidget {
   }
 }
 
-// ─── Order Tracker Card ───────────────────────────────────────────────────────
+// â”€â”€â”€ Order Tracker Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _OrderTrackerCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _OrderTrackerCard({required this.data});
@@ -392,7 +392,7 @@ class _OrderTrackerCard extends StatelessWidget {
     final color = _moduleColors['market']!;
     return _CardShell(
       accentColor: color,
-      moduleLabel: 'MARKET · TRACKING',
+      moduleLabel: 'MARKET Â· TRACKING',
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -409,7 +409,7 @@ class _OrderTrackerCard extends StatelessWidget {
                     size: 14, color: AppColors.textSecondary),
                 const SizedBox(width: 4),
                 Text(
-                  '${data['status'] ?? 'In transit'} · ETA: ${data['eta'] ?? '—'}',
+                  '${data['status'] ?? 'In transit'} Â· ETA: ${data['eta'] ?? 'â€”'}',
                   style: const TextStyle(
                       color: AppColors.textSecondary, fontSize: 12),
                 ),
@@ -429,7 +429,7 @@ class _OrderTrackerCard extends StatelessWidget {
   }
 }
 
-// ─── Shop Carousel Card ───────────────────────────────────────────────────────
+// â”€â”€â”€ Shop Carousel Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _ShopCarouselCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _ShopCarouselCard({required this.data});
@@ -444,7 +444,7 @@ class _ShopCarouselCard extends StatelessWidget {
 
     return _CardShell(
       accentColor: color,
-      moduleLabel: 'MARKET · SHOPS',
+      moduleLabel: 'MARKET Â· SHOPS',
       child: Column(
         children: [
           SizedBox(
@@ -462,9 +462,9 @@ class _ShopCarouselCard extends StatelessWidget {
                     width: 130,
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: color.withOpacity(0.06),
+                      color: color.withValues(alpha: 0.06),
                       borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: color.withOpacity(0.15)),
+                      border: Border.all(color: color.withValues(alpha: 0.15)),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -476,7 +476,7 @@ class _ShopCarouselCard extends StatelessWidget {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis),
                         const SizedBox(height: 2),
-                        Text('${shop['distance']} · ⭐ ${shop['rating']}',
+                        Text('${shop['distance']} Â· â­ ${shop['rating']}',
                             style: const TextStyle(
                                 fontSize: 10, color: AppColors.textSecondary)),
                       ],
@@ -497,7 +497,7 @@ class _ShopCarouselCard extends StatelessWidget {
   }
 }
 
-// ─── Feed Card ────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Feed Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _FeedCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _FeedCard({required this.data});
@@ -507,7 +507,7 @@ class _FeedCard extends StatelessWidget {
     final color = _moduleColors['updates']!;
     return _CardShell(
       accentColor: color,
-      moduleLabel: 'MY UPDATES · FEED',
+      moduleLabel: 'MY UPDATES Â· FEED',
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(
@@ -528,7 +528,7 @@ class _FeedCard extends StatelessWidget {
   }
 }
 
-// ─── Live Orders Card ─────────────────────────────────────────────────────────
+// â”€â”€â”€ Live Orders Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _LiveOrdersCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _LiveOrdersCard({required this.data});
@@ -540,7 +540,7 @@ class _LiveOrdersCard extends StatelessWidget {
 
     return _CardShell(
       accentColor: color,
-      moduleLabel: 'LIVE · ORDERS',
+      moduleLabel: 'LIVE Â· ORDERS',
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8),
         child: orders.isEmpty
@@ -558,7 +558,7 @@ class _LiveOrdersCard extends StatelessWidget {
                       width: 32,
                       height: 32,
                       decoration: BoxDecoration(
-                        color: (urgent ? AppColors.error : color).withOpacity(0.12),
+                        color: (urgent ? AppColors.error : color).withValues(alpha: 0.12),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Icon(
@@ -573,7 +573,7 @@ class _LiveOrdersCard extends StatelessWidget {
                           fontSize: 13, fontWeight: FontWeight.w600),
                     ),
                     subtitle: Text(
-                      '${order['customer']} · ${order['items']} item(s)',
+                      '${order['customer']} Â· ${order['items']} item(s)',
                       style: const TextStyle(fontSize: 11),
                     ),
                     trailing: _CardActionButton(
@@ -589,7 +589,7 @@ class _LiveOrdersCard extends StatelessWidget {
   }
 }
 
-// ─── Driver Delivery Card ─────────────────────────────────────────────────────
+// â”€â”€â”€ Driver Delivery Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _DriverDeliveryCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _DriverDeliveryCard({required this.data});
@@ -601,7 +601,7 @@ class _DriverDeliveryCard extends StatelessWidget {
 
     return _CardShell(
       accentColor: color,
-      moduleLabel: 'LIVE · DRIVER',
+      moduleLabel: 'LIVE Â· DRIVER',
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: data['type'] == 'current'
@@ -615,7 +615,7 @@ class _DriverDeliveryCard extends StatelessWidget {
                         style: const TextStyle(fontWeight: FontWeight.w600)),
                   ]),
                   const SizedBox(height: 4),
-                  Text('ETA: ${data['eta'] ?? '—'}',
+                  Text('ETA: ${data['eta'] ?? 'â€”'}',
                       style: const TextStyle(
                           color: AppColors.textSecondary, fontSize: 12)),
                   const SizedBox(height: 12),
@@ -624,7 +624,7 @@ class _DriverDeliveryCard extends StatelessWidget {
                         label: 'Navigate', color: color, onTap: () {}),
                     const SizedBox(width: 8),
                     _CardActionButton(
-                        label: '🆘 SOS',
+                        label: 'ðŸ†˜ SOS',
                         color: AppColors.error,
                         onTap: () {},
                         isDestructive: true),
@@ -641,7 +641,7 @@ class _DriverDeliveryCard extends StatelessWidget {
                         title: Text(pkg['id']?.toString() ?? '',
                             style: const TextStyle(fontWeight: FontWeight.w600)),
                         subtitle: Text(
-                          '${pkg['stops']} stops · ${pkg['distance']} · ETA ${pkg['eta']}',
+                          '${pkg['stops']} stops Â· ${pkg['distance']} Â· ETA ${pkg['eta']}',
                           style: const TextStyle(fontSize: 11),
                         ),
                         trailing: _CardActionButton(
@@ -657,7 +657,7 @@ class _DriverDeliveryCard extends StatelessWidget {
   }
 }
 
-// ─── Alert List Card ──────────────────────────────────────────────────────────
+// â”€â”€â”€ Alert List Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _AlertListCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _AlertListCard({required this.data});
@@ -692,11 +692,11 @@ class _AlertListCard extends StatelessWidget {
                         style: const TextStyle(
                             fontSize: 13, fontWeight: FontWeight.w600)),
                     subtitle: Text(
-                      '${alert['type']} · ${alert['age']}',
+                      '${alert['type']} Â· ${alert['age']}',
                       style: const TextStyle(fontSize: 11),
                     ),
                     trailing: resolved
-                        ? const Text('✓',
+                        ? const Text('âœ“',
                             style: TextStyle(color: AppColors.success))
                         : _CardActionButton(
                             label: 'Resolve',
@@ -710,7 +710,7 @@ class _AlertListCard extends StatelessWidget {
   }
 }
 
-// ─── Chat List Card ───────────────────────────────────────────────────────────
+// â”€â”€â”€ Chat List Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _ChatListCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _ChatListCard({required this.data});
@@ -722,7 +722,7 @@ class _ChatListCard extends StatelessWidget {
 
     return _CardShell(
       accentColor: color,
-      moduleLabel: 'qualChat${type == 'hey_ya' ? ' · HEY YA' : type == 'fleet' ? ' · FLEET' : ''}',
+      moduleLabel: 'qualChat${type == 'hey_ya' ? ' Â· HEY YA' : type == 'fleet' ? ' Â· FLEET' : ''}',
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(
@@ -749,7 +749,7 @@ class _ChatListCard extends StatelessWidget {
   }
 }
 
-// ─── Operations Overview Card ─────────────────────────────────────────────────
+// â”€â”€â”€ Operations Overview Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _OperationsCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _OperationsCard({required this.data});
@@ -791,9 +791,9 @@ class _StatChip extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.08),
+        color: color.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: color.withOpacity(0.2)),
+        border: Border.all(color: color.withValues(alpha: 0.2)),
       ),
       child: Column(
         children: [
@@ -809,7 +809,7 @@ class _StatChip extends StatelessWidget {
   }
 }
 
-// ─── Profile Strength Card ────────────────────────────────────────────────────
+// â”€â”€â”€ Profile Strength Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _ProfileStrengthCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _ProfileStrengthCard({required this.data});
@@ -844,7 +844,7 @@ class _ProfileStrengthCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(4),
               child: LinearProgressIndicator(
                 value: strength / 100,
-                backgroundColor: color.withOpacity(0.12),
+                backgroundColor: color.withValues(alpha: 0.12),
                 valueColor: AlwaysStoppedAnimation(color),
                 minHeight: 8,
               ),
@@ -859,7 +859,7 @@ class _ProfileStrengthCard extends StatelessWidget {
   }
 }
 
-// ─── Notification Hub Card ────────────────────────────────────────────────────
+// â”€â”€â”€ Notification Hub Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _NotificationHubCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _NotificationHubCard({required this.data});
@@ -870,7 +870,7 @@ class _NotificationHubCard extends StatelessWidget {
 
     return _CardShell(
       accentColor: color,
-      moduleLabel: 'UTILITY · NOTIFICATIONS',
+      moduleLabel: 'UTILITY Â· NOTIFICATIONS',
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(
@@ -889,7 +889,7 @@ class _NotificationHubCard extends StatelessWidget {
   }
 }
 
-// ─── Help Guide Card ─────────────────────────────────────────────────────────
+// â”€â”€â”€ Help Guide Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _HelpGuideCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _HelpGuideCard({required this.data});
@@ -902,7 +902,7 @@ class _HelpGuideCard extends StatelessWidget {
 
     return _CardShell(
       accentColor: color,
-      moduleLabel: data['reminders'] != null ? 'APRIL · REMINDERS' : 'HELP',
+      moduleLabel: data['reminders'] != null ? 'APRIL Â· REMINDERS' : 'HELP',
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: reminders.isNotEmpty
@@ -936,7 +936,7 @@ class _HelpGuideCard extends StatelessWidget {
   }
 }
 
-// ─── Confirmation Card ────────────────────────────────────────────────────────
+// â”€â”€â”€ Confirmation Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _ConfirmationCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _ConfirmationCard({required this.data});
@@ -977,7 +977,7 @@ class _ConfirmationCard extends StatelessWidget {
                     onTap: () {}),
               ]),
             ] else if (action == 'sos') ...[
-              const Text('🆘 Emergency SOS Activated',
+              const Text('ðŸ†˜ Emergency SOS Activated',
                   style: TextStyle(
                       fontWeight: FontWeight.w800,
                       color: AppColors.error,
@@ -999,7 +999,7 @@ class _ConfirmationCard extends StatelessWidget {
   }
 }
 
-// ─── Greeting Card ────────────────────────────────────────────────────────────
+// â”€â”€â”€ Greeting Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _GreetingCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _GreetingCard({required this.data});
@@ -1010,7 +1010,7 @@ class _GreetingCard extends StatelessWidget {
   }
 }
 
-// ─── Coming Soon Card ─────────────────────────────────────────────────────────
+// â”€â”€â”€ Coming Soon Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _ComingSoonCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -1026,7 +1026,7 @@ class _ComingSoonCard extends StatelessWidget {
         children: const [
           Icon(Icons.open_in_new, size: 14, color: AppColors.textTertiary),
           SizedBox(width: 6),
-          Text('Opening full screen…',
+          Text('Opening full screenâ€¦',
               style: TextStyle(
                   fontSize: 12, color: AppColors.textSecondary)),
         ],
@@ -1035,7 +1035,7 @@ class _ComingSoonCard extends StatelessWidget {
   }
 }
 
-// ─── Error Card ───────────────────────────────────────────────────────────────
+// â”€â”€â”€ Error Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _ErrorCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _ErrorCard({required this.data});
@@ -1045,9 +1045,9 @@ class _ErrorCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: AppColors.error.withOpacity(0.06),
+        color: AppColors.error.withValues(alpha: 0.06),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppColors.error.withOpacity(0.2)),
+        border: Border.all(color: AppColors.error.withValues(alpha: 0.2)),
       ),
       child: Row(
         children: [

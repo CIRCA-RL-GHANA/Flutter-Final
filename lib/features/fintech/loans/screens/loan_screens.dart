@@ -1,4 +1,4 @@
-/// Fintech › Loans — Loan Application Screen
+﻿/// Fintech â€º Loans â€” Loan Application Screen
 /// Shows competing FI offers, lets user apply & tracks repayment progress.
 
 import 'package:flutter/material.dart';
@@ -130,7 +130,7 @@ class _LoanApplicationScreenState extends State<LoanApplicationScreen>
             builder: (context, ai, _) {
               if (ai.insights.isEmpty) return const SizedBox.shrink();
               return Container(
-                color: _kGold.withOpacity(0.07),
+                color: _kGold.withValues(alpha: 0.07),
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                 child: Row(children: [
                   Icon(Icons.auto_awesome, size: 14, color: _kGold),
@@ -243,7 +243,7 @@ class _LoanApplicationScreenState extends State<LoanApplicationScreen>
   );
 }
 
-// ─── Loan Repayment Screen ────────────────────────────────────────────────────
+// â”€â”€â”€ Loan Repayment Screen â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class LoanRepaymentScreen extends StatefulWidget {
   final Map<String, dynamic> loan;
@@ -322,7 +322,7 @@ class _LoanRepaymentScreenState extends State<LoanRepaymentScreen> {
   }
 }
 
-// ─── Shared sub-widgets ───────────────────────────────────────────────────────
+// â”€â”€â”€ Shared sub-widgets â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class LoanOfferTile extends StatelessWidget {
   final Map<String, dynamic> offer;
@@ -346,13 +346,13 @@ class LoanOfferTile extends StatelessWidget {
         child: Row(children: [
           Container(
             width: 40, height: 40,
-            decoration: BoxDecoration(color: _kGold.withOpacity(0.1), shape: BoxShape.circle),
+            decoration: BoxDecoration(color: _kGold.withValues(alpha: 0.1), shape: BoxShape.circle),
             child: const Icon(Icons.account_balance, color: _kGold, size: 20),
           ),
           const SizedBox(width: 12),
           Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text('Rate: $rate% p.a.', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
-            Text('Max: ${offer['maxAmount'] ?? '–'} QP', style: const TextStyle(color: Colors.grey, fontSize: 12)),
+            Text('Max: ${offer['maxAmount'] ?? 'â€“'} QP', style: const TextStyle(color: Colors.grey, fontSize: 12)),
           ])),
           if (isSelected) const Icon(Icons.check_circle, color: _kGold),
         ]),
@@ -387,7 +387,7 @@ class _LoanTile extends StatelessWidget {
         if (status == 'active')
           TextButton(
             onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => LoanRepaymentScreen(loan: loan))),
-            child: const Text('Repay Now →'),
+            child: const Text('Repay Now â†’'),
           ),
       ]),
     );
@@ -435,7 +435,7 @@ class _StatusChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-    decoration: BoxDecoration(color: color.withOpacity(0.1), borderRadius: BorderRadius.circular(20)),
+    decoration: BoxDecoration(color: color.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(20)),
     child: Text(label, style: TextStyle(fontSize: 11, color: color, fontWeight: FontWeight.w600)),
   );
 }

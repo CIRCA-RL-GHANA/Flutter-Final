@@ -1,4 +1,4 @@
-/// qualChat Screen 9 — Archived Chats
+﻿/// qualChat Screen 9 â€” Archived Chats
 /// Archive management: search, filter/sort, preview/restore/delete, storage
 
 import 'package:flutter/material.dart';
@@ -66,12 +66,12 @@ class _QualChatArchivedScreenState extends State<QualChatArchivedScreen> {
         final filteredChats = _getFilteredChats(archived);
         final totalSize = provider.totalArchivedSizeMb;
 
-        return WillPopScope(
-          onWillPop: () async {
+        return PopScope(
+          canPop: true,
+          onPopInvokedWithResult: (didPop, result) {
             _searchController.clear();
             _searchQuery = '';
-            setState(() {});
-            return true;
+            if (mounted) setState(() {});
           },
           child: Scaffold(
             backgroundColor: const Color(0xFFF8F9FE),
@@ -91,11 +91,11 @@ class _QualChatArchivedScreenState extends State<QualChatArchivedScreen> {
                   },
                   itemBuilder: (_) => const [
                     PopupMenuItem(
-                        value: 'restore_all', child: Text('🔄 Restore All')),
+                        value: 'restore_all', child: Text('ðŸ”„ Restore All')),
                     PopupMenuItem(
-                        value: 'empty', child: Text('🗑️ Empty Archive')),
+                        value: 'empty', child: Text('ðŸ—‘ï¸ Empty Archive')),
                     PopupMenuItem(
-                        value: 'export', child: Text('📤 Export Archive')),
+                        value: 'export', child: Text('ðŸ“¤ Export Archive')),
                   ],
                 ),
               ],
@@ -106,7 +106,7 @@ class _QualChatArchivedScreenState extends State<QualChatArchivedScreen> {
                   builder: (context, ai, _) {
                     if (ai.insights.isEmpty) return const SizedBox.shrink();
                     return Container(
-                      color: kChatColor.withOpacity(0.07),
+                      color: kChatColor.withValues(alpha: 0.07),
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                       child: Row(
                         children: [
@@ -130,7 +130,7 @@ class _QualChatArchivedScreenState extends State<QualChatArchivedScreen> {
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [kChatColor.withOpacity(0.08), kChatColorLight],
+                      colors: [kChatColor.withValues(alpha: 0.08), kChatColorLight],
                     ),
                     borderRadius: BorderRadius.circular(12),
                   ),
@@ -159,7 +159,7 @@ class _QualChatArchivedScreenState extends State<QualChatArchivedScreen> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 4),
                         decoration: BoxDecoration(
-                          color: kChatColor.withOpacity(0.15),
+                          color: kChatColor.withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
@@ -209,7 +209,7 @@ class _QualChatArchivedScreenState extends State<QualChatArchivedScreen> {
                                     Text('A-Z', style: TextStyle(fontSize: 13))),
                             DropdownMenuItem(
                                 value: ArchiveSort.largest,
-                                child: Text('Size ↓',
+                                child: Text('Size â†“',
                                     style: TextStyle(fontSize: 13))),
                           ],
                           onChanged: (v) {
@@ -343,7 +343,7 @@ class _QualChatArchivedScreenState extends State<QualChatArchivedScreen> {
               Navigator.pop(ctx);
               provider.restoreAllArchived();
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('✓ All chats restored')),
+                const SnackBar(content: Text('âœ“ All chats restored')),
               );
             },
             child: const Text('Restore All',
@@ -372,7 +372,7 @@ class _QualChatArchivedScreenState extends State<QualChatArchivedScreen> {
               Navigator.pop(ctx);
               provider.emptyArchive();
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('✓ Archive emptied')),
+                const SnackBar(content: Text('âœ“ Archive emptied')),
               );
             },
             child: const Text('Delete All',
@@ -401,7 +401,7 @@ class _QualChatArchivedScreenState extends State<QualChatArchivedScreen> {
               Navigator.pop(ctx);
               provider.deleteArchivedChat(chat.id);
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('✓ ${chat.conversation.title} deleted')),
+                SnackBar(content: Text('âœ“ ${chat.conversation.title} deleted')),
               );
             },
             child: const Text('Delete',
@@ -415,13 +415,13 @@ class _QualChatArchivedScreenState extends State<QualChatArchivedScreen> {
   void _restoreChat(BuildContext context, ArchivedChat chat, QualChatProvider provider) {
     provider.restoreArchivedChat(chat.id);
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('✓ ${chat.conversation.title} restored')),
+      SnackBar(content: Text('âœ“ ${chat.conversation.title} restored')),
     );
   }
 
   void _exportArchive(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('✓ Archive export started')),
+      const SnackBar(content: Text('âœ“ Archive export started')),
     );
   }
 }

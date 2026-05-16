@@ -1,7 +1,7 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// MARKET MODULE — Screen 7: My Transactions Dashboard
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// MARKET MODULE â€” Screen 7: My Transactions Dashboard
 /// Active orders, order history, returns, rides, FAB for new order
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -58,7 +58,7 @@ class _MarketTransactionsScreenState extends State<MarketTransactionsScreen>
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kMarketColor.withOpacity(0.07),
+                    color: kMarketColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -159,7 +159,7 @@ class _MarketTransactionsScreenState extends State<MarketTransactionsScreen>
   }
 }
 
-// ── KPI Card ───────────────────────────────────────────────────────
+// â”€â”€ KPI Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _KPICard extends StatelessWidget {
   final IconData icon;
   final String label;
@@ -179,7 +179,7 @@ class _KPICard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: color.withOpacity(0.08),
+          color: color.withValues(alpha: 0.08),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Column(
@@ -192,7 +192,7 @@ class _KPICard extends StatelessWidget {
             ),
             Text(
               label,
-              style: TextStyle(fontSize: 10, color: color.withOpacity(0.8)),
+              style: TextStyle(fontSize: 10, color: color.withValues(alpha: 0.8)),
             ),
           ],
         ),
@@ -201,7 +201,7 @@ class _KPICard extends StatelessWidget {
   }
 }
 
-// ── Active Orders Tab ──────────────────────────────────────────────
+// â”€â”€ Active Orders Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _ActiveTab extends StatelessWidget {
   final MarketProvider prov;
 
@@ -240,7 +240,7 @@ class _ActiveTab extends StatelessWidget {
   }
 }
 
-// ── History Tab ────────────────────────────────────────────────────
+// â”€â”€ History Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _HistoryTab extends StatelessWidget {
   final MarketProvider prov;
 
@@ -275,7 +275,7 @@ class _HistoryTab extends StatelessWidget {
   }
 }
 
-// ── Returns Tab ────────────────────────────────────────────────────
+// â”€â”€ Returns Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _ReturnsTab extends StatelessWidget {
   final MarketProvider prov;
 
@@ -313,7 +313,7 @@ class _ReturnsTab extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                       decoration: BoxDecoration(
-                        color: ret.statusColor.withOpacity(0.1),
+                        color: ret.statusColor.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: Text(
@@ -339,7 +339,7 @@ class _ReturnsTab extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '${ret.items.length} item(s) • ${ret.reason.name}',
+                  '${ret.items.length} item(s) â€¢ ${ret.reason.name}',
                   style: TextStyle(fontSize: 12, color: AppColors.textSecondary),
                 ),
                 const SizedBox(height: 8),
@@ -375,7 +375,7 @@ class _ReturnsTab extends StatelessWidget {
   }
 }
 
-// ── Rides Tab ──────────────────────────────────────────────────────
+// â”€â”€ Rides Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _RidesTab extends StatelessWidget {
   final MarketProvider prov;
 
@@ -415,7 +415,7 @@ class _RidesTab extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: ride.statusColor.withOpacity(0.1),
+                        color: ride.statusColor.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Icon(Icons.directions_car, size: 20, color: ride.statusColor),
@@ -517,7 +517,7 @@ class _RidesTab extends StatelessWidget {
   }
 }
 
-// ── Order Card ─────────────────────────────────────────────────────
+// â”€â”€ Order Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 class _OrderCard extends StatelessWidget {
   final MarketOrder order;
   final VoidCallback? onTap;
@@ -574,7 +574,7 @@ class _OrderCard extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(
-                      color: order.statusColor.withOpacity(0.1),
+                      color: order.statusColor.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(

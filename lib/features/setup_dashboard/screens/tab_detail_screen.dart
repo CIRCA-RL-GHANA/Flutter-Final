@@ -1,9 +1,9 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SD1.3-DETAIL: TAB DETAIL — 4-Tab Deep View
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD1.3-DETAIL: TAB DETAIL â€” 4-Tab Deep View
 /// Tabs: Overview, Transactions, Payments, Settings
 /// RBAC: Owner/Admin(fullAccess), BM(branchScoped), Monitor(viewOnly),
 ///        RO/BRO(ownOnly)
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -54,7 +54,7 @@ class _TabDetailScreenState extends State<TabDetailScreen> {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kSetupColor.withOpacity(0.07),
+                    color: kSetupColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -97,7 +97,7 @@ class _TabDetailScreenState extends State<TabDetailScreen> {
   }
 }
 
-// ─── Tab Header ──────────────────────────────────────────────────────────────
+// â”€â”€â”€ Tab Header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _TabHeader extends StatelessWidget {
   final CustomerTab tab;
@@ -123,7 +123,7 @@ class _TabHeader extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 12,
             offset: const Offset(0, 4),
           ),
@@ -135,7 +135,7 @@ class _TabHeader extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 22,
-                backgroundColor: _statusColor.withOpacity(0.1),
+                backgroundColor: _statusColor.withValues(alpha: 0.1),
                 child: Text(
                   tab.customerName[0],
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: _statusColor),
@@ -160,7 +160,7 @@ class _TabHeader extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                 decoration: BoxDecoration(
-                  color: _statusColor.withOpacity(0.1),
+                  color: _statusColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: Text(
@@ -178,7 +178,7 @@ class _TabHeader extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '₵${tab.amountUsed.toStringAsFixed(0)} / ₵${tab.creditLimit.toStringAsFixed(0)}',
+                    'â‚µ${tab.amountUsed.toStringAsFixed(0)} / â‚µ${tab.creditLimit.toStringAsFixed(0)}',
                     style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
                   ),
                   Text(
@@ -213,7 +213,7 @@ class _TabHeader extends StatelessWidget {
   }
 }
 
-// ─── Overview Tab ────────────────────────────────────────────────────────────
+// â”€â”€â”€ Overview Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _OverviewTab extends StatelessWidget {
   final CustomerTab tab;
@@ -226,13 +226,13 @@ class _OverviewTab extends StatelessWidget {
       children: [
         Row(
           children: [
-            Expanded(child: SetupStatCard(label: 'Credit Limit', value: '₵${tab.creditLimit.toStringAsFixed(0)}', icon: Icons.credit_card)),
+            Expanded(child: SetupStatCard(label: 'Credit Limit', value: 'â‚µ${tab.creditLimit.toStringAsFixed(0)}', icon: Icons.credit_card)),
             const SizedBox(width: 10),
-            Expanded(child: SetupStatCard(label: 'Used', value: '₵${tab.amountUsed.toStringAsFixed(0)}', icon: Icons.shopping_cart, color: AppColors.warning)),
+            Expanded(child: SetupStatCard(label: 'Used', value: 'â‚µ${tab.amountUsed.toStringAsFixed(0)}', icon: Icons.shopping_cart, color: AppColors.warning)),
             const SizedBox(width: 10),
             Expanded(child: SetupStatCard(
               label: 'Available',
-              value: '₵${(tab.creditLimit - tab.amountUsed).clamp(0, tab.creditLimit).toStringAsFixed(0)}',
+              value: 'â‚µ${(tab.creditLimit - tab.amountUsed).clamp(0, tab.creditLimit).toStringAsFixed(0)}',
               icon: Icons.account_balance_wallet,
               color: AppColors.success,
             )),
@@ -255,7 +255,7 @@ class _OverviewTab extends StatelessWidget {
               SetupInfoRow(label: 'Tab Number', value: tab.tabNumber),
               SetupInfoRow(label: 'Status', value: tab.status.name.toUpperCase(), valueColor: kSetupColor),
               if (tab.customerRating > 0)
-                SetupInfoRow(label: 'Customer Rating', value: '${tab.customerRating} ⭐'),
+                SetupInfoRow(label: 'Customer Rating', value: '${tab.customerRating} â­'),
               SetupInfoRow(label: 'Created', value: setupTimeAgo(tab.createdAt)),
               if (tab.autoPayEnabled)
                 const SetupInfoRow(label: 'Auto-Pay', value: 'Enabled', valueColor: AppColors.success),
@@ -276,7 +276,7 @@ class _OverviewTab extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 12),
-                SetupInfoRow(label: 'Amount', value: '₵${tab.nextPaymentAmount.toStringAsFixed(0)}'),
+                SetupInfoRow(label: 'Amount', value: 'â‚µ${tab.nextPaymentAmount.toStringAsFixed(0)}'),
                 SetupInfoRow(
                   label: 'Due',
                   value: setupTimeAgo(tab.nextPaymentDate!),
@@ -291,7 +291,7 @@ class _OverviewTab extends StatelessWidget {
   }
 }
 
-// ─── Transactions Tab ────────────────────────────────────────────────────────
+// â”€â”€â”€ Transactions Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _TransactionsTab extends StatelessWidget {
   final List<TabTransaction> transactions;
@@ -331,7 +331,7 @@ class _TransactionCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(14),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -343,7 +343,7 @@ class _TransactionCard extends StatelessWidget {
             width: 36,
             height: 36,
             decoration: BoxDecoration(
-              color: color.withOpacity(0.1),
+              color: color.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(
@@ -364,14 +364,14 @@ class _TransactionCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  '${tx.category} · ${setupTimeAgo(tx.date)}',
+                  '${tx.category} Â· ${setupTimeAgo(tx.date)}',
                   style: const TextStyle(fontSize: 10, color: AppColors.textTertiary),
                 ),
               ],
             ),
           ),
           Text(
-            '${isPayment ? "+" : "-"}₵${tx.amount.toStringAsFixed(0)}',
+            '${isPayment ? "+" : "-"}â‚µ${tx.amount.toStringAsFixed(0)}',
             style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: color),
           ),
         ],
@@ -380,7 +380,7 @@ class _TransactionCard extends StatelessWidget {
   }
 }
 
-// ─── Payments Tab ────────────────────────────────────────────────────────────
+// â”€â”€â”€ Payments Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _PaymentsTab extends StatelessWidget {
   final CustomerTab tab;
@@ -404,7 +404,7 @@ class _PaymentsTab extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               if (tab.nextPaymentDate != null) ...[
-                SetupInfoRow(label: 'Next Payment', value: '₵${tab.nextPaymentAmount.toStringAsFixed(0)}'),
+                SetupInfoRow(label: 'Next Payment', value: 'â‚µ${tab.nextPaymentAmount.toStringAsFixed(0)}'),
                 SetupInfoRow(
                   label: 'Due Date',
                   value: setupTimeAgo(tab.nextPaymentDate!),
@@ -464,7 +464,7 @@ class _PaymentHistoryRow extends StatelessWidget {
             width: 28,
             height: 28,
             decoration: BoxDecoration(
-              color: AppColors.success.withOpacity(0.1),
+              color: AppColors.success.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(8),
             ),
             child: const Icon(Icons.check, size: 14, color: AppColors.success),
@@ -474,8 +474,8 @@ class _PaymentHistoryRow extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('₵${amount.toStringAsFixed(0)}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-                Text('$method · $date', style: const TextStyle(fontSize: 10, color: AppColors.textTertiary)),
+                Text('â‚µ${amount.toStringAsFixed(0)}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
+                Text('$method Â· $date', style: const TextStyle(fontSize: 10, color: AppColors.textTertiary)),
               ],
             ),
           ),
@@ -485,7 +485,7 @@ class _PaymentHistoryRow extends StatelessWidget {
   }
 }
 
-// ─── Settings Tab ────────────────────────────────────────────────────────────
+// â”€â”€â”€ Settings Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _SettingsTab extends StatelessWidget {
   final CustomerTab tab;
@@ -508,7 +508,7 @@ class _SettingsTab extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 12),
-              SetupInfoRow(label: 'Credit Limit', value: '₵${tab.creditLimit.toStringAsFixed(0)}'),
+              SetupInfoRow(label: 'Credit Limit', value: 'â‚µ${tab.creditLimit.toStringAsFixed(0)}'),
               SetupInfoRow(
                 label: 'Auto-Pay',
                 value: tab.autoPayEnabled ? 'Enabled' : 'Disabled',
@@ -544,9 +544,9 @@ class _SettingsTab extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: AppColors.error.withOpacity(0.05),
+              color: AppColors.error.withValues(alpha: 0.05),
               borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: AppColors.error.withOpacity(0.15)),
+              border: Border.all(color: AppColors.error.withValues(alpha: 0.15)),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

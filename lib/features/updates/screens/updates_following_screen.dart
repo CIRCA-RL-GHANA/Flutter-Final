@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SCREEN 11 — Following Management
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SCREEN 11 â€” Following Management
 /// Categories: Entities, People, Topics, Lists. Bulk actions,
 /// mute/unmute, priority, following analytics.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -60,7 +60,7 @@ class _BodyState extends State<_Body> with SingleTickerProviderStateMixin {
               Center(
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                  decoration: BoxDecoration(color: kUpdatesColor.withOpacity(0.08), borderRadius: BorderRadius.circular(12)),
+                  decoration: BoxDecoration(color: kUpdatesColor.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(12)),
                   child: Text('${prov.followingCount}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: kUpdatesColor)),
                 ),
               ),
@@ -77,7 +77,7 @@ class _BodyState extends State<_Body> with SingleTickerProviderStateMixin {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kUpdatesColor.withOpacity(0.07),
+                    color: kUpdatesColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -100,7 +100,7 @@ class _BodyState extends State<_Body> with SingleTickerProviderStateMixin {
               if (_isBulkMode && _selectedIds.isNotEmpty)
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-                  color: kUpdatesColor.withOpacity(0.06),
+                  color: kUpdatesColor.withValues(alpha: 0.06),
                   child: Row(
                     children: [
                       Text('${_selectedIds.length} selected', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: kUpdatesColor)),
@@ -135,7 +135,7 @@ class _BodyState extends State<_Body> with SingleTickerProviderStateMixin {
               Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 4, offset: const Offset(0, 2))],
+                  boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 4, offset: const Offset(0, 2))],
                 ),
                 child: TabBar(
                   controller: _tabController,
@@ -218,7 +218,7 @@ class _BodyState extends State<_Body> with SingleTickerProviderStateMixin {
   }
 }
 
-// ─── Following List ─────────────────────────────────────────────────────────
+// â”€â”€â”€ Following List â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _FollowingList extends StatelessWidget {
   final List<FollowedEntity> items;
@@ -259,7 +259,7 @@ class _FollowingList extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(12),
             border: isSelected ? Border.all(color: kUpdatesColor, width: 2) : null,
-            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 4)],
+            boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 4)],
           ),
           child: Row(
             children: [
@@ -282,7 +282,7 @@ class _FollowingList extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 22,
-                    backgroundColor: kUpdatesColor.withOpacity(0.12),
+                    backgroundColor: kUpdatesColor.withValues(alpha: 0.12),
                     child: Icon(
                       _typeIcon(entity.type),
                       size: 18,
@@ -321,7 +321,7 @@ class _FollowingList extends StatelessWidget {
                     Row(
                       children: [
                         Text('${entity.followerCount} followers', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
-                        const Text(' • ', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                        const Text(' â€¢ ', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                         Text(entity.updateFrequency, style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                       ],
                     ),
@@ -413,7 +413,7 @@ class _FollowingList extends StatelessWidget {
   }
 }
 
-// ─── Lists View ─────────────────────────────────────────────────────────────
+// â”€â”€â”€ Lists View â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _ListsView extends StatelessWidget {
   final List<FollowingList> lists;
@@ -436,9 +436,9 @@ class _ListsView extends StatelessWidget {
             padding: const EdgeInsets.all(14),
             margin: const EdgeInsets.only(bottom: 10),
             decoration: BoxDecoration(
-              color: kUpdatesColor.withOpacity(0.04),
+              color: kUpdatesColor.withValues(alpha: 0.04),
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: kUpdatesColor.withOpacity(0.2), style: BorderStyle.solid),
+              border: Border.all(color: kUpdatesColor.withValues(alpha: 0.2), style: BorderStyle.solid),
             ),
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -458,14 +458,14 @@ class _ListsView extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(12),
-            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 4)],
+            boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 4)],
           ),
           child: Row(
             children: [
               Container(
                 width: 44, height: 44,
                 decoration: BoxDecoration(
-                  color: kUpdatesColor.withOpacity(0.08),
+                  color: kUpdatesColor.withValues(alpha: 0.08),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: const Icon(Icons.list, size: 20, color: kUpdatesColor),

@@ -1,9 +1,9 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SD1.2: VEHICLES — Fleet Management
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD1.2: VEHICLES â€” Fleet Management
 /// Vehicle list, live status, fuel/maintenance tracking, driver assignment
 /// RBAC: Admin(full), BM(branch), RO(full), BRO(branch), Driver(own),
 ///        Monitor/BrMon(view)
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -47,7 +47,7 @@ class VehiclesScreen extends StatelessWidget {
             ),
             body: CustomScrollView(
             slivers: [
-              // ─── Fleet Overview ────────────────────────────
+              // â”€â”€â”€ Fleet Overview â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -83,7 +83,7 @@ class VehiclesScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Vehicle List ─────────────────────────────
+              // â”€â”€â”€ Vehicle List â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
@@ -94,7 +94,7 @@ class VehiclesScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── AI Insights ─────────────────────────────────────────
+              // â”€â”€â”€ AI Insights â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Consumer<AIInsightsNotifier>(
                   builder: (context, ai, _) {
@@ -103,7 +103,7 @@ class VehiclesScreen extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: kSetupColor.withOpacity(0.07),
+                          color: kSetupColor.withValues(alpha: 0.07),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -135,7 +135,7 @@ class VehiclesScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Maintenance Schedule ─────────────────────
+              // â”€â”€â”€ Maintenance Schedule â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -158,7 +158,7 @@ class VehiclesScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Fuel Log ─────────────────────────────────
+              // â”€â”€â”€ Fuel Log â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -191,7 +191,7 @@ class VehiclesScreen extends StatelessWidget {
   }
 }
 
-// ─── Vehicle Card ────────────────────────────────────────────────────────────
+// â”€â”€â”€ Vehicle Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _VehicleCard extends StatelessWidget {
   final Vehicle vehicle;
@@ -212,7 +212,7 @@ class _VehicleCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(14),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -227,7 +227,7 @@ class _VehicleCard extends StatelessWidget {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: _statusColor(vehicle.status).withOpacity(0.1),
+                  color: _statusColor(vehicle.status).withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Icon(Icons.local_shipping, size: 22,
@@ -247,7 +247,7 @@ class _VehicleCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '${vehicle.plateNumber} · ${vehicle.zone ?? "Unassigned"}',
+                      '${vehicle.plateNumber} Â· ${vehicle.zone ?? "Unassigned"}',
                       style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                     ),
                   ],
@@ -327,7 +327,7 @@ class _VehicleCard extends StatelessWidget {
   }
 }
 
-// ─── Vehicle Stat ────────────────────────────────────────────────────────────
+// â”€â”€â”€ Vehicle Stat â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _VehicleStat extends StatelessWidget {
   final String label;
@@ -366,7 +366,7 @@ class _VehicleStat extends StatelessWidget {
   }
 }
 
-// ─── Maintenance Item ────────────────────────────────────────────────────────
+// â”€â”€â”€ Maintenance Item â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _MaintenanceItem extends StatelessWidget {
   final MaintenanceRecord record;
@@ -382,7 +382,7 @@ class _MaintenanceItem extends StatelessWidget {
             width: 36,
             height: 36,
             decoration: BoxDecoration(
-              color: (record.isUrgent ? AppColors.error : kSetupColor).withOpacity(0.1),
+              color: (record.isUrgent ? AppColors.error : kSetupColor).withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(
@@ -405,7 +405,7 @@ class _MaintenanceItem extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'Vehicle ${record.vehicleId} · ₵${record.cost.toStringAsFixed(0)}',
+                  'Vehicle ${record.vehicleId} Â· â‚µ${record.cost.toStringAsFixed(0)}',
                   style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                 ),
               ],
@@ -421,7 +421,7 @@ class _MaintenanceItem extends StatelessWidget {
   }
 }
 
-// ─── Fuel Item ───────────────────────────────────────────────────────────────
+// â”€â”€â”€ Fuel Item â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _FuelItem extends StatelessWidget {
   final FuelEntry entry;
@@ -437,7 +437,7 @@ class _FuelItem extends StatelessWidget {
             width: 36,
             height: 36,
             decoration: BoxDecoration(
-              color: kSetupColor.withOpacity(0.1),
+              color: kSetupColor.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(10),
             ),
             child: const Icon(Icons.local_gas_station, size: 18, color: kSetupColor),
@@ -448,7 +448,7 @@ class _FuelItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${entry.liters}L · ₵${entry.cost.toStringAsFixed(0)}',
+                  '${entry.liters}L Â· â‚µ${entry.cost.toStringAsFixed(0)}',
                   style: const TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w500,
@@ -456,7 +456,7 @@ class _FuelItem extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'Vehicle ${entry.vehicleId} · ${entry.odometer} km',
+                  'Vehicle ${entry.vehicleId} Â· ${entry.odometer} km',
                   style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                 ),
               ],

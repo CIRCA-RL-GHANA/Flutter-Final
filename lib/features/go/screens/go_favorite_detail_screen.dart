@@ -1,4 +1,4 @@
-/// GO Screen 8 — Favorite Detail
+﻿/// GO Screen 8 â€” Favorite Detail
 /// Entity passport, relationship dashboard, financial relationship,
 /// communication hub, transaction tools, relationship management
 
@@ -32,7 +32,7 @@ class GoFavoriteDetailScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 14),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: kGoColor.withOpacity(0.07),
+                        color: kGoColor.withValues(alpha: 0.07),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -53,22 +53,22 @@ class GoFavoriteDetailScreen extends StatelessWidget {
                   );
                 },
               ),
-              // 1 — Entity passport
+              // 1 â€” Entity passport
               _buildPassport(fav),
               const SizedBox(height: 14),
-              // 2 — Relationship dashboard
+              // 2 â€” Relationship dashboard
               _buildRelationship(fav),
               const SizedBox(height: 14),
-              // 3 — Quick actions
+              // 3 â€” Quick actions
               _buildQuickActions(context),
               const SizedBox(height: 14),
-              // 4 — Transaction history
+              // 4 â€” Transaction history
               _buildTransactionHistory(fav),
               const SizedBox(height: 14),
-              // 5 — Notes / Context
+              // 5 â€” Notes / Context
               _buildNotes(fav),
               const SizedBox(height: 14),
-              // 6 — Admin tools
+              // 6 â€” Admin tools
               _buildAdminTools(context, fav),
               const SizedBox(height: 80),
             ],
@@ -173,7 +173,7 @@ class GoFavoriteDetailScreen extends StatelessWidget {
       const SizedBox(height: 8),
       Wrap(spacing: 6, children: [
         Chip(label: const Text('Frequent', style: TextStyle(fontSize: 10)), backgroundColor: kGoColorLight, side: BorderSide.none, padding: EdgeInsets.zero, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
-        Chip(label: const Text('Verified', style: TextStyle(fontSize: 10)), backgroundColor: kGoPositive.withOpacity(0.1), side: BorderSide.none, padding: EdgeInsets.zero, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
+        Chip(label: const Text('Verified', style: TextStyle(fontSize: 10)), backgroundColor: kGoPositive.withValues(alpha: 0.1), side: BorderSide.none, padding: EdgeInsets.zero, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
         ActionChip(label: const Text('+ Tag', style: TextStyle(fontSize: 10)), onPressed: () {}, backgroundColor: Colors.white, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: EdgeInsets.zero, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
       ]),
     ]));
@@ -211,7 +211,7 @@ class _Badge extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
-    decoration: BoxDecoration(color: color.withOpacity(0.1), borderRadius: BorderRadius.circular(12)),
+    decoration: BoxDecoration(color: color.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(12)),
     child: Text(label, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: color)),
   );
 }

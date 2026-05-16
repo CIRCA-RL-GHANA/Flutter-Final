@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// U2: NOTIFICATION CENTER Screen
 /// Filterable notification feed with read/unread/archive, swipe actions,
 /// notification type chips, priority indicators
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -51,7 +51,7 @@ class NotificationCenterScreen extends StatelessWidget {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kUtilityColor.withOpacity(0.07),
+                    color: kUtilityColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -70,7 +70,7 @@ class NotificationCenterScreen extends StatelessWidget {
                 },
               ),
 
-              // ─── Status Filter Chips ──────────────────────
+              // â”€â”€â”€ Status Filter Chips â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               Padding(
                 padding: const EdgeInsets.only(top: 8),
                 child: UtilityFilterChipRow(
@@ -85,7 +85,7 @@ class NotificationCenterScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Type Filter Chips ────────────────────────
+              // â”€â”€â”€ Type Filter Chips â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               Padding(
                 padding: const EdgeInsets.only(top: 8),
                 child: SizedBox(
@@ -114,7 +114,7 @@ class NotificationCenterScreen extends StatelessWidget {
 
               const SizedBox(height: 8),
 
-              // ─── Notification List ────────────────────────
+              // â”€â”€â”€ Notification List â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               Expanded(
                 child: filtered.isEmpty
                     ? const UtilityEmptyState(
@@ -167,7 +167,7 @@ class NotificationCenterScreen extends StatelessWidget {
       alignment: alignment,
       padding: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(14),
       ),
       child: Icon(icon, color: color),
@@ -188,7 +188,7 @@ class NotificationCenterScreen extends StatelessWidget {
   }
 }
 
-// ─── Type Filter Chip ────────────────────────────────────────────────────────
+// â”€â”€â”€ Type Filter Chip â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _TypeChip extends StatelessWidget {
   final String label;
@@ -211,7 +211,7 @@ class _TypeChip extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         decoration: BoxDecoration(
-          color: isSelected ? kUtilityColor.withOpacity(0.1) : Colors.transparent,
+          color: isSelected ? kUtilityColor.withValues(alpha: 0.1) : Colors.transparent,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
             color: isSelected ? kUtilityColor : AppColors.inputBorder,
@@ -230,7 +230,7 @@ class _TypeChip extends StatelessWidget {
   }
 }
 
-// ─── Notification Card ───────────────────────────────────────────────────────
+// â”€â”€â”€ Notification Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _NotificationCard extends StatelessWidget {
   final NotificationItem notification;
@@ -252,10 +252,10 @@ class _NotificationCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(14),
           border: notification.isRead
               ? null
-              : Border.all(color: const Color(0xFF3B82F6).withOpacity(0.15)),
+              : Border.all(color: const Color(0xFF3B82F6).withValues(alpha: 0.15)),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.03),
+              color: Colors.black.withValues(alpha: 0.03),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -271,7 +271,7 @@ class _NotificationCard extends StatelessWidget {
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: notification.priorityColor.withOpacity(0.1),
+                    color: notification.priorityColor.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Icon(notification.typeIcon, size: 20, color: notification.priorityColor),

@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
 import '../providers/device_check_provider.dart';
 
 
-// OS palette � mirrors splash / welcome
+// OS palette ï¿½ mirrors splash / welcome
 const Color _kBg        = Color(0xFF08080F);
 const Color _kSurface   = Color(0xFF0E0E1A);
 const Color _kBorder    = Color(0xFF1C1C2E);
@@ -44,10 +44,10 @@ class _PreLoadingScreenState extends State<PreLoadingScreen> {
     if (!mounted) return;
 
     if (passed) {
-      // All checks passed → go to splash
+      // All checks passed â†’ go to splash
       Navigator.of(context).pushReplacementNamed(AppRoutes.splash);
     } else {
-      // Failed checks → show appropriate error
+      // Failed checks â†’ show appropriate error
       _handleFailure(deviceCheck);
     }
   }
@@ -155,7 +155,7 @@ class _PreLoadingScreenState extends State<PreLoadingScreen> {
                     Text(
                       'Preparing genie help...',
                       style: TextStyle(
-                        color: const Color(0xFF0E0E1A).withOpacity(0.7),
+                        color: const Color(0xFF0E0E1A).withValues(alpha: 0.7),
                         fontSize: 14,
                       ),
                     ),
@@ -254,7 +254,7 @@ class _ErrorDisplay extends StatelessWidget {
               width: 80,
               height: 80,
               decoration: BoxDecoration(
-                color: const Color(0xFFEF4444).withOpacity(0.15),
+                color: const Color(0xFFEF4444).withValues(alpha: 0.15),
                 shape: BoxShape.circle,
               ),
               child: Icon(icon, size: 40, color: const Color(0xFFEF4444)),

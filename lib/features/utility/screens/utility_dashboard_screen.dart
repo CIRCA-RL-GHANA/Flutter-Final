@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// U0: UTILITY DASHBOARD — Master Entry Point
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// U0: UTILITY DASHBOARD â€” Master Entry Point
 /// System health overview, quick action grid, recent activity feed
 /// RBAC-aware: advanced tools only for owner/admin/branchManager
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -29,13 +29,13 @@ class UtilityDashboardScreen extends StatelessWidget {
           backgroundColor: const Color(0xFFF8F9FC),
           appBar: const UtilityAppBar(title: 'Utility'),
           body: CustomScrollView(
-            slivers: [              // ─── AI Insights ──────────────────────
+            slivers: [              // â”€â”€â”€ AI Insights â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Consumer<AIInsightsNotifier>(
                   builder: (context, ai, _) {
                     if (ai.insights.isEmpty) return const SizedBox.shrink();
                     return Container(
-                      color: kUtilityColor.withOpacity(0.07),
+                      color: kUtilityColor.withValues(alpha: 0.07),
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                       child: Row(children: [
                         const Icon(Icons.auto_awesome, size: 14, color: kUtilityColor),
@@ -48,7 +48,7 @@ class UtilityDashboardScreen extends StatelessWidget {
                   },
                 ),
               ),
-              // ─── System Health Banner ─────────────────────
+              // â”€â”€â”€ System Health Banner â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -56,7 +56,7 @@ class UtilityDashboardScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Quick Actions Grid ───────────────────────
+              // â”€â”€â”€ Quick Actions Grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
@@ -93,7 +93,7 @@ class UtilityDashboardScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── System Metrics ───────────────────────────
+              // â”€â”€â”€ System Metrics â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
@@ -145,7 +145,7 @@ class UtilityDashboardScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Recent Activity ──────────────────────────
+              // â”€â”€â”€ Recent Activity â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
@@ -177,7 +177,7 @@ class UtilityDashboardScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Bottom Spacer ────────────────────────────
+              // â”€â”€â”€ Bottom Spacer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               const SliverToBoxAdapter(child: SizedBox(height: 100)),
             ],
           ),
@@ -187,7 +187,7 @@ class UtilityDashboardScreen extends StatelessWidget {
   }
 }
 
-// ─── System Health Banner ────────────────────────────────────────────────────
+// â”€â”€â”€ System Health Banner â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _SystemHealthBanner extends StatelessWidget {
   final SystemHealthSummary health;
@@ -209,12 +209,12 @@ class _SystemHealthBanner extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            color.withOpacity(0.08),
-            color.withOpacity(0.02),
+            color.withValues(alpha: 0.08),
+            color.withValues(alpha: 0.02),
           ],
         ),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: color.withOpacity(0.15)),
+        border: Border.all(color: color.withValues(alpha: 0.15)),
       ),
       child: Row(
         children: [
@@ -242,7 +242,7 @@ class _SystemHealthBanner extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '${health.pendingUpdates} update${health.pendingUpdates != 1 ? 's' : ''} pending · Last backup ${_timeAgo(health.lastBackup)}',
+                  '${health.pendingUpdates} update${health.pendingUpdates != 1 ? 's' : ''} pending Â· Last backup ${_timeAgo(health.lastBackup)}',
                   style: const TextStyle(
                     fontSize: 12,
                     color: AppColors.textSecondary,
@@ -257,7 +257,7 @@ class _SystemHealthBanner extends StatelessWidget {
   }
 }
 
-// ─── Activity Item ───────────────────────────────────────────────────────────
+// â”€â”€â”€ Activity Item â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _ActivityItem extends StatelessWidget {
   final RecentActivity activity;
@@ -273,7 +273,7 @@ class _ActivityItem extends StatelessWidget {
             width: 36,
             height: 36,
             decoration: BoxDecoration(
-              color: _categoryColor(activity.category).withOpacity(0.1),
+              color: _categoryColor(activity.category).withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(activity.icon, size: 18, color: _categoryColor(activity.category)),
@@ -329,7 +329,7 @@ class _ActivityItem extends StatelessWidget {
   }
 }
 
-// ─── Helpers ─────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 String _timeAgo(DateTime dt) {
   final diff = DateTime.now().difference(dt);

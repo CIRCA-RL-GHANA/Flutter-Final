@@ -1,4 +1,4 @@
-/// GO Screen 0 — Context Switcher (Pre-Entry)
+﻿/// GO Screen 0 â€” Context Switcher (Pre-Entry)
 /// Full-screen modal for selecting operational financial context
 /// Trigger: Tapping GO widget on PROMPT screen
 
@@ -32,7 +32,7 @@ class GoContextScreen extends StatelessWidget {
           body: SafeArea(
             child: Column(
               children: [
-                // ── Header ──────────────────────────
+                // â”€â”€ Header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
                   child: Row(
@@ -54,7 +54,7 @@ class GoContextScreen extends StatelessWidget {
 
                 const SizedBox(height: 20),
 
-                // ── Global Summary ──────────────────────────
+                // â”€â”€ Global Summary â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: GoSectionCard(
@@ -128,7 +128,7 @@ class GoContextScreen extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(20, 0, 20, 12),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: kGoColor.withOpacity(0.07),
+                          color: kGoColor.withValues(alpha: 0.07),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -150,7 +150,7 @@ class GoContextScreen extends StatelessWidget {
                   },
                 ),
 
-                // ── Context Grid ──────────────────────────
+                // â”€â”€ Context Grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                 Expanded(
                   child: contexts.isEmpty
                       ? GoEmptyState(
@@ -194,9 +194,9 @@ class GoContextScreen extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Context Card
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _ContextCard extends StatelessWidget {
   final FinancialContext ctx;
@@ -222,7 +222,7 @@ class _ContextCard extends StatelessWidget {
             // Avatar
             CircleAvatar(
               radius: 24,
-              backgroundColor: _typeColor.withOpacity(0.15),
+              backgroundColor: _typeColor.withValues(alpha: 0.15),
               child: Text(ctx.typeEmoji, style: const TextStyle(fontSize: 22)),
             ),
             const SizedBox(height: 10),

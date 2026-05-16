@@ -1,24 +1,24 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// MY UPDATES MODULE — Shared Widgets
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// MY UPDATES MODULE â€” Shared Widgets
 /// Reusable UI components: UpdatesAppBar, UpdateCard, CommentItem,
 /// NotificationItem, InterestCard, FollowedEntityCard, FilterChipBar,
 /// EngagementBar, EmptyState, SectionCard, etc.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../core/theme/app_colors.dart';
 import '../models/updates_models.dart';
 
-// ─── Module Colors ──────────────────────────────────────────────────────────
+// â”€â”€â”€ Module Colors â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-/// The canonical module color for MY UPDATES (Pink — Social)
+/// The canonical module color for MY UPDATES (Pink â€” Social)
 const Color kUpdatesColor = Color(0xFFEC4899);
 const Color kUpdatesColorLight = Color(0xFFFCE7F3);
 const Color kUpdatesColorDark = Color(0xFF9D174D);
 const Color kUpdatesAccent = Color(0xFF8B5CF6);
 
-// ─── Updates App Bar ────────────────────────────────────────────────────────
+// â”€â”€â”€ Updates App Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class UpdatesAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -55,7 +55,7 @@ class UpdatesAppBar extends StatelessWidget implements PreferredSizeWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: kUpdatesColor,
-                    boxShadow: [BoxShadow(color: kUpdatesColor.withOpacity(0.3), blurRadius: 4)],
+                    boxShadow: [BoxShadow(color: kUpdatesColor.withValues(alpha: 0.3), blurRadius: 4)],
                   ),
                 ),
               ],
@@ -76,7 +76,7 @@ class UpdatesAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-// ─── Update Card ────────────────────────────────────────────────────────────
+// â”€â”€â”€ Update Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class UpdateCard extends StatelessWidget {
   final UpdateEntity update;
@@ -112,7 +112,7 @@ class UpdateCard extends StatelessWidget {
           border: update.isAnnouncement
               ? const Border(left: BorderSide(color: Color(0xFF3B82F6), width: 3))
               : null,
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 8, offset: const Offset(0, 2))],
+          boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8, offset: const Offset(0, 2))],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -127,7 +127,7 @@ class UpdateCard extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: isCompact ? 16 : 20,
-                        backgroundColor: kUpdatesColor.withOpacity(0.15),
+                        backgroundColor: kUpdatesColor.withValues(alpha: 0.15),
                         child: Text(
                           update.entityAvatar.isNotEmpty ? update.entityAvatar : update.entityName.substring(0, 1),
                           style: TextStyle(fontSize: isCompact ? 12 : 14, fontWeight: FontWeight.w700, color: kUpdatesColor),
@@ -175,10 +175,10 @@ class UpdateCard extends StatelessWidget {
                         Row(
                           children: [
                             Text(update.authorRole, style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
-                            const Text(' • ', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                            const Text(' â€¢ ', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                             Text(_timeAgo(update.createdAt), style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                             if (update.isEdited) ...[
-                              const Text(' • ', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                              const Text(' â€¢ ', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                               const Text('edited', style: TextStyle(fontSize: 10, fontStyle: FontStyle.italic, color: AppColors.textTertiary)),
                             ],
                           ],
@@ -267,7 +267,7 @@ class UpdateCard extends StatelessWidget {
   }
 }
 
-// ─── Media Preview ──────────────────────────────────────────────────────────
+// â”€â”€â”€ Media Preview â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _MediaPreview extends StatelessWidget {
   final UpdateEntity update;
@@ -286,7 +286,7 @@ class _MediaPreview extends StatelessWidget {
       width: double.infinity,
       margin: const EdgeInsets.symmetric(horizontal: 14),
       decoration: BoxDecoration(
-        color: kUpdatesColor.withOpacity(0.08),
+        color: kUpdatesColor.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Stack(
@@ -298,12 +298,12 @@ class _MediaPreview extends StatelessWidget {
                 Icon(
                   icon ?? Icons.image,
                   size: 40,
-                  color: kUpdatesColor.withOpacity(0.3),
+                  color: kUpdatesColor.withValues(alpha: 0.3),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   update.contentType.name.toUpperCase(),
-                  style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: kUpdatesColor.withOpacity(0.4)),
+                  style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: kUpdatesColor.withValues(alpha: 0.4)),
                 ),
               ],
             ),
@@ -314,7 +314,7 @@ class _MediaPreview extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.6),
+                  color: Colors.black.withValues(alpha: 0.6),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
@@ -329,7 +329,7 @@ class _MediaPreview extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.9),
+                  color: Colors.white.withValues(alpha: 0.9),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Row(
@@ -337,7 +337,7 @@ class _MediaPreview extends StatelessWidget {
                     const Icon(Icons.play_arrow, size: 20, color: kUpdatesColor),
                     const SizedBox(width: 6),
                     Expanded(
-                      child: Container(height: 3, decoration: BoxDecoration(color: kUpdatesColor.withOpacity(0.2), borderRadius: BorderRadius.circular(2))),
+                      child: Container(height: 3, decoration: BoxDecoration(color: kUpdatesColor.withValues(alpha: 0.2), borderRadius: BorderRadius.circular(2))),
                     ),
                     const SizedBox(width: 6),
                     const Text('2:30', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
@@ -351,7 +351,7 @@ class _MediaPreview extends StatelessWidget {
   }
 }
 
-// ─── Poll Preview ───────────────────────────────────────────────────────────
+// â”€â”€â”€ Poll Preview â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _PollPreview extends StatelessWidget {
   final UpdatePoll poll;
@@ -372,7 +372,7 @@ class _PollPreview extends StatelessWidget {
                   width: double.infinity,
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                   decoration: BoxDecoration(
-                    color: opt.id == poll.selectedOptionId ? kUpdatesColor.withOpacity(0.1) : Colors.grey.shade50,
+                    color: opt.id == poll.selectedOptionId ? kUpdatesColor.withValues(alpha: 0.1) : Colors.grey.shade50,
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(color: opt.id == poll.selectedOptionId ? kUpdatesColor : Colors.grey.shade200),
                   ),
@@ -389,7 +389,7 @@ class _PollPreview extends StatelessWidget {
                     child: Container(
                       width: (opt.percentage / 100) * 200,
                       decoration: BoxDecoration(
-                        color: kUpdatesColor.withOpacity(0.06),
+                        color: kUpdatesColor.withValues(alpha: 0.06),
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
@@ -398,7 +398,7 @@ class _PollPreview extends StatelessWidget {
             ),
           )),
           Text(
-            '${poll.totalVotes} votes • ${_timeLeft(poll.endsAt)}',
+            '${poll.totalVotes} votes â€¢ ${_timeLeft(poll.endsAt)}',
             style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
           ),
         ],
@@ -415,7 +415,7 @@ class _PollPreview extends StatelessWidget {
   }
 }
 
-// ─── Engagement Bar ─────────────────────────────────────────────────────────
+// â”€â”€â”€ Engagement Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _EngagementBar extends StatelessWidget {
   final UpdateEntity update;
@@ -505,7 +505,7 @@ class _EngagementButton extends StatelessWidget {
   }
 }
 
-// ─── Comment Item ───────────────────────────────────────────────────────────
+// â”€â”€â”€ Comment Item â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class CommentItem extends StatelessWidget {
   final UpdateComment comment;
@@ -530,7 +530,7 @@ class CommentItem extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: depth == 0 ? 18 : 14,
-            backgroundColor: kUpdatesColor.withOpacity(0.12),
+            backgroundColor: kUpdatesColor.withValues(alpha: 0.12),
             child: Text(
               comment.userAvatar.isNotEmpty ? comment.userAvatar : comment.username.substring(0, 1),
               style: TextStyle(fontSize: depth == 0 ? 12 : 10, fontWeight: FontWeight.w700, color: kUpdatesColor),
@@ -590,7 +590,7 @@ class CommentItem extends StatelessWidget {
   }
 }
 
-// ─── Notification Item ──────────────────────────────────────────────────────
+// â”€â”€â”€ Notification Item â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class NotificationItem extends StatelessWidget {
   final UpdateNotification notification;
@@ -609,13 +609,13 @@ class NotificationItem extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        color: notification.isRead ? Colors.transparent : kUpdatesColor.withOpacity(0.03),
+        color: notification.isRead ? Colors.transparent : kUpdatesColor.withValues(alpha: 0.03),
         child: Row(
           children: [
             Container(
               width: 40, height: 40,
               decoration: BoxDecoration(
-                color: info.$2.withOpacity(0.12),
+                color: info.$2.withValues(alpha: 0.12),
                 shape: BoxShape.circle,
               ),
               child: Icon(info.$1, size: 18, color: info.$2),
@@ -657,7 +657,7 @@ class NotificationItem extends StatelessWidget {
       };
 }
 
-// ─── Filter Chip Bar ────────────────────────────────────────────────────────
+// â”€â”€â”€ Filter Chip Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class UpdatesFilterChipBar extends StatelessWidget {
   final FeedFilter activeFilter;
@@ -683,7 +683,7 @@ class UpdatesFilterChipBar extends StatelessWidget {
       height: 48,
       decoration: BoxDecoration(
         color: Colors.white,
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 4, offset: const Offset(0, 2))],
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 4, offset: const Offset(0, 2))],
       ),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -732,7 +732,7 @@ class UpdatesFilterChipBar extends StatelessWidget {
   }
 }
 
-// ─── Section Card ───────────────────────────────────────────────────────────
+// â”€â”€â”€ Section Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class UpdatesSectionCard extends StatelessWidget {
   final String title;
@@ -758,7 +758,7 @@ class UpdatesSectionCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(14),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 8, offset: const Offset(0, 2))],
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 8, offset: const Offset(0, 2))],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -768,7 +768,7 @@ class UpdatesSectionCard extends StatelessWidget {
               Container(
                 width: 26, height: 26,
                 decoration: BoxDecoration(
-                  color: iconColor.withOpacity(0.1),
+                  color: iconColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: Icon(icon, size: 14, color: iconColor),
@@ -787,7 +787,7 @@ class UpdatesSectionCard extends StatelessWidget {
   }
 }
 
-// ─── Empty State ────────────────────────────────────────────────────────────
+// â”€â”€â”€ Empty State â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class UpdatesEmptyState extends StatelessWidget {
   final IconData icon;
@@ -816,10 +816,10 @@ class UpdatesEmptyState extends StatelessWidget {
             Container(
               width: 72, height: 72,
               decoration: BoxDecoration(
-                color: kUpdatesColor.withOpacity(0.08),
+                color: kUpdatesColor.withValues(alpha: 0.08),
                 shape: BoxShape.circle,
               ),
-              child: Icon(icon, size: 32, color: kUpdatesColor.withOpacity(0.4)),
+              child: Icon(icon, size: 32, color: kUpdatesColor.withValues(alpha: 0.4)),
             ),
             const SizedBox(height: 16),
             Text(title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.textPrimary), textAlign: TextAlign.center),
@@ -845,7 +845,7 @@ class UpdatesEmptyState extends StatelessWidget {
   }
 }
 
-// ─── Liker Item ─────────────────────────────────────────────────────────────
+// â”€â”€â”€ Liker Item â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class LikerItem extends StatelessWidget {
   final UpdateLiker liker;
@@ -863,7 +863,7 @@ class LikerItem extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 20,
-                backgroundColor: kUpdatesColor.withOpacity(0.12),
+                backgroundColor: kUpdatesColor.withValues(alpha: 0.12),
                 child: Text(liker.username.substring(0, 1), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: kUpdatesColor)),
               ),
               if (liker.isOnline)
@@ -914,7 +914,7 @@ class LikerItem extends StatelessWidget {
           else
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              decoration: BoxDecoration(color: kUpdatesColor.withOpacity(0.08), borderRadius: BorderRadius.circular(8)),
+              decoration: BoxDecoration(color: kUpdatesColor.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(8)),
               child: const Text('Following', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: kUpdatesColor)),
             ),
         ],
@@ -923,7 +923,7 @@ class LikerItem extends StatelessWidget {
   }
 }
 
-// ─── Helpers ────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 String _timeAgo(DateTime dt) {
   final diff = DateTime.now().difference(dt);

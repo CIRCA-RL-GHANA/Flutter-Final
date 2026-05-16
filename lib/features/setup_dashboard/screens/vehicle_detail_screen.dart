@@ -1,9 +1,9 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SD1.2-DETAIL: VEHICLE DETAIL — 5-Tab Deep View
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD1.2-DETAIL: VEHICLE DETAIL â€” 5-Tab Deep View
 /// Tabs: Overview, Maintenance, Fuel, Routes, Driver
 /// RBAC: Owner/Admin(fullAccess), BM(branchScoped), Monitor(viewOnly),
 ///        Driver(ownOnly)
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -49,14 +49,14 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
           appBar: SetupAppBar(title: '${vehicle.make} ${vehicle.model}'),
           body: Column(
             children: [
-              // ─── Vehicle Header ────────────────────────────
+              // â”€â”€â”€ Vehicle Header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               _VehicleHeader(vehicle: vehicle),
               const SizedBox(height: 12),
               Consumer<AIInsightsNotifier>(
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kSetupColor.withOpacity(0.07),
+                    color: kSetupColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -100,7 +100,7 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
   }
 }
 
-// ─── Vehicle Header ──────────────────────────────────────────────────────────
+// â”€â”€â”€ Vehicle Header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _VehicleHeader extends StatelessWidget {
   final Vehicle vehicle;
@@ -123,7 +123,7 @@ class _VehicleHeader extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 12,
             offset: const Offset(0, 4),
           ),
@@ -135,7 +135,7 @@ class _VehicleHeader extends StatelessWidget {
             width: 56,
             height: 56,
             decoration: BoxDecoration(
-              color: _statusColor.withOpacity(0.1),
+              color: _statusColor.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(14),
             ),
             child: Icon(Icons.local_shipping, size: 28, color: _statusColor),
@@ -158,7 +158,7 @@ class _VehicleHeader extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                   decoration: BoxDecoration(
-                    color: _statusColor.withOpacity(0.1),
+                    color: _statusColor.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Text(
@@ -187,7 +187,7 @@ class _VehicleHeader extends StatelessWidget {
   }
 }
 
-// ─── Overview Tab ────────────────────────────────────────────────────────────
+// â”€â”€â”€ Overview Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _OverviewTab extends StatelessWidget {
   final Vehicle vehicle;
@@ -235,7 +235,7 @@ class _OverviewTab extends StatelessWidget {
   }
 }
 
-// ─── Maintenance Tab ─────────────────────────────────────────────────────────
+// â”€â”€â”€ Maintenance Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _MaintenanceTab extends StatelessWidget {
   final List<MaintenanceRecord> records;
@@ -271,11 +271,11 @@ class _MaintenanceCard extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(14),
         border: record.isUrgent
-            ? Border.all(color: AppColors.error.withOpacity(0.3))
+            ? Border.all(color: AppColors.error.withValues(alpha: 0.3))
             : null,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -287,7 +287,7 @@ class _MaintenanceCard extends StatelessWidget {
             width: 38,
             height: 38,
             decoration: BoxDecoration(
-              color: (record.isUrgent ? AppColors.error : kSetupColor).withOpacity(0.1),
+              color: (record.isUrgent ? AppColors.error : kSetupColor).withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(
@@ -313,7 +313,7 @@ class _MaintenanceCard extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                         decoration: BoxDecoration(
-                          color: AppColors.error.withOpacity(0.1),
+                          color: AppColors.error.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: const Text(
@@ -325,7 +325,7 @@ class _MaintenanceCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '₵${record.cost.toStringAsFixed(0)} · ${setupTimeAgo(record.date)}',
+                  'â‚µ${record.cost.toStringAsFixed(0)} Â· ${setupTimeAgo(record.date)}',
                   style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                 ),
               ],
@@ -337,7 +337,7 @@ class _MaintenanceCard extends StatelessWidget {
   }
 }
 
-// ─── Fuel Tab ────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Fuel Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _FuelTab extends StatelessWidget {
   final List<FuelEntry> entries;
@@ -366,7 +366,7 @@ class _FuelTab extends StatelessWidget {
             const SizedBox(width: 10),
             Expanded(child: SetupStatCard(
               label: 'Total Cost',
-              value: '₵${entries.fold(0.0, (sum, e) => sum + e.cost).toStringAsFixed(0)}',
+              value: 'â‚µ${entries.fold(0.0, (sum, e) => sum + e.cost).toStringAsFixed(0)}',
               icon: Icons.attach_money,
               color: AppColors.warning,
             )),
@@ -394,7 +394,7 @@ class _FuelEntryCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(14),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -406,7 +406,7 @@ class _FuelEntryCard extends StatelessWidget {
             width: 38,
             height: 38,
             decoration: BoxDecoration(
-              color: AppColors.warning.withOpacity(0.1),
+              color: AppColors.warning.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(10),
             ),
             child: const Icon(Icons.local_gas_station, size: 18, color: AppColors.warning),
@@ -421,14 +421,14 @@ class _FuelEntryCard extends StatelessWidget {
                   style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
                 ),
                 Text(
-                  'Odometer: ${entry.odometer} km · ${setupTimeAgo(entry.date)}',
+                  'Odometer: ${entry.odometer} km Â· ${setupTimeAgo(entry.date)}',
                   style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                 ),
               ],
             ),
           ),
           Text(
-            '₵${entry.cost.toStringAsFixed(0)}',
+            'â‚µ${entry.cost.toStringAsFixed(0)}',
             style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AppColors.warning),
           ),
         ],
@@ -437,7 +437,7 @@ class _FuelEntryCard extends StatelessWidget {
   }
 }
 
-// ─── Routes Tab ──────────────────────────────────────────────────────────────
+// â”€â”€â”€ Routes Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _RoutesTab extends StatelessWidget {
   final Vehicle vehicle;
@@ -498,7 +498,7 @@ class _RoutesTab extends StatelessWidget {
   }
 }
 
-// ─── Driver Tab ──────────────────────────────────────────────────────────────
+// â”€â”€â”€ Driver Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _DriverTab extends StatelessWidget {
   final Vehicle vehicle;
@@ -533,7 +533,7 @@ class _DriverTab extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 24,
-                    backgroundColor: kSetupColor.withOpacity(0.1),
+                    backgroundColor: kSetupColor.withValues(alpha: 0.1),
                     child: Text(
                       vehicle.assignedDriverName![0],
                       style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: kSetupColor),

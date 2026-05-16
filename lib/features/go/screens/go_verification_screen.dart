@@ -1,4 +1,4 @@
-/// GO Screen 3 — Verification Modal
+﻿/// GO Screen 3 â€” Verification Modal
 /// Universal bottom-sheet verification with 4 methods:
 /// Face ID, Fingerprint, PIN, OTP
 /// 4 states: pending, verifying, verified, failed
@@ -60,7 +60,7 @@ class _GoVerificationScreenState extends State<GoVerificationScreen> with Single
           builder: (context, ai, _) {
             if (ai.insights.isEmpty) return const SizedBox.shrink();
             return Container(
-              color: kGoColor.withOpacity(0.07),
+              color: kGoColor.withValues(alpha: 0.07),
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
               child: Row(children: [
                 const Icon(Icons.auto_awesome, size: 14, color: kGoColor),
@@ -200,7 +200,7 @@ class _GoVerificationScreenState extends State<GoVerificationScreen> with Single
       _buildFAQ('Why do I need to verify?', 'Verification protects your account from unauthorized transactions and ensures compliance with financial regulations.'),
       _buildFAQ('What if biometric fails?', 'You can always use PIN or OTP as fallback methods. If issues persist, contact support.'),
       _buildFAQ('How is my data protected?', 'All verification data is encrypted end-to-end and never stored on our servers.'),
-      _buildFAQ('Can I change my verification method?', 'Yes, go to Security tab in this modal or visit Settings → Security to manage preferences.'),
+      _buildFAQ('Can I change my verification method?', 'Yes, go to Security tab in this modal or visit Settings â†’ Security to manage preferences.'),
       const SizedBox(height: 16),
       OutlinedButton.icon(
         icon: const Icon(Icons.support_agent, size: 18),

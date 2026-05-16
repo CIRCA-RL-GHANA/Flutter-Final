@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/constants/app_strings.dart';
@@ -7,7 +7,7 @@ import '../providers/onboarding_provider.dart';
 import '../widgets/buttons.dart';
 
 
-// OS palette � mirrors splash / welcome
+// OS palette ï¿½ mirrors splash / welcome
 const Color _kBg        = Color(0xFF08080F);
 const Color _kSurface   = Color(0xFF0E0E1A);
 const Color _kBorder    = Color(0xFF1C1C2E);
@@ -50,7 +50,7 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
     if (lastLogin == null) {
       return const _WelcomeContext(
         greeting: AppStrings.welcomeBack,
-        emoji: '👋',
+        emoji: 'ðŸ‘‹',
         showWhatsNew: false,
         daysSince: 0,
       );
@@ -61,28 +61,28 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
     if (daysSince < 7) {
       return _WelcomeContext(
         greeting: AppStrings.welcomeBack,
-        emoji: '👋',
+        emoji: 'ðŸ‘‹',
         showWhatsNew: false,
         daysSince: daysSince,
       );
     } else if (daysSince < 30) {
       return _WelcomeContext(
         greeting: AppStrings.missedYou,
-        emoji: '💙',
+        emoji: 'ðŸ’™',
         showWhatsNew: false,
         daysSince: daysSince,
       );
     } else if (daysSince < 90) {
       return _WelcomeContext(
         greeting: AppStrings.whatsNew,
-        emoji: '🎉',
+        emoji: 'ðŸŽ‰',
         showWhatsNew: true,
         daysSince: daysSince,
       );
     } else {
       return _WelcomeContext(
         greeting: AppStrings.refreshAccount,
-        emoji: '🔄',
+        emoji: 'ðŸ”„',
         showWhatsNew: true,
         daysSince: daysSince,
       );
@@ -115,7 +115,7 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
                         width: 44,
                         height: 44,
                         decoration: BoxDecoration(
-                          color: const Color(0xFF0E0E1A).withOpacity(0.1),
+                          color: const Color(0xFF0E0E1A).withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: const Icon(
@@ -177,7 +177,7 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
                             name,
                             style: TextStyle(
                               fontSize: 20,
-                              color: const Color(0xFF22BDD8).withOpacity(0.9),
+                              color: const Color(0xFF22BDD8).withValues(alpha: 0.9),
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -195,7 +195,7 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
                               width: double.infinity,
                               padding: const EdgeInsets.all(20),
                               decoration: BoxDecoration(
-                                color: const Color(0xFF0E0E1A).withOpacity(0.1),
+                                color: const Color(0xFF0E0E1A).withValues(alpha: 0.1),
                                 borderRadius: BorderRadius.circular(6),
                                 border: Border.all(color: const Color(0xFF1C1C2E)),
                               ),
@@ -240,7 +240,7 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
                             width: double.infinity,
                             padding: const EdgeInsets.all(20),
                             decoration: BoxDecoration(
-                              color: const Color(0xFF0E0E1A).withOpacity(0.08),
+                              color: const Color(0xFF0E0E1A).withValues(alpha: 0.08),
                               borderRadius: BorderRadius.circular(6),
                               border: Border.all(color: const Color(0xFF0E0E1A)),
                             ),
@@ -372,7 +372,7 @@ class _NewFeatureItem extends StatelessWidget {
             width: 32,
             height: 32,
             decoration: BoxDecoration(
-              color: const Color(0xFF22BDD8).withOpacity(0.2),
+              color: const Color(0xFF22BDD8).withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Icon(icon, size: 16, color: const Color(0xFF22BDD8)),
@@ -382,7 +382,7 @@ class _NewFeatureItem extends StatelessWidget {
             text,
             style: TextStyle(
               fontSize: 14,
-              color: const Color(0xFF0E0E1A).withOpacity(0.8),
+              color: const Color(0xFF0E0E1A).withValues(alpha: 0.8),
             ),
           ),
         ],
@@ -414,7 +414,7 @@ class _StatItem extends StatelessWidget {
           label,
           style: TextStyle(
             fontSize: 12,
-            color: const Color(0xFF0E0E1A).withOpacity(0.6),
+            color: const Color(0xFF0E0E1A).withValues(alpha: 0.6),
           ),
         ),
       ],
@@ -440,7 +440,7 @@ class _QuickActionBtn extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 16),
         decoration: BoxDecoration(
-          color: const Color(0xFF0E0E1A).withOpacity(0.08),
+          color: const Color(0xFF0E0E1A).withValues(alpha: 0.08),
           borderRadius: BorderRadius.circular(6),
           border: Border.all(color: const Color(0xFF1C1C2E)),
         ),
@@ -452,7 +452,7 @@ class _QuickActionBtn extends StatelessWidget {
               label,
               style: TextStyle(
                 fontSize: 12,
-                color: const Color(0xFF0E0E1A).withOpacity(0.7),
+                color: const Color(0xFF0E0E1A).withValues(alpha: 0.7),
                 height: 1.3,
               ),
               textAlign: TextAlign.center,

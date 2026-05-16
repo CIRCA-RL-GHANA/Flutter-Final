@@ -1,13 +1,13 @@
-/// Alerts Module — Shared Reusable UI Components
+﻿/// Alerts Module â€” Shared Reusable UI Components
 /// Module Color: Red (0xFFEF4444)
 /// Visibility: All roles EXCEPT Owner
 
 import 'package:flutter/material.dart';
 import '../models/alerts_models.dart';
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // COLOR CONSTANTS
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 const kAlertsColor = Color(0xFFEF4444);
 const kAlertsColorLight = Color(0xFFFEE2E2);
@@ -21,9 +21,9 @@ const kAlertsInfoLight = Color(0xFFDBEAFE);
 const kAlertsCritical = Color(0xFF7C3AED);
 const kAlertsCriticalLight = Color(0xFFEDE9FE);
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // ALERTS APP BAR
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class AlertsAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -65,9 +65,9 @@ class AlertsAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // SECTION CARD
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class AlertsSectionCard extends StatelessWidget {
   final String? title;
@@ -110,9 +110,9 @@ class AlertsSectionCard extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // EMPTY STATE
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class AlertsEmptyState extends StatelessWidget {
   final IconData icon;
@@ -171,9 +171,9 @@ class AlertsEmptyState extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════
-// ALERT CARD — Pending
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ALERT CARD â€” Pending
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class PendingAlertCard extends StatelessWidget {
   final AlertItem alert;
@@ -220,14 +220,14 @@ class PendingAlertCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Top row — priority chip + time
+            // Top row â€” priority chip + time
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                   decoration: BoxDecoration(
-                    color: borderColor.withOpacity(0.1),
+                    color: borderColor.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Text(
@@ -259,7 +259,7 @@ class PendingAlertCard extends StatelessWidget {
             ),
             const Spacer(),
 
-            // Bottom row — assignee + actions
+            // Bottom row â€” assignee + actions
             Row(
               children: [
                 if (alert.assigneeName != null) ...[
@@ -267,7 +267,7 @@ class PendingAlertCard extends StatelessWidget {
                     width: 22,
                     height: 22,
                     decoration: BoxDecoration(
-                      color: kAlertsInfo.withOpacity(0.1),
+                      color: kAlertsInfo.withValues(alpha: 0.1),
                       shape: BoxShape.circle,
                     ),
                     child: Center(child: Text(alert.assigneeName![0], style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: kAlertsInfo))),
@@ -304,9 +304,9 @@ class PendingAlertCard extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════
-// ALERT CARD — Resolved
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ALERT CARD â€” Resolved
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class ResolvedAlertCard extends StatelessWidget {
   final AlertItem alert;
@@ -338,7 +338,7 @@ class ResolvedAlertCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Top row — status + time
+            // Top row â€” status + time
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -365,7 +365,7 @@ class ResolvedAlertCard extends StatelessWidget {
                     width: 22,
                     height: 22,
                     decoration: BoxDecoration(
-                      color: kAlertsResolved.withOpacity(0.1),
+                      color: kAlertsResolved.withValues(alpha: 0.1),
                       shape: BoxShape.circle,
                     ),
                     child: Center(child: Text(alert.resolution!.resolverName[0], style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: kAlertsResolved))),
@@ -397,9 +397,9 @@ class ResolvedAlertCard extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // SLA CHIP
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _SlaChip extends StatelessWidget {
   final AlertSlaInfo sla;
@@ -420,7 +420,7 @@ class _SlaChip extends StatelessWidget {
             : '${remaining.inMinutes}m left';
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-      decoration: BoxDecoration(color: color.withOpacity(0.1), borderRadius: BorderRadius.circular(6)),
+      decoration: BoxDecoration(color: color.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(6)),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -433,9 +433,9 @@ class _SlaChip extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // VERIFICATION BADGE
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _VerificationBadge extends StatelessWidget {
   final VerificationStatus status;
@@ -443,19 +443,19 @@ class _VerificationBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final label = status == VerificationStatus.verified ? '✅ Verified' : '📋 Pending Review';
+    final label = status == VerificationStatus.verified ? 'âœ… Verified' : 'ðŸ“‹ Pending Review';
     final color = status == VerificationStatus.verified ? kAlertsResolved : kAlertsInfo;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-      decoration: BoxDecoration(color: color.withOpacity(0.1), borderRadius: BorderRadius.circular(6)),
+      decoration: BoxDecoration(color: color.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(6)),
       child: Text(label, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: color)),
     );
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // PRIORITY FILTER PILL
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class PriorityFilterPill extends StatelessWidget {
   final String label;
@@ -494,9 +494,9 @@ class PriorityFilterPill extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // ACTIVITY TIMELINE EVENT
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class ActivityTimelineEvent extends StatelessWidget {
   final ActivityEvent event;
@@ -523,7 +523,7 @@ class ActivityTimelineEvent extends StatelessWidget {
                   width: 28,
                   height: 28,
                   decoration: BoxDecoration(
-                    color: _eventColor(event.type).withOpacity(0.1),
+                    color: _eventColor(event.type).withValues(alpha: 0.1),
                     shape: BoxShape.circle,
                   ),
                   child: Center(child: Text(event.typeEmoji, style: const TextStyle(fontSize: 13))),
@@ -591,9 +591,9 @@ class ActivityTimelineEvent extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // KNOWLEDGE BASE ITEM CARD
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class KnowledgeItemCard extends StatelessWidget {
   final KnowledgeBaseItem item;
@@ -630,7 +630,7 @@ class KnowledgeItemCard extends StatelessWidget {
               children: [
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                  decoration: BoxDecoration(color: kAlertsResolved.withOpacity(0.1), borderRadius: BorderRadius.circular(4)),
+                  decoration: BoxDecoration(color: kAlertsResolved.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(4)),
                   child: Text('${(item.similarityScore * 100).toInt()}% match', style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: kAlertsResolved)),
                 ),
                 const SizedBox(width: 8),
@@ -657,22 +657,22 @@ class _KbTypeBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final data = {
-      KnowledgeItemType.article: ('📚', 'Article', kAlertsInfo),
-      KnowledgeItemType.pastResolution: ('✅', 'Past Fix', kAlertsResolved),
-      KnowledgeItemType.communitySolution: ('🌐', 'Community', kAlertsCritical),
+      KnowledgeItemType.article: ('ðŸ“š', 'Article', kAlertsInfo),
+      KnowledgeItemType.pastResolution: ('âœ…', 'Past Fix', kAlertsResolved),
+      KnowledgeItemType.communitySolution: ('ðŸŒ', 'Community', kAlertsCritical),
     };
     final d = data[type]!;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-      decoration: BoxDecoration(color: d.$3.withOpacity(0.1), borderRadius: BorderRadius.circular(4)),
+      decoration: BoxDecoration(color: d.$3.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(4)),
       child: Text('${d.$1} ${d.$2}', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: d.$3)),
     );
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // TEMPLATE CARD
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class AlertTemplateCard extends StatelessWidget {
   final AlertTemplate template;
@@ -730,9 +730,9 @@ class AlertTemplateCard extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // RESOLVER LEADERBOARD TILE
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class ResolverLeaderboardTile extends StatelessWidget {
   final ResolverStats resolver;
@@ -757,12 +757,12 @@ class ResolverLeaderboardTile extends StatelessWidget {
             width: 28,
             height: 28,
             decoration: BoxDecoration(
-              color: rank <= 3 ? kAlertsWarning.withOpacity(0.15) : const Color(0xFFF3F4F6),
+              color: rank <= 3 ? kAlertsWarning.withValues(alpha: 0.15) : const Color(0xFFF3F4F6),
               shape: BoxShape.circle,
             ),
             child: Center(
               child: Text(
-                rank <= 3 ? ['🥇', '🥈', '🥉'][rank - 1] : '#$rank',
+                rank <= 3 ? ['ðŸ¥‡', 'ðŸ¥ˆ', 'ðŸ¥‰'][rank - 1] : '#$rank',
                 style: TextStyle(fontSize: rank <= 3 ? 14 : 11, fontWeight: FontWeight.w700),
               ),
             ),
@@ -799,9 +799,9 @@ class ResolverLeaderboardTile extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // STAFF PICKER TILE
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class StaffPickerTile extends StatelessWidget {
   final AlertStaffMember staff;
@@ -828,7 +828,7 @@ class StaffPickerTile extends StatelessWidget {
               width: 36,
               height: 36,
               decoration: BoxDecoration(
-                color: kAlertsColor.withOpacity(0.1),
+                color: kAlertsColor.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
               child: Center(child: Text(staff.name[0], style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: kAlertsColor))),
@@ -843,7 +843,7 @@ class StaffPickerTile extends StatelessWidget {
                     children: [
                       Text(staff.role, style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
                       if (staff.branch != null) ...[
-                        const Text(' • ', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                        const Text(' â€¢ ', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
                         Text(staff.branch!, style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
                       ],
                     ],
@@ -873,9 +873,9 @@ class StaffPickerTile extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // MINI DONUT CHART (for widget)
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class MiniDonutChart extends StatelessWidget {
   final List<IssueDistribution> data;
@@ -904,9 +904,9 @@ class _DonutPainter extends CustomPainter {
     const strokeWidth = 8.0;
     final colors = [kAlertsColor, kAlertsWarning, kAlertsInfo, kAlertsResolved, const Color(0xFF9CA3AF)];
 
-    double startAngle = -1.5708; // -π/2
+    double startAngle = -1.5708; // -Ï€/2
     for (int i = 0; i < data.length && i < colors.length; i++) {
-      final sweepAngle = (data[i].percentage / 100) * 6.2832; // 2π
+      final sweepAngle = (data[i].percentage / 100) * 6.2832; // 2Ï€
       final paint = Paint()
         ..color = colors[i]
         ..style = PaintingStyle.stroke

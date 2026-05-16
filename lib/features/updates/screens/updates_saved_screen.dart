@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SCREEN 5 — Saved Updates Library
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SCREEN 5 â€” Saved Updates Library
 /// Grid/List/Calendar view, collections management, batch operations,
 /// search within saved, sort options.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -80,7 +80,7 @@ class _BodyState extends State<_Body> {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kUpdatesColor.withOpacity(0.07),
+                    color: kUpdatesColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -103,7 +103,7 @@ class _BodyState extends State<_Body> {
               if (_isBatchMode && _selectedIds.isNotEmpty)
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-                  color: kUpdatesColor.withOpacity(0.06),
+                  color: kUpdatesColor.withValues(alpha: 0.06),
                   child: Row(
                     children: [
                       Text('${_selectedIds.length} selected', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: kUpdatesColor)),
@@ -215,7 +215,7 @@ class _BodyState extends State<_Body> {
             ...prov.collections.map((c) => ListTile(
               leading: Container(
                 width: 32, height: 32,
-                decoration: BoxDecoration(color: c.color.withOpacity(0.15), borderRadius: BorderRadius.circular(8)),
+                decoration: BoxDecoration(color: c.color.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(8)),
                 child: Icon(Icons.folder, size: 16, color: c.color),
               ),
               title: Text(c.name, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
@@ -284,7 +284,7 @@ class _BodyState extends State<_Body> {
   }
 }
 
-// ─── Collection Chip ────────────────────────────────────────────────────────
+// â”€â”€â”€ Collection Chip â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _CollectionChip extends StatelessWidget {
   final String label;
@@ -298,7 +298,7 @@ class _CollectionChip extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
-        color: isSelected ? kUpdatesColor : (color ?? kUpdatesColor).withOpacity(0.06),
+        color: isSelected ? kUpdatesColor : (color ?? kUpdatesColor).withValues(alpha: 0.06),
         borderRadius: BorderRadius.circular(18),
         border: Border.all(color: isSelected ? kUpdatesColor : (color ?? Colors.grey.shade200)),
       ),
@@ -310,7 +310,7 @@ class _CollectionChip extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
             decoration: BoxDecoration(
-              color: isSelected ? Colors.white.withOpacity(0.2) : Colors.grey.shade200,
+              color: isSelected ? Colors.white.withValues(alpha: 0.2) : Colors.grey.shade200,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Text('$count', style: TextStyle(fontSize: 9, fontWeight: FontWeight.w700, color: isSelected ? Colors.white : AppColors.textSecondary)),
@@ -321,7 +321,7 @@ class _CollectionChip extends StatelessWidget {
   }
 }
 
-// ─── Grid View ──────────────────────────────────────────────────────────────
+// â”€â”€â”€ Grid View â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _GridView extends StatelessWidget {
   final List<dynamic> saved;
@@ -361,7 +361,7 @@ class _GridView extends StatelessWidget {
               color: Colors.white,
               borderRadius: BorderRadius.circular(12),
               border: isSelected ? Border.all(color: kUpdatesColor, width: 2) : null,
-              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 6)],
+              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 6)],
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -370,12 +370,12 @@ class _GridView extends StatelessWidget {
                 Container(
                   height: 80,
                   decoration: BoxDecoration(
-                    color: kUpdatesColor.withOpacity(0.06),
+                    color: kUpdatesColor.withValues(alpha: 0.06),
                     borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
                   ),
                   child: Stack(
                     children: [
-                      Center(child: Icon(_contentIcon(update.contentType), size: 28, color: kUpdatesColor.withOpacity(0.3))),
+                      Center(child: Icon(_contentIcon(update.contentType), size: 28, color: kUpdatesColor.withValues(alpha: 0.3))),
                       if (isBatchMode)
                         Positioned(
                           top: 6, right: 6,
@@ -412,7 +412,7 @@ class _GridView extends StatelessWidget {
   }
 }
 
-// ─── List View ──────────────────────────────────────────────────────────────
+// â”€â”€â”€ List View â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _ListView extends StatelessWidget {
   final List<dynamic> saved;
@@ -448,7 +448,7 @@ class _ListView extends StatelessWidget {
               color: Colors.white,
               borderRadius: BorderRadius.circular(10),
               border: isSelected ? Border.all(color: kUpdatesColor, width: 2) : null,
-              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 4)],
+              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 4)],
             ),
             child: Row(
               children: [
@@ -467,10 +467,10 @@ class _ListView extends StatelessWidget {
                 Container(
                   width: 48, height: 48,
                   decoration: BoxDecoration(
-                    color: kUpdatesColor.withOpacity(0.08),
+                    color: kUpdatesColor.withValues(alpha: 0.08),
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Icon(_contentIcon(update.contentType), size: 20, color: kUpdatesColor.withOpacity(0.4)),
+                  child: Icon(_contentIcon(update.contentType), size: 20, color: kUpdatesColor.withValues(alpha: 0.4)),
                 ),
                 const SizedBox(width: 10),
                 Expanded(

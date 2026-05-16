@@ -1,4 +1,4 @@
-/// qualChat Screen 4 — My Preferences (Owner Only)
+﻿/// qualChat Screen 4 â€” My Preferences (Owner Only)
 /// Intelligent Preference System: Vibe settings, discovery, privacy
 
 import 'package:flutter/material.dart';
@@ -18,7 +18,7 @@ class QualChatPreferencesScreen extends StatelessWidget {
         return Scaffold(
           backgroundColor: const Color(0xFFF8F9FE),
           appBar: QualChatAppBar(
-            title: 'My Vibe Settings 🎛️',
+            title: 'My Vibe Settings ðŸŽ›ï¸',
             actions: [
               TextButton(
                 onPressed: () {},
@@ -33,7 +33,7 @@ class QualChatPreferencesScreen extends StatelessWidget {
                   builder: (context, ai, _) {
                     if (ai.insights.isEmpty) return const SizedBox.shrink();
                     return Container(
-                      color: kChatColor.withOpacity(0.07),
+                      color: kChatColor.withValues(alpha: 0.07),
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                       width: double.infinity,
                       child: Row(
@@ -58,7 +58,7 @@ class QualChatPreferencesScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       _ToggleRow(
-                        emoji: '🌟',
+                        emoji: 'ðŸŒŸ',
                         label: 'Open to new connections',
                         subtitle: provider.isOpenToConnections ? 'Active - Sparkling!' : 'Paused',
                         value: provider.isOpenToConnections,
@@ -66,7 +66,7 @@ class QualChatPreferencesScreen extends StatelessWidget {
                       ),
                       const Divider(height: 24),
                       _ToggleRow(
-                        emoji: '🛡️',
+                        emoji: 'ðŸ›¡ï¸',
                         label: 'Incognito Mode',
                         subtitle: provider.incognitoMode ? 'Your profile is hidden' : 'Your profile is visible',
                         value: provider.incognitoMode,
@@ -228,10 +228,10 @@ class QualChatPreferencesScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [kChatColor.withOpacity(0.1), kChatSocial.withOpacity(0.1)],
+                      colors: [kChatColor.withValues(alpha: 0.1), kChatSocial.withValues(alpha: 0.1)],
                     ),
                     borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: kChatColor.withOpacity(0.2)),
+                    border: Border.all(color: kChatColor.withValues(alpha: 0.2)),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -284,15 +284,15 @@ class QualChatPreferencesScreen extends StatelessWidget {
 
   String _tagEmoji(VibeTag tag) {
     switch (tag) {
-      case VibeTag.adventurous: return '🏃';
-      case VibeTag.creative: return '🎨';
-      case VibeTag.nerdy: return '📚';
-      case VibeTag.foodie: return '🍳';
-      case VibeTag.musical: return '🎵';
-      case VibeTag.pets: return '🐶';
-      case VibeTag.travel: return '🌍';
-      case VibeTag.gaming: return '🎮';
-      case VibeTag.calm: return '🧘';
+      case VibeTag.adventurous: return 'ðŸƒ';
+      case VibeTag.creative: return 'ðŸŽ¨';
+      case VibeTag.nerdy: return 'ðŸ“š';
+      case VibeTag.foodie: return 'ðŸ³';
+      case VibeTag.musical: return 'ðŸŽµ';
+      case VibeTag.pets: return 'ðŸ¶';
+      case VibeTag.travel: return 'ðŸŒ';
+      case VibeTag.gaming: return 'ðŸŽ®';
+      case VibeTag.calm: return 'ðŸ§˜';
     }
   }
 }
@@ -366,7 +366,7 @@ class _DataButton extends StatelessWidget {
         style: OutlinedButton.styleFrom(
           foregroundColor: isDestructive ? const Color(0xFFEF4444) : const Color(0xFF6B7280),
           side: BorderSide(
-            color: isDestructive ? const Color(0xFFEF4444).withOpacity(0.3) : const Color(0xFFE5E7EB),
+            color: isDestructive ? const Color(0xFFEF4444).withValues(alpha: 0.3) : const Color(0xFFE5E7EB),
           ),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 8),
@@ -386,7 +386,7 @@ class _RecommendationItem extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 4),
       child: Row(
         children: [
-          const Text('•  ', style: TextStyle(color: kChatColor)),
+          const Text('â€¢  ', style: TextStyle(color: kChatColor)),
           Expanded(
             child: Text(text, style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
           ),

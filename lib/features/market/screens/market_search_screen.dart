@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// MARKET MODULE — Screen 1.1: Unified Market Search
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// MARKET MODULE â€” Screen 1.1: Unified Market Search
 /// Full-screen modal with search bar, recent searches, quick filters,
 /// tabbed results (Merchants / Products / Deals), AI suggestions
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -62,7 +62,7 @@ class _MarketSearchScreenState extends State<MarketSearchScreen> with SingleTick
           ),
           body: Column(
             children: [
-              // ── Search Input ──
+              // â”€â”€ Search Input â”€â”€
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: MarketSearchBar(
@@ -72,11 +72,11 @@ class _MarketSearchScreenState extends State<MarketSearchScreen> with SingleTick
                 ),
               ),
 
-              // ── Quick Filter Chips ──
+              // â”€â”€ Quick Filter Chips â”€â”€
               Padding(
                 padding: const EdgeInsets.only(bottom: 8),
                 child: MarketQuickFilterChips(
-                  filters: const ['Open now', 'Free delivery', 'Under 30min', '4★+', 'Near me'],
+                  filters: const ['Open now', 'Free delivery', 'Under 30min', '4â˜…+', 'Near me'],
                   selected: _quickFilters,
                   onToggle: (f) => setState(() {
                     _quickFilters.contains(f) ? _quickFilters.remove(f) : _quickFilters.add(f);
@@ -84,7 +84,7 @@ class _MarketSearchScreenState extends State<MarketSearchScreen> with SingleTick
                 ),
               ),
 
-              // ── Content area ──
+              // â”€â”€ Content area â”€â”€
               if (_query.isEmpty) ...[
                 // Recent searches
                 const MarketSectionTitle(title: 'Recent Searches', icon: Icons.history),
@@ -119,8 +119,8 @@ class _MarketSearchScreenState extends State<MarketSearchScreen> with SingleTick
                           },
                           child: Chip(
                             label: Text(s, style: const TextStyle(fontSize: 12)),
-                            backgroundColor: kMarketColor.withOpacity(0.08),
-                            side: BorderSide(color: kMarketColor.withOpacity(0.2)),
+                            backgroundColor: kMarketColor.withValues(alpha: 0.08),
+                            side: BorderSide(color: kMarketColor.withValues(alpha: 0.2)),
                             labelStyle: const TextStyle(color: kMarketColor),
                           ),
                         )).toList(),
@@ -200,7 +200,7 @@ class _MarketSearchScreenState extends State<MarketSearchScreen> with SingleTick
               color: Colors.white,
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
-                BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 8, offset: const Offset(0, 2)),
+                BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8, offset: const Offset(0, 2)),
               ],
             ),
             child: Row(
@@ -209,7 +209,7 @@ class _MarketSearchScreenState extends State<MarketSearchScreen> with SingleTick
                   width: 48,
                   height: 48,
                   decoration: BoxDecoration(
-                    color: kMarketColor.withOpacity(0.1),
+                    color: kMarketColor.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: const Icon(Icons.store, color: kMarketColor),
@@ -230,8 +230,8 @@ class _MarketSearchScreenState extends State<MarketSearchScreen> with SingleTick
                       ),
                       Row(
                         children: [
-                          Text('${merchant.ratingDisplay}★', style: const TextStyle(fontSize: 12)),
-                          Text(' • ${merchant.deliveryTimeDisplay} • ${merchant.distanceMiles}mi',
+                          Text('${merchant.ratingDisplay}â˜…', style: const TextStyle(fontSize: 12)),
+                          Text(' â€¢ ${merchant.deliveryTimeDisplay} â€¢ ${merchant.distanceMiles}mi',
                               style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                         ],
                       ),
@@ -334,7 +334,7 @@ class _MarketSearchScreenState extends State<MarketSearchScreen> with SingleTick
                     const SizedBox(height: 4),
                     Text(
                       deal.title,
-                      style: TextStyle(color: Colors.white.withOpacity(0.9), fontSize: 13),
+                      style: TextStyle(color: Colors.white.withValues(alpha: 0.9), fontSize: 13),
                     ),
                   ],
                 ),
@@ -343,7 +343,7 @@ class _MarketSearchScreenState extends State<MarketSearchScreen> with SingleTick
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
+                    color: Colors.white.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Text(
@@ -359,10 +359,10 @@ class _MarketSearchScreenState extends State<MarketSearchScreen> with SingleTick
   }
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// AI Search Suggestion Banner — shows AI keyword suggestions when query is empty
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// AI Search Suggestion Banner â€” shows AI keyword suggestions when query is empty
 // or a smart "you might like" row when the user has typed something.
-// ─────────────────────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _AISearchSuggestionBanner extends StatelessWidget {
   final String  query;
@@ -379,7 +379,7 @@ class _AISearchSuggestionBanner extends StatelessWidget {
       builder: (ctx, notifier, _) {
         final results = notifier.searchResults;
 
-        // When no query & no AI results — show a generic AI prompt banner
+        // When no query & no AI results â€” show a generic AI prompt banner
         if (query.isEmpty && results.isEmpty) {
           return Container(
             margin: const EdgeInsets.all(16),
@@ -397,7 +397,7 @@ class _AISearchSuggestionBanner extends StatelessWidget {
                 const SizedBox(width: 10),
                 const Expanded(
                   child: Text(
-                    'AI-powered search — type anything and get\nsemantically ranked results.',
+                    'AI-powered search â€” type anything and get\nsemantically ranked results.',
                     style: TextStyle(fontSize: 12, color: AppColors.textSecondary),
                   ),
                 ),
@@ -406,7 +406,7 @@ class _AISearchSuggestionBanner extends StatelessWidget {
           );
         }
 
-        // When AI search results exist — show them as suggestion chips
+        // When AI search results exist â€” show them as suggestion chips
         if (results.isNotEmpty) {
           return Container(
             margin:  const EdgeInsets.symmetric(horizontal: 16, vertical: 8),

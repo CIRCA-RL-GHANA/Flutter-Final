@@ -1,4 +1,4 @@
-/// Alerts Screen 3 — Alert Detail (Immersive View)
+﻿/// Alerts Screen 3 â€” Alert Detail (Immersive View)
 /// Collapsible header, priority strip, metadata grid, description card,
 /// assignment panel, activity timeline, resolution zone, sticky bottom actions
 
@@ -33,7 +33,7 @@ class AlertsDetailScreen extends StatelessWidget {
           backgroundColor: const Color(0xFFF8F9FE),
           body: CustomScrollView(
             slivers: [
-              // ──── COLLAPSIBLE HEADER ────
+              // â”€â”€â”€â”€ COLLAPSIBLE HEADER â”€â”€â”€â”€
               SliverAppBar(
                 pinned: true,
                 expandedHeight: 180,
@@ -78,7 +78,7 @@ class AlertsDetailScreen extends StatelessWidget {
                             width: double.infinity,
                             padding: const EdgeInsets.symmetric(vertical: 4),
                             decoration: BoxDecoration(
-                              color: _priorityColor(alert.priority).withOpacity(0.1),
+                              color: _priorityColor(alert.priority).withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(6),
                             ),
                             child: Center(
@@ -118,13 +118,13 @@ class AlertsDetailScreen extends StatelessWidget {
                 ),
               ),
 
-              // ──── AI INSIGHTS ────
+              // â”€â”€â”€â”€ AI INSIGHTS â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Consumer<AIInsightsNotifier>(
                   builder: (context, ai, _) {
                     if (ai.insights.isEmpty) return const SizedBox.shrink();
                     return Container(
-                      color: kAlertsColor.withOpacity(0.07),
+                      color: kAlertsColor.withValues(alpha: 0.07),
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                       child: Row(children: [
                         const Icon(Icons.auto_awesome, size: 14, color: kAlertsColor),
@@ -138,14 +138,14 @@ class AlertsDetailScreen extends StatelessWidget {
                 ),
               ),
 
-              // ──── BODY ────
+              // â”€â”€â”€â”€ BODY â”€â”€â”€â”€
               SliverPadding(
                 padding: const EdgeInsets.all(16),
                 sliver: SliverList(
                   delegate: SliverChildListDelegate([
-                    // ──── METADATA GRID ────
+                    // â”€â”€â”€â”€ METADATA GRID â”€â”€â”€â”€
                     AlertsSectionCard(
-                      title: '📋 Details',
+                      title: 'ðŸ“‹ Details',
                       child: Column(
                         children: [
                           _MetadataRow(label: 'Category', value: '${alert.categoryEmoji} ${alert.categoryLabel}'),
@@ -174,25 +174,25 @@ class AlertsDetailScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 12),
 
-                    // ──── DESCRIPTION ────
+                    // â”€â”€â”€â”€ DESCRIPTION â”€â”€â”€â”€
                     AlertsSectionCard(
-                      title: '📝 Description',
+                      title: 'ðŸ“ Description',
                       child: Text(alert.description, style: const TextStyle(fontSize: 14, color: Color(0xFF374151), height: 1.5)),
                     ),
                     const SizedBox(height: 12),
 
-                    // ──── SLA INFO ────
+                    // â”€â”€â”€â”€ SLA INFO â”€â”€â”€â”€
                     if (alert.slaInfo != null) ...[
                       AlertsSectionCard(
-                        title: '⏱️ SLA Tracking',
+                        title: 'â±ï¸ SLA Tracking',
                         child: _SlaDetailPanel(sla: alert.slaInfo!),
                       ),
                       const SizedBox(height: 12),
                     ],
 
-                    // ──── ASSIGNMENT PANEL ────
+                    // â”€â”€â”€â”€ ASSIGNMENT PANEL â”€â”€â”€â”€
                     AlertsSectionCard(
-                      title: '👤 Assignment',
+                      title: 'ðŸ‘¤ Assignment',
                       child: alert.assigneeName != null
                           ? Row(
                               children: [
@@ -200,7 +200,7 @@ class AlertsDetailScreen extends StatelessWidget {
                                   width: 40,
                                   height: 40,
                                   decoration: BoxDecoration(
-                                    color: kAlertsInfo.withOpacity(0.1),
+                                    color: kAlertsInfo.withValues(alpha: 0.1),
                                     shape: BoxShape.circle,
                                   ),
                                   child: Center(child: Text(alert.assigneeName![0], style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: kAlertsInfo))),
@@ -248,10 +248,10 @@ class AlertsDetailScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 12),
 
-                    // ──── TECHNICAL DETAILS ────
+                    // â”€â”€â”€â”€ TECHNICAL DETAILS â”€â”€â”€â”€
                     if (alert.technicalDetails != null) ...[
                       AlertsSectionCard(
-                        title: '🔧 Technical Details',
+                        title: 'ðŸ”§ Technical Details',
                         child: Column(
                           children: [
                             if (alert.technicalDetails!.errorCode != null)
@@ -270,10 +270,10 @@ class AlertsDetailScreen extends StatelessWidget {
                       const SizedBox(height: 12),
                     ],
 
-                    // ──── RESOLUTION ZONE ────
+                    // â”€â”€â”€â”€ RESOLUTION ZONE â”€â”€â”€â”€
                     if (alert.resolution != null) ...[
                       AlertsSectionCard(
-                        title: '✅ Resolution',
+                        title: 'âœ… Resolution',
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -283,7 +283,7 @@ class AlertsDetailScreen extends StatelessWidget {
                                   width: 32,
                                   height: 32,
                                   decoration: BoxDecoration(
-                                    color: kAlertsResolved.withOpacity(0.1),
+                                    color: kAlertsResolved.withValues(alpha: 0.1),
                                     shape: BoxShape.circle,
                                   ),
                                   child: Center(child: Text(alert.resolution!.resolverName[0], style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: kAlertsResolved))),
@@ -302,7 +302,7 @@ class AlertsDetailScreen extends StatelessWidget {
                                   Container(
                                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                                     decoration: BoxDecoration(
-                                      color: kAlertsResolved.withOpacity(0.1),
+                                      color: kAlertsResolved.withValues(alpha: 0.1),
                                       borderRadius: BorderRadius.circular(8),
                                     ),
                                     child: Text('${alert.resolution!.qualityScore}%', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: kAlertsResolved)),
@@ -325,9 +325,9 @@ class AlertsDetailScreen extends StatelessWidget {
                       const SizedBox(height: 12),
                     ],
 
-                    // ──── ACTIVITY TIMELINE ────
+                    // â”€â”€â”€â”€ ACTIVITY TIMELINE â”€â”€â”€â”€
                     AlertsSectionCard(
-                      title: '📊 Activity Timeline',
+                      title: 'ðŸ“Š Activity Timeline',
                       trailing: Text('${alert.timeline.length} events', style: const TextStyle(fontSize: 12, color: Color(0xFF9CA3AF))),
                       child: alert.timeline.isEmpty
                           ? const Text('No activity yet', style: TextStyle(fontSize: 13, color: Color(0xFF9CA3AF)))
@@ -348,14 +348,14 @@ class AlertsDetailScreen extends StatelessWidget {
             ],
           ),
 
-          // ──── STICKY BOTTOM ACTIONS ────
+          // â”€â”€â”€â”€ STICKY BOTTOM ACTIONS â”€â”€â”€â”€
           bottomNavigationBar: alert.isPending
               ? Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     border: const Border(top: BorderSide(color: Color(0xFF1C1C2E))),
-                    boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 8, offset: const Offset(0, -2))],
+                    boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 8, offset: const Offset(0, -2))],
                   ),
                   child: SafeArea(
                     child: Row(
@@ -421,9 +421,9 @@ class AlertsDetailScreen extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Status Chip
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _StatusChip extends StatelessWidget {
   final AlertStatus status;
@@ -435,7 +435,7 @@ class _StatusChip extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(6),
       ),
       child: Text(
@@ -472,9 +472,9 @@ class _StatusChip extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Metadata Row
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _MetadataRow extends StatelessWidget {
   final String label;
@@ -499,9 +499,9 @@ class _MetadataRow extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // SLA Detail Panel
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _SlaDetailPanel extends StatelessWidget {
   final AlertSlaInfo sla;
@@ -554,7 +554,7 @@ class _SlaDetailPanel extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(label, style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: color)),
-                  Text('Target: ${sla.targetTime.inHours}h • Status: $statusLabel', style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
+                  Text('Target: ${sla.targetTime.inHours}h â€¢ Status: $statusLabel', style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
                 ],
               ),
             ),
@@ -565,9 +565,9 @@ class _SlaDetailPanel extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Resolution Field
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _ResolutionField extends StatelessWidget {
   final String label;

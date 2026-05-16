@@ -1,4 +1,4 @@
-/// Alerts Screen 0 — PROMPT Screen Integration (Alerts Widget)
+﻿/// Alerts Screen 0 â€” PROMPT Screen Integration (Alerts Widget)
 /// Glass morphism card, metrics row, resolved preview, resolver avatars,
 /// mini donut chart, real-time badge
 
@@ -27,7 +27,7 @@ class AlertsWidgetScreen extends StatelessWidget {
             border: Border.all(color: const Color(0xFFE5E7EB)),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.05),
+                color: Colors.black.withValues(alpha: 0.05),
                 blurRadius: 12,
                 offset: const Offset(0, 4),
               ),
@@ -40,7 +40,7 @@ class AlertsWidgetScreen extends StatelessWidget {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kAlertsColor.withOpacity(0.07),
+                    color: kAlertsColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(children: [
                       const Icon(Icons.auto_awesome, size: 14, color: kAlertsColor),
@@ -52,7 +52,7 @@ class AlertsWidgetScreen extends StatelessWidget {
                   );
                 },
               ),
-              // ──── HEADER ROW ────
+              // â”€â”€â”€â”€ HEADER ROW â”€â”€â”€â”€
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
                 child: Row(
@@ -61,7 +61,7 @@ class AlertsWidgetScreen extends StatelessWidget {
                       width: 32,
                       height: 32,
                       decoration: BoxDecoration(
-                        color: kAlertsColor.withOpacity(0.1),
+                        color: kAlertsColor.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: const Icon(Icons.notification_important, size: 18, color: kAlertsColor),
@@ -95,27 +95,27 @@ class AlertsWidgetScreen extends StatelessWidget {
                 ),
               ),
 
-              // ──── METRICS ROW ────
+              // â”€â”€â”€â”€ METRICS ROW â”€â”€â”€â”€
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
                   children: [
                     _MetricPill(
-                      emoji: '🔴',
+                      emoji: 'ðŸ”´',
                       label: 'Pending',
                       value: '${provider.pendingCount}',
                       color: kAlertsColor,
                     ),
                     const SizedBox(width: 8),
                     _MetricPill(
-                      emoji: '✅',
+                      emoji: 'âœ…',
                       label: 'Resolved',
                       value: '${provider.resolvedCount}',
                       color: kAlertsResolved,
                     ),
                     const SizedBox(width: 8),
                     _MetricPill(
-                      emoji: '⚡',
+                      emoji: 'âš¡',
                       label: 'Critical',
                       value: '${provider.highPriorityPendingCount}',
                       color: kAlertsCritical,
@@ -126,7 +126,7 @@ class AlertsWidgetScreen extends StatelessWidget {
 
               const Divider(height: 20, indent: 16, endIndent: 16),
 
-              // ──── LATEST PENDING ALERTS ────
+              // â”€â”€â”€â”€ LATEST PENDING ALERTS â”€â”€â”€â”€
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
@@ -166,7 +166,7 @@ class AlertsWidgetScreen extends StatelessWidget {
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   child: Text(
-                    'All clear — no pending alerts 🎉',
+                    'All clear â€” no pending alerts ðŸŽ‰',
                     style: TextStyle(fontSize: 13, color: Color(0xFF6B7280)),
                   ),
                 )
@@ -178,7 +178,7 @@ class AlertsWidgetScreen extends StatelessWidget {
 
               const SizedBox(height: 12),
 
-              // ──── DISTRIBUTION + RESOLVER ROW ────
+              // â”€â”€â”€â”€ DISTRIBUTION + RESOLVER ROW â”€â”€â”€â”€
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
                 child: Row(
@@ -221,16 +221,16 @@ class AlertsWidgetScreen extends StatelessWidget {
 
   String _categoryEmoji(AlertCategory cat) {
     const map = {
-      AlertCategory.payment: '💳',
-      AlertCategory.shipment: '📦',
-      AlertCategory.system: '⚙️',
-      AlertCategory.driverRide: '🚗',
-      AlertCategory.returnRefund: '↩️',
-      AlertCategory.account: '👤',
-      AlertCategory.security: '🔒',
-      AlertCategory.other: '📋',
+      AlertCategory.payment: 'ðŸ’³',
+      AlertCategory.shipment: 'ðŸ“¦',
+      AlertCategory.system: 'âš™ï¸',
+      AlertCategory.driverRide: 'ðŸš—',
+      AlertCategory.returnRefund: 'â†©ï¸',
+      AlertCategory.account: 'ðŸ‘¤',
+      AlertCategory.security: 'ðŸ”’',
+      AlertCategory.other: 'ðŸ“‹',
     };
-    return map[cat] ?? '📋';
+    return map[cat] ?? 'ðŸ“‹';
   }
 
   String _categoryLabel(AlertCategory cat) {
@@ -248,9 +248,9 @@ class AlertsWidgetScreen extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Compact Alert Row (for widget preview)
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _CompactAlertRow extends StatelessWidget {
   final AlertItem alert;
@@ -291,7 +291,7 @@ class _CompactAlertRow extends StatelessWidget {
                     style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
                   ),
                   Text(
-                    '#${alert.id} • ${_timeAgo(alert.createdAt)}',
+                    '#${alert.id} â€¢ ${_timeAgo(alert.createdAt)}',
                     style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF)),
                   ),
                 ],
@@ -300,7 +300,7 @@ class _CompactAlertRow extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               decoration: BoxDecoration(
-                color: pColor.withOpacity(0.1),
+                color: pColor.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(4),
               ),
               child: Text(
@@ -325,10 +325,10 @@ class _CompactAlertRow extends StatelessWidget {
 
   String _priorityShort(AlertPriority p) {
     switch (p) {
-      case AlertPriority.critical: return '🚨';
-      case AlertPriority.high: return '🔥';
-      case AlertPriority.medium: return '⚠️';
-      case AlertPriority.low: return 'ℹ️';
+      case AlertPriority.critical: return 'ðŸš¨';
+      case AlertPriority.high: return 'ðŸ”¥';
+      case AlertPriority.medium: return 'âš ï¸';
+      case AlertPriority.low: return 'â„¹ï¸';
     }
   }
 
@@ -340,9 +340,9 @@ class _CompactAlertRow extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Metric Pill
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _MetricPill extends StatelessWidget {
   final String emoji;
@@ -358,9 +358,9 @@ class _MetricPill extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
         decoration: BoxDecoration(
-          color: color.withOpacity(0.06),
+          color: color.withValues(alpha: 0.06),
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: color.withOpacity(0.15)),
+          border: Border.all(color: color.withValues(alpha: 0.15)),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -375,9 +375,9 @@ class _MetricPill extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Resolver Avatar Stack
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _ResolverAvatarStack extends StatelessWidget {
   final List<AlertStaffMember> staff;
@@ -398,7 +398,7 @@ class _ResolverAvatarStack extends StatelessWidget {
                 width: 26,
                 height: 26,
                 decoration: BoxDecoration(
-                  color: [kAlertsColor, kAlertsInfo, kAlertsResolved][i % 3].withOpacity(0.15),
+                  color: [kAlertsColor, kAlertsInfo, kAlertsResolved][i % 3].withValues(alpha: 0.15),
                   shape: BoxShape.circle,
                   border: Border.all(color: Colors.white, width: 2),
                 ),

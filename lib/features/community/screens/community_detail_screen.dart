@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// COMMUNITY MODULE — Community Detail Screen
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// COMMUNITY MODULE â€” Community Detail Screen
 /// Adaptive detail view; UI surface adapts to community type.
-/// Theater → linked asset; Hangout → event date/location; Fair → listings, etc.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// Theater â†’ linked asset; Hangout â†’ event date/location; Fair â†’ listings, etc.
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -79,7 +79,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> with Sing
                   background: Container(
                     decoration: BoxDecoration(
                       gradient: LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight,
-                        colors: [_color.withOpacity(0.9), _color]),
+                        colors: [_color.withValues(alpha: 0.9), _color]),
                     ),
                     child: SafeArea(
                       child: Padding(
@@ -90,7 +90,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> with Sing
                             Row(children: [
                               Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                                decoration: BoxDecoration(color: Colors.white.withOpacity(0.2), borderRadius: BorderRadius.circular(20)),
+                                decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.2), borderRadius: BorderRadius.circular(20)),
                                 child: Row(children: [
                                   Icon(_arch['icon'] as IconData, color: Colors.white, size: 14),
                                   const SizedBox(width: 5),
@@ -119,15 +119,15 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> with Sing
             ],
             body: Column(
               children: [
-                // ── Type-specific banner ─────────────────────────────
+                // â”€â”€ Type-specific banner â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                 _typeSpecificBanner(),
 
-                // ── AI insight ────────────────────────────────────────
+                // â”€â”€ AI insight â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                 if (ai.insights.isNotEmpty)
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(color: _color.withOpacity(0.07), borderRadius: BorderRadius.circular(10), border: Border.all(color: _color.withOpacity(0.2))),
+                    decoration: BoxDecoration(color: _color.withValues(alpha: 0.07), borderRadius: BorderRadius.circular(10), border: Border.all(color: _color.withValues(alpha: 0.2))),
                     child: Row(children: [
                       Icon(Icons.auto_awesome, color: _color, size: 14),
                       const SizedBox(width: 8),
@@ -135,7 +135,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> with Sing
                     ]),
                   ),
 
-                // ── Tab views ─────────────────────────────────────────
+                // â”€â”€ Tab views â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                 Expanded(
                   child: TabBarView(
                     controller: _tabs,
@@ -170,7 +170,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> with Sing
   Widget _typeSpecificBanner() {
     return switch (_type) {
       'theater' => _infoBanner(Icons.live_tv, 'Next screening: Tonight 8 PM WAT', 'Tap to sync your watch session'),
-      'hangout' => _infoBanner(Icons.event, 'Next event: Sat, 24 May · Accra Hub', 'In-person & virtual attendance'),
+      'hangout' => _infoBanner(Icons.event, 'Next event: Sat, 24 May Â· Accra Hub', 'In-person & virtual attendance'),
       'fair'    => _infoBanner(Icons.storefront, 'Fair active until Dec 31', '24 listings available'),
       'journal' => _infoBanner(Icons.book, '12 shared entries this week', 'Community blog & documentation'),
       _         => const SizedBox.shrink(),
@@ -181,7 +181,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> with Sing
     return Container(
       margin: const EdgeInsets.fromLTRB(16, 8, 16, 0),
       padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(color: _color.withOpacity(0.08), borderRadius: BorderRadius.circular(12), border: Border.all(color: _color.withOpacity(0.2))),
+      decoration: BoxDecoration(color: _color.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(12), border: Border.all(color: _color.withValues(alpha: 0.2))),
       child: Row(children: [
         Icon(icon, color: _color, size: 22),
         const SizedBox(width: 12),
@@ -197,7 +197,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> with Sing
     if (!_joined) {
       return Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Icon(_arch['icon'] as IconData, size: 60, color: _color.withOpacity(0.3)),
+          Icon(_arch['icon'] as IconData, size: 60, color: _color.withValues(alpha: 0.3)),
           const SizedBox(height: 16),
           const Text('Join to see the feed', style: TextStyle(fontSize: 16, color: AppColors.textSecondary)),
         ]),
@@ -216,7 +216,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> with Sing
         if (posts.isEmpty) {
           return Center(
             child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Icon(Icons.chat_bubble_outline, size: 48, color: _color.withOpacity(0.3)),
+              Icon(Icons.chat_bubble_outline, size: 48, color: _color.withValues(alpha: 0.3)),
               const SizedBox(height: 12),
               const Text('No posts yet. Be the first to post!', style: TextStyle(color: AppColors.textSecondary)),
             ]),
@@ -251,7 +251,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> with Sing
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Row(children: [
             CircleAvatar(
-              backgroundColor: _color.withOpacity(0.2),
+              backgroundColor: _color.withValues(alpha: 0.2),
               radius: 16,
               child: Text(
                 authorName.isNotEmpty ? authorName[0].toUpperCase() : '?',

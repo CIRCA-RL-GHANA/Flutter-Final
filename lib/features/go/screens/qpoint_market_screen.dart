@@ -1,4 +1,4 @@
-/// Q Points Market Screen — Full production implementation
+﻿/// Q Points Market Screen â€” Full production implementation
 /// Sections: Stats Bar | Order Book | Place Order | Open Orders | Trade History
 ///
 /// Access is gated behind Q Points ToS acceptance (v1.0.0).
@@ -12,7 +12,7 @@ import '../providers/qpoints_tos_provider.dart';
 import '../models/qpoint_market_models.dart';
 import 'qpoints_tos_screen.dart';
 
-// ── Brand colour for the market module ──────────────────────────────────────
+// â”€â”€ Brand colour for the market module â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const Color kMarketColor = Color(0xFF6C47FF); // deep violet
 
 /// Entry point: checks ToS acceptance, shows ToS screen or the market.
@@ -95,7 +95,7 @@ class _QPointMarketScreenState extends State<QPointMarketScreen>
         actions: [
           IconButton(
             icon: const Icon(Icons.info_outline),
-            tooltip: 'Fees & Disclosures (§7)',
+            tooltip: 'Fees & Disclosures (Â§7)',
             onPressed: () => _showFeeSheet(context),
           ),
           IconButton(
@@ -124,10 +124,10 @@ class _QPointMarketScreenState extends State<QPointMarketScreen>
         builder: (context, provider, _) {
           return Column(
             children: [
-              // ── Stats banner ─────────────────────────────────────────────
+              // â”€â”€ Stats banner â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               _StatsBanner(provider: provider),
 
-              // ── Tabs ─────────────────────────────────────────────────────
+              // â”€â”€ Tabs â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               Expanded(
                 child: TabBarView(
                   controller: _tab,
@@ -154,7 +154,7 @@ class _QPointMarketScreenState extends State<QPointMarketScreen>
     );
   }
 
-  // ── Sheets ────────────────────────────────────────────────────────────────
+  // â”€â”€ Sheets â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   void _showPlaceOrderSheet(BuildContext ctx, QPointMarketProvider provider) {
     showModalBottomSheet(
@@ -181,7 +181,7 @@ class _QPointMarketScreenState extends State<QPointMarketScreen>
     );
   }
 
-  /// Fee & Disclosure sheet — TOS §7.1 requires fees to be disclosed on the Platform.
+  /// Fee & Disclosure sheet â€” TOS Â§7.1 requires fees to be disclosed on the Platform.
   void _showFeeSheet(BuildContext ctx) {
     context.read<QPointMarketProvider>().loadFeeSchedule();
     showModalBottomSheet(
@@ -196,9 +196,9 @@ class _QPointMarketScreenState extends State<QPointMarketScreen>
   }
 }
 
-// ════════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Stats Banner
-// ════════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _StatsBanner extends StatelessWidget {
   final QPointMarketProvider provider;
@@ -221,7 +221,7 @@ class _StatsBanner extends StatelessWidget {
                 label: 'Balance',
                 value: balance != null
                     ? '${balance.balance.toStringAsFixed(2)} QP'
-                    : '—',
+                    : 'â€”',
               ),
               const SizedBox(width: 16),
               const _Stat(
@@ -231,12 +231,12 @@ class _StatsBanner extends StatelessWidget {
               const SizedBox(width: 16),
               _Stat(
                 label: 'Vol 24h (QP)',
-                value: stats != null ? _formatVol(stats.volume24h) : '—',
+                value: stats != null ? _formatVol(stats.volume24h) : 'â€”',
               ),
             ],
           ),
           const SizedBox(height: 8),
-          // TOS §5.2 — AI last-resort counterparty indicator (operational, not a legal guarantee)
+          // TOS Â§5.2 â€” AI last-resort counterparty indicator (operational, not a legal guarantee)
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
@@ -294,9 +294,9 @@ class _Stat extends StatelessWidget {
       );
 }
 
-// ════════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Market Tab: Order Book + Quick Buy/Sell
-// ════════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _MarketTab extends StatelessWidget {
   final QPointMarketProvider provider;
@@ -307,10 +307,10 @@ class _MarketTab extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
-        // Cash balance card — real-time facilitator liquidity with Refresh button
+        // Cash balance card â€” real-time facilitator liquidity with Refresh button
         _CashBalanceCard(provider: provider),
         const SizedBox(height: 16),
-        // Bridge suspension banner — only shown when active facilitator's bridge is down
+        // Bridge suspension banner â€” only shown when active facilitator's bridge is down
         if (provider.bridgeUnavailableMessage != null)
           _BridgeStatusBanner(message: provider.bridgeUnavailableMessage!),
         if (provider.bridgeUnavailableMessage != null)
@@ -354,7 +354,7 @@ class _CashBalanceCard extends StatelessWidget {
       _providerNames[id ?? 'mock'] ?? (id ?? 'Facilitator');
 
   String _formatAmount(double? amount) {
-    if (amount == null) return '—';
+    if (amount == null) return 'â€”';
     return '\$${amount.toStringAsFixed(2)}';
   }
 
@@ -383,7 +383,7 @@ class _CashBalanceCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF6C47FF).withOpacity(0.25),
+            color: const Color(0xFF6C47FF).withValues(alpha: 0.25),
             blurRadius: 12,
             offset: const Offset(0, 4),
           ),
@@ -393,7 +393,7 @@ class _CashBalanceCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // ── Header row ──────────────────────────────────────────────
+          // â”€â”€ Header row â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
           Row(
             children: [
               const Icon(
@@ -417,7 +417,7 @@ class _CashBalanceCard extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.15),
+                    color: Colors.white.withValues(alpha: 0.15),
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: const Text(
@@ -458,7 +458,7 @@ class _CashBalanceCard extends StatelessWidget {
 
           const SizedBox(height: 10),
 
-          // ── Balance amount ───────────────────────────────────────────
+          // â”€â”€ Balance amount â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
           if (isLoading && cb == null)
             const SizedBox(
               height: 32,
@@ -513,7 +513,7 @@ class _CashBalanceCard extends StatelessWidget {
 
           const SizedBox(height: 12),
 
-          // ── Fee disclosure row (TOS §7.1) ────────────────────────────
+          // â”€â”€ Fee disclosure row (TOS Â§7.1) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
           if (cb != null)
             Row(
               children: [
@@ -535,8 +535,8 @@ class _CashBalanceCard extends StatelessWidget {
                       const SizedBox(width: 4),
                       Text(
                         '${cb.liquidityFeePercent}% liquidity fee  '
-                        '·  Buy \$${cb.buyPrice.toStringAsFixed(3)}'
-                        '  ·  Sell \$${cb.sellPrice.toStringAsFixed(3)}',
+                        'Â·  Buy \$${cb.buyPrice.toStringAsFixed(3)}'
+                        '  Â·  Sell \$${cb.sellPrice.toStringAsFixed(3)}',
                         style: const TextStyle(
                           color: Colors.white60,
                           fontSize: 11,
@@ -774,7 +774,7 @@ class _ActionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Material(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(12),
         child: InkWell(
           borderRadius: BorderRadius.circular(12),
@@ -927,9 +927,9 @@ class _BookRow extends StatelessWidget {
       );
 }
 
-// ════════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Orders Tab
-// ════════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _OrdersTab extends StatelessWidget {
   final QPointMarketProvider provider;
@@ -992,7 +992,7 @@ class _OpenOrderTile extends StatelessWidget {
               padding:
                   const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
-                color: color.withOpacity(0.12),
+                color: color.withValues(alpha: 0.12),
                 borderRadius: BorderRadius.circular(6),
               ),
               child: Text(isBuy ? 'BUY' : 'SELL',
@@ -1028,9 +1028,9 @@ class _OpenOrderTile extends StatelessWidget {
   }
 }
 
-// ════════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // History Tab
-// ════════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _HistoryTab extends StatefulWidget {
   final QPointMarketProvider provider;
@@ -1064,7 +1064,7 @@ class _HistoryTabState extends State<_HistoryTab> {
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
-        // ── Deposit / Withdrawal history ──────────────────────────────
+        // â”€â”€ Deposit / Withdrawal history â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         if (transactions.isNotEmpty) ...[
           const Padding(
             padding: EdgeInsets.only(bottom: 8),
@@ -1075,7 +1075,7 @@ class _HistoryTabState extends State<_HistoryTab> {
           const SizedBox(height: 16),
         ],
 
-        // ── Q Points trade history ────────────────────────────────────
+        // â”€â”€ Q Points trade history â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         if (trades.isNotEmpty) ...[
           const Padding(
             padding: EdgeInsets.only(bottom: 8),
@@ -1099,12 +1099,12 @@ class _TradeTile extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         child: ListTile(
           leading: CircleAvatar(
-            backgroundColor: kMarketColor.withOpacity(0.1),
+            backgroundColor: kMarketColor.withValues(alpha: 0.1),
             child:
                 const Icon(Icons.swap_horiz, color: kMarketColor, size: 20),
           ),
           title: Text(
-            '\$${trade.price.toStringAsFixed(4)} × ${trade.quantity.toStringAsFixed(2)} QP',
+            '\$${trade.price.toStringAsFixed(4)} Ã— ${trade.quantity.toStringAsFixed(2)} QP',
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
           ),
           subtitle: Text(
@@ -1124,9 +1124,9 @@ class _TradeTile extends StatelessWidget {
   }
 }
 
-// ════════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Place Order Bottom Sheet
-// ════════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _PlaceOrderSheet extends StatefulWidget {
   const _PlaceOrderSheet();
@@ -1314,7 +1314,7 @@ class _TypeButton extends StatelessWidget {
             duration: const Duration(milliseconds: 180),
             padding: const EdgeInsets.symmetric(vertical: 12),
             decoration: BoxDecoration(
-              color: selected ? color : color.withOpacity(0.08),
+              color: selected ? color : color.withValues(alpha: 0.08),
               borderRadius: BorderRadius.circular(10),
             ),
             alignment: Alignment.center,
@@ -1330,9 +1330,9 @@ class _TypeButton extends StatelessWidget {
       );
 }
 
-// ════════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Cash In / Cash Out Bottom Sheet
-// ════════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _CashInOutSheet extends StatefulWidget {
   final bool isBuy;
@@ -1476,9 +1476,9 @@ class _CashInOutSheetState extends State<_CashInOutSheet> {
   }
 }
 
-// ════════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Notifications Bottom Sheet
-// ════════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _NotificationsSheet extends StatelessWidget {
   const _NotificationsSheet();
@@ -1542,7 +1542,7 @@ class _NotificationTile extends StatelessWidget {
     final icon = _iconFor(n.type);
     return ListTile(
       leading: CircleAvatar(
-        backgroundColor: kMarketColor.withOpacity(n.read ? 0.05 : 0.15),
+        backgroundColor: kMarketColor.withValues(alpha: n.read ? 0.05 : 0.15),
         child: Icon(icon,
             color: n.read ? Colors.black38 : kMarketColor, size: 18),
       ),
@@ -1585,10 +1585,10 @@ class _NotificationTile extends StatelessWidget {
   }
 }
 
-// ════════════════════════════════════════════════════════════════════════════
-// Fee Disclosure Sheet — TOS §7.1 & §7.2
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// Fee Disclosure Sheet â€” TOS Â§7.1 & Â§7.2
 // "Fees will be disclosed on the Platform and may be changed upon notice."
-// ════════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _FeeDisclosureSheet extends StatelessWidget {
   const _FeeDisclosureSheet();
@@ -1625,11 +1625,11 @@ class _FeeDisclosureSheet extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
               decoration: BoxDecoration(
-                color: kMarketColor.withOpacity(0.08),
+                color: kMarketColor.withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: const Text(
-                'Q Points Terms of Service §7.1 — Fee Disclosure',
+                'Q Points Terms of Service Â§7.1 â€” Fee Disclosure',
                 style: TextStyle(fontSize: 11, color: kMarketColor, fontWeight: FontWeight.w600),
               ),
             ),
@@ -1664,7 +1664,7 @@ class _FeeDisclosureSheet extends StatelessWidget {
                 detail: 'The price peg is fixed. 1 Q Point is always equal to \$1.00 USD.',
               ),
               const SizedBox(height: 16),
-              // Tax disclosure — TOS §7.2
+              // Tax disclosure â€” TOS Â§7.2
               Container(
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
@@ -1681,7 +1681,7 @@ class _FeeDisclosureSheet extends StatelessWidget {
                             size: 16, color: Color(0xFFE65100)),
                         SizedBox(width: 6),
                         Text(
-                          'Tax Disclosure — Q Points ToS §7.2',
+                          'Tax Disclosure â€” Q Points ToS Â§7.2',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 12,
@@ -1706,7 +1706,7 @@ class _FeeDisclosureSheet extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               const Text(
-                'Fees may be changed upon notice per Q Points Terms of Service §7.1.',
+                'Fees may be changed upon notice per Q Points Terms of Service Â§7.1.',
                 style: TextStyle(fontSize: 11, color: Colors.black38),
               ),
             ],
@@ -1763,9 +1763,9 @@ class _FeeRow extends StatelessWidget {
   }
 }
 
-// ════════════════════════════════════════════════════════════════════════════
-// Transaction tile — shows a single deposit or withdrawal record
-// ════════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// Transaction tile â€” shows a single deposit or withdrawal record
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _TransactionTile extends StatelessWidget {
   final FacilitatorTransaction transaction;
@@ -1801,7 +1801,7 @@ class _TransactionTile extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         child: ListTile(
           leading: CircleAvatar(
-            backgroundColor: _typeColor(transaction.type).withOpacity(0.1),
+            backgroundColor: _typeColor(transaction.type).withValues(alpha: 0.1),
             child: Icon(_typeIcon(transaction.type),
                 color: _typeColor(transaction.type), size: 20),
           ),
@@ -1811,13 +1811,13 @@ class _TransactionTile extends StatelessWidget {
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
           ),
           subtitle: Text(
-            '${transaction.provider.toUpperCase()} · ${_formatDate(transaction.createdAt)}',
+            '${transaction.provider.toUpperCase()} Â· ${_formatDate(transaction.createdAt)}',
             style: const TextStyle(fontSize: 11, color: Colors.black45),
           ),
           trailing: Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
             decoration: BoxDecoration(
-              color: _statusColor(transaction.status).withOpacity(0.1),
+              color: _statusColor(transaction.status).withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Text(
@@ -1833,9 +1833,9 @@ class _TransactionTile extends StatelessWidget {
       );
 }
 
-// ════════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Deposit bottom sheet
-// ════════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _DepositSheet extends StatefulWidget {
   const _DepositSheet();
@@ -2021,9 +2021,9 @@ class _DepositSheetState extends State<_DepositSheet> {
   }
 }
 
-// ════════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // Withdraw bottom sheet
-// ════════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _WithdrawSheet extends StatefulWidget {
   const _WithdrawSheet();
@@ -2054,7 +2054,7 @@ class _WithdrawSheetState extends State<_WithdrawSheet> {
     if (ok) {
       setState(() {
         _result = 'Withdrawal initiated! Funds will be sent to your '
-            'registered payout account within 1–3 business days depending on your provider.';
+            'registered payout account within 1â€“3 business days depending on your provider.';
         _done = true;
       });
       provider.clearLastWithdrawalResult();

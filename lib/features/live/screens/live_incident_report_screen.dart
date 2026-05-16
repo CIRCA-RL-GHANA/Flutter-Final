@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// LIVE MODULE — Screen 21: Incident Reporting
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// LIVE MODULE â€” Screen 21: Incident Reporting
 /// Structured incident report: type/severity selection, description,
 /// photo evidence, location tagging, submission flow
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -66,7 +66,7 @@ class _LiveIncidentReportScreenState extends State<LiveIncidentReportScreen> {
             builder: (context, ai, _) {
               if (ai.insights.isEmpty) return const SizedBox.shrink();
               return Container(
-                color: kLiveColor.withOpacity(0.07),
+                color: kLiveColor.withValues(alpha: 0.07),
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                 child: Row(
                   children: [
@@ -118,7 +118,7 @@ class _LiveIncidentReportScreenState extends State<LiveIncidentReportScreen> {
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Colors.white,
-              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 8, offset: const Offset(0, -2))],
+              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 8, offset: const Offset(0, -2))],
             ),
             child: Row(
               children: [
@@ -202,7 +202,7 @@ class _TypeSeverityStep extends StatelessWidget {
                   margin: const EdgeInsets.only(bottom: 6),
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: isSelected ? kLiveColor.withOpacity(0.05) : Colors.grey.shade50,
+                    color: isSelected ? kLiveColor.withValues(alpha: 0.05) : Colors.grey.shade50,
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: isSelected ? kLiveColor : Colors.grey.shade200, width: isSelected ? 2 : 1),
                   ),
@@ -243,7 +243,7 @@ class _TypeSeverityStep extends StatelessWidget {
                   margin: const EdgeInsets.only(bottom: 6),
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                   decoration: BoxDecoration(
-                    color: isSelected ? info.$3.withOpacity(0.1) : Colors.grey.shade50,
+                    color: isSelected ? info.$3.withValues(alpha: 0.1) : Colors.grey.shade50,
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: isSelected ? info.$3 : Colors.grey.shade200),
                   ),
@@ -277,13 +277,13 @@ class _TypeSeverityStep extends StatelessWidget {
   }
 
   (String, String, String) _typeInfo(IncidentType type) => switch (type) {
-        IncidentType.vehicleAccident => ('🚗', 'Vehicle Accident', 'Collision or road accident'),
-        IncidentType.theftRobbery => ('🔒', 'Theft / Robbery', 'Package or vehicle theft'),
-        IncidentType.packageDamageLoss => ('📦', 'Package Damage', 'Damaged goods during transit'),
-        IncidentType.harassment => ('⚠️', 'Harassment', 'Customer or third-party harassment'),
-        IncidentType.customerDispute => ('🗣️', 'Customer Dispute', 'Dispute with customer'),
-        IncidentType.medicalEmergency => ('🏥', 'Medical Emergency', 'Medical emergency incident'),
-        IncidentType.other => ('📋', 'Other', 'Any other incident type'),
+        IncidentType.vehicleAccident => ('ðŸš—', 'Vehicle Accident', 'Collision or road accident'),
+        IncidentType.theftRobbery => ('ðŸ”’', 'Theft / Robbery', 'Package or vehicle theft'),
+        IncidentType.packageDamageLoss => ('ðŸ“¦', 'Package Damage', 'Damaged goods during transit'),
+        IncidentType.harassment => ('âš ï¸', 'Harassment', 'Customer or third-party harassment'),
+        IncidentType.customerDispute => ('ðŸ—£ï¸', 'Customer Dispute', 'Dispute with customer'),
+        IncidentType.medicalEmergency => ('ðŸ¥', 'Medical Emergency', 'Medical emergency incident'),
+        IncidentType.other => ('ðŸ“‹', 'Other', 'Any other incident type'),
       };
 
   (String, String, Color) _severityInfo(IncidentSeverity severity) => switch (severity) {
@@ -410,7 +410,7 @@ class _DetailsStep extends StatelessWidget {
                     children: [
                       Icon(Icons.my_location, size: 16, color: Color(0xFF10B981)),
                       SizedBox(width: 8),
-                      Text('Location acquired ✓', style: TextStyle(fontSize: 12, color: Color(0xFF059669), fontWeight: FontWeight.w600)),
+                      Text('Location acquired âœ“', style: TextStyle(fontSize: 12, color: Color(0xFF059669), fontWeight: FontWeight.w600)),
                     ],
                   ),
                 ),
@@ -452,9 +452,9 @@ class _ReviewStep extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [kLiveColor.withOpacity(0.1), kLiveAccent.withOpacity(0.05)]),
+            gradient: LinearGradient(colors: [kLiveColor.withValues(alpha: 0.1), kLiveAccent.withValues(alpha: 0.05)]),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: kLiveColor.withOpacity(0.2)),
+            border: Border.all(color: kLiveColor.withValues(alpha: 0.2)),
           ),
           child: const Column(
             children: [
@@ -479,7 +479,7 @@ class _ReviewStep extends StatelessWidget {
               const Divider(height: 12),
               _SummaryRow(label: 'Description', value: description.isEmpty ? 'No description' : (description.length > 60 ? '${description.substring(0, 60)}...' : description)),
               const Divider(height: 12),
-              _SummaryRow(label: 'Location tagged', value: locationTagged ? 'Yes ✓' : 'No'),
+              _SummaryRow(label: 'Location tagged', value: locationTagged ? 'Yes âœ“' : 'No'),
               const Divider(height: 12),
               _SummaryRow(label: 'Photos', value: '$photoCount attached'),
             ],
@@ -516,7 +516,7 @@ class _SubmittedView extends StatelessWidget {
           children: [
             Container(
               width: 80, height: 80,
-              decoration: BoxDecoration(shape: BoxShape.circle, color: const Color(0xFF10B981).withOpacity(0.1)),
+              decoration: BoxDecoration(shape: BoxShape.circle, color: const Color(0xFF10B981).withValues(alpha: 0.1)),
               child: const Center(child: Icon(Icons.check_circle, size: 48, color: Color(0xFF10B981))),
             ),
             const SizedBox(height: 20),

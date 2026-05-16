@@ -1,4 +1,4 @@
-/// APRIL Screen 4 — Wishlist Command Center
+﻿/// APRIL Screen 4 â€” Wishlist Command Center
 /// 4 view modes: grid, list, priority, timeline
 /// Item management, collections, savings tracking
 
@@ -19,7 +19,7 @@ class AprilWishlistScreen extends StatelessWidget {
         return Scaffold(
           backgroundColor: const Color(0xFFF8F9FE),
           appBar: AprilAppBar(
-            title: '🎁 Wishlist',
+            title: 'ðŸŽ Wishlist',
             actions: [
               if (provider.highPriorityWishlistCount > 0)
                 Padding(
@@ -28,7 +28,7 @@ class AprilWishlistScreen extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFEF4444).withOpacity(0.1),
+                        color: const Color(0xFFEF4444).withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Text(
@@ -71,10 +71,10 @@ class AprilWishlistScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     _WishlistStat(label: 'Items', value: '${provider.filteredWishlistItems.length}'),
-                    Container(width: 1, height: 30, color: kAprilColorDark.withOpacity(0.2)),
-                    _WishlistStat(label: 'Total Value', value: '₵${provider.totalWishlistValue.toStringAsFixed(0)}'),
-                    Container(width: 1, height: 30, color: kAprilColorDark.withOpacity(0.2)),
-                    _WishlistStat(label: 'Saved', value: '₵${provider.totalWishlistSaved.toStringAsFixed(0)}'),
+                    Container(width: 1, height: 30, color: kAprilColorDark.withValues(alpha: 0.2)),
+                    _WishlistStat(label: 'Total Value', value: 'â‚µ${provider.totalWishlistValue.toStringAsFixed(0)}'),
+                    Container(width: 1, height: 30, color: kAprilColorDark.withValues(alpha: 0.2)),
+                    _WishlistStat(label: 'Saved', value: 'â‚µ${provider.totalWishlistSaved.toStringAsFixed(0)}'),
                   ],
                 ),
               ),
@@ -187,9 +187,9 @@ class AprilWishlistScreen extends StatelessWidget {
                                 margin: const EdgeInsets.fromLTRB(16, 4, 16, 4),
                                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
                                 decoration: BoxDecoration(
-                                  color: kAprilColor.withOpacity(0.08),
+                                  color: kAprilColor.withValues(alpha: 0.08),
                                   borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(color: kAprilColor.withOpacity(0.2)),
+                                  border: Border.all(color: kAprilColor.withValues(alpha: 0.2)),
                                 ),
                                 child: Row(
                                   children: [
@@ -197,7 +197,7 @@ class AprilWishlistScreen extends StatelessWidget {
                                     const SizedBox(width: 6),
                                     Expanded(
                                       child: Text(
-                                        'AI — ${recs.length} personalised picks based on your interests',
+                                        'AI â€” ${recs.length} personalised picks based on your interests',
                                         style: const TextStyle(
                                           fontSize: 11,
                                           fontWeight: FontWeight.w600,
@@ -270,11 +270,11 @@ class AprilWishlistScreen extends StatelessWidget {
 
   String _priorityStars(WishlistPriority p) {
     switch (p) {
-      case WishlistPriority.low: return '⭐';
-      case WishlistPriority.medium: return '⭐⭐';
-      case WishlistPriority.high: return '⭐⭐⭐';
-      case WishlistPriority.veryHigh: return '⭐⭐⭐⭐';
-      case WishlistPriority.critical: return '⭐⭐⭐⭐⭐';
+      case WishlistPriority.low: return 'â­';
+      case WishlistPriority.medium: return 'â­â­';
+      case WishlistPriority.high: return 'â­â­â­';
+      case WishlistPriority.veryHigh: return 'â­â­â­â­';
+      case WishlistPriority.critical: return 'â­â­â­â­â­';
     }
   }
 
@@ -330,7 +330,7 @@ class AprilWishlistScreen extends StatelessWidget {
             TextField(
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                hintText: 'Price (₵)',
+                hintText: 'Price (â‚µ)',
                 hintStyle: const TextStyle(fontSize: 14, color: Color(0xFF9CA3AF)),
                 prefixIcon: const Icon(Icons.attach_money, color: Color(0xFF9CA3AF)),
                 filled: true,
@@ -360,9 +360,9 @@ class AprilWishlistScreen extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // List Tile View
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 class _WishlistListTile extends StatelessWidget {
   final WishlistItem item;
   const _WishlistListTile({required this.item});
@@ -383,7 +383,7 @@ class _WishlistListTile extends StatelessWidget {
             width: 56,
             height: 56,
             decoration: BoxDecoration(
-              color: kAprilColor.withOpacity(0.1),
+              color: kAprilColor.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(10),
             ),
             child: const Icon(Icons.shopping_bag, color: kAprilColorDark),
@@ -397,7 +397,7 @@ class _WishlistListTile extends StatelessWidget {
                 const SizedBox(height: 2),
                 Row(
                   children: [
-                    Text('₵${item.price.toStringAsFixed(2)}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: kAprilColorDark)),
+                    Text('â‚µ${item.price.toStringAsFixed(2)}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: kAprilColorDark)),
                     const SizedBox(width: 8),
                     Text('${item.savedPercentage.toStringAsFixed(0)}% saved', style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
                   ],
@@ -423,9 +423,9 @@ class _WishlistListTile extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════
-// Priority View — Grouped by priority
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// Priority View â€” Grouped by priority
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 class _PriorityView extends StatelessWidget {
   final List<WishlistItem> items;
   const _PriorityView({required this.items});
@@ -464,9 +464,9 @@ class _PriorityView extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════
-// Timeline View — Items by added date
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// Timeline View â€” Items by added date
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 class _TimelineView extends StatelessWidget {
   final List<WishlistItem> items;
   const _TimelineView({required this.items});
@@ -517,9 +517,9 @@ class _TimelineView extends StatelessWidget {
   }
 }
 
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // SHARED MINI WIDGETS
-// ═══════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _WishlistStat extends StatelessWidget {
   final String label, value;

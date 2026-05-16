@@ -1,4 +1,4 @@
-import 'dart:math';
+﻿import 'dart:math';
 import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
 
@@ -114,7 +114,7 @@ class _ParticlePainter extends CustomPainter {
     for (var particle in particles) {
       final y = (particle.y - progress * particle.speed * 200) % size.height;
       final paint = Paint()
-        ..color = particle.color.withOpacity(
+        ..color = particle.color.withValues(alpha: 
           particle.opacity * (0.5 + 0.5 * sin(progress * pi * 2 + particle.x)),
         )
         ..style = PaintingStyle.fill;
@@ -170,9 +170,9 @@ class _SparkleEffectState extends State<SparkleEffect>
         return ShaderMask(
           shaderCallback: (bounds) => LinearGradient(
             colors: [
-              Colors.white.withOpacity(0.0),
-              Colors.white.withOpacity(0.3 * _controller.value),
-              Colors.white.withOpacity(0.0),
+              Colors.white.withValues(alpha: 0.0),
+              Colors.white.withValues(alpha: 0.3 * _controller.value),
+              Colors.white.withValues(alpha: 0.0),
             ],
             stops: [
               (_controller.value - 0.3).clamp(0.0, 1.0),
@@ -238,7 +238,7 @@ class _GlowPulseState extends State<GlowPulse>
             boxShadow: [
               BoxShadow(
                 color: widget.glowColor
-                    .withOpacity(0.3 + 0.3 * _controller.value),
+                    .withValues(alpha: 0.3 + 0.3 * _controller.value),
                 blurRadius: widget.maxBlur * (0.5 + 0.5 * _controller.value),
                 spreadRadius: 2 + 4 * _controller.value,
               ),

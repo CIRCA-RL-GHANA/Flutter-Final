@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/constants/app_strings.dart';
@@ -11,15 +11,12 @@ import '../widgets/onboarding_header.dart';
 import '../widgets/progress_indicators.dart';
 
 
-// OS palette � mirrors splash / welcome
+// OS palette ï¿½ mirrors splash / welcome
 const Color _kBg        = Color(0xFF08080F);
 const Color _kSurface   = Color(0xFF0E0E1A);
 const Color _kBorder    = Color(0xFF1C1C2E);
 const Color _kAccent    = Color(0xFF22BDD8);
 const Color _kAccentDim = Color(0xFF1E2A6E);
-const Color _kText      = Color(0xFFE8E8F0);
-const Color _kTextDim   = Color(0xFF9A9AB2);
-const Color _kTextMuted = Color(0xFF7A7A95);
 /// Screen 6: Profile Photo and Username
 /// Identity creation with social validation
 class ProfilePhotoScreen extends StatefulWidget {
@@ -351,11 +348,11 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                                     ),
                                     decoration: BoxDecoration(
                                       color:
-                                          const Color(0xFF22BDD8).withOpacity(0.1),
+                                          const Color(0xFF22BDD8).withValues(alpha: 0.1),
                                       borderRadius: BorderRadius.circular(6),
                                       border: Border.all(
                                         color: const Color(0xFF22BDD8)
-                                            .withOpacity(0.3),
+                                            .withValues(alpha: 0.3),
                                       ),
                                     ),
                                     child: Text(
@@ -580,7 +577,7 @@ class _PhotoOptionTile extends StatelessWidget {
         width: 44,
         height: 44,
         decoration: BoxDecoration(
-          color: color.withOpacity(0.1),
+          color: color.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Icon(icon, color: color),

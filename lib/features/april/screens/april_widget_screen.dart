@@ -1,4 +1,4 @@
-/// APRIL Screen 0 — PROMPT Screen Integration (APRIL Widget)
+﻿/// APRIL Screen 0 â€” PROMPT Screen Integration (APRIL Widget)
 /// Voice activation, quick actions, pending actions, plugin status
 
 import 'package:flutter/material.dart';
@@ -26,7 +26,7 @@ class AprilWidgetScreen extends StatelessWidget {
             border: Border.all(color: const Color(0xFFE5E5E7)),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.05),
+                color: Colors.black.withValues(alpha: 0.05),
                 blurRadius: 12,
                 offset: const Offset(0, 4),
               ),
@@ -39,7 +39,7 @@ class AprilWidgetScreen extends StatelessWidget {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kAprilColor.withOpacity(0.07),
+                    color: kAprilColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(children: [
                       const Icon(Icons.auto_awesome, size: 14, color: kAprilColor),
@@ -51,7 +51,7 @@ class AprilWidgetScreen extends StatelessWidget {
                   );
                 },
               ),
-              // ──── VOICE ACTIVATION PANEL ────
+              // â”€â”€â”€â”€ VOICE ACTIVATION PANEL â”€â”€â”€â”€
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
                 child: Row(
@@ -94,7 +94,7 @@ class AprilWidgetScreen extends StatelessWidget {
                 ),
               ),
 
-              // ──── QUICK ACTIONS BAR ────
+              // â”€â”€â”€â”€ QUICK ACTIONS BAR â”€â”€â”€â”€
               SizedBox(
                 height: 40,
                 child: ListView(
@@ -127,7 +127,7 @@ class AprilWidgetScreen extends StatelessWidget {
 
               const Divider(height: 20, indent: 16, endIndent: 16),
 
-              // ──── PENDING ACTIONS ────
+              // â”€â”€â”€â”€ PENDING ACTIONS â”€â”€â”€â”€
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
@@ -166,7 +166,7 @@ class AprilWidgetScreen extends StatelessWidget {
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   child: Text(
-                    'No pending actions 🎉',
+                    'No pending actions ðŸŽ‰',
                     style: TextStyle(fontSize: 13, color: Color(0xFF6B7280)),
                   ),
                 )
@@ -178,7 +178,7 @@ class AprilWidgetScreen extends StatelessWidget {
 
               const SizedBox(height: 12),
 
-              // ──── PLUGIN STATUS INDICATORS ────
+              // â”€â”€â”€â”€ PLUGIN STATUS INDICATORS â”€â”€â”€â”€
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
                 child: Row(
@@ -198,9 +198,9 @@ class AprilWidgetScreen extends StatelessWidget {
 
   String _greeting(String name) {
     final hour = DateTime.now().hour;
-    if (hour < 12) return 'Good morning, $name ☀️';
-    if (hour < 17) return 'Good afternoon, $name 🌤️';
-    return 'Good evening, $name 🌙';
+    if (hour < 12) return 'Good morning, $name â˜€ï¸';
+    if (hour < 17) return 'Good afternoon, $name ðŸŒ¤ï¸';
+    return 'Good evening, $name ðŸŒ™';
   }
 }
 

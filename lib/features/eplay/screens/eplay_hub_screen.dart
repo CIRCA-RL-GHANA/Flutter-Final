@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// e-PLAY MODULE — Hub Screen
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// e-PLAY MODULE â€” Hub Screen
 /// Digital goods marketplace hub for African creators.
 /// Entry point: category carousel, featured content, creator spotlight.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,7 +12,7 @@ import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../providers/eplay_provider.dart';
 
-// ── Module color
+// â”€â”€ Module color
 const Color kEPlayColor = Color(0xFF7C3AED);       // Deep violet
 const Color kEPlayColorDark = Color(0xFF4C1D95);
 const Color kEPlayAccent = Color(0xFFDDD6FE);
@@ -26,11 +26,11 @@ const _categories = [
 ];
 
 final _featured = [
-  {'title': 'Afrobeats Vol. 3',    'creator': 'KobiBeat',  'type': 'music',  'price': '₵5'},
-  {'title': 'Lagos Stories',        'creator': 'NaijaPen',  'type': 'ebook',  'price': '₵8'},
-  {'title': 'The River Speaks',     'creator': 'AkosiFilm', 'type': 'movie',  'price': '₵15'},
+  {'title': 'Afrobeats Vol. 3',    'creator': 'KobiBeat',  'type': 'music',  'price': 'â‚µ5'},
+  {'title': 'Lagos Stories',        'creator': 'NaijaPen',  'type': 'ebook',  'price': 'â‚µ8'},
+  {'title': 'The River Speaks',     'creator': 'AkosiFilm', 'type': 'movie',  'price': 'â‚µ15'},
   {'title': 'Tech Minds Africa',    'creator': 'GeekCast',  'type': 'podcast','price': 'Free'},
-  {'title': 'Highlife Classics',    'creator': 'GoldWax',   'type': 'music',  'price': '₵4'},
+  {'title': 'Highlife Classics',    'creator': 'GoldWax',   'type': 'music',  'price': 'â‚µ4'},
 ];
 
 class EPlayHubScreen extends StatefulWidget {
@@ -75,7 +75,7 @@ class _EPlayHubScreenState extends State<EPlayHubScreen> {
             body: CustomScrollView(
               controller: _scrollController,
               slivers: [
-                // ── Hero SliverAppBar ────────────────────────────────────
+                // â”€â”€ Hero SliverAppBar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                 SliverAppBar(
                   expandedHeight: 220,
                   pinned: true,
@@ -103,16 +103,16 @@ class _EPlayHubScreenState extends State<EPlayHubScreen> {
                   ),
                 ),
 
-                // ── AI Insight banner ───────────────────────────────────
+                // â”€â”€ AI Insight banner â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                 if (ai.insights.isNotEmpty)
                   SliverToBoxAdapter(
                     child: Container(
                       margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        gradient: LinearGradient(colors: [kEPlayColor.withOpacity(0.12), kEPlayColorDark.withOpacity(0.06)]),
+                        gradient: LinearGradient(colors: [kEPlayColor.withValues(alpha: 0.12), kEPlayColorDark.withValues(alpha: 0.06)]),
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: kEPlayColor.withOpacity(0.25)),
+                        border: Border.all(color: kEPlayColor.withValues(alpha: 0.25)),
                       ),
                       child: Row(children: [
                         const Icon(Icons.auto_awesome, color: kEPlayColor, size: 18),
@@ -127,10 +127,10 @@ class _EPlayHubScreenState extends State<EPlayHubScreen> {
                     ),
                   ),
 
-                // ── Category pills ──────────────────────────────────────
+                // â”€â”€ Category pills â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                 SliverToBoxAdapter(child: _buildCategoryRow()),
 
-                // ── Featured content ────────────────────────────────────
+                // â”€â”€ Featured content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                 const SliverToBoxAdapter(
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(16, 20, 16, 8),
@@ -139,10 +139,10 @@ class _EPlayHubScreenState extends State<EPlayHubScreen> {
                 ),
                 SliverToBoxAdapter(child: _buildFeaturedCarousel(eplay)),
 
-                // ── Quick actions ────────────────────────────────────────
+                // â”€â”€ Quick actions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                 SliverToBoxAdapter(child: _buildQuickActions()),
 
-                // ── Creator spotlight ───────────────────────────────────
+                // â”€â”€ Creator spotlight â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                 const SliverToBoxAdapter(
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(16, 20, 16, 8),
@@ -188,7 +188,7 @@ class _EPlayHubScreenState extends State<EPlayHubScreen> {
               const Text('e-Play', style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold)),
               const SizedBox(height: 6),
               const Text(
-                'African digital content — music, film, books & more.\nOwn it. Stream it. Carry it everywhere.',
+                'African digital content â€” music, film, books & more.\nOwn it. Stream it. Carry it everywhere.',
                 style: TextStyle(color: Colors.white70, fontSize: 13),
               ),
               const Spacer(),
@@ -242,7 +242,7 @@ class _EPlayHubScreenState extends State<EPlayHubScreen> {
                 color: isSelected ? kEPlayColor : Colors.white,
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(color: isSelected ? kEPlayColor : AppColors.inputBorder),
-                boxShadow: isSelected ? [BoxShadow(color: kEPlayColor.withOpacity(0.3), blurRadius: 8, offset: const Offset(0, 2))] : [],
+                boxShadow: isSelected ? [BoxShadow(color: kEPlayColor.withValues(alpha: 0.3), blurRadius: 8, offset: const Offset(0, 2))] : [],
               ),
               child: Row(children: [
                 Icon(icon, size: 16, color: isSelected ? Colors.white : AppColors.textSecondary),
@@ -281,7 +281,7 @@ class _EPlayHubScreenState extends State<EPlayHubScreen> {
                   'creator': liveItems[i]['creatorName'] ?? liveItems[i]['creator'] ?? '',
                   'type': liveItems[i]['type'] ?? 'music',
                   'price': liveItems[i]['priceQPoints'] != null
-                      ? '₵${liveItems[i]['priceQPoints']}'
+                      ? 'â‚µ${liveItems[i]['priceQPoints']}'
                       : 'Free',
                 }
               : Map<String, dynamic>.from(_featured[i]);
@@ -295,7 +295,7 @@ class _EPlayHubScreenState extends State<EPlayHubScreen> {
               decoration: BoxDecoration(
                 gradient: LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, colors: colors),
                 borderRadius: BorderRadius.circular(16),
-                boxShadow: [BoxShadow(color: colors[0].withOpacity(0.35), blurRadius: 10, offset: const Offset(0, 4))],
+                boxShadow: [BoxShadow(color: colors[0].withValues(alpha: 0.35), blurRadius: 10, offset: const Offset(0, 4))],
               ),
               padding: const EdgeInsets.all(14),
               child: Column(
@@ -309,7 +309,7 @@ class _EPlayHubScreenState extends State<EPlayHubScreen> {
                   const SizedBox(height: 6),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                    decoration: BoxDecoration(color: Colors.white.withOpacity(0.25), borderRadius: BorderRadius.circular(8)),
+                    decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.25), borderRadius: BorderRadius.circular(8)),
                     child: Text(item['price']!, style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold)),
                   ),
                 ],
@@ -340,7 +340,7 @@ class _EPlayHubScreenState extends State<EPlayHubScreen> {
         onTap: onTap,
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 14),
-          decoration: BoxDecoration(color: color.withOpacity(0.1), borderRadius: BorderRadius.circular(14), border: Border.all(color: color.withOpacity(0.25))),
+          decoration: BoxDecoration(color: color.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(14), border: Border.all(color: color.withValues(alpha: 0.25))),
           child: Column(children: [
             Icon(icon, color: color, size: 24),
             const SizedBox(height: 6),
@@ -362,7 +362,7 @@ class _EPlayHubScreenState extends State<EPlayHubScreen> {
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       leading: CircleAvatar(
-        backgroundColor: kEPlayColor.withOpacity(0.15),
+        backgroundColor: kEPlayColor.withValues(alpha: 0.15),
         child: Text(c['name']![0], style: const TextStyle(color: kEPlayColor, fontWeight: FontWeight.bold)),
       ),
       title: Text(c['name']!, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14)),

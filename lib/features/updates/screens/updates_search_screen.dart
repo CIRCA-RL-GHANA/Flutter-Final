@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SCREEN 6 — Search & Explore
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SCREEN 6 â€” Search & Explore
 /// Five tabs: Top, Latest, Accounts, Hashtags, Nearby.
 /// Trending hashtags, suggested accounts, recent searches.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -129,7 +129,7 @@ class _BodyState extends State<_Body> with SingleTickerProviderStateMixin {
   }
 }
 
-// ─── Discover (Pre-Search) ──────────────────────────────────────────────────
+// â”€â”€â”€ Discover (Pre-Search) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _DiscoverView extends StatelessWidget {
   final UpdatesProvider prov;
@@ -157,7 +157,7 @@ class _DiscoverView extends StatelessWidget {
                     children: [
                       Container(
                         width: 32, height: 32,
-                        decoration: BoxDecoration(color: kUpdatesColor.withOpacity(0.08), borderRadius: BorderRadius.circular(8)),
+                        decoration: BoxDecoration(color: kUpdatesColor.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(8)),
                         child: const Icon(Icons.tag, size: 16, color: kUpdatesColor),
                       ),
                       const SizedBox(width: 10),
@@ -173,7 +173,7 @@ class _DiscoverView extends StatelessWidget {
                       if (h.growthRate > 0)
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                          decoration: BoxDecoration(color: kUpdatesColor.withOpacity(0.08), borderRadius: BorderRadius.circular(10)),
+                          decoration: BoxDecoration(color: kUpdatesColor.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(10)),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
@@ -204,7 +204,7 @@ class _DiscoverView extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 20,
-                      backgroundColor: kUpdatesAccent.withOpacity(0.12),
+                      backgroundColor: kUpdatesAccent.withValues(alpha: 0.12),
                       child: Text(a.name.substring(0, 1), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: kUpdatesAccent)),
                     ),
                     const SizedBox(width: 10),
@@ -221,7 +221,7 @@ class _DiscoverView extends StatelessWidget {
                               ],
                             ],
                           ),
-                          Text('${a.followerCount} followers • ${a.mutualConnections} mutual', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                          Text('${a.followerCount} followers â€¢ ${a.mutualConnections} mutual', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                         ],
                       ),
                     ),
@@ -251,7 +251,7 @@ class _DiscoverView extends StatelessWidget {
   }
 }
 
-// ─── Tab Results ────────────────────────────────────────────────────────────
+// â”€â”€â”€ Tab Results â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _TopResults extends StatelessWidget {
   final UpdatesProvider prov;
@@ -279,16 +279,16 @@ class _TopResults extends StatelessWidget {
                 margin: const EdgeInsets.only(bottom: 10),
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 decoration: BoxDecoration(
-                  color: kUpdatesColor.withOpacity(0.07),
+                  color: kUpdatesColor.withValues(alpha: 0.07),
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: kUpdatesColor.withOpacity(0.15)),
+                  border: Border.all(color: kUpdatesColor.withValues(alpha: 0.15)),
                 ),
                 child: Row(
                   children: [
                     Icon(Icons.auto_awesome, size: 14, color: kUpdatesColor),
                     const SizedBox(width: 6),
                     Text(
-                      'AI — Semantically ranked results',
+                      'AI â€” Semantically ranked results',
                       style: TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.w600,
@@ -354,7 +354,7 @@ class _AccountsResults extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 24,
-                backgroundColor: kUpdatesColor.withOpacity(0.12),
+                backgroundColor: kUpdatesColor.withValues(alpha: 0.12),
                 child: Text(a.name.substring(0, 1), style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: kUpdatesColor)),
               ),
               const SizedBox(width: 12),
@@ -414,7 +414,7 @@ class _HashtagsResults extends StatelessWidget {
             children: [
               Container(
                 width: 40, height: 40,
-                decoration: BoxDecoration(color: kUpdatesColor.withOpacity(0.08), borderRadius: BorderRadius.circular(10)),
+                decoration: BoxDecoration(color: kUpdatesColor.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(10)),
                 child: const Icon(Icons.tag, size: 20, color: kUpdatesColor),
               ),
               const SizedBox(width: 12),

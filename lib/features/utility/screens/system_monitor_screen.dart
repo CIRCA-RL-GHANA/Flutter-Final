@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// U8: SYSTEM MONITOR Screen
 /// Performance metrics, device info, active sessions, system logs
 /// RBAC: Owner, Administrator, BranchManager only
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -44,7 +44,7 @@ class SystemMonitorScreen extends StatelessWidget {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kUtilityColor.withOpacity(0.07),
+                    color: kUtilityColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -62,7 +62,7 @@ class SystemMonitorScreen extends StatelessWidget {
                   );
                 },
               ),
-              // ─── Performance Metrics Grid ──────────────────
+              // â”€â”€â”€ Performance Metrics Grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               const UtilitySectionTitle(
                 title: 'Performance',
                 icon: Icons.speed,
@@ -93,7 +93,7 @@ class SystemMonitorScreen extends StatelessWidget {
 
               const SizedBox(height: 16),
 
-              // ─── Device Info ───────────────────────────────
+              // â”€â”€â”€ Device Info â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               const UtilitySectionTitle(
                 title: 'Device Information',
                 icon: Icons.phone_android,
@@ -115,7 +115,7 @@ class SystemMonitorScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Active Sessions ──────────────────────────
+              // â”€â”€â”€ Active Sessions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               const UtilitySectionTitle(
                 title: 'Active Sessions',
                 icon: Icons.devices,
@@ -130,7 +130,7 @@ class SystemMonitorScreen extends StatelessWidget {
 
               const SizedBox(height: 16),
 
-              // ─── System Logs ──────────────────────────────
+              // â”€â”€â”€ System Logs â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               const UtilitySectionTitle(
                 title: 'System Logs',
                 icon: Icons.terminal,
@@ -178,7 +178,7 @@ class SystemMonitorScreen extends StatelessWidget {
                       return Column(
                         children: [
                           _LogRow(entry: log),
-                          if (!isLast) Divider(height: 1, color: AppColors.inputBorder.withOpacity(0.5)),
+                          if (!isLast) Divider(height: 1, color: AppColors.inputBorder.withValues(alpha: 0.5)),
                         ],
                       );
                     }).toList(),
@@ -223,7 +223,7 @@ class SystemMonitorScreen extends StatelessWidget {
   }
 }
 
-// ─── Trend Icon ──────────────────────────────────────────────────────────────
+// â”€â”€â”€ Trend Icon â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _TrendIcon extends StatelessWidget {
   final MetricTrend trend;
@@ -242,7 +242,7 @@ class _TrendIcon extends StatelessWidget {
   }
 }
 
-// ─── Info Row ────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Info Row â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _InfoRow extends StatelessWidget {
   final String label;
@@ -274,13 +274,13 @@ class _InfoRow extends StatelessWidget {
             ],
           ),
         ),
-        if (!isLast) Divider(height: 1, color: AppColors.inputBorder.withOpacity(0.5)),
+        if (!isLast) Divider(height: 1, color: AppColors.inputBorder.withValues(alpha: 0.5)),
       ],
     );
   }
 }
 
-// ─── Session Card ────────────────────────────────────────────────────────────
+// â”€â”€â”€ Session Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _SessionCard extends StatelessWidget {
   final ActiveSession session;
@@ -299,7 +299,7 @@ class _SessionCard extends StatelessWidget {
               width: 40,
               height: 40,
               decoration: BoxDecoration(
-                color: (session.isCurrent ? const Color(0xFF10B981) : const Color(0xFF3B82F6)).withOpacity(0.1),
+                color: (session.isCurrent ? const Color(0xFF10B981) : const Color(0xFF3B82F6)).withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(
@@ -326,7 +326,7 @@ class _SessionCard extends StatelessWidget {
                     ],
                   ),
                   Text(
-                    '${session.location} · ${session.ipAddress}',
+                    '${session.location} Â· ${session.ipAddress}',
                     style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                   ),
                 ],
@@ -345,7 +345,7 @@ class _SessionCard extends StatelessWidget {
   }
 }
 
-// ─── Log Filter Chip ─────────────────────────────────────────────────────────
+// â”€â”€â”€ Log Filter Chip â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _LogFilterChip extends StatelessWidget {
   final String label;
@@ -371,7 +371,7 @@ class _LogFilterChip extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         decoration: BoxDecoration(
-          color: isSelected ? chipColor.withOpacity(0.15) : Colors.transparent,
+          color: isSelected ? chipColor.withValues(alpha: 0.15) : Colors.transparent,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(color: isSelected ? chipColor : AppColors.inputBorder),
         ),
@@ -388,7 +388,7 @@ class _LogFilterChip extends StatelessWidget {
   }
 }
 
-// ─── Log Row ─────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Log Row â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _LogRow extends StatelessWidget {
   final SystemLogEntry entry;
@@ -420,7 +420,7 @@ class _LogRow extends StatelessWidget {
                   style: const TextStyle(fontSize: 12, color: AppColors.textPrimary),
                 ),
                 Text(
-                  '${entry.source} · ${_formatTime(entry.timestamp)}',
+                  '${entry.source} Â· ${_formatTime(entry.timestamp)}',
                   style: const TextStyle(fontSize: 10, color: AppColors.textTertiary),
                 ),
               ],

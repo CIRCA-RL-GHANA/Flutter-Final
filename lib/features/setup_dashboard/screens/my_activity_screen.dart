@@ -1,9 +1,9 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SD3.5: MY ACTIVITY — Tasks, Goals, Timeline
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD3.5: MY ACTIVITY â€” Tasks, Goals, Timeline
 /// Task progress, goal tracking with progress bars, today's activity timeline
 /// RBAC: Owner(all), Admin(all), BM(branch), SO(entity),
 ///        BSO(branch), Monitor/BrMon(view), RO/BRO(own), Driver(own)
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -46,7 +46,7 @@ class MyActivityScreen extends StatelessWidget {
             ),
           body: CustomScrollView(
             slivers: [
-              // ─── Task Summary ─────────────────────────────
+              // â”€â”€â”€ Task Summary â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -71,7 +71,7 @@ class MyActivityScreen extends StatelessWidget {
                       Expanded(
                         child: KPIBadge(
                           label: 'Productivity',
-                          value: tasks.isEmpty ? '—' : '${(completedTasks * 100 / tasks.length).round()}%',
+                          value: tasks.isEmpty ? 'â€”' : '${(completedTasks * 100 / tasks.length).round()}%',
                           icon: Icons.speed,
                           color: tasks.isEmpty
                               ? AppColors.textTertiary
@@ -87,7 +87,7 @@ class MyActivityScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Overdue Alert ────────────────────────────
+              // â”€â”€â”€ Overdue Alert â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               if (tasks.where((t) => t.status != TaskStatus.completed && t.status != TaskStatus.cancelled && (t.dueDate?.isBefore(DateTime.now()) ?? false)).isNotEmpty)
                 SliverToBoxAdapter(
                   child: Padding(
@@ -95,16 +95,16 @@ class MyActivityScreen extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: AppColors.error.withOpacity(0.08),
+                        color: AppColors.error.withValues(alpha: 0.08),
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: AppColors.error.withOpacity(0.3)),
+                        border: Border.all(color: AppColors.error.withValues(alpha: 0.3)),
                       ),
                       child: Row(
                         children: [
                           Container(
                             padding: const EdgeInsets.all(6),
                             decoration: BoxDecoration(
-                              color: AppColors.error.withOpacity(0.15),
+                              color: AppColors.error.withValues(alpha: 0.15),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: const Icon(Icons.warning_amber, size: 18, color: AppColors.error),
@@ -132,7 +132,7 @@ class MyActivityScreen extends StatelessWidget {
                   ),
                 ),
 
-              // ─── Task Status Filter ───────────────────────
+              // â”€â”€â”€ Task Status Filter â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -155,7 +155,7 @@ class MyActivityScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Tasks Section ────────────────────────────
+              // â”€â”€â”€ Tasks Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
@@ -163,7 +163,7 @@ class MyActivityScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── AI Insights ─────────────────────────────────────────
+              // â”€â”€â”€ AI Insights â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Consumer<AIInsightsNotifier>(
                   builder: (context, ai, _) {
@@ -172,7 +172,7 @@ class MyActivityScreen extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: kSetupColor.withOpacity(0.07),
+                          color: kSetupColor.withValues(alpha: 0.07),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -204,7 +204,7 @@ class MyActivityScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Goals Section ────────────────────────────
+              // â”€â”€â”€ Goals Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
@@ -222,7 +222,7 @@ class MyActivityScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Timeline Section ─────────────────────────
+              // â”€â”€â”€ Timeline Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
@@ -289,7 +289,7 @@ class _TaskCard extends StatelessWidget {
         border: Border(left: BorderSide(color: _statusColor, width: 3)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -316,7 +316,7 @@ class _TaskCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
-                  color: _priorityColor.withOpacity(0.1),
+                  color: _priorityColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: Text(
@@ -405,7 +405,7 @@ class _GoalCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(14),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -427,7 +427,7 @@ class _GoalCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
-                  color: _statusColor.withOpacity(0.1),
+                  color: _statusColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: Text(
@@ -513,7 +513,7 @@ class _TimelineItem extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // ─── Timeline Connector ──────────────
+          // â”€â”€â”€ Timeline Connector â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
           SizedBox(
             width: 30,
             child: Column(
@@ -533,7 +533,7 @@ class _TimelineItem extends StatelessWidget {
               ],
             ),
           ),
-          // ─── Content ─────────────────────────
+          // â”€â”€â”€ Content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
           Expanded(
             child: Container(
               margin: const EdgeInsets.only(bottom: 12),
@@ -543,7 +543,7 @@ class _TimelineItem extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.03),
+                    color: Colors.black.withValues(alpha: 0.03),
                     blurRadius: 8,
                     offset: const Offset(0, 2),
                   ),
@@ -555,7 +555,7 @@ class _TimelineItem extends StatelessWidget {
                     width: 34,
                     height: 34,
                     decoration: BoxDecoration(
-                      color: _actionColor.withOpacity(0.1),
+                      color: _actionColor.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Icon(_actionIcon, size: 16, color: _actionColor),
@@ -601,7 +601,7 @@ class _TimelineItem extends StatelessWidget {
   }
 }
 
-// ─── Task Status Chip ────────────────────────────────────────────────────────
+// â”€â”€â”€ Task Status Chip â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _TaskStatusChip extends StatelessWidget {
   final String label;
@@ -622,10 +622,10 @@ class _TaskStatusChip extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
-        color: isSelected ? c.withOpacity(0.12) : Colors.white,
+        color: isSelected ? c.withValues(alpha: 0.12) : Colors.white,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: isSelected ? c.withOpacity(0.4) : AppColors.inputBorder,
+          color: isSelected ? c.withValues(alpha: 0.4) : AppColors.inputBorder,
         ),
       ),
       child: Row(
@@ -643,7 +643,7 @@ class _TaskStatusChip extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
             decoration: BoxDecoration(
-              color: c.withOpacity(0.15),
+              color: c.withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Text(

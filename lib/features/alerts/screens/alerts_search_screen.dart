@@ -1,4 +1,4 @@
-/// Alerts Screen 1.1 — Advanced Search & Discovery
+﻿/// Alerts Screen 1.1 â€” Advanced Search & Discovery
 /// Full-width search bar, grouped results by status, search highlighting,
 /// AI suggestions, recent/saved searches
 
@@ -100,7 +100,7 @@ class _AlertsSearchScreenState extends State<AlertsSearchScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // ──── AI SUGGESTIONS (dynamic) ────
+          // â”€â”€â”€â”€ AI SUGGESTIONS (dynamic) â”€â”€â”€â”€
           Consumer<AIInsightsNotifier>(
             builder: (ctx, aiNotifier, _) {
               final aiRecs = aiNotifier.recommendations;
@@ -118,7 +118,7 @@ class _AlertsSearchScreenState extends State<AlertsSearchScreen> {
                     ];
               final isAI = aiRecs.isNotEmpty;
               return AlertsSectionCard(
-                title: isAI ? '✨ AI Smart Suggestions' : '🤖 AI Suggestions',
+                title: isAI ? 'âœ¨ AI Smart Suggestions' : 'ðŸ¤– AI Suggestions',
                 child: Column(
                   children: chips
                       .map((label) => _SuggestionChip(
@@ -132,7 +132,7 @@ class _AlertsSearchScreenState extends State<AlertsSearchScreen> {
           ),
           const SizedBox(height: 16),
 
-          // ──── RECENT SEARCHES ────
+          // â”€â”€â”€â”€ RECENT SEARCHES â”€â”€â”€â”€
           if (provider.recentSearches.isNotEmpty) ...[
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -152,7 +152,7 @@ class _AlertsSearchScreenState extends State<AlertsSearchScreen> {
             const SizedBox(height: 16),
           ],
 
-          // ──── SAVED SEARCHES ────
+          // â”€â”€â”€â”€ SAVED SEARCHES â”€â”€â”€â”€
           if (provider.savedSearches.isNotEmpty) ...[
             const Text('Saved Searches', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700)),
             const SizedBox(height: 8),
@@ -162,7 +162,7 @@ class _AlertsSearchScreenState extends State<AlertsSearchScreen> {
             )),
           ],
 
-          // ──── SEARCH TIPS ────
+          // â”€â”€â”€â”€ SEARCH TIPS â”€â”€â”€â”€
           const SizedBox(height: 24),
           Container(
             padding: const EdgeInsets.all(14),
@@ -173,7 +173,7 @@ class _AlertsSearchScreenState extends State<AlertsSearchScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('💡 Search Tips', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: kAlertsInfo)),
+                const Text('ðŸ’¡ Search Tips', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: kAlertsInfo)),
                 const SizedBox(height: 8),
                 _tip('Search by ID: TX-2041'),
                 _tip('Search by category: payment, shipment'),
@@ -214,7 +214,7 @@ class _AlertsSearchScreenState extends State<AlertsSearchScreen> {
                     ? Container(
                         padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
                         decoration: BoxDecoration(
-                          color: kAlertsInfo.withOpacity(0.08),
+                          color: kAlertsInfo.withValues(alpha: 0.08),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Row(
@@ -239,7 +239,7 @@ class _AlertsSearchScreenState extends State<AlertsSearchScreen> {
           ),
           const SizedBox(height: 12),
 
-          // ──── PENDING GROUP ────
+          // â”€â”€â”€â”€ PENDING GROUP â”€â”€â”€â”€
           if (pending.isNotEmpty) ...[
             _GroupHeader(label: 'Pending', count: pending.length, color: kAlertsColor),
             const SizedBox(height: 8),
@@ -250,7 +250,7 @@ class _AlertsSearchScreenState extends State<AlertsSearchScreen> {
             const SizedBox(height: 16),
           ],
 
-          // ──── RESOLVED GROUP ────
+          // â”€â”€â”€â”€ RESOLVED GROUP â”€â”€â”€â”€
           if (resolved.isNotEmpty) ...[
             _GroupHeader(label: 'Resolved', count: resolved.length, color: kAlertsResolved),
             const SizedBox(height: 8),
@@ -275,7 +275,7 @@ class _AlertsSearchScreenState extends State<AlertsSearchScreen> {
       padding: const EdgeInsets.only(bottom: 4),
       child: Row(
         children: [
-          const Text('•', style: TextStyle(fontSize: 12, color: kAlertsInfo)),
+          const Text('â€¢', style: TextStyle(fontSize: 12, color: kAlertsInfo)),
           const SizedBox(width: 8),
           Text(text, style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
         ],
@@ -284,9 +284,9 @@ class _AlertsSearchScreenState extends State<AlertsSearchScreen> {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Suggestion Chip
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _SuggestionChip extends StatelessWidget {
   final String label;
@@ -317,9 +317,9 @@ class _SuggestionChip extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Recent Search Tile
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _RecentSearchTile extends StatelessWidget {
   final RecentSearch search;
@@ -351,9 +351,9 @@ class _RecentSearchTile extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Saved Search Tile
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _SavedSearchTile extends StatelessWidget {
   final SavedSearch search;
@@ -370,7 +370,7 @@ class _SavedSearchTile extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: kAlertsInfo.withOpacity(0.3)),
+          border: Border.all(color: kAlertsInfo.withValues(alpha: 0.3)),
         ),
         child: Row(
           children: [
@@ -385,9 +385,9 @@ class _SavedSearchTile extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Group Header
-// ──────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _GroupHeader extends StatelessWidget {
   final String label;
@@ -405,7 +405,7 @@ class _GroupHeader extends StatelessWidget {
         const SizedBox(width: 6),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
-          decoration: BoxDecoration(color: color.withOpacity(0.1), borderRadius: BorderRadius.circular(8)),
+          decoration: BoxDecoration(color: color.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(8)),
           child: Text('$count', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: color)),
         ),
       ],

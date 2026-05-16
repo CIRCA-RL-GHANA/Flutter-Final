@@ -1,12 +1,12 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// GenieSyncConflictCard
 ///
 /// Renders a side-by-side comparison of the local vs server version of a
 /// conflicting resource. The user can accept one version with a single tap.
 /// Haptic bracket-style feedback confirms selection.
 ///
-/// Recommendation 2 — Sync-Conflict UI.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// Recommendation 2 â€” Sync-Conflict UI.
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 
@@ -39,9 +39,9 @@ class GenieSyncConflictCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: cs.errorContainer.withOpacity(0.14),
+        color: cs.errorContainer.withValues(alpha: 0.14),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: cs.error.withOpacity(0.35)),
+        border: Border.all(color: cs.error.withValues(alpha: 0.35)),
       ),
       padding: const EdgeInsets.all(14),
       child: Column(
@@ -54,7 +54,7 @@ class GenieSyncConflictCard extends StatelessWidget {
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
-                  'Sync conflict — ${conflict.resourceType}',
+                  'Sync conflict â€” ${conflict.resourceType}',
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       color: cs.error,
@@ -130,9 +130,9 @@ class _VersionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: accentColor.withOpacity(0.08),
+        color: accentColor.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: accentColor.withOpacity(0.28)),
+        border: Border.all(color: accentColor.withValues(alpha: 0.28)),
       ),
       padding: const EdgeInsets.all(10),
       child: Column(

@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SD1.3-CREATE: TAB CREATE WIZARD — 4-Step Form
-/// Steps: Customer → Credit Settings → Payment Terms → Review
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD1.3-CREATE: TAB CREATE WIZARD â€” 4-Step Form
+/// Steps: Customer â†’ Credit Settings â†’ Payment Terms â†’ Review
 /// RBAC: Admin(full), BM(branch), SO(full), BSO(branch)
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -91,7 +91,7 @@ class _TabCreateScreenState extends State<TabCreateScreen> {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kSetupColor.withOpacity(0.07),
+                    color: kSetupColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -165,7 +165,7 @@ class _TabCreateScreenState extends State<TabCreateScreen> {
   }
 }
 
-// ─── Step Indicator ──────────────────────────────────────────────────────────
+// â”€â”€â”€ Step Indicator â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _TabStepIndicator extends StatelessWidget {
   final int currentStep;
@@ -188,7 +188,7 @@ class _TabStepIndicator extends StatelessWidget {
             borderRadius: BorderRadius.circular(4),
             child: LinearProgressIndicator(
               value: (currentStep + 1) / stepCount,
-              backgroundColor: kSetupColor.withOpacity(0.1),
+              backgroundColor: kSetupColor.withValues(alpha: 0.1),
               valueColor: const AlwaysStoppedAnimation<Color>(kSetupColor),
               minHeight: 4,
             ),
@@ -213,7 +213,7 @@ class _TabStepIndicator extends StatelessWidget {
   }
 }
 
-// ─── Step 1: Customer ────────────────────────────────────────────────────────
+// â”€â”€â”€ Step 1: Customer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _CustomerStep extends StatelessWidget {
   final TextEditingController nameCtrl;
@@ -253,10 +253,10 @@ class _CustomerStep extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 14),
                     decoration: BoxDecoration(
-                      color: isSelected ? kSetupColor.withOpacity(0.08) : Colors.white,
+                      color: isSelected ? kSetupColor.withValues(alpha: 0.08) : Colors.white,
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                        color: isSelected ? kSetupColor.withOpacity(0.3) : Colors.grey.shade300,
+                        color: isSelected ? kSetupColor.withValues(alpha: 0.3) : Colors.grey.shade300,
                       ),
                     ),
                     child: Column(
@@ -310,7 +310,7 @@ class _CustomerStep extends StatelessWidget {
   }
 }
 
-// ─── Step 2: Credit Settings ─────────────────────────────────────────────────
+// â”€â”€â”€ Step 2: Credit Settings â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _CreditSettingsStep extends StatelessWidget {
   final TextEditingController creditLimitCtrl;
@@ -333,7 +333,7 @@ class _CreditSettingsStep extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       children: [
         SetupFormField(
-          label: 'Credit Limit (₵)',
+          label: 'Credit Limit (â‚µ)',
           hint: '0.00',
           controller: creditLimitCtrl,
           keyboardType: TextInputType.number,
@@ -406,9 +406,9 @@ class _CreditSettingsStep extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: AppColors.warning.withOpacity(0.06),
+            color: AppColors.warning.withValues(alpha: 0.06),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: AppColors.warning.withOpacity(0.15)),
+            border: Border.all(color: AppColors.warning.withValues(alpha: 0.15)),
           ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -430,7 +430,7 @@ class _CreditSettingsStep extends StatelessWidget {
   }
 }
 
-// ─── Step 3: Payment Terms ───────────────────────────────────────────────────
+// â”€â”€â”€ Step 3: Payment Terms â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _PaymentTermsStep extends StatelessWidget {
   final int paymentDays;
@@ -468,10 +468,10 @@ class _PaymentTermsStep extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                 decoration: BoxDecoration(
-                  color: isSelected ? kSetupColor.withOpacity(0.08) : Colors.white,
+                  color: isSelected ? kSetupColor.withValues(alpha: 0.08) : Colors.white,
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(
-                    color: isSelected ? kSetupColor.withOpacity(0.3) : Colors.grey.shade300,
+                    color: isSelected ? kSetupColor.withValues(alpha: 0.3) : Colors.grey.shade300,
                   ),
                 ),
                 child: Text(
@@ -527,7 +527,7 @@ class _PaymentTermsStep extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: AppColors.info.withOpacity(0.06),
+              color: AppColors.info.withValues(alpha: 0.06),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Column(
@@ -539,8 +539,8 @@ class _PaymentTermsStep extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '• 5 days before due date\n• On due date\n• 3 days after due date (overdue)',
-                  style: TextStyle(fontSize: 11, color: AppColors.info.withOpacity(0.8)),
+                  'â€¢ 5 days before due date\nâ€¢ On due date\nâ€¢ 3 days after due date (overdue)',
+                  style: TextStyle(fontSize: 11, color: AppColors.info.withValues(alpha: 0.8)),
                 ),
               ],
             ),
@@ -560,7 +560,7 @@ class _PaymentTermsStep extends StatelessWidget {
   }
 }
 
-// ─── Step 4: Review ──────────────────────────────────────────────────────────
+// â”€â”€â”€ Step 4: Review â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _TabReviewStep extends StatelessWidget {
   final String customerName;
@@ -587,9 +587,9 @@ class _TabReviewStep extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: kSetupColor.withOpacity(0.06),
+            color: kSetupColor.withValues(alpha: 0.06),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: kSetupColor.withOpacity(0.15)),
+            border: Border.all(color: kSetupColor.withValues(alpha: 0.15)),
           ),
           child: const Row(
             children: [
@@ -609,7 +609,7 @@ class _TabReviewStep extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SetupSectionTitle(title: 'Customer Details', icon: Icons.person),
-              SetupInfoRow(label: 'Name', value: customerName.isNotEmpty ? customerName : '—'),
+              SetupInfoRow(label: 'Name', value: customerName.isNotEmpty ? customerName : 'â€”'),
               SetupInfoRow(label: 'Type', value: customerType),
             ],
           ),
@@ -620,7 +620,7 @@ class _TabReviewStep extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SetupSectionTitle(title: 'Credit & Payment', icon: Icons.credit_card),
-              SetupInfoRow(label: 'Credit Limit', value: creditLimit.isNotEmpty ? '₵$creditLimit' : '—'),
+              SetupInfoRow(label: 'Credit Limit', value: creditLimit.isNotEmpty ? 'â‚µ$creditLimit' : 'â€”'),
               SetupInfoRow(label: 'Payment Terms', value: 'Net $paymentDays'),
               SetupInfoRow(label: 'Interest', value: interestRate),
               SetupInfoRow(label: 'Reminders', value: autoReminders ? 'Enabled' : 'Disabled'),
@@ -632,9 +632,9 @@ class _TabReviewStep extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: AppColors.success.withOpacity(0.06),
+            color: AppColors.success.withValues(alpha: 0.06),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: AppColors.success.withOpacity(0.15)),
+            border: Border.all(color: AppColors.success.withValues(alpha: 0.15)),
           ),
           child: Row(
             children: [
@@ -642,7 +642,7 @@ class _TabReviewStep extends StatelessWidget {
                 width: 36,
                 height: 36,
                 decoration: BoxDecoration(
-                  color: AppColors.success.withOpacity(0.15),
+                  color: AppColors.success.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: const Icon(Icons.shield, size: 18, color: AppColors.success),
@@ -672,7 +672,7 @@ class _TabReviewStep extends StatelessWidget {
   }
 }
 
-// ─── Nav Bar ─────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Nav Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _TabNavBar extends StatelessWidget {
   final int currentStep;
@@ -700,7 +700,7 @@ class _TabNavBar extends StatelessWidget {
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.06),
+            color: Colors.black.withValues(alpha: 0.06),
             blurRadius: 10,
             offset: const Offset(0, -2),
           ),

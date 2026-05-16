@@ -1,9 +1,9 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SD1.7: DELIVERY ZONES — Zone Management
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD1.7: DELIVERY ZONES â€” Zone Management
 /// Zone list, coverage, fee structure, vehicle assignment
 /// RBAC: Admin(full), BM(branch), Monitor/BrMon(view), RO/BRO(view),
 ///        Driver(view)
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -77,7 +77,7 @@ class ZonesScreen extends StatelessWidget {
                   child: const SetupSectionTitle(title: 'All Zones', icon: Icons.map),
                 ),
               ),
-              // ─── AI Insights ─────────────────────────────────────────
+              // â”€â”€â”€ AI Insights â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Consumer<AIInsightsNotifier>(
                   builder: (context, ai, _) {
@@ -86,7 +86,7 @@ class ZonesScreen extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: kSetupColor.withOpacity(0.07),
+                          color: kSetupColor.withValues(alpha: 0.07),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -145,7 +145,7 @@ class _ZoneCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(14),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -160,7 +160,7 @@ class _ZoneCard extends StatelessWidget {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: kSetupColor.withOpacity(0.1),
+                  color: kSetupColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: const Icon(Icons.map, size: 22, color: kSetupColor),
@@ -179,7 +179,7 @@ class _ZoneCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '₵${zone.fee.toStringAsFixed(0)} fee · ${zone.estimatedTime}',
+                      'â‚µ${zone.fee.toStringAsFixed(0)} fee Â· ${zone.estimatedTime}',
                       style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                     ),
                   ],
@@ -201,7 +201,7 @@ class _ZoneCard extends StatelessWidget {
             children: [
               _ZoneStat(label: 'Vehicles', value: '${zone.vehicleCount}'),
               _ZoneStat(label: 'Deliveries', value: '${zone.dailyDeliveries}/day'),
-              _ZoneStat(label: 'Coverage', value: '${zone.coverageKm2} km²'),
+              _ZoneStat(label: 'Coverage', value: '${zone.coverageKm2} kmÂ²'),
               _ZoneStat(label: 'Population', value: _formatPop(zone.populationServed)),
             ],
           ),

@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// U7: ADVANCED DATA TOOLS Screen
 /// Storage analytics, backup management, cache control, sync status
 /// RBAC: Owner, Administrator, BranchManager only
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -32,7 +32,7 @@ class AdvancedDataScreen extends StatelessWidget {
                 builder: (context, ai, _) {
                   if (ai.insights.isEmpty) return const SizedBox.shrink();
                   return Container(
-                    color: kUtilityColor.withOpacity(0.07),
+                    color: kUtilityColor.withValues(alpha: 0.07),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     child: Row(
                       children: [
@@ -50,7 +50,7 @@ class AdvancedDataScreen extends StatelessWidget {
                   );
                 },
               ),
-              // ─── Storage Overview ─────────────────────────
+              // â”€â”€â”€ Storage Overview â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               const UtilitySectionTitle(
                 title: 'Storage Overview',
                 icon: Icons.sd_storage,
@@ -80,7 +80,7 @@ class AdvancedDataScreen extends StatelessWidget {
                                 style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: AppColors.textPrimary),
                               ),
                               Text(
-                                'of ${storage.totalMB.toStringAsFixed(0)} MB total · ${(storage.freePercentage * 100).toStringAsFixed(0)}% free',
+                                'of ${storage.totalMB.toStringAsFixed(0)} MB total Â· ${(storage.freePercentage * 100).toStringAsFixed(0)}% free',
                                 style: const TextStyle(fontSize: 12, color: AppColors.textTertiary),
                               ),
                             ],
@@ -98,7 +98,7 @@ class AdvancedDataScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Backup Management ────────────────────────
+              // â”€â”€â”€ Backup Management â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               const UtilitySectionTitle(
                 title: 'Backups',
                 icon: Icons.backup,
@@ -141,7 +141,7 @@ class AdvancedDataScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Cache Management ─────────────────────────
+              // â”€â”€â”€ Cache Management â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               const UtilitySectionTitle(
                 title: 'Cache',
                 icon: Icons.cached,
@@ -190,7 +190,7 @@ class AdvancedDataScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Sync Status ──────────────────────────────
+              // â”€â”€â”€ Sync Status â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               const UtilitySectionTitle(
                 title: 'Sync Status',
                 icon: Icons.sync,
@@ -217,7 +217,7 @@ class AdvancedDataScreen extends StatelessWidget {
   }
 }
 
-// ─── Storage Breakdown Row ───────────────────────────────────────────────────
+// â”€â”€â”€ Storage Breakdown Row â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _StorageBreakdownRow extends StatelessWidget {
   final DataCategory category;
@@ -235,7 +235,7 @@ class _StorageBreakdownRow extends StatelessWidget {
             width: 28,
             height: 28,
             decoration: BoxDecoration(
-              color: category.color.withOpacity(0.1),
+              color: category.color.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(7),
             ),
             child: Icon(category.icon, size: 14, color: category.color),
@@ -261,7 +261,7 @@ class _StorageBreakdownRow extends StatelessWidget {
               borderRadius: BorderRadius.circular(3),
               child: LinearProgressIndicator(
                 value: total > 0 ? category.sizeMB / total : 0,
-                backgroundColor: category.color.withOpacity(0.1),
+                backgroundColor: category.color.withValues(alpha: 0.1),
                 valueColor: AlwaysStoppedAnimation(category.color),
                 minHeight: 4,
               ),
@@ -273,7 +273,7 @@ class _StorageBreakdownRow extends StatelessWidget {
   }
 }
 
-// ─── Backup Row ──────────────────────────────────────────────────────────────
+// â”€â”€â”€ Backup Row â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _BackupRow extends StatelessWidget {
   final DataBackup backup;
@@ -328,7 +328,7 @@ class _BackupRow extends StatelessWidget {
   }
 }
 
-// ─── Cache Row ───────────────────────────────────────────────────────────────
+// â”€â”€â”€ Cache Row â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _CacheRow extends StatelessWidget {
   final CacheInfo cache;
@@ -346,7 +346,7 @@ class _CacheRow extends StatelessWidget {
             child: Text(cache.category, style: const TextStyle(fontSize: 13, color: AppColors.textPrimary)),
           ),
           Text(
-            '${cache.sizeMB.toStringAsFixed(1)} MB · ${cache.itemCount} items',
+            '${cache.sizeMB.toStringAsFixed(1)} MB Â· ${cache.itemCount} items',
             style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
           ),
         ],
@@ -355,7 +355,7 @@ class _CacheRow extends StatelessWidget {
   }
 }
 
-// ─── Sync Row ────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Sync Row â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _SyncRow extends StatelessWidget {
   final SyncStatus sync;
@@ -371,7 +371,7 @@ class _SyncRow extends StatelessWidget {
             width: 32,
             height: 32,
             decoration: BoxDecoration(
-              color: _syncColor(sync.state).withOpacity(0.1),
+              color: _syncColor(sync.state).withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Icon(sync.icon, size: 16, color: _syncColor(sync.state)),

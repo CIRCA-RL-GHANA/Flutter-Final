@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SD1.1: PRODUCTS — Inventory Management
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD1.1: PRODUCTS â€” Inventory Management
 /// Grid/list view, search, filter by category/stock, product detail
 /// RBAC: Admin(full), BM(branch), Monitor/BrMon(view), RO/BRO(view)
-/// ═══════════════════════════════════════════════════════════════════════════
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -53,7 +53,7 @@ class ProductsScreen extends StatelessWidget {
             ),
             body: CustomScrollView(
             slivers: [
-              // ─── Summary Cards ────────────────────────────
+              // â”€â”€â”€ Summary Cards â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -89,7 +89,7 @@ class ProductsScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Search ───────────────────────────────────
+              // â”€â”€â”€ Search â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
@@ -125,7 +125,7 @@ class ProductsScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Product List ─────────────────────────────
+              // â”€â”€â”€ Product List â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               if (products.isEmpty) ...[
                 const SliverFillRemaining(
                   child: SetupEmptyState(
@@ -135,7 +135,7 @@ class ProductsScreen extends StatelessWidget {
                   ),
                 ),
               ] else if (setupProv.isGridView) ...[
-              // ─── AI Insights ─────────────────────────────────────────
+              // â”€â”€â”€ AI Insights â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
               SliverToBoxAdapter(
                 child: Consumer<AIInsightsNotifier>(
                   builder: (context, ai, _) {
@@ -144,7 +144,7 @@ class ProductsScreen extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: kSetupColor.withOpacity(0.07),
+                          color: kSetupColor.withValues(alpha: 0.07),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -201,7 +201,7 @@ class ProductsScreen extends StatelessWidget {
   }
 }
 
-// ─── Product Grid Card ───────────────────────────────────────────────────────
+// â”€â”€â”€ Product Grid Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _ProductGridCard extends StatelessWidget {
   final Product product;
@@ -222,7 +222,7 @@ class _ProductGridCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(14),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.04),
+              color: Colors.black.withValues(alpha: 0.04),
               blurRadius: 10,
               offset: const Offset(0, 2),
             ),
@@ -236,11 +236,11 @@ class _ProductGridCard extends StatelessWidget {
               height: 80,
               width: double.infinity,
               decoration: BoxDecoration(
-                color: kSetupColor.withOpacity(0.06),
+                color: kSetupColor.withValues(alpha: 0.06),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Center(
-                child: Icon(Icons.image, size: 32, color: kSetupColor.withOpacity(0.3)),
+                child: Icon(Icons.image, size: 32, color: kSetupColor.withValues(alpha: 0.3)),
               ),
             ),
             const SizedBox(height: 8),
@@ -260,7 +260,7 @@ class _ProductGridCard extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  '₵${product.currentPrice.toStringAsFixed(0)}',
+                  'â‚µ${product.currentPrice.toStringAsFixed(0)}',
                   style: const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w700,
@@ -270,7 +270,7 @@ class _ProductGridCard extends StatelessWidget {
                 if (product.hasDiscount) ...[
                   const SizedBox(width: 6),
                   Text(
-                    '₵${product.basePrice.toStringAsFixed(0)}',
+                    'â‚µ${product.basePrice.toStringAsFixed(0)}',
                     style: const TextStyle(
                       fontSize: 11,
                       color: AppColors.textTertiary,
@@ -307,7 +307,7 @@ class _ProductGridCard extends StatelessWidget {
   }
 }
 
-// ─── Product List Tile ───────────────────────────────────────────────────────
+// â”€â”€â”€ Product List Tile â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _ProductListTile extends StatelessWidget {
   final Product product;
@@ -328,7 +328,7 @@ class _ProductListTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(14),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -341,7 +341,7 @@ class _ProductListTile extends StatelessWidget {
             width: 56,
             height: 56,
             decoration: BoxDecoration(
-              color: kSetupColor.withOpacity(0.06),
+              color: kSetupColor.withValues(alpha: 0.06),
               borderRadius: BorderRadius.circular(10),
             ),
             child: const Icon(Icons.image, size: 24, color: kSetupColor),
@@ -362,14 +362,14 @@ class _ProductListTile extends StatelessWidget {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  '${product.category} · ${product.sku}',
+                  '${product.category} Â· ${product.sku}',
                   style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                 ),
                 const SizedBox(height: 4),
                 Row(
                   children: [
                     Text(
-                      '₵${product.currentPrice.toStringAsFixed(0)}',
+                      'â‚µ${product.currentPrice.toStringAsFixed(0)}',
                       style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w700,
@@ -390,7 +390,7 @@ class _ProductListTile extends StatelessWidget {
   }
 }
 
-// ─── Stock Badge ─────────────────────────────────────────────────────────────
+// â”€â”€â”€ Stock Badge â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 class _StockBadge extends StatelessWidget {
   final Product product;
@@ -419,7 +419,7 @@ class _StockBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(6),
       ),
       child: Text(

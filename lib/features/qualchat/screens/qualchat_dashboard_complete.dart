@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:dio/dio.dart';
 import '../models/qualchat_models.dart';
@@ -127,7 +127,7 @@ class _QualChatDashboardScreenState extends State<QualChatDashboardScreen> {
             builder: (context, ai, _) {
               if (ai.insights.isEmpty) return const SizedBox.shrink();
               return Container(
-                color: kChatColor.withOpacity(0.07),
+                color: kChatColor.withValues(alpha: 0.07),
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                 child: Row(children: [
                   const Icon(Icons.auto_awesome, size: 14, color: kChatColor),
@@ -228,7 +228,7 @@ class _ConversationTile extends StatelessWidget {
     return ListTile(
       onTap: onTap,
       leading: CircleAvatar(
-        backgroundColor: kChatColor.withOpacity(0.1),
+        backgroundColor: kChatColor.withValues(alpha: 0.1),
         child: Text(
           conversation.title[0].toUpperCase(),
           style: const TextStyle(
