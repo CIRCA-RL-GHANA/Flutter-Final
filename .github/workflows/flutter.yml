@@ -246,17 +246,39 @@ jobs:
           ! grep -q 'New version available! Reload to update' build/web/index.html || { echo "::error::Built index.html still has old confirm() prompt"; exit 1; }
           echo "Build size: $(du -sh build/web/ | cut -f1)"
 
-      - name: Bundle vercel.json with build output
+      - name: Bundle vercel.json with build output (static-only)
         run: |
-          cp vercel.json build/web/vercel.json
-          echo "vercel.json bundled into build/web for deploy"
+          # Strip build/framework fields so Vercel does NOT try to re-build
+          # the already-prebuilt directory (which caused infinite "Building…").
+          node -e "
+            const fs = require('fs');
+            const v = JSON.parse(fs.readFileSync('vercel.json','utf8'));
+            delete v.framework;
+            delete v.installCommand;
+            delete v.buildCommand;
+            delete v.outputDirectory;
+            delete v.devCommand;
+            delete v.ignoreCommand;
+            fs.writeFileSync('build/web/vercel.json', JSON.stringify(v, null, 2));
+          "
+          echo 'vercel.json bundled into build/web (build fields stripped)'
           head -40 build/web/vercel.json
 
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
 
       - name: Deploy to Vercel (production)
-        run: vercel deploy build/web --token=${{ secrets.VERCEL_TOKEN }} --prod --yes --force
+        timeout-minutes: 10
+        run: |
+          set -e
+          cd build/web
+          # Mark as a static, prebuilt deployment: tell Vercel there is no
+          # framework and no build command. The vercel.json here only carries
+          # headers + rewrites.
+          vercel deploy . \
+            --token="${{ secrets.VERCEL_TOKEN }}" \
+            --prod --yes --force \
+            --archive=tgz
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
