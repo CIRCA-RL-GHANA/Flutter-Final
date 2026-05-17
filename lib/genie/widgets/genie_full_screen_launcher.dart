@@ -8,22 +8,64 @@
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../core/design/ive.dart';
 import '../../core/routes/app_routes.dart';
 import '../../core/theme/app_colors.dart';
 import '../../features/prompt/models/rbac_models.dart';
+import '../../features/prompt/providers/context_provider.dart';
 import '../genie_intent.dart';
 import '../genie_rbac_enforcer.dart';
 import '../genie_tactile_actions.dart';
 
 class GenieFullScreenLauncher {
-  /// Launch the full-screen route for a module.
+  /// Launch the full-screen route for a module, gated by RBAC.
+  ///
+  /// If the current role lacks access to [module], the navigation is
+  /// suppressed and a polite denial snackbar is surfaced. Callers that
+  /// already know the role may use [launchForRole] directly.
   static void launch(BuildContext context, GenieModule module) {
+    final role = _resolveRole(context);
+    launchForRole(context, module, role);
+  }
+
+  /// Launch with an explicit role (used by callers that already have it).
+  static void launchForRole(
+      BuildContext context, GenieModule module, UserRole role) {
+    if (!GenieRBACEnforcer.canAccessModule(role, module)) {
+      _denyAccess(context, role, module);
+      return;
+    }
     GenieTactileActions.onNavigate();
     final route = _routeForModule(module);
     if (route != null) {
       Navigator.of(context).pushNamed(route);
     }
+  }
+
+  static UserRole _resolveRole(BuildContext context) {
+    try {
+      return context.read<ContextProvider>().currentRole;
+    } catch (_) {
+      return UserRole.none;
+    }
+  }
+
+  static void _denyAccess(
+      BuildContext context, UserRole role, GenieModule module) {
+    GenieTactileActions.onError();
+    final messenger = ScaffoldMessenger.maybeOf(context);
+    if (messenger == null) return;
+    final message =
+        GenieRBACEnforcer.getDenialMessage(role, module, 'open');
+    messenger.showSnackBar(
+      SnackBar(
+        content: Text(message),
+        behavior: SnackBarBehavior.floating,
+        duration: const Duration(seconds: 4),
+        backgroundColor: AppColors.textPrimary,
+      ),
+    );
   }
 
   /// Show the full-module-list bottom sheet, RBAC-filtered.
@@ -174,7 +216,8 @@ class _ModuleMenuSheet extends StatelessWidget {
                 color: m.$4,
                 onTap: () {
                   Navigator.pop(context);
-                  GenieFullScreenLauncher.launch(context, m.$1);
+                  GenieFullScreenLauncher.launchForRole(
+                      context, m.$1, role);
                 },
               );
             },

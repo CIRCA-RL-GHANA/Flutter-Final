@@ -96,6 +96,18 @@ class _GenieScreenState extends State<GenieScreen>
   }
 
   void _handleChipTap(GenieIntent intent) {
+    // RBAC pre-check: every navigation path (classic-dashboard, full-screen
+    // launch, or controller-routed intent) must honor the role's access
+    // matrix. executeIntent() also re-validates, giving us defense-in-depth.
+    final role = context.read<ContextProvider>().currentRole;
+    if (!GenieRBACEnforcer.canPerformAction(
+        role, intent.module, intent.action)) {
+      // Defer to controller — it posts a polite, role-aware denial bubble
+      // (full denial path lives in GenieController.executeIntent).
+      _controller.executeIntent(intent);
+      return;
+    }
+
     // Handle Genie-native intents that require navigation
     if (intent.module == GenieModule.genie &&
         intent.action == 'classic_dashboard') {
@@ -104,7 +116,7 @@ class _GenieScreenState extends State<GenieScreen>
     }
     // Modules requiring full-screen navigation
     if (intent.requiresFullScreen) {
-      GenieFullScreenLauncher.launch(context, intent.module);
+      GenieFullScreenLauncher.launchForRole(context, intent.module, role);
       return;
     }
     _controller.executeIntent(intent);
@@ -118,8 +130,10 @@ class _GenieScreenState extends State<GenieScreen>
     }
   }
 
+  // ignore: unused_element
   void _handleFullScreen(GenieModule module) {
-    GenieFullScreenLauncher.launch(context, module);
+    final role = context.read<ContextProvider>().currentRole;
+    GenieFullScreenLauncher.launchForRole(context, module, role);
   }
 
   void _handleSOS() {
