@@ -17,9 +17,9 @@
   "categories": ["finance", "social", "productivity", "utilities", "business", "shopping"],
   "icons": [
     {
-      "src": "icons/genie_help_icon.svg",
+      "src": "icons/genie_help_logo.png",
       "sizes": "any",
-      "type": "image/svg+xml",
+      "type": "image/png",
       "purpose": "any"
     },
     {

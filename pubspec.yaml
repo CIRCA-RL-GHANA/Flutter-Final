@@ -74,7 +74,9 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
-    # Brand logo (vector)
+    # Brand logo (real PNG)
+    - assets/images/genie_help_logo.png
+    # Legacy vector marks (kept for back-compat references)
     - assets/images/genie_help_icon.svg
     - assets/images/genie_help_icon_dark.svg
     # Individual icon references for PWA manifest

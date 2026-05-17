@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 /// Canonical brand colors for the genie help mark/wordmark.
@@ -83,16 +82,20 @@ class AppLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // [variant] retained for API back-compat; the real PNG logo is a single
+    // asset that renders correctly on both light and dark backgrounds.
     final useDark = _useDarkAsset(context);
-    final asset = useDark
-        ? 'assets/images/genie_help_icon_dark.svg'
-        : 'assets/images/genie_help_icon.svg';
 
-    final mark = SvgPicture.asset(
-      asset,
-      width: size,
-      height: size,
-      semanticsLabel: semanticsLabel ?? 'genie help logo',
+    final mark = Semantics(
+      label: semanticsLabel ?? 'genie help logo',
+      image: true,
+      child: Image.asset(
+        'assets/images/genie_help_logo.png',
+        width: size,
+        height: size,
+        fit: BoxFit.contain,
+        filterQuality: FilterQuality.high,
+      ),
     );
 
     if (!showWordmark) return mark;
