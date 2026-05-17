@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// LIVE MODULE â€” Screen 14: Return Pickup Verification
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// LIVE MODULE — Screen 14: Return Pickup Verification
 /// Driver verifies return pickup: item inspection, photo evidence,
 /// condition assessment, and pickup confirmation
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -119,9 +119,9 @@ class _LiveReturnPickupScreenState extends State<LiveReturnPickupScreen> {
                           iconColor: const Color(0xFF3B82F6),
                           child: Column(
                             children: [
-                              _ConditionOption(label: 'âœ… Good â€” Matches description', value: 'good', groupValue: _condition, onChanged: (v) => setState(() => _condition = v!)),
-                              _ConditionOption(label: 'âš ï¸ Fair â€” Minor discrepancies', value: 'fair', groupValue: _condition, onChanged: (v) => setState(() => _condition = v!)),
-                              _ConditionOption(label: 'âŒ Poor â€” Significant damage', value: 'poor', groupValue: _condition, onChanged: (v) => setState(() => _condition = v!)),
+                              _ConditionOption(label: 'âœ… Good — Matches description', value: 'good', groupValue: _condition, onChanged: (v) => setState(() => _condition = v!)),
+                              _ConditionOption(label: 'âš ï¸ Fair — Minor discrepancies', value: 'fair', groupValue: _condition, onChanged: (v) => setState(() => _condition = v!)),
+                              _ConditionOption(label: 'âŒ Poor — Significant damage', value: 'poor', groupValue: _condition, onChanged: (v) => setState(() => _condition = v!)),
                             ],
                           ),
                         ),

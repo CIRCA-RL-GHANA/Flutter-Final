@@ -1,4 +1,4 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// Screen 7: Notification Orchestrator
 /// Mode presets, per-module matrix, smart rules, quiet hours
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -52,7 +52,7 @@ class NotificationSettingsScreen extends StatelessWidget {
                   );
                 },
               ),
-              // â”€â”€â”€ Master Toggle â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Master Toggle ─────────────────────────────
               SectionCard(
                 child: SettingsToggle(
                   icon: Icons.notifications,
@@ -65,7 +65,7 @@ class NotificationSettingsScreen extends StatelessWidget {
               ),
 
               if (notif.globalEnabled) ...[
-                // â”€â”€â”€ Mode Presets â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                // ─── Mode Presets ──────────────────────────────
                 const SizedBox(height: 8),
                 const Text('Notification Mode', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textSecondary)),
                 const SizedBox(height: 10),
@@ -87,7 +87,7 @@ class NotificationSettingsScreen extends StatelessWidget {
                   ),
                 ),
 
-                // â”€â”€â”€ Per-Module Matrix â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                // ─── Per-Module Matrix ─────────────────────────
                 const SizedBox(height: 16),
                 SectionCard(
                   child: CollapsibleSection(
@@ -104,7 +104,7 @@ class NotificationSettingsScreen extends StatelessWidget {
                   ),
                 ),
 
-                // â”€â”€â”€ Quiet Hours â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                // ─── Quiet Hours ───────────────────────────────
                 SectionCard(
                   child: Column(
                     children: [
@@ -148,7 +148,7 @@ class NotificationSettingsScreen extends StatelessWidget {
                   ),
                 ),
 
-                // â”€â”€â”€ Smart Rules â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                // ─── Smart Rules ───────────────────────────────
                 SectionCard(
                   child: CollapsibleSection(
                     title: 'Smart Rules',
@@ -180,7 +180,7 @@ class NotificationSettingsScreen extends StatelessWidget {
                   ),
                 ),
 
-                // â”€â”€â”€ Preview â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                // ─── Preview ───────────────────────────────────
                 SectionCard(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

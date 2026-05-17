@@ -1,4 +1,4 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// Shared Widgets for Utility Module
 /// Reusable components: metric cards, section headers, utility tiles,
 /// filter chips, status indicators, info panels
@@ -8,12 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../core/theme/app_colors.dart';
 
-// â”€â”€â”€ Utility Module Color â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Utility Module Color ────────────────────────────────────────────────────
 
 /// The canonical module color for Utility (Slate)
 const Color kUtilityColor = Color(0xFF64748B);
 
-// â”€â”€â”€ Utility App Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Utility App Bar ─────────────────────────────────────────────────────────
 
 class UtilityAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -73,7 +73,7 @@ class UtilityAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-// â”€â”€â”€ Metric Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Metric Card ─────────────────────────────────────────────────────────────
 
 class MetricCard extends StatelessWidget {
   final String label;
@@ -162,7 +162,7 @@ class MetricCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Utility Section Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Utility Section Card ────────────────────────────────────────────────────
 
 class UtilitySectionCard extends StatelessWidget {
   final Widget child;
@@ -212,7 +212,7 @@ class UtilitySectionCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Section Title â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Section Title ───────────────────────────────────────────────────────────
 
 class UtilitySectionTitle extends StatelessWidget {
   final String title;
@@ -254,7 +254,7 @@ class UtilitySectionTitle extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Utility Action Tile â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Utility Action Tile ─────────────────────────────────────────────────────
 
 class UtilityActionTile extends StatelessWidget {
   final String label;
@@ -336,7 +336,7 @@ class UtilityActionTile extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Utility Toggle Tile â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Utility Toggle Tile ─────────────────────────────────────────────────────
 
 class UtilityToggleTile extends StatelessWidget {
   final String label;
@@ -410,7 +410,7 @@ class UtilityToggleTile extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Filter Chip Row â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Filter Chip Row ─────────────────────────────────────────────────────────
 
 class UtilityFilterChipRow extends StatelessWidget {
   final List<String> labels;
@@ -469,7 +469,7 @@ class UtilityFilterChipRow extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Status Indicator â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Status Indicator ────────────────────────────────────────────────────────
 
 class UtilityStatusIndicator extends StatelessWidget {
   final String label;
@@ -522,7 +522,7 @@ class UtilityStatusIndicator extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Empty State â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Empty State ─────────────────────────────────────────────────────────────
 
 class UtilityEmptyState extends StatelessWidget {
   final IconData icon;
@@ -591,7 +591,7 @@ class UtilityEmptyState extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Percentage Ring â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Percentage Ring ─────────────────────────────────────────────────────────
 
 class PercentageRing extends StatelessWidget {
   final double percentage;
@@ -639,7 +639,7 @@ class PercentageRing extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Quick Action Grid Item â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Quick Action Grid Item ──────────────────────────────────────────────────
 
 class QuickActionGridItem extends StatelessWidget {
   final String label;

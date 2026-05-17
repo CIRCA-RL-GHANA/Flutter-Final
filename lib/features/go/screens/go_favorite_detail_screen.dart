@@ -1,4 +1,4 @@
-﻿/// GO Screen 8 â€” Favorite Detail
+/// GO Screen 8 — Favorite Detail
 /// Entity passport, relationship dashboard, financial relationship,
 /// communication hub, transaction tools, relationship management
 
@@ -53,22 +53,22 @@ class GoFavoriteDetailScreen extends StatelessWidget {
                   );
                 },
               ),
-              // 1 â€” Entity passport
+              // 1 — Entity passport
               _buildPassport(fav),
               const SizedBox(height: 14),
-              // 2 â€” Relationship dashboard
+              // 2 — Relationship dashboard
               _buildRelationship(fav),
               const SizedBox(height: 14),
-              // 3 â€” Quick actions
+              // 3 — Quick actions
               _buildQuickActions(context),
               const SizedBox(height: 14),
-              // 4 â€” Transaction history
+              // 4 — Transaction history
               _buildTransactionHistory(fav),
               const SizedBox(height: 14),
-              // 5 â€” Notes / Context
+              // 5 — Notes / Context
               _buildNotes(fav),
               const SizedBox(height: 14),
-              // 6 â€” Admin tools
+              // 6 — Admin tools
               _buildAdminTools(context, fav),
               const SizedBox(height: 80),
             ],

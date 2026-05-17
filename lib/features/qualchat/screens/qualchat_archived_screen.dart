@@ -1,4 +1,4 @@
-﻿/// qualChat Screen 9 â€” Archived Chats
+/// qualChat Screen 9 — Archived Chats
 /// Archive management: search, filter/sort, preview/restore/delete, storage
 
 import 'package:flutter/material.dart';

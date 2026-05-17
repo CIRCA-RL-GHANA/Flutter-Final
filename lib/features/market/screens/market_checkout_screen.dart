@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// MARKET MODULE â€” Screen 6: Order Summary & Payment
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// MARKET MODULE — Screen 6: Order Summary & Payment
 /// Progress indicator, payment method selection, order review, terms
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
@@ -120,7 +120,7 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
     );
   }
 
-  // â”€â”€ Step 1: Review â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Step 1: Review ───────────────────────────────────────────────
   Widget _buildReviewStep(MarketProvider prov, CartSummary? summary) {
     return ListView(
       padding: const EdgeInsets.all(16),
@@ -227,7 +227,7 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
     );
   }
 
-  // â”€â”€ Step 2: Payment â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Step 2: Payment ──────────────────────────────────────────────
   Widget _buildPaymentStep(MarketProvider prov) {
     _selectedPaymentId ??= prov.defaultPaymentMethod.id;
     return ListView(
@@ -251,7 +251,7 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
                   const SizedBox(width: 8),
                   const Expanded(
                     child: Text(
-                      'AI fraud protection active â€” your payment is being monitored',
+                      'AI fraud protection active — your payment is being monitored',
                       style: TextStyle(fontSize: 12, color: Color(0xFF10B981), fontWeight: FontWeight.w500),
                     ),
                   ),
@@ -352,7 +352,7 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
     );
   }
 
-  // â”€â”€ Step 3: Confirm â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Step 3: Confirm ──────────────────────────────────────────────
   Widget _buildConfirmStep(MarketProvider prov, CartSummary? summary) {
     final selectedPayment = prov.paymentMethods
         .where((m) => m.id == _selectedPaymentId)

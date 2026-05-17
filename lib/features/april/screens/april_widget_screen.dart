@@ -1,4 +1,4 @@
-﻿/// APRIL Screen 0 â€” PROMPT Screen Integration (APRIL Widget)
+/// APRIL Screen 0 — PROMPT Screen Integration (APRIL Widget)
 /// Voice activation, quick actions, pending actions, plugin status
 
 import 'package:flutter/material.dart';
@@ -51,7 +51,7 @@ class AprilWidgetScreen extends StatelessWidget {
                   );
                 },
               ),
-              // â”€â”€â”€â”€ VOICE ACTIVATION PANEL â”€â”€â”€â”€
+              // ──── VOICE ACTIVATION PANEL ────
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
                 child: Row(
@@ -94,7 +94,7 @@ class AprilWidgetScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€â”€ QUICK ACTIONS BAR â”€â”€â”€â”€
+              // ──── QUICK ACTIONS BAR ────
               SizedBox(
                 height: 40,
                 child: ListView(
@@ -127,7 +127,7 @@ class AprilWidgetScreen extends StatelessWidget {
 
               const Divider(height: 20, indent: 16, endIndent: 16),
 
-              // â”€â”€â”€â”€ PENDING ACTIONS â”€â”€â”€â”€
+              // ──── PENDING ACTIONS ────
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
@@ -178,7 +178,7 @@ class AprilWidgetScreen extends StatelessWidget {
 
               const SizedBox(height: 12),
 
-              // â”€â”€â”€â”€ PLUGIN STATUS INDICATORS â”€â”€â”€â”€
+              // ──── PLUGIN STATUS INDICATORS ────
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
                 child: Row(

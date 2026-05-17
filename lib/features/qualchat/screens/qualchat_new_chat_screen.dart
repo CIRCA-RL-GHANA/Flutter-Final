@@ -1,4 +1,4 @@
-﻿/// qualChat Screen 7 â€” New Chat (Enhanced)
+/// qualChat Screen 7 — New Chat (Enhanced)
 /// Intelligent recipient selection: individual + group creation
 
 import 'package:flutter/material.dart';
@@ -385,7 +385,7 @@ class _SelectedRecipientCard extends StatelessWidget {
               PresenceDot(status: user.presence),
               const SizedBox(width: 6),
               Text(
-                '${user.presence.name[0].toUpperCase()}${user.presence.name.substring(1)} â€¢ ${user.role}',
+                '${user.presence.name[0].toUpperCase()}${user.presence.name.substring(1)} • ${user.role}',
                 style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
               ),
             ],

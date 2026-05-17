@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD1.1-DETAIL: PRODUCT DETAIL â€” 5-Tab Deep View
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD1.1-DETAIL: PRODUCT DETAIL — 5-Tab Deep View
 /// Tabs: Overview, Inventory, Pricing, Media, Analytics
 /// RBAC: Owner/Admin(fullAccess), BM(branchScoped), Monitor(viewOnly),
 ///        Driver(viewOnly), Others(hidden)
@@ -46,7 +46,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           appBar: SetupAppBar(title: product.name),
           body: Column(
             children: [
-              // â”€â”€â”€ Product Header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Product Header ────────────────────────────
               _ProductHeader(product: product),
               const SizedBox(height: 12),              Consumer<AIInsightsNotifier>(
                 builder: (context, ai, _) {
@@ -69,14 +69,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     ),
                   );
                 },
-              ),              // â”€â”€â”€ Tab Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              ),              // ─── Tab Bar ──────────────────────────────────
               SetupDetailTabBar(
                 tabs: _tabs,
                 selectedIndex: _tabIndex,
                 onTabChanged: (i) => setState(() => _tabIndex = i),
               ),
               const SizedBox(height: 12),
-              // â”€â”€â”€ Tab Content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Tab Content ──────────────────────────────
               Expanded(
                 child: IndexedStack(
                   index: _tabIndex,
@@ -97,7 +97,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   }
 }
 
-// â”€â”€â”€ Product Header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Product Header ──────────────────────────────────────────────────────────
 
 class _ProductHeader extends StatelessWidget {
   final Product product;
@@ -217,7 +217,7 @@ class _StockBadge extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Overview Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Overview Tab ────────────────────────────────────────────────────────────
 
 class _OverviewTab extends StatelessWidget {
   final Product product;
@@ -296,7 +296,7 @@ class _OverviewTab extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Inventory Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Inventory Tab ───────────────────────────────────────────────────────────
 
 class _InventoryTab extends StatelessWidget {
   final Product product;
@@ -371,7 +371,7 @@ class _InventoryTab extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Pricing Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Pricing Tab ─────────────────────────────────────────────────────────────
 
 class _PricingTab extends StatelessWidget {
   final Product product;
@@ -482,7 +482,7 @@ class _PriceHistoryRow extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Media Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Media Tab ───────────────────────────────────────────────────────────────
 
 class _MediaTab extends StatelessWidget {
   final Product product;
@@ -553,7 +553,7 @@ class _MediaTab extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Analytics Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Analytics Tab ───────────────────────────────────────────────────────────
 
 class _AnalyticsTab extends StatelessWidget {
   final Product product;

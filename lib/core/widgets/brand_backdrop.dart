@@ -1,4 +1,4 @@
-﻿import 'dart:math' as math;
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import '../theme/brand.dart';
@@ -17,7 +17,7 @@ class BrandBackdrop extends StatefulWidget {
 
   final Widget? child;
 
-  /// 0..1 â€” scales bloom opacity. Use lower values behind content-heavy screens.
+  /// 0..1 — scales bloom opacity. Use lower values behind content-heavy screens.
   final double intensity;
 
   @override
@@ -85,7 +85,7 @@ class _BloomPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final tau = 2 * math.pi;
 
-    // Cyan bloom â€” orbits the upper-left.
+    // Cyan bloom — orbits the upper-left.
     final cx = size.width * (0.25 + 0.12 * math.cos(t * tau));
     final cy = size.height * (0.22 + 0.08 * math.sin(t * tau));
     final cyanR = size.shortestSide * 0.55;
@@ -98,7 +98,7 @@ class _BloomPainter extends CustomPainter {
       ).createShader(Rect.fromCircle(center: Offset(cx, cy), radius: cyanR));
     canvas.drawCircle(Offset(cx, cy), cyanR, cyanPaint);
 
-    // Gold bloom â€” orbits the lower-right, offset phase.
+    // Gold bloom — orbits the lower-right, offset phase.
     final gx = size.width * (0.78 + 0.10 * math.cos(t * tau + math.pi));
     final gy = size.height * (0.80 + 0.10 * math.sin(t * tau + math.pi / 2));
     final goldR = size.shortestSide * 0.5;

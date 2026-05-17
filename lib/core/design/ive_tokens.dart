@@ -93,7 +93,42 @@ class IveTokens {
   static const EdgeInsets pagePaddingTight =
       EdgeInsets.symmetric(horizontal: s4, vertical: s3);
 
+  // ─── Responsive content width ─────────────────────────────────────────
+  /// Maximum readable content width on tablet / desktop / PWA. Beyond this,
+  /// content should be centered, never stretched. A single column of prose
+  /// or a focused dashboard reads best at ≤ 760 px.
+  static const double maxContentWidth = 760;
+
   // ─── Hairline border helpers ──────────────────────────────────────────
   static const BorderSide hairlineSide = BorderSide(color: hairline, width: 1);
   static Border get cardBorder => Border.all(color: hairline, width: 1);
+
+  // ─── Module accent palette (single source of truth) ───────────────────
+  /// One restrained accent per top-level module. Use this instead of
+  /// inline hex values anywhere a module needs to be visually distinguished
+  /// (cards, badges, accents). Order is intentional: golden = action,
+  /// blue = information, green = motion, indigo = system.
+  static const Color moduleGo      = Color(0xFFFFD27A); // golden — action
+  static const Color moduleMarket  = Color(0xFF6FA8FF); // blue   — information
+  static const Color moduleLive    = Color(0xFF34D399); // green  — motion
+  static const Color moduleUpdates = Color(0xFFB591FF); // violet — narrative
+  static const Color moduleAlerts  = Color(0xFFFBBF24); // amber  — attention
+  static const Color moduleUser    = Color(0xFF22D3EE); // cyan   — self
+  static const Color moduleSetup   = Color(0xFF818CF8); // indigo — configuration
+  static const Color moduleUtility = Color(0xFF8B5CF6); // purple — tooling
+
+  static const Map<String, Color> moduleColors = {
+    'go':      moduleGo,
+    'goPage':  moduleGo,
+    'market':  moduleMarket,
+    'live':    moduleLive,
+    'updates': moduleUpdates,
+    'myUpdates': moduleUpdates,
+    'alerts':  moduleAlerts,
+    'user':    moduleUser,
+    'userDetails': moduleUser,
+    'setup':   moduleSetup,
+    'setupDashboard': moduleSetup,
+    'utility': moduleUtility,
+  };
 }

@@ -1,4 +1,4 @@
-﻿/// qualChat Screen 13 â€” Settings
+/// qualChat Screen 13 — Settings
 /// Centralized config: notifications, privacy, media, appearance, accessibility, advanced
 
 import 'package:flutter/material.dart';
@@ -46,7 +46,7 @@ class QualChatSettingsScreen extends StatelessWidget {
                   );
                 },
               ),
-              // â”€â”€â”€â”€ NOTIFICATIONS â”€â”€â”€â”€
+              // ──── NOTIFICATIONS ────
               _SettingsSection(
                 icon: Icons.notifications,
                 title: 'Notifications',
@@ -92,7 +92,7 @@ class QualChatSettingsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // â”€â”€â”€â”€ PRIVACY â”€â”€â”€â”€
+              // ──── PRIVACY ────
               _SettingsSection(
                 icon: Icons.shield,
                 title: 'Privacy',
@@ -132,7 +132,7 @@ class QualChatSettingsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // â”€â”€â”€â”€ MEDIA â”€â”€â”€â”€
+              // ──── MEDIA ────
               _SettingsSection(
                 icon: Icons.photo_library,
                 title: 'Media & Storage',
@@ -170,7 +170,7 @@ class QualChatSettingsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // â”€â”€â”€â”€ APPEARANCE â”€â”€â”€â”€
+              // ──── APPEARANCE ────
               _SettingsSection(
                 icon: Icons.palette,
                 title: 'Appearance',
@@ -275,7 +275,7 @@ class QualChatSettingsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // â”€â”€â”€â”€ ACCESSIBILITY â”€â”€â”€â”€
+              // ──── ACCESSIBILITY ────
               _SettingsSection(
                 icon: Icons.accessibility,
                 title: 'Accessibility',
@@ -303,7 +303,7 @@ class QualChatSettingsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // â”€â”€â”€â”€ ADVANCED â”€â”€â”€â”€
+              // ──── ADVANCED ────
               _SettingsSection(
                 icon: Icons.settings,
                 title: 'Advanced',

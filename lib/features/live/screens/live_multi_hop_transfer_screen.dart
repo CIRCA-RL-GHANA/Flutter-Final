@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// LIVE MODULE â€” Screen 15: Multi-Hop Transfer Flow
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// LIVE MODULE — Screen 15: Multi-Hop Transfer Flow
 /// Package hand-off between drivers: scan verification,
 /// condition check, chain-of-custody log, transfer confirmation
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -516,7 +516,7 @@ class _CustodyEntry extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(name, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-                Text('$time â€” $action', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                Text('$time — $action', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
               ],
             ),
           ),

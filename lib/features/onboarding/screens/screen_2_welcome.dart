@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/design/ive.dart';
 import '../../../core/routes/app_routes.dart';
@@ -18,7 +18,7 @@ class WelcomeScreen extends StatefulWidget {
   State<WelcomeScreen> createState() => _WelcomeScreenState();
 }
 
-// â”€â”€ OS palette (mirrors splash) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── OS palette (mirrors splash) ───────────────────────────────────────────────
 const Color _kBg        = IveTokens.bg;
 const Color _kSurface   = IveTokens.surface;
 const Color _kBorder    = IveTokens.hairline;
@@ -84,7 +84,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // â”€â”€ System header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                  // ── System header ─────────────────────────────────────
                   Padding(
                     padding: const EdgeInsets.fromLTRB(24, 28, 24, 0),
                     child: Row(
@@ -146,12 +146,12 @@ class _WelcomeScreenState extends State<WelcomeScreen>
 
                   const SizedBox(height: 32),
 
-                  // â”€â”€ Divider â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                  // ── Divider ────────────────────────────────────────────
                   Container(height: 1, color: _kBorder),
 
                   const SizedBox(height: 28),
 
-                  // â”€â”€ Descriptor â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                  // ── Descriptor ────────────────────────────────────────
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24),
                     child: Column(
@@ -181,7 +181,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
 
                   const SizedBox(height: 28),
 
-                  // â”€â”€ Module manifest grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                  // ── Module manifest grid ───────────────────────────────
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -189,7 +189,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     ),
                   ),
 
-                  // â”€â”€ Platform Overview link â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                  // ── Platform Overview link ────────────────────────────
                   Padding(
                     padding: const EdgeInsets.fromLTRB(24, 4, 24, 0),
                     child: Semantics(
@@ -243,7 +243,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     ),
                   ),
 
-                  // â”€â”€ Actions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                  // ── Actions ───────────────────────────────────────────
                   Padding(
                     padding: const EdgeInsets.fromLTRB(24, 12, 24, 8),
                     child: Semantics(
@@ -304,8 +304,8 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   }
 }
 
-// â”€â”€â”€ Module manifest grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-// Shows the installed modules of the OS â€” commerce, payments, logistics, etc.
+// ─── Module manifest grid ─────────────────────────────────────────────────────
+// Shows the installed modules of the OS — commerce, payments, logistics, etc.
 
 class _Module {
   final String code;
@@ -404,7 +404,7 @@ class _ModuleCard extends StatelessWidget {
               ],
             ),
           ),
-          // Status dot â€” online
+          // Status dot — online
           Container(
             width: 5,
             height: 5,
@@ -419,7 +419,7 @@ class _ModuleCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ OS primary button â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── OS primary button ────────────────────────────────────────────────────────
 class _OsButton extends StatelessWidget {
   final String label;
   final VoidCallback onTap;
@@ -429,7 +429,7 @@ class _OsButton extends StatelessWidget {
   Widget build(BuildContext context) => IveButton.primary(label: label, onPressed: onTap);
 }
 
-// â”€â”€â”€ Mini brand mark (consistent with splash) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Mini brand mark (consistent with splash) ────────────────────────────────
 class _MiniHexMark extends StatelessWidget {
   const _MiniHexMark();
 

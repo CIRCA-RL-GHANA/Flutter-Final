@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SCREEN 7 / 7A â€” Options Menu + Report Flow
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SCREEN 7 / 7A — Options Menu + Report Flow
 /// Bottom sheet options menu (save, copy link, mute, follow, report).
 /// Report flow: 4-step wizard (reason, details, evidence, submit).
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -269,7 +269,7 @@ class _Body extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Option Tile â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Option Tile ────────────────────────────────────────────────────────────
 
 class _OptionTile extends StatelessWidget {
   final IconData icon;
@@ -297,7 +297,7 @@ class _OptionTile extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Screen 7A: Report Flow â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Screen 7A: Report Flow ─────────────────────────────────────────────────
 
 class _ReportFlow extends StatefulWidget {
   const _ReportFlow();
@@ -447,7 +447,7 @@ class _ReportFlowState extends State<_ReportFlow> {
   }
 }
 
-// â”€â”€â”€ Report Steps â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Report Steps ───────────────────────────────────────────────────────────
 
 class _StepReason extends StatelessWidget {
   final ReportReason? selectedReason;
@@ -526,7 +526,7 @@ class _StepDetails extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 8),
-        const Text('Optional â€” but helpful for our review team.', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+        const Text('Optional — but helpful for our review team.', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
       ],
     );
   }

@@ -1,4 +1,4 @@
-﻿/// GO Screen 15 â€” Archive & History
+/// GO Screen 15 — Archive & History
 /// Transaction archive, historical analysis, compliance storage
 
 import 'package:flutter/material.dart';

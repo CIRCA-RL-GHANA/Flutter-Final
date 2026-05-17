@@ -1,4 +1,4 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// Screen 6: Privacy Control Center
 /// Data map visualization, control toggles, transparency panel
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -53,12 +53,12 @@ class PrivacyCenterScreen extends StatelessWidget {
                   );
                 },
               ),
-              // â”€â”€â”€ Privacy Score â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Privacy Score ──────────────────────────────
               _PrivacyScoreCard(score: privacy.privacyScore),
 
               const SizedBox(height: 16),
 
-              // â”€â”€â”€ Data Map â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Data Map ──────────────────────────────────
               SectionCard(
                 child: CollapsibleSection(
                   title: 'Your Data Map',
@@ -68,7 +68,7 @@ class PrivacyCenterScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Profile Visibility â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Profile Visibility ────────────────────────
               SectionCard(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,7 +92,7 @@ class PrivacyCenterScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Data Sharing â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Data Sharing ──────────────────────────────
               SectionCard(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,7 +112,7 @@ class PrivacyCenterScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Location Tracking â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Location Tracking ─────────────────────────
               SectionCard(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -136,7 +136,7 @@ class PrivacyCenterScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Toggles â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Toggles ──────────────────────────────────
               SectionCard(
                 child: Column(
                   children: [
@@ -161,7 +161,7 @@ class PrivacyCenterScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Data Export â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Data Export ────────────────────────────────
               SectionCard(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -203,7 +203,7 @@ class PrivacyCenterScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Account Deletion â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Account Deletion ──────────────────────────
               SectionCard(
                 borderColor: const Color(0xFFEF4444).withValues(alpha: 0.15),
                 child: Column(

@@ -1,4 +1,4 @@
-﻿/// GO Screen 4 â€” My Tabs
+/// GO Screen 4 — My Tabs
 /// Credit health dashboard, filter bar, accordion tab cards,
 /// bulk operations, analytics panel
 

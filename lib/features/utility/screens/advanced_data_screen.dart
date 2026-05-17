@@ -1,4 +1,4 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// U7: ADVANCED DATA TOOLS Screen
 /// Storage analytics, backup management, cache control, sync status
 /// RBAC: Owner, Administrator, BranchManager only
@@ -50,7 +50,7 @@ class AdvancedDataScreen extends StatelessWidget {
                   );
                 },
               ),
-              // â”€â”€â”€ Storage Overview â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Storage Overview ─────────────────────────
               const UtilitySectionTitle(
                 title: 'Storage Overview',
                 icon: Icons.sd_storage,
@@ -98,7 +98,7 @@ class AdvancedDataScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Backup Management â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Backup Management ────────────────────────
               const UtilitySectionTitle(
                 title: 'Backups',
                 icon: Icons.backup,
@@ -141,7 +141,7 @@ class AdvancedDataScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Cache Management â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Cache Management ─────────────────────────
               const UtilitySectionTitle(
                 title: 'Cache',
                 icon: Icons.cached,
@@ -190,7 +190,7 @@ class AdvancedDataScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Sync Status â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Sync Status ──────────────────────────────
               const UtilitySectionTitle(
                 title: 'Sync Status',
                 icon: Icons.sync,
@@ -217,7 +217,7 @@ class AdvancedDataScreen extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Storage Breakdown Row â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Storage Breakdown Row ───────────────────────────────────────────────────
 
 class _StorageBreakdownRow extends StatelessWidget {
   final DataCategory category;
@@ -273,7 +273,7 @@ class _StorageBreakdownRow extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Backup Row â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Backup Row ──────────────────────────────────────────────────────────────
 
 class _BackupRow extends StatelessWidget {
   final DataBackup backup;
@@ -328,7 +328,7 @@ class _BackupRow extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Cache Row â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Cache Row ───────────────────────────────────────────────────────────────
 
 class _CacheRow extends StatelessWidget {
   final CacheInfo cache;
@@ -355,7 +355,7 @@ class _CacheRow extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Sync Row â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Sync Row ────────────────────────────────────────────────────────────────
 
 class _SyncRow extends StatelessWidget {
   final SyncStatus sync;

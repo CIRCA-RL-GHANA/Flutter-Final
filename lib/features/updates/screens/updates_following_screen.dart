@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SCREEN 11 â€” Following Management
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SCREEN 11 — Following Management
 /// Categories: Entities, People, Topics, Lists. Bulk actions,
 /// mute/unmute, priority, following analytics.
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -218,7 +218,7 @@ class _BodyState extends State<_Body> with SingleTickerProviderStateMixin {
   }
 }
 
-// â”€â”€â”€ Following List â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Following List ─────────────────────────────────────────────────────────
 
 class _FollowingList extends StatelessWidget {
   final List<FollowedEntity> items;
@@ -321,7 +321,7 @@ class _FollowingList extends StatelessWidget {
                     Row(
                       children: [
                         Text('${entity.followerCount} followers', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
-                        const Text(' â€¢ ', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                        const Text(' • ', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                         Text(entity.updateFrequency, style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                       ],
                     ),
@@ -413,7 +413,7 @@ class _FollowingList extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Lists View â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Lists View ─────────────────────────────────────────────────────────────
 
 class _ListsView extends StatelessWidget {
   final List<FollowingList> lists;

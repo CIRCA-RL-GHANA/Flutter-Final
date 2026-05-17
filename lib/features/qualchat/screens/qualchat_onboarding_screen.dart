@@ -1,4 +1,4 @@
-﻿/// qualChat Screen 14 â€” Onboarding Flow
+/// qualChat Screen 14 — Onboarding Flow
 /// 4-step flow: Welcome & Permissions â†’ Role Config â†’ Profile Setup â†’ Quick Tour
 
 import 'package:flutter/material.dart';
@@ -87,7 +87,7 @@ class QualChatOnboardingScreen extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€â”€ Step 0: Welcome & Permissions â”€â”€â”€â”€
+// ──── Step 0: Welcome & Permissions ────
 class _WelcomeStep extends StatelessWidget {
   const _WelcomeStep({super.key});
 
@@ -201,7 +201,7 @@ class _PermissionItem extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€â”€ Step 1: Role Configuration â”€â”€â”€â”€
+// ──── Step 1: Role Configuration ────
 class _RoleConfigStep extends StatelessWidget {
   final QualChatProvider provider;
   const _RoleConfigStep({super.key, required this.provider});
@@ -288,7 +288,7 @@ class _RoleConfigStep extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€â”€ Step 2: Profile Setup â”€â”€â”€â”€
+// ──── Step 2: Profile Setup ────
 class _ProfileSetupStep extends StatelessWidget {
   final QualChatProvider provider;
   const _ProfileSetupStep({super.key, required this.provider});
@@ -301,7 +301,7 @@ class _ProfileSetupStep extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            'Set up your profile âœ¨',
+            'Set up your profile ✨',
             style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: Color(0xFF1A1A1A)),
           ),
           const SizedBox(height: 8),
@@ -446,7 +446,7 @@ class _ProfileSetupStep extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€â”€ Step 3: Quick Tour â”€â”€â”€â”€
+// ──── Step 3: Quick Tour ────
 class _QuickTourStep extends StatelessWidget {
   const _QuickTourStep({super.key});
 

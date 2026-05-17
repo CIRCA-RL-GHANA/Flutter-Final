@@ -1,4 +1,4 @@
-﻿import 'dart:math';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import '../../../core/design/ive.dart';
 import 'package:provider/provider.dart';
@@ -135,7 +135,7 @@ class _SuccessScreenState extends State<SuccessScreen>
     return Scaffold(
       body: Stack(
         children: [
-          // Background gradient â€” brand dark with cyan glow ceiling
+          // Background gradient — brand dark with cyan glow ceiling
           Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(

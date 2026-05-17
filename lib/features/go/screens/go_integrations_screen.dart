@@ -1,4 +1,4 @@
-﻿/// GO Screen 14 â€” Integrations Hub
+/// GO Screen 14 — Integrations Hub
 /// Accounting, banking, business, custom integrations
 
 import 'package:flutter/material.dart';
@@ -113,7 +113,7 @@ class _GoIntegrationsScreenState extends State<GoIntegrationsScreen> with Single
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(color: const Color(0xFFF3F4F6), borderRadius: BorderRadius.circular(8)),
           child: Row(children: [
-            const Expanded(child: Text('API Key: â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢a7f3', style: TextStyle(fontSize: 12, fontFamily: 'monospace'))),
+            const Expanded(child: Text('API Key: ••••••••••••a7f3', style: TextStyle(fontSize: 12, fontFamily: 'monospace'))),
             IconButton(icon: const Icon(Icons.copy, size: 16, color: kGoColor), onPressed: () {}),
           ]),
         ),

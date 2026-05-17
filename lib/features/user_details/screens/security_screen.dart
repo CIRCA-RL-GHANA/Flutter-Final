@@ -1,4 +1,4 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// Screen 5: Security Deep Dive
 /// 4 tabs: Auth Methods, Devices & Sessions, Emergency, Advanced
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -403,7 +403,7 @@ class _SessionCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    '${session.os} â€¢ ${session.location}',
+                    '${session.os} • ${session.location}',
                     style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                   ),
                 ],
@@ -450,7 +450,7 @@ class _SecurityEventCard extends StatelessWidget {
                 Text(event.description, style: const TextStyle(fontSize: 13, color: AppColors.textPrimary)),
                 if (event.deviceName != null || event.location != null)
                   Text(
-                    [event.deviceName, event.location].whereType<String>().join(' â€¢ '),
+                    [event.deviceName, event.location].whereType<String>().join(' • '),
                     style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                   ),
               ],
@@ -507,7 +507,7 @@ class _EmergencyTab extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(ec.name, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textPrimary)),
-                          Text('${ec.relationship} â€¢ ${ec.phone}', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                          Text('${ec.relationship} • ${ec.phone}', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                         ],
                       ),
                     ),

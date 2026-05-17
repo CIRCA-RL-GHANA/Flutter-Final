@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// LIVE MODULE â€” Shared Widgets
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// LIVE MODULE — Shared Widgets
 /// Reusable UI components: LiveAppBar, LiveOrderCard, LivePackageCard,
 /// LiveReturnCard, LiveDriverCard, LiveMetricBadge, LiveTimeline,
 /// LiveVerificationWidget, LiveSectionCard, LiveEmptyState, etc.
@@ -10,15 +10,15 @@ import 'package:flutter/services.dart';
 import '../../../core/theme/app_colors.dart';
 import '../models/live_models.dart';
 
-// â”€â”€â”€ LIVE Module Color â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── LIVE Module Color ───────────────────────────────────────────────────────
 
-/// The canonical module color for LIVE (Vibrant Red-Orange â€” Operations)
+/// The canonical module color for LIVE (Vibrant Red-Orange — Operations)
 const Color kLiveColor = Color(0xFFEF4444);
 const Color kLiveColorLight = Color(0xFFFEE2E2);
 const Color kLiveColorDark = Color(0xFF991B1B);
 const Color kLiveAccent = Color(0xFFF97316);
 
-// â”€â”€â”€ Live App Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Live App Bar ────────────────────────────────────────────────────────────
 
 class LiveAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -87,7 +87,7 @@ class LiveAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-// â”€â”€â”€ Live Order Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Live Order Card ─────────────────────────────────────────────────────────
 
 class LiveOrderCard extends StatelessWidget {
   final LiveOrder order;
@@ -334,7 +334,7 @@ class LiveOrderCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Live Package Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Live Package Card ───────────────────────────────────────────────────────
 
 class LivePackageCard extends StatelessWidget {
   final LivePackage package;
@@ -518,7 +518,7 @@ class LivePackageCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Live Return Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Live Return Card ────────────────────────────────────────────────────────
 
 class LiveReturnCard extends StatelessWidget {
   final LiveReturn ret;
@@ -593,7 +593,7 @@ class LiveReturnCard extends StatelessWidget {
                 children: [
                   Icon(Icons.shopping_bag_outlined, size: 16, color: AppColors.textSecondary),
                   const SizedBox(width: 4),
-                  Text('${ret.itemName} â€¢ â‚µ${ret.itemPrice.toStringAsFixed(0)}', style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+                  Text('${ret.itemName} • â‚µ${ret.itemPrice.toStringAsFixed(0)}', style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
                 ],
               ),
               const SizedBox(height: 4),
@@ -604,7 +604,7 @@ class LiveReturnCard extends StatelessWidget {
                   const SizedBox(width: 4),
                   Expanded(
                     child: Text(
-                      '${ret.reason}${ret.reasonDetail != null ? " â€¢ \"${ret.reasonDetail}\"" : ""}',
+                      '${ret.reason}${ret.reasonDetail != null ? " • \"${ret.reasonDetail}\"" : ""}',
                       style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -646,7 +646,7 @@ class LiveReturnCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Text(
-                    'Reviewer: ${ret.reviewerName} â€¢ Started ${ret.reviewStartedAt != null ? "${DateTime.now().difference(ret.reviewStartedAt!).inMinutes}min ago" : ""}',
+                    'Reviewer: ${ret.reviewerName} • Started ${ret.reviewStartedAt != null ? "${DateTime.now().difference(ret.reviewStartedAt!).inMinutes}min ago" : ""}',
                     style: const TextStyle(fontSize: 11, color: Color(0xFF92400E)),
                   ),
                 ),
@@ -709,7 +709,7 @@ class LiveReturnCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Live Driver Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Live Driver Card ────────────────────────────────────────────────────────
 
 class LiveDriverCard extends StatelessWidget {
   final LiveDriver driver;
@@ -794,7 +794,7 @@ class LiveDriverCard extends StatelessWidget {
                         children: [
                           Icon(Icons.star, size: 14, color: const Color(0xFFF59E0B)),
                           Text(' ${driver.rating} ', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
-                          Text('â€¢ ${driver.distanceMiles}mi away', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                          Text('• ${driver.distanceMiles}mi away', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                         ],
                       ),
                     ],
@@ -865,7 +865,7 @@ class LiveDriverCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Live Metric Badge â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Live Metric Badge ───────────────────────────────────────────────────────
 
 class LiveMetricBadge extends StatelessWidget {
   final String label;
@@ -915,7 +915,7 @@ class LiveMetricBadge extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Live Timeline Widget â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Live Timeline Widget ────────────────────────────────────────────────────
 
 class LiveTimelineWidget extends StatelessWidget {
   final List<OrderTimelineEntry> entries;
@@ -1014,7 +1014,7 @@ class LiveTimelineWidget extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Live Section Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Live Section Card ───────────────────────────────────────────────────────
 
 class LiveSectionCard extends StatelessWidget {
   final String title;
@@ -1079,7 +1079,7 @@ class LiveSectionCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Live Empty State â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Live Empty State ────────────────────────────────────────────────────────
 
 class LiveEmptyState extends StatelessWidget {
   final IconData icon;
@@ -1179,7 +1179,7 @@ class LiveEmptyState extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Verification PIN Display â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Verification PIN Display ────────────────────────────────────────────────
 
 class PinDisplayWidget extends StatelessWidget {
   final String pin;
@@ -1250,7 +1250,7 @@ class PinDisplayWidget extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Private Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Private Helpers ─────────────────────────────────────────────────────────
 
 class _PriorityBadge extends StatelessWidget {
   final OrderPriority priority;

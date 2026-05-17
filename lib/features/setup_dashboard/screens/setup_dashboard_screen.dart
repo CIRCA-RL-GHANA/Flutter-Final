@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD0: SETUP DASHBOARD HUB â€” Master Entry Point
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD0: SETUP DASHBOARD HUB — Master Entry Point
 /// 6-row adaptive card matrix with role-based filtering
 /// Rows: Operations, Finance & Staff, Logistics, Engagement,
 ///        Branch Identity, Personal & History
@@ -53,7 +53,7 @@ class _SetupDashboardScreenState extends State<SetupDashboardScreen> {
             },
             child: CustomScrollView(
               slivers: [
-                // â”€â”€â”€ Header Banner â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                // ─── Header Banner ────────────────────────────
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -61,8 +61,8 @@ class _SetupDashboardScreenState extends State<SetupDashboardScreen> {
                   ),
                 ),
 
-                // â”€â”€â”€ Search Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-              // â”€â”€â”€ AI Insights â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                // ─── Search Bar ───────────────────────────────
+              // ─── AI Insights ─────────────────────────────────────────
               SliverToBoxAdapter(
                 child: Consumer<AIInsightsNotifier>(
                   builder: (context, ai, _) {
@@ -102,7 +102,7 @@ class _SetupDashboardScreenState extends State<SetupDashboardScreen> {
                   ),
                 ),
 
-                // â”€â”€â”€ Card Rows â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                // ─── Card Rows ────────────────────────────────
                 ...rows.entries.map((entry) {
                   final rowCards = entry.value;
                   if (rowCards.isEmpty) return const SliverToBoxAdapter(child: SizedBox.shrink());
@@ -154,7 +154,7 @@ class _SetupDashboardScreenState extends State<SetupDashboardScreen> {
                   );
                 }),
 
-                // â”€â”€â”€ Empty State â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                // ─── Empty State ──────────────────────────
                 if (filteredCards.isEmpty && _searchQuery.isNotEmpty)
                   SliverToBoxAdapter(
                     child: Padding(
@@ -167,12 +167,12 @@ class _SetupDashboardScreenState extends State<SetupDashboardScreen> {
                     ),
                   ),
 
-                // â”€â”€â”€ SOS Button (Owner/Admin/BranchManager only) â”€â”€
+                // ─── SOS Button (Owner/Admin/BranchManager only) ──
                 SliverToBoxAdapter(
                   child: SetupSOSButton(onPressed: () {}),
                 ),
 
-                // â”€â”€â”€ Bottom Spacer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                // ─── Bottom Spacer ────────────────────────────
                 const SliverToBoxAdapter(child: SizedBox(height: 100)),
               ],
             ),
@@ -232,7 +232,7 @@ class _SetupDashboardScreenState extends State<SetupDashboardScreen> {
   }
 }
 
-// â”€â”€â”€ Header Banner â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Header Banner ───────────────────────────────────────────────────────────
 
 class _HeaderBanner extends StatelessWidget {
   final DashboardHeaderInfo header;
@@ -310,7 +310,7 @@ class _HeaderBanner extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Sync Badge â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Sync Badge ──────────────────────────────────────────────────────────────
 
 class _SyncBadge extends StatelessWidget {
   final SyncState state;
@@ -366,7 +366,7 @@ class _SyncBadge extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Search Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Search Bar ──────────────────────────────────────────────────────────────
 
 class _SearchBar extends StatelessWidget {
   final ValueChanged<String> onChanged;

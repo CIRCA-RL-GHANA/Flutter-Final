@@ -1,4 +1,4 @@
-﻿/// Q Points Terms of Service Screen
+/// Q Points Terms of Service Screen
 /// 
 /// Fully compliant with the Q Points ToS (v1.0.0, effective April 27, 2026).
 /// Legal requirements enforced by UI:
@@ -144,7 +144,7 @@ class _QPointsTosScreenState extends State<QPointsTosScreen> {
                 children: [
                   CircularProgressIndicator(color: kQpColor),
                   SizedBox(height: 16),
-                  Text('Loading Terms of Serviceâ€¦',
+                  Text('Loading Terms of Service…',
                       style: TextStyle(color: Colors.grey)),
                 ],
               ),
@@ -179,14 +179,14 @@ class _QPointsTosScreenState extends State<QPointsTosScreen> {
 
           return Column(
             children: [
-              // â”€â”€ Version banner â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ── Version banner ───────────────────────────────────────────
               _VersionBanner(tos: tos),
 
-              // â”€â”€ Scroll-to-read instruction â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ── Scroll-to-read instruction ───────────────────────────────
               if (!provider.hasScrolledToBottom)
                 const _ScrollPromptBanner(),
 
-              // â”€â”€ ToS Body (scrollable) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ── ToS Body (scrollable) ────────────────────────────────────
               Expanded(
                 child: _TosBody(
                   tos: tos,
@@ -194,7 +194,7 @@ class _QPointsTosScreenState extends State<QPointsTosScreen> {
                 ),
               ),
 
-              // â”€â”€ After scroll: Checkboxes + Buttons â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ── After scroll: Checkboxes + Buttons ───────────────────────
               _ConsentFooter(
                 provider: provider,
                 onAccept: () => _handleAccept(provider),
@@ -208,9 +208,9 @@ class _QPointsTosScreenState extends State<QPointsTosScreen> {
   }
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─────────────────────────────────────────────────────────────────────────────
 // Sub-widgets
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─────────────────────────────────────────────────────────────────────────────
 
 class _VersionBanner extends StatelessWidget {
   final QPointsTosContent tos;
@@ -397,13 +397,13 @@ class _TosBody extends StatelessWidget {
             ),
           ),
         ));
-      } else if (line.startsWith('â€¢')) {
+      } else if (line.startsWith('•')) {
         widgets.add(Padding(
           padding: const EdgeInsets.only(left: 12, top: 2),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('â€¢  ', style: TextStyle(color: kQpColor, fontSize: 13)),
+              const Text('•  ', style: TextStyle(color: kQpColor, fontSize: 13)),
               Expanded(
                 child: Text(
                   line.substring(1).trim(),
@@ -495,7 +495,7 @@ class _RiskHighlightBox extends StatelessWidget {
             detail:
                 'The Company has no legal obligation to repurchase Q Points for fiat or to guarantee a market. '
                 'The AI Participant maintains standing buy and sell orders at \$1.00 as an operational last-resort feature, '
-                'meaning it may fill your order if no peer counterparty is available â€” but this is not a legal guarantee of redemption. '
+                'meaning it may fill your order if no peer counterparty is available — but this is not a legal guarantee of redemption. '
                 'The AI Participant may be suspended at any time without notice.',
           ),
         ],

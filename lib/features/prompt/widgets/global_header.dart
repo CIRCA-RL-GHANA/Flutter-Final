@@ -1,4 +1,4 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// Global Header (Persistent)
 /// Top Navigation Bar with context, search, and quick actions
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -6,6 +6,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '../../../core/design/ive_tokens.dart';
 import '../../../core/theme/app_colors.dart';
 import '../models/rbac_models.dart';
 import '../providers/context_provider.dart';
@@ -26,13 +27,16 @@ class GlobalHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      decoration: const BoxDecoration(
+        color: IveTokens.bg,
+        border: Border(bottom: IveTokens.hairlineSide),
+      ),
       child: SafeArea(
         bottom: false,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // â”€â”€â”€ Top Row: Context | Quick Actions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            // ─── Top Row: Context | Quick Actions ────────────────────────
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
               child: Row(
@@ -49,7 +53,7 @@ class GlobalHeader extends StatelessWidget {
               ),
             ),
 
-            // â”€â”€â”€ Search Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            // ─── Search Bar ─────────────────────────────────────────────
             const Padding(
               padding: EdgeInsets.fromLTRB(16, 0, 16, 12),
               child: _GlobalSearchBar(),
@@ -94,7 +98,8 @@ class _ContextSection extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.textPrimary,
+                  color: IveTokens.label,
+                  letterSpacing: -0.1,
                 ),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -159,7 +164,7 @@ class _ContextAvatar extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: _presenceColor,
-                border: Border.all(color: Colors.white, width: 2),
+                border: Border.all(color: IveTokens.bg, width: 2),
               ),
             ),
           ),
@@ -408,7 +413,7 @@ class _NotificationBell extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: AppColors.error,
                       borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: Colors.white, width: 1.5),
+                      border: Border.all(color: IveTokens.bg, width: 1.5),
                     ),
                     child: Text(
                       count > 99 ? '99+' : '$count',
@@ -546,7 +551,7 @@ class ContextSwitcherSheet extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: const BoxDecoration(
-        color: Colors.white,
+        color: IveTokens.surface,
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
       child: Column(

@@ -1,4 +1,4 @@
-﻿/// Alerts Screen 9 â€” Templates Library
+/// Alerts Screen 9 — Templates Library
 /// Template grid (resolution/alert/communication/workflow),
 /// variable support, version control
 
@@ -164,9 +164,9 @@ class _AlertsTemplatesScreenState extends State<AlertsTemplatesScreen> with Sing
   }
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 // Template List
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 
 class _TemplateList extends StatelessWidget {
   final List<AlertTemplate> templates;
@@ -194,9 +194,9 @@ class _TemplateList extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 // Expandable Template Card
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 
 class _ExpandableTemplateCard extends StatefulWidget {
   final AlertTemplate template;

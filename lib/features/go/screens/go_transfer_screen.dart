@@ -1,4 +1,4 @@
-﻿/// GO Screen 2C â€” Transfer QPoints
+/// GO Screen 2C — Transfer QPoints
 /// Enhanced P2P transfer with receiver selection, risk assessment,
 /// fee optimizer, scheduling, relationship context
 
@@ -52,7 +52,7 @@ class _GoTransferScreenState extends State<GoTransferScreen> {
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
-                          'AI fraud protection active â€” ${ai.insights.first['title'] ?? ''}',
+                          'AI fraud protection active — ${ai.insights.first['title'] ?? ''}',
                           style: TextStyle(fontSize: 11, color: Colors.green.shade700),
                           maxLines: 1, overflow: TextOverflow.ellipsis,
                         ),
@@ -229,7 +229,7 @@ class _GoTransferScreenState extends State<GoTransferScreen> {
     switch (s) {
       case TransferSchedule.now: return 'Send Now';
       case TransferSchedule.later: return 'Schedule for Later';
-      case TransferSchedule.onRate: return 'When Rate Reachesâ€¦';
+      case TransferSchedule.onRate: return 'When Rate Reaches…';
       case TransferSchedule.recurring: return 'Recurring';
     }
   }

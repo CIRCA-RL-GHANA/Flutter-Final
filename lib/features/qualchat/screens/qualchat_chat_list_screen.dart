@@ -1,4 +1,4 @@
-﻿/// qualChat Screen 8 â€” Chat List (Enhanced)
+/// qualChat Screen 8 — Chat List (Enhanced)
 /// Smart inbox: tabs, pinned, search, swipe actions, FAB
 
 import 'package:flutter/material.dart';
@@ -126,7 +126,7 @@ class QualChatChatListScreen extends StatelessWidget {
                         icon: Icons.chat_bubble_outline,
                         title: 'No conversations',
                         message: 'Your inbox is empty ðŸ’«\nStart your first chat!',
-                        ctaLabel: 'âœ¨ New Chat',
+                        ctaLabel: '✨ New Chat',
                       )
                     : RefreshIndicator(
                         color: kChatColor,

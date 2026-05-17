@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SCREEN 4 â€” Shares List & Actions
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SCREEN 4 — Shares List & Actions
 /// Two-pane layout: share history (who shared, platform, reach) and
 /// share actions (copy link, platform icons, QR code).
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -179,7 +179,7 @@ class _Body extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Share Stats Banner â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Share Stats Banner ─────────────────────────────────────────────────────
 
 class _ShareStatsBanner extends StatelessWidget {
   final ShareStats stats;
@@ -231,7 +231,7 @@ class _StatColumn extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Share Action â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Share Action ───────────────────────────────────────────────────────────
 
 class _ShareAction extends StatelessWidget {
   final IconData icon;
@@ -257,7 +257,7 @@ class _ShareAction extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Share History Item â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Share History Item ─────────────────────────────────────────────────────
 
 class _ShareHistoryItem extends StatelessWidget {
   final UpdateShare share;
@@ -285,7 +285,7 @@ class _ShareHistoryItem extends StatelessWidget {
                     Icon(_platformIconStr(share.platform), size: 12, color: AppColors.textTertiary),
                     const SizedBox(width: 3),
                     Text('via ${share.platform}', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
-                    const Text(' â€¢ ', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                    const Text(' • ', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                     Text(_timeAgo(share.sharedAt), style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                   ],
                 ),
@@ -303,7 +303,7 @@ class _ShareHistoryItem extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Helpers ────────────────────────────────────────────────────────────────
 
 IconData _platformIconStr(String p) => switch (p) {
       'QualChat' => Icons.group,

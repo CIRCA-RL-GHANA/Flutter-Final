@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// MARKET MODULE â€” Screen 10: Delivery Tracker & PIN Verification
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// MARKET MODULE — Screen 10: Delivery Tracker & PIN Verification
 /// Live map, delivery timeline, driver info, PIN handoff, safety features
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
@@ -198,7 +198,7 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  '${tracking.distanceMiles.toStringAsFixed(1)} mi away â€¢ ${tracking.etaMinutes} min ETA',
+                  '${tracking.distanceMiles.toStringAsFixed(1)} mi away • ${tracking.etaMinutes} min ETA',
                   style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
                 ),
               ],

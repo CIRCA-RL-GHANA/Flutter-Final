@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD2.2: OUTLOOK â€” Analytics & AI Insights
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD2.2: OUTLOOK — Analytics & AI Insights
 /// KPI dashboard, AI-powered insights, trend analysis
 /// RBAC: Owner(personal), Admin(full), BM(branch), SO/BSO(view/brView),
 ///        Monitor/BrMon(view), RO/BRO(view)
@@ -44,7 +44,7 @@ class OutlookScreen extends StatelessWidget {
             ),
           body: CustomScrollView(
             slivers: [
-              // â”€â”€â”€ Quick Actions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Quick Actions ────────────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -108,8 +108,8 @@ class OutlookScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ KPI Grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-              // â”€â”€â”€ AI Insights â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── KPI Grid ─────────────────────────────────
+              // ─── AI Insights ─────────────────────────────────────────
               SliverToBoxAdapter(
                 child: Consumer<AIInsightsNotifier>(
                   builder: (context, ai, _) {
@@ -174,7 +174,7 @@ class OutlookScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Performance Summary â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Performance Summary ──────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
@@ -225,7 +225,7 @@ class OutlookScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ AI Insights â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── AI Insights ──────────────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
@@ -348,7 +348,7 @@ class _InsightCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Performance Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Performance Bar ─────────────────────────────────────────────────────────
 
 class _PerfBar extends StatelessWidget {
   final String label;

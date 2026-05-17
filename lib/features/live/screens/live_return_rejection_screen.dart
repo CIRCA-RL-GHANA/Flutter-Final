@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// LIVE MODULE â€” Screen 8: Return Rejection Flow
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// LIVE MODULE — Screen 8: Return Rejection Flow
 /// Structured rejection with required reason, evidence review,
 /// customer communication template, and appeal info
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -87,7 +87,7 @@ class _LiveReturnRejectionScreenState extends State<LiveReturnRejectionScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text('Rejecting return for:', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: kLiveColor)),
-                          Text('${ret.itemName} â€” â‚µ${ret.itemPrice.toStringAsFixed(2)}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700)),
+                          Text('${ret.itemName} — â‚µ${ret.itemPrice.toStringAsFixed(2)}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700)),
                           Text('Customer: ${ret.customerName}', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                         ],
                       ),
@@ -165,9 +165,9 @@ class _LiveReturnRejectionScreenState extends State<LiveReturnRejectionScreen> {
                     children: [
                       const Text('Customer Appeal Rights', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Color(0xFF6B21A8))),
                       const SizedBox(height: 4),
-                      Text('â€¢ Customer can appeal within 7 days', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
-                      Text('â€¢ Appeal goes to senior response officer', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
-                      Text('â€¢ Customer will be notified of their options', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                      Text('• Customer can appeal within 7 days', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                      Text('• Appeal goes to senior response officer', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                      Text('• Customer will be notified of their options', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                     ],
                   ),
                 ),

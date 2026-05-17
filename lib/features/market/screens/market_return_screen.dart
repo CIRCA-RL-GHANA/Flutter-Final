@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// MARKET MODULE â€” Screen 9: Return Request & Evidence
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// MARKET MODULE — Screen 9: Return Request & Evidence
 /// 4 Steps: Order Selection â†’ Evidence Collection â†’ Details â†’ Review
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
@@ -155,7 +155,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
     );
   }
 
-  // â”€â”€ Step 1: Item Selection â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Step 1: Item Selection ─────────────────────────────────────
   Widget _buildItemSelection(MarketOrder order) {
     return ListView(
       padding: const EdgeInsets.all(16),
@@ -230,7 +230,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
                           style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
                         ),
                         Text(
-                          'Qty: ${item.quantity} â€¢ \$${item.total.toStringAsFixed(2)}',
+                          'Qty: ${item.quantity} • \$${item.total.toStringAsFixed(2)}',
                           style: TextStyle(fontSize: 12, color: AppColors.textTertiary),
                         ),
                       ],
@@ -245,7 +245,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
     );
   }
 
-  // â”€â”€ Step 2: Evidence Collection â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Step 2: Evidence Collection ────────────────────────────────
   Widget _buildEvidenceCollection() {
     return ListView(
       padding: const EdgeInsets.all(16),
@@ -349,7 +349,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
     );
   }
 
-  // â”€â”€ Step 3: Details â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Step 3: Details ────────────────────────────────────────────
   Widget _buildDetailsStep() {
     return ListView(
       padding: const EdgeInsets.all(16),
@@ -408,7 +408,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
     );
   }
 
-  // â”€â”€ Step 4: Review â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Step 4: Review ─────────────────────────────────────────────
   Widget _buildReviewStep(MarketOrder order) {
     final selectedItemsList = order.items
         .where((i) => _selectedItems.contains(i.productId))

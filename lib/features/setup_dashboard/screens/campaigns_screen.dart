@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD1.10: CAMPAIGNS â€” Marketing Campaign Management
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD1.10: CAMPAIGNS — Marketing Campaign Management
 /// Campaign list, ROI tracking, budget, reach/conversions
 /// RBAC: Owner(personal), Admin(full), BM(branch), SO(full), BSO(branch),
 ///        Monitor/BrMon(view)
@@ -76,7 +76,7 @@ class CampaignsScreen extends StatelessWidget {
                   child: const SetupSectionTitle(title: 'All Campaigns', icon: Icons.campaign),
                 ),
               ),
-              // â”€â”€â”€ AI Insights â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── AI Insights ─────────────────────────────────────────
               SliverToBoxAdapter(
                 child: Consumer<AIInsightsNotifier>(
                   builder: (context, ai, _) {

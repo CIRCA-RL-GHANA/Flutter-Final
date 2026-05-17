@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// e-PLAY MODULE â€” Browse Screen
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// e-PLAY MODULE — Browse Screen
 /// Filterable content catalogue by type (music / movie / podcast / ebook / show)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
@@ -80,7 +80,7 @@ class _EPlayBrowseScreenState extends State<EPlayBrowseScreen> {
                   onChanged: (v) => setState(() => _searchQuery = v),
                   style: const TextStyle(color: Colors.white),
                   decoration: InputDecoration(
-                    hintText: 'Search titles, creatorsâ€¦',
+                    hintText: 'Search titles, creators…',
                     hintStyle: const TextStyle(color: Colors.white54),
                     prefixIcon: const Icon(Icons.search, color: Colors.white54),
                     filled: true,
@@ -94,7 +94,7 @@ class _EPlayBrowseScreenState extends State<EPlayBrowseScreen> {
           ),
           body: Column(
             children: [
-              // â”€â”€ AI insight â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ── AI insight ──────────────────────────────────────────────
               if (ai.insights.isNotEmpty)
                 Container(
                   margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
@@ -111,7 +111,7 @@ class _EPlayBrowseScreenState extends State<EPlayBrowseScreen> {
                   ]),
                 ),
 
-              // â”€â”€ Type filter chips â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ── Type filter chips ────────────────────────────────────
               SizedBox(
                 height: 50,
                 child: ListView.builder(
@@ -147,7 +147,7 @@ class _EPlayBrowseScreenState extends State<EPlayBrowseScreen> {
                 ),
               ),
 
-              // â”€â”€ Grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ── Grid ────────────────────────────────────────────────
               Expanded(
                 child: eplay.isBrowseLoading && items.isEmpty
                     ? const Center(child: CircularProgressIndicator())

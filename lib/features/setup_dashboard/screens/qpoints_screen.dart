@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD3.4: Q-POINTS â€” Balance, Transactions, Redemption
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD3.4: Q-POINTS — Balance, Transactions, Redemption
 /// Balance header, transaction history, type-colored entries
 /// RBAC: Owner(all), Admin(entity), BM(branch), SO(entity),
 ///        BSO(branch), Monitor/BrMon(view), RO/BRO(limited), Driver(own)
@@ -50,7 +50,7 @@ class QPointsScreen extends StatelessWidget {
             ),
           body: CustomScrollView(
             slivers: [
-              // â”€â”€â”€ Balance Header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Balance Header ───────────────────────────
               SliverToBoxAdapter(
                 child: Container(
                   margin: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -103,7 +103,7 @@ class QPointsScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Tier Badge â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Tier Badge ───────────────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -156,7 +156,7 @@ class QPointsScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Quick Actions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Quick Actions ───────────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -174,7 +174,7 @@ class QPointsScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Earning Summary â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Earning Summary ──────────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -226,7 +226,7 @@ class QPointsScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Transaction History â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Transaction History ──────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
@@ -234,7 +234,7 @@ class QPointsScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ AI Insights â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── AI Insights ─────────────────────────────────────────
               SliverToBoxAdapter(
                 child: Consumer<AIInsightsNotifier>(
                   builder: (context, ai, _) {
@@ -383,7 +383,7 @@ class _TransactionCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Quick Action â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Quick Action ────────────────────────────────────────────────────────────
 
 class _QuickAction extends StatelessWidget {
   final IconData icon;
@@ -425,7 +425,7 @@ class _QuickAction extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Breakdown Stat â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Breakdown Stat ──────────────────────────────────────────────────────────
 
 class _BreakdownStat extends StatelessWidget {
   final String label;

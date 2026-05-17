@@ -1,4 +1,4 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// Shared Widgets for User Details Module
 /// Reusable components: collapsible sections, edit fields, status badges, etc.
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../core/theme/app_colors.dart';
 
-// â”€â”€â”€ Collapsible Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Collapsible Section ─────────────────────────────────────────────────────
 
 class CollapsibleSection extends StatefulWidget {
   final String title;
@@ -109,7 +109,7 @@ class _CollapsibleSectionState extends State<CollapsibleSection>
   }
 }
 
-// â”€â”€â”€ Detail Row â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Detail Row ──────────────────────────────────────────────────────────────
 
 class DetailRow extends StatelessWidget {
   final IconData icon;
@@ -174,7 +174,7 @@ class DetailRow extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Status Badge â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Status Badge ────────────────────────────────────────────────────────────
 
 class StatusBadge extends StatelessWidget {
   final String label;
@@ -218,7 +218,7 @@ class StatusBadge extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Settings Toggle â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Settings Toggle ─────────────────────────────────────────────────────────
 
 class SettingsToggle extends StatelessWidget {
   final String label;
@@ -283,7 +283,7 @@ class SettingsToggle extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Section Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Section Card ────────────────────────────────────────────────────────────
 
 class SectionCard extends StatelessWidget {
   final Widget child;
@@ -320,7 +320,7 @@ class SectionCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Module Header (Back + Title + Actions) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Module Header (Back + Title + Actions) ──────────────────────────────────
 
 class ModuleHeader extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -377,7 +377,7 @@ class ModuleHeader extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-// â”€â”€â”€ Edit Field Modal â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Edit Field Modal ────────────────────────────────────────────────────────
 
 class EditFieldModal extends StatefulWidget {
   final String title;
@@ -487,7 +487,7 @@ class _EditFieldModalState extends State<EditFieldModal> {
   }
 }
 
-// â”€â”€â”€ Context Type Gradient â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Context Type Gradient ───────────────────────────────────────────────────
 
 Color contextTypeColor(dynamic entityType) {
   final name = entityType.toString().split('.').last;

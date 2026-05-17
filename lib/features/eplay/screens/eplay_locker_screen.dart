@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// e-PLAY MODULE â€” Cloud Locker Screen
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// e-PLAY MODULE — Cloud Locker Screen
 /// The user's personal library of purchased / licensed digital content.
 /// Content is never on-device unless pinned for temporary offline cache.
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -75,7 +75,7 @@ class _EPlayLockerScreenState extends State<EPlayLockerScreen> with SingleTicker
           ),
           body: Column(
             children: [
-              // â”€â”€ AI insight â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ── AI insight ──────────────────────────────────────────────
               if (ai.insights.isNotEmpty)
                 Container(
                   margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
@@ -92,7 +92,7 @@ class _EPlayLockerScreenState extends State<EPlayLockerScreen> with SingleTicker
                   ]),
                 ),
 
-              // â”€â”€ Stats bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ── Stats bar ───────────────────────────────────────────────
               Container(
                 margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
                 padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
@@ -111,7 +111,7 @@ class _EPlayLockerScreenState extends State<EPlayLockerScreen> with SingleTicker
                 ),
               ),
 
-              // â”€â”€ Tab content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ── Tab content ─────────────────────────────────────────────
               Expanded(
                 child: eplay.isLockerLoading
                     ? const Center(child: CircularProgressIndicator())

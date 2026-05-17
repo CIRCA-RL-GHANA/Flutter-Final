@@ -1,4 +1,4 @@
-﻿/// GO Screen 5 â€” Tab Detail
+/// GO Screen 5 — Tab Detail
 /// Tab identity card, financial snapshot, transaction timeline,
 /// settlement interface, negotiation tools, documents, audit trail
 
@@ -65,22 +65,22 @@ class _GoTabDetailScreenState extends State<GoTabDetailScreen> {
                   );
                 },
               ),
-              // 1 â€” Identity card
+              // 1 — Identity card
               _buildIdentityCard(tab),
               const SizedBox(height: 14),
-              // 2 â€” Financial snapshot
+              // 2 — Financial snapshot
               _buildFinancialSnapshot(tab),
               const SizedBox(height: 14),
-              // 3 â€” Timeline
+              // 3 — Timeline
               _buildTimeline(timeline),
               const SizedBox(height: 14),
-              // 4 â€” Settlement
+              // 4 — Settlement
               _buildSettlement(tab),
               const SizedBox(height: 14),
-              // 5 â€” Actions
+              // 5 — Actions
               _buildActions(tab),
               const SizedBox(height: 14),
-              // 6 â€” Audit
+              // 6 — Audit
               _buildAudit(tab),
               const SizedBox(height: 80),
             ],

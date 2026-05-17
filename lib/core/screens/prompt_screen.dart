@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// PROMPT Screen â€” The Universal Launcher
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// PROMPT Screen — The Universal Launcher
 /// Role-adaptive dashboard with 10 module widgets, global header, RBAC,
 /// responsive grid layout, time-based adaptation
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -103,14 +103,14 @@ class _PromptScreenState extends State<PromptScreen> {
       ),
       child: Scaffold(
         backgroundColor: AppColors.backgroundLight,
-        // Universal FAB â€” "+Add Entity" always visible per spec
+        // Universal FAB — "+Add Entity" always visible per spec
         floatingActionButton: _AddEntityFAB(contextProvider: contextProvider),
         body: CustomScrollView(
           physics: const BouncingScrollPhysics(
             parent: AlwaysScrollableScrollPhysics(),
           ),
           slivers: [
-            // â”€â”€â”€ Global Header (pinned) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            // ─── Global Header (pinned) ──────────────────────────────
             SliverToBoxAdapter(
               child: GlobalHeader(
                 onContextSwitchTap: () => _showContextSwitcher(context),
@@ -119,22 +119,24 @@ class _PromptScreenState extends State<PromptScreen> {
               ),
             ),
 
-            // â”€â”€â”€ Time Greeting â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            // ─── Time Greeting ───────────────────────────────────────
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(20, 8, 20, 4),
                 child: Text(
                   '${promptProvider.timeEmoji} ${promptProvider.timeGreeting}, $userName',
                   style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w700,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w600,
                     color: AppColors.textPrimary,
+                    letterSpacing: -0.4,
+                    height: 1.15,
                   ),
                 ),
               ),
             ),
 
-            // â”€â”€â”€ Search Results Overlay â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            // ─── Search Results Overlay ──────────────────────────────
             if (promptProvider.isSearching && promptProvider.searchResults.isNotEmpty)
               SliverToBoxAdapter(
                 child: SearchResultsOverlay(
@@ -152,7 +154,7 @@ class _PromptScreenState extends State<PromptScreen> {
                 ),
               ),
 
-            // â”€â”€â”€ Module Widgets Grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            // ─── Module Widgets Grid ─────────────────────────────────
             if (!promptProvider.isSearching || promptProvider.searchResults.isEmpty)
               AdaptiveGrid(
                 children: List.generate(modules.length, (index) {
@@ -182,7 +184,7 @@ class _PromptScreenState extends State<PromptScreen> {
                 }),
               ),
 
-            // â”€â”€â”€ Bottom Padding â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            // ─── Bottom Padding ──────────────────────────────────────
             const SliverToBoxAdapter(
               child: SizedBox(height: 100),
             ),
@@ -192,7 +194,7 @@ class _PromptScreenState extends State<PromptScreen> {
     );
   }
 
-  // â”€â”€â”€ Module Content Factory â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ─── Module Content Factory ──────────────────────────────────────────────
 
   Widget _buildModuleContent({
     required PromptModule module,
@@ -236,7 +238,7 @@ class _PromptScreenState extends State<PromptScreen> {
     }
   }
 
-  // â”€â”€â”€ Interactions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ─── Interactions ────────────────────────────────────────────────────────
 
   void _onModuleTap(BuildContext context, PromptModule module) {
     HapticFeedback.lightImpact();
@@ -529,7 +531,7 @@ class _PromptScreenState extends State<PromptScreen> {
   }
 }
 
-// â”€â”€â”€ Add Entity FAB â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Add Entity FAB ─────────────────────────────────────────────────────────
 
 class _AddEntityFAB extends StatelessWidget {
   final ContextProvider contextProvider;

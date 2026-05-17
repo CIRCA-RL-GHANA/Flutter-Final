@@ -1,4 +1,4 @@
-﻿/// qualChat Screen 3 â€” Hey Ya Journey (Owner Only)
+/// qualChat Screen 3 — Hey Ya Journey (Owner Only)
 /// Dating timeline: track your connection journey and plan a date
 
 import 'package:flutter/material.dart';

@@ -1,4 +1,4 @@
-﻿/// GO Screen 0 â€” Context Switcher (Pre-Entry)
+/// GO Screen 0 — Context Switcher (Pre-Entry)
 /// Full-screen modal for selecting operational financial context
 /// Trigger: Tapping GO widget on PROMPT screen
 
@@ -32,7 +32,7 @@ class GoContextScreen extends StatelessWidget {
           body: SafeArea(
             child: Column(
               children: [
-                // â”€â”€ Header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                // ── Header ──────────────────────────
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
                   child: Row(
@@ -54,7 +54,7 @@ class GoContextScreen extends StatelessWidget {
 
                 const SizedBox(height: 20),
 
-                // â”€â”€ Global Summary â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                // ── Global Summary ──────────────────────────
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: GoSectionCard(
@@ -150,7 +150,7 @@ class GoContextScreen extends StatelessWidget {
                   },
                 ),
 
-                // â”€â”€ Context Grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                // ── Context Grid ──────────────────────────
                 Expanded(
                   child: contexts.isEmpty
                       ? GoEmptyState(
@@ -194,9 +194,9 @@ class GoContextScreen extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 // Context Card
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 
 class _ContextCard extends StatelessWidget {
   final FinancialContext ctx;

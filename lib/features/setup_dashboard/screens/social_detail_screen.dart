@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD1.6-DETAIL: SOCIAL POST DETAIL â€” 4-Tab Deep View
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD1.6-DETAIL: SOCIAL POST DETAIL — 4-Tab Deep View
 /// Tabs: Overview, Engagement, Audience, Boost
 /// RBAC: Admin(full), SO(full), BSO(branch), BM(branch), Monitor(viewOnly)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -94,7 +94,7 @@ class _SocialDetailScreenState extends State<SocialDetailScreen> {
   }
 }
 
-// â”€â”€â”€ Header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Header ──────────────────────────────────────────────────────────────────
 
 class _PostHeader extends StatelessWidget {
   final SocialPost post;
@@ -222,7 +222,7 @@ class _PostHeader extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Overview Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Overview Tab ────────────────────────────────────────────────────────────
 
 class _OverviewTab extends StatelessWidget {
   final SocialPost post;
@@ -356,7 +356,7 @@ class _OverviewTab extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Engagement Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Engagement Tab ──────────────────────────────────────────────────────────
 
 class _EngagementTab extends StatelessWidget {
   final SocialPost post;
@@ -456,7 +456,7 @@ class _EngagementTab extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Audience Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Audience Tab ────────────────────────────────────────────────────────────
 
 class _AudienceTab extends StatelessWidget {
   final SocialPost post;
@@ -532,7 +532,7 @@ class _AudienceTab extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Boost Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Boost Tab ───────────────────────────────────────────────────────────────
 
 class _BoostTab extends StatelessWidget {
   final SocialPost post;
@@ -601,21 +601,21 @@ class _BoostTab extends StatelessWidget {
               const SetupSectionTitle(title: 'Budget Options', icon: Icons.monetization_on),
               const _BoostOption(
                 budget: 'â‚µ50',
-                reach: '2,500 â€“ 5,000',
+                reach: '2,500 – 5,000',
                 duration: '3 days',
                 isRecommended: false,
               ),
               const Divider(height: 16),
               const _BoostOption(
                 budget: 'â‚µ150',
-                reach: '7,500 â€“ 15,000',
+                reach: '7,500 – 15,000',
                 duration: '7 days',
                 isRecommended: true,
               ),
               const Divider(height: 16),
               const _BoostOption(
                 budget: 'â‚µ500',
-                reach: '25,000 â€“ 50,000',
+                reach: '25,000 – 50,000',
                 duration: '14 days',
                 isRecommended: false,
               ),
@@ -629,7 +629,7 @@ class _BoostTab extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SetupSectionTitle(title: 'Target Audience', icon: Icons.filter_alt),
-              const SetupInfoRow(label: 'Age', value: '18 â€“ 45'),
+              const SetupInfoRow(label: 'Age', value: '18 – 45'),
               const SetupInfoRow(label: 'Location', value: 'Greater Accra, Ashanti'),
               const SetupInfoRow(label: 'Interests', value: 'Shopping, Food & Dining'),
               SetupInfoRow(label: 'Platforms', value: post.platforms.map((p) => p.name).join(', ')),
@@ -643,10 +643,10 @@ class _BoostTab extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SetupSectionTitle(title: 'Estimated Performance', icon: Icons.trending_up),
-              const SetupInfoRow(label: 'Impressions', value: '10,000 â€“ 20,000'),
-              const SetupInfoRow(label: 'Clicks', value: '500 â€“ 1,200'),
-              const SetupInfoRow(label: 'Engagement Rate', value: '3.5% â€“ 5.2%'),
-              const SetupInfoRow(label: 'Cost per Click', value: 'â‚µ0.13 â€“ â‚µ0.30'),
+              const SetupInfoRow(label: 'Impressions', value: '10,000 – 20,000'),
+              const SetupInfoRow(label: 'Clicks', value: '500 – 1,200'),
+              const SetupInfoRow(label: 'Engagement Rate', value: '3.5% – 5.2%'),
+              const SetupInfoRow(label: 'Cost per Click', value: 'â‚µ0.13 – â‚µ0.30'),
             ],
           ),
         ),
@@ -656,7 +656,7 @@ class _BoostTab extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Helper Widgets â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Helper Widgets ──────────────────────────────────────────────────────────
 
 String _formatNumber(int n) {
   if (n >= 1000000) return '${(n / 1000000).toStringAsFixed(1)}M';

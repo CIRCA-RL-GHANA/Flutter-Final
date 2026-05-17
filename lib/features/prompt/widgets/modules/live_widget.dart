@@ -1,4 +1,4 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// LIVE Widget (Real-Time Operations)
 /// Visible to: Branch Manager, Branch Response Officer, Driver, Response Officer
 /// Role-specific views per spec
@@ -75,7 +75,7 @@ class LiveWidgetContent extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Branch Manager / Response Officer View â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Branch Manager / Response Officer View ─────────────────────────────────
 
 class _ManagerView extends StatelessWidget {
   final Color color;
@@ -100,14 +100,14 @@ class _ManagerView extends StatelessWidget {
           // Incoming Orders
           _LiveItem(
             title: 'Order #ORD-2041',
-            subtitle: 'Alice â€¢ 3 items',
+            subtitle: 'Alice • 3 items',
             trailing: 'ASSIGN',
             color: color,
           ),
           const SizedBox(height: 6),
           const _LiveItem(
             title: 'Order #ORD-2042',
-            subtitle: 'Bob â€¢ 1 item',
+            subtitle: 'Bob • 1 item',
             trailing: 'SELF-PICKUP',
             color: AppColors.success,
           ),
@@ -145,7 +145,7 @@ class _ManagerView extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Driver View â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Driver View ─────────────────────────────────────────────────────────────
 
 class _DriverView extends StatelessWidget {
   final DriverType? driverType;
@@ -163,7 +163,7 @@ class _DriverView extends StatelessWidget {
             // Transport driver view
             _LiveItem(
               title: 'Ride #R-901',
-              subtitle: '2.3km â€¢ â‚µ12.50',
+              subtitle: '2.3km • â‚µ12.50',
               trailing: 'ACCEPT',
               color: color,
             ),
@@ -195,7 +195,7 @@ class _DriverView extends StatelessWidget {
             // Shop/Logistics driver view
             _LiveItem(
               title: 'Package #P-789',
-              subtitle: '2 stops â€¢ 8.3 miles',
+              subtitle: '2 stops • 8.3 miles',
               trailing: 'START',
               color: color,
             ),
@@ -257,7 +257,7 @@ class _DriverView extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Shared Components â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Shared Components ──────────────────────────────────────────────────────
 
 class _LivePulse extends StatefulWidget {
   final Color color;

@@ -1,4 +1,4 @@
-﻿/// Alerts Screen 4 â€” Alert Composer (Create New Alert)
+/// Alerts Screen 4 — Alert Composer (Create New Alert)
 /// Stepped wizard: Type â†’ Describe â†’ Assignment â†’ Review
 /// Admin/Branch Manager only
 
@@ -49,7 +49,7 @@ class _AlertsComposerScreenState extends State<AlertsComposerScreen> {
               children: [
                 const Text('New Alert', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
                 Text(
-                  'Step ${_step + 1} of 4 â€” ${_stepLabel(_step)}',
+                  'Step ${_step + 1} of 4 — ${_stepLabel(_step)}',
                   style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
                 ),
               ],
@@ -80,7 +80,7 @@ class _AlertsComposerScreenState extends State<AlertsComposerScreen> {
                 },
               ),
 
-              // â”€â”€â”€â”€ STEP INDICATOR â”€â”€â”€â”€
+              // ──── STEP INDICATOR ────
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 color: Colors.white,
@@ -98,7 +98,7 @@ class _AlertsComposerScreenState extends State<AlertsComposerScreen> {
                 ),
               ),
 
-              // â”€â”€â”€â”€ STEP CONTENT â”€â”€â”€â”€
+              // ──── STEP CONTENT ────
               Expanded(
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.all(16),
@@ -111,7 +111,7 @@ class _AlertsComposerScreenState extends State<AlertsComposerScreen> {
             ],
           ),
 
-          // â”€â”€â”€â”€ NAVIGATION FOOTER â”€â”€â”€â”€
+          // ──── NAVIGATION FOOTER ────
           bottomNavigationBar: Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
@@ -193,9 +193,9 @@ class _AlertsComposerScreenState extends State<AlertsComposerScreen> {
   }
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 // Step 1: Type & Priority
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 
 class _StepType extends StatelessWidget {
   final AlertCategory category;
@@ -247,10 +247,10 @@ class _StepType extends StatelessWidget {
           title: 'ðŸš© Priority Level',
           child: Column(
             children: [
-              _PriorityOption(label: 'ðŸš¨ Critical â€” Immediate action required', value: AlertPriority.critical, current: priority, color: kAlertsCritical, onTap: () => onPriorityChanged(AlertPriority.critical)),
-              _PriorityOption(label: 'ðŸ”¥ High â€” Needs urgent attention', value: AlertPriority.high, current: priority, color: kAlertsColor, onTap: () => onPriorityChanged(AlertPriority.high)),
-              _PriorityOption(label: 'âš ï¸ Medium â€” Standard response time', value: AlertPriority.medium, current: priority, color: kAlertsWarning, onTap: () => onPriorityChanged(AlertPriority.medium)),
-              _PriorityOption(label: 'â„¹ï¸ Low â€” Can be scheduled', value: AlertPriority.low, current: priority, color: kAlertsInfo, onTap: () => onPriorityChanged(AlertPriority.low)),
+              _PriorityOption(label: 'ðŸš¨ Critical — Immediate action required', value: AlertPriority.critical, current: priority, color: kAlertsCritical, onTap: () => onPriorityChanged(AlertPriority.critical)),
+              _PriorityOption(label: 'ðŸ”¥ High — Needs urgent attention', value: AlertPriority.high, current: priority, color: kAlertsColor, onTap: () => onPriorityChanged(AlertPriority.high)),
+              _PriorityOption(label: 'âš ï¸ Medium — Standard response time', value: AlertPriority.medium, current: priority, color: kAlertsWarning, onTap: () => onPriorityChanged(AlertPriority.medium)),
+              _PriorityOption(label: 'â„¹ï¸ Low — Can be scheduled', value: AlertPriority.low, current: priority, color: kAlertsInfo, onTap: () => onPriorityChanged(AlertPriority.low)),
             ],
           ),
         ),
@@ -303,9 +303,9 @@ class _PriorityOption extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 // Step 2: Describe
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 
 class _StepDescribe extends StatelessWidget {
   final TextEditingController titleController;
@@ -419,9 +419,9 @@ class _TemplateChip extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 // Step 3: Assignment
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 
 class _StepAssignment extends StatelessWidget {
   final List<AlertStaffMember> staff;
@@ -481,9 +481,9 @@ class _StepAssignment extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 // Step 4: Review
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 
 class _StepReview extends StatelessWidget {
   final AlertCategory category;

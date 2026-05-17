@@ -1,19 +1,19 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../theme/brand.dart';
 
 /// Visual hierarchy variants for [BrandButton].
 enum BrandButtonVariant {
-  /// Primary CTA â€” filled cyan gradient with glow.
+  /// Primary CTA — filled cyan gradient with glow.
   primary,
 
-  /// Secondary â€” transparent fill, cyan outline.
+  /// Secondary — transparent fill, cyan outline.
   secondary,
 
-  /// Tertiary â€” text-only, cyan label, no fill or border.
+  /// Tertiary — text-only, cyan label, no fill or border.
   ghost,
 
-  /// Destructive â€” danger-tinted fill.
+  /// Destructive — danger-tinted fill.
   danger,
 }
 

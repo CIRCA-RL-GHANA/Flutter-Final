@@ -1,4 +1,4 @@
-﻿/// Alerts Screen 0 â€” PROMPT Screen Integration (Alerts Widget)
+/// Alerts Screen 0 — PROMPT Screen Integration (Alerts Widget)
 /// Glass morphism card, metrics row, resolved preview, resolver avatars,
 /// mini donut chart, real-time badge
 
@@ -53,7 +53,7 @@ class AlertsWidgetScreen extends StatelessWidget {
                   );
                 },
               ),
-              // â”€â”€â”€â”€ HEADER ROW â”€â”€â”€â”€
+              // ──── HEADER ROW ────
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
                 child: Row(
@@ -96,7 +96,7 @@ class AlertsWidgetScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€â”€ METRICS ROW â”€â”€â”€â”€
+              // ──── METRICS ROW ────
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
@@ -127,7 +127,7 @@ class AlertsWidgetScreen extends StatelessWidget {
 
               const Divider(height: 20, indent: 16, endIndent: 16),
 
-              // â”€â”€â”€â”€ LATEST PENDING ALERTS â”€â”€â”€â”€
+              // ──── LATEST PENDING ALERTS ────
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
@@ -167,7 +167,7 @@ class AlertsWidgetScreen extends StatelessWidget {
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   child: Text(
-                    'All clear â€” no pending alerts ðŸŽ‰',
+                    'All clear — no pending alerts ðŸŽ‰',
                     style: TextStyle(fontSize: 13, color: Color(0xFF6B7280)),
                   ),
                 )
@@ -179,7 +179,7 @@ class AlertsWidgetScreen extends StatelessWidget {
 
               const SizedBox(height: 12),
 
-              // â”€â”€â”€â”€ DISTRIBUTION + RESOLVER ROW â”€â”€â”€â”€
+              // ──── DISTRIBUTION + RESOLVER ROW ────
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
                 child: Row(
@@ -249,9 +249,9 @@ class AlertsWidgetScreen extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 // Compact Alert Row (for widget preview)
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 
 class _CompactAlertRow extends StatelessWidget {
   final AlertItem alert;
@@ -292,7 +292,7 @@ class _CompactAlertRow extends StatelessWidget {
                     style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
                   ),
                   Text(
-                    '#${alert.id} â€¢ ${_timeAgo(alert.createdAt)}',
+                    '#${alert.id} • ${_timeAgo(alert.createdAt)}',
                     style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF)),
                   ),
                 ],
@@ -341,9 +341,9 @@ class _CompactAlertRow extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 // Metric Pill
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 
 class _MetricPill extends StatelessWidget {
   final String emoji;
@@ -376,9 +376,9 @@ class _MetricPill extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 // Resolver Avatar Stack
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 
 class _ResolverAvatarStack extends StatelessWidget {
   final List<AlertStaffMember> staff;

@@ -1,4 +1,4 @@
-﻿/// qualChat Screen 4 â€” My Preferences (Owner Only)
+/// qualChat Screen 4 — My Preferences (Owner Only)
 /// Intelligent Preference System: Vibe settings, discovery, privacy
 
 import 'package:flutter/material.dart';
@@ -386,7 +386,7 @@ class _RecommendationItem extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 4),
       child: Row(
         children: [
-          const Text('â€¢  ', style: TextStyle(color: kChatColor)),
+          const Text('•  ', style: TextStyle(color: kChatColor)),
           Expanded(
             child: Text(text, style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
           ),

@@ -1,4 +1,4 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// SETUP DASHBOARD Widget (Operations Center)
 /// Visible to: Owner, Admin (full), Branch Manager (branch-scoped),
 /// Social Officer (engagement emphasis), Monitor (view-only)
@@ -28,7 +28,7 @@ class SetupDashboardWidgetContent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Header â€” branch-scoped roles get narrower title
+          // Header — branch-scoped roles get narrower title
           Row(
             children: [
               Icon(Icons.settings_applications, size: 18, color: color),
@@ -78,7 +78,7 @@ class SetupDashboardWidgetContent extends StatelessWidget {
 
   List<Widget> _getRows(Color color) {
     switch (role) {
-      // â”€â”€ Owner: personal features only â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+      // ── Owner: personal features only ──────────────────────────────────
       case UserRole.owner:
         return [
           _MatrixRow(icon: Icons.person_outline,  label: 'Profile',      value: 'Personal',     color: color),
@@ -87,7 +87,7 @@ class SetupDashboardWidgetContent extends StatelessWidget {
           _MatrixRow(icon: Icons.track_changes,   label: 'My Activity',  value: 'Today',        color: color),
         ];
 
-      // â”€â”€ Administrator: full business suite â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+      // ── Administrator: full business suite ─────────────────────────────
       case UserRole.administrator:
         return [
           _MatrixRow(icon: Icons.inventory_2,     label: 'Products',   value: '1,245',  color: color),
@@ -96,7 +96,7 @@ class SetupDashboardWidgetContent extends StatelessWidget {
           _MatrixRow(icon: Icons.stars_outlined,  label: 'Q-Points',   value: 'Entity', color: color),
         ];
 
-      // â”€â”€ Branch Manager: branch-scoped ops â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+      // ── Branch Manager: branch-scoped ops ──────────────────────────────
       case UserRole.branchManager:
         return [
           _MatrixRow(icon: Icons.inventory_2,      label: 'Products',   value: '487 SKUs', color: color),
@@ -105,7 +105,7 @@ class SetupDashboardWidgetContent extends StatelessWidget {
           _MatrixRow(icon: Icons.bar_chart,        label: 'My Activity', value: 'Today',   color: color),
         ];
 
-      // â”€â”€ Social Officer: engagement emphasis â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+      // ── Social Officer: engagement emphasis ────────────────────────────
       case UserRole.socialOfficer:
         return [
           _MatrixRow(icon: Icons.campaign,         label: 'Marketing',    value: '5 active',  color: color, emphasized: true),
@@ -114,7 +114,7 @@ class SetupDashboardWidgetContent extends StatelessWidget {
           _MatrixRow(icon: Icons.dynamic_feed,     label: 'Social',       value: '3 posts',   color: color),
         ];
 
-      // â”€â”€ Branch Social Officer: branch engagement â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+      // ── Branch Social Officer: branch engagement ────────────────────────
       case UserRole.branchSocialOfficer:
         return [
           _MatrixRow(icon: Icons.campaign,         label: 'Marketing',    value: 'Branch',    color: color, emphasized: true),
@@ -123,7 +123,7 @@ class SetupDashboardWidgetContent extends StatelessWidget {
           _MatrixRow(icon: Icons.dynamic_feed,     label: 'Social',       value: 'Branch',    color: color),
         ];
 
-      // â”€â”€ Monitor: view-only oversight â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+      // ── Monitor: view-only oversight ───────────────────────────────────
       case UserRole.monitor:
         return [
           _MatrixRow(icon: Icons.visibility_outlined, label: 'Activity Log', value: 'View Only', color: color),
@@ -132,7 +132,7 @@ class SetupDashboardWidgetContent extends StatelessWidget {
           _MatrixRow(icon: Icons.people,              label: 'Staff',        value: 'View Only', color: color),
         ];
 
-      // â”€â”€ Branch Monitor: branch view-only â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+      // ── Branch Monitor: branch view-only ───────────────────────────────
       case UserRole.branchMonitor:
         return [
           _MatrixRow(icon: Icons.visibility_outlined, label: 'Activity Log', value: 'Branch',    color: color),
@@ -141,7 +141,7 @@ class SetupDashboardWidgetContent extends StatelessWidget {
           _MatrixRow(icon: Icons.people,              label: 'Staff',        value: 'View Only', color: color),
         ];
 
-      // â”€â”€ Response Officer: operational focus â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+      // ── Response Officer: operational focus ────────────────────────────
       case UserRole.responseOfficer:
         return [
           _MatrixRow(icon: Icons.local_shipping,   label: 'Vehicles',      value: 'Fleet',      color: color),
@@ -150,7 +150,7 @@ class SetupDashboardWidgetContent extends StatelessWidget {
           _MatrixRow(icon: Icons.track_changes,    label: 'My Activity',   value: 'Today',      color: color),
         ];
 
-      // â”€â”€ Branch Response Officer: branch ops â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+      // ── Branch Response Officer: branch ops ────────────────────────────
       case UserRole.branchResponseOfficer:
         return [
           _MatrixRow(icon: Icons.local_shipping,   label: 'Vehicles',      value: 'Branch',     color: color),
@@ -159,7 +159,7 @@ class SetupDashboardWidgetContent extends StatelessWidget {
           _MatrixRow(icon: Icons.track_changes,    label: 'My Activity',   value: 'Today',      color: color),
         ];
 
-      // â”€â”€ Driver: personal ops â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+      // ── Driver: personal ops ───────────────────────────────────────────
       case UserRole.driver:
         return [
           _MatrixRow(icon: Icons.local_shipping,   label: 'My Vehicle',    value: 'Assigned',   color: color),
@@ -168,7 +168,7 @@ class SetupDashboardWidgetContent extends StatelessWidget {
           _MatrixRow(icon: Icons.track_changes,    label: 'My Activity',   value: 'Today',      color: color),
         ];
 
-      // â”€â”€ none / fallback â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+      // ── none / fallback ────────────────────────────────────────────────
       default:
         return [
           _MatrixRow(icon: Icons.person_outline,   label: 'Profile',       value: 'Personal',   color: color),

@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// COMMUNITY MODULE â€” Community Members Screen
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// COMMUNITY MODULE — Community Members Screen
 /// Paginated member list with roles. Admins can ban members.
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
@@ -91,7 +91,7 @@ class _CommunityMembersScreenState extends State<CommunityMembersScreen> {
           ),
           body: Column(
             children: [
-              // â”€â”€ AI insight â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ── AI insight ──────────────────────────────────────────
               if (ai.insights.isNotEmpty)
                 Container(
                   margin: const EdgeInsets.fromLTRB(16, 10, 16, 0),
@@ -104,14 +104,14 @@ class _CommunityMembersScreenState extends State<CommunityMembersScreen> {
                   ]),
                 ),
 
-              // â”€â”€ Search â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ── Search ──────────────────────────────────────────────
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
                 child: TextField(
                   controller: _searchCtrl,
                   onChanged: (_) => setState(() {}),
                   decoration: InputDecoration(
-                    hintText: 'Search membersâ€¦',
+                    hintText: 'Search members…',
                     prefixIcon: const Icon(Icons.search, size: 20),
                     filled: true,
                     fillColor: AppColors.inputFill,
@@ -121,7 +121,7 @@ class _CommunityMembersScreenState extends State<CommunityMembersScreen> {
                 ),
               ),
 
-              // â”€â”€ Role filter chips â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ── Role filter chips ──────────────────────────────────
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 child: SingleChildScrollView(
@@ -145,7 +145,7 @@ class _CommunityMembersScreenState extends State<CommunityMembersScreen> {
                 ),
               ),
 
-              // â”€â”€ Member count / loading â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ── Member count / loading ─────────────────────────────
               if (communityProvider.isMembersLoading && allMembers.isEmpty)
                 const Expanded(child: Center(child: CircularProgressIndicator()))
               else ...[

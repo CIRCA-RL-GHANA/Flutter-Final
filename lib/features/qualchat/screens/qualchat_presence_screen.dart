@@ -1,4 +1,4 @@
-﻿/// qualChat Screen 6 â€” Presence Dashboard (Enhanced)
+/// qualChat Screen 6 — Presence Dashboard (Enhanced)
 /// Real-Time Operations Center: presence, heatmap, user cards
 
 import 'package:flutter/material.dart';

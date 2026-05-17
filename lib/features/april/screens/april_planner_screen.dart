@@ -1,4 +1,4 @@
-﻿/// APRIL Screen 2 â€” Planner Command Center (Financial Dashboard)
+/// APRIL Screen 2 — Planner Command Center (Financial Dashboard)
 /// 4 tabs: Overview, Transactions, Budgets, Analytics
 
 import 'package:flutter/material.dart';
@@ -580,7 +580,7 @@ class _AnalyticsTab extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('â€¢', style: TextStyle(fontSize: 16, color: kAprilColorDark)),
+                  const Text('•', style: TextStyle(fontSize: 16, color: kAprilColorDark)),
                   const SizedBox(width: 8),
                   Expanded(child: Text(tip, style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280)))),
                 ],

@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:provider/provider.dart';
 import '../../../core/design/ive.dart';
@@ -9,7 +9,7 @@ import '../../../core/widgets/app_logo.dart';
 import '../providers/onboarding_provider.dart';
 
 /// Screen 1: OS Boot Splash Screen
-/// Communicates scale and authority â€” genie help as global commerce infrastructure.
+/// Communicates scale and authority — genie help as global commerce infrastructure.
 /// Aesthetic: dark system boot, geometric logo mark, sequential init messages,
 /// segmented progress bar. No consumer sparkles.
 class SplashScreen extends StatefulWidget {
@@ -19,10 +19,10 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-// â”€â”€ OS palette (independent of consumer theme) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── OS palette (independent of consumer theme) ───────────────────────────────
 const Color _kBg       = Color(0xFF08080F); // near-black with blue tint
 const Color _kGrid     = Color(0xFF0E0E1A); // subtle grid lines
-const Color _kAccent   = Color(0xFF22BDD8); // electric blue â€” system authority
+const Color _kAccent   = Color(0xFF22BDD8); // electric blue — system authority
 const Color _kAccentDim = Color(0xFF1E2A6E);
 
 class _SplashScreenState extends State<SplashScreen>
@@ -146,7 +146,7 @@ class _SplashScreenState extends State<SplashScreen>
         label: AppStrings.splashLoading,
         child: Stack(
           children: [
-            // â”€â”€ Background: scrolling topology grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            // ── Background: scrolling topology grid ───────────────────────
             AnimatedBuilder(
               animation: _gridController,
               builder: (_, __) => CustomPaint(
@@ -155,7 +155,7 @@ class _SplashScreenState extends State<SplashScreen>
               ),
             ),
 
-            // â”€â”€ Main content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            // ── Main content ──────────────────────────────────────────────
             AnimatedBuilder(
               animation: _bootController,
               builder: (_, __) {
@@ -221,7 +221,7 @@ class _SplashScreenState extends State<SplashScreen>
 
                     const Spacer(flex: 3),
 
-                    // â”€â”€ Boot footer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                    // ── Boot footer ───────────────────────────────────────
                     Opacity(
                       opacity: _footerOpacity.value,
                       child: Padding(
@@ -251,7 +251,7 @@ class _SplashScreenState extends State<SplashScreen>
 
                             const SizedBox(height: 5),
 
-                            // Percentage â€” right aligned
+                            // Percentage — right aligned
                             Align(
                               alignment: Alignment.centerRight,
                               child: Text(
@@ -278,7 +278,7 @@ class _SplashScreenState extends State<SplashScreen>
   }
 }
 
-// â”€â”€â”€ OS Logo Mark â€” genie help brand mark â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── OS Logo Mark — genie help brand mark ────────────────────────────────────
 class _OsLogoMark extends StatelessWidget {
   const _OsLogoMark();
 
@@ -292,7 +292,7 @@ class _OsLogoMark extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Segmented progress bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Segmented progress bar ──────────────────────────────────────────────────
 class _SegmentedBar extends StatelessWidget {
   final double progress;
   final int segments;
@@ -319,8 +319,8 @@ class _SegmentedBar extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Background grid painter â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-// Slow-scrolling topology grid â€” suggests global infrastructure scale.
+// ─── Background grid painter ─────────────────────────────────────────────────
+// Slow-scrolling topology grid — suggests global infrastructure scale.
 class _GridPainter extends CustomPainter {
   final double progress;
   const _GridPainter({required this.progress});

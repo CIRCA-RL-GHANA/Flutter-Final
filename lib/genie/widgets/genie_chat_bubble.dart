@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// GenieChatBubble â€“ Individual Message Bubble in the Conversation Thread
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// GenieChatBubble – Individual Message Bubble in the Conversation Thread
 /// Handles user bubbles (right-aligned) and Genie bubbles (left-aligned).
 /// Supports swipe-to-dismiss and swipe-to-act gestures.
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -121,7 +121,7 @@ class _GenieChatBubbleState extends State<GenieChatBubble>
   }
 }
 
-// â”€â”€â”€ Text Bubble â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Text Bubble ─────────────────────────────────────────────────────────────
 class _TextBubble extends StatelessWidget {
   final GenieMessage message;
   const _TextBubble({required this.message});
@@ -132,23 +132,17 @@ class _TextBubble extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       decoration: BoxDecoration(
-        color: isUser ? AppColors.primary : Colors.white,
+        color: isUser ? AppColors.primary : AppColors.surfaceLight,
         borderRadius: BorderRadius.only(
           topLeft: const Radius.circular(18),
           topRight: const Radius.circular(18),
           bottomLeft: Radius.circular(isUser ? 18 : 4),
           bottomRight: Radius.circular(isUser ? 4 : 18),
         ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.06),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
-        border: isUser
-            ? null
-            : Border.all(color: AppColors.inputBorder, width: 0.5),
+        border: Border.all(
+          color: AppColors.inputBorder,
+          width: 0.5,
+        ),
       ),
       child: Text(
         message.text ?? '',
@@ -162,7 +156,7 @@ class _TextBubble extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Card Bubble (wraps inline card) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Card Bubble (wraps inline card) ─────────────────────────────────────────
 class _CardBubble extends StatelessWidget {
   final GenieMessage message;
   const _CardBubble({required this.message});
@@ -189,7 +183,7 @@ class _CardBubble extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Genie Avatar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Genie Avatar ─────────────────────────────────────────────────────────────
 class _GenieAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -216,7 +210,7 @@ class _GenieAvatar extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Swipe Background â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Swipe Background ─────────────────────────────────────────────────────────
 class _SwipeBackground extends StatelessWidget {
   final Color color;
   final IconData icon;

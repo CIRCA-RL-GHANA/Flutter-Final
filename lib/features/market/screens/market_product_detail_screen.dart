@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// MARKET MODULE â€” Screen 4: Product Detail
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// MARKET MODULE — Screen 4: Product Detail
 /// Media gallery, customization, quantity, fulfillment, nutrition, reviews
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
@@ -455,7 +455,7 @@ class _MarketProductDetailScreenState extends State<MarketProductDetailScreen> {
           ),
           const SizedBox(height: 100),
 
-          // â”€â”€â”€ AI Similar Products â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+          // ─── AI Similar Products ───────────────────────────────
           Consumer<AIInsightsNotifier>(
             builder: (ctx, notifier, _) {
               final recs = notifier.recommendations;
@@ -470,7 +470,7 @@ class _MarketProductDetailScreenState extends State<MarketProductDetailScreen> {
                         Icon(Icons.auto_awesome, size: 16, color: Color(0xFF8B5CF6)),
                         SizedBox(width: 6),
                         Text(
-                          'AI â€” You might also like',
+                          'AI — You might also like',
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w700,

@@ -9,13 +9,17 @@
 // dependent territories. 247 entries total, alphabetised by
 // English short name.
 //
-// Flag emoji is derived from the ISO code (regional-indicator
-// symbols) at runtime, so the source file stays plain ASCII
-// and renders correctly on every platform that supports
-// Unicode flag glyphs.
+// Flag rendering: we deliberately do NOT use Unicode regional
+// indicator emoji. Several platforms (notably Windows + Chrome)
+// ship Segoe UI Emoji without flag glyphs, which causes flags
+// to render as raw two-letter boxes. The `CountryFlag` widget
+// below renders a clean ISO-code chip that is pixel-identical
+// on every platform we support.
 // ─────────────────────────────────────────────────────────────
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import '../design/ive_tokens.dart';
 
 @immutable
 class Country {
@@ -34,8 +38,10 @@ class Country {
     required this.dialCode,
   });
 
-  /// Flag emoji computed from the ISO code using Unicode regional
-  /// indicator symbols. Stable across builds, no source encoding risk.
+  /// Legacy: regional-indicator emoji form of the flag.
+  /// Kept for backwards compatibility, but prefer [CountryFlag]
+  /// for any UI rendering — the emoji form is unreliable on
+  /// Windows / Chrome where flag glyphs are not shipped.
   String get flag => flagOf(iso);
 
   /// Convenience: name + dial code as it reads on a tile.
@@ -43,7 +49,9 @@ class Country {
 }
 
 /// Builds the flag emoji for a 2-letter ISO 3166-1 alpha-2 code.
-/// Returns a white-flag fallback for invalid input.
+/// Returns a white-flag fallback for invalid input. Note: many
+/// desktop platforms render this as raw text — prefer
+/// [CountryFlag] for visible UI.
 String flagOf(String iso) {
   if (iso.length != 2) return '\u{1F3F3}';
   final upper = iso.toUpperCase();
@@ -54,6 +62,53 @@ String flagOf(String iso) {
     0x1F1E6 + (a - 0x41),
     0x1F1E6 + (b - 0x41),
   ]);
+}
+
+/// Cross-platform country flag chip. Renders the two-letter ISO
+/// code in a tight, restrained badge — visually consistent on
+/// iOS, Android, Web, Windows, macOS and Linux. Sized to match
+/// the surrounding text by default.
+class CountryFlag extends StatelessWidget {
+  const CountryFlag({
+    super.key,
+    required this.iso,
+    this.size = 22,
+  });
+
+  /// 2-letter ISO 3166-1 alpha-2 code (case-insensitive).
+  final String iso;
+
+  /// Approximate font size of the badge label.
+  /// The chip auto-sizes around this value.
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    final code = iso.length == 2 ? iso.toUpperCase() : '··';
+    final double height = size * 1.25;
+    final double width = size * 1.85;
+    return Container(
+      width: width,
+      height: height,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: IveTokens.surfaceRaised,
+        borderRadius: BorderRadius.circular(IveTokens.rXs),
+        border: Border.all(color: IveTokens.hairline, width: 1),
+      ),
+      child: Text(
+        code,
+        style: TextStyle(
+          fontSize: size * 0.58,
+          fontWeight: FontWeight.w700,
+          letterSpacing: 0.5,
+          color: IveTokens.label,
+          height: 1.0,
+          fontFeatures: const [FontFeature.tabularFigures()],
+        ),
+      ),
+    );
+  }
 }
 
 /// Countries pinned to the top of pickers — the markets the product

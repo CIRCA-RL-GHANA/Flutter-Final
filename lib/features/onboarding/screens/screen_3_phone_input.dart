@@ -224,9 +224,9 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
                           ),
                           child: Row(
                             children: [
-                              Text(
-                                _selectedCountry.flag,
-                                style: const TextStyle(fontSize: 24),
+                              CountryFlag(
+                                iso: _selectedCountry.iso,
+                                size: 22,
                               ),
                               const SizedBox(width: 12),
                               Expanded(
@@ -845,7 +845,7 @@ class _CountryTile extends StatelessWidget {
             : Colors.transparent,
         child: Row(
           children: [
-            Text(country.flag, style: const TextStyle(fontSize: 26)),
+            CountryFlag(iso: country.iso, size: 22),
             const SizedBox(width: 14),
             Expanded(
               child: Text(

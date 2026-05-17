@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD3.3: INTERESTS â€” Topic Following & Recommendations
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD3.3: INTERESTS — Topic Following & Recommendations
 /// Interest grid, categories, recommendations, update counts
 /// RBAC: Owner(personal), Admin(entity), BM(branch), SO(entity),
 ///        BSO(branch), Monitor/BrMon(view), RO/BRO(view), Driver(own)
@@ -43,7 +43,7 @@ class InterestsScreen extends StatelessWidget {
             ),
           body: CustomScrollView(
             slivers: [
-              // â”€â”€â”€ Summary KPIs â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Summary KPIs ─────────────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -79,7 +79,7 @@ class InterestsScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Categories Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Categories Bar ───────────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -115,7 +115,7 @@ class InterestsScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Interest Grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Interest Grid ────────────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
@@ -123,7 +123,7 @@ class InterestsScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ AI Insights â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── AI Insights ─────────────────────────────────────────
               SliverToBoxAdapter(
                 child: Consumer<AIInsightsNotifier>(
                   builder: (context, ai, _) {
@@ -170,7 +170,7 @@ class InterestsScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Recommendations â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Recommendations ──────────────────────────
               if (recommendations.isNotEmpty) ...[
                 SliverToBoxAdapter(
                   child: Padding(

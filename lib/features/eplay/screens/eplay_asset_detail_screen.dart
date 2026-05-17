@@ -1,7 +1,7 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// e-PLAY MODULE â€” Asset Detail Screen
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// e-PLAY MODULE — Asset Detail Screen
 /// DRM content detail page: purchase â†’ adds to cloud locker.
-/// No file is downloaded â€” access lives in the server-side license.
+/// No file is downloaded — access lives in the server-side license.
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
@@ -35,7 +35,7 @@ class _EPlayAssetDetailScreenState extends State<EPlayAssetDetailScreen> {
           backgroundColor: AppColors.backgroundDark,
           body: CustomScrollView(
             slivers: [
-              // â”€â”€ Hero â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ── Hero ─────────────────────────────────────────────────
               SliverAppBar(
                 expandedHeight: 280,
                 pinned: true,
@@ -76,7 +76,7 @@ class _EPlayAssetDetailScreenState extends State<EPlayAssetDetailScreen> {
                 ),
               ),
 
-              // â”€â”€ Body â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ── Body ─────────────────────────────────────────────────
               SliverToBoxAdapter(
                 child: Container(
                   decoration: const BoxDecoration(
@@ -120,7 +120,7 @@ class _EPlayAssetDetailScreenState extends State<EPlayAssetDetailScreen> {
                             ]),
                             const SizedBox(height: 6),
                             const Text(
-                              'Your purchase grants perpetual cloud access â€” not a file download. Stream this content anytime from any device. Optionally pin for offline use.',
+                              'Your purchase grants perpetual cloud access — not a file download. Stream this content anytime from any device. Optionally pin for offline use.',
                               style: TextStyle(fontSize: 12, color: AppColors.textSecondary, height: 1.5),
                             ),
                           ],
@@ -145,7 +145,7 @@ class _EPlayAssetDetailScreenState extends State<EPlayAssetDetailScreen> {
                       const Text('About this content', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                       const SizedBox(height: 8),
                       const Text(
-                        'Experience authentic African creativity. This content is protected by e-Play DRM â€” accessible only within the Genie app for the authenticated license holder.',
+                        'Experience authentic African creativity. This content is protected by e-Play DRM — accessible only within the Genie app for the authenticated license holder.',
                         style: TextStyle(fontSize: 13, color: AppColors.textSecondary, height: 1.6),
                       ),
                       const SizedBox(height: 20),
@@ -164,7 +164,7 @@ class _EPlayAssetDetailScreenState extends State<EPlayAssetDetailScreen> {
                       _accessRow(Icons.lock_open, 'Perpetual Cloud Access', 'Stream forever after purchase'),
                       _accessRow(Icons.phone_android, 'Cross-device', 'Access from any Genie login'),
                       _accessRow(Icons.download_done, 'Offline Pin', 'Pin for temporary offline use'),
-                      _accessRow(Icons.block, 'No Resale', 'DRM-protected â€” not transferable'),
+                      _accessRow(Icons.block, 'No Resale', 'DRM-protected — not transferable'),
 
                       const SizedBox(height: 32),
 
@@ -186,7 +186,7 @@ class _EPlayAssetDetailScreenState extends State<EPlayAssetDetailScreen> {
                             : ElevatedButton.icon(
                                 onPressed: _purchasing ? null : _purchase,
                                 icon: _purchasing ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2)) : const Icon(Icons.add_shopping_cart),
-                                label: Text(_purchasing ? 'Processingâ€¦' : 'Add to Cloud Locker'),
+                                label: Text(_purchasing ? 'Processing…' : 'Add to Cloud Locker'),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: kEPlayColor,
                                   foregroundColor: Colors.white,

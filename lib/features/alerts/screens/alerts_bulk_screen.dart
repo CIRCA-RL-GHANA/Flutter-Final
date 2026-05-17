@@ -1,4 +1,4 @@
-﻿/// Alerts Screen 8 â€” Bulk Alert Management
+/// Alerts Screen 8 — Bulk Alert Management
 /// Bulk assign, status change, tags, export, merge
 /// Progress indicator, undo
 
@@ -64,7 +64,7 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
                 },
               ),
 
-              // â”€â”€â”€â”€ SELECTION BANNER â”€â”€â”€â”€
+              // ──── SELECTION BANNER ────
               Container(
                 padding: const EdgeInsets.all(14),
                 color: kAlertsColorLight,
@@ -85,7 +85,7 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
                 ),
               ),
 
-              // â”€â”€â”€â”€ ACTION GRID â”€â”€â”€â”€
+              // ──── ACTION GRID ────
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(
@@ -146,7 +146,7 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
                 ),
               ),
 
-              // â”€â”€â”€â”€ ACTION PANEL â”€â”€â”€â”€
+              // ──── ACTION PANEL ────
               if (_selectedAction != null)
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -155,7 +155,7 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
 
               const SizedBox(height: 12),
 
-              // â”€â”€â”€â”€ SELECTED ALERTS LIST â”€â”€â”€â”€
+              // ──── SELECTED ALERTS LIST ────
               Expanded(
                 child: selectedAlerts.isEmpty
                     ? const AlertsEmptyState(
@@ -186,7 +186,7 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
             ],
           ),
 
-          // â”€â”€â”€â”€ EXECUTE FOOTER â”€â”€â”€â”€
+          // ──── EXECUTE FOOTER ────
           bottomNavigationBar: _selectedAction != null && provider.selectedCount > 0
               ? Container(
                   padding: const EdgeInsets.all(16),
@@ -283,7 +283,7 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
 
   void _showExportSuccess(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Export started â€” check downloads'), backgroundColor: kAlertsResolved),
+      const SnackBar(content: Text('Export started — check downloads'), backgroundColor: kAlertsResolved),
     );
   }
 
@@ -311,9 +311,9 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
   }
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 // Bulk Action Button
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 
 class _BulkActionButton extends StatelessWidget {
   final IconData icon;
@@ -349,9 +349,9 @@ class _BulkActionButton extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 // Compact Selected Alert
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 
 class _CompactSelectedAlert extends StatelessWidget {
   final AlertItem alert;
@@ -382,9 +382,9 @@ class _CompactSelectedAlert extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 // Export Chip
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 
 class _ExportChip extends StatelessWidget {
   final String label;

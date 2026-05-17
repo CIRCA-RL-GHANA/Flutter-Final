@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD1.2: VEHICLES â€” Fleet Management
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD1.2: VEHICLES — Fleet Management
 /// Vehicle list, live status, fuel/maintenance tracking, driver assignment
 /// RBAC: Admin(full), BM(branch), RO(full), BRO(branch), Driver(own),
 ///        Monitor/BrMon(view)
@@ -47,7 +47,7 @@ class VehiclesScreen extends StatelessWidget {
             ),
             body: CustomScrollView(
             slivers: [
-              // â”€â”€â”€ Fleet Overview â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Fleet Overview ────────────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -83,7 +83,7 @@ class VehiclesScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Vehicle List â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Vehicle List ─────────────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
@@ -94,7 +94,7 @@ class VehiclesScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ AI Insights â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── AI Insights ─────────────────────────────────────────
               SliverToBoxAdapter(
                 child: Consumer<AIInsightsNotifier>(
                   builder: (context, ai, _) {
@@ -135,7 +135,7 @@ class VehiclesScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Maintenance Schedule â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Maintenance Schedule ─────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -158,7 +158,7 @@ class VehiclesScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Fuel Log â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Fuel Log ─────────────────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -191,7 +191,7 @@ class VehiclesScreen extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Vehicle Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Vehicle Card ────────────────────────────────────────────────────────────
 
 class _VehicleCard extends StatelessWidget {
   final Vehicle vehicle;
@@ -327,7 +327,7 @@ class _VehicleCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Vehicle Stat â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Vehicle Stat ────────────────────────────────────────────────────────────
 
 class _VehicleStat extends StatelessWidget {
   final String label;
@@ -366,7 +366,7 @@ class _VehicleStat extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Maintenance Item â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Maintenance Item ────────────────────────────────────────────────────────
 
 class _MaintenanceItem extends StatelessWidget {
   final MaintenanceRecord record;
@@ -421,7 +421,7 @@ class _MaintenanceItem extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Fuel Item â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Fuel Item ───────────────────────────────────────────────────────────────
 
 class _FuelItem extends StatelessWidget {
   final FuelEntry entry;

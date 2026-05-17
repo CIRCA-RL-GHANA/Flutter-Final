@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// MARKET MODULE â€” Screen 11: Ride Hailing & Execution
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// MARKET MODULE — Screen 11: Ride Hailing & Execution
 /// 6 Parts: Request â†’ Matching â†’ Active â†’ In-Ride â†’ Arrival â†’ Post-Ride
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
@@ -80,7 +80,7 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
     }
   }
 
-  // â”€â”€ Phase 0: Request â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Phase 0: Request ───────────────────────────────────────────
   Widget _buildRequestPhase(BuildContext context, MarketProvider prov) {
     return Column(
       children: [
@@ -315,7 +315,7 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
     );
   }
 
-  // â”€â”€ Phase 1: Matching â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Phase 1: Matching ──────────────────────────────────────────
   Widget _buildMatchingPhase(BuildContext context, MarketProvider prov) {
     return Scaffold(
       appBar: const MarketAppBar(title: 'Finding a Driver'),
@@ -387,7 +387,7 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
     );
   }
 
-  // â”€â”€ Phase 2: Driver Assigned â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Phase 2: Driver Assigned ───────────────────────────────────
   Widget _buildDriverAssignedPhase(BuildContext context, MarketProvider prov, RideRequest ride) {
     return Scaffold(
       body: Column(
@@ -593,7 +593,7 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
     );
   }
 
-  // â”€â”€ Phase 3: In Ride â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Phase 3: In Ride ───────────────────────────────────────────
   Widget _buildInRidePhase(BuildContext context, MarketProvider prov, RideRequest ride) {
     return Scaffold(
       body: Column(
@@ -705,7 +705,7 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
     );
   }
 
-  // â”€â”€ Phase 4: Arrival â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Phase 4: Arrival ───────────────────────────────────────────
   Widget _buildArrivalPhase(BuildContext context, MarketProvider prov, RideRequest ride) {
     return Scaffold(
       body: Center(
@@ -804,7 +804,7 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
     );
   }
 
-  // â”€â”€ Phase 5: Post Ride â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Phase 5: Post Ride ─────────────────────────────────────────
   Widget _buildPostRidePhase(BuildContext context, MarketProvider prov) {
     return Scaffold(
       body: SafeArea(

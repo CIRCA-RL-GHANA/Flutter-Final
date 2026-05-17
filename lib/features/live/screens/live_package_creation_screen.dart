@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// LIVE MODULE â€” Screen 5: Package Creation & Bundling
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// LIVE MODULE — Screen 5: Package Creation & Bundling
 /// Multi-step wizard: Package config, bundle assistant, route preview,
 /// security/verification settings, confirmation
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -183,7 +183,7 @@ class _LivePackageCreationScreenState extends State<LivePackageCreationScreen> {
   }
 }
 
-// â”€â”€â”€ Step 1: Package Configuration â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Step 1: Package Configuration ─────────────────────────────────────────────
 
 class _PackageConfigStep extends StatelessWidget {
   final PackageType selectedType;
@@ -277,7 +277,7 @@ class _PackageConfigStep extends StatelessWidget {
           child: Column(
             children: [
               _PackageToggle(label: 'â„ï¸ Cold chain required', value: coldChain, onChanged: onColdChainChanged),
-              _PackageToggle(label: 'ðŸ“¦ Fragile â€” handle with care', value: fragile, onChanged: onFragileChanged),
+              _PackageToggle(label: 'ðŸ“¦ Fragile — handle with care', value: fragile, onChanged: onFragileChanged),
             ],
           ),
         ),
@@ -299,7 +299,7 @@ class _PackageConfigStep extends StatelessWidget {
                 children: [
                   Icon(Icons.route, size: 32, color: AppColors.textTertiary),
                   const SizedBox(height: 4),
-                  Text('${selectedOrderIds.length} stop${selectedOrderIds.length == 1 ? '' : 's'} â€¢ Est. 45 min', style: TextStyle(fontSize: 12, color: AppColors.textTertiary)),
+                  Text('${selectedOrderIds.length} stop${selectedOrderIds.length == 1 ? '' : 's'} • Est. 45 min', style: TextStyle(fontSize: 12, color: AppColors.textTertiary)),
                 ],
               ),
             ),
@@ -310,7 +310,7 @@ class _PackageConfigStep extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Step 2: Security & Verification â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Step 2: Security & Verification ──────────────────────────────────────────
 
 class _SecurityStep extends StatelessWidget {
   final bool requireSignature;
@@ -410,7 +410,7 @@ class _SecurityStep extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Step 3: Confirmation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Step 3: Confirmation ────────────────────────────────────────────────────
 
 class _ConfirmationStep extends StatelessWidget {
   final PackageType selectedType;
@@ -505,7 +505,7 @@ class _ConfirmationStep extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Shared Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Shared Helpers ──────────────────────────────────────────────────────────
 
 class _OrderBundleItem extends StatelessWidget {
   final LiveOrder order;
@@ -535,8 +535,8 @@ class _OrderBundleItem extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('#${order.id} â€” ${order.customerName}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-                    Text('${order.items.length} items â€¢ â‚µ${order.total.toStringAsFixed(0)}', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                    Text('#${order.id} — ${order.customerName}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
+                    Text('${order.items.length} items • â‚µ${order.total.toStringAsFixed(0)}', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                   ],
                 ),
               ),

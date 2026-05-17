@@ -1,4 +1,4 @@
-﻿/// GO Screen 2B â€” Sell QPoints Flow
+/// GO Screen 2B — Sell QPoints Flow
 /// Mirror of Buy flow with sell-specific differences:
 /// Destination selection, minimum 500 QP, processing time warning,
 /// additional verification for large amounts
@@ -103,7 +103,7 @@ class _GoSellScreenState extends State<GoSellScreen> {
                         const SizedBox(width: 8),
                         Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                           Text(gw.name, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
-                          Text('Rate: 1 QP = ${gw.sellRate} GHS â€¢ Min: ${gw.minSell.toStringAsFixed(0)} QP', style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
+                          Text('Rate: 1 QP = ${gw.sellRate} GHS • Min: ${gw.minSell.toStringAsFixed(0)} QP', style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
                           Text('Processing: ${gw.processingTime}', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
                         ])),
                       ],

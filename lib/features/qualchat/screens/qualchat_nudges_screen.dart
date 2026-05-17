@@ -1,4 +1,4 @@
-﻿/// qualChat Screen 11 â€” Smart Nudges
+/// qualChat Screen 11 — Smart Nudges
 /// AI wingmate: swipe deck, nudge types, AI decision mode, settings
 
 import 'package:flutter/material.dart';
@@ -82,7 +82,7 @@ class QualChatNudgesScreen extends StatelessWidget {
                                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
                                 ),
                                 Text(
-                                  '${nudges.length} nudges to review â€¢ ${currentIndex + 1} of ${nudges.length}',
+                                  '${nudges.length} nudges to review • ${currentIndex + 1} of ${nudges.length}',
                                   style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
                                 ),
                               ],
@@ -122,7 +122,7 @@ class QualChatNudgesScreen extends StatelessWidget {
                       ),
                     ),
 
-                    // Swipe deck â€” current nudge
+                    // Swipe deck — current nudge
                     Expanded(
                       child: currentIndex < nudges.length
                           ? _NudgeCard(nudge: nudges[currentIndex])

@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD3.2: SUBSCRIPTION â€” Plan Management
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD3.2: SUBSCRIPTION — Plan Management
 /// Plan details, usage limits, storage, API calls, renewal
 /// RBAC: Owner(personal), Admin(entity), BM(brView)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -35,7 +35,7 @@ class SubscriptionScreen extends StatelessWidget {
             ),
           body: CustomScrollView(
             slivers: [
-              // â”€â”€â”€ Plan Header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Plan Header ──────────────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -65,7 +65,7 @@ class SubscriptionScreen extends StatelessWidget {
                           ),
                         if (sub.plan == SubscriptionPlan.free)
                           const Text(
-                            'Free â€” no charge',
+                            'Free — no charge',
                             style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
                           ),
                         const SizedBox(height: 12),
@@ -78,7 +78,7 @@ class SubscriptionScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Text(
-                              'âœ¨ Free Trial â€” ${sub.daysInFreeTrial} days left',
+                              '✨ Free Trial — ${sub.daysInFreeTrial} days left',
                               style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: AppColors.success),
                             ),
                           )
@@ -100,8 +100,8 @@ class SubscriptionScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Usage Metrics â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-              // â”€â”€â”€ AI Insights â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Usage Metrics ────────────────────────────
+              // ─── AI Insights ─────────────────────────────────────────
               SliverToBoxAdapter(
                 child: Consumer<AIInsightsNotifier>(
                   builder: (context, ai, _) {
@@ -175,7 +175,7 @@ class SubscriptionScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Plan Features â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Plan Features ────────────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -200,7 +200,7 @@ class SubscriptionScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Upgrade CTA â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Upgrade CTA ──────────────────────────────
               // Hidden for Branch Manager (branchViewOnly) via SetupActionGuard.
               // Owner/Admin see it with OTP required on tap (spec: subscription.upgrade).
               if (sub.plan != SubscriptionPlan.enterprise)
@@ -360,7 +360,7 @@ class _UsageBar extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Feature Row â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Feature Row ─────────────────────────────────────────────────────────────
 
 class _FeatureRow extends StatelessWidget {
   final String label;

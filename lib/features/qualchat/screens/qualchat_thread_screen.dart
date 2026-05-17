@@ -1,4 +1,4 @@
-﻿/// qualChat Screen 10 â€” Chat Thread (Enhanced)
+/// qualChat Screen 10 — Chat Thread (Enhanced)
 /// Immersive conversation: messages, composer, reactions, attachments, header menu
 
 import 'package:flutter/material.dart';

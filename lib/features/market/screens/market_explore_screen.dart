@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// MARKET MODULE â€” Screen 1.5: Explore All Merchants
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// MARKET MODULE — Screen 1.5: Explore All Merchants
 /// Full-screen immersive grid with map/grid toggle, masonry merchant cards
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
@@ -105,7 +105,7 @@ class _MarketExploreScreenState extends State<MarketExploreScreen> {
                 )
               : CustomScrollView(
                   slivers: [
-                    // â”€â”€â”€ AI Personalized Recommendations Banner â”€â”€â”€â”€
+                    // ─── AI Personalized Recommendations Banner ────
                     SliverToBoxAdapter(
                       child: Consumer<AIInsightsNotifier>(
                         builder: (ctx, notifier, _) {

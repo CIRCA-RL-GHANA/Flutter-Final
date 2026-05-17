@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// MARKET MODULE â€” Screen 1.2: Advanced Filters
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// MARKET MODULE — Screen 1.2: Advanced Filters
 /// Bottom-sheet style screen with price range, delivery options,
 /// dietary preferences, merchant attributes, sort, save filter sets
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -77,7 +77,7 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
                   );
                 },
               ),
-          // â”€â”€ Price Range â”€â”€
+          // ── Price Range ──
           const _SectionHeader(title: 'Price Range', expanded: true),
           Row(
             children: [
@@ -101,7 +101,7 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
           ),
           const SizedBox(height: 8),
 
-          // â”€â”€ Delivery Options â”€â”€
+          // ── Delivery Options ──
           const _SectionHeader(title: 'Delivery Options'),
           _FilterTile(
             label: 'Delivery only',
@@ -136,7 +136,7 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
           ),
           const SizedBox(height: 8),
 
-          // â”€â”€ Dietary & Preferences â”€â”€
+          // ── Dietary & Preferences ──
           const _SectionHeader(title: 'Dietary & Preferences'),
           Wrap(
             spacing: 8,
@@ -178,7 +178,7 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
           ),
           const SizedBox(height: 16),
 
-          // â”€â”€ Merchant Attributes â”€â”€
+          // ── Merchant Attributes ──
           const _SectionHeader(title: 'Merchant Attributes'),
           SwitchListTile(
             dense: true,
@@ -206,7 +206,7 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
           ),
           const SizedBox(height: 8),
 
-          // â”€â”€ Rating â”€â”€
+          // ── Rating ──
           const _SectionHeader(title: 'Minimum Rating'),
           Row(
             children: List.generate(5, (i) {
@@ -248,7 +248,7 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
           ),
           const SizedBox(height: 16),
 
-          // â”€â”€ Sort Options â”€â”€
+          // ── Sort Options ──
           const _SectionHeader(title: 'Sort By'),
           ..._sortOptions.map((opt) {
             final (sort, label, icon) = opt;
@@ -270,7 +270,7 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
           }),
           const SizedBox(height: 16),
 
-          // â”€â”€ Save Filter â”€â”€
+          // ── Save Filter ──
           OutlinedButton.icon(
             onPressed: _saveFilter,
             icon: const Icon(Icons.bookmark_border, size: 18),
@@ -286,7 +286,7 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
           const SizedBox(height: 80),
         ],
       ),
-      // â”€â”€ Sticky Footer â”€â”€
+      // ── Sticky Footer ──
       bottomNavigationBar: Container(
         padding: const EdgeInsets.fromLTRB(16, 12, 16, 28),
         decoration: BoxDecoration(

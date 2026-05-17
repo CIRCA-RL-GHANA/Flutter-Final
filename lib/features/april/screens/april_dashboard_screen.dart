@@ -1,4 +1,4 @@
-﻿/// APRIL Screen 1 â€” ActionCore Dashboard (Home Hub)
+/// APRIL Screen 1 — ActionCore Dashboard (Home Hub)
 /// Master header, voice center, notifications, plugin grid, command bar, status
 
 import 'package:flutter/material.dart';
@@ -20,7 +20,7 @@ class AprilDashboardScreen extends StatelessWidget {
           backgroundColor: const Color(0xFFF8F9FE),
           body: CustomScrollView(
             slivers: [
-              // â”€â”€â”€â”€ MASTER HEADER (Sticky) â”€â”€â”€â”€
+              // ──── MASTER HEADER (Sticky) ────
               SliverAppBar(
                 pinned: true,
                 expandedHeight: 140,
@@ -99,7 +99,7 @@ class AprilDashboardScreen extends StatelessWidget {
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-                              const Text(' â€¢ ', style: TextStyle(color: Color(0xFF9CA3AF))),
+                              const Text(' • ', style: TextStyle(color: Color(0xFF9CA3AF))),
                               Text(
                                 'Last sync: ${_timeAgo(provider.lastSync)}',
                                 style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280)),
@@ -117,7 +117,7 @@ class AprilDashboardScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(16),
                 sliver: SliverList(
                   delegate: SliverChildListDelegate([
-                    // â”€â”€â”€â”€ VOICE COMMAND CENTER â”€â”€â”€â”€
+                    // ──── VOICE COMMAND CENTER ────
                     AprilSectionCard(
                       title: 'ðŸŽ¤ Voice Command Center',
                       child: Column(
@@ -185,7 +185,7 @@ class AprilDashboardScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
 
-                    // â”€â”€â”€â”€ SMART NOTIFICATIONS PANEL â”€â”€â”€â”€
+                    // ──── SMART NOTIFICATIONS PANEL ────
                     AprilSectionCard(
                       title: 'ðŸ”” Notifications',
                       trailing: provider.unreadNotificationCount > 0
@@ -230,13 +230,13 @@ class AprilDashboardScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
 
-                    // â”€â”€â”€â”€ AI INSIGHTS PANEL â”€â”€â”€â”€
+                    // ──── AI INSIGHTS PANEL ────
                     Consumer<AIInsightsNotifier>(
                       builder: (ctx, aiNotifier, _) {
                         final insights = aiNotifier.insights;
                         if (insights.isEmpty) return const SizedBox.shrink();
                         return AprilSectionCard(
-                          title: 'âœ¨ AI Insights',
+                          title: '✨ AI Insights',
                           child: Column(
                             children: [
                               ...insights.take(2).map(
@@ -252,7 +252,7 @@ class AprilDashboardScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
 
-                    // â”€â”€â”€â”€ PLUGIN QUICK ACCESS GRID â”€â”€â”€â”€
+                    // ──── PLUGIN QUICK ACCESS GRID ────
                     const Text(
                       'ðŸ“¦ Plugins',
                       style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
@@ -283,7 +283,7 @@ class AprilDashboardScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
 
-                    // â”€â”€â”€â”€ QUICK COMMAND BAR â”€â”€â”€â”€
+                    // ──── QUICK COMMAND BAR ────
                     AprilSectionCard(
                       title: 'âš¡ Quick Command',
                       child: Column(
@@ -329,7 +329,7 @@ class AprilDashboardScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
 
-                    // â”€â”€â”€â”€ SYSTEM STATUS FOOTER â”€â”€â”€â”€
+                    // ──── SYSTEM STATUS FOOTER ────
                     Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(

@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD1.2-DETAIL: VEHICLE DETAIL â€” 5-Tab Deep View
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD1.2-DETAIL: VEHICLE DETAIL — 5-Tab Deep View
 /// Tabs: Overview, Maintenance, Fuel, Routes, Driver
 /// RBAC: Owner/Admin(fullAccess), BM(branchScoped), Monitor(viewOnly),
 ///        Driver(ownOnly)
@@ -49,7 +49,7 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
           appBar: SetupAppBar(title: '${vehicle.make} ${vehicle.model}'),
           body: Column(
             children: [
-              // â”€â”€â”€ Vehicle Header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Vehicle Header ────────────────────────────
               _VehicleHeader(vehicle: vehicle),
               const SizedBox(height: 12),
               Consumer<AIInsightsNotifier>(
@@ -100,7 +100,7 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
   }
 }
 
-// â”€â”€â”€ Vehicle Header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Vehicle Header ──────────────────────────────────────────────────────────
 
 class _VehicleHeader extends StatelessWidget {
   final Vehicle vehicle;
@@ -187,7 +187,7 @@ class _VehicleHeader extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Overview Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Overview Tab ────────────────────────────────────────────────────────────
 
 class _OverviewTab extends StatelessWidget {
   final Vehicle vehicle;
@@ -235,7 +235,7 @@ class _OverviewTab extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Maintenance Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Maintenance Tab ─────────────────────────────────────────────────────────
 
 class _MaintenanceTab extends StatelessWidget {
   final List<MaintenanceRecord> records;
@@ -337,7 +337,7 @@ class _MaintenanceCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Fuel Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Fuel Tab ────────────────────────────────────────────────────────────────
 
 class _FuelTab extends StatelessWidget {
   final List<FuelEntry> entries;
@@ -437,7 +437,7 @@ class _FuelEntryCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Routes Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Routes Tab ──────────────────────────────────────────────────────────────
 
 class _RoutesTab extends StatelessWidget {
   final Vehicle vehicle;
@@ -498,7 +498,7 @@ class _RoutesTab extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Driver Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Driver Tab ──────────────────────────────────────────────────────────────
 
 class _DriverTab extends StatelessWidget {
   final Vehicle vehicle;

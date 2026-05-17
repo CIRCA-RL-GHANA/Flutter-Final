@@ -1,4 +1,4 @@
-﻿/// Fintech â€º Loans â€” Loan Application Screen
+/// Fintech â€º Loans — Loan Application Screen
 /// Shows competing FI offers, lets user apply & tracks repayment progress.
 
 import 'package:flutter/material.dart';
@@ -244,7 +244,7 @@ class _LoanApplicationScreenState extends State<LoanApplicationScreen>
   );
 }
 
-// â”€â”€â”€ Loan Repayment Screen â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Loan Repayment Screen ────────────────────────────────────────────────────
 
 class LoanRepaymentScreen extends StatefulWidget {
   final Map<String, dynamic> loan;
@@ -323,7 +323,7 @@ class _LoanRepaymentScreenState extends State<LoanRepaymentScreen> {
   }
 }
 
-// â”€â”€â”€ Shared sub-widgets â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Shared sub-widgets ───────────────────────────────────────────────────────
 
 class LoanOfferTile extends StatelessWidget {
   final Map<String, dynamic> offer;
@@ -353,7 +353,7 @@ class LoanOfferTile extends StatelessWidget {
           const SizedBox(width: 12),
           Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text('Rate: $rate% p.a.', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
-            Text('Max: ${offer['maxAmount'] ?? 'â€“'} QP', style: const TextStyle(color: Colors.grey, fontSize: 12)),
+            Text('Max: ${offer['maxAmount'] ?? '–'} QP', style: const TextStyle(color: Colors.grey, fontSize: 12)),
           ])),
           if (isSelected) const Icon(Icons.check_circle, color: _kGold),
         ]),

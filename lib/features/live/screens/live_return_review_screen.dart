@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// LIVE MODULE â€” Screen 7: Return Review Interface
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// LIVE MODULE — Screen 7: Return Review Interface
 /// Detailed return review with evidence gallery, customer history,
 /// adjudication options, and resolution workflow
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -223,7 +223,7 @@ class _LiveReturnReviewScreenState extends State<LiveReturnReviewScreen> {
                         children: [
                           const Text('AI Recommendation: APPROVE', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: Color(0xFF059669))),
                           const SizedBox(height: 4),
-                          Text('Confidence: 87% â€¢ Evidence quality: Good â€¢ Customer history: Low risk', style: TextStyle(fontSize: 11, color: AppColors.textSecondary)),
+                          Text('Confidence: 87% • Evidence quality: Good • Customer history: Low risk', style: TextStyle(fontSize: 11, color: AppColors.textSecondary)),
                         ],
                       ),
                     ),

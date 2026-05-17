@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// LIVE MODULE â€” Screen 18: Live Analytics Dashboard
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// LIVE MODULE — Screen 18: Live Analytics Dashboard
 /// Real-time operations analytics: KPIs, delivery zones,
 /// bottleneck alerts, performance trends, predictive insights
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -296,7 +296,7 @@ class _ZoneCard extends StatelessWidget {
                       ],
                     ],
                   ),
-                  Text('${zone.orderCount} orders â€¢ ${zone.intensity} demand',
+                  Text('${zone.orderCount} orders • ${zone.intensity} demand',
                       style: TextStyle(
                           fontSize: 11, color: AppColors.textTertiary)),
                 ],
@@ -444,7 +444,7 @@ class _DriverLeaderboardItem extends StatelessWidget {
                       style: const TextStyle(
                           fontSize: 13, fontWeight: FontWeight.w600)),
                   Text(
-                      '${driver.todayDeliveries} deliveries â€¢ ${driver.onTimeRate.toStringAsFixed(0)}% on-time',
+                      '${driver.todayDeliveries} deliveries • ${driver.onTimeRate.toStringAsFixed(0)}% on-time',
                       style: TextStyle(
                           fontSize: 11, color: AppColors.textTertiary)),
                 ],

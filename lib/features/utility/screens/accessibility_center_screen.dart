@@ -1,4 +1,4 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// U6: ACCESSIBILITY CENTER Screen
 /// Text scaling, bold text, high contrast, reduce motion, color blindness,
 /// screen reader, touch targets, presets
@@ -63,7 +63,7 @@ class AccessibilityCenterScreen extends StatelessWidget {
                   );
                 },
               ),
-              // â”€â”€â”€ Quick Presets â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Quick Presets ─────────────────────────────
               const UtilitySectionTitle(
                 title: 'Quick Presets',
                 icon: Icons.auto_awesome,
@@ -90,7 +90,7 @@ class AccessibilityCenterScreen extends StatelessWidget {
 
               const SizedBox(height: 16),
 
-              // â”€â”€â”€ Vision â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Vision ───────────────────────────────────
               const UtilitySectionTitle(
                 title: 'Vision',
                 icon: Icons.visibility,
@@ -149,7 +149,7 @@ class AccessibilityCenterScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Motion â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Motion ───────────────────────────────────
               const UtilitySectionTitle(
                 title: 'Motion',
                 icon: Icons.animation,
@@ -170,7 +170,7 @@ class AccessibilityCenterScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Interaction â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Interaction ──────────────────────────────
               const UtilitySectionTitle(
                 title: 'Interaction',
                 icon: Icons.touch_app,
@@ -220,7 +220,7 @@ class AccessibilityCenterScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Audio â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Audio ────────────────────────────────────
               const UtilitySectionTitle(
                 title: 'Audio & Screen Reader',
                 icon: Icons.record_voice_over,
@@ -306,7 +306,7 @@ class AccessibilityCenterScreen extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Preset Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Preset Card ─────────────────────────────────────────────────────────────
 
 class _PresetCard extends StatelessWidget {
   final AccessibilityPreset preset;
@@ -354,7 +354,7 @@ class _PresetCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Accessibility Slider â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Accessibility Slider ────────────────────────────────────────────────────
 
 class _AccessibilitySlider extends StatelessWidget {
   final String label;

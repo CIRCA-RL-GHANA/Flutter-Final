@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// MARKET MODULE â€” Shared Widgets
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// MARKET MODULE — Shared Widgets
 /// Reusable UI components: MarketAppBar, MerchantCard, ProductCard,
 /// CartPreview, StatusTimeline, RatingStars, PriceTag, CategoryChip,
 /// MarketFilterChipRow, MarketSectionTitle, MarketSearchBar, etc.
@@ -10,14 +10,14 @@ import 'package:flutter/services.dart';
 import '../../../core/theme/app_colors.dart';
 import '../models/market_models.dart';
 
-// â”€â”€â”€ Market Module Color â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Market Module Color ─────────────────────────────────────────────────────
 
 /// The canonical module color for Market (Emerald Green)
 const Color kMarketColor = Color(0xFF10B981);
 const Color kMarketColorLight = Color(0xFFD1FAE5);
 const Color kMarketColorDark = Color(0xFF065F46);
 
-// â”€â”€â”€ Market App Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Market App Bar ──────────────────────────────────────────────────────────
 
 class MarketAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -79,7 +79,7 @@ class MarketAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-// â”€â”€â”€ Merchant Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Merchant Card ───────────────────────────────────────────────────────────
 
 class MerchantCard extends StatelessWidget {
   final Merchant merchant;
@@ -224,7 +224,7 @@ class MerchantCard extends StatelessWidget {
                   // Tags
                   if (merchant.tags.isNotEmpty)
                     Text(
-                      merchant.tags.join(' â€¢ '),
+                      merchant.tags.join(' • '),
                       style: TextStyle(
                         fontSize: 12,
                         color: AppColors.textSecondary,
@@ -346,7 +346,7 @@ class MerchantCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Product Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Product Card ────────────────────────────────────────────────────────────
 
 class MarketProductCard extends StatelessWidget {
   final MarketProduct product;
@@ -630,7 +630,7 @@ class MarketProductCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Rating Stars â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Rating Stars ────────────────────────────────────────────────────────────
 
 class RatingStars extends StatelessWidget {
   final double rating;
@@ -671,7 +671,7 @@ class RatingStars extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Price Tag â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Price Tag ───────────────────────────────────────────────────────────────
 
 class PriceTag extends StatelessWidget {
   final double price;
@@ -715,7 +715,7 @@ class PriceTag extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Category Chip Row â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Category Chip Row ───────────────────────────────────────────────────────
 
 class MarketCategoryChipRow extends StatelessWidget {
   final MerchantCategory selected;
@@ -782,7 +782,7 @@ class MarketCategoryChipRow extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Quick Filter Chips â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Quick Filter Chips ──────────────────────────────────────────────────────
 
 class MarketQuickFilterChips extends StatelessWidget {
   final List<String> filters;
@@ -835,7 +835,7 @@ class MarketQuickFilterChips extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Section Title â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Section Title ───────────────────────────────────────────────────────────
 
 class MarketSectionTitle extends StatelessWidget {
   final String title;
@@ -889,7 +889,7 @@ class MarketSectionTitle extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Search Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Search Bar ──────────────────────────────────────────────────────────────
 
 class MarketSearchBar extends StatelessWidget {
   final String hint;
@@ -951,7 +951,7 @@ class MarketSearchBar extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Order Status Timeline â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Order Status Timeline ───────────────────────────────────────────────────
 
 class OrderStatusTimeline extends StatelessWidget {
   final List<TrackingEvent> events;
@@ -1047,7 +1047,7 @@ class OrderStatusTimeline extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Cart Preview Badge â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Cart Preview Badge ──────────────────────────────────────────────────────
 
 class CartPreviewBadge extends StatelessWidget {
   final int itemCount;
@@ -1103,7 +1103,7 @@ class CartPreviewBadge extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Order Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Order Card ──────────────────────────────────────────────────────────────
 
 class MarketOrderCard extends StatelessWidget {
   final MarketOrder order;
@@ -1164,7 +1164,7 @@ class MarketOrderCard extends StatelessWidget {
                         style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
                       ),
                       Text(
-                        '${order.id} â€¢ ${_timeAgo(order.createdAt)}',
+                        '${order.id} • ${_timeAgo(order.createdAt)}',
                         style: TextStyle(fontSize: 11, color: AppColors.textSecondary),
                       ),
                     ],
@@ -1278,7 +1278,7 @@ class _ActionButton extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Market Info Row â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Market Info Row ─────────────────────────────────────────────────────────
 
 class MarketInfoRow extends StatelessWidget {
   final IconData icon;
@@ -1318,7 +1318,7 @@ class MarketInfoRow extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Market Section Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Market Section Card ─────────────────────────────────────────────────────
 
 class MarketSectionCard extends StatelessWidget {
   final String title;
@@ -1378,7 +1378,7 @@ class MarketSectionCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ KPI Badge â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── KPI Badge ───────────────────────────────────────────────────────────────
 
 class MarketKPIBadge extends StatelessWidget {
   final String label;
@@ -1428,7 +1428,7 @@ class MarketKPIBadge extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Empty State â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Empty State ─────────────────────────────────────────────────────────────
 
 class MarketEmptyState extends StatelessWidget {
   final IconData icon;
@@ -1489,7 +1489,7 @@ class MarketEmptyState extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Quantity Selector â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Quantity Selector ───────────────────────────────────────────────────────
 
 class QuantitySelector extends StatelessWidget {
   final int quantity;

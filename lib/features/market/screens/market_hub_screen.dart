@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// MARKET MODULE â€” Screen 1: Market Hub (Immersive Discovery)
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// MARKET MODULE — Screen 1: Market Hub (Immersive Discovery)
 /// Video background, category navigation, merchant discovery,
 /// AI optimization panel, quick actions, deal carousel
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -51,7 +51,7 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
           body: CustomScrollView(
             controller: _scrollController,
             slivers: [
-              // â”€â”€ Video Background / Hero Section â”€â”€
+              // ── Video Background / Hero Section ──
               SliverAppBar(
                 expandedHeight: 280,
                 pinned: true,
@@ -202,7 +202,7 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
                 ),
               ),
 
-              // â”€â”€ Category Navigation â”€â”€
+              // ── Category Navigation ──
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.only(top: 16, bottom: 8),
@@ -213,7 +213,7 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
                 ),
               ),
 
-              // â”€â”€ Live Merchant Counter â”€â”€
+              // ── Live Merchant Counter ──
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -247,22 +247,22 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
                 ),
               ),
 
-              // â”€â”€ Quick Actions Grid â”€â”€
+              // ── Quick Actions Grid ──
               SliverToBoxAdapter(
                 child: _buildQuickActions(context, prov),
               ),
 
-              // â”€â”€ AI Optimization Panel â”€â”€
+              // ── AI Optimization Panel ──
               SliverToBoxAdapter(
                 child: _buildAIPanel(prov),
               ),
 
-              // â”€â”€ My Transactions Button â”€â”€
+              // ── My Transactions Button ──
               SliverToBoxAdapter(
                 child: _buildTransactionButton(context, prov),
               ),
 
-              // â”€â”€ Deals Carousel â”€â”€
+              // ── Deals Carousel ──
               if (prov.merchantDeals.isNotEmpty) ...[
                 const SliverToBoxAdapter(
                   child: MarketSectionTitle(
@@ -276,7 +276,7 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
                 ),
               ],
 
-              // â”€â”€ Merchant Discovery â”€â”€
+              // ── Merchant Discovery ──
               const SliverToBoxAdapter(
                 child: MarketSectionTitle(
                   title: 'Discover Merchants',
@@ -322,7 +322,7 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
                   backgroundColor: kMarketColor,
                   icon: const Icon(Icons.shopping_cart, color: Colors.white),
                   label: Text(
-                    '${prov.cartItemCount} items â€¢ ${prov.cartSummary.totalDisplay}',
+                    '${prov.cartItemCount} items • ${prov.cartSummary.totalDisplay}',
                     style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
                   ),
                 )

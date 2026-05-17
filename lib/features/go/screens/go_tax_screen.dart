@@ -1,4 +1,4 @@
-﻿/// GO Screen 11 â€” Tax & Compliance
+/// GO Screen 11 — Tax & Compliance
 /// Transaction categorization, report generator, regulatory dashboard
 
 import 'package:flutter/material.dart';
@@ -147,7 +147,7 @@ class _GoTaxScreenState extends State<GoTaxScreen> with SingleTickerProviderStat
   Widget _buildDocuments(GoProvider p) {
     final docs = [
       ('Tax Certificate 2024', 'PDF', '2.3 MB', Icons.picture_as_pdf, kGoNegative),
-      ('KYC Verification', 'Verified', 'â€”', Icons.verified, kGoPositive),
+      ('KYC Verification', 'Verified', '—', Icons.verified, kGoPositive),
       ('AML Report Q4', 'PDF', '1.1 MB', Icons.picture_as_pdf, kGoNegative),
       ('Transaction Summary', 'CSV', '456 KB', Icons.table_chart, kGoInfo),
       ('Compliance Audit', 'PDF', '3.7 MB', Icons.picture_as_pdf, kGoNegative),
@@ -175,7 +175,7 @@ class _GoTaxScreenState extends State<GoTaxScreen> with SingleTickerProviderStat
         child: ListTile(
           leading: Icon(d.$4, color: d.$5, size: 24),
           title: Text(d.$1, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-          subtitle: Text('${d.$2} â€¢ ${d.$3}', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+          subtitle: Text('${d.$2} • ${d.$3}', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
           trailing: IconButton(icon: const Icon(Icons.download, size: 18, color: kGoColor), onPressed: () {}),
           dense: true,
         ),

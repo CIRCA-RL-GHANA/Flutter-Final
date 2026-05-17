@@ -1,4 +1,4 @@
-﻿/// Alerts Screen 7 â€” Knowledge Base Integration
+/// Alerts Screen 7 — Knowledge Base Integration
 /// AI-suggested solutions, similarity scores, feedback loop
 
 import 'package:flutter/material.dart';
@@ -51,7 +51,7 @@ class AlertsKnowledgeScreen extends StatelessWidget {
                     );
                   },
                 ),
-                // â”€â”€â”€â”€ CONTEXT BANNER â”€â”€â”€â”€
+                // ──── CONTEXT BANNER ────
                 if (alert != null) ...[
                   Container(
                     padding: const EdgeInsets.all(12),
@@ -78,7 +78,7 @@ class AlertsKnowledgeScreen extends StatelessWidget {
                   const SizedBox(height: 16),
                 ],
 
-                // â”€â”€â”€â”€ CATEGORY TABS â”€â”€â”€â”€
+                // ──── CATEGORY TABS ────
                 SizedBox(
                   height: 36,
                   child: ListView(
@@ -93,14 +93,14 @@ class AlertsKnowledgeScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
 
-                // â”€â”€â”€â”€ RESULTS COUNT â”€â”€â”€â”€
+                // ──── RESULTS COUNT ────
                 Text(
                   '${items.length} article${items.length == 1 ? '' : 's'} found',
                   style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280)),
                 ),
                 const SizedBox(height: 12),
 
-                // â”€â”€â”€â”€ KNOWLEDGE ITEMS â”€â”€â”€â”€
+                // ──── KNOWLEDGE ITEMS ────
                 if (items.isEmpty)
                   const AlertsEmptyState(
                     icon: Icons.library_books,
@@ -115,7 +115,7 @@ class AlertsKnowledgeScreen extends StatelessWidget {
 
                 const SizedBox(height: 16),
 
-                // â”€â”€â”€â”€ FEEDBACK PROMPT â”€â”€â”€â”€
+                // ──── FEEDBACK PROMPT ────
                 Container(
                   padding: const EdgeInsets.all(14),
                   decoration: BoxDecoration(
@@ -218,9 +218,9 @@ class AlertsKnowledgeScreen extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 // KB Filter Chip
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 
 class _KbFilterChip extends StatelessWidget {
   final String label;
@@ -246,9 +246,9 @@ class _KbFilterChip extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 // Feedback Button
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 
 class _FeedbackButton extends StatelessWidget {
   final IconData icon;

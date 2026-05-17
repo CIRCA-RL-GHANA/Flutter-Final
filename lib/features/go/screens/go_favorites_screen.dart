@@ -1,4 +1,4 @@
-﻿/// GO Screen 7 â€” Favorites Hub
+/// GO Screen 7 — Favorites Hub
 /// Categorized grid (People/Businesses/Services/Internal),
 /// entity cards, relationship insights, bulk management, discovery
 

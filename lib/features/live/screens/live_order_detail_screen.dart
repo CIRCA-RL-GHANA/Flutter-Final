@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// LIVE MODULE â€” Screen 3: Order Detail Expansion
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// LIVE MODULE — Screen 3: Order Detail Expansion
 /// Complete order information: customer, items, delivery, special
 /// instructions, driver assignment, timeline, action buttons
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -24,7 +24,7 @@ class LiveOrderDetailScreen extends StatelessWidget {
         return Scaffold(
           backgroundColor: AppColors.backgroundLight,
           appBar: LiveAppBar(
-            title: 'Order #${order.id} â€¢ ${order.priority.name.toUpperCase()}',
+            title: 'Order #${order.id} • ${order.priority.name.toUpperCase()}',
             actions: [
               IconButton(icon: const Icon(Icons.more_vert, size: 20), color: AppColors.textSecondary, onPressed: () {}),
               IconButton(icon: const Icon(Icons.download, size: 20), color: AppColors.textSecondary, onPressed: () {}),
@@ -100,7 +100,7 @@ class LiveOrderDetailScreen extends StatelessWidget {
                         Icon(Icons.star, size: 14, color: const Color(0xFFF59E0B)),
                         Text(' ${order.customerRating}', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                         const SizedBox(width: 8),
-                        Text('â€¢ ${order.customerOrderCount} orders', style: TextStyle(fontSize: 12, color: AppColors.textTertiary)),
+                        Text('• ${order.customerOrderCount} orders', style: TextStyle(fontSize: 12, color: AppColors.textTertiary)),
                       ],
                     ),
                     if (order.customerPhone != null) ...[
@@ -129,7 +129,7 @@ class LiveOrderDetailScreen extends StatelessWidget {
                         children: [
                           Icon(Icons.business, size: 14, color: AppColors.textSecondary),
                           const SizedBox(width: 4),
-                          Text('${order.customerCompany}${order.deliveryReception != null ? " â€¢ Reception: ${order.deliveryReception}" : ""}', style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+                          Text('${order.customerCompany}${order.deliveryReception != null ? " • Reception: ${order.deliveryReception}" : ""}', style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
                         ],
                       ),
                     ],
@@ -188,7 +188,7 @@ class LiveOrderDetailScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Subtotal: â‚µ${order.subtotal.toStringAsFixed(0)} â€¢ Delivery: â‚µ${order.deliveryFee.toStringAsFixed(0)}', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                        Text('Subtotal: â‚µ${order.subtotal.toStringAsFixed(0)} • Delivery: â‚µ${order.deliveryFee.toStringAsFixed(0)}', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                         Text('TOTAL: â‚µ${order.total.toStringAsFixed(0)}', style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800, color: AppColors.textPrimary)),
                       ],
                     ),
@@ -211,7 +211,7 @@ class LiveOrderDetailScreen extends StatelessWidget {
                   children: [
                     Text(order.deliveryAddress, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
                     if (order.deliveryFloor != null)
-                      Text('Floor: ${order.deliveryFloor}${order.deliveryReception != null ? " â€¢ Reception: ${order.deliveryReception}" : ""}', style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+                      Text('Floor: ${order.deliveryFloor}${order.deliveryReception != null ? " • Reception: ${order.deliveryReception}" : ""}', style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
                     if (order.accessCode != null)
                       Text('Access code: ${order.accessCode}', style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
                     if (order.parkingNote != null)

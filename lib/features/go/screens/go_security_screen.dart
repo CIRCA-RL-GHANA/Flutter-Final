@@ -1,4 +1,4 @@
-﻿/// GO Screen 13 â€” Security Center
+/// GO Screen 13 — Security Center
 /// Access control, audit trail, security settings
 
 import 'package:flutter/material.dart';

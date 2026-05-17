@@ -1,4 +1,4 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// U4: HELP & SUPPORT Screen
 /// FAQ articles, support tickets, contact options, search help
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -50,7 +50,7 @@ class HelpSupportScreen extends StatelessWidget {
                   );
                 },
               ),
-              // â”€â”€â”€ Search Help â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Search Help ───────────────────────────────
               Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -77,7 +77,7 @@ class HelpSupportScreen extends StatelessWidget {
 
               const SizedBox(height: 16),
 
-              // â”€â”€â”€ Contact Options â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Contact Options ──────────────────────────
               const UtilitySectionTitle(
                 title: 'Contact Us',
                 icon: Icons.headset_mic,
@@ -98,7 +98,7 @@ class HelpSupportScreen extends StatelessWidget {
 
               const SizedBox(height: 16),
 
-              // â”€â”€â”€ Category Chips â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Category Chips ───────────────────────────
               const UtilitySectionTitle(
                 title: 'Help Articles',
                 icon: Icons.article,
@@ -128,7 +128,7 @@ class HelpSupportScreen extends StatelessWidget {
 
               const SizedBox(height: 12),
 
-              // â”€â”€â”€ Articles List â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Articles List ────────────────────────────
               if (articles.isEmpty)
                 const Padding(
                   padding: EdgeInsets.only(top: 20),
@@ -141,7 +141,7 @@ class HelpSupportScreen extends StatelessWidget {
               else
                 ...articles.map((article) => _ArticleCard(article: article)),
 
-              // â”€â”€â”€ Support Tickets â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Support Tickets ──────────────────────────
               if (tickets.isNotEmpty) ...[
                 const SizedBox(height: 16),
                 const UtilitySectionTitle(
@@ -171,7 +171,7 @@ class HelpSupportScreen extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Contact Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Contact Card ────────────────────────────────────────────────────────────
 
 class _ContactCard extends StatelessWidget {
   final ContactOption option;
@@ -217,7 +217,7 @@ class _ContactCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Category Chip â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Category Chip ───────────────────────────────────────────────────────────
 
 class _HelpCategoryChip extends StatelessWidget {
   final String label;
@@ -259,7 +259,7 @@ class _HelpCategoryChip extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Article Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Article Card ────────────────────────────────────────────────────────────
 
 class _ArticleCard extends StatefulWidget {
   final HelpArticle article;
@@ -363,7 +363,7 @@ class _ArticleCardState extends State<_ArticleCard> {
   }
 }
 
-// â”€â”€â”€ Ticket Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Ticket Card ─────────────────────────────────────────────────────────────
 
 class _TicketCard extends StatelessWidget {
   final SupportTicket ticket;

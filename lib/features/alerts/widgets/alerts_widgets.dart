@@ -1,4 +1,4 @@
-﻿/// Alerts Module â€” Shared Reusable UI Components
+/// Alerts Module — Shared Reusable UI Components
 /// Module Color: Red (0xFFEF4444)
 /// Visibility: All roles EXCEPT Owner
 
@@ -172,7 +172,7 @@ class AlertsEmptyState extends StatelessWidget {
 }
 
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// ALERT CARD â€” Pending
+// ALERT CARD — Pending
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class PendingAlertCard extends StatelessWidget {
@@ -220,7 +220,7 @@ class PendingAlertCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Top row â€” priority chip + time
+            // Top row — priority chip + time
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -259,7 +259,7 @@ class PendingAlertCard extends StatelessWidget {
             ),
             const Spacer(),
 
-            // Bottom row â€” assignee + actions
+            // Bottom row — assignee + actions
             Row(
               children: [
                 if (alert.assigneeName != null) ...[
@@ -305,7 +305,7 @@ class PendingAlertCard extends StatelessWidget {
 }
 
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// ALERT CARD â€” Resolved
+// ALERT CARD — Resolved
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class ResolvedAlertCard extends StatelessWidget {
@@ -338,7 +338,7 @@ class ResolvedAlertCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Top row â€” status + time
+            // Top row — status + time
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -843,7 +843,7 @@ class StaffPickerTile extends StatelessWidget {
                     children: [
                       Text(staff.role, style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
                       if (staff.branch != null) ...[
-                        const Text(' â€¢ ', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                        const Text(' • ', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
                         Text(staff.branch!, style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
                       ],
                     ],

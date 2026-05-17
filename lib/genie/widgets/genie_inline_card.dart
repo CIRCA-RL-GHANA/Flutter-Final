@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// GenieInlineCard â€“ Rich Module Cards Rendered Inside the Chat Thread
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// GenieInlineCard – Rich Module Cards Rendered Inside the Chat Thread
 ///
 /// Each card type renders a functional micro-widget. Cards reuse module
 /// color identities and expose action buttons that feed back into the
@@ -93,7 +93,7 @@ class GenieInlineCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Card Shell â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Card Shell ───────────────────────────────────────────────────────────────
 class _CardShell extends StatelessWidget {
   final Color accentColor;
   final Widget child;
@@ -166,7 +166,7 @@ class _CardShell extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Action Button â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Action Button ────────────────────────────────────────────────────────────
 class _CardActionButton extends StatelessWidget {
   final String label;
   final Color color;
@@ -216,7 +216,7 @@ class _CardActionButton extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Balance Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Balance Card ────────────────────────────────────────────────────────────
 class _BalanceCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _BalanceCard({required this.data});
@@ -289,7 +289,7 @@ class _BalanceCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Transaction Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Transaction Card ─────────────────────────────────────────────────────────
 class _TransactionCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _TransactionCard({required this.data});
@@ -343,7 +343,7 @@ class _TransactionCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Order Summary Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Order Summary Card ───────────────────────────────────────────────────────
 class _OrderSummaryCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _OrderSummaryCard({required this.data});
@@ -382,7 +382,7 @@ class _OrderSummaryCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Order Tracker Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Order Tracker Card ───────────────────────────────────────────────────────
 class _OrderTrackerCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _OrderTrackerCard({required this.data});
@@ -409,7 +409,7 @@ class _OrderTrackerCard extends StatelessWidget {
                     size: 14, color: AppColors.textSecondary),
                 const SizedBox(width: 4),
                 Text(
-                  '${data['status'] ?? 'In transit'} Â· ETA: ${data['eta'] ?? 'â€”'}',
+                  '${data['status'] ?? 'In transit'} Â· ETA: ${data['eta'] ?? '—'}',
                   style: const TextStyle(
                       color: AppColors.textSecondary, fontSize: 12),
                 ),
@@ -429,7 +429,7 @@ class _OrderTrackerCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Shop Carousel Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Shop Carousel Card ───────────────────────────────────────────────────────
 class _ShopCarouselCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _ShopCarouselCard({required this.data});
@@ -497,7 +497,7 @@ class _ShopCarouselCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Feed Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Feed Card ────────────────────────────────────────────────────────────────
 class _FeedCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _FeedCard({required this.data});
@@ -528,7 +528,7 @@ class _FeedCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Live Orders Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Live Orders Card ─────────────────────────────────────────────────────────
 class _LiveOrdersCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _LiveOrdersCard({required this.data});
@@ -589,7 +589,7 @@ class _LiveOrdersCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Driver Delivery Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Driver Delivery Card ─────────────────────────────────────────────────────
 class _DriverDeliveryCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _DriverDeliveryCard({required this.data});
@@ -615,7 +615,7 @@ class _DriverDeliveryCard extends StatelessWidget {
                         style: const TextStyle(fontWeight: FontWeight.w600)),
                   ]),
                   const SizedBox(height: 4),
-                  Text('ETA: ${data['eta'] ?? 'â€”'}',
+                  Text('ETA: ${data['eta'] ?? '—'}',
                       style: const TextStyle(
                           color: AppColors.textSecondary, fontSize: 12)),
                   const SizedBox(height: 12),
@@ -657,7 +657,7 @@ class _DriverDeliveryCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Alert List Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Alert List Card ──────────────────────────────────────────────────────────
 class _AlertListCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _AlertListCard({required this.data});
@@ -710,7 +710,7 @@ class _AlertListCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Chat List Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Chat List Card ───────────────────────────────────────────────────────────
 class _ChatListCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _ChatListCard({required this.data});
@@ -749,7 +749,7 @@ class _ChatListCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Operations Overview Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Operations Overview Card ─────────────────────────────────────────────────
 class _OperationsCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _OperationsCard({required this.data});
@@ -809,7 +809,7 @@ class _StatChip extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Profile Strength Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Profile Strength Card ────────────────────────────────────────────────────
 class _ProfileStrengthCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _ProfileStrengthCard({required this.data});
@@ -859,7 +859,7 @@ class _ProfileStrengthCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Notification Hub Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Notification Hub Card ────────────────────────────────────────────────────
 class _NotificationHubCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _NotificationHubCard({required this.data});
@@ -889,7 +889,7 @@ class _NotificationHubCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Help Guide Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Help Guide Card ─────────────────────────────────────────────────────────
 class _HelpGuideCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _HelpGuideCard({required this.data});
@@ -936,7 +936,7 @@ class _HelpGuideCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Confirmation Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Confirmation Card ────────────────────────────────────────────────────────
 class _ConfirmationCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _ConfirmationCard({required this.data});
@@ -999,7 +999,7 @@ class _ConfirmationCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Greeting Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Greeting Card ────────────────────────────────────────────────────────────
 class _GreetingCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _GreetingCard({required this.data});
@@ -1010,7 +1010,7 @@ class _GreetingCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Coming Soon Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Coming Soon Card ─────────────────────────────────────────────────────────
 class _ComingSoonCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -1026,7 +1026,7 @@ class _ComingSoonCard extends StatelessWidget {
         children: const [
           Icon(Icons.open_in_new, size: 14, color: AppColors.textTertiary),
           SizedBox(width: 6),
-          Text('Opening full screenâ€¦',
+          Text('Opening full screen…',
               style: TextStyle(
                   fontSize: 12, color: AppColors.textSecondary)),
         ],
@@ -1035,7 +1035,7 @@ class _ComingSoonCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Error Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Error Card ───────────────────────────────────────────────────────────────
 class _ErrorCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _ErrorCard({required this.data});

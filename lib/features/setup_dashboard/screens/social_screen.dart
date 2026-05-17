@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD1.11: SOCIAL â€” Social Media & Updates
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD1.11: SOCIAL — Social Media & Updates
 /// Post feed, scheduled content, engagement metrics
 /// RBAC: Owner(personal), Admin(full), BM(branch), SO(full), BSO(branch),
 ///        Monitor/BrMon(view), RO/BRO(view), Driver(view)
@@ -43,7 +43,7 @@ class SocialScreen extends StatelessWidget {
             ),
           body: CustomScrollView(
             slivers: [
-              // â”€â”€â”€ Engagement KPIs â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Engagement KPIs ──────────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -71,7 +71,7 @@ class SocialScreen extends StatelessWidget {
                           label: 'Avg. Engage',
                           value: (() {
                             final published = posts.where((p) => p.status == PostStatus.published).toList();
-                            if (published.isEmpty) return 'â€”';
+                            if (published.isEmpty) return '—';
                             final avg = published.fold<double>(0, (s, p) => s + p.engagementRate) / published.length;
                             return '${avg.toStringAsFixed(1)}%';
                           })(),
@@ -84,7 +84,7 @@ class SocialScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Status Filter â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Status Filter ────────────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -105,7 +105,7 @@ class SocialScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Platform Distribution â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Platform Distribution ────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -164,7 +164,7 @@ class SocialScreen extends StatelessWidget {
                   child: const SetupSectionTitle(title: 'Posts', icon: Icons.forum),
                 ),
               ),
-              // â”€â”€â”€ AI Insights â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── AI Insights ─────────────────────────────────────────
               SliverToBoxAdapter(
                 child: Consumer<AIInsightsNotifier>(
                   builder: (context, ai, _) {
@@ -360,7 +360,7 @@ class _PostStat extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Content Type Chip â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Content Type Chip ───────────────────────────────────────────────────────
 
 class _ContentTypeChip extends StatelessWidget {
   final String label;

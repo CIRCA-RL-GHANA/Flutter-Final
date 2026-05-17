@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// LIVE MODULE â€” Screen 16: Driver Home (Transport)
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// LIVE MODULE — Screen 16: Driver Home (Transport)
 /// Transport driver dashboard: active ride, earnings, availability,
 /// ride queue, vehicle info, and quick actions
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -186,7 +186,7 @@ class LiveTransportDriverHomeScreen extends StatelessWidget {
                     child: LiveEmptyState(
                       icon: Icons.directions_car,
                       title: 'No rides in queue',
-                      subtitle: 'Stay online â€” new ride requests will appear here.',
+                      subtitle: 'Stay online — new ride requests will appear here.',
                     ),
                   ),
                 )
@@ -284,7 +284,7 @@ class _ActiveRideCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 8),
-            Text('${ride.passengerName} â€¢ ${ride.passengerRideCount} passenger(s)', style: TextStyle(fontSize: 13, color: Colors.white.withValues(alpha: 0.9))),
+            Text('${ride.passengerName} • ${ride.passengerRideCount} passenger(s)', style: TextStyle(fontSize: 13, color: Colors.white.withValues(alpha: 0.9))),
             const SizedBox(height: 4),
             Row(
               children: [
@@ -351,7 +351,7 @@ class _RideRequestCard extends StatelessWidget {
           const SizedBox(height: 8),
           Row(
             children: [
-              Text('${ride.distanceKm.toStringAsFixed(1)} km â€¢ ${ride.etaMinutes} min', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+              Text('${ride.distanceKm.toStringAsFixed(1)} km • ${ride.etaMinutes} min', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
               const Spacer(),
               SizedBox(
                 height: 32,

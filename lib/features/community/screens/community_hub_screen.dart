@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// COMMUNITY MODULE â€” Hub Screen
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// COMMUNITY MODULE — Hub Screen
 /// Discover all 7 UGO community archetypes:
 /// Library Â· Playlist Â· Theater Â· Fair Â· Hub Â· Hangout Â· Journal
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -55,7 +55,7 @@ class _CommunityHubScreenState extends State<CommunityHubScreen> {
           backgroundColor: AppColors.backgroundLight,
           body: CustomScrollView(
             slivers: [
-              // â”€â”€ SliverAppBar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ── SliverAppBar ──────────────────────────────────────────
               SliverAppBar(
                 expandedHeight: 180,
                 pinned: true,
@@ -101,7 +101,7 @@ class _CommunityHubScreenState extends State<CommunityHubScreen> {
                 ),
               ),
 
-              // â”€â”€ AI insight â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ── AI insight ────────────────────────────────────────────
               if (ai.insights.isNotEmpty)
                 SliverToBoxAdapter(
                   child: Container(
@@ -120,7 +120,7 @@ class _CommunityHubScreenState extends State<CommunityHubScreen> {
                   ),
                 ),
 
-              // â”€â”€ 7 archetypes grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ── 7 archetypes grid ──────────────────────────────────────
               const SliverToBoxAdapter(
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(16, 18, 16, 8),
@@ -143,7 +143,7 @@ class _CommunityHubScreenState extends State<CommunityHubScreen> {
                 ),
               ),
 
-              // â”€â”€ Trending â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ── Trending ───────────────────────────────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(16, 20, 16, 8),

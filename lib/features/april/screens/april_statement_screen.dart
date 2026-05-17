@@ -1,4 +1,4 @@
-﻿/// APRIL Screen 5 â€” Personal Statement Dashboard
+/// APRIL Screen 5 — Personal Statement Dashboard
 /// 7 modular statement cards, version control, completion tracking
 
 import 'package:flutter/material.dart';
@@ -445,7 +445,7 @@ class _OverallProgressCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      '${provider.statementCards.length} sections â€¢ ${provider.statementCards.where((c) => c.completionPercent == 100).length} complete',
+                      '${provider.statementCards.length} sections • ${provider.statementCards.where((c) => c.completionPercent == 100).length} complete',
                       style: const TextStyle(color: Colors.white60, fontSize: 12),
                     ),
                   ],

@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// LIVE MODULE â€” Screen 13: Delivery Verification Flow
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// LIVE MODULE — Screen 13: Delivery Verification Flow
 /// Multi-method verification: PIN entry, photo capture,
 /// signature, biometric, proof of delivery, and confirmation
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -230,7 +230,7 @@ class _PinStep extends StatelessWidget {
             maxLength: 4,
             style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w800, letterSpacing: 16),
             decoration: InputDecoration(
-              hintText: 'â€¢ â€¢ â€¢ â€¢',
+              hintText: '• • • •',
               counterText: '',
               filled: true,
               fillColor: const Color(0xFF11131C),

@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// LIVE MODULE â€” Screen 1: Live Dashboard (Main Operations View)
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// LIVE MODULE — Screen 1: Live Dashboard (Main Operations View)
 /// Central command center: Tab bar (Orders/Returns/Packages),
 /// operations overview, urgent actions, predictive insights, controls
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -72,7 +72,7 @@ class _LiveDashboardScreenState extends State<LiveDashboardScreen> with SingleTi
               ],
             ),
             leadingWidth: 70,
-            title: const Text('LIVE â€¢ Operations', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: AppColors.textPrimary)),
+            title: const Text('LIVE • Operations', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: AppColors.textPrimary)),
             actions: [
               IconButton(icon: const Icon(Icons.business, size: 20), color: AppColors.textSecondary, onPressed: () {}),
               IconButton(
@@ -147,7 +147,7 @@ class _LiveDashboardScreenState extends State<LiveDashboardScreen> with SingleTi
   }
 }
 
-// â”€â”€â”€ Orders View â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Orders View ─────────────────────────────────────────────────────────────
 
 class _OrdersView extends StatelessWidget {
   final LiveProvider prov;
@@ -302,7 +302,7 @@ class _OrdersView extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Returns View â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Returns View ────────────────────────────────────────────────────────────
 
 class _ReturnsView extends StatelessWidget {
   final LiveProvider prov;
@@ -359,7 +359,7 @@ class _ReturnsView extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Packages View â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Packages View ───────────────────────────────────────────────────────────
 
 class _PackagesView extends StatelessWidget {
   final LiveProvider prov;

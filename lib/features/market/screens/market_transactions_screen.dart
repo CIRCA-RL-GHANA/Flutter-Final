@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// MARKET MODULE â€” Screen 7: My Transactions Dashboard
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// MARKET MODULE — Screen 7: My Transactions Dashboard
 /// Active orders, order history, returns, rides, FAB for new order
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
@@ -159,7 +159,7 @@ class _MarketTransactionsScreenState extends State<MarketTransactionsScreen>
   }
 }
 
-// â”€â”€ KPI Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── KPI Card ───────────────────────────────────────────────────────
 class _KPICard extends StatelessWidget {
   final IconData icon;
   final String label;
@@ -201,7 +201,7 @@ class _KPICard extends StatelessWidget {
   }
 }
 
-// â”€â”€ Active Orders Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Active Orders Tab ──────────────────────────────────────────────
 class _ActiveTab extends StatelessWidget {
   final MarketProvider prov;
 
@@ -240,7 +240,7 @@ class _ActiveTab extends StatelessWidget {
   }
 }
 
-// â”€â”€ History Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── History Tab ────────────────────────────────────────────────────
 class _HistoryTab extends StatelessWidget {
   final MarketProvider prov;
 
@@ -275,7 +275,7 @@ class _HistoryTab extends StatelessWidget {
   }
 }
 
-// â”€â”€ Returns Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Returns Tab ────────────────────────────────────────────────────
 class _ReturnsTab extends StatelessWidget {
   final MarketProvider prov;
 
@@ -339,7 +339,7 @@ class _ReturnsTab extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '${ret.items.length} item(s) â€¢ ${ret.reason.name}',
+                  '${ret.items.length} item(s) • ${ret.reason.name}',
                   style: TextStyle(fontSize: 12, color: AppColors.textSecondary),
                 ),
                 const SizedBox(height: 8),
@@ -375,7 +375,7 @@ class _ReturnsTab extends StatelessWidget {
   }
 }
 
-// â”€â”€ Rides Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Rides Tab ──────────────────────────────────────────────────────
 class _RidesTab extends StatelessWidget {
   final MarketProvider prov;
 
@@ -517,7 +517,7 @@ class _RidesTab extends StatelessWidget {
   }
 }
 
-// â”€â”€ Order Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Order Card ─────────────────────────────────────────────────────
 class _OrderCard extends StatelessWidget {
   final MarketOrder order;
   final VoidCallback? onTap;

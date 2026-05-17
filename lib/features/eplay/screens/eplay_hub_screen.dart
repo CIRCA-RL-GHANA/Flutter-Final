@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// e-PLAY MODULE â€” Hub Screen
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// e-PLAY MODULE — Hub Screen
 /// Digital goods marketplace hub for African creators.
 /// Entry point: category carousel, featured content, creator spotlight.
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -12,7 +12,7 @@ import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../providers/eplay_provider.dart';
 
-// â”€â”€ Module color
+// ── Module color
 const Color kEPlayColor = Color(0xFF7C3AED);       // Deep violet
 const Color kEPlayColorDark = Color(0xFF4C1D95);
 const Color kEPlayAccent = Color(0xFFDDD6FE);
@@ -75,7 +75,7 @@ class _EPlayHubScreenState extends State<EPlayHubScreen> {
             body: CustomScrollView(
               controller: _scrollController,
               slivers: [
-                // â”€â”€ Hero SliverAppBar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                // ── Hero SliverAppBar ────────────────────────────────────
                 SliverAppBar(
                   expandedHeight: 220,
                   pinned: true,
@@ -103,7 +103,7 @@ class _EPlayHubScreenState extends State<EPlayHubScreen> {
                   ),
                 ),
 
-                // â”€â”€ AI Insight banner â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                // ── AI Insight banner ───────────────────────────────────
                 if (ai.insights.isNotEmpty)
                   SliverToBoxAdapter(
                     child: Container(
@@ -127,10 +127,10 @@ class _EPlayHubScreenState extends State<EPlayHubScreen> {
                     ),
                   ),
 
-                // â”€â”€ Category pills â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                // ── Category pills ──────────────────────────────────────
                 SliverToBoxAdapter(child: _buildCategoryRow()),
 
-                // â”€â”€ Featured content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                // ── Featured content ────────────────────────────────────
                 const SliverToBoxAdapter(
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(16, 20, 16, 8),
@@ -139,10 +139,10 @@ class _EPlayHubScreenState extends State<EPlayHubScreen> {
                 ),
                 SliverToBoxAdapter(child: _buildFeaturedCarousel(eplay)),
 
-                // â”€â”€ Quick actions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                // ── Quick actions ────────────────────────────────────────
                 SliverToBoxAdapter(child: _buildQuickActions()),
 
-                // â”€â”€ Creator spotlight â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                // ── Creator spotlight ───────────────────────────────────
                 const SliverToBoxAdapter(
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(16, 20, 16, 8),
@@ -188,7 +188,7 @@ class _EPlayHubScreenState extends State<EPlayHubScreen> {
               const Text('e-Play', style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold)),
               const SizedBox(height: 6),
               const Text(
-                'African digital content â€” music, film, books & more.\nOwn it. Stream it. Carry it everywhere.',
+                'African digital content — music, film, books & more.\nOwn it. Stream it. Carry it everywhere.',
                 style: TextStyle(color: Colors.white70, fontSize: 13),
               ),
               const Spacer(),

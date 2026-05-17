@@ -1,4 +1,4 @@
-﻿/// GO Module â€” Shared Reusable UI Components
+/// GO Module — Shared Reusable UI Components
 /// Module Color: Emerald Green (0xFF10B981)
 /// Visibility: Owner + Administrator only
 
@@ -155,7 +155,7 @@ class GoContextChip extends StatelessWidget {
           children: [
             Text(ctx.typeEmoji, style: const TextStyle(fontSize: 14)),
             const SizedBox(width: 6),
-            Text('${ctx.name} â€¢ ${ctx.role}', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: kGoColorDark)),
+            Text('${ctx.name} • ${ctx.role}', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: kGoColorDark)),
             const SizedBox(width: 4),
             const Icon(Icons.keyboard_arrow_down, size: 16, color: kGoColorDark),
           ],
@@ -367,7 +367,7 @@ class GoTransactionRow extends StatelessWidget {
             ),
             if (transaction.feeAmount != null) ...[
               const SizedBox(height: 6),
-              Text('Fee: ${transaction.feeAmount!.toStringAsFixed(2)} QP â€¢ Net: ${transaction.netAmount?.toStringAsFixed(2) ?? '-'} QP',
+              Text('Fee: ${transaction.feeAmount!.toStringAsFixed(2)} QP • Net: ${transaction.netAmount?.toStringAsFixed(2) ?? '-'} QP',
                 style: const TextStyle(fontSize: 10, color: Color(0xFF9CA3AF))),
             ],
           ],
@@ -411,7 +411,7 @@ class GoTabCard extends StatelessWidget {
                       children: [
                         Text(tab.id, style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF), fontWeight: FontWeight.w500)),
                         const SizedBox(width: 6),
-                        Text('â€¢ ${tab.entityName} â€¢ ${tab.entityRole}', style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
+                        Text('• ${tab.entityName} • ${tab.entityRole}', style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
                         const Spacer(),
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
@@ -495,7 +495,7 @@ class GoRequestCard extends StatelessWidget {
             const SizedBox(height: 6),
             Text(request.title, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
             const SizedBox(height: 4),
-            Text('by ${request.submittedBy} â€¢ ${request.id}', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+            Text('by ${request.submittedBy} • ${request.id}', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
           ],
         ),
       ),
@@ -541,7 +541,7 @@ class GoFavoriteCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(entity.name, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-                      Text('${entity.handle} â€¢ ${entity.role}', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                      Text('${entity.handle} • ${entity.role}', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
                     ],
                   ),
                 ),
@@ -743,7 +743,7 @@ class GoAuditRow extends StatelessWidget {
               children: [
                 Text(entry.action, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500)),
                 const SizedBox(height: 2),
-                Text('${entry.actor}${entry.ipAddress != null ? ' â€¢ ${entry.ipAddress}' : ''}',
+                Text('${entry.actor}${entry.ipAddress != null ? ' • ${entry.ipAddress}' : ''}',
                   style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
               ],
             ),

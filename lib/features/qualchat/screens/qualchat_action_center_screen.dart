@@ -1,4 +1,4 @@
-﻿/// qualChat Screen 12 â€” Action Center
+/// qualChat Screen 12 — Action Center
 /// Task manager: priority sections, AI suggestions, profile completeness, analytics
 
 import 'package:flutter/material.dart';
@@ -104,7 +104,7 @@ class QualChatActionCenterScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // â”€â”€â”€â”€ ACT NOW â”€â”€â”€â”€
+              // ──── ACT NOW ────
               if (actNow.isNotEmpty) ...[
                 _SectionLabel(
                     title: 'ðŸ”¥ ACT NOW',
@@ -114,7 +114,7 @@ class QualChatActionCenterScreen extends StatelessWidget {
                 const SizedBox(height: 16),
               ],
 
-              // â”€â”€â”€â”€ CONSIDER LATER â”€â”€â”€â”€
+              // ──── CONSIDER LATER ────
               if (considerLater.isNotEmpty) ...[
                 _SectionLabel(
                     title: 'ðŸ’¡ CONSIDER LATER',
@@ -124,7 +124,7 @@ class QualChatActionCenterScreen extends StatelessWidget {
                 const SizedBox(height: 16),
               ],
 
-              // â”€â”€â”€â”€ AI SUGGESTIONS â”€â”€â”€â”€
+              // ──── AI SUGGESTIONS ────
               if (suggestions.isNotEmpty) ...[
                 const _SectionLabel(
                     title: 'ðŸ¤– AI SUGGESTIONS', count: 0, color: kChatColor),

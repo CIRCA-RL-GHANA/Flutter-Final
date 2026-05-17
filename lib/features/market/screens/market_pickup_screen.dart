@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// MARKET MODULE â€” Screen 8: Self-Pickup Process
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// MARKET MODULE — Screen 8: Self-Pickup Process
 /// 5 Phases: Preparation â†’ Arrival â†’ Verification â†’ Handoff â†’ Complete
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
@@ -258,7 +258,7 @@ class _MarketPickupScreenState extends State<MarketPickupScreen> {
   }
 }
 
-// â”€â”€ Phase 1: Preparation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Phase 1: Preparation ───────────────────────────────────────────
 class _PreparationPhase extends StatelessWidget {
   final MarketOrder order;
 
@@ -334,7 +334,7 @@ class _PreparationPhase extends StatelessWidget {
   }
 }
 
-// â”€â”€ Phase 2: Arrival â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Phase 2: Arrival ───────────────────────────────────────────────
 class _ArrivalPhase extends StatelessWidget {
   final MarketOrder order;
 
@@ -425,7 +425,7 @@ class _ArrivalPhase extends StatelessWidget {
   }
 }
 
-// â”€â”€ Phase 3: Verification â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Phase 3: Verification ──────────────────────────────────────────
 class _VerificationPhase extends StatelessWidget {
   final MarketOrder order;
 
@@ -527,7 +527,7 @@ class _VerificationStep extends StatelessWidget {
   }
 }
 
-// â”€â”€ Phase 4: Handoff â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Phase 4: Handoff ───────────────────────────────────────────────
 class _HandoffPhase extends StatelessWidget {
   final MarketOrder order;
 
@@ -592,7 +592,7 @@ class _HandoffPhase extends StatelessWidget {
   }
 }
 
-// â”€â”€ Phase 5: Complete â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Phase 5: Complete ──────────────────────────────────────────────
 class _CompletePhase extends StatelessWidget {
   final MarketOrder order;
 

@@ -1,4 +1,4 @@
-﻿/// GO Screen 3 â€” Verification Modal
+/// GO Screen 3 — Verification Modal
 /// Universal bottom-sheet verification with 4 methods:
 /// Face ID, Fingerprint, PIN, OTP
 /// 4 states: pending, verifying, verified, failed

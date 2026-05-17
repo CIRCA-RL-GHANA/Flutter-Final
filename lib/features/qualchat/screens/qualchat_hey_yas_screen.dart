@@ -1,4 +1,4 @@
-﻿/// qualChat Screen 2 â€” Hey Ya (Owner Only)
+/// qualChat Screen 2 — Hey Ya (Owner Only)
 /// Dating feature: express romantic interest, get AI-matched, plan a date
 
 import 'package:flutter/material.dart';
@@ -152,8 +152,8 @@ class QualChatHeyYasScreen extends StatelessWidget {
                     ? const QualChatEmptyState(
                         icon: Icons.favorite_border,
                         title: 'No sparks yet',
-                        message: 'Send a Hey Ya to someone you like â€” tell them\nyou\'re interested and pick a date idea âœ¨',
-                        ctaLabel: 'âœ¨ Send Hey Ya',
+                        message: 'Send a Hey Ya to someone you like — tell them\nyou\'re interested and pick a date idea ✨',
+                        ctaLabel: '✨ Send Hey Ya',
                       )
                     : ListView.builder(
                         itemCount: heyYas.length,

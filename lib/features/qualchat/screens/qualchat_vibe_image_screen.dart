@@ -1,4 +1,4 @@
-﻿/// qualChat Screen 5 â€” My Hey Ya Image (Owner Only)
+/// qualChat Screen 5 — My Hey Ya Image (Owner Only)
 /// Vibe Snapshot Studio: photo management, analytics, AI enhancement
 
 import 'package:flutter/material.dart';
@@ -59,7 +59,7 @@ class QualChatVibeImageScreen extends StatelessWidget {
                       'YOUR PHOTO',
                       style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: kChatSocial),
                     ),
-                    const Text('16:9 â€¢ HD', style: TextStyle(fontSize: 12, color: Color(0xFF9CA3AF))),
+                    const Text('16:9 • HD', style: TextStyle(fontSize: 12, color: Color(0xFF9CA3AF))),
                   ],
                 ),
               ),
@@ -72,7 +72,7 @@ class QualChatVibeImageScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'Status: ðŸŸ¢ Active â€¢ Public â€¢ Sparkling!',
+                    'Status: ðŸŸ¢ Active • Public • Sparkling!',
                     style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFF1A1A1A)),
                   ),
                   const SizedBox(height: 4),

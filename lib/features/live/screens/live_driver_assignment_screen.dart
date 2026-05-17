@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// LIVE MODULE â€” Screen 4: Driver Assignment Flow
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// LIVE MODULE — Screen 4: Driver Assignment Flow
 /// Intelligent driver matching: recommended driver, alternatives,
 /// driver map view, assignment settings, confirmation
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -54,7 +54,7 @@ class _LiveDriverAssignmentScreenState extends State<LiveDriverAssignmentScreen>
         return Scaffold(
           backgroundColor: AppColors.backgroundLight,
           appBar: LiveAppBar(
-            title: 'Assign Driver â€¢ Order #${order.id}',
+            title: 'Assign Driver • Order #${order.id}',
             actions: [
               IconButton(
                 icon: const Icon(Icons.close, size: 20),
@@ -332,7 +332,7 @@ class _DetailRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text('â€¢ $label', style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+          Text('• $label', style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
           Text(value, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
         ],
       ),

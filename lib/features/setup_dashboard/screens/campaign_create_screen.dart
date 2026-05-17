@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD1.10-CREATE: CAMPAIGN CREATE WIZARD â€” 5-Step Form
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD1.10-CREATE: CAMPAIGN CREATE WIZARD — 5-Step Form
 /// Steps: Type â†’ Audience â†’ Budget â†’ Content â†’ Review
 /// RBAC: Admin(full), BM(branch), SO(full), BSO(branch)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -176,7 +176,7 @@ class _CampaignCreateScreenState extends State<CampaignCreateScreen> {
   }
 }
 
-// â”€â”€â”€ Step Indicator â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Step Indicator ──────────────────────────────────────────────────────────
 
 class _CampaignStepIndicator extends StatelessWidget {
   final int currentStep;
@@ -224,7 +224,7 @@ class _CampaignStepIndicator extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Step 1: Type â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Step 1: Type ────────────────────────────────────────────────────────────
 
 class _TypeStep extends StatelessWidget {
   final TextEditingController nameCtrl;
@@ -311,7 +311,7 @@ class _TypeStep extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Step 2: Audience â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Step 2: Audience ────────────────────────────────────────────────────────
 
 class _AudienceStep extends StatelessWidget {
   final Set<String> selectedAudiences;
@@ -415,7 +415,7 @@ class _AudienceStep extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Step 3: Budget â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Step 3: Budget ──────────────────────────────────────────────────────────
 
 class _BudgetStep extends StatelessWidget {
   final TextEditingController budgetCtrl;
@@ -539,9 +539,9 @@ class _BudgetStep extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 8),
-              const SetupInfoRow(label: 'Est. Reach', value: '5,000 â€“ 12,000'),
-              const SetupInfoRow(label: 'Est. Clicks', value: '250 â€“ 600'),
-              const SetupInfoRow(label: 'Est. Cost/Click', value: 'â‚µ0.15 â€“ â‚µ0.40'),
+              const SetupInfoRow(label: 'Est. Reach', value: '5,000 – 12,000'),
+              const SetupInfoRow(label: 'Est. Clicks', value: '250 – 600'),
+              const SetupInfoRow(label: 'Est. Cost/Click', value: 'â‚µ0.15 – â‚µ0.40'),
             ],
           ),
         ),
@@ -551,7 +551,7 @@ class _BudgetStep extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Step 4: Content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Step 4: Content ─────────────────────────────────────────────────────────
 
 class _ContentStep extends StatelessWidget {
   final TextEditingController headlineCtrl;
@@ -645,7 +645,7 @@ class _ContentStep extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Step 5: Review â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Step 5: Review ──────────────────────────────────────────────────────────
 
 class _CampaignReviewStep extends StatelessWidget {
   final String name;
@@ -694,10 +694,10 @@ class _CampaignReviewStep extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SetupSectionTitle(title: 'Campaign Summary', icon: Icons.campaign),
-              SetupInfoRow(label: 'Name', value: name.isNotEmpty ? name : 'â€”'),
+              SetupInfoRow(label: 'Name', value: name.isNotEmpty ? name : '—'),
               SetupInfoRow(label: 'Type', value: type.name),
               SetupInfoRow(label: 'Goal', value: goal.name),
-              SetupInfoRow(label: 'Budget', value: budget.isNotEmpty ? 'â‚µ$budget' : 'â€”'),
+              SetupInfoRow(label: 'Budget', value: budget.isNotEmpty ? 'â‚µ$budget' : '—'),
               SetupInfoRow(label: 'Channel', value: channel),
               SetupInfoRow(label: 'Audiences', value: audiences.join(', ')),
             ],
@@ -709,9 +709,9 @@ class _CampaignReviewStep extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SetupSectionTitle(title: 'Estimated Results', icon: Icons.analytics),
-              const SetupInfoRow(label: 'Reach', value: '5,000 â€“ 12,000'),
-              const SetupInfoRow(label: 'Engagement', value: '3.5% â€“ 5.2%'),
-              const SetupInfoRow(label: 'Conversions', value: '50 â€“ 150'),
+              const SetupInfoRow(label: 'Reach', value: '5,000 – 12,000'),
+              const SetupInfoRow(label: 'Engagement', value: '3.5% – 5.2%'),
+              const SetupInfoRow(label: 'Conversions', value: '50 – 150'),
             ],
           ),
         ),
@@ -721,7 +721,7 @@ class _CampaignReviewStep extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Nav Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Nav Bar ─────────────────────────────────────────────────────────────────
 
 class _CampaignNavBar extends StatelessWidget {
   final int currentStep;
@@ -795,7 +795,7 @@ class _CampaignNavBar extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Shared Widgets â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Shared Widgets ──────────────────────────────────────────────────────────
 
 class _SelectionTile extends StatelessWidget {
   final String title;

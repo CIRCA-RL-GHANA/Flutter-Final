@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD3.1: PROFILE â€” User/Entity Profile
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD3.1: PROFILE — User/Entity Profile
 /// Profile info, completeness, skills, social links, rating
 /// RBAC: All roles (personal/entity/branch scope varies)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -43,7 +43,7 @@ class ProfileScreen extends StatelessWidget {
             ),
           body: CustomScrollView(
             slivers: [
-              // â”€â”€â”€ Profile Header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Profile Header ───────────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -130,8 +130,8 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Contact Info â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-              // â”€â”€â”€ AI Insights â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Contact Info ─────────────────────────────
+              // ─── AI Insights ─────────────────────────────────────────
               SliverToBoxAdapter(
                 child: Consumer<AIInsightsNotifier>(
                   builder: (context, ai, _) {
@@ -195,7 +195,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Bio â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Bio ──────────────────────────────────────
               if (profile.bio != null)
                 SliverToBoxAdapter(
                   child: Padding(
@@ -215,7 +215,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
 
-              // â”€â”€â”€ Skills â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Skills ───────────────────────────────────
               if (profile.skills.isNotEmpty)
                 SliverToBoxAdapter(
                   child: Padding(
@@ -246,7 +246,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
 
-              // â”€â”€â”€ Social Links â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Social Links ──────────────────────────
               if (profile.socialLinks.isNotEmpty)
                 SliverToBoxAdapter(
                   child: Padding(
@@ -271,7 +271,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
 
-              // â”€â”€â”€ Activity Summary â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Activity Summary ─────────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -325,7 +325,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ SOS Button (Owner / Admin / BranchManager only) â”€â”€â”€â”€â”€
+              // ─── SOS Button (Owner / Admin / BranchManager only) ─────
               SliverToBoxAdapter(
                 child: SetupSOSButton(
                   onPressed: () {},
@@ -360,7 +360,7 @@ class ProfileScreen extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Profile Stat â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Profile Stat ────────────────────────────────────────────────────────────
 
 class _ProfileStat extends StatelessWidget {
   final String label;

@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SCREEN 6 â€” Search & Explore
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SCREEN 6 — Search & Explore
 /// Five tabs: Top, Latest, Accounts, Hashtags, Nearby.
 /// Trending hashtags, suggested accounts, recent searches.
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -129,7 +129,7 @@ class _BodyState extends State<_Body> with SingleTickerProviderStateMixin {
   }
 }
 
-// â”€â”€â”€ Discover (Pre-Search) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Discover (Pre-Search) ──────────────────────────────────────────────────
 
 class _DiscoverView extends StatelessWidget {
   final UpdatesProvider prov;
@@ -221,7 +221,7 @@ class _DiscoverView extends StatelessWidget {
                               ],
                             ],
                           ),
-                          Text('${a.followerCount} followers â€¢ ${a.mutualConnections} mutual', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                          Text('${a.followerCount} followers • ${a.mutualConnections} mutual', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                         ],
                       ),
                     ),
@@ -251,7 +251,7 @@ class _DiscoverView extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Tab Results â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Tab Results ────────────────────────────────────────────────────────────
 
 class _TopResults extends StatelessWidget {
   final UpdatesProvider prov;
@@ -288,7 +288,7 @@ class _TopResults extends StatelessWidget {
                     Icon(Icons.auto_awesome, size: 14, color: kUpdatesColor),
                     const SizedBox(width: 6),
                     Text(
-                      'AI â€” Semantically ranked results',
+                      'AI — Semantically ranked results',
                       style: TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.w600,

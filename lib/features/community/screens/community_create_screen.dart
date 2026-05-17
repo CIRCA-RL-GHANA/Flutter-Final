@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// COMMUNITY MODULE â€” Create Community Screen
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// COMMUNITY MODULE — Create Community Screen
 /// User picks type â†’ fills details â†’ creates a community space.
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
@@ -17,7 +17,7 @@ const _types = [
   {'type': 'theater',  'label': 'Theater',  'icon': Icons.theaters,        'color': 0xFFDC2626, 'hint': 'Synchronized movie/show viewing groups'},
   {'type': 'fair',     'label': 'Fair',     'icon': Icons.storefront,      'color': 0xFFD97706, 'hint': 'Pop-up marketplace or artist showcase'},
   {'type': 'hub',      'label': 'Hub',      'icon': Icons.hub,             'color': 0xFF2563EB, 'hint': 'Topical forum, knowledge base, discussion'},
-  {'type': 'hangout',  'label': 'Hangout',  'icon': Icons.event,           'color': 0xFF059669, 'hint': 'Schedule events â€” virtual or physical'},
+  {'type': 'hangout',  'label': 'Hangout',  'icon': Icons.event,           'color': 0xFF059669, 'hint': 'Schedule events — virtual or physical'},
   {'type': 'journal',  'label': 'Journal',  'icon': Icons.book,            'color': 0xFF6366F1, 'hint': 'Blog, shared notes, community documentation'},
 ];
 
@@ -75,7 +75,7 @@ class _CommunityCreateScreenState extends State<CommunityCreateScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // â”€â”€ Step 1: Pick type â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                // ── Step 1: Pick type ─────────────────────────────────
                 const Text('Choose Type', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 4),
                 const Text('Each type enables a different way to connect.', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
@@ -128,7 +128,7 @@ class _CommunityCreateScreenState extends State<CommunityCreateScreen> {
 
                 const SizedBox(height: 24),
 
-                // â”€â”€ AI insight â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                // ── AI insight ────────────────────────────────────────
                 if (ai.insights.isNotEmpty)
                   Container(
                     margin: const EdgeInsets.only(bottom: 16),
@@ -141,7 +141,7 @@ class _CommunityCreateScreenState extends State<CommunityCreateScreen> {
                     ]),
                   ),
 
-                // â”€â”€ Step 2: Details â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                // ── Step 2: Details ────────────────────────────────────
                 const Text('Details', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 12),
 
@@ -215,7 +215,7 @@ class _CommunityCreateScreenState extends State<CommunityCreateScreen> {
                     icon: _creating
                         ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
                         : const Icon(Icons.check_circle_outline),
-                    label: Text(_creating ? 'Creatingâ€¦' : 'Create Community'),
+                    label: Text(_creating ? 'Creating…' : 'Create Community'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: color,
                       disabledBackgroundColor: AppColors.inputBorder,

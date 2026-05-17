@@ -1,4 +1,4 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// Shared Widgets for Setup Dashboard Module
 /// Reusable components: app bar, module cards, KPI badges, state cards,
 /// filter chips, section titles, permission gate, context badge
@@ -14,7 +14,7 @@ import '../models/setup_dashboard_models.dart';
 import '../models/setup_rbac.dart';
 import '../providers/setup_dashboard_provider.dart';
 
-// â”€â”€â”€ Setup Dashboard Module Color â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Setup Dashboard Module Color ────────────────────────────────────────────
 
 /// The canonical module color for Setup Dashboard.
 ///
@@ -23,7 +23,7 @@ import '../providers/setup_dashboard_provider.dart';
 /// every Setup Dashboard surface (KPI badges, FABs, RBAC chips, etc.).
 const Color kSetupColor = Color(0xFF22BDD8);
 
-// â”€â”€â”€ Setup App Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Setup App Bar ───────────────────────────────────────────────────────────
 
 class SetupAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -83,7 +83,7 @@ class SetupAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-// â”€â”€â”€ Setup Module Card (Hub Card) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Setup Module Card (Hub Card) ────────────────────────────────────────────
 
 class SetupModuleCard extends StatelessWidget {
   final DashboardCard card;
@@ -130,7 +130,7 @@ class SetupModuleCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              // â”€â”€â”€ Row 1: Icon + Badge Cluster â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Row 1: Icon + Badge Cluster ───────────
               Row(
                 children: [
                   Container(
@@ -193,7 +193,7 @@ class SetupModuleCard extends StatelessWidget {
               ),
               const SizedBox(height: 8),
 
-              // â”€â”€â”€ Title + Subtitle â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Title + Subtitle ──────────────────────
               Text(
                 card.title,
                 style: const TextStyle(
@@ -218,7 +218,7 @@ class SetupModuleCard extends StatelessWidget {
                 ),
               ],
 
-              // â”€â”€â”€ Status Dots (fleet / staff viz) â”€â”€â”€â”€â”€â”€
+              // ─── Status Dots (fleet / staff viz) ──────
               if (card.statusDots.isNotEmpty) ...[
                 const SizedBox(height: 6),
                 Wrap(
@@ -247,7 +247,7 @@ class SetupModuleCard extends StatelessWidget {
                 ),
               ],
 
-              // â”€â”€â”€ Progress Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Progress Bar ─────────────────────────
               if (card.progress != null) ...[
                 const SizedBox(height: 6),
                 if (card.progressLabel != null)
@@ -275,7 +275,7 @@ class SetupModuleCard extends StatelessWidget {
 
               const SizedBox(height: 4),
 
-              // â”€â”€â”€ Metrics (compact) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Metrics (compact) ────────────────────
               ...card.metrics.entries.take(2).map((e) => Padding(
                     padding: const EdgeInsets.only(bottom: 1),
                     child: Row(
@@ -301,7 +301,7 @@ class SetupModuleCard extends StatelessWidget {
                     ),
                   )),
 
-              // â”€â”€â”€ Summary Line â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Summary Line ─────────────────────────
               if (card.summaryLine != null) ...[
                 const SizedBox(height: 3),
                 Text(
@@ -316,7 +316,7 @@ class SetupModuleCard extends StatelessWidget {
                 ),
               ],
 
-              // â”€â”€â”€ Action Labels â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Action Labels ────────────────────────
               if (card.actionLabels.isNotEmpty) ...[
                 const Spacer(),
                 Row(
@@ -365,7 +365,7 @@ class SetupModuleCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Setup Section Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Setup Section Card ──────────────────────────────────────────────────────
 
 class SetupSectionCard extends StatelessWidget {
   final Widget child;
@@ -415,7 +415,7 @@ class SetupSectionCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Section Title â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Section Title ───────────────────────────────────────────────────────────
 
 class SetupSectionTitle extends StatelessWidget {
   final String title;
@@ -457,7 +457,7 @@ class SetupSectionTitle extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ KPI Badge â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── KPI Badge ───────────────────────────────────────────────────────────────
 
 class KPIBadge extends StatelessWidget {
   final String label;
@@ -570,7 +570,7 @@ class KPIBadge extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Setup Action Tile â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Setup Action Tile ───────────────────────────────────────────────────────
 
 class SetupActionTile extends StatelessWidget {
   final String label;
@@ -652,7 +652,7 @@ class SetupActionTile extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Filter Chip Row â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Filter Chip Row ─────────────────────────────────────────────────────────
 
 class SetupFilterChipRow extends StatelessWidget {
   final List<String> labels;
@@ -711,7 +711,7 @@ class SetupFilterChipRow extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Status Indicator â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Status Indicator ────────────────────────────────────────────────────────
 
 class SetupStatusIndicator extends StatelessWidget {
   final String label;
@@ -762,7 +762,7 @@ class SetupStatusIndicator extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Context Badge (role-colored pill) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Context Badge (role-colored pill) ───────────────────────────────────────
 
 class ContextBadge extends StatelessWidget {
   final String label;
@@ -808,7 +808,7 @@ class ContextBadge extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Empty State â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Empty State ─────────────────────────────────────────────────────────────
 
 class SetupEmptyState extends StatelessWidget {
   final IconData icon;
@@ -877,7 +877,7 @@ class SetupEmptyState extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Error State â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Error State ─────────────────────────────────────────────────────────────
 
 class SetupErrorState extends StatelessWidget {
   final String title;
@@ -949,7 +949,7 @@ class SetupErrorState extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Loading State â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Loading State ───────────────────────────────────────────────────────────
 
 class SetupLoadingState extends StatelessWidget {
   final String? message;
@@ -990,7 +990,7 @@ class SetupLoadingState extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Permission Gate â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Permission Gate ─────────────────────────────────────────────────────────
 
 class PermissionGate extends StatelessWidget {
   final CardAccessLevel access;
@@ -1018,7 +1018,7 @@ class PermissionGate extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Data Scope Indicator â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Data Scope Indicator ────────────────────────────────────────────────────
 
 class DataScopeIndicator extends StatelessWidget {
   final CardAccessLevel access;
@@ -1065,7 +1065,7 @@ class DataScopeIndicator extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Percentage Ring â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Percentage Ring ─────────────────────────────────────────────────────────
 
 class SetupPercentageRing extends StatelessWidget {
   final double percentage;
@@ -1113,7 +1113,7 @@ class SetupPercentageRing extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Helpers ─────────────────────────────────────────────────────────────────
 
 String setupTimeAgo(DateTime dt) {
   final diff = DateTime.now().difference(dt);
@@ -1124,7 +1124,7 @@ String setupTimeAgo(DateTime dt) {
   return '${dt.day}/${dt.month}';
 }
 
-// â”€â”€â”€ Setup Detail Tab Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Setup Detail Tab Bar ────────────────────────────────────────────────────
 
 /// Horizontal scrollable tab bar for detail screens
 class SetupDetailTabBar extends StatelessWidget {
@@ -1190,7 +1190,7 @@ class SetupDetailTabBar extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Setup Form Field â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Setup Form Field ────────────────────────────────────────────────────────
 
 /// Styled text field for setup forms
 class SetupFormField extends StatelessWidget {
@@ -1272,7 +1272,7 @@ class SetupFormField extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Setup Confirm Dialog â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Setup Confirm Dialog ────────────────────────────────────────────────────
 
 /// Confirmation dialog with destructive / normal actions
 Future<bool> showSetupConfirmDialog({
@@ -1307,7 +1307,7 @@ Future<bool> showSetupConfirmDialog({
   return result ?? false;
 }
 
-// â”€â”€â”€ Setup FAB â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Setup FAB ───────────────────────────────────────────────────────────────
 
 /// Floating action button styled for setup module
 class SetupFAB extends StatelessWidget {
@@ -1349,7 +1349,7 @@ class SetupFAB extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Adaptive Grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Adaptive Grid ───────────────────────────────────────────────────────────
 
 /// Responsive grid that adjusts columns based on available width
 class AdaptiveGrid extends StatelessWidget {
@@ -1390,7 +1390,7 @@ class AdaptiveGrid extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Skeleton Loader â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Skeleton Loader ─────────────────────────────────────────────────────────
 
 /// Shimmer-like skeleton loading placeholder
 class SetupSkeletonLoader extends StatefulWidget {
@@ -1487,7 +1487,7 @@ class SetupSkeletonCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Setup Bottom Sheet â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Setup Bottom Sheet ──────────────────────────────────────────────────────
 
 /// Show a styled bottom sheet with drag handle
 Future<T?> showSetupBottomSheet<T>({
@@ -1529,7 +1529,7 @@ Future<T?> showSetupBottomSheet<T>({
   );
 }
 
-// â”€â”€â”€ Setup Search Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Setup Search Bar ────────────────────────────────────────────────────────
 
 /// Reusable search bar for list screens
 class SetupSearchBar extends StatelessWidget {
@@ -1575,7 +1575,7 @@ class SetupSearchBar extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Setup Info Row â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Setup Info Row ──────────────────────────────────────────────────────────
 
 /// Key-value row for detail views
 class SetupInfoRow extends StatelessWidget {
@@ -1630,7 +1630,7 @@ class SetupInfoRow extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Setup Stat Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Setup Stat Card ─────────────────────────────────────────────────────────
 
 /// Mini stat card for detail screen headers
 class SetupStatCard extends StatelessWidget {
@@ -1680,7 +1680,7 @@ class SetupStatCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ RBAC Gate Widget â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── RBAC Gate Widget ────────────────────────────────────────────────────────
 
 /// Wraps screen content and enforces role-based access control.
 ///
@@ -1809,7 +1809,7 @@ class _ViewOnlyBanner extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ RBAC-Aware FAB â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── RBAC-Aware FAB ──────────────────────────────────────────────────────────
 
 /// A floating action button that is only shown when the current user role
 /// has edit/create permissions for the given [cardId].
@@ -1849,7 +1849,7 @@ class SetupRbacFAB extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ RBAC Action Guard â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── RBAC Action Guard ───────────────────────────────────────────────────────
 
 /// Convenience widget that shows or hides its child based on edit permission.
 ///
@@ -1880,7 +1880,7 @@ class SetupActionGuard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ OTP Gate â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── OTP Gate ────────────────────────────────────────────────────────────────
 
 /// Wraps an action that requires OTP/PIN verification before proceeding.
 ///
@@ -2013,7 +2013,7 @@ class SetupOtpGate extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Export Button (RBAC-gated) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Export Button (RBAC-gated) ───────────────────────────────────────────────
 
 /// Export button that is only rendered when [role] is allowed to export
 /// [dataType] per [SetupDashboardRBAC.canExport].
@@ -2073,7 +2073,7 @@ class SetupExportButton extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Redacted Data Banner â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Redacted Data Banner ────────────────────────────────────────────────────
 
 /// Displayed at the top of a screen when the current role sees redacted data.
 /// (Spec: Monitor/BranchMonitor see audit logs with PII masked.)
@@ -2085,7 +2085,7 @@ class SetupRedactedBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final text = message ??
-        'Redacted view â€” user identities and sensitive fields are masked '
+        'Redacted view — user identities and sensitive fields are masked '
         'per your role permissions.';
     return Container(
       width: double.infinity,
@@ -2116,7 +2116,7 @@ class SetupRedactedBanner extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ OTP Guard (programmatic) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── OTP Guard (programmatic) ─────────────────────────────────────────────────
 
 /// Programmatic OTP guard for use in [onPressed] / [onTap] callbacks
 /// (e.g., FAB taps) where wrapping with [SetupOtpGate] is impractical.
@@ -2210,7 +2210,7 @@ Future<void> showSetupOtpGuard(
   }
 }
 
-// â”€â”€â”€ RBAC Tooltip Helper â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── RBAC Tooltip Helper ─────────────────────────────────────────────────────
 
 /// Shows a role-scoped tooltip [SnackBar] when the user taps a restricted
 /// feature. Call this from [onTap] handlers of disabled buttons.
@@ -2237,9 +2237,9 @@ void showSetupRbacTooltip(BuildContext context, String cardId) {
   );
 }
 
-// â”€â”€â”€ SOS Button â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── SOS Button ─────────────────────────────────────────────────────────────
 
-/// Emergency SOS button â€” visible to Owner, Administrator, Branch Manager only.
+/// Emergency SOS button — visible to Owner, Administrator, Branch Manager only.
 /// Spec: Roles without access see nothing (SizedBox.shrink).
 class SetupSOSButton extends StatelessWidget {
   const SetupSOSButton({super.key, this.onPressed});
@@ -2328,7 +2328,7 @@ class SetupSOSButton extends StatelessWidget {
               // TODO: Integrate with emergency broadcast service.
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
-                  content: Text('SOS signal sent â€” help is on the way.'),
+                  content: Text('SOS signal sent — help is on the way.'),
                   backgroundColor: AppColors.error,
                   behavior: SnackBarBehavior.floating,
                 ),
@@ -2343,7 +2343,7 @@ class SetupSOSButton extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Role Context Badge â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Role Context Badge ───────────────────────────────────────────────────────
 
 /// Compact pill showing the active role with spec-accurate color coding.
 class SetupRoleBadge extends StatelessWidget {

@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD1.3-CREATE: TAB CREATE WIZARD â€” 4-Step Form
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD1.3-CREATE: TAB CREATE WIZARD — 4-Step Form
 /// Steps: Customer â†’ Credit Settings â†’ Payment Terms â†’ Review
 /// RBAC: Admin(full), BM(branch), SO(full), BSO(branch)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -165,7 +165,7 @@ class _TabCreateScreenState extends State<TabCreateScreen> {
   }
 }
 
-// â”€â”€â”€ Step Indicator â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Step Indicator ──────────────────────────────────────────────────────────
 
 class _TabStepIndicator extends StatelessWidget {
   final int currentStep;
@@ -213,7 +213,7 @@ class _TabStepIndicator extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Step 1: Customer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Step 1: Customer ────────────────────────────────────────────────────────
 
 class _CustomerStep extends StatelessWidget {
   final TextEditingController nameCtrl;
@@ -310,7 +310,7 @@ class _CustomerStep extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Step 2: Credit Settings â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Step 2: Credit Settings ─────────────────────────────────────────────────
 
 class _CreditSettingsStep extends StatelessWidget {
   final TextEditingController creditLimitCtrl;
@@ -430,7 +430,7 @@ class _CreditSettingsStep extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Step 3: Payment Terms â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Step 3: Payment Terms ───────────────────────────────────────────────────
 
 class _PaymentTermsStep extends StatelessWidget {
   final int paymentDays;
@@ -539,7 +539,7 @@ class _PaymentTermsStep extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'â€¢ 5 days before due date\nâ€¢ On due date\nâ€¢ 3 days after due date (overdue)',
+                  '• 5 days before due date\n• On due date\n• 3 days after due date (overdue)',
                   style: TextStyle(fontSize: 11, color: AppColors.info.withValues(alpha: 0.8)),
                 ),
               ],
@@ -560,7 +560,7 @@ class _PaymentTermsStep extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Step 4: Review â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Step 4: Review ──────────────────────────────────────────────────────────
 
 class _TabReviewStep extends StatelessWidget {
   final String customerName;
@@ -609,7 +609,7 @@ class _TabReviewStep extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SetupSectionTitle(title: 'Customer Details', icon: Icons.person),
-              SetupInfoRow(label: 'Name', value: customerName.isNotEmpty ? customerName : 'â€”'),
+              SetupInfoRow(label: 'Name', value: customerName.isNotEmpty ? customerName : '—'),
               SetupInfoRow(label: 'Type', value: customerType),
             ],
           ),
@@ -620,7 +620,7 @@ class _TabReviewStep extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SetupSectionTitle(title: 'Credit & Payment', icon: Icons.credit_card),
-              SetupInfoRow(label: 'Credit Limit', value: creditLimit.isNotEmpty ? 'â‚µ$creditLimit' : 'â€”'),
+              SetupInfoRow(label: 'Credit Limit', value: creditLimit.isNotEmpty ? 'â‚µ$creditLimit' : '—'),
               SetupInfoRow(label: 'Payment Terms', value: 'Net $paymentDays'),
               SetupInfoRow(label: 'Interest', value: interestRate),
               SetupInfoRow(label: 'Reminders', value: autoReminders ? 'Enabled' : 'Disabled'),
@@ -672,7 +672,7 @@ class _TabReviewStep extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Nav Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Nav Bar ─────────────────────────────────────────────────────────────────
 
 class _TabNavBar extends StatelessWidget {
   final int currentStep;

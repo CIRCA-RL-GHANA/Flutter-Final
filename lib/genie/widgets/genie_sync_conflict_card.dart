@@ -1,11 +1,11 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// GenieSyncConflictCard
 ///
 /// Renders a side-by-side comparison of the local vs server version of a
 /// conflicting resource. The user can accept one version with a single tap.
 /// Haptic bracket-style feedback confirms selection.
 ///
-/// Recommendation 2 â€” Sync-Conflict UI.
+/// Recommendation 2 — Sync-Conflict UI.
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
@@ -54,7 +54,7 @@ class GenieSyncConflictCard extends StatelessWidget {
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
-                  'Sync conflict â€” ${conflict.resourceType}',
+                  'Sync conflict — ${conflict.resourceType}',
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       color: cs.error,

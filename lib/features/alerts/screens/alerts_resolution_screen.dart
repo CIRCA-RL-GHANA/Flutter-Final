@@ -1,4 +1,4 @@
-﻿/// Alerts Screen 5 â€” Resolution Workspace
+/// Alerts Screen 5 — Resolution Workspace
 /// Method selection, templates, composer, verification panel
 
 import 'package:flutter/material.dart';
@@ -76,7 +76,7 @@ class _AlertsResolutionScreenState extends State<AlertsResolutionScreen> {
                     );
                   },
                 ),
-                // â”€â”€â”€â”€ ALERT CONTEXT â”€â”€â”€â”€
+                // ──── ALERT CONTEXT ────
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
@@ -102,7 +102,7 @@ class _AlertsResolutionScreenState extends State<AlertsResolutionScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                // â”€â”€â”€â”€ TEMPLATES (TOGGLE) â”€â”€â”€â”€
+                // ──── TEMPLATES (TOGGLE) ────
                 if (_showTemplates) ...[
                   AlertsSectionCard(
                     title: 'ðŸ“ Resolution Templates',
@@ -134,7 +134,7 @@ class _AlertsResolutionScreenState extends State<AlertsResolutionScreen> {
                   const SizedBox(height: 16),
                 ],
 
-                // â”€â”€â”€â”€ RESOLUTION METHOD â”€â”€â”€â”€
+                // ──── RESOLUTION METHOD ────
                 AlertsSectionCard(
                   title: 'ðŸ”§ Resolution Method',
                   child: Wrap(
@@ -159,7 +159,7 @@ class _AlertsResolutionScreenState extends State<AlertsResolutionScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                // â”€â”€â”€â”€ RESOLUTION DETAILS â”€â”€â”€â”€
+                // ──── RESOLUTION DETAILS ────
                 AlertsSectionCard(
                   title: 'âœï¸ Resolution Details',
                   child: Column(
@@ -217,7 +217,7 @@ class _AlertsResolutionScreenState extends State<AlertsResolutionScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                // â”€â”€â”€â”€ CUSTOMER NOTIFICATION â”€â”€â”€â”€
+                // ──── CUSTOMER NOTIFICATION ────
                 AlertsSectionCard(
                   title: 'ðŸ“¨ Customer Notification',
                   child: Wrap(
@@ -242,7 +242,7 @@ class _AlertsResolutionScreenState extends State<AlertsResolutionScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                // â”€â”€â”€â”€ KNOWLEDGE BASE SUGGESTION â”€â”€â”€â”€
+                // ──── KNOWLEDGE BASE SUGGESTION ────
                 AlertsSectionCard(
                   title: 'ðŸ’¡ Related Knowledge',
                   trailing: GestureDetector(
@@ -259,7 +259,7 @@ class _AlertsResolutionScreenState extends State<AlertsResolutionScreen> {
             ),
           ),
 
-          // â”€â”€â”€â”€ SUBMIT FOOTER â”€â”€â”€â”€
+          // ──── SUBMIT FOOTER ────
           bottomNavigationBar: Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(

@@ -1,4 +1,4 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// Screen 1: USER DETAILS Master Dashboard
 /// Identity section, multi-context carousel, collapsible sections, footer
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -6,6 +6,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '../../../core/design/ive_tokens.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
@@ -29,7 +30,7 @@ class UserDetailsMasterScreen extends StatelessWidget {
           backgroundColor: const Color(0xFF08080F),
           body: CustomScrollView(
             slivers: [
-              // â”€â”€â”€ App Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── App Bar ──────────────────────────────────
               SliverAppBar(
                 expandedHeight: 0,
                 floating: true,
@@ -88,7 +89,7 @@ class UserDetailsMasterScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              // â”€â”€â”€ AI Insights â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── AI Insights ────────────────────────────────────
               SliverToBoxAdapter(
                 child: Consumer<AIInsightsNotifier>(
                   builder: (context, ai, _) {
@@ -107,7 +108,7 @@ class UserDetailsMasterScreen extends StatelessWidget {
                   },
                 ),
               ),
-              // â”€â”€â”€ Identity Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Identity Section ─────────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
@@ -115,7 +116,7 @@ class UserDetailsMasterScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Quick Stats â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Quick Stats ──────────────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -123,7 +124,7 @@ class UserDetailsMasterScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Multi-Context Carousel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Multi-Context Carousel ────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.only(top: 16),
@@ -139,7 +140,7 @@ class UserDetailsMasterScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Personal Information â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Personal Information ──────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
@@ -154,7 +155,7 @@ class UserDetailsMasterScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Security Center â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Security Center ──────────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -170,7 +171,7 @@ class UserDetailsMasterScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Preferences Hub â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Preferences Hub ──────────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -190,7 +191,7 @@ class UserDetailsMasterScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Context-Specific Settings â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Context-Specific Settings ─────────────────
               if (activeCtx.entityType.toString().contains('business') ||
                   activeCtx.entityType.toString().contains('branch'))
                 SliverToBoxAdapter(
@@ -209,12 +210,12 @@ class UserDetailsMasterScreen extends StatelessWidget {
                   ),
                 ),
 
-              // â”€â”€â”€ Bottom Spacer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Bottom Spacer ────────────────────────────
               const SliverToBoxAdapter(child: SizedBox(height: 100)),
             ],
           ),
 
-          // â”€â”€â”€ Sticky Footer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+          // ─── Sticky Footer ──────────────────────────────
           bottomNavigationBar: _StickyFooter(
             onHelp: () {},
             onDownload: () => udp.requestDataExport(),

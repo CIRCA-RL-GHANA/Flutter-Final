@@ -1,4 +1,4 @@
-﻿/// GO Screen 10 â€” Financial Planner
+/// GO Screen 10 — Financial Planner
 /// Cash flow forecast, budget manager, goal setting
 
 import 'package:flutter/material.dart';

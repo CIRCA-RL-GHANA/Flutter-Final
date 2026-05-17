@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// U0: UTILITY DASHBOARD â€” Master Entry Point
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// U0: UTILITY DASHBOARD — Master Entry Point
 /// System health overview, quick action grid, recent activity feed
 /// RBAC-aware: advanced tools only for owner/admin/branchManager
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -7,6 +7,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '../../../core/design/ive_tokens.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../../prompt/providers/context_provider.dart';
@@ -26,10 +27,10 @@ class UtilityDashboardScreen extends StatelessWidget {
         final quickActions = utilProv.getQuickActions(role);
 
         return Scaffold(
-          backgroundColor: const Color(0xFF08080F),
+          backgroundColor: IveTokens.bg,
           appBar: const UtilityAppBar(title: 'Utility'),
           body: CustomScrollView(
-            slivers: [              // â”€â”€â”€ AI Insights â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            slivers: [              // ─── AI Insights ──────────────────────
               SliverToBoxAdapter(
                 child: Consumer<AIInsightsNotifier>(
                   builder: (context, ai, _) {
@@ -41,14 +42,14 @@ class UtilityDashboardScreen extends StatelessWidget {
                         const Icon(Icons.auto_awesome, size: 14, color: kUtilityColor),
                         const SizedBox(width: 8),
                         Expanded(child: Text('AI: ${ai.insights.first['title'] ?? ''}',
-                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kUtilityColor),
+                          style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: kUtilityColor, letterSpacing: 0.1),
                           maxLines: 1, overflow: TextOverflow.ellipsis)),
                       ]),
                     );
                   },
                 ),
               ),
-              // â”€â”€â”€ System Health Banner â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── System Health Banner ─────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -56,7 +57,7 @@ class UtilityDashboardScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Quick Actions Grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Quick Actions Grid ───────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
@@ -93,7 +94,7 @@ class UtilityDashboardScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ System Metrics â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── System Metrics ───────────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
@@ -123,7 +124,7 @@ class UtilityDashboardScreen extends StatelessWidget {
                               label: 'Storage',
                               value: '${health.storageUsedMB.toStringAsFixed(1)} MB',
                               icon: Icons.sd_storage,
-                              color: const Color(0xFF8B5CF6),
+                              color: IveTokens.moduleUtility,
                               percentage: health.storagePercentage,
                             ),
                           ),
@@ -145,7 +146,7 @@ class UtilityDashboardScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Recent Activity â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Recent Activity ──────────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
@@ -177,7 +178,7 @@ class UtilityDashboardScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Bottom Spacer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Bottom Spacer ────────────────────────────
               const SliverToBoxAdapter(child: SizedBox(height: 100)),
             ],
           ),
@@ -187,7 +188,7 @@ class UtilityDashboardScreen extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ System Health Banner â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── System Health Banner ────────────────────────────────────────────────────
 
 class _SystemHealthBanner extends StatelessWidget {
   final SystemHealthSummary health;
@@ -257,7 +258,7 @@ class _SystemHealthBanner extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Activity Item â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Activity Item ───────────────────────────────────────────────────────────
 
 class _ActivityItem extends StatelessWidget {
   final RecentActivity activity;
@@ -329,7 +330,7 @@ class _ActivityItem extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Helpers ─────────────────────────────────────────────────────────────────
 
 String _timeAgo(DateTime dt) {
   final diff = DateTime.now().difference(dt);

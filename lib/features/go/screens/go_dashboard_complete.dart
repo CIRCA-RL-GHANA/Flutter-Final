@@ -1,4 +1,4 @@
-﻿/// GO Dashboard Screen â€” Main Financial Hub
+/// GO Dashboard Screen — Main Financial Hub
 /// P2P, Wallets, Investments, Cards, Quick Actions
 /// Complete production implementation with search, error handling, real-time updates
 
@@ -99,25 +99,25 @@ class _GODashboardScreenState extends State<GODashboardScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // â”€â”€â”€ Balance Summary Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                          // ─── Balance Summary Card ───────────────────────────
                           _buildBalanceCard(provider),
 
-                          // â”€â”€â”€ AI Insights Banner â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                          // ─── AI Insights Banner ─────────────────────────────
                           _buildAIInsightsBanner(),
 
-                          // â”€â”€â”€ Quick Action Buttons â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                          // ─── Quick Action Buttons ───────────────────────────
                           _buildQuickActions(context),
 
-                          // â”€â”€â”€ Active Wallets â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                          // ─── Active Wallets ──────────────────────────────────
                           _buildWalletsSection(provider),
 
-                          // â”€â”€â”€ Latest Cards â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                          // ─── Latest Cards ───────────────────────────────────
                           _buildCardsSection(provider),
 
-                          // â”€â”€â”€ Recent Transactions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                          // ─── Recent Transactions ────────────────────────────
                           _buildRecentTransactions(provider),
 
-                          // â”€â”€â”€ Quick Recipients â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                          // ─── Quick Recipients ───────────────────────────────
                           _buildFavoriteRecipients(provider),
 
                           const SizedBox(height: 24),
@@ -508,9 +508,9 @@ class _GODashboardScreenState extends State<GODashboardScreen> {
     );
   }}
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ────────────────────────────────────────────────────────────────────────────
 // COMPONENTS
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ────────────────────────────────────────────────────────────────────────────
 
 class _QuickActionButton extends StatelessWidget {
   final IconData icon;
@@ -642,7 +642,7 @@ class _CardItem extends StatelessWidget {
             ),
           ),
           Text(
-            'â€¢â€¢â€¢â€¢ ${card.lastFour}',
+            '•••• ${card.lastFour}',
             style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w700,

@@ -1,4 +1,4 @@
-﻿/// GO Screen 9 â€” Batch Operations
+/// GO Screen 9 — Batch Operations
 /// Batch transfer creator, payment run manager, bulk approval interface
 
 import 'package:flutter/material.dart';
@@ -192,7 +192,7 @@ class _BatchCard extends StatelessWidget {
           const SizedBox(width: 10),
           Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(batch.label ?? batch.typeLabel, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-            Text('${batch.itemCount} items â€¢ ${batch.totalAmount.toStringAsFixed(0)} QP', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+            Text('${batch.itemCount} items • ${batch.totalAmount.toStringAsFixed(0)} QP', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
           ])),
           _StatusChip(status: batch.status.name),
         ]),

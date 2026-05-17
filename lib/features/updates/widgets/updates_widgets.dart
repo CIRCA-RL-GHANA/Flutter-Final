@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// MY UPDATES MODULE â€” Shared Widgets
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// MY UPDATES MODULE — Shared Widgets
 /// Reusable UI components: UpdatesAppBar, UpdateCard, CommentItem,
 /// NotificationItem, InterestCard, FollowedEntityCard, FilterChipBar,
 /// EngagementBar, EmptyState, SectionCard, etc.
@@ -10,15 +10,15 @@ import 'package:flutter/services.dart';
 import '../../../core/theme/app_colors.dart';
 import '../models/updates_models.dart';
 
-// â”€â”€â”€ Module Colors â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Module Colors ──────────────────────────────────────────────────────────
 
-/// The canonical module color for MY UPDATES (Pink â€” Social)
+/// The canonical module color for MY UPDATES (Pink — Social)
 const Color kUpdatesColor = Color(0xFFEC4899);
 const Color kUpdatesColorLight = Color(0xFFFCE7F3);
 const Color kUpdatesColorDark = Color(0xFF9D174D);
 const Color kUpdatesAccent = Color(0xFF8B5CF6);
 
-// â”€â”€â”€ Updates App Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Updates App Bar ────────────────────────────────────────────────────────
 
 class UpdatesAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -76,7 +76,7 @@ class UpdatesAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-// â”€â”€â”€ Update Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Update Card ────────────────────────────────────────────────────────────
 
 class UpdateCard extends StatelessWidget {
   final UpdateEntity update;
@@ -175,10 +175,10 @@ class UpdateCard extends StatelessWidget {
                         Row(
                           children: [
                             Text(update.authorRole, style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
-                            const Text(' â€¢ ', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                            const Text(' • ', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                             Text(_timeAgo(update.createdAt), style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                             if (update.isEdited) ...[
-                              const Text(' â€¢ ', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                              const Text(' • ', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                               const Text('edited', style: TextStyle(fontSize: 10, fontStyle: FontStyle.italic, color: AppColors.textTertiary)),
                             ],
                           ],
@@ -267,7 +267,7 @@ class UpdateCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Media Preview â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Media Preview ──────────────────────────────────────────────────────────
 
 class _MediaPreview extends StatelessWidget {
   final UpdateEntity update;
@@ -351,7 +351,7 @@ class _MediaPreview extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Poll Preview â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Poll Preview ───────────────────────────────────────────────────────────
 
 class _PollPreview extends StatelessWidget {
   final UpdatePoll poll;
@@ -398,7 +398,7 @@ class _PollPreview extends StatelessWidget {
             ),
           )),
           Text(
-            '${poll.totalVotes} votes â€¢ ${_timeLeft(poll.endsAt)}',
+            '${poll.totalVotes} votes • ${_timeLeft(poll.endsAt)}',
             style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
           ),
         ],
@@ -415,7 +415,7 @@ class _PollPreview extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Engagement Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Engagement Bar ─────────────────────────────────────────────────────────
 
 class _EngagementBar extends StatelessWidget {
   final UpdateEntity update;
@@ -505,7 +505,7 @@ class _EngagementButton extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Comment Item â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Comment Item ───────────────────────────────────────────────────────────
 
 class CommentItem extends StatelessWidget {
   final UpdateComment comment;
@@ -590,7 +590,7 @@ class CommentItem extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Notification Item â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Notification Item ──────────────────────────────────────────────────────
 
 class NotificationItem extends StatelessWidget {
   final UpdateNotification notification;
@@ -657,7 +657,7 @@ class NotificationItem extends StatelessWidget {
       };
 }
 
-// â”€â”€â”€ Filter Chip Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Filter Chip Bar ────────────────────────────────────────────────────────
 
 class UpdatesFilterChipBar extends StatelessWidget {
   final FeedFilter activeFilter;
@@ -732,7 +732,7 @@ class UpdatesFilterChipBar extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Section Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Section Card ───────────────────────────────────────────────────────────
 
 class UpdatesSectionCard extends StatelessWidget {
   final String title;
@@ -787,7 +787,7 @@ class UpdatesSectionCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Empty State â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Empty State ────────────────────────────────────────────────────────────
 
 class UpdatesEmptyState extends StatelessWidget {
   final IconData icon;
@@ -845,7 +845,7 @@ class UpdatesEmptyState extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Liker Item â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Liker Item ─────────────────────────────────────────────────────────────
 
 class LikerItem extends StatelessWidget {
   final UpdateLiker liker;
@@ -923,7 +923,7 @@ class LikerItem extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Helpers ────────────────────────────────────────────────────────────────
 
 String _timeAgo(DateTime dt) {
   final diff = DateTime.now().difference(dt);

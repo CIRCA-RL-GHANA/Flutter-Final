@@ -1,4 +1,4 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// U8: SYSTEM MONITOR Screen
 /// Performance metrics, device info, active sessions, system logs
 /// RBAC: Owner, Administrator, BranchManager only
@@ -62,7 +62,7 @@ class SystemMonitorScreen extends StatelessWidget {
                   );
                 },
               ),
-              // â”€â”€â”€ Performance Metrics Grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Performance Metrics Grid ──────────────────
               const UtilitySectionTitle(
                 title: 'Performance',
                 icon: Icons.speed,
@@ -93,7 +93,7 @@ class SystemMonitorScreen extends StatelessWidget {
 
               const SizedBox(height: 16),
 
-              // â”€â”€â”€ Device Info â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Device Info ───────────────────────────────
               const UtilitySectionTitle(
                 title: 'Device Information',
                 icon: Icons.phone_android,
@@ -115,7 +115,7 @@ class SystemMonitorScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Active Sessions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Active Sessions ──────────────────────────
               const UtilitySectionTitle(
                 title: 'Active Sessions',
                 icon: Icons.devices,
@@ -130,7 +130,7 @@ class SystemMonitorScreen extends StatelessWidget {
 
               const SizedBox(height: 16),
 
-              // â”€â”€â”€ System Logs â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── System Logs ──────────────────────────────
               const UtilitySectionTitle(
                 title: 'System Logs',
                 icon: Icons.terminal,
@@ -223,7 +223,7 @@ class SystemMonitorScreen extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Trend Icon â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Trend Icon ──────────────────────────────────────────────────────────────
 
 class _TrendIcon extends StatelessWidget {
   final MetricTrend trend;
@@ -242,7 +242,7 @@ class _TrendIcon extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Info Row â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Info Row ────────────────────────────────────────────────────────────────
 
 class _InfoRow extends StatelessWidget {
   final String label;
@@ -280,7 +280,7 @@ class _InfoRow extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Session Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Session Card ────────────────────────────────────────────────────────────
 
 class _SessionCard extends StatelessWidget {
   final ActiveSession session;
@@ -345,7 +345,7 @@ class _SessionCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Log Filter Chip â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Log Filter Chip ─────────────────────────────────────────────────────────
 
 class _LogFilterChip extends StatelessWidget {
   final String label;
@@ -388,7 +388,7 @@ class _LogFilterChip extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Log Row â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Log Row ─────────────────────────────────────────────────────────────────
 
 class _LogRow extends StatelessWidget {
   final SystemLogEntry entry;

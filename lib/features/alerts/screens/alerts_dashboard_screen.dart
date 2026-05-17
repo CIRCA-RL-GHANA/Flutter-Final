@@ -1,4 +1,4 @@
-﻿/// Alerts Screen 1 â€” Dashboard Master View
+/// Alerts Screen 1 — Dashboard Master View
 /// Segmented control (Pending/Resolved/All), priority triage bar,
 /// alert cards sorted by priority, time filter chips, real-time counter
 
@@ -88,7 +88,7 @@ class AlertsDashboardScreen extends StatelessWidget {
           ),
           body: Column(
             children: [
-              // â”€â”€â”€â”€ PRIORITY TRIAGE BAR â”€â”€â”€â”€
+              // ──── PRIORITY TRIAGE BAR ────
               if (provider.dashboardTab == AlertDashboardTab.pending)
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
@@ -138,7 +138,7 @@ class AlertsDashboardScreen extends StatelessWidget {
                   ),
                 ),
 
-              // â”€â”€â”€â”€ AI PRIORITY INSIGHTS â”€â”€â”€â”€
+              // ──── AI PRIORITY INSIGHTS ────
               if (provider.dashboardTab == AlertDashboardTab.pending)
                 Consumer<AIInsightsNotifier>(
                   builder: (ctx, notifier, _) {
@@ -181,7 +181,7 @@ class AlertsDashboardScreen extends StatelessWidget {
                   },
                 ),
 
-              // â”€â”€â”€â”€ SYNC STATUS â”€â”€â”€â”€
+              // ──── SYNC STATUS ────
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: Row(
@@ -208,7 +208,7 @@ class AlertsDashboardScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€â”€ ALERT LIST â”€â”€â”€â”€
+              // ──── ALERT LIST ────
               Expanded(
                 child: provider.filteredAlerts.isEmpty
                     ? AlertsEmptyState(
@@ -276,7 +276,7 @@ class AlertsDashboardScreen extends StatelessWidget {
             ],
           ),
 
-          // â”€â”€â”€â”€ BULK ACTIONS FAB â”€â”€â”€â”€
+          // ──── BULK ACTIONS FAB ────
           floatingActionButton: provider.isSelectMode
               ? FloatingActionButton.extended(
                   backgroundColor: kAlertsColor,
@@ -302,9 +302,9 @@ class AlertsDashboardScreen extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 // Segmented Tab Bar
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 
 class _SegmentedTabBar extends StatelessWidget {
   final AlertDashboardTab selected;
@@ -424,9 +424,9 @@ class _TabSegment extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 // Triage Chip
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 
 class _TriageChip extends StatelessWidget {
   final String label;

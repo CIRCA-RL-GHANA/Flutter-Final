@@ -1,4 +1,4 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// U5: DATA & PRIVACY Screen
 /// Privacy toggles, data storage breakdown, connected apps, data export,
 /// account deletion
@@ -48,12 +48,12 @@ class DataPrivacyScreen extends StatelessWidget {
                   );
                 },
               ),
-              // â”€â”€â”€ Privacy Score Banner â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Privacy Score Banner ──────────────────────
               _PrivacyScoreBanner(settings: prov.privacySettings),
 
               const SizedBox(height: 16),
 
-              // â”€â”€â”€ Privacy Controls â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Privacy Controls ─────────────────────────
               const UtilitySectionTitle(
                 title: 'Privacy Controls',
                 icon: Icons.privacy_tip_outlined,
@@ -80,7 +80,7 @@ class DataPrivacyScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Data Usage â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Data Usage ───────────────────────────────
               const UtilitySectionTitle(
                 title: 'Data Usage',
                 icon: Icons.pie_chart_outline,
@@ -121,7 +121,7 @@ class DataPrivacyScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Connected Apps â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Connected Apps ───────────────────────────
               const UtilitySectionTitle(
                 title: 'Connected Apps',
                 icon: Icons.apps,
@@ -143,7 +143,7 @@ class DataPrivacyScreen extends StatelessWidget {
                   onRevoke: () => _confirmRevoke(context, prov, app),
                 )),
 
-              // â”€â”€â”€ Data Export â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Data Export ───────────────────────────────
               const UtilitySectionTitle(
                 title: 'Data Export',
                 icon: Icons.download,
@@ -207,7 +207,7 @@ class DataPrivacyScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Danger Zone â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Danger Zone ──────────────────────────────
               const UtilitySectionTitle(
                 title: 'Danger Zone',
                 icon: Icons.warning_amber,
@@ -280,7 +280,7 @@ class DataPrivacyScreen extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Privacy Score Banner â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Privacy Score Banner ────────────────────────────────────────────────────
 
 class _PrivacyScoreBanner extends StatelessWidget {
   final List<PrivacySetting> settings;
@@ -335,7 +335,7 @@ class _PrivacyScoreBanner extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Data Category Row â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Data Category Row ───────────────────────────────────────────────────────
 
 class _DataCategoryRow extends StatelessWidget {
   final DataCategory category;
@@ -380,7 +380,7 @@ class _DataCategoryRow extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Connected App Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Connected App Card ──────────────────────────────────────────────────────
 
 class _ConnectedAppCard extends StatelessWidget {
   final ConnectedApp app;

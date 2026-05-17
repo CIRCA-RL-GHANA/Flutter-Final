@@ -1,4 +1,4 @@
-﻿/// Fintech â€º Insurance â€” Policy Purchase & Claims Screen
+/// Fintech â€º Insurance — Policy Purchase & Claims Screen
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -170,7 +170,7 @@ class _InsuranceScreenState extends State<InsuranceScreen>
   }
 }
 
-// â”€â”€â”€ Sub-widgets â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Sub-widgets ──────────────────────────────────────────────────────────────
 
 class _PolicyTypeSelector extends StatelessWidget {
   final String selected;
@@ -323,7 +323,7 @@ class _ClaimTile extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ File Claim Bottom Sheet â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── File Claim Bottom Sheet ──────────────────────────────────────────────────
 
 class ClaimsScreen extends StatefulWidget {
   const ClaimsScreen({super.key});

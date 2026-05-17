@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'core/theme/app_theme.dart';
+import 'core/design/ive_tokens.dart';
 import 'core/routes/app_routes.dart';
 import 'core/providers/app_providers.dart';
 import 'core/network/api_client.dart';
@@ -28,13 +29,13 @@ void main() async {
 
   // Set system UI overlay style — aligned to brand-dark surfaces
   SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
+    SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.light,
       statusBarBrightness: Brightness.dark,
-      systemNavigationBarColor: Color(0xFF08080F),
+      systemNavigationBarColor: IveTokens.bg,
       systemNavigationBarIconBrightness: Brightness.light,
-      systemNavigationBarDividerColor: Color(0xFF1C1C2E),
+      systemNavigationBarDividerColor: IveTokens.hairline,
     ),
   );
 

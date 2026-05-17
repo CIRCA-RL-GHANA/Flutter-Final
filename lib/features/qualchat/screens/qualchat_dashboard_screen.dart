@@ -1,4 +1,4 @@
-﻿/// qualChat Screen 1 â€” Dashboard (Enhanced)
+/// qualChat Screen 1 — Dashboard (Enhanced)
 /// Mode toggle, Vibe Check (Owner), Presence Hub, Insights, Archive
 
 import 'package:flutter/material.dart';
@@ -42,7 +42,7 @@ class QualChatDashboardScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   color: kChatColor.withValues(alpha: 0.05),
                   child: Text(
-                    'Role: Owner â€¢ Context: Personal â€¢ Mode: ${provider.mode == ChatMode.social ? "Social" : "Professional"}',
+                    'Role: Owner • Context: Personal • Mode: ${provider.mode == ChatMode.social ? "Social" : "Professional"}',
                     style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
                   ),
                 ),
@@ -143,7 +143,7 @@ class QualChatDashboardScreen extends StatelessWidget {
     );
   }
 
-  // â”€â”€â”€â”€ SECTION A: VIBE CHECK â”€â”€â”€â”€
+  // ──── SECTION A: VIBE CHECK ────
 
   Widget _buildVibeCheckSection(BuildContext context, QualChatProvider provider) {
     return QualChatSectionCard(
@@ -154,7 +154,7 @@ class QualChatDashboardScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            'Vibe Status: Sparkling Ready âœ¨',
+            'Vibe Status: Sparkling Ready ✨',
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
@@ -201,7 +201,7 @@ class QualChatDashboardScreen extends StatelessWidget {
                 'Active Sparks: ${provider.activeSparks}',
                 style: const TextStyle(fontSize: 13, color: Color(0xFF1A1A1A)),
               ),
-              const Text(' â€¢ ', style: TextStyle(color: Color(0xFF9CA3AF))),
+              const Text(' • ', style: TextStyle(color: Color(0xFF9CA3AF))),
               Text(
                 'Matches: ${provider.matchCount} ðŸ’˜',
                 style: const TextStyle(fontSize: 13, color: Color(0xFF1A1A1A)),
@@ -262,7 +262,7 @@ class QualChatDashboardScreen extends StatelessWidget {
               Expanded(
                 child: OutlinedButton.icon(
                   onPressed: () => Navigator.pushNamed(context, AppRoutes.qualChatHeyYas),
-                  icon: const Text('âœ¨'),
+                  icon: const Text('✨'),
                   label: const Text('Send Hey Ya'),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: kChatSocial,
@@ -291,7 +291,7 @@ class QualChatDashboardScreen extends StatelessWidget {
     );
   }
 
-  // â”€â”€â”€â”€ SECTION B: PRESENCE â”€â”€â”€â”€
+  // ──── SECTION B: PRESENCE ────
 
   Widget _buildPresenceSection(BuildContext context, QualChatProvider provider) {
     const stats = QualChatProvider.presenceStats;
@@ -408,7 +408,7 @@ class QualChatDashboardScreen extends StatelessWidget {
     );
   }
 
-  // â”€â”€â”€â”€ SECTION C: INSIGHTS â”€â”€â”€â”€
+  // ──── SECTION C: INSIGHTS ────
 
   Widget _buildInsightsSection(BuildContext context) {
     return QualChatSectionCard(
@@ -522,7 +522,7 @@ class QualChatDashboardScreen extends StatelessWidget {
     );
   }
 
-  // â”€â”€â”€â”€ SECTION D: ARCHIVE â”€â”€â”€â”€
+  // ──── SECTION D: ARCHIVE ────
 
   Widget _buildArchiveSection(BuildContext context, QualChatProvider provider) {
     return QualChatSectionCard(
@@ -531,7 +531,7 @@ class QualChatDashboardScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            '${QualChatProvider.archivedChats.length} threads hidden â€¢ Last archived: Today',
+            '${QualChatProvider.archivedChats.length} threads hidden • Last archived: Today',
             style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
           ),
           const SizedBox(height: 12),
@@ -589,7 +589,7 @@ class QualChatDashboardScreen extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€â”€ HELPER WIDGETS â”€â”€â”€â”€
+// ──── HELPER WIDGETS ────
 
 class _QuickButton extends StatelessWidget {
   final String label;

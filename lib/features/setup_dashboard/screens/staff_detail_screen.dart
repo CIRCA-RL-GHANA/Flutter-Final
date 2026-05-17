@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD1.5-DETAIL: STAFF DETAIL â€” 4-Tab Deep View
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD1.5-DETAIL: STAFF DETAIL — 4-Tab Deep View
 /// Tabs: Overview, Schedule, Tasks, Performance
 /// RBAC: Owner/Admin(fullAccess), BM(branchScoped), Monitor(viewOnly)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -47,7 +47,7 @@ class _StaffDetailScreenState extends State<StaffDetailScreen> {
           appBar: SetupAppBar(
             title: staff.name,
             actions: [
-              // Edit role action â€” gated by OTP for Branch Manager
+              // Edit role action — gated by OTP for Branch Manager
               SetupActionGuard(
                 cardId: 'staff',
                 child: _RoleChangeButton(
@@ -470,7 +470,7 @@ class _MetricBar extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Role Change Button â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Role Change Button ───────────────────────────────────────────────────────
 
 /// Renders "Change Role" icon in the staff detail app bar.
 /// For Branch Managers, wraps in [SetupOtpGate] requiring Admin OTP.
@@ -514,7 +514,7 @@ class _RoleChangeButton extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Role Picker Sheet â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Role Picker Sheet ────────────────────────────────────────────────────────
 
 class _RolePickerSheet extends StatelessWidget {
   const _RolePickerSheet({required this.staff});

@@ -1,4 +1,4 @@
-﻿/// GO Screen 6 â€” Request Center
+/// GO Screen 6 — Request Center
 /// 3-tab interface: My Requests, Pending Approval, Templates
 /// 8 request types, creation flow, status pipeline
 

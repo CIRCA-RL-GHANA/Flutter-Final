@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// MARKET MODULE â€” Screen 1.1: Unified Market Search
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// MARKET MODULE — Screen 1.1: Unified Market Search
 /// Full-screen modal with search bar, recent searches, quick filters,
 /// tabbed results (Merchants / Products / Deals), AI suggestions
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -62,7 +62,7 @@ class _MarketSearchScreenState extends State<MarketSearchScreen> with SingleTick
           ),
           body: Column(
             children: [
-              // â”€â”€ Search Input â”€â”€
+              // ── Search Input ──
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: MarketSearchBar(
@@ -72,7 +72,7 @@ class _MarketSearchScreenState extends State<MarketSearchScreen> with SingleTick
                 ),
               ),
 
-              // â”€â”€ Quick Filter Chips â”€â”€
+              // ── Quick Filter Chips ──
               Padding(
                 padding: const EdgeInsets.only(bottom: 8),
                 child: MarketQuickFilterChips(
@@ -84,7 +84,7 @@ class _MarketSearchScreenState extends State<MarketSearchScreen> with SingleTick
                 ),
               ),
 
-              // â”€â”€ Content area â”€â”€
+              // ── Content area ──
               if (_query.isEmpty) ...[
                 // Recent searches
                 const MarketSectionTitle(title: 'Recent Searches', icon: Icons.history),
@@ -231,7 +231,7 @@ class _MarketSearchScreenState extends State<MarketSearchScreen> with SingleTick
                       Row(
                         children: [
                           Text('${merchant.ratingDisplay}â˜…', style: const TextStyle(fontSize: 12)),
-                          Text(' â€¢ ${merchant.deliveryTimeDisplay} â€¢ ${merchant.distanceMiles}mi',
+                          Text(' • ${merchant.deliveryTimeDisplay} • ${merchant.distanceMiles}mi',
                               style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                         ],
                       ),
@@ -359,10 +359,10 @@ class _MarketSearchScreenState extends State<MarketSearchScreen> with SingleTick
   }
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-// AI Search Suggestion Banner â€” shows AI keyword suggestions when query is empty
+// ─────────────────────────────────────────────────────────────────────────────
+// AI Search Suggestion Banner — shows AI keyword suggestions when query is empty
 // or a smart "you might like" row when the user has typed something.
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─────────────────────────────────────────────────────────────────────────────
 
 class _AISearchSuggestionBanner extends StatelessWidget {
   final String  query;
@@ -379,7 +379,7 @@ class _AISearchSuggestionBanner extends StatelessWidget {
       builder: (ctx, notifier, _) {
         final results = notifier.searchResults;
 
-        // When no query & no AI results â€” show a generic AI prompt banner
+        // When no query & no AI results — show a generic AI prompt banner
         if (query.isEmpty && results.isEmpty) {
           return Container(
             margin: const EdgeInsets.all(16),
@@ -397,7 +397,7 @@ class _AISearchSuggestionBanner extends StatelessWidget {
                 const SizedBox(width: 10),
                 const Expanded(
                   child: Text(
-                    'AI-powered search â€” type anything and get\nsemantically ranked results.',
+                    'AI-powered search — type anything and get\nsemantically ranked results.',
                     style: TextStyle(fontSize: 12, color: AppColors.textSecondary),
                   ),
                 ),
@@ -406,7 +406,7 @@ class _AISearchSuggestionBanner extends StatelessWidget {
           );
         }
 
-        // When AI search results exist â€” show them as suggestion chips
+        // When AI search results exist — show them as suggestion chips
         if (results.isNotEmpty) {
           return Container(
             margin:  const EdgeInsets.symmetric(horizontal: 16, vertical: 8),

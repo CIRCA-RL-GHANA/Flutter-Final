@@ -1,4 +1,4 @@
-﻿/// APRIL Screen 4 â€” Wishlist Command Center
+/// APRIL Screen 4 — Wishlist Command Center
 /// 4 view modes: grid, list, priority, timeline
 /// Item management, collections, savings tracking
 
@@ -197,7 +197,7 @@ class AprilWishlistScreen extends StatelessWidget {
                                     const SizedBox(width: 6),
                                     Expanded(
                                       child: Text(
-                                        'AI â€” ${recs.length} personalised picks based on your interests',
+                                        'AI — ${recs.length} personalised picks based on your interests',
                                         style: const TextStyle(
                                           fontSize: 11,
                                           fontWeight: FontWeight.w600,
@@ -424,7 +424,7 @@ class _WishlistListTile extends StatelessWidget {
 }
 
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// Priority View â€” Grouped by priority
+// Priority View — Grouped by priority
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 class _PriorityView extends StatelessWidget {
   final List<WishlistItem> items;
@@ -465,7 +465,7 @@ class _PriorityView extends StatelessWidget {
 }
 
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// Timeline View â€” Items by added date
+// Timeline View — Items by added date
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 class _TimelineView extends StatelessWidget {
   final List<WishlistItem> items;

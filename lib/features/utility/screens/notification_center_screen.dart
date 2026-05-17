@@ -1,4 +1,4 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// U2: NOTIFICATION CENTER Screen
 /// Filterable notification feed with read/unread/archive, swipe actions,
 /// notification type chips, priority indicators
@@ -70,7 +70,7 @@ class NotificationCenterScreen extends StatelessWidget {
                 },
               ),
 
-              // â”€â”€â”€ Status Filter Chips â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Status Filter Chips ──────────────────────
               Padding(
                 padding: const EdgeInsets.only(top: 8),
                 child: UtilityFilterChipRow(
@@ -85,7 +85,7 @@ class NotificationCenterScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Type Filter Chips â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Type Filter Chips ────────────────────────
               Padding(
                 padding: const EdgeInsets.only(top: 8),
                 child: SizedBox(
@@ -114,7 +114,7 @@ class NotificationCenterScreen extends StatelessWidget {
 
               const SizedBox(height: 8),
 
-              // â”€â”€â”€ Notification List â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Notification List ────────────────────────
               Expanded(
                 child: filtered.isEmpty
                     ? const UtilityEmptyState(
@@ -188,7 +188,7 @@ class NotificationCenterScreen extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Type Filter Chip â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Type Filter Chip ────────────────────────────────────────────────────────
 
 class _TypeChip extends StatelessWidget {
   final String label;
@@ -230,7 +230,7 @@ class _TypeChip extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Notification Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Notification Card ───────────────────────────────────────────────────────
 
 class _NotificationCard extends StatelessWidget {
   final NotificationItem notification;

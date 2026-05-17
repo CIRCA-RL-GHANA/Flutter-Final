@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// e-PLAY MODULE â€” Creator Studio Screen
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// e-PLAY MODULE — Creator Studio Screen
 /// Creators open their "digital branch", upload content, manage royalties.
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
@@ -72,7 +72,7 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
     );
   }
 
-  // â”€â”€ Onboarding: Open digital branch â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Onboarding: Open digital branch ──────────────────────────────────────
 
   Widget _buildOnboarding(EPlayProvider eplay) {
     return SingleChildScrollView(
@@ -90,7 +90,7 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
           const Text('Open Your Digital Branch', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppColors.textPrimary), textAlign: TextAlign.center),
           const SizedBox(height: 10),
           const Text(
-            'Sell music, movies, podcasts, e-books and shows directly to your audience. You keep 85% â€” Genie keeps 15%.',
+            'Sell music, movies, podcasts, e-books and shows directly to your audience. You keep 85% — Genie keeps 15%.',
             style: TextStyle(fontSize: 14, color: AppColors.textSecondary, height: 1.6),
             textAlign: TextAlign.center,
           ),
@@ -138,7 +138,7 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
     );
   }
 
-  // â”€â”€ Creator Studio â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Creator Studio ────────────────────────────────────────────────────────
 
   Widget _buildStudio(AIInsightsNotifier ai, EPlayProvider eplay) {
     return TabBarView(
@@ -231,7 +231,7 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
             child: ElevatedButton.icon(
               onPressed: _uploading ? null : () => setState(() => _uploading = !_uploading),
               icon: _uploading ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2)) : const Icon(Icons.upload),
-              label: Text(_uploading ? 'Uploadingâ€¦' : 'Upload & Publish'),
+              label: Text(_uploading ? 'Uploading…' : 'Upload & Publish'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: kEPlayColor, foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(vertical: 15),

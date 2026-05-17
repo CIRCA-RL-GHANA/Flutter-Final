@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD3.5: MY ACTIVITY â€” Tasks, Goals, Timeline
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// SD3.5: MY ACTIVITY — Tasks, Goals, Timeline
 /// Task progress, goal tracking with progress bars, today's activity timeline
 /// RBAC: Owner(all), Admin(all), BM(branch), SO(entity),
 ///        BSO(branch), Monitor/BrMon(view), RO/BRO(own), Driver(own)
@@ -46,7 +46,7 @@ class MyActivityScreen extends StatelessWidget {
             ),
           body: CustomScrollView(
             slivers: [
-              // â”€â”€â”€ Task Summary â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Task Summary ─────────────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -71,7 +71,7 @@ class MyActivityScreen extends StatelessWidget {
                       Expanded(
                         child: KPIBadge(
                           label: 'Productivity',
-                          value: tasks.isEmpty ? 'â€”' : '${(completedTasks * 100 / tasks.length).round()}%',
+                          value: tasks.isEmpty ? '—' : '${(completedTasks * 100 / tasks.length).round()}%',
                           icon: Icons.speed,
                           color: tasks.isEmpty
                               ? AppColors.textTertiary
@@ -87,7 +87,7 @@ class MyActivityScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Overdue Alert â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Overdue Alert ────────────────────────────
               if (tasks.where((t) => t.status != TaskStatus.completed && t.status != TaskStatus.cancelled && (t.dueDate?.isBefore(DateTime.now()) ?? false)).isNotEmpty)
                 SliverToBoxAdapter(
                   child: Padding(
@@ -132,7 +132,7 @@ class MyActivityScreen extends StatelessWidget {
                   ),
                 ),
 
-              // â”€â”€â”€ Task Status Filter â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Task Status Filter ───────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -155,7 +155,7 @@ class MyActivityScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Tasks Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Tasks Section ────────────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
@@ -163,7 +163,7 @@ class MyActivityScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ AI Insights â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── AI Insights ─────────────────────────────────────────
               SliverToBoxAdapter(
                 child: Consumer<AIInsightsNotifier>(
                   builder: (context, ai, _) {
@@ -204,7 +204,7 @@ class MyActivityScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Goals Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Goals Section ────────────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
@@ -222,7 +222,7 @@ class MyActivityScreen extends StatelessWidget {
                 ),
               ),
 
-              // â”€â”€â”€ Timeline Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+              // ─── Timeline Section ─────────────────────────
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
@@ -513,7 +513,7 @@ class _TimelineItem extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // â”€â”€â”€ Timeline Connector â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+          // ─── Timeline Connector ──────────────
           SizedBox(
             width: 30,
             child: Column(
@@ -533,7 +533,7 @@ class _TimelineItem extends StatelessWidget {
               ],
             ),
           ),
-          // â”€â”€â”€ Content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+          // ─── Content ─────────────────────────
           Expanded(
             child: Container(
               margin: const EdgeInsets.only(bottom: 12),
@@ -601,7 +601,7 @@ class _TimelineItem extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Task Status Chip â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Task Status Chip ────────────────────────────────────────────────────────
 
 class _TaskStatusChip extends StatelessWidget {
   final String label;

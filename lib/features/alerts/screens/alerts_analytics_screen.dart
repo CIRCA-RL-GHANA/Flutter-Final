@@ -1,4 +1,4 @@
-﻿/// Alerts Screen 6 â€” Analytics Dashboard
+/// Alerts Screen 6 — Analytics Dashboard
 /// Volume trends, SLA compliance, category distribution,
 /// team workload, resolver leaderboard
 
@@ -24,7 +24,7 @@ class AlertsAnalyticsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // â”€â”€â”€â”€ AI ANALYTICS INSIGHT â”€â”€â”€â”€
+                // ──── AI ANALYTICS INSIGHT ────
                 Consumer<AIInsightsNotifier>(
                   builder: (context, ai, _) {
                     if (ai.insights.isEmpty) return const SizedBox.shrink();
@@ -43,7 +43,7 @@ class AlertsAnalyticsScreen extends StatelessWidget {
                     );
                   },
                 ),
-                // â”€â”€â”€â”€ KEY METRICS â”€â”€â”€â”€
+                // ──── KEY METRICS ────
                 Row(
                   children: [
                     _MetricCard(
@@ -85,7 +85,7 @@ class AlertsAnalyticsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
 
-                // â”€â”€â”€â”€ VOLUME TRENDS â”€â”€â”€â”€
+                // ──── VOLUME TRENDS ────
                 AlertsSectionCard(
                   title: 'ðŸ“ˆ Alert Volume (7 Days)',
                   child: SizedBox(
@@ -95,7 +95,7 @@ class AlertsAnalyticsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
 
-                // â”€â”€â”€â”€ CATEGORY DISTRIBUTION â”€â”€â”€â”€
+                // ──── CATEGORY DISTRIBUTION ────
                 AlertsSectionCard(
                   title: 'ðŸ—‚ï¸ Category Distribution',
                   child: Column(
@@ -111,7 +111,7 @@ class AlertsAnalyticsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
 
-                // â”€â”€â”€â”€ SLA COMPLIANCE GAUGE â”€â”€â”€â”€
+                // ──── SLA COMPLIANCE GAUGE ────
                 AlertsSectionCard(
                   title: 'â±ï¸ SLA Compliance',
                   child: Column(
@@ -165,7 +165,7 @@ class AlertsAnalyticsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
 
-                // â”€â”€â”€â”€ ISSUE DISTRIBUTION DONUT â”€â”€â”€â”€
+                // ──── ISSUE DISTRIBUTION DONUT ────
                 AlertsSectionCard(
                   title: 'ðŸ© Issue Mix',
                   child: Row(
@@ -199,7 +199,7 @@ class AlertsAnalyticsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
 
-                // â”€â”€â”€â”€ RESOLVER LEADERBOARD â”€â”€â”€â”€
+                // ──── RESOLVER LEADERBOARD ────
                 AlertsSectionCard(
                   title: 'ðŸ† Top Resolvers',
                   child: Column(
@@ -214,7 +214,7 @@ class AlertsAnalyticsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
 
-                // â”€â”€â”€â”€ TEAM WORKLOAD â”€â”€â”€â”€
+                // ──── TEAM WORKLOAD ────
                 AlertsSectionCard(
                   title: 'ðŸ‘¥ Team Workload',
                   child: Column(
@@ -266,9 +266,9 @@ class AlertsAnalyticsScreen extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 // Metric Card
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 
 class _MetricCard extends StatelessWidget {
   final String emoji;
@@ -309,9 +309,9 @@ class _MetricCard extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 // Bar Chart
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 
 class _BarChart extends StatelessWidget {
   final List<AlertAnalyticsPoint> data;
@@ -350,9 +350,9 @@ class _BarChart extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 // Distribution Bar
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 
 class _DistributionBar extends StatelessWidget {
   final String label;
@@ -385,9 +385,9 @@ class _DistributionBar extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 // Legend Dot
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 
 class _LegendDot extends StatelessWidget {
   final Color color;

@@ -1,4 +1,4 @@
-﻿/// Alerts Screen 2 â€” Comprehensive Filter System
+/// Alerts Screen 2 — Comprehensive Filter System
 /// Full-screen modal with accordion sections (Time Intelligence,
 /// People & Assignment, Issue Taxonomy, Status & Workflow, AI Filters),
 /// filter presets, sticky footer
@@ -86,7 +86,7 @@ class _AlertsFilterScreenState extends State<AlertsFilterScreen> {
                     );
                   },
                 ),
-                // â”€â”€â”€â”€ FILTER PRESETS â”€â”€â”€â”€
+                // ──── FILTER PRESETS ────
                 AlertsSectionCard(
                   title: 'âš¡ Quick Presets',
                   child: Wrap(
@@ -116,7 +116,7 @@ class _AlertsFilterScreenState extends State<AlertsFilterScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                // â”€â”€â”€â”€ TIME INTELLIGENCE â”€â”€â”€â”€
+                // ──── TIME INTELLIGENCE ────
                 _FilterAccordion(
                   icon: Icons.schedule,
                   title: 'Time Intelligence',
@@ -131,7 +131,7 @@ class _AlertsFilterScreenState extends State<AlertsFilterScreen> {
                 ),
                 const SizedBox(height: 12),
 
-                // â”€â”€â”€â”€ PRIORITY LEVEL â”€â”€â”€â”€
+                // ──── PRIORITY LEVEL ────
                 _FilterAccordion(
                   icon: Icons.flag,
                   title: 'Priority Level',
@@ -166,7 +166,7 @@ class _AlertsFilterScreenState extends State<AlertsFilterScreen> {
                 ),
                 const SizedBox(height: 12),
 
-                // â”€â”€â”€â”€ ISSUE TAXONOMY â”€â”€â”€â”€
+                // ──── ISSUE TAXONOMY ────
                 _FilterAccordion(
                   icon: Icons.category,
                   title: 'Issue Taxonomy',
@@ -199,7 +199,7 @@ class _AlertsFilterScreenState extends State<AlertsFilterScreen> {
                 ),
                 const SizedBox(height: 12),
 
-                // â”€â”€â”€â”€ STATUS & WORKFLOW â”€â”€â”€â”€
+                // ──── STATUS & WORKFLOW ────
                 _FilterAccordion(
                   icon: Icons.assignment,
                   title: 'Status & Workflow',
@@ -214,7 +214,7 @@ class _AlertsFilterScreenState extends State<AlertsFilterScreen> {
                 ),
                 const SizedBox(height: 12),
 
-                // â”€â”€â”€â”€ PEOPLE & ASSIGNMENT â”€â”€â”€â”€
+                // ──── PEOPLE & ASSIGNMENT ────
                 _FilterAccordion(
                   icon: Icons.people,
                   title: 'People & Assignment',
@@ -233,7 +233,7 @@ class _AlertsFilterScreenState extends State<AlertsFilterScreen> {
             ),
           ),
 
-          // â”€â”€â”€â”€ STICKY FOOTER â”€â”€â”€â”€
+          // ──── STICKY FOOTER ────
           bottomNavigationBar: Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
@@ -311,7 +311,7 @@ class _AlertsFilterScreenState extends State<AlertsFilterScreen> {
   }
 
   void _applyPreset(AlertFilterPreset preset) {
-    // Apply preset logic â€” simplified for demo
+    // Apply preset logic — simplified for demo
     setState(() {
       _priority = null;
       _category = null;
@@ -366,9 +366,9 @@ class _AlertsFilterScreenState extends State<AlertsFilterScreen> {
   }
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 // Filter Accordion
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 
 class _FilterAccordion extends StatelessWidget {
   final IconData icon;
@@ -400,9 +400,9 @@ class _FilterAccordion extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 // Radio Tile
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 
 class _RadioTile<T> extends StatelessWidget {
   final String label;
@@ -440,9 +440,9 @@ class _RadioTile<T> extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 // Check Tile
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 
 class _CheckTile extends StatelessWidget {
   final String label;
@@ -479,9 +479,9 @@ class _CheckTile extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 // Toggle Tile
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ──────────────────────────────────────────────
 
 class _ToggleTile extends StatelessWidget {
   final String label;

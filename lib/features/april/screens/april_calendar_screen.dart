@@ -1,4 +1,4 @@
-﻿/// APRIL Screen 3 â€” Smart Calendar
+/// APRIL Screen 3 — Smart Calendar
 /// 5 view modes: day, week, month, agenda, year
 /// Event creation, meeting scheduling, day timeline
 
@@ -237,7 +237,7 @@ class AprilCalendarScreen extends StatelessWidget {
 }
 
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// DAY VIEW â€” Timeline
+// DAY VIEW — Timeline
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 class _DayView extends StatelessWidget {
   final AprilProvider provider;
@@ -423,7 +423,7 @@ class _WeekView extends StatelessWidget {
 }
 
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// MONTH VIEW â€” Calendar Grid
+// MONTH VIEW — Calendar Grid
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 class _MonthView extends StatelessWidget {
   final AprilProvider provider;
@@ -550,7 +550,7 @@ class _MonthView extends StatelessWidget {
 }
 
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// AGENDA VIEW â€” Scrollable Event List
+// AGENDA VIEW — Scrollable Event List
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 class _AgendaView extends StatelessWidget {
   final AprilProvider provider;
@@ -617,7 +617,7 @@ class _AgendaView extends StatelessWidget {
 }
 
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// YEAR VIEW â€” Compact 12-Month Grid
+// YEAR VIEW — Compact 12-Month Grid
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 class _YearView extends StatelessWidget {
   final AprilProvider provider;

@@ -1,5 +1,5 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// LIVE MODULE â€” Screen 20: Emergency SOS Interface
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// LIVE MODULE — Screen 20: Emergency SOS Interface
 /// Critical safety screen: SOS activation, auto-location sharing,
 /// emergency contacts, countdown timer, authorities notification
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -180,10 +180,10 @@ class _SOSSetupView extends StatelessWidget {
             children: [
               Text('âš ï¸ When SOS is activated:', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: kLiveColor)),
               SizedBox(height: 4),
-              Text('â€¢ Your real-time location is shared', style: TextStyle(fontSize: 12, color: Color(0xFF991B1B))),
-              Text('â€¢ Emergency contacts are notified', style: TextStyle(fontSize: 12, color: Color(0xFF991B1B))),
-              Text('â€¢ Operations center is alerted', style: TextStyle(fontSize: 12, color: Color(0xFF991B1B))),
-              Text('â€¢ Audio recording begins (if enabled)', style: TextStyle(fontSize: 12, color: Color(0xFF991B1B))),
+              Text('• Your real-time location is shared', style: TextStyle(fontSize: 12, color: Color(0xFF991B1B))),
+              Text('• Emergency contacts are notified', style: TextStyle(fontSize: 12, color: Color(0xFF991B1B))),
+              Text('• Operations center is alerted', style: TextStyle(fontSize: 12, color: Color(0xFF991B1B))),
+              Text('• Audio recording begins (if enabled)', style: TextStyle(fontSize: 12, color: Color(0xFF991B1B))),
             ],
           ),
         ),
@@ -341,7 +341,7 @@ class _ContactItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(contact.name, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-                Text('${contact.type.name} â€¢ ${contact.phone}', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                Text('${contact.type.name} • ${contact.phone}', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
               ],
             ),
           ),
