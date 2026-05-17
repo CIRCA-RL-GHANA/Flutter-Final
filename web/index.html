@@ -218,20 +218,29 @@
         Promise.all(jobs).then(done).catch(done);
       }
       try {
-        var purgedThisCycle = sessionStorage.getItem('__cache_purged') === '1';
+        // Allow up to 3 purge cycles per session so a single edge-cache hiccup
+        // (Vercel CDN serving a stale index.html after a deploy) cannot strand
+        // the user on the old build indefinitely. The counter is reset once the
+        // confirmed-live stamp matches.
+        var purgeCount = parseInt(sessionStorage.getItem('__purge_count') || '0', 10);
         fetch('version.json?ts=' + Date.now(), { cache: 'no-store' })
           .then(function(r) { return r.ok ? r.json() : null; })
           .then(function(v) {
             if (!v) return;
             var stamp = (v.version || '') + '+' + (v.build_number || '');
             var prev = localStorage.getItem('app_build_stamp');
-            localStorage.setItem('app_build_stamp', stamp);
-            if (prev && prev !== stamp && !purgedThisCycle) {
-              console.log('[Cache] Build changed', prev, '→', stamp, '— purging.');
+            if (prev && prev !== stamp && purgeCount < 3) {
+              // Build changed: purge caches BEFORE updating the stored stamp so
+              // that if the next load still brings old content we can detect it.
+              console.log('[Cache] Build changed', prev, '\u2192', stamp,
+                          '(purge #' + (purgeCount + 1) + ')');
+              sessionStorage.setItem('__purge_count', purgeCount + 1);
               purgeAndReload();
             } else {
-              // Clean the one-shot flag once we know we're on the new build.
-              try { sessionStorage.removeItem('__cache_purged'); } catch (_) {}
+              // We are on the correct build (or no previous stamp). Commit the
+              // stamp now and reset the retry counter.
+              localStorage.setItem('app_build_stamp', stamp);
+              try { sessionStorage.removeItem('__purge_count'); } catch (_) {}
             }
           })
           .catch(function(e) { console.warn('[Cache] version check failed:', e); });
