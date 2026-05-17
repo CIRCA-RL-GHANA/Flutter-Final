@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/design/ive.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '../../../core/data/countries.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/constants/app_strings.dart';
 import '../../../core/utils/helpers.dart';
@@ -39,21 +40,11 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
   Timer? _emailSuggestionTimer;
   bool _showEmailSuggestion = false;
 
-  // Country data
-  final List<_CountryData> _countries = [
-    const _CountryData('US', 'United States', '+1', 'ðŸ‡ºðŸ‡¸'),
-    const _CountryData('GB', 'United Kingdom', '+44', 'ðŸ‡¬ðŸ‡§'),
-    const _CountryData('GH', 'Ghana', '+233', 'ðŸ‡¬ðŸ‡­'),
-    const _CountryData('NG', 'Nigeria', '+234', 'ðŸ‡³ðŸ‡¬'),
-    const _CountryData('CA', 'Canada', '+1', 'ðŸ‡¨ðŸ‡¦'),
-    const _CountryData('DE', 'Germany', '+49', 'ðŸ‡©ðŸ‡ª'),
-    const _CountryData('FR', 'France', '+33', 'ðŸ‡«ðŸ‡·'),
-    const _CountryData('IN', 'India', '+91', 'ðŸ‡®ðŸ‡³'),
-    const _CountryData('KE', 'Kenya', '+254', 'ðŸ‡°ðŸ‡ª'),
-    const _CountryData('ZA', 'South Africa', '+27', 'ðŸ‡¿ðŸ‡¦'),
-  ];
+  // Canonical country catalogue — all ISO 3166-1 entries with E.164
+  // calling codes. Source of truth: lib/core/data/countries.dart.
+  final List<Country> _countries = kCountries;
 
-  late _CountryData _selectedCountry;
+  late Country _selectedCountry;
 
   // Validation states
   _ValidationState _validationState = _ValidationState.empty;
@@ -62,7 +53,9 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
   void initState() {
     super.initState();
     _phoneController = TextEditingController();
-    _selectedCountry = _countries.first;
+    // Default to the primary market (Ghana); user may change in picker.
+    _selectedCountry =
+        countryByIso('GH') ?? _countries.first;
 
     _waveController = AnimationController(
       duration: const Duration(seconds: 2),
@@ -527,19 +520,16 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
 
 enum _ValidationState { empty, typing, valid, invalid }
 
-class _CountryData {
-  final String iso;
-  final String name;
-  final String dialCode;
-  final String flag;
-
-  const _CountryData(this.iso, this.name, this.dialCode, this.flag);
-}
-
+// ─────────────────────────────────────────────────────────────
+// Country picker sheet — global, complete (~250 entries),
+// sectioned, searchable. Designed to feel inevitable: a quiet
+// frame, generous touch targets, sticky letter headings, and
+// a pinned "Popular" block for the markets we serve first.
+// ─────────────────────────────────────────────────────────────
 class _CountryPickerSheet extends StatefulWidget {
-  final List<_CountryData> countries;
-  final _CountryData selectedCountry;
-  final ValueChanged<_CountryData> onSelect;
+  final List<Country> countries;
+  final Country selectedCountry;
+  final ValueChanged<Country> onSelect;
 
   const _CountryPickerSheet({
     required this.countries,
@@ -551,112 +541,381 @@ class _CountryPickerSheet extends StatefulWidget {
   State<_CountryPickerSheet> createState() => _CountryPickerSheetState();
 }
 
+/// One row in the rendered list. Either a sticky section heading
+/// or a selectable country tile.
+sealed class _Row {
+  const _Row();
+}
+
+class _HeaderRow extends _Row {
+  final String label;
+  const _HeaderRow(this.label);
+}
+
+class _CountryRow extends _Row {
+  final Country country;
+  const _CountryRow(this.country);
+}
+
 class _CountryPickerSheetState extends State<_CountryPickerSheet> {
-  late TextEditingController _searchController;
-  late List<_CountryData> _filtered;
+  late final TextEditingController _searchController;
+  late final FocusNode _searchFocus;
+  String _query = '';
 
   @override
   void initState() {
     super.initState();
     _searchController = TextEditingController();
-    _filtered = widget.countries;
+    _searchFocus = FocusNode();
   }
 
   @override
   void dispose() {
     _searchController.dispose();
+    _searchFocus.dispose();
     super.dispose();
   }
 
-  void _onSearch(String query) {
-    setState(() {
-      _filtered = widget.countries
-          .where((c) =>
-              c.name.toLowerCase().contains(query.toLowerCase()) ||
-              c.dialCode.contains(query) ||
-              c.iso.toLowerCase().contains(query.toLowerCase()))
-          .toList();
-    });
+  /// Compose the visible list. When the search box is empty we render
+  /// a "Popular" block on top, then the entire catalogue with sticky
+  /// A–Z headers. While the user is typing we collapse to a single
+  /// flat result list to keep matches dense and scannable.
+  List<_Row> _composeRows() {
+    final q = _query.trim().toLowerCase();
+    if (q.isEmpty) {
+      final rows = <_Row>[];
+
+      // Popular block
+      final popular = kPopularCountries;
+      if (popular.isNotEmpty) {
+        rows.add(const _HeaderRow('Popular'));
+        rows.addAll(popular.map(_CountryRow.new));
+      }
+
+      // Full A–Z with letter sections (countries list is pre-sorted by name).
+      rows.add(const _HeaderRow('All countries'));
+      String? lastInitial;
+      for (final c in widget.countries) {
+        final initial = c.name.isEmpty
+            ? '#'
+            : _firstAsciiLetter(c.name).toUpperCase();
+        if (initial != lastInitial) {
+          rows.add(_HeaderRow(initial));
+          lastInitial = initial;
+        }
+        rows.add(_CountryRow(c));
+      }
+      return rows;
+    }
+
+    // Search mode: rank exact code/iso matches first, then name matches.
+    final qNoPlus = q.startsWith('+') ? q.substring(1) : q;
+    final exactCode = <Country>[];
+    final startsWith = <Country>[];
+    final contains = <Country>[];
+    for (final c in widget.countries) {
+      final name = c.name.toLowerCase();
+      final iso = c.iso.toLowerCase();
+      final code = c.dialCode.replaceFirst('+', '');
+      if (code == qNoPlus || iso == q) {
+        exactCode.add(c);
+      } else if (name.startsWith(q) || code.startsWith(qNoPlus)) {
+        startsWith.add(c);
+      } else if (name.contains(q) || iso.contains(q)) {
+        contains.add(c);
+      }
+    }
+    final ordered = <Country>[...exactCode, ...startsWith, ...contains];
+    if (ordered.isEmpty) return const <_Row>[];
+    return <_Row>[
+      _HeaderRow('${ordered.length} result${ordered.length == 1 ? '' : 's'}'),
+      ...ordered.map(_CountryRow.new),
+    ];
+  }
+
+  /// Returns the first ASCII letter in [s], or '#' if none. Used to
+  /// place names beginning with diacritics under their unaccented
+  /// initial (Åland → A, Côte d'Ivoire → C, Réunion → R).
+  static String _firstAsciiLetter(String s) {
+    const folds = <String, String>{
+      'Å': 'A', 'Á': 'A', 'À': 'A', 'Â': 'A', 'Ä': 'A', 'Ã': 'A',
+      'Ç': 'C', 'Č': 'C',
+      'É': 'E', 'È': 'E', 'Ê': 'E', 'Ë': 'E',
+      'Í': 'I', 'Ì': 'I', 'Î': 'I', 'Ï': 'I',
+      'Ñ': 'N',
+      'Ó': 'O', 'Ò': 'O', 'Ô': 'O', 'Ö': 'O', 'Õ': 'O', 'Ø': 'O',
+      'Ś': 'S', 'Š': 'S',
+      'Ú': 'U', 'Ù': 'U', 'Û': 'U', 'Ü': 'U',
+      'Ý': 'Y',
+      'Ž': 'Z',
+    };
+    for (var i = 0; i < s.length; i++) {
+      final ch = s[i];
+      final folded = folds[ch] ?? ch;
+      final code = folded.codeUnitAt(0);
+      if ((code >= 0x41 && code <= 0x5A) || (code >= 0x61 && code <= 0x7A)) {
+        return folded;
+      }
+    }
+    return '#';
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.8,
-      decoration: const BoxDecoration(
-        color: const Color(0xFF0E0E1A),
-        borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
-      ),
-      child: Column(
-        children: [
-          // Header
-          Padding(
-            padding: const EdgeInsets.fromLTRB(24, 16, 24, 8),
+    final rows = _composeRows();
+    final bottomInset = MediaQuery.of(context).viewInsets.bottom;
+
+    return DraggableScrollableSheet(
+      initialChildSize: 0.86,
+      minChildSize: 0.5,
+      maxChildSize: 0.94,
+      expand: false,
+      builder: (context, scrollController) => Container(
+        decoration: const BoxDecoration(
+          color: IveTokens.surface,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          border: Border(
+            top: BorderSide(color: IveTokens.hairline, width: 0.5),
+          ),
+        ),
+        child: SafeArea(
+          top: false,
+          child: Padding(
+            padding: EdgeInsets.only(bottom: bottomInset),
             child: Column(
               children: [
-                Container(
-                  width: 40,
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF1C1C2E),
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                TextField(
-                  controller: _searchController,
-                  onChanged: _onSearch,
-                  decoration: InputDecoration(
-                    hintText: 'Search country or code',
-                    prefixIcon: const Icon(Icons.search),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
+                // Grabber
+                Padding(
+                  padding: const EdgeInsets.only(top: 8, bottom: 4),
+                  child: Container(
+                    width: 36,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: IveTokens.hairline,
+                      borderRadius: BorderRadius.circular(2),
                     ),
                   ),
+                ),
+
+                // Title row
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 8, 12, 8),
+                  child: Row(
+                    children: [
+                      const Expanded(
+                        child: Text(
+                          'Select country',
+                          style: TextStyle(
+                            color: IveTokens.label,
+                            fontSize: 17,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: -0.2,
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          HapticFeedback.selectionClick();
+                          Navigator.of(context).pop();
+                        },
+                        icon: const Icon(Icons.close_rounded),
+                        color: IveTokens.labelSecondary,
+                        tooltip: 'Close',
+                      ),
+                    ],
+                  ),
+                ),
+
+                // Search bar
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+                  child: IveTextField(
+                    controller: _searchController,
+                    hint: 'Search country, code, or +dial',
+                    prefix: const Icon(
+                      Icons.search_rounded,
+                      size: 20,
+                      color: IveTokens.labelSecondary,
+                    ),
+                    suffix: _query.isEmpty
+                        ? null
+                        : IconButton(
+                            padding: EdgeInsets.zero,
+                            visualDensity: VisualDensity.compact,
+                            icon: const Icon(
+                              Icons.cancel_rounded,
+                              size: 18,
+                              color: IveTokens.labelTertiary,
+                            ),
+                            onPressed: () {
+                              _searchController.clear();
+                              setState(() => _query = '');
+                            },
+                          ),
+                    textInputAction: TextInputAction.search,
+                    onChanged: (v) => setState(() => _query = v),
+                  ),
+                ),
+
+                const SizedBox(height: 4),
+                const Divider(height: 1, color: IveTokens.hairline),
+
+                // Rows
+                Expanded(
+                  child: rows.isEmpty
+                      ? const _EmptyResults()
+                      : ListView.builder(
+                          controller: scrollController,
+                          padding: const EdgeInsets.only(bottom: 16),
+                          itemCount: rows.length,
+                          itemBuilder: (context, i) {
+                            final row = rows[i];
+                            if (row is _HeaderRow) {
+                              return _SectionHeader(label: row.label);
+                            }
+                            if (row is _CountryRow) {
+                              final c = row.country;
+                              final selected =
+                                  c.iso == widget.selectedCountry.iso;
+                              return _CountryTile(
+                                country: c,
+                                selected: selected,
+                                onTap: () {
+                                  HapticFeedback.selectionClick();
+                                  widget.onSelect(c);
+                                },
+                              );
+                            }
+                            return const SizedBox.shrink();
+                          },
+                        ),
                 ),
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
 
-          // Country list
-          Expanded(
-            child: ListView.builder(
-              itemCount: _filtered.length,
-              itemBuilder: (context, index) {
-                final country = _filtered[index];
-                final isSelected = country.iso == widget.selectedCountry.iso;
-                return ListTile(
-                  leading: Text(
-                    country.flag,
-                    style: const TextStyle(fontSize: 28),
-                  ),
-                  title: Text(
-                    country.name,
-                    style: TextStyle(
-                      fontWeight:
-                          isSelected ? FontWeight.w600 : FontWeight.normal,
-                    ),
-                  ),
-                  trailing: Text(
-                    country.dialCode,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      color: isSelected
-                          ? const Color(0xFF22BDD8)
-                          : const Color(0xFF9A9AB2),
-                    ),
-                  ),
-                  selected: isSelected,
-                  selectedTileColor: const Color(0xFF22BDD8).withValues(alpha: 0.05),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  onTap: () => widget.onSelect(country),
-                );
-              },
+class _SectionHeader extends StatelessWidget {
+  final String label;
+  const _SectionHeader({required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      color: IveTokens.surface,
+      padding: const EdgeInsets.fromLTRB(20, 14, 20, 6),
+      child: Text(
+        label.toUpperCase(),
+        style: const TextStyle(
+          color: IveTokens.labelTertiary,
+          fontSize: 11,
+          fontWeight: FontWeight.w600,
+          letterSpacing: 0.8,
+        ),
+      ),
+    );
+  }
+}
+
+class _CountryTile extends StatelessWidget {
+  final Country country;
+  final bool selected;
+  final VoidCallback onTap;
+
+  const _CountryTile({
+    required this.country,
+    required this.selected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        constraints: const BoxConstraints(minHeight: 52),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        color: selected
+            ? IveTokens.accent.withValues(alpha: 0.07)
+            : Colors.transparent,
+        child: Row(
+          children: [
+            Text(country.flag, style: const TextStyle(fontSize: 26)),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Text(
+                country.name,
+                style: TextStyle(
+                  color: IveTokens.label,
+                  fontSize: 16,
+                  fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
+                  letterSpacing: -0.1,
+                ),
+              ),
             ),
-          ),
-        ],
+            const SizedBox(width: 8),
+            Text(
+              country.dialCode,
+              style: TextStyle(
+                color: selected
+                    ? IveTokens.accent
+                    : IveTokens.labelSecondary,
+                fontSize: 15,
+                fontWeight: FontWeight.w600,
+                fontFeatures: const [FontFeature.tabularFigures()],
+              ),
+            ),
+            const SizedBox(width: 6),
+            SizedBox(
+              width: 20,
+              child: selected
+                  ? const Icon(
+                      Icons.check_rounded,
+                      size: 18,
+                      color: IveTokens.accent,
+                    )
+                  : const SizedBox.shrink(),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _EmptyResults extends StatelessWidget {
+  const _EmptyResults();
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(32),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: const [
+            Icon(
+              Icons.public_off_rounded,
+              size: 40,
+              color: IveTokens.labelTertiary,
+            ),
+            SizedBox(height: 12),
+            Text(
+              'No country matches that search',
+              style: TextStyle(
+                color: IveTokens.labelSecondary,
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
       ),
     );
   }
