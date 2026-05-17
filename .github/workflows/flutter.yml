@@ -246,39 +246,65 @@ jobs:
           ! grep -q 'New version available! Reload to update' build/web/index.html || { echo "::error::Built index.html still has old confirm() prompt"; exit 1; }
           echo "Build size: $(du -sh build/web/ | cut -f1)"
 
-      - name: Bundle vercel.json with build output (static-only)
+      - name: Construct Vercel Build Output (prebuilt, zero-build)
         run: |
-          # Strip build/framework fields so Vercel does NOT try to re-build
-          # the already-prebuilt directory (which caused infinite "Building…").
+          set -e
+          # Vercel's "Build Output API" lets us skip Vercel's build phase
+          # entirely. We translate vercel.json (headers + rewrites) into the
+          # official .vercel/output/config.json schema, and place the Flutter
+          # build under .vercel/output/static.
+          mkdir -p .vercel/output/static
+          cp -a build/web/. .vercel/output/static/
           node -e "
             const fs = require('fs');
             const v = JSON.parse(fs.readFileSync('vercel.json','utf8'));
-            delete v.framework;
-            delete v.installCommand;
-            delete v.buildCommand;
-            delete v.outputDirectory;
-            delete v.devCommand;
-            delete v.ignoreCommand;
-            fs.writeFileSync('build/web/vercel.json', JSON.stringify(v, null, 2));
+            const routes = [];
+            // 1. Apply all header rules first, with continue:true so matching
+            //    continues to the filesystem / rewrite phase.
+            for (const h of (v.headers || [])) {
+              const headers = {};
+              for (const kv of (h.headers || [])) headers[kv.key] = kv.value;
+              routes.push({ src: h.source, headers, continue: true });
+            }
+            // 2. Serve real files from disk before falling through to rewrites.
+            routes.push({ handle: 'filesystem' });
+            // 3. SPA rewrites.
+            for (const r of (v.rewrites || [])) {
+              routes.push({ src: r.source, dest: r.destination });
+            }
+            const config = { version: 3, routes };
+            fs.writeFileSync('.vercel/output/config.json', JSON.stringify(config, null, 2));
+            console.log('config.json routes:', routes.length);
           "
-          echo 'vercel.json bundled into build/web (build fields stripped)'
-          head -40 build/web/vercel.json
+          echo '--- .vercel/output/config.json ---'
+          cat .vercel/output/config.json
+          echo '--- static dir size ---'
+          du -sh .vercel/output/static
 
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
 
-      - name: Deploy to Vercel (production)
-        timeout-minutes: 10
+      - name: Pull Vercel project metadata
+        timeout-minutes: 3
+        run: |
+          vercel pull --yes --environment=production --token="${{ secrets.VERCEL_TOKEN }}"
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+      - name: Deploy to Vercel (production, prebuilt)
+        id: vercel_deploy
+        timeout-minutes: 8
         run: |
           set -e
-          cd build/web
-          # Mark as a static, prebuilt deployment: tell Vercel there is no
-          # framework and no build command. The vercel.json here only carries
-          # headers + rewrites.
-          vercel deploy . \
-            --token="${{ secrets.VERCEL_TOKEN }}" \
-            --prod --yes --force \
-            --archive=tgz
+          # --prebuilt tells Vercel to deploy .vercel/output verbatim with NO
+          # build phase. This is the official escape hatch that prevents the
+          # "Building…" hang we hit when Vercel detected the directory and
+          # tried to re-build it.
+          URL=$(vercel deploy --prebuilt --prod --yes \
+            --token="${{ secrets.VERCEL_TOKEN }}" 2>&1 | tee /tmp/vercel.log | tail -1)
+          echo "Deployment URL: $URL"
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
@@ -309,13 +335,20 @@ jobs:
     needs: build-android
     environment: production
     continue-on-error: true
+    # Only run when Play Store creds are configured.
+    if: github.ref == 'refs/heads/main'
 
     steps:
-      - uses: actions/download-artifact@v4
+      - name: Download Android AAB
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        id: dl_aab
         with:
           name: android-aab
 
       - name: Upload to Play Store
+        if: steps.dl_aab.outcome == 'success'
+        continue-on-error: true
         uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT }}
@@ -332,13 +365,19 @@ jobs:
     needs: build-ios
     environment: production
     continue-on-error: true
+    if: github.ref == 'refs/heads/main'
 
     steps:
-      - uses: actions/download-artifact@v4
+      - name: Download iOS IPA
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        id: dl_ipa
         with:
           name: ios-ipa
 
       - name: Upload to App Store Connect
+        if: steps.dl_ipa.outcome == 'success'
+        continue-on-error: true
         uses: apple-actions/upload-testflight-build@v1
         with:
           app-path: '*.ipa'
