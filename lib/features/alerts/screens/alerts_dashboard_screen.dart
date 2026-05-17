@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/widgets/ai_insight_card.dart';
 import '../models/alerts_models.dart';
@@ -236,12 +237,12 @@ class AlertsDashboardScreen extends StatelessWidget {
                               ? PendingAlertCard(
                                   alert: alert,
                                   isSelected: provider.selectedAlertIds.contains(alert.id),
-                                  onTap: () => Navigator.pushNamed(context, '/alerts/detail', arguments: alert.id),
+                                  onTap: () => Navigator.pushNamed(context, AppRoutes.alertsDetail, arguments: alert.id),
                                   onLongPress: () => provider.toggleSelectAlert(alert.id),
                                 )
                               : ResolvedAlertCard(
                                   alert: alert,
-                                  onTap: () => Navigator.pushNamed(context, '/alerts/detail', arguments: alert.id),
+                                  onTap: () => Navigator.pushNamed(context, AppRoutes.alertsDetail, arguments: alert.id),
                                 );
                           if (!showAIBadge) return card;
                           return Stack(

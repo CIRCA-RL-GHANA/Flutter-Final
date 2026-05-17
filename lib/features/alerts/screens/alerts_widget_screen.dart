@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../core/routes/app_routes.dart';
 import '../models/alerts_models.dart';
 import '../providers/alerts_provider.dart';
 import '../widgets/alerts_widgets.dart';
@@ -173,7 +174,7 @@ class AlertsWidgetScreen extends StatelessWidget {
               else
                 ...provider.pendingAlerts.take(3).map((alert) => _CompactAlertRow(
                   alert: alert,
-                  onTap: () => Navigator.pushNamed(context, '/alerts/detail', arguments: alert.id),
+                  onTap: () => Navigator.pushNamed(context, AppRoutes.alertsDetail, arguments: alert.id),
                 )),
 
               const SizedBox(height: 12),

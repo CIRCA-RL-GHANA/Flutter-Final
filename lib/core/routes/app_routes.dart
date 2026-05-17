@@ -788,12 +788,12 @@ class AppRoutes {
       case alertsFilter:
         return _buildRoute(const AlertsFilterScreen(), settings);
       case alertsDetail:
-        final alertId = settings.arguments as String;
+        final alertId = (settings.arguments as String?) ?? '';
         return _buildRoute(AlertsDetailScreen(alertId: alertId), settings);
       case alertsCompose:
         return _buildRoute(const AlertsComposerScreen(), settings);
       case alertsResolve:
-        final alertId = settings.arguments as String;
+        final alertId = (settings.arguments as String?) ?? '';
         return _buildRoute(AlertsResolutionScreen(alertId: alertId), settings);
       case alertsAnalytics:
         return _buildRoute(const AlertsAnalyticsScreen(), settings);

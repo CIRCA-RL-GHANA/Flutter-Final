@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../models/alerts_models.dart';
 import '../providers/alerts_provider.dart';
@@ -245,7 +246,7 @@ class _AlertsSearchScreenState extends State<AlertsSearchScreen> {
             const SizedBox(height: 8),
             ...pending.map((alert) => PendingAlertCard(
               alert: alert,
-              onTap: () => Navigator.pushNamed(context, '/alerts/detail', arguments: alert.id),
+              onTap: () => Navigator.pushNamed(context, AppRoutes.alertsDetail, arguments: alert.id),
             )),
             const SizedBox(height: 16),
           ],
@@ -256,7 +257,7 @@ class _AlertsSearchScreenState extends State<AlertsSearchScreen> {
             const SizedBox(height: 8),
             ...resolved.map((alert) => ResolvedAlertCard(
               alert: alert,
-              onTap: () => Navigator.pushNamed(context, '/alerts/detail', arguments: alert.id),
+              onTap: () => Navigator.pushNamed(context, AppRoutes.alertsDetail, arguments: alert.id),
             )),
           ],
         ],

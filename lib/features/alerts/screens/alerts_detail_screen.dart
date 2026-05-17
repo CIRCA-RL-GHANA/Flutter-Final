@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../core/routes/app_routes.dart';
 import '../models/alerts_models.dart';
 import '../providers/alerts_provider.dart';
 import '../widgets/alerts_widgets.dart';
@@ -381,7 +382,7 @@ class AlertsDetailScreen extends StatelessWidget {
                           child: ElevatedButton.icon(
                             icon: const Icon(Icons.check_circle, size: 18),
                             label: const Text('Resolve', style: TextStyle(fontWeight: FontWeight.w600)),
-                            onPressed: () => Navigator.pushNamed(context, '/alerts/resolve', arguments: alert.id),
+                            onPressed: () => Navigator.pushNamed(context, AppRoutes.alertsResolve, arguments: alert.id),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: kAlertsResolved,
                               foregroundColor: Colors.white,
