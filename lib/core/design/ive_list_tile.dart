@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'ive_text.dart';
 import 'ive_tokens.dart';
 
@@ -79,13 +80,19 @@ class IveListTile extends StatelessWidget {
     );
 
     if (onTap == null) return row;
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: onTap,
-        splashColor: IveTokens.accentSoft,
-        highlightColor: IveTokens.accentSoft,
-        child: Semantics(button: true, label: title, child: row),
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () {
+            HapticFeedback.selectionClick();
+            onTap!();
+          },
+          splashColor: IveTokens.accentSoft,
+          highlightColor: IveTokens.accentSoft,
+          child: Semantics(button: true, label: title, child: row),
+        ),
       ),
     );
   }

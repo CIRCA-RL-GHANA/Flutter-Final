@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'ive_text.dart';
 import 'ive_tokens.dart';
 
@@ -10,7 +11,13 @@ import 'ive_tokens.dart';
 /// - [IveButton.text]     — text-only, used for tertiary actions
 ///
 /// Sized to a 44pt minimum tap target.
-class IveButton extends StatelessWidget {
+///
+/// Interaction polish (Jony-Ive grade):
+///  • Pointer cursor on hover (web/desktop)
+///  • Subtle press-scale (97%) for tactile feedback
+///  • Light haptic on tap (medium for destructive)
+///  • Visible focus ring for keyboard / accessibility users
+class IveButton extends StatefulWidget {
   const IveButton._({
     super.key,
     required this.label,
@@ -93,29 +100,46 @@ class IveButton extends StatelessWidget {
       );
 
   @override
-  Widget build(BuildContext context) {
-    final disabled = onPressed == null && !isLoading;
-    final isPrimary = _variant == _IveButtonVariant.primary;
-    final isText    = _variant == _IveButtonVariant.text;
+  State<IveButton> createState() => _IveButtonState();
+}
 
-    final fg = isDestructive
+class _IveButtonState extends State<IveButton> {
+  bool _pressed = false;
+  bool _focused = false;
+
+  void _handleTap() {
+    if (widget.isDestructive) {
+      HapticFeedback.mediumImpact();
+    } else {
+      HapticFeedback.lightImpact();
+    }
+    widget.onPressed?.call();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final disabled = widget.onPressed == null && !widget.isLoading;
+    final isPrimary = widget._variant == _IveButtonVariant.primary;
+    final isText    = widget._variant == _IveButtonVariant.text;
+
+    final fg = widget.isDestructive
         ? IveTokens.danger
         : isPrimary
             ? Colors.white
             : IveTokens.label;
 
     final bg = isPrimary
-        ? (isDestructive ? IveTokens.danger : IveTokens.accent)
+        ? (widget.isDestructive ? IveTokens.danger : IveTokens.accent)
         : Colors.transparent;
 
     final border = isPrimary || isText
         ? null
         : Border.all(color: IveTokens.hairline, width: 1);
 
-    final height = compact ? 40.0 : IveTokens.tap;
-    final hPad   = compact ? 14.0 : IveTokens.s5;
+    final height = widget.compact ? 40.0 : IveTokens.tap;
+    final hPad   = widget.compact ? 14.0 : IveTokens.s5;
 
-    final content = isLoading
+    final content = widget.isLoading
         ? SizedBox(
             width: 18, height: 18,
             child: CircularProgressIndicator(
@@ -124,16 +148,16 @@ class IveButton extends StatelessWidget {
             ),
           )
         : Row(
-            mainAxisSize: expand ? MainAxisSize.max : MainAxisSize.min,
+            mainAxisSize: widget.expand ? MainAxisSize.max : MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              if (icon != null) ...[
-                Icon(icon, size: 18, color: fg),
+              if (widget.icon != null) ...[
+                Icon(widget.icon, size: 18, color: fg),
                 const SizedBox(width: IveTokens.s2),
               ],
               Flexible(
                 child: Text(
-                  label,
+                  widget.label,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: IveType.bodyEmphasis.copyWith(
@@ -144,7 +168,7 @@ class IveButton extends StatelessWidget {
             ],
           );
 
-    final child = AnimatedContainer(
+    final container = AnimatedContainer(
       duration: IveTokens.dMicro,
       curve: IveTokens.standard,
       height: height,
@@ -157,23 +181,64 @@ class IveButton extends StatelessWidget {
       child: Center(child: content),
     );
 
+    // Press-scale gives a tactile, physical response.
+    final scaled = AnimatedScale(
+      duration: IveTokens.dMicro,
+      curve: IveTokens.standard,
+      scale: _pressed && !disabled ? 0.97 : 1.0,
+      child: container,
+    );
+
+    // Focus ring for keyboard / accessibility users; matches the press radius.
+    final ringed = AnimatedContainer(
+      duration: IveTokens.dMicro,
+      curve: IveTokens.standard,
+      padding: const EdgeInsets.all(2),
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(Radius.circular(IveTokens.rMd + 2)),
+        border: Border.all(
+          color: _focused && !disabled
+              ? IveTokens.accent.withValues(alpha: 0.55)
+              : Colors.transparent,
+          width: 1.5,
+        ),
+      ),
+      child: scaled,
+    );
+
     final tappable = Material(
       color: Colors.transparent,
       child: InkWell(
-        onTap: disabled || isLoading ? null : onPressed,
+        onTap: disabled || widget.isLoading ? null : _handleTap,
+        onHighlightChanged: (v) {
+          if (mounted) setState(() => _pressed = v);
+        },
+        onFocusChange: (v) {
+          if (mounted) setState(() => _focused = v);
+        },
         borderRadius: IveTokens.brMd,
         splashColor: IveTokens.accentSoft,
         highlightColor: IveTokens.accentSoft,
+        focusColor: Colors.transparent, // we paint our own ring
         child: Semantics(
           button: true,
           enabled: !disabled,
-          label: label,
-          child: child,
+          label: widget.label,
+          child: ringed,
         ),
       ),
     );
 
-    return expand ? SizedBox(width: double.infinity, child: tappable) : tappable;
+    final hoverable = MouseRegion(
+      cursor: disabled
+          ? SystemMouseCursors.basic
+          : SystemMouseCursors.click,
+      child: tappable,
+    );
+
+    return widget.expand
+        ? SizedBox(width: double.infinity, child: hoverable)
+        : hoverable;
   }
 }
 
