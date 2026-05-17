@@ -14,6 +14,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '../core/design/ive_tokens.dart';
 import '../core/routes/app_routes.dart';
 import '../core/theme/app_colors.dart';
 import '../features/prompt/models/rbac_models.dart';
@@ -253,7 +254,7 @@ class _GenieScreenState extends State<GenieScreen>
             // ─── Chip Row ────────────────────────────────────────────────
             if (!_inputExpanded)
               Container(
-                color: Colors.white,
+                color: IveTokens.bg,
                 child: GenieQuickCommandBar(
                   role: role,
                   onChipTap: _handleChipTap,
@@ -300,7 +301,7 @@ class _OfflineBanner extends StatelessWidget {
           SizedBox(width: 6),
           Text(
             'You\'re offline. Actions will sync when you reconnect.',
-            style: TextStyle(fontSize: 11, color: AppColors.warning),
+            style: TextStyle(fontSize: 12, color: AppColors.warning),
           ),
         ],
       ),
@@ -318,7 +319,7 @@ class _PinnedTileStrip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: IveTokens.bg,
       height: 56,
       child: ListView(
         scrollDirection: Axis.horizontal,
@@ -331,7 +332,7 @@ class _PinnedTileStrip extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
                 color: AppColors.primaryLight.withValues(alpha: 0.08),
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: IveTokens.brSm,
                 border:
                     Border.all(color: AppColors.primaryLight.withValues(alpha: 0.2)),
               ),
@@ -343,7 +344,7 @@ class _PinnedTileStrip extends StatelessWidget {
                   Text(
                     e.key.name.toUpperCase(),
                     style: const TextStyle(
-                      fontSize: 11,
+                      fontSize: 12,
                       fontWeight: FontWeight.w600,
                       color: AppColors.primaryLight,
                     ),
@@ -375,7 +376,7 @@ class _TypingIndicatorState extends State<_TypingIndicator>
     super.initState();
     _anim = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 700),
+      duration: IveTokens.dSlow,
     )..repeat(reverse: true);
   }
 
@@ -408,9 +409,9 @@ class _TypingIndicatorState extends State<_TypingIndicator>
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
               decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(18),
-                border: Border.all(color: AppColors.inputBorder),
+                color: IveTokens.surface,
+                borderRadius: IveTokens.brLg,
+                border: Border.all(color: IveTokens.hairline),
               ),
               child: Row(
                 children: List.generate(
@@ -459,14 +460,14 @@ class _InputArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border(top: BorderSide(color: AppColors.inputBorder)),
+      decoration: const BoxDecoration(
+        color: IveTokens.surface,
+        border: Border(top: BorderSide(color: IveTokens.hairline)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.04),
+            color: Color(0x14000000),
             blurRadius: 12,
-            offset: const Offset(0, -2),
+            offset: Offset(0, -2),
           ),
         ],
       ),

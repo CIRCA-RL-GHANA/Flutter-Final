@@ -7,6 +7,7 @@
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
+import '../../core/design/ive_tokens.dart';
 import '../../core/theme/app_colors.dart';
 import '../genie_intent.dart';
 import '../genie_rbac_enforcer.dart';
@@ -62,32 +63,7 @@ class _QuickChip extends StatefulWidget {
 class _QuickChipState extends State<_QuickChip> {
   bool _pressed = false;
 
-  Color get _accentColor {
-    switch (widget.chip.module) {
-      case GenieModule.goPage:
-        return const Color(0xFFFFD700);
-      case GenieModule.market:
-        return const Color(0xFF2563EB);
-      case GenieModule.myUpdates:
-        return const Color(0xFF8B5CF6);
-      case GenieModule.live:
-        return const Color(0xFF10B981);
-      case GenieModule.alerts:
-        return const Color(0xFFEF4444);
-      case GenieModule.qualChat:
-        return const Color(0xFF06B6D4);
-      case GenieModule.april:
-        return const Color(0xFFF59E0B);
-      case GenieModule.eplay:
-        return const Color(0xFF7C3AED);
-      case GenieModule.community:
-        return const Color(0xFF0891B2);
-      case GenieModule.setupDashboard:
-        return const Color(0xFF6366F1);
-      default:
-        return AppColors.primaryLight;
-    }
-  }
+  Color get _accentColor => IveTokens.moduleColor(widget.chip.module.name);
 
   @override
   Widget build(BuildContext context) {

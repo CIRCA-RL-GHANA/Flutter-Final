@@ -7,24 +7,14 @@
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
+import '../../core/design/ive_tokens.dart';
 import '../../core/theme/app_colors.dart';
 import '../genie_intent.dart';
 import '../genie_tactile_actions.dart';
 
-/// Module accent colors matching the original spec.
-const _moduleColors = {
-  'go': Color(0xFFFFD700),
-  'market': Color(0xFF2563EB),
-  'updates': Color(0xFF8B5CF6),
-  'live': Color(0xFF10B981),
-  'alerts': Color(0xFFEF4444),
-  'qualchat': Color(0xFF06B6D4),
-  'april': Color(0xFFF59E0B),
-  'setup': Color(0xFF22BDD8),
-  'utility': Color(0xFF6B7280),
-  'user': Color(0xFF059669),
-  'genie': Color(0xFFFFD700),
-};
+/// Module accent colors — sourced from the unified design system so every
+/// card, chip, and tile across the app draws from the same palette.
+const _moduleColors = IveTokens.moduleColors;
 
 class GenieInlineCard extends StatelessWidget {
   final GenieMessage message;

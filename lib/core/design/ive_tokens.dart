@@ -108,27 +108,46 @@ class IveTokens {
   /// inline hex values anywhere a module needs to be visually distinguished
   /// (cards, badges, accents). Order is intentional: golden = action,
   /// blue = information, green = motion, indigo = system.
-  static const Color moduleGo      = Color(0xFFFFD27A); // golden — action
-  static const Color moduleMarket  = Color(0xFF6FA8FF); // blue   — information
-  static const Color moduleLive    = Color(0xFF34D399); // green  — motion
-  static const Color moduleUpdates = Color(0xFFB591FF); // violet — narrative
-  static const Color moduleAlerts  = Color(0xFFFBBF24); // amber  — attention
-  static const Color moduleUser    = Color(0xFF22D3EE); // cyan   — self
-  static const Color moduleSetup   = Color(0xFF818CF8); // indigo — configuration
-  static const Color moduleUtility = Color(0xFF8B5CF6); // purple — tooling
+  static const Color moduleGo         = Color(0xFFFFD27A); // golden  — action
+  static const Color moduleMarket     = Color(0xFF6FA8FF); // blue    — information
+  static const Color moduleLive       = Color(0xFF34D399); // green   — motion
+  static const Color moduleUpdates    = Color(0xFFB591FF); // violet  — narrative
+  static const Color moduleAlerts     = Color(0xFFFBBF24); // amber   — attention
+  static const Color moduleUser       = Color(0xFF22D3EE); // cyan    — self
+  static const Color moduleSetup      = Color(0xFF818CF8); // indigo  — configuration
+  static const Color moduleUtility    = Color(0xFF9BA3AE); // neutral — tooling
+  static const Color moduleQualChat   = Color(0xFF4ECFE1); // teal    — conversation
+  static const Color moduleApril      = Color(0xFFFFB14E); // sunrise — personal AI
+  static const Color moduleEplay      = Color(0xFFB591FF); // violet  — entertainment
+  static const Color moduleCommunity  = Color(0xFF4FC4D9); // aqua    — collective
+  static const Color moduleFintech    = Color(0xFF5BE0C2); // mint    — capital
+  static const Color moduleEnterprise = Color(0xFFC99B2C); // gold    — enterprise
+  static const Color moduleGenie      = Color(0xFFFFD27A); // golden  — native
 
   static const Map<String, Color> moduleColors = {
-    'go':      moduleGo,
-    'goPage':  moduleGo,
-    'market':  moduleMarket,
-    'live':    moduleLive,
-    'updates': moduleUpdates,
-    'myUpdates': moduleUpdates,
-    'alerts':  moduleAlerts,
-    'user':    moduleUser,
-    'userDetails': moduleUser,
-    'setup':   moduleSetup,
-    'setupDashboard': moduleSetup,
-    'utility': moduleUtility,
+    'go':              moduleGo,
+    'goPage':          moduleGo,
+    'market':          moduleMarket,
+    'live':            moduleLive,
+    'updates':         moduleUpdates,
+    'myUpdates':       moduleUpdates,
+    'alerts':          moduleAlerts,
+    'user':            moduleUser,
+    'userDetails':     moduleUser,
+    'setup':           moduleSetup,
+    'setupDashboard':  moduleSetup,
+    'utility':         moduleUtility,
+    'qualChat':        moduleQualChat,
+    'qualchat':        moduleQualChat,
+    'april':           moduleApril,
+    'eplay':           moduleEplay,
+    'community':       moduleCommunity,
+    'fintech':         moduleFintech,
+    'enterprise':      moduleEnterprise,
+    'genie':           moduleGenie,
   };
+
+  /// Resolves a module's canonical accent by key. Unknown keys fall back to
+  /// the brand accent so the UI never paints a missing module in a raw hex.
+  static Color moduleColor(String key) => moduleColors[key] ?? accent;
 }

@@ -120,20 +120,20 @@ class _ModuleMenuSheet extends StatelessWidget {
   const _ModuleMenuSheet({required this.role});
 
   static const _allModules = <(GenieModule, String, IconData, Color)>[
-    (GenieModule.goPage,         'GO PAGE',    Icons.payments_outlined,        Color(0xFFFFD27A)),
-    (GenieModule.market,         'MARKET',     Icons.storefront_outlined,      Color(0xFF6FA8FF)),
-    (GenieModule.eplay,          'e-PLAY',     Icons.graphic_eq_rounded,       Color(0xFFB591FF)),
-    (GenieModule.community,      'COMMUNITY',  Icons.public_outlined,          Color(0xFF4FC4D9)),
-    (GenieModule.myUpdates,      'UPDATES',    Icons.dynamic_feed_outlined,    Color(0xFFB39BFA)),
-    (GenieModule.setupDashboard, 'SETUP',      Icons.tune_rounded,             Color(0xFF8C92FF)),
-    (GenieModule.alerts,         'ALERTS',     Icons.notifications_none,       Color(0xFFFF7373)),
-    (GenieModule.live,           'LIVE',       Icons.sensors_rounded,          Color(0xFF4FD1A1)),
-    (GenieModule.qualChat,       'qualChat',   Icons.chat_bubble_outline,      Color(0xFF4ECFE1)),
-    (GenieModule.april,          'APRIL',      Icons.auto_awesome_outlined,    Color(0xFFFFB14E)),
-    (GenieModule.userDetails,    'PROFILE',    Icons.person_outline,           Color(0xFF4FD0A6)),
-    (GenieModule.utility,        'UTILITY',    Icons.handyman_outlined,        Color(0xFF9BA3AE)),
-    (GenieModule.fintech,        'FINTECH',    Icons.account_balance_outlined, Color(0xFF5BE0C2)),
-    (GenieModule.enterprise,     'ENTERPRISE', Icons.business_center_outlined, Color(0xFFC99B2C)),
+    (GenieModule.goPage,         'GO PAGE',    Icons.payments_outlined,        IveTokens.moduleGo),
+    (GenieModule.market,         'MARKET',     Icons.storefront_outlined,      IveTokens.moduleMarket),
+    (GenieModule.eplay,          'e-PLAY',     Icons.graphic_eq_rounded,       IveTokens.moduleEplay),
+    (GenieModule.community,      'COMMUNITY',  Icons.public_outlined,          IveTokens.moduleCommunity),
+    (GenieModule.myUpdates,      'UPDATES',    Icons.dynamic_feed_outlined,    IveTokens.moduleUpdates),
+    (GenieModule.setupDashboard, 'SETUP',      Icons.tune_rounded,             IveTokens.moduleSetup),
+    (GenieModule.alerts,         'ALERTS',     Icons.notifications_none,       IveTokens.moduleAlerts),
+    (GenieModule.live,           'LIVE',       Icons.sensors_rounded,          IveTokens.moduleLive),
+    (GenieModule.qualChat,       'qualChat',   Icons.chat_bubble_outline,      IveTokens.moduleQualChat),
+    (GenieModule.april,          'APRIL',      Icons.auto_awesome_outlined,    IveTokens.moduleApril),
+    (GenieModule.userDetails,    'PROFILE',    Icons.person_outline,           IveTokens.moduleUser),
+    (GenieModule.utility,        'UTILITY',    Icons.handyman_outlined,        IveTokens.moduleUtility),
+    (GenieModule.fintech,        'FINTECH',    Icons.account_balance_outlined, IveTokens.moduleFintech),
+    (GenieModule.enterprise,     'ENTERPRISE', Icons.business_center_outlined, IveTokens.moduleEnterprise),
   ];
 
   @override
@@ -144,7 +144,7 @@ class _ModuleMenuSheet extends StatelessWidget {
 
     return Container(
       decoration: const BoxDecoration(
-        color: Colors.white,
+        color: IveTokens.surface,
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
       child: Column(
