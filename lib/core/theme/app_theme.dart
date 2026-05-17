@@ -408,7 +408,7 @@ class AppTheme {
           textStyle: WidgetStatePropertyAll(IveType.subhead),
         ),
       ),
-      bottomAppBarTheme: const BottomAppBarTheme(
+      bottomAppBarTheme: const BottomAppBarThemeData(
         color: IveTokens.bg,
         surfaceTintColor: Colors.transparent,
         elevation: 0,
