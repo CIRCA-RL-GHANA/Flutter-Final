@@ -241,27 +241,44 @@ jobs:
         run: |
           test -f build/web/flutter_service_worker.js || { echo "::error::Service worker missing"; exit 1; }
           test -f build/web/manifest.json             || { echo "::error::manifest.json missing"; exit 1; }
+          test -f build/web/index.html                || { echo "::error::index.html missing"; exit 1; }
+          grep -q 'controllerchange' build/web/index.html || { echo "::error::Built index.html missing silent-update SW logic"; exit 1; }
+          ! grep -q 'New version available! Reload to update' build/web/index.html || { echo "::error::Built index.html still has old confirm() prompt"; exit 1; }
           echo "Build size: $(du -sh build/web/ | cut -f1)"
+
+      - name: Bundle vercel.json with build output
+        run: |
+          cp vercel.json build/web/vercel.json
+          echo "vercel.json bundled into build/web for deploy"
+          head -40 build/web/vercel.json
 
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
 
       - name: Deploy to Vercel (production)
-        continue-on-error: true
-        run: vercel deploy build/web --token=${{ secrets.VERCEL_TOKEN }} --prod --yes
+        run: vercel deploy build/web --token=${{ secrets.VERCEL_TOKEN }} --prod --yes --force
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
       - name: Smoke-test Vercel deployment
-        continue-on-error: true
         env:
           DEPLOY_URL: ${{ vars.VERCEL_URL || 'https://genieinprompt.app' }}
         run: |
-          sleep 10
-          STATUS=$(curl -s -o /dev/null -w '%{http_code}' "$DEPLOY_URL")
+          sleep 15
+          # Root must be reachable.
+          STATUS=$(curl -s -o /dev/null -w '%{http_code}' "$DEPLOY_URL?cb=$RANDOM")
           echo "PWA HTTP status: $STATUS"
-          [ "$STATUS" -eq 200 ] || echo "::warning::Smoke test returned HTTP $STATUS (deployment may still be propagating)"
+          [ "$STATUS" -eq 200 ] || { echo "::error::Smoke test failed: HTTP $STATUS"; exit 1; }
+          # Served HTML must contain the silent-update SW logic.
+          HTML=$(curl -s "$DEPLOY_URL/index.html?cb=$RANDOM")
+          echo "$HTML" | grep -q 'controllerchange' || { echo "::error::Live HTML missing controllerchange (silent SW update logic)"; exit 1; }
+          echo "$HTML" | grep -q 'New version available! Reload to update' && { echo "::error::Live HTML still serves old confirm() prompt"; exit 1; } || true
+          # main.dart.js must NOT be served as immutable.
+          CC=$(curl -sI "$DEPLOY_URL/main.dart.js?cb=$RANDOM" | grep -i '^cache-control:' || true)
+          echo "main.dart.js: $CC"
+          echo "$CC" | grep -qi 'immutable' && { echo "::error::main.dart.js still served with immutable header"; exit 1; } || true
+          echo "✅ Deploy verified: silent SW logic live, main.dart.js no-cache."
 
   # ---- Deploy Android to Play Store ----
   deploy-android:
