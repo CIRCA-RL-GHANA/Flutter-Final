@@ -190,23 +190,46 @@
     document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
 
     window.addEventListener('load', function() {
-      // Register service worker
+      // Register service worker — silent auto-update strategy.
+      // Returning visitors always get the latest build without a confirm prompt.
       if ('serviceWorker' in navigator) {
+        var refreshing = false;
+        // When the active worker is replaced, reload exactly once to pick up new assets.
+        navigator.serviceWorker.addEventListener('controllerchange', function() {
+          if (refreshing) return;
+          refreshing = true;
+          window.location.reload();
+        });
+
         navigator.serviceWorker.register('flutter_service_worker.js').then(function(reg) {
           console.log('[SW] Registered with scope:', reg.scope);
 
-          // Listen for updates
+          // Promote any worker already waiting from a prior visit.
+          if (reg.waiting && navigator.serviceWorker.controller) {
+            try { reg.waiting.postMessage({ type: 'SKIP_WAITING' }); } catch (_) {}
+          }
+
+          // When a new worker is found, install it silently and activate immediately.
           reg.addEventListener('updatefound', function() {
             var newWorker = reg.installing;
+            if (!newWorker) return;
             newWorker.addEventListener('statechange', function() {
-              if (newWorker.state === 'activated' && navigator.serviceWorker.controller) {
-                // New content available, show update prompt
-                if (confirm('New version available! Reload to update?')) {
-                  window.location.reload();
-                }
+              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                // New build is ready — silently activate; controllerchange will reload.
+                try { newWorker.postMessage({ type: 'SKIP_WAITING' }); } catch (_) {}
               }
             });
           });
+
+          // Proactively check for updates on load and whenever the tab regains focus.
+          try { reg.update(); } catch (_) {}
+          document.addEventListener('visibilitychange', function() {
+            if (document.visibilityState === 'visible') {
+              try { reg.update(); } catch (_) {}
+            }
+          });
+          // Hourly background check for long-lived sessions / installed PWAs.
+          setInterval(function() { try { reg.update(); } catch (_) {} }, 60 * 60 * 1000);
         }).catch(function(err) {
           console.warn('[SW] Registration failed:', err);
         });
