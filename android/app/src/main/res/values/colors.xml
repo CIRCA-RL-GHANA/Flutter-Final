@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- genie help brand tokens -->
-    <color name="brand_bg">#FF08080F</color>
+    <color name="brand_bg">#FF000000</color>
     <color name="brand_surface">#FF0E0E1A</color>
     <color name="brand_border">#FF1C1C2E</color>
     <color name="brand_cyan">#FF22BDD8</color>

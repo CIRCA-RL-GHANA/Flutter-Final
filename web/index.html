@@ -35,13 +35,13 @@
   <meta name="twitter:image" content="https://genieinprompt.app/icons/icon_512x512.png">
 
   <!-- PWA Meta Tags -->
-  <meta name="theme-color" content="#08080F">
+  <meta name="theme-color" content="#000000">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="genie help">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="application-name" content="genie help">
-  <meta name="msapplication-TileColor" content="#08080F">
+  <meta name="msapplication-TileColor" content="#000000">
   <meta name="msapplication-TileImage" content="icons/icon_152x152.png">
   <meta name="msapplication-config" content="none">
 
@@ -70,8 +70,8 @@
   <style>
     /* Brand tokens (CSS custom properties for the boot shell only) */
     :root {
-      --bg:       #08080F;
-      --bg-2:     #11131C;
+      --bg:       #000000;
+      --bg-2:     #000000;
       --cyan:     #22BDD8;
       --gold:     #C99B2C;
       --text:     #E8E8F0;
@@ -105,9 +105,8 @@
       gap: 14px;
       height: 100vh;
       width: 100vw;
-      /* Soft radial vignette for depth */
-      background:
-        radial-gradient(ellipse at center, var(--bg-2) 0%, var(--bg) 70%);
+      /* Solid black to match logo background */
+      background: #000000;
       position: fixed;
       top: 0;
       left: 0;
