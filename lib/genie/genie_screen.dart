@@ -23,6 +23,7 @@ import 'genie_controller.dart';
 import 'genie_intent.dart';
 import 'genie_rbac_enforcer.dart';
 import 'genie_tactile_actions.dart';
+import 'genie_voice.dart';
 import 'widgets/genie_chat_bubble.dart';
 import 'widgets/genie_full_screen_launcher.dart';
 import 'widgets/genie_quick_command_bar.dart';
@@ -125,8 +126,24 @@ class _GenieScreenState extends State<GenieScreen>
   void _handleVoice() async {
     if (_controller.isListening) {
       await _controller.stopVoice();
-    } else {
-      await _controller.startVoice();
+      return;
+    }
+    await _controller.startVoice();
+    // If the platform reports unavailable (no Web Speech API, mic permission
+    // denied, or native STT not wired) tell the user instead of silently
+    // sitting on the mic icon.
+    if (!mounted) return;
+    if (_controller.voiceStatus == GenieVoiceStatus.unavailable) {
+      ScaffoldMessenger.maybeOf(context)?.showSnackBar(
+        const SnackBar(
+          content: Text(
+            'Voice input is unavailable on this device. '
+            'Check microphone permission or use the text field.',
+          ),
+          behavior: SnackBarBehavior.floating,
+          duration: Duration(seconds: 4),
+        ),
+      );
     }
   }
 

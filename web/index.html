@@ -5,6 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Force fresh fetches of the shell. Hashed assets under /assets and
+       /canvaskit remain long-cached via vercel.json headers. -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <meta name="color-scheme" content="dark">
   <meta name="format-detection" content="telephone=no">
 
@@ -189,6 +194,51 @@
     document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
 
     window.addEventListener('load', function() {
+      // ─── Build-version guard ────────────────────────────────────────────
+      // Compare the build emitted by `flutter build web` (version.json) to
+      // the build we previously stored. If it changed, nuke every cache and
+      // unregister stale service workers BEFORE booting Flutter, so the
+      // user can never be stuck on an old shell.
+      function purgeAndReload() {
+        var done = function() {
+          try { sessionStorage.setItem('__cache_purged', '1'); } catch (_) {}
+          window.location.reload();
+        };
+        var jobs = [];
+        if (window.caches && caches.keys) {
+          jobs.push(caches.keys().then(function(keys) {
+            return Promise.all(keys.map(function(k) { return caches.delete(k); }));
+          }));
+        }
+        if (navigator.serviceWorker && navigator.serviceWorker.getRegistrations) {
+          jobs.push(navigator.serviceWorker.getRegistrations().then(function(regs) {
+            return Promise.all(regs.map(function(r) { return r.unregister(); }));
+          }));
+        }
+        Promise.all(jobs).then(done).catch(done);
+      }
+      try {
+        var purgedThisCycle = sessionStorage.getItem('__cache_purged') === '1';
+        fetch('version.json?ts=' + Date.now(), { cache: 'no-store' })
+          .then(function(r) { return r.ok ? r.json() : null; })
+          .then(function(v) {
+            if (!v) return;
+            var stamp = (v.version || '') + '+' + (v.build_number || '');
+            var prev = localStorage.getItem('app_build_stamp');
+            localStorage.setItem('app_build_stamp', stamp);
+            if (prev && prev !== stamp && !purgedThisCycle) {
+              console.log('[Cache] Build changed', prev, '→', stamp, '— purging.');
+              purgeAndReload();
+            } else {
+              // Clean the one-shot flag once we know we're on the new build.
+              try { sessionStorage.removeItem('__cache_purged'); } catch (_) {}
+            }
+          })
+          .catch(function(e) { console.warn('[Cache] version check failed:', e); });
+      } catch (e) {
+        console.warn('[Cache] version check threw:', e);
+      }
+
       // Register service worker — silent auto-update strategy.
       // Returning visitors always get the latest build without a confirm prompt.
       if ('serviceWorker' in navigator) {

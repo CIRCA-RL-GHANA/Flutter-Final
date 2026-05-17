@@ -99,11 +99,15 @@ class GenieController extends ChangeNotifier {
     GenieVoice.instance.configure(
       onResult: (transcript) => handleInput(transcript),
       onStatus: (status) {
+        _voiceStatus = status;
         _isListening = status == GenieVoiceStatus.listening;
         notifyListeners();
       },
     );
   }
+
+  GenieVoiceStatus _voiceStatus = GenieVoiceStatus.idle;
+  GenieVoiceStatus get voiceStatus => _voiceStatus;
 
   // ─── Greeting ─────────────────────────────────────────────────────────────
   void _sendGreeting() {
