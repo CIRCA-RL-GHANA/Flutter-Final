@@ -5,6 +5,7 @@
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 import 'package:flutter/material.dart';
+import '../../core/design/ive_tokens.dart';
 import '../../core/theme/app_colors.dart';
 import '../genie_intent.dart';
 import '../genie_tactile_actions.dart';
@@ -37,15 +38,15 @@ class _GenieChatBubbleState extends State<GenieChatBubble>
     super.initState();
     _entranceCtrl = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 380),
+      duration: IveTokens.dFast,
     );
-    _fadeAnim = CurvedAnimation(parent: _entranceCtrl, curve: Curves.easeOut);
+    _fadeAnim = CurvedAnimation(parent: _entranceCtrl, curve: IveTokens.enter);
     _slideAnim = Tween<Offset>(
       begin: widget.message.isUser
           ? const Offset(0.08, 0)
           : const Offset(-0.08, 0),
       end: Offset.zero,
-    ).animate(CurvedAnimation(parent: _entranceCtrl, curve: Curves.easeOutCubic));
+    ).animate(CurvedAnimation(parent: _entranceCtrl, curve: IveTokens.emphasized));
 
     _entranceCtrl.forward();
   }
@@ -228,7 +229,7 @@ class _SwipeBackground extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 8),
       decoration: BoxDecoration(
         color: color,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: IveTokens.brMd,
       ),
       alignment: alignment,
       padding: const EdgeInsets.symmetric(horizontal: 20),

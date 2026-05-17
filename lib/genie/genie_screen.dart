@@ -82,8 +82,8 @@ class _GenieScreenState extends State<GenieScreen>
       if (_scrollCtrl.hasClients) {
         _scrollCtrl.animateTo(
           _scrollCtrl.position.maxScrollExtent,
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeOut,
+          duration: IveTokens.dFast,
+          curve: IveTokens.standard,
         );
       }
     });
@@ -160,10 +160,10 @@ class _GenieScreenState extends State<GenieScreen>
       context: context,
       barrierDismissible: false,
       builder: (ctx) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        shape: RoundedRectangleBorder(borderRadius: IveTokens.brLg),
         title: Row(
           children: const [
-            Icon(Icons.sos, color: Color(0xFFEF4444), size: 24),
+            Icon(Icons.sos, color: IveTokens.danger, size: 24),
             SizedBox(width: 8),
             Text('Emergency SOS'),
           ],
@@ -197,7 +197,7 @@ class _GenieScreenState extends State<GenieScreen>
     final pinnedShortcuts = GenieRBACEnforcer.getDefaultPinnedShortcuts(role);
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.dark.copyWith(
+      value: SystemUiOverlayStyle.light.copyWith(
         statusBarColor: Colors.transparent,
       ),
       child: Scaffold(

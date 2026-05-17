@@ -38,13 +38,13 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   void initState() {
     super.initState();
     _entranceController = AnimationController(
-      duration: const Duration(milliseconds: 900),
+      duration: IveTokens.dBase,
       vsync: this,
     )..forward();
 
     _fadeIn = CurvedAnimation(
       parent: _entranceController,
-      curve: Curves.easeIn,
+      curve: IveTokens.enter,
     );
 
     _slideUp = Tween<Offset>(
@@ -52,7 +52,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
       end: Offset.zero,
     ).animate(CurvedAnimation(
       parent: _entranceController,
-      curve: Curves.easeOut,
+      curve: IveTokens.emphasized,
     ));
   }
 
@@ -126,10 +126,10 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                               decoration: BoxDecoration(
                                 border: Border.all(
                                     color: _kAccent.withValues(alpha: 0.30)),
-                                borderRadius: BorderRadius.circular(3),
+                                borderRadius: IveTokens.brXs,
                               ),
                               child: Text(
-                                'COMMERCE OS  Â·  v1.0',
+                                'COMMERCE OS  ·  v1.0',
                                 style: TextStyle(
                                   fontSize: 9,
                                   fontWeight: FontWeight.w600,
@@ -168,9 +168,9 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          'Payments Â· Logistics Â· Commerce Â· Finance Â· AI',
+                          'Payments · Logistics · Commerce · Finance · AI',
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 13,
                             color: _kTextDim,
                             letterSpacing: 0.5,
                           ),
@@ -206,7 +206,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                           color: _kSurface,
                           border: Border.all(
                               color: _kAccent.withValues(alpha: 0.30)),
-                          borderRadius: BorderRadius.circular(6),
+                          borderRadius: IveTokens.brXs,
                         ),
                         child: Row(
                           children: [
@@ -322,14 +322,14 @@ class _Module {
 }
 
 const _kModules = [
-  _Module(code: 'GO',   label: 'GO Wallet',   desc: 'Send Â· Pay Â· Top up',    icon: Icons.account_balance_wallet_outlined),
-  _Module(code: 'MKT',  label: 'Market',       desc: 'Buy Â· Sell Â· Deliver',   icon: Icons.storefront_outlined),
-  _Module(code: 'LIV',  label: 'Live',         desc: 'Ride Â· Track Â· Deliver', icon: Icons.near_me_outlined),
-  _Module(code: 'QC',   label: 'QualChat',     desc: 'Comm Â· Signal Â· Relay',  icon: Icons.chat_bubble_outline),
-  _Module(code: 'APR',  label: 'APRIL',        desc: 'Plan Â· Budget Â· Earn',   icon: Icons.event_note_outlined),
-  _Module(code: 'UPD',  label: 'Updates',      desc: 'Follow Â· Post Â· React',  icon: Icons.dynamic_feed_outlined),
-  _Module(code: 'ENT',  label: 'Enterprise',   desc: 'API Â· Webhooks Â· RBAC',  icon: Icons.hub_outlined),
-  _Module(code: 'FIN',  label: 'Fintech',      desc: 'Loans Â· Insurance Â· FI', icon: Icons.account_balance_outlined),
+  _Module(code: 'GO',   label: 'GO Wallet',   desc: 'Send · Pay · Top up',    icon: Icons.account_balance_wallet_outlined),
+  _Module(code: 'MKT',  label: 'Market',       desc: 'Buy · Sell · Deliver',   icon: Icons.storefront_outlined),
+  _Module(code: 'LIV',  label: 'Live',         desc: 'Ride · Track · Deliver', icon: Icons.near_me_outlined),
+  _Module(code: 'QC',   label: 'QualChat',     desc: 'Chat · Signal · Relay',  icon: Icons.chat_bubble_outline),
+  _Module(code: 'APR',  label: 'APRIL',        desc: 'Plan · Budget · Earn',   icon: Icons.event_note_outlined),
+  _Module(code: 'UPD',  label: 'Updates',      desc: 'Follow · Post · React',  icon: Icons.dynamic_feed_outlined),
+  _Module(code: 'ENT',  label: 'Enterprise',   desc: 'API · Webhooks · RBAC',  icon: Icons.hub_outlined),
+  _Module(code: 'FIN',  label: 'Fintech',      desc: 'Loans · Insurance · FI', icon: Icons.account_balance_outlined),
 ];
 
 class _ModuleGrid extends StatelessWidget {
@@ -373,7 +373,7 @@ class _ModuleCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: _kSurface,
         border: Border.all(color: _kBorder),
-        borderRadius: BorderRadius.circular(6),
+        borderRadius: IveTokens.brXs,
       ),
       child: Row(
         children: [
@@ -396,7 +396,7 @@ class _ModuleCard extends StatelessWidget {
                 Text(
                   module.desc,
                   style: TextStyle(
-                    fontSize: 10,
+                    fontSize: 11,
                     color: _kTextDim,
                     letterSpacing: 0.2,
                   ),
@@ -404,12 +404,12 @@ class _ModuleCard extends StatelessWidget {
               ],
             ),
           ),
-          // Status dot — online
+          // Status dot — online / active
           Container(
             width: 5,
             height: 5,
             decoration: BoxDecoration(
-              color: const Color(0xFF10B981).withValues(alpha: 0.70),
+              color: IveTokens.success.withValues(alpha: 0.70),
               shape: BoxShape.circle,
             ),
           ),
@@ -417,16 +417,6 @@ class _ModuleCard extends StatelessWidget {
       ),
     );
   }
-}
-
-// ─── OS primary button ────────────────────────────────────────────────────────
-class _OsButton extends StatelessWidget {
-  final String label;
-  final VoidCallback onTap;
-  const _OsButton({required this.label, required this.onTap});
-
-  @override
-  Widget build(BuildContext context) => IveButton.primary(label: label, onPressed: onTap);
 }
 
 // ─── Mini brand mark (consistent with splash) ────────────────────────────────

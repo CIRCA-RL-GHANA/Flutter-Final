@@ -79,7 +79,7 @@ class _QuickChipState extends State<_QuickChip> {
         onTapCancel: () => setState(() => _pressed = false),
         child: AnimatedScale(
           scale: _pressed ? 0.95 : 1.0,
-          duration: const Duration(milliseconds: 80),
+          duration: IveTokens.dMicro,
           child: Container(
             constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
