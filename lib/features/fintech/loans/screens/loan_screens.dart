@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/services/fintech_service.dart';
 import '../../../../core/services/ai_insights_notifier.dart';
+import '../../../../core/routes/app_routes.dart';
 
 const _kGold = Color(0xFFD4A017);
 const _kCyan = Color(0xFF00BCD4);
@@ -386,7 +387,11 @@ class _LoanTile extends StatelessWidget {
         Text('Outstanding: $outstanding QP', style: const TextStyle(color: _kGold, fontWeight: FontWeight.w600)),
         if (status == 'active')
           TextButton(
-            onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => LoanRepaymentScreen(loan: loan))),
+            onPressed: () => Navigator.pushNamed(
+              context,
+              AppRoutes.fintechLoanRepayment,
+              arguments: loan,
+            ),
             child: const Text('Repay Now â†’'),
           ),
       ]),

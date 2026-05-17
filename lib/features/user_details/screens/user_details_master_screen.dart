@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../../prompt/providers/context_provider.dart';
 import '../models/user_details_models.dart';
@@ -133,7 +134,7 @@ class UserDetailsMasterScreen extends StatelessWidget {
                       HapticFeedback.mediumImpact();
                       ctxProvider.switchContext(ctx);
                     },
-                    onManage: () => Navigator.pushNamed(context, '/user-details/contexts'),
+                    onManage: () => Navigator.pushNamed(context, AppRoutes.userDetailsContexts),
                   ),
                 ),
               ),
@@ -217,7 +218,7 @@ class UserDetailsMasterScreen extends StatelessWidget {
           bottomNavigationBar: _StickyFooter(
             onHelp: () {},
             onDownload: () => udp.requestDataExport(),
-            onFab: () => Navigator.pushNamed(context, '/user-details/create-entity'),
+            onFab: () => Navigator.pushNamed(context, AppRoutes.userDetailsCreateEntity),
           ),
         );
       },
@@ -233,7 +234,7 @@ class UserDetailsMasterScreen extends StatelessWidget {
         );
         break;
       case 'audit':
-        Navigator.pushNamed(context, '/user-details/audit-log');
+        Navigator.pushNamed(context, AppRoutes.userDetailsAuditLog);
         break;
       case 'help':
         break;
@@ -259,7 +260,7 @@ class _IdentitySection extends StatelessWidget {
         children: [
           // Avatar + Verification Badge
           GestureDetector(
-            onTap: () => Navigator.pushNamed(context, '/user-details/avatar-editor'),
+            onTap: () => Navigator.pushNamed(context, AppRoutes.userDetailsAvatarEditor),
             child: Stack(
               alignment: Alignment.center,
               children: [
@@ -783,7 +784,7 @@ class _SecurityPreview extends StatelessWidget {
         SizedBox(
           width: double.infinity,
           child: OutlinedButton.icon(
-            onPressed: () => Navigator.pushNamed(context, '/user-details/security'),
+            onPressed: () => Navigator.pushNamed(context, AppRoutes.userDetailsSecurity),
             icon: const Icon(Icons.shield, size: 16),
             label: const Text('Full Security Settings'),
             style: OutlinedButton.styleFrom(
@@ -843,21 +844,21 @@ class _PreferencesHub extends StatelessWidget {
           label: 'Notifications',
           subtitle: notifications.activeMode.label,
           color: const Color(0xFFF59E0B),
-          onTap: () => Navigator.pushNamed(context, '/user-details/notifications'),
+          onTap: () => Navigator.pushNamed(context, AppRoutes.userDetailsNotifications),
         ),
         _PrefTile(
           icon: Icons.privacy_tip_outlined,
           label: 'Privacy',
           subtitle: 'Score: ${privacy.privacyScore}%',
           color: const Color(0xFF8B5CF6),
-          onTap: () => Navigator.pushNamed(context, '/user-details/privacy'),
+          onTap: () => Navigator.pushNamed(context, AppRoutes.userDetailsPrivacy),
         ),
         _PrefTile(
           icon: Icons.accessibility_new,
           label: 'Accessibility',
           subtitle: accessibility.activePresetName ?? 'Default',
           color: const Color(0xFF06B6D4),
-          onTap: () => Navigator.pushNamed(context, '/user-details/accessibility'),
+          onTap: () => Navigator.pushNamed(context, AppRoutes.userDetailsAccessibility),
         ),
       ],
     );

@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import '../models/go_models.dart';
 import '../providers/go_provider.dart';
 import '../widgets/go_widgets.dart';
+import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 
 class GoHubScreen extends StatefulWidget {
@@ -179,12 +180,12 @@ class _GoHubScreenState extends State<GoHubScreen> {
       crossAxisSpacing: 8,
       childAspectRatio: 0.95,
       children: [
-        GoQuickAction(icon: Icons.arrow_downward, label: 'Buy QP', subtitle: 'From gateway', badge: 'Best: 0.085', onTap: () => Navigator.pushNamed(context, '/go/buy')),
-        GoQuickAction(icon: Icons.arrow_upward, label: 'Sell QP', subtitle: 'To bank', badge: 'Fee: 1.5%', onTap: () => Navigator.pushNamed(context, '/go/sell')),
-        GoQuickAction(icon: Icons.swap_horiz, label: 'Transfer', subtitle: 'P2P instant', badge: '0 fee til 5PM', onTap: () => Navigator.pushNamed(context, '/go/transfer')),
-        GoQuickAction(icon: Icons.receipt_long, label: 'My Tabs', subtitle: 'Credit mgmt', badge: '3 overdue', onTap: () => Navigator.pushNamed(context, '/go/tabs')),
-        GoQuickAction(icon: Icons.playlist_add_check, label: 'Batch Ops', subtitle: 'Bulk payments', badge: 'New', onTap: () => Navigator.pushNamed(context, '/go/batch')),
-        GoQuickAction(icon: Icons.assessment, label: 'Planner', subtitle: 'Forecast & budget', badge: 'Q3 ready', onTap: () => Navigator.pushNamed(context, '/go/planner')),
+        GoQuickAction(icon: Icons.arrow_downward, label: 'Buy QP', subtitle: 'From gateway', badge: 'Best: 0.085', onTap: () => Navigator.pushNamed(context, AppRoutes.goBuy)),
+        GoQuickAction(icon: Icons.arrow_upward, label: 'Sell QP', subtitle: 'To bank', badge: 'Fee: 1.5%', onTap: () => Navigator.pushNamed(context, AppRoutes.goSell)),
+        GoQuickAction(icon: Icons.swap_horiz, label: 'Transfer', subtitle: 'P2P instant', badge: '0 fee til 5PM', onTap: () => Navigator.pushNamed(context, AppRoutes.goTransfer)),
+        GoQuickAction(icon: Icons.receipt_long, label: 'My Tabs', subtitle: 'Credit mgmt', badge: '3 overdue', onTap: () => Navigator.pushNamed(context, AppRoutes.goTabs)),
+        GoQuickAction(icon: Icons.playlist_add_check, label: 'Batch Ops', subtitle: 'Bulk payments', badge: 'New', onTap: () => Navigator.pushNamed(context, AppRoutes.goBatch)),
+        GoQuickAction(icon: Icons.assessment, label: 'Planner', subtitle: 'Forecast & budget', badge: 'Q3 ready', onTap: () => Navigator.pushNamed(context, AppRoutes.goPlanner)),
       ],
     );
   }

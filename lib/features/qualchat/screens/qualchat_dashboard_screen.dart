@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../models/qualchat_models.dart';
 import '../providers/qualchat_provider.dart';
 import '../widgets/qualchat_widgets.dart';
+import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 
 class QualChatDashboardScreen extends StatelessWidget {
@@ -120,9 +121,9 @@ class QualChatDashboardScreen extends StatelessWidget {
                 heroTag: 'primary_fab',
                 onPressed: () {
                   if (provider.mode == ChatMode.social) {
-                    Navigator.pushNamed(context, '/qualchat/hey-yas');
+                    Navigator.pushNamed(context, AppRoutes.qualChatHeyYas);
                   } else {
-                    Navigator.pushNamed(context, '/qualchat/new-chat');
+                    Navigator.pushNamed(context, AppRoutes.qualChatNewChat);
                   }
                 },
                 backgroundColor: provider.mode == ChatMode.social
@@ -260,7 +261,7 @@ class QualChatDashboardScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: OutlinedButton.icon(
-                  onPressed: () => Navigator.pushNamed(context, '/qualchat/hey-yas'),
+                  onPressed: () => Navigator.pushNamed(context, AppRoutes.qualChatHeyYas),
                   icon: const Text('âœ¨'),
                   label: const Text('Send Hey Ya'),
                   style: OutlinedButton.styleFrom(
@@ -273,7 +274,7 @@ class QualChatDashboardScreen extends StatelessWidget {
               const SizedBox(width: 8),
               Expanded(
                 child: OutlinedButton.icon(
-                  onPressed: () => Navigator.pushNamed(context, '/qualchat/action-center'),
+                  onPressed: () => Navigator.pushNamed(context, AppRoutes.qualChatActionCenter),
                   icon: const Text('ðŸ“Š'),
                   label: const Text('Analytics'),
                   style: OutlinedButton.styleFrom(
@@ -305,7 +306,7 @@ class QualChatDashboardScreen extends StatelessWidget {
                 label: 'Online',
                 status: PresenceStatus.online,
                 changePercent: stats.onlineChangePercent,
-                onTap: () => Navigator.pushNamed(context, '/qualchat/presence'),
+                onTap: () => Navigator.pushNamed(context, AppRoutes.qualChatPresence),
               ),
               const SizedBox(width: 8),
               PresenceStatCard(
@@ -313,7 +314,7 @@ class QualChatDashboardScreen extends StatelessWidget {
                 label: 'Idle',
                 status: PresenceStatus.idle,
                 changePercent: stats.idleChangePercent,
-                onTap: () => Navigator.pushNamed(context, '/qualchat/presence'),
+                onTap: () => Navigator.pushNamed(context, AppRoutes.qualChatPresence),
               ),
               const SizedBox(width: 8),
               PresenceStatCard(
@@ -321,7 +322,7 @@ class QualChatDashboardScreen extends StatelessWidget {
                 label: 'Offline',
                 status: PresenceStatus.offline,
                 changePercent: stats.offlineChangePercent,
-                onTap: () => Navigator.pushNamed(context, '/qualchat/presence'),
+                onTap: () => Navigator.pushNamed(context, AppRoutes.qualChatPresence),
               ),
             ],
           ),
@@ -377,7 +378,7 @@ class QualChatDashboardScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: OutlinedButton.icon(
-                  onPressed: () => Navigator.pushNamed(context, '/qualchat/new-chat'),
+                  onPressed: () => Navigator.pushNamed(context, AppRoutes.qualChatNewChat),
                   icon: const Icon(Icons.rocket_launch, size: 16),
                   label: const Text('Start New Chat'),
                   style: OutlinedButton.styleFrom(
@@ -390,7 +391,7 @@ class QualChatDashboardScreen extends StatelessWidget {
               const SizedBox(width: 8),
               Expanded(
                 child: OutlinedButton.icon(
-                  onPressed: () => Navigator.pushNamed(context, '/qualchat/presence'),
+                  onPressed: () => Navigator.pushNamed(context, AppRoutes.qualChatPresence),
                   icon: const Icon(Icons.visibility, size: 16),
                   label: const Text('Browse Active'),
                   style: OutlinedButton.styleFrom(
@@ -493,7 +494,7 @@ class QualChatDashboardScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: OutlinedButton(
-                  onPressed: () => Navigator.pushNamed(context, '/qualchat/archived'),
+                  onPressed: () => Navigator.pushNamed(context, AppRoutes.qualChatArchived),
                   child: const Text('ðŸ“ Archive Manager'),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: kChatColor,
@@ -575,7 +576,7 @@ class QualChatDashboardScreen extends StatelessWidget {
           const SizedBox(height: 12),
           Row(
             children: [
-              _SmallAction(label: 'Manage', onTap: () => Navigator.pushNamed(context, '/qualchat/archived')),
+              _SmallAction(label: 'Manage', onTap: () => Navigator.pushNamed(context, AppRoutes.qualChatArchived)),
               const SizedBox(width: 8),
               _SmallAction(label: 'Restore All', onTap: () {}),
               const SizedBox(width: 8),

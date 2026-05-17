@@ -1,4 +1,5 @@
 ﻿import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../design/ive_text.dart';
 import '../design/ive_tokens.dart';
 
@@ -41,6 +42,7 @@ class AppTheme {
       primaryTextTheme: IveType.buildTextTheme(),
       appBarTheme: AppBarTheme(
         backgroundColor: IveTokens.bg.withValues(alpha: 0.92),
+        foregroundColor: IveTokens.label,
         elevation: 0,
         scrolledUnderElevation: 0,
         surfaceTintColor: Colors.transparent,
@@ -51,6 +53,11 @@ class AppTheme {
         actionsIconTheme: const IconThemeData(color: IveTokens.label, size: 22),
         titleTextStyle: IveType.headline,
         toolbarTextStyle: IveType.headline,
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.light,
+          statusBarBrightness: Brightness.dark,
+        ),
       ),
       cardTheme: const CardThemeData(
         color: IveTokens.surface,
@@ -284,6 +291,151 @@ class AppTheme {
           TargetPlatform.linux:   ZoomPageTransitionsBuilder(),
           TargetPlatform.windows: ZoomPageTransitionsBuilder(),
         },
+      ),
+      // ─── Filled extra components so raw Material widgets used in older
+      //     screens still render with the Ive vocabulary. ────────────────
+      iconButtonTheme: IconButtonThemeData(
+        style: IconButton.styleFrom(
+          foregroundColor: IveTokens.label,
+          highlightColor: IveTokens.accentSoft,
+          hoverColor: IveTokens.accentSoft,
+          minimumSize: const Size.square(IveTokens.tap),
+          padding: const EdgeInsets.all(IveTokens.s2),
+          shape: const RoundedRectangleBorder(borderRadius: IveTokens.brSm),
+        ),
+      ),
+      popupMenuTheme: PopupMenuThemeData(
+        color: IveTokens.surfaceRaised,
+        surfaceTintColor: Colors.transparent,
+        elevation: 0,
+        shape: const RoundedRectangleBorder(
+          borderRadius: IveTokens.brSm,
+          side: BorderSide(color: IveTokens.hairline),
+        ),
+        textStyle: IveType.callout,
+      ),
+      dropdownMenuTheme: DropdownMenuThemeData(
+        textStyle: IveType.body,
+        menuStyle: MenuStyle(
+          backgroundColor: const WidgetStatePropertyAll(IveTokens.surfaceRaised),
+          surfaceTintColor: const WidgetStatePropertyAll(Colors.transparent),
+          elevation: const WidgetStatePropertyAll(0),
+          shape: const WidgetStatePropertyAll(RoundedRectangleBorder(
+            borderRadius: IveTokens.brSm,
+            side: BorderSide(color: IveTokens.hairline),
+          )),
+        ),
+      ),
+      menuTheme: MenuThemeData(
+        style: MenuStyle(
+          backgroundColor: const WidgetStatePropertyAll(IveTokens.surfaceRaised),
+          surfaceTintColor: const WidgetStatePropertyAll(Colors.transparent),
+          elevation: const WidgetStatePropertyAll(0),
+          shape: const WidgetStatePropertyAll(RoundedRectangleBorder(
+            borderRadius: IveTokens.brSm,
+            side: BorderSide(color: IveTokens.hairline),
+          )),
+        ),
+      ),
+      expansionTileTheme: const ExpansionTileThemeData(
+        backgroundColor: Colors.transparent,
+        collapsedBackgroundColor: Colors.transparent,
+        iconColor: IveTokens.labelSecondary,
+        collapsedIconColor: IveTokens.labelSecondary,
+        textColor: IveTokens.label,
+        collapsedTextColor: IveTokens.label,
+        tilePadding: EdgeInsets.symmetric(horizontal: IveTokens.s5),
+        childrenPadding:
+            EdgeInsets.symmetric(horizontal: IveTokens.s5, vertical: IveTokens.s2),
+        shape: Border(),
+        collapsedShape: Border(),
+      ),
+      searchBarTheme: SearchBarThemeData(
+        backgroundColor: const WidgetStatePropertyAll(IveTokens.surface),
+        surfaceTintColor: const WidgetStatePropertyAll(Colors.transparent),
+        overlayColor: const WidgetStatePropertyAll(Colors.transparent),
+        elevation: const WidgetStatePropertyAll(0),
+        shadowColor: const WidgetStatePropertyAll(Colors.transparent),
+        side: const WidgetStatePropertyAll(
+            BorderSide(color: IveTokens.hairline)),
+        shape: const WidgetStatePropertyAll(RoundedRectangleBorder(
+          borderRadius: IveTokens.brMd,
+        )),
+        textStyle: WidgetStatePropertyAll(IveType.body),
+        hintStyle: WidgetStatePropertyAll(
+            IveType.body.copyWith(color: IveTokens.labelTertiary)),
+        padding: const WidgetStatePropertyAll(
+            EdgeInsets.symmetric(horizontal: IveTokens.s4)),
+      ),
+      searchViewTheme: SearchViewThemeData(
+        backgroundColor: IveTokens.bg,
+        surfaceTintColor: Colors.transparent,
+        elevation: 0,
+        side: const BorderSide(color: IveTokens.hairline),
+        shape: const RoundedRectangleBorder(borderRadius: IveTokens.brMd),
+        headerHintStyle:
+            IveType.body.copyWith(color: IveTokens.labelTertiary),
+        headerTextStyle: IveType.body,
+      ),
+      bannerTheme: MaterialBannerThemeData(
+        backgroundColor: IveTokens.surface,
+        surfaceTintColor: Colors.transparent,
+        elevation: 0,
+        contentTextStyle: IveType.callout,
+      ),
+      drawerTheme: const DrawerThemeData(
+        backgroundColor: IveTokens.bg,
+        surfaceTintColor: Colors.transparent,
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.horizontal(right: Radius.circular(IveTokens.rLg)),
+        ),
+      ),
+      segmentedButtonTheme: SegmentedButtonThemeData(
+        style: ButtonStyle(
+          backgroundColor: WidgetStateProperty.resolveWith((s) =>
+              s.contains(WidgetState.selected)
+                  ? IveTokens.accent.withValues(alpha: 0.14)
+                  : IveTokens.surface),
+          foregroundColor: WidgetStateProperty.resolveWith((s) =>
+              s.contains(WidgetState.selected)
+                  ? IveTokens.accent
+                  : IveTokens.label),
+          side: const WidgetStatePropertyAll(
+              BorderSide(color: IveTokens.hairline)),
+          shape: const WidgetStatePropertyAll(RoundedRectangleBorder(
+              borderRadius: IveTokens.brSm)),
+          textStyle: WidgetStatePropertyAll(IveType.subhead),
+        ),
+      ),
+      bottomAppBarTheme: const BottomAppBarTheme(
+        color: IveTokens.bg,
+        surfaceTintColor: Colors.transparent,
+        elevation: 0,
+      ),
+      dataTableTheme: DataTableThemeData(
+        dataRowColor: const WidgetStatePropertyAll(Colors.transparent),
+        headingRowColor: const WidgetStatePropertyAll(IveTokens.surface),
+        dividerThickness: 1,
+        headingTextStyle:
+            IveType.subhead.copyWith(color: IveTokens.labelSecondary),
+        dataTextStyle: IveType.body,
+        columnSpacing: IveTokens.s6,
+        horizontalMargin: IveTokens.s5,
+      ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          minimumSize: const Size(0, IveTokens.tap),
+          backgroundColor: IveTokens.accent,
+          foregroundColor: Colors.white,
+          disabledBackgroundColor: IveTokens.accent.withValues(alpha: 0.4),
+          disabledForegroundColor: Colors.white.withValues(alpha: 0.7),
+          elevation: 0,
+          shape: const RoundedRectangleBorder(borderRadius: IveTokens.brMd),
+          padding: const EdgeInsets.symmetric(
+              horizontal: IveTokens.s5, vertical: IveTokens.s3),
+          textStyle: IveType.bodyEmphasis,
+        ),
       ),
     );
   }
