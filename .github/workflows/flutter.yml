@@ -237,17 +237,28 @@ jobs:
             --dart-define=API_BASE_URL=${{ vars.API_BASE_URL || 'https://api.genieinprompt.app' }} \
             --dart-define=ENVIRONMENT=production
 
-      - name: Stamp build SHA into SW registration URL
+      - name: Inject build SHA into version.json (unique per-deploy cache-bust)
         run: |
-          # Appending ?v=<sha> forces the browser to treat each deployment as a
-          # brand-new service-worker scope, evicting any stale caching SWs that
-          # older Flutter builds may have installed. Without this, users whose
-          # browsers have an old caching SW installed never pick up new builds.
+          # Flutter's pubspec version (e.g. 1.0.5+6) is static across code-only commits,
+          # so the index.html version-stamp would never change and purgeAndReload() would
+          # never fire for returning visitors.  We enrich version.json with the exact git
+          # SHA so every deployment — even one that doesn't bump pubspec — gets a unique
+          # build_stamp that the client-side cache-bust logic can detect.
+          #
+          # NOTE: Flutter 3.27+ already injects ?v=<serviceWorkerVersion> into the SW
+          # registration URL itself (and marks the legacy SW as deprecated), so a
+          # sed-based URL patch is no longer needed or possible.
           SHA="${{ github.sha }}"
-          sed -i "s|register('flutter_service_worker.js')|register('flutter_service_worker.js?v=${SHA}')|g" build/web/index.html
-          grep -q "flutter_service_worker.js?v=${SHA}" build/web/index.html \
-            && echo "SW stamped: flutter_service_worker.js?v=${SHA:0:8}…" \
-            || { echo '::error::SHA stamp failed'; exit 1; }
+          SHORT="${SHA:0:8}"
+          node -e "
+            const fs = require('fs');
+            const p = 'build/web/version.json';
+            const v = JSON.parse(fs.readFileSync(p, 'utf8'));
+            v.build_sha = '${SHORT}';
+            fs.writeFileSync(p, JSON.stringify(v));
+            console.log('version.json enriched:', JSON.stringify(v));
+          "
+          echo "Build SHA ${SHORT} injected into version.json"
 
       - name: Verify PWA artefacts
         run: |

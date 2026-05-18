@@ -227,7 +227,7 @@
           .then(function(r) { return r.ok ? r.json() : null; })
           .then(function(v) {
             if (!v) return;
-            var stamp = (v.version || '') + '+' + (v.build_number || '');
+            var stamp = (v.version || '') + '+' + (v.build_number || '') + (v.build_sha ? '@' + v.build_sha : '');
             var prev = localStorage.getItem('app_build_stamp');
             if (prev && prev !== stamp && purgeCount < 3) {
               // Build changed: purge caches BEFORE updating the stored stamp so
