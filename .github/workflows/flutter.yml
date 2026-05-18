@@ -237,6 +237,18 @@ jobs:
             --dart-define=API_BASE_URL=${{ vars.API_BASE_URL || 'https://api.genieinprompt.app' }} \
             --dart-define=ENVIRONMENT=production
 
+      - name: Stamp build SHA into SW registration URL
+        run: |
+          # Appending ?v=<sha> forces the browser to treat each deployment as a
+          # brand-new service-worker scope, evicting any stale caching SWs that
+          # older Flutter builds may have installed. Without this, users whose
+          # browsers have an old caching SW installed never pick up new builds.
+          SHA="${{ github.sha }}"
+          sed -i "s|register('flutter_service_worker.js')|register('flutter_service_worker.js?v=${SHA}')|g" build/web/index.html
+          grep -q "flutter_service_worker.js?v=${SHA}" build/web/index.html \
+            && echo "SW stamped: flutter_service_worker.js?v=${SHA:0:8}…" \
+            || { echo '::error::SHA stamp failed'; exit 1; }
+
       - name: Verify PWA artefacts
         run: |
           test -f build/web/flutter_service_worker.js || { echo "::error::Service worker missing"; exit 1; }
