@@ -12,7 +12,7 @@ import '../widgets/onboarding_header.dart';
 import '../widgets/progress_indicators.dart';
 
 
-// OS palette ï¿½ mirrors splash / welcome
+// OS palette — mirrors splash / welcome
 const Color _kBg        = IveTokens.bg;
 const Color _kSurface   = IveTokens.surface;
 const Color _kBorder    = IveTokens.hairline;
@@ -248,7 +248,9 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                                     fontSize: 14,
                                     fontWeight: FontWeight.w500,
                                     color: IveTokens.accent,
-                              ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           const SizedBox(height: 8),
@@ -563,6 +565,23 @@ class _PhotoOptionTile extends StatelessWidget {
         decoration: BoxDecoration(
           color: color.withValues(alpha: 0.1),
           borderRadius: IveTokens.brMd,
+        ),
+        child: Icon(icon, color: color, size: 22),
+      ),
+      title: Text(
+        label,
+        style: const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+          color: IveTokens.label,
+        ),
+      ),
+      trailing: const Icon(
+        Icons.arrow_forward_ios,
+        size: 14,
+        color: IveTokens.labelTertiary,
+      ),
+      onTap: onTap,
     );
   }
 }
