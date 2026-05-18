@@ -189,6 +189,7 @@
   </div>
 
   <script src="flutter.js" defer></script>
+  <script src="flutter_bootstrap.js" defer></script>
   <script>
     // Disable right-click context menu in production
     document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
@@ -293,13 +294,9 @@
         });
       }
 
-      // Initialize Flutter engine (new stable API — loadEntrypoint deprecated 3.27+)
-      _flutter.loader.load({
-        onEntrypointLoaded: async function(engineInitializer) {
-          const appRunner = await engineInitializer.initializeEngine();
-          await appRunner.runApp();
-        }
-      });
+      // Flutter engine initialization is handled by flutter_bootstrap.js (Flutter 3.22+).
+      // That script sets _flutter.buildConfig and calls _flutter.loader.load() via the
+      // new multi-argument API. No manual load() call needed here.
     });
 
     // Remove splash on first Flutter frame (with hard timeout watchdog)
