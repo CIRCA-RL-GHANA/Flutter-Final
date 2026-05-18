@@ -74,24 +74,4 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
-    # Brand logo (real PNG)
-    - assets/images/genie_help_logo.png
-    # Legacy vector marks (kept for back-compat references)
-    - assets/images/genie_help_icon.svg
-    - assets/images/genie_help_icon_dark.svg
-    # Individual icon references for PWA manifest
-    - assets/icons/icon_42x42.png
-    - assets/icons/icon_56x56.png
-    - assets/icons/icon_81x81.png
-    - assets/icons/icon_108x108.png
-    - assets/icons/icon_120x120.png
-    - assets/icons/icon_152x152.png
-    - assets/icons/icon_180x180.png
-    - assets/icons/icon_192x192.png
-    - assets/icons/icon_256x256.png
-    - assets/icons/icon_384x384.png
-    - assets/icons/icon_512x512.png
-    - assets/icons/icon_1024x1024.png
-    - assets/icons/icon_maskable_192x192.png
-    - assets/icons/icon_maskable_512x512.png
   # Fonts are served via the google_fonts package (GoogleFonts.poppins) — no local font files required.

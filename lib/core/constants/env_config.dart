@@ -2,10 +2,19 @@
 /// Switch between environments by changing the active config.
 class EnvConfig {
   static const String appName = 'genie help';
-  static const String appVersion = '1.0.0';
+  static const String appVersion = '1.0.5';
 
-  // Active environment
-  static const Environment current = Environment.production;
+  // Resolved from --dart-define=ENVIRONMENT=... (defaults to production for safety).
+  // Pass --dart-define=ENVIRONMENT=development to point at a local server during dev.
+  static const String _envName = String.fromEnvironment(
+    'ENVIRONMENT',
+    defaultValue: 'production',
+  );
+  static final Environment current = _envName == 'development'
+      ? Environment.development
+      : _envName == 'staging'
+          ? Environment.staging
+          : Environment.production;
 
   static String get baseUrl {
     switch (current) {
