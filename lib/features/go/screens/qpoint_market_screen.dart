@@ -11,9 +11,10 @@ import '../providers/qpoint_market_provider.dart';
 import '../providers/qpoints_tos_provider.dart';
 import '../models/qpoint_market_models.dart';
 import 'qpoints_tos_screen.dart';
+import '../../../core/design/ive_tokens.dart';
 
 // ── Brand colour for the market module ──────────────────────────────────────
-const Color kMarketColor = Color(0xFF6C47FF); // deep violet
+const Color kMarketColor = IveTokens.moduleUpdates; // deep violet
 
 /// Entry point: checks ToS acceptance, shows ToS screen or the market.
 class QPointMarketScreen extends StatefulWidget {
@@ -78,7 +79,7 @@ class _QPointMarketScreenState extends State<QPointMarketScreen>
     // Show loading spinner while the ToS status is being checked
     if (!_tosCheckComplete) {
       return const Scaffold(
-        backgroundColor: Color(0xFFF4F3FF),
+        backgroundColor: IveTokens.bg,
         body: Center(
           child: CircularProgressIndicator(color: kMarketColor),
         ),
@@ -86,7 +87,7 @@ class _QPointMarketScreenState extends State<QPointMarketScreen>
     }
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F3FF),
+      backgroundColor: IveTokens.bg,
       appBar: AppBar(
         backgroundColor: kMarketColor,
         foregroundColor: Colors.white,
@@ -376,14 +377,14 @@ class _CashBalanceCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         gradient: const LinearGradient(
-          colors: [Color(0xFF6C47FF), Color(0xFF9B79FF)],
+          colors: [IveTokens.moduleUpdates, IveTokens.moduleSetup],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF6C47FF).withValues(alpha: 0.25),
+            color: IveTokens.moduleUpdates.withValues(alpha: 0.25),
             blurRadius: 12,
             offset: const Offset(0, 4),
           ),
@@ -524,7 +525,7 @@ class _CashBalanceCard extends StatelessWidget {
                     fontSize: 12,
                   ),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF3D2B9F),
+                    color: IveTokens.moduleSetup,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
@@ -687,7 +688,7 @@ class _QuickActions extends StatelessWidget {
               child: _ActionCard(
                 label: 'Deposit',
                 subLabel: 'Add funds',
-                color: const Color(0xFF1B7AE8),
+                color: IveTokens.accent,
                 icon: Icons.download_rounded,
                 onTap: () => _showDepositSheet(context),
               ),
@@ -697,7 +698,7 @@ class _QuickActions extends StatelessWidget {
               child: _ActionCard(
                 label: 'Withdraw',
                 subLabel: 'Send to bank',
-                color: const Color(0xFF9C27B0),
+                color: IveTokens.moduleUpdates,
                 icon: Icons.upload_rounded,
                 onTap: () => _showWithdrawSheet(context),
               ),
@@ -1668,9 +1669,9 @@ class _FeeDisclosureSheet extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFFFF8E1),
+                  color: IveTokens.surfaceRaised,
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: const Color(0xFFFFCC80)),
+                  border: Border.all(color: IveTokens.warning),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -1678,14 +1679,14 @@ class _FeeDisclosureSheet extends StatelessWidget {
                     const Row(
                       children: [
                         Icon(Icons.account_balance_outlined,
-                            size: 16, color: Color(0xFFE65100)),
+                            size: 16, color: IveTokens.warning),
                         SizedBox(width: 6),
                         Text(
                           'Tax Disclosure — Q Points ToS Â§7.2',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 12,
-                            color: Color(0xFFE65100),
+                            color: IveTokens.warning,
                           ),
                         ),
                       ],
@@ -1699,7 +1700,7 @@ class _FeeDisclosureSheet extends StatelessWidget {
                               'trades or gains. The Company does not withhold or remit taxes '
                               'on your behalf, except as required by law.',
                       style: const TextStyle(
-                          fontSize: 12, color: Color(0xFF555555), height: 1.5),
+                          fontSize: 12, color: IveTokens.labelSecondary, height: 1.5),
                     ),
                   ],
                 ),
@@ -1789,7 +1790,7 @@ class _TransactionTile extends StatelessWidget {
       type == 'deposit' ? Icons.download_rounded : Icons.upload_rounded;
 
   Color _typeColor(String type) =>
-      type == 'deposit' ? const Color(0xFF1B7AE8) : const Color(0xFF9C27B0);
+      type == 'deposit' ? IveTokens.accent : IveTokens.moduleUpdates;
 
   String _formatDate(DateTime dt) {
     return '${dt.month}/${dt.day} ${dt.hour.toString().padLeft(2, '0')}:${dt.minute.toString().padLeft(2, '0')}';
@@ -1994,7 +1995,7 @@ class _DepositSheetState extends State<_DepositSheet> {
                 width: double.infinity,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF1B7AE8),
+                    backgroundColor: IveTokens.accent,
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12)),
@@ -2168,7 +2169,7 @@ class _WithdrawSheetState extends State<_WithdrawSheet> {
                 width: double.infinity,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF9C27B0),
+                    backgroundColor: IveTokens.moduleUpdates,
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12)),

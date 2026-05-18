@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../core/design/ive_tokens.dart';
 import '../core/services/enterprise_service.dart';
 
 /// Pathway 4 — Embeddable Agentic Concierge chat widget.
@@ -136,7 +137,7 @@ class _GenieConciergeWidgetState extends State<GenieConciergeWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final accent = widget.accentColor ?? const Color(0xFF6C3CE1);
+    final accent = widget.accentColor ?? IveTokens.accent;
     final theme = Theme.of(context);
 
     if (_starting) {
@@ -147,9 +148,9 @@ class _GenieConciergeWidgetState extends State<GenieConciergeWidget> {
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(Icons.error_outline, color: Colors.red, size: 36),
+          const Icon(Icons.error_outline, color: IveTokens.danger, size: 36),
           const SizedBox(height: 8),
-          Text(_error!, style: const TextStyle(color: Colors.red)),
+          Text(_error!, style: const TextStyle(color: IveTokens.danger)),
           TextButton(onPressed: _startSession, child: const Text('Retry')),
         ],
       );
@@ -166,7 +167,7 @@ class _GenieConciergeWidgetState extends State<GenieConciergeWidget> {
               const CircleAvatar(
                 radius: 16,
                 backgroundColor: Colors.white,
-                child: Icon(Icons.auto_awesome, color: Color(0xFF6C3CE1), size: 18),
+                child: Icon(Icons.auto_awesome, color: IveTokens.accent, size: 18),
               ),
               const SizedBox(width: 10),
               Text(

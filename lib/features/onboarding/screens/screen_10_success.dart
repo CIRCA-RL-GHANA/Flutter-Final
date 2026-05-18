@@ -19,12 +19,12 @@ const Color _kTextDim   = IveTokens.labelSecondary;
 
 // Confetti in OS accent palette
 const List<Color> _kConfettiColors = [
-  Color(0xFF22BDD8),
-  Color(0xFF10B981),
-  Color(0xFF9A9AB2),
-  Color(0xFF22BDD8),
-  Color(0xFF1E2A6E),
-  Color(0xFFE8E8F0),
+  IveTokens.accent,
+  IveTokens.success,
+  IveTokens.labelSecondary,
+  IveTokens.accent,
+  Color(0xFF1E2A6E), // dark navy — no IveToken equivalent
+  IveTokens.label,
 ];
 
 /// Screen 10: Sign Up Success (Celebration)
@@ -73,7 +73,7 @@ class _SuccessScreenState extends State<SuccessScreen>
     );
 
     _contentController = AnimationController(
-      duration: const Duration(milliseconds: 800),
+      duration: IveTokens.dSlow,
       vsync: this,
     );
 
@@ -142,8 +142,8 @@ class _SuccessScreenState extends State<SuccessScreen>
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Color(0xFF11131C),
-                  Color(0xFF08080F),
+                  IveTokens.surface,
+                  IveTokens.bg,
                 ],
               ),
             ),
@@ -181,10 +181,10 @@ class _SuccessScreenState extends State<SuccessScreen>
                           height: 100,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: const Color(0xFF10B981),
+                            color: IveTokens.success,
                             boxShadow: [
                               BoxShadow(
-                                color: const Color(0xFF10B981).withValues(alpha: 0.4),
+                                color: IveTokens.success.withValues(alpha: 0.4),
                                 blurRadius: 24,
                                 spreadRadius: 4,
                               ),
@@ -193,7 +193,7 @@ class _SuccessScreenState extends State<SuccessScreen>
                           child: const Icon(
                             Icons.check,
                             size: 48,
-                            color: const Color(0xFF0E0E1A),
+                            color: IveTokens.surface,
                           ),
                         ),
                       );
@@ -215,7 +215,7 @@ class _SuccessScreenState extends State<SuccessScreen>
                               style: const TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
-                                color: const Color(0xFF0E0E1A),
+                                color: IveTokens.label,
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -224,7 +224,7 @@ class _SuccessScreenState extends State<SuccessScreen>
                               AppStrings.accountReady,
                               style: TextStyle(
                                 fontSize: 16,
-                                color: const Color(0xFF0E0E1A).withValues(alpha: 0.7),
+                                color: IveTokens.labelSecondary,
                               ),
                             ),
                           ],
@@ -282,14 +282,14 @@ class _SuccessScreenState extends State<SuccessScreen>
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(4, (index) {
                       return AnimatedContainer(
-                        duration: const Duration(milliseconds: 300),
+                        duration: IveTokens.dFast,
                         margin: const EdgeInsets.symmetric(horizontal: 3),
                         width: _currentPage == index ? 20 : 8,
                         height: 8,
                         decoration: BoxDecoration(
                           color: _currentPage == index
-                              ? const Color(0xFF22BDD8)
-                              : const Color(0xFF1C1C2E),
+                              ? IveTokens.accent
+                              : IveTokens.hairline,
                           borderRadius: BorderRadius.circular(4),
                         ),
                       );
@@ -334,7 +334,7 @@ class _SuccessScreenState extends State<SuccessScreen>
                           // Tertiary: Skip to Dashboard
                           SecondaryButton(
                             text: AppStrings.skipToDashboard,
-                            color: const Color(0xFF9A9AB2),
+                            color: IveTokens.labelSecondary,
                             onPressed: () {
                               Navigator.of(context)
                                   .pushReplacementNamed(AppRoutes.genieHome);
@@ -354,7 +354,7 @@ class _SuccessScreenState extends State<SuccessScreen>
                       AppStrings.needHelp,
                       style: TextStyle(
                         fontSize: 12,
-                        color: const Color(0xFF0E0E1A).withValues(alpha: 0.4),
+                        color: IveTokens.labelTertiary,
                       ),
                     ),
                   ),
@@ -387,9 +387,9 @@ class _FeatureCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 6),
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: const Color(0xFF0E0E1A).withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(6),
-        border: Border.all(color: const Color(0xFF1C1C2E)),
+        color: IveTokens.surface.withValues(alpha: 0.1),
+        borderRadius: IveTokens.brXs,
+        border: Border.all(color: IveTokens.hairline),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -401,7 +401,7 @@ class _FeatureCard extends StatelessWidget {
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: const Color(0xFF0E0E1A),
+              color: IveTokens.label,
             ),
             textAlign: TextAlign.center,
           ),
@@ -410,7 +410,7 @@ class _FeatureCard extends StatelessWidget {
             subtitle,
             style: TextStyle(
               fontSize: 14,
-              color: const Color(0xFF0E0E1A).withValues(alpha: 0.6),
+              color: IveTokens.labelSecondary,
             ),
             textAlign: TextAlign.center,
           ),

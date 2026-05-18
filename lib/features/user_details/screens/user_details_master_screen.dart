@@ -27,7 +27,7 @@ class UserDetailsMasterScreen extends StatelessWidget {
         final allContexts = ctxProvider.availableContexts;
 
         return Scaffold(
-          backgroundColor: const Color(0xFF08080F),
+          backgroundColor: IveTokens.bg,
           body: CustomScrollView(
             slivers: [
               // ─── App Bar ──────────────────────────────────
@@ -148,7 +148,7 @@ class UserDetailsMasterScreen extends StatelessWidget {
                     child: CollapsibleSection(
                       title: 'Personal Information',
                       icon: Icons.person_outline,
-                      iconColor: const Color(0xFF6366F1),
+                      iconColor: IveTokens.moduleSetup,
                       child: _PersonalInfoContent(identity: identity, editMode: udp.editMode),
                     ),
                   ),
@@ -163,7 +163,7 @@ class UserDetailsMasterScreen extends StatelessWidget {
                     child: CollapsibleSection(
                       title: 'Security Center',
                       icon: Icons.shield_outlined,
-                      iconColor: const Color(0xFF10B981),
+                      iconColor: IveTokens.success,
                       initiallyExpanded: false,
                       child: _SecurityPreview(security: udp.security),
                     ),
@@ -179,7 +179,7 @@ class UserDetailsMasterScreen extends StatelessWidget {
                     child: CollapsibleSection(
                       title: 'Preferences Hub',
                       icon: Icons.tune,
-                      iconColor: const Color(0xFF8B5CF6),
+                      iconColor: IveTokens.moduleUpdates,
                       initiallyExpanded: false,
                       child: _PreferencesHub(
                         notifications: udp.notifications,
@@ -280,7 +280,7 @@ class _IdentitySection extends StatelessWidget {
                 // Avatar
                 CircleAvatar(
                   radius: 48,
-                  backgroundColor: const Color(0xFF6366F1).withValues(alpha: 0.1),
+                  backgroundColor: IveTokens.moduleSetup.withValues(alpha: 0.1),
                   child: identity.avatarUrl != null
                       ? ClipOval(
                           child: Image.network(
@@ -306,7 +306,7 @@ class _IdentitySection extends StatelessWidget {
                               style: const TextStyle(
                                 fontSize: 36,
                                 fontWeight: FontWeight.bold,
-                                color: Color(0xFF6366F1),
+                                color: IveTokens.moduleSetup,
                               ),
                             ),
                           ),
@@ -318,7 +318,7 @@ class _IdentitySection extends StatelessWidget {
                           style: const TextStyle(
                             fontSize: 36,
                             fontWeight: FontWeight.bold,
-                            color: Color(0xFF6366F1),
+                            color: IveTokens.moduleSetup,
                           ),
                         ),
                 ),
@@ -331,7 +331,7 @@ class _IdentitySection extends StatelessWidget {
                       padding: const EdgeInsets.all(6),
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Color(0xFF6366F1),
+                        color: IveTokens.moduleSetup,
                       ),
                       child: const Icon(Icons.camera_alt, size: 14, color: Colors.white),
                     ),
@@ -424,21 +424,21 @@ class _QuickStats extends StatelessWidget {
         _StatChip(
           label: 'Profile',
           value: '${(identity.profileCompleteness * 100).toInt()}%',
-          color: const Color(0xFF6366F1),
+          color: IveTokens.moduleSetup,
           icon: Icons.person,
         ),
         const SizedBox(width: 8),
         _StatChip(
           label: 'Member',
           value: memberDuration,
-          color: const Color(0xFF10B981),
+          color: IveTokens.success,
           icon: Icons.calendar_today,
         ),
         const SizedBox(width: 8),
         _StatChip(
           label: 'Contacts',
           value: '${identity.emergencyContacts.length}',
-          color: const Color(0xFF8B5CF6),
+          color: IveTokens.moduleUpdates,
           icon: Icons.people,
         ),
       ],
@@ -522,7 +522,7 @@ class _ContextCarousel extends StatelessWidget {
                 onTap: onManage,
                 child: const Text(
                   'Manage',
-                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Color(0xFF6366F1)),
+                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: IveTokens.moduleSetup),
                 ),
               ),
             ],
@@ -634,14 +634,14 @@ class _AddContextCard extends StatelessWidget {
               height: 32,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: const Color(0xFF6366F1).withValues(alpha: 0.08),
+                color: IveTokens.moduleSetup.withValues(alpha: 0.08),
               ),
-              child: const Icon(Icons.add, size: 18, color: Color(0xFF6366F1)),
+              child: const Icon(Icons.add, size: 18, color: IveTokens.moduleSetup),
             ),
             const SizedBox(height: 4),
             const Text(
               'Add',
-              style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: Color(0xFF6366F1)),
+              style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: IveTokens.moduleSetup),
             ),
           ],
         ),
@@ -693,7 +693,7 @@ class _PersonalInfoContent extends StatelessWidget {
           label: 'Email',
           value: identity.email ?? 'Not set',
           trailing: identity.emailVerified
-              ? const Icon(Icons.verified, size: 14, color: Color(0xFF10B981))
+              ? const Icon(Icons.verified, size: 14, color: IveTokens.success)
               : null,
           editable: editMode,
           onTap: editMode
@@ -706,7 +706,7 @@ class _PersonalInfoContent extends StatelessWidget {
           label: 'Phone',
           value: identity.phone ?? 'Not set',
           trailing: identity.phoneVerified
-              ? const Icon(Icons.verified, size: 14, color: Color(0xFF10B981))
+              ? const Icon(Icons.verified, size: 14, color: IveTokens.success)
               : null,
         ),
         DetailRow(
@@ -758,25 +758,25 @@ class _SecurityPreview extends StatelessWidget {
           label: 'Primary Auth',
           value: security.primaryAuth.label,
           icon: security.primaryAuth.icon,
-          color: const Color(0xFF10B981),
+          color: IveTokens.success,
         ),
         _SecurityRow(
           label: '2FA Status',
           value: security.twoFactorEnabled ? 'Enabled' : 'Disabled',
           icon: Icons.security,
-          color: security.twoFactorEnabled ? const Color(0xFF10B981) : const Color(0xFFF59E0B),
+          color: security.twoFactorEnabled ? IveTokens.success : IveTokens.warning,
         ),
         _SecurityRow(
           label: 'Active Sessions',
           value: '${security.activeSessions.length} devices',
           icon: Icons.devices,
-          color: const Color(0xFF3B82F6),
+          color: IveTokens.moduleMarket,
         ),
         _SecurityRow(
           label: 'Password Health',
           value: '${security.passwordHealthScore}%',
           icon: Icons.health_and_safety,
-          color: security.passwordHealthScore >= 80 ? const Color(0xFF10B981) : const Color(0xFFF59E0B),
+          color: security.passwordHealthScore >= 80 ? IveTokens.success : IveTokens.warning,
         ),
 
         const SizedBox(height: 12),
@@ -789,8 +789,8 @@ class _SecurityPreview extends StatelessWidget {
             icon: const Icon(Icons.shield, size: 16),
             label: const Text('Full Security Settings'),
             style: OutlinedButton.styleFrom(
-              foregroundColor: const Color(0xFF10B981),
-              side: const BorderSide(color: Color(0xFF10B981), width: 1),
+              foregroundColor: IveTokens.success,
+              side: const BorderSide(color: IveTokens.success, width: 1),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
               padding: const EdgeInsets.symmetric(vertical: 10),
             ),
@@ -844,21 +844,21 @@ class _PreferencesHub extends StatelessWidget {
           icon: Icons.notifications_outlined,
           label: 'Notifications',
           subtitle: notifications.activeMode.label,
-          color: const Color(0xFFF59E0B),
+          color: IveTokens.warning,
           onTap: () => Navigator.pushNamed(context, AppRoutes.userDetailsNotifications),
         ),
         _PrefTile(
           icon: Icons.privacy_tip_outlined,
           label: 'Privacy',
           subtitle: 'Score: ${privacy.privacyScore}%',
-          color: const Color(0xFF8B5CF6),
+          color: IveTokens.moduleUpdates,
           onTap: () => Navigator.pushNamed(context, AppRoutes.userDetailsPrivacy),
         ),
         _PrefTile(
           icon: Icons.accessibility_new,
           label: 'Accessibility',
           subtitle: accessibility.activePresetName ?? 'Default',
-          color: const Color(0xFF06B6D4),
+          color: IveTokens.accent,
           onTap: () => Navigator.pushNamed(context, AppRoutes.userDetailsAccessibility),
         ),
       ],
@@ -972,7 +972,7 @@ class _StickyFooter extends StatelessWidget {
           FloatingActionButton(
             heroTag: 'user_details_fab',
             mini: true,
-            backgroundColor: const Color(0xFF6366F1),
+            backgroundColor: IveTokens.moduleSetup,
             onPressed: onFab,
             child: const Icon(Icons.add, color: Colors.white, size: 20),
           ),

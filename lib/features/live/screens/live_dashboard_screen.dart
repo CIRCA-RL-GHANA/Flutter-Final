@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../core/design/ive_tokens.dart';
 import '../../../core/routes/app_routes.dart';
 import '../models/live_models.dart';
 import '../providers/live_provider.dart';
@@ -168,7 +169,7 @@ class _OrdersView extends StatelessWidget {
           LiveSectionCard(
             title: 'OPERATIONS OVERVIEW',
             icon: Icons.analytics_outlined,
-            iconColor: const Color(0xFF3B82F6),
+            iconColor: IveTokens.moduleMarket,
             onMore: () => Navigator.pushNamed(context, AppRoutes.liveAnalytics),
             child: Wrap(
               spacing: 8,
@@ -178,25 +179,25 @@ class _OrdersView extends StatelessWidget {
                   label: 'Active Drivers',
                   value: '${prov.metrics.activeDrivers}/${prov.metrics.totalDrivers}',
                   icon: Icons.local_shipping,
-                  color: const Color(0xFF3B82F6),
+                  color: IveTokens.moduleMarket,
                 ),
                 LiveMetricBadge(
                   label: 'Avg Response',
                   value: '${prov.metrics.avgResponseTimeMinutes}min',
                   icon: Icons.timer,
-                  color: const Color(0xFF10B981),
+                  color: IveTokens.success,
                 ),
                 LiveMetricBadge(
                   label: 'Efficiency',
                   value: '${(prov.metrics.efficiencyScore * 100).toInt()}%',
                   icon: Icons.speed,
-                  color: const Color(0xFFF59E0B),
+                  color: IveTokens.warning,
                 ),
                 LiveMetricBadge(
                   label: "Today's Revenue",
                   value: 'â‚µ${prov.metrics.todayRevenue.toStringAsFixed(0)}',
                   icon: Icons.attach_money,
-                  color: const Color(0xFF8B5CF6),
+                  color: IveTokens.moduleUpdates,
                 ),
               ],
             ),
@@ -212,7 +213,7 @@ class _OrdersView extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: 8),
                   child: Row(
                     children: [
-                      const Icon(Icons.error, size: 16, color: Color(0xFFEF4444)),
+                      const Icon(Icons.error, size: 16, color: IveTokens.danger),
                       const SizedBox(width: 8),
                       Expanded(child: Text(a.title, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500))),
                       ...a.actions.take(2).map((act) => Padding(
@@ -238,7 +239,7 @@ class _OrdersView extends StatelessWidget {
           LiveSectionCard(
             title: 'PREDICTIVE INSIGHTS',
             icon: Icons.auto_awesome,
-            iconColor: const Color(0xFF8B5CF6),
+              iconColor: IveTokens.moduleUpdates,
             child: Column(
               children: prov.insights.map((i) => Padding(
                 padding: const EdgeInsets.only(bottom: 8),

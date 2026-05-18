@@ -10,6 +10,7 @@ import '../providers/go_provider.dart';
 import '../widgets/go_widgets.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/widgets/ai_insight_card.dart';
+import '../../../core/design/ive_tokens.dart';
 
 class GODashboardScreen extends StatefulWidget {
   const GODashboardScreen({super.key});
@@ -62,19 +63,19 @@ class _GODashboardScreenState extends State<GODashboardScreen> {
             return true;
           },
           child: Scaffold(
-            backgroundColor: const Color(0xFFF8F9FE),
+            backgroundColor: IveTokens.bg,
             appBar: AppBar(
               title: const Text(
                 'GO Financial',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w700,
-                  color: Color(0xFF1F2937),
+                  color: IveTokens.label,
                 ),
               ),
               elevation: 0,
-              backgroundColor: Colors.white,
-              foregroundColor: const Color(0xFF1F2937),
+              backgroundColor: IveTokens.surface,
+              foregroundColor: IveTokens.label,
               actions: [
                 Padding(
                   padding: const EdgeInsets.all(8),
@@ -92,7 +93,7 @@ class _GODashboardScreenState extends State<GODashboardScreen> {
               onRefresh: _loadDashboardData,
               child: provider.isLoading
                   ? const Center(
-                      child: CircularProgressIndicator(color: Color(0xFF2563EB)),
+                      child: CircularProgressIndicator(color: IveTokens.accent),
                     )
                   : SingleChildScrollView(
                       physics: const AlwaysScrollableScrollPhysics(),
@@ -137,12 +138,12 @@ class _GODashboardScreenState extends State<GODashboardScreen> {
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [const Color(0xFF2563EB), const Color(0xFF1E40AF)],
+          colors: [IveTokens.accent, IveTokens.accentPressed],
         ),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF2563EB).withValues(alpha: 0.4),
+            color: IveTokens.accent.withValues(alpha: 0.4),
             blurRadius: 12,
             offset: const Offset(0, 4),
           ),
@@ -156,7 +157,7 @@ class _GODashboardScreenState extends State<GODashboardScreen> {
             style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w500,
-              color: Color(0xFFBFDBFE),
+              color: IveTokens.label,
             ),
           ),
           const SizedBox(height: 8),
@@ -207,7 +208,7 @@ class _GODashboardScreenState extends State<GODashboardScreen> {
                       'Income: \$${provider.monthlyIncome.toStringAsFixed(0)}',
                       style: const TextStyle(
                         fontSize: 12,
-                        color: Color(0xFFBFDBFE),
+                        color: IveTokens.label,
                       ),
                     ),
                   ],
@@ -227,7 +228,7 @@ class _GODashboardScreenState extends State<GODashboardScreen> {
                       'Spent: \$${provider.monthlySpent.toStringAsFixed(0)}',
                       style: const TextStyle(
                         fontSize: 12,
-                        color: Color(0xFFBFDBFE),
+                        color: IveTokens.label,
                       ),
                     ),
                   ],
@@ -249,25 +250,25 @@ class _GODashboardScreenState extends State<GODashboardScreen> {
           _QuickActionButton(
             icon: Icons.call_made,
             label: 'Send',
-            color: const Color(0xFF3B82F6),
+            color: IveTokens.moduleMarket,
             onTap: () => Navigator.pushNamed(context, AppRoutes.goTransfer),
           ),
           _QuickActionButton(
             icon: Icons.call_received,
             label: 'Request',
-            color: const Color(0xFF10B981),
+            color: IveTokens.success,
             onTap: () => Navigator.pushNamed(context, AppRoutes.goRequest),
           ),
           _QuickActionButton(
             icon: Icons.shopping_bag_outlined,
             label: 'Buy',
-            color: const Color(0xFF8B5CF6),
+            color: IveTokens.moduleUpdates,
             onTap: () => Navigator.pushNamed(context, AppRoutes.goBuy),
           ),
           _QuickActionButton(
             icon: Icons.trending_up,
             label: 'Invest',
-            color: const Color(0xFFF59E0B),
+            color: IveTokens.warning,
             onTap: () => Navigator.pushNamed(context, AppRoutes.goInvest),
           ),
         ],
@@ -293,7 +294,7 @@ class _GODashboardScreenState extends State<GODashboardScreen> {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
-                  color: Color(0xFF1F2937),
+                  color: IveTokens.label,
                 ),
               ),
               TextButton(
@@ -304,7 +305,7 @@ class _GODashboardScreenState extends State<GODashboardScreen> {
                   'View All',
                   style: TextStyle(
                     fontSize: 12,
-                    color: Color(0xFF2563EB),
+                    color: IveTokens.accent,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -346,7 +347,7 @@ class _GODashboardScreenState extends State<GODashboardScreen> {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
-                  color: Color(0xFF1F2937),
+                  color: IveTokens.label,
                 ),
               ),
               TextButton(
@@ -357,7 +358,7 @@ class _GODashboardScreenState extends State<GODashboardScreen> {
                   'View All',
                   style: TextStyle(
                     fontSize: 12,
-                    color: Color(0xFF2563EB),
+                    color: IveTokens.accent,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -410,7 +411,7 @@ class _GODashboardScreenState extends State<GODashboardScreen> {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
-                  color: Color(0xFF1F2937),
+                  color: IveTokens.label,
                 ),
               ),
               TextButton(
@@ -421,7 +422,7 @@ class _GODashboardScreenState extends State<GODashboardScreen> {
                   'View All',
                   style: TextStyle(
                     fontSize: 12,
-                    color: Color(0xFF2563EB),
+                    color: IveTokens.accent,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -452,7 +453,7 @@ class _GODashboardScreenState extends State<GODashboardScreen> {
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w700,
-              color: Color(0xFF1F2937),
+              color: IveTokens.label,
             ),
           ),
           const SizedBox(height: 8),
@@ -474,8 +475,8 @@ class _GODashboardScreenState extends State<GODashboardScreen> {
           return const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: LinearProgressIndicator(
-              backgroundColor: Color(0xFFEFF6FF),
-              valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF2563EB)),
+              backgroundColor: IveTokens.surface,
+              valueColor: AlwaysStoppedAnimation<Color>(IveTokens.accent),
             ),
           );
         }
@@ -491,7 +492,7 @@ class _GODashboardScreenState extends State<GODashboardScreen> {
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w700,
-                  color: Color(0xFF1F2937),
+                  color: IveTokens.label,
                 ),
               ),
               const SizedBox(height: 8),
@@ -547,7 +548,7 @@ class _QuickActionButton extends StatelessWidget {
             style: const TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w600,
-              color: Color(0xFF374151),
+              color: IveTokens.labelSecondary,
             ),
           ),
         ],
@@ -584,7 +585,7 @@ class _WalletCard extends StatelessWidget {
             style: const TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w600,
-              color: Color(0xFFBFDBFE),
+              color: IveTokens.label,
             ),
           ),
           const SizedBox(height: 4),
@@ -625,7 +626,7 @@ class _CardItem extends StatelessWidget {
       margin: const EdgeInsets.only(right: 12),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: IveTokens.surface,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: Colors.grey.shade200),
       ),
@@ -638,7 +639,7 @@ class _CardItem extends StatelessWidget {
             style: const TextStyle(
               fontSize: 11,
               fontWeight: FontWeight.w600,
-              color: Color(0xFF6B7280),
+              color: IveTokens.labelSecondary,
             ),
           ),
           Text(
@@ -646,7 +647,7 @@ class _CardItem extends StatelessWidget {
             style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w700,
-              color: Color(0xFF1F2937),
+              color: IveTokens.label,
             ),
           ),
           Text(
@@ -656,7 +657,7 @@ class _CardItem extends StatelessWidget {
             style: const TextStyle(
               fontSize: 11,
               fontWeight: FontWeight.w500,
-              color: Color(0xFF6B7280),
+              color: IveTokens.labelSecondary,
             ),
           ),
         ],
@@ -680,7 +681,7 @@ class _TransactionTile extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: IveTokens.surface,
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: Colors.grey.shade200),
       ),
@@ -709,14 +710,14 @@ class _TransactionTile extends StatelessWidget {
                   style: const TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
-                    color: Color(0xFF1F2937),
+                    color: IveTokens.label,
                   ),
                 ),
                 Text(
                   transaction.date,
                   style: const TextStyle(
                     fontSize: 11,
-                    color: Color(0xFF9CA3AF),
+                    color: IveTokens.labelTertiary,
                   ),
                 ),
               ],
@@ -774,7 +775,7 @@ class _RecipientAvatar extends StatelessWidget {
             style: const TextStyle(
               fontSize: 11,
               fontWeight: FontWeight.w600,
-              color: Color(0xFF374151),
+              color: IveTokens.labelSecondary,
             ),
             textAlign: TextAlign.center,
           ),

@@ -10,6 +10,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../core/design/ive_tokens.dart';
 import '../../prompt/models/rbac_models.dart';
 import '../../prompt/providers/context_provider.dart';
 import '../models/setup_dashboard_models.dart';
@@ -44,7 +45,7 @@ class _SetupDashboardScreenState extends State<SetupDashboardScreen> {
         final rows = _groupCardsIntoRows(filteredCards);
 
         return Scaffold(
-          backgroundColor: const Color(0xFF08080F),
+          backgroundColor: IveTokens.bg,
           appBar: const SetupAppBar(title: 'Setup Dashboard'),
           body: RefreshIndicator(
             color: kSetupColor,

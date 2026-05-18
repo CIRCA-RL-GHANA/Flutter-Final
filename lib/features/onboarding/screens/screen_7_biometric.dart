@@ -125,7 +125,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF08080F),
+      backgroundColor: IveTokens.bg,
       body: SafeArea(
         child: Responsive.constrained(
           child: Column(
@@ -175,12 +175,12 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
                 height: 140,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: const Color(0xFF22BDD8).withValues(alpha: 
+                  color: IveTokens.accent.withValues(alpha: 
                     0.08 + 0.05 * _animController.value,
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: const Color(0xFF22BDD8).withValues(alpha: 
+                      color: IveTokens.accent.withValues(alpha: 
                         0.1 + 0.1 * _animController.value,
                       ),
                       blurRadius: 20 + 10 * _animController.value,
@@ -191,7 +191,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
                 child: Icon(
                   _getBiometricIcon(biometric.biometricType),
                   size: 60,
-                  color: const Color(0xFF22BDD8),
+                  color: IveTokens.accent,
                 ),
               );
             },
@@ -219,8 +219,8 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
-              color: const Color(0xFF0E0E1A),
-              borderRadius: BorderRadius.circular(6),
+              color: IveTokens.surface,
+              borderRadius: IveTokens.brXs,
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -230,7 +230,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
-                    color: const Color(0xFFE8E8F0),
+                    color: IveTokens.label,
                   ),
                 ),
                 Switch.adaptive(
@@ -238,7 +238,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
                   onChanged: (value) {
                     biometric.setBiometricEnabled(value);
                   },
-                  activeColor: const Color(0xFF22BDD8),
+                  activeColor: IveTokens.accent,
                 ),
               ],
             ),
@@ -253,11 +253,11 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
             child: Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6),
+                borderRadius: IveTokens.brXs,
                 border: Border.all(
                   color: biometric.consentGiven
-                      ? const Color(0xFF22BDD8)
-                      : const Color(0xFF1C1C2E),
+                      ? IveTokens.accent
+                      : IveTokens.hairline,
                 ),
               ),
               child: Row(
@@ -267,8 +267,8 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
                         ? Icons.check_box
                         : Icons.check_box_outline_blank,
                     color: biometric.consentGiven
-                        ? const Color(0xFF22BDD8)
-                        : const Color(0xFF7A7A95),
+                        ? IveTokens.accent
+                        : IveTokens.labelTertiary,
                     size: 24,
                   ),
                   const SizedBox(width: 12),
@@ -277,7 +277,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
                       AppStrings.biometricConsent,
                       style: const TextStyle(
                         fontSize: 13,
-                        color: const Color(0xFF9A9AB2),
+                        color: IveTokens.labelSecondary,
                       ),
                     ),
                   ),
@@ -293,7 +293,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
             AppStrings.changeAnytime,
             style: const TextStyle(
               fontSize: 12,
-              color: const Color(0xFF7A7A95),
+              color: IveTokens.labelTertiary,
             ),
           ),
 
@@ -349,12 +349,12 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
             height: 100,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: const Color(0xFF22BDD8).withValues(alpha: 0.1),
+              color: IveTokens.accent.withValues(alpha: 0.1),
             ),
             child: const Icon(
               Icons.pin_outlined,
               size: 48,
-              color: const Color(0xFF22BDD8),
+              color: IveTokens.accent,
             ),
           ),
 
@@ -376,7 +376,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
               labelText: 'Enter PIN (4-6 digits)',
               counterText: '',
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(6),
+                borderRadius: IveTokens.brXs,
               ),
             ),
           ),
@@ -399,7 +399,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
               labelText: 'Confirm PIN',
               counterText: '',
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(6),
+                borderRadius: IveTokens.brXs,
               ),
             ),
           ),
@@ -411,7 +411,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
               _pinError!,
               style: const TextStyle(
                 fontSize: 13,
-                color: const Color(0xFFEF4444),
+                color: IveTokens.danger,
               ),
             ),
           ],
@@ -419,7 +419,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
           const SizedBox(height: 8),
           const Text(
             'Your PIN will be used as a fallback authentication method',
-            style: TextStyle(fontSize: 12, color: const Color(0xFF7A7A95)),
+            style: const TextStyle(fontSize: 12, color: IveTokens.labelTertiary),
             textAlign: TextAlign.center,
           ),
 
@@ -477,17 +477,17 @@ class _BenefitRow extends StatelessWidget {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              color: const Color(0xFF10B981).withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(10),
+              color: IveTokens.success.withValues(alpha: 0.1),
+              borderRadius: IveTokens.brMd,
             ),
-            child: Icon(icon, size: 20, color: const Color(0xFF10B981)),
+            child: Icon(icon, size: 20, color: IveTokens.success),
           ),
           const SizedBox(width: 16),
           Text(
             text,
             style: const TextStyle(
               fontSize: 15,
-              color: const Color(0xFFE8E8F0),
+              color: IveTokens.label,
               fontWeight: FontWeight.w500,
             ),
           ),

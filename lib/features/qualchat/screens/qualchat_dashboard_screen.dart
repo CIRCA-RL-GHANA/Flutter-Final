@@ -7,6 +7,7 @@ import '../models/qualchat_models.dart';
 import '../providers/qualchat_provider.dart';
 import '../widgets/qualchat_widgets.dart';
 import '../../../core/routes/app_routes.dart';
+import '../../../core/design/ive_tokens.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 
 class QualChatDashboardScreen extends StatelessWidget {
@@ -17,7 +18,7 @@ class QualChatDashboardScreen extends StatelessWidget {
     return Consumer<QualChatProvider>(
       builder: (context, provider, _) {
         return Scaffold(
-          backgroundColor: const Color(0xFFF8F9FE),
+          backgroundColor: IveTokens.bg,
           appBar: QualChatAppBar(
             title: 'qualChat Dashboard',
             showBackButton: true,
@@ -112,7 +113,7 @@ class QualChatDashboardScreen extends StatelessWidget {
                         : ChatMode.social,
                   );
                 },
-                backgroundColor: const Color(0xFF6B7280),
+                backgroundColor: IveTokens.surface,
                 child: const Icon(Icons.theater_comedy, color: Colors.white, size: 20),
               ),
               const SizedBox(height: 12),
@@ -166,7 +167,7 @@ class QualChatDashboardScreen extends StatelessWidget {
           // Connection success rate chart
           const Text(
             'ðŸŽ¯ Connection Success Rate',
-            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: Color(0xFF1A1A1A)),
+            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: IveTokens.label),
           ),
           const SizedBox(height: 8),
           SizedBox(
@@ -190,7 +191,7 @@ class QualChatDashboardScreen extends StatelessWidget {
           const SizedBox(height: 4),
           const Text(
             'Last 10 connections',
-            style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF)),
+            style: TextStyle(fontSize: 11, color: IveTokens.labelTertiary),
           ),
           const SizedBox(height: 16),
 
@@ -199,19 +200,19 @@ class QualChatDashboardScreen extends StatelessWidget {
             children: [
               Text(
                 'Active Sparks: ${provider.activeSparks}',
-                style: const TextStyle(fontSize: 13, color: Color(0xFF1A1A1A)),
+                style: const TextStyle(fontSize: 13, color: IveTokens.label),
               ),
-              const Text(' • ', style: TextStyle(color: Color(0xFF9CA3AF))),
+              const Text(' • ', style: TextStyle(color: IveTokens.labelTertiary)),
               Text(
-                'Matches: ${provider.matchCount} ðŸ’˜',
-                style: const TextStyle(fontSize: 13, color: Color(0xFF1A1A1A)),
+                'Matches: ${provider.matchCount} 💘',
+                style: const TextStyle(fontSize: 13, color: IveTokens.label),
               ),
             ],
           ),
           const SizedBox(height: 4),
           Text(
             'Energy Level: ${provider.energyLevel}% âš¡',
-            style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280)),
+            style: const TextStyle(fontSize: 13, color: IveTokens.labelSecondary),
           ),
           const SizedBox(height: 16),
 
@@ -232,13 +233,13 @@ class QualChatDashboardScreen extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
-                      color: Color(0xFF1A1A1A),
+                      color: IveTokens.label,
                     ),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     '"${QualChatProvider.nudges.first.reason}"',
-                    style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
+                    style: const TextStyle(fontSize: 12, color: IveTokens.labelSecondary),
                   ),
                   const SizedBox(height: 12),
                   Row(
@@ -333,7 +334,7 @@ class QualChatDashboardScreen extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Text(
               'Available Now:',
-              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: Color(0xFF1A1A1A)),
+              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: IveTokens.label),
             ),
           ),
           const SizedBox(height: 8),
@@ -344,9 +345,9 @@ class QualChatDashboardScreen extends StatelessWidget {
                 children: [
                   PresenceDot(status: u.presence),
                   const SizedBox(width: 8),
-                  Text(u.name, style: const TextStyle(fontSize: 13, color: Color(0xFF1A1A1A))),
+                  Text(u.name, style: const TextStyle(fontSize: 13, color: IveTokens.label)),
                   const SizedBox(width: 4),
-                  Text('(${u.role})', style: const TextStyle(fontSize: 12, color: Color(0xFF9CA3AF))),
+                  Text('(${u.role})', style: const TextStyle(fontSize: 12, color: IveTokens.labelTertiary)),
                   const Spacer(),
                   Icon(Icons.chat, size: 16, color: kChatColor),
                 ],
@@ -359,16 +360,16 @@ class QualChatDashboardScreen extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
             decoration: BoxDecoration(
-              color: const Color(0xFFF3F4F6),
+              color: IveTokens.surface,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Row(
               children: const [
-                Icon(Icons.search, size: 18, color: Color(0xFF9CA3AF)),
+                Icon(Icons.search, size: 18, color: IveTokens.labelTertiary),
                 SizedBox(width: 8),
                 Text(
                   'Search or start new chat...',
-                  style: TextStyle(fontSize: 13, color: Color(0xFF9CA3AF)),
+                  style: TextStyle(fontSize: 13, color: IveTokens.labelTertiary),
                 ),
               ],
             ),
@@ -419,7 +420,7 @@ class QualChatDashboardScreen extends StatelessWidget {
         children: [
           const Text(
             'Priority Conversations:',
-            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: Color(0xFF1A1A1A)),
+            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: IveTokens.label),
           ),
           const SizedBox(height: 8),
           ...QualChatProvider.insights.map((i) {
@@ -428,13 +429,13 @@ class QualChatDashboardScreen extends StatelessWidget {
             switch (i.priority) {
               case InsightPriority.unresolved:
                 icon = Icons.warning_amber;
-                iconColor = const Color(0xFFF59E0B);
+                iconColor = IveTokens.warning;
               case InsightPriority.followUp:
                 icon = Icons.schedule;
-                iconColor = const Color(0xFF3B82F6);
+                iconColor = IveTokens.moduleMarket;
               case InsightPriority.completed:
                 icon = Icons.check_circle;
-                iconColor = const Color(0xFF10B981);
+                iconColor = IveTokens.success;
             }
             return Padding(
               padding: const EdgeInsets.only(bottom: 6),
@@ -445,7 +446,7 @@ class QualChatDashboardScreen extends StatelessWidget {
                   Expanded(
                     child: Text(
                       i.title,
-                      style: const TextStyle(fontSize: 13, color: Color(0xFF1A1A1A)),
+style: const TextStyle(fontSize: 13, color: IveTokens.label),
                     ),
                   ),
                 ],
@@ -455,18 +456,18 @@ class QualChatDashboardScreen extends StatelessWidget {
           const SizedBox(height: 12),
           Row(
             children: const [
-              Text('Sentiment Trend: ðŸ“ˆ Positive',
-                  style: TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
+              Text('Sentiment Trend: 📈 Positive',
+                  style: TextStyle(fontSize: 12, color: IveTokens.labelSecondary)),
               SizedBox(width: 16),
-              Text('Response Time: â±ï¸ Avg 12m',
-                  style: TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
+              Text('Response Time: ⏱️ Avg 12m',
+                  style: TextStyle(fontSize: 12, color: IveTokens.labelSecondary)),
             ],
           ),
           const SizedBox(height: 12),
 
           // Recent media
           const Text('Recent Media:',
-              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: Color(0xFF1A1A1A))),
+              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: IveTokens.label)),
           const SizedBox(height: 8),
           Row(
             children: [
@@ -480,11 +481,11 @@ class QualChatDashboardScreen extends StatelessWidget {
                 width: 48,
                 height: 48,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF3F4F6),
+                  color: IveTokens.surface,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: const Center(
-                  child: Text('+3', style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                  child: Text('+3', style: TextStyle(fontSize: 13, color: IveTokens.labelSecondary)),
                 ),
               ),
             ],
@@ -532,7 +533,7 @@ class QualChatDashboardScreen extends StatelessWidget {
         children: [
           Text(
             '${QualChatProvider.archivedChats.length} threads hidden • Last archived: Today',
-            style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
+            style: const TextStyle(fontSize: 12, color: IveTokens.labelSecondary),
           ),
           const SizedBox(height: 12),
           ...QualChatProvider.archivedChats.take(2).map((a) {
@@ -557,7 +558,7 @@ class QualChatDashboardScreen extends StatelessWidget {
                             style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
                         Text(
                           '"${a.conversation.lastMessage}"',
-                          style: const TextStyle(fontSize: 12, color: Color(0xFF9CA3AF)),
+                          style: const TextStyle(fontSize: 12, color: IveTokens.labelTertiary),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -571,7 +572,7 @@ class QualChatDashboardScreen extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             'Storage: ${provider.totalArchivedSizeMb.toStringAsFixed(1)} MB saved',
-            style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
+            style: const TextStyle(fontSize: 12, color: IveTokens.labelSecondary),
           ),
           const SizedBox(height: 12),
           Row(
@@ -651,8 +652,8 @@ class _SmallAction extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border.all(
             color: isDestructive
-                ? const Color(0xFFEF4444).withValues(alpha: 0.3)
-                : const Color(0xFFE5E7EB),
+                ? IveTokens.danger.withValues(alpha: 0.3)
+                : IveTokens.hairline,
           ),
           borderRadius: BorderRadius.circular(8),
         ),
@@ -661,7 +662,7 @@ class _SmallAction extends StatelessWidget {
           style: TextStyle(
             fontSize: 11,
             fontWeight: FontWeight.w600,
-            color: isDestructive ? const Color(0xFFEF4444) : const Color(0xFF6B7280),
+            color: isDestructive ? IveTokens.danger : IveTokens.labelSecondary,
           ),
         ),
       ),

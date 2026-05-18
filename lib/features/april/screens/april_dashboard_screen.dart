@@ -8,6 +8,7 @@ import '../../../core/widgets/ai_insight_card.dart';
 import '../models/april_models.dart';
 import '../providers/april_provider.dart';
 import '../widgets/april_widgets.dart';
+import '../../../core/design/ive_tokens.dart';
 
 class AprilDashboardScreen extends StatelessWidget {
   const AprilDashboardScreen({super.key});
@@ -17,7 +18,7 @@ class AprilDashboardScreen extends StatelessWidget {
     return Consumer<AprilProvider>(
       builder: (context, provider, _) {
         return Scaffold(
-          backgroundColor: const Color(0xFFF8F9FE),
+          backgroundColor: IveTokens.bg,
           body: CustomScrollView(
             slivers: [
               // ──── MASTER HEADER (Sticky) ────
@@ -25,7 +26,7 @@ class AprilDashboardScreen extends StatelessWidget {
                 pinned: true,
                 expandedHeight: 140,
                 backgroundColor: Colors.white,
-                foregroundColor: const Color(0xFF1A1A1A),
+                foregroundColor: IveTokens.label,
                 elevation: 0,
                 actions: [
                   IconButton(
@@ -74,7 +75,7 @@ class AprilDashboardScreen extends StatelessWidget {
                                         child: const Text('Owner', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: kAprilColorDark)),
                                       ),
                                       const SizedBox(width: 6),
-                                      const Text('Personal Context', style: TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
+                                      const Text('Personal Context', style: TextStyle(fontSize: 12, color: IveTokens.labelSecondary)),
                                     ],
                                   ),
                                 ],
@@ -94,15 +95,15 @@ class AprilDashboardScreen extends StatelessWidget {
                                 style: TextStyle(
                                   fontSize: 13,
                                   color: provider.pendingActionCount > 0
-                                      ? const Color(0xFFEF4444)
-                                      : const Color(0xFF10B981),
+                                      ? IveTokens.danger
+                                      : IveTokens.success,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-                              const Text(' • ', style: TextStyle(color: Color(0xFF9CA3AF))),
+                              const Text(' • ', style: TextStyle(color: IveTokens.labelTertiary)),
                               Text(
                                 'Last sync: ${_timeAgo(provider.lastSync)}',
-                                style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280)),
+                                style: const TextStyle(fontSize: 13, color: IveTokens.labelSecondary),
                               ),
                             ],
                           ),
@@ -147,7 +148,7 @@ class AprilDashboardScreen extends StatelessWidget {
                           const SizedBox(height: 4),
                           const Text(
                             'Say "Add meeting with Alex tomorrow"',
-                            style: TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
+                            style: TextStyle(fontSize: 12, color: IveTokens.labelSecondary),
                           ),
                           const SizedBox(height: 16),
 
@@ -159,23 +160,23 @@ class AprilDashboardScreen extends StatelessWidget {
                             children: provider.voiceHistory.take(5).map((cmd) => Dismissible(
                               key: ValueKey(cmd.id),
                               onDismissed: (_) => provider.removeVoiceCommand(cmd.id),
-                              background: Container(color: const Color(0xFFEF4444)),
+                              background: Container(color: IveTokens.danger),
                               child: ListTile(
                                 dense: true,
                                 contentPadding: EdgeInsets.zero,
                                 leading: Icon(
                                   cmd.type == CommandType.voice ? Icons.mic : Icons.keyboard,
                                   size: 18,
-                                  color: cmd.successful ? kAprilSuccess : const Color(0xFFEF4444),
+                                  color: cmd.successful ? kAprilSuccess : IveTokens.danger,
                                 ),
                                 title: Text(cmd.text, style: const TextStyle(fontSize: 13)),
                                 subtitle: Text(
                                   cmd.result ?? '',
-                                  style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280)),
+                                  style: const TextStyle(fontSize: 11, color: IveTokens.labelSecondary),
                                 ),
                                 trailing: Text(
                                   _timeAgo(cmd.timestamp),
-                                  style: const TextStyle(fontSize: 10, color: Color(0xFF9CA3AF)),
+                                  style: const TextStyle(fontSize: 10, color: IveTokens.labelTertiary),
                                 ),
                               ),
                             )).toList(),
@@ -192,7 +193,7 @@ class AprilDashboardScreen extends StatelessWidget {
                           ? Container(
                               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                               decoration: BoxDecoration(
-                                color: const Color(0xFFEF4444),
+                                color: IveTokens.danger,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Text(
@@ -206,7 +207,7 @@ class AprilDashboardScreen extends StatelessWidget {
                           if (provider.notifications.isEmpty)
                             const Padding(
                               padding: EdgeInsets.symmetric(vertical: 16),
-                              child: Text('All caught up! ðŸŽ‰', style: TextStyle(color: Color(0xFF6B7280))),
+                              child: Text('All caught up! 🎉', style: TextStyle(color: IveTokens.labelSecondary)),
                             )
                           else
                             ...provider.notifications.map((n) => AprilNotificationCard(
@@ -291,14 +292,14 @@ class AprilDashboardScreen extends StatelessWidget {
                           TextField(
                             decoration: InputDecoration(
                               hintText: 'Type a command...',
-                              hintStyle: const TextStyle(fontSize: 14, color: Color(0xFF9CA3AF)),
-                              prefixIcon: const Icon(Icons.terminal, color: Color(0xFF9CA3AF)),
+                              hintStyle: const TextStyle(fontSize: 14, color: IveTokens.labelTertiary),
+                              prefixIcon: const Icon(Icons.terminal, color: IveTokens.labelTertiary),
                               suffixIcon: IconButton(
-                                icon: const Icon(Icons.help_outline, size: 20, color: Color(0xFF9CA3AF)),
+                                icon: const Icon(Icons.help_outline, size: 20, color: IveTokens.labelTertiary),
                                 onPressed: () {},
                               ),
                               filled: true,
-                              fillColor: const Color(0xFFF3F4F6),
+                              fillColor: IveTokens.surface,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
                                 borderSide: BorderSide.none,
@@ -335,19 +336,19 @@ class AprilDashboardScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(14),
-                        border: Border.all(color: const Color(0xFFE5E7EB)),
+                        border: Border.all(color: IveTokens.hairline),
                       ),
                       child: Column(
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text('APRIL v2.1.0', style: TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
+                              const Text('APRIL v2.1.0', style: TextStyle(fontSize: 12, color: IveTokens.labelSecondary)),
                               Row(
                                 children: [
-                                  Container(width: 6, height: 6, decoration: const BoxDecoration(color: Color(0xFF10B981), shape: BoxShape.circle)),
+                                  Container(width: 6, height: 6, decoration: const BoxDecoration(color: IveTokens.success, shape: BoxShape.circle)),
                                   const SizedBox(width: 4),
-                                  const Text('All systems synced', style: TextStyle(fontSize: 12, color: Color(0xFF10B981))),
+                                  const Text('All systems synced', style: TextStyle(fontSize: 12, color: IveTokens.success)),
                                 ],
                               ),
                             ],
@@ -356,12 +357,12 @@ class AprilDashboardScreen extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text('Storage: 124 MB / 1 GB', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                              const Text('Storage: 124 MB / 1 GB', style: TextStyle(fontSize: 11, color: IveTokens.labelTertiary)),
                               GestureDetector(
                                 onTap: () {},
                                 child: const Text(
                                   'ðŸ›‘ Emergency Stop',
-                                  style: TextStyle(fontSize: 11, color: Color(0xFFEF4444), fontWeight: FontWeight.w600),
+                                  style: TextStyle(fontSize: 11, color: IveTokens.danger, fontWeight: FontWeight.w600),
                                 ),
                               ),
                             ],

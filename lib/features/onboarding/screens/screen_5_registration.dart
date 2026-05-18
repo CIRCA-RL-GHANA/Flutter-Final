@@ -80,9 +80,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(reg.error ?? AppStrings.couldntSave),
-          backgroundColor: const Color(0xFFEF4444),
+          backgroundColor: IveTokens.danger,
           behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(borderRadius: IveTokens.brMd),
         ),
       );
     }
@@ -101,10 +101,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         return Theme(
           data: Theme.of(context).copyWith(
             colorScheme: const ColorScheme.light(
-              primary: const Color(0xFF22BDD8),
-              onPrimary: const Color(0xFF0E0E1A),
-              surface: const Color(0xFF0E0E1A),
-              onSurface: const Color(0xFFE8E8F0),
+              primary: IveTokens.accent,
+              onPrimary: IveTokens.surface,
+              surface: IveTokens.surface,
+              onSurface: IveTokens.label,
             ),
           ),
           child: child!,
@@ -120,7 +120,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF08080F),
+      backgroundColor: IveTokens.bg,
       body: SafeArea(
         child: Responsive.constrained(
           child: Column(
@@ -140,7 +140,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     AppStrings.completeLater,
                     style: TextStyle(
                       fontSize: 13,
-                      color: const Color(0xFF7A7A95),
+                      color: IveTokens.labelTertiary,
                     ),
                   ),
                 ),
@@ -171,7 +171,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 labelText: AppStrings.firstName,
                                 prefixIcon: const Icon(Icons.person_outline, size: 20),
                                 border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(6),
+                                  borderRadius: IveTokens.brXs,
                                 ),
                               ),
                             ),
@@ -185,7 +185,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 labelText: AppStrings.lastName,
                                 prefixIcon: const Icon(Icons.person_outline, size: 20),
                                 border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(6),
+                                  borderRadius: IveTokens.brXs,
                                 ),
                               ),
                             ),
@@ -194,7 +194,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               AppStrings.forIdentityVerification,
                               style: const TextStyle(
                                 fontSize: 12,
-                                color: const Color(0xFF7A7A95),
+                                color: IveTokens.labelTertiary,
                               ),
                             ),
 
@@ -215,7 +215,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 labelText: 'Email address',
                                 prefixIcon: const Icon(Icons.email_outlined, size: 20),
                                 border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(6),
+                                  borderRadius: IveTokens.brXs,
                                 ),
                               ),
                             ),
@@ -227,15 +227,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 vertical: 8,
                               ),
                               decoration: BoxDecoration(
-                                color: const Color(0xFF22BDD8).withValues(alpha: 0.1),
-                                borderRadius: BorderRadius.circular(8),
+                                color: IveTokens.accent.withValues(alpha: 0.1),
+                                borderRadius: IveTokens.brXs,
                               ),
                               child: Row(
                                 children: [
                                   Icon(
                                     Icons.star,
                                     size: 16,
-                                    color: const Color(0xFF22BDD8).withValues(alpha: 0.8),
+                                    color: IveTokens.accent.withValues(alpha: 0.8),
                                   ),
                                   const SizedBox(width: 8),
                                   const Text(
@@ -243,7 +243,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                     style: TextStyle(
                                       fontSize: 12,
                                       fontWeight: FontWeight.w500,
-                                      color: const Color(0xFF9A9AB2),
+                                      color: IveTokens.labelSecondary,
                                     ),
                                   ),
                                 ],
@@ -266,10 +266,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   vertical: 16,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: const Color(0xFF0E0E1A),
-                                  borderRadius: BorderRadius.circular(6),
+                                  color: IveTokens.surface,
+                                  borderRadius: IveTokens.brXs,
                                   border: Border.all(
-                                    color: const Color(0xFF1C1C2E),
+                                    color: IveTokens.hairline,
                                   ),
                                 ),
                                 child: Row(
@@ -277,7 +277,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                     const Icon(
                                       Icons.calendar_today_outlined,
                                       size: 20,
-                                      color: const Color(0xFF7A7A95),
+                                      color: IveTokens.labelTertiary,
                                     ),
                                     const SizedBox(width: 12),
                                     Text(
@@ -287,14 +287,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                       style: TextStyle(
                                         fontSize: 16,
                                         color: reg.dateOfBirth != null
-                                            ? const Color(0xFFE8E8F0)
-                                            : const Color(0xFF7A7A95),
+                                            ? IveTokens.label
+                                            : IveTokens.labelTertiary,
                                       ),
                                     ),
                                     const Spacer(),
                                     const Icon(
                                       Icons.keyboard_arrow_down,
-                                      color: const Color(0xFF7A7A95),
+                                      color: IveTokens.labelTertiary,
                                     ),
                                   ],
                                 ),
@@ -361,7 +361,7 @@ class _SectionLabel extends StatelessWidget {
           style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,
-            color: const Color(0xFFE8E8F0),
+            color: IveTokens.label,
           ),
         ),
         const SizedBox(height: 2),
@@ -369,7 +369,7 @@ class _SectionLabel extends StatelessWidget {
           hint,
           style: const TextStyle(
             fontSize: 12,
-            color: const Color(0xFF7A7A95),
+            color: IveTokens.labelTertiary,
           ),
         ),
       ],
@@ -399,23 +399,23 @@ class _PrivacyDashboard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFF0E0E1A),
-        borderRadius: BorderRadius.circular(6),
-        border: Border.all(color: const Color(0xFF1C1C2E)),
+        color: IveTokens.surface,
+        borderRadius: IveTokens.brXs,
+        border: Border.all(color: IveTokens.hairline),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              const Icon(Icons.shield_outlined, size: 20, color: const Color(0xFF22BDD8)),
+              const Icon(Icons.shield_outlined, size: 20, color: IveTokens.accent),
               const SizedBox(width: 8),
               const Text(
                 'Privacy Preferences',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
-                  color: const Color(0xFFE8E8F0),
+                  color: IveTokens.label,
                 ),
               ),
             ],
@@ -478,13 +478,13 @@ class _PrivacyToggle extends StatelessWidget {
             label,
             style: const TextStyle(
               fontSize: 14,
-              color: const Color(0xFF9A9AB2),
+              color: IveTokens.labelSecondary,
             ),
           ),
           Switch.adaptive(
             value: value,
             onChanged: onChanged,
-            activeColor: const Color(0xFF22BDD8),
+            activeColor: IveTokens.accent,
           ),
         ],
       ),
@@ -507,7 +507,7 @@ class _LegalLink extends StatelessWidget {
         label,
         style: const TextStyle(
           fontSize: 12,
-          color: const Color(0xFF22BDD8),
+          color: IveTokens.accent,
           decoration: TextDecoration.underline,
         ),
       ),

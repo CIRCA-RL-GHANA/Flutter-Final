@@ -194,10 +194,10 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: const Text(AppStrings.newCodeSent),
-          backgroundColor: const Color(0xFF10B981),
+          backgroundColor: IveTokens.success,
           behavior: SnackBarBehavior.floating,
           shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              RoundedRectangleBorder(borderRadius: IveTokens.brMd),
           margin: const EdgeInsets.all(16),
         ),
       );
@@ -209,7 +209,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
     final auth = context.watch<PhoneAuthProvider>();
 
     return Scaffold(
-      backgroundColor: const Color(0xFF08080F),
+      backgroundColor: IveTokens.bg,
       body: SafeArea(
         child: Responsive.constrained(
           child: Column(
@@ -235,8 +235,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                             vertical: 12,
                           ),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF0E0E1A),
-                            borderRadius: BorderRadius.circular(12),
+                            color: IveTokens.surface,
+                            borderRadius: IveTokens.brMd,
                           ),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
@@ -246,14 +246,14 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                                 style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
-                                  color: const Color(0xFFE8E8F0),
+                                  color: IveTokens.label,
                                 ),
                               ),
                               const SizedBox(width: 8),
                               const Icon(
                                 Icons.edit,
                                 size: 16,
-                                color: const Color(0xFF22BDD8),
+                                color: IveTokens.accent,
                               ),
                             ],
                           ),
@@ -265,7 +265,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                         AppStrings.enterOtpCode,
                         style: const TextStyle(
                           fontSize: 14,
-                          color: const Color(0xFF9A9AB2),
+                          color: IveTokens.labelSecondary,
                         ),
                       ),
 
@@ -319,7 +319,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                           auth.error!,
                           style: const TextStyle(
                             fontSize: 13,
-                            color: const Color(0xFFEF4444),
+                            color: IveTokens.danger,
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -332,7 +332,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                         const _SuccessIndicator()
                       else if (_isVerifying)
                         const CircularProgressIndicator(
-                          color: const Color(0xFF22BDD8),
+                          color: IveTokens.accent,
                         )
                       else ...[
                         // Timer display
@@ -349,10 +349,10 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                                     CircularProgressIndicator(
                                       value: _remainingSeconds / 299,
                                       strokeWidth: 3,
-                                      backgroundColor: const Color(0xFF0E0E1A),
+                                      backgroundColor: IveTokens.surface,
                                       valueColor:
                                           const AlwaysStoppedAnimation<Color>(
-                                        const Color(0xFF22BDD8),
+                                        IveTokens.accent,
                                       ),
                                     ),
                                     Text(
@@ -360,7 +360,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                                       style: const TextStyle(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w600,
-                                        color: const Color(0xFFE8E8F0),
+                                        color: IveTokens.label,
                                       ),
                                     ),
                                   ],
@@ -371,7 +371,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                                 '${AppStrings.resendCode} $_formattedTime',
                                 style: const TextStyle(
                                   fontSize: 13,
-                                  color: const Color(0xFF7A7A95),
+                                color: IveTokens.labelTertiary,
                                 ),
                               ),
                             ],
@@ -391,8 +391,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600,
                                 color: auth.resendAttemptsRemaining > 0
-                                    ? const Color(0xFF22BDD8)
-                                    : const Color(0xFF7A7A95),
+                                    ? IveTokens.accent
+                                    : IveTokens.labelTertiary,
                               ),
                             ),
                           ),
@@ -404,7 +404,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                           'Didn\'t receive a code?',
                           style: TextStyle(
                             fontSize: 14,
-                            color: const Color(0xFF9A9AB2),
+                            color: IveTokens.labelSecondary,
                           ),
                         ),
                         const SizedBox(height: 12),
@@ -459,18 +459,18 @@ class _OtpDigitField extends StatelessWidget {
       focusNode: FocusNode(),
       onKey: onKey,
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
+        duration: IveTokens.dFast,
         decoration: BoxDecoration(
           color: isSuccess
-              ? const Color(0xFF10B981).withValues(alpha: 0.1)
-              : const Color(0xFF0E0E1A),
-          borderRadius: BorderRadius.circular(12),
+              ? IveTokens.success.withValues(alpha: 0.1)
+              : IveTokens.surface,
+          borderRadius: IveTokens.brMd,
           border: Border.all(
             color: isSuccess
-                ? const Color(0xFF10B981)
+                ? IveTokens.success
                 : focusNode.hasFocus
-                    ? const Color(0xFF22BDD8)
-                    : const Color(0xFF1C1C2E),
+                    ? IveTokens.accent
+                    : IveTokens.hairline,
             width: focusNode.hasFocus || isSuccess ? 2 : 1,
           ),
         ),
@@ -484,7 +484,7 @@ class _OtpDigitField extends StatelessWidget {
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
-            color: isSuccess ? const Color(0xFF10B981) : const Color(0xFFE8E8F0),
+            color: isSuccess ? IveTokens.success : IveTokens.label,
           ),
           inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,
@@ -518,12 +518,12 @@ class _SuccessIndicator extends StatelessWidget {
                 width: 64,
                 height: 64,
                 decoration: const BoxDecoration(
-                  color: const Color(0xFF10B981),
+                  color: IveTokens.success,
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(
                   Icons.check,
-                  color: const Color(0xFF0E0E1A),
+                  color: IveTokens.surface,
                   size: 32,
                 ),
               ),
@@ -536,7 +536,7 @@ class _SuccessIndicator extends StatelessWidget {
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w600,
-            color: const Color(0xFF10B981),
+            color: IveTokens.success,
           ),
         ),
       ],
@@ -562,25 +562,25 @@ class _AlternativeMethodButton extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: const Color(0xFF1C1C2E)),
+          borderRadius: IveTokens.brMd,
+          border: Border.all(color: IveTokens.hairline),
         ),
         child: Row(
           children: [
-            Icon(icon, size: 20, color: const Color(0xFF9A9AB2)),
+            Icon(icon, size: 20, color: IveTokens.labelSecondary),
             const SizedBox(width: 12),
             Text(
               label,
               style: const TextStyle(
                 fontSize: 14,
-                color: const Color(0xFF9A9AB2),
+                color: IveTokens.labelSecondary,
               ),
             ),
             const Spacer(),
             const Icon(
               Icons.arrow_forward_ios,
               size: 14,
-              color: const Color(0xFF7A7A95),
+              color: IveTokens.labelTertiary,
             ),
           ],
         ),

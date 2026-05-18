@@ -72,8 +72,8 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
       builder: (context) => Container(
         padding: const EdgeInsets.all(24),
         decoration: const BoxDecoration(
-          color: const Color(0xFF0E0E1A),
-          borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+          color: IveTokens.surface,
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(IveTokens.rLg)),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -82,8 +82,8 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
               width: 40,
               height: 4,
               decoration: BoxDecoration(
-                color: const Color(0xFF1C1C2E),
-                borderRadius: BorderRadius.circular(2),
+                color: IveTokens.hairline,
+                borderRadius: IveTokens.brXs,
               ),
             ),
             const SizedBox(height: 24),
@@ -92,14 +92,14 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: const Color(0xFFE8E8F0),
+                color: IveTokens.label,
               ),
             ),
             const SizedBox(height: 24),
             _PhotoOptionTile(
               icon: Icons.camera_alt_outlined,
               label: AppStrings.takePhoto,
-              color: const Color(0xFF22BDD8),
+              color: IveTokens.accent,
               onTap: () {
                 Navigator.pop(context);
                 _pickPhoto('camera');
@@ -108,7 +108,7 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
             _PhotoOptionTile(
               icon: Icons.photo_library_outlined,
               label: AppStrings.chooseFromGallery,
-              color: const Color(0xFF10B981),
+              color: IveTokens.success,
               onTap: () {
                 Navigator.pop(context);
                 _pickPhoto('gallery');
@@ -117,7 +117,7 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
             _PhotoOptionTile(
               icon: Icons.auto_awesome,
               label: AppStrings.generateAiAvatar,
-              color: const Color(0xFF22BDD8),
+              color: IveTokens.accent,
               onTap: () {
                 Navigator.pop(context);
                 _generateAiAvatar();
@@ -126,7 +126,7 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
             _PhotoOptionTile(
               icon: Icons.skip_next_outlined,
               label: AppStrings.skipForNow,
-              color: const Color(0xFF7A7A95),
+              color: IveTokens.labelTertiary,
               onTap: () => Navigator.pop(context),
             ),
             const SizedBox(height: 16),
@@ -166,7 +166,7 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF08080F),
+      backgroundColor: IveTokens.bg,
       body: SafeArea(
         child: Responsive.constrained(
           child: Column(
@@ -201,11 +201,11 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                                       height: 120,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
-                                        color: const Color(0xFF0E0E1A),
+                                        color: IveTokens.surface,
                                         border: Border.all(
                                           color: profile.hasPhoto
-                                              ? const Color(0xFF22BDD8)
-                                              : const Color(0xFF1C1C2E),
+                                              ? IveTokens.accent
+                                              : IveTokens.hairline,
                                           width: 3,
                                         ),
                                         image: profile.hasPhoto
@@ -220,7 +220,7 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                                           ? const Icon(
                                               Icons.person,
                                               size: 48,
-                                              color: const Color(0xFF7A7A95),
+                                              color: IveTokens.labelTertiary,
                                             )
                                           : null,
                                     ),
@@ -228,12 +228,12 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                                       width: 36,
                                       height: 36,
                                       decoration: const BoxDecoration(
-                                        color: const Color(0xFF22BDD8),
+                                        color: IveTokens.accent,
                                         shape: BoxShape.circle,
                                       ),
                                       child: const Icon(
                                         Icons.add,
-                                        color: const Color(0xFF0E0E1A),
+                                        color: IveTokens.surface,
                                         size: 20,
                                       ),
                                     ),
@@ -247,24 +247,7 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                                   style: const TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w500,
-                                    color: const Color(0xFF22BDD8),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-
-                          const SizedBox(height: 32),
-
-                          // Section 2: Username
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: const Text(
-                              AppStrings.username,
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: const Color(0xFFE8E8F0),
+                                    color: IveTokens.accent,
                               ),
                             ),
                           ),
@@ -277,15 +260,15 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                               prefixStyle: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
-                                color: const Color(0xFF9A9AB2),
+                                color: IveTokens.labelSecondary,
                               ),
                               hintText: 'Choose a username',
                               suffixIcon: _buildUsernameSuffix(profile),
                               border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(6),
+                                borderRadius: IveTokens.brXs,
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(6),
+                                borderRadius: IveTokens.brXs,
                                 borderSide: BorderSide(
                                   color: _getUsernameBorderColor(
                                       profile.usernameStatus),
@@ -328,7 +311,7 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                                 'Suggestions:',
                                 style: TextStyle(
                                   fontSize: 12,
-                                  color: const Color(0xFF7A7A95),
+                                  color: IveTokens.labelTertiary,
                                 ),
                               ),
                             ),
@@ -349,10 +332,10 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                                     ),
                                     decoration: BoxDecoration(
                                       color:
-                                          const Color(0xFF22BDD8).withValues(alpha: 0.1),
-                                      borderRadius: BorderRadius.circular(6),
+                                          IveTokens.accent.withValues(alpha: 0.1),
+                                      borderRadius: IveTokens.brXs,
                                       border: Border.all(
-                                        color: const Color(0xFF22BDD8)
+                                        color: IveTokens.accent
                                             .withValues(alpha: 0.3),
                                       ),
                                     ),
@@ -360,7 +343,7 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                                       '@$suggestion',
                                       style: const TextStyle(
                                         fontSize: 13,
-                                        color: const Color(0xFF22BDD8),
+                                        color: IveTokens.accent,
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ),
@@ -376,8 +359,8 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                           Container(
                             padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
-                              color: const Color(0xFF0E0E1A),
-                              borderRadius: BorderRadius.circular(6),
+                              color: IveTokens.surface,
+                              borderRadius: IveTokens.brXs,
                             ),
                             child: Row(
                               children: [
@@ -397,7 +380,7 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                                         style: const TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600,
-                                          color: const Color(0xFFE8E8F0),
+                                          color: IveTokens.label,
                                         ),
                                       ),
                                       const SizedBox(height: 4),
@@ -405,7 +388,7 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                                         AppStrings.completeProfile,
                                         style: TextStyle(
                                           fontSize: 12,
-                                          color: const Color(0xFF7A7A95),
+                                          color: IveTokens.labelTertiary,
                                         ),
                                       ),
                                       const SizedBox(height: 8),
@@ -482,17 +465,17 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
       case UsernameStatus.available:
         return const Padding(
           padding: EdgeInsets.all(16),
-          child: Icon(Icons.check_circle, color: const Color(0xFF10B981), size: 20),
+          child: Icon(Icons.check_circle, color: IveTokens.success, size: 20),
         );
       case UsernameStatus.taken:
         return const Padding(
           padding: EdgeInsets.all(16),
-          child: Icon(Icons.cancel, color: const Color(0xFFEF4444), size: 20),
+          child: Icon(Icons.cancel, color: IveTokens.danger, size: 20),
         );
       case UsernameStatus.invalid:
         return const Padding(
           padding: EdgeInsets.all(16),
-          child: Icon(Icons.warning, color: const Color(0xFFF59E0B), size: 20),
+          child: Icon(Icons.warning, color: IveTokens.warning, size: 20),
         );
       default:
         return null;
@@ -502,28 +485,28 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
   Color _getUsernameBorderColor(UsernameStatus status) {
     switch (status) {
       case UsernameStatus.available:
-        return const Color(0xFF10B981);
+        return IveTokens.success;
       case UsernameStatus.taken:
-        return const Color(0xFFEF4444);
+        return IveTokens.danger;
       case UsernameStatus.invalid:
-        return const Color(0xFFF59E0B);
+        return IveTokens.warning;
       default:
-        return const Color(0xFF1C1C2E);
+        return IveTokens.hairline;
     }
   }
 
   Color _getUsernameColor(UsernameStatus status) {
     switch (status) {
       case UsernameStatus.available:
-        return const Color(0xFF10B981);
+        return IveTokens.success;
       case UsernameStatus.taken:
-        return const Color(0xFFEF4444);
+        return IveTokens.danger;
       case UsernameStatus.invalid:
-        return const Color(0xFFF59E0B);
+        return IveTokens.warning;
       case UsernameStatus.checking:
-        return const Color(0xFF7A7A95);
+        return IveTokens.labelTertiary;
       default:
-        return const Color(0xFF7A7A95);
+        return IveTokens.labelTertiary;
     }
   }
 
@@ -579,20 +562,7 @@ class _PhotoOptionTile extends StatelessWidget {
         height: 44,
         decoration: BoxDecoration(
           color: color.withValues(alpha: 0.1),
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Icon(icon, color: color),
-      ),
-      title: Text(
-        label,
-        style: const TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-      onTap: onTap,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          borderRadius: IveTokens.brMd,
     );
   }
 }
@@ -617,7 +587,7 @@ class _PointsRow extends StatelessWidget {
           Icon(
             points > 0 ? Icons.check_circle : Icons.circle_outlined,
             size: 12,
-            color: points > 0 ? const Color(0xFF10B981) : const Color(0xFF7A7A95),
+            color: points > 0 ? IveTokens.success : IveTokens.labelTertiary,
           ),
           const SizedBox(width: 6),
           Text(
@@ -625,8 +595,8 @@ class _PointsRow extends StatelessWidget {
             style: TextStyle(
               fontSize: 11,
               color: points > 0
-                  ? const Color(0xFF9A9AB2)
-                  : const Color(0xFF7A7A95),
+                  ? IveTokens.labelSecondary
+                  : IveTokens.labelTertiary,
             ),
           ),
         ],

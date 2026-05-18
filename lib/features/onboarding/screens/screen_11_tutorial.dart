@@ -37,35 +37,35 @@ class _TutorialScreenState extends State<TutorialScreen> {
       title: 'Your PROMPT Screen',
       description: 'This is your personalized dashboard. Tap any widget to interact with it.',
       icon: Icons.dashboard_customize_outlined,
-      color: const Color(0xFF22BDD8),
+      color: _kAccent,
       instruction: 'Tap to explore widgets',
     ),
     _TutorialStep(
       title: 'Widget Interactions',
       description: 'Swipe left/right to navigate. Long-press to customize. Tap to open.',
       icon: Icons.touch_app_outlined,
-      color: const Color(0xFF10B981),
+      color: IveTokens.success,
       instruction: 'Try swiping, tapping, and long-pressing',
     ),
     _TutorialStep(
       title: 'Your Role Features',
       description: 'Based on your selected role, you have unique features and widgets.',
       icon: Icons.person_outline,
-      color: const Color(0xFF22BDD8),
+      color: _kAccent,
       instruction: 'Explore your role-specific tools',
     ),
     _TutorialStep(
       title: 'Quick Actions',
       description: 'The most common tasks are just one tap away from your home screen.',
       icon: Icons.flash_on_outlined,
-      color: const Color(0xFFF59E0B),
+      color: IveTokens.warning,
       instruction: 'Try the quick action buttons',
     ),
     _TutorialStep(
       title: 'Get Help Anytime',
       description: 'Tap the help icon anywhere in the app to get instant assistance.',
       icon: Icons.help_outline,
-      color: const Color(0xFF22BDD8),
+      color: _kAccent,
       instruction: 'Look for the help icon',
     ),
   ];
@@ -95,7 +95,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF08080F),
+      backgroundColor: _kBg,
       body: SafeArea(
         child: Responsive.constrained(
           child: Column(
@@ -111,7 +111,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: const Color(0xFFE8E8F0),
+                        color: _kText,
                       ),
                     ),
                     TextButton(
@@ -120,7 +120,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
                         'Skip',
                         style: TextStyle(
                           fontSize: 14,
-                          color: const Color(0xFF7A7A95),
+                          color: _kTextMuted,
                         ),
                       ),
                     ),
@@ -162,7 +162,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
                       style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
-                        color: const Color(0xFF7A7A95),
+                        color: _kTextMuted,
                       ),
                     ),
                     const Spacer(),
@@ -262,7 +262,7 @@ class _TutorialStepView extends StatelessWidget {
             style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: const Color(0xFFE8E8F0),
+              color: _kText,
             ),
             textAlign: TextAlign.center,
           ),
@@ -274,7 +274,7 @@ class _TutorialStepView extends StatelessWidget {
             step.description,
             style: const TextStyle(
               fontSize: 16,
-              color: const Color(0xFF9A9AB2),
+              color: _kTextDim,
               height: 1.5,
             ),
             textAlign: TextAlign.center,
@@ -287,7 +287,7 @@ class _TutorialStepView extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
             decoration: BoxDecoration(
               color: step.color.withValues(alpha: 0.08),
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: IveTokens.brMd,
               border: Border.all(color: step.color.withValues(alpha: 0.2)),
             ),
             child: Row(

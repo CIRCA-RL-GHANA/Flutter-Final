@@ -36,7 +36,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
   void initState() {
     super.initState();
     _animController = AnimationController(
-      duration: const Duration(milliseconds: 800),
+      duration: IveTokens.dSlow,
       vsync: this,
     )..forward();
   }
@@ -66,7 +66,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
     final isMobile = Responsive.isMobile(context);
 
     return Scaffold(
-      backgroundColor: const Color(0xFF08080F),
+      backgroundColor: IveTokens.bg,
       body: SafeArea(
         child: Responsive.constrained(
           child: Column(
@@ -95,7 +95,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
                                 child: _RoleCategoryCard(
                                   title: AppStrings.individual,
                                   icon: Icons.person_outline,
-                                  color: const Color(0xFF22BDD8),
+                                  color: IveTokens.accent,
                                   features: role.getCategoryFeatures(
                                       RoleCategory.individual),
                                   isSelected: role.selectedCategory ==
@@ -111,7 +111,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
                                 child: _RoleCategoryCard(
                                   title: AppStrings.business,
                                   icon: Icons.business_outlined,
-                                  color: const Color(0xFF0891B2),
+                                  color: IveTokens.accentPressed,
                                   features: role.getCategoryFeatures(
                                       RoleCategory.business),
                                   isSelected: role.selectedCategory ==
@@ -135,7 +135,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
                                 style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
-                                  color: const Color(0xFFE8E8F0),
+                                  color: IveTokens.label,
                                 ),
                               ),
                             ),
@@ -156,10 +156,10 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
                           Container(
                             padding: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
-                              color: const Color(0xFF22BDD8).withValues(alpha: 0.08),
-                              borderRadius: BorderRadius.circular(12),
+                              color: IveTokens.accent.withValues(alpha: 0.08),
+                              borderRadius: IveTokens.brMd,
                               border: Border.all(
-                                color: const Color(0xFF22BDD8).withValues(alpha: 0.2),
+                                color: IveTokens.accent.withValues(alpha: 0.2),
                               ),
                             ),
                             child: Row(
@@ -167,7 +167,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
                                 Icon(
                                   Icons.info_outline,
                                   size: 18,
-                                  color: const Color(0xFF22BDD8),
+                                  color: IveTokens.accent,
                                 ),
                                 const SizedBox(width: 8),
                                 Expanded(
@@ -179,7 +179,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
                                             : 'You can change your role anytime in settings.',
                                     style: TextStyle(
                                       fontSize: 12,
-                                      color: const Color(0xFF22BDD8),
+                                      color: IveTokens.accent,
                                     ),
                                   ),
                                 ),
@@ -224,21 +224,21 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
         'Buyer',
         'Primary shopping & social',
         Icons.shopping_bag_outlined,
-        const Color(0xFF22BDD8),
+        IveTokens.accent,
       ),
       _SubRoleData(
         IndividualRole.deliveryPartner,
         'Delivery Partner',
         'Earn through deliveries',
         Icons.local_shipping_outlined,
-        const Color(0xFFF59E0B),
+        IveTokens.warning,
       ),
       _SubRoleData(
         IndividualRole.transportProvider,
         'Transport Provider',
         'Offer rides',
         Icons.directions_car_outlined,
-        const Color(0xFF22BDD8),
+        IveTokens.accent,
       ),
     ];
 
@@ -263,21 +263,21 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
         'Administrator',
         'Day-to-day management',
         Icons.manage_accounts_outlined,
-        const Color(0xFF10B981),
+        IveTokens.success,
       ),
       _SubRoleData(
         BusinessRole.branchManager,
         'Branch Manager',
         'Location-specific',
         Icons.store_outlined,
-        const Color(0xFFF59E0B),
+        IveTokens.warning,
       ),
       _SubRoleData(
         BusinessRole.staff,
         'Staff',
         'Limited permissions',
         Icons.badge_outlined,
-        const Color(0xFF9A9AB2),
+        IveTokens.labelSecondary,
       ),
     ];
 
@@ -327,13 +327,13 @@ class _RoleCategoryCard extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
+          duration: IveTokens.dFast,
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: isSelected ? color.withValues(alpha: 0.08) : const Color(0xFF0E0E1A),
-            borderRadius: BorderRadius.circular(6),
+            color: isSelected ? color.withValues(alpha: 0.08) : IveTokens.surface,
+            borderRadius: IveTokens.brXs,
             border: Border.all(
-              color: isSelected ? color : const Color(0xFF1C1C2E),
+              color: isSelected ? color : IveTokens.hairline,
               width: isSelected ? 2 : 1,
             ),
             boxShadow: isSelected
@@ -363,7 +363,7 @@ class _RoleCategoryCard extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: isSelected ? color : const Color(0xFFE8E8F0),
+                  color: isSelected ? color : IveTokens.label,
                 ),
               ),
               const SizedBox(height: 8),
@@ -376,7 +376,7 @@ class _RoleCategoryCard extends StatelessWidget {
                       Icon(
                         Icons.check,
                         size: 14,
-                        color: isSelected ? color : const Color(0xFF7A7A95),
+                        color: isSelected ? color : IveTokens.labelTertiary,
                       ),
                       const SizedBox(width: 4),
                       Flexible(
@@ -385,8 +385,8 @@ class _RoleCategoryCard extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 12,
                             color: isSelected
-                                ? const Color(0xFFE8E8F0)
-                                : const Color(0xFF9A9AB2),
+                                ? IveTokens.label
+                                : IveTokens.labelSecondary,
                           ),
                         ),
                       ),
@@ -399,15 +399,15 @@ class _RoleCategoryCard extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
-                  color: isSelected ? color : const Color(0xFF0E0E1A),
-                  borderRadius: BorderRadius.circular(6),
+                  color: isSelected ? color : IveTokens.surface,
+                  borderRadius: IveTokens.brXs,
                 ),
                 child: Text(
                   isSelected ? 'Selected' : 'Select',
                   style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
-                    color: isSelected ? Colors.white : const Color(0xFF9A9AB2),
+                    color: isSelected ? Colors.white : IveTokens.labelSecondary,
                   ),
                 ),
               ),
@@ -453,15 +453,15 @@ class _SubRoleCard extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
+          duration: IveTokens.dFast,
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
           decoration: BoxDecoration(
             color: isSelected
                 ? data.color.withValues(alpha: 0.06)
-                : const Color(0xFF0E0E1A),
-            borderRadius: BorderRadius.circular(14),
+                : IveTokens.surface,
+            borderRadius: IveTokens.brMd,
             border: Border.all(
-              color: isSelected ? data.color : const Color(0xFF1C1C2E),
+              color: isSelected ? data.color : IveTokens.hairline,
               width: isSelected ? 2 : 1,
             ),
           ),
@@ -488,7 +488,7 @@ class _SubRoleCard extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                         color: isSelected
                             ? data.color
-                            : const Color(0xFFE8E8F0),
+                            : IveTokens.label,
                       ),
                     ),
                     const SizedBox(height: 2),
@@ -496,7 +496,7 @@ class _SubRoleCard extends StatelessWidget {
                       data.description,
                       style: const TextStyle(
                         fontSize: 12,
-                        color: const Color(0xFF7A7A95),
+                        color: IveTokens.labelTertiary,
                       ),
                     ),
                   ],
@@ -506,7 +506,7 @@ class _SubRoleCard extends StatelessWidget {
                 isSelected
                     ? Icons.radio_button_checked
                     : Icons.radio_button_unchecked,
-                color: isSelected ? data.color : const Color(0xFF7A7A95),
+                color: isSelected ? data.color : IveTokens.labelTertiary,
                 size: 22,
               ),
             ],

@@ -10,6 +10,7 @@ import '../../../core/widgets/ai_insight_card.dart';
 import '../models/alerts_models.dart';
 import '../providers/alerts_provider.dart';
 import '../widgets/alerts_widgets.dart';
+import '../../../core/design/ive_tokens.dart';
 
 class AlertsDashboardScreen extends StatelessWidget {
   const AlertsDashboardScreen({super.key});
@@ -19,7 +20,7 @@ class AlertsDashboardScreen extends StatelessWidget {
     return Consumer<AlertsProvider>(
       builder: (context, provider, _) {
         return Scaffold(
-          backgroundColor: const Color(0xFFF8F9FE),
+          backgroundColor: IveTokens.bg,
           appBar: AlertsAppBar(
             title: 'Alerts',
             actions: [
@@ -161,14 +162,14 @@ class AlertsDashboardScreen extends StatelessWidget {
                         children: [
                           Row(
                             children: const [
-                              Icon(Icons.auto_awesome, size: 13, color: Color(0xFF8B5CF6)),
+                              Icon(Icons.auto_awesome, size: 13, color: IveTokens.moduleUpdates),
                               SizedBox(width: 5),
                               Text(
                                 'AI Risk Intelligence',
                                 style: TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600,
-                                  color: Color(0xFF8B5CF6),
+                                  color: IveTokens.moduleUpdates,
                                 ),
                               ),
                             ],
@@ -188,18 +189,18 @@ class AlertsDashboardScreen extends StatelessWidget {
                   children: [
                     Text(
                       '${provider.filteredAlerts.length} alert${provider.filteredAlerts.length == 1 ? '' : 's'}',
-                      style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: Color(0xFF1A1A1A)),
+                      style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: IveTokens.label),
                     ),
                     const Spacer(),
                     GestureDetector(
                       onTap: provider.refreshSync,
                       child: Row(
                         children: [
-                          const Icon(Icons.sync, size: 14, color: Color(0xFF9CA3AF)),
+                          const Icon(Icons.sync, size: 14, color: IveTokens.labelTertiary),
                           const SizedBox(width: 4),
                           Text(
                             'Updated ${_timeAgo(provider.lastSync)}',
-                            style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF)),
+                            style: const TextStyle(fontSize: 11, color: IveTokens.labelTertiary),
                           ),
                         ],
                       ),
@@ -255,7 +256,7 @@ class AlertsDashboardScreen extends StatelessWidget {
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
                                   decoration: BoxDecoration(
-                                    color: const Color(0xFF8B5CF6),
+                                    color: IveTokens.moduleUpdates,
                                     borderRadius: BorderRadius.circular(6),
                                   ),
                                   child: const Row(
@@ -327,7 +328,7 @@ class _SegmentedTabBar extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       padding: const EdgeInsets.all(3),
       decoration: BoxDecoration(
-        color: const Color(0xFFF3F4F6),
+        color: IveTokens.surface,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
@@ -350,7 +351,7 @@ class _SegmentedTabBar extends StatelessWidget {
             label: 'All',
             count: totalCount,
             isSelected: selected == AlertDashboardTab.all,
-            color: const Color(0xFF6B7280),
+            color: IveTokens.labelSecondary,
             onTap: () => onChanged(AlertDashboardTab.all),
           ),
         ],
@@ -397,7 +398,7 @@ class _TabSegment extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 13,
                   fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
-                  color: isSelected ? const Color(0xFF1A1A1A) : const Color(0xFF6B7280),
+                  color: isSelected ? IveTokens.label : IveTokens.labelSecondary,
                 ),
               ),
               const SizedBox(width: 4),
@@ -412,7 +413,7 @@ class _TabSegment extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 11,
                     fontWeight: FontWeight.w700,
-                    color: isSelected ? color : const Color(0xFF9CA3AF),
+                    color: isSelected ? color : IveTokens.labelTertiary,
                   ),
                 ),
               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../core/design/ive_tokens.dart';
 import '../core/services/enterprise_service.dart';
 
 /// Pathway 1 — Embeddable Q-Points payment button.
@@ -88,7 +89,7 @@ class _GeniePaymentButtonState extends State<GeniePaymentButton> {
               : const Icon(Icons.currency_exchange_rounded, size: 18),
           label: Text(widget.label),
           style: FilledButton.styleFrom(
-            backgroundColor: widget.color ?? const Color(0xFF6C3CE1),
+            backgroundColor: widget.color ?? IveTokens.accent,
             padding: const EdgeInsets.symmetric(vertical: 14),
             textStyle: theme.textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w700),
           ),
@@ -100,8 +101,8 @@ class _GeniePaymentButtonState extends State<GeniePaymentButton> {
             textAlign: TextAlign.center,
             style: theme.textTheme.bodySmall?.copyWith(
               color: _result!.startsWith('Paid')
-                  ? Colors.green.shade700
-                  : Colors.red.shade700,
+                  ? IveTokens.success
+                  : IveTokens.danger,
             ),
           ),
         ],

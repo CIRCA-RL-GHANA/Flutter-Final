@@ -37,6 +37,7 @@ import '../../features/utility/providers/utility_provider.dart';
 import '../../features/setup_dashboard/providers/setup_dashboard_provider.dart';
 import '../theme/app_colors.dart';
 import '../routes/app_routes.dart';
+import '../design/ive_tokens.dart';
 
 class PromptScreen extends StatefulWidget {
   const PromptScreen({super.key});
@@ -98,7 +99,7 @@ class _PromptScreenState extends State<PromptScreen> {
     ).toList();
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.dark.copyWith(
+      value: SystemUiOverlayStyle.light.copyWith(
         statusBarColor: Colors.transparent,
       ),
       child: Scaffold(
@@ -282,7 +283,7 @@ class _PromptScreenState extends State<PromptScreen> {
     showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(IveTokens.rLg)),
       ),
       builder: (ctx) => SafeArea(
         child: Column(
@@ -347,7 +348,7 @@ class _PromptScreenState extends State<PromptScreen> {
       context: context,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(IveTokens.rLg)),
       ),
       builder: (ctx) => const ContextSwitcherSheet(),
     );
@@ -361,7 +362,7 @@ class _PromptScreenState extends State<PromptScreen> {
       context: context,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(IveTokens.rLg)),
       ),
       builder: (ctx) => DraggableScrollableSheet(
         initialChildSize: 0.5,
@@ -490,7 +491,7 @@ class _PromptScreenState extends State<PromptScreen> {
       case SearchResultType.transaction:
         return AppColors.warning;
       case SearchResultType.message:
-        return const Color(0xFF8B5CF6);
+        return IveTokens.moduleUpdates;
       case SearchResultType.alert:
         return AppColors.error;
     }
@@ -505,7 +506,7 @@ class _PromptScreenState extends State<PromptScreen> {
       context: context,
       barrierDismissible: false,
       builder: (ctx) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        shape: RoundedRectangleBorder(borderRadius: IveTokens.brLg),
         title: Row(
           children: [
             Icon(Icons.sos, color: AppColors.error, size: 24),
@@ -556,7 +557,7 @@ class _AddEntityFAB extends StatelessWidget {
       backgroundColor: AppColors.primary,
       foregroundColor: Colors.white,
       elevation: 4,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      shape: RoundedRectangleBorder(borderRadius: IveTokens.brLg),
     );
   }
 }

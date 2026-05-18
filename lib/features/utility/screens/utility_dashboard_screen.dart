@@ -317,15 +317,15 @@ class _ActivityItem extends StatelessWidget {
   Color _categoryColor(ActivityCategory cat) {
     switch (cat) {
       case ActivityCategory.security:
-        return const Color(0xFF10B981);
+        return IveTokens.success;
       case ActivityCategory.data:
-        return const Color(0xFF8B5CF6);
+        return IveTokens.moduleUpdates;
       case ActivityCategory.system:
-        return const Color(0xFF3B82F6);
+        return IveTokens.moduleMarket;
       case ActivityCategory.user:
-        return const Color(0xFF6366F1);
+        return IveTokens.moduleSetup;
       case ActivityCategory.notification:
-        return const Color(0xFFF59E0B);
+        return IveTokens.warning;
     }
   }
 }

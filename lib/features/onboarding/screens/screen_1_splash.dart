@@ -20,10 +20,10 @@ class SplashScreen extends StatefulWidget {
 }
 
 // ── OS palette (independent of consumer theme) ───────────────────────────────
-const Color _kBg       = Color(0xFF08080F); // near-black with blue tint
-const Color _kGrid     = Color(0xFF0E0E1A); // subtle grid lines
-const Color _kAccent   = Color(0xFF22BDD8); // electric blue — system authority
-const Color _kAccentDim = Color(0xFF1E2A6E);
+const Color _kBg       = IveTokens.bg;       // near-black with blue tint
+const Color _kGrid     = IveTokens.surface;   // subtle grid lines
+const Color _kAccent   = IveTokens.accent;    // electric blue — system authority
+const Color _kAccentDim = Color(0xFF1E2A6E);  // dark navy — no IveToken equivalent
 
 class _SplashScreenState extends State<SplashScreen>
     with TickerProviderStateMixin {
@@ -305,7 +305,7 @@ class _SegmentedBar extends StatelessWidget {
         final filled = (i + 1) / segments <= progress + 0.001;
         return Expanded(
           child: AnimatedContainer(
-            duration: const Duration(milliseconds: 300),
+            duration: IveTokens.dFast,
             height: 2,
             margin: EdgeInsets.only(right: i < segments - 1 ? 3 : 0),
             decoration: BoxDecoration(

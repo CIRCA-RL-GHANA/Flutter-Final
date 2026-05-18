@@ -197,7 +197,7 @@ class _RoleBadge extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.12),
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: IveTokens.brSm,
       ),
       child: Text(
         _label,
@@ -258,7 +258,7 @@ class _SwitchContextButton extends StatelessWidget {
           height: 36,
           decoration: BoxDecoration(
             color: AppColors.inputFill,
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: IveTokens.brSm,
           ),
           child: const Icon(
             Icons.sync,
@@ -326,7 +326,7 @@ class _ZapActionMenu extends StatelessWidget {
         height: 36,
         decoration: BoxDecoration(
           color: AppColors.inputFill,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: IveTokens.brSm,
         ),
         child: const Icon(
           Icons.electric_bolt,
@@ -334,7 +334,7 @@ class _ZapActionMenu extends StatelessWidget {
           color: AppColors.accent,
         ),
       ),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      shape: RoundedRectangleBorder(borderRadius: IveTokens.brLg),
       offset: const Offset(0, 44),
       onSelected: (value) {
         // Navigate to selected module
@@ -393,7 +393,7 @@ class _NotificationBell extends StatelessWidget {
                 height: 36,
                 decoration: BoxDecoration(
                   color: AppColors.inputFill,
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: IveTokens.brSm,
                 ),
                 child: const Icon(
                   Icons.notifications_outlined,
@@ -412,7 +412,7 @@ class _NotificationBell extends StatelessWidget {
                     ),
                     decoration: BoxDecoration(
                       color: AppColors.error,
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: IveTokens.brPill,
                       border: Border.all(color: IveTokens.bg, width: 1.5),
                     ),
                     child: Text(
@@ -453,7 +453,7 @@ class _EmergencySOS extends StatelessWidget {
           height: 36,
           decoration: BoxDecoration(
             color: AppColors.error,
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: IveTokens.brSm,
           ),
           child: const Icon(
             Icons.sos,
@@ -481,7 +481,7 @@ class _GlobalSearchBar extends StatelessWidget {
       height: 44,
       decoration: BoxDecoration(
         color: AppColors.inputFill,
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: IveTokens.brMd,
       ),
       child: Row(
         children: [
@@ -520,7 +520,7 @@ class _GlobalSearchBar extends StatelessWidget {
                 height: 36,
                 decoration: BoxDecoration(
                   color: AppColors.primaryLight.withValues(alpha: 0.08),
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: IveTokens.brSm,
                 ),
                 child: Icon(
                   Icons.mic,
@@ -552,7 +552,7 @@ class ContextSwitcherSheet extends StatelessWidget {
       padding: const EdgeInsets.all(24),
       decoration: const BoxDecoration(
         color: IveTokens.surface,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(IveTokens.rLg)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -602,7 +602,7 @@ class ContextSwitcherSheet extends StatelessWidget {
                     color: isActive
                         ? AppColors.primaryLight.withValues(alpha: 0.08)
                         : AppColors.inputFill,
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: IveTokens.brLg,
                     border: isActive
                         ? Border.all(color: AppColors.primaryLight, width: 1.5)
                         : null,
@@ -663,7 +663,7 @@ class ContextSwitcherSheet extends StatelessWidget {
               style: OutlinedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 14),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(14),
+                  borderRadius: IveTokens.brMd,
                 ),
                 side: BorderSide(color: AppColors.primaryLight.withValues(alpha: 0.3)),
               ),

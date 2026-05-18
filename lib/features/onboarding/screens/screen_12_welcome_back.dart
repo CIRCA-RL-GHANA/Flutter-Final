@@ -100,7 +100,7 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
 
     return Scaffold(
       body: Container(
-        color: const Color(0xFF08080F),
+        color: _kBg,
         child: SafeArea(
           child: Responsive.constrained(
             child: Column(
@@ -116,13 +116,13 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
                         width: 44,
                         height: 44,
                         decoration: BoxDecoration(
-                          color: const Color(0xFF0E0E1A).withValues(alpha: 0.1),
-                          borderRadius: BorderRadius.circular(12),
+                          color: _kSurface,
+                          borderRadius: IveTokens.brMd,
                         ),
                         child: const Icon(
                           Icons.arrow_back_ios_new,
                           size: 18,
-                          color: const Color(0xFF0E0E1A),
+                          color: _kText,
                         ),
                       ),
                     ),
@@ -161,7 +161,7 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
                             style: const TextStyle(
                               fontSize: 28,
                               fontWeight: FontWeight.bold,
-                              color: const Color(0xFF0E0E1A),
+                              color: _kText,
                             ),
                             textAlign: TextAlign.center,
                           ),
@@ -178,7 +178,7 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
                             name,
                             style: TextStyle(
                               fontSize: 20,
-                              color: const Color(0xFF22BDD8).withValues(alpha: 0.9),
+                              color: _kAccent.withValues(alpha: 0.9),
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -196,9 +196,9 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
                               width: double.infinity,
                               padding: const EdgeInsets.all(20),
                               decoration: BoxDecoration(
-                                color: const Color(0xFF0E0E1A).withValues(alpha: 0.1),
-                                borderRadius: BorderRadius.circular(6),
-                                border: Border.all(color: const Color(0xFF1C1C2E)),
+                                color: _kSurface,
+                                borderRadius: IveTokens.brXs,
+                                border: Border.all(color: _kBorder),
                               ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -208,7 +208,7 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
                                     style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
-                                      color: const Color(0xFF0E0E1A),
+                                      color: _kText,
                                     ),
                                   ),
                                   const SizedBox(height: 12),
@@ -241,9 +241,9 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
                             width: double.infinity,
                             padding: const EdgeInsets.all(20),
                             decoration: BoxDecoration(
-                              color: const Color(0xFF0E0E1A).withValues(alpha: 0.08),
-                              borderRadius: BorderRadius.circular(6),
-                              border: Border.all(color: const Color(0xFF0E0E1A)),
+                              color: _kSurface,
+                              borderRadius: IveTokens.brXs,
+                              border: Border.all(color: _kBorder),
                             ),
                             child: Column(
                               children: [
@@ -252,7 +252,7 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600,
-                                    color: const Color(0xFF0E0E1A),
+                                    color: _kText,
                                   ),
                                 ),
                                 const SizedBox(height: 16),
@@ -373,17 +373,17 @@ class _NewFeatureItem extends StatelessWidget {
             width: 32,
             height: 32,
             decoration: BoxDecoration(
-              color: const Color(0xFF22BDD8).withValues(alpha: 0.2),
+              color: _kAccent.withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(icon, size: 16, color: const Color(0xFF22BDD8)),
+            child: Icon(icon, size: 16, color: _kAccent),
           ),
           const SizedBox(width: 12),
           Text(
             text,
             style: TextStyle(
               fontSize: 14,
-              color: const Color(0xFF0E0E1A).withValues(alpha: 0.8),
+              color: _kTextDim,
             ),
           ),
         ],
@@ -407,7 +407,7 @@ class _StatItem extends StatelessWidget {
           style: const TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
-            color: const Color(0xFF22BDD8),
+            color: _kAccent,
           ),
         ),
         const SizedBox(height: 4),
@@ -415,7 +415,7 @@ class _StatItem extends StatelessWidget {
           label,
           style: TextStyle(
             fontSize: 12,
-            color: const Color(0xFF0E0E1A).withValues(alpha: 0.6),
+            color: _kTextMuted,
           ),
         ),
       ],
@@ -441,19 +441,19 @@ class _QuickActionBtn extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 16),
         decoration: BoxDecoration(
-          color: const Color(0xFF0E0E1A).withValues(alpha: 0.08),
-          borderRadius: BorderRadius.circular(6),
-          border: Border.all(color: const Color(0xFF1C1C2E)),
+          color: _kSurface,
+          borderRadius: IveTokens.brXs,
+          border: Border.all(color: _kBorder),
         ),
         child: Column(
           children: [
-            Icon(icon, size: 28, color: const Color(0xFF9A9AB2)),
+            Icon(icon, size: 28, color: _kTextDim),
             const SizedBox(height: 8),
             Text(
               label,
               style: TextStyle(
                 fontSize: 12,
-                color: const Color(0xFF0E0E1A).withValues(alpha: 0.7),
+                color: _kTextDim,
                 height: 1.3,
               ),
               textAlign: TextAlign.center,

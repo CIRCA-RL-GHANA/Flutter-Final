@@ -74,7 +74,7 @@ class _PermissionsScreenState extends State<PermissionsScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF08080F),
+      backgroundColor: IveTokens.bg,
       body: SafeArea(
         child: Responsive.constrained(
           child: Consumer<PermissionProvider>(
@@ -90,7 +90,7 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                 });
                 return const Center(
                   child: CircularProgressIndicator(
-                    color: const Color(0xFF22BDD8),
+                    color: IveTokens.accent,
                   ),
                 );
               }
@@ -111,13 +111,13 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                                 width: 44,
                                 height: 44,
                                 decoration: BoxDecoration(
-                                  color: const Color(0xFF0E0E1A),
-                                  borderRadius: BorderRadius.circular(12),
+                                  color: IveTokens.surface,
+                                  borderRadius: IveTokens.brMd,
                                 ),
                                 child: const Icon(
                                   Icons.arrow_back_ios_new,
                                   size: 18,
-                                  color: const Color(0xFFE8E8F0),
+                                  color: IveTokens.label,
                                 ),
                               ),
                             ),
@@ -126,7 +126,7 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                               style: const TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,
-                                color: const Color(0xFF7A7A95),
+                                color: IveTokens.labelTertiary,
                               ),
                             ),
                             TextButton(
@@ -142,7 +142,7 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                                 'Skip All',
                                 style: TextStyle(
                                   fontSize: 13,
-                                  color: const Color(0xFF7A7A95),
+                                  color: IveTokens.labelTertiary,
                                 ),
                               ),
                             ),
@@ -155,10 +155,10 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                           borderRadius: BorderRadius.circular(4),
                           child: LinearProgressIndicator(
                             value: permProvider.progress,
-                            backgroundColor: const Color(0xFF0E0E1A),
+                            backgroundColor: IveTokens.surface,
                             valueColor:
                                 const AlwaysStoppedAnimation<Color>(
-                                    const Color(0xFF22BDD8)),
+                                    IveTokens.accent),
                             minHeight: 4,
                           ),
                         ),
@@ -217,13 +217,13 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                                 height: 120,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: const Color(0xFF22BDD8)
-                                      .withValues(alpha: 0.08),
+                                color: IveTokens.accent
+                                    .withValues(alpha: 0.08),
                                 ),
                                 child: Icon(
                                   _getPermissionIconData(currentPerm),
                                   size: 56,
-                                  color: const Color(0xFF22BDD8),
+                                  color: IveTokens.accent,
                                 ),
                               ),
 
@@ -236,7 +236,7 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                                 style: const TextStyle(
                                   fontSize: 24,
                                   fontWeight: FontWeight.bold,
-                                  color: const Color(0xFFE8E8F0),
+                                  color: IveTokens.label,
                                 ),
                               ),
 
@@ -248,7 +248,7 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                                     .getBenefitText(currentPerm),
                                 style: const TextStyle(
                                   fontSize: 16,
-                                  color: const Color(0xFF9A9AB2),
+                                  color: IveTokens.labelSecondary,
                                   height: 1.5,
                                 ),
                                 textAlign: TextAlign.center,
@@ -261,8 +261,8 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                                 width: double.infinity,
                                 height: 160,
                                 decoration: BoxDecoration(
-                                  color: const Color(0xFF0E0E1A),
-                                  borderRadius: BorderRadius.circular(6),
+                                  color: IveTokens.surface,
+                                  borderRadius: IveTokens.brXs,
                                 ),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -270,15 +270,14 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                                     Icon(
                                       _getPermissionIconData(currentPerm),
                                       size: 40,
-                                      color:
-                                          const Color(0xFF7A7A95).withValues(alpha: 0.5),
+                                      color: IveTokens.labelTertiary.withValues(alpha: 0.5),
                                     ),
                                     const SizedBox(height: 8),
                                     Text(
                                       'Feature Preview',
                                       style: TextStyle(
                                         fontSize: 12,
-                                        color: const Color(0xFF7A7A95),
+                                        color: IveTokens.labelTertiary,
                                       ),
                                     ),
                                   ],
@@ -313,7 +312,7 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                           AppStrings.enableLater,
                           style: const TextStyle(
                             fontSize: 12,
-                            color: const Color(0xFF7A7A95),
+                            color: IveTokens.labelTertiary,
                           ),
                         ),
                       ],
@@ -353,11 +352,11 @@ class _PermissionsScreenState extends State<PermissionsScreen>
   Color _getGroupColor(PermissionGroup group) {
     switch (group) {
       case PermissionGroup.essential:
-        return const Color(0xFF22BDD8);
+        return IveTokens.accent;
       case PermissionGroup.enhanced:
-        return const Color(0xFF10B981);
+        return IveTokens.success;
       case PermissionGroup.premium:
-        return const Color(0xFF22BDD8);
+        return IveTokens.accent;
     }
   }
 

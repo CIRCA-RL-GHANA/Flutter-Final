@@ -155,9 +155,9 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        backgroundColor: const Color(0xFFEF4444),
+        backgroundColor: IveTokens.danger,
         behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        shape: RoundedRectangleBorder(borderRadius: IveTokens.brMd),
         margin: const EdgeInsets.all(16),
       ),
     );
@@ -188,7 +188,7 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
     final isLoading = context.watch<PhoneAuthProvider>().isLoading;
 
     return Scaffold(
-      backgroundColor: const Color(0xFF08080F),
+      backgroundColor: IveTokens.bg,
       body: SafeArea(
         child: Responsive.constrained(
           child: Column(
@@ -218,9 +218,9 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
                             vertical: 14,
                           ),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF0E0E1A),
-                            borderRadius: BorderRadius.circular(6),
-                            border: Border.all(color: const Color(0xFF1C1C2E)),
+                            color: IveTokens.surface,
+                            borderRadius: IveTokens.brXs,
+                            border: Border.all(color: IveTokens.hairline),
                           ),
                           child: Row(
                             children: [
@@ -235,7 +235,7 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
                                   style: const TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500,
-                                    color: const Color(0xFFE8E8F0),
+                                    color: IveTokens.label,
                                   ),
                                 ),
                               ),
@@ -244,13 +244,13 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
                                 style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
-                                  color: const Color(0xFF9A9AB2),
+                                  color: IveTokens.labelSecondary,
                                 ),
                               ),
                               const SizedBox(width: 8),
                               const Icon(
                                 Icons.keyboard_arrow_down,
-                                color: const Color(0xFF7A7A95),
+                                color: IveTokens.labelTertiary,
                               ),
                             ],
                           ),
@@ -262,7 +262,7 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
                       // Phone input field
                       Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6),
+                          borderRadius: IveTokens.brXs,
                           border: Border.all(
                             color: _getBorderColor(),
                             width: _validationState == _ValidationState.empty
@@ -279,10 +279,10 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
                                 vertical: 18,
                               ),
                               decoration: BoxDecoration(
-                                color: const Color(0xFF0E0E1A),
+                                color: IveTokens.surface,
                                 borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(16),
-                                  bottomLeft: Radius.circular(16),
+                                  topLeft: Radius.circular(IveTokens.rXs),
+                                  bottomLeft: Radius.circular(IveTokens.rXs),
                                 ),
                               ),
                               child: Text(
@@ -290,7 +290,7 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
                                 style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
-                                  color: const Color(0xFFE8E8F0),
+                                  color: IveTokens.label,
                                 ),
                               ),
                             ),
@@ -341,7 +341,7 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
                             AppStrings.invalidNumber,
                             style: const TextStyle(
                               fontSize: 12,
-                              color: const Color(0xFFEF4444),
+                              color: IveTokens.danger,
                             ),
                           ),
                         ),
@@ -360,8 +360,8 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
                                 decoration: BoxDecoration(
                                   color: _validationState ==
                                           _ValidationState.valid
-                                      ? const Color(0xFF10B981).withValues(alpha: 0.1)
-                                      : const Color(0xFF22BDD8)
+                                      ? IveTokens.success.withValues(alpha: 0.1)
+                                      : IveTokens.accent
                                           .withValues(alpha: 0.05),
                                   shape: BoxShape.circle,
                                 ),
@@ -370,8 +370,8 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
                                   size: 80,
                                   color: _validationState ==
                                           _ValidationState.valid
-                                      ? const Color(0xFF10B981).withValues(alpha: 0.5)
-                                      : const Color(0xFF22BDD8)
+                                      ? IveTokens.success.withValues(alpha: 0.5)
+                                      : IveTokens.accent
                                           .withValues(alpha: 0.2),
                                 ),
                               );
@@ -383,7 +383,7 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
                       if (_showEmailSuggestion)
                         AnimatedOpacity(
                           opacity: _showEmailSuggestion ? 1.0 : 0.0,
-                          duration: const Duration(milliseconds: 300),
+                          duration: IveTokens.dFast,
                           child: Padding(
                             padding: const EdgeInsets.only(top: 16),
                             child: SecondaryButton(
@@ -424,13 +424,13 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
   Color _getBorderColor() {
     switch (_validationState) {
       case _ValidationState.empty:
-        return const Color(0xFF1C1C2E);
+        return IveTokens.hairline;
       case _ValidationState.typing:
-        return const Color(0xFF22BDD8);
+        return IveTokens.accent;
       case _ValidationState.valid:
-        return const Color(0xFF10B981);
+        return IveTokens.success;
       case _ValidationState.invalid:
-        return const Color(0xFFEF4444);
+        return IveTokens.danger;
     }
   }
 

@@ -6,6 +6,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../../core/design/ive_tokens.dart';
 import '../../../core/theme/app_colors.dart';
 import '../models/rbac_models.dart';
 import '../providers/prompt_provider.dart';
@@ -47,19 +48,19 @@ class _ModuleWidgetCardState extends State<ModuleWidgetCard>
   void initState() {
     super.initState();
     _entranceController = AnimationController(
-      duration: const Duration(milliseconds: 500),
+      duration: IveTokens.dBase,
       vsync: this,
     );
 
     _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _entranceController, curve: Curves.easeOut),
+      CurvedAnimation(parent: _entranceController, curve: IveTokens.enter),
     );
 
     _slideAnimation = Tween<Offset>(
       begin: const Offset(0, 0.05),
       end: Offset.zero,
     ).animate(
-      CurvedAnimation(parent: _entranceController, curve: Curves.easeOutCubic),
+      CurvedAnimation(parent: _entranceController, curve: IveTokens.emphasized),
     );
 
     // Staggered entrance: 50ms delay per widget index
@@ -106,7 +107,7 @@ class _ModuleWidgetCardState extends State<ModuleWidgetCard>
                   },
             child: AnimatedScale(
               scale: _scale,
-              duration: const Duration(milliseconds: 100),
+              duration: IveTokens.dMicro,
               child: _buildCardContent(info),
             ),
           ),
@@ -155,19 +156,19 @@ class _NormalCard extends StatelessWidget {
       opacity: isViewOnly ? 0.4 : 1.0,
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
+          color: IveTokens.surface,
+          borderRadius: IveTokens.brLg,
           border: Border.all(color: info.color.withValues(alpha: 0.12), width: 1),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.04),
+              color: Colors.black.withValues(alpha: 0.12),
               blurRadius: 12,
               offset: const Offset(0, 4),
             ),
           ],
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: IveTokens.brLg,
           child: Stack(
             children: [
               child,
@@ -179,7 +180,7 @@ class _NormalCard extends StatelessWidget {
                       child: const Center(
                         child: Icon(
                           Icons.lock_outline,
-                          color: Colors.black45,
+                          color: Colors.white38,
                           size: 28,
                         ),
                       ),
@@ -228,11 +229,11 @@ class _LoadingCardState extends State<_LoadingCard>
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
+        color: IveTokens.surface,
+        borderRadius: IveTokens.brLg,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.04),
+            color: Colors.black.withValues(alpha: 0.12),
             blurRadius: 12,
             offset: const Offset(0, 4),
           ),
@@ -269,7 +270,7 @@ class _LoadingCardState extends State<_LoadingCard>
       width: width,
       height: height,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: IveTokens.brXs,
         gradient: LinearGradient(
           begin: Alignment(-1.0 + 2.0 * _shimmerController.value, 0),
           end: Alignment(-1.0 + 2.0 * _shimmerController.value + 1, 0),
@@ -297,12 +298,12 @@ class _ErrorCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
+        color: IveTokens.surface,
+        borderRadius: IveTokens.brLg,
         border: Border.all(color: AppColors.error.withValues(alpha: 0.4), width: 1.5),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.04),
+            color: Colors.black.withValues(alpha: 0.12),
             blurRadius: 12,
             offset: const Offset(0, 4),
           ),
@@ -353,12 +354,12 @@ class _EmptyCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
+        color: IveTokens.surface,
+        borderRadius: IveTokens.brLg,
         border: Border.all(color: AppColors.inputBorder),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.02),
+            color: Colors.black.withValues(alpha: 0.12),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -417,8 +418,8 @@ class _DisabledCard extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: Colors.grey.shade100,
-            borderRadius: BorderRadius.circular(20),
+            color: IveTokens.surface,
+            borderRadius: IveTokens.brLg,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

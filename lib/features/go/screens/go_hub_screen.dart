@@ -8,6 +8,7 @@ import '../models/go_models.dart';
 import '../providers/go_provider.dart';
 import '../widgets/go_widgets.dart';
 import '../../../core/routes/app_routes.dart';
+import '../../../core/design/ive_tokens.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 
 class GoHubScreen extends StatefulWidget {
@@ -27,7 +28,7 @@ class _GoHubScreenState extends State<GoHubScreen> {
       builder: (context, provider, _) {
         final ctx = provider.activeContext;
         return Scaffold(
-          backgroundColor: const Color(0xFFF8F9FE),
+          backgroundColor: IveTokens.bg,
           body: SafeArea(
             child: Column(
               children: [
@@ -113,9 +114,9 @@ class _GoHubScreenState extends State<GoHubScreen> {
               padding: const EdgeInsets.all(14),
               child: Row(
                 children: [
-                  const Text('TOTAL NET WORTH', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF9CA3AF), letterSpacing: 0.8)),
+                  const Text('TOTAL NET WORTH', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: IveTokens.labelTertiary, letterSpacing: 0.8)),
                   const Spacer(),
-                  Icon(_pulseExpanded ? Icons.expand_less : Icons.expand_more, size: 20, color: const Color(0xFF9CA3AF)),
+                  Icon(_pulseExpanded ? Icons.expand_less : Icons.expand_more, size: 20, color: IveTokens.labelTertiary),
                 ],
               ),
             ),
@@ -145,7 +146,7 @@ class _GoHubScreenState extends State<GoHubScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('LIQUIDITY BREAKDOWN', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: Color(0xFF9CA3AF), letterSpacing: 0.8)),
+                  const Text('LIQUIDITY BREAKDOWN', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: IveTokens.labelTertiary, letterSpacing: 0.8)),
                   const SizedBox(height: 10),
                   Row(
                     children: [
@@ -157,7 +158,7 @@ class _GoHubScreenState extends State<GoHubScreen> {
                     ],
                   ),
                   const SizedBox(height: 14),
-                  const Text('GATEWAY STATUS', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: Color(0xFF9CA3AF), letterSpacing: 0.8)),
+                  const Text('GATEWAY STATUS', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: IveTokens.labelTertiary, letterSpacing: 0.8)),
                   const SizedBox(height: 6),
                   ...provider.gateways.map((gw) => GatewayStatusRow(gateway: gw)),
                 ],
@@ -199,7 +200,7 @@ class _GoHubScreenState extends State<GoHubScreen> {
           Row(
             children: [
               Expanded(child: _RateColumn(title: 'BUY RATES', gateways: live, isBuy: true)),
-              Container(width: 1, height: 80, color: const Color(0xFFE5E7EB)),
+              Container(width: 1, height: 80, color: IveTokens.hairline),
               Expanded(child: _RateColumn(title: 'SELL RATES', gateways: live, isBuy: false)),
             ],
           ),
@@ -208,9 +209,9 @@ class _GoHubScreenState extends State<GoHubScreen> {
             children: [
               const Icon(Icons.notifications_outlined, size: 16, color: kGoColor),
               const SizedBox(width: 6),
-              Text('${provider.rateAlerts.length} rate alerts active', style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
+              Text('${provider.rateAlerts.length} rate alerts active', style: const TextStyle(fontSize: 12, color: IveTokens.labelSecondary)),
               const Spacer(),
-              const Text('Auto-refresh: 15s', style: TextStyle(fontSize: 10, color: Color(0xFF9CA3AF))),
+              const Text('Auto-refresh: 15s', style: TextStyle(fontSize: 10, color: IveTokens.labelTertiary)),
             ],
           ),
         ],
@@ -227,17 +228,17 @@ class _GoHubScreenState extends State<GoHubScreen> {
           const _PartyNode(label: 'YOU', sublabel: 'John', color: kGoColor),
           Column(
             children: [
-              const Icon(Icons.arrow_forward, size: 16, color: Color(0xFF9CA3AF)),
-              Container(width: 40, height: 1, color: const Color(0xFFE5E7EB)),
-              const Text('Fee: 0.85 QP', style: TextStyle(fontSize: 8, color: Color(0xFF9CA3AF))),
+              const Icon(Icons.arrow_forward, size: 16, color: IveTokens.labelTertiary),
+              Container(width: 40, height: 1, color: IveTokens.hairline),
+              const Text('Fee: 0.85 QP', style: TextStyle(fontSize: 8, color: IveTokens.labelTertiary)),
             ],
           ),
           const _PartyNode(label: 'G/W', sublabel: 'Payst', color: kGoInfo),
           Column(
             children: [
-              const Icon(Icons.arrow_forward, size: 16, color: Color(0xFF9CA3AF)),
-              Container(width: 40, height: 1, color: const Color(0xFFE5E7EB)),
-              const Text('Instant', style: TextStyle(fontSize: 8, color: Color(0xFF9CA3AF))),
+              const Icon(Icons.arrow_forward, size: 16, color: IveTokens.labelTertiary),
+              Container(width: 40, height: 1, color: IveTokens.hairline),
+              const Text('Instant', style: TextStyle(fontSize: 8, color: IveTokens.labelTertiary)),
             ],
           ),
           const _PartyNode(label: 'SYS Q', sublabel: 'WALLET', color: kGoPurple),
@@ -263,12 +264,12 @@ class _GoHubScreenState extends State<GoHubScreen> {
                   padding: const EdgeInsets.only(bottom: 4),
                   child: Row(
                     children: [
-                      Expanded(child: Text(m.metricLabel, style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280)))),
+                      Expanded(child: Text(m.metricLabel, style: const TextStyle(fontSize: 11, color: IveTokens.labelSecondary))),
                       SizedBox(
                         width: 50,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(3),
-                          child: LinearProgressIndicator(value: m.score / 100, minHeight: 4, backgroundColor: const Color(0xFFF3F4F6), valueColor: AlwaysStoppedAnimation(m.score >= 70 ? kGoPositive : m.score >= 50 ? kGoWarning : kGoNegative)),
+                          child: LinearProgressIndicator(value: m.score / 100, minHeight: 4, backgroundColor: IveTokens.surface, valueColor: AlwaysStoppedAnimation(m.score >= 70 ? kGoPositive : m.score >= 50 ? kGoWarning : kGoNegative)),
                         ),
                       ),
                       const SizedBox(width: 4),
@@ -306,10 +307,10 @@ class _GoHubScreenState extends State<GoHubScreen> {
                     decoration: BoxDecoration(
                       color: isActive ? kGoColor : Colors.white,
                       borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: isActive ? kGoColor : const Color(0xFFE5E7EB)),
+                      border: Border.all(color: isActive ? kGoColor : IveTokens.hairline),
                     ),
                     alignment: Alignment.center,
-                    child: Text(tab.name[0].toUpperCase() + tab.name.substring(1), style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: isActive ? Colors.white : const Color(0xFF6B7280))),
+                    child: Text(tab.name[0].toUpperCase() + tab.name.substring(1), style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: isActive ? IveTokens.label : IveTokens.labelSecondary)),
                   ),
                 ),
               );
@@ -334,7 +335,7 @@ class _GoHubScreenState extends State<GoHubScreen> {
                 Icon(ev.icon, size: 16, color: ev.color),
                 const SizedBox(width: 10),
                 Expanded(child: Text(ev.title, style: const TextStyle(fontSize: 13))),
-                if (ev.amount != null) Text('${ev.amount!.toStringAsFixed(0)} QP', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Color(0xFF6B7280))),
+                if (ev.amount != null) Text('${ev.amount!.toStringAsFixed(0)} QP', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: IveTokens.labelSecondary)),
               ],
             ),
           )),
@@ -420,7 +421,7 @@ class _GoHubScreenState extends State<GoHubScreen> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(child: Container(width: 40, height: 4, margin: const EdgeInsets.only(bottom: 16), decoration: BoxDecoration(color: const Color(0xFFE5E7EB), borderRadius: BorderRadius.circular(2)))),
+            Center(child: Container(width: 40, height: 4, margin: const EdgeInsets.only(bottom: 16), decoration: BoxDecoration(color: IveTokens.hairline, borderRadius: BorderRadius.circular(2)))),
             const Text('Rate Alert', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
             const SizedBox(height: 12),
             TextField(
@@ -429,7 +430,7 @@ class _GoHubScreenState extends State<GoHubScreen> {
                 labelText: 'Alert me when rate hits',
                 suffixText: 'QP/GHS',
                 filled: true,
-                fillColor: const Color(0xFFF3F4F6),
+                fillColor: IveTokens.surface,
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
               ),
             ),
@@ -463,12 +464,12 @@ class _ContextBar extends StatelessWidget {
     return Container(
       height: 48,
       padding: const EdgeInsets.symmetric(horizontal: 12),
-      decoration: const BoxDecoration(color: Colors.white, border: Border(bottom: BorderSide(color: Color(0xFF1C1C2E)))),
+      decoration: const BoxDecoration(color: IveTokens.surface, border: Border(bottom: BorderSide(color: IveTokens.hairline))),
       child: Row(
         children: [
           GestureDetector(
             onTap: () => Navigator.pop(context),
-            child: const Icon(Icons.arrow_back, size: 20, color: Color(0xFF1A1A1A)),
+            child: const Icon(Icons.arrow_back, size: 20, color: IveTokens.label),
           ),
           const SizedBox(width: 8),
           if (ctx != null) GoContextChip(context: ctx!, onTap: () => Navigator.pushReplacementNamed(context, '/go/context')),
@@ -477,20 +478,20 @@ class _ContextBar extends StatelessWidget {
             onTap: () {},
             child: Row(
               children: [
-                const Icon(Icons.calendar_today, size: 14, color: Color(0xFF9CA3AF)),
+                const Icon(Icons.calendar_today, size: 14, color: IveTokens.labelTertiary),
                 const SizedBox(width: 4),
-                Text(provider.financialPeriod, style: const TextStyle(fontSize: 10, color: Color(0xFF6B7280))),
+                Text(provider.financialPeriod, style: const TextStyle(fontSize: 10, color: IveTokens.labelSecondary)),
               ],
             ),
           ),
           const SizedBox(width: 12),
           SizedBox(
             width: 20, height: 20,
-            child: CircularProgressIndicator(value: provider.syncProgress, strokeWidth: 2.5, backgroundColor: const Color(0xFFF3F4F6), valueColor: const AlwaysStoppedAnimation(kGoColor)),
+            child: CircularProgressIndicator(value: provider.syncProgress, strokeWidth: 2.5, backgroundColor: IveTokens.surface, valueColor: const AlwaysStoppedAnimation(kGoColor)),
           ),
           const SizedBox(width: 8),
           PopupMenuButton<String>(
-            icon: const Icon(Icons.more_vert, size: 20, color: Color(0xFF6B7280)),
+            icon: const Icon(Icons.more_vert, size: 20, color: IveTokens.labelSecondary),
             itemBuilder: (_) => [
               const PopupMenuItem(value: 'reports', child: Text('Reports')),
               const PopupMenuItem(value: 'security', child: Text('Security')),
@@ -536,7 +537,7 @@ class _LiquidityBox extends StatelessWidget {
             Text(label, style: TextStyle(fontSize: 10, color: color, fontWeight: FontWeight.w600)),
             const SizedBox(height: 4),
             Text('${value.toStringAsFixed(0)}', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
-            const Text('QP', style: TextStyle(fontSize: 10, color: Color(0xFF9CA3AF))),
+            const Text('QP', style: TextStyle(fontSize: 10, color: IveTokens.labelTertiary)),
             const SizedBox(height: 4),
             Text('${pct.toStringAsFixed(1)}%', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: color)),
           ],
@@ -563,7 +564,7 @@ class _RateColumn extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: Color(0xFF9CA3AF), letterSpacing: 0.5)),
+          Text(title, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: IveTokens.labelTertiary, letterSpacing: 0.5)),
           const SizedBox(height: 6),
           ...gateways.map((gw) => Padding(
             padding: const EdgeInsets.only(bottom: 4),
@@ -571,7 +572,7 @@ class _RateColumn extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(gw.name, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600)),
-                Text('1 QP = ${(isBuy ? gw.buyRate : gw.sellRate).toStringAsFixed(3)} GHS', style: const TextStyle(fontSize: 10, color: Color(0xFF6B7280))),
+                Text('1 QP = ${(isBuy ? gw.buyRate : gw.sellRate).toStringAsFixed(3)} GHS', style: const TextStyle(fontSize: 10, color: IveTokens.labelSecondary)),
               ],
             ),
           )),
@@ -600,7 +601,7 @@ class _PartyNode extends StatelessWidget {
       child: Column(
         children: [
           Text(label, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: color)),
-          Text(sublabel, style: const TextStyle(fontSize: 8, color: Color(0xFF9CA3AF))),
+          Text(sublabel, style: const TextStyle(fontSize: 8, color: IveTokens.labelTertiary)),
         ],
       ),
     );
@@ -627,7 +628,7 @@ class _FavAvatar extends StatelessWidget {
             CircleAvatar(radius: 24, backgroundColor: kGoColorLight, child: Text(entity.name[0], style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: kGoColorDark))),
             const SizedBox(height: 4),
             Text(entity.name.split(' ').first, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500), overflow: TextOverflow.ellipsis),
-            Text(entity.role, style: const TextStyle(fontSize: 9, color: Color(0xFF9CA3AF))),
+            Text(entity.role, style: const TextStyle(fontSize: 9, color: IveTokens.labelTertiary)),
           ],
         ),
       ),
@@ -647,10 +648,10 @@ class _AddFavAvatar extends StatelessWidget {
         padding: const EdgeInsets.only(right: 14),
         child: Column(
           children: [
-            CircleAvatar(radius: 24, backgroundColor: const Color(0xFFF3F4F6), child: const Icon(Icons.add, size: 20, color: Color(0xFF9CA3AF))),
+            CircleAvatar(radius: 24, backgroundColor: IveTokens.surface, child: const Icon(Icons.add, size: 20, color: IveTokens.labelTertiary)),
             const SizedBox(height: 4),
             const Text('+Add', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w500)),
-            const Text('New', style: TextStyle(fontSize: 9, color: Color(0xFF9CA3AF))),
+            const Text('New', style: TextStyle(fontSize: 9, color: IveTokens.labelTertiary)),
           ],
         ),
       ),

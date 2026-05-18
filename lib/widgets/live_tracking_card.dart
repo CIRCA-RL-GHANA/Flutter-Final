@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import '../core/design/ive_tokens.dart';
+import '../core/design/ive_tokens.dart';
 
 /// Pathway 2 — Live delivery tracking card.
 ///
@@ -97,7 +99,8 @@ class _LiveTrackingCardState extends State<LiveTrackingCard>
 
     return Card(
       elevation: 4,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      color: IveTokens.surface,
+      shape: RoundedRectangleBorder(borderRadius: IveTokens.brLg),
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -115,10 +118,10 @@ class _LiveTrackingCardState extends State<LiveTrackingCard>
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: isDelivered
-                          ? Colors.green
+                          ? IveTokens.success
                           : Color.lerp(
-                              const Color(0xFF6C3CE1),
-                              const Color(0xFFB39DDB),
+                              IveTokens.moduleLive,
+                              IveTokens.moduleLive.withValues(alpha: 0.5),
                               _pulseCtrl.value,
                             ),
                     ),
@@ -138,7 +141,7 @@ class _LiveTrackingCardState extends State<LiveTrackingCard>
                       _etaMinutes > 0 ? 'ETA ~$_etaMinutes min' : 'Arriving now',
                       style: const TextStyle(fontSize: 12, color: Colors.white),
                     ),
-                    backgroundColor: const Color(0xFF6C3CE1),
+                    backgroundColor: IveTokens.moduleLive,
                     padding: EdgeInsets.zero,
                     visualDensity: VisualDensity.compact,
                   ),
@@ -149,12 +152,12 @@ class _LiveTrackingCardState extends State<LiveTrackingCard>
 
             // ── Progress bar ───────────────────────────────────────────────
             ClipRRect(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: IveTokens.brXs,
               child: LinearProgressIndicator(
                 value: _progressFraction,
                 minHeight: 8,
-                backgroundColor: Colors.grey.shade200,
-                color: isDelivered ? Colors.green : const Color(0xFF6C3CE1),
+                backgroundColor: IveTokens.hairline,
+                color: isDelivered ? IveTokens.success : IveTokens.moduleLive,
               ),
             ),
 
@@ -170,13 +173,13 @@ class _LiveTrackingCardState extends State<LiveTrackingCard>
               children: [
                 CircleAvatar(
                   radius: 20,
-                  backgroundColor: const Color(0xFFEDE7F6),
+                  backgroundColor: IveTokens.surfaceRaised,
                   child: Text(
                     widget.driverName.isNotEmpty
                         ? widget.driverName[0].toUpperCase()
                         : 'D',
                     style: const TextStyle(
-                      color: Color(0xFF6C3CE1),
+                      color: IveTokens.moduleLive,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
@@ -194,14 +197,14 @@ class _LiveTrackingCardState extends State<LiveTrackingCard>
                       Text(
                         widget.vehicleDescription!,
                         style: theme.textTheme.bodySmall
-                            ?.copyWith(color: Colors.grey.shade600),
+                            ?.copyWith(color: IveTokens.labelTertiary),
                       ),
                   ],
                 ),
                 const Spacer(),
                 IconButton(
-                  icon: const Icon(Icons.phone_rounded,
-                      color: Color(0xFF6C3CE1)),
+                  icon: Icon(Icons.phone_rounded,
+                      color: IveTokens.moduleLive),
                   tooltip: 'Call driver',
                   onPressed: () {
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -242,20 +245,20 @@ class _StepRow extends StatelessWidget {
           Icon(
             step.icon,
             size: 18,
-            color: active ? const Color(0xFF6C3CE1) : Colors.grey.shade400,
+            color: active ? IveTokens.moduleLive : IveTokens.hairline,
           ),
           const SizedBox(width: 10),
           Text(
             step.label,
             style: TextStyle(
               fontSize: 13,
-              color: active ? Colors.black87 : Colors.grey.shade500,
+              color: active ? IveTokens.label : IveTokens.labelTertiary,
               fontWeight: active ? FontWeight.w600 : FontWeight.normal,
             ),
           ),
           if (active) ...[
             const SizedBox(width: 6),
-            const Icon(Icons.check_circle, size: 14, color: Color(0xFF6C3CE1)),
+            const Icon(Icons.check_circle, size: 14, color: IveTokens.moduleLive),
           ],
         ],
       ),
