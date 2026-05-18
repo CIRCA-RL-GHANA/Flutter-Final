@@ -28,11 +28,3 @@ void pwaVibrate(List<int> pattern) {
 void pwaPlayEarcon(String role) {
   // intentionally empty
 }
-
-/// Web earcon hook. Intentionally a no-op to keep the web build
-/// independent of `dart:web_audio` (removed from the Dart SDK).
-/// Role-distinct feedback is delivered via [pwaVibrate]; audible earcons
-/// can be reintroduced later via `package:web` + `dart:js_interop`.
-void pwaPlayEarcon(String role) {
-  // intentionally empty
-}
