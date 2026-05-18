@@ -53,7 +53,7 @@ class LiveTransportDriverHomeScreen extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Hey, ${driver.name.split(' ').first}! '🚗',  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: Colors.white)),
+                                Text('Hey, ${driver.name.split(' ').first}! 🚗', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: Colors.white)),
                                 Text('Transport Driver', style: TextStyle(fontSize: 12, color: Colors.white.withValues(alpha: 0.8))),
                               ],
                             ),
@@ -298,7 +298,7 @@ class _ActiveRideCard extends StatelessWidget {
               children: [
                 Text('â‚µ${ride.fare.toStringAsFixed(0)}', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: Colors.white)),
                 const Spacer(),
-                const Text('TAP TO CONTINUE '🚗',  style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white70)),
+                const Text('TAP TO CONTINUE 🚗', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white70)),
               ],
             ),
           ],

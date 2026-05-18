@@ -4,14 +4,12 @@
 /// `dart:web_audio` is no longer part of the Dart SDK).
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
-import 'dart:js_util' as js_util;
 
 /// Triggers navigator.vibrate() with a role-distinct pattern.
 /// Silently no-ops on browsers that do not support the Vibration API.
 void pwaVibrate(List<int> pattern) {
   try {
-    final nav = html.window.navigator;
-    js_util.callMethod(nav, 'vibrate', [pattern]);
+    html.window.navigator.vibrate(pattern);
   } catch (_) {
     // Vibration API unsupported – silently ignored.
   }
