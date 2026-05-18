@@ -6,7 +6,7 @@
 //
 // Coverage: every ISO 3166-1 alpha-2 entry that has an E.164
 // calling code — sovereign states plus officially-listed
-// dependent territories. 247 entries total, alphabetised by
+// dependent territories. 249 entries total, alphabetised by
 // English short name.
 //
 // Flag rendering: we deliberately do NOT use Unicode regional

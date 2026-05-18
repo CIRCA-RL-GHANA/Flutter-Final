@@ -14,7 +14,7 @@ import '../widgets/buttons.dart';
 import '../widgets/onboarding_header.dart';
 
 
-// OS palette ï¿½ mirrors splash / welcome
+// OS palette — mirrors splash / welcome
 const Color _kBg        = IveTokens.bg;
 const Color _kSurface   = IveTokens.surface;
 const Color _kBorder    = IveTokens.hairline;
@@ -124,12 +124,12 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
     if (!mounted) return;
 
     if (result == NumberCheckResult.existingUser) {
-      // Existing user â†’ welcome back flow
+      // Existing user → welcome back flow
       onboarding.setReturningUser(true);
       Navigator.of(context).pushNamed(AppRoutes.welcomeBack);
     } else if (result == NumberCheckResult.newUser ||
         result == NumberCheckResult.valid) {
-      // New user â†’ send OTP
+      // New user → send OTP
       await phoneAuth.sendOtp();
       if (!mounted) return;
 
@@ -210,9 +210,13 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
                       const SizedBox(height: 16),
 
                       // Country selector
-                      GestureDetector(
-                        onTap: _showCountryPicker,
-                        child: Container(
+                      Semantics(
+                        label:
+                            '${_selectedCountry.name} ${_selectedCountry.dialCode}. Tap to select country.',
+                        button: true,
+                        child: GestureDetector(
+                          onTap: _showCountryPicker,
+                          child: Container(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 16,
                             vertical: 14,
@@ -254,6 +258,7 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
                               ),
                             ],
                           ),
+                        ),
                         ),
                       ),
 
@@ -609,19 +614,25 @@ class _CountryPickerSheetState extends State<_CountryPickerSheet> {
     }
 
     // Search mode: rank exact code/iso matches first, then name matches.
+    // qFolded strips diacritics so "cote" finds "Côte d'Ivoire",
+    // "reunion" finds "Réunion", "curacao" finds "Curaçao", etc.
     final qNoPlus = q.startsWith('+') ? q.substring(1) : q;
+    final qFolded = _foldForSearch(q);
     final exactCode = <Country>[];
     final startsWith = <Country>[];
     final contains = <Country>[];
     for (final c in widget.countries) {
       final name = c.name.toLowerCase();
+      final nameFolded = _foldForSearch(c.name);
       final iso = c.iso.toLowerCase();
       final code = c.dialCode.replaceFirst('+', '');
       if (code == qNoPlus || iso == q) {
         exactCode.add(c);
-      } else if (name.startsWith(q) || code.startsWith(qNoPlus)) {
+      } else if (name.startsWith(q) || nameFolded.startsWith(qFolded) ||
+          code.startsWith(qNoPlus)) {
         startsWith.add(c);
-      } else if (name.contains(q) || iso.contains(q)) {
+      } else if (name.contains(q) || nameFolded.contains(qFolded) ||
+          iso.contains(q)) {
         contains.add(c);
       }
     }
@@ -658,6 +669,30 @@ class _CountryPickerSheetState extends State<_CountryPickerSheet> {
       }
     }
     return '#';
+  }
+
+  /// Strip diacritics and normalize to ASCII for fuzzy search matching.
+  /// Ensures "cote" finds "Côte d'Ivoire", "reunion" finds "Réunion",
+  /// "curacao" finds "Curaçao", "sao tome" finds "São Tomé and Príncipe",
+  /// etc. Input is lowercased before substitution.
+  static String _foldForSearch(String s) {
+    const subs = <String, String>{
+      'à': 'a', 'á': 'a', 'â': 'a', 'ã': 'a', 'ä': 'a', 'å': 'a',
+      'ç': 'c',
+      'è': 'e', 'é': 'e', 'ê': 'e', 'ë': 'e',
+      'ì': 'i', 'í': 'i', 'î': 'i', 'ï': 'i',
+      'ñ': 'n',
+      'ò': 'o', 'ó': 'o', 'ô': 'o', 'õ': 'o', 'ö': 'o', 'ø': 'o',
+      'ś': 's', 'š': 's',
+      'ù': 'u', 'ú': 'u', 'û': 'u', 'ü': 'u',
+      'ý': 'y',
+      'ž': 'z',
+    };
+    final buf = StringBuffer();
+    for (final ch in s.toLowerCase().split('')) {
+      buf.write(subs[ch] ?? ch);
+    }
+    return buf.toString();
   }
 
   @override
