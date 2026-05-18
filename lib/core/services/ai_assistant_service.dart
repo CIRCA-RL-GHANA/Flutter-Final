@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'ai_service.dart';
-import '../network/api_response.dart';
 
 /// Message in a conversation thread.
 class AiChatMessage {
