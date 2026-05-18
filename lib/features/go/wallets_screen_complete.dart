@@ -135,6 +135,11 @@ class WalletsProvider extends ChangeNotifier {
     }
   }
 
+  void selectWallet(String id) {
+    selectedWalletId = id;
+    notifyListeners();
+  }
+
   Wallet? get selectedWallet {
     if (selectedWalletId == null) return null;
     return wallets.firstWhere(
@@ -373,8 +378,7 @@ class _WalletsScreenState extends State<WalletsScreen> {
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
         ),
         onTap: () {
-          provider.selectedWalletId = wallet.id;
-          provider.notifyListeners();
+          provider.selectWallet(wallet.id);
         },
       ),
     );
