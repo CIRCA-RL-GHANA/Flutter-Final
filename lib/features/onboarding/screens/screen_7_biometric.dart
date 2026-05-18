@@ -12,7 +12,7 @@ import '../widgets/buttons.dart';
 import '../widgets/onboarding_header.dart';
 
 
-// OS palette ï¿½ mirrors splash / welcome
+// OS palette — mirrors splash / welcome
 const Color _kBg        = IveTokens.bg;
 const Color _kSurface   = IveTokens.surface;
 const Color _kBorder    = IveTokens.hairline;

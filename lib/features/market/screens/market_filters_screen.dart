@@ -1,4 +1,4 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// MARKET MODULE — Screen 1.2: Advanced Filters
 /// Bottom-sheet style screen with price range, delivery options,
 /// dietary preferences, merchant attributes, sort, save filter sets
@@ -400,34 +400,34 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
   String _dietaryLabel(DietaryPreference d) {
     switch (d) {
       case DietaryPreference.vegetarian:
-        return 'Vegetarian';
+        return '🥬';
       case DietaryPreference.vegan:
-        return 'Vegan';
+        return '🌱';
       case DietaryPreference.glutenFree:
-        return 'Gluten-free';
+        return '🌾';
       case DietaryPreference.halal:
-        return 'Halal';
+        return '🕌';
       case DietaryPreference.kosher:
-        return 'Kosher';
+        return '✡';
       case DietaryPreference.organic:
-        return 'Organic';
+        return '🌿';
     }
   }
 
   String _dietaryEmoji(DietaryPreference d) {
     switch (d) {
       case DietaryPreference.vegetarian:
-        return 'ðŸ¥¬';
+        return '🥬';
       case DietaryPreference.vegan:
-        return 'ðŸŒ±';
+        return '🌱';
       case DietaryPreference.glutenFree:
-        return 'ðŸŒ¾';
+        return '🌾';
       case DietaryPreference.halal:
-        return 'â˜ª';
+        return '🕌';
       case DietaryPreference.kosher:
-        return 'âœ¡';
+        return '✡';
       case DietaryPreference.organic:
-        return 'ðŸŒ¿';
+        return '🌿';
     }
   }
 

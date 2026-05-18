@@ -1,4 +1,4 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// GenieInlineCard – Rich Module Cards Rendered Inside the Chat Thread
 ///
 /// Each card type renders a functional micro-widget. Cards reuse module
@@ -614,7 +614,7 @@ class _DriverDeliveryCard extends StatelessWidget {
                         label: 'Navigate', color: color, onTap: () {}),
                     const SizedBox(width: 8),
                     _CardActionButton(
-                        label: 'ðŸ†˜ SOS',
+                        label: '🆘 SOS',
                         color: AppColors.error,
                         onTap: () {},
                         isDestructive: true),
@@ -686,7 +686,7 @@ class _AlertListCard extends StatelessWidget {
                       style: const TextStyle(fontSize: 11),
                     ),
                     trailing: resolved
-                        ? const Text('âœ“',
+                        ? const Text('✓',
                             style: TextStyle(color: AppColors.success))
                         : _CardActionButton(
                             label: 'Resolve',
@@ -967,7 +967,7 @@ class _ConfirmationCard extends StatelessWidget {
                     onTap: () {}),
               ]),
             ] else if (action == 'sos') ...[
-              const Text('ðŸ†˜ Emergency SOS Activated',
+              const Text('🆘 Emergency SOS Activated',
                   style: TextStyle(
                       fontWeight: FontWeight.w800,
                       color: AppColors.error,

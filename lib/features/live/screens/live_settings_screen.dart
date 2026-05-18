@@ -1,4 +1,4 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// LIVE MODULE — Screen 22: Live Module Settings
 /// Configuration: auto-assign, bundles, returns, verification defaults,
 /// thresholds, driver policies, performance targets
@@ -314,10 +314,10 @@ class _LiveSettingsScreenState extends State<LiveSettingsScreen> {
   }
 
   (String, String, String) _verificationInfo(DefaultVerification method) => switch (method) {
-        DefaultVerification.biometricOnly => ('ðŸ”', 'Biometric Only', 'Fingerprint or face verification'),
-        DefaultVerification.pinOnly => ('ðŸ”‘', 'PIN Only', 'Customer enters a delivery PIN'),
-        DefaultVerification.biometricAndPin => ('ðŸ›¡ï¸', 'Biometric + PIN', 'Full multi-factor verification'),
-        DefaultVerification.photoSignature => ('ðŸ“¸', 'Photo + Signature', 'Photo proof with digital signature'),
+        DefaultVerification.biometricOnly => ('🔐', 'Biometric Only', 'Fingerprint or face verification'),
+        DefaultVerification.pinOnly => ('🔑', 'PIN Only', 'Customer enters a delivery PIN'),
+        DefaultVerification.biometricAndPin => ('🛡', 'Biometric + PIN', 'Full multi-factor verification'),
+        DefaultVerification.photoSignature => ('📸', 'Photo + Signature', 'Photo proof with digital signature'),
       };
 }
 

@@ -9,7 +9,7 @@ import '../widgets/buttons.dart';
 import '../widgets/progress_indicators.dart';
 
 
-// OS palette ï¿½ mirrors splash / welcome
+// OS palette — mirrors splash / welcome
 const Color _kBg        = IveTokens.bg;
 const Color _kSurface   = IveTokens.surface;
 const Color _kBorder    = IveTokens.hairline;
@@ -34,7 +34,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
 
   final List<_TutorialStep> _steps = [
     _TutorialStep(
-      title: 'Your PROMPT Screen',
+      title: 'Your genie help Screen',
       description: 'This is your personalized dashboard. Tap any widget to interact with it.',
       icon: Icons.dashboard_customize_outlined,
       color: _kAccent,

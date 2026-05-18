@@ -1,4 +1,4 @@
-import 'dart:math';
+﻿import 'dart:math';
 import 'package:flutter/material.dart';
 import '../../../core/design/ive.dart';
 import 'package:provider/provider.dart';
@@ -8,7 +8,7 @@ import '../../../core/utils/responsive.dart';
 import '../providers/onboarding_provider.dart';
 import '../widgets/buttons.dart';
 
-// OS palette ï¿½ mirrors splash / welcome
+// OS palette — mirrors splash / welcome
 const Color _kBg        = IveTokens.bg;
 const Color _kSurface   = IveTokens.surface;
 const Color _kBorder    = IveTokens.hairline;
@@ -253,7 +253,7 @@ class _SuccessScreenState extends State<SuccessScreen>
                         children: const [
                           _FeatureCard(
                             emoji: 'ðŸŽ¯',
-                            title: 'Your PROMPT Screen',
+                            title: 'Your genie help Screen',
                             subtitle: 'Everything you need, personalized',
                           ),
                           _FeatureCard(

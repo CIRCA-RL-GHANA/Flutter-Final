@@ -649,7 +649,7 @@ class UtilityProvider extends ChangeNotifier {
     ),
     HelpArticle(
       id: 'ha_7', title: 'Contact Our Support Team',
-      content: 'Reach us via in-app chat, email at support@thepg.com, or call +233 XX XXX XXXX during business hours.',
+      content: 'Reach us via in-app chat or email at support@geniehelp.app. Our team is available 24/7.',
       category: HelpCategory.contact, icon: Icons.headset_mic,
       isPinned: true, viewCount: 3200, tags: ['contact', 'support', 'help'],
       updatedAt: DateTime.now().subtract(const Duration(days: 0)),
@@ -730,12 +730,8 @@ class UtilityProvider extends ChangeNotifier {
       icon: Icons.chat_bubble, color: Color(0xFF3B82F6), action: 'chat',
     ),
     ContactOption(
-      label: 'Email Support', subtitle: 'support@thepg.com',
+      label: 'Email Support', subtitle: 'support@geniehelp.app',
       icon: Icons.email, color: Color(0xFF10B981), action: 'email',
-    ),
-    ContactOption(
-      label: 'Phone', subtitle: '+233 XX XXX XXXX',
-      icon: Icons.phone, color: Color(0xFF8B5CF6), action: 'phone',
     ),
     ContactOption(
       label: 'Community Forum', subtitle: 'Ask the community',
@@ -1071,8 +1067,8 @@ class UtilityProvider extends ChangeNotifier {
   DeviceInfoModel _deviceInfo = const DeviceInfoModel(
     deviceName: 'Pixel 7 Pro',
     osVersion: 'Android 14',
-    appVersion: '2.4.1',
-    buildNumber: '241',
+    appVersion: '1.0.5',
+    buildNumber: '6',
     deviceId: 'PX7P-XXXX-XXXX',
     screenResolution: '1440 × 3120',
     locale: 'en_GH',

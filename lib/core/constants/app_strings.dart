@@ -102,16 +102,16 @@ class AppStrings {
   static const String notificationBenefit = 'Get order updates and security alerts';
   static const String locationBenefit = 'Find nearby shops and services';
   static const String preciseLocationBenefit = 'Accurate delivery tracking';
-  static const String contactsBenefit = 'Find friends already on PROMPT';
+  static const String contactsBenefit = 'Find friends already on genie help';
   static const String cameraBenefit = 'Scan QR codes and upload photos';
   static const String allow = 'Allow';
   static const String notNow = 'Not Now';
   static const String enableLater = 'You can enable later in settings';
 
   // Success Screen
-  static const String welcomeTo = 'Welcome to PROMPT,';
+  static const String welcomeTo = 'Welcome to genie help,';
   static const String accountReady = 'Your account is ready to use';
-  static const String explorePrompt = 'Explore PROMPT';
+  static const String explorePrompt = 'Explore genie help';
   static const String takeTour = 'Take Tour';
   static const String skipToDashboard = 'Skip to Dashboard';
 

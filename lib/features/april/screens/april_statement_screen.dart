@@ -1,4 +1,4 @@
-/// APRIL Screen 5 — Personal Statement Dashboard
+﻿/// APRIL Screen 5 — Personal Statement Dashboard
 /// 7 modular statement cards, version control, completion tracking
 
 import 'package:flutter/material.dart';
@@ -159,13 +159,13 @@ class AprilStatementScreen extends StatelessWidget {
 
   void _showCardEditor(BuildContext context, StatementCardData card) {
     final emojis = {
-      StatementCard.lifestyle: 'ðŸ ',
-      StatementCard.family: 'ðŸ‘¨â€ðŸ‘©â€ðŸ‘§â€ðŸ‘¦',
-      StatementCard.career: 'ðŸ’¼',
-      StatementCard.financial: 'ðŸ’°',
-      StatementCard.health: 'ðŸ¥',
-      StatementCard.legal: 'âš–ï¸',
-      StatementCard.growth: 'ðŸŒ±',
+      StatementCard.lifestyle: '🏠',
+      StatementCard.family: '👨‍👩‍👧‍👦',
+      StatementCard.career: '💼',
+      StatementCard.financial: '💰',
+      StatementCard.health: '🏥',
+      StatementCard.legal: '⚖️',
+      StatementCard.growth: '🌱',
     };
 
     showModalBottomSheet(
@@ -192,7 +192,7 @@ class AprilStatementScreen extends StatelessWidget {
               padding: const EdgeInsets.all(16),
               child: Row(
                 children: [
-                  Text(emojis[card.type] ?? 'ðŸ“„', style: const TextStyle(fontSize: 24)),
+                  Text(emojis[card.type] ?? '🔄', style: const TextStyle(fontSize: 24)),
                   const SizedBox(width: 10),
                   Expanded(
                     child: Column(

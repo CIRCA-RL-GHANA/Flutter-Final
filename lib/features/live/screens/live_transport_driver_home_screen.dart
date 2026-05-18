@@ -1,4 +1,4 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// LIVE MODULE — Screen 16: Driver Home (Transport)
 /// Transport driver dashboard: active ride, earnings, availability,
 /// ride queue, vehicle info, and quick actions
@@ -53,7 +53,7 @@ class LiveTransportDriverHomeScreen extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Hey, ${driver.name.split(' ').first}! ðŸš—', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: Colors.white)),
+                                Text('Hey, ${driver.name.split(' ').first}! '🚗',  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: Colors.white)),
                                 Text('Transport Driver', style: TextStyle(fontSize: 12, color: Colors.white.withValues(alpha: 0.8))),
                               ],
                             ),
@@ -132,7 +132,7 @@ class LiveTransportDriverHomeScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('ðŸš— ACTIVE RIDE', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                        const Text('🚗 ACTIVE RIDE', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                         const SizedBox(height: 8),
                         _ActiveRideCard(
                           ride: activeRide,
@@ -175,7 +175,7 @@ class LiveTransportDriverHomeScreen extends StatelessWidget {
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-                  child: Text('ðŸ“‹ RIDE QUEUE (${pendingRides.length})', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  child: Text('📋 RIDE QUEUE (${pendingRides.length})', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ),
               ),
 
@@ -298,7 +298,7 @@ class _ActiveRideCard extends StatelessWidget {
               children: [
                 Text('â‚µ${ride.fare.toStringAsFixed(0)}', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: Colors.white)),
                 const Spacer(),
-                const Text('TAP TO CONTINUE â†’', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white70)),
+                const Text('TAP TO CONTINUE '🚗',  style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white70)),
               ],
             ),
           ],

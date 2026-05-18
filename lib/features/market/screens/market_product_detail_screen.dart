@@ -1,4 +1,4 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// MARKET MODULE — Screen 4: Product Detail
 /// Media gallery, customization, quantity, fulfillment, nutrition, reviews
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -623,17 +623,17 @@ class _MarketProductDetailScreenState extends State<MarketProductDetailScreen> {
   String _dietaryLabel(DietaryPreference d) {
     switch (d) {
       case DietaryPreference.vegetarian:
-        return 'ðŸ¥¬ Vegetarian';
+        return '🥬 Vegetarian';
       case DietaryPreference.vegan:
-        return 'ðŸŒ± Vegan';
+        return '🌱 Vegan';
       case DietaryPreference.glutenFree:
-        return 'ðŸŒ¾ Gluten-free';
+        return '🌾 Gluten-free';
       case DietaryPreference.halal:
-        return 'ðŸ•Œ Halal';
+        return '🕌 Halal';
       case DietaryPreference.kosher:
-        return 'âœ¡ Kosher';
+        return '⚖ Kosher';
       case DietaryPreference.organic:
-        return 'ðŸŒ¿ Organic';
+        return '🌿 Organic';
     }
   }
 }

@@ -1,4 +1,4 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// LIVE MODULE — Screen 7: Return Review Interface
 /// Detailed return review with evidence gallery, customer history,
 /// adjudication options, and resolution workflow
@@ -209,7 +209,7 @@ class _LiveReturnReviewScreenState extends State<LiveReturnReviewScreen> {
 
               // AI Analysis
               LiveSectionCard(
-                title: 'ðŸ¤– AI ANALYSIS',
+                title: '🤖 AI ANALYSIS',
                 icon: Icons.psychology,
                 iconColor: const Color(0xFF10B981),
                 child: Column(

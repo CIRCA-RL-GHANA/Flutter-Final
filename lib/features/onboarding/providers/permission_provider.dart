@@ -74,7 +74,7 @@ class PermissionProvider extends ChangeNotifier {
       case AppPermission.locationPrecise:
         return 'Accurate delivery tracking';
       case AppPermission.contacts:
-        return 'Find friends already on PROMPT';
+        return 'Find friends already on genie help';
       case AppPermission.camera:
         return 'Scan QR codes and upload photos';
       case AppPermission.microphone:

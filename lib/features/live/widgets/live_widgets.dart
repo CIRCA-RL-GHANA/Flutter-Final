@@ -1,4 +1,4 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// LIVE MODULE — Shared Widgets
 /// Reusable UI components: LiveAppBar, LiveOrderCard, LivePackageCard,
 /// LiveReturnCard, LiveDriverCard, LiveMetricBadge, LiveTimeline,
@@ -763,7 +763,7 @@ class LiveDriverCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: const Text(
-                        'ðŸ¥‡ RECOMMENDED',
+                        '🥇 RECOMMENDED',
                         style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white),
                       ),
                     ),

@@ -1,4 +1,4 @@
-/// qualChat Module — Shared Widgets
+﻿/// qualChat Module — Shared Widgets
 /// Reusable UI components for all qualChat screens
 /// Module Color: Cyan 0xFF06B6D4
 
@@ -622,19 +622,19 @@ class _StatusBadge extends StatelessWidget {
     Color color;
     switch (status) {
       case HeyYaStatus.pending:
-        text = 'ðŸŸ¡ Pending';
+        text = '🟡 Pending';
         color = const Color(0xFFF59E0B);
       case HeyYaStatus.accepted:
-        text = 'ï¿½ Matched';
+        text = '✅ Matched';
         color = const Color(0xFF10B981);
       case HeyYaStatus.expired:
-        text = 'ðŸ”´ Expired';
+        text = '🔴 Expired';
         color = const Color(0xFFEF4444);
       case HeyYaStatus.rejected:
-        text = 'âŒ Passed';
+        text = '❌ Passed';
         color = const Color(0xFFEF4444);
       case HeyYaStatus.withdrawn:
-        text = 'â†©ï¸ Withdrawn';
+        text = '↩️ Withdrawn';
         color = const Color(0xFF6B7280);
     }
     return Container(

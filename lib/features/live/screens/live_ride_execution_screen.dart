@@ -1,4 +1,4 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// LIVE MODULE — Screen 17: Ride Execution & Security
 /// Full ride flow: passenger pickup, identity verification,
 /// live navigation, trip details, fare display, completion
@@ -480,7 +480,7 @@ class _RideCompleteView extends StatelessWidget {
                 child: const Icon(Icons.celebration, size: 64, color: Color(0xFF10B981)),
               ),
               const SizedBox(height: 20),
-              const Text('ðŸŽ‰ TRIP COMPLETED!', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
+              const Text('🎉 TRIP COMPLETED!', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
               const SizedBox(height: 8),
               Text(ride.passengerName, style: TextStyle(fontSize: 15, color: AppColors.textSecondary)),
               const SizedBox(height: 16),

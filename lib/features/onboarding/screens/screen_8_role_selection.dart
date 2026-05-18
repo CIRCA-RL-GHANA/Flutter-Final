@@ -10,7 +10,7 @@ import '../widgets/buttons.dart';
 import '../widgets/onboarding_header.dart';
 
 
-// OS palette ï¿½ mirrors splash / welcome
+// OS palette — mirrors splash / welcome
 const Color _kBg        = IveTokens.bg;
 const Color _kSurface   = IveTokens.surface;
 const Color _kBorder    = IveTokens.hairline;
@@ -173,7 +173,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
                                 Expanded(
                                   child: Text(
                                     role.selectedCategory == RoleCategory.individual
-                                        ? 'Your individual account gives you Owner access ï¿½ shop, socialise, and manage your personal finances.'
+                                        ? 'Your individual account gives you Owner access — shop, socialise, and manage your personal finances.'
                                         : role.selectedCategory == RoleCategory.business
                                             ? 'Select the staff role you have been invited to join this business entity as.'
                                             : 'You can change your role anytime in settings.',
@@ -255,7 +255,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
   }
 
   Widget _buildBusinessSubRoles(RoleProvider role) {
-    // Owner is NOT listed here ï¿½ Owner is the individual who created the entity,
+    // Owner is NOT listed here - Owner is the individual who created the entity,
     // not an assignable staff role. Business sub-roles are staff positions only.
     final subRoles = [
       _SubRoleData(
