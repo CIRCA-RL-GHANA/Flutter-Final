@@ -299,9 +299,11 @@ class _OfflineBanner extends StatelessWidget {
         children: const [
           Icon(Icons.cloud_off_outlined, size: 14, color: AppColors.warning),
           SizedBox(width: 6),
-          Text(
-            'You\'re offline. Actions will sync when you reconnect.',
-            style: TextStyle(fontSize: 12, color: AppColors.warning),
+          Expanded(
+            child: Text(
+              'You\'re offline. Actions will sync when you reconnect.',
+              style: TextStyle(fontSize: 12, color: AppColors.warning),
+            ),
           ),
         ],
       ),
