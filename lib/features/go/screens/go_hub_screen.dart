@@ -85,7 +85,7 @@ class _GoHubScreenState extends State<GoHubScreen> {
                         const SizedBox(height: 16),
 
                         // ── SECTION 10: AI Insights ──────────
-                        GoSectionHeader(title: 'AI Insights ðŸ”®', icon: Icons.auto_awesome),
+                        GoSectionHeader(title: 'AI Insights', icon: Icons.auto_awesome),
                         _buildInsights(provider),
                         const SizedBox(height: 32),
                       ],

@@ -120,7 +120,7 @@ class AprilDashboardScreen extends StatelessWidget {
                   delegate: SliverChildListDelegate([
                     // ──── VOICE COMMAND CENTER ────
                     AprilSectionCard(
-                      title: 'ðŸŽ¤ Voice Command Center',
+                      title: 'Voice Command Center',
                       child: Column(
                         children: [
                           const SizedBox(height: 8),
@@ -188,7 +188,7 @@ class AprilDashboardScreen extends StatelessWidget {
 
                     // ──── SMART NOTIFICATIONS PANEL ────
                     AprilSectionCard(
-                      title: 'ðŸ”” Notifications',
+                      title: 'Notifications',
                       trailing: provider.unreadNotificationCount > 0
                           ? Container(
                               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
@@ -255,7 +255,7 @@ class AprilDashboardScreen extends StatelessWidget {
 
                     // ──── PLUGIN QUICK ACCESS GRID ────
                     const Text(
-                      'ðŸ“¦ Plugins',
+                      'Plugins',
                       style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
                     ),
                     const SizedBox(height: 12),
@@ -286,7 +286,7 @@ class AprilDashboardScreen extends StatelessWidget {
 
                     // ──── QUICK COMMAND BAR ────
                     AprilSectionCard(
-                      title: 'âš¡ Quick Command',
+                      title: 'Quick Command',
                       child: Column(
                         children: [
                           TextField(

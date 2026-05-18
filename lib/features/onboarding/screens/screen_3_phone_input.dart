@@ -444,20 +444,20 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
           height: 20,
           child: CircularProgressIndicator(
             strokeWidth: 2,
-            color: const Color(0xFF22BDD8),
+            color: _kAccent,
           ),
         );
       case _ValidationState.valid:
         return const Icon(
           Icons.check_circle,
           size: 20,
-          color: const Color(0xFF10B981),
+          color: IveTokens.success,
         );
       case _ValidationState.invalid:
         return const Icon(
           Icons.error,
           size: 20,
-          color: const Color(0xFFEF4444),
+          color: IveTokens.danger,
         );
     }
   }
@@ -472,7 +472,7 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
           bottom: MediaQuery.of(context).viewInsets.bottom,
         ),
         decoration: const BoxDecoration(
-          color: const Color(0xFF0E0E1A),
+          color: _kSurface,
           borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
         ),
         child: Padding(
@@ -486,7 +486,7 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: const Color(0xFFE8E8F0),
+                  color: _kText,
                 ),
               ),
               const SizedBox(height: 16),

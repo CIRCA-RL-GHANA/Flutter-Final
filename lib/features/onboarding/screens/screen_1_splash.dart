@@ -20,7 +20,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 // ── OS palette (independent of consumer theme) ───────────────────────────────
-const Color _kBg       = IveTokens.bg;       // near-black with blue tint
+const Color _kBg       = Color(0xFF000000);   // pure black — matches logo PNG background
 const Color _kGrid     = IveTokens.surface;   // subtle grid lines
 const Color _kAccent   = IveTokens.accent;    // electric blue — system authority
 const Color _kAccentDim = Color(0xFF1E2A6E);  // dark navy — no IveToken equivalent

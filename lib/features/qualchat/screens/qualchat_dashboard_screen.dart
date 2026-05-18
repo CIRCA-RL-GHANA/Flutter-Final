@@ -44,7 +44,7 @@ class QualChatDashboardScreen extends StatelessWidget {
                   color: kChatColor.withValues(alpha: 0.05),
                   child: Text(
                     'Role: Owner • Context: Personal • Mode: ${provider.mode == ChatMode.social ? "Social" : "Professional"}',
-                    style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
+                    style: const TextStyle(fontSize: 12, color: IveTokens.labelSecondary),
                   ),
                 ),
 
@@ -148,8 +148,8 @@ class QualChatDashboardScreen extends StatelessWidget {
 
   Widget _buildVibeCheckSection(BuildContext context, QualChatProvider provider) {
     return QualChatSectionCard(
-      title: 'My Hey Yas ðŸ’–',
-      trailing: 'âŸ³',
+      title: 'My Hey Yas',
+      trailing: '\u27F3',
       onTrailingTap: () {},
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -180,7 +180,7 @@ class QualChatDashboardScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: c.isSuccess
                           ? kChatSocial.withValues(alpha: 0.7)
-                          : const Color(0xFFE5E7EB),
+                          : IveTokens.hairline,
                       borderRadius: BorderRadius.circular(4),
                     ),
                   ),
@@ -297,7 +297,7 @@ class QualChatDashboardScreen extends StatelessWidget {
   Widget _buildPresenceSection(BuildContext context, QualChatProvider provider) {
     const stats = QualChatProvider.presenceStats;
     return QualChatSectionCard(
-      title: 'ðŸ‘¥ Presence Dashboard',
+      title: 'Presence Dashboard',
       child: Column(
         children: [
           Row(
@@ -413,8 +413,8 @@ class QualChatDashboardScreen extends StatelessWidget {
 
   Widget _buildInsightsSection(BuildContext context) {
     return QualChatSectionCard(
-      title: 'ðŸ§  Conversation Insights',
-      trailing: 'â“˜',
+      title: 'Conversation Insights',
+      trailing: '\u24D8',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -527,7 +527,7 @@ style: const TextStyle(fontSize: 13, color: IveTokens.label),
 
   Widget _buildArchiveSection(BuildContext context, QualChatProvider provider) {
     return QualChatSectionCard(
-      title: 'ðŸ—ƒï¸ Archived Conversations',
+      title: 'Archived Conversations',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
