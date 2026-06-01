@@ -150,6 +150,13 @@ class _GoRequestsScreenState extends State<GoRequestsScreen> with SingleTickerPr
             subtitle: Text(t.$3, style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
             trailing: const Icon(Icons.arrow_forward_ios, size: 14, color: Color(0xFFD1D5DB)),
             onTap: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('New ${t.$1} started'), backgroundColor: kGoColor)),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildCreateSheet() {
     return Container(
       height: 300,
       padding: const EdgeInsets.all(16),
