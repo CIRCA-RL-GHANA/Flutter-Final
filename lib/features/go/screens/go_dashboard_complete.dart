@@ -11,6 +11,7 @@ import '../widgets/go_widgets.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/widgets/ai_insight_card.dart';
 import '../../../core/design/ive_tokens.dart';
+import '../../../core/routes/app_routes.dart';
 
 class GODashboardScreen extends StatefulWidget {
   const GODashboardScreen({super.key});
