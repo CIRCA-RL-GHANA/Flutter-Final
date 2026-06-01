@@ -38,7 +38,7 @@ class LiveAnalyticsScreen extends StatelessWidget {
               IconButton(
                   icon: const Icon(Icons.file_download, size: 20),
                   color: AppColors.textSecondary,
-                  onPressed: () {}),
+                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Exporting...')))),
             ],
           ),
           body: RefreshIndicator(

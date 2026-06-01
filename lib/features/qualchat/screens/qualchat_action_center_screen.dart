@@ -7,6 +7,7 @@ import '../models/qualchat_models.dart';
 import '../providers/qualchat_provider.dart';
 import '../widgets/qualchat_widgets.dart';
 import '../../../core/services/ai_insights_notifier.dart';
+import '../../../core/routes/app_routes.dart';
 
 class QualChatActionCenterScreen extends StatelessWidget {
   const QualChatActionCenterScreen({super.key});
@@ -356,14 +357,26 @@ class _TaskCard extends StatelessWidget {
                 _TaskAction(
                     label: 'Complete',
                     color: const Color(0xFF10B981),
-                    onTap: () {}),
+                    onTap: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Task marked complete')),
+                      );
+                    }),
                 const SizedBox(width: 8),
                 _TaskAction(
                     label: 'Snooze',
                     color: const Color(0xFFF59E0B),
-                    onTap: () {}),
+                    onTap: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Task snoozed')),
+                      );
+                    }),
                 const SizedBox(width: 8),
-                _TaskAction(label: 'Delegate', color: kChatColor, onTap: () {}),
+                _TaskAction(label: 'Delegate', color: kChatColor, onTap: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Task delegated')),
+                  );
+                }),
               ],
             ),
           ],
@@ -444,7 +457,11 @@ class _AISuggestionCard extends StatelessWidget {
             children: [
               Expanded(
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('AI suggestion applied')),
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: kChatColor,
                     foregroundColor: Colors.white,
@@ -459,7 +476,11 @@ class _AISuggestionCard extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               OutlinedButton(
-                onPressed: () {},
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('AI suggestion dismissed')),
+                  );
+                },
                 style: OutlinedButton.styleFrom(
                   side: const BorderSide(color: kChatColor),
                   shape: RoundedRectangleBorder(

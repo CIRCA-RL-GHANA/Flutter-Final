@@ -12,6 +12,7 @@ import '../models/live_models.dart';
 import '../providers/live_provider.dart';
 import '../widgets/live_widgets.dart';
 import '../../../core/services/ai_insights_notifier.dart';
+import '../../../core/routes/app_routes.dart';
 
 class LiveEmergencySOSScreen extends StatefulWidget {
   const LiveEmergencySOSScreen({super.key});
@@ -271,7 +272,9 @@ class _ActiveSOSView extends StatelessWidget {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Calling ${c.name}...')),
+                  ),
                   style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10B981), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
                   child: const Text('CALL', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700)),
                 ),
@@ -346,7 +349,9 @@ class _ContactItem extends StatelessWidget {
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Calling...')),
+            ),
             icon: const Icon(Icons.phone, size: 18, color: Color(0xFF10B981)),
             style: IconButton.styleFrom(backgroundColor: const Color(0xFFD1FAE5)),
           ),

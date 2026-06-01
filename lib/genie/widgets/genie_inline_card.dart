@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import '../../core/design/ive_tokens.dart';
+import '../../core/routes/app_routes.dart';
 import '../../core/theme/app_colors.dart';
 import '../genie_intent.dart';
 import '../genie_tactile_actions.dart';
@@ -251,19 +252,19 @@ class _BalanceCard extends StatelessWidget {
                 _CardActionButton(
                   label: 'Buy',
                   color: color,
-                  onTap: () {},
+                  onTap: () => Navigator.pushNamed(context, AppRoutes.goBuy),
                 ),
                 const SizedBox(width: 8),
                 _CardActionButton(
                   label: 'Sell',
                   color: AppColors.textSecondary,
-                  onTap: () {},
+                  onTap: () => Navigator.pushNamed(context, AppRoutes.goSell),
                 ),
                 const SizedBox(width: 8),
                 _CardActionButton(
                   label: 'Transfer',
                   color: AppColors.info,
-                  onTap: () {},
+                  onTap: () => Navigator.pushNamed(context, AppRoutes.goTransfer),
                 ),
               ],
             ),
@@ -364,7 +365,7 @@ class _OrderSummaryCard extends StatelessWidget {
                 ],
               ),
             ),
-            _CardActionButton(label: 'Checkout', color: color, onTap: () {}),
+            _CardActionButton(label: 'Checkout', color: color, onTap: () => Navigator.pushNamed(context, AppRoutes.marketCart)),
           ],
         ),
       ),
@@ -411,7 +412,7 @@ class _OrderTrackerCard extends StatelessWidget {
                   style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
             ],
             const SizedBox(height: 12),
-            _CardActionButton(label: 'Track on Map', color: color, onTap: () {}),
+            _CardActionButton(label: 'Track on Map', color: color, onTap: () => Navigator.pushNamed(context, AppRoutes.marketDeliveryTracker)),
           ],
         ),
       ),
@@ -447,7 +448,7 @@ class _ShopCarouselCard extends StatelessWidget {
               itemBuilder: (context, i) {
                 final shop = shops[i];
                 return GestureDetector(
-                  onTap: () => GenieTactileActions.onTap(),
+                  onTap: () => Navigator.pushNamed(context, AppRoutes.marketBranch),
                   child: Container(
                     width: 130,
                     padding: const EdgeInsets.all(10),
@@ -479,7 +480,7 @@ class _ShopCarouselCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
             child: _CardActionButton(
-                label: 'Browse All', color: color, onTap: () {}),
+                label: 'Browse All', color: color, onTap: () => Navigator.pushNamed(context, AppRoutes.marketHub)),
           ),
         ],
       ),
@@ -510,7 +511,7 @@ class _FeedCard extends StatelessWidget {
                 style: TextStyle(fontSize: 13),
               ),
             ),
-            _CardActionButton(label: 'View', color: color, onTap: () {}),
+            _CardActionButton(label: 'View', color: color, onTap: () => Navigator.pushNamed(context, AppRoutes.updatesFeed)),
           ],
         ),
       ),
@@ -569,7 +570,7 @@ class _LiveOrdersCard extends StatelessWidget {
                     trailing: _CardActionButton(
                       label: 'Assign',
                       color: color,
-                      onTap: () {},
+                      onTap: () => Navigator.pushNamed(context, AppRoutes.liveDriverAssignment),
                     ),
                   );
                 }).toList(),
@@ -611,12 +612,14 @@ class _DriverDeliveryCard extends StatelessWidget {
                   const SizedBox(height: 12),
                   Row(children: [
                     _CardActionButton(
-                        label: 'Navigate', color: color, onTap: () {}),
+                        label: 'Navigate',
+                        color: color,
+                        onTap: () => Navigator.pushNamed(context, AppRoutes.liveDeliveryVerification)),
                     const SizedBox(width: 8),
                     _CardActionButton(
                         label: '🆘 SOS',
                         color: AppColors.error,
-                        onTap: () {},
+                        onTap: () => Navigator.pushNamed(context, AppRoutes.liveEmergencySOS),
                         isDestructive: true),
                   ]),
                 ],
@@ -637,7 +640,7 @@ class _DriverDeliveryCard extends StatelessWidget {
                         trailing: _CardActionButton(
                           label: 'Accept',
                           color: color,
-                          onTap: () {},
+                          onTap: () => Navigator.pushNamed(context, AppRoutes.livePackageAcceptance),
                         ),
                       );
                     }).toList(),
@@ -691,7 +694,7 @@ class _AlertListCard extends StatelessWidget {
                         : _CardActionButton(
                             label: 'Resolve',
                             color: color,
-                            onTap: () {}),
+                            onTap: () => Navigator.pushNamed(context, AppRoutes.alertsResolve, arguments: alert['id'])),
                   );
                 }).toList(),
               ),
@@ -731,7 +734,19 @@ class _ChatListCard extends StatelessWidget {
               child: Text('Tap to open your conversations.',
                   style: TextStyle(fontSize: 13)),
             ),
-            _CardActionButton(label: 'Open', color: color, onTap: () {}),
+            _CardActionButton(
+              label: 'Open',
+              color: color,
+              onTap: () {
+                if (type == 'hey_ya') {
+                  Navigator.pushNamed(context, AppRoutes.qualChatHeyYas);
+                } else if (type == 'presence') {
+                  Navigator.pushNamed(context, AppRoutes.qualChatPresence);
+                } else {
+                  Navigator.pushNamed(context, AppRoutes.qualChatDashboard);
+                }
+              },
+            ),
           ],
         ),
       ),
@@ -841,7 +856,9 @@ class _ProfileStrengthCard extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             _CardActionButton(
-                label: 'Complete Profile', color: color, onTap: () {}),
+                label: 'Complete Profile',
+                color: color,
+                onTap: () => Navigator.pushNamed(context, AppRoutes.userDetailsMaster)),
           ],
         ),
       ),
@@ -871,7 +888,7 @@ class _NotificationHubCard extends StatelessWidget {
               child: Text('3 unread notifications.',
                   style: TextStyle(fontSize: 13)),
             ),
-            _CardActionButton(label: 'View All', color: color, onTap: () {}),
+            _CardActionButton(label: 'View All', color: color, onTap: () => Navigator.pushNamed(context, AppRoutes.utilityNotifications)),
           ],
         ),
       ),
@@ -918,7 +935,7 @@ class _HelpGuideCard extends StatelessWidget {
                     child: Text('Tap to open the help center.',
                         style: TextStyle(fontSize: 13)),
                   ),
-                  _CardActionButton(label: 'Help', color: color, onTap: () {}),
+                  _CardActionButton(label: 'Help', color: color, onTap: () => Navigator.pushNamed(context, AppRoutes.utilityHelp)),
                 ],
               ),
       ),
@@ -958,13 +975,13 @@ class _ConfirmationCard extends StatelessWidget {
                 _CardActionButton(
                     label: 'Confirm',
                     color: color,
-                    onTap: () {},
+                    onTap: () => Navigator.pushNamed(context, AppRoutes.goTransfer),
                     isDestructive: true),
                 const SizedBox(width: 8),
                 _CardActionButton(
                     label: 'Cancel',
                     color: AppColors.textSecondary,
-                    onTap: () {}),
+                    onTap: () => Navigator.pop(context)),
               ]),
             ] else if (action == 'sos') ...[
               const Text('🆘 Emergency SOS Activated',
@@ -979,7 +996,8 @@ class _ConfirmationCard extends StatelessWidget {
               Text('Confirm: $action',
                   style: const TextStyle(fontWeight: FontWeight.w600)),
               const SizedBox(height: 12),
-              _CardActionButton(label: 'Confirm', color: color, onTap: () {},
+              _CardActionButton(label: 'Confirm', color: color,
+                  onTap: () => Navigator.pop(context),
                   isDestructive: true),
             ],
           ],

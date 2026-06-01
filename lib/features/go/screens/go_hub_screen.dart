@@ -341,7 +341,7 @@ class _GoHubScreenState extends State<GoHubScreen> {
           )),
           const SizedBox(height: 6),
           GestureDetector(
-            onTap: () {},
+            onTap: () => Navigator.pushNamed(context, AppRoutes.goPlanner),
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -398,7 +398,7 @@ class _GoHubScreenState extends State<GoHubScreen> {
                       const SizedBox(width: 10),
                       Expanded(child: Text(ins.text, style: const TextStyle(fontSize: 13))),
                       if (ins.isActionable) GestureDetector(
-                        onTap: () {},
+                        onTap: () => Navigator.pushNamed(context, AppRoutes.goFinancial),
                         child: Text(ins.actionLabel ?? 'View', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: kGoColor)),
                       ),
                     ],
@@ -475,7 +475,7 @@ class _ContextBar extends StatelessWidget {
           if (ctx != null) GoContextChip(context: ctx!, onTap: () => Navigator.pushReplacementNamed(context, '/go/context')),
           const Spacer(),
           GestureDetector(
-            onTap: () {},
+            onTap: () => Navigator.pushNamed(context, AppRoutes.goPlanner),
             child: Row(
               children: [
                 const Icon(Icons.calendar_today, size: 14, color: IveTokens.labelTertiary),

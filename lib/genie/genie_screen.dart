@@ -276,7 +276,7 @@ class _GenieScreenState extends State<GenieScreen>
             // ─── Pinned Shortcut Bar ─────────────────────────────────────
             _PinnedShortcutBar(
               shortcuts: pinnedShortcuts,
-              onShortcutTap: (intent) => _controller.executeIntent(intent),
+              onShortcutTap: _handleChipTap,
             ),
           ],
         ),

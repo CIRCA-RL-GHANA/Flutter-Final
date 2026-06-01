@@ -202,7 +202,7 @@ class MarketCartScreen extends StatelessWidget {
           ),
           const SizedBox(width: 8),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Bundle added to cart'), behavior: SnackBarBehavior.floating)),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.white,
               foregroundColor: const Color(0xFF6D28D9),

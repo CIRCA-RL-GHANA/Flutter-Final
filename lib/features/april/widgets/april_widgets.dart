@@ -515,7 +515,7 @@ class AprilNotificationCard extends StatelessWidget {
                     return Padding(
                       padding: const EdgeInsets.only(right: 8),
                       child: GestureDetector(
-                        onTap: () {},
+                        onTap: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${labels[action] ?? action.name}'))),
                         child: Text(
                           labels[action] ?? '',
                           style: TextStyle(

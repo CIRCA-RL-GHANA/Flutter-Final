@@ -10,6 +10,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../models/utility_models.dart';
 import '../providers/utility_provider.dart';
+import '../../../core/routes/app_routes.dart';
 import '../widgets/shared_widgets.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -228,14 +229,16 @@ class SettingsScreen extends StatelessWidget {
                       label: 'Terms of Service',
                       icon: Icons.description,
                       iconColor: const Color(0xFF64748B),
-                      onTap: () {},
+                      onTap: () => Navigator.pushNamed(context, AppRoutes.utilityPrivacy),
                     ),
                     const Divider(height: 1),
                     UtilityActionTile(
                       label: 'Open Source Licenses',
                       icon: Icons.code,
                       iconColor: const Color(0xFF64748B),
-                      onTap: () {},
+                      onTap: () => ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Open source licenses')),
+                      ),
                     ),
                   ],
                 ),

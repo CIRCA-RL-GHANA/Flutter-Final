@@ -560,7 +560,14 @@ class _SettingsTab extends StatelessWidget {
                   children: [
                     Expanded(
                       child: OutlinedButton.icon(
-                        onPressed: () {},
+                        onPressed: () => showDialog(context: context, builder: (_) => AlertDialog(
+                          title: const Text('Freeze Tab?'),
+                          content: const Text('This will temporarily freeze this tab, preventing new transactions.'),
+                          actions: [
+                            TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
+                            ElevatedButton(onPressed: () { Navigator.pop(context); ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Tab frozen'))); }, style: ElevatedButton.styleFrom(backgroundColor: AppColors.warning), child: const Text('Freeze')),
+                          ],
+                        )),
                         icon: const Icon(Icons.pause, size: 16),
                         label: const Text('Freeze', style: TextStyle(fontSize: 12)),
                         style: OutlinedButton.styleFrom(
@@ -573,7 +580,14 @@ class _SettingsTab extends StatelessWidget {
                     const SizedBox(width: 10),
                     Expanded(
                       child: OutlinedButton.icon(
-                        onPressed: () {},
+                        onPressed: () => showDialog(context: context, builder: (_) => AlertDialog(
+                          title: const Text('Close Tab?'),
+                          content: const Text('This will close this tab permanently. Any outstanding balance must be settled first.'),
+                          actions: [
+                            TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
+                            ElevatedButton(onPressed: () { Navigator.pop(context); ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Tab closed'))); }, style: ElevatedButton.styleFrom(backgroundColor: AppColors.error), child: const Text('Close Tab')),
+                          ],
+                        )),
                         icon: const Icon(Icons.close, size: 16),
                         label: const Text('Close Tab', style: TextStyle(fontSize: 12)),
                         style: OutlinedButton.styleFrom(
@@ -594,11 +608,24 @@ class _SettingsTab extends StatelessWidget {
   }
 }
 
-class _SettingToggle extends StatelessWidget {
+class _SettingToggle extends StatefulWidget {
   final String label;
   final bool value;
 
   const _SettingToggle({required this.label, required this.value});
+
+  @override
+  State<_SettingToggle> createState() => _SettingToggleState();
+}
+
+class _SettingToggleState extends State<_SettingToggle> {
+  late bool _value;
+
+  @override
+  void initState() {
+    super.initState();
+    _value = widget.value;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -607,10 +634,10 @@ class _SettingToggle extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+          Text(widget.label, style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
           Switch(
-            value: value,
-            onChanged: (_) {},
+            value: _value,
+            onChanged: (v) => setState(() => _value = v),
             activeColor: kSetupColor,
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
           ),

@@ -7,6 +7,7 @@ import '../models/qualchat_models.dart';
 import '../providers/qualchat_provider.dart';
 import '../widgets/qualchat_widgets.dart';
 import '../../../core/services/ai_insights_notifier.dart';
+import '../../../core/routes/app_routes.dart';
 
 class QualChatThreadScreen extends StatefulWidget {
   const QualChatThreadScreen({super.key});
@@ -114,21 +115,38 @@ class _QualChatThreadScreenState extends State<QualChatThreadScreen> {
             actions: [
               IconButton(
                 icon: const Icon(Icons.call, color: kChatColor, size: 22),
-                onPressed: () {},
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Calling...')),
+                  );
+                },
               ),
               IconButton(
                 icon: const Icon(Icons.videocam, color: kChatColor, size: 22),
-                onPressed: () {},
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Starting video call...')),
+                  );
+                },
               ),
               PopupMenuButton<String>(
                 icon: const Icon(Icons.more_vert, color: Color(0xFF1A1A1A)),
                 onSelected: (value) {
                   switch (value) {
                     case 'search':
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Searching in chat...')),
+                      );
                       break;
                     case 'mute':
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Notifications muted')),
+                      );
                       break;
                     case 'pin':
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Conversation pinned')),
+                      );
                       break;
                     case 'archive':
                       Navigator.pop(context);
@@ -137,6 +155,9 @@ class _QualChatThreadScreenState extends State<QualChatThreadScreen> {
                       _showReportDialog(context);
                       break;
                     case 'block':
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('User blocked')),
+                      );
                       break;
                   }
                 },
@@ -450,7 +471,11 @@ class _SmartComposer extends StatelessWidget {
             // Emoji
             IconButton(
               icon: const Icon(Icons.emoji_emotions_outlined, color: Color(0xFF6B7280)),
-              onPressed: () {},
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Reaction added')),
+                );
+              },
             ),
             // Send / Voice
             ValueListenableBuilder<TextEditingValue>(

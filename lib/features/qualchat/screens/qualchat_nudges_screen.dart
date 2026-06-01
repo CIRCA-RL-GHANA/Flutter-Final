@@ -89,16 +89,7 @@ class QualChatNudgesScreen extends StatelessWidget {
                             ),
                           ),
                           // AI mode toggle
-                          Column(
-                            children: [
-                              Switch(
-                                value: true,
-                                onChanged: (_) {},
-                                activeColor: kChatColor,
-                              ),
-                              const Text('Auto', style: TextStyle(fontSize: 10, color: Color(0xFF6B7280))),
-                            ],
-                          ),
+                          const _AutoModeToggle(),
                         ],
                       ),
                     ),
@@ -194,85 +185,38 @@ class QualChatNudgesScreen extends StatelessWidget {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
-      builder: (_) => DraggableScrollableSheet(
-        initialChildSize: 0.5,
-        minChildSize: 0.3,
-        maxChildSize: 0.7,
-        expand: false,
-        builder: (_, ctrl) => ListView(
-          controller: ctrl,
-          padding: const EdgeInsets.all(24),
-          children: [
-            Center(
-              child: Container(
-                width: 40,
-                height: 4,
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade300,
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
-            const Text(
-              'Nudge Settings',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-            ),
-            const SizedBox(height: 20),
-
-            // Nudge type toggles
-            ...NudgeType.values.map((type) {
-              final labels = {
-                NudgeType.followUp: 'ðŸ“Ž Follow-ups',
+      builder: (_) => const _NudgeSettingsSheet(),
+    );
+  }
+}
+// ── Stateful Auto-mode toggle ─────────────────────────────────────ðŸ“Ž Follow-ups',
                 NudgeType.reEngagement: 'ðŸ¤ Re-engagement',
                 NudgeType.profileUpdate: 'ðŸ“ Profile Updates',
                 NudgeType.compatibility: 'ðŸ’« Compatibility',
                 NudgeType.activity: 'âš¡ Activity',
               };
-              return SwitchListTile(
-                title: Text(labels[type] ?? type.name, style: const TextStyle(fontSize: 14)),
-                value: true,
-                onChanged: (_) {},
-                activeColor: kChatColor,
-              );
-            }),
+// ── Stateful Auto-mode toggle ─────────────────────────────────────
+class _AutoModeToggle extends StatefulWidget {
+  const _AutoModeToggle();
 
-            const Divider(height: 32),
+  @override
+  State<_AutoModeToggle> createState() => _AutoModeToggleState();
+}
 
-            // Frequency
-            const Text('Nudge Frequency', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
-            const SizedBox(height: 8),
-            SegmentedButton<String>(
-              segments: const [
-                ButtonSegment(value: 'low', label: Text('Low')),
-                ButtonSegment(value: 'medium', label: Text('Medium')),
-                ButtonSegment(value: 'high', label: Text('High')),
-              ],
-              selected: const {'medium'},
-              onSelectionChanged: (_) {},
-              style: ButtonStyle(
-                backgroundColor: WidgetStateProperty.resolveWith((states) {
-                  if (states.contains(WidgetState.selected)) return kChatColor;
-                  return null;
-                }),
-              ),
-            ),
+class _AutoModeToggleState extends State<_AutoModeToggle> {
+  bool _auto = true;
 
-            const SizedBox(height: 24),
-
-            // Quiet hours
-            const Text('Quiet Hours', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
-            const SizedBox(height: 8),
-            SwitchListTile(
-              title: const Text('Enable quiet hours', style: TextStyle(fontSize: 14)),
-              subtitle: const Text('10:00 PM - 8:00 AM', style: TextStyle(fontSize: 12)),
-              value: true,
-              onChanged: (_) {},
-              activeColor: kChatColor,
-            ),
-          ],
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Switch(
+          value: _auto,
+          onChanged: (v) => setState(() => _auto = v),
+          activeColor: kChatColor,
         ),
-      ),
+        const Text('Auto', style: TextStyle(fontSize: 10, color: Color(0xFF6B7280))),
+      ],
     );
   }
 }

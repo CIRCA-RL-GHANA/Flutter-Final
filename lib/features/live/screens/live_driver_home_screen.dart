@@ -158,9 +158,9 @@ class LiveDriverHomeScreen extends StatelessWidget {
                       const SizedBox(height: 8),
                       Row(
                         children: [
-                          Expanded(child: _QuickAction(icon: Icons.qr_code_scanner, label: 'Scan Package', color: const Color(0xFF8B5CF6), onTap: () {})),
+                          Expanded(child: _QuickAction(icon: Icons.qr_code_scanner, label: 'Scan Package', color: const Color(0xFF8B5CF6), onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Opening scanner...'))))),
                           const SizedBox(width: 8),
-                          Expanded(child: _QuickAction(icon: Icons.camera_alt, label: 'Take Photo', color: const Color(0xFF3B82F6), onTap: () {})),
+                          Expanded(child: _QuickAction(icon: Icons.camera_alt, label: 'Take Photo', color: const Color(0xFF3B82F6), onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Opening camera...'))))),
                           const SizedBox(width: 8),
                           Expanded(child: _QuickAction(icon: Icons.sos, label: 'Emergency', color: kLiveColor, onTap: () => Navigator.pushNamed(context, AppRoutes.liveEmergencySOS))),
                           const SizedBox(width: 8),
@@ -181,7 +181,7 @@ class LiveDriverHomeScreen extends StatelessWidget {
                     children: [
                       Text('ðŸ“‹ PACKAGE QUEUE (${pendingPackages.length})', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () => Navigator.pushNamed(context, AppRoutes.livePackages),
                         child: const Text('View All', style: TextStyle(fontSize: 12, color: kLiveColor)),
                       ),
                     ],

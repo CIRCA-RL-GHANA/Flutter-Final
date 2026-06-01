@@ -1,4 +1,5 @@
 ﻿import 'package:flutter/material.dart';
+import '../../core/routes/app_routes.dart';
 
 class Alert {
   final String id;
@@ -190,7 +191,7 @@ class UserProfile extends StatelessWidget {
                 const Text('John Doe', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
                 const Text('user@genieinprompt.app', style: TextStyle(color: Colors.grey)),
                 const SizedBox(height: 16),
-                ElevatedButton(onPressed: () {}, child: const Text('Edit Profile')),
+                ElevatedButton(onPressed: () => Navigator.pushNamed(context, AppRoutes.userDetailsMaster), child: const Text('Edit Profile')),
               ],
             ),
           ),
@@ -199,45 +200,45 @@ class UserProfile extends StatelessWidget {
             title: const Text('Orders'),
             subtitle: const Text('5 orders'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () {},
+            onTap: () => Navigator.pushNamed(context, AppRoutes.marketTransactions),
           ),
           ListTile(
             leading: const Icon(Icons.favorite),
             title: const Text('Wishlist'),
             subtitle: const Text('12 items'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () {},
+            onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Wishlist'))),
           ),
           ListTile(
             leading: const Icon(Icons.stars),
             title: const Text('Loyalty Points'),
             subtitle: const Text('2,450 points'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () {},
+            onTap: () => Navigator.pushNamed(context, AppRoutes.qPointsMarket),
           ),
           ListTile(
             leading: const Icon(Icons.payment),
             title: const Text('Payment Methods'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () {},
+            onTap: () => Navigator.pushNamed(context, AppRoutes.userDetailsMaster),
           ),
           ListTile(
             leading: const Icon(Icons.location_on),
             title: const Text('Addresses'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () {},
+            onTap: () => Navigator.pushNamed(context, AppRoutes.userDetailsMaster),
           ),
           ListTile(
             leading: const Icon(Icons.security),
             title: const Text('Security'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () {},
+            onTap: () => Navigator.pushNamed(context, AppRoutes.userDetailsSecurity),
           ),
           ListTile(
             leading: const Icon(Icons.info),
             title: const Text('About'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () {},
+            onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Version 2.4.1'))),
           ),
           ListTile(
             leading: const Icon(Icons.logout, color: Colors.red),
@@ -321,12 +322,12 @@ class _AppSettingsState extends State<AppSettings> {
           ListTile(
             title: const Text('Terms of Service'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () {},
+            onTap: () => Navigator.pushNamed(context, AppRoutes.utilityPrivacy),
           ),
           ListTile(
             title: const Text('Privacy Policy'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () {},
+            onTap: () => Navigator.pushNamed(context, AppRoutes.utilityPrivacy),
           ),
         ],
       ),

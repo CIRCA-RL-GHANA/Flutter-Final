@@ -196,7 +196,7 @@ class _LiveDriverAssignmentScreenState extends State<LiveDriverAssignmentScreen>
                 children: [
                   Expanded(
                     child: OutlinedButton.icon(
-                      onPressed: () {},
+                      onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Broadcasting to all drivers...'))),
                       icon: const Icon(Icons.broadcast_on_personal, size: 16),
                       label: const Text('BROADCAST TO ALL', style: TextStyle(fontSize: 12)),
                       style: OutlinedButton.styleFrom(foregroundColor: kLiveColor, padding: const EdgeInsets.symmetric(vertical: 12)),
@@ -205,7 +205,7 @@ class _LiveDriverAssignmentScreenState extends State<LiveDriverAssignmentScreen>
                   const SizedBox(width: 8),
                   Expanded(
                     child: OutlinedButton.icon(
-                      onPressed: () {},
+                      onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Scheduling...'))),
                       icon: const Icon(Icons.schedule, size: 16),
                       label: const Text('SCHEDULE LATER', style: TextStyle(fontSize: 12)),
                       style: OutlinedButton.styleFrom(foregroundColor: AppColors.textSecondary, padding: const EdgeInsets.symmetric(vertical: 12)),
@@ -302,9 +302,9 @@ class _AssignmentConfirmation extends StatelessWidget {
           const SizedBox(height: 16),
           Row(
             children: [
-              Expanded(child: OutlinedButton.icon(onPressed: () {}, icon: const Icon(Icons.gps_fixed, size: 16), label: const Text('VIEW DRIVER'), style: OutlinedButton.styleFrom(foregroundColor: kLiveColor, padding: const EdgeInsets.symmetric(vertical: 12)))),
+              Expanded(child: OutlinedButton.icon(onPressed: () => Navigator.pushNamed(context, AppRoutes.liveDriverPerformance), icon: const Icon(Icons.gps_fixed, size: 16), label: const Text('VIEW DRIVER'), style: OutlinedButton.styleFrom(foregroundColor: kLiveColor, padding: const EdgeInsets.symmetric(vertical: 12)))),
               const SizedBox(width: 8),
-              Expanded(child: OutlinedButton.icon(onPressed: () {}, icon: const Icon(Icons.notifications, size: 16), label: const Text('NOTIFY CUSTOMER'), style: OutlinedButton.styleFrom(foregroundColor: AppColors.textSecondary, padding: const EdgeInsets.symmetric(vertical: 12)))),
+              Expanded(child: OutlinedButton.icon(onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Notifying customer...'))), icon: const Icon(Icons.notifications, size: 16), label: const Text('NOTIFY CUSTOMER'), style: OutlinedButton.styleFrom(foregroundColor: AppColors.textSecondary, padding: const EdgeInsets.symmetric(vertical: 12)))),
               const SizedBox(width: 8),
               Expanded(
                 child: ElevatedButton(

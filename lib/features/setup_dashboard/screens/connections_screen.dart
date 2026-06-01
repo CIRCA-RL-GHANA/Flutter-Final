@@ -37,7 +37,7 @@ class ConnectionsScreen extends StatelessWidget {
             ),
             floatingActionButton: SetupRbacFAB(
               cardId: 'connections',
-              onPressed: () {},
+              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Add new contact'))),
               label: 'Add Contact',
               icon: Icons.person_add,
             ),

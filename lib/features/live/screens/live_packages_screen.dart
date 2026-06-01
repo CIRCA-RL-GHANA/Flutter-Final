@@ -49,8 +49,8 @@ class _LivePackagesScreenState extends State<LivePackagesScreen> with SingleTick
           appBar: LiveAppBar(
             title: 'Package Management',
             actions: [
-              IconButton(icon: const Icon(Icons.filter_list, size: 20), color: AppColors.textSecondary, onPressed: () {}),
-              IconButton(icon: const Icon(Icons.search, size: 20), color: AppColors.textSecondary, onPressed: () {}),
+              IconButton(icon: const Icon(Icons.filter_list, size: 20), color: AppColors.textSecondary, onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Filter packages...')))),
+              IconButton(icon: const Icon(Icons.search, size: 20), color: AppColors.textSecondary, onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Search packages...')))),
             ],
           ),
           body: Column(
@@ -119,7 +119,7 @@ class _LivePackagesScreenState extends State<LivePackagesScreen> with SingleTick
                 ),
                 const SizedBox(width: 8),
                 OutlinedButton.icon(
-                  onPressed: () {},
+                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Exporting...'))),
                   icon: const Icon(Icons.file_download, size: 16),
                   label: const Text('EXPORT', style: TextStyle(fontSize: 12)),
                   style: OutlinedButton.styleFrom(foregroundColor: AppColors.textSecondary, padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12)),

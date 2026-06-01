@@ -13,6 +13,7 @@ import '../../../core/services/ai_insights_notifier.dart';
 import '../../prompt/providers/context_provider.dart';
 import '../models/utility_models.dart';
 import '../providers/utility_provider.dart';
+import '../../../core/routes/app_routes.dart';
 import '../widgets/shared_widgets.dart';
 
 class UtilityDashboardScreen extends StatelessWidget {
@@ -157,7 +158,7 @@ class UtilityDashboardScreen extends StatelessWidget {
                         title: 'Recent Activity',
                         icon: Icons.history,
                         trailing: TextButton(
-                          onPressed: () {},
+                          onPressed: () => Navigator.pushNamed(context, AppRoutes.userDetailsAuditLog),
                           style: TextButton.styleFrom(
                             foregroundColor: kUtilityColor,
                             padding: EdgeInsets.zero,

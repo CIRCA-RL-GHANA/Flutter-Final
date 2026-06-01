@@ -8,9 +8,17 @@ import '../providers/alerts_provider.dart';
 import '../widgets/alerts_widgets.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 
-class AlertsKnowledgeScreen extends StatelessWidget {
+class AlertsKnowledgeScreen extends StatefulWidget {
   final String? alertId;
   const AlertsKnowledgeScreen({super.key, this.alertId});
+
+  @override
+  State<AlertsKnowledgeScreen> createState() => _AlertsKnowledgeScreenState();
+}
+
+class _AlertsKnowledgeScreenState extends State<AlertsKnowledgeScreen> {
+  String _selectedFilter = 'All';
+  String? get alertId => widget.alertId;
 
   @override
   Widget build(BuildContext context) {
@@ -84,10 +92,10 @@ class AlertsKnowledgeScreen extends StatelessWidget {
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: [
-                      _KbFilterChip(label: 'All', isSelected: true, onTap: () {}),
-                      _KbFilterChip(label: 'ðŸ“š Articles', isSelected: false, onTap: () {}),
-                      _KbFilterChip(label: 'âœ… Past Fixes', isSelected: false, onTap: () {}),
-                      _KbFilterChip(label: 'ðŸŒ Community', isSelected: false, onTap: () {}),
+                      _KbFilterChip(label: 'All', isSelected: _selectedFilter == 'All', onTap: () => setState(() => _selectedFilter = 'All')),
+                      _KbFilterChip(label: '📚 Articles', isSelected: _selectedFilter == 'Articles', onTap: () => setState(() => _selectedFilter = 'Articles')),
+                      _KbFilterChip(label: '✅ Past Fixes', isSelected: _selectedFilter == 'Past Fixes', onTap: () => setState(() => _selectedFilter = 'Past Fixes')),
+                      _KbFilterChip(label: '🌐 Community', isSelected: _selectedFilter == 'Community', onTap: () => setState(() => _selectedFilter = 'Community')),
                     ],
                   ),
                 ),

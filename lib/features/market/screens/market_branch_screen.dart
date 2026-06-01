@@ -107,11 +107,11 @@ class _MarketBranchScreenState extends State<MarketBranchScreen>
       actions: [
         IconButton(
           icon: const Icon(Icons.share, color: Colors.white),
-          onPressed: () {},
+          onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Link copied to clipboard'), behavior: SnackBarBehavior.floating)),
         ),
         IconButton(
           icon: const Icon(Icons.favorite_border, color: Colors.white),
-          onPressed: () {},
+          onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Added to favorites'), behavior: SnackBarBehavior.floating)),
         ),
       ],
       flexibleSpace: FlexibleSpaceBar(
@@ -546,7 +546,7 @@ class _DealsTab extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: isActive ? () {} : null,
+                    onPressed: isActive ? () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Voucher applied'), behavior: SnackBarBehavior.floating)) : null,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
                       foregroundColor: kMarketColorDark,
@@ -944,7 +944,11 @@ class _ReturnsTab extends StatelessWidget {
                     ),
                     const Spacer(),
                     TextButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Opening video...')),
+                        );
+                      },
                       icon: const Icon(Icons.play_arrow, size: 16),
                       label: const Text('Watch', style: TextStyle(fontSize: 12)),
                       style: TextButton.styleFrom(foregroundColor: kMarketColor),

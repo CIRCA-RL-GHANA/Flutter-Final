@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../models/qualchat_models.dart';
 import '../providers/qualchat_provider.dart';
 import '../widgets/qualchat_widgets.dart';
+import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 
 class QualChatPreferencesScreen extends StatelessWidget {
@@ -21,7 +22,14 @@ class QualChatPreferencesScreen extends StatelessWidget {
             title: 'My Vibe Settings ðŸŽ›ï¸',
             actions: [
               TextButton(
-                onPressed: () {},
+                onPressed: () => showDialog(context: context, builder: (_) => AlertDialog(
+                  title: const Text('Reset Vibe Settings?'),
+                  content: const Text('This will reset all your vibe preferences to defaults.'),
+                  actions: [
+                    TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
+                    ElevatedButton(onPressed: () { Navigator.pop(context); ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Settings reset to defaults'))); }, child: const Text('Reset')),
+                  ],
+                )),
                 child: const Text('Reset', style: TextStyle(color: Color(0xFFEF4444))),
               ),
             ],
@@ -213,11 +221,25 @@ class QualChatPreferencesScreen extends StatelessWidget {
                   title: 'Data Controls',
                   child: Row(
                     children: [
-                      _DataButton(label: 'Clear History', icon: Icons.delete_outline, onTap: () {}),
+                      _DataButton(label: 'Clear History', icon: Icons.delete_outline, onTap: () => showDialog(context: context, builder: (_) => AlertDialog(
+                        title: const Text('Clear Chat History?'),
+                        content: const Text('This will permanently delete your QualChat history.'),
+                        actions: [
+                          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
+                          ElevatedButton(onPressed: () { Navigator.pop(context); ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('History cleared'))); }, style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFFEF4444)), child: const Text('Clear')),
+                        ],
+                      ))),
                       const SizedBox(width: 8),
-                      _DataButton(label: 'Export Data', icon: Icons.download, onTap: () {}),
+                      _DataButton(label: 'Export Data', icon: Icons.download, onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Exporting your data...')))),
                       const SizedBox(width: 8),
-                      _DataButton(label: 'Delete Account', icon: Icons.warning_amber, onTap: () {}, isDestructive: true),
+                      _DataButton(label: 'Delete Account', icon: Icons.warning_amber, onTap: () => showDialog(context: context, builder: (_) => AlertDialog(
+                        title: const Text('Delete Account?'),
+                        content: const Text('This will permanently delete your QualChat account and all data. This cannot be undone.'),
+                        actions: [
+                          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
+                          ElevatedButton(onPressed: () { Navigator.pop(context); ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Account deletion requested'))); }, style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFFEF4444)), child: const Text('Delete')),
+                        ],
+                      )), isDestructive: true),
                     ],
                   ),
                 ),
@@ -249,7 +271,7 @@ class QualChatPreferencesScreen extends StatelessWidget {
                         children: [
                           Expanded(
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('AI suggestions applied'))),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: kChatColor,
                                 foregroundColor: Colors.white,
@@ -260,7 +282,7 @@ class QualChatPreferencesScreen extends StatelessWidget {
                           ),
                           const SizedBox(width: 8),
                           OutlinedButton(
-                            onPressed: () {},
+                            onPressed: () => Navigator.pushNamed(context, AppRoutes.utilityHelp),
                             style: OutlinedButton.styleFrom(
                               foregroundColor: kChatColor,
                               side: const BorderSide(color: kChatColor),

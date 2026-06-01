@@ -165,7 +165,7 @@ class NotificationSettingsScreen extends StatelessWidget {
                         SizedBox(
                           width: double.infinity,
                           child: OutlinedButton.icon(
-                            onPressed: () {},
+                              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Add new smart rule'))),
                             icon: const Icon(Icons.add, size: 16),
                             label: const Text('Add Rule'),
                             style: OutlinedButton.styleFrom(

@@ -209,7 +209,9 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
           const SizedBox(height: 16),
           // Upload area
           GestureDetector(
-            onTap: () {},
+            onTap: () => ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Opening file picker...')),
+            ),
             child: Container(
               width: double.infinity, height: 120,
               decoration: BoxDecoration(

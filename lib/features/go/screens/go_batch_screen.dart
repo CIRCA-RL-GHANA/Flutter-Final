@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../models/go_models.dart';
 import '../providers/go_provider.dart';
@@ -72,7 +73,7 @@ class _GoBatchScreenState extends State<GoBatchScreen> with SingleTickerProvider
           ],
         ),
         floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {},
+          onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Creating new batch...'), backgroundColor: kGoColor)),
           backgroundColor: kGoColor,
           icon: const Icon(Icons.add, color: Colors.white),
           label: const Text('New Batch', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
@@ -93,14 +94,14 @@ class _GoBatchScreenState extends State<GoBatchScreen> with SingleTickerProvider
           Expanded(child: OutlinedButton.icon(
             icon: const Icon(Icons.upload_file, size: 18),
             label: const Text('Upload CSV'),
-            onPressed: () {},
+            onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Select a CSV file to upload'), backgroundColor: kGoColor)),
             style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 12)),
           )),
           const SizedBox(width: 10),
           Expanded(child: OutlinedButton.icon(
             icon: const Icon(Icons.person_add, size: 18),
             label: const Text('Add Manual'),
-            onPressed: () {},
+            onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Add recipients manually'), backgroundColor: kGoColor)),
             style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 12)),
           )),
         ]),
@@ -125,7 +126,7 @@ class _GoBatchScreenState extends State<GoBatchScreen> with SingleTickerProvider
         SizedBox(width: double.infinity, child: ElevatedButton.icon(
           icon: const Icon(Icons.add, size: 18),
           label: const Text('Create Payment Run'),
-          onPressed: () {},
+          onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Setting up new payment run...'), backgroundColor: kGoColor)),
           style: ElevatedButton.styleFrom(backgroundColor: kGoColor, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 12), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
         )),
       ])),
@@ -151,13 +152,13 @@ class _GoBatchScreenState extends State<GoBatchScreen> with SingleTickerProvider
         // Approve all / Reject all
         Row(children: [
           Expanded(child: OutlinedButton(
-            onPressed: () {},
+            onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('All pending operations rejected'), backgroundColor: kGoNegative)),
             style: OutlinedButton.styleFrom(foregroundColor: kGoNegative, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 12)),
             child: const Text('Reject All'),
           )),
           const SizedBox(width: 10),
           Expanded(child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('All pending operations approved'), backgroundColor: kGoPositive)),
             style: ElevatedButton.styleFrom(backgroundColor: kGoPositive, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 12), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
             child: const Text('Approve All'),
           )),
@@ -207,9 +208,9 @@ class _BatchCard extends StatelessWidget {
         if (showApproveReject) ...[
           const SizedBox(height: 10),
           Row(children: [
-            Expanded(child: OutlinedButton(onPressed: () {}, style: OutlinedButton.styleFrom(foregroundColor: kGoNegative, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 8)), child: const Text('Reject', style: TextStyle(fontSize: 12)))),
+            Expanded(child: OutlinedButton(onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Batch rejected'), backgroundColor: kGoNegative)), style: OutlinedButton.styleFrom(foregroundColor: kGoNegative, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 8)), child: const Text('Reject', style: TextStyle(fontSize: 12)))),
             const SizedBox(width: 8),
-            Expanded(child: ElevatedButton(onPressed: () {}, style: ElevatedButton.styleFrom(backgroundColor: kGoPositive, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 8), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))), child: const Text('Approve', style: TextStyle(fontSize: 12)))),
+            Expanded(child: ElevatedButton(onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Batch approved'), backgroundColor: kGoPositive)), style: ElevatedButton.styleFrom(backgroundColor: kGoPositive, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 8), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))), child: const Text('Approve', style: TextStyle(fontSize: 12)))),
           ]),
         ],
       ]),

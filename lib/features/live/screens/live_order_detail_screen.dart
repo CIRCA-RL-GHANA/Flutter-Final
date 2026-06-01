@@ -26,8 +26,18 @@ class LiveOrderDetailScreen extends StatelessWidget {
           appBar: LiveAppBar(
             title: 'Order #${order.id} • ${order.priority.name.toUpperCase()}',
             actions: [
-              IconButton(icon: const Icon(Icons.more_vert, size: 20), color: AppColors.textSecondary, onPressed: () {}),
-              IconButton(icon: const Icon(Icons.download, size: 20), color: AppColors.textSecondary, onPressed: () {}),
+              IconButton(
+                icon: const Icon(Icons.more_vert, size: 20),
+                color: AppColors.textSecondary,
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
+                    builder: (_) => const SizedBox(height: 120),
+                  );
+                },
+              ),
+              IconButton(icon: const Icon(Icons.download, size: 20), color: AppColors.textSecondary, onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Exporting...')))),
             ],
           ),
           body: ListView(
@@ -137,9 +147,9 @@ class LiveOrderDetailScreen extends StatelessWidget {
                     Wrap(
                       spacing: 8,
                       children: [
-                        _ActionChip(label: 'CALL', icon: Icons.phone, onTap: () {}),
-                        _ActionChip(label: 'MESSAGE', icon: Icons.message, onTap: () {}),
-                        _ActionChip(label: 'VIEW PROFILE', icon: Icons.person, onTap: () {}),
+                        _ActionChip(label: 'CALL', icon: Icons.phone, onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Calling...')))),
+                        _ActionChip(label: 'MESSAGE', icon: Icons.message, onTap: () => Navigator.pushNamed(context, AppRoutes.qualChatDashboard)),
+                        _ActionChip(label: 'VIEW PROFILE', icon: Icons.person, onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Loading profile...')))),
                       ],
                     ),
                   ],
@@ -220,7 +230,7 @@ class LiveOrderDetailScreen extends StatelessWidget {
                     Wrap(
                       spacing: 8,
                       children: [
-                        _ActionChip(label: 'OPEN IN MAPS', icon: Icons.map, onTap: () {}),
+                        _ActionChip(label: 'OPEN IN MAPS', icon: Icons.map, onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Opening maps...')))),
                         _ActionChip(label: 'COPY ADDRESS', icon: Icons.copy, onTap: () => HapticFeedback.lightImpact()),
                       ],
                     ),
@@ -242,8 +252,8 @@ class LiveOrderDetailScreen extends StatelessWidget {
                       Wrap(
                         spacing: 8,
                         children: [
-                          _ActionChip(label: 'ADD INSTRUCTION', icon: Icons.add, onTap: () {}),
-                          _ActionChip(label: 'EDIT', icon: Icons.edit, onTap: () {}),
+                          _ActionChip(label: 'ADD INSTRUCTION', icon: Icons.add, onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Add instruction...')))),
+                          _ActionChip(label: 'EDIT', icon: Icons.edit, onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Edit instructions...')))),
                         ],
                       ),
                     ],
@@ -276,8 +286,8 @@ class LiveOrderDetailScreen extends StatelessWidget {
                       spacing: 8,
                       children: [
                         _ActionChip(label: 'ASSIGN DRIVER', icon: Icons.person_add, onTap: () => Navigator.pushNamed(context, AppRoutes.liveDriverAssignment)),
-                        _ActionChip(label: 'AUTO-ASSIGN', icon: Icons.auto_fix_high, onTap: () {}),
-                        _ActionChip(label: 'SELF-PICKUP', icon: Icons.store, onTap: () {}),
+                        _ActionChip(label: 'AUTO-ASSIGN', icon: Icons.auto_fix_high, onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Auto-assigning...')))),
+                        _ActionChip(label: 'SELF-PICKUP', icon: Icons.store, onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Marked for self-pickup')))),
                       ],
                     ),
                   ],
@@ -305,7 +315,7 @@ class LiveOrderDetailScreen extends StatelessWidget {
                 children: [
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Preparation complete'))),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF10B981),
                         foregroundColor: Colors.white,
@@ -317,7 +327,7 @@ class LiveOrderDetailScreen extends StatelessWidget {
                   ),
                   const SizedBox(width: 8),
                   OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Order on hold'))),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: const Color(0xFFF59E0B),
                       padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
@@ -327,7 +337,25 @@ class LiveOrderDetailScreen extends StatelessWidget {
                   ),
                   const SizedBox(width: 8),
                   OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (ctx) => AlertDialog(
+                          title: const Text('Cancel Order'),
+                          content: const Text('Are you sure you want to cancel this order?'),
+                          actions: [
+                            TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('NO')),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(ctx);
+                                Navigator.pop(context);
+                              },
+                              child: const Text('YES, CANCEL'),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                     style: OutlinedButton.styleFrom(
                       foregroundColor: kLiveColor,
                       padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),

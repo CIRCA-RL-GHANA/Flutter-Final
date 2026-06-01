@@ -40,7 +40,7 @@ class MyActivityScreen extends StatelessWidget {
             ),
             floatingActionButton: SetupRbacFAB(
               cardId: 'my_activity',
-              onPressed: () {},
+              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Add new task'))),
               label: 'Add Task',
               icon: Icons.add_task,
             ),

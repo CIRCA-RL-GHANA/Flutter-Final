@@ -101,7 +101,7 @@ class _GoFavoritesScreenState extends State<GoFavoritesScreen> {
                   TextButton.icon(
                     icon: const Icon(Icons.sort, size: 14),
                     label: const Text('Sort', style: TextStyle(fontSize: 11)),
-                    onPressed: () {},
+                    onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Sorted by name'))),
                     style: TextButton.styleFrom(foregroundColor: kGoColor, padding: EdgeInsets.zero, minimumSize: const Size(50, 24)),
                   ),
                 ]),
@@ -120,7 +120,7 @@ class _GoFavoritesScreenState extends State<GoFavoritesScreen> {
             ],
           ),
           floatingActionButton: FloatingActionButton(
-            onPressed: () {},
+            onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Add a new favorite'))),
             backgroundColor: kGoColor,
             child: const Icon(Icons.person_add, color: Colors.white),
           ),

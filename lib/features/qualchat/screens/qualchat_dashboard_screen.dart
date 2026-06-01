@@ -29,7 +29,36 @@ class QualChatDashboardScreen extends StatelessWidget {
             actions: [
               IconButton(
                 icon: const Icon(Icons.more_vert),
-                onPressed: () {},
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+                    ),
+                    builder: (_) => SafeArea(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          ListTile(
+                            leading: const Icon(Icons.settings),
+                            title: const Text('Settings'),
+                            onTap: () => Navigator.pop(context),
+                          ),
+                          ListTile(
+                            leading: const Icon(Icons.help_outline),
+                            title: const Text('Help'),
+                            onTap: () => Navigator.pop(context),
+                          ),
+                          ListTile(
+                            leading: const Icon(Icons.feedback_outlined),
+                            title: const Text('Feedback'),
+                            onTap: () => Navigator.pop(context),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
               ),
             ],
           ),
@@ -150,7 +179,11 @@ class QualChatDashboardScreen extends StatelessWidget {
     return QualChatSectionCard(
       title: 'My Hey Yas',
       trailing: '\u27F3',
-      onTrailingTap: () {},
+      onTrailingTap: () {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Refreshing...')),
+        );
+      },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -244,11 +277,19 @@ class QualChatDashboardScreen extends StatelessWidget {
                   const SizedBox(height: 12),
                   Row(
                     children: [
-                      _QuickButton(label: 'Send Message', onTap: () {}),
+                      _QuickButton(label: 'Send Message', onTap: () => Navigator.pushNamed(context, AppRoutes.qualChatDashboard)),
                       const SizedBox(width: 8),
-                      _QuickButton(label: 'Remind Later', onTap: () {}),
+                      _QuickButton(label: 'Remind Later', onTap: () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Reminder set')),
+                        );
+                      }),
                       const SizedBox(width: 8),
-                      _QuickButton(label: 'Pass', onTap: () {}),
+                      _QuickButton(label: 'Pass', onTap: () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Passed')),
+                        );
+                      }),
                     ],
                   ),
                 ],
@@ -507,7 +548,7 @@ style: const TextStyle(fontSize: 13, color: IveTokens.label),
               const SizedBox(width: 8),
               Expanded(
                 child: OutlinedButton(
-                  onPressed: () {},
+                  onPressed: () => Navigator.pushNamed(context, AppRoutes.qualChatActionCenter),
                   child: const Text('ðŸ“Š Full Report'),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: kChatColor,
@@ -579,9 +620,36 @@ style: const TextStyle(fontSize: 13, color: IveTokens.label),
             children: [
               _SmallAction(label: 'Manage', onTap: () => Navigator.pushNamed(context, AppRoutes.qualChatArchived)),
               const SizedBox(width: 8),
-              _SmallAction(label: 'Restore All', onTap: () {}),
+              _SmallAction(label: 'Restore All', onTap: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('All conversations restored')),
+                );
+              }),
               const SizedBox(width: 8),
-              _SmallAction(label: 'Empty Trash', onTap: () {}, isDestructive: true),
+              _SmallAction(label: 'Empty Trash', onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (ctx) => AlertDialog(
+                    title: const Text('Empty Trash'),
+                    content: const Text('Permanently delete all archived conversations?'),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(ctx),
+                        child: const Text('Cancel'),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(ctx);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Trash emptied')),
+                          );
+                        },
+                        child: const Text('Delete', style: TextStyle(color: Colors.red)),
+                      ),
+                    ],
+                  ),
+                );
+              }, isDestructive: true),
             ],
           ),
         ],

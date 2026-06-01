@@ -8,6 +8,7 @@ import '../../../core/widgets/ai_price_widgets.dart';
 import '../models/april_models.dart';
 import '../providers/april_provider.dart';
 import '../widgets/april_widgets.dart';
+import '../../../core/routes/app_routes.dart';
 
 class AprilPlannerScreen extends StatefulWidget {
   const AprilPlannerScreen({super.key});
@@ -45,7 +46,7 @@ class _AprilPlannerScreenState extends State<AprilPlannerScreen> with SingleTick
           appBar: AprilAppBar(
             title: 'ðŸ’° Planner',
             actions: [
-              IconButton(icon: const Icon(Icons.download, size: 22), onPressed: () {}),
+              IconButton(icon: const Icon(Icons.download, size: 22), onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Downloading...')))),
             ],
             bottom: TabBar(
               controller: _tabController,
@@ -212,7 +213,7 @@ class _OverviewTab extends StatelessWidget {
         AprilSectionCard(
           title: 'ðŸ“… Upcoming Bills',
           trailing: TextButton(
-            onPressed: () {},
+            onPressed: () => Navigator.pushNamed(context, AppRoutes.aprilStatement),
             child: const Text('See all', style: TextStyle(fontSize: 12, color: kAprilColorDark)),
           ),
           child: Column(
@@ -268,7 +269,7 @@ class _OverviewTab extends StatelessWidget {
         AprilSectionCard(
           title: 'ðŸ§¾ Recent Transactions',
           trailing: TextButton(
-            onPressed: () {},
+            onPressed: () => Navigator.pushNamed(context, AppRoutes.aprilStatement),
             child: const Text('View all', style: TextStyle(fontSize: 12, color: kAprilColorDark)),
           ),
           child: Column(

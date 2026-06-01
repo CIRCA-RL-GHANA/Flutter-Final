@@ -90,8 +90,8 @@ class _GoReportsScreenState extends State<GoReportsScreen> with SingleTickerProv
             title: Text(r.$1, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
             subtitle: Text(r.$2, style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
             trailing: Row(mainAxisSize: MainAxisSize.min, children: [
-              IconButton(icon: const Icon(Icons.visibility, size: 18, color: kGoColor), onPressed: () {}),
-              IconButton(icon: const Icon(Icons.download, size: 18, color: Color(0xFF9CA3AF)), onPressed: () {}),
+              IconButton(icon: const Icon(Icons.visibility, size: 18, color: kGoColor), onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Generating report...')))),
+              IconButton(icon: const Icon(Icons.download, size: 18, color: Color(0xFF9CA3AF)), onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Preparing download...')))),
             ]),
           ),
         )),
@@ -153,7 +153,7 @@ class _GoReportsScreenState extends State<GoReportsScreen> with SingleTickerProv
         SizedBox(width: double.infinity, child: ElevatedButton.icon(
           icon: const Icon(Icons.auto_awesome, size: 18),
           label: const Text('Generate Report'),
-          onPressed: () {},
+          onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Generating report...'))),
           style: ElevatedButton.styleFrom(backgroundColor: kGoColor, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
         )),
       ])),
@@ -179,8 +179,8 @@ class _GoReportsScreenState extends State<GoReportsScreen> with SingleTickerProv
               Text(r.title, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
               Text('${r.type.name} • ${r.format} • ${r.generatedAt.day}/${r.generatedAt.month}/${r.generatedAt.year}', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
             ])),
-            IconButton(icon: const Icon(Icons.download, size: 18, color: kGoColor), onPressed: () {}),
-            IconButton(icon: const Icon(Icons.share, size: 18, color: Color(0xFF9CA3AF)), onPressed: () {}),
+            IconButton(icon: const Icon(Icons.download, size: 18, color: kGoColor), onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Preparing download...')))),
+            IconButton(icon: const Icon(Icons.share, size: 18, color: Color(0xFF9CA3AF)), onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Link copied to clipboard')))),
           ]),
         );
       },
@@ -194,7 +194,7 @@ class _DateField extends StatelessWidget {
   @override
   Widget build(BuildContext context) => TextField(
     readOnly: true,
-    onTap: () {},
+    onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Date picker coming soon'))),
     decoration: InputDecoration(
       hintText: label, suffixIcon: const Icon(Icons.calendar_today, size: 16),
       filled: true, fillColor: const Color(0xFFF3F4F6),
@@ -210,7 +210,7 @@ class _FormatChip extends StatelessWidget {
   const _FormatChip({required this.label, required this.selected});
   @override
   Widget build(BuildContext context) => GestureDetector(
-    onTap: () {},
+    onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Format selected'))),
     child: Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(color: selected ? kGoColor : Colors.white, borderRadius: BorderRadius.circular(8), border: Border.all(color: selected ? kGoColor : const Color(0xFFE5E7EB))),

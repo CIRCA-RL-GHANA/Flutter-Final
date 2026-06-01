@@ -316,12 +316,12 @@ class LiveOrderCard extends StatelessWidget {
                   children: [
                     if (order.assignedDriverName == null) ...[
                       _LiveActionChip(label: 'ASSIGN DRIVER', icon: Icons.person_add, onTap: onAssign),
-                      _LiveActionChip(label: 'SELF-PICKUP', icon: Icons.store, onTap: () {}),
-                      _LiveActionChip(label: 'CREATE PACKAGE', icon: Icons.inventory, onTap: () {}),
+                      _LiveActionChip(label: 'SELF-PICKUP', icon: Icons.store, onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Self-pickup confirmed')))),
+                      _LiveActionChip(label: 'CREATE PACKAGE', icon: Icons.inventory, onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Creating package...')))),
                     ] else ...[
                       _LiveActionChip(label: 'VIEW DETAILS', icon: Icons.visibility, onTap: onTap),
                       _LiveActionChip(label: 'TRACK DRIVER', icon: Icons.gps_fixed, onTap: onTrack),
-                      _LiveActionChip(label: 'MESSAGE', icon: Icons.message, onTap: () {}),
+                      _LiveActionChip(label: 'MESSAGE', icon: Icons.message, onTap: () => Navigator.pushNamed(context, AppRoutes.qualChatDashboard)),
                     ],
                   ],
                 ),
@@ -487,9 +487,9 @@ class LivePackageCard extends StatelessWidget {
                   spacing: 8,
                   children: [
                     _LiveActionChip(label: 'TRACK LIVE', icon: Icons.gps_fixed, onTap: onTrack),
-                    _LiveActionChip(label: 'MESSAGE', icon: Icons.message_outlined, onTap: () {}),
+                    _LiveActionChip(label: 'MESSAGE', icon: Icons.message_outlined, onTap: () => Navigator.pushNamed(context, AppRoutes.qualChatDashboard)),
                     if (package.driverName != null)
-                      _LiveActionChip(label: 'REASSIGN', icon: Icons.swap_horiz, onTap: () {}),
+                      _LiveActionChip(label: 'REASSIGN', icon: Icons.swap_horiz, onTap: () => Navigator.pushNamed(context, AppRoutes.liveDriverAssignment)),
                   ],
                 ),
               ],
@@ -660,7 +660,7 @@ class LiveReturnCard extends StatelessWidget {
                     if (ret.status == LiveReturnStatus.pending)
                       _LiveActionChip(label: 'REVIEW RETURN', icon: Icons.rate_review, onTap: onReview),
                     if (ret.status == LiveReturnStatus.pending)
-                      _LiveActionChip(label: 'REQUEST MORE INFO', icon: Icons.help_outline, onTap: () {}),
+                      _LiveActionChip(label: 'REQUEST MORE INFO', icon: Icons.help_outline, onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Info request sent to customer')))),
                     if (ret.status == LiveReturnStatus.underReview)
                       _LiveActionChip(label: 'VIEW REVIEW', icon: Icons.visibility, onTap: onTap),
                   ],

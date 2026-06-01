@@ -48,7 +48,7 @@ class _MarketTransactionsScreenState extends State<MarketTransactionsScreen>
             actions: [
               IconButton(
                 icon: const Icon(Icons.search, color: AppColors.textPrimary),
-                onPressed: () {},
+                onPressed: () => Navigator.pushNamed(context, AppRoutes.utilitySearch),
               ),
             ],
           ),
@@ -641,7 +641,7 @@ class _OrderCard extends StatelessWidget {
                     ),
                     const SizedBox(width: 8),
                     OutlinedButton.icon(
-                      onPressed: () {},
+                      onPressed: () => Navigator.pushNamed(context, AppRoutes.marketCart),
                       icon: const Icon(Icons.refresh, size: 16),
                       label: const Text('Reorder'),
                       style: OutlinedButton.styleFrom(

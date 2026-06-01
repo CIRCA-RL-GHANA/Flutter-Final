@@ -337,7 +337,7 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
         const SizedBox(height: 16),
         // Add new payment
         OutlinedButton.icon(
-          onPressed: () {},
+          onPressed: () => Navigator.pushNamed(context, AppRoutes.userDetailsMaster),
           icon: const Icon(Icons.add, size: 18),
           label: const Text('Add Payment Method'),
           style: OutlinedButton.styleFrom(

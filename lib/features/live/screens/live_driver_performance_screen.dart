@@ -12,6 +12,7 @@ import '../models/live_models.dart';
 import '../providers/live_provider.dart';
 import '../widgets/live_widgets.dart';
 import '../../../core/services/ai_insights_notifier.dart';
+import '../../../core/routes/app_routes.dart';
 
 class LiveDriverPerformanceScreen extends StatelessWidget {
   const LiveDriverPerformanceScreen({super.key});
@@ -39,7 +40,17 @@ class LiveDriverPerformanceScreen extends StatelessWidget {
                         children: [
                           IconButton(icon: const Icon(Icons.arrow_back, color: Colors.white), onPressed: () => Navigator.pop(context)),
                           const Expanded(child: Text('Driver Performance', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white))),
-                          IconButton(icon: const Icon(Icons.more_vert, color: Colors.white70), onPressed: () {}),
+                          IconButton(icon: const Icon(Icons.more_vert, color: Colors.white70), onPressed: () => showModalBottomSheet(
+                            context: context,
+                            builder: (_) => Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                ListTile(leading: const Icon(Icons.edit), title: const Text('Edit Driver'), onTap: () => Navigator.pop(context)),
+                                ListTile(leading: const Icon(Icons.block), title: const Text('Suspend Driver'), onTap: () => Navigator.pop(context)),
+                                ListTile(leading: const Icon(Icons.delete_outline), title: const Text('Remove Driver'), onTap: () => Navigator.pop(context)),
+                              ],
+                            ),
+                          )),
                         ],
                       ),
                       const SizedBox(height: 8),
@@ -213,7 +224,7 @@ class LiveDriverPerformanceScreen extends StatelessWidget {
                         children: [
                           Expanded(
                             child: OutlinedButton.icon(
-                              onPressed: () {},
+                              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Calling...'))),
                               icon: const Icon(Icons.phone, size: 16),
                               label: const Text('CALL', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700)),
                               style: OutlinedButton.styleFrom(foregroundColor: const Color(0xFF10B981), padding: const EdgeInsets.symmetric(vertical: 12)),
@@ -222,7 +233,7 @@ class LiveDriverPerformanceScreen extends StatelessWidget {
                           const SizedBox(width: 8),
                           Expanded(
                             child: OutlinedButton.icon(
-                              onPressed: () {},
+                              onPressed: () => Navigator.pushNamed(context, AppRoutes.qualChatDashboard),
                               icon: const Icon(Icons.chat, size: 16),
                               label: const Text('MESSAGE', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700)),
                               style: OutlinedButton.styleFrom(foregroundColor: const Color(0xFF3B82F6), padding: const EdgeInsets.symmetric(vertical: 12)),
@@ -231,7 +242,7 @@ class LiveDriverPerformanceScreen extends StatelessWidget {
                           const SizedBox(width: 8),
                           Expanded(
                             child: OutlinedButton.icon(
-                              onPressed: () {},
+                              onPressed: () => Navigator.pushNamed(context, AppRoutes.liveDriverAssignment),
                               icon: const Icon(Icons.assignment, size: 16),
                               label: const Text('ASSIGN', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700)),
                               style: OutlinedButton.styleFrom(foregroundColor: kLiveColor, padding: const EdgeInsets.symmetric(vertical: 12)),

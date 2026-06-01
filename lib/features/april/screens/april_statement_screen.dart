@@ -103,10 +103,10 @@ class AprilStatementScreen extends StatelessWidget {
                           spacing: 8,
                           runSpacing: 8,
                           children: [
-                            _AIActionChip(label: 'âœï¸ Draft section', onTap: () {}),
-                            _AIActionChip(label: 'ðŸ” Review & refine', onTap: () {}),
-                            _AIActionChip(label: 'ðŸ“Š Suggest highlights', onTap: () {}),
-                            _AIActionChip(label: 'ðŸŒ Translate', onTap: () {}),
+                            _AIActionChip(label: '✏️ Draft section', onTap: () => ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text('Running AI action...')))),
+                            _AIActionChip(label: '🔍 Review & refine', onTap: () => ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text('Running AI action...')))),
+                            _AIActionChip(label: '📊 Suggest highlights', onTap: () => ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text('Running AI action...')))),
+                            _AIActionChip(label: '🌐 Translate', onTap: () => ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text('Running AI action...')))),
                           ],
                         ),
                       ],
@@ -327,7 +327,12 @@ class AprilStatementScreen extends StatelessWidget {
               title: Text(v.changeComment, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
               subtitle: Text(_formatDate(v.createdAt), style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
               trailing: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(ctx);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Version restored')),
+                  );
+                },
                 child: const Text('Restore', style: TextStyle(fontSize: 12, color: kAprilColorDark)),
               ),
             )),

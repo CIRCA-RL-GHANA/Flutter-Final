@@ -7,6 +7,7 @@ import '../models/qualchat_models.dart';
 import '../providers/qualchat_provider.dart';
 import '../widgets/qualchat_widgets.dart';
 import '../../../core/services/ai_insights_notifier.dart';
+import '../../../core/routes/app_routes.dart';
 
 class QualChatTimelineScreen extends StatelessWidget {
   const QualChatTimelineScreen({super.key});
@@ -44,7 +45,11 @@ class QualChatTimelineScreen extends StatelessWidget {
         title: 'Dating Journey ðŸ’˜',
         actions: [
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Link copied to clipboard')),
+              );
+            },
             child: const Text('Share', style: TextStyle(color: kChatColor)),
           ),
         ],
@@ -172,21 +177,41 @@ class QualChatTimelineScreen extends StatelessWidget {
             const SizedBox(height: 12),
             Row(
               children: [
-                _ActionButton(icon: 'ðŸ’Œ', label: 'Say Hi', onTap: () {}),
+                _ActionButton(icon: '💌', label: 'Say Hi', onTap: () => Navigator.pushNamed(context, AppRoutes.qualChatDashboard)),
                 const SizedBox(width: 8),
-                _ActionButton(icon: 'ðŸ“…', label: 'Plan Date', onTap: () {}, isPrimary: true),
+                _ActionButton(icon: '📅', label: 'Plan Date', onTap: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Opening planner...')),
+                  );
+                }, isPrimary: true),
                 const SizedBox(width: 8),
-                _ActionButton(icon: 'ðŸŽ¤', label: 'Voice Note', onTap: () {}),
+                _ActionButton(icon: '🎤', label: 'Voice Note', onTap: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Recording voice note...')),
+                  );
+                }),
               ],
             ),
             const SizedBox(height: 8),
             Row(
               children: [
-                _ActionButton(icon: 'âœ…', label: 'Accept', onTap: () {}, isPrimary: request.status == HeyYaStatus.pending && !request.isSentByMe),
+                _ActionButton(icon: '✅', label: 'Accept', onTap: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Accepted!')),
+                  );
+                }, isPrimary: request.status == HeyYaStatus.pending && !request.isSentByMe),
                 const SizedBox(width: 8),
-                _ActionButton(icon: 'ðŸ”„', label: 'Re-spark', onTap: () {}),
+                _ActionButton(icon: '🔄', label: 'Re-spark', onTap: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Re-sparked!')),
+                  );
+                }),
                 const SizedBox(width: 8),
-                _ActionButton(icon: 'âŒ', label: 'Withdraw', onTap: () {}, isDestructive: true),
+                _ActionButton(icon: '❌', label: 'Withdraw', onTap: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Withdrawn')),
+                  );
+                }, isDestructive: true),
               ],
             ),
           ],

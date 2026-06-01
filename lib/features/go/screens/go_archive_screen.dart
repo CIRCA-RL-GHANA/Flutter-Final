@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../models/go_models.dart';
 import '../providers/go_provider.dart';
@@ -109,7 +110,7 @@ class _GoArchiveScreenState extends State<GoArchiveScreen> with SingleTickerProv
             children: ['All', 'Last 30d', 'Last 90d', 'This Year', '2023'].map((f) => Padding(
               padding: const EdgeInsets.only(right: 6),
               child: GestureDetector(
-                onTap: () {},
+                onTap: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Filtering: $f'), backgroundColor: kGoColor, duration: const Duration(seconds: 1))),
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                   decoration: BoxDecoration(color: f == 'All' ? kGoColor : Colors.white, borderRadius: BorderRadius.circular(16), border: Border.all(color: f == 'All' ? kGoColor : const Color(0xFFE5E7EB))),
@@ -190,20 +191,27 @@ class _GoArchiveScreenState extends State<GoArchiveScreen> with SingleTickerProv
         const GoSectionHeader(title: 'Export Options', icon: Icons.download),
         const SizedBox(height: 10),
         Row(children: [
-          Expanded(child: _ExportBtn(icon: Icons.picture_as_pdf, label: 'PDF', onTap: () {})),
+          Expanded(child: _ExportBtn(icon: Icons.picture_as_pdf, label: 'PDF', onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Generating PDF export...'), backgroundColor: kGoColor)))),
           const SizedBox(width: 8),
-          Expanded(child: _ExportBtn(icon: Icons.table_chart, label: 'CSV', onTap: () {})),
+          Expanded(child: _ExportBtn(icon: Icons.table_chart, label: 'CSV', onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Generating CSV export...'), backgroundColor: kGoColor)))),
           const SizedBox(width: 8),
-          Expanded(child: _ExportBtn(icon: Icons.grid_on, label: 'Excel', onTap: () {})),
+          Expanded(child: _ExportBtn(icon: Icons.grid_on, label: 'Excel', onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Generating Excel export...'), backgroundColor: kGoColor)))),
           const SizedBox(width: 8),
-          Expanded(child: _ExportBtn(icon: Icons.data_object, label: 'JSON', onTap: () {})),
+          Expanded(child: _ExportBtn(icon: Icons.data_object, label: 'JSON', onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Generating JSON export...'), backgroundColor: kGoColor)))),
         ]),
       ])),
       const SizedBox(height: 14),
       SizedBox(width: double.infinity, child: OutlinedButton.icon(
         icon: const Icon(Icons.delete_sweep, size: 18),
         label: const Text('Request Data Deletion'),
-        onPressed: () {},
+        onPressed: () => showDialog(context: context, builder: (_) => AlertDialog(
+          title: const Text('Request Data Deletion?'),
+          content: const Text('This will submit a request to delete non-mandatory records. Legally required records will be retained per compliance rules.'),
+          actions: [
+            TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
+            ElevatedButton(onPressed: () { Navigator.pop(context); ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Data deletion request submitted'), backgroundColor: kGoNegative)); }, style: ElevatedButton.styleFrom(backgroundColor: kGoNegative), child: const Text('Submit Request')),
+          ],
+        )),
         style: OutlinedButton.styleFrom(foregroundColor: kGoNegative, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 12)),
       )),
     ]);

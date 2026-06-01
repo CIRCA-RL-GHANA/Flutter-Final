@@ -52,7 +52,7 @@ class _LiveOrdersScreenState extends State<LiveOrdersScreen> with SingleTickerPr
             ),
             title: const Text('ORDERS • LIVE', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: AppColors.textPrimary)),
             actions: [
-              IconButton(icon: const Icon(Icons.search, size: 20), color: AppColors.textSecondary, onPressed: () {}),
+              IconButton(icon: const Icon(Icons.search, size: 20), color: AppColors.textSecondary, onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Search orders...')))),
               IconButton(icon: const Icon(Icons.settings, size: 20), color: AppColors.textSecondary, onPressed: () => Navigator.pushNamed(context, AppRoutes.liveSettings)),
               IconButton(icon: const Icon(Icons.bar_chart, size: 20), color: AppColors.textSecondary, onPressed: () => Navigator.pushNamed(context, AppRoutes.liveAnalytics)),
             ],
@@ -109,7 +109,7 @@ class _LiveOrdersScreenState extends State<LiveOrdersScreen> with SingleTickerPr
                 children: [
                   Expanded(
                     child: OutlinedButton.icon(
-                      onPressed: () {},
+                      onPressed: () => Navigator.pushNamed(context, AppRoutes.liveDriverAssignment),
                       icon: const Icon(Icons.select_all, size: 16),
                       label: const Text('BULK ASSIGN', style: TextStyle(fontSize: 12)),
                       style: OutlinedButton.styleFrom(foregroundColor: kLiveColor, padding: const EdgeInsets.symmetric(vertical: 12)),
@@ -118,7 +118,7 @@ class _LiveOrdersScreenState extends State<LiveOrdersScreen> with SingleTickerPr
                   const SizedBox(width: 8),
                   Expanded(
                     child: ElevatedButton.icon(
-                      onPressed: () {},
+                      onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Auto-assigning all orders...'))),
                       icon: const Icon(Icons.auto_fix_high, size: 16),
                       label: const Text('AUTO-ASSIGN ALL', style: TextStyle(fontSize: 12)),
                       style: ElevatedButton.styleFrom(
@@ -130,7 +130,7 @@ class _LiveOrdersScreenState extends State<LiveOrdersScreen> with SingleTickerPr
                   ),
                   const SizedBox(width: 8),
                   OutlinedButton.icon(
-                    onPressed: () {},
+                    onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Exporting...'))),
                     icon: const Icon(Icons.download, size: 16),
                     label: const Text('EXPORT', style: TextStyle(fontSize: 12)),
                     style: OutlinedButton.styleFrom(foregroundColor: AppColors.textSecondary, padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12)),

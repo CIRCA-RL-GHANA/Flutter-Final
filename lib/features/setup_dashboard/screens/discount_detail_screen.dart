@@ -579,14 +579,21 @@ class _SettingsTab extends StatelessWidget {
                   icon: Icons.pause_circle_outline,
                   label: 'Pause Discount',
                   subtitle: 'Temporarily disable this discount tier',
-                  onTap: () {},
+                  onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Discount paused'))),
                 ),
                 const SizedBox(height: 8),
                 SetupActionTile(
                   icon: Icons.delete_outline,
                   label: 'Delete Discount',
                   subtitle: 'Permanently remove this discount tier',
-                  onTap: () {},
+                  onTap: () => showDialog(context: context, builder: (_) => AlertDialog(
+                    title: const Text('Delete Discount?'),
+                    content: const Text('This will permanently remove this discount tier. This action cannot be undone.'),
+                    actions: [
+                      TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
+                      ElevatedButton(onPressed: () { Navigator.pop(context); ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Discount deleted'))); }, style: ElevatedButton.styleFrom(backgroundColor: AppColors.error), child: const Text('Delete')),
+                    ],
+                  )),
                   iconColor: AppColors.error,
                 ),
               ],

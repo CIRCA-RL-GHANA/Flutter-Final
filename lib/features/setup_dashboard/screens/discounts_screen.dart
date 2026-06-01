@@ -36,7 +36,7 @@ class DiscountsScreen extends StatelessWidget {
             ),
             floatingActionButton: SetupRbacFAB(
               cardId: 'discounts',
-              onPressed: () {},
+              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Create new discount tier'))),
               label: 'New Tier',
               icon: Icons.add,
             ),

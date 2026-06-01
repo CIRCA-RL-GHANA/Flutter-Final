@@ -4,6 +4,7 @@
 /// 4 states: pending, verifying, verified, failed
 
 import 'package:flutter/material.dart';
+import '../../../core/routes/app_routes.dart';
 import 'package:provider/provider.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../models/go_models.dart';
@@ -44,6 +45,9 @@ class _GoVerificationScreenState extends State<GoVerificationScreen> with Single
   GoVerificationMethod? _selectedMethod;
   final _pinCtrl = TextEditingController();
   final _otpCtrl = TextEditingController();
+  bool _requireAll = true;
+  bool _biometricPreferred = true;
+  bool _rememberDevice = false;
 
   @override
   void initState() { super.initState(); _tabCtrl = TabController(length: 4, vsync: this); }
@@ -179,9 +183,9 @@ class _GoVerificationScreenState extends State<GoVerificationScreen> with Single
       GoSectionCard(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         const Text('VERIFICATION PREFERENCES', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF9CA3AF))),
         const Divider(height: 16),
-        SwitchListTile(title: const Text('Require for all transactions', style: TextStyle(fontSize: 13)), value: true, onChanged: (_) {}, activeColor: kGoColor, dense: true),
-        SwitchListTile(title: const Text('Biometric preferred', style: TextStyle(fontSize: 13)), value: true, onChanged: (_) {}, activeColor: kGoColor, dense: true),
-        SwitchListTile(title: const Text('Remember device (7 days)', style: TextStyle(fontSize: 13)), value: false, onChanged: (_) {}, activeColor: kGoColor, dense: true),
+        SwitchListTile(title: const Text('Require for all transactions', style: TextStyle(fontSize: 13)), value: _requireAll, onChanged: (v) => setState(() => _requireAll = v), activeColor: kGoColor, dense: true),
+        SwitchListTile(title: const Text('Biometric preferred', style: TextStyle(fontSize: 13)), value: _biometricPreferred, onChanged: (v) => setState(() => _biometricPreferred = v), activeColor: kGoColor, dense: true),
+        SwitchListTile(title: const Text('Remember device (7 days)', style: TextStyle(fontSize: 13)), value: _rememberDevice, onChanged: (v) => setState(() => _rememberDevice = v), activeColor: kGoColor, dense: true),
       ])),
       const SizedBox(height: 10),
       GoSectionCard(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -205,7 +209,7 @@ class _GoVerificationScreenState extends State<GoVerificationScreen> with Single
       OutlinedButton.icon(
         icon: const Icon(Icons.support_agent, size: 18),
         label: const Text('Contact Support'),
-        onPressed: () {},
+        onPressed: () => Navigator.pushNamed(context, AppRoutes.utilityHelp),
         style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 12)),
       ),
     ]);

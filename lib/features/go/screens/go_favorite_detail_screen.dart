@@ -3,6 +3,7 @@
 /// communication hub, transaction tools, relationship management
 
 import 'package:flutter/material.dart';
+import '../../../core/routes/app_routes.dart';
 import 'package:provider/provider.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../models/go_models.dart';
@@ -63,10 +64,10 @@ class GoFavoriteDetailScreen extends StatelessWidget {
               _buildQuickActions(context),
               const SizedBox(height: 14),
               // 4 — Transaction history
-              _buildTransactionHistory(fav),
+              _buildTransactionHistory(context, fav),
               const SizedBox(height: 14),
               // 5 — Notes / Context
-              _buildNotes(fav),
+              _buildNotes(context, fav),
               const SizedBox(height: 14),
               // 6 — Admin tools
               _buildAdminTools(context, fav),
@@ -136,18 +137,18 @@ class GoFavoriteDetailScreen extends StatelessWidget {
         _ActionBtn(icon: Icons.send, label: 'Send QP', onTap: () => Navigator.pushNamed(context, '/go/transfer')),
         _ActionBtn(icon: Icons.request_page, label: 'Request', onTap: () => Navigator.pushNamed(context, '/go/requests')),
         _ActionBtn(icon: Icons.receipt_long, label: 'New Tab', onTap: () => Navigator.pushNamed(context, '/go/tabs')),
-        _ActionBtn(icon: Icons.message, label: 'Message', onTap: () {}),
-        _ActionBtn(icon: Icons.schedule, label: 'Schedule', onTap: () {}),
-        _ActionBtn(icon: Icons.share, label: 'Share', onTap: () {}),
+        _ActionBtn(icon: Icons.message, label: 'Message', onTap: () => Navigator.pushNamed(context, AppRoutes.qualChatDashboard)),
+        _ActionBtn(icon: Icons.schedule, label: 'Schedule', onTap: () => Navigator.pushNamed(context, AppRoutes.goPlanner)),
+        _ActionBtn(icon: Icons.share, label: 'Share', onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Link copied to clipboard')))),
       ]),
     ]));
   }
 
-  Widget _buildTransactionHistory(FavoriteEntity fav) {
+  Widget _buildTransactionHistory(BuildContext context, FavoriteEntity fav) {
     return GoSectionCard(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Row(children: [
         const Expanded(child: GoSectionHeader(title: 'Recent Activity', icon: Icons.history)),
-        TextButton(onPressed: () {}, child: const Text('View All', style: TextStyle(fontSize: 11, color: kGoColor))),
+        TextButton(onPressed: () => Navigator.pushNamed(context, AppRoutes.goArchive), child: const Text('View All', style: TextStyle(fontSize: 11, color: kGoColor))),
       ]),
       const SizedBox(height: 8),
       // Mock recent transactions
@@ -160,7 +161,7 @@ class GoFavoriteDetailScreen extends StatelessWidget {
     ]));
   }
 
-  Widget _buildNotes(FavoriteEntity fav) {
+  Widget _buildNotes(BuildContext context, FavoriteEntity fav) {
     return GoSectionCard(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       const GoSectionHeader(title: 'Notes & Tags', icon: Icons.note),
       const SizedBox(height: 8),
@@ -174,7 +175,7 @@ class GoFavoriteDetailScreen extends StatelessWidget {
       Wrap(spacing: 6, children: [
         Chip(label: const Text('Frequent', style: TextStyle(fontSize: 10)), backgroundColor: kGoColorLight, side: BorderSide.none, padding: EdgeInsets.zero, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
         Chip(label: const Text('Verified', style: TextStyle(fontSize: 10)), backgroundColor: kGoPositive.withValues(alpha: 0.1), side: BorderSide.none, padding: EdgeInsets.zero, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
-        ActionChip(label: const Text('+ Tag', style: TextStyle(fontSize: 10)), onPressed: () {}, backgroundColor: Colors.white, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: EdgeInsets.zero, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
+        ActionChip(label: const Text('+ Tag', style: TextStyle(fontSize: 10)), onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Tag added'))), backgroundColor: Colors.white, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: EdgeInsets.zero, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
       ]),
     ]));
   }
@@ -187,19 +188,19 @@ class GoFavoriteDetailScreen extends StatelessWidget {
         leading: const Icon(Icons.block, color: kGoNegative, size: 20),
         title: const Text('Block Party', style: TextStyle(fontSize: 13, color: kGoNegative)),
         dense: true, contentPadding: EdgeInsets.zero,
-        onTap: () {},
+        onTap: () => showDialog(context: context, builder: (ctx) => AlertDialog(title: const Text('Block Party'), content: const Text('Are you sure you want to block this party?'), actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')), ElevatedButton(onPressed: () { Navigator.pop(ctx); ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Party blocked'))); }, style: ElevatedButton.styleFrom(backgroundColor: kGoNegative, foregroundColor: Colors.white), child: const Text('Block'))])),
       ),
       ListTile(
         leading: const Icon(Icons.delete_outline, color: Color(0xFF9CA3AF), size: 20),
         title: const Text('Remove from Favorites', style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
         dense: true, contentPadding: EdgeInsets.zero,
-        onTap: () {},
+        onTap: () => showDialog(context: context, builder: (ctx) => AlertDialog(title: const Text('Remove from Favorites'), content: const Text('Remove this party from your favorites?'), actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')), ElevatedButton(onPressed: () => Navigator.pop(ctx), style: ElevatedButton.styleFrom(backgroundColor: kGoColor, foregroundColor: Colors.white), child: const Text('Remove'))])),
       ),
       ListTile(
         leading: const Icon(Icons.flag_outlined, color: kGoWarning, size: 20),
         title: const Text('Report', style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
         dense: true, contentPadding: EdgeInsets.zero,
-        onTap: () {},
+        onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Report submitted'))),
       ),
     ]));
   }

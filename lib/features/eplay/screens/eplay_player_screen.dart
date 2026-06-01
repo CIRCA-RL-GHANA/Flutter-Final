@@ -62,8 +62,28 @@ class _EPlayPlayerScreenState extends State<EPlayPlayerScreen> with TickerProvid
               ],
             ),
             actions: [
-              IconButton(icon: const Icon(Icons.share, color: Colors.white), onPressed: () {}),
-              IconButton(icon: const Icon(Icons.more_vert, color: Colors.white), onPressed: () {}),
+              IconButton(
+                icon: const Icon(Icons.share, color: Colors.white),
+                onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Link copied to clipboard')),
+                ),
+              ),
+              IconButton(
+                icon: const Icon(Icons.more_vert, color: Colors.white),
+                onPressed: () => showModalBottomSheet(
+                  context: context,
+                  builder: (ctx) => SafeArea(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ListTile(leading: const Icon(Icons.playlist_add), title: const Text('Add to playlist'), onTap: () => Navigator.pop(ctx)),
+                        ListTile(leading: const Icon(Icons.download), title: const Text('Download'), onTap: () => Navigator.pop(ctx)),
+                        ListTile(leading: const Icon(Icons.flag), title: const Text('Report'), onTap: () => Navigator.pop(ctx)),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
           body: SafeArea(
@@ -153,7 +173,7 @@ class _EPlayPlayerScreenState extends State<EPlayPlayerScreen> with TickerProvid
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    IconButton(icon: const Icon(Icons.skip_previous, color: Colors.white, size: 36), onPressed: () {}),
+                    IconButton(icon: const Icon(Icons.skip_previous, color: Colors.white, size: 36), onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Playing previous')))),
                     GestureDetector(
                       onTap: () => setState(() {
                         _isPlaying = !_isPlaying;
@@ -170,7 +190,7 @@ class _EPlayPlayerScreenState extends State<EPlayPlayerScreen> with TickerProvid
                         child: Icon(_isPlaying ? Icons.pause : Icons.play_arrow, color: colors[0], size: 40),
                       ),
                     ),
-                    IconButton(icon: const Icon(Icons.skip_next, color: Colors.white, size: 36), onPressed: () {}),
+                    IconButton(icon: const Icon(Icons.skip_next, color: Colors.white, size: 36), onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Playing next')))),
                   ],
                 ),
                 const SizedBox(height: 32),

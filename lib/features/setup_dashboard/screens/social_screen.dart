@@ -37,7 +37,7 @@ class SocialScreen extends StatelessWidget {
             ),
             floatingActionButton: SetupRbacFAB(
               cardId: 'social',
-              onPressed: () {},
+              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Create new post'))),
               label: 'New Post',
               icon: Icons.edit,
             ),

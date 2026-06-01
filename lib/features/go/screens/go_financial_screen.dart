@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' hide Consumer;
 import 'package:provider/provider.dart';
 import 'package:thepg/core/providers/service_providers.dart';
+import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/widgets/ai_price_widgets.dart';
 import '../../../core/widgets/ai_insight_card.dart';
@@ -95,22 +96,22 @@ class _GoFinancialScreenState extends ConsumerState<GoFinancialScreen> {
                   _ActionButton(
                     icon: Icons.add,
                     label: 'Add Income',
-                    onTap: () {},
+                    onTap: () => Navigator.pushNamed(context, AppRoutes.goBuy),
                   ),
                   _ActionButton(
                     icon: Icons.remove,
                     label: 'Add Expense',
-                    onTap: () {},
+                    onTap: () => Navigator.pushNamed(context, AppRoutes.goSell),
                   ),
                   _ActionButton(
                     icon: Icons.swap_horiz,
                     label: 'Transfer',
-                    onTap: () {},
+                    onTap: () => Navigator.pushNamed(context, AppRoutes.goTransfer),
                   ),
                   _ActionButton(
                     icon: Icons.more_horiz,
                     label: 'More',
-                    onTap: () {},
+                    onTap: () => Navigator.pushNamed(context, AppRoutes.goHub),
                   ),
                 ],
               ),
@@ -183,7 +184,7 @@ class _GoFinancialScreenState extends ConsumerState<GoFinancialScreen> {
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () => Navigator.pushNamed(context, AppRoutes.goArchive),
                     child: const Text('View All'),
                   ),
                 ],

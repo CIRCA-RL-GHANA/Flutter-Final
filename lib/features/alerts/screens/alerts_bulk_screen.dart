@@ -274,7 +274,7 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
       SnackBar(
         content: Text('${_actionLabel(_selectedAction!)} applied to ${provider.selectedCount} alerts'),
         backgroundColor: kAlertsResolved,
-        action: SnackBarAction(label: 'Undo', textColor: Colors.white, onPressed: () {}),
+        action: SnackBarAction(label: 'Undo', textColor: Colors.white, onPressed: () => Navigator.pop(context)),
       ),
     );
     provider.clearSelection();

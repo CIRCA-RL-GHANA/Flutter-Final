@@ -9,6 +9,7 @@ import '../models/april_models.dart';
 import '../providers/april_provider.dart';
 import '../widgets/april_widgets.dart';
 import '../../../core/design/ive_tokens.dart';
+import '../../../core/routes/app_routes.dart';
 
 class AprilDashboardScreen extends StatelessWidget {
   const AprilDashboardScreen({super.key});
@@ -296,7 +297,7 @@ class AprilDashboardScreen extends StatelessWidget {
                               prefixIcon: const Icon(Icons.terminal, color: IveTokens.labelTertiary),
                               suffixIcon: IconButton(
                                 icon: const Icon(Icons.help_outline, size: 20, color: IveTokens.labelTertiary),
-                                onPressed: () {},
+                                onPressed: () => Navigator.pushNamed(context, AppRoutes.utilityHelp),
                               ),
                               filled: true,
                               fillColor: IveTokens.surface,
@@ -313,7 +314,7 @@ class AprilDashboardScreen extends StatelessWidget {
                             runSpacing: 6,
                             children: ['Add expense', 'Schedule meeting', 'Check balance', 'Add to wishlist']
                                 .map((t) => GestureDetector(
-                                      onTap: () {},
+                                      onTap: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Running: $t'), duration: const Duration(seconds: 1))),
                                       child: Container(
                                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                                         decoration: BoxDecoration(
@@ -359,7 +360,27 @@ class AprilDashboardScreen extends StatelessWidget {
                             children: [
                               const Text('Storage: 124 MB / 1 GB', style: TextStyle(fontSize: 11, color: IveTokens.labelTertiary)),
                               GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (ctx) => AlertDialog(
+                                      title: const Text('Emergency Stop'),
+                                      content: const Text('This will immediately halt all APRIL processes. Are you sure?'),
+                                      actions: [
+                                        TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(ctx);
+                                            ScaffoldMessenger.of(context).showSnackBar(
+                                              const SnackBar(content: Text('APRIL processes stopped.')),
+                                            );
+                                          },
+                                          child: const Text('Stop', style: TextStyle(color: Colors.red)),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
                                 child: const Text(
                                   'ðŸ›‘ Emergency Stop',
                                   style: TextStyle(fontSize: 11, color: IveTokens.danger, fontWeight: FontWeight.w600),

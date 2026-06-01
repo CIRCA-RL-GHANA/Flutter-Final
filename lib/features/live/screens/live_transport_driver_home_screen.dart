@@ -157,7 +157,7 @@ class LiveTransportDriverHomeScreen extends StatelessWidget {
                       const SizedBox(height: 8),
                       Row(
                         children: [
-                          Expanded(child: _QuickAction(icon: Icons.navigation, label: 'Navigate', color: const Color(0xFF3B82F6), onTap: () {})),
+                          Expanded(child: _QuickAction(icon: Icons.navigation, label: 'Navigate', color: const Color(0xFF3B82F6), onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Opening navigation...'))))),
                           const SizedBox(width: 8),
                           Expanded(child: _QuickAction(icon: Icons.sos, label: 'Emergency', color: kLiveColor, onTap: () => Navigator.pushNamed(context, AppRoutes.liveEmergencySOS))),
                           const SizedBox(width: 8),

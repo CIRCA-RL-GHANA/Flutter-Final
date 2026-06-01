@@ -514,7 +514,9 @@ class _EmergencyTab extends StatelessWidget {
                     IconButton(
                       icon: const Icon(Icons.edit, size: 16),
                       color: AppColors.textTertiary,
-                      onPressed: () {},
+                      onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Edit emergency contact')),
+                      ),
                     ),
                   ],
                 ),
@@ -525,7 +527,9 @@ class _EmergencyTab extends StatelessWidget {
         SizedBox(
           width: double.infinity,
           child: OutlinedButton.icon(
-            onPressed: () {},
+            onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Add emergency contact')),
+            ),
             icon: const Icon(Icons.add, size: 18),
             label: const Text('Add Emergency Contact'),
             style: OutlinedButton.styleFrom(
@@ -562,7 +566,9 @@ class _EmergencyTab extends StatelessWidget {
                   label: 'Recovery Codes',
                   value: '8 codes remaining',
                   trailing: TextButton(
-                    onPressed: () {},
+                    onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Recovery codes')),
+                    ),
                     child: const Text('View', style: TextStyle(fontSize: 12)),
                   ),
                 ),
@@ -667,7 +673,9 @@ class _AdvancedTab extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: OutlinedButton(
-                  onPressed: () {},
+                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Reset security settings')),
+                  ),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: const Color(0xFFEF4444),
                     side: const BorderSide(color: Color(0xFFEF4444)),
@@ -680,7 +688,9 @@ class _AdvancedTab extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Deactivate account')),
+                  ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFEF4444),
                     foregroundColor: Colors.white,

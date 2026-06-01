@@ -203,7 +203,7 @@ class _QualChatPremiumScreenState extends ConsumerState<QualChatPremiumScreen> {
                       ),
                       suffixIcon: IconButton(
                         icon: const Icon(Icons.attach_file),
-                        onPressed: () {},
+                        onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Attach file'))),
                       ),
                     ),
                   ),

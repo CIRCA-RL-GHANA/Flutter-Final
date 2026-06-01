@@ -289,7 +289,12 @@ class QualChatNewChatScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Group created successfully!'), backgroundColor: kChatColor),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: kChatColor,
                       foregroundColor: Colors.white,
@@ -411,7 +416,7 @@ class _SelectedRecipientCard extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               OutlinedButton.icon(
-                onPressed: () {},
+                onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Calling...'))),
                 icon: const Icon(Icons.call, size: 16),
                 label: const Text('Call'),
                 style: OutlinedButton.styleFrom(

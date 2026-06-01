@@ -6,6 +6,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../models/market_models.dart';
 import '../providers/market_provider.dart';
@@ -393,7 +394,11 @@ class _ArrivalPhase extends StatelessWidget {
                 children: [
                   Expanded(
                     child: ElevatedButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Opening navigation...')),
+                        );
+                      },
                       icon: const Icon(Icons.navigation, size: 18),
                       label: const Text('Navigate'),
                       style: ElevatedButton.styleFrom(
@@ -406,7 +411,11 @@ class _ArrivalPhase extends StatelessWidget {
                   const SizedBox(width: 12),
                   Expanded(
                     child: OutlinedButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Calling...')),
+                        );
+                      },
                       icon: const Icon(Icons.phone, size: 18),
                       label: const Text('Call'),
                       style: OutlinedButton.styleFrom(
@@ -528,10 +537,23 @@ class _VerificationStep extends StatelessWidget {
 }
 
 // ── Phase 4: Handoff ───────────────────────────────────────────────
-class _HandoffPhase extends StatelessWidget {
+class _HandoffPhase extends StatefulWidget {
   final MarketOrder order;
 
   const _HandoffPhase({required this.order});
+
+  @override
+  State<_HandoffPhase> createState() => _HandoffPhaseState();
+}
+
+class _HandoffPhaseState extends State<_HandoffPhase> {
+  late final Set<String> _checkedItems;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkedItems = {};
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -562,10 +584,14 @@ class _HandoffPhase extends StatelessWidget {
         const SizedBox(height: 16),
         MarketSectionCard(
           title: 'Items Checklist',
-          children: order.items.map((item) {
+          children: widget.order.items.map((item) {
+              final itemKey = '${item.name}_${item.quantity}';
               return CheckboxListTile(
-                value: true,
-                onChanged: (_) {},
+                value: _checkedItems.contains(itemKey),
+                onChanged: (v) => setState(() {
+                  if (v == true) _checkedItems.add(itemKey);
+                  else _checkedItems.remove(itemKey);
+                }),
                 title: Text('${item.quantity}x ${item.name}', style: const TextStyle(fontSize: 14)),
                 activeColor: kMarketColor,
                 controlAffinity: ListTileControlAffinity.leading,
@@ -584,7 +610,9 @@ class _HandoffPhase extends StatelessWidget {
             title: const Text('Report an issue', style: TextStyle(fontSize: 14)),
             subtitle: const Text('Missing or wrong items?', style: TextStyle(fontSize: 12)),
             trailing: const Icon(Icons.chevron_right, color: AppColors.error),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, AppRoutes.utilityHelp);
+            },
           ),
         ),
       ],

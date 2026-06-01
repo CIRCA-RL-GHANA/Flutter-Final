@@ -129,7 +129,7 @@ class _GoTabsScreenState extends State<GoTabsScreen> with SingleTickerProviderSt
             ],
           ),
           floatingActionButton: FloatingActionButton.extended(
-            onPressed: () {},
+            onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Creating new tab...'))),
             backgroundColor: kGoColor,
             icon: const Icon(Icons.add, color: Colors.white),
             label: const Text('New Tab', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),

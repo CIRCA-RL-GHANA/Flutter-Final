@@ -15,6 +15,7 @@ import '../../prompt/models/rbac_models.dart';
 import '../../prompt/providers/context_provider.dart';
 import '../models/setup_dashboard_models.dart';
 import '../providers/setup_dashboard_provider.dart';
+import '../../../core/routes/app_routes.dart';
 import '../widgets/shared_widgets.dart';
 
 class SetupDashboardScreen extends StatefulWidget {
@@ -170,7 +171,7 @@ class _SetupDashboardScreenState extends State<SetupDashboardScreen> {
 
                 // ─── SOS Button (Owner/Admin/BranchManager only) ──
                 SliverToBoxAdapter(
-                  child: SetupSOSButton(onPressed: () {}),
+                  child: SetupSOSButton(onPressed: () => Navigator.pushNamed(context, AppRoutes.liveEmergencySOS)),
                 ),
 
                 // ─── Bottom Spacer ────────────────────────────

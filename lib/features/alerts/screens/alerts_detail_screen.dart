@@ -217,7 +217,9 @@ class AlertsDetailScreen extends StatelessWidget {
                                   ),
                                 ),
                                 OutlinedButton(
-                                  onPressed: () {},
+                                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(content: Text('Reassigning...')),
+                                  ),
                                   style: OutlinedButton.styleFrom(
                                     foregroundColor: kAlertsColor,
                                     side: const BorderSide(color: kAlertsColor),
@@ -235,7 +237,9 @@ class AlertsDetailScreen extends StatelessWidget {
                                 const Text('Unassigned', style: TextStyle(fontSize: 14, color: Color(0xFF9CA3AF), fontStyle: FontStyle.italic)),
                                 const Spacer(),
                                 ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(content: Text('Assigning...')),
+                                  ),
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: kAlertsColor,
                                     foregroundColor: Colors.white,

@@ -657,7 +657,7 @@ class ContextSwitcherSheet extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: OutlinedButton.icon(
-              onPressed: () {},
+              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Add new entity'))),
               icon: const Icon(Icons.add, size: 20),
               label: const Text('Add Entity'),
               style: OutlinedButton.styleFrom(

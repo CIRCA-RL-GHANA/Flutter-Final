@@ -37,7 +37,7 @@ class InterestsScreen extends StatelessWidget {
             ),
             floatingActionButton: SetupRbacFAB(
               cardId: 'interests',
-              onPressed: () {},
+              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Discover new interests'))),
               label: 'Discover',
               icon: Icons.explore,
             ),

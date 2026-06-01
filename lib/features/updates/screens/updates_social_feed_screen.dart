@@ -1,5 +1,6 @@
 ﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../widgets/updates_widgets.dart';
 
@@ -54,7 +55,7 @@ class _UpdatesSocialFeedScreenState extends State<UpdatesSocialFeedScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
-            onPressed: () {},
+            onPressed: () => Navigator.pushNamed(context, AppRoutes.updatesSearch),
           ),
         ],
       ),
@@ -148,7 +149,7 @@ class _UpdatesSocialFeedScreenState extends State<UpdatesSocialFeedScreen> {
                     const Spacer(),
                     IconButton(
                       icon: const Icon(Icons.more_horiz),
-                      onPressed: () {},
+                      onPressed: () => showModalBottomSheet(context: context, builder: (_) => const SizedBox(height: 150, child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [ListTile(leading: Icon(Icons.share), title: Text('Share')), ListTile(leading: Icon(Icons.flag), title: Text('Report'))]))),
                       iconSize: 20,
                     ),
                   ],

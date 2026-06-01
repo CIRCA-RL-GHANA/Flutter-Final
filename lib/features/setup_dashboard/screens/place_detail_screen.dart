@@ -389,7 +389,14 @@ class _SettingsTab extends StatelessWidget {
                   SizedBox(
                     height: 30,
                     child: OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () => showDialog(context: context, builder: (_) => AlertDialog(
+                        title: const Text('Deactivate Place?'),
+                        content: const Text('This will hide the place from all operations. You can reactivate it later.'),
+                        actions: [
+                          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
+                          ElevatedButton(onPressed: () { Navigator.pop(context); ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Place deactivated'))); }, style: ElevatedButton.styleFrom(backgroundColor: AppColors.error), child: const Text('Deactivate')),
+                        ],
+                      )),
                       style: OutlinedButton.styleFrom(
                         foregroundColor: AppColors.error,
                         side: const BorderSide(color: AppColors.error),
@@ -410,10 +417,23 @@ class _SettingsTab extends StatelessWidget {
   }
 }
 
-class _SettingSwitch extends StatelessWidget {
+class _SettingSwitch extends StatefulWidget {
   final String label;
   final bool value;
   const _SettingSwitch({required this.label, required this.value});
+
+  @override
+  State<_SettingSwitch> createState() => _SettingSwitchState();
+}
+
+class _SettingSwitchState extends State<_SettingSwitch> {
+  late bool _value;
+
+  @override
+  void initState() {
+    super.initState();
+    _value = widget.value;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -422,10 +442,10 @@ class _SettingSwitch extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: const TextStyle(fontSize: 13)),
+          Text(widget.label, style: const TextStyle(fontSize: 13)),
           Switch(
-            value: value,
-            onChanged: (_) {},
+            value: _value,
+            onChanged: (v) => setState(() => _value = v),
             activeColor: kSetupColor,
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
           ),

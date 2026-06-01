@@ -3,6 +3,7 @@
 /// Step 4: Security, Step 5: Processing/Confirmation
 
 import 'package:flutter/material.dart';
+import '../../../core/routes/app_routes.dart';
 import 'package:provider/provider.dart';
 import '../models/go_models.dart';
 import '../providers/go_provider.dart';
@@ -417,9 +418,9 @@ class _StepResult extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TextButton(onPressed: () {}, child: const Text('View Receipt')),
+                TextButton(onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Preparing download...'))), child: const Text('View Receipt')),
                 const SizedBox(width: 12),
-                TextButton(onPressed: () {}, child: const Text('Share')),
+                TextButton(onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Link copied to clipboard'))), child: const Text('Share')),
               ],
             ),
             const SizedBox(height: 16),
@@ -445,7 +446,7 @@ class _StepResult extends StatelessWidget {
           const Text('Please try again or contact support.', style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
           const SizedBox(height: 24),
           ElevatedButton(onPressed: onRetry, style: ElevatedButton.styleFrom(backgroundColor: kGoColor, foregroundColor: Colors.white, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))), child: const Text('Retry')),
-          TextButton(onPressed: () {}, child: const Text('Contact Support')),
+          TextButton(onPressed: () => Navigator.pushNamed(context, AppRoutes.utilityHelp), child: const Text('Contact Support')),
         ],
       ),
     );

@@ -44,7 +44,7 @@ class QPointsScreen extends StatelessWidget {
             ),
             floatingActionButton: SetupRbacFAB(
               cardId: 'qpoints',
-              onPressed: () {},
+              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Buy QPoints'))),
               label: 'Buy QP',
               icon: Icons.add_shopping_cart,
             ),

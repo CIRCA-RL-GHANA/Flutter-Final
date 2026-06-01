@@ -236,9 +236,9 @@ class _EnRouteView extends StatelessWidget {
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  IconButton(onPressed: () {}, icon: const Icon(Icons.phone, size: 18, color: Color(0xFF10B981)), style: IconButton.styleFrom(backgroundColor: const Color(0xFFD1FAE5))),
+                  IconButton(onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Calling...'))), icon: const Icon(Icons.phone, size: 18, color: Color(0xFF10B981)), style: IconButton.styleFrom(backgroundColor: const Color(0xFFD1FAE5))),
                   const SizedBox(width: 4),
-                  IconButton(onPressed: () {}, icon: const Icon(Icons.chat, size: 18, color: Color(0xFF3B82F6)), style: IconButton.styleFrom(backgroundColor: const Color(0xFFDBEAFE))),
+                  IconButton(onPressed: () => Navigator.pushNamed(context, AppRoutes.qualChatDashboard), icon: const Icon(Icons.chat, size: 18, color: Color(0xFF3B82F6)), style: IconButton.styleFrom(backgroundColor: const Color(0xFFDBEAFE))),
                 ],
               ),
             ],
@@ -426,7 +426,7 @@ class _InTripView extends StatelessWidget {
             children: [
               Expanded(
                 child: OutlinedButton.icon(
-                  onPressed: () {},
+                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Trip link copied'))),
                   icon: const Icon(Icons.share_location, size: 16),
                   label: const Text('Share Trip', style: TextStyle(fontSize: 11)),
                   style: OutlinedButton.styleFrom(foregroundColor: const Color(0xFF3B82F6)),
@@ -435,7 +435,7 @@ class _InTripView extends StatelessWidget {
               const SizedBox(width: 8),
               Expanded(
                 child: OutlinedButton.icon(
-                  onPressed: () {},
+                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Recording...'))),
                   icon: const Icon(Icons.mic, size: 16),
                   label: const Text('Record', style: TextStyle(fontSize: 11)),
                   style: OutlinedButton.styleFrom(foregroundColor: const Color(0xFF8B5CF6)),

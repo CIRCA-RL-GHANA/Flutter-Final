@@ -6,6 +6,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../models/market_models.dart';
 import '../providers/market_provider.dart';
@@ -60,7 +61,7 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
                       ),
                       child: const Icon(Icons.phone, size: 20, color: AppColors.textPrimary),
                     ),
-                    onPressed: () {},
+                    onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Calling driver...'), behavior: SnackBarBehavior.floating)),
                   ),
                 ],
                 flexibleSpace: FlexibleSpaceBar(
@@ -137,7 +138,7 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
                       _buildStatusCard(tracking),
                       const SizedBox(height: 16),
                       // Driver info
-                      _buildDriverCard(tracking),
+                      _buildDriverCard(context, tracking),
                       const SizedBox(height: 16),
                       // Delivery timeline
                       _buildTimeline(tracking),
@@ -147,7 +148,7 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
                         _buildPINCard(tracking),
                       const SizedBox(height: 16),
                       // Safety features
-                      _buildSafetyCard(),
+                      _buildSafetyCard(context),
                       const SizedBox(height: 24),
                     ],
                   ),
@@ -209,7 +210,7 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildDriverCard(DeliveryTracking tracking) {
+  Widget _buildDriverCard(BuildContext context, DeliveryTracking tracking) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
       elevation: 0,
@@ -265,7 +266,7 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
                 ),
                 child: const Icon(Icons.chat, size: 18, color: kMarketColor),
               ),
-              onPressed: () {},
+              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Opening chat...'), behavior: SnackBarBehavior.floating)),
             ),
             IconButton(
               icon: Container(
@@ -274,9 +275,9 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
                   color: kMarketColorLight,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const Icon(Icons.phone, size: 18, color: kMarketColor),
+              child: const Icon(Icons.phone, size: 18, color: kMarketColor),
               ),
-              onPressed: () {},
+              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Calling driver...'), behavior: SnackBarBehavior.floating)),
             ),
           ],
         ),
@@ -385,7 +386,7 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSafetyCard() {
+  Widget _buildSafetyCard(BuildContext context) {
     return MarketSectionCard(
       title: 'Safety',
       children: [
@@ -393,16 +394,19 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
             icon: Icons.share_location,
             title: 'Share live location',
             subtitle: 'Share your delivery status with someone',
+            onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Location shared'), behavior: SnackBarBehavior.floating)),
           ),
           _SafetyOption(
             icon: Icons.report,
             title: 'Report an issue',
             subtitle: 'Problems with your delivery',
+            onTap: () => Navigator.pushNamed(context, AppRoutes.utilityHelp),
           ),
           _SafetyOption(
             icon: Icons.support_agent,
             title: 'Contact support',
             subtitle: 'Get help from our team',
+            onTap: () => Navigator.pushNamed(context, AppRoutes.utilityHelp),
           ),
         ],
     );
@@ -452,11 +456,13 @@ class _SafetyOption extends StatelessWidget {
   final IconData icon;
   final String title;
   final String subtitle;
+  final VoidCallback? onTap;
 
   const _SafetyOption({
     required this.icon,
     required this.title,
     required this.subtitle,
+    this.onTap,
   });
 
   @override
@@ -466,7 +472,7 @@ class _SafetyOption extends StatelessWidget {
       title: Text(title, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
       subtitle: Text(subtitle, style: const TextStyle(fontSize: 12)),
       trailing: const Icon(Icons.chevron_right, color: AppColors.textTertiary),
-      onTap: () {},
+      onTap: onTap,
       contentPadding: EdgeInsets.zero,
     );
   }

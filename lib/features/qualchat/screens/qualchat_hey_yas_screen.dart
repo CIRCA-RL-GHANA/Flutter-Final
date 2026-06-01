@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../models/qualchat_models.dart';
 import '../providers/qualchat_provider.dart';
 import '../widgets/qualchat_widgets.dart';
+import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 
 const _kTabLabels = {
@@ -188,8 +189,8 @@ class QualChatHeyYasScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: ElevatedButton.icon(
-                    onPressed: () {},
-                    icon: const Text('ðŸ’–'),
+                    onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Hey Ya sent!'))),
+                    icon: const Text('💖'),
                     label: const Text('Send Hey Ya'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: kChatSocial,
@@ -200,7 +201,7 @@ class QualChatHeyYasScreen extends StatelessWidget {
                 ),
                 const SizedBox(width: 8),
                 OutlinedButton.icon(
-                  onPressed: () {},
+                  onPressed: () => Navigator.pushNamed(context, AppRoutes.qualChatDashboard),
                   icon: const Icon(Icons.explore_outlined, size: 16),
                   label: const Text('Discover'),
                   style: OutlinedButton.styleFrom(

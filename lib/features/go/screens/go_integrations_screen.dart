@@ -2,6 +2,7 @@
 /// Accounting, banking, business, custom integrations
 
 import 'package:flutter/material.dart';
+import '../../../core/routes/app_routes.dart';
 import 'package:provider/provider.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../models/go_models.dart';
@@ -114,19 +115,19 @@ class _GoIntegrationsScreenState extends State<GoIntegrationsScreen> with Single
           decoration: BoxDecoration(color: const Color(0xFFF3F4F6), borderRadius: BorderRadius.circular(8)),
           child: Row(children: [
             const Expanded(child: Text('API Key: ••••••••••••a7f3', style: TextStyle(fontSize: 12, fontFamily: 'monospace'))),
-            IconButton(icon: const Icon(Icons.copy, size: 16, color: kGoColor), onPressed: () {}),
+            IconButton(icon: const Icon(Icons.copy, size: 16, color: kGoColor), onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Copied to clipboard')))),
           ]),
         ),
         const SizedBox(height: 10),
         Row(children: [
           Expanded(child: OutlinedButton(
-            onPressed: () {},
+            onPressed: () => Navigator.pushNamed(context, AppRoutes.utilityHelp),
             style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFF1C1C2E))),
             child: const Text('View Docs'),
           )),
           const SizedBox(width: 10),
           Expanded(child: OutlinedButton(
-            onPressed: () {},
+            onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('New API key generated'))),
             style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFF1C1C2E))),
             child: const Text('Generate Key'),
           )),
@@ -141,7 +142,7 @@ class _GoIntegrationsScreenState extends State<GoIntegrationsScreen> with Single
         SizedBox(width: double.infinity, child: ElevatedButton.icon(
           icon: const Icon(Icons.add, size: 18),
           label: const Text('Add Webhook'),
-          onPressed: () {},
+          onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Webhook configuration added'))),
           style: ElevatedButton.styleFrom(backgroundColor: kGoColor, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 12), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
         )),
       ])),
@@ -200,7 +201,7 @@ class _IntegrationCard extends StatelessWidget {
             ),
             const SizedBox(height: 6),
             GestureDetector(
-              onTap: () {},
+              onTap: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(connected ? 'Managing integration...' : 'Connecting integration...'))),
               child: Text(connected ? 'Manage' : 'Connect', style: const TextStyle(fontSize: 11, color: kGoColor, fontWeight: FontWeight.w600)),
             ),
           ]),

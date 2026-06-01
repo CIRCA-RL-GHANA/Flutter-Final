@@ -118,6 +118,7 @@ class _LiveDeliveryVerificationScreenState extends State<LiveDeliveryVerificatio
                         HapticFeedback.mediumImpact();
                         setState(() => _signatureCollected = true);
                       },
+                      onClear: () => setState(() => _signatureCollected = false),
                     ),
                   ],
                 ),
@@ -336,7 +337,8 @@ class _PhotoStep extends StatelessWidget {
 class _SignatureStep extends StatelessWidget {
   final bool collected;
   final VoidCallback onSign;
-  const _SignatureStep({required this.collected, required this.onSign});
+  final VoidCallback? onClear;
+  const _SignatureStep({required this.collected, required this.onSign, this.onClear});
 
   @override
   Widget build(BuildContext context) {
@@ -386,7 +388,7 @@ class _SignatureStep extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              TextButton(onPressed: () {}, child: const Text('Clear', style: TextStyle(color: AppColors.textSecondary))),
+              TextButton(onPressed: onClear, child: const Text('Clear', style: TextStyle(color: AppColors.textSecondary))),
             ],
           ),
           const SizedBox(height: 8),

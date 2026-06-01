@@ -42,7 +42,17 @@ class _LiveReturnReviewScreenState extends State<LiveReturnReviewScreen> {
           appBar: LiveAppBar(
             title: 'Return Review #${ret.id}',
             actions: [
-              IconButton(icon: const Icon(Icons.more_vert, size: 20), color: AppColors.textSecondary, onPressed: () {}),
+              IconButton(
+                icon: const Icon(Icons.more_vert, size: 20),
+                color: AppColors.textSecondary,
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
+                    builder: (_) => const SizedBox(height: 120),
+                  );
+                },
+              ),
             ],
           ),
           body: ListView(
@@ -301,7 +311,7 @@ class _LiveReturnReviewScreenState extends State<LiveReturnReviewScreen> {
                 const SizedBox(width: 8),
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Escalated to management'))),
                     style: OutlinedButton.styleFrom(foregroundColor: AppColors.textSecondary, padding: const EdgeInsets.symmetric(vertical: 14)),
                     child: const Text('ESCALATE', style: TextStyle(fontWeight: FontWeight.w700)),
                   ),

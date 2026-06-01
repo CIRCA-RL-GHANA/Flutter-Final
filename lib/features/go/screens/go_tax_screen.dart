@@ -83,7 +83,7 @@ class _GoTaxScreenState extends State<GoTaxScreen> with SingleTickerProviderStat
         const SizedBox(width: 8),
         const Text('Tax Year 2024', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
         const Spacer(),
-        TextButton(onPressed: () {}, child: const Text('Change', style: TextStyle(fontSize: 12, color: kGoColor))),
+        TextButton(onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Change period coming soon'))), child: const Text('Change', style: TextStyle(fontSize: 12, color: kGoColor))),
       ])),
       const SizedBox(height: 14),
       // Summary cards
@@ -107,7 +107,7 @@ class _GoTaxScreenState extends State<GoTaxScreen> with SingleTickerProviderStat
       SizedBox(width: double.infinity, child: OutlinedButton.icon(
         icon: const Icon(Icons.download, size: 18),
         label: const Text('Export Tax Report'),
-        onPressed: () {},
+        onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Exporting tax report...'))),
         style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 12)),
       )),
     ]);
@@ -162,7 +162,7 @@ class _GoTaxScreenState extends State<GoTaxScreen> with SingleTickerProviderStat
         SizedBox(width: double.infinity, child: ElevatedButton.icon(
           icon: const Icon(Icons.description, size: 18),
           label: const Text('Generate Report'),
-          onPressed: () {},
+          onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Generating report...'))),
           style: ElevatedButton.styleFrom(backgroundColor: kGoColor, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 12), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
         )),
       ])),
@@ -176,7 +176,7 @@ class _GoTaxScreenState extends State<GoTaxScreen> with SingleTickerProviderStat
           leading: Icon(d.$4, color: d.$5, size: 24),
           title: Text(d.$1, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
           subtitle: Text('${d.$2} • ${d.$3}', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
-          trailing: IconButton(icon: const Icon(Icons.download, size: 18, color: kGoColor), onPressed: () {}),
+          trailing: IconButton(icon: const Icon(Icons.download, size: 18, color: kGoColor), onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Preparing download...')))),
           dense: true,
         ),
       )),

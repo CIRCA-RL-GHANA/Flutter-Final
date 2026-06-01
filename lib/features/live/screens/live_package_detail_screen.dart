@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../core/routes/app_routes.dart';
 import '../models/live_models.dart';
 import '../providers/live_provider.dart';
 import '../widgets/live_widgets.dart';
@@ -28,8 +29,18 @@ class LivePackageDetailScreen extends StatelessWidget {
           appBar: LiveAppBar(
             title: 'Package ${pkg.id}',
             actions: [
-              IconButton(icon: const Icon(Icons.share, size: 20), color: AppColors.textSecondary, onPressed: () {}),
-              IconButton(icon: const Icon(Icons.more_vert, size: 20), color: AppColors.textSecondary, onPressed: () {}),
+              IconButton(icon: const Icon(Icons.share, size: 20), color: AppColors.textSecondary, onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Sharing...')))),
+              IconButton(
+                icon: const Icon(Icons.more_vert, size: 20),
+                color: AppColors.textSecondary,
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
+                    builder: (_) => const SizedBox(height: 120),
+                  );
+                },
+              ),
             ],
           ),
           body: ListView(
@@ -128,7 +139,7 @@ class LivePackageDetailScreen extends StatelessWidget {
                         ),
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Calling...'))),
                         icon: const Icon(Icons.phone, size: 18, color: Color(0xFF10B981)),
                         style: IconButton.styleFrom(backgroundColor: const Color(0xFFD1FAE5)),
                       ),
@@ -278,7 +289,7 @@ class LivePackageDetailScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: OutlinedButton.icon(
-                    onPressed: () {},
+                    onPressed: () => Navigator.pushNamed(context, AppRoutes.liveDriverAssignment),
                     icon: const Icon(Icons.swap_horiz, size: 16),
                     label: const Text('REASSIGN', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700)),
                     style: OutlinedButton.styleFrom(foregroundColor: kLiveColor, padding: const EdgeInsets.symmetric(vertical: 14)),
@@ -287,7 +298,7 @@ class LivePackageDetailScreen extends StatelessWidget {
                 const SizedBox(width: 8),
                 Expanded(
                   child: OutlinedButton.icon(
-                    onPressed: () {},
+                    onPressed: () => Navigator.pushNamed(context, AppRoutes.qualChatDashboard),
                     icon: const Icon(Icons.chat, size: 16),
                     label: const Text('MESSAGE', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700)),
                     style: OutlinedButton.styleFrom(foregroundColor: const Color(0xFF3B82F6), padding: const EdgeInsets.symmetric(vertical: 14)),
@@ -296,7 +307,7 @@ class LivePackageDetailScreen extends StatelessWidget {
                 const SizedBox(width: 8),
                 Expanded(
                   child: ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Locating...'))),
                     icon: const Icon(Icons.gps_fixed, size: 16),
                     label: const Text('TRACK', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 12)),
                     style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10B981), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),

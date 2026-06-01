@@ -37,7 +37,7 @@ class ProfileScreen extends StatelessWidget {
             ),
             floatingActionButton: SetupRbacFAB(
               cardId: 'profile',
-              onPressed: () {},
+              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Edit profile'))),
               label: 'Edit',
               icon: Icons.edit,
             ),
@@ -328,7 +328,7 @@ class ProfileScreen extends StatelessWidget {
               // ─── SOS Button (Owner / Admin / BranchManager only) ─────
               SliverToBoxAdapter(
                 child: SetupSOSButton(
-                  onPressed: () {},
+                  onPressed: () => Navigator.pushNamed(context, AppRoutes.liveEmergencySOS),
                 ),
               ),
 

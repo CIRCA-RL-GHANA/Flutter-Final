@@ -375,7 +375,7 @@ class _EPlayHubScreenState extends State<EPlayHubScreen> {
           const Text('titles', style: TextStyle(fontSize: 10, color: AppColors.textTertiary)),
         ],
       ),
-      onTap: () {},
+      onTap: () => Navigator.pushNamed(context, AppRoutes.eplayDetail),
     );
   }
 

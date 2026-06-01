@@ -104,7 +104,7 @@ class StoreDetailsScreen extends StatelessWidget {
                     const SizedBox(width: 12),
                     Expanded(
                       child: ElevatedButton.icon(
-                        onPressed: () {},
+                        onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Opening chat with store...'))),
                         icon: const Icon(Icons.message),
                         label: const Text('Contact'),
                       ),
@@ -207,7 +207,7 @@ class ProductDetailsScreen extends StatelessWidget {
                     ),
                     const SizedBox(width: 12),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Added to wishlist'))),
                       style: ElevatedButton.styleFrom(backgroundColor: Colors.grey),
                       child: const Icon(Icons.favorite_border),
                     ),
@@ -346,8 +346,16 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
   }
 }
 
-class CheckoutScreen extends StatelessWidget {
+class CheckoutScreen extends StatefulWidget {
   const CheckoutScreen({Key? key}) : super(key: key);
+
+  @override
+  State<CheckoutScreen> createState() => _CheckoutScreenState();
+}
+
+class _CheckoutScreenState extends State<CheckoutScreen> {
+  int _selectedShipping = 0;
+  int _selectedPayment = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -362,14 +370,14 @@ class CheckoutScreen extends StatelessWidget {
           ]),
           const SizedBox(height: 24),
           _buildSection('Shipping Method', [
-            _shipMethod('Standard (5-7 days)', '\$5.00'),
-            _shipMethod('Express (2-3 days)', '\$15.00'),
-            _shipMethod('Overnight', '\$25.00'),
+            _shipMethod('Standard (5-7 days)', '\$5.00', 0),
+            _shipMethod('Express (2-3 days)', '\$15.00', 1),
+            _shipMethod('Overnight', '\$25.00', 2),
           ]),
           const SizedBox(height: 24),
           _buildSection('Payment Method', [
-            _paymentMethod('Visa ending in 3366'),
-            _paymentMethod('Add new card'),
+            _paymentMethod('Visa ending in 3366', 0),
+            _paymentMethod('Add new card', 1),
           ]),
           const SizedBox(height: 24),
           const Text('Order Summary', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
@@ -430,12 +438,12 @@ class CheckoutScreen extends StatelessWidget {
     );
   }
 
-  Widget _shipMethod(String name, String price) {
+  Widget _shipMethod(String name, String price, int index) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Card(
         child: ListTile(
-          leading: Radio(value: 1, groupValue: 1, onChanged: (_) {}),
+          leading: Radio<int>(value: index, groupValue: _selectedShipping, onChanged: (v) => setState(() => _selectedShipping = v!)),
           title: Text(name),
           trailing: Text(price, style: const TextStyle(fontWeight: FontWeight.bold)),
         ),
@@ -443,12 +451,12 @@ class CheckoutScreen extends StatelessWidget {
     );
   }
 
-  Widget _paymentMethod(String method) {
+  Widget _paymentMethod(String method, int index) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Card(
         child: ListTile(
-          leading: Radio(value: 1, groupValue: 1, onChanged: (_) {}),
+          leading: Radio<int>(value: index, groupValue: _selectedPayment, onChanged: (v) => setState(() => _selectedPayment = v!)),
           title: Text(method),
         ),
       ),

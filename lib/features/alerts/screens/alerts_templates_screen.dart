@@ -315,7 +315,9 @@ class _ExpandableTemplateCardState extends State<_ExpandableTemplateCard> {
                         child: OutlinedButton.icon(
                           icon: const Icon(Icons.edit, size: 16),
                           label: const Text('Edit'),
-                          onPressed: () {},
+                          onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Edit template coming soon')),
+                          ),
                           style: OutlinedButton.styleFrom(
                             foregroundColor: const Color(0xFF6B7280),
                             side: const BorderSide(color: Color(0xFF1C1C2E)),

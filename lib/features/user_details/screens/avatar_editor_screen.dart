@@ -445,9 +445,16 @@ class _ColorDot extends StatelessWidget {
 // Tab 3: Consistency (cross-context avatar sync)
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-class _ConsistencyTab extends StatelessWidget {
+class _ConsistencyTab extends StatefulWidget {
   final List<dynamic> contexts;
   const _ConsistencyTab({required this.contexts});
+
+  @override
+  State<_ConsistencyTab> createState() => _ConsistencyTabState();
+}
+
+class _ConsistencyTabState extends State<_ConsistencyTab> {
+  bool _syncAcrossContexts = true;
 
   @override
   Widget build(BuildContext context) {
@@ -471,8 +478,8 @@ class _ConsistencyTab extends StatelessWidget {
             icon: Icons.sync,
             label: 'Sync Avatar Across Contexts',
             subtitle: 'Use the same photo everywhere',
-            value: true,
-            onChanged: (_) {},
+            value: _syncAcrossContexts,
+            onChanged: (v) => setState(() => _syncAcrossContexts = v),
             activeColor: const Color(0xFF6366F1),
           ),
         ),
@@ -485,7 +492,7 @@ class _ConsistencyTab extends StatelessWidget {
         const SizedBox(height: 10),
 
         // Context avatar list
-        ...contexts.map((ctx) {
+        ...widget.contexts.map((ctx) {
           final color = contextTypeColor(ctx.entityType);
           return Padding(
             padding: const EdgeInsets.only(bottom: 8),

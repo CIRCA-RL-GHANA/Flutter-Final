@@ -49,8 +49,8 @@ class _LiveReturnsScreenState extends State<LiveReturnsScreen> with SingleTicker
           appBar: LiveAppBar(
             title: 'Returns Management',
             actions: [
-              IconButton(icon: const Icon(Icons.filter_list, size: 20), color: AppColors.textSecondary, onPressed: () {}),
-              IconButton(icon: const Icon(Icons.search, size: 20), color: AppColors.textSecondary, onPressed: () {}),
+              IconButton(icon: const Icon(Icons.filter_list, size: 20), color: AppColors.textSecondary, onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Filter returns...')))),
+              IconButton(icon: const Icon(Icons.search, size: 20), color: AppColors.textSecondary, onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Search returns...')))),
             ],
           ),
           body: Column(
@@ -116,7 +116,7 @@ class _LiveReturnsScreenState extends State<LiveReturnsScreen> with SingleTicker
               children: [
                 Expanded(
                   child: OutlinedButton.icon(
-                    onPressed: () {},
+                    onPressed: () => Navigator.pushNamed(context, AppRoutes.liveReturnReview),
                     icon: const Icon(Icons.check_circle, size: 16),
                     label: const Text('BULK REVIEW', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700)),
                     style: OutlinedButton.styleFrom(foregroundColor: kLiveColor, padding: const EdgeInsets.symmetric(vertical: 12)),
@@ -125,7 +125,7 @@ class _LiveReturnsScreenState extends State<LiveReturnsScreen> with SingleTicker
                 const SizedBox(width: 8),
                 Expanded(
                   child: OutlinedButton.icon(
-                    onPressed: () {},
+                    onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Auto-approving returns...'))),
                     icon: const Icon(Icons.auto_awesome, size: 16),
                     label: const Text('AUTO-APPROVE', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700)),
                     style: OutlinedButton.styleFrom(foregroundColor: const Color(0xFF10B981), padding: const EdgeInsets.symmetric(vertical: 12)),
@@ -134,7 +134,7 @@ class _LiveReturnsScreenState extends State<LiveReturnsScreen> with SingleTicker
                 const SizedBox(width: 8),
                 Expanded(
                   child: OutlinedButton.icon(
-                    onPressed: () {},
+                    onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Exporting...'))),
                     icon: const Icon(Icons.file_download, size: 16),
                     label: const Text('EXPORT', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700)),
                     style: OutlinedButton.styleFrom(foregroundColor: AppColors.textSecondary, padding: const EdgeInsets.symmetric(vertical: 12)),

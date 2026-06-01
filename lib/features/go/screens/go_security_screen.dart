@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../providers/go_provider.dart';
 import '../widgets/go_widgets.dart';
@@ -114,7 +115,7 @@ class _GoSecurityScreenState extends State<GoSecurityScreen> with SingleTickerPr
         TextButton.icon(
           icon: const Icon(Icons.filter_list, size: 14),
           label: const Text('Filter', style: TextStyle(fontSize: 11)),
-          onPressed: () {},
+          onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Showing latest 30 entries'), backgroundColor: kGoColor)),
           style: TextButton.styleFrom(foregroundColor: kGoColor),
         ),
       ]),
@@ -131,15 +132,15 @@ class _GoSecurityScreenState extends State<GoSecurityScreen> with SingleTickerPr
         const SizedBox(height: 8),
         _ToggleRow(label: 'Biometric Login', value: p.getSecuritySetting('biometricLogin'), onChanged: (v) => p.setSecuritySetting('biometricLogin', v)),
         _ToggleRow(label: 'Two-Factor Authentication', value: p.getSecuritySetting('twoFactorAuth'), onChanged: (v) => p.setSecuritySetting('twoFactorAuth', v)),
-        _ToggleRow(label: 'Require PIN for transactions', value: true, onChanged: (v) {}),
+        _ToggleRow(label: 'Require PIN for transactions', value: p.getSecuritySetting('requirePin'), onChanged: (v) => p.setSecuritySetting('requirePin', v)),
       ])),
       const SizedBox(height: 14),
       GoSectionCard(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         const GoSectionHeader(title: 'Notifications', icon: Icons.notifications),
         const SizedBox(height: 8),
-        _ToggleRow(label: 'Transaction alerts', value: p.getSecuritySetting('anomalyAlerts'), onChanged: (v) {}),
-        _ToggleRow(label: 'Login alerts', value: true, onChanged: (v) {}),
-        _ToggleRow(label: 'Security warnings', value: true, onChanged: (v) {}),
+        _ToggleRow(label: 'Transaction alerts', value: p.getSecuritySetting('anomalyAlerts'), onChanged: (v) => p.setSecuritySetting('anomalyAlerts', v)),
+        _ToggleRow(label: 'Login alerts', value: p.getSecuritySetting('loginAlerts'), onChanged: (v) => p.setSecuritySetting('loginAlerts', v)),
+        _ToggleRow(label: 'Security warnings', value: p.getSecuritySetting('securityWarnings'), onChanged: (v) => p.setSecuritySetting('securityWarnings', v)),
       ])),
       const SizedBox(height: 14),
       GoSectionCard(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -150,7 +151,7 @@ class _GoSecurityScreenState extends State<GoSecurityScreen> with SingleTickerPr
         _LimitRow(label: 'Monthly Limit', value: '1000000 QP'),
         const SizedBox(height: 8),
         SizedBox(width: double.infinity, child: OutlinedButton(
-          onPressed: () {},
+          onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Limit increase request submitted'), backgroundColor: kGoColor)),
           style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFF1C1C2E))),
           child: const Text('Request Limit Increase'),
         )),
@@ -163,13 +164,27 @@ class _GoSecurityScreenState extends State<GoSecurityScreen> with SingleTickerPr
           leading: const Icon(Icons.lock_reset, color: kGoWarning, size: 20),
           title: const Text('Reset Security Settings', style: TextStyle(fontSize: 13)),
           dense: true, contentPadding: EdgeInsets.zero,
-          onTap: () {},
+          onTap: () => showDialog(context: context, builder: (_) => AlertDialog(
+            title: const Text('Reset Security Settings?'),
+            content: const Text('This will restore all security settings to their defaults. You cannot undo this.'),
+            actions: [
+              TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
+              ElevatedButton(onPressed: () { Navigator.pop(context); ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Security settings reset'), backgroundColor: kGoWarning)); }, style: ElevatedButton.styleFrom(backgroundColor: kGoWarning), child: const Text('Reset')),
+            ],
+          )),
         ),
         ListTile(
           leading: const Icon(Icons.block, color: kGoNegative, size: 20),
           title: const Text('Freeze Account', style: TextStyle(fontSize: 13, color: kGoNegative)),
           dense: true, contentPadding: EdgeInsets.zero,
-          onTap: () {},
+          onTap: () => showDialog(context: context, builder: (_) => AlertDialog(
+            title: const Text('Freeze Account?'),
+            content: const Text('No transactions will be possible while your account is frozen. Contact support to unfreeze.'),
+            actions: [
+              TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
+              ElevatedButton(onPressed: () { Navigator.pop(context); ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Account frozen. Contact support to reactivate.'), backgroundColor: kGoNegative)); }, style: ElevatedButton.styleFrom(backgroundColor: kGoNegative), child: const Text('Freeze')),
+            ],
+          )),
         ),
       ])),
     ]);
@@ -212,7 +227,7 @@ class _RecommendCard extends StatelessWidget {
         Text(title, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
         Text(desc, style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
       ])),
-      TextButton(onPressed: () {}, child: Text(action, style: const TextStyle(fontSize: 11, color: kGoColor, fontWeight: FontWeight.w600))),
+      TextButton(onPressed: () => Navigator.pushNamed(context, AppRoutes.userDetailsSecurity), child: Text(action, style: const TextStyle(fontSize: 11, color: kGoColor, fontWeight: FontWeight.w600))),
     ]),
   );
 }

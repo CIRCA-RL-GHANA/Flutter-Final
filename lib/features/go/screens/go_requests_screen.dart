@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../core/routes/app_routes.dart';
 import '../models/go_models.dart';
 import '../providers/go_provider.dart';
 import '../widgets/go_widgets.dart';
@@ -122,7 +123,7 @@ class _GoRequestsScreenState extends State<GoRequestsScreen> with SingleTickerPr
     return ListView.builder(
       padding: const EdgeInsets.all(16),
       itemCount: reqs.length,
-      itemBuilder: (_, i) => GoRequestCard(request: reqs[i], onTap: () {}),
+      itemBuilder: (_, i) => GoRequestCard(request: reqs[i], onTap: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Request #${reqs[i].id} opened'), backgroundColor: kGoColor))),
     );
   }
 
@@ -148,14 +149,7 @@ class _GoRequestsScreenState extends State<GoRequestsScreen> with SingleTickerPr
             title: Text(t.$1, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
             subtitle: Text(t.$3, style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
             trailing: const Icon(Icons.arrow_forward_ios, size: 14, color: Color(0xFFD1D5DB)),
-            onTap: () {},
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _buildCreateSheet() {
+            onTap: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('New ${t.$1} started'), backgroundColor: kGoColor)),
     return Container(
       height: 300,
       padding: const EdgeInsets.all(16),
@@ -173,7 +167,7 @@ class _GoRequestsScreenState extends State<GoRequestsScreen> with SingleTickerPr
           child: GridView.count(
             crossAxisCount: 4, mainAxisSpacing: 8, crossAxisSpacing: 8, childAspectRatio: 0.9,
             children: RequestType.values.map((t) => GestureDetector(
-              onTap: () {},
+              onTap: () { setState(() => _showCreate = false); ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Creating ${t.name} request...'), backgroundColor: kGoColor)); },
               child: Container(
                 decoration: BoxDecoration(color: kGoColorLight, borderRadius: BorderRadius.circular(10)),
                 child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [

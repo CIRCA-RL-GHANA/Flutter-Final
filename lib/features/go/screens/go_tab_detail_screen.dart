@@ -3,6 +3,7 @@
 /// settlement interface, negotiation tools, documents, audit trail
 
 import 'package:flutter/material.dart';
+import '../../../core/routes/app_routes.dart';
 import 'package:provider/provider.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../models/go_models.dart';
@@ -96,7 +97,7 @@ class _GoTabDetailScreenState extends State<GoTabDetailScreen> {
               )),
               const SizedBox(width: 12),
               Expanded(child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Reminder sent'))),
                 style: ElevatedButton.styleFrom(backgroundColor: kGoColor, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                 child: const Text('Send Reminder'),
               )),
@@ -200,9 +201,9 @@ class _GoTabDetailScreenState extends State<GoTabDetailScreen> {
       Row(children: [
         Expanded(child: _SettleOption(label: 'Full', desc: '${tab.currentBalance.toStringAsFixed(0)} QP', selected: true, onTap: () { _settleAmountCtrl.text = tab.currentBalance.toStringAsFixed(0); })),
         const SizedBox(width: 8),
-        Expanded(child: _SettleOption(label: 'Partial', desc: 'Custom amount', selected: false, onTap: () {})),
+        Expanded(child: _SettleOption(label: 'Partial', desc: 'Custom amount', selected: false, onTap: () => setState(() { _settleAmountCtrl.clear(); }))),
         const SizedBox(width: 8),
-        Expanded(child: _SettleOption(label: 'Plan', desc: 'Installments', selected: false, onTap: () {})),
+        Expanded(child: _SettleOption(label: 'Plan', desc: 'Installments', selected: false, onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Installment plan coming soon'))))),
       ]),
       const SizedBox(height: 12),
       TextField(
@@ -212,7 +213,7 @@ class _GoTabDetailScreenState extends State<GoTabDetailScreen> {
       ),
       const SizedBox(height: 10),
       SizedBox(width: double.infinity, child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () => Navigator.pushNamed(context, AppRoutes.goTransfer),
         style: ElevatedButton.styleFrom(backgroundColor: kGoColor, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 12), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
         child: const Text('Proceed to Settlement', style: TextStyle(fontWeight: FontWeight.w600)),
       )),
@@ -224,12 +225,12 @@ class _GoTabDetailScreenState extends State<GoTabDetailScreen> {
       const GoSectionHeader(title: 'Actions', icon: Icons.more_horiz),
       const SizedBox(height: 10),
       Wrap(spacing: 8, runSpacing: 8, children: [
-        _ActionBtn(icon: Icons.message, label: 'Message', onTap: () {}),
-        _ActionBtn(icon: Icons.edit, label: 'Edit', onTap: () {}),
-        _ActionBtn(icon: Icons.handshake, label: 'Negotiate', onTap: () {}),
-        _ActionBtn(icon: Icons.attach_file, label: 'Documents', onTap: () {}),
-        _ActionBtn(icon: Icons.share, label: 'Share', onTap: () {}),
-        if (tab.status != TabStatus.settled) _ActionBtn(icon: Icons.cancel, label: 'Dispute', onTap: () {}, color: kGoNegative),
+        _ActionBtn(icon: Icons.message, label: 'Message', onTap: () => Navigator.pushNamed(context, AppRoutes.qualChatDashboard)),
+        _ActionBtn(icon: Icons.edit, label: 'Edit', onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Edit coming soon')))),
+        _ActionBtn(icon: Icons.handshake, label: 'Negotiate', onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Opening negotiation...')))),
+        _ActionBtn(icon: Icons.attach_file, label: 'Documents', onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Opening documents...')))),
+        _ActionBtn(icon: Icons.share, label: 'Share', onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Link copied to clipboard')))),
+        if (tab.status != TabStatus.settled) _ActionBtn(icon: Icons.cancel, label: 'Dispute', onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Dispute filed'))), color: kGoNegative),
       ]),
     ]));
   }

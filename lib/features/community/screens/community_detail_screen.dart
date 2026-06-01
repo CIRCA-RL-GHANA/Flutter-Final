@@ -73,7 +73,21 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> with Sing
                     icon: const Icon(Icons.people, color: Colors.white),
                     onPressed: () => Navigator.pushNamed(context, AppRoutes.communityMembers, arguments: _comm),
                   ),
-                  IconButton(icon: const Icon(Icons.more_vert, color: Colors.white), onPressed: () {}),
+                  IconButton(
+                    icon: const Icon(Icons.more_vert, color: Colors.white),
+                    onPressed: () => showModalBottomSheet(
+                      context: context,
+                      builder: (ctx) => SafeArea(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            ListTile(leading: const Icon(Icons.share), title: const Text('Share'), onTap: () => Navigator.pop(ctx)),
+                            ListTile(leading: const Icon(Icons.flag), title: const Text('Report'), onTap: () => Navigator.pop(ctx)),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
                 flexibleSpace: FlexibleSpaceBar(
                   background: Container(
@@ -148,7 +162,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> with Sing
           floatingActionButton: _joined
               ? FloatingActionButton.extended(
                   backgroundColor: _color,
-                  onPressed: () {},
+                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Create new post'))),
                   icon: const Icon(Icons.add, color: Colors.white),
                   label: const Text('New Post', style: TextStyle(color: Colors.white)),
                 )

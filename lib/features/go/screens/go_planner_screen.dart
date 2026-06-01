@@ -160,7 +160,7 @@ class _GoPlannerScreenState extends State<GoPlannerScreen> with SingleTickerProv
       SizedBox(width: double.infinity, child: OutlinedButton.icon(
         icon: const Icon(Icons.add, size: 18),
         label: const Text('Add Category'),
-        onPressed: () {},
+        onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Add budget category'))),
         style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 12)),
       )),
     ]);
@@ -174,7 +174,7 @@ class _GoPlannerScreenState extends State<GoPlannerScreen> with SingleTickerProv
       SizedBox(width: double.infinity, child: ElevatedButton.icon(
         icon: const Icon(Icons.add, size: 18),
         label: const Text('Set New Goal'),
-        onPressed: () {},
+        onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Set up a new financial goal'))),
         style: ElevatedButton.styleFrom(backgroundColor: kGoColor, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
       )),
     ]);

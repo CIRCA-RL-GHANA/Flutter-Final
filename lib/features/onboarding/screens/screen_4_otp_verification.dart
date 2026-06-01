@@ -411,19 +411,19 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                         _AlternativeMethodButton(
                           icon: Icons.phone,
                           label: AppStrings.getCodeViaCall,
-                          onTap: () {},
+                          onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Sending code via call...'))),
                         ),
                         const SizedBox(height: 8),
                         _AlternativeMethodButton(
                           icon: Icons.chat_bubble_outline,
                           label: AppStrings.receiveOnWhatsApp,
-                          onTap: () {},
+                          onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Sending code via WhatsApp...'))),
                         ),
                         const SizedBox(height: 8),
                         _AlternativeMethodButton(
                           icon: Icons.email_outlined,
                           label: AppStrings.sendToEmail,
-                          onTap: () {},
+                          onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Sending code to email...'))),
                         ),
                       ],
                     ],

@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../providers/qualchat_provider.dart';
 import '../widgets/qualchat_widgets.dart';
 import '../../../core/services/ai_insights_notifier.dart';
+import '../../../core/routes/app_routes.dart';
 
 class QualChatVibeImageScreen extends StatelessWidget {
   const QualChatVibeImageScreen({super.key});
@@ -18,7 +19,41 @@ class QualChatVibeImageScreen extends StatelessWidget {
       appBar: QualChatAppBar(
         title: 'My Vibe Snapshot ðŸ“¸',
         actions: [
-          IconButton(icon: const Icon(Icons.more_vert), onPressed: () {}),
+          IconButton(icon: const Icon(Icons.more_vert), onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+            ),
+            builder: (_) => SafeArea(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ListTile(
+                    leading: const Icon(Icons.share),
+                    title: const Text('Share'),
+                    onTap: () {
+                      Navigator.pop(context);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Link copied to clipboard')),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.delete_outline),
+                    title: const Text('Delete'),
+                    onTap: () => Navigator.pop(context),
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.report_outlined),
+                    title: const Text('Report'),
+                    onTap: () => Navigator.pop(context),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }),
         ],
       ),
       body: SingleChildScrollView(
@@ -127,11 +162,31 @@ class QualChatVibeImageScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(
                 children: [
-                  _VibeAction(icon: 'ðŸ§ƒ', label: 'Refresh', onTap: () {}),
-                  _VibeAction(icon: 'âœï¸', label: 'Edit', onTap: () {}),
-                  _VibeAction(icon: 'ðŸ”„', label: 'Cycle', onTap: () {}),
-                  _VibeAction(icon: 'ðŸ“Š', label: 'Stats', onTap: () {}),
-                  _VibeAction(icon: 'â¬‡ï¸', label: 'Save', onTap: () {}),
+                  _VibeAction(icon: '🧃', label: 'Refresh', onTap: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Refreshing vibe...')),
+                    );
+                  }),
+                  _VibeAction(icon: '✏️', label: 'Edit', onTap: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Opening editor...')),
+                    );
+                  }),
+                  _VibeAction(icon: '🔄', label: 'Cycle', onTap: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Cycling vibe image...')),
+                    );
+                  }),
+                  _VibeAction(icon: '📊', label: 'Stats', onTap: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Loading stats...')),
+                    );
+                  }),
+                  _VibeAction(icon: '⬇️', label: 'Save', onTap: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Saving...')),
+                    );
+                  }),
                 ],
               ),
             ),
@@ -146,7 +201,11 @@ class QualChatVibeImageScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: OutlinedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Set as profile picture')),
+                            );
+                          },
                           style: OutlinedButton.styleFrom(
                             foregroundColor: kChatColor,
                             side: const BorderSide(color: kChatColor),
@@ -158,7 +217,11 @@ class QualChatVibeImageScreen extends StatelessWidget {
                       const SizedBox(width: 8),
                       Expanded(
                         child: OutlinedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Schedule next vibe image')),
+                            );
+                          },
                           style: OutlinedButton.styleFrom(
                             foregroundColor: kChatColor,
                             side: const BorderSide(color: kChatColor),
@@ -170,7 +233,11 @@ class QualChatVibeImageScreen extends StatelessWidget {
                       const SizedBox(width: 8),
                       Expanded(
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('AI enhancing...')),
+                            );
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: kChatSocial,
                             foregroundColor: Colors.white,

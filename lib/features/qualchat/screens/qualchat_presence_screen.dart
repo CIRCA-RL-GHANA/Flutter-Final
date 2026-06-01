@@ -7,6 +7,7 @@ import '../models/qualchat_models.dart';
 import '../providers/qualchat_provider.dart';
 import '../widgets/qualchat_widgets.dart';
 import '../../../core/services/ai_insights_notifier.dart';
+import '../../../core/routes/app_routes.dart';
 
 class QualChatPresenceScreen extends StatelessWidget {
   const QualChatPresenceScreen({super.key});
@@ -24,7 +25,11 @@ class QualChatPresenceScreen extends StatelessWidget {
             actions: [
               IconButton(
                 icon: const Icon(Icons.sync, color: kChatColor),
-                onPressed: () {},
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Syncing...')),
+                  );
+                },
                 tooltip: 'Sync',
               ),
             ],
@@ -221,7 +226,7 @@ class QualChatPresenceScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: ElevatedButton.icon(
-                          onPressed: () {},
+                          onPressed: () => Navigator.pushNamed(context, AppRoutes.qualChatDashboard),
                           icon: const Icon(Icons.chat, size: 16),
                           label: const Text('Message All Online'),
                           style: ElevatedButton.styleFrom(
@@ -234,7 +239,7 @@ class QualChatPresenceScreen extends StatelessWidget {
                       const SizedBox(width: 8),
                       Expanded(
                         child: OutlinedButton.icon(
-                          onPressed: () {},
+                          onPressed: () => Navigator.pushNamed(context, AppRoutes.qualChatDashboard),
                           icon: const Icon(Icons.campaign, size: 16),
                           label: const Text('Announcement'),
                           style: OutlinedButton.styleFrom(
@@ -346,13 +351,25 @@ class _ExpandableUserCardState extends State<_ExpandableUserCard> {
               const SizedBox(height: 8),
               Row(
                 children: [
-                  _QuickAction(icon: Icons.chat, label: 'Message', onTap: () {}),
+                  _QuickAction(icon: Icons.chat, label: 'Message', onTap: () => Navigator.pushNamed(context, AppRoutes.qualChatDashboard)),
                   const SizedBox(width: 8),
-                  _QuickAction(icon: Icons.call, label: 'Call', onTap: () {}),
+                  _QuickAction(icon: Icons.call, label: 'Call', onTap: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Calling...')),
+                    );
+                  }),
                   const SizedBox(width: 8),
-                  _QuickAction(icon: Icons.calendar_today, label: 'Schedule', onTap: () {}),
+                  _QuickAction(icon: Icons.calendar_today, label: 'Schedule', onTap: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Opening scheduler...')),
+                    );
+                  }),
                   const SizedBox(width: 8),
-                  _QuickAction(icon: Icons.visibility, label: 'View', onTap: () {}),
+                  _QuickAction(icon: Icons.visibility, label: 'View', onTap: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Viewing profile...')),
+                    );
+                  }),
                 ],
               ),
             ],

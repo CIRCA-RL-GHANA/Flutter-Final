@@ -86,7 +86,7 @@ class _MarketProductDetailScreenState extends State<MarketProductDetailScreen> {
             ),
             child: const Icon(Icons.favorite_border, size: 20, color: AppColors.textPrimary),
           ),
-          onPressed: () {},
+          onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Added to favorites'), behavior: SnackBarBehavior.floating)),
         ),
         IconButton(
           icon: Container(
@@ -97,7 +97,7 @@ class _MarketProductDetailScreenState extends State<MarketProductDetailScreen> {
             ),
             child: const Icon(Icons.share, size: 20, color: AppColors.textPrimary),
           ),
-          onPressed: () {},
+          onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Link copied to clipboard'), behavior: SnackBarBehavior.floating)),
         ),
       ],
       flexibleSpace: FlexibleSpaceBar(

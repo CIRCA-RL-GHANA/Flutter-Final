@@ -75,7 +75,7 @@ class _LiveDashboardScreenState extends State<LiveDashboardScreen> with SingleTi
             leadingWidth: 70,
             title: const Text('LIVE • Operations', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: AppColors.textPrimary)),
             actions: [
-              IconButton(icon: const Icon(Icons.business, size: 20), color: AppColors.textSecondary, onPressed: () {}),
+              IconButton(icon: const Icon(Icons.business, size: 20), color: AppColors.textSecondary, onPressed: () => Navigator.pushNamed(context, AppRoutes.setupDashboard)),
               IconButton(
                 icon: Badge(
                   label: Text('${prov.unreadNotificationCount}'),
@@ -83,9 +83,9 @@ class _LiveDashboardScreenState extends State<LiveDashboardScreen> with SingleTi
                   child: const Icon(Icons.notifications_outlined, size: 20),
                 ),
                 color: AppColors.textSecondary,
-                onPressed: () {},
+                onPressed: () => Navigator.pushNamed(context, AppRoutes.utilityNotifications),
               ),
-              IconButton(icon: const Icon(Icons.my_location, size: 20), color: AppColors.textSecondary, onPressed: () {}),
+              IconButton(icon: const Icon(Icons.my_location, size: 20), color: AppColors.textSecondary, onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Locating...')))),
               IconButton(
                 icon: const Icon(Icons.sos, size: 20),
                 color: kLiveColor,
@@ -219,7 +219,7 @@ class _OrdersView extends StatelessWidget {
                       ...a.actions.take(2).map((act) => Padding(
                         padding: const EdgeInsets.only(left: 6),
                         child: InkWell(
-                          onTap: () {},
+                          onTap: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(act))),
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                             decoration: BoxDecoration(
@@ -280,7 +280,7 @@ class _OrdersView extends StatelessWidget {
             children: [
               Expanded(
                 child: OutlinedButton.icon(
-                  onPressed: () {},
+                  onPressed: () => Navigator.pushNamed(context, AppRoutes.liveDriverAssignment),
                   icon: const Icon(Icons.select_all, size: 16),
                   label: const Text('BULK ASSIGN'),
                   style: OutlinedButton.styleFrom(foregroundColor: kLiveColor, padding: const EdgeInsets.symmetric(vertical: 12)),
@@ -289,7 +289,7 @@ class _OrdersView extends StatelessWidget {
               const SizedBox(width: 8),
               Expanded(
                 child: OutlinedButton.icon(
-                  onPressed: () {},
+                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Auto-assigning...'))),
                   icon: const Icon(Icons.auto_fix_high, size: 16),
                   label: const Text('AUTO-ASSIGN'),
                   style: OutlinedButton.styleFrom(foregroundColor: kLiveColor, padding: const EdgeInsets.symmetric(vertical: 12)),
@@ -337,7 +337,7 @@ class _ReturnsView extends StatelessWidget {
             children: [
               Expanded(
                 child: OutlinedButton.icon(
-                  onPressed: () {},
+                  onPressed: () => Navigator.pushNamed(context, AppRoutes.liveReturnReview),
                   icon: const Icon(Icons.checklist, size: 16),
                   label: const Text('BULK REVIEW'),
                   style: OutlinedButton.styleFrom(foregroundColor: kLiveColor, padding: const EdgeInsets.symmetric(vertical: 12)),
@@ -346,7 +346,7 @@ class _ReturnsView extends StatelessWidget {
               const SizedBox(width: 8),
               Expanded(
                 child: OutlinedButton.icon(
-                  onPressed: () {},
+                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Auto-approving...'))),
                   icon: const Icon(Icons.auto_awesome, size: 16),
                   label: const Text('AUTO-APPROVE <â‚µ50'),
                   style: OutlinedButton.styleFrom(foregroundColor: kLiveColor, padding: const EdgeInsets.symmetric(vertical: 12)),

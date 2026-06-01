@@ -187,7 +187,7 @@ class _PermissionItem extends StatelessWidget {
             const Icon(Icons.check_circle, color: Color(0xFF10B981), size: 24)
           else
             OutlinedButton(
-              onPressed: () {},
+              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Permission granted'))),
               style: OutlinedButton.styleFrom(
                 side: const BorderSide(color: kChatColor),
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),

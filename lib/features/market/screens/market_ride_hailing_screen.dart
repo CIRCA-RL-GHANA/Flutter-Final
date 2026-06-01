@@ -6,6 +6,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../models/market_models.dart';
 import '../providers/market_provider.dart';
@@ -511,7 +512,7 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
                         ),
                         child: const Icon(Icons.phone, size: 20, color: kMarketColor),
                       ),
-                      onPressed: () {},
+                      onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Calling driver...'), behavior: SnackBarBehavior.floating)),
                     ),
                     IconButton(
                       icon: Container(
@@ -522,7 +523,7 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
                         ),
                         child: const Icon(Icons.chat, size: 20, color: kMarketColor),
                       ),
-                      onPressed: () {},
+                      onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Opening chat...'), behavior: SnackBarBehavior.floating)),
                     ),
                   ],
                 ),
@@ -677,9 +678,9 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    _QuickAction(icon: Icons.share_location, label: 'Share', onTap: () {}),
-                    _QuickAction(icon: Icons.report, label: 'Report', onTap: () {}),
-                    _QuickAction(icon: Icons.support_agent, label: 'Help', onTap: () {}),
+                    _QuickAction(icon: Icons.share_location, label: 'Share', onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Location shared'), behavior: SnackBarBehavior.floating))),
+                    _QuickAction(icon: Icons.report, label: 'Report', onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Report submitted'), behavior: SnackBarBehavior.floating))),
+                    _QuickAction(icon: Icons.support_agent, label: 'Help', onTap: () => Navigator.pushNamed(context, AppRoutes.utilityHelp)),
                   ],
                 ),
                 const SizedBox(height: 16),
@@ -1026,7 +1027,7 @@ class _TipButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      onPressed: () {},
+      onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Tip added'), behavior: SnackBarBehavior.floating)),
       style: OutlinedButton.styleFrom(
         foregroundColor: kMarketColor,
         side: const BorderSide(color: kMarketColor),

@@ -35,7 +35,7 @@ class BandsScreen extends StatelessWidget {
             ),
             floatingActionButton: SetupRbacFAB(
               cardId: 'vehicle_bands',
-              onPressed: () {},
+              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Create new vehicle band'))),
               label: 'New Band',
               icon: Icons.add,
             ),
