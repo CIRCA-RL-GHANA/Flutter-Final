@@ -190,11 +190,46 @@ class QualChatNudgesScreen extends StatelessWidget {
   }
 }
 // ── Stateful Auto-mode toggle ─────────────────────────────────────ðŸ“Ž Follow-ups',
-                NudgeType.reEngagement: 'ðŸ¤ Re-engagement',
-                NudgeType.profileUpdate: 'ðŸ“ Profile Updates',
-                NudgeType.compatibility: 'ðŸ’« Compatibility',
-                NudgeType.activity: 'âš¡ Activity',
-              };
+
+
+// ── Nudge Settings Sheet ──────────────────────────────────────────
+class _NudgeSettingsSheet extends StatelessWidget {
+  const _NudgeSettingsSheet();
+
+  @override
+  Widget build(BuildContext context) {
+    const typeLabels = {
+      NudgeType.followUp: 'Follow-ups',
+      NudgeType.reEngagement: 'Re-engagement',
+      NudgeType.profileUpdate: 'Profile Updates',
+      NudgeType.compatibility: 'Compatibility',
+      NudgeType.activity: 'Activity',
+    };
+    return Padding(
+      padding: EdgeInsets.only(
+        left: 20, right: 20, top: 20,
+        bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text('Nudge Settings', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
+          const SizedBox(height: 16),
+          const Text('Active nudge types:', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: Color(0xFF6B7280))),
+          const SizedBox(height: 10),
+          ...NudgeType.values.map((t) => ListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: Text(typeLabels[t] ?? t.name, style: const TextStyle(fontSize: 13)),
+            trailing: const Icon(Icons.check_circle, color: kChatColor, size: 20),
+          )),
+        ],
+      ),
+    );
+  }
+}
+
 // ── Stateful Auto-mode toggle ─────────────────────────────────────
 class _AutoModeToggle extends StatefulWidget {
   const _AutoModeToggle();
