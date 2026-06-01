@@ -209,6 +209,68 @@ class _ExpandableTemplateCard extends StatefulWidget {
 class _ExpandableTemplateCardState extends State<_ExpandableTemplateCard> {
   bool _expanded = false;
 
+  void _showEditSheet(BuildContext context) {
+    final nameCtrl = TextEditingController(text: widget.template.name);
+    final contentCtrl = TextEditingController(text: widget.template.content);
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      builder: (_) => Padding(
+        padding: EdgeInsets.only(
+          left: 20, right: 20, top: 20,
+          bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(child: Container(width: 40, height: 4, margin: const EdgeInsets.only(bottom: 16), decoration: BoxDecoration(color: const Color(0xFFE5E7EB), borderRadius: BorderRadius.circular(2)))),
+            const Text('Edit Template', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
+            const SizedBox(height: 16),
+            TextField(
+              controller: nameCtrl,
+              decoration: InputDecoration(
+                labelText: 'Template Name',
+                filled: true, fillColor: const Color(0xFFF3F4F6),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+              ),
+            ),
+            const SizedBox(height: 12),
+            TextField(
+              controller: contentCtrl,
+              maxLines: 5,
+              decoration: InputDecoration(
+                labelText: 'Template Content',
+                hintText: 'Use \${variable} for dynamic fields...',
+                filled: true, fillColor: const Color(0xFFF3F4F6),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+              ),
+            ),
+            const SizedBox(height: 16),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Template updated'), backgroundColor: kAlertsResolved),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: kAlertsColor, foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                ),
+                child: const Text('Save Changes', style: TextStyle(fontWeight: FontWeight.w600)),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -315,9 +377,7 @@ class _ExpandableTemplateCardState extends State<_ExpandableTemplateCard> {
                         child: OutlinedButton.icon(
                           icon: const Icon(Icons.edit, size: 16),
                           label: const Text('Edit'),
-                          onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Edit template coming soon')),
-                          ),
+                          onPressed: () => _showEditSheet(context),
                           style: OutlinedButton.styleFrom(
                             foregroundColor: const Color(0xFF6B7280),
                             side: const BorderSide(color: Color(0xFF1C1C2E)),

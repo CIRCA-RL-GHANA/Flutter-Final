@@ -16,6 +16,11 @@ class GoTaxScreen extends StatefulWidget {
 
 class _GoTaxScreenState extends State<GoTaxScreen> with SingleTickerProviderStateMixin {
   late TabController _tabCtrl;
+  String _selectedPeriod = 'Tax Year 2024';
+  static const List<String> _periods = [
+    'Tax Year 2024', 'Tax Year 2023', 'Tax Year 2022',
+    'Q4 2024', 'Q3 2024', 'Q2 2024', 'Q1 2024',
+  ];
 
   @override
   void initState() { super.initState(); _tabCtrl = TabController(length: 3, vsync: this); }
@@ -81,9 +86,27 @@ class _GoTaxScreenState extends State<GoTaxScreen> with SingleTickerProviderStat
       GoSectionCard(child: Row(children: [
         const Icon(Icons.calendar_month, size: 18, color: kGoColor),
         const SizedBox(width: 8),
-        const Text('Tax Year 2024', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+        Text(_selectedPeriod, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
         const Spacer(),
-        TextButton(onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Change period coming soon'))), child: const Text('Change', style: TextStyle(fontSize: 12, color: kGoColor))),
+        TextButton(
+          onPressed: () async {
+            final chosen = await showDialog<String>(
+              context: context,
+              builder: (ctx) => SimpleDialog(
+                title: const Text('Select Period'),
+                children: _periods.map((p) => SimpleDialogOption(
+                  onPressed: () => Navigator.pop(ctx, p),
+                  child: Text(p, style: TextStyle(
+                    fontWeight: p == _selectedPeriod ? FontWeight.w700 : FontWeight.w400,
+                    color: p == _selectedPeriod ? kGoColor : null,
+                  )),
+                )).toList(),
+              ),
+            );
+            if (chosen != null) setState(() => _selectedPeriod = chosen);
+          },
+          child: const Text('Change', style: TextStyle(fontSize: 12, color: kGoColor)),
+        ),
       ])),
       const SizedBox(height: 14),
       // Summary cards

@@ -18,6 +18,13 @@ class AlertsBulkScreen extends StatefulWidget {
 
 class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
   BulkActionType? _selectedAction;
+  final Set<String> _selectedTags = {};
+  String _mergeStrategy = 'newest';
+
+  static const List<String> _presetTags = [
+    'Urgent', 'Critical', 'Fraud', 'System', 'Customer',
+    'Review', 'Escalate', 'Follow-up', 'Billing', 'Security',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -261,10 +268,65 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
             ],
           ),
         );
-      default:
+      case BulkActionType.addTags:
         return AlertsSectionCard(
-          title: 'ðŸ”§ ${_actionLabel(_selectedAction!)}',
-          child: const Text('Feature coming soon', style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+          title: '🏷️ Select Tags',
+          child: Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: _presetTags.map((tag) {
+              final selected = _selectedTags.contains(tag);
+              return GestureDetector(
+                onTap: () => setState(() {
+                  if (selected) {
+                    _selectedTags.remove(tag);
+                  } else {
+                    _selectedTags.add(tag);
+                  }
+                }),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: selected ? kAlertsColor : Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: selected ? kAlertsColor : const Color(0xFFE5E7EB)),
+                  ),
+                  child: Text(
+                    tag,
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: selected ? Colors.white : const Color(0xFF374151),
+                      fontWeight: selected ? FontWeight.w600 : FontWeight.w400,
+                    ),
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+        );
+      case BulkActionType.merge:
+        return AlertsSectionCard(
+          title: '🔀 Merge Strategy',
+          child: Column(
+            children: [
+              RadioListTile<String>(
+                value: 'newest',
+                groupValue: _mergeStrategy,
+                title: const Text('Keep newest alert', style: TextStyle(fontSize: 13)),
+                subtitle: const Text('Older duplicates will be archived', style: TextStyle(fontSize: 11)),
+                activeColor: kAlertsColor,
+                onChanged: (v) => setState(() => _mergeStrategy = v!),
+              ),
+              RadioListTile<String>(
+                value: 'oldest',
+                groupValue: _mergeStrategy,
+                title: const Text('Keep oldest alert', style: TextStyle(fontSize: 13)),
+                subtitle: const Text('Newer duplicates will be archived', style: TextStyle(fontSize: 11)),
+                activeColor: kAlertsColor,
+                onChanged: (v) => setState(() => _mergeStrategy = v!),
+              ),
+            ],
+          ),
         );
     }
   }

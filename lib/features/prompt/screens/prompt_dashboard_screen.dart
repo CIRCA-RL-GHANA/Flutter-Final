@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:thepg/core/providers/service_providers.dart';
+import 'package:thepg/core/routes/app_routes.dart';
 
 class PromptDashboardScreen extends ConsumerStatefulWidget {
   const PromptDashboardScreen({Key? key}) : super(key: key);
@@ -67,14 +68,12 @@ class _PromptDashboardScreenState extends ConsumerState<PromptDashboardScreen>
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Icon(Icons.chat, size: 64, color: Colors.grey),
+                          const Icon(Icons.chat_bubble_outline, size: 64, color: Colors.grey),
                           const SizedBox(height: 16),
                           const Text('No conversations yet'),
                           const SizedBox(height: 16),
                           ElevatedButton(
-                            onPressed: () {
-                              Navigator.of(context).pushNamed('/chat/new');
-                            },
+                            onPressed: () => Navigator.pushNamed(context, AppRoutes.qualChatNewChat),
                             child: const Text('Start a new conversation'),
                           ),
                         ],
@@ -84,11 +83,14 @@ class _PromptDashboardScreenState extends ConsumerState<PromptDashboardScreen>
                       itemCount: conversations.length,
                       itemBuilder: (context, index) {
                         final conversation = conversations[index];
+                        final avatarUrl = (conversation['participantAvatar'] as String?) ?? '';
                         return ListTile(
                           leading: CircleAvatar(
-                            backgroundImage: NetworkImage(
-                              (conversation['participantAvatar'] as String?) ?? '',
-                            ),
+                            backgroundColor: Colors.grey.shade200,
+                            backgroundImage: avatarUrl.isNotEmpty ? NetworkImage(avatarUrl) : null,
+                            child: avatarUrl.isEmpty
+                                ? const Icon(Icons.person, color: Colors.grey)
+                                : null,
                           ),
                           title: Text((conversation['participantName'] as String?) ?? 'Unknown'),
                           subtitle: Text(
@@ -100,9 +102,7 @@ class _PromptDashboardScreenState extends ConsumerState<PromptDashboardScreen>
                             (conversation['lastMessageTime'] as String?) ?? '',
                             style: Theme.of(context).textTheme.bodySmall,
                           ),
-                          onTap: () {
-                            Navigator.of(context).pushNamed('/chat/${conversation['id']}');
-                          },
+                          onTap: () => Navigator.pushNamed(context, AppRoutes.qualChatDashboard),
                         );
                       },
                     );
@@ -114,17 +114,17 @@ class _PromptDashboardScreenState extends ConsumerState<PromptDashboardScreen>
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.people, size: 64, color: Colors.grey),
+                Icon(Icons.people_outline, size: 64, color: Colors.grey.shade300),
                 const SizedBox(height: 16),
-                const Text('Contacts feature coming soon'),
-                const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Feature in development')),
-                    );
-                  },
-                  child: const Text('View Contacts'),
+                const Text(
+                  'Contacts',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Color(0xFF374151)),
+                ),
+                const SizedBox(height: 8),
+                const Text(
+                  'Your contacts will appear here once\nthe feature becomes available.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 14, color: Color(0xFF9CA3AF)),
                 ),
               ],
             ),
@@ -138,25 +138,24 @@ class _PromptDashboardScreenState extends ConsumerState<PromptDashboardScreen>
                 title: const Text('Notifications'),
                 subtitle: const Text('Manage notification settings'),
                 trailing: const Icon(Icons.arrow_forward),
-                onTap: () {
-                  // Navigate to notifications settings
-                },
+                onTap: () => Navigator.pushNamed(context, AppRoutes.utilityNotifications),
               ),
               ListTile(
                 title: const Text('Privacy'),
                 subtitle: const Text('Control your privacy settings'),
                 trailing: const Icon(Icons.arrow_forward),
-                onTap: () {
-                  // Navigate to privacy settings
-                },
+                onTap: () => Navigator.pushNamed(context, AppRoutes.utilityPrivacy),
               ),
               ListTile(
                 title: const Text('About'),
                 subtitle: const Text('Learn about genie help'),
                 trailing: const Icon(Icons.arrow_forward),
-                onTap: () {
-                  // Navigate to about page
-                },
+                onTap: () => showAboutDialog(
+                  context: context,
+                  applicationName: 'genie help',
+                  applicationVersion: '1.0',
+                  applicationLegalese: '© 2026 CIRCA-RL. All rights reserved.',
+                ),
               ),
             ],
           ),

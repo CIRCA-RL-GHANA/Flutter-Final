@@ -188,15 +188,35 @@ class _GoReportsScreenState extends State<GoReportsScreen> with SingleTickerProv
   }
 }
 
-class _DateField extends StatelessWidget {
+class _DateField extends StatefulWidget {
   final String label;
   const _DateField({required this.label});
   @override
+  State<_DateField> createState() => _DateFieldState();
+}
+
+class _DateFieldState extends State<_DateField> {
+  DateTime? _selected;
+
+  @override
   Widget build(BuildContext context) => TextField(
     readOnly: true,
-    onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Date picker coming soon'))),
+    controller: TextEditingController(
+      text: _selected != null
+          ? '${_selected!.day}/${_selected!.month}/${_selected!.year}'
+          : '',
+    ),
+    onTap: () async {
+      final picked = await showDatePicker(
+        context: context,
+        initialDate: _selected ?? DateTime.now(),
+        firstDate: DateTime(2020),
+        lastDate: DateTime.now(),
+      );
+      if (picked != null) setState(() => _selected = picked);
+    },
     decoration: InputDecoration(
-      hintText: label, suffixIcon: const Icon(Icons.calendar_today, size: 16),
+      hintText: widget.label, suffixIcon: const Icon(Icons.calendar_today, size: 16),
       filled: true, fillColor: const Color(0xFFF3F4F6),
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide.none),
       contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),

@@ -226,7 +226,7 @@ class _GoTabDetailScreenState extends State<GoTabDetailScreen> {
       const SizedBox(height: 10),
       Wrap(spacing: 8, runSpacing: 8, children: [
         _ActionBtn(icon: Icons.message, label: 'Message', onTap: () => Navigator.pushNamed(context, AppRoutes.qualChatDashboard)),
-        _ActionBtn(icon: Icons.edit, label: 'Edit', onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Edit coming soon')))),
+        _ActionBtn(icon: Icons.edit, label: 'Edit', onTap: () => _showEditTabSheet(context, tab)),
         _ActionBtn(icon: Icons.handshake, label: 'Negotiate', onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Opening negotiation...')))),
         _ActionBtn(icon: Icons.attach_file, label: 'Documents', onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Opening documents...')))),
         _ActionBtn(icon: Icons.share, label: 'Share', onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Link copied to clipboard')))),
@@ -262,6 +262,70 @@ class _StatusBadge extends StatelessWidget {
       case TabStatus.closed: c = const Color(0xFF9CA3AF); t = 'Closed';
     }
     return Container(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4), decoration: BoxDecoration(color: c.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(12)), child: Text(t, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: c)));
+  }
+
+  void _showEditTabSheet(BuildContext context, GoTab tab) {
+    final descCtrl = TextEditingController(text: tab.description);
+    final noteCtrl = TextEditingController();
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      builder: (_) => Padding(
+        padding: EdgeInsets.only(
+          left: 20, right: 20, top: 20,
+          bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Edit Tab — ${tab.id}', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
+            const SizedBox(height: 16),
+            const Text('Description', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
+            const SizedBox(height: 6),
+            TextField(
+              controller: descCtrl,
+              decoration: InputDecoration(
+                hintText: 'Tab description',
+                filled: true, fillColor: const Color(0xFFF3F4F6),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+              ),
+            ),
+            const SizedBox(height: 12),
+            const Text('Notes', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
+            const SizedBox(height: 6),
+            TextField(
+              controller: noteCtrl,
+              maxLines: 3,
+              decoration: InputDecoration(
+                hintText: 'Add an internal note...',
+                filled: true, fillColor: const Color(0xFFF3F4F6),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+              ),
+            ),
+            const SizedBox(height: 16),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Tab updated successfully'), backgroundColor: kGoColor),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: kGoColor, foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                ),
+                child: const Text('Save Changes', style: TextStyle(fontWeight: FontWeight.w600)),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 
