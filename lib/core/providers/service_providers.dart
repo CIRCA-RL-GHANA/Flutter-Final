@@ -5,14 +5,16 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../services/chat_service.dart';
 import '../services/orders_service.dart';
-import '../network/api_client.dart';
 
 // ── Riverpod providers (for ConsumerWidget / ConsumerStatefulWidget screens) ─
 
+// ChatService extends ChangeNotifier — still uses ChangeNotifierProvider.
 final chatServiceProvider = ChangeNotifierProvider<ChatService>(
-  (ref) => ChatService(ApiClient.instance.dio),
+  (ref) => ChatService(),
 );
 
-final ordersServiceProvider = ChangeNotifierProvider<OrdersService>(
-  (ref) => OrdersService(ApiClient.instance.dio),
+// OrdersService is a plain service class (no longer a ChangeNotifier).
+// Use Provider<T> so Riverpod doesn't require ChangeNotifier.
+final ordersServiceProvider = Provider<OrdersService>(
+  (ref) => OrdersService(),
 );
