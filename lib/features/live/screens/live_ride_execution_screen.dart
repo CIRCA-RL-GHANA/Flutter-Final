@@ -7,6 +7,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../../../core/design/ive_tokens.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
 import '../models/live_models.dart';
@@ -186,20 +188,11 @@ class _EnRouteView extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
-        // Map placeholder
-        Container(
-          height: 180,
-          decoration: BoxDecoration(color: const Color(0xFFE5E7EB), borderRadius: BorderRadius.circular(14)),
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(Icons.navigation, size: 40, color: AppColors.textTertiary),
-                const SizedBox(height: 8),
-                Text('Navigating to pickup location', style: TextStyle(fontSize: 13, color: AppColors.textTertiary)),
-              ],
-            ),
-          ),
+        // Route card — shows live location context and opens the native maps app.
+        _RouteMapCard(
+          label: 'Navigating to pickup',
+          address: ride.pickupAddress,
+          destinationAddress: ride.dropoffAddress,
         ),
 
         const SizedBox(height: 12),
@@ -617,4 +610,160 @@ class _CompletionRow extends StatelessWidget {
       ),
     );
   }
+}
+
+// ─── Route Map Card ───────────────────────────────────────────────────────────
+/// Shows pickup → drop-off route with an "Open in Maps" deep-link.
+/// Replaces a native map tile when google_maps_flutter is not in use.
+class _RouteMapCard extends StatelessWidget {
+  final String label;
+  final String? address;
+  final String? destinationAddress;
+
+  const _RouteMapCard({
+    required this.label,
+    this.address,
+    this.destinationAddress,
+  });
+
+  Future<void> _openMaps() async {
+    final query = Uri.encodeComponent(
+      destinationAddress ?? address ?? label,
+    );
+    final uri = Uri.parse('geo:0,0?q=$query');
+    // Fallback to Google Maps web URL for environments that don't handle geo: URIs.
+    final fallback = Uri.parse('https://www.google.com/maps/search/?api=1&query=$query');
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      await launchUrl(fallback, mode: LaunchMode.externalApplication);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 180,
+      decoration: BoxDecoration(
+        color: IveTokens.surface,
+        borderRadius: BorderRadius.circular(14),
+        border: IveTokens.cardBorder,
+      ),
+      child: Stack(
+        children: [
+          // Subtle grid pattern to suggest a map surface.
+          Positioned.fill(
+            child: CustomPaint(painter: _MapGridPainter()),
+          ),
+          // Route info overlay.
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    const Icon(Icons.navigation_rounded,
+                        size: 18, color: IveTokens.accent),
+                    const SizedBox(width: 6),
+                    Text(
+                      label,
+                      style: const TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: IveTokens.label,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                if (address != null)
+                  _RouteStop(
+                    icon: Icons.trip_origin_rounded,
+                    color: IveTokens.success,
+                    text: address!,
+                  ),
+                if (address != null && destinationAddress != null)
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8),
+                    child: Container(width: 2, height: 20, color: IveTokens.hairline),
+                  ),
+                if (destinationAddress != null)
+                  _RouteStop(
+                    icon: Icons.location_on_rounded,
+                    color: IveTokens.danger,
+                    text: destinationAddress!,
+                  ),
+                const Spacer(),
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: TextButton.icon(
+                    onPressed: _openMaps,
+                    icon: const Icon(Icons.open_in_new_rounded,
+                        size: 14, color: IveTokens.accent),
+                    label: const Text(
+                      'Open in Maps',
+                      style: TextStyle(fontSize: 12, color: IveTokens.accent),
+                    ),
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      minimumSize: Size.zero,
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _RouteStop extends StatelessWidget {
+  final IconData icon;
+  final Color color;
+  final String text;
+  const _RouteStop({required this.icon, required this.color, required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Icon(icon, size: 14, color: color),
+        const SizedBox(width: 6),
+        Expanded(
+          child: Text(
+            text,
+            style: const TextStyle(
+              fontSize: 12,
+              color: IveTokens.labelSecondary,
+            ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _MapGridPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = IveTokens.hairline.withValues(alpha: 0.5)
+      ..strokeWidth = 0.5;
+    const spacing = 24.0;
+    for (double x = 0; x < size.width; x += spacing) {
+      canvas.drawLine(Offset(x, 0), Offset(x, size.height), paint);
+    }
+    for (double y = 0; y < size.height; y += spacing) {
+      canvas.drawLine(Offset(0, y), Offset(size.width, y), paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

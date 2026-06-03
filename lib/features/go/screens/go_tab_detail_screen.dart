@@ -203,7 +203,7 @@ class _GoTabDetailScreenState extends State<GoTabDetailScreen> {
         const SizedBox(width: 8),
         Expanded(child: _SettleOption(label: 'Partial', desc: 'Custom amount', selected: false, onTap: () => setState(() { _settleAmountCtrl.clear(); }))),
         const SizedBox(width: 8),
-        Expanded(child: _SettleOption(label: 'Plan', desc: 'Installments', selected: false, onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Installment plan coming soon'))))),
+        Expanded(child: _SettleOption(label: 'Plan', desc: 'Installments', selected: false, onTap: () => Navigator.pushNamed(context, AppRoutes.fintechLoans))),
       ]),
       const SizedBox(height: 12),
       TextField(

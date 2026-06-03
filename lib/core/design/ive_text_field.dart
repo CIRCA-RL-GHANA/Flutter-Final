@@ -9,6 +9,7 @@ class IveTextField extends StatelessWidget {
   const IveTextField({
     super.key,
     this.controller,
+    this.focusNode,
     this.label,
     this.hint,
     this.helper,
@@ -33,6 +34,7 @@ class IveTextField extends StatelessWidget {
   });
 
   final TextEditingController? controller;
+  final FocusNode? focusNode;
   final String? label;
   final String? hint;
   final String? helper;
@@ -66,6 +68,7 @@ class IveTextField extends StatelessWidget {
         ],
         TextField(
           controller: controller,
+          focusNode: focusNode,
           obscureText: obscure,
           enabled: enabled,
           keyboardType: keyboardType,

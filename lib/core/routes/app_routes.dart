@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../design/ive_text.dart';
+import '../design/ive_tokens.dart';
 import '../../features/onboarding/screens/screen_0_preloading.dart';
 import '../../features/onboarding/screens/screen_1_splash.dart';
 import '../../features/onboarding/screens/screen_2_welcome.dart';
@@ -918,9 +920,7 @@ class AppRoutes {
 
       default:
         return _buildRoute(
-          const Scaffold(
-            body: Center(child: Text('Route not found')),
-          ),
+          _RouteNotFoundScreen(name: settings.name ?? ''),
           settings,
         );
     }
@@ -933,14 +933,11 @@ class AppRoutes {
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         const begin = Offset(1.0, 0.0);
         const end = Offset.zero;
-        const curve = Curves.easeInOutCubic;
 
-        var tween = Tween(begin: begin, end: end).chain(
-          CurveTween(curve: curve),
-        );
-        var fadeTween = Tween(begin: 0.0, end: 1.0).chain(
-          CurveTween(curve: curve),
-        );
+        final tween = Tween(begin: begin, end: end)
+            .chain(CurveTween(curve: IveTokens.emphasized));
+        final fadeTween = Tween(begin: 0.0, end: 1.0)
+            .chain(CurveTween(curve: IveTokens.enter));
 
         return SlideTransition(
           position: animation.drive(tween),
@@ -950,7 +947,71 @@ class AppRoutes {
           ),
         );
       },
-      transitionDuration: const Duration(milliseconds: 400),
+      // 320 ms matches IveTokens.dBase — snappy yet perceptible.
+      transitionDuration: IveTokens.dBase,
+    );
+  }
+}
+
+// ─── 404 fallback ─────────────────────────────────────────────────────────────
+
+class _RouteNotFoundScreen extends StatelessWidget {
+  final String name;
+  const _RouteNotFoundScreen({required this.name});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: IveTokens.bg,
+      appBar: AppBar(
+        backgroundColor: IveTokens.bg,
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        leading: const BackButton(color: IveTokens.label),
+      ),
+      body: SafeArea(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(IveTokens.s8),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: 64,
+                  height: 64,
+                  decoration: BoxDecoration(
+                    color: IveTokens.surface,
+                    borderRadius: IveTokens.brMd,
+                    border: IveTokens.cardBorder,
+                  ),
+                  child: const Icon(Icons.route_outlined,
+                      size: 28, color: IveTokens.labelTertiary),
+                ),
+                const SizedBox(height: IveTokens.s4),
+                Text('Page not found', style: IveType.title3),
+                const SizedBox(height: IveTokens.s2),
+                ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 280),
+                  child: Text(
+                    name.isEmpty ? 'This route does not exist.' : '"$name" is not a registered route.',
+                    style: IveType.callout,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                const SizedBox(height: IveTokens.s6),
+                TextButton.icon(
+                  onPressed: () => Navigator.of(context).pop(),
+                  icon: const Icon(Icons.arrow_back_rounded,
+                      size: 18, color: IveTokens.accent),
+                  label: Text('Go back',
+                      style: IveType.bodyEmphasis
+                          .copyWith(color: IveTokens.accent)),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

@@ -25,26 +25,41 @@ class IveCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final shape = radius ?? IveTokens.brSm;
-    final content = AnimatedContainer(
-      duration: IveTokens.dMicro,
-      curve: IveTokens.standard,
-      padding: padding,
-      decoration: BoxDecoration(
-        color: color ?? IveTokens.surface,
-        borderRadius: shape,
-        border: bordered ? IveTokens.cardBorder : null,
-      ),
-      child: child,
-    );
-    if (onTap == null) return content;
+
+    // Non-interactive: keep the AnimatedContainer so state-driven color
+    // changes animate smoothly.
+    if (onTap == null) {
+      return AnimatedContainer(
+        duration: IveTokens.dMicro,
+        curve: IveTokens.standard,
+        padding: padding,
+        decoration: BoxDecoration(
+          color: color ?? IveTokens.surface,
+          borderRadius: shape,
+          border: bordered ? IveTokens.cardBorder : null,
+        ),
+        child: child,
+      );
+    }
+
+    // Tappable: use Ink so the ripple is painted ON TOP of the card surface
+    // instead of behind the opaque background (where it would be invisible).
     return Material(
       color: Colors.transparent,
       borderRadius: shape,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: shape,
-        splashColor: IveTokens.accentSoft,
-        child: content,
+      clipBehavior: Clip.antiAlias,
+      child: Ink(
+        decoration: BoxDecoration(
+          color: color ?? IveTokens.surface,
+          borderRadius: shape,
+          border: bordered ? IveTokens.cardBorder : null,
+        ),
+        child: InkWell(
+          onTap: onTap,
+          splashColor: IveTokens.accentSoft,
+          highlightColor: IveTokens.accentSoft,
+          child: Padding(padding: padding, child: child),
+        ),
       ),
     );
   }

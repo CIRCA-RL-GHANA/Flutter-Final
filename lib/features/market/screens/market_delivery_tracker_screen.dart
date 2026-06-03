@@ -5,6 +5,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../../../core/design/ive_tokens.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
@@ -68,19 +70,14 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
                   background: Stack(
                     fit: StackFit.expand,
                     children: [
-                      // Map placeholder
-                      Container(
-                        color: const Color(0xFFE8F0FE),
-                        child: const Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(Icons.map, size: 60, color: AppColors.textTertiary),
-                              SizedBox(height: 8),
-                              Text('Live Delivery Map', style: TextStyle(color: AppColors.textTertiary)),
-                            ],
-                          ),
-                        ),
+                      // Route map card with native maps deep-link.
+                      _DeliveryMapBanner(
+                        driverName: tracking.driverName,
+                        destinationLat: tracking.destinationLat,
+                        destinationLng: tracking.destinationLng,
+                        merchantLat: tracking.merchantLat,
+                        merchantLng: tracking.merchantLng,
+                        etaMinutes: tracking.etaMinutes,
                       ),
                       // ETA overlay
                       Positioned(
@@ -476,4 +473,161 @@ class _SafetyOption extends StatelessWidget {
       contentPadding: EdgeInsets.zero,
     );
   }
+}
+
+// ─── Delivery Map Banner ──────────────────────────────────────────────────────
+
+class _DeliveryMapBanner extends StatelessWidget {
+  final String driverName;
+  final double destinationLat;
+  final double destinationLng;
+  final double merchantLat;
+  final double merchantLng;
+  final int etaMinutes;
+
+  const _DeliveryMapBanner({
+    required this.driverName,
+    required this.destinationLat,
+    required this.destinationLng,
+    required this.merchantLat,
+    required this.merchantLng,
+    required this.etaMinutes,
+  });
+
+  Future<void> _openDestinationInMaps() async {
+    final geo = Uri.parse('geo:$destinationLat,$destinationLng');
+    final web = Uri.parse(
+      'https://www.google.com/maps/search/?api=1&query=$destinationLat,$destinationLng',
+    );
+    if (await canLaunchUrl(geo)) {
+      await launchUrl(geo, mode: LaunchMode.externalApplication);
+    } else {
+      await launchUrl(web, mode: LaunchMode.externalApplication);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: IveTokens.bg,
+      child: Stack(
+        children: [
+          Positioned.fill(child: CustomPaint(painter: _GridPainter())),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Icon(Icons.local_shipping_rounded,
+                    size: 28, color: IveTokens.accent),
+                const SizedBox(height: 8),
+                _AddressRow(
+                  icon: Icons.trip_origin_rounded,
+                  color: IveTokens.success,
+                  label: 'Pickup',
+                  address:
+                      '${merchantLat.toStringAsFixed(5)}, ${merchantLng.toStringAsFixed(5)}',
+                ),
+                const SizedBox(height: 4),
+                _AddressRow(
+                  icon: Icons.location_on_rounded,
+                  color: IveTokens.danger,
+                  label: 'Delivery',
+                  address:
+                      '${destinationLat.toStringAsFixed(5)}, ${destinationLng.toStringAsFixed(5)}',
+                ),
+                const SizedBox(height: 4),
+                _AddressRow(
+                  icon: Icons.person_rounded,
+                  color: IveTokens.accent,
+                  label: 'Driver',
+                  address: '$driverName · ETA $etaMinutes min',
+                ),
+                const SizedBox(height: 12),
+                GestureDetector(
+                  onTap: _openDestinationInMaps,
+                  child: Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: IveTokens.accent.withValues(alpha: 0.12),
+                      borderRadius: IveTokens.brSm,
+                      border: Border.all(
+                          color: IveTokens.accent.withValues(alpha: 0.3)),
+                    ),
+                    child: const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.open_in_new_rounded,
+                            size: 13, color: IveTokens.accent),
+                        SizedBox(width: 5),
+                        Text('Open in Maps',
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: IveTokens.accent,
+                                fontWeight: FontWeight.w600)),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _AddressRow extends StatelessWidget {
+  final IconData icon;
+  final Color color;
+  final String label;
+  final String address;
+
+  const _AddressRow({
+    required this.icon,
+    required this.color,
+    required this.label,
+    required this.address,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Icon(icon, size: 13, color: color),
+        const SizedBox(width: 5),
+        Text('$label  ', style: const TextStyle(fontSize: 11, color: IveTokens.labelTertiary)),
+        Expanded(
+          child: Text(
+            address,
+            style: const TextStyle(fontSize: 12, color: IveTokens.label, fontWeight: FontWeight.w500),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _GridPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = IveTokens.hairline.withValues(alpha: 0.4)
+      ..strokeWidth = 0.5;
+    const s = 28.0;
+    for (double x = 0; x < size.width; x += s) {
+      canvas.drawLine(Offset(x, 0), Offset(x, size.height), paint);
+    }
+    for (double y = 0; y < size.height; y += s) {
+      canvas.drawLine(Offset(0, y), Offset(size.width, y), paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter old) => false;
 }

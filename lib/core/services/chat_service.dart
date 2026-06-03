@@ -1,163 +1,157 @@
-﻿import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import '../network/api_client.dart';
+import '../network/api_response.dart';
+import '../constants/api_routes.dart';
 import 'ai_service.dart';
 
 /// Service for chat conversations and messages.
 /// Extends basic chat CRUD with AI-powered message analysis.
 class ChatService extends ChangeNotifier {
-  final Dio _dio;
+  final ApiClient _api;
   final AIService _aiService;
-  // Base social endpoint — all chat routes are nested under /social
-  static const String _baseEndpoint = '/social';
 
-  ChatService(this._dio, [AIService? aiService])
-      : _aiService = aiService ?? AIService();
+  ChatService([ApiClient? api, AIService? aiService])
+      : _api = api ?? ApiClient.instance,
+        _aiService = aiService ?? AIService();
 
-  // Get chat sessions (backend: GET /social/chat/sessions)
-  Future<List<Map<String, dynamic>>> getConversations({
+  // ─── Sessions ─────────────────────────────────────────────────────────────
+
+  /// Fetch all chat sessions for the authenticated user.
+  Future<ApiResponse<List<Map<String, dynamic>>>> getConversations({
     int page = 1,
     int limit = 20,
   }) async {
-    try {
-      final response = await _dio.get(
-        '$_baseEndpoint/chat/sessions',
-        queryParameters: {
-          'page': page,
-          'limit': limit,
-        },
-      );
-
-      final data = response.data['data'];
-      if (data is List) {
-        return List<Map<String, dynamic>>.from(data);
-      }
-      if (data is Map && data.containsKey('items')) {
-        return List<Map<String, dynamic>>.from(data['items']);
-      }
-      return [];
-    } catch (e) {
-      debugPrint('[ChatService] Error fetching sessions: $e');
-      return [];
-    }
+    return _api.get<List<Map<String, dynamic>>>(
+      ApiRoutes.social.chatSessions,
+      queryParameters: {'page': page, 'limit': limit},
+      fromJson: (json) {
+        if (json is List) return List<Map<String, dynamic>>.from(json);
+        if (json is Map && json.containsKey('items')) {
+          return List<Map<String, dynamic>>.from(json['items'] as List);
+        }
+        return const [];
+      },
+    );
   }
 
-  // Get or create a chat session (backend: POST /social/chat/sessions)
+  /// Find a session by ID from the current session list.
+  /// The backend does not expose a single-session GET; we scan the list.
   Future<Map<String, dynamic>?> getConversation(String conversationId) async {
-    // The backend does not expose a GET-by-id for sessions;
-    // return from the session list instead.
-    final sessions = await getConversations();
+    final result = await getConversations(limit: 100);
+    if (!result.isSuccess || result.data == null) return null;
     try {
-      return sessions.firstWhere((s) => s['id'] == conversationId);
+      return result.data!.firstWhere((s) => s['id'] == conversationId);
     } catch (_) {
       return null;
     }
   }
 
-  // Get messages for a session (backend: GET /social/chat/sessions/:sessionId/messages)
-  Future<List<Map<String, dynamic>>> getMessages(
+  /// Create (or re-open) a direct-message session between two users.
+  Future<ApiResponse<Map<String, dynamic>>> createConversation({
+    required String user1Id,
+    required String user2Id,
+  }) async {
+    return _api.post<Map<String, dynamic>>(
+      ApiRoutes.social.chatSessions,
+      data: {'user1Id': user1Id, 'user2Id': user2Id},
+      fromJson: (json) => json as Map<String, dynamic>,
+    );
+  }
+
+  // ─── Messages ──────────────────────────────────────────────────────────────
+
+  /// Fetch messages for a session (newest-last order).
+  Future<ApiResponse<List<Map<String, dynamic>>>> getMessages(
     String conversationId, {
-    int page = 1,
     int limit = 50,
   }) async {
-    try {
-      final response = await _dio.get(
-        '$_baseEndpoint/chat/sessions/$conversationId/messages',
-        queryParameters: {
-          'limit': limit,
-        },
-      );
-
-      final data = response.data['data'];
-      if (data is List) {
-        return List<Map<String, dynamic>>.from(data);
-      }
-      if (data is Map && data.containsKey('items')) {
-        return List<Map<String, dynamic>>.from(data['items']);
-      }
-      return [];
-    } catch (e) {
-      debugPrint('[ChatService] Error fetching messages: $e');
-      return [];
-    }
+    return _api.get<List<Map<String, dynamic>>>(
+      ApiRoutes.social.sessionMessages(conversationId),
+      queryParameters: {'limit': limit},
+      fromJson: (json) {
+        if (json is List) return List<Map<String, dynamic>>.from(json);
+        if (json is Map && json.containsKey('items')) {
+          return List<Map<String, dynamic>>.from(json['items'] as List);
+        }
+        return const [];
+      },
+    );
   }
 
-  // Create / get-or-create chat session (backend: POST /social/chat/sessions)
-  Future<Map<String, dynamic>?> createConversation({
-    required List<String> participantIds,
-    String type = 'direct',
+  /// Send a text message in a session.
+  Future<ApiResponse<Map<String, dynamic>>> sendMessage({
+    required String sessionId,
+    required String content,
+    String type = 'text',
   }) async {
-    if (participantIds.length < 2) return null;
-    try {
-      final response = await _dio.post(
-        '$_baseEndpoint/chat/sessions',
-        data: {
-          'user1Id': participantIds[0],
-          'user2Id': participantIds[1],
-        },
-      );
-      return response.data['data'];
-    } catch (e) {
-      debugPrint('[ChatService] Error creating session: $e');
-      return null;
-    }
+    return _api.post<Map<String, dynamic>>(
+      ApiRoutes.social.chatMessages,
+      data: {'sessionId': sessionId, 'content': content, 'type': type},
+      fromJson: (json) => json as Map<String, dynamic>,
+    );
   }
 
-  // Send a chat message (backend: POST /social/chat/messages)
+  /// Mark all messages in a session as read.
+  Future<ApiResponse<Map<String, dynamic>>> markSessionRead(
+    String conversationId,
+  ) async {
+    return _api.put<Map<String, dynamic>>(
+      ApiRoutes.social.markRead(conversationId),
+      fromJson: (json) => json as Map<String, dynamic>,
+    );
+  }
+
+  // ─── Backend-unsupported operations ────────────────────────────────────────
+  // The backend's /social/chat specification does not include delete, archive,
+  // or unarchive endpoints. These are documented no-ops returning false/empty
+  // so callers can handle them gracefully without crashing.
+
+  /// Not supported by the backend. Returns false; callers should hide the UI
+  /// option or show an "unavailable" message.
   Future<bool> deleteMessage(String messageId) async {
-    // The backend does not expose a message-delete endpoint;
-    // return false gracefully so callers can handle accordingly.
-    debugPrint('[ChatService] deleteMessage not supported by backend');
+    if (kDebugMode) {
+      debugPrint('[ChatService] deleteMessage: backend does not expose a DELETE endpoint.');
+    }
     return false;
   }
 
-  // Mark session as read (backend: PUT /social/chat/sessions/:sessionId/read)
+  /// Not supported by the backend; use [markSessionRead] instead.
   Future<bool> archiveConversation(String conversationId) async {
-    // The backend does not expose an archive endpoint;
-    // map to mark-as-read as the closest available action.
-    try {
-      await _dio.put('$_baseEndpoint/chat/sessions/$conversationId/read');
-      return true;
-    } catch (e) {
-      debugPrint('[ChatService] Error marking session read: $e');
-      return false;
-    }
+    final result = await markSessionRead(conversationId);
+    return result.isSuccess;
   }
 
-  // Unarchive — no backend equivalent; no-op.
-  Future<bool> unarchiveConversation(String conversationId) async {
-    return true;
-  }
+  /// Not supported by the backend. Returns true (idempotent no-op).
+  Future<bool> unarchiveConversation(String conversationId) async => true;
 
-  // Search conversations — no backend search endpoint; filter client-side.
+  /// Search is done client-side (no backend search endpoint for chat sessions).
+  /// Fetches up to 100 sessions and filters locally.
   Future<List<Map<String, dynamic>>> searchConversations(String query) async {
-    final sessions = await getConversations(limit: 100);
+    final result = await getConversations(limit: 100);
+    if (!result.isSuccess || result.data == null) return const [];
     final q = query.toLowerCase();
-    return sessions
+    return result.data!
         .where((s) =>
             s['recipientName']?.toString().toLowerCase().contains(q) == true ||
             s['lastMessage']?.toString().toLowerCase().contains(q) == true)
         .toList();
   }
 
-  // ═══════════════════════════════════════════════════════════════════════
-  // AI-ENHANCED METHODS
-  // ═══════════════════════════════════════════════════════════════════════
+  // ─── AI-enhanced methods ───────────────────────────────────────────────────
 
-  /// Analyze sentiment of a message for tone detection.
-  /// Returns score (-1 to +1), label (positive/negative/neutral), confidence.
+  /// Analyse message sentiment (-1 → +1, label, confidence).
   Future<Map<String, dynamic>?> analyzeMessageSentiment(String message) async {
     final response = await _aiService.analyzeSentiment(message);
     return response.isSuccess ? response.data : null;
   }
 
-  /// Detect intent and entities from a message for smart routing.
-  /// Useful for customer support routing and quick replies.
+  /// Detect intent and entities for smart routing / quick replies.
   Future<Map<String, dynamic>?> detectMessageIntent(String message) async {
     final response = await _aiService.detectIntent(message);
     return response.isSuccess ? response.data : null;
   }
 
-  /// Get AI-generated smart reply suggestions based on conversation context.
+  /// Get AI-generated reply suggestions based on conversation context.
   Future<Map<String, dynamic>?> getSmartReplySuggestions(
     String conversationContext,
   ) async {
@@ -165,7 +159,7 @@ class ChatService extends ChangeNotifier {
     return response.isSuccess ? response.data : null;
   }
 
-  /// Extract keywords from messages for tagging/categorization.
+  /// Extract top-N keywords from a message for tagging / categorization.
   Future<Map<String, dynamic>?> extractMessageKeywords(
     String messageText, {
     int topN = 5,
@@ -174,16 +168,16 @@ class ChatService extends ChangeNotifier {
     return response.isSuccess ? response.data : null;
   }
 
-  /// Summarize a long conversation thread for quick overview.
+  /// Summarise a long conversation thread for a quick overview card.
   Future<Map<String, dynamic>?> summarizeConversation(
     List<String> messages,
   ) async {
-    final combinedText = messages.join(' ');
-    final response = await _aiService.summariseText(combinedText);
+    final combined = messages.join(' ');
+    final response = await _aiService.summariseText(combined);
     return response.isSuccess ? response.data : null;
   }
 
-  /// Compute similarity between two messages for de-duplication.
+  /// Compute semantic similarity between two messages (de-duplication).
   Future<Map<String, dynamic>?> computeMessageSimilarity(
     String message1,
     String message2,

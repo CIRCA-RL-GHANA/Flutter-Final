@@ -5,8 +5,10 @@
 ///        Driver(viewOnly), Others(hidden)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../core/design/ive_empty_state.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../prompt/providers/context_provider.dart';
@@ -121,15 +123,29 @@ class _ProductHeader extends StatelessWidget {
       ),
       child: Row(
         children: [
-          // Product image placeholder
-          Container(
-            width: 64,
-            height: 64,
-            decoration: BoxDecoration(
-              color: kSetupColor.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(14),
-            ),
-            child: const Icon(Icons.inventory_2, size: 30, color: kSetupColor),
+          // Product image
+          ClipRRect(
+            borderRadius: BorderRadius.circular(14),
+            child: product.imageUrls.isNotEmpty
+                ? CachedNetworkImage(
+                    imageUrl: product.imageUrls.first,
+                    width: 64,
+                    height: 64,
+                    fit: BoxFit.cover,
+                    placeholder: (_, __) => IveSkeleton(width: 64, height: 64, radius: BorderRadius.circular(14)),
+                    errorWidget: (_, __, ___) => Container(
+                      width: 64,
+                      height: 64,
+                      color: kSetupColor.withValues(alpha: 0.1),
+                      child: const Icon(Icons.inventory_2_outlined, size: 30, color: kSetupColor),
+                    ),
+                  )
+                : Container(
+                    width: 64,
+                    height: 64,
+                    color: kSetupColor.withValues(alpha: 0.1),
+                    child: const Icon(Icons.inventory_2_outlined, size: 30, color: kSetupColor),
+                  ),
           ),
           const SizedBox(width: 14),
           Expanded(

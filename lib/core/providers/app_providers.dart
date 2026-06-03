@@ -102,12 +102,14 @@ class AppProviders {
       // ── Infrastructure Services ─────────────────────────────────────────
       ChangeNotifierProvider(create: (_) => WebSocketService()),
 
+      // ChatService is a ChangeNotifier (real-time state).
       ChangeNotifierProvider(
-        create: (_) => ChatService(ApiClient.instance.dio),
+        create: (_) => ChatService(),
       ),
 
-      ChangeNotifierProvider(
-        create: (_) => OrdersService(ApiClient.instance.dio),
+      // OrdersService is a stateless API service — use plain Provider.
+      Provider<OrdersService>(
+        create: (_) => OrdersService(),
       ),
 
       ChangeNotifierProvider(

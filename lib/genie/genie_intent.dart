@@ -19,7 +19,7 @@ enum GenieModule {
   eplay,
   // User-generated community spaces
   community,
-  // Cross-module orchestration placeholder
+  // Intents that span more than one module (e.g. "pay and schedule delivery").
   crossModule,
   // Genie-native (help, settings, unknown)
   genie,

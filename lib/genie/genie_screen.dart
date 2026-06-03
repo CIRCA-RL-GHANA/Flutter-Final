@@ -14,6 +14,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '../core/design/ive_text.dart';
 import '../core/design/ive_tokens.dart';
 import '../core/routes/app_routes.dart';
 import '../core/theme/app_colors.dart';
@@ -241,8 +242,25 @@ class _GenieScreenState extends State<GenieScreen>
                         final message = _controller.messages[index];
                         return GenieChatBubble(
                           message: message,
-                          onDismiss: () {},
-                          onPrimaryAction: () {},
+                          // Swipe-left to dismiss: removes the bubble from the thread.
+                          onDismiss: () => _controller.removeMessage(message.id),
+                          // Swipe-right primary action: re-execute the card's module
+                          // intent so the user gets a fresh response or navigates.
+                          onPrimaryAction: () {
+                            final module = message.cardData['module'] as String?;
+                            final action = message.cardData['action'] as String?;
+                            if (module != null && action != null) {
+                              try {
+                                final mod = GenieModule.values
+                                    .firstWhere((m) => m.name == module);
+                                _controller.executeIntent(
+                                  GenieIntent(module: mod, action: action),
+                                );
+                              } catch (_) {
+                                // Unknown module string — silently ignore.
+                              }
+                            }
+                          },
                         );
                       },
                     ),
@@ -293,16 +311,17 @@ class _OfflineBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      color: AppColors.warning.withValues(alpha: 0.15),
-      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
+      color: IveTokens.warning.withValues(alpha: 0.12),
+      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: IveTokens.s4),
       child: Row(
-        children: const [
-          Icon(Icons.cloud_off_outlined, size: 14, color: AppColors.warning),
-          SizedBox(width: 6),
+        children: [
+          const Icon(Icons.cloud_off_outlined,
+              size: 14, color: IveTokens.warning),
+          const SizedBox(width: IveTokens.s2),
           Expanded(
             child: Text(
               'You\'re offline. Actions will sync when you reconnect.',
-              style: TextStyle(fontSize: 12, color: AppColors.warning),
+              style: IveType.caption.copyWith(color: IveTokens.warning),
             ),
           ),
         ],
@@ -333,22 +352,21 @@ class _PinnedTileStrip extends StatelessWidget {
               margin: const EdgeInsets.only(right: 8),
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
-                color: AppColors.primaryLight.withValues(alpha: 0.08),
+                color: IveTokens.accent.withValues(alpha: 0.08),
                 borderRadius: IveTokens.brSm,
-                border:
-                    Border.all(color: AppColors.primaryLight.withValues(alpha: 0.2)),
+                border: Border.all(
+                    color: IveTokens.accent.withValues(alpha: 0.2)),
               ),
               child: Row(
                 children: [
                   const Icon(Icons.push_pin_outlined,
-                      size: 12, color: AppColors.textSecondary),
-                  const SizedBox(width: 4),
+                      size: 12, color: IveTokens.labelSecondary),
+                  const SizedBox(width: IveTokens.s1),
                   Text(
                     e.key.name.toUpperCase(),
-                    style: const TextStyle(
-                      fontSize: 12,
+                    style: IveType.caption.copyWith(
+                      color: IveTokens.accent,
                       fontWeight: FontWeight.w600,
-                      color: AppColors.primaryLight,
                     ),
                   ),
                 ],
@@ -370,21 +388,34 @@ class _TypingIndicator extends StatefulWidget {
 }
 
 class _TypingIndicatorState extends State<_TypingIndicator>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _anim;
+    with TickerProviderStateMixin {
+  // Three independent controllers offset in phase to create a wave.
+  late final List<AnimationController> _dots;
+  static const _dotCount = 3;
+  static const _phaseOffset = 160; // ms between each dot's peak
 
   @override
   void initState() {
     super.initState();
-    _anim = AnimationController(
-      vsync: this,
-      duration: IveTokens.dSlow,
-    )..repeat(reverse: true);
+    _dots = List.generate(_dotCount, (i) {
+      final c = AnimationController(
+        vsync: this,
+        duration: const Duration(milliseconds: 480),
+      );
+      // Stagger starts so each dot is already mid-cycle when the first frame
+      // renders — this prevents them all bouncing in lock-step.
+      Future.delayed(Duration(milliseconds: i * _phaseOffset), () {
+        if (mounted) c.repeat(reverse: true);
+      });
+      return c;
+    });
   }
 
   @override
   void dispose() {
-    _anim.dispose();
+    for (final c in _dots) {
+      c.dispose();
+    }
     super.dispose();
   }
 
@@ -397,40 +428,50 @@ class _TypingIndicatorState extends State<_TypingIndicator>
           Container(
             width: 32,
             height: 32,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               shape: BoxShape.circle,
-              gradient: const LinearGradient(
-                colors: [AppColors.accent, AppColors.primaryLight],
+              gradient: LinearGradient(
+                colors: [IveTokens.accent, IveTokens.accentPressed],
               ),
             ),
-            child: const Icon(Icons.auto_awesome, color: Colors.white, size: 14),
+            child: const Icon(Icons.auto_awesome,
+                color: Colors.white, size: 14),
           ),
-          const SizedBox(width: 8),
-          FadeTransition(
-            opacity: _anim,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-              decoration: BoxDecoration(
-                color: IveTokens.surface,
-                borderRadius: IveTokens.brLg,
-                border: Border.all(color: IveTokens.hairline),
-              ),
-              child: Row(
-                children: List.generate(
-                  3,
-                  (i) => Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 2),
-                    child: Container(
-                      width: 6,
-                      height: 6,
-                      decoration: BoxDecoration(
-                        color: AppColors.textTertiary,
-                        shape: BoxShape.circle,
+          const SizedBox(width: IveTokens.s2),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+            decoration: BoxDecoration(
+              color: IveTokens.surface,
+              borderRadius: IveTokens.brLg,
+              border: IveTokens.cardBorder,
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: List.generate(_dotCount, (i) {
+                return AnimatedBuilder(
+                  animation: _dots[i],
+                  builder: (_, __) => Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 2),
+                    child: Transform.translate(
+                      // Bounce up by 4px at peak.
+                      offset: Offset(0, -4 * _dots[i].value),
+                      child: Container(
+                        width: 6,
+                        height: 6,
+                        decoration: BoxDecoration(
+                          color: Color.lerp(
+                            IveTokens.labelTertiary,
+                            IveTokens.accent,
+                            _dots[i].value,
+                          ),
+                          shape: BoxShape.circle,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ),
+                );
+              }),
             ),
           ),
         ],
@@ -653,11 +694,8 @@ class _PinnedShortcutBar extends StatelessWidget {
                       const SizedBox(height: 2),
                       Text(
                         s.label,
-                        style: const TextStyle(
-                          fontSize: 9,
-                          color: AppColors.textSecondaryDark,
-                          fontWeight: FontWeight.w500,
-                        ),
+                        style: IveType.caption
+                            .copyWith(color: IveTokens.labelSecondary),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
@@ -680,13 +718,10 @@ class _EmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
       child: Text(
         'Say "Hey Genie" or type something…',
-        style: TextStyle(
-          color: AppColors.textTertiary,
-          fontSize: 14,
-        ),
+        style: IveType.callout,
       ),
     );
   }

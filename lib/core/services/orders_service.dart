@@ -1,125 +1,144 @@
-﻿import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
+import '../network/api_client.dart';
+import '../network/api_response.dart';
+import '../constants/api_routes.dart';
 
-class OrdersService extends ChangeNotifier {
-  final Dio _dio;
-  static const String _baseEndpoint = '/orders';
+/// Legacy name kept for compatibility — now delegates through ApiClient/ApiResponse
+/// instead of raw Dio so callers receive structured errors they can act on.
+class OrdersService {
+  final ApiClient _api;
 
-  OrdersService(this._dio);
+  OrdersService([ApiClient? api]) : _api = api ?? ApiClient.instance;
 
-  // Get user orders
-  Future<List<Map<String, dynamic>>> getOrders({
+  /// Fetch paginated order list for the authenticated user.
+  Future<ApiResponse<List<Map<String, dynamic>>>> getOrders({
     int page = 1,
     int limit = 20,
     String? status,
   }) async {
-    try {
-      final params = {
+    return _api.get<List<Map<String, dynamic>>>(
+      ApiRoutes.orders.byUser('me'),
+      queryParameters: {
         'page': page,
         'limit': limit,
         'sortBy': 'createdAt',
         'sortOrder': 'DESC',
-      };
-
-      if (status != null) {
-        params['status'] = status;
-      }
-
-      final response = await _dio.get(
-        _baseEndpoint,
-        queryParameters: params,
-      );
-
-      final data = response.data['data'];
-      if (data is Map && data.containsKey('items')) {
-        return List<Map<String, dynamic>>.from(data['items']);
-      }
-      return [];
-    } catch (e) {
-      debugPrint('[OrdersService] Error fetching orders: $e');
-      return [];
-    }
+        if (status != null) 'status': status,
+      },
+      fromJson: (json) {
+        if (json is List) {
+          return List<Map<String, dynamic>>.from(json);
+        }
+        if (json is Map && json.containsKey('items')) {
+          return List<Map<String, dynamic>>.from(json['items'] as List);
+        }
+        return const [];
+      },
+    );
   }
 
-  // Get order details
-  Future<Map<String, dynamic>?> getOrder(String orderId) async {
-    try {
-      final response = await _dio.get('$_baseEndpoint/$orderId');
-      return response.data['data'];
-    } catch (e) {
-      debugPrint('[OrdersService] Error fetching order: $e');
-      return null;
-    }
+  /// Fetch a single order by ID.
+  Future<ApiResponse<Map<String, dynamic>>> getOrder(String orderId) async {
+    return _api.get<Map<String, dynamic>>(
+      ApiRoutes.orders.byId(orderId),
+      fromJson: (json) => json as Map<String, dynamic>,
+    );
   }
 
-  // Create order
-  Future<Map<String, dynamic>?> createOrder({
+  /// Place a new order.
+  Future<ApiResponse<Map<String, dynamic>>> createOrder({
     required List<Map<String, dynamic>> items,
     required String deliveryAddressId,
     String? notes,
     String paymentMethod = 'qpoints',
   }) async {
-    try {
-      final response = await _dio.post(
-        _baseEndpoint,
-        data: {
-          'items': items,
-          'deliveryAddressId': deliveryAddressId,
-          'notes': notes,
-          'paymentMethod': paymentMethod,
-        },
-      );
-
-      return response.data['data'];
-    } catch (e) {
-      debugPrint('[OrdersService] Error creating order: $e');
-      return null;
-    }
+    return _api.post<Map<String, dynamic>>(
+      ApiRoutes.orders.create,
+      data: {
+        'items': items,
+        'deliveryAddressId': deliveryAddressId,
+        'paymentMethod': paymentMethod,
+        if (notes != null) 'notes': notes,
+      },
+      fromJson: (json) => json as Map<String, dynamic>,
+    );
   }
 
-  // Cancel order
-  Future<bool> cancelOrder(String orderId, {String? reason}) async {
-    try {
-      await _dio.patch(
-        '$_baseEndpoint/$orderId/cancel',
-        data: {'reason': reason},
-      );
-      return true;
-    } catch (e) {
-      debugPrint('[OrdersService] Error canceling order: $e');
-      return false;
-    }
+  /// Cancel an order. Callers should check `response.success` before acting.
+  Future<ApiResponse<Map<String, dynamic>>> cancelOrder(
+    String orderId, {
+    String? reason,
+  }) async {
+    return _api.patch<Map<String, dynamic>>(
+      ApiRoutes.orders.updateStatus(orderId),
+      data: {
+        'status': 'cancelled',
+        if (reason != null) 'reason': reason,
+      },
+      fromJson: (json) => json as Map<String, dynamic>,
+    );
   }
 
-  // Track order
-  Future<Map<String, dynamic>?> trackOrder(String orderId) async {
-    try {
-      final response = await _dio.get('$_baseEndpoint/$orderId/track');
-      return response.data['data'];
-    } catch (e) {
-      debugPrint('[OrdersService] Error tracking order: $e');
-      return null;
-    }
+  /// Get live tracking data for an order in transit.
+  Future<ApiResponse<Map<String, dynamic>>> trackOrder(String orderId) async {
+    return _api.get<Map<String, dynamic>>(
+      ApiRoutes.orders.delivery(orderId),
+      fromJson: (json) => json as Map<String, dynamic>,
+    );
   }
 
-  // Rate order
-  Future<bool> rateOrder(
+  /// Submit a star rating and review for a completed order.
+  Future<ApiResponse<Map<String, dynamic>>> rateOrder(
     String orderId, {
     required double rating,
     required String review,
   }) async {
-    try {
-      await _dio.post(
-        '$_baseEndpoint/$orderId/rate',
-        data: {
-          'rating': rating,
-          'review': review,
-        },
-      );
-      return true;
-    } catch (e) {
-      debugPrint('[OrdersService] Error rating order: $e');
-      return false;
-    }
+    return _api.post<Map<String, dynamic>>(
+      ApiRoutes.orders.byId(orderId),
+      data: {'rating': rating, 'review': review},
+      fromJson: (json) => json as Map<String, dynamic>,
+    );
+  }
+
+  /// Update order status (admin / fulfilment use).
+  Future<ApiResponse<Map<String, dynamic>>> updateStatus(
+    String orderId,
+    String status,
+  ) async {
+    return _api.patch<Map<String, dynamic>>(
+      ApiRoutes.orders.updateStatus(orderId),
+      data: {'status': status},
+      fromJson: (json) => json as Map<String, dynamic>,
+    );
+  }
+
+  /// Get all returns filed by the authenticated user.
+  Future<ApiResponse<List<Map<String, dynamic>>>> getReturns() async {
+    return _api.get<List<Map<String, dynamic>>>(
+      ApiRoutes.orders.returns,
+      fromJson: (json) {
+        if (json is List) return List<Map<String, dynamic>>.from(json);
+        if (json is Map && json.containsKey('items')) {
+          return List<Map<String, dynamic>>.from(json['items'] as List);
+        }
+        return const [];
+      },
+    );
+  }
+
+  /// Request a return for a specific order.
+  Future<ApiResponse<Map<String, dynamic>>> createReturnRequest({
+    required String orderId,
+    required String reason,
+    List<String>? itemIds,
+  }) async {
+    return _api.post<Map<String, dynamic>>(
+      ApiRoutes.orders.returns,
+      data: {
+        'orderId': orderId,
+        'reason': reason,
+        if (itemIds != null) 'itemIds': itemIds,
+      },
+      fromJson: (json) => json as Map<String, dynamic>,
+    );
   }
 }

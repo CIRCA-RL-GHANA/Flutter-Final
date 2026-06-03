@@ -7,6 +7,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '../../../core/design/ive_tokens.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/theme/app_colors.dart';
 import '../models/updates_models.dart';
@@ -426,11 +427,38 @@ class _ListsView extends StatelessWidget {
       children: [
         // Create new list button
         GestureDetector(
-          onTap: () {
+          onTap: () async {
             HapticFeedback.lightImpact();
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Create list coming soon'), backgroundColor: kUpdatesColor, duration: Duration(seconds: 1)),
+            final nameCtrl = TextEditingController();
+            final created = await showDialog<String>(
+              context: context,
+              builder: (ctx) => AlertDialog(
+                backgroundColor: IveTokens.surface,
+                shape: RoundedRectangleBorder(borderRadius: IveTokens.brMd),
+                title: const Text('New Following List', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
+                content: TextField(
+                  controller: nameCtrl,
+                  autofocus: true,
+                  textCapitalization: TextCapitalization.words,
+                  decoration: const InputDecoration(hintText: 'List name e.g. Tech Creators'),
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(ctx),
+                    child: const Text('Cancel', style: TextStyle(color: AppColors.textTertiary)),
+                  ),
+                  FilledButton(
+                    onPressed: () => Navigator.pop(ctx, nameCtrl.text.trim()),
+                    style: FilledButton.styleFrom(backgroundColor: kUpdatesColor),
+                    child: const Text('Create'),
+                  ),
+                ],
+              ),
             );
+            nameCtrl.dispose();
+            if (created != null && created.isNotEmpty && context.mounted) {
+              context.read<UpdatesProvider>().createFollowingList(created);
+            }
           },
           child: Container(
             padding: const EdgeInsets.all(14),

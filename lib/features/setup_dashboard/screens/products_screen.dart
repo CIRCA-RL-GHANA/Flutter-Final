@@ -4,9 +4,11 @@
 /// RBAC: Admin(full), BM(branch), Monitor/BrMon(view), RO/BRO(view)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '../../../core/design/ive_empty_state.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/theme/app_colors.dart';
@@ -231,17 +233,27 @@ class _ProductGridCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Image placeholder
-            Container(
-              height: 80,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: kSetupColor.withValues(alpha: 0.06),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Center(
-                child: Icon(Icons.image, size: 32, color: kSetupColor.withValues(alpha: 0.3)),
-              ),
+            // Product thumbnail
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: product.imageUrls.isNotEmpty
+                  ? CachedNetworkImage(
+                      imageUrl: product.imageUrls.first,
+                      height: 80,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                      placeholder: (_, __) => IveSkeleton(height: 80, radius: BorderRadius.circular(10)),
+                      errorWidget: (_, __, ___) => Container(
+                        height: 80,
+                        color: kSetupColor.withValues(alpha: 0.06),
+                        child: Icon(Icons.inventory_2_outlined, size: 28, color: kSetupColor.withValues(alpha: 0.35)),
+                      ),
+                    )
+                  : Container(
+                      height: 80,
+                      color: kSetupColor.withValues(alpha: 0.06),
+                      child: Icon(Icons.inventory_2_outlined, size: 28, color: kSetupColor.withValues(alpha: 0.35)),
+                    ),
             ),
             const SizedBox(height: 8),
             // Name
@@ -336,15 +348,29 @@ class _ProductListTile extends StatelessWidget {
       ),
       child: Row(
         children: [
-          // Image placeholder
-          Container(
-            width: 56,
-            height: 56,
-            decoration: BoxDecoration(
-              color: kSetupColor.withValues(alpha: 0.06),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: const Icon(Icons.image, size: 24, color: kSetupColor),
+          // Product thumbnail (list row)
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: product.imageUrls.isNotEmpty
+                ? CachedNetworkImage(
+                    imageUrl: product.imageUrls.first,
+                    width: 56,
+                    height: 56,
+                    fit: BoxFit.cover,
+                    placeholder: (_, __) => IveSkeleton(width: 56, height: 56, radius: BorderRadius.circular(10)),
+                    errorWidget: (_, __, ___) => Container(
+                      width: 56,
+                      height: 56,
+                      color: kSetupColor.withValues(alpha: 0.06),
+                      child: const Icon(Icons.inventory_2_outlined, size: 24, color: kSetupColor),
+                    ),
+                  )
+                : Container(
+                    width: 56,
+                    height: 56,
+                    color: kSetupColor.withValues(alpha: 0.06),
+                    child: const Icon(Icons.inventory_2_outlined, size: 24, color: kSetupColor),
+                  ),
           ),
           const SizedBox(width: 12),
           // Info

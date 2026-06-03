@@ -1008,6 +1008,13 @@ class GenieController extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Remove a single message from the thread by ID.
+  /// Called when the user swipes to dismiss a Genie bubble.
+  void removeMessage(String id) {
+    _messages.removeWhere((m) => m.id == id);
+    notifyListeners();
+  }
+
   void clearHistory() {
     _messages.clear();
     _sendGreeting();

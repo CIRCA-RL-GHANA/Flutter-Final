@@ -68,6 +68,7 @@ class WebSocketService extends ChangeNotifier {
   
   String? _currentToken;
   String? _currentUserId;
+  String? _currentBaseUrl;   // stored so reconnect after disconnect works
   Timer? _reconnectTimer;
   int _reconnectAttempts = 0;
   static const _maxReconnectAttempts = 10;
@@ -91,6 +92,7 @@ class WebSocketService extends ChangeNotifier {
   }) async {
     _currentToken = token;
     _currentUserId = userId;
+    _currentBaseUrl = baseUrl;
 
     try {
       _socket = IO.io(
@@ -167,7 +169,8 @@ class WebSocketService extends ChangeNotifier {
     s.onDisconnect((_) {
       debugPrint('[WebSocket] Disconnected');
       _connectionController.add(false);
-      _scheduleReconnect('');
+      // Use the stored _currentBaseUrl — passing '' would block reconnection.
+      _scheduleReconnect(_currentBaseUrl ?? '');
       notifyListeners();
     });
 

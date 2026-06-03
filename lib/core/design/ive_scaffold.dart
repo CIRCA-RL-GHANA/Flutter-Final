@@ -46,7 +46,12 @@ class IveScaffold extends StatelessWidget {
             subtitle: largeTitleSubtitle,
             trailing: largeTitleTrailing,
           ),
-          Expanded(child: child),
+          // When scrollable=true the Column is placed inside a
+          // SingleChildScrollView, which provides unbounded vertical space.
+          // Using Expanded there would throw a RenderFlex error because
+          // Expanded requires a bounded parent. We only expand the child
+          // when the column itself is the root (non-scrollable) layout.
+          if (scrollable) child else Expanded(child: child),
         ],
       );
     }

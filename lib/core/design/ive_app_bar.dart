@@ -24,8 +24,13 @@ class IveAppBar extends StatelessWidget implements PreferredSizeWidget {
   final PreferredSizeWidget? bottom;
 
   @override
-  Size get preferredSize =>
-      Size.fromHeight(kToolbarHeight + (bottom?.preferredSize.height ?? 0));
+  Size get preferredSize => Size.fromHeight(
+        kToolbarHeight +
+            // When bottom == null we inject a 1px hairline divider as the
+            // AppBar's bottom widget (height = 1). Omitting that 1px here
+            // creates a layout discrepancy in SliverAppBar / CustomScrollView.
+            (bottom != null ? bottom!.preferredSize.height : 1),
+      );
 
   @override
   Widget build(BuildContext context) {

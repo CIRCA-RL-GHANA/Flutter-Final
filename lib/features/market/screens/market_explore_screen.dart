@@ -6,6 +6,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '../../../core/design/ive_tokens.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
@@ -196,23 +197,25 @@ class _MarketExploreScreenState extends State<MarketExploreScreen> {
   Widget _buildMapView(MarketProvider prov) {
     return Stack(
       children: [
-        // Map placeholder
-        Container(
-          color: const Color(0xFFE8F0FE),
-          child: const Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+        // Map surface — grid texture with merchant count indicator.
+        Positioned.fill(
+          child: Container(
+            color: const Color(0xFF0D0F1A),
+            child: Stack(
               children: [
-                Icon(Icons.map, size: 80, color: AppColors.textTertiary),
-                SizedBox(height: 16),
-                Text(
-                  'Interactive Map View',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.textSecondary),
-                ),
-                SizedBox(height: 8),
-                Text(
-                  'Merchant locations with delivery radius',
-                  style: TextStyle(fontSize: 13, color: AppColors.textTertiary),
+                Positioned.fill(child: CustomPaint(painter: _ExploreGridPainter())),
+                Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.store_rounded, size: 36, color: IveTokens.accent.withValues(alpha: 0.5)),
+                      const SizedBox(height: 8),
+                      Text(
+                        '${prov.filteredMerchants.length} merchants nearby',
+                        style: TextStyle(fontSize: 13, color: IveTokens.labelSecondary),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -292,4 +295,23 @@ class _MarketExploreScreenState extends State<MarketExploreScreen> {
       ],
     );
   }
+}
+
+class _ExploreGridPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = IveTokens.hairline.withValues(alpha: 0.35)
+      ..strokeWidth = 0.5;
+    const s = 32.0;
+    for (double x = 0; x < size.width; x += s) {
+      canvas.drawLine(Offset(x, 0), Offset(x, size.height), paint);
+    }
+    for (double y = 0; y < size.height; y += s) {
+      canvas.drawLine(Offset(0, y), Offset(size.width, y), paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter old) => false;
 }

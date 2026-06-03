@@ -271,6 +271,20 @@ class UpdatesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Create a new named following list and add it to the local list.
+  void createFollowingList(String name) {
+    final newList = FollowingList(
+      id: 'list_${DateTime.now().millisecondsSinceEpoch}',
+      name: name,
+      memberCount: 0,
+    );
+    _followingLists = [
+      ...(_followingLists.isNotEmpty ? _followingLists : _fallbackFollowingLists),
+      newList,
+    ];
+    notifyListeners();
+  }
+
   // ═══════════════════════════════════════════════════════════════════════════
   // SECTION 9: SEARCH (fallback-only)
   // ═══════════════════════════════════════════════════════════════════════════

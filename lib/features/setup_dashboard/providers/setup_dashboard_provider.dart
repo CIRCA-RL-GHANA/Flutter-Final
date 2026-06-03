@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import '../../../core/services/services.dart';
+import '../../../core/services/user_service.dart';
 import '../../prompt/models/rbac_models.dart';
 import '../models/setup_dashboard_models.dart';
 import '../models/setup_rbac.dart';
@@ -26,6 +27,10 @@ class SetupDashboardProvider extends ChangeNotifier {
   final QPointsService _qPointsService = QPointsService();
   final ProfileService _profileService = ProfileService();
   final AuthService _authService = AuthService();
+
+  /// Exposed for screens that need to resolve the current admin identity
+  /// (e.g. role-assignment confirmation dialogs).
+  AuthService get authService => _authService;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // MUTABLE INSTANCE DATA (loaded from API)
@@ -1210,8 +1215,7 @@ class SetupDashboardProvider extends ChangeNotifier {
           await loadProfile();
           return;
         default:
-          // Sections without a backend endpoint — simulate refresh
-          await Future.delayed(const Duration(milliseconds: 800));
+          // Section has no dedicated backend endpoint — mark loaded immediately.
           _sectionStates[sectionId] = CardState.loaded;
           notifyListeners();
       }
@@ -1557,13 +1561,67 @@ class SetupDashboardProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Staff — local fallback (no staff endpoint)
-  Future<void> addStaffMember(StaffMember staff) async {
+  // ─── Staff ──────────────────────────────────────────────────────────────────
+
+  /// Assign a new role to a staff member via the backend.
+  ///
+  /// [staffId] is the target user's ID.
+  /// [role] is the new [UserRole] to assign.
+  /// [adminId] is the authenticated admin performing the action.
+  /// [entityId] is the owning entity's ID.
+  /// [adminPin] is the admin's security PIN, required by the backend.
+  ///
+  /// On success the local list is updated in-place so the UI reflects the
+  /// change immediately without a full reload.
+  Future<bool> updateStaffRole({
+    required String staffId,
+    required UserRole role,
+    required String adminId,
+    required String entityId,
+    required String adminPin,
+  }) async {
     _isLoading = true;
     notifyListeners();
-    await Future.delayed(const Duration(milliseconds: 500));
-    _staff = List.from(staffMembers)..add(staff);
+
+    final userService = UserService();
+    final response = await userService.assignStaffRole(
+      adminId: adminId,
+      userId: staffId,
+      entityId: entityId,
+      role: role.name,
+      pin: adminPin,
+    );
+
     _isLoading = false;
+
+    if (response.isSuccess) {
+      // Reflect change in the local list so the UI updates immediately.
+      final idx = _staff.indexWhere((s) => s.id == staffId);
+      if (idx != -1) {
+        final s = _staff[idx];
+        _staff = List.from(_staff)
+          ..[idx] = StaffMember(
+            id: s.id,
+            name: s.name,
+            role: role,
+            status: s.status,
+            email: s.email,
+            phone: s.phone,
+            branchId: s.branchId,
+            joinedAt: s.joinedAt,
+            avatarUrl: s.avatarUrl,
+            schedule: s.schedule,
+            metrics: s.metrics,
+          );
+      }
+    }
+
+    notifyListeners();
+    return response.isSuccess;
+  }
+
+  Future<void> addStaffMember(StaffMember staff) async {
+    _staff = List.from(staffMembers)..add(staff);
     notifyListeners();
   }
 
@@ -1573,13 +1631,8 @@ class SetupDashboardProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Campaigns — local fallback (no campaign endpoint)
   Future<void> addCampaign(Campaign campaign) async {
-    _isLoading = true;
-    notifyListeners();
-    await Future.delayed(const Duration(milliseconds: 500));
     _campaigns = List.from(campaigns)..add(campaign);
-    _isLoading = false;
     notifyListeners();
   }
 
@@ -1618,13 +1671,8 @@ class SetupDashboardProvider extends ChangeNotifier {
     }
   }
 
-  // Branches — local fallback
   Future<void> addBranch(Branch branch) async {
-    _isLoading = true;
-    notifyListeners();
-    await Future.delayed(const Duration(milliseconds: 500));
     _branches = List.from(branches)..add(branch);
-    _isLoading = false;
     notifyListeners();
   }
 

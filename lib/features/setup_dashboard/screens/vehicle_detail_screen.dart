@@ -7,6 +7,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../../../core/design/ive_tokens.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../prompt/providers/context_provider.dart';
@@ -468,31 +470,8 @@ class _RoutesTab extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 12),
-        // Route map placeholder
-        Container(
-          height: 180,
-          decoration: BoxDecoration(
-            color: Colors.grey.shade100,
-            borderRadius: BorderRadius.circular(14),
-          ),
-          child: const Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.map, size: 40, color: AppColors.textTertiary),
-                SizedBox(height: 8),
-                Text(
-                  'Route Map',
-                  style: TextStyle(fontSize: 13, color: AppColors.textTertiary),
-                ),
-                Text(
-                  'Map integration coming soon',
-                  style: TextStyle(fontSize: 11, color: AppColors.textTertiary),
-                ),
-              ],
-            ),
-          ),
-        ),
+        // Route card — shows vehicle zone and opens native maps.
+        _VehicleRouteCard(vehicle: vehicle),
       ],
     );
   }
@@ -564,4 +543,143 @@ class _DriverTab extends StatelessWidget {
       ],
     );
   }
+}
+
+// ─── Vehicle Route Card ───────────────────────────────────────────────────────
+
+class _VehicleRouteCard extends StatelessWidget {
+  final Vehicle vehicle;
+  const _VehicleRouteCard({required this.vehicle});
+
+  Future<void> _openMaps() async {
+    final query = Uri.encodeComponent(vehicle.zone ?? vehicle.plateNumber);
+    final geo = Uri.parse('geo:0,0?q=$query');
+    final web = Uri.parse('https://www.google.com/maps/search/?api=1&query=$query');
+    if (await canLaunchUrl(geo)) {
+      await launchUrl(geo, mode: LaunchMode.externalApplication);
+    } else {
+      await launchUrl(web, mode: LaunchMode.externalApplication);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 180,
+      decoration: BoxDecoration(
+        color: IveTokens.surface,
+        borderRadius: BorderRadius.circular(14),
+        border: IveTokens.cardBorder,
+      ),
+      child: Stack(
+        children: [
+          Positioned.fill(child: CustomPaint(painter: _VehicleGridPainter())),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    const Icon(Icons.directions_car_rounded,
+                        size: 18, color: IveTokens.accent),
+                    const SizedBox(width: 6),
+                    Text(
+                      vehicle.plateNumber,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                        color: IveTokens.label,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                _VehicleInfoRow(
+                  icon: Icons.my_location_rounded,
+                  color: IveTokens.accent,
+                  label: 'Zone',
+                  value: vehicle.zone ?? 'Unassigned',
+                ),
+                const SizedBox(height: 4),
+                _VehicleInfoRow(
+                  icon: Icons.route_rounded,
+                  color: IveTokens.success,
+                  label: 'Today',
+                  value: '${vehicle.distanceToday} km · ${vehicle.deliveriesToday} deliveries',
+                ),
+                const Spacer(),
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: TextButton.icon(
+                    onPressed: _openMaps,
+                    icon: const Icon(Icons.open_in_new_rounded,
+                        size: 14, color: IveTokens.accent),
+                    label: const Text('Open in Maps',
+                        style: TextStyle(fontSize: 12, color: IveTokens.accent)),
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      minimumSize: Size.zero,
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _VehicleInfoRow extends StatelessWidget {
+  final IconData icon;
+  final Color color;
+  final String label;
+  final String value;
+  const _VehicleInfoRow({
+    required this.icon,
+    required this.color,
+    required this.label,
+    required this.value,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Icon(icon, size: 13, color: color),
+        const SizedBox(width: 5),
+        Text('$label  ', style: const TextStyle(fontSize: 11, color: IveTokens.labelTertiary)),
+        Expanded(
+          child: Text(
+            value,
+            style: const TextStyle(fontSize: 12, color: IveTokens.label, fontWeight: FontWeight.w500),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _VehicleGridPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = IveTokens.hairline.withValues(alpha: 0.4)
+      ..strokeWidth = 0.5;
+    const s = 28.0;
+    for (double x = 0; x < size.width; x += s) {
+      canvas.drawLine(Offset(x, 0), Offset(x, size.height), paint);
+    }
+    for (double y = 0; y < size.height; y += s) {
+      canvas.drawLine(Offset(0, y), Offset(size.width, y), paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter old) => false;
 }

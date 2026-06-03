@@ -440,7 +440,7 @@ class MarketProvider extends ChangeNotifier {
         notifyListeners();
         return newOrder;
       } else {
-        _error = response.message ?? 'Failed to place order';
+        _error = response.error?.userMessage ?? 'Failed to place order';
       }
     } catch (e) {
       debugPrint('MarketProvider.placeOrder error: $e');
@@ -521,7 +521,7 @@ class MarketProvider extends ChangeNotifier {
         notifyListeners();
         return newReturn;
       } else {
-        _error = response.message ?? 'Failed to submit return';
+        _error = response.error?.userMessage ?? 'Failed to submit return';
       }
     } catch (e) {
       debugPrint('MarketProvider.submitReturn error: $e');

@@ -557,17 +557,7 @@ class _RolePickerSheet extends StatelessWidget {
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
             ),
             trailing: const Icon(Icons.chevron_right, size: 18, color: AppColors.textTertiary),
-            onTap: () {
-              Navigator.pop(context);
-              // TODO: Call provider.updateStaffRole(staff.id, role)
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Role changed to ${_roleLabel(role)}'),
-                  behavior: SnackBarBehavior.floating,
-                  backgroundColor: kSetupColor,
-                ),
-              );
-            },
+            onTap: () => _confirmRoleChange(context, role),
           ),
         ),
       ],
@@ -586,5 +576,88 @@ class _RolePickerSheet extends StatelessWidget {
       case UserRole.driver:                return 'Driver';
       default:                             return role.name;
     }
+  }
+
+  /// Collect admin PIN then call the backend to assign the new role.
+  Future<void> _confirmRoleChange(BuildContext context, UserRole role) async {
+    Navigator.pop(context); // close the role-picker sheet
+
+    final pinController = TextEditingController();
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: const Color(0xFF11131C),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        title: Text(
+          'Confirm Role Change',
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Assign "${_roleLabel(role)}" to ${staff.name}?\n\nEnter your admin PIN to confirm.',
+              style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              controller: pinController,
+              obscureText: true,
+              keyboardType: TextInputType.number,
+              maxLength: 6,
+              autofocus: true,
+              decoration: const InputDecoration(
+                labelText: 'Admin PIN',
+                counterText: '',
+                prefixIcon: Icon(Icons.lock_outline, size: 18),
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: const Text('Cancel', style: TextStyle(color: AppColors.textTertiary)),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            style: FilledButton.styleFrom(backgroundColor: kSetupColor),
+            child: const Text('Confirm'),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed != true || !context.mounted) return;
+    if (pinController.text.trim().isEmpty) return;
+
+    final provider = context.read<SetupDashboardProvider>();
+    final authResponse = await provider.authService.getMe();
+    final adminId = authResponse.data?['id'] as String? ?? '';
+    final entityId = authResponse.data?['entityId'] as String? ?? '';
+
+    final success = await provider.updateStaffRole(
+      staffId: staff.id,
+      role: role,
+      adminId: adminId,
+      entityId: entityId,
+      adminPin: pinController.text.trim(),
+    );
+
+    if (!context.mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          success
+              ? 'Role updated to ${_roleLabel(role)}'
+              : 'Role change failed. Check your PIN and try again.',
+        ),
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: success ? kSetupColor : AppColors.error,
+      ),
+    );
+
+    pinController.dispose();
   }
 }

@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../providers/april_provider.dart';
 import '../widgets/april_widgets.dart';
 import '../../../core/services/ai_insights_notifier.dart';
@@ -66,9 +67,21 @@ class AprilSettingsScreen extends StatelessWidget {
                     label: 'Language',
                     subtitle: 'English (Default)',
                     icon: Icons.language,
-                    onTap: () => ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Language settings — coming soon')),
-                    ),
+                    onTap: () async {
+                      // Open the device's system language/locale settings.
+                      const settingsUri = 'app-settings:';
+                      final uri = Uri.parse(settingsUri);
+                      if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Open device Settings → General → Language & Region to change language.'),
+                              behavior: SnackBarBehavior.floating,
+                            ),
+                          );
+                        }
+                      }
+                    },
                   ),
                 ],
               ),

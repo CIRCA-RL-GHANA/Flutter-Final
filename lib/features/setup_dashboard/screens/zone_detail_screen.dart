@@ -6,6 +6,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../../../core/design/ive_tokens.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../prompt/providers/context_provider.dart';
@@ -222,24 +224,7 @@ class _CoverageTab extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 100),
       children: [
-        Container(
-          height: 200,
-          decoration: BoxDecoration(
-            color: kSetupColor.withValues(alpha: 0.06),
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: kSetupColor.withValues(alpha: 0.15)),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(Icons.map, size: 48, color: kSetupColor.withValues(alpha: 0.4)),
-              const SizedBox(height: 8),
-              Text('Zone Coverage Map', style: TextStyle(fontSize: 13, color: kSetupColor.withValues(alpha: 0.6), fontWeight: FontWeight.w600)),
-              const SizedBox(height: 4),
-              Text('Map view coming soon', style: TextStyle(fontSize: 11, color: kSetupColor.withValues(alpha: 0.4))),
-            ],
-          ),
-        ),
+        _ZoneCoverageCard(zone: zone),
         const SizedBox(height: 16),
         SetupSectionCard(
           child: Column(
@@ -420,4 +405,115 @@ class _MetricRow extends StatelessWidget {
       ),
     );
   }
+}
+
+// ─── Zone Coverage Card ───────────────────────────────────────────────────────
+
+class _ZoneCoverageCard extends StatelessWidget {
+  final DeliveryZone zone;
+  const _ZoneCoverageCard({required this.zone});
+
+  Future<void> _openInMaps() async {
+    final query = Uri.encodeComponent(zone.name);
+    final geo = Uri.parse('geo:0,0?q=$query');
+    final web = Uri.parse('https://www.google.com/maps/search/?api=1&query=$query');
+    if (await canLaunchUrl(geo)) {
+      await launchUrl(geo, mode: LaunchMode.externalApplication);
+    } else {
+      await launchUrl(web, mode: LaunchMode.externalApplication);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 200,
+      decoration: BoxDecoration(
+        color: IveTokens.surface,
+        borderRadius: BorderRadius.circular(16),
+        border: IveTokens.cardBorder,
+      ),
+      child: Stack(
+        children: [
+          Positioned.fill(child: CustomPaint(painter: _ZoneGridPainter())),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    const Icon(Icons.layers_rounded, size: 18, color: IveTokens.accent),
+                    const SizedBox(width: 6),
+                    Text(
+                      'Zone Coverage — ${zone.name}',
+                      style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: IveTokens.label),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                _ZoneInfoRow(icon: Icons.crop_square_rounded, label: 'Area', value: '${zone.coverageKm2.toStringAsFixed(1)} km²'),
+                const SizedBox(height: 4),
+                _ZoneInfoRow(icon: Icons.people_rounded, label: 'Population served', value: '${zone.populationServed}'),
+                const SizedBox(height: 4),
+                _ZoneInfoRow(icon: Icons.local_shipping_rounded, label: 'Daily deliveries', value: '${zone.dailyDeliveries}'),
+                const Spacer(),
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: TextButton.icon(
+                    onPressed: _openInMaps,
+                    icon: const Icon(Icons.open_in_new_rounded, size: 14, color: IveTokens.accent),
+                    label: const Text('Open in Maps', style: TextStyle(fontSize: 12, color: IveTokens.accent)),
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      minimumSize: Size.zero,
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ZoneInfoRow extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final String value;
+  const _ZoneInfoRow({required this.icon, required this.label, required this.value});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Icon(icon, size: 13, color: IveTokens.labelTertiary),
+        const SizedBox(width: 5),
+        Text('$label  ', style: const TextStyle(fontSize: 11, color: IveTokens.labelTertiary)),
+        Text(value, style: const TextStyle(fontSize: 12, color: IveTokens.label, fontWeight: FontWeight.w500)),
+      ],
+    );
+  }
+}
+
+class _ZoneGridPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = IveTokens.hairline.withValues(alpha: 0.35)
+      ..strokeWidth = 0.5;
+    const s = 30.0;
+    for (double x = 0; x < size.width; x += s) {
+      canvas.drawLine(Offset(x, 0), Offset(x, size.height), paint);
+    }
+    for (double y = 0; y < size.height; y += s) {
+      canvas.drawLine(Offset(0, y), Offset(size.width, y), paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter old) => false;
 }
