@@ -1,6 +1,7 @@
 /// Alerts Module — Shared Reusable UI Components
 /// Module Color: Red (0xFFEF4444)
 /// Visibility: All roles EXCEPT Owner
+library;
 
 import 'package:flutter/material.dart';
 import '../models/alerts_models.dart';
@@ -141,7 +142,7 @@ class AlertsEmptyState extends StatelessWidget {
             Container(
               width: 72,
               height: 72,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: kAlertsColorLight,
                 shape: BoxShape.circle,
               ),
@@ -328,11 +329,11 @@ class ResolvedAlertCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(12),
-          border: Border(
+          border: const Border(
             left: BorderSide(color: kAlertsResolved, width: 4),
-            top: const BorderSide(color: Color(0xFF1C1C2E)),
-            right: const BorderSide(color: Color(0xFF1C1C2E)),
-            bottom: const BorderSide(color: Color(0xFF1C1C2E)),
+            top: BorderSide(color: Color(0xFF1C1C2E)),
+            right: BorderSide(color: Color(0xFF1C1C2E)),
+            bottom: BorderSide(color: Color(0xFF1C1C2E)),
           ),
         ),
         child: Column(

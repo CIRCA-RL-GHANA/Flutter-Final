@@ -3,6 +3,7 @@
 /// Discover all 7 UGO community archetypes:
 /// Library Â· Playlist Â· Theater Â· Fair Â· Hub Â· Hangout Â· Journal
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -84,15 +85,15 @@ class _CommunityHubScreenState extends State<CommunityHubScreen> {
                         colors: [Color(0xFF0C4A6E), kCommunityColorDark, kCommunityColor],
                       ),
                     ),
-                    child: SafeArea(
+                    child: const SafeArea(
                       child: Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 12, 20, 60),
+                        padding: EdgeInsets.fromLTRB(20, 12, 20, 60),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text('Communities', style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold)),
-                            const SizedBox(height: 6),
-                            const Text('7 ways to connect, curate, and create together.', style: TextStyle(color: Colors.white70, fontSize: 13)),
+                            Text('Communities', style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold)),
+                            SizedBox(height: 6),
+                            Text('7 ways to connect, curate, and create together.', style: TextStyle(color: Colors.white70, fontSize: 13)),
                           ],
                         ),
                       ),

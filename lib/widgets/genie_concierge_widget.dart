@@ -114,7 +114,7 @@ class _GenieConciergeWidgetState extends State<GenieConciergeWidget> {
       setState(() => _messages.add(_ChatMessage(role: 'agent', text: reply)));
     } catch (e) {
       setState(() =>
-          _messages.add(_ChatMessage(role: 'agent', text: 'Sorry, something went wrong.')));
+          _messages.add(const _ChatMessage(role: 'agent', text: 'Sorry, something went wrong.')));
     } finally {
       setState(() => _loading = false);
       _scrollToBottom();

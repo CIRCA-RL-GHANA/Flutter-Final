@@ -1,5 +1,6 @@
 /// APRIL Screen 1 — ActionCore Dashboard (Home Hub)
 /// Master header, voice center, notifications, plugin grid, command bar, status
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

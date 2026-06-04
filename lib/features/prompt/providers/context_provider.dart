@@ -3,6 +3,7 @@
 /// Manages active user context, role switching, entity management
 /// Loads real user contexts from API, falls back to hardcoded defaults
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
 import 'package:flutter/foundation.dart';
 import '../../../core/services/services.dart';

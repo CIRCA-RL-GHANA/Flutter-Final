@@ -35,35 +35,35 @@ class WalletsProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      await Future.delayed(Duration(milliseconds: 500));
+      await Future.delayed(const Duration(milliseconds: 500));
       wallets = [
         Wallet(
           id: 'wallet_1',
           currency: 'USD',
           balance: 5250.75,
           type: 'Primary',
-          createdAt: DateTime.now().subtract(Duration(days: 90)),
+          createdAt: DateTime.now().subtract(const Duration(days: 90)),
         ),
         Wallet(
           id: 'wallet_2',
           currency: 'EUR',
           balance: 3150.50,
           type: 'Secondary',
-          createdAt: DateTime.now().subtract(Duration(days: 60)),
+          createdAt: DateTime.now().subtract(const Duration(days: 60)),
         ),
         Wallet(
           id: 'wallet_3',
           currency: 'GBP',
           balance: 1850.25,
           type: 'Secondary',
-          createdAt: DateTime.now().subtract(Duration(days: 30)),
+          createdAt: DateTime.now().subtract(const Duration(days: 30)),
         ),
         Wallet(
           id: 'wallet_4',
           currency: 'NGN',
           balance: 850000.00,
           type: 'Local',
-          createdAt: DateTime.now().subtract(Duration(days: 15)),
+          createdAt: DateTime.now().subtract(const Duration(days: 15)),
         ),
       ];
       selectedWalletId = wallets.first.id;
@@ -157,7 +157,7 @@ class WalletsProvider extends ChangeNotifier {
 }
 
 class WalletsScreen extends StatefulWidget {
-  const WalletsScreen({Key? key}) : super(key: key);
+  const WalletsScreen({super.key});
 
   @override
   State<WalletsScreen> createState() => _WalletsScreenState();

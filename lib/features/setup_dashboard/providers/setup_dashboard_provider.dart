@@ -1603,15 +1603,20 @@ class SetupDashboardProvider extends ChangeNotifier {
           ..[idx] = StaffMember(
             id: s.id,
             name: s.name,
-            role: role,
+            role: role.name,
+            department: s.department,
+            branch: s.branch,
             status: s.status,
+            rating: s.rating,
+            reviewCount: s.reviewCount,
+            joinedDate: s.joinedDate,
+            hoursThisWeek: s.hoursThisWeek,
+            hoursTarget: s.hoursTarget,
+            tasksCompleted: s.tasksCompleted,
+            tasksTotal: s.tasksTotal,
+            vehicleId: s.vehicleId,
             email: s.email,
             phone: s.phone,
-            branchId: s.branchId,
-            joinedAt: s.joinedAt,
-            avatarUrl: s.avatarUrl,
-            schedule: s.schedule,
-            metrics: s.metrics,
           );
       }
     }

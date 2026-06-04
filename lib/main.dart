@@ -29,7 +29,7 @@ void main() async {
 
   // Set system UI overlay style — aligned to brand-dark surfaces
   SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(
+    const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.light,
       statusBarBrightness: Brightness.dark,

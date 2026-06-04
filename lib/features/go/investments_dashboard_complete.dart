@@ -36,7 +36,7 @@ class InvestmentsProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      await Future.delayed(Duration(milliseconds: 500));
+      await Future.delayed(const Duration(milliseconds: 500));
       investments = [
         Investment(
           id: 'inv_1',
@@ -46,8 +46,8 @@ class InvestmentsProvider extends ChangeNotifier {
           returns: 750.00,
           roi: 15.0,
           status: 'active',
-          startDate: DateTime.now().subtract(Duration(days: 180)),
-          maturityDate: DateTime.now().add(Duration(days: 180)),
+          startDate: DateTime.now().subtract(const Duration(days: 180)),
+          maturityDate: DateTime.now().add(const Duration(days: 180)),
         ),
         Investment(
           id: 'inv_2',
@@ -57,8 +57,8 @@ class InvestmentsProvider extends ChangeNotifier {
           returns: 450.00,
           roi: 4.5,
           status: 'active',
-          startDate: DateTime.now().subtract(Duration(days: 365)),
-          maturityDate: DateTime.now().add(Duration(days: 365)),
+          startDate: DateTime.now().subtract(const Duration(days: 365)),
+          maturityDate: DateTime.now().add(const Duration(days: 365)),
         ),
         Investment(
           id: 'inv_3',
@@ -68,7 +68,7 @@ class InvestmentsProvider extends ChangeNotifier {
           returns: 600.00,
           roi: 8.0,
           status: 'active',
-          startDate: DateTime.now().subtract(Duration(days: 90)),
+          startDate: DateTime.now().subtract(const Duration(days: 90)),
         ),
       ];
     } catch (e) {
@@ -90,7 +90,7 @@ class InvestmentsProvider extends ChangeNotifier {
         roi: 0.0,
         status: 'active',
         startDate: DateTime.now(),
-        maturityDate: DateTime.now().add(Duration(days: 365)),
+        maturityDate: DateTime.now().add(const Duration(days: 365)),
       );
       investments.add(newInvestment);
       notifyListeners();
@@ -130,7 +130,7 @@ class InvestmentsProvider extends ChangeNotifier {
 }
 
 class InvestmentsDashboard extends StatefulWidget {
-  const InvestmentsDashboard({Key? key}) : super(key: key);
+  const InvestmentsDashboard({super.key});
 
   @override
   State<InvestmentsDashboard> createState() => _InvestmentsDashboardState();

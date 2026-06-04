@@ -10,6 +10,7 @@
 ///     surfaces a clear failure message
 ///   • Exposes a Stream so the stepper card widget can react in real-time
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
 import 'dart:async';
 import 'dart:convert';
