@@ -61,7 +61,8 @@ class _PromptDashboardScreenState extends ConsumerState<PromptDashboardScreen>
                 );
               }
 
-              final conversations = snapshot.data ?? [];
+              // getConversations() returns ApiResponse — unwrap .data for the list.
+              final conversations = snapshot.data?.data ?? [];
 
               return conversations.isEmpty
                   ? Center(

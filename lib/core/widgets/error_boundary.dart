@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../design/ive_button.dart';
 import '../design/ive_text.dart';
 import '../design/ive_tokens.dart';
-import '../theme/app_colors.dart';
 
 class ErrorBoundary extends StatefulWidget {
   final Widget child;

@@ -29,7 +29,7 @@ class IveAppBar extends StatelessWidget implements PreferredSizeWidget {
             // When bottom == null we inject a 1px hairline divider as the
             // AppBar's bottom widget (height = 1). Omitting that 1px here
             // creates a layout discrepancy in SliverAppBar / CustomScrollView.
-            (bottom != null ? bottom!.preferredSize.height : 1),
+            (bottom != null ? bottom!.preferredSize.height : 1.0),
       );
 
   @override
