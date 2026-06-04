@@ -14,37 +14,6 @@ analyzer:
     - test/models/order_model_test.dart
     - test/models/ride_model_test.dart
     - test/models/user_model_test.dart
-    # ── Temporary exclusions while audit fixes are validated ─────────────────
-    - lib/core/design/ive_app_bar.dart
-    - lib/core/design/ive_card.dart
-    - lib/core/design/ive_scaffold.dart
-    - lib/core/design/ive_text_field.dart
-    - lib/core/providers/app_providers.dart
-    - lib/core/providers/service_providers.dart
-    - lib/core/routes/app_routes.dart
-    - lib/core/services/chat_service.dart
-    - lib/core/services/orders_service.dart
-    - lib/core/services/websocket_service.dart
-    - lib/core/widgets/error_boundary.dart
-    - lib/features/april/screens/april_settings_screen.dart
-    - lib/features/go/screens/go_tab_detail_screen.dart
-    - lib/features/live/screens/live_ride_execution_screen.dart
-    - lib/features/market/providers/market_provider.dart
-    - lib/features/market/screens/market_delivery_tracker_screen.dart
-    - lib/features/market/screens/market_explore_screen.dart
-    - lib/features/setup_dashboard/providers/setup_dashboard_provider.dart
-    - lib/features/setup_dashboard/screens/product_detail_screen.dart
-    - lib/features/setup_dashboard/screens/products_screen.dart
-    - lib/features/setup_dashboard/screens/staff_detail_screen.dart
-    - lib/features/setup_dashboard/screens/vehicle_detail_screen.dart
-    - lib/features/setup_dashboard/screens/zone_detail_screen.dart
-    - lib/features/setup_dashboard/widgets/shared_widgets.dart
-    - lib/features/updates/providers/updates_provider.dart
-    - lib/features/updates/screens/updates_following_screen.dart
-    - lib/genie/genie_controller.dart
-    - lib/genie/genie_intent.dart
-    - lib/genie/genie_screen.dart
-    - lib/features/prompt/screens/prompt_dashboard_screen.dart
 
   # Downgrade pre-existing style/cleanliness warnings to info so they remain
   # visible but do not block CI (flutter analyze --no-fatal-infos).
