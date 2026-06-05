@@ -2,8 +2,8 @@ import '../network/api_client.dart';
 import '../network/api_response.dart';
 import '../constants/api_routes.dart';
 
-/// Legacy name kept for compatibility — now delegates through ApiClient/ApiResponse
-/// instead of raw Dio so callers receive structured errors they can act on.
+/// Canonical order-management service.
+/// All callers should use this class; the legacy OrderService is removed.
 class OrdersService {
   final ApiClient _api;
 
@@ -36,6 +36,13 @@ class OrdersService {
     );
   }
 
+  /// Alias used by MarketProvider — fetches orders for the authenticated user.
+  Future<ApiResponse<List<Map<String, dynamic>>>> getUserOrders({
+    String userId = 'me',
+    int limit = 20,
+  }) =>
+      getOrders(limit: limit);
+
   /// Fetch a single order by ID.
   Future<ApiResponse<Map<String, dynamic>>> getOrder(String orderId) async {
     return _api.get<Map<String, dynamic>>(
@@ -45,25 +52,29 @@ class OrdersService {
   }
 
   /// Place a new order.
+  /// [deliveryAddress] is a free-form map matching the backend DeliveryAddressDto
+  /// shape: { street, city, coordinates? }.
   Future<ApiResponse<Map<String, dynamic>>> createOrder({
     required List<Map<String, dynamic>> items,
-    required String deliveryAddressId,
-    String? notes,
-    String paymentMethod = 'qpoints',
+    required Map<String, dynamic> deliveryAddress,
+    String paymentMethod = 'QPOINTS',
+    String? branchId,
+    String? deliveryNotes,
   }) async {
     return _api.post<Map<String, dynamic>>(
       ApiRoutes.orders.create,
       data: {
         'items': items,
-        'deliveryAddressId': deliveryAddressId,
+        'deliveryAddress': deliveryAddress,
         'paymentMethod': paymentMethod,
-        if (notes != null) 'notes': notes,
+        if (branchId != null) 'branchId': branchId,
+        if (deliveryNotes != null) 'deliveryNotes': deliveryNotes,
       },
       fromJson: (json) => json as Map<String, dynamic>,
     );
   }
 
-  /// Cancel an order. Callers should check `response.success` before acting.
+  /// Cancel an order.
   Future<ApiResponse<Map<String, dynamic>>> cancelOrder(
     String orderId, {
     String? reason,
@@ -125,18 +136,23 @@ class OrdersService {
     );
   }
 
+  /// Alias used by MarketProvider — fetches returns for the authenticated user.
+  Future<ApiResponse<List<Map<String, dynamic>>>> getReturnRequests(
+          [String userId = 'me']) =>
+      getReturns();
+
   /// Request a return for a specific order.
   Future<ApiResponse<Map<String, dynamic>>> createReturnRequest({
     required String orderId,
     required String reason,
-    List<String>? itemIds,
+    List<Map<String, dynamic>>? items,
   }) async {
     return _api.post<Map<String, dynamic>>(
       ApiRoutes.orders.returns,
       data: {
         'orderId': orderId,
         'reason': reason,
-        if (itemIds != null) 'itemIds': itemIds,
+        if (items != null && items.isNotEmpty) 'items': items,
       },
       fromJson: (json) => json as Map<String, dynamic>,
     );

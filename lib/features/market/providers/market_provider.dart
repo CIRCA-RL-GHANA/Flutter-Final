@@ -16,7 +16,7 @@ class MarketProvider extends ChangeNotifier {
   // ═══════════════════════════════════════════════════════════════════════════
 
   final ProductService _productService = ProductService();
-  final OrderService _orderService = OrderService();
+  final OrdersService _orderService = OrdersService();
   final RideService _rideService = RideService();
 
   // ═══════════════════════════════════════════════════════════════════════════

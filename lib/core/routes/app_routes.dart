@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../design/ive_text.dart';
 import '../design/ive_tokens.dart';
 import '../../features/onboarding/screens/screen_0_preloading.dart';
@@ -195,7 +194,6 @@ import '../../features/enterprise/screens/concierge_embed_screen.dart';
 import '../../features/go/screens/go_financial_screen.dart';
 import '../../features/go/screens/go_context_screen.dart';
 import '../../features/go/screens/qpoint_market_screen.dart';
-import '../../features/go/providers/qpoint_market_provider.dart';
 import '../../features/go/screens/go_hub_screen.dart';
 import '../../features/go/screens/go_buy_screen.dart';
 import '../../features/go/screens/go_sell_screen.dart';
@@ -811,13 +809,7 @@ class AppRoutes {
 
       // GO Module
       case qPointsMarket:
-        return _buildRoute(
-          ChangeNotifierProvider(
-            create: (_) => QPointMarketProvider(),
-            child: const QPointMarketScreen(),
-          ),
-          settings,
-        );
+        return _buildRoute(const QPointMarketScreen(), settings);
       case goContext:
         return _buildRoute(const GoContextScreen(), settings);
       case goHub:

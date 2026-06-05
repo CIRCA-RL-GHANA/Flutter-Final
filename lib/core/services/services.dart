@@ -4,7 +4,6 @@ export 'profile_service.dart';
 export 'entity_service.dart';
 export 'qpoints_service.dart';
 export 'product_service.dart';
-export 'order_service.dart';
 export 'orders_service.dart';
 export 'vehicle_service.dart';
 export 'ride_service.dart';

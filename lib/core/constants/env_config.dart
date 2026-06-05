@@ -10,7 +10,7 @@ class EnvConfig {
     'ENVIRONMENT',
     defaultValue: 'production',
   );
-  static final Environment current = _envName == 'development'
+  static const Environment current = _envName == 'development'
       ? Environment.development
       : _envName == 'staging'
           ? Environment.staging
