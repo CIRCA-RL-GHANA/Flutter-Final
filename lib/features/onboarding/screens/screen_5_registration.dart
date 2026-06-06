@@ -12,14 +12,8 @@ import '../widgets/onboarding_header.dart';
 
 
 // OS palette — mirrors splash / welcome
-const Color _kBg        = IveTokens.bg;
-const Color _kSurface   = IveTokens.surface;
-const Color _kBorder    = IveTokens.hairline;
-const Color _kAccent    = IveTokens.accent;
-const Color _kAccentDim = IveTokens.accentPressed;
-const Color _kText      = IveTokens.label;
+// ignore: unused_element
 const Color _kTextDim   = IveTokens.labelSecondary;
-const Color _kTextMuted = IveTokens.labelTertiary;
 /// Screen 5: User Registration (Comprehensive)
 /// Progressive profiling with privacy-first approach
 class RegistrationScreen extends StatefulWidget {
@@ -82,7 +76,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           content: Text(reg.error ?? AppStrings.couldntSave),
           backgroundColor: IveTokens.danger,
           behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(borderRadius: IveTokens.brMd),
+          shape: const RoundedRectangleBorder(borderRadius: IveTokens.brMd),
         ),
       );
     }
@@ -167,9 +161,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               onChanged: reg.setFirstName,
                               validator: Validators.validateName,
                               textCapitalization: TextCapitalization.words,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 labelText: AppStrings.firstName,
-                                prefixIcon: const Icon(Icons.person_outline, size: 20),
+                                prefixIcon: Icon(Icons.person_outline, size: 20),
                                 border: OutlineInputBorder(
                                   borderRadius: IveTokens.brXs,
                                 ),
@@ -181,18 +175,18 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               onChanged: reg.setLastName,
                               validator: Validators.validateName,
                               textCapitalization: TextCapitalization.words,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 labelText: AppStrings.lastName,
-                                prefixIcon: const Icon(Icons.person_outline, size: 20),
+                                prefixIcon: Icon(Icons.person_outline, size: 20),
                                 border: OutlineInputBorder(
                                   borderRadius: IveTokens.brXs,
                                 ),
                               ),
                             ),
                             const SizedBox(height: 4),
-                            Text(
+                            const Text(
                               AppStrings.forIdentityVerification,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 12,
                                 color: IveTokens.labelTertiary,
                               ),
@@ -211,9 +205,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               onChanged: reg.setEmail,
                               validator: Validators.validateEmail,
                               keyboardType: TextInputType.emailAddress,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 labelText: 'Email address',
-                                prefixIcon: const Icon(Icons.email_outlined, size: 20),
+                                prefixIcon: Icon(Icons.email_outlined, size: 20),
                                 border: OutlineInputBorder(
                                   borderRadius: IveTokens.brXs,
                                 ),
@@ -406,11 +400,11 @@ class _PrivacyDashboard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
+          const Row(
             children: [
-              const Icon(Icons.shield_outlined, size: 20, color: IveTokens.accent),
-              const SizedBox(width: 8),
-              const Text(
+              Icon(Icons.shield_outlined, size: 20, color: IveTokens.accent),
+              SizedBox(width: 8),
+              Text(
                 'Privacy Preferences',
                 style: TextStyle(
                   fontSize: 16,
@@ -441,13 +435,13 @@ class _PrivacyDashboard extends StatelessWidget {
           const Divider(height: 24),
 
           // Legal links
-          Wrap(
+          const Wrap(
             spacing: 16,
             runSpacing: 8,
             children: [
-              const _LegalLink(label: AppStrings.termsOfService),
-              const _LegalLink(label: AppStrings.privacyPolicy),
-              const _LegalLink(label: AppStrings.dataProcessing),
+              _LegalLink(label: AppStrings.termsOfService),
+              _LegalLink(label: AppStrings.privacyPolicy),
+              _LegalLink(label: AppStrings.dataProcessing),
             ],
           ),
         ],
@@ -484,7 +478,7 @@ class _PrivacyToggle extends StatelessWidget {
           Switch.adaptive(
             value: value,
             onChanged: onChanged,
-            activeColor: IveTokens.accent,
+            activeThumbColor: IveTokens.accent,
           ),
         ],
       ),

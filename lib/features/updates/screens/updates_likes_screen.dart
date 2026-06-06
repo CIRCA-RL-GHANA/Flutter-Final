@@ -3,6 +3,7 @@
 /// Shows who liked an update: search/filter, mutual connections, online
 /// indicators, follow buttons, reaction type badges.
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -115,8 +116,8 @@ class _BodyState extends State<_Body> with SingleTickerProviderStateMixin {
                     filled: true,
                     fillColor: const Color(0xFF11131C),
                     contentPadding: const EdgeInsets.symmetric(vertical: 10),
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide(color: AppColors.inputBorder)),
-                    enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide(color: AppColors.inputBorder)),
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: AppColors.inputBorder)),
+                    enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: AppColors.inputBorder)),
                     focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: kUpdatesColor)),
                   ),
                 ),
@@ -155,16 +156,16 @@ class _BodyState extends State<_Body> with SingleTickerProviderStateMixin {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.symmetric(horizontal: 14),
-                  children: [
-                    const _ReactionChip(emoji: 'â¤ï¸', label: 'All', isSelected: true),
-                    const SizedBox(width: 6),
-                    const _ReactionChip(emoji: 'ðŸ‘', label: 'Like', isSelected: false),
-                    const SizedBox(width: 6),
-                    const _ReactionChip(emoji: 'ðŸ”¥', label: 'Fire', isSelected: false),
-                    const SizedBox(width: 6),
-                    const _ReactionChip(emoji: 'ðŸ˜‚', label: 'Laugh', isSelected: false),
-                    const SizedBox(width: 6),
-                    const _ReactionChip(emoji: 'ðŸ˜®', label: 'Wow', isSelected: false),
+                  children: const [
+                    _ReactionChip(emoji: 'â¤ï¸', label: 'All', isSelected: true),
+                    SizedBox(width: 6),
+                    _ReactionChip(emoji: 'ðŸ‘', label: 'Like', isSelected: false),
+                    SizedBox(width: 6),
+                    _ReactionChip(emoji: 'ðŸ”¥', label: 'Fire', isSelected: false),
+                    SizedBox(width: 6),
+                    _ReactionChip(emoji: 'ðŸ˜‚', label: 'Laugh', isSelected: false),
+                    SizedBox(width: 6),
+                    _ReactionChip(emoji: 'ðŸ˜®', label: 'Wow', isSelected: false),
                   ],
                 ),
               ),

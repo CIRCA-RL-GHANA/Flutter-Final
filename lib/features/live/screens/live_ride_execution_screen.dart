@@ -1,8 +1,9 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// LIVE MODULE — Screen 17: Ride Execution & Security
 /// Full ride flow: passenger pickup, identity verification,
 /// live navigation, trip details, fare display, completion
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -218,9 +219,9 @@ class _EnRouteView extends StatelessWidget {
                       children: [
                         const Icon(Icons.star, size: 12, color: Color(0xFFF59E0B)),
                         const SizedBox(width: 2),
-                        Text('${ride.passengerRating}', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                        Text('${ride.passengerRating}', style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                         const SizedBox(width: 8),
-                        Text('${ride.passengerRideCount} passenger(s)', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                        Text('${ride.passengerRideCount} passenger(s)', style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                       ],
                     ),
                   ],
@@ -306,7 +307,7 @@ class _VerifyView extends StatelessWidget {
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: verified ? const Color(0xFF10B981) : AppColors.textPrimary),
               ),
               const SizedBox(height: 4),
-              Text('Confirm the passenger matches the booking', style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+              const Text('Confirm the passenger matches the booking', style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
             ],
           ),
         ),
@@ -361,12 +362,12 @@ class _InTripView extends StatelessWidget {
         Container(
           height: 200,
           decoration: BoxDecoration(color: const Color(0xFFE5E7EB), borderRadius: BorderRadius.circular(14)),
-          child: Center(
+          child: const Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Icon(Icons.navigation, size: 40, color: AppColors.textTertiary),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Text('Live trip navigation', style: TextStyle(fontSize: 13, color: AppColors.textTertiary)),
               ],
             ),
@@ -379,7 +380,7 @@ class _InTripView extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [const Color(0xFF10B981), const Color(0xFF059669)]),
+            gradient: const LinearGradient(colors: [Color(0xFF10B981), Color(0xFF059669)]),
             borderRadius: BorderRadius.circular(14),
           ),
           child: Row(
@@ -405,7 +406,7 @@ class _InTripView extends StatelessWidget {
             children: [
               Text(ride.dropoffAddress, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
               const SizedBox(height: 4),
-              Text('Passenger: ${ride.passengerName}', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+              Text('Passenger: ${ride.passengerName}', style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
             ],
           ),
         ),
@@ -475,7 +476,7 @@ class _RideCompleteView extends StatelessWidget {
               const SizedBox(height: 20),
               const Text('🎉 TRIP COMPLETED!', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
               const SizedBox(height: 8),
-              Text(ride.passengerName, style: TextStyle(fontSize: 15, color: AppColors.textSecondary)),
+              Text(ride.passengerName, style: const TextStyle(fontSize: 15, color: AppColors.textSecondary)),
               const SizedBox(height: 16),
               Container(
                 padding: const EdgeInsets.all(16),
@@ -548,7 +549,7 @@ class _TripDetailRow extends StatelessWidget {
         children: [
           Icon(icon, size: 14, color: color),
           const SizedBox(width: 8),
-          Text('$label: ', style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+          Text('$label: ', style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
           Expanded(child: Text(value, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600))),
         ],
       ),
@@ -568,7 +569,7 @@ class _VerifyRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+          Text(label, style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
           Text(value, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
         ],
       ),
@@ -604,7 +605,7 @@ class _CompletionRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+          Text(label, style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
           Text(value, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
         ],
       ),

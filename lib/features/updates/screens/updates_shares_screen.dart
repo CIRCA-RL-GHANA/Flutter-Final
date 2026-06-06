@@ -3,6 +3,7 @@
 /// Two-pane layout: share history (who shared, platform, reach) and
 /// share actions (copy link, platform icons, QR code).
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

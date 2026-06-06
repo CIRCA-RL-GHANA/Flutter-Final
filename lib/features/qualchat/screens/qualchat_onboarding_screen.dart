@@ -1,5 +1,6 @@
 /// qualChat Screen 14 — Onboarding Flow
 /// 4-step flow: Welcome & Permissions â†’ Role Config â†’ Profile Setup â†’ Quick Tour
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -74,13 +75,13 @@ class QualChatOnboardingScreen extends StatelessWidget {
   Widget _buildStep(BuildContext context, QualChatProvider provider, int step) {
     switch (step) {
       case 0:
-        return _WelcomeStep(key: const ValueKey(0));
+        return const _WelcomeStep(key: ValueKey(0));
       case 1:
         return _RoleConfigStep(key: const ValueKey(1), provider: provider);
       case 2:
         return _ProfileSetupStep(key: const ValueKey(2), provider: provider);
       case 3:
-        return _QuickTourStep(key: const ValueKey(3));
+        return const _QuickTourStep(key: ValueKey(3));
       default:
         return const SizedBox.shrink();
     }
@@ -126,21 +127,21 @@ class _WelcomeStep extends StatelessWidget {
           const SizedBox(height: 40),
 
           // Permissions
-          _PermissionItem(
+          const _PermissionItem(
             icon: Icons.notifications,
             title: 'Notifications',
             description: 'Stay updated with new messages',
             granted: true,
           ),
           const SizedBox(height: 12),
-          _PermissionItem(
+          const _PermissionItem(
             icon: Icons.contacts,
             title: 'Contacts',
             description: 'Find friends and connections',
             granted: false,
           ),
           const SizedBox(height: 12),
-          _PermissionItem(
+          const _PermissionItem(
             icon: Icons.photo_camera,
             title: 'Camera & Photos',
             description: 'Share photos and media',
@@ -469,37 +470,37 @@ class _QuickTourStep extends StatelessWidget {
           ),
           const SizedBox(height: 32),
 
-          _TourFeature(
+          const _TourFeature(
             icon: Icons.chat_bubble,
             color: kChatColor,
             title: 'Smart Chat',
             description: 'AI-powered messaging with smart replies and nudges',
           ),
           const SizedBox(height: 16),
-          _TourFeature(
+          const _TourFeature(
             icon: Icons.favorite,
-            color: const Color(0xFFEC4899),
+            color: Color(0xFFEC4899),
             title: 'Hey Ya Connections',
             description: 'Find and connect with compatible people',
           ),
           const SizedBox(height: 16),
-          _TourFeature(
+          const _TourFeature(
             icon: Icons.visibility,
-            color: const Color(0xFF10B981),
+            color: Color(0xFF10B981),
             title: 'Presence Tracking',
             description: 'See who\'s online and available in real-time',
           ),
           const SizedBox(height: 16),
-          _TourFeature(
+          const _TourFeature(
             icon: Icons.auto_awesome,
-            color: const Color(0xFF8B5CF6),
+            color: Color(0xFF8B5CF6),
             title: 'AI Wingmate',
             description: 'Smart nudges and suggestions to build connections',
           ),
           const SizedBox(height: 16),
-          _TourFeature(
+          const _TourFeature(
             icon: Icons.shield,
-            color: const Color(0xFFF59E0B),
+            color: Color(0xFFF59E0B),
             title: 'Privacy First',
             description: 'Full control over your visibility and data',
           ),

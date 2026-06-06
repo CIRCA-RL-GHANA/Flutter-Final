@@ -1,6 +1,7 @@
 /// GO Screen 2C — Transfer QPoints
 /// Enhanced P2P transfer with receiver selection, risk assessment,
 /// fee optimizer, scheduling, relationship context
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -193,7 +194,7 @@ class _GoTransferScreenState extends State<GoTransferScreen> {
           const SizedBox(height: 8),
           // Category
           DropdownButtonFormField<String>(
-            value: _category,
+            initialValue: _category,
             items: ['Personal', 'Business', 'Gift', 'Repayment', 'Other'].map((c) => DropdownMenuItem(value: c, child: Text(c, style: const TextStyle(fontSize: 13)))).toList(),
             onChanged: (v) => setState(() => _category = v ?? _category),
             decoration: InputDecoration(labelText: 'Category', filled: true, fillColor: const Color(0xFF11131C), border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: Color(0xFF1C1C2E)))),
@@ -203,8 +204,8 @@ class _GoTransferScreenState extends State<GoTransferScreen> {
           const Text('SCHEDULE', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF9CA3AF))),
           const SizedBox(height: 6),
           ...TransferSchedule.values.map((s) => RadioListTile<TransferSchedule>(
-            value: s, groupValue: _schedule,
-            onChanged: (v) => setState(() => _schedule = v ?? _schedule),
+            value: s, groupValue: _schedule, // ignore: deprecated_member_use
+            onChanged: (v) => setState(() => _schedule = v ?? _schedule), // ignore: deprecated_member_use
             title: Text(_scheduleLabel(s), style: const TextStyle(fontSize: 13)),
             dense: true, activeColor: kGoColor, visualDensity: VisualDensity.compact,
           )),
@@ -260,6 +261,7 @@ class _GoTransferScreenState extends State<GoTransferScreen> {
             Expanded(child: Text('Risk Assessment: LOW\nThis recipient is in your favorites with 12 previous transfers.', style: TextStyle(fontSize: 12, color: Color(0xFF1E40AF)))),
           ])),
           const SizedBox(height: 14),
+          // ignore: deprecated_member_use
           CheckboxListTile(
             value: _termsAccepted, onChanged: (v) => setState(() => _termsAccepted = v ?? false), activeColor: kGoColor,
             controlAffinity: ListTileControlAffinity.leading,

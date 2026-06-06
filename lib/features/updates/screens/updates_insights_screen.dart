@@ -3,6 +3,7 @@
 /// Reach, impressions, engagement rate, time-based analytics, AI insights,
 /// audience demographics, content performance, ROI metrics.
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -134,15 +135,15 @@ class _BodyState extends State<_Body> {
                 const SizedBox(height: 8),
 
                 // Audience breakdown
-                UpdatesSectionCard(
+                const UpdatesSectionCard(
                   title: 'AUDIENCE BREAKDOWN',
                   icon: Icons.people,
                   iconColor: kUpdatesAccent,
                   child: Column(
                     children: [
-                      const _AudienceRow(label: 'Followers', value: 68, color: kUpdatesColor),
-                      const _AudienceRow(label: 'Non-followers', value: 22, color: kUpdatesAccent),
-                      _AudienceRow(label: 'New visitors', value: 10, color: const Color(0xFF10B981)),
+                      _AudienceRow(label: 'Followers', value: 68, color: kUpdatesColor),
+                      _AudienceRow(label: 'Non-followers', value: 22, color: kUpdatesAccent),
+                      _AudienceRow(label: 'New visitors', value: 10, color: Color(0xFF10B981)),
                     ],
                   ),
                 ),
@@ -150,17 +151,17 @@ class _BodyState extends State<_Body> {
                 const SizedBox(height: 8),
 
                 // Content performance
-                UpdatesSectionCard(
+                const UpdatesSectionCard(
                   title: 'CONTENT PERFORMANCE',
                   icon: Icons.bar_chart,
-                  iconColor: const Color(0xFFF59E0B),
+                  iconColor: Color(0xFFF59E0B),
                   child: Column(
                     children: [
-                      const _ContentTypeRow(type: 'Images', engagement: 15.2, count: 12),
-                      const _ContentTypeRow(type: 'Videos', engagement: 22.8, count: 5),
-                      const _ContentTypeRow(type: 'Polls', engagement: 31.5, count: 3),
-                      const _ContentTypeRow(type: 'Text', engagement: 8.4, count: 18),
-                      const _ContentTypeRow(type: 'Audio', engagement: 12.1, count: 2),
+                      _ContentTypeRow(type: 'Images', engagement: 15.2, count: 12),
+                      _ContentTypeRow(type: 'Videos', engagement: 22.8, count: 5),
+                      _ContentTypeRow(type: 'Polls', engagement: 31.5, count: 3),
+                      _ContentTypeRow(type: 'Text', engagement: 8.4, count: 18),
+                      _ContentTypeRow(type: 'Audio', engagement: 12.1, count: 2),
                     ],
                   ),
                 ),
@@ -231,16 +232,16 @@ class _BodyState extends State<_Body> {
                 const SizedBox(height: 8),
 
                 // Best posting times
-                UpdatesSectionCard(
+                const UpdatesSectionCard(
                   title: 'BEST POSTING TIMES',
                   icon: Icons.schedule,
-                  iconColor: const Color(0xFF3B82F6),
+                  iconColor: Color(0xFF3B82F6),
                   child: Column(
                     children: [
-                      const _TimeSlot(day: 'Monday', time: '9:00 AM - 11:00 AM', engagement: 'High'),
-                      const _TimeSlot(day: 'Wednesday', time: '2:00 PM - 4:00 PM', engagement: 'Very High'),
-                      const _TimeSlot(day: 'Friday', time: '6:00 PM - 8:00 PM', engagement: 'Medium'),
-                      const _TimeSlot(day: 'Saturday', time: '10:00 AM - 12:00 PM', engagement: 'High'),
+                      _TimeSlot(day: 'Monday', time: '9:00 AM - 11:00 AM', engagement: 'High'),
+                      _TimeSlot(day: 'Wednesday', time: '2:00 PM - 4:00 PM', engagement: 'Very High'),
+                      _TimeSlot(day: 'Friday', time: '6:00 PM - 8:00 PM', engagement: 'Medium'),
+                      _TimeSlot(day: 'Saturday', time: '10:00 AM - 12:00 PM', engagement: 'High'),
                     ],
                   ),
                 ),
@@ -454,7 +455,7 @@ class _ContentTypeRow extends StatelessWidget {
           const SizedBox(width: 8),
           SizedBox(
             width: 42,
-            child: Text('${engagement}%', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600)),
+            child: Text('$engagement%', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600)),
           ),
           Text('($count)', style: const TextStyle(fontSize: 10, color: AppColors.textTertiary)),
         ],

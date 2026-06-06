@@ -5,6 +5,7 @@
 ///
 /// Migrated from hardcoded demo data to real API calls with fallback.
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
 import 'package:flutter/material.dart';
 import '../models/live_models.dart';
@@ -1003,7 +1004,7 @@ class LiveProvider extends ChangeNotifier {
       totalDeliveries: 122,
       totalEarnings: 1245.0,
     ),
-    LiveDriver(
+    const LiveDriver(
       id: 'D004',
       name: 'Alex Brown',
       rating: 4.8,
@@ -1011,7 +1012,7 @@ class LiveProvider extends ChangeNotifier {
       distanceMiles: 1.5,
       etaToStoreMinutes: 8,
       etaToCustomerMinutes: 20,
-      specialties: const ['Airport', 'Long distance'],
+      specialties: ['Airport', 'Long distance'],
       availability: DriverAvailability.online,
       driverType: LiveDriverType.transport,
       todayDeliveries: 7,
@@ -1020,8 +1021,8 @@ class LiveProvider extends ChangeNotifier {
       onTimeRate: 0.96,
       totalDeliveries: 340,
       totalEarnings: 4250.0,
-      onlineTime: const Duration(hours: 4, minutes: 15),
-      badges: const [
+      onlineTime: Duration(hours: 4, minutes: 15),
+      badges: [
         DriverBadge(name: 'Road Warrior', description: '300+ rides completed', icon: Icons.directions_car, color: Color(0xFFFFD700)),
         DriverBadge(name: 'Top Rated', description: '4.8+ avg rating', icon: Icons.star, color: Color(0xFFF59E0B)),
       ],
@@ -1070,13 +1071,13 @@ class LiveProvider extends ChangeNotifier {
           completedAt: DateTime(2026, 2, 8, 12, 4),
           evidenceUrls: ['evidence_1.jpg', 'evidence_2.jpg'],
         ),
-        PackageStop(
+        const PackageStop(
           id: 'S2', sequence: 2, type: StopType.returnPickup, status: StopStatus.inProgress,
           address: '125 Business District', customerName: 'Sarah M.',
           returnId: '567', itemDescription: 'Wireless Headphones (Defective)',
           distanceMiles: 0.4, etaMinutes: 4, photoRequired: true,
         ),
-        PackageStop(
+        const PackageStop(
           id: 'S3', sequence: 3, type: StopType.delivery, status: StopStatus.upcoming,
           address: '130 Business District', customerName: 'David K.',
           orderId: '1300', itemDescription: 'Phone case',

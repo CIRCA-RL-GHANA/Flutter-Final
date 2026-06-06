@@ -1,5 +1,6 @@
 /// qualChat Screen 7 — New Chat (Enhanced)
 /// Intelligent recipient selection: individual + group creation
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

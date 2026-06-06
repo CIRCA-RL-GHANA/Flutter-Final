@@ -1,6 +1,7 @@
 /// Alerts Screen 0 — PROMPT Screen Integration (Alerts Widget)
 /// Glass morphism card, metrics row, resolved preview, resolver avatars,
 /// mini donut chart, real-time badge
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

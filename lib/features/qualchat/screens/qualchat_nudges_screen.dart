@@ -1,5 +1,6 @@
 /// qualChat Screen 11 — Smart Nudges
 /// AI wingmate: swipe deck, nudge types, AI decision mode, settings
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -248,7 +249,7 @@ class _AutoModeToggleState extends State<_AutoModeToggle> {
         Switch(
           value: _auto,
           onChanged: (v) => setState(() => _auto = v),
-          activeColor: kChatColor,
+          activeThumbColor: kChatColor,
         ),
         const Text('Auto', style: TextStyle(fontSize: 10, color: Color(0xFF6B7280))),
       ],

@@ -5,6 +5,7 @@
 /// color identities and expose action buttons that feed back into the
 /// GenieController. Pinch-out triggers full-screen navigation.
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import '../../core/design/ive_tokens.dart';
@@ -1029,9 +1030,9 @@ class _ComingSoonCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: AppColors.inputBorder),
       ),
-      child: Row(
+      child: const Row(
         mainAxisSize: MainAxisSize.min,
-        children: const [
+        children: [
           Icon(Icons.open_in_new, size: 14, color: AppColors.textTertiary),
           SizedBox(width: 6),
           Text('Opening full screen…',

@@ -1,8 +1,9 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// LIVE MODULE — Screen 16: Driver Home (Transport)
 /// Transport driver dashboard: active ride, earnings, availability,
 /// ride queue, vehicle info, and quick actions
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -84,7 +85,7 @@ class LiveTransportDriverHomeScreen extends StatelessWidget {
                           children: [
                             _EarningsStat(label: 'Today', value: 'â‚µ${earnings.totalEarnings.toStringAsFixed(0)}'),
                             Container(width: 1, height: 30, color: Colors.white.withValues(alpha: 0.3)),
-                            _EarningsStat(label: 'This Week', value: 'â‚µ0'),
+                            const _EarningsStat(label: 'This Week', value: 'â‚µ0'),
                             Container(width: 1, height: 30, color: Colors.white.withValues(alpha: 0.3)),
                             _EarningsStat(label: 'Rides', value: '${earnings.ridesCompleted}'),
                           ],
@@ -218,8 +219,8 @@ class LiveTransportDriverHomeScreen extends StatelessWidget {
                     iconColor: const Color(0xFF3B82F6),
                     child: Column(
                       children: [
-                        _InfoRow(label: 'Vehicle', value: 'Not set'),
-                        _InfoRow(label: 'License', value: 'Not set'),
+                        const _InfoRow(label: 'Vehicle', value: 'Not set'),
+                        const _InfoRow(label: 'License', value: 'Not set'),
                         _InfoRow(label: 'Rating', value: '${driver.rating} â­'),
                         _InfoRow(label: 'Total rides', value: '${driver.totalDeliveries}'),
                       ],
@@ -264,7 +265,7 @@ class _ActiveRideCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [kLiveColor, kLiveAccent]),
+          gradient: const LinearGradient(colors: [kLiveColor, kLiveAccent]),
           borderRadius: BorderRadius.circular(14),
         ),
         child: Column(
@@ -335,23 +336,23 @@ class _RideRequestCard extends StatelessWidget {
           const SizedBox(height: 6),
           Row(
             children: [
-              Icon(Icons.my_location, size: 14, color: const Color(0xFF10B981)),
+              const Icon(Icons.my_location, size: 14, color: Color(0xFF10B981)),
               const SizedBox(width: 4),
-              Expanded(child: Text(ride.pickupAddress, style: TextStyle(fontSize: 12, color: AppColors.textSecondary), overflow: TextOverflow.ellipsis)),
+              Expanded(child: Text(ride.pickupAddress, style: const TextStyle(fontSize: 12, color: AppColors.textSecondary), overflow: TextOverflow.ellipsis)),
             ],
           ),
           const SizedBox(height: 2),
           Row(
             children: [
-              Icon(Icons.location_on, size: 14, color: kLiveColor),
+              const Icon(Icons.location_on, size: 14, color: kLiveColor),
               const SizedBox(width: 4),
-              Expanded(child: Text(ride.dropoffAddress, style: TextStyle(fontSize: 12, color: AppColors.textSecondary), overflow: TextOverflow.ellipsis)),
+              Expanded(child: Text(ride.dropoffAddress, style: const TextStyle(fontSize: 12, color: AppColors.textSecondary), overflow: TextOverflow.ellipsis)),
             ],
           ),
           const SizedBox(height: 8),
           Row(
             children: [
-              Text('${ride.distanceKm.toStringAsFixed(1)} km • ${ride.etaMinutes} min', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+              Text('${ride.distanceKm.toStringAsFixed(1)} km • ${ride.etaMinutes} min', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
               const Spacer(),
               SizedBox(
                 height: 32,
@@ -388,7 +389,7 @@ class _QuickAction extends StatelessWidget {
           children: [
             Icon(icon, size: 22, color: color),
             const SizedBox(height: 4),
-            Text(label, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: AppColors.textSecondary)),
+            Text(label, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: AppColors.textSecondary)),
           ],
         ),
       ),
@@ -408,7 +409,7 @@ class _InfoRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+          Text(label, style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
           Text(value, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
         ],
       ),

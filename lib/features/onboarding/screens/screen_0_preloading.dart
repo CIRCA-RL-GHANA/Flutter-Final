@@ -229,10 +229,10 @@ class _ErrorDisplay extends StatelessWidget {
               child: Container(
                 width: 56,
                 height: 56,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: IveTokens.surface,
                   borderRadius: IveTokens.brSm,
-                  border: const Border.fromBorderSide(IveTokens.hairlineSide),
+                  border: Border.fromBorderSide(IveTokens.hairlineSide),
                 ),
                 child: Icon(icon, size: 24, color: IveTokens.danger),
               ),

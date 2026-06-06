@@ -1,9 +1,9 @@
 /// GO Screen 9 — Batch Operations
 /// Batch transfer creator, payment run manager, bulk approval interface
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../models/go_models.dart';
 import '../providers/go_provider.dart';

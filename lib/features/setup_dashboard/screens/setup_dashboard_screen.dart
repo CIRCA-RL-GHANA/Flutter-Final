@@ -4,9 +4,9 @@
 /// Rows: Operations, Finance & Staff, Logistics, Engagement,
 ///        Branch Identity, Personal & History
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/theme/app_colors.dart';
@@ -158,9 +158,9 @@ class _SetupDashboardScreenState extends State<SetupDashboardScreen> {
 
                 // ─── Empty State ──────────────────────────
                 if (filteredCards.isEmpty && _searchQuery.isNotEmpty)
-                  SliverToBoxAdapter(
+                  const SliverToBoxAdapter(
                     child: Padding(
-                      padding: const EdgeInsets.all(40),
+                      padding: EdgeInsets.all(40),
                       child: SetupEmptyState(
                         icon: Icons.search_off,
                         title: 'No modules found',

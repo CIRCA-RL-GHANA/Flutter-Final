@@ -3,6 +3,7 @@
 /// Tabs: Overview, Staff, Vehicles, Performance
 /// RBAC: Admin(fullAccess), Monitor(viewOnly)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,9 +31,9 @@ class _BranchDetailScreenState extends State<BranchDetailScreen> {
       builder: (context, setupProv, ctxProv, _) {
         final branch = setupProv.selectedBranch;
         if (branch == null) {
-          return Scaffold(
-            appBar: const SetupAppBar(title: 'Branch Detail'),
-            body: const SetupEmptyState(
+          return const Scaffold(
+            appBar: SetupAppBar(title: 'Branch Detail'),
+            body: SetupEmptyState(
               icon: Icons.business,
               title: 'No branch selected',
               subtitle: 'Select a branch from the list',
@@ -194,11 +195,11 @@ class _OverviewTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.info_outline, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Branch Details', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Branch Details', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
               const SizedBox(height: 12),
@@ -287,11 +288,11 @@ class _VehiclesTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.local_shipping, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Fleet Summary', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Fleet Summary', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
               const SizedBox(height: 12),
@@ -320,17 +321,17 @@ class _PerformanceTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.analytics, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Key Metrics', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Key Metrics', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
               const SizedBox(height: 12),
               _PerformanceBar(label: 'Customer Satisfaction', value: branch.rating / 5.0, color: AppColors.success),
               const _PerformanceBar(label: 'Order Fulfillment', value: 0.92, color: kSetupColor),
-              _PerformanceBar(label: 'Staff Efficiency', value: 0.85, color: const Color(0xFF8B5CF6)),
+              const _PerformanceBar(label: 'Staff Efficiency', value: 0.85, color: Color(0xFF8B5CF6)),
               const _PerformanceBar(label: 'Revenue Target', value: 0.78, color: AppColors.warning),
             ],
           ),
@@ -340,11 +341,11 @@ class _PerformanceTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.pie_chart, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Revenue Breakdown', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Revenue Breakdown', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
               const SizedBox(height: 12),

@@ -1,6 +1,7 @@
 /// APRIL Module — Shared Widgets
 /// Personal Assistant & Command Core
 /// Module Color: Gold 0xFFFFD700
+library;
 
 import 'package:flutter/material.dart';
 import '../models/april_models.dart';
@@ -515,7 +516,7 @@ class AprilNotificationCard extends StatelessWidget {
                     return Padding(
                       padding: const EdgeInsets.only(right: 8),
                       child: GestureDetector(
-                        onTap: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${labels[action] ?? action.name}'))),
+                        onTap: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(labels[action] ?? action.name))),
                         child: Text(
                           labels[action] ?? '',
                           style: TextStyle(

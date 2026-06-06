@@ -1,6 +1,7 @@
 /// Alerts Screen 8 — Bulk Alert Management
 /// Bulk assign, status change, tags, export, merge
 /// Progress indicator, undo
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -311,19 +312,19 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
             children: [
               RadioListTile<String>(
                 value: 'newest',
-                groupValue: _mergeStrategy,
+                groupValue: _mergeStrategy, // ignore: deprecated_member_use
                 title: const Text('Keep newest alert', style: TextStyle(fontSize: 13)),
                 subtitle: const Text('Older duplicates will be archived', style: TextStyle(fontSize: 11)),
                 activeColor: kAlertsColor,
-                onChanged: (v) => setState(() => _mergeStrategy = v!),
+                onChanged: (v) => setState(() => _mergeStrategy = v!), // ignore: deprecated_member_use
               ),
               RadioListTile<String>(
                 value: 'oldest',
-                groupValue: _mergeStrategy,
+                groupValue: _mergeStrategy, // ignore: deprecated_member_use
                 title: const Text('Keep oldest alert', style: TextStyle(fontSize: 13)),
                 subtitle: const Text('Newer duplicates will be archived', style: TextStyle(fontSize: 11)),
                 activeColor: kAlertsColor,
-                onChanged: (v) => setState(() => _mergeStrategy = v!),
+                onChanged: (v) => setState(() => _mergeStrategy = v!), // ignore: deprecated_member_use
               ),
             ],
           ),

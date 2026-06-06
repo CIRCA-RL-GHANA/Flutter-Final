@@ -4,6 +4,7 @@
 /// `speech_to_text` package, which is not yet a dependency. Until then
 /// every call here is a deterministic no-op and reports
 /// `unavailable` so the UI can degrade gracefully.
+library;
 
 typedef VoiceTranscriptCallback = void Function(String transcript);
 typedef VoiceStatusCallback = void Function(String status);

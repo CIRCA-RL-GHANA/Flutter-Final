@@ -3,6 +3,7 @@
 /// Master state for the PROMPT screen: widget ordering, notifications,
 /// search, time adaptation, widget data, layout persistence
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
 import 'package:flutter/foundation.dart';
 import '../../../core/services/services.dart';
@@ -26,7 +27,7 @@ class PromptProvider extends ChangeNotifier {
         _orderService = orderService ?? OrderService();
 
   // ─── Global Loading / Error State ───────────────────────────────────────
-  bool _isLoading = false;
+  final bool _isLoading = false;
   bool get isLoading => _isLoading;
 
   String? _error;
@@ -248,7 +249,7 @@ class PromptProvider extends ChangeNotifier {
 
   // ─── Widget Layout / Ordering ─────────────────────────────────────────
   /// Custom module order (persisted per role via SharedPreferences in production)
-  Map<UserRole, List<PromptModule>> _customOrders = {};
+  final Map<UserRole, List<PromptModule>> _customOrders = {};
 
   List<PromptModule> getModuleOrder(UserRole role) {
     if (_customOrders.containsKey(role)) {

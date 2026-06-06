@@ -3,6 +3,7 @@
 /// Critical safety screen: SOS activation, auto-location sharing,
 /// emergency contacts, countdown timer, authorities notification
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,7 +13,6 @@ import '../models/live_models.dart';
 import '../providers/live_provider.dart';
 import '../widgets/live_widgets.dart';
 import '../../../core/services/ai_insights_notifier.dart';
-import '../../../core/routes/app_routes.dart';
 
 class LiveEmergencySOSScreen extends StatefulWidget {
   const LiveEmergencySOSScreen({super.key});
@@ -143,7 +143,7 @@ class _SOSSetupView extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               const Text('LONG PRESS TO ACTIVATE', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: kLiveColor)),
-              Text('Your location will be shared immediately', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+              const Text('Your location will be shared immediately', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
             ],
           ),
         ),
@@ -316,7 +316,7 @@ class _SOSToggle extends StatelessWidget {
       child: Row(
         children: [
           Expanded(child: Text(label, style: const TextStyle(fontSize: 13))),
-          Switch(value: value, onChanged: onChanged, activeColor: kLiveColor, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
+          Switch(value: value, onChanged: onChanged, activeThumbColor: kLiveColor, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
         ],
       ),
     );
@@ -344,7 +344,7 @@ class _ContactItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(contact.name, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-                Text('${contact.type.name} • ${contact.phone}', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                Text('${contact.type.name} • ${contact.phone}', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
               ],
             ),
           ),

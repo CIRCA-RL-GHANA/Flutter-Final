@@ -4,6 +4,7 @@
 /// RBAC: Owner(all), Admin(entity), BM(branch), SO(entity),
 ///        BSO(branch), Monitor/BrMon(view), RO/BRO(limited), Driver(own)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -39,7 +40,7 @@ class QPointsScreen extends StatelessWidget {
                 ),
                 const SizedBox(width: 8),
                 DataScopeIndicator(access: setupProv.getCardAccess('qpoints', ctxProv.currentRole)),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
               ],
             ),
             floatingActionButton: SetupRbacFAB(
@@ -157,17 +158,17 @@ class QPointsScreen extends StatelessWidget {
               ),
 
               // ─── Quick Actions ───────────────────────────
-              SliverToBoxAdapter(
+              const SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
+                  padding: EdgeInsets.fromLTRB(20, 12, 20, 0),
                   child: Row(
                     children: [
                       Expanded(child: _QuickAction(icon: Icons.send, label: 'Transfer', color: kSetupColor)),
-                      const SizedBox(width: 10),
-                      Expanded(child: _QuickAction(icon: Icons.redeem, label: 'Redeem', color: const Color(0xFF8B5CF6))),
-                      const SizedBox(width: 10),
+                      SizedBox(width: 10),
+                      Expanded(child: _QuickAction(icon: Icons.redeem, label: 'Redeem', color: Color(0xFF8B5CF6))),
+                      SizedBox(width: 10),
                       Expanded(child: _QuickAction(icon: Icons.card_giftcard, label: 'Gift', color: AppColors.accent)),
-                      const SizedBox(width: 10),
+                      SizedBox(width: 10),
                       Expanded(child: _QuickAction(icon: Icons.history, label: 'History', color: AppColors.success)),
                     ],
                   ),
@@ -227,10 +228,10 @@ class QPointsScreen extends StatelessWidget {
               ),
 
               // ─── Transaction History ──────────────────────
-              SliverToBoxAdapter(
+              const SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                  child: const SetupSectionTitle(title: 'Transaction History', icon: Icons.history),
+                  padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                  child: SetupSectionTitle(title: 'Transaction History', icon: Icons.history),
                 ),
               ),
 

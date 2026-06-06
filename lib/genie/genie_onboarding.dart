@@ -7,6 +7,7 @@
 ///   • Confusion detection: offer a help lifeline after N failed intents
 ///   • All state persisted in SharedPreferences → tips never repeat once dismissed
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -188,7 +189,7 @@ class GenieOnboarding {
       message: 'I notice you often visit ${_moduleLabel(module)}. '
           'Say "$voiceCommand" next time and I\'ll show you instantly.',
       actionLabel: 'Try it',
-      actionIntent: GenieIntentResolver_staticResolve(voiceCommand),
+      actionIntent: genieIntentResolverStaticResolve(voiceCommand),
     );
   }
 
@@ -234,7 +235,7 @@ class GenieOnboarding {
 
 /// Minimal static resolver shim for the onboarding tips.
 /// Avoids a circular dependency on GenieIntentResolver.
-GenieIntent? GenieIntentResolver_staticResolve(String command) {
+GenieIntent? genieIntentResolverStaticResolve(String command) {
   final t = command.toLowerCase();
   if (t.contains('balance')) {
     return const GenieIntent(module: GenieModule.goPage, action: 'check_balance');

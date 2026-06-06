@@ -1,5 +1,6 @@
 /// Fintech â€º Loans — Loan Application Screen
 /// Shows competing FI offers, lets user apply & tracks repayment progress.
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -134,12 +135,12 @@ class _LoanApplicationScreenState extends State<LoanApplicationScreen>
                 color: _kGold.withValues(alpha: 0.07),
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                 child: Row(children: [
-                  Icon(Icons.auto_awesome, size: 14, color: _kGold),
+                  const Icon(Icons.auto_awesome, size: 14, color: _kGold),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
                       'Genie: ${ai.insights.first['label'] ?? 'Loan tips available'}',
-                      style: TextStyle(fontSize: 11, color: _kGold),
+                      style: const TextStyle(fontSize: 11, color: _kGold),
                       maxLines: 1, overflow: TextOverflow.ellipsis,
                     ),
                   ),
@@ -165,14 +166,14 @@ class _LoanApplicationScreenState extends State<LoanApplicationScreen>
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           const Text('Loan Details', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
           const SizedBox(height: 12),
-          _FieldLabel('Amount (QP)'),
+          const _FieldLabel('Amount (QP)'),
           TextField(
             controller: _amountCtrl,
             keyboardType: TextInputType.number,
             decoration: _inputDecoration('e.g. 1000'),
           ),
           const SizedBox(height: 10),
-          _FieldLabel('Purpose'),
+          const _FieldLabel('Purpose'),
           TextField(
             controller: _purposeCtrl,
             decoration: _inputDecoration('e.g. inventory, equipment'),
@@ -289,7 +290,7 @@ class _LoanRepaymentScreenState extends State<LoanRepaymentScreen> {
         _Card(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             const Text('Outstanding Balance', style: TextStyle(color: Colors.grey, fontSize: 13)),
-            Text('${outstanding} QP', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: _kGold)),
+            Text('$outstanding QP', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: _kGold)),
           ]),
           const SizedBox(height: 8),
           Text('Auto-sweep: $autoSweep% of incoming revenue', style: const TextStyle(fontSize: 12, color: Colors.grey)),

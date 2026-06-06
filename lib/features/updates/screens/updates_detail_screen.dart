@@ -3,6 +3,7 @@
 /// Full update view with engagement metrics, comments module (sort, reply,
 /// nested threads), and quick-compose input.
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -49,10 +50,10 @@ class _BodyState extends State<_Body> {
       builder: (context, prov, _) {
         final update = prov.selectedUpdate;
         if (update == null) {
-          return Scaffold(
+          return const Scaffold(
             backgroundColor: AppColors.backgroundLight,
-            appBar: const UpdatesAppBar(title: 'Update'),
-            body: const UpdatesEmptyState(icon: Icons.article, title: 'Update not found', message: 'This update may have been removed.'),
+            appBar: UpdatesAppBar(title: 'Update'),
+            body: UpdatesEmptyState(icon: Icons.article, title: 'Update not found', message: 'This update may have been removed.'),
           );
         }
 

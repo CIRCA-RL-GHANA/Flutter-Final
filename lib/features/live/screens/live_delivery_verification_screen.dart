@@ -3,6 +3,7 @@
 /// Multi-method verification: PIN entry, photo capture,
 /// signature, biometric, proof of delivery, and confirmation
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -218,7 +219,7 @@ class _PinStep extends StatelessWidget {
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: verified ? const Color(0xFF10B981) : AppColors.textPrimary),
               ),
               const SizedBox(height: 4),
-              Text('Ask the customer for their 4-digit delivery PIN', style: TextStyle(fontSize: 13, color: AppColors.textSecondary), textAlign: TextAlign.center),
+              const Text('Ask the customer for their 4-digit delivery PIN', style: TextStyle(fontSize: 13, color: AppColors.textSecondary), textAlign: TextAlign.center),
             ],
           ),
         ),
@@ -286,7 +287,7 @@ class _PhotoStep extends StatelessWidget {
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: taken ? const Color(0xFF10B981) : AppColors.textPrimary),
               ),
               const SizedBox(height: 4),
-              Text('Take a clear photo of the delivered package', style: TextStyle(fontSize: 13, color: AppColors.textSecondary), textAlign: TextAlign.center),
+              const Text('Take a clear photo of the delivered package', style: TextStyle(fontSize: 13, color: AppColors.textSecondary), textAlign: TextAlign.center),
             ],
           ),
         ),
@@ -299,12 +300,12 @@ class _PhotoStep extends StatelessWidget {
               borderRadius: BorderRadius.circular(14),
               border: Border.all(color: const Color(0xFFE5E7EB), style: BorderStyle.solid, width: 2),
             ),
-            child: Center(
+            child: const Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(Icons.camera_alt, size: 48, color: AppColors.textTertiary),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Text('Tap to capture photo', style: TextStyle(fontSize: 13, color: AppColors.textTertiary)),
                 ],
               ),
@@ -367,7 +368,7 @@ class _SignatureStep extends StatelessWidget {
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: collected ? const Color(0xFF10B981) : AppColors.textPrimary),
               ),
               const SizedBox(height: 4),
-              Text('Have the customer sign below to confirm delivery', style: TextStyle(fontSize: 13, color: AppColors.textSecondary), textAlign: TextAlign.center),
+              const Text('Have the customer sign below to confirm delivery', style: TextStyle(fontSize: 13, color: AppColors.textSecondary), textAlign: TextAlign.center),
             ],
           ),
         ),
@@ -380,7 +381,7 @@ class _SignatureStep extends StatelessWidget {
               borderRadius: BorderRadius.circular(14),
               border: Border.all(color: const Color(0xFF8B5CF6), width: 2),
             ),
-            child: Center(
+            child: const Center(
               child: Text('Sign here', style: TextStyle(fontSize: 16, color: AppColors.textTertiary, fontStyle: FontStyle.italic)),
             ),
           ),
@@ -439,7 +440,7 @@ class _CompletionView extends StatelessWidget {
               const SizedBox(height: 20),
               const Text('ðŸŽ‰ DELIVERY VERIFIED!', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
               const SizedBox(height: 8),
-              Text('Package ${package.id} delivered successfully', style: TextStyle(fontSize: 14, color: AppColors.textSecondary)),
+              Text('Package ${package.id} delivered successfully', style: const TextStyle(fontSize: 14, color: AppColors.textSecondary)),
               const SizedBox(height: 4),
               const Text('All verification steps completed', style: TextStyle(fontSize: 13, color: Color(0xFF10B981), fontWeight: FontWeight.w600)),
               const SizedBox(height: 24),

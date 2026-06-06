@@ -31,7 +31,6 @@ import '../services/chat_service.dart';
 import '../services/orders_service.dart';
 import '../services/localstorage_service.dart';
 import '../services/sync/sync_manager.dart';
-import '../network/api_client.dart';
 
 class AppProviders {
   AppProviders._();

@@ -1,7 +1,8 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// MARKET Widget (Commerce & Logistics)
 /// Visible to: Owner, Administrator only
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -37,7 +38,7 @@ class MarketWidgetContent extends StatelessWidget {
               // Cart badge
               Stack(
                 children: [
-                  Icon(Icons.shopping_cart_outlined, size: 18,
+                  const Icon(Icons.shopping_cart_outlined, size: 18,
                       color: AppColors.textSecondary),
                   Positioned(
                     right: -2,
@@ -85,7 +86,7 @@ class MarketWidgetContent extends StatelessWidget {
           const SizedBox(height: 10),
 
           // Quick Actions
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               _MarketAction(icon: Icons.shopping_bag_outlined, label: 'Shop'),

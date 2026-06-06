@@ -3,6 +3,7 @@
 /// Visible to: Owner, Admin (full), Branch Manager (branch-scoped),
 /// Social Officer (engagement emphasis), Monitor (view-only)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import '../../../../core/routes/app_routes.dart';

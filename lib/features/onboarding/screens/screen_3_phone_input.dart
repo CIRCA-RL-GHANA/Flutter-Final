@@ -15,14 +15,11 @@ import '../widgets/onboarding_header.dart';
 
 
 // OS palette — mirrors splash / welcome
-const Color _kBg        = IveTokens.bg;
 const Color _kSurface   = IveTokens.surface;
-const Color _kBorder    = IveTokens.hairline;
 const Color _kAccent    = IveTokens.accent;
-const Color _kAccentDim = IveTokens.accentPressed;
 const Color _kText      = IveTokens.label;
+// ignore: unused_element
 const Color _kTextDim   = IveTokens.labelSecondary;
-const Color _kTextMuted = IveTokens.labelTertiary;
 /// Screen 3: Phone Number Input (Intelligent)
 /// Frictionless number entry with predictive intelligence
 class PhoneInputScreen extends StatefulWidget {
@@ -157,7 +154,7 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
         content: Text(message),
         backgroundColor: IveTokens.danger,
         behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: IveTokens.brMd),
+        shape: const RoundedRectangleBorder(borderRadius: IveTokens.brMd),
         margin: const EdgeInsets.all(16),
       ),
     );
@@ -283,9 +280,9 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
                                 horizontal: 16,
                                 vertical: 18,
                               ),
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 color: IveTokens.surface,
-                                borderRadius: const BorderRadius.only(
+                                borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(IveTokens.rXs),
                                   bottomLeft: Radius.circular(IveTokens.rXs),
                                 ),
@@ -340,11 +337,11 @@ class _PhoneInputScreenState extends State<PhoneInputScreen>
 
                       // Validation message
                       if (_validationState == _ValidationState.invalid)
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8, left: 4),
+                        const Padding(
+                          padding: EdgeInsets.only(top: 8, left: 4),
                           child: Text(
                             AppStrings.invalidNumber,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 12,
                               color: IveTokens.danger,
                             ),
@@ -928,12 +925,12 @@ class _EmptyResults extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Padding(
-        padding: const EdgeInsets.all(32),
+        padding: EdgeInsets.all(32),
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: const [
+          children: [
             Icon(
               Icons.public_off_rounded,
               size: 40,

@@ -3,6 +3,7 @@
 /// Band list, utilization, vehicle assignment
 /// RBAC: Admin(full), BM(branch), Monitor/BrMon(view)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +31,7 @@ class BandsScreen extends StatelessWidget {
               title: 'Vehicle Bands',
               actions: [
                 DataScopeIndicator(access: setupProv.getCardAccess('vehicle_bands', ctxProv.currentRole)),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
               ],
             ),
             floatingActionButton: SetupRbacFAB(
@@ -135,10 +136,10 @@ class BandsScreen extends StatelessWidget {
                 ),
               ),
 
-              SliverToBoxAdapter(
+              const SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
-                  child: const SetupSectionTitle(title: 'All Bands', icon: Icons.category),
+                  padding: EdgeInsets.fromLTRB(20, 16, 20, 0),
+                  child: SetupSectionTitle(title: 'All Bands', icon: Icons.category),
                 ),
               ),
               // ─── AI Insights ─────────────────────────────────────────
@@ -257,9 +258,9 @@ class _BandCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+              const Text(
                 'Utilization',
-                style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
+                style: TextStyle(fontSize: 12, color: AppColors.textSecondary),
               ),
               Text(
                 '${band.utilization}%',

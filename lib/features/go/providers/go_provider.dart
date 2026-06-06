@@ -1,6 +1,7 @@
 /// GO Module — Provider (State Management)
 /// Comprehensive demo data for all 16 screens
 /// Module Color: Emerald Green (0xFF10B981)
+library;
 
 import 'package:flutter/material.dart';
 import '../models/go_models.dart';
@@ -154,7 +155,7 @@ class GoProvider extends ChangeNotifier {
     const PaymentGateway(id: 'gw-4', name: 'Crypto', status: GatewayStatus.setupRequired, balance: 0, buyRate: 0.09, sellRate: 0.088, minBuy: 0, maxBuy: 999999, minSell: 0, maxSell: 999999, feePercent: 0, processingTime: '~15 min'),
   ];
 
-  List<PaymentGateway> _gateways = [];
+  final List<PaymentGateway> _gateways = [];
 
   List<PaymentGateway> get gateways =>
       _gateways.isNotEmpty ? _gateways : _fallbackGateways;
@@ -463,7 +464,7 @@ class GoProvider extends ChangeNotifier {
     UpcomingEvent(id: 'ev-4', title: 'Monthly financial report', date: DateTime.now().add(const Duration(days: 6)), icon: Icons.assessment, color: const Color(0xFF6B7280)),
   ];
 
-  List<UpcomingEvent> _upcomingEvents = [];
+  final List<UpcomingEvent> _upcomingEvents = [];
 
   List<UpcomingEvent> get upcomingEvents =>
       _upcomingEvents.isNotEmpty ? _upcomingEvents : _fallbackUpcomingEvents;
@@ -478,7 +479,7 @@ class GoProvider extends ChangeNotifier {
     FavoriteEntity(id: 'fav-5', name: 'Jane Smith', handle: '@jane_admin', role: 'Team Lead', category: FavoriteCategory.internal, rating: 5.0, ratingCount: 12, totalSpent: 1500, avgTransaction: 300, transactionCount: 5, favoriteSince: DateTime(2024, 7, 1), lastInteraction: DateTime.now().subtract(const Duration(hours: 2)), isOnline: true, trustScore: 98),
   ];
 
-  List<FavoriteEntity> _favorites = [];
+  final List<FavoriteEntity> _favorites = [];
 
   List<FavoriteEntity> get favorites =>
       _favorites.isNotEmpty ? _favorites : _fallbackFavorites;
@@ -506,7 +507,7 @@ class GoProvider extends ChangeNotifier {
     GoTab(id: 'T-8814', entityName: 'Accra-Mall Branch', entityRole: 'Branch', description: 'Operational Float', status: TabStatus.active, risk: TabRisk.low, creditLimit: 15000, currentBalance: 4500, minimumDue: 1500, dueDate: DateTime.now().add(const Duration(days: 25)), createdAt: DateTime(2024, 1, 15), lastActivity: DateTime.now().subtract(const Duration(days: 3)), onTimePayments: 24, totalPayments: 24, interestRate: 0),
   ];
 
-  List<GoTab> _tabs = [];
+  final List<GoTab> _tabs = [];
 
   List<GoTab> get tabs => _tabs.isNotEmpty ? _tabs : _fallbackTabs;
 
@@ -548,7 +549,7 @@ class GoProvider extends ChangeNotifier {
     GoRequest(id: 'RQC-78897', type: RequestType.tabClosure, status: RequestStatus.rejected, title: 'Close tab T-8815 early', description: 'Requesting early closure due to contract termination.', submittedBy: 'David Lee', submittedAt: DateTime.now().subtract(const Duration(days: 10)), decidedAt: DateTime.now().subtract(const Duration(days: 8)), decidedBy: 'Admin', relatedTabId: 'T-8815', comments: 'Outstanding balance must be settled first'),
   ];
 
-  List<GoRequest> _requests = [];
+  final List<GoRequest> _requests = [];
 
   List<GoRequest> get requests =>
       _requests.isNotEmpty ? _requests : _fallbackRequests;
@@ -564,7 +565,7 @@ class GoProvider extends ChangeNotifier {
     BatchOperation(id: 'BATCH-003', type: BatchActionType.tabSettlement, itemCount: 3, totalAmount: 2800, status: TransactionStatus.processing, createdAt: DateTime.now().subtract(const Duration(hours: 6)), completedItems: 1, failedItems: 0, label: 'Quarterly settlements'),
   ];
 
-  List<BatchOperation> _batchOps = [];
+  final List<BatchOperation> _batchOps = [];
 
   List<BatchOperation> get batchOperations =>
       _batchOps.isNotEmpty ? _batchOps : _fallbackBatchOps;
@@ -578,7 +579,7 @@ class GoProvider extends ChangeNotifier {
     FinancialGoal(id: 'goal-4', title: 'Q4 Revenue Target', type: GoalType.revenue, status: GoalStatus.onTrack, targetAmount: 200000, currentAmount: 158000, targetDate: DateTime(2025, 12, 31), createdAt: DateTime(2024, 1, 1)),
   ];
 
-  List<FinancialGoal> _goals = [];
+  final List<FinancialGoal> _goals = [];
 
   List<FinancialGoal> get goals =>
       _goals.isNotEmpty ? _goals : _fallbackGoals;
@@ -591,7 +592,7 @@ class GoProvider extends ChangeNotifier {
     const BudgetCategory(id: 'bud-5', name: 'Maintenance', allocated: 8000, spent: 6100, icon: Icons.build, color: Color(0xFF6366F1)),
   ];
 
-  List<BudgetCategory> _budgets = [];
+  final List<BudgetCategory> _budgets = [];
 
   List<BudgetCategory> get budgets =>
       _budgets.isNotEmpty ? _budgets : _fallbackBudgets;
@@ -615,7 +616,7 @@ class GoProvider extends ChangeNotifier {
     TaxEntry(id: 'tax-5', transactionId: 'TX-4616', description: 'Batch Payroll', category: TaxCategory.expense, amount: 4500, date: DateTime.now().subtract(const Duration(days: 4)), isCategorized: true, taxCode: 'EXP-003'),
   ];
 
-  List<TaxEntry> _taxEntries = [];
+  final List<TaxEntry> _taxEntries = [];
 
   List<TaxEntry> get taxEntries =>
       _taxEntries.isNotEmpty ? _taxEntries : _fallbackTaxEntries;
@@ -630,7 +631,7 @@ class GoProvider extends ChangeNotifier {
     ComplianceCheck(id: 'cc-5', title: 'Gateway PCI Compliance', description: 'Payment gateway security certification', status: ComplianceStatus.pending, deadline: DateTime.now().add(const Duration(days: 45))),
   ];
 
-  List<ComplianceCheck> _complianceChecks = [];
+  final List<ComplianceCheck> _complianceChecks = [];
 
   List<ComplianceCheck> get complianceChecks =>
       _complianceChecks.isNotEmpty ? _complianceChecks : _fallbackComplianceChecks;
@@ -644,7 +645,7 @@ class GoProvider extends ChangeNotifier {
     GeneratedReport(id: 'rpt-4', title: 'Weekly Transaction Summary', type: ReportType.custom, format: ReportFormat.csv, generatedAt: DateTime.now().subtract(const Duration(days: 1)), period: 'This Week', fileSize: 0.5, isScheduled: true),
   ];
 
-  List<GeneratedReport> _reports = [];
+  final List<GeneratedReport> _reports = [];
 
   List<GeneratedReport> get reports =>
       _reports.isNotEmpty ? _reports : _fallbackReports;
@@ -660,7 +661,7 @@ class GoProvider extends ChangeNotifier {
     AuditEntry(id: 'aud-6', action: 'Tab T-8817 settled in full', actor: 'System', timestamp: DateTime.now().subtract(const Duration(days: 10)), severity: AuditSeverity.info),
   ];
 
-  List<AuditEntry> _auditEntries = [];
+  final List<AuditEntry> _auditEntries = [];
 
   List<AuditEntry> get auditEntries =>
       _auditEntries.isNotEmpty ? _auditEntries : _fallbackAuditEntries;
@@ -683,14 +684,14 @@ class GoProvider extends ChangeNotifier {
 
   static final List<GoIntegration> _fallbackIntegrations = [
     GoIntegration(id: 'int-1', name: 'QuickBooks', category: IntegrationCategory.accounting, status: IntegrationStatus.connected, description: 'Auto-sync transactions & invoices', lastSync: DateTime.now().subtract(const Duration(hours: 1)), icon: Icons.receipt_long),
-    GoIntegration(id: 'int-2', name: 'Xero', category: IntegrationCategory.accounting, status: IntegrationStatus.disconnected, description: 'Cloud accounting platform', icon: Icons.cloud),
+    const GoIntegration(id: 'int-2', name: 'Xero', category: IntegrationCategory.accounting, status: IntegrationStatus.disconnected, description: 'Cloud accounting platform', icon: Icons.cloud),
     GoIntegration(id: 'int-3', name: 'GCB Bank API', category: IntegrationCategory.banking, status: IntegrationStatus.connected, description: 'Direct bank transfers & reconciliation', lastSync: DateTime.now().subtract(const Duration(minutes: 30)), icon: Icons.account_balance),
     GoIntegration(id: 'int-4', name: 'Paystack API', category: IntegrationCategory.banking, status: IntegrationStatus.connected, description: 'Payment gateway integration', lastSync: DateTime.now().subtract(const Duration(minutes: 5)), icon: Icons.payment),
-    GoIntegration(id: 'int-5', name: 'Salesforce CRM', category: IntegrationCategory.business, status: IntegrationStatus.error, description: 'Customer relationship management', errorCount: 3, icon: Icons.people),
-    GoIntegration(id: 'int-6', name: 'Custom Webhook', category: IntegrationCategory.custom, status: IntegrationStatus.configuring, description: 'Custom API endpoint for events', icon: Icons.webhook),
+    const GoIntegration(id: 'int-5', name: 'Salesforce CRM', category: IntegrationCategory.business, status: IntegrationStatus.error, description: 'Customer relationship management', errorCount: 3, icon: Icons.people),
+    const GoIntegration(id: 'int-6', name: 'Custom Webhook', category: IntegrationCategory.custom, status: IntegrationStatus.configuring, description: 'Custom API endpoint for events', icon: Icons.webhook),
   ];
 
-  List<GoIntegration> _integrations = [];
+  final List<GoIntegration> _integrations = [];
 
   List<GoIntegration> get integrations =>
       _integrations.isNotEmpty ? _integrations : _fallbackIntegrations;
@@ -705,7 +706,7 @@ class GoProvider extends ChangeNotifier {
     ArchivedRecord(id: 'arc-3', title: 'FY 2022 Complete Archive', type: 'Full Archive', archivedAt: DateTime(2023, 2, 1), period: 'Jan-Dec 2022', transactionCount: 980, totalValue: 620000, isOnLegalHold: true),
   ];
 
-  List<ArchivedRecord> _archives = [];
+  final List<ArchivedRecord> _archives = [];
 
   List<ArchivedRecord> get archives =>
       _archives.isNotEmpty ? _archives : _fallbackArchives;
@@ -717,7 +718,7 @@ class GoProvider extends ChangeNotifier {
     RateAlert(id: 'ra-2', targetRate: 0.075, channel: RateAlertChannel.email, isActive: true),
   ];
 
-  List<RateAlert> _rateAlerts = [];
+  final List<RateAlert> _rateAlerts = [];
 
   List<RateAlert> get rateAlerts =>
       _rateAlerts.isNotEmpty ? _rateAlerts : _fallbackRateAlerts;
@@ -731,7 +732,7 @@ class GoProvider extends ChangeNotifier {
     FinancialInsight(id: 'ins-4', text: 'Anomaly: Unusual transfer pattern detected', icon: Icons.warning_amber, isActionable: true, actionLabel: 'Review'),
   ];
 
-  List<FinancialInsight> _insights = [];
+  final List<FinancialInsight> _insights = [];
 
   List<FinancialInsight> get insights =>
       _insights.isNotEmpty ? _insights : _fallbackInsights;
@@ -745,7 +746,7 @@ class GoProvider extends ChangeNotifier {
     FundingSource(id: 'fs-4', label: 'Mobile Money', type: FundingSourceType.mobileMoney, lastFour: '7890'),
   ];
 
-  List<FundingSource> _fundingSources = [];
+  final List<FundingSource> _fundingSources = [];
 
   List<FundingSource> get fundingSources =>
       _fundingSources.isNotEmpty ? _fundingSources : _fallbackFundingSources;
@@ -756,7 +757,7 @@ class GoProvider extends ChangeNotifier {
   double get syncProgress => _syncProgress;
   void setSyncProgress(double v) { _syncProgress = v; notifyListeners(); }
 
-  String _financialPeriod = 'Q3 2024 • Week 32';
+  final String _financialPeriod = 'Q3 2024 • Week 32';
   String get financialPeriod => _financialPeriod;
 
   // ──── BUY/SELL/TRANSFER STATE ────────────────────────────────

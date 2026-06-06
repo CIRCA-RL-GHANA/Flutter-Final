@@ -3,6 +3,7 @@
 /// Adaptive detail view; UI surface adapts to community type.
 /// Theater â†’ linked asset; Hangout â†’ event date/location; Fair â†’ listings, etc.
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +11,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../providers/community_provider.dart';
-import 'community_hub_screen.dart' show kCommunityColor, kCommunityColorDark, kCommunityArchetypes;
+import 'community_hub_screen.dart' show kCommunityArchetypes;
 
 class CommunityDetailScreen extends StatefulWidget {
   final Map<String, dynamic>? community;
@@ -57,8 +58,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> with Sing
   Widget build(BuildContext context) {
     return Consumer2<AIInsightsNotifier, CommunityProvider>(
       builder: (context, ai, community, _) {
-        final communityId = _comm['id'] as String?;
-        final posts = communityId != null ? (community.postsCache[communityId] ?? []) : [];
+        final _ = _comm['id'] as String?;
         return Scaffold(
           backgroundColor: AppColors.backgroundLight,
           body: NestedScrollView(
@@ -285,11 +285,11 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> with Sing
           ],
           const SizedBox(height: 8),
           Row(children: [
-            Icon(Icons.favorite_border, size: 16, color: AppColors.textTertiary),
+            const Icon(Icons.favorite_border, size: 16, color: AppColors.textTertiary),
             const SizedBox(width: 4),
             Text('$likesCount', style: const TextStyle(fontSize: 12, color: AppColors.textTertiary)),
             const SizedBox(width: 16),
-            Icon(Icons.comment_outlined, size: 16, color: AppColors.textTertiary),
+            const Icon(Icons.comment_outlined, size: 16, color: AppColors.textTertiary),
             const SizedBox(width: 4),
             Text('$commentsCount', style: const TextStyle(fontSize: 12, color: AppColors.textTertiary)),
           ]),

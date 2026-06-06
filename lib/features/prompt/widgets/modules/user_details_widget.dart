@@ -2,6 +2,7 @@
 /// USER DETAILS Widget (Profile & Entities)
 /// Visible to: ALL roles
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -154,11 +155,11 @@ class UserDetailsWidgetContent extends StatelessWidget {
               color: AppColors.success.withValues(alpha: 0.06),
               borderRadius: BorderRadius.circular(6),
             ),
-            child: Row(
+            child: const Row(
               children: [
                 Icon(Icons.shield, size: 12, color: AppColors.success),
-                const SizedBox(width: 4),
-                const Expanded(
+                SizedBox(width: 4),
+                Expanded(
                   child: Text(
                     '2FA on • Last login: Today',
                     style: TextStyle(fontSize: 9, color: AppColors.textTertiary),

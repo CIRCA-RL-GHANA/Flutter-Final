@@ -4,6 +4,7 @@
 /// RBAC: Owner(personal), Admin(entity), BM(branch), SO(entity),
 ///        BSO(branch), Monitor/BrMon(view), RO/BRO(view), Driver(own)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -32,7 +33,7 @@ class InterestsScreen extends StatelessWidget {
               title: 'Interests',
               actions: [
                 DataScopeIndicator(access: setupProv.getCardAccess('interests', ctxProv.currentRole)),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
               ],
             ),
             floatingActionButton: SetupRbacFAB(
@@ -116,10 +117,10 @@ class InterestsScreen extends StatelessWidget {
               ),
 
               // ─── Interest Grid ────────────────────────────
-              SliverToBoxAdapter(
+              const SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
-                  child: const SetupSectionTitle(title: 'Your Interests', icon: Icons.interests),
+                  padding: EdgeInsets.fromLTRB(20, 16, 20, 0),
+                  child: SetupSectionTitle(title: 'Your Interests', icon: Icons.interests),
                 ),
               ),
 
@@ -172,10 +173,10 @@ class InterestsScreen extends StatelessWidget {
 
               // ─── Recommendations ──────────────────────────
               if (recommendations.isNotEmpty) ...[
-                SliverToBoxAdapter(
+                const SliverToBoxAdapter(
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                    child: const SetupSectionTitle(
+                    padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                    child: SetupSectionTitle(
                       title: 'Recommended For You',
                       icon: Icons.auto_awesome,
                       iconColor: Color(0xFF8B5CF6),

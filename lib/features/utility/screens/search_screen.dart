@@ -3,6 +3,7 @@
 /// Cross-module search with category filters, recent searches,
 /// quick suggestions, real-time results
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -144,12 +145,12 @@ class _SearchScreenState extends State<SearchScreen> {
                       if (q.isNotEmpty) prov.addRecentSearch(q);
                     },
 
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'Search everything...',
-                      hintStyle: const TextStyle(color: AppColors.textTertiary, fontSize: 15),
-                      prefixIcon: const Icon(Icons.search, color: AppColors.textTertiary),
+                      hintStyle: TextStyle(color: AppColors.textTertiary, fontSize: 15),
+                      prefixIcon: Icon(Icons.search, color: AppColors.textTertiary),
                       border: InputBorder.none,
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                      contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                     ),
                   ),
                 ),
@@ -322,8 +323,8 @@ class _AISearchBanner extends StatelessWidget {
           color: const Color(0xFF8B5CF6).withValues(alpha: 0.05),
           borderRadius: BorderRadius.circular(10),
         ),
-        child: Row(
-          children: const [
+        child: const Row(
+          children: [
             SizedBox(
               width: 14, height: 14,
               child: CircularProgressIndicator(strokeWidth: 1.5, color: Color(0xFF8B5CF6)),
@@ -407,7 +408,7 @@ class _SearchResults extends StatelessWidget {
       separatorBuilder: (_, __) => const SizedBox(height: 8),
       itemBuilder: (context, i) {
         final result = sorted[i];
-        final isAITop = aiRankedIds.isNotEmpty && aiRankedIds.indexOf(result.title) < 3 && aiRankedIds.indexOf(result.title) != -1;
+        final isAITop = aiRankedIds.isNotEmpty && aiRankedIds.indexOf(result.title) < 3 && aiRankedIds.contains(result.title);
         return UtilitySectionCard(
           onTap: result.route != null
               ? () => Navigator.pushNamed(context, result.route!)

@@ -1,5 +1,6 @@
 /// qualChat Screen 2 — Hey Ya (Owner Only)
 /// Dating feature: express romantic interest, get AI-matched, plan a date
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -55,11 +56,11 @@ class QualChatHeyYasScreen extends StatelessWidget {
                 width: double.infinity,
                 color: kChatSocial.withValues(alpha: 0.08),
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                child: Row(
+                child: const Row(
                   children: [
-                    const Text('ðŸ’˜', style: TextStyle(fontSize: 16)),
-                    const SizedBox(width: 8),
-                    const Expanded(
+                    Text('ðŸ’˜', style: TextStyle(fontSize: 16)),
+                    SizedBox(width: 8),
+                    Expanded(
                       child: Text(
                         'Spark interest Â· Get matched by Genie AI Â· Plan your date',
                         style: TextStyle(
@@ -181,9 +182,9 @@ class QualChatHeyYasScreen extends StatelessWidget {
           // Sticky footer
           bottomNavigationBar: Container(
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
-              border: Border(top: BorderSide(color: const Color(0xFFE5E7EB))),
+              border: Border(top: BorderSide(color: Color(0xFFE5E7EB))),
             ),
             child: Row(
               children: [

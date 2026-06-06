@@ -5,6 +5,7 @@
 /// Uses a priority-ordered list of pattern sets per module. ~200 built-in
 /// intents covering all platform actions. Fully offline, no server call.
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
 import 'genie_intent.dart';
 
@@ -562,7 +563,7 @@ class GenieIntentResolver {
 
   static String _extractSearchQuery(String t) {
     return t
-        .replaceFirst(RegExp(r"search for|find |look for |search "), '')
+        .replaceFirst(RegExp(r'search for|find |look for |search '), '')
         .trim();
   }
 }

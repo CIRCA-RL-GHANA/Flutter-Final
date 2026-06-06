@@ -14,6 +14,7 @@
 ///   • SOS button visibility
 ///   • Tooltip messages for locked / view-only UI elements
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
 import '../../prompt/models/rbac_models.dart';
 

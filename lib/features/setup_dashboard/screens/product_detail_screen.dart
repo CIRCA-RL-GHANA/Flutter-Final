@@ -4,6 +4,7 @@
 /// RBAC: Owner/Admin(fullAccess), BM(branchScoped), Monitor(viewOnly),
 ///        Driver(viewOnly), Others(hidden)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -33,9 +34,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       builder: (context, setupProv, ctxProv, _) {
         final product = setupProv.selectedProduct;
         if (product == null) {
-          return Scaffold(
-            appBar: const SetupAppBar(title: 'Product Detail'),
-            body: const SetupEmptyState(
+          return const Scaffold(
+            appBar: SetupAppBar(title: 'Product Detail'),
+            body: SetupEmptyState(
               icon: Icons.inventory_2,
               title: 'No product selected',
               subtitle: 'Select a product from the list',
@@ -260,11 +261,11 @@ class _OverviewTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.info_outline, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Product Details', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Product Details', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
               const SizedBox(height: 12),
@@ -284,11 +285,11 @@ class _OverviewTab extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
+                const Row(
                   children: [
                     Icon(Icons.label_outline, size: 18, color: kSetupColor),
-                    const SizedBox(width: 8),
-                    const Text('Tags', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                    SizedBox(width: 8),
+                    Text('Tags', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                   ],
                 ),
                 const SizedBox(height: 12),
@@ -328,11 +329,11 @@ class _InventoryTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.analytics_outlined, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Stock Level', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Stock Level', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
               const SizedBox(height: 12),
@@ -368,11 +369,11 @@ class _InventoryTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.refresh, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Reorder Info', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Reorder Info', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
               const SizedBox(height: 12),
@@ -406,11 +407,11 @@ class _PricingTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.attach_money, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Price Details', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Price Details', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
               const SizedBox(height: 12),
@@ -435,11 +436,11 @@ class _PricingTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.timeline, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Price History', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Price History', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
               const SizedBox(height: 12),
@@ -513,11 +514,11 @@ class _MediaTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.photo_library, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Product Images', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Product Images', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
               const SizedBox(height: 12),
@@ -544,19 +545,19 @@ class _MediaTab extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 12),
-        SetupSectionCard(
+        const SetupSectionCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
                   Icon(Icons.videocam, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Product Videos', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Product Videos', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
-              const SizedBox(height: 12),
-              const SetupEmptyState(
+              SizedBox(height: 12),
+              SetupEmptyState(
                 icon: Icons.videocam_off,
                 title: 'No videos yet',
                 subtitle: 'Add product demo videos',
@@ -581,13 +582,13 @@ class _AnalyticsTab extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 100),
       children: [
         // Performance KPIs
-        Row(
+        const Row(
           children: [
             Expanded(child: SetupStatCard(label: 'Views', value: '2.4K', icon: Icons.visibility, color: kSetupColor)),
-            const SizedBox(width: 10),
+            SizedBox(width: 10),
             Expanded(child: SetupStatCard(label: 'Conversion', value: '12%', icon: Icons.trending_up, color: AppColors.success)),
-            const SizedBox(width: 10),
-            Expanded(child: SetupStatCard(label: 'Revenue', value: 'â‚µ42K', icon: Icons.attach_money, color: const Color(0xFF8B5CF6))),
+            SizedBox(width: 10),
+            Expanded(child: SetupStatCard(label: 'Revenue', value: 'â‚µ42K', icon: Icons.attach_money, color: Color(0xFF8B5CF6))),
           ],
         ),
         const SizedBox(height: 16),
@@ -595,11 +596,11 @@ class _AnalyticsTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.trending_up, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Sales Trend', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Sales Trend', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
               const SizedBox(height: 12),
@@ -614,21 +615,21 @@ class _AnalyticsTab extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 12),
-        SetupSectionCard(
+        const SetupSectionCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
                   Icon(Icons.people, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Top Buyers', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Top Buyers', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
-              const SizedBox(height: 12),
-              const _BuyerRow(name: 'John Smith', purchases: 12, amount: 5400),
-              const _BuyerRow(name: 'Sarah Johnson', purchases: 8, amount: 3200),
-              const _BuyerRow(name: 'Mike Chen', purchases: 6, amount: 2100),
+              SizedBox(height: 12),
+              _BuyerRow(name: 'John Smith', purchases: 12, amount: 5400),
+              _BuyerRow(name: 'Sarah Johnson', purchases: 8, amount: 3200),
+              _BuyerRow(name: 'Mike Chen', purchases: 6, amount: 2100),
             ],
           ),
         ),

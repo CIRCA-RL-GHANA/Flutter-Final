@@ -2,6 +2,7 @@
 /// MARKET MODULE — Screen 3.1: Product Filters
 /// Advanced product filtering: price, dietary, availability, category
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -68,7 +69,7 @@ class _MarketProductFiltersScreenState extends State<MarketProductFiltersScreen>
                 },
               ),
               // Price range
-              _SectionHeader(title: 'Price Range', icon: Icons.attach_money),
+              const _SectionHeader(title: 'Price Range', icon: Icons.attach_money),
               const SizedBox(height: 8),
               Card(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
@@ -117,7 +118,7 @@ class _MarketProductFiltersScreenState extends State<MarketProductFiltersScreen>
               const SizedBox(height: 20),
 
               // Dietary preferences
-              _SectionHeader(title: 'Dietary Preferences', icon: Icons.eco),
+              const _SectionHeader(title: 'Dietary Preferences', icon: Icons.eco),
               const SizedBox(height: 8),
               Card(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
@@ -159,7 +160,7 @@ class _MarketProductFiltersScreenState extends State<MarketProductFiltersScreen>
               const SizedBox(height: 20),
 
               // Availability
-              _SectionHeader(title: 'Availability', icon: Icons.inventory),
+              const _SectionHeader(title: 'Availability', icon: Icons.inventory),
               const SizedBox(height: 8),
               Card(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
@@ -189,7 +190,7 @@ class _MarketProductFiltersScreenState extends State<MarketProductFiltersScreen>
               const SizedBox(height: 20),
 
               // Rating
-              _SectionHeader(title: 'Minimum Rating', icon: Icons.star),
+              const _SectionHeader(title: 'Minimum Rating', icon: Icons.star),
               const SizedBox(height: 8),
               Card(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
@@ -219,7 +220,7 @@ class _MarketProductFiltersScreenState extends State<MarketProductFiltersScreen>
               const SizedBox(height: 20),
 
               // Toggles
-              _SectionHeader(title: 'More Options', icon: Icons.settings),
+              const _SectionHeader(title: 'More Options', icon: Icons.settings),
               const SizedBox(height: 8),
               Card(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
@@ -231,7 +232,7 @@ class _MarketProductFiltersScreenState extends State<MarketProductFiltersScreen>
                       title: const Text('Discounted only', style: TextStyle(fontSize: 14)),
                       subtitle: const Text('Show only items on sale', style: TextStyle(fontSize: 12)),
                       value: _discountedOnly,
-                      activeColor: kMarketColor,
+                      activeThumbColor: kMarketColor,
                       onChanged: (v) => setState(() => _discountedOnly = v),
                     ),
                     const Divider(height: 0, indent: 16, endIndent: 16),
@@ -239,7 +240,7 @@ class _MarketProductFiltersScreenState extends State<MarketProductFiltersScreen>
                       title: const Text('Organic only', style: TextStyle(fontSize: 14)),
                       subtitle: const Text('Certified organic products', style: TextStyle(fontSize: 12)),
                       value: _organicOnly,
-                      activeColor: kMarketColor,
+                      activeThumbColor: kMarketColor,
                       onChanged: (v) => setState(() => _organicOnly = v),
                     ),
                     const Divider(height: 0, indent: 16, endIndent: 16),
@@ -247,7 +248,7 @@ class _MarketProductFiltersScreenState extends State<MarketProductFiltersScreen>
                       title: const Text('Locally sourced', style: TextStyle(fontSize: 14)),
                       subtitle: const Text('Products from local producers', style: TextStyle(fontSize: 12)),
                       value: _localOnly,
-                      activeColor: kMarketColor,
+                      activeThumbColor: kMarketColor,
                       onChanged: (v) => setState(() => _localOnly = v),
                     ),
                   ],
@@ -294,7 +295,7 @@ class _MarketProductFiltersScreenState extends State<MarketProductFiltersScreen>
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       elevation: 0,
                     ),
-                    child: Text('Apply Filters (${_activeCount})'),
+                    child: Text('Apply Filters ($_activeCount)'),
                   ),
                 ),
               ],

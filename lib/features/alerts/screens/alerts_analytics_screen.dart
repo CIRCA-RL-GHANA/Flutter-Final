@@ -1,6 +1,7 @@
 /// Alerts Screen 6 — Analytics Dashboard
 /// Volume trends, SLA compliance, category distribution,
 /// team workload, resolver leaderboard
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -150,14 +151,14 @@ class AlertsAnalyticsScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 12),
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const _LegendDot(color: kAlertsResolved, label: 'On Track'),
-                          const SizedBox(width: 16),
-                          const _LegendDot(color: kAlertsWarning, label: 'At Risk'),
-                          const SizedBox(width: 16),
-                          const _LegendDot(color: kAlertsColor, label: 'Breached'),
+                          _LegendDot(color: kAlertsResolved, label: 'On Track'),
+                          SizedBox(width: 16),
+                          _LegendDot(color: kAlertsWarning, label: 'At Risk'),
+                          SizedBox(width: 16),
+                          _LegendDot(color: kAlertsColor, label: 'Breached'),
                         ],
                       ),
                     ],

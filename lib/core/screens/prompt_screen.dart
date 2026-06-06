@@ -3,11 +3,11 @@
 /// Role-adaptive dashboard with 10 module widgets, global header, RBAC,
 /// responsive grid layout, time-based adaptation
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import '../services/ai_insights_notifier.dart';
 import '../../features/onboarding/providers/onboarding_provider.dart';
 import '../../features/prompt/models/rbac_models.dart';
 import '../../features/prompt/providers/context_provider.dart';
@@ -506,12 +506,12 @@ class _PromptScreenState extends State<PromptScreen> {
       context: context,
       barrierDismissible: false,
       builder: (ctx) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: IveTokens.brLg),
-        title: Row(
+        shape: const RoundedRectangleBorder(borderRadius: IveTokens.brLg),
+        title: const Row(
           children: [
             Icon(Icons.sos, color: AppColors.error, size: 24),
-            const SizedBox(width: 8),
-            const Text('Emergency SOS'),
+            SizedBox(width: 8),
+            Text('Emergency SOS'),
           ],
         ),
         content: const Text(
@@ -557,7 +557,7 @@ class _AddEntityFAB extends StatelessWidget {
       backgroundColor: AppColors.primary,
       foregroundColor: Colors.white,
       elevation: 4,
-      shape: RoundedRectangleBorder(borderRadius: IveTokens.brLg),
+      shape: const RoundedRectangleBorder(borderRadius: IveTokens.brLg),
     );
   }
 }

@@ -2,6 +2,7 @@
 /// MARKET MODULE — Screen 11: Ride Hailing & Execution
 /// 6 Parts: Request â†’ Matching â†’ Active â†’ In-Ride â†’ Arrival â†’ Post-Ride
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -158,7 +159,7 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
                                   controller: _pickupController,
                                   decoration: InputDecoration(
                                     hintText: 'Pickup location',
-                                    hintStyle: TextStyle(fontSize: 13, color: AppColors.textTertiary),
+                                    hintStyle: const TextStyle(fontSize: 13, color: AppColors.textTertiary),
                                     prefixIcon: const Icon(Icons.my_location, size: 18, color: kMarketColor),
                                     border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                                     focusedBorder: OutlineInputBorder(
@@ -175,7 +176,7 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
                                   controller: _dropoffController,
                                   decoration: InputDecoration(
                                     hintText: 'Where to?',
-                                    hintStyle: TextStyle(fontSize: 13, color: AppColors.textTertiary),
+                                    hintStyle: const TextStyle(fontSize: 13, color: AppColors.textTertiary),
                                     prefixIcon: const Icon(Icons.location_on, size: 18, color: AppColors.error),
                                     border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                                     focusedBorder: OutlineInputBorder(
@@ -237,7 +238,7 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
                               ),
                               Text(
                                 _rideTypeDesc(type),
-                                style: TextStyle(fontSize: 11, color: AppColors.textTertiary),
+                                style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                               ),
                             ],
                           ),
@@ -352,7 +353,7 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 8),
-            Text(
+            const Text(
               'This usually takes less than a minute',
               style: TextStyle(fontSize: 14, color: AppColors.textSecondary),
             ),
@@ -496,7 +497,7 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
                               const SizedBox(width: 8),
                               Text(
                                 ride.vehiclePlate ?? 'ABC-1234',
-                                style: TextStyle(fontSize: 12, color: AppColors.textTertiary),
+                                style: const TextStyle(fontSize: 12, color: AppColors.textTertiary),
                               ),
                             ],
                           ),
@@ -733,7 +734,7 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
               Text(
                 ride.destinationAddress,
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 14, color: AppColors.textSecondary),
+                style: const TextStyle(fontSize: 14, color: AppColors.textSecondary),
               ),
               const SizedBox(height: 24),
               // Fare summary
@@ -852,7 +853,7 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
                     selectedColor: kMarketColorLight,
                     onSelected: (_) {},
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                    side: BorderSide(color: AppColors.inputBorder),
+                    side: const BorderSide(color: AppColors.inputBorder),
                   );
                 }).toList(),
               ),
@@ -862,7 +863,7 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
                 maxLines: 3,
                 decoration: InputDecoration(
                   hintText: 'Leave a comment (optional)',
-                  hintStyle: TextStyle(fontSize: 13, color: AppColors.textTertiary),
+                  hintStyle: const TextStyle(fontSize: 13, color: AppColors.textTertiary),
                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -875,16 +876,16 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
               // Tip
               const Text('Add a tip?', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
               const SizedBox(height: 8),
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const _TipButton(label: '\$1'),
-                  const SizedBox(width: 12),
-                  const _TipButton(label: '\$2'),
-                  const SizedBox(width: 12),
-                  const _TipButton(label: '\$5'),
-                  const SizedBox(width: 12),
-                  const _TipButton(label: 'Other'),
+                  _TipButton(label: '\$1'),
+                  SizedBox(width: 12),
+                  _TipButton(label: '\$2'),
+                  SizedBox(width: 12),
+                  _TipButton(label: '\$5'),
+                  SizedBox(width: 12),
+                  _TipButton(label: 'Other'),
                 ],
               ),
               const Spacer(),
@@ -984,7 +985,7 @@ class _RideInfoPill extends StatelessWidget {
         Icon(icon, size: 20, color: kMarketColor),
         const SizedBox(height: 4),
         Text(value, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
-        Text(label, style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+        Text(label, style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
       ],
     );
   }

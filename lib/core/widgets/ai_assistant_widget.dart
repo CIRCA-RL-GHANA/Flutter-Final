@@ -29,7 +29,6 @@ class _AIAssistantWidgetState extends State<AIAssistantWidget>
   final TextEditingController _controller = TextEditingController();
   final ScrollController _scrollController = ScrollController();
   late final AnimationController _animCtrl;
-  late final Animation<double> _scaleAnim;
 
   @override
   void initState() {
@@ -37,10 +36,6 @@ class _AIAssistantWidgetState extends State<AIAssistantWidget>
     _animCtrl = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 250),
-    );
-    _scaleAnim = CurvedAnimation(
-      parent: _animCtrl,
-      curve: Curves.easeOutBack,
     );
   }
 

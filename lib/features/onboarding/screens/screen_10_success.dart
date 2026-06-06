@@ -9,12 +9,19 @@ import '../providers/onboarding_provider.dart';
 import '../widgets/buttons.dart';
 
 // OS palette — mirrors splash / welcome
+// ignore: unused_element
 const Color _kBg        = IveTokens.bg;
+// ignore: unused_element
 const Color _kSurface   = IveTokens.surface;
+// ignore: unused_element
 const Color _kBorder    = IveTokens.hairline;
+// ignore: unused_element
 const Color _kAccent    = IveTokens.accent;
+// ignore: unused_element
 const Color _kAccentDim = IveTokens.accentPressed;
+// ignore: unused_element
 const Color _kText      = IveTokens.label;
+// ignore: unused_element
 const Color _kTextDim   = IveTokens.labelSecondary;
 
 // Confetti in OS accent palette
@@ -220,7 +227,7 @@ class _SuccessScreenState extends State<SuccessScreen>
                               textAlign: TextAlign.center,
                             ),
                             const SizedBox(height: 8),
-                            Text(
+                            const Text(
                               AppStrings.accountReady,
                               style: TextStyle(
                                 fontSize: 16,
@@ -350,7 +357,7 @@ class _SuccessScreenState extends State<SuccessScreen>
                   // Support link
                   FadeTransition(
                     opacity: _cardsOpacity,
-                    child: Text(
+                    child: const Text(
                       AppStrings.needHelp,
                       style: TextStyle(
                         fontSize: 12,
@@ -408,7 +415,7 @@ class _FeatureCard extends StatelessWidget {
           const SizedBox(height: 4),
           Text(
             subtitle,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14,
               color: IveTokens.labelSecondary,
             ),

@@ -5,6 +5,7 @@
 ///
 /// Migrated from hardcoded demo data to real API calls with fallback.
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
 import 'package:flutter/material.dart';
 import '../models/market_models.dart';

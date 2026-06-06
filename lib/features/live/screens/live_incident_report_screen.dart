@@ -3,6 +3,7 @@
 /// Structured incident report: type/severity selection, description,
 /// photo evidence, location tagging, submission flow
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -215,7 +216,7 @@ class _TypeSeverityStep extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(info.$2, style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: isSelected ? kLiveColor : AppColors.textPrimary)),
-                            Text(info.$3, style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                            Text(info.$3, style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                           ],
                         ),
                       ),
@@ -259,7 +260,7 @@ class _TypeSeverityStep extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(info.$1, style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: isSelected ? info.$3 : AppColors.textPrimary)),
-                            Text(info.$2, style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                            Text(info.$2, style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                           ],
                         ),
                       ),
@@ -348,7 +349,7 @@ class _DetailsStep extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('$photoCount photo(s) attached', style: TextStyle(fontSize: 12, color: AppColors.textTertiary)),
+              Text('$photoCount photo(s) attached', style: const TextStyle(fontSize: 12, color: AppColors.textTertiary)),
               const SizedBox(height: 8),
               Row(
                 children: [
@@ -389,16 +390,16 @@ class _DetailsStep extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Expanded(
+                  const Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Tag current location', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
+                        Text('Tag current location', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
                         Text('GPS coordinates will be recorded', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                       ],
                     ),
                   ),
-                  Switch(value: locationTagged, onChanged: onLocationTaggedChanged, activeColor: kLiveColor),
+                  Switch(value: locationTagged, onChanged: onLocationTaggedChanged, activeThumbColor: kLiveColor),
                 ],
               ),
               if (locationTagged)
@@ -524,7 +525,7 @@ class _SubmittedView extends StatelessWidget {
             const SizedBox(height: 8),
             Text('Incident #INC-${DateTime.now().millisecondsSinceEpoch % 10000}', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: kLiveColor)),
             const SizedBox(height: 8),
-            Text('Our operations team has been notified and will review your report shortly.', textAlign: TextAlign.center, style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+            const Text('Our operations team has been notified and will review your report shortly.', textAlign: TextAlign.center, style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
             const SizedBox(height: 24),
             SizedBox(
               width: double.infinity,
@@ -610,7 +611,7 @@ class _SummaryRow extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(width: 110, child: Text(label, style: TextStyle(fontSize: 12, color: AppColors.textTertiary))),
+        SizedBox(width: 110, child: Text(label, style: const TextStyle(fontSize: 12, color: AppColors.textTertiary))),
         Expanded(child: Text(value, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: valueColor ?? AppColors.textPrimary))),
       ],
     );

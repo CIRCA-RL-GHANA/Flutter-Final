@@ -2,6 +2,7 @@
 /// Shared Widgets for User Details Module
 /// Reusable components: collapsible sections, edit fields, status badges, etc.
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -275,7 +276,7 @@ class SettingsToggle extends StatelessWidget {
               HapticFeedback.selectionClick();
               onChanged(v);
             },
-            activeColor: activeColor ?? AppColors.primaryLight,
+            activeThumbColor: activeColor ?? AppColors.primaryLight,
           ),
         ],
       ),

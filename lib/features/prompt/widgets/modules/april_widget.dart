@@ -1,7 +1,8 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// APRIL Widget (Personal Assistant)
 /// Visible to: Owner ONLY (completely hidden for other roles)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -126,11 +127,11 @@ class AprilWidgetContent extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
               border: Border.all(color: AppColors.info.withValues(alpha: 0.12)),
             ),
-            child: Row(
+            child: const Row(
               children: [
-                const Icon(Icons.receipt, size: 14, color: AppColors.info),
-                const SizedBox(width: 6),
-                const Expanded(
+                Icon(Icons.receipt, size: 14, color: AppColors.info),
+                SizedBox(width: 6),
+                Expanded(
                   child: Text(
                     'Bill due tomorrow: â‚µ150',
                     style: TextStyle(fontSize: 10, color: AppColors.textSecondary),
@@ -184,7 +185,7 @@ class _QuickCommand extends StatelessWidget {
             style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
           ),
           const Spacer(),
-          Icon(Icons.chevron_right, size: 14, color: AppColors.textTertiary),
+          const Icon(Icons.chevron_right, size: 14, color: AppColors.textTertiary),
         ],
       ),
     );

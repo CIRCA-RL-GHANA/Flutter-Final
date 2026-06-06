@@ -2,6 +2,7 @@
 /// MARKET MODULE — Screen 7: My Transactions Dashboard
 /// Active orders, order history, returns, rides, FAB for new order
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -328,7 +329,7 @@ class _ReturnsTab extends StatelessWidget {
                     const Spacer(),
                     Text(
                       '#${ret.id.substring(0, 8).toUpperCase()}',
-                      style: TextStyle(fontSize: 12, color: AppColors.textTertiary),
+                      style: const TextStyle(fontSize: 12, color: AppColors.textTertiary),
                     ),
                   ],
                 ),
@@ -340,16 +341,16 @@ class _ReturnsTab extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(
                   '${ret.items.length} item(s) • ${ret.reason.name}',
-                  style: TextStyle(fontSize: 12, color: AppColors.textSecondary),
+                  style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
                 ),
                 const SizedBox(height: 8),
                 Row(
                   children: [
-                    Icon(Icons.calendar_today, size: 13, color: AppColors.textTertiary),
+                    const Icon(Icons.calendar_today, size: 13, color: AppColors.textTertiary),
                     const SizedBox(width: 4),
                     Text(
                       'Requested ${_formatDate(ret.createdAt)}',
-                      style: TextStyle(fontSize: 12, color: AppColors.textTertiary),
+                      style: const TextStyle(fontSize: 12, color: AppColors.textTertiary),
                     ),
                     const Spacer(),
                     Text(
@@ -493,18 +494,18 @@ class _RidesTab extends StatelessWidget {
                 const SizedBox(height: 8),
                 Row(
                   children: [
-                    Icon(Icons.schedule, size: 13, color: AppColors.textTertiary),
+                    const Icon(Icons.schedule, size: 13, color: AppColors.textTertiary),
                     const SizedBox(width: 4),
                     Text(
                       '${ride.estimatedMinutes} min',
-                      style: TextStyle(fontSize: 12, color: AppColors.textTertiary),
+                      style: const TextStyle(fontSize: 12, color: AppColors.textTertiary),
                     ),
                     const SizedBox(width: 16),
-                    Icon(Icons.straighten, size: 13, color: AppColors.textTertiary),
+                    const Icon(Icons.straighten, size: 13, color: AppColors.textTertiary),
                     const SizedBox(width: 4),
                     Text(
                       '${ride.estimatedDistance.toStringAsFixed(1)} km',
-                      style: TextStyle(fontSize: 12, color: AppColors.textTertiary),
+                      style: const TextStyle(fontSize: 12, color: AppColors.textTertiary),
                     ),
                   ],
                 ),
@@ -566,7 +567,7 @@ class _OrderCard extends StatelessWidget {
                         ),
                         Text(
                           '#${order.id.substring(0, 8).toUpperCase()}',
-                          style: TextStyle(fontSize: 11, color: AppColors.textTertiary),
+                          style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                         ),
                       ],
                     ),
@@ -592,7 +593,7 @@ class _OrderCard extends StatelessWidget {
               // Items preview
               Text(
                 order.items.map((i) => '${i.quantity}x ${i.name}').join(', '),
-                style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
+                style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -600,11 +601,11 @@ class _OrderCard extends StatelessWidget {
               // Footer
               Row(
                 children: [
-                  Icon(Icons.calendar_today, size: 13, color: AppColors.textTertiary),
+                  const Icon(Icons.calendar_today, size: 13, color: AppColors.textTertiary),
                   const SizedBox(width: 4),
                   Text(
                     '${order.createdAt.day}/${order.createdAt.month}/${order.createdAt.year}',
-                    style: TextStyle(fontSize: 12, color: AppColors.textTertiary),
+                    style: const TextStyle(fontSize: 12, color: AppColors.textTertiary),
                   ),
                   const Spacer(),
                   Text(

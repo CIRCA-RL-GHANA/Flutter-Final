@@ -2,6 +2,7 @@
 /// Full-screen modal with accordion sections (Time Intelligence,
 /// People & Assignment, Issue Taxonomy, Status & Workflow, AI Filters),
 /// filter presets, sticky footer
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -500,7 +501,7 @@ class _ToggleTile extends StatelessWidget {
           Switch(
             value: value,
             onChanged: onChanged,
-            activeColor: kAlertsColor,
+            activeThumbColor: kAlertsColor,
           ),
         ],
       ),

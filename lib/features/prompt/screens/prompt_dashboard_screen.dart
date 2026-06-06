@@ -4,7 +4,7 @@ import 'package:thepg/core/providers/service_providers.dart';
 import 'package:thepg/core/routes/app_routes.dart';
 
 class PromptDashboardScreen extends ConsumerStatefulWidget {
-  const PromptDashboardScreen({Key? key}) : super(key: key);
+  const PromptDashboardScreen({super.key});
 
   @override
   ConsumerState<PromptDashboardScreen> createState() =>

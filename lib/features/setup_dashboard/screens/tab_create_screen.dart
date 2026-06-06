@@ -3,6 +3,7 @@
 /// Steps: Customer â†’ Credit Settings â†’ Payment Terms â†’ Review
 /// RBAC: Admin(full), BM(branch), SO(full), BSO(branch)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -378,15 +379,15 @@ class _CreditSettingsStep extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Expanded(
+              const Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'Require Manager Approval',
                       style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.textPrimary),
                     ),
-                    const Text(
+                    Text(
                       'Purchases above limit need authorization',
                       style: TextStyle(fontSize: 11, color: AppColors.textSecondary),
                     ),
@@ -396,7 +397,7 @@ class _CreditSettingsStep extends StatelessWidget {
               Switch(
                 value: requireApproval,
                 onChanged: onApprovalChanged,
-                activeColor: kSetupColor,
+                activeThumbColor: kSetupColor,
               ),
             ],
           ),
@@ -410,12 +411,12 @@ class _CreditSettingsStep extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             border: Border.all(color: AppColors.warning.withValues(alpha: 0.15)),
           ),
-          child: Row(
+          child: const Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Icon(Icons.warning_amber, size: 18, color: AppColors.warning),
-              const SizedBox(width: 10),
-              const Expanded(
+              Icon(Icons.warning_amber, size: 18, color: AppColors.warning),
+              SizedBox(width: 10),
+              Expanded(
                 child: Text(
                   'Setting a credit limit establishes financial liability. Ensure the customer\'s creditworthiness has been verified.',
                   style: TextStyle(fontSize: 12, color: AppColors.warning),
@@ -498,15 +499,15 @@ class _PaymentTermsStep extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Expanded(
+              const Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'Automatic Reminders',
                       style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.textPrimary),
                     ),
-                    const Text(
+                    Text(
                       'Send SMS/email reminders before due date',
                       style: TextStyle(fontSize: 11, color: AppColors.textSecondary),
                     ),
@@ -516,7 +517,7 @@ class _PaymentTermsStep extends StatelessWidget {
               Switch(
                 value: autoReminders,
                 onChanged: onRemindersChanged,
-                activeColor: kSetupColor,
+                activeThumbColor: kSetupColor,
               ),
             ],
           ),

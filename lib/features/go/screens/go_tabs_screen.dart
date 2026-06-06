@@ -1,6 +1,7 @@
 /// GO Screen 4 — My Tabs
 /// Credit health dashboard, filter bar, accordion tab cards,
 /// bulk operations, analytics panel
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -151,7 +152,7 @@ class _GoTabsScreenState extends State<GoTabsScreen> with SingleTickerProviderSt
           Expanded(child: _AnalyticStat(label: 'Active', value: '${p.tabs.where((t) => t.status == TabStatus.active).length}', color: kGoColor)),
           Expanded(child: _AnalyticStat(label: 'Overdue', value: '${p.tabs.where((t) => t.status == TabStatus.overdue).length}', color: kGoNegative)),
           Expanded(child: _AnalyticStat(label: 'Settled', value: '${p.tabs.where((t) => t.status == TabStatus.settled).length}', color: kGoPositive)),
-          Expanded(child: const _AnalyticStat(label: 'Avg Days', value: '14', color: kGoInfo)),
+          const Expanded(child: _AnalyticStat(label: 'Avg Days', value: '14', color: kGoInfo)),
         ]),
       ]),
     );

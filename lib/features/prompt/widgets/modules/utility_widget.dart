@@ -2,6 +2,7 @@
 /// UTILITY Widget (Global Tools)
 /// Visible to: ALL roles
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';

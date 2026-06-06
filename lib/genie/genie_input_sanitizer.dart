@@ -12,6 +12,7 @@
 /// resolution or server call. The same logic should be mirrored on the
 /// backend AI guard (see ai-input-sanitizer.guard.ts).
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
 /// Categories of input that were sanitized or rejected.
 enum SanitizationFlag {
@@ -110,7 +111,7 @@ class GenieInputSanitizer {
     // 4. Injection detection — reject outright
     for (final pattern in _injectionPatterns) {
       if (pattern.hasMatch(text)) {
-        return SanitizationResult(
+        return const SanitizationResult(
           cleanedText: '',
           flags: [SanitizationFlag.injectionAttempt],
           rejected: true,

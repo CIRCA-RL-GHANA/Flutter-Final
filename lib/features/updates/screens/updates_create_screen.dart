@@ -3,6 +3,7 @@
 /// Full composer: media attach, text with mentions/hashtags, poll builder,
 /// visibility picker, scheduling, preview before publish.
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -87,8 +88,8 @@ class _BodyState extends State<_Body> {
             onPressed: _captionController.text.isNotEmpty || _isPollMode
                 ? () => _showPreviewSheet(context)
                 : null,
-            child: const Text('Preview', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
             style: TextButton.styleFrom(foregroundColor: kUpdatesColor),
+            child: const Text('Preview', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
           ),
           const SizedBox(width: 4),
           Padding(
@@ -419,8 +420,9 @@ class _BodyState extends State<_Body> {
       firstDate: DateTime.now(),
       lastDate: DateTime.now().add(const Duration(days: 90)),
     );
-    if (date != null && mounted) {
-      final time = await showTimePicker(context: context, initialTime: TimeOfDay.now());
+    if (date != null) {
+      if (!mounted) return;
+      final time = await showTimePicker(context: this.context, initialTime: TimeOfDay.now());
       if (time != null && mounted) {
         setState(() => _scheduledDate = DateTime(date.year, date.month, date.day, time.hour, time.minute));
       }
@@ -523,7 +525,7 @@ class _BodyState extends State<_Body> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Center(
-                          child: Text('${_mediaCount} media attachment(s)', style: TextStyle(color: kUpdatesColor.withValues(alpha: 0.5))),
+                          child: Text('$_mediaCount media attachment(s)', style: TextStyle(color: kUpdatesColor.withValues(alpha: 0.5))),
                         ),
                       ),
                     ],

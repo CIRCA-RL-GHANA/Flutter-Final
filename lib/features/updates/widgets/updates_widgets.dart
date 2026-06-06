@@ -4,6 +4,7 @@
 /// NotificationItem, InterestCard, FollowedEntityCard, FilterChipBar,
 /// EngagementBar, EmptyState, SectionCard, etc.
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -174,7 +175,7 @@ class UpdateCard extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            Text(update.authorRole, style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                            Text(update.authorRole, style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                             const Text(' • ', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                             Text(_timeAgo(update.createdAt), style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                             if (update.isEdited) ...[

@@ -50,13 +50,11 @@ class IveAppBar extends StatelessWidget implements PreferredSizeWidget {
           : Text(title!,
               style: IveType.headline.copyWith(color: IveTokens.label)),
       actions: actions,
-      bottom: bottom == null
-          ? const PreferredSize(
+      bottom: bottom ?? const PreferredSize(
               preferredSize: Size.fromHeight(1),
               child: Divider(
                   height: 1, thickness: 1, color: IveTokens.hairline),
-            )
-          : bottom,
+            ),
     );
   }
 }

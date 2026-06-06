@@ -4,6 +4,7 @@
 /// RBAC: Owner/Admin(fullAccess), BM(branchScoped), Monitor(viewOnly),
 ///        Driver(ownOnly)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -33,9 +34,9 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
       builder: (context, setupProv, ctxProv, _) {
         final vehicle = setupProv.selectedVehicle;
         if (vehicle == null) {
-          return Scaffold(
-            appBar: const SetupAppBar(title: 'Vehicle Detail'),
-            body: const SetupEmptyState(
+          return const Scaffold(
+            appBar: SetupAppBar(title: 'Vehicle Detail'),
+            body: SetupEmptyState(
               icon: Icons.local_shipping,
               title: 'No vehicle selected',
               subtitle: 'Select a vehicle from the fleet',
@@ -214,11 +215,11 @@ class _OverviewTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.info_outline, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Vehicle Info', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Vehicle Info', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
               const SizedBox(height: 12),
@@ -454,11 +455,11 @@ class _RoutesTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.route, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Today\'s Route', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Today\'s Route', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
               const SizedBox(height: 12),
@@ -500,11 +501,11 @@ class _DriverTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.person, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Assigned Driver', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Assigned Driver', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
               const SizedBox(height: 12),

@@ -4,6 +4,7 @@
 /// RBAC: Owner(all), Admin(all), BM(branch), SO(entity),
 ///        BSO(branch), Monitor/BrMon(view), RO/BRO(own), Driver(own)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +36,7 @@ class MyActivityScreen extends StatelessWidget {
               title: 'My Activity',
               actions: [
                 DataScopeIndicator(access: setupProv.getCardAccess('my_activity', ctxProv.currentRole)),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
               ],
             ),
             floatingActionButton: SetupRbacFAB(
@@ -156,10 +157,10 @@ class MyActivityScreen extends StatelessWidget {
               ),
 
               // ─── Tasks Section ────────────────────────────
-              SliverToBoxAdapter(
+              const SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                  child: const SetupSectionTitle(title: 'Tasks', icon: Icons.checklist),
+                  padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                  child: SetupSectionTitle(title: 'Tasks', icon: Icons.checklist),
                 ),
               ),
 
@@ -205,10 +206,10 @@ class MyActivityScreen extends StatelessWidget {
               ),
 
               // ─── Goals Section ────────────────────────────
-              SliverToBoxAdapter(
+              const SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                  child: const SetupSectionTitle(title: 'Goals', icon: Icons.flag),
+                  padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                  child: SetupSectionTitle(title: 'Goals', icon: Icons.flag),
                 ),
               ),
 
@@ -223,10 +224,10 @@ class MyActivityScreen extends StatelessWidget {
               ),
 
               // ─── Timeline Section ─────────────────────────
-              SliverToBoxAdapter(
+              const SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                  child: const SetupSectionTitle(title: "Today's Timeline", icon: Icons.timeline),
+                  padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                  child: SetupSectionTitle(title: "Today's Timeline", icon: Icons.timeline),
                 ),
               ),
 

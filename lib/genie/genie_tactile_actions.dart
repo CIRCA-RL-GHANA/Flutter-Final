@@ -5,6 +5,7 @@
 /// Maps action categories to platform haptic patterns.
 /// All methods are no-ops if haptics are disabled in accessibility settings.
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
 import 'package:flutter/services.dart';
 

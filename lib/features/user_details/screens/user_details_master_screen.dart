@@ -2,6 +2,7 @@
 /// Screen 1: USER DETAILS Master Dashboard
 /// Identity section, multi-context carousel, collapsible sections, footer
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -924,14 +925,14 @@ class _ContextSpecificSettings extends StatelessWidget {
     return Column(
       children: [
         if (isBusiness) ...[
-          DetailRow(icon: Icons.schedule, label: 'Business Hours', value: '9:00 AM - 5:00 PM'),
-          DetailRow(icon: Icons.badge, label: 'Registration', value: 'GH-BRN-123456'),
-          DetailRow(icon: Icons.factory, label: 'Industry', value: 'Retail & Commerce'),
-          DetailRow(icon: Icons.people_outline, label: 'Employees', value: '10-50'),
+          const DetailRow(icon: Icons.schedule, label: 'Business Hours', value: '9:00 AM - 5:00 PM'),
+          const DetailRow(icon: Icons.badge, label: 'Registration', value: 'GH-BRN-123456'),
+          const DetailRow(icon: Icons.factory, label: 'Industry', value: 'Retail & Commerce'),
+          const DetailRow(icon: Icons.people_outline, label: 'Employees', value: '10-50'),
         ] else ...[
-          DetailRow(icon: Icons.access_time, label: 'Shift Pattern', value: 'Morning Shift'),
-          DetailRow(icon: Icons.map_outlined, label: 'Coverage Radius', value: '10 km'),
-          DetailRow(icon: Icons.account_tree_outlined, label: 'Parent Entity', value: 'Wizdom Shop'),
+          const DetailRow(icon: Icons.access_time, label: 'Shift Pattern', value: 'Morning Shift'),
+          const DetailRow(icon: Icons.map_outlined, label: 'Coverage Radius', value: '10 km'),
+          const DetailRow(icon: Icons.account_tree_outlined, label: 'Parent Entity', value: 'Wizdom Shop'),
         ],
       ],
     );

@@ -5,6 +5,7 @@
 /// Every intent is validated here before execution. The enforcer never
 /// reveals the existence of forbidden data – it redirects politely.
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
 import '../features/prompt/models/rbac_models.dart';
 import 'genie_intent.dart';
@@ -190,41 +191,41 @@ class GenieRBACEnforcer {
       UserRole role, GenieModule module, String action) {
     switch (module) {
       case GenieModule.goPage:
-        return "GO PAGE is available to Owner and Admin only. "
+        return 'GO PAGE is available to Owner and Admin only. '
             "I can show you your branch's operational overview instead. "
             "Say 'open LIVE' or tap below.";
       case GenieModule.market:
-        return "MARKET access is restricted to Owner and Admin. "
-            "I can help you with Live orders or deliveries instead.";
+        return 'MARKET access is restricted to Owner and Admin. '
+            'I can help you with Live orders or deliveries instead.';
       case GenieModule.alerts:
-        return "Alerts management is handled by your team. "
-            "You can check your personal notifications instead.";
+        return 'Alerts management is handled by your team. '
+            'You can check your personal notifications instead.';
       case GenieModule.april:
-        return "Personal AI assistant features are available for Owners. "
-            "I can help you with tasks within your role. What would you like?";
+        return 'Personal AI assistant features are available for Owners. '
+            'I can help you with tasks within your role. What would you like?';
       case GenieModule.live:
-        return "LIVE operations require a Branch Manager, "
-            "Response Officer, or Driver role. "
-            "I can redirect you to the right place. What do you need?";
+        return 'LIVE operations require a Branch Manager, '
+            'Response Officer, or Driver role. '
+            'I can redirect you to the right place. What do you need?';
       case GenieModule.setupDashboard:
         if (_isWriteAction(action)) {
-          return "Your role has view-only access to Setup Dashboard. "
-              "Contact your admin to make changes.";
+          return 'Your role has view-only access to Setup Dashboard. '
+              'Contact your admin to make changes.';
         }
         return "You don't have access to that section. "
             "I can show you what's available in your dashboard.";
       case GenieModule.qualChat:
-        return "That feature is restricted to Owners. "
-            "You can still access regular chats and conversations.";
+        return 'That feature is restricted to Owners. '
+            'You can still access regular chats and conversations.';
       case GenieModule.eplay:
-        return "Creator Studio is available to Owner and Admin accounts. "
-            "You can still browse and access your cloud locker.";
+        return 'Creator Studio is available to Owner and Admin accounts. '
+            'You can still browse and access your cloud locker.';
       case GenieModule.community:
         return "You don't have access to that community action. "
-            "Try browsing or joining a public community.";
+            'Try browsing or joining a public community.';
       default:
         return "I can't access that for you right now, "
-            "but I can help with something related. What else can I do?";
+            'but I can help with something related. What else can I do?';
     }
   }
 

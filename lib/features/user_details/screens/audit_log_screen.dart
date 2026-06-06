@@ -2,6 +2,7 @@
 /// Screen 9: Activity & Audit Log
 /// Timeline, filter matrix, export, anomaly highlighting
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -147,7 +148,7 @@ class AuditLogScreen extends StatelessWidget {
                       child: SizedBox(
                         height: 28,
                         child: DropdownButtonFormField<String?>(
-                          value: udp.auditModuleFilter,
+                          initialValue: udp.auditModuleFilter,
                           decoration: const InputDecoration(
                             contentPadding: EdgeInsets.symmetric(horizontal: 8),
                             border: InputBorder.none,

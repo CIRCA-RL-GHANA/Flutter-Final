@@ -1,4 +1,5 @@
 /// Fintech › Credit Data — Credit Score Gauge & FI query screen
+library;
 
 import 'package:flutter/material.dart';
 import 'dart:math' as math;

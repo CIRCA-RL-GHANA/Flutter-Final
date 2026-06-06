@@ -3,6 +3,7 @@
 /// Profile info, completeness, skills, social links, rating
 /// RBAC: All roles (personal/entity/branch scope varies)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,7 +13,6 @@ import '../../../core/theme/app_colors.dart';
 import '../../prompt/providers/context_provider.dart';
 // ignore: unused_import
 import '../models/setup_dashboard_models.dart';
-import '../models/setup_rbac.dart';
 import '../providers/setup_dashboard_provider.dart';
 import '../widgets/shared_widgets.dart';
 
@@ -33,7 +33,7 @@ class ProfileScreen extends StatelessWidget {
               title: 'Profile',
               actions: [
                 DataScopeIndicator(access: setupProv.getCardAccess('profile', ctxProv.currentRole)),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
               ],
             ),
             floatingActionButton: SetupRbacFAB(
@@ -73,12 +73,12 @@ class ProfileScreen extends StatelessWidget {
                         ),
                         if (profile.isVerified) ...[
                           const SizedBox(height: 4),
-                          Row(
+                          const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Icon(Icons.verified, size: 16, color: kSetupColor),
-                              const SizedBox(width: 4),
-                              const Text(
+                              Icon(Icons.verified, size: 16, color: kSetupColor),
+                              SizedBox(width: 4),
+                              Text(
                                 'Verified Account',
                                 style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: kSetupColor),
                               ),

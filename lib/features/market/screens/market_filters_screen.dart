@@ -3,6 +3,7 @@
 /// Bottom-sheet style screen with price range, delivery options,
 /// dietary preferences, merchant attributes, sort, save filter sets
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -29,7 +30,7 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
   bool _sustainable = false;
   SortOption _sort = SortOption.recommended;
   double _minRating = 0;
-  int _resultCount = 42;
+  final int _resultCount = 42;
 
   @override
   Widget build(BuildContext context) {
@@ -122,7 +123,7 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
           Row(
             children: [
               Text('Max delivery time: ${_maxDeliveryTime.toInt()} min',
-                  style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+                  style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
             ],
           ),
           Slider(
@@ -183,7 +184,7 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
           SwitchListTile(
             dense: true,
             contentPadding: EdgeInsets.zero,
-            activeColor: kMarketColor,
+            activeThumbColor: kMarketColor,
             title: const Text('Verified only', style: TextStyle(fontSize: 14)),
             value: _verifiedOnly,
             onChanged: (v) => setState(() => _verifiedOnly = v),
@@ -191,7 +192,7 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
           SwitchListTile(
             dense: true,
             contentPadding: EdgeInsets.zero,
-            activeColor: kMarketColor,
+            activeThumbColor: kMarketColor,
             title: const Text('Family-owned', style: TextStyle(fontSize: 14)),
             value: _familyOwned,
             onChanged: (v) => setState(() => _familyOwned = v),
@@ -199,7 +200,7 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
           SwitchListTile(
             dense: true,
             contentPadding: EdgeInsets.zero,
-            activeColor: kMarketColor,
+            activeThumbColor: kMarketColor,
             title: const Text('Sustainable', style: TextStyle(fontSize: 14)),
             value: _sustainable,
             onChanged: (v) => setState(() => _sustainable = v),
@@ -264,8 +265,8 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
                 ],
               ),
               value: sort,
-              groupValue: _sort,
-              onChanged: (v) => setState(() => _sort = v!),
+              groupValue: _sort, // ignore: deprecated_member_use
+              onChanged: (v) => setState(() => _sort = v!), // ignore: deprecated_member_use
             );
           }),
           const SizedBox(height: 16),

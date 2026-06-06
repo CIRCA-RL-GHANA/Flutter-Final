@@ -1,6 +1,7 @@
 /// GO Screen 5 — Tab Detail
 /// Tab identity card, financial snapshot, transaction timeline,
 /// settlement interface, negotiation tools, documents, audit trail
+library;
 
 import 'package:flutter/material.dart';
 import '../../../core/routes/app_routes.dart';
@@ -236,13 +237,13 @@ class _GoTabDetailScreenState extends State<GoTabDetailScreen> {
   }
 
   Widget _buildAudit(GoTab tab) {
-    return GoSectionCard(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      const GoSectionHeader(title: 'Audit Trail', icon: Icons.history),
-      const SizedBox(height: 10),
-      const _AuditLine(time: 'Today', action: 'Viewed tab details'),
-      const _AuditLine(time: '2 days ago', action: 'Payment of 500 QP received'),
-      const _AuditLine(time: '1 week ago', action: 'Reminder sent'),
-      const _AuditLine(time: '2 weeks ago', action: 'Tab created'),
+    return const GoSectionCard(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      GoSectionHeader(title: 'Audit Trail', icon: Icons.history),
+      SizedBox(height: 10),
+      _AuditLine(time: 'Today', action: 'Viewed tab details'),
+      _AuditLine(time: '2 days ago', action: 'Payment of 500 QP received'),
+      _AuditLine(time: '1 week ago', action: 'Reminder sent'),
+      _AuditLine(time: '2 weeks ago', action: 'Tab created'),
     ]));
   }
 

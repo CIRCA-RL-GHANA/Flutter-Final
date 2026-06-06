@@ -3,6 +3,7 @@
 ///
 /// Access is gated behind Q Points ToS acceptance (v1.0.0).
 /// Users who have not accepted are shown the ToS screen first.
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -625,7 +626,7 @@ class _ActiveFacilitatorChip extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surfaceVariant,
+          color: Theme.of(context).colorScheme.surfaceContainerHighest,
           borderRadius: BorderRadius.circular(20),
         ),
         child: Row(
@@ -1646,13 +1647,13 @@ class _FeeDisclosureSheet extends StatelessWidget {
                     : '\$0.02 per matched trade (charged to taker)',
                 detail: 'Charged on each successfully matched order.',
               ),
-              _FeeRow(
+              const _FeeRow(
                 icon: Icons.add_circle_outline,
                 label: 'Order Placement Fee',
                 value: '\$0.00',
                 detail: 'No fee for placing or cancelling a limit order.',
               ),
-              _FeeRow(
+              const _FeeRow(
                 icon: Icons.output,
                 label: 'Withdrawal Fee',
                 value: '\$0.00 (Platform)',

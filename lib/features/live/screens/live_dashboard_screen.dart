@@ -3,6 +3,7 @@
 /// Central command center: Tab bar (Orders/Returns/Packages),
 /// operations overview, urgent actions, predictive insights, controls
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -226,7 +227,7 @@ class _OrdersView extends StatelessWidget {
                               color: kLiveColor.withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(6),
                             ),
-                            child: Text(act, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: kLiveColor)),
+                            child: Text(act, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: kLiveColor)),
                           ),
                         ),
                       )),
@@ -259,7 +260,7 @@ class _OrdersView extends StatelessWidget {
             children: [
               const Text('Orders', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
               const Spacer(),
-              TextButton(onPressed: () => Navigator.pushNamed(context, AppRoutes.liveOrders), child: Text('View All', style: TextStyle(color: kLiveColor, fontSize: 13))),
+              TextButton(onPressed: () => Navigator.pushNamed(context, AppRoutes.liveOrders), child: const Text('View All', style: TextStyle(color: kLiveColor, fontSize: 13))),
             ],
           ),
           const SizedBox(height: 8),

@@ -3,6 +3,7 @@
 /// The primary social feed with filter bar, update cards, compose FAB,
 /// notification badge, and infinite-scroll-style list.
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -121,10 +122,10 @@ class _Body extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: kUpdatesColor.withValues(alpha: 0.18)),
                   ),
-                  child: Row(
+                  child: const Row(
                     children: [
                       Icon(Icons.auto_awesome, size: 14, color: kUpdatesColor),
-                      const SizedBox(width: 6),
+                      SizedBox(width: 6),
                       Text(
                         'AI — Personalised feed order',
                         style: TextStyle(

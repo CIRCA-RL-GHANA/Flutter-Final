@@ -4,6 +4,7 @@
 /// Market Hub, Search, Filters, Merchants, Products, Cart, Orders,
 /// Transactions, Self-Pickup, Returns, Delivery Tracking, Ride Hailing
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
 import 'package:flutter/material.dart';
 

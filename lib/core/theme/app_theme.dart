@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../design/ive_text.dart';
 import '../design/ive_tokens.dart';
@@ -133,7 +133,7 @@ class AppTheme {
         indicatorColor: IveTokens.accent,
         indicatorSize: TabBarIndicatorSize.label,
         dividerColor: IveTokens.hairline,
-        overlayColor: WidgetStatePropertyAll(IveTokens.accentSoft),
+        overlayColor: const WidgetStatePropertyAll(IveTokens.accentSoft),
       ),
       switchTheme: SwitchThemeData(
         trackColor: WidgetStateProperty.resolveWith((s) =>
@@ -316,22 +316,22 @@ class AppTheme {
       ),
       dropdownMenuTheme: DropdownMenuThemeData(
         textStyle: IveType.body,
-        menuStyle: MenuStyle(
-          backgroundColor: const WidgetStatePropertyAll(IveTokens.surfaceRaised),
-          surfaceTintColor: const WidgetStatePropertyAll(Colors.transparent),
-          elevation: const WidgetStatePropertyAll(0),
-          shape: const WidgetStatePropertyAll(RoundedRectangleBorder(
+        menuStyle: const MenuStyle(
+          backgroundColor: WidgetStatePropertyAll(IveTokens.surfaceRaised),
+          surfaceTintColor: WidgetStatePropertyAll(Colors.transparent),
+          elevation: WidgetStatePropertyAll(0),
+          shape: WidgetStatePropertyAll(RoundedRectangleBorder(
             borderRadius: IveTokens.brSm,
             side: BorderSide(color: IveTokens.hairline),
           )),
         ),
       ),
-      menuTheme: MenuThemeData(
+      menuTheme: const MenuThemeData(
         style: MenuStyle(
-          backgroundColor: const WidgetStatePropertyAll(IveTokens.surfaceRaised),
-          surfaceTintColor: const WidgetStatePropertyAll(Colors.transparent),
-          elevation: const WidgetStatePropertyAll(0),
-          shape: const WidgetStatePropertyAll(RoundedRectangleBorder(
+          backgroundColor: WidgetStatePropertyAll(IveTokens.surfaceRaised),
+          surfaceTintColor: WidgetStatePropertyAll(Colors.transparent),
+          elevation: WidgetStatePropertyAll(0),
+          shape: WidgetStatePropertyAll(RoundedRectangleBorder(
             borderRadius: IveTokens.brSm,
             side: BorderSide(color: IveTokens.hairline),
           )),

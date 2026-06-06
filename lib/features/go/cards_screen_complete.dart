@@ -34,7 +34,7 @@ class CardsProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      await Future.delayed(Duration(milliseconds: 500));
+      await Future.delayed(const Duration(milliseconds: 500));
       cards = [
         PaymentCard(
           id: 'card_1',
@@ -43,7 +43,7 @@ class CardsProvider extends ChangeNotifier {
           expiryDate: '12/26',
           isDefault: true,
           cardType: 'Visa',
-          addedAt: DateTime.now().subtract(Duration(days: 180)),
+          addedAt: DateTime.now().subtract(const Duration(days: 180)),
         ),
         PaymentCard(
           id: 'card_2',
@@ -52,7 +52,7 @@ class CardsProvider extends ChangeNotifier {
           expiryDate: '08/27',
           isDefault: false,
           cardType: 'Mastercard',
-          addedAt: DateTime.now().subtract(Duration(days: 90)),
+          addedAt: DateTime.now().subtract(const Duration(days: 90)),
         ),
       ];
     } catch (e) {
@@ -161,7 +161,7 @@ class CardsProvider extends ChangeNotifier {
 }
 
 class CardsScreen extends StatefulWidget {
-  const CardsScreen({Key? key}) : super(key: key);
+  const CardsScreen({super.key});
 
   @override
   State<CardsScreen> createState() => _CardsScreenState();

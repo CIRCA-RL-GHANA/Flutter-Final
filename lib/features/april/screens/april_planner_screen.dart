@@ -1,5 +1,6 @@
 /// APRIL Screen 2 — Planner Command Center (Financial Dashboard)
 /// 4 tabs: Overview, Transactions, Budgets, Analytics
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -106,14 +107,14 @@ class _AprilPlannerScreenState extends State<AprilPlannerScreen> with SingleTick
             const SizedBox(height: 20),
 
             // Quick Add Presets
-            Wrap(
+            const Wrap(
               spacing: 8,
               runSpacing: 8,
               children: [
-                const _QuickAddChip(label: 'â˜• Coffee', amount: '15.00', category: TransactionCategory.dining),
-                const _QuickAddChip(label: 'ðŸš• Ride', amount: '25.00', category: TransactionCategory.transport),
-                const _QuickAddChip(label: 'ðŸ›’ Groceries', amount: '120.00', category: TransactionCategory.groceries),
-                const _QuickAddChip(label: 'ðŸ’Š Medicine', amount: '45.00', category: TransactionCategory.healthcare),
+                _QuickAddChip(label: 'â˜• Coffee', amount: '15.00', category: TransactionCategory.dining),
+                _QuickAddChip(label: 'ðŸš• Ride', amount: '25.00', category: TransactionCategory.transport),
+                _QuickAddChip(label: 'ðŸ›’ Groceries', amount: '120.00', category: TransactionCategory.groceries),
+                _QuickAddChip(label: 'ðŸ’Š Medicine', amount: '45.00', category: TransactionCategory.healthcare),
               ],
             ),
             const SizedBox(height: 16),

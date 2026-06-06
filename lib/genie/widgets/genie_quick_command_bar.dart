@@ -5,10 +5,10 @@
 /// Chips are RBAC-filtered and role-specific. Snaps to center on scroll.
 /// Minimum 48Ã—48 dp touch target on each chip.
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import '../../core/design/ive_tokens.dart';
-import '../../core/theme/app_colors.dart';
 import '../genie_intent.dart';
 import '../genie_rbac_enforcer.dart';
 import '../genie_tactile_actions.dart';

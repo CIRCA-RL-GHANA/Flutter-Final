@@ -1,6 +1,7 @@
 /// qualChat Module — Data Models
 /// Communications Hub: Messages, Presence, HeyYa
 /// Module Color: Cyan 0xFF06B6D4
+library;
 
 // ──────────────────────────────────────────────
 //  ENUMS

@@ -3,6 +3,7 @@
 /// Categories: Entities, People, Topics, Lists. Bulk actions,
 /// mute/unmute, priority, following analytics.
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -360,9 +361,9 @@ class _FollowingList extends StatelessWidget {
                   }
                 },
                 itemBuilder: (_) => [
-                  PopupMenuItem(value: 'priority', child: Row(children: [const Icon(Icons.star, size: 16, color: kUpdatesColor), const SizedBox(width: 8), const Text('Set Priority', style: TextStyle(fontSize: 13))])),
+                  const PopupMenuItem(value: 'priority', child: Row(children: [Icon(Icons.star, size: 16, color: kUpdatesColor), SizedBox(width: 8), Text('Set Priority', style: TextStyle(fontSize: 13))])),
                   PopupMenuItem(value: 'mute', child: Row(children: [Icon(entity.isMuted ? Icons.volume_up : Icons.volume_off, size: 16, color: AppColors.warning), const SizedBox(width: 8), Text(entity.isMuted ? 'Unmute' : 'Mute', style: const TextStyle(fontSize: 13))])),
-                  PopupMenuItem(value: 'unfollow', child: Row(children: [const Icon(Icons.person_remove, size: 16, color: AppColors.error), const SizedBox(width: 8), const Text('Unfollow', style: TextStyle(fontSize: 13, color: AppColors.error))])),
+                  const PopupMenuItem(value: 'unfollow', child: Row(children: [Icon(Icons.person_remove, size: 16, color: AppColors.error), SizedBox(width: 8), Text('Unfollow', style: TextStyle(fontSize: 13, color: AppColors.error))])),
                 ],
               ),
             ],
@@ -434,7 +435,7 @@ class _ListsView extends StatelessWidget {
               context: context,
               builder: (ctx) => AlertDialog(
                 backgroundColor: IveTokens.surface,
-                shape: RoundedRectangleBorder(borderRadius: IveTokens.brMd),
+                shape: const RoundedRectangleBorder(borderRadius: IveTokens.brMd),
                 title: const Text('New Following List', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
                 content: TextField(
                   controller: nameCtrl,

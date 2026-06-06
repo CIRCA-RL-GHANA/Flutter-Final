@@ -3,9 +3,9 @@
 /// Tab list, credit utilization, transaction history, payment tracking
 /// RBAC: Admin(full), BM(branch), Monitor/BrMon(view)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/routes/app_routes.dart';
@@ -32,7 +32,7 @@ class TabsScreen extends StatelessWidget {
               title: 'Customer Tabs',
               actions: [
                 DataScopeIndicator(access: setupProv.getCardAccess('tabs', ctxProv.currentRole)),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
               ],
             ),
             floatingActionButton: SetupRbacFAB(
@@ -82,10 +82,10 @@ class TabsScreen extends StatelessWidget {
               ),
 
               // ─── Tab List ─────────────────────────────────
-              SliverToBoxAdapter(
+              const SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
-                  child: const SetupSectionTitle(
+                  padding: EdgeInsets.fromLTRB(20, 16, 20, 0),
+                  child: SetupSectionTitle(
                     title: 'Active Accounts',
                     icon: Icons.receipt_long,
                   ),

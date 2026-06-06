@@ -1,5 +1,6 @@
 /// qualChat Screen 12 — Action Center
 /// Task manager: priority sections, AI suggestions, profile completeness, analytics
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,7 +8,6 @@ import '../models/qualchat_models.dart';
 import '../providers/qualchat_provider.dart';
 import '../widgets/qualchat_widgets.dart';
 import '../../../core/services/ai_insights_notifier.dart';
-import '../../../core/routes/app_routes.dart';
 
 class QualChatActionCenterScreen extends StatelessWidget {
   const QualChatActionCenterScreen({super.key});
@@ -17,8 +17,8 @@ class QualChatActionCenterScreen extends StatelessWidget {
     return Consumer<QualChatProvider>(
       builder: (context, provider, _) {
         final tasks = QualChatProvider.tasks;
-        final suggestions = QualChatProvider.aiSuggestions;
-        final analytics = QualChatProvider.taskAnalytics;
+        const suggestions = QualChatProvider.aiSuggestions;
+        const analytics = QualChatProvider.taskAnalytics;
         final completeness = provider.profileCompleteness;
 
         final actNow =

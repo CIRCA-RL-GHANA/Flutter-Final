@@ -2,6 +2,7 @@
 /// Screen 4: Avatar & Branding Editor
 /// Photo, Branding colors/logo, Consistency across contexts
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -193,16 +194,16 @@ class _PhotoTab extends StatelessWidget {
         const SizedBox(height: 20),
 
         // Guidelines
-        SectionCard(
+        const SectionCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Photo Guidelines', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textPrimary)),
-              const SizedBox(height: 8),
-              const _Guideline('Clear face shot, centered'),
-              const _Guideline('Minimum 200x200 pixels'),
-              const _Guideline('Max file size: 5MB'),
-              const _Guideline('Supported: JPG, PNG, WEBP'),
+              Text('Photo Guidelines', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textPrimary)),
+              SizedBox(height: 8),
+              _Guideline('Clear face shot, centered'),
+              _Guideline('Minimum 200x200 pixels'),
+              _Guideline('Max file size: 5MB'),
+              _Guideline('Supported: JPG, PNG, WEBP'),
             ],
           ),
         ),

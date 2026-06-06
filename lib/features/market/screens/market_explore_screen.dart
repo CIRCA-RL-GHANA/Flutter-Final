@@ -2,9 +2,9 @@
 /// MARKET MODULE — Screen 1.5: Explore All Merchants
 /// Full-screen immersive grid with map/grid toggle, masonry merchant cards
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/design/ive_tokens.dart';
 import '../../../core/theme/app_colors.dart';
@@ -69,7 +69,7 @@ class _MarketExploreScreenState extends State<MarketExploreScreen> {
             children: [
               Text(
                 '${prov.filteredMerchants.length} merchants',
-                style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
+                style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
               ),
               const Spacer(),
               GestureDetector(
@@ -125,8 +125,8 @@ class _MarketExploreScreenState extends State<MarketExploreScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Row(
-                                  children: const [
+                                const Row(
+                                  children: [
                                     Icon(Icons.auto_awesome, size: 14, color: Color(0xFF8B5CF6)),
                                     SizedBox(width: 6),
                                     Text(
@@ -212,7 +212,7 @@ class _MarketExploreScreenState extends State<MarketExploreScreen> {
                       const SizedBox(height: 8),
                       Text(
                         '${prov.filteredMerchants.length} merchants nearby',
-                        style: TextStyle(fontSize: 13, color: IveTokens.labelSecondary),
+                        style: const TextStyle(fontSize: 13, color: IveTokens.labelSecondary),
                       ),
                     ],
                   ),

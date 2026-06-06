@@ -4,6 +4,7 @@
 /// RBAC: Owner(personal), Admin(full), BM(branch), SO(full), BSO(branch),
 ///        Monitor/BrMon(view)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -32,7 +33,7 @@ class CampaignsScreen extends StatelessWidget {
               title: 'Marketing',
               actions: [
                 DataScopeIndicator(access: setupProv.getCardAccess('marketing', ctxProv.currentRole)),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
               ],
             ),
             floatingActionButton: SetupRbacFAB(
@@ -70,10 +71,10 @@ class CampaignsScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SliverToBoxAdapter(
+              const SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
-                  child: const SetupSectionTitle(title: 'All Campaigns', icon: Icons.campaign),
+                  padding: EdgeInsets.fromLTRB(20, 16, 20, 0),
+                  child: SetupSectionTitle(title: 'All Campaigns', icon: Icons.campaign),
                 ),
               ),
               // ─── AI Insights ─────────────────────────────────────────

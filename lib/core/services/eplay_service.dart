@@ -13,6 +13,7 @@
 ///   GET    /eplay/locker/:assetId/stream
 ///   PATCH  /eplay/locker/:id/pin
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
 import '../network/api_client.dart';
 import '../network/api_response.dart';

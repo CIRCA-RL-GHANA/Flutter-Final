@@ -2,6 +2,7 @@
 /// GenieIntent – Structured Representation of Every User Request
 /// Maps voice/text/tap inputs to a canonical module action with parameters.
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
 /// The 12 platform modules Genie can orchestrate.
 enum GenieModule {

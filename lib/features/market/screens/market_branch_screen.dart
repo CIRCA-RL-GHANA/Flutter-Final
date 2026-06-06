@@ -2,6 +2,7 @@
 /// MARKET MODULE — Screen 2: Branch Main View
 /// Merchant profile with 5 tabs: Updates Â· Deals Â· Shop Â· Info Â· Returns
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -349,7 +350,7 @@ class _UpdatesTab extends StatelessWidget {
                           ),
                           Text(
                             _timeAgo(post.createdAt),
-                            style: TextStyle(fontSize: 11, color: AppColors.textTertiary),
+                            style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                           ),
                         ],
                       ),
@@ -411,7 +412,7 @@ class _PostAction extends StatelessWidget {
       children: [
         Icon(icon, size: 16, color: AppColors.textTertiary),
         const SizedBox(width: 4),
-        Text(label, style: TextStyle(fontSize: 12, color: AppColors.textTertiary)),
+        Text(label, style: const TextStyle(fontSize: 12, color: AppColors.textTertiary)),
       ],
     );
   }
@@ -446,7 +447,7 @@ class _DealsTab extends StatelessWidget {
           margin: const EdgeInsets.only(bottom: 12),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
-            gradient: LinearGradient(
+            gradient: const LinearGradient(
               colors: [kMarketColor, kMarketColorDark],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -627,7 +628,7 @@ class _ShopTab extends StatelessWidget {
             children: [
               Text(
                 '${products.length} products',
-                style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
+                style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
               ),
               const Spacer(),
               GestureDetector(
@@ -764,7 +765,7 @@ class _InfoTab extends StatelessWidget {
                         style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
                       ),
                     ),
-                    Text(e.value, style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+                    Text(e.value, style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
                   ],
                 ),
               );
@@ -931,16 +932,16 @@ class _ReturnsTab extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(
                   video.reason.name,
-                  style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
+                  style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
                 ),
                 const SizedBox(height: 8),
                 Row(
                   children: [
-                    Icon(Icons.calendar_today, size: 13, color: AppColors.textTertiary),
+                    const Icon(Icons.calendar_today, size: 13, color: AppColors.textTertiary),
                     const SizedBox(width: 4),
                     Text(
                       '${video.createdAt.day}/${video.createdAt.month}/${video.createdAt.year}',
-                      style: TextStyle(fontSize: 12, color: AppColors.textTertiary),
+                      style: const TextStyle(fontSize: 12, color: AppColors.textTertiary),
                     ),
                     const Spacer(),
                     TextButton.icon(

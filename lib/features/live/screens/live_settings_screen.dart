@@ -1,8 +1,9 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// LIVE MODULE — Screen 22: Live Module Settings
 /// Configuration: auto-assign, bundles, returns, verification defaults,
 /// thresholds, driver policies, performance targets
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -173,7 +174,7 @@ class _LiveSettingsScreenState extends State<LiveSettingsScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Default verification method', style: TextStyle(fontSize: 12, color: AppColors.textTertiary)),
+                    const Text('Default verification method', style: TextStyle(fontSize: 12, color: AppColors.textTertiary)),
                     const SizedBox(height: 10),
                     ...DefaultVerification.values.map((method) {
                       final info = _verificationInfo(method);
@@ -197,7 +198,7 @@ class _LiveSettingsScreenState extends State<LiveSettingsScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(info.$2, style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: isSelected ? const Color(0xFF059669) : AppColors.textPrimary)),
-                                    Text(info.$3, style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                                    Text(info.$3, style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                                   ],
                                 ),
                               ),
@@ -349,14 +350,14 @@ class _SettingsToggle extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(label, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-                Text(subtitle, style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                Text(subtitle, style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
               ],
             ),
           ),
           Switch(
             value: value,
             onChanged: onChanged,
-            activeColor: kLiveColor,
+            activeThumbColor: kLiveColor,
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
           ),
         ],
@@ -434,7 +435,7 @@ class _InfoRow extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 6),
       child: Row(
         children: [
-          Expanded(child: Text(label, style: TextStyle(fontSize: 12, color: AppColors.textSecondary))),
+          Expanded(child: Text(label, style: const TextStyle(fontSize: 12, color: AppColors.textSecondary))),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
             decoration: BoxDecoration(color: Colors.grey.shade100, borderRadius: BorderRadius.circular(6)),

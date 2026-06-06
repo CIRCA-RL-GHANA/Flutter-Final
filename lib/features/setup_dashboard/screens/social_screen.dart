@@ -4,6 +4,7 @@
 /// RBAC: Owner(personal), Admin(full), BM(branch), SO(full), BSO(branch),
 ///        Monitor/BrMon(view), RO/BRO(view), Driver(view)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -32,7 +33,7 @@ class SocialScreen extends StatelessWidget {
               title: 'Social & Updates',
               actions: [
                 DataScopeIndicator(access: setupProv.getCardAccess('social', ctxProv.currentRole)),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
               ],
             ),
             floatingActionButton: SetupRbacFAB(
@@ -158,10 +159,10 @@ class SocialScreen extends StatelessWidget {
                 ),
               ),
 
-              SliverToBoxAdapter(
+              const SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
-                  child: const SetupSectionTitle(title: 'Posts', icon: Icons.forum),
+                  padding: EdgeInsets.fromLTRB(20, 16, 20, 0),
+                  child: SetupSectionTitle(title: 'Posts', icon: Icons.forum),
                 ),
               ),
               // ─── AI Insights ─────────────────────────────────────────

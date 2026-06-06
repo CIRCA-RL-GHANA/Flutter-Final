@@ -1,6 +1,7 @@
 /// Alerts Screen 1.1 — Advanced Search & Discovery
 /// Full-width search bar, grouped results by status, search highlighting,
 /// AI suggestions, recent/saved searches
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -218,11 +219,11 @@ class _AlertsSearchScreenState extends State<AlertsSearchScreen> {
                           color: kAlertsInfo.withValues(alpha: 0.08),
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        child: Row(
+                        child: const Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Icon(Icons.auto_awesome, size: 11, color: kAlertsInfo),
-                            const SizedBox(width: 3),
+                            SizedBox(width: 3),
                             Text(
                               'AI ranked',
                               style: TextStyle(

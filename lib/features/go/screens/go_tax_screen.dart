@@ -1,5 +1,6 @@
 /// GO Screen 11 — Tax & Compliance
 /// Transaction categorization, report generator, regulatory dashboard
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -110,15 +111,15 @@ class _GoTaxScreenState extends State<GoTaxScreen> with SingleTickerProviderStat
       ])),
       const SizedBox(height: 14),
       // Summary cards
-      Row(children: [
+      const Row(children: [
         Expanded(child: _TaxCard(label: 'Total Income', value: '125,000 QP', icon: Icons.arrow_downward, color: kGoPositive)),
-        const SizedBox(width: 10),
+        SizedBox(width: 10),
         Expanded(child: _TaxCard(label: 'Total Expenses', value: '87,500 QP', icon: Icons.arrow_upward, color: kGoNegative)),
       ]),
       const SizedBox(height: 10),
-      Row(children: [
+      const Row(children: [
         Expanded(child: _TaxCard(label: 'Tax Liability', value: '5,625 QP', icon: Icons.account_balance, color: kGoWarning)),
-        const SizedBox(width: 10),
+        SizedBox(width: 10),
         Expanded(child: _TaxCard(label: 'Net Profit', value: '37,500 QP', icon: Icons.trending_up, color: kGoInfo)),
       ]),
       const SizedBox(height: 14),

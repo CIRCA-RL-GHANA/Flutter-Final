@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:thepg/core/providers/service_providers.dart';
 
 class QualChatPremiumScreen extends ConsumerStatefulWidget {
   final String? conversationId;
   
   const QualChatPremiumScreen({
-    Key? key,
+    super.key,
     this.conversationId,
-  }) : super(key: key);
+  });
 
   @override
   ConsumerState<QualChatPremiumScreen> createState() =>

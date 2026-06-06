@@ -1,6 +1,7 @@
 /// Alerts Screen 1 — Dashboard Master View
 /// Segmented control (Pending/Resolved/All), priority triage bar,
 /// alert cards sorted by priority, time filter chips, real-time counter
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -160,8 +161,8 @@ class AlertsDashboardScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            children: const [
+                          const Row(
+                            children: [
                               Icon(Icons.auto_awesome, size: 13, color: IveTokens.moduleUpdates),
                               SizedBox(width: 5),
                               Text(

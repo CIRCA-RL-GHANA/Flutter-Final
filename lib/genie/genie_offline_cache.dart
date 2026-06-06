@@ -11,6 +11,7 @@
 ///   • Detects sync conflicts when offline mutations rejoin the network
 ///   • Exposes a SyncConflict model consumed by GenieSyncConflictCard
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
 import 'dart:convert';
 import 'package:flutter/foundation.dart';

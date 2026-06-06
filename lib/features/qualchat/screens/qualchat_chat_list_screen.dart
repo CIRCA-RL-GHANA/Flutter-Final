@@ -1,5 +1,6 @@
 /// qualChat Screen 8 — Chat List (Enhanced)
 /// Smart inbox: tabs, pinned, search, swipe actions, FAB
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

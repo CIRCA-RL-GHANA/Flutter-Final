@@ -17,7 +17,6 @@
 // on every platform we support.
 // ─────────────────────────────────────────────────────────────
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../design/ive_tokens.dart';
 

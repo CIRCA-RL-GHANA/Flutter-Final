@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import '../core/design/ive_tokens.dart';
-import '../core/design/ive_tokens.dart';
 
 /// Pathway 2 — Live delivery tracking card.
 ///
@@ -100,7 +99,7 @@ class _LiveTrackingCardState extends State<LiveTrackingCard>
     return Card(
       elevation: 4,
       color: IveTokens.surface,
-      shape: RoundedRectangleBorder(borderRadius: IveTokens.brLg),
+      shape: const RoundedRectangleBorder(borderRadius: IveTokens.brLg),
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -203,7 +202,7 @@ class _LiveTrackingCardState extends State<LiveTrackingCard>
                 ),
                 const Spacer(),
                 IconButton(
-                  icon: Icon(Icons.phone_rounded,
+                  icon: const Icon(Icons.phone_rounded,
                       color: IveTokens.moduleLive),
                   tooltip: 'Call driver',
                   onPressed: () {

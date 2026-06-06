@@ -13,10 +13,15 @@ import '../widgets/progress_indicators.dart';
 
 
 // OS palette — mirrors splash / welcome
+// ignore: unused_element
 const Color _kBg        = IveTokens.bg;
+// ignore: unused_element
 const Color _kSurface   = IveTokens.surface;
+// ignore: unused_element
 const Color _kBorder    = IveTokens.hairline;
+// ignore: unused_element
 const Color _kAccent    = IveTokens.accent;
+// ignore: unused_element
 const Color _kAccentDim = IveTokens.accentPressed;
 /// Screen 6: Profile Photo and Username
 /// Identity creation with social validation
@@ -73,7 +78,7 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
         padding: const EdgeInsets.all(24),
         decoration: const BoxDecoration(
           color: IveTokens.surface,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(IveTokens.rLg)),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(IveTokens.rLg)),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -81,7 +86,7 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
             Container(
               width: 40,
               height: 4,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: IveTokens.hairline,
                 borderRadius: IveTokens.brXs,
               ),
@@ -266,7 +271,7 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                               ),
                               hintText: 'Choose a username',
                               suffixIcon: _buildUsernameSuffix(profile),
-                              border: OutlineInputBorder(
+                              border: const OutlineInputBorder(
                                 borderRadius: IveTokens.brXs,
                               ),
                               enabledBorder: OutlineInputBorder(
@@ -307,9 +312,9 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                           // Username suggestions
                           if (profile.suggestions.isNotEmpty) ...[
                             const SizedBox(height: 16),
-                            Align(
+                            const Align(
                               alignment: Alignment.centerLeft,
-                              child: const Text(
+                              child: Text(
                                 'Suggestions:',
                                 style: TextStyle(
                                   fontSize: 12,
@@ -360,7 +365,7 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                           // Section 3: Profile Completeness
                           Container(
                             padding: const EdgeInsets.all(16),
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               color: IveTokens.surface,
                               borderRadius: IveTokens.brXs,
                             ),

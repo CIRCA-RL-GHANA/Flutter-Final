@@ -4,6 +4,7 @@
 /// RBAC: Owner(personal), Admin(full), BM(branch), SO/BSO(view/brView),
 ///        Monitor/BrMon(view), RO/BRO(view)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -39,7 +40,7 @@ class OutlookScreen extends StatelessWidget {
                 ),
                 const SizedBox(width: 8),
                 DataScopeIndicator(access: setupProv.getCardAccess('outlook', ctxProv.currentRole)),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
               ],
             ),
           body: CustomScrollView(
@@ -216,7 +217,7 @@ class OutlookScreen extends StatelessWidget {
                         const SizedBox(height: 8),
                         const _PerfBar(label: 'Customer Satisfaction', percent: 0.92, color: kSetupColor),
                         const SizedBox(height: 8),
-                        _PerfBar(label: 'Delivery SLA', percent: 0.85, color: const Color(0xFF8B5CF6)),
+                        const _PerfBar(label: 'Delivery SLA', percent: 0.85, color: Color(0xFF8B5CF6)),
                         const SizedBox(height: 8),
                         const _PerfBar(label: 'Staff Productivity', percent: 0.71, color: AppColors.warning),
                       ],

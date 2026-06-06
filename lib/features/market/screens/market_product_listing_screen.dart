@@ -2,6 +2,7 @@
 /// MARKET MODULE — Screen 3: Product Listing & Selection
 /// Full-screen product catalog with grid/list toggle, sort, categories
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -124,7 +125,7 @@ class _MarketProductListingScreenState extends State<MarketProductListingScreen>
                   children: [
                     Text(
                       '${products.length} items',
-                      style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
+                      style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
                     ),
                     const Spacer(),
                     // Sort dropdown
@@ -144,11 +145,11 @@ class _MarketProductListingScreenState extends State<MarketProductListingScreen>
                     const SizedBox(width: 12),
                     GestureDetector(
                       onTap: () => Navigator.pushNamed(context, AppRoutes.marketProductFilters),
-                      child: Row(
+                      child: const Row(
                         children: [
-                          const Icon(Icons.tune, size: 16, color: kMarketColor),
-                          const SizedBox(width: 4),
-                          const Text('Filter', style: TextStyle(fontSize: 13, color: kMarketColor, fontWeight: FontWeight.w600)),
+                          Icon(Icons.tune, size: 16, color: kMarketColor),
+                          SizedBox(width: 4),
+                          Text('Filter', style: TextStyle(fontSize: 13, color: kMarketColor, fontWeight: FontWeight.w600)),
                         ],
                       ),
                     ),

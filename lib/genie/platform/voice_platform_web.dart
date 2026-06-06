@@ -3,7 +3,8 @@
 /// Uses the browser's Web Speech API (`SpeechRecognition` /
 /// `webkitSpeechRecognition`). Falls back gracefully if the API is
 /// unavailable or the user denies microphone permission.
-// ignore: avoid_web_libraries_in_flutter
+library;
+// ignore: avoid_web_libraries_in_flutter, deprecated_member_use
 import 'dart:html' as html;
 import 'dart:js_interop';
 import 'dart:js_interop_unsafe';
@@ -56,7 +57,7 @@ Future<bool> voiceStart() async {
     _recognition!['continuous'] = false.toJS;
     _recognition!['interimResults'] = false.toJS;
     _recognition!['maxAlternatives'] = 1.toJS;
-    _recognition!['lang'] = (html.window.navigator.language ?? 'en-US').toJS;
+    _recognition!['lang'] = html.window.navigator.language.toJS;
 
     _recognition!['onstart'] =
         ((JSAny? _) => _onStatus?.call('listening')).toJS;

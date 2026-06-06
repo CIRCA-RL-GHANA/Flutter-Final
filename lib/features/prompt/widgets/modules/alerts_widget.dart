@@ -2,6 +2,7 @@
 /// ALERTS Widget (Resolution Log)
 /// Visible to: ALL roles EXCEPT Owner
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -55,7 +56,7 @@ class AlertsWidgetContent extends StatelessWidget {
           const SizedBox(height: 8),
 
           // Filter Summary
-          Text(
+          const Text(
             'Last 7 days • 12 resolved • 2 pending',
             style: TextStyle(
               fontSize: 10,

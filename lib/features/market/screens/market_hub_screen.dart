@@ -3,6 +3,7 @@
 /// Video background, category navigation, merchant discovery,
 /// AI optimization panel, quick actions, deal carousel
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,7 +22,7 @@ class MarketHubScreen extends StatefulWidget {
 }
 
 class _MarketHubScreenState extends State<MarketHubScreen> {
-  int _featuredIndex = 0;
+  final int _featuredIndex = 0;
   final _scrollController = ScrollController();
   bool _isCollapsed = false;
 
@@ -554,7 +555,7 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
             width: 240,
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
-              gradient: LinearGradient(
+              gradient: const LinearGradient(
                 colors: [kMarketColor, kMarketColorDark],
               ),
               borderRadius: BorderRadius.circular(14),

@@ -3,6 +3,7 @@
 /// Driver accepts/declines assigned packages, reviews details,
 /// confirms pickup readiness, and starts navigation
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -69,19 +70,19 @@ class _LivePackageAcceptanceScreenState extends State<LivePackageAcceptanceScree
               Container(
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(colors: [const Color(0xFFF59E0B), const Color(0xFFEF4444)]),
+                  gradient: const LinearGradient(colors: [Color(0xFFF59E0B), Color(0xFFEF4444)]),
                   borderRadius: BorderRadius.circular(14),
                 ),
                 child: Row(
                   children: [
                     const Icon(Icons.timer, color: Colors.white, size: 24),
                     const SizedBox(width: 12),
-                    Expanded(
+                    const Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text('RESPOND WITHIN', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white70)),
-                          const Text('0:48', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900, color: Colors.white)),
+                          Text('RESPOND WITHIN', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white70)),
+                          Text('0:48', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900, color: Colors.white)),
                         ],
                       ),
                     ),
@@ -118,8 +119,8 @@ class _LivePackageAcceptanceScreenState extends State<LivePackageAcceptanceScree
                     const SizedBox(height: 8),
                     _InfoRow(icon: Icons.route, label: '${pkg.stops.length} stops'),
                     _InfoRow(icon: Icons.attach_money, label: 'Value: â‚µ${pkg.driverEarnings.toStringAsFixed(0)}'),
-                    _InfoRow(icon: Icons.timer, label: 'Est. duration: 45 min'),
-                    _InfoRow(icon: Icons.straighten, label: 'Est. distance: 8.3 km'),
+                    const _InfoRow(icon: Icons.timer, label: 'Est. duration: 45 min'),
+                    const _InfoRow(icon: Icons.straighten, label: 'Est. distance: 8.3 km'),
                   ],
                 ),
               ),
@@ -149,12 +150,12 @@ class _LivePackageAcceptanceScreenState extends State<LivePackageAcceptanceScree
                               children: [
                                 Row(
                                   children: [
-                                    Text(stop.type.name.toUpperCase(), style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.textTertiary)),
+                                    Text(stop.type.name.toUpperCase(), style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.textTertiary)),
                                     const SizedBox(width: 6),
                                     Text(stop.customerName, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600)),
                                   ],
                                 ),
-                                Text(stop.address, style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                                Text(stop.address, style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                               ],
                             ),
                           ),
@@ -263,9 +264,9 @@ class _AcceptedView extends StatelessWidget {
               const SizedBox(height: 20),
               Text('Package ${package.id} Accepted!', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
               const SizedBox(height: 8),
-              Text('Head to the pickup location to collect the package.', style: TextStyle(fontSize: 14, color: AppColors.textSecondary), textAlign: TextAlign.center),
+              const Text('Head to the pickup location to collect the package.', style: TextStyle(fontSize: 14, color: AppColors.textSecondary), textAlign: TextAlign.center),
               const SizedBox(height: 4),
-              Text('First stop: ${package.stops.first.address}', style: TextStyle(fontSize: 13, color: AppColors.textTertiary), textAlign: TextAlign.center),
+              Text('First stop: ${package.stops.first.address}', style: const TextStyle(fontSize: 13, color: AppColors.textTertiary), textAlign: TextAlign.center),
               const SizedBox(height: 24),
               SizedBox(
                 width: double.infinity,
@@ -302,7 +303,7 @@ class _InfoRow extends StatelessWidget {
         children: [
           Icon(icon, size: 14, color: AppColors.textTertiary),
           const SizedBox(width: 8),
-          Text(label, style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+          Text(label, style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
         ],
       ),
     );

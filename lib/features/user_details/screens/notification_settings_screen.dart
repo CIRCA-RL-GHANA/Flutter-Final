@@ -2,6 +2,7 @@
 /// Screen 7: Notification Orchestrator
 /// Mode presets, per-module matrix, smart rules, quiet hours
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -344,7 +345,7 @@ class _ModuleNotifRow extends StatelessWidget {
               HapticFeedback.selectionClick();
               onToggle(v);
             },
-            activeColor: const Color(0xFFF59E0B),
+            activeThumbColor: const Color(0xFFF59E0B),
           ),
         ],
       ),
@@ -410,7 +411,7 @@ class _SmartRuleCard extends StatelessWidget {
                 HapticFeedback.selectionClick();
                 onToggle(v);
               },
-              activeColor: const Color(0xFF06B6D4),
+              activeThumbColor: const Color(0xFF06B6D4),
             ),
           ],
         ),

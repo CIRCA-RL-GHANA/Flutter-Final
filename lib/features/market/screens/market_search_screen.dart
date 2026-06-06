@@ -3,13 +3,13 @@
 /// Full-screen modal with search bar, recent searches, quick filters,
 /// tabbed results (Merchants / Products / Deals), AI suggestions
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
-import '../../../core/widgets/ai_smart_search_bar.dart';
 import '../models/market_models.dart';
 import '../providers/market_provider.dart';
 import '../widgets/market_widgets.dart';
@@ -224,7 +224,7 @@ class _MarketSearchScreenState extends State<MarketSearchScreen> with SingleTick
                           Text(merchant.name, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
                           if (merchant.verification != VerificationTier.none) ...[
                             const SizedBox(width: 4),
-                            Icon(Icons.verified, size: 14, color: kMarketColor),
+                            const Icon(Icons.verified, size: 14, color: kMarketColor),
                           ],
                         ],
                       ),
@@ -232,7 +232,7 @@ class _MarketSearchScreenState extends State<MarketSearchScreen> with SingleTick
                         children: [
                           Text('${merchant.ratingDisplay}â˜…', style: const TextStyle(fontSize: 12)),
                           Text(' • ${merchant.deliveryTimeDisplay} • ${merchant.distanceMiles}mi',
-                              style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                              style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                         ],
                       ),
                     ],
@@ -318,7 +318,7 @@ class _MarketSearchScreenState extends State<MarketSearchScreen> with SingleTick
         return Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [kMarketColor, kMarketColorDark]),
+            gradient: const LinearGradient(colors: [kMarketColor, kMarketColorDark]),
             borderRadius: BorderRadius.circular(14),
           ),
           child: Row(
@@ -390,12 +390,12 @@ class _AISearchSuggestionBanner extends StatelessWidget {
               border: Border.all(
                   color: const Color(0xFF8B5CF6).withValues(alpha: 0.15)),
             ),
-            child: Row(
+            child: const Row(
               children: [
-                const Icon(Icons.auto_awesome,
+                Icon(Icons.auto_awesome,
                     size: 18, color: Color(0xFF8B5CF6)),
-                const SizedBox(width: 10),
-                const Expanded(
+                SizedBox(width: 10),
+                Expanded(
                   child: Text(
                     'AI-powered search — type anything and get\nsemantically ranked results.',
                     style: TextStyle(fontSize: 12, color: AppColors.textSecondary),
@@ -418,8 +418,8 @@ class _AISearchSuggestionBanner extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: const [
+                const Row(
+                  children: [
                     Icon(Icons.auto_awesome, size: 14, color: Color(0xFF8B5CF6)),
                     SizedBox(width: 4),
                     Text('AI Suggestions',

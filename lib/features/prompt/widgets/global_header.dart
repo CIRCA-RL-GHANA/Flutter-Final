@@ -2,6 +2,7 @@
 /// Global Header (Persistent)
 /// Top Navigation Bar with context, search, and quick actions
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -256,7 +257,7 @@ class _SwitchContextButton extends StatelessWidget {
         child: Container(
           width: 36,
           height: 36,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: AppColors.inputFill,
             borderRadius: IveTokens.brSm,
           ),
@@ -324,7 +325,7 @@ class _ZapActionMenu extends StatelessWidget {
       icon: Container(
         width: 36,
         height: 36,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: AppColors.inputFill,
           borderRadius: IveTokens.brSm,
         ),
@@ -334,7 +335,7 @@ class _ZapActionMenu extends StatelessWidget {
           color: AppColors.accent,
         ),
       ),
-      shape: RoundedRectangleBorder(borderRadius: IveTokens.brLg),
+      shape: const RoundedRectangleBorder(borderRadius: IveTokens.brLg),
       offset: const Offset(0, 44),
       onSelected: (value) {
         // Navigate to selected module
@@ -391,7 +392,7 @@ class _NotificationBell extends StatelessWidget {
               Container(
                 width: 36,
                 height: 36,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: AppColors.inputFill,
                   borderRadius: IveTokens.brSm,
                 ),
@@ -451,7 +452,7 @@ class _EmergencySOS extends StatelessWidget {
         child: Container(
           width: 36,
           height: 36,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: AppColors.error,
             borderRadius: IveTokens.brSm,
           ),
@@ -479,14 +480,14 @@ class _GlobalSearchBar extends StatelessWidget {
 
     return Container(
       height: 44,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: AppColors.inputFill,
         borderRadius: IveTokens.brMd,
       ),
       child: Row(
         children: [
           const SizedBox(width: 14),
-          Icon(
+          const Icon(
             Icons.search,
             size: 20,
             color: AppColors.textTertiary,
@@ -522,7 +523,7 @@ class _GlobalSearchBar extends StatelessWidget {
                   color: AppColors.primaryLight.withValues(alpha: 0.08),
                   borderRadius: IveTokens.brSm,
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.mic,
                   size: 18,
                   color: AppColors.primaryLight,
@@ -641,7 +642,7 @@ class ContextSwitcherSheet extends StatelessWidget {
                       _RoleBadge(role: ctx.role),
                       if (isActive) ...[
                         const SizedBox(width: 8),
-                        Icon(Icons.check_circle,
+                        const Icon(Icons.check_circle,
                             size: 20, color: AppColors.primaryLight),
                       ],
                     ],
@@ -662,7 +663,7 @@ class ContextSwitcherSheet extends StatelessWidget {
               label: const Text('Add Entity'),
               style: OutlinedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 14),
-                shape: RoundedRectangleBorder(
+                shape: const RoundedRectangleBorder(
                   borderRadius: IveTokens.brMd,
                 ),
                 side: BorderSide(color: AppColors.primaryLight.withValues(alpha: 0.3)),

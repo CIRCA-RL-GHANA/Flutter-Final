@@ -1,11 +1,11 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../widgets/updates_widgets.dart';
 
 class UpdatesSocialFeedScreen extends StatefulWidget {
-  const UpdatesSocialFeedScreen({Key? key}) : super(key: key);
+  const UpdatesSocialFeedScreen({super.key});
 
   @override
   State<UpdatesSocialFeedScreen> createState() =>

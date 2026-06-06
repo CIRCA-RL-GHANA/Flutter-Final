@@ -3,6 +3,7 @@
 /// Reusable components: metric cards, section headers, utility tiles,
 /// filter chips, status indicators, info panels
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -402,7 +403,7 @@ class UtilityToggleTile extends StatelessWidget {
               HapticFeedback.selectionClick();
               onChanged(v);
             },
-            activeColor: color,
+            activeThumbColor: color,
           ),
         ],
       ),

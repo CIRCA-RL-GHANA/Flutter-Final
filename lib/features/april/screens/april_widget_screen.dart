@@ -1,5 +1,6 @@
 /// APRIL Screen 0 — PROMPT Screen Integration (APRIL Widget)
 /// Voice activation, quick actions, pending actions, plugin status
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

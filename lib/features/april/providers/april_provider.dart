@@ -1,6 +1,7 @@
 /// APRIL Module — State Management
 /// Provider with API-first loading + fallback demo data for all 7 screens
 /// Module Color: Gold 0xFFFFD700
+library;
 
 import 'package:flutter/foundation.dart';
 import '../../../core/services/services.dart';
@@ -52,7 +53,7 @@ class AprilProvider extends ChangeNotifier {
   //  GLOBAL STATE (local only)
   // ──────────────────────────────────────────────
 
-  String _userName = 'John';
+  final String _userName = 'John';
   String get userName => _userName;
 
   VoiceState _voiceState = VoiceState.idle;
@@ -224,7 +225,7 @@ class AprilProvider extends ChangeNotifier {
     ),
   ];
 
-  List<PluginStatus> _pluginStatuses = [];
+  final List<PluginStatus> _pluginStatuses = [];
   List<PluginStatus> get pluginStatuses =>
       _pluginStatuses.isNotEmpty ? _pluginStatuses : _fallbackPluginStatuses;
 

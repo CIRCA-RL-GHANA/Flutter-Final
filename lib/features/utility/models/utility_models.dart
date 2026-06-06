@@ -3,6 +3,7 @@
 /// Complete data models for all 9 screens: Dashboard, Settings, Notifications,
 /// Search, Help, Privacy, Accessibility, Advanced Data, System Monitor
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
 import 'package:flutter/material.dart';
 

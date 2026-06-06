@@ -3,6 +3,7 @@
 /// Steps: Type â†’ Audience â†’ Budget â†’ Content â†’ Review
 /// RBAC: Admin(full), BM(branch), SO(full), BSO(branch)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -27,7 +28,7 @@ class _CampaignCreateScreenState extends State<CampaignCreateScreen> {
 
   // Form state
   // ignore: unused_field
-  String _campaignName = '';
+  final String _campaignName = '';
   CampaignType _type = CampaignType.discount;
   CampaignGoal _goal = CampaignGoal.brandAwareness;
   final _nameCtrl = TextEditingController();
@@ -397,6 +398,7 @@ class _AudienceStep extends StatelessWidget {
                         ],
                       ),
                     ),
+                    // ignore: deprecated_member_use
                     Checkbox(
                       value: isSelected,
                       onChanged: (_) => onToggle(name),
@@ -528,20 +530,20 @@ class _BudgetStep extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             border: Border.all(color: AppColors.info.withValues(alpha: 0.15)),
           ),
-          child: Column(
+          child: const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Row(
+              Row(
                 children: [
                   Icon(Icons.analytics, size: 16, color: AppColors.info),
                   SizedBox(width: 6),
                   Text('Estimated Performance', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: AppColors.info)),
                 ],
               ),
-              const SizedBox(height: 8),
-              const SetupInfoRow(label: 'Est. Reach', value: '5,000 – 12,000'),
-              const SetupInfoRow(label: 'Est. Clicks', value: '250 – 600'),
-              const SetupInfoRow(label: 'Est. Cost/Click', value: 'â‚µ0.15 – â‚µ0.40'),
+              SizedBox(height: 8),
+              SetupInfoRow(label: 'Est. Reach', value: '5,000 – 12,000'),
+              SetupInfoRow(label: 'Est. Clicks', value: '250 – 600'),
+              SetupInfoRow(label: 'Est. Cost/Click', value: 'â‚µ0.15 – â‚µ0.40'),
             ],
           ),
         ),
@@ -605,7 +607,7 @@ class _ContentStep extends StatelessWidget {
                   style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
                 ),
                 const SizedBox(height: 4),
-                Text(
+                const Text(
                   'PNG, JPG Â· Recommended 1200Ã—628',
                   style: TextStyle(fontSize: 11, color: AppColors.textTertiary),
                 ),
@@ -704,14 +706,14 @@ class _CampaignReviewStep extends StatelessWidget {
           ),
         ),
 
-        SetupSectionCard(
+        const SetupSectionCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SetupSectionTitle(title: 'Estimated Results', icon: Icons.analytics),
-              const SetupInfoRow(label: 'Reach', value: '5,000 – 12,000'),
-              const SetupInfoRow(label: 'Engagement', value: '3.5% – 5.2%'),
-              const SetupInfoRow(label: 'Conversions', value: '50 – 150'),
+              SetupSectionTitle(title: 'Estimated Results', icon: Icons.analytics),
+              SetupInfoRow(label: 'Reach', value: '5,000 – 12,000'),
+              SetupInfoRow(label: 'Engagement', value: '3.5% – 5.2%'),
+              SetupInfoRow(label: 'Conversions', value: '50 – 150'),
             ],
           ),
         ),

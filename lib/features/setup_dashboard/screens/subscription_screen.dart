@@ -3,6 +3,7 @@
 /// Plan details, usage limits, storage, API calls, renewal
 /// RBAC: Owner(personal), Admin(entity), BM(brView)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +31,7 @@ class SubscriptionScreen extends StatelessWidget {
               title: 'Subscription',
               actions: [
                 DataScopeIndicator(access: setupProv.getCardAccess('subscription', ctxProv.currentRole)),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
               ],
             ),
           body: CustomScrollView(

@@ -3,6 +3,7 @@
 /// Handles user bubbles (right-aligned) and Genie bubbles (left-aligned).
 /// Supports swipe-to-dismiss and swipe-to-act gestures.
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import '../../core/design/ive_tokens.dart';

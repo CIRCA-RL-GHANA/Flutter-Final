@@ -3,6 +3,7 @@
 /// Real-time operations analytics: KPIs, delivery zones,
 /// bottleneck alerts, performance trends, predictive insights
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -217,13 +218,13 @@ class LiveAnalyticsScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: const Color(0xFFF3F4F6),
                         borderRadius: BorderRadius.circular(12)),
-                    child: Center(
+                    child: const Center(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Icon(Icons.bar_chart,
                               size: 32, color: AppColors.textTertiary),
-                          const SizedBox(height: 4),
+                          SizedBox(height: 4),
                           Text('Hourly order volume chart',
                               style: TextStyle(
                                   fontSize: 12, color: AppColors.textTertiary)),
@@ -297,7 +298,7 @@ class _ZoneCard extends StatelessWidget {
                     ],
                   ),
                   Text('${zone.orderCount} orders • ${zone.intensity} demand',
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 11, color: AppColors.textTertiary)),
                 ],
               ),
@@ -346,7 +347,7 @@ class _BottleneckCard extends StatelessWidget {
                       style: const TextStyle(
                           fontSize: 13, fontWeight: FontWeight.w600)),
                   Text(alert.description,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 11, color: AppColors.textSecondary)),
                 ],
               ),
@@ -385,7 +386,7 @@ class _InsightCard extends StatelessWidget {
                       style: const TextStyle(
                           fontSize: 13, fontWeight: FontWeight.w600)),
                   Text(insight.description,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 12, color: AppColors.textSecondary)),
                 ],
               ),
@@ -445,7 +446,7 @@ class _DriverLeaderboardItem extends StatelessWidget {
                           fontSize: 13, fontWeight: FontWeight.w600)),
                   Text(
                       '${driver.todayDeliveries} deliveries • ${driver.onTimeRate.toStringAsFixed(0)}% on-time',
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 11, color: AppColors.textTertiary)),
                 ],
               ),

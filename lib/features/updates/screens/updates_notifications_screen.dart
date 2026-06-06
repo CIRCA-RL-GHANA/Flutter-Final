@@ -3,6 +3,7 @@
 /// Six filter tabs: All, Likes, Comments, Mentions, Shares, System.
 /// Mark all read, individual actions, notification grouping.
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -235,20 +236,20 @@ class _BodyState extends State<_Body> with SingleTickerProviderStateMixin {
     showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
-      builder: (_) => Padding(
-        padding: const EdgeInsets.all(16),
+      builder: (_) => const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Notification Preferences', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
-            const SizedBox(height: 12),
-            const _NotifToggle(label: 'Likes', subtitle: 'When someone likes your update', value: true),
-            const _NotifToggle(label: 'Comments', subtitle: 'When someone comments on your update', value: true),
-            const _NotifToggle(label: 'Mentions', subtitle: 'When someone mentions you', value: true),
-            const _NotifToggle(label: 'Shares', subtitle: 'When your update is shared', value: true),
-            const _NotifToggle(label: 'System', subtitle: 'Platform announcements', value: false),
-            const SizedBox(height: 8),
+            Text('Notification Preferences', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
+            SizedBox(height: 12),
+            _NotifToggle(label: 'Likes', subtitle: 'When someone likes your update', value: true),
+            _NotifToggle(label: 'Comments', subtitle: 'When someone comments on your update', value: true),
+            _NotifToggle(label: 'Mentions', subtitle: 'When someone mentions you', value: true),
+            _NotifToggle(label: 'Shares', subtitle: 'When your update is shared', value: true),
+            _NotifToggle(label: 'System', subtitle: 'Platform announcements', value: false),
+            SizedBox(height: 8),
           ],
         ),
       ),
@@ -281,7 +282,7 @@ class _NotifToggleState extends State<_NotifToggle> {
       subtitle: Text(widget.subtitle, style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
       value: _value,
       onChanged: (v) => setState(() => _value = v),
-      activeColor: kUpdatesColor,
+      activeThumbColor: kUpdatesColor,
       contentPadding: EdgeInsets.zero,
     );
   }

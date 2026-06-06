@@ -1,6 +1,7 @@
 /// APRIL Screen 4 — Wishlist Command Center
 /// 4 view modes: grid, list, priority, timeline
 /// Item management, collections, savings tracking
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

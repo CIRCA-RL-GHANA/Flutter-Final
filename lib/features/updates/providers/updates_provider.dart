@@ -4,6 +4,7 @@
 /// Feed, Comments, Likes, Shares, Saved, Search, Notifications,
 /// Interests, Following, Insights, Reports
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
 import 'package:flutter/material.dart';
 import '../../../core/services/services.dart';
@@ -188,7 +189,7 @@ class UpdatesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<UpdateComment> _comments = [];
+  final List<UpdateComment> _comments = [];
 
   List<UpdateComment> get comments =>
       _comments.isNotEmpty ? _comments : _fallbackComments;
@@ -197,7 +198,7 @@ class UpdatesProvider extends ChangeNotifier {
   // SECTION 4: LIKES (fallback-only)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  List<UpdateLiker> _likers = [];
+  final List<UpdateLiker> _likers = [];
 
   List<UpdateLiker> get likers =>
       _likers.isNotEmpty ? _likers : _fallbackLikers;
@@ -206,7 +207,7 @@ class UpdatesProvider extends ChangeNotifier {
   // SECTION 5: SHARES (fallback-only)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  List<UpdateShare> _shares = [];
+  final List<UpdateShare> _shares = [];
 
   List<UpdateShare> get shares =>
       _shares.isNotEmpty ? _shares : _fallbackShares;
@@ -226,7 +227,7 @@ class UpdatesProvider extends ChangeNotifier {
   // SECTION 6: NOTIFICATIONS (fallback-only)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  List<UpdateNotification> _notifications = [];
+  final List<UpdateNotification> _notifications = [];
 
   List<UpdateNotification> get notifications =>
       _notifications.isNotEmpty ? _notifications : _fallbackNotifications;
@@ -242,7 +243,7 @@ class UpdatesProvider extends ChangeNotifier {
   // SECTION 7: INTERESTS (fallback-only — ownerId not available)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  List<UserInterest> _interests = [];
+  final List<UserInterest> _interests = [];
 
   List<UserInterest> get interests =>
       _interests.isNotEmpty ? _interests : _fallbackInterests;
@@ -255,7 +256,7 @@ class UpdatesProvider extends ChangeNotifier {
   // SECTION 8: FOLLOWING (fallback-only)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  List<FollowedEntity> _following = [];
+  final List<FollowedEntity> _following = [];
 
   List<FollowedEntity> get following =>
       _following.isNotEmpty ? _following : _fallbackFollowing;
@@ -297,12 +298,12 @@ class UpdatesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<TrendingHashtag> _trendingHashtags = [];
+  final List<TrendingHashtag> _trendingHashtags = [];
 
   List<TrendingHashtag> get trendingHashtags =>
       _trendingHashtags.isNotEmpty ? _trendingHashtags : _fallbackTrendingHashtags;
 
-  List<SearchAccount> _searchAccounts = [];
+  final List<SearchAccount> _searchAccounts = [];
 
   List<SearchAccount> get searchAccounts =>
       _searchAccounts.isNotEmpty ? _searchAccounts : _fallbackSearchAccounts;
@@ -348,7 +349,7 @@ class UpdatesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<SavedCollection> _collections = [];
+  final List<SavedCollection> _collections = [];
 
   List<SavedCollection> get collections =>
       _collections.isNotEmpty ? _collections : _fallbackCollections;
@@ -374,11 +375,11 @@ class UpdatesProvider extends ChangeNotifier {
             ? List<String>.from(json['mediaUrls'] as List)
             : json['attachments'] != null
                 ? List<String>.from(json['attachments'] as List)
-                : null ?? [],
+                : [],
         caption: json['caption']?.toString() ?? json['content']?.toString() ?? '',
         hashtags: json['hashtags'] != null
             ? List<String>.from(json['hashtags'] as List)
-            : null ?? [],
+            : [],
         visibility: _parseVisibility(json['visibility']?.toString()),
         createdAt: json['createdAt'] != null
             ? DateTime.tryParse(json['createdAt'].toString()) ?? DateTime.now()

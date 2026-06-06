@@ -2,6 +2,7 @@
 /// MARKET MODULE — Screen 8: Self-Pickup Process
 /// 5 Phases: Preparation â†’ Arrival â†’ Verification â†’ Handoff â†’ Complete
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -276,15 +277,15 @@ class _PreparationPhase extends StatelessWidget {
             color: kMarketColorLight,
             borderRadius: BorderRadius.circular(16),
           ),
-          child: Column(
+          child: const Column(
             children: [
-              const Icon(Icons.restaurant, size: 48, color: kMarketColor),
-              const SizedBox(height: 12),
-              const Text(
+              Icon(Icons.restaurant, size: 48, color: kMarketColor),
+              SizedBox(height: 12),
+              Text(
                 'Your order is being prepared',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
               ),
-              const SizedBox(height: 4),
+              SizedBox(height: 4),
               Text(
                 'Estimated ready in 15-20 minutes',
                 style: TextStyle(fontSize: 14, color: AppColors.textSecondary),
@@ -478,7 +479,7 @@ class _VerificationPhase extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-              Text(
+              const Text(
                 'Valid for this pickup only',
                 style: TextStyle(fontSize: 12, color: AppColors.textTertiary),
               ),
@@ -486,12 +487,12 @@ class _VerificationPhase extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 16),
-        MarketSectionCard(
+        const MarketSectionCard(
           title: 'Verification Steps',
           children: [
-              const _VerificationStep(step: 1, text: 'Show the pickup code to the merchant', isDone: true),
-              const _VerificationStep(step: 2, text: 'Merchant scans or enters your code', isDone: false),
-              const _VerificationStep(step: 3, text: 'Verify your items are correct', isDone: false),
+              _VerificationStep(step: 1, text: 'Show the pickup code to the merchant', isDone: true),
+              _VerificationStep(step: 2, text: 'Merchant scans or enters your code', isDone: false),
+              _VerificationStep(step: 3, text: 'Verify your items are correct', isDone: false),
             ],
         ),
       ],
@@ -525,7 +526,7 @@ class _VerificationStep extends StatelessWidget {
                 : Text(
                     '$step',
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 11, color: AppColors.textTertiary),
+                    style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                   ),
           ),
           const SizedBox(width: 10),
@@ -586,11 +587,15 @@ class _HandoffPhaseState extends State<_HandoffPhase> {
           title: 'Items Checklist',
           children: widget.order.items.map((item) {
               final itemKey = '${item.name}_${item.quantity}';
+              // ignore: deprecated_member_use
               return CheckboxListTile(
                 value: _checkedItems.contains(itemKey),
                 onChanged: (v) => setState(() {
-                  if (v == true) _checkedItems.add(itemKey);
-                  else _checkedItems.remove(itemKey);
+                  if (v == true) {
+                    _checkedItems.add(itemKey);
+                  } else {
+                    _checkedItems.remove(itemKey);
+                  }
                 }),
                 title: Text('${item.quantity}x ${item.name}', style: const TextStyle(fontSize: 14)),
                 activeColor: kMarketColor,
@@ -648,7 +653,7 @@ class _CompletePhase extends StatelessWidget {
         const SizedBox(height: 8),
         Text(
           'Enjoy your order from ${order.merchantName}',
-          style: TextStyle(fontSize: 14, color: AppColors.textSecondary),
+          style: const TextStyle(fontSize: 14, color: AppColors.textSecondary),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 24),
@@ -674,7 +679,7 @@ class _CompletePhase extends StatelessWidget {
                 maxLines: 2,
                 decoration: InputDecoration(
                   hintText: 'Leave a review (optional)',
-                  hintStyle: TextStyle(fontSize: 13, color: AppColors.textTertiary),
+                  hintStyle: const TextStyle(fontSize: 13, color: AppColors.textTertiary),
                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),

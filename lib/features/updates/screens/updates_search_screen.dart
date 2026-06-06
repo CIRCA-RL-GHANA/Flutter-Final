@@ -3,6 +3,7 @@
 /// Five tabs: Top, Latest, Accounts, Hashtags, Nearby.
 /// Trending hashtags, suggested accounts, recent searches.
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -283,10 +284,10 @@ class _TopResults extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: kUpdatesColor.withValues(alpha: 0.15)),
                 ),
-                child: Row(
+                child: const Row(
                   children: [
                     Icon(Icons.auto_awesome, size: 14, color: kUpdatesColor),
-                    const SizedBox(width: 6),
+                    SizedBox(width: 6),
                     Text(
                       'AI — Semantically ranked results',
                       style: TextStyle(

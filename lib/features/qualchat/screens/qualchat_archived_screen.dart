@@ -1,5 +1,6 @@
 /// qualChat Screen 9 — Archived Chats
 /// Archive management: search, filter/sort, preview/restore/delete, storage
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -182,7 +183,7 @@ class _QualChatArchivedScreenState extends State<QualChatArchivedScreen> {
                       // Sort
                       Expanded(
                         child: DropdownButtonFormField<ArchiveSort>(
-                          value: provider.archiveSort,
+                          initialValue: provider.archiveSort,
                           decoration: InputDecoration(
                             labelText: 'Sort by',
                             labelStyle: const TextStyle(fontSize: 13),
@@ -221,7 +222,7 @@ class _QualChatArchivedScreenState extends State<QualChatArchivedScreen> {
                       // Filter
                       Expanded(
                         child: DropdownButtonFormField<ArchiveFilter>(
-                          value: _selectedFilter,
+                          initialValue: _selectedFilter,
                           decoration: InputDecoration(
                             labelText: 'Filter',
                             labelStyle: const TextStyle(fontSize: 13),
@@ -422,34 +423,6 @@ class _QualChatArchivedScreenState extends State<QualChatArchivedScreen> {
   void _exportArchive(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('âœ“ Archive export started')),
-    );
-  }
-}
-
-class _ArchiveAction extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final Color color;
-  final VoidCallback onTap;
-  const _ArchiveAction(
-      {required this.icon,
-      required this.label,
-      required this.color,
-      required this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Row(
-        children: [
-          Icon(icon, size: 16, color: color),
-          const SizedBox(width: 4),
-          Text(label,
-              style: TextStyle(
-                  fontSize: 12, fontWeight: FontWeight.w500, color: color)),
-        ],
-      ),
     );
   }
 }

@@ -3,6 +3,7 @@
 /// Branch list, online status, revenue, staff/vehicle counts
 /// RBAC: Admin(full), Monitor(view)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -31,7 +32,7 @@ class BranchesScreen extends StatelessWidget {
               title: 'Branches',
               actions: [
                 DataScopeIndicator(access: setupProv.getCardAccess('branches', ctxProv.currentRole)),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
               ],
             ),
             floatingActionButton: SetupRbacFAB(
@@ -75,10 +76,10 @@ class BranchesScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SliverToBoxAdapter(
+              const SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
-                  child: const SetupSectionTitle(title: 'All Branches', icon: Icons.business),
+                  padding: EdgeInsets.fromLTRB(20, 16, 20, 0),
+                  child: SetupSectionTitle(title: 'All Branches', icon: Icons.business),
                 ),
               ),
               // ─── AI Insights ─────────────────────────────────────────

@@ -14,6 +14,7 @@
 ///   POST   /community/:id/posts
 ///   DELETE /community/:id/posts/:postId
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
 import '../network/api_client.dart';
 import '../network/api_response.dart';

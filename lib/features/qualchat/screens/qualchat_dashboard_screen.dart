@@ -1,5 +1,6 @@
 /// qualChat Screen 1 — Dashboard (Enhanced)
 /// Mode toggle, Vibe Check (Owner), Presence Hub, Insights, Archive
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -390,7 +391,7 @@ class QualChatDashboardScreen extends StatelessWidget {
                   const SizedBox(width: 4),
                   Text('(${u.role})', style: const TextStyle(fontSize: 12, color: IveTokens.labelTertiary)),
                   const Spacer(),
-                  Icon(Icons.chat, size: 16, color: kChatColor),
+                  const Icon(Icons.chat, size: 16, color: kChatColor),
                 ],
               ),
             );
@@ -404,8 +405,8 @@ class QualChatDashboardScreen extends StatelessWidget {
               color: IveTokens.surface,
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Row(
-              children: const [
+            child: const Row(
+              children: [
                 Icon(Icons.search, size: 18, color: IveTokens.labelTertiary),
                 SizedBox(width: 8),
                 Text(
@@ -495,8 +496,8 @@ style: const TextStyle(fontSize: 13, color: IveTokens.label),
             );
           }),
           const SizedBox(height: 12),
-          Row(
-            children: const [
+          const Row(
+            children: [
               Text('Sentiment Trend: 📈 Positive',
                   style: TextStyle(fontSize: 12, color: IveTokens.labelSecondary)),
               SizedBox(width: 16),
@@ -512,11 +513,11 @@ style: const TextStyle(fontSize: 13, color: IveTokens.label),
           const SizedBox(height: 8),
           Row(
             children: [
-              _MediaThumb(icon: Icons.photo, label: 'ðŸ“¸'),
+              const _MediaThumb(icon: Icons.photo, label: 'ðŸ“¸'),
               const SizedBox(width: 8),
-              _MediaThumb(icon: Icons.videocam, label: 'ðŸ“¹'),
+              const _MediaThumb(icon: Icons.videocam, label: 'ðŸ“¹'),
               const SizedBox(width: 8),
-              _MediaThumb(icon: Icons.attach_file, label: 'ðŸ“Ž'),
+              const _MediaThumb(icon: Icons.attach_file, label: 'ðŸ“Ž'),
               const SizedBox(width: 8),
               Container(
                 width: 48,
@@ -537,24 +538,24 @@ style: const TextStyle(fontSize: 13, color: IveTokens.label),
               Expanded(
                 child: OutlinedButton(
                   onPressed: () => Navigator.pushNamed(context, AppRoutes.qualChatArchived),
-                  child: const Text('ðŸ“ Archive Manager'),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: kChatColor,
                     side: const BorderSide(color: kChatColor),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   ),
+                  child: const Text('ðŸ“ Archive Manager'),
                 ),
               ),
               const SizedBox(width: 8),
               Expanded(
                 child: OutlinedButton(
                   onPressed: () => Navigator.pushNamed(context, AppRoutes.qualChatActionCenter),
-                  child: const Text('ðŸ“Š Full Report'),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: kChatColor,
                     side: const BorderSide(color: kChatColor),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   ),
+                  child: const Text('ðŸ“Š Full Report'),
                 ),
               ),
             ],

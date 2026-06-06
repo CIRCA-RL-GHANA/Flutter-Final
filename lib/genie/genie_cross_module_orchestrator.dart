@@ -5,6 +5,7 @@
 /// a market order AND send a qualChat confirmation). Executes steps serially
 /// with rollback on failure. RBAC is verified for every step.
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
 import 'package:flutter/foundation.dart';
 import '../features/prompt/models/rbac_models.dart';
@@ -185,9 +186,9 @@ class GenieCrossModuleOrchestrator {
     required String purpose,
   }) {
     return [
-      OrchestrationStep(
+      const OrchestrationStep(
         description: 'Checking your Q-Points balance via GO PAGE',
-        intent: const GenieIntent(module: GenieModule.goPage, action: 'check_balance'),
+        intent: GenieIntent(module: GenieModule.goPage, action: 'check_balance'),
       ),
       OrchestrationStep(
         description: 'Fetching loan offers for ${amountQp.toStringAsFixed(0)} QP',
@@ -215,9 +216,9 @@ class GenieCrossModuleOrchestrator {
     required int termDays,
   }) {
     return [
-      OrchestrationStep(
+      const OrchestrationStep(
         description: 'Verifying Q-Points balance',
-        intent: const GenieIntent(module: GenieModule.goPage, action: 'check_balance'),
+        intent: GenieIntent(module: GenieModule.goPage, action: 'check_balance'),
       ),
       OrchestrationStep(
         description: 'Opening term deposit screen for ${amountQp.toStringAsFixed(0)} QP / $termDays days',
@@ -246,9 +247,9 @@ class GenieCrossModuleOrchestrator {
           requiresFullScreen: true,
         ),
       ),
-      OrchestrationStep(
+      const OrchestrationStep(
         description: 'Uploading KYB licence document',
-        intent: const GenieIntent(
+        intent: GenieIntent(
           module: GenieModule.enterprise,
           action: 'upload_kyb_doc',
           requiresFullScreen: true,

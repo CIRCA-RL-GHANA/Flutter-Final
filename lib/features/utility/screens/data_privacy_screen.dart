@@ -3,6 +3,7 @@
 /// Privacy toggles, data storage breakdown, connected apps, data export,
 /// account deletion
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -95,7 +96,7 @@ class DataPrivacyScreen extends StatelessWidget {
                           percentage: prov.totalDataMB / 50.0,
                           color: const Color(0xFF3B82F6),
                           size: 56,
-                          label: '${prov.totalDataMB.toStringAsFixed(1)}',
+                          label: prov.totalDataMB.toStringAsFixed(1),
                         ),
                         const SizedBox(width: 16),
                         Expanded(

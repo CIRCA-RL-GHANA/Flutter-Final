@@ -8,7 +8,7 @@ import '../../../core/widgets/ai_price_widgets.dart';
 import '../../../core/widgets/ai_insight_card.dart';
 
 class GoFinancialScreen extends ConsumerStatefulWidget {
-  const GoFinancialScreen({Key? key}) : super(key: key);
+  const GoFinancialScreen({super.key});
 
   @override
   ConsumerState<GoFinancialScreen> createState() => _GoFinancialScreenState();
@@ -17,7 +17,7 @@ class GoFinancialScreen extends ConsumerStatefulWidget {
 class _GoFinancialScreenState extends ConsumerState<GoFinancialScreen> {
   @override
   Widget build(BuildContext context) {
-    final ordersService = ref.watch(ordersServiceProvider);
+    ref.watch(ordersServiceProvider);
     
     return Scaffold(
       appBar: AppBar(
@@ -144,8 +144,8 @@ class _GoFinancialScreenState extends ConsumerState<GoFinancialScreen> {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            children: const [
+                          const Row(
+                            children: [
                               Icon(Icons.auto_awesome, size: 14, color: Color(0xFF8B5CF6)),
                               SizedBox(width: 6),
                               Text(

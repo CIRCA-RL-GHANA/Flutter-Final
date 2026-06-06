@@ -2,6 +2,7 @@
 /// MARKET MODULE — Screen 6: Order Summary & Payment
 /// Progress indicator, payment method selection, order review, terms
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -134,12 +135,12 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
                 label: 'Method',
                 value: prov.selectedFulfillment.name,
               ),
-              MarketInfoRow(
+              const MarketInfoRow(
                 icon: Icons.location_on,
                 label: 'Address',
                 value: 'The PG Campus, Block A',
               ),
-              MarketInfoRow(
+              const MarketInfoRow(
                 icon: Icons.access_time,
                 label: 'Estimated',
                 value: '25-35 min',
@@ -177,7 +178,7 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
                           ),
                           Text(
                             'x${item.quantity}',
-                            style: TextStyle(fontSize: 11, color: AppColors.textTertiary),
+                            style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                           ),
                         ],
                       ),
@@ -209,7 +210,7 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
                   onChanged: (v) => _deliveryNote = v,
                   decoration: InputDecoration(
                     hintText: 'Special instructions for delivery...',
-                    hintStyle: TextStyle(fontSize: 13, color: AppColors.textTertiary),
+                    hintStyle: const TextStyle(fontSize: 13, color: AppColors.textTertiary),
                     border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -245,11 +246,11 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: const Color(0xFF10B981).withValues(alpha: 0.3)),
               ),
-              child: Row(
+              child: const Row(
                 children: [
-                  const Icon(Icons.verified_user_outlined, size: 16, color: Color(0xFF10B981)),
-                  const SizedBox(width: 8),
-                  const Expanded(
+                  Icon(Icons.verified_user_outlined, size: 16, color: Color(0xFF10B981)),
+                  SizedBox(width: 8),
+                  Expanded(
                     child: Text(
                       'AI fraud protection active — your payment is being monitored',
                       style: TextStyle(fontSize: 12, color: Color(0xFF10B981), fontWeight: FontWeight.w500),
@@ -306,7 +307,7 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
                               : method.type == PaymentMethodType.tabCredit
                                   ? '\$${method.balance?.toStringAsFixed(2) ?? "0.00"} available'
                                   : method.last4 ?? '',
-                          style: TextStyle(fontSize: 12, color: AppColors.textTertiary),
+                          style: const TextStyle(fontSize: 12, color: AppColors.textTertiary),
                         ),
                       ],
                     ),
@@ -314,7 +315,7 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
                   if (isSelected)
                     const Icon(Icons.check_circle, color: kMarketColor)
                   else
-                    Icon(Icons.radio_button_unchecked, color: AppColors.inputBorder),
+                    const Icon(Icons.radio_button_unchecked, color: AppColors.inputBorder),
                   if (method.isDefault) ...[
                     const SizedBox(width: 8),
                     Container(
@@ -401,21 +402,22 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
         ),
         const SizedBox(height: 16),
         // Terms
+        // ignore: deprecated_member_use
         CheckboxListTile(
           value: _agreedToTerms,
           onChanged: (v) => setState(() => _agreedToTerms = v ?? false),
           controlAffinity: ListTileControlAffinity.leading,
           activeColor: kMarketColor,
           title: RichText(
-            text: TextSpan(
-              style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
+            text: const TextSpan(
+              style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
               children: [
-                const TextSpan(text: 'I agree to the '),
+                TextSpan(text: 'I agree to the '),
                 TextSpan(
                   text: 'Terms of Service',
                   style: TextStyle(color: kMarketColor, fontWeight: FontWeight.w600),
                 ),
-                const TextSpan(text: ' and '),
+                TextSpan(text: ' and '),
                 TextSpan(
                   text: 'Refund Policy',
                   style: TextStyle(color: kMarketColor, fontWeight: FontWeight.w600),
@@ -539,7 +541,7 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
                   ? 'Your order has been placed successfully.\nYou can track it in My Transactions.'
                   : 'Something went wrong. Please try again or check your Q Points balance.',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 14, color: AppColors.textSecondary),
+              style: const TextStyle(fontSize: 14, color: AppColors.textSecondary),
             ),
           ],
         ),

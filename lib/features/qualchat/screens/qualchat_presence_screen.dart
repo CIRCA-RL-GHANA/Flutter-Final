@@ -1,5 +1,6 @@
 /// qualChat Screen 6 — Presence Dashboard (Enhanced)
 /// Real-Time Operations Center: presence, heatmap, user cards
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -90,9 +91,9 @@ class QualChatPresenceScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 4),
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
+                        children: [
                           Text('12a', style: TextStyle(fontSize: 10, color: Color(0xFF9CA3AF))),
                           Text('6a', style: TextStyle(fontSize: 10, color: Color(0xFF9CA3AF))),
                           Text('12p', style: TextStyle(fontSize: 10, color: Color(0xFF9CA3AF))),

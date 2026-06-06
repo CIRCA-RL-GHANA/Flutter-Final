@@ -3,6 +3,7 @@
 /// Package hand-off between drivers: scan verification,
 /// condition check, chain-of-custody log, transfer confirmation
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -31,7 +32,7 @@ class _LiveMultiHopTransferScreenState extends State<LiveMultiHopTransferScreen>
     return Consumer<LiveProvider>(
       builder: (context, prov, _) {
         final pkg = prov.selectedPackage ?? prov.packages.first;
-        final TransferRequest? transfer = null;
+        const TransferRequest? transfer = null;
 
         if (_step == 3) {
           return _TransferCompleteView(package: pkg, onDone: () => Navigator.pop(context));
@@ -195,7 +196,7 @@ class _ScanStep extends StatelessWidget {
               const SizedBox(height: 16),
               Text(scanned ? 'PACKAGE SCANNED âœ…' : 'SCAN PACKAGE QR CODE', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: scanned ? const Color(0xFF10B981) : AppColors.textPrimary)),
               const SizedBox(height: 4),
-              Text('Scan the QR code on package ${package.id}', style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+              Text('Scan the QR code on package ${package.id}', style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
             ],
           ),
         ),
@@ -208,12 +209,12 @@ class _ScanStep extends StatelessWidget {
               borderRadius: BorderRadius.circular(14),
               border: Border.all(color: const Color(0xFF8B5CF6).withValues(alpha: 0.3), width: 2),
             ),
-            child: Center(
+            child: const Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(Icons.qr_code_scanner, size: 48, color: AppColors.textTertiary),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Text('Point camera at QR code', style: TextStyle(fontSize: 13, color: AppColors.textTertiary)),
                 ],
               ),
@@ -261,12 +262,12 @@ class _VerifyStep extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
-        LiveSectionCard(
+        const LiveSectionCard(
           title: 'CONDITION CHECK',
           icon: Icons.checklist,
-          iconColor: const Color(0xFF3B82F6),
+          iconColor: Color(0xFF3B82F6),
           child: Column(
-            children: const [
+            children: [
               _ConditionCheckItem(label: 'Package seal intact', checked: true),
               _ConditionCheckItem(label: 'No visible damage', checked: true),
               _ConditionCheckItem(label: 'Correct package count', checked: true),
@@ -275,15 +276,15 @@ class _VerifyStep extends StatelessWidget {
           ),
         ),
 
-        LiveSectionCard(
+        const LiveSectionCard(
           title: 'CHAIN OF CUSTODY',
           icon: Icons.link,
-          iconColor: const Color(0xFF8B5CF6),
+          iconColor: Color(0xFF8B5CF6),
           child: Column(
             children: [
-              const _CustodyEntry(name: 'Branch Warehouse', time: '09:15 AM', action: 'Created'),
-              const _CustodyEntry(name: 'James Wilson', time: '09:32 AM', action: 'Picked up'),
-              const _CustodyEntry(name: 'Transfer Point A', time: '10:05 AM', action: 'Current'),
+              _CustodyEntry(name: 'Branch Warehouse', time: '09:15 AM', action: 'Created'),
+              _CustodyEntry(name: 'James Wilson', time: '09:32 AM', action: 'Picked up'),
+              _CustodyEntry(name: 'Transfer Point A', time: '10:05 AM', action: 'Current'),
             ],
           ),
         ),
@@ -330,17 +331,17 @@ class _HandoffStep extends StatelessWidget {
                 child: const Text('SC', style: TextStyle(fontWeight: FontWeight.w700, color: Color(0xFF3B82F6))),
               ),
               const SizedBox(width: 12),
-              Expanded(
+              const Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Sarah Chen', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                    Text('Sarah Chen', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                     Row(
                       children: [
-                        const Icon(Icons.star, size: 12, color: Color(0xFFF59E0B)),
-                        const SizedBox(width: 2),
+                        Icon(Icons.star, size: 12, color: Color(0xFFF59E0B)),
+                        SizedBox(width: 2),
                         Text('4.7', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8),
                         Text('ID verified âœ…', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                       ],
                     ),
@@ -426,7 +427,7 @@ class _TransferCompleteView extends StatelessWidget {
               const SizedBox(height: 20),
               const Text('ðŸ¤ TRANSFER COMPLETE!', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
               const SizedBox(height: 8),
-              Text('Package ${package.id} handed off successfully', style: TextStyle(fontSize: 14, color: AppColors.textSecondary)),
+              Text('Package ${package.id} handed off successfully', style: const TextStyle(fontSize: 14, color: AppColors.textSecondary)),
               const SizedBox(height: 4),
               const Text('Chain of custody updated', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: Color(0xFF10B981))),
               const SizedBox(height: 24),
@@ -516,7 +517,7 @@ class _CustodyEntry extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(name, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-                Text('$time — $action', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                Text('$time — $action', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
               ],
             ),
           ),
@@ -538,7 +539,7 @@ class _TransferInfoRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+          Text(label, style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
           Text(value, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
         ],
       ),

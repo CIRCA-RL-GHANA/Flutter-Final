@@ -5,6 +5,7 @@
 /// Delivery Zones, Vehicle Bands, Branches, Campaigns, Social, Connections,
 /// Audit Log, Outlook, Q-Points, My Activity, Profile, Subscription, Interests
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
 import 'package:flutter/material.dart';
 
@@ -1168,7 +1169,7 @@ class SubscriptionInfo {
     this.apiCallsUsed = 0,
     this.utilizationPercent = 0.0,
     this.isInFreeTrial = false,
-    this.freeTrialEndsAt = null,
+    this.freeTrialEndsAt,
     this.txCountThisMonth = 0,
     this.txFreeQuota = 100,
     this.includesSocialFeatures = false,

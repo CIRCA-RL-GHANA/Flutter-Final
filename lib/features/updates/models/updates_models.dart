@@ -4,6 +4,7 @@
 /// Updates, Comments, Engagement, Notifications, Interests, Following,
 /// Shares, Reports, Polls, Collections, Insights
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
 import 'package:flutter/material.dart';
 

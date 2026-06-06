@@ -2,6 +2,7 @@
 /// MARKET MODULE — Screen 10: Delivery Tracker & PIN Verification
 /// Live map, delivery timeline, driver info, PIN handoff, safety features
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -197,7 +198,7 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
                 const SizedBox(height: 2),
                 Text(
                   '${tracking.distanceMiles.toStringAsFixed(1)} mi away • ${tracking.etaMinutes} min ETA',
-                  style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
+                  style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
                 ),
               ],
             ),
@@ -246,7 +247,7 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
                       const SizedBox(width: 8),
                       Text(
                         tracking.vehicleInfo,
-                        style: TextStyle(fontSize: 12, color: AppColors.textTertiary),
+                        style: const TextStyle(fontSize: 12, color: AppColors.textTertiary),
                       ),
                     ],
                   ),
@@ -333,7 +334,7 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
                       if (event.timestamp != null)
                         Text(
                           '${event.timestamp!.hour}:${event.timestamp!.minute.toString().padLeft(2, '0')}',
-                          style: TextStyle(fontSize: 11, color: AppColors.textTertiary),
+                          style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                         ),
                     ],
                   ),

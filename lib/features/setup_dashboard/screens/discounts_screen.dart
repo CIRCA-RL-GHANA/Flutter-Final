@@ -3,6 +3,7 @@
 /// Active discount tiers, create/edit, revenue impact tracking
 /// RBAC: Admin(full), BM(branch), SO(full), BSO(branch), Monitor/BrMon(view)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -31,7 +32,7 @@ class DiscountsScreen extends StatelessWidget {
               title: 'Discount Tiers',
               actions: [
                 DataScopeIndicator(access: setupProv.getCardAccess('discounts', ctxProv.currentRole)),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
               ],
             ),
             floatingActionButton: SetupRbacFAB(
@@ -114,10 +115,10 @@ class DiscountsScreen extends StatelessWidget {
               ),
 
               // ─── Discount List ────────────────────────────
-              SliverToBoxAdapter(
+              const SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
-                  child: const SetupSectionTitle(
+                  padding: EdgeInsets.fromLTRB(20, 16, 20, 0),
+                  child: SetupSectionTitle(
                     title: 'All Discount Tiers',
                     icon: Icons.local_offer,
                   ),

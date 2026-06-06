@@ -2,6 +2,7 @@
 /// Unified incident resolution tracking system
 /// Module Color: Red (0xFFEF4444)
 /// API-first with fallback demo data pattern
+library;
 
 import 'package:flutter/foundation.dart';
 import '../models/alerts_models.dart';
@@ -799,7 +800,7 @@ class AlertsProvider extends ChangeNotifier {
     AlertStaffMember(id: 'staff-6', name: 'James Brown', role: 'Driver', activeAlerts: 1, isAvailable: true, branch: 'East'),
   ];
 
-  List<AlertStaffMember> _staff = [];
+  final List<AlertStaffMember> _staff = [];
 
   List<AlertStaffMember> get staff => _staff.isNotEmpty ? _staff : _fallbackStaff;
 
@@ -833,7 +834,7 @@ class AlertsProvider extends ChangeNotifier {
       createdBy: 'Admin', usageCount: 22),
   ];
 
-  List<AlertTemplate> _templates = [];
+  final List<AlertTemplate> _templates = [];
 
   List<AlertTemplate> get templates => _templates.isNotEmpty ? _templates : _fallbackTemplates;
   List<AlertTemplate> templatesByType(AlertTemplateType type) => templates.where((t) => t.type == type).toList();
@@ -853,7 +854,7 @@ class AlertsProvider extends ChangeNotifier {
       type: KnowledgeItemType.communitySolution, similarityScore: 0.73, helpfulCount: 45, createdAt: DateTime.now().subtract(const Duration(days: 30)), source: 'Branch East'),
   ];
 
-  List<KnowledgeBaseItem> _knowledgeBase = [];
+  final List<KnowledgeBaseItem> _knowledgeBase = [];
 
   List<KnowledgeBaseItem> get knowledgeBase => _knowledgeBase.isNotEmpty ? _knowledgeBase : _fallbackKnowledgeBase;
   List<KnowledgeBaseItem> knowledgeForAlert(AlertItem alert) {

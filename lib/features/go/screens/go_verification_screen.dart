@@ -2,6 +2,7 @@
 /// Universal bottom-sheet verification with 4 methods:
 /// Face ID, Fingerprint, PIN, OTP
 /// 4 states: pending, verifying, verified, failed
+library;
 
 import 'package:flutter/material.dart';
 import '../../../core/routes/app_routes.dart';
@@ -183,17 +184,17 @@ class _GoVerificationScreenState extends State<GoVerificationScreen> with Single
       GoSectionCard(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         const Text('VERIFICATION PREFERENCES', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF9CA3AF))),
         const Divider(height: 16),
-        SwitchListTile(title: const Text('Require for all transactions', style: TextStyle(fontSize: 13)), value: _requireAll, onChanged: (v) => setState(() => _requireAll = v), activeColor: kGoColor, dense: true),
-        SwitchListTile(title: const Text('Biometric preferred', style: TextStyle(fontSize: 13)), value: _biometricPreferred, onChanged: (v) => setState(() => _biometricPreferred = v), activeColor: kGoColor, dense: true),
-        SwitchListTile(title: const Text('Remember device (7 days)', style: TextStyle(fontSize: 13)), value: _rememberDevice, onChanged: (v) => setState(() => _rememberDevice = v), activeColor: kGoColor, dense: true),
+        SwitchListTile(title: const Text('Require for all transactions', style: TextStyle(fontSize: 13)), value: _requireAll, onChanged: (v) => setState(() => _requireAll = v), activeThumbColor: kGoColor, dense: true),
+        SwitchListTile(title: const Text('Biometric preferred', style: TextStyle(fontSize: 13)), value: _biometricPreferred, onChanged: (v) => setState(() => _biometricPreferred = v), activeThumbColor: kGoColor, dense: true),
+        SwitchListTile(title: const Text('Remember device (7 days)', style: TextStyle(fontSize: 13)), value: _rememberDevice, onChanged: (v) => setState(() => _rememberDevice = v), activeThumbColor: kGoColor, dense: true),
       ])),
       const SizedBox(height: 10),
-      GoSectionCard(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        const Text('THRESHOLDS', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF9CA3AF))),
-        const Divider(height: 16),
-        const _DetailRow(label: 'Single transaction limit', value: '50,000 QP'),
-        const _DetailRow(label: 'Daily limit', value: '200,000 QP'),
-        const _DetailRow(label: 'Monthly limit', value: '1,000,000 QP'),
+      const GoSectionCard(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Text('THRESHOLDS', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF9CA3AF))),
+        Divider(height: 16),
+        _DetailRow(label: 'Single transaction limit', value: '50,000 QP'),
+        _DetailRow(label: 'Daily limit', value: '200,000 QP'),
+        _DetailRow(label: 'Monthly limit', value: '1,000,000 QP'),
       ])),
     ]);
   }
@@ -246,12 +247,12 @@ class _GoVerificationScreenState extends State<GoVerificationScreen> with Single
           const Text('Please hold still', style: TextStyle(fontSize: 12, color: Color(0xFF9CA3AF))),
         ]));
       case GoVerificationState.verified:
-        return Center(child: Column(mainAxisSize: MainAxisSize.min, children: [
-          const Icon(Icons.check_circle, size: 72, color: kGoPositive),
-          const SizedBox(height: 16),
-          const Text('Verified!', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: kGoPositive)),
-          const SizedBox(height: 8),
-          const Text('Identity confirmed successfully.', style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+        return const Center(child: Column(mainAxisSize: MainAxisSize.min, children: [
+          Icon(Icons.check_circle, size: 72, color: kGoPositive),
+          SizedBox(height: 16),
+          Text('Verified!', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: kGoPositive)),
+          SizedBox(height: 8),
+          Text('Identity confirmed successfully.', style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
         ]));
       case GoVerificationState.failed:
         return Center(child: Column(mainAxisSize: MainAxisSize.min, children: [

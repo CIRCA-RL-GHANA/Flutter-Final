@@ -1,10 +1,10 @@
 /// GO Screen 6 — Request Center
 /// 3-tab interface: My Requests, Pending Approval, Templates
 /// 8 request types, creation flow, status pipeline
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../core/routes/app_routes.dart';
 import '../models/go_models.dart';
 import '../providers/go_provider.dart';
 import '../widgets/go_widgets.dart';

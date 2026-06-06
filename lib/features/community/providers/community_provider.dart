@@ -5,6 +5,7 @@
 /// Delegates all API calls to CommunityService. Gracefully falls back to
 /// stub data when offline so the UI always renders beautifully.
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
 import 'package:flutter/foundation.dart';
 import '../../../core/services/community_service.dart';

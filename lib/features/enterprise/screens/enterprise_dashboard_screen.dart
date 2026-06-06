@@ -1,6 +1,7 @@
 /// Enterprise â€º Dashboard Screen
 /// Central hub for managing API keys, multi-channel integrations,
 /// fulfillment tasks, and concierge sessions.
+library;
 
 import 'package:flutter/material.dart';
 import '../../../core/services/enterprise_service.dart';
@@ -340,7 +341,7 @@ class _EnterpriseDashboardScreenState extends State<EnterpriseDashboardScreen>
               ),
               const SizedBox(height: 12),
               DropdownButtonFormField<String>(
-                value: selectedType,
+                initialValue: selectedType,
                 dropdownColor: _kCard,
                 style: const TextStyle(color: Colors.white),
                 decoration: const InputDecoration(

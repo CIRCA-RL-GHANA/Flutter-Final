@@ -3,6 +3,7 @@
 /// Structured rejection with required reason, evidence review,
 /// customer communication template, and appeal info
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -88,7 +89,7 @@ class _LiveReturnRejectionScreenState extends State<LiveReturnRejectionScreen> {
                         children: [
                           const Text('Rejecting return for:', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: kLiveColor)),
                           Text('${ret.itemName} — â‚µ${ret.itemPrice.toStringAsFixed(2)}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700)),
-                          Text('Customer: ${ret.customerName}', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                          Text('Customer: ${ret.customerName}', style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                         ],
                       ),
                     ),
@@ -110,13 +111,13 @@ class _LiveReturnRejectionScreenState extends State<LiveReturnRejectionScreen> {
                       padding: const EdgeInsets.only(bottom: 4),
                       child: RadioListTile<RejectionReason>(
                         value: reason,
-                        groupValue: _selectedReason,
-                        onChanged: (v) => setState(() => _selectedReason = v),
+                        groupValue: _selectedReason, // ignore: deprecated_member_use
+                        onChanged: (v) => setState(() => _selectedReason = v), // ignore: deprecated_member_use
                         title: Text(
                           _reasonLabel(reason),
                           style: TextStyle(fontSize: 13, fontWeight: selected ? FontWeight.w700 : FontWeight.w400),
                         ),
-                        subtitle: Text(_reasonDescription(reason), style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                        subtitle: Text(_reasonDescription(reason), style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                         activeColor: kLiveColor,
                         dense: true,
                         contentPadding: EdgeInsets.zero,
@@ -160,11 +161,11 @@ class _LiveReturnRejectionScreenState extends State<LiveReturnRejectionScreen> {
                 child: Container(
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(color: const Color(0xFFF3E8FF), borderRadius: BorderRadius.circular(8)),
-                  child: Column(
+                  child: const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Customer Appeal Rights', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Color(0xFF6B21A8))),
-                      const SizedBox(height: 4),
+                      Text('Customer Appeal Rights', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Color(0xFF6B21A8))),
+                      SizedBox(height: 4),
                       Text('• Customer can appeal within 7 days', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                       Text('• Appeal goes to senior response officer', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                       Text('• Customer will be notified of their options', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
@@ -287,7 +288,7 @@ class _RejectionToggle extends StatelessWidget {
       child: Row(
         children: [
           Expanded(child: Text(label, style: const TextStyle(fontSize: 13))),
-          Switch(value: value, onChanged: onChanged, activeColor: kLiveColor, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
+          Switch(value: value, onChanged: onChanged, activeThumbColor: kLiveColor, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
         ],
       ),
     );

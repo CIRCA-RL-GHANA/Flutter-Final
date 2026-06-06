@@ -4,6 +4,7 @@
 /// RBAC: Owner/Admin(fullAccess), BM(branchScoped), Monitor(viewOnly),
 ///        RO/BRO(ownOnly)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -31,9 +32,9 @@ class _TabDetailScreenState extends State<TabDetailScreen> {
       builder: (context, setupProv, ctxProv, _) {
         final tab = setupProv.selectedTab;
         if (tab == null) {
-          return Scaffold(
-            appBar: const SetupAppBar(title: 'Tab Detail'),
-            body: const SetupEmptyState(
+          return const Scaffold(
+            appBar: SetupAppBar(title: 'Tab Detail'),
+            body: SetupEmptyState(
               icon: Icons.receipt_long,
               title: 'No tab selected',
               subtitle: 'Select a customer tab from the list',
@@ -243,11 +244,11 @@ class _OverviewTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.info_outline, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Tab Details', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Tab Details', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
               const SizedBox(height: 12),
@@ -268,11 +269,11 @@ class _OverviewTab extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
+                const Row(
                   children: [
                     Icon(Icons.payment, size: 18, color: kSetupColor),
-                    const SizedBox(width: 8),
-                    const Text('Next Payment', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                    SizedBox(width: 8),
+                    Text('Next Payment', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                   ],
                 ),
                 const SizedBox(height: 12),
@@ -395,11 +396,11 @@ class _PaymentsTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.calendar_today, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Payment Schedule', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Payment Schedule', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
               const SizedBox(height: 12),
@@ -420,21 +421,21 @@ class _PaymentsTab extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 12),
-        SetupSectionCard(
+        const SetupSectionCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
                   Icon(Icons.history, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Payment History', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Payment History', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
-              const SizedBox(height: 12),
-              const _PaymentHistoryRow(amount: 500, date: '3 days ago', method: 'Credit Card'),
-              const _PaymentHistoryRow(amount: 350, date: '1 week ago', method: 'Mobile Money'),
-              const _PaymentHistoryRow(amount: 200, date: '2 weeks ago', method: 'Cash'),
+              SizedBox(height: 12),
+              _PaymentHistoryRow(amount: 500, date: '3 days ago', method: 'Credit Card'),
+              _PaymentHistoryRow(amount: 350, date: '1 week ago', method: 'Mobile Money'),
+              _PaymentHistoryRow(amount: 200, date: '2 weeks ago', method: 'Cash'),
             ],
           ),
         ),
@@ -500,11 +501,11 @@ class _SettingsTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.settings, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Tab Configuration', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Tab Configuration', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
               const SizedBox(height: 12),
@@ -518,21 +519,21 @@ class _SettingsTab extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 12),
-        SetupSectionCard(
+        const SetupSectionCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
                   Icon(Icons.notifications_outlined, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Notifications', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Notifications', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
-              const SizedBox(height: 12),
-              const _SettingToggle(label: 'Payment reminders', value: true),
-              const _SettingToggle(label: 'Limit warnings', value: true),
-              const _SettingToggle(label: 'Transaction alerts', value: false),
+              SizedBox(height: 12),
+              _SettingToggle(label: 'Payment reminders', value: true),
+              _SettingToggle(label: 'Limit warnings', value: true),
+              _SettingToggle(label: 'Transaction alerts', value: false),
             ],
           ),
         ),
@@ -638,7 +639,7 @@ class _SettingToggleState extends State<_SettingToggle> {
           Switch(
             value: _value,
             onChanged: (v) => setState(() => _value = v),
-            activeColor: kSetupColor,
+            activeThumbColor: kSetupColor,
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
           ),
         ],

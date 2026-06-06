@@ -1,6 +1,7 @@
 /// Enterprise â€º Concierge Embed Screen
 /// Allows enterprise accounts to test and manage their AI Concierge sessions —
 /// open a session, send messages, and view the response thread.
+library;
 
 import 'package:flutter/material.dart';
 import '../../../core/services/enterprise_service.dart';
@@ -24,7 +25,7 @@ class _ConciergeEmbedScreenState extends State<ConciergeEmbedScreen> {
   final _scrollCtrl = ScrollController();
 
   String? _sessionId;
-  List<Map<String, dynamic>> _messages = [];
+  final List<Map<String, dynamic>> _messages = [];
   bool _loading = false;
   bool _sending = false;
 
@@ -177,20 +178,20 @@ class _ConciergeEmbedScreenState extends State<ConciergeEmbedScreen> {
             ),
           ),
           if (_sending)
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 4),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const SizedBox(width: 20),
-                  const SizedBox(
+                  SizedBox(width: 20),
+                  SizedBox(
                     width: 16,
                     height: 16,
                     child: CircularProgressIndicator(
                         strokeWidth: 2, color: _kCyan),
                   ),
-                  const SizedBox(width: 8),
-                  const Text('Genie is typing…',
+                  SizedBox(width: 8),
+                  Text('Genie is typing…',
                       style: TextStyle(color: Colors.white38, fontSize: 12)),
                 ],
               ),

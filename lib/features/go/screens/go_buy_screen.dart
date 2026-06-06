@@ -1,6 +1,7 @@
 /// GO Screen 2A — Buy QPoints Flow (5-Step Process)
 /// Step 1: Gateway Selection, Step 2: Amount, Step 3: Review,
 /// Step 4: Security, Step 5: Processing/Confirmation
+library;
 
 import 'package:flutter/material.dart';
 import '../../../core/routes/app_routes.dart';
@@ -123,6 +124,7 @@ class _StepGateway extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
+                      // ignore: deprecated_member_use
                       Radio<String>(value: gw.id, groupValue: selectedId, onChanged: gw.status == GatewayStatus.live || gw.status == GatewayStatus.pending ? (v) => onSelect(v!) : null, activeColor: kGoColor),
                       Expanded(
                         child: Column(
@@ -218,7 +220,7 @@ class _StepAmount extends StatelessWidget {
                   children: [
                     const Text('BREAKDOWN', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF9CA3AF), letterSpacing: 0.5)),
                     const Divider(height: 16),
-                    _BreakdownRow(label: 'QPoints to receive', value: '${amount.toStringAsFixed(0)}'),
+                    _BreakdownRow(label: 'QPoints to receive', value: amount.toStringAsFixed(0)),
                     _BreakdownRow(label: 'Gateway rate', value: '${gateway.buyRate} GHS/QP'),
                     _BreakdownRow(label: 'Subtotal', value: '${cost.toStringAsFixed(2)} GHS'),
                     _BreakdownRow(label: 'Gateway fee (${gateway.feePercent}%)', value: '${fee.toStringAsFixed(2)} GHS'),
@@ -245,6 +247,7 @@ class _StepAmount extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
+                      // ignore: deprecated_member_use
                       Radio<String>(value: fs.id, groupValue: selectedFundingId, onChanged: (v) => onFundingSelected(v!), activeColor: kGoColor),
                       Icon(fs.icon, size: 18, color: const Color(0xFF6B7280)),
                       const SizedBox(width: 8),
@@ -308,11 +311,11 @@ class _StepReview extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    _ReviewParty(label: 'YOU', icon: Icons.person, color: kGoColor),
+                    const _ReviewParty(label: 'YOU', icon: Icons.person, color: kGoColor),
                     const Icon(Icons.arrow_forward, size: 16, color: Color(0xFF9CA3AF)),
                     _ReviewParty(label: gateway.name.toUpperCase(), icon: Icons.payment, color: kGoInfo),
                     const Icon(Icons.arrow_forward, size: 16, color: Color(0xFF9CA3AF)),
-                    _ReviewParty(label: 'QP WALLET', icon: Icons.account_balance_wallet, color: kGoPurple),
+                    const _ReviewParty(label: 'QP WALLET', icon: Icons.account_balance_wallet, color: kGoPurple),
                   ],
                 ),
               ),
@@ -322,6 +325,7 @@ class _StepReview extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // ignore: deprecated_member_use
                     CheckboxListTile(
                       value: termsAccepted,
                       onChanged: (v) => onTermsChanged(v ?? false),

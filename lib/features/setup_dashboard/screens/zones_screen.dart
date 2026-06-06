@@ -4,6 +4,7 @@
 /// RBAC: Admin(full), BM(branch), Monitor/BrMon(view), RO/BRO(view),
 ///        Driver(view)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -32,7 +33,7 @@ class ZonesScreen extends StatelessWidget {
               title: 'Delivery Zones',
               actions: [
                 DataScopeIndicator(access: setupProv.getCardAccess('delivery_zones', ctxProv.currentRole)),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
               ],
             ),
             floatingActionButton: SetupRbacFAB(
@@ -71,10 +72,10 @@ class ZonesScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SliverToBoxAdapter(
+              const SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
-                  child: const SetupSectionTitle(title: 'All Zones', icon: Icons.map),
+                  padding: EdgeInsets.fromLTRB(20, 16, 20, 0),
+                  child: SetupSectionTitle(title: 'All Zones', icon: Icons.map),
                 ),
               ),
               // ─── AI Insights ─────────────────────────────────────────

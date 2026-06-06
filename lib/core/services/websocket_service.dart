@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:math';
-import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'package:socket_io_client/socket_io_client.dart' as io;
 import 'package:flutter/foundation.dart';
 
 class ChatMessage {
@@ -61,7 +61,7 @@ class TypingIndicator {
 class WebSocketService extends ChangeNotifier {
   static final WebSocketService _instance = WebSocketService._internal();
   
-  IO.Socket? _socket;
+  io.Socket? _socket;
   final _messageController = StreamController<ChatMessage>.broadcast();
   final _typingController = StreamController<TypingIndicator>.broadcast();
   final _connectionController = StreamController<bool>.broadcast();
@@ -95,7 +95,7 @@ class WebSocketService extends ChangeNotifier {
     _currentBaseUrl = baseUrl;
 
     try {
-      _socket = IO.io(
+      _socket = io.io(
         '$baseUrl/chat',
         <String, dynamic>{
           'transports': ['websocket', 'polling'],

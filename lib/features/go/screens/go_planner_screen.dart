@@ -1,5 +1,6 @@
 /// GO Screen 10 — Financial Planner
 /// Cash flow forecast, budget manager, goal setting
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

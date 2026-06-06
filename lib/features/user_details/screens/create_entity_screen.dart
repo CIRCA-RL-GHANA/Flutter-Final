@@ -1,7 +1,8 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// Screen 3: Create / Edit Entity Form
 /// 5-step stepper: Type â†’ Core Info â†’ Verification â†’ Role â†’ Review
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -129,15 +130,15 @@ class CreateEntityScreen extends StatelessWidget {
     switch (udp.creationStep) {
       case 0:
       case 1:
-        return _Step1TypeSelection(key: const ValueKey('step1'));
+        return const _Step1TypeSelection(key: ValueKey('step1'));
       case 2:
-        return _Step2CoreInfo(key: const ValueKey('step2'));
+        return const _Step2CoreInfo(key: ValueKey('step2'));
       case 3:
-        return _Step3Verification(key: const ValueKey('step3'));
+        return const _Step3Verification(key: ValueKey('step3'));
       case 4:
-        return _Step4RoleAssignment(key: const ValueKey('step4'));
+        return const _Step4RoleAssignment(key: ValueKey('step4'));
       default:
-        return _Step1TypeSelection(key: const ValueKey('step1'));
+        return const _Step1TypeSelection(key: ValueKey('step1'));
     }
   }
 }

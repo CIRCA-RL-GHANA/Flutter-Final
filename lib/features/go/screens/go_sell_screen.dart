@@ -2,6 +2,7 @@
 /// Mirror of Buy flow with sell-specific differences:
 /// Destination selection, minimum 500 QP, processing time warning,
 /// additional verification for large amounts
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -99,6 +100,7 @@ class _GoSellScreenState extends State<GoSellScreen> {
                     decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12), border: Border.all(color: sel ? kGoColor : const Color(0xFFE5E7EB), width: sel ? 2 : 1)),
                     child: Row(
                       children: [
+                        // ignore: deprecated_member_use
                         Radio<String>(value: gw.id, groupValue: _selectedGwId, onChanged: (v) => setState(() => _selectedGwId = v), activeColor: kGoColor),
                         const SizedBox(width: 8),
                         Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -173,7 +175,7 @@ class _GoSellScreenState extends State<GoSellScreen> {
               if (_amount >= gw.minSell) GoSectionCard(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 const Text('BREAKDOWN', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF9CA3AF))),
                 const Divider(height: 16),
-                _Row(label: 'QPoints to sell', value: '${_amount.toStringAsFixed(0)}'),
+                _Row(label: 'QPoints to sell', value: _amount.toStringAsFixed(0)),
                 _Row(label: 'Rate', value: '${gw.sellRate} GHS/QP'),
                 _Row(label: 'Revenue', value: '${revenue.toStringAsFixed(2)} GHS'),
                 _Row(label: 'Fee (${gw.feePercent}%)', value: '-${fee.toStringAsFixed(2)} GHS'),
@@ -185,7 +187,7 @@ class _GoSellScreenState extends State<GoSellScreen> {
               const Text('PURPOSE', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF9CA3AF))),
               const SizedBox(height: 6),
               DropdownButtonFormField<String>(
-                value: _purpose,
+                initialValue: _purpose,
                 items: ['Personal withdrawal', 'Business expense', 'Supplier payment', 'Tax payment', 'Other'].map((p) => DropdownMenuItem(value: p, child: Text(p, style: const TextStyle(fontSize: 13)))).toList(),
                 onChanged: (v) => setState(() => _purpose = v ?? _purpose),
                 decoration: InputDecoration(filled: true, fillColor: const Color(0xFF11131C), border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: Color(0xFF1C1C2E)))),
@@ -233,6 +235,7 @@ class _GoSellScreenState extends State<GoSellScreen> {
                 ),
               ],
               const SizedBox(height: 14),
+              // ignore: deprecated_member_use
               CheckboxListTile(
                 value: _termsAccepted,
                 onChanged: (v) => setState(() => _termsAccepted = v ?? false),

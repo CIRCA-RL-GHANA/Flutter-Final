@@ -3,6 +3,7 @@
 /// Steps: Basic Info â†’ Pricing â†’ Inventory â†’ Media â†’ Variants â†’ SEO â†’ Review
 /// RBAC: Admin(full), BM(branch), SO(full), BSO(branch)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -297,9 +298,9 @@ class _BasicInfoStep extends StatelessWidget {
           controller: skuCtrl,
         ),
         const SizedBox(height: 14),
-        Text(
+        const Text(
           'Category',
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 13,
             fontWeight: FontWeight.w600,
             color: AppColors.textPrimary,
@@ -498,7 +499,7 @@ class _MediaStep extends StatelessWidget {
                   style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
                 ),
                 const SizedBox(height: 4),
-                Text(
+                const Text(
                   'PNG, JPG up to 5MB Â· Max 8 images',
                   style: TextStyle(fontSize: 11, color: AppColors.textTertiary),
                 ),
@@ -553,11 +554,11 @@ class _VariantsStep extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             border: Border.all(color: kSetupColor.withValues(alpha: 0.15)),
           ),
-          child: Row(
+          child: const Row(
             children: [
-              const Icon(Icons.info_outline, size: 18, color: kSetupColor),
-              const SizedBox(width: 10),
-              const Expanded(
+              Icon(Icons.info_outline, size: 18, color: kSetupColor),
+              SizedBox(width: 10),
+              Expanded(
                 child: Text(
                   'Add variants if this product comes in different sizes, colors, or other options.',
                   style: TextStyle(fontSize: 12, color: kSetupColor),
@@ -578,7 +579,7 @@ class _VariantsStep extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  Icon(Icons.add_circle_outline, size: 20, color: kSetupColor),
+                  const Icon(Icons.add_circle_outline, size: 20, color: kSetupColor),
                   const SizedBox(width: 12),
                   Text(
                     'Add $option variants',
@@ -597,11 +598,11 @@ class _VariantsStep extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             border: Border.all(color: Colors.grey.shade200),
           ),
-          child: Row(
+          child: const Row(
             children: [
               Icon(Icons.add, size: 20, color: kSetupColor),
-              const SizedBox(width: 12),
-              const Text(
+              SizedBox(width: 12),
+              Text(
                 'Custom option type...',
                 style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
               ),
@@ -677,7 +678,7 @@ class _SEOStep extends StatelessWidget {
                 style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFF1A0DAB)),
               ),
               const SizedBox(height: 2),
-              Text(
+              const Text(
                 'yourstore.com/products/...',
                 style: TextStyle(fontSize: 11, color: AppColors.success),
               ),
@@ -729,11 +730,11 @@ class _ReviewStep extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             border: Border.all(color: kSetupColor.withValues(alpha: 0.15)),
           ),
-          child: Row(
+          child: const Row(
             children: [
-              const Icon(Icons.check_circle, size: 18, color: kSetupColor),
-              const SizedBox(width: 10),
-              const Text(
+              Icon(Icons.check_circle, size: 18, color: kSetupColor),
+              SizedBox(width: 10),
+              Text(
                 'Review your product details before publishing',
                 style: TextStyle(fontSize: 12, color: kSetupColor, fontWeight: FontWeight.w600),
               ),
@@ -780,7 +781,7 @@ class _ReviewStep extends StatelessWidget {
               Switch(
                 value: isPublished,
                 onChanged: onPublishedChanged,
-                activeColor: kSetupColor,
+                activeThumbColor: kSetupColor,
               ),
             ],
           ),
@@ -909,7 +910,7 @@ class _SwitchTile extends StatelessWidget {
           Switch(
             value: value,
             onChanged: onChanged,
-            activeColor: kSetupColor,
+            activeThumbColor: kSetupColor,
           ),
         ],
       ),

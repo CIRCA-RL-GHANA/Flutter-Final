@@ -45,7 +45,7 @@ class MarketProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      await Future.delayed(Duration(milliseconds: 500));
+      await Future.delayed(const Duration(milliseconds: 500));
       allProducts = _generateMockProducts();
       _applyFilters();
     } catch (e) {
@@ -151,7 +151,7 @@ class MarketProvider extends ChangeNotifier {
 
   Future<void> searchProducts(String query) async {
     try {
-      await Future.delayed(Duration(milliseconds: 300));
+      await Future.delayed(const Duration(milliseconds: 300));
       if (query.isEmpty) {
         _applyFilters();
       } else {
@@ -177,7 +177,7 @@ class MarketProvider extends ChangeNotifier {
 }
 
 class MarketBrowseScreen extends StatefulWidget {
-  const MarketBrowseScreen({Key? key}) : super(key: key);
+  const MarketBrowseScreen({super.key});
 
   @override
   State<MarketBrowseScreen> createState() => _MarketBrowseScreenState();

@@ -2,6 +2,7 @@
 /// Screen 6: Privacy Control Center
 /// Data map visualization, control toggles, transparency panel
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -166,11 +167,11 @@ class PrivacyCenterScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
+                    const Row(
                       children: [
-                        const Icon(Icons.download_outlined, size: 18, color: Color(0xFF3B82F6)),
-                        const SizedBox(width: 8),
-                        const Text('Data Export', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textPrimary)),
+                        Icon(Icons.download_outlined, size: 18, color: Color(0xFF3B82F6)),
+                        SizedBox(width: 8),
+                        Text('Data Export', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textPrimary)),
                       ],
                     ),
                     const SizedBox(height: 8),
@@ -496,8 +497,8 @@ class _RadioOption<T> extends StatelessWidget {
             ),
             Radio<T>(
               value: value,
-              groupValue: groupValue,
-              onChanged: onChanged,
+              groupValue: groupValue, // ignore: deprecated_member_use
+              onChanged: onChanged, // ignore: deprecated_member_use
               activeColor: const Color(0xFF8B5CF6),
             ),
           ],

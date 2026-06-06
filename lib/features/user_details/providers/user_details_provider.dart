@@ -3,8 +3,8 @@
 /// Master state management for the entire User Details module:
 /// identity, security, privacy, accessibility, notifications, audit trail
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../models/user_details_models.dart';
 import '../../prompt/models/rbac_models.dart';
@@ -295,7 +295,7 @@ class UserDetailsProvider extends ChangeNotifier {
   String _contextSearch = '';
   String get contextSearch => _contextSearch;
 
-  List<AppContextModel> _archivedContexts = [];
+  final List<AppContextModel> _archivedContexts = [];
   List<AppContextModel> get archivedContexts => _archivedContexts;
 
   void setContextFilter(ContextFilter filter) {
@@ -680,7 +680,7 @@ class UserDetailsProvider extends ChangeNotifier {
   AccessibilitySettings _accessibility = const AccessibilitySettings();
   AccessibilitySettings get accessibility => _accessibility;
 
-  List<AccessibilityPreset> _accessibilityPresets = [
+  final List<AccessibilityPreset> _accessibilityPresets = [
     const AccessibilityPreset(
       name: 'Default',
       settings: AccessibilitySettings(),
@@ -914,7 +914,7 @@ class UserDetailsProvider extends ChangeNotifier {
   AuditTimeFilter _auditTimeFilter = AuditTimeFilter.last7Days;
   AuditTimeFilter get auditTimeFilter => _auditTimeFilter;
 
-  Set<AuditAction> _auditActionFilter = {};
+  final Set<AuditAction> _auditActionFilter = {};
   Set<AuditAction> get auditActionFilter => _auditActionFilter;
 
   String? _auditModuleFilter;
@@ -982,10 +982,10 @@ class UserDetailsProvider extends ChangeNotifier {
   }
 
   // ─── Business/Branch Context Settings ────────────────────────────────────
-  BusinessSettings _businessSettings = const BusinessSettings();
+  final BusinessSettings _businessSettings = const BusinessSettings();
   BusinessSettings get businessSettings => _businessSettings;
 
-  BranchSettings _branchSettings = const BranchSettings();
+  final BranchSettings _branchSettings = const BranchSettings();
   BranchSettings get branchSettings => _branchSettings;
 
   // ─── Data Privacy Categories (for Privacy Control Center) ────────────────

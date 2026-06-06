@@ -1,6 +1,7 @@
-﻿/// qualChat Module — Shared Widgets
+/// qualChat Module — Shared Widgets
 /// Reusable UI components for all qualChat screens
 /// Module Color: Cyan 0xFF06B6D4
+library;
 
 import 'package:flutter/material.dart';
 import '../models/qualchat_models.dart';
@@ -275,7 +276,7 @@ class ConversationCard extends StatelessWidget {
                   Row(
                     children: [
                       if (c.typingUser != null) ...[
-                        Icon(Icons.edit, size: 14, color: kChatColor),
+                        const Icon(Icons.edit, size: 14, color: kChatColor),
                         const SizedBox(width: 4),
                         Text(
                           '${c.typingUser} is typing...',
@@ -603,7 +604,7 @@ class _MiniBar extends StatelessWidget {
             child: LinearProgressIndicator(
               value: value / 100,
               backgroundColor: const Color(0xFFF3F4F6),
-              valueColor: AlwaysStoppedAnimation<Color>(kChatSocial),
+              valueColor: const AlwaysStoppedAnimation<Color>(kChatSocial),
               minHeight: 4,
             ),
           ),

@@ -1,5 +1,6 @@
 ﻿/// APRIL Screen 5 — Personal Statement Dashboard
 /// 7 modular statement cards, version control, completion tracking
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -45,7 +46,6 @@ class AprilStatementScreen extends StatelessWidget {
               Consumer<AIInsightsNotifier>(
                 builder: (ctx, aiNotifier, _) {
                   final insights = aiNotifier.insights;
-                  final spending = aiNotifier.spendingPattern;
                   return Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(

@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Transaction {
@@ -41,7 +41,7 @@ class TransactionsProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      await Future.delayed(Duration(milliseconds: 500));
+      await Future.delayed(const Duration(milliseconds: 500));
       allTransactions = _generateMockTransactions();
       _applyFilters();
     } catch (e) {
@@ -60,7 +60,7 @@ class TransactionsProvider extends ChangeNotifier {
         amount: 150.00,
         currency: 'USD',
         description: 'Grocery Store',
-        timestamp: DateTime.now().subtract(Duration(hours: 2)),
+        timestamp: DateTime.now().subtract(const Duration(hours: 2)),
         status: 'completed',
         category: 'Shopping',
       ),
@@ -70,7 +70,7 @@ class TransactionsProvider extends ChangeNotifier {
         amount: 2500.00,
         currency: 'USD',
         description: 'Salary Deposit',
-        timestamp: DateTime.now().subtract(Duration(days: 1)),
+        timestamp: DateTime.now().subtract(const Duration(days: 1)),
         status: 'completed',
         category: 'Income',
       ),
@@ -80,7 +80,7 @@ class TransactionsProvider extends ChangeNotifier {
         amount: 45.99,
         currency: 'USD',
         description: 'Netflix Subscription',
-        timestamp: DateTime.now().subtract(Duration(days: 3)),
+        timestamp: DateTime.now().subtract(const Duration(days: 3)),
         status: 'completed',
         category: 'Entertainment',
       ),
@@ -90,7 +90,7 @@ class TransactionsProvider extends ChangeNotifier {
         amount: 500.00,
         currency: 'USD',
         description: 'Sent to John',
-        timestamp: DateTime.now().subtract(Duration(days: 5)),
+        timestamp: DateTime.now().subtract(const Duration(days: 5)),
         status: 'completed',
         category: 'Transfer',
       ),
@@ -100,7 +100,7 @@ class TransactionsProvider extends ChangeNotifier {
         amount: 89.50,
         currency: 'USD',
         description: 'Fuel',
-        timestamp: DateTime.now().subtract(Duration(days: 7)),
+        timestamp: DateTime.now().subtract(const Duration(days: 7)),
         status: 'completed',
         category: 'Transport',
       ),
@@ -144,7 +144,7 @@ class TransactionsProvider extends ChangeNotifier {
 
   Future<void> searchTransactions(String query) async {
     try {
-      await Future.delayed(Duration(milliseconds: 300));
+      await Future.delayed(const Duration(milliseconds: 300));
       filteredTransactions = allTransactions
           .where((txn) =>
               txn.description.toLowerCase().contains(query.toLowerCase()) ||
@@ -166,7 +166,7 @@ class TransactionsProvider extends ChangeNotifier {
 }
 
 class TransactionsScreen extends StatefulWidget {
-  const TransactionsScreen({Key? key}) : super(key: key);
+  const TransactionsScreen({super.key});
 
   @override
   State<TransactionsScreen> createState() => _TransactionsScreenState();
@@ -226,7 +226,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                           children: [
                             ...provider.paginatedTransactions
                                 .map((txn) => _buildTransactionTile(txn))
-                                .toList(),
+                                ,
                             if (provider.hasMore)
                               Padding(
                                 padding: const EdgeInsets.all(16),
@@ -277,11 +277,11 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                   isExpanded: true,
                   hint: const Text('Type'),
                   value: provider.selectedType,
-                  items: [
-                    const DropdownMenuItem(value: null, child: Text('All Types')),
-                    const DropdownMenuItem(value: 'debit', child: Text('Debit')),
-                    const DropdownMenuItem(value: 'credit', child: Text('Credit')),
-                    const DropdownMenuItem(value: 'transfer', child: Text('Transfer')),
+                  items: const [
+                    DropdownMenuItem(value: null, child: Text('All Types')),
+                    DropdownMenuItem(value: 'debit', child: Text('Debit')),
+                    DropdownMenuItem(value: 'credit', child: Text('Credit')),
+                    DropdownMenuItem(value: 'transfer', child: Text('Transfer')),
                   ],
                   onChanged: (val) => provider.setTypeFilter(val),
                 ),
@@ -363,7 +363,7 @@ extension DateTimeExtension on DateTime {
   }
 
   bool get isYesterday {
-    final yesterday = DateTime.now().subtract(Duration(days: 1));
+    final yesterday = DateTime.now().subtract(const Duration(days: 1));
     return year == yesterday.year && month == yesterday.month && day == yesterday.day;
   }
 }

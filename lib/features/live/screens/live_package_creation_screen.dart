@@ -3,6 +3,7 @@
 /// Multi-step wizard: Package config, bundle assistant, route preview,
 /// security/verification settings, confirmation
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -157,7 +158,7 @@ class _LivePackageCreationScreenState extends State<LivePackageCreationScreen> {
                         setState(() => _step++);
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: const Text('âœ… Package created successfully!'), backgroundColor: const Color(0xFF10B981)),
+                          const SnackBar(content: Text('âœ… Package created successfully!'), backgroundColor: Color(0xFF10B981)),
                         );
                         Navigator.pop(context);
                       }
@@ -297,9 +298,9 @@ class _PackageConfigStep extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.route, size: 32, color: AppColors.textTertiary),
+                  const Icon(Icons.route, size: 32, color: AppColors.textTertiary),
                   const SizedBox(height: 4),
-                  Text('${selectedOrderIds.length} stop${selectedOrderIds.length == 1 ? '' : 's'} • Est. 45 min', style: TextStyle(fontSize: 12, color: AppColors.textTertiary)),
+                  Text('${selectedOrderIds.length} stop${selectedOrderIds.length == 1 ? '' : 's'} • Est. 45 min', style: const TextStyle(fontSize: 12, color: AppColors.textTertiary)),
                 ],
               ),
             ),
@@ -374,10 +375,10 @@ class _SecurityStep extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 12),
-              _EvidenceItem(icon: Icons.camera_alt, label: 'Package photo at pickup'),
-              _EvidenceItem(icon: Icons.camera_alt, label: 'Package photo at delivery'),
-              _EvidenceItem(icon: Icons.location_on, label: 'GPS coordinates at each stop'),
-              _EvidenceItem(icon: Icons.timer, label: 'Timestamp logging'),
+              const _EvidenceItem(icon: Icons.camera_alt, label: 'Package photo at pickup'),
+              const _EvidenceItem(icon: Icons.camera_alt, label: 'Package photo at delivery'),
+              const _EvidenceItem(icon: Icons.location_on, label: 'GPS coordinates at each stop'),
+              const _EvidenceItem(icon: Icons.timer, label: 'Timestamp logging'),
             ],
           ),
         ),
@@ -392,16 +393,16 @@ class _SecurityStep extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 decoration: BoxDecoration(color: const Color(0xFFFEF3C7), borderRadius: BorderRadius.circular(8)),
-                child: Row(
+                child: const Row(
                   children: [
-                    const Icon(Icons.security, size: 14, color: Color(0xFFF59E0B)),
-                    const SizedBox(width: 6),
-                    Text('Standard coverage up to â‚µ5,000', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Color(0xFF92400E))),
+                    Icon(Icons.security, size: 14, color: Color(0xFFF59E0B)),
+                    SizedBox(width: 6),
+                    Text('Standard coverage up to â‚µ5,000', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Color(0xFF92400E))),
                   ],
                 ),
               ),
               const SizedBox(height: 8),
-              Text('For higher value orders, premium coverage is automatically applied.', style: TextStyle(fontSize: 12, color: AppColors.textTertiary)),
+              const Text('For higher value orders, premium coverage is automatically applied.', style: TextStyle(fontSize: 12, color: AppColors.textTertiary)),
             ],
           ),
         ),
@@ -486,11 +487,11 @@ class _ConfirmationStep extends StatelessWidget {
             ),
           ),
 
-        LiveSectionCard(
+        const LiveSectionCard(
           title: 'VERIFICATION REQUIREMENTS',
           icon: Icons.verified,
-          iconColor: const Color(0xFF10B981),
-          child: const Column(
+          iconColor: Color(0xFF10B981),
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _EvidenceItem(icon: Icons.check_circle, label: 'Digital signature required'),
@@ -536,7 +537,7 @@ class _OrderBundleItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('#${order.id} — ${order.customerName}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-                    Text('${order.items.length} items • â‚µ${order.total.toStringAsFixed(0)}', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                    Text('${order.items.length} items • â‚µ${order.total.toStringAsFixed(0)}', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                   ],
                 ),
               ),
@@ -567,7 +568,7 @@ class _PackageToggle extends StatelessWidget {
       child: Row(
         children: [
           Expanded(child: Text(label, style: const TextStyle(fontSize: 13))),
-          Switch(value: value, onChanged: onChanged, activeColor: kLiveColor, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
+          Switch(value: value, onChanged: onChanged, activeThumbColor: kLiveColor, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
         ],
       ),
     );
@@ -587,7 +588,7 @@ class _EvidenceItem extends StatelessWidget {
         children: [
           Icon(icon, size: 14, color: const Color(0xFF10B981)),
           const SizedBox(width: 8),
-          Text(label, style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+          Text(label, style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
         ],
       ),
     );
@@ -606,7 +607,7 @@ class _SummaryRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+          Text(label, style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
           Text(value, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
         ],
       ),

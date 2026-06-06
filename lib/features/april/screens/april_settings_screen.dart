@@ -1,5 +1,6 @@
 /// APRIL Screen 6 — APRIL Settings
 /// 7 sections: General, Voice, Plugins, Notifications, Privacy, Advanced, Help
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -466,7 +467,7 @@ class _SettingsToggle extends StatelessWidget {
       trailing: Switch(
         value: value,
         onChanged: onChanged,
-        activeColor: kAprilColor,
+        activeThumbColor: kAprilColor,
       ),
     );
   }

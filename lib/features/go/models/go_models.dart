@@ -2,6 +2,7 @@
 /// All data models, enums, and value objects
 /// Module Color: Emerald Green (0xFF10B981)
 /// Visibility: Owner + Administrator only
+library;
 
 import 'package:flutter/material.dart';
 

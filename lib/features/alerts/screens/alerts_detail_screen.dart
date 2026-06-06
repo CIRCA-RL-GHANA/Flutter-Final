@@ -1,6 +1,7 @@
 /// Alerts Screen 3 — Alert Detail (Immersive View)
 /// Collapsible header, priority strip, metadata grid, description card,
 /// assignment panel, activity timeline, resolution zone, sticky bottom actions
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -533,7 +534,7 @@ class _SlaDetailPanel extends StatelessWidget {
       children: [
         Row(
           children: [
-            Container(
+            SizedBox(
               width: 44,
               height: 44,
               child: Stack(

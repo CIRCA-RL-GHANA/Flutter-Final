@@ -1,6 +1,7 @@
 /// Enterprise â€º Onboarding Screen
 /// Allows an account owner to register their business on the Genie Enterprise
 /// platform (pathways 1–5), upload KYB documents, and view profile status.
+library;
 
 import 'package:flutter/material.dart';
 import '../../../core/services/enterprise_service.dart';
@@ -118,7 +119,7 @@ class _EnterpriseOnboardingScreenState
               _sectionLabel('Business Type'),
               const SizedBox(height: 8),
               DropdownButtonFormField<String>(
-                value: _selectedType,
+                initialValue: _selectedType,
                 dropdownColor: const Color(0xFF11131C),
                 style: const TextStyle(color: Colors.white),
                 decoration: _inputDecoration('Enterprise Type'),
@@ -136,6 +137,7 @@ class _EnterpriseOnboardingScreenState
               const SizedBox(height: 16),
               _sectionLabel('Access Pathways'),
               const SizedBox(height: 8),
+              // ignore: deprecated_member_use
               ..._pathwayLabels.entries.map((e) => CheckboxListTile(
                     activeColor: _kGold,
                     checkColor: Colors.black,
@@ -250,7 +252,7 @@ class _EnterpriseOnboardingScreenState
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: _kGold),
+          borderSide: const BorderSide(color: _kGold),
         ),
       );
 }

@@ -8,8 +8,10 @@ import '../widgets/buttons.dart';
 // OS palette — mirrors splash / welcome
 const Color _kBg        = IveTokens.bg;
 const Color _kSurface   = IveTokens.surface;
+// ignore: unused_element
 const Color _kBorder    = IveTokens.hairline;
 const Color _kAccent    = IveTokens.accent;
+// ignore: unused_element
 const Color _kAccentDim = IveTokens.accentPressed;
 const Color _kText      = IveTokens.label;
 const Color _kTextDim   = IveTokens.labelSecondary;
@@ -172,7 +174,7 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
         );
 
       case ErrorType.phoneLost:
-        return _ErrorConfig(
+        return const _ErrorConfig(
           icon: Icons.phone_disabled_rounded,
           iconColor: IveTokens.warning,
           title: 'Phone Number Changed?',
@@ -188,7 +190,7 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
         );
 
       case ErrorType.biometricChanged:
-        return _ErrorConfig(
+        return const _ErrorConfig(
           icon: Icons.fingerprint,
           iconColor: IveTokens.warning,
           title: 'Biometric Changed',
@@ -204,7 +206,7 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
         );
 
       case ErrorType.deviceChange:
-        return _ErrorConfig(
+        return const _ErrorConfig(
           icon: Icons.devices_rounded,
           iconColor: _kAccent,
           title: 'New Device Detected',
@@ -241,7 +243,7 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
                     child: Container(
                       width: 44,
                       height: 44,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: _kSurface,
                         borderRadius: IveTokens.brMd,
                       ),
@@ -312,7 +314,7 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
                           Container(
                             width: double.infinity,
                             padding: const EdgeInsets.all(16),
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               color: _kSurface,
                               borderRadius: IveTokens.brXs,
                             ),
@@ -403,9 +405,9 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
                       ),
                     ],
                     const SizedBox(height: 16),
-                    Text(
+                    const Text(
                       AppStrings.needHelp,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 12,
                         color: _kTextMuted,
                       ),

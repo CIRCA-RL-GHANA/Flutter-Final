@@ -1,9 +1,10 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// LIVE MODULE — Shared Widgets
 /// Reusable UI components: LiveAppBar, LiveOrderCard, LivePackageCard,
 /// LiveReturnCard, LiveDriverCard, LiveMetricBadge, LiveTimeline,
 /// LiveVerificationWidget, LiveSectionCard, LiveEmptyState, etc.
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -150,11 +151,11 @@ class LiveOrderCard extends StatelessWidget {
                         color: kLiveColor.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(6),
                       ),
-                      child: Row(
+                      child: const Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Icon(Icons.access_time, size: 12, color: kLiveColor),
-                          const SizedBox(width: 2),
+                          SizedBox(width: 2),
                           Text(
                             'OVERDUE',
                             style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: kLiveColor),
@@ -166,7 +167,7 @@ class LiveOrderCard extends StatelessWidget {
                   const Spacer(),
                   Text(
                     order.timeSinceCreated,
-                    style: TextStyle(fontSize: 12, color: AppColors.textTertiary),
+                    style: const TextStyle(fontSize: 12, color: AppColors.textTertiary),
                   ),
                 ],
               ),
@@ -174,17 +175,17 @@ class LiveOrderCard extends StatelessWidget {
               // Customer row
               Row(
                 children: [
-                  Icon(Icons.person_outline, size: 16, color: AppColors.textSecondary),
+                  const Icon(Icons.person_outline, size: 16, color: AppColors.textSecondary),
                   const SizedBox(width: 4),
                   Text(
                     order.customerName,
                     style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(width: 8),
-                  Icon(Icons.star, size: 14, color: const Color(0xFFF59E0B)),
+                  const Icon(Icons.star, size: 14, color: Color(0xFFF59E0B)),
                   Text(
                     order.customerRating.toStringAsFixed(1),
-                    style: TextStyle(fontSize: 12, color: AppColors.textSecondary),
+                    style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
                   ),
                 ],
               ),
@@ -192,12 +193,12 @@ class LiveOrderCard extends StatelessWidget {
               // Address row
               Row(
                 children: [
-                  Icon(Icons.location_on_outlined, size: 16, color: AppColors.textSecondary),
+                  const Icon(Icons.location_on_outlined, size: 16, color: AppColors.textSecondary),
                   const SizedBox(width: 4),
                   Expanded(
                     child: Text(
                       order.deliveryAddress,
-                      style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
+                      style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
@@ -207,12 +208,12 @@ class LiveOrderCard extends StatelessWidget {
               // Items row
               Row(
                 children: [
-                  Icon(Icons.inventory_2_outlined, size: 16, color: AppColors.textSecondary),
+                  const Icon(Icons.inventory_2_outlined, size: 16, color: AppColors.textSecondary),
                   const SizedBox(width: 4),
                   Expanded(
                     child: Text(
                       order.items.map((i) => i.name).join(', '),
-                      style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
+                      style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
@@ -224,9 +225,9 @@ class LiveOrderCard extends StatelessWidget {
                 Wrap(
                   spacing: 6,
                   children: [
-                    if (order.requiresColdStorage) _SpecialTag(icon: Icons.ac_unit, label: 'Cold storage'),
-                    if (order.requiresIdVerification) _SpecialTag(icon: Icons.badge, label: 'ID required'),
-                    if (order.isFragile) _SpecialTag(icon: Icons.warning_amber, label: 'Fragile'),
+                    if (order.requiresColdStorage) const _SpecialTag(icon: Icons.ac_unit, label: 'Cold storage'),
+                    if (order.requiresIdVerification) const _SpecialTag(icon: Icons.badge, label: 'ID required'),
+                    if (order.isFragile) const _SpecialTag(icon: Icons.warning_amber, label: 'Fragile'),
                   ],
                 ),
               ],
@@ -241,12 +242,12 @@ class LiveOrderCard extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      Icon(Icons.chat_bubble_outline, size: 14, color: AppColors.textTertiary),
+                      const Icon(Icons.chat_bubble_outline, size: 14, color: AppColors.textTertiary),
                       const SizedBox(width: 6),
                       Expanded(
                         child: Text(
                           '"${order.customerNote}"',
-                          style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic, color: AppColors.textSecondary),
+                          style: const TextStyle(fontSize: 12, fontStyle: FontStyle.italic, color: AppColors.textSecondary),
                         ),
                       ),
                     ],
@@ -392,17 +393,17 @@ class LivePackageCard extends StatelessWidget {
               if (package.driverName != null)
                 Row(
                   children: [
-                    Icon(Icons.local_shipping_outlined, size: 16, color: AppColors.textSecondary),
+                    const Icon(Icons.local_shipping_outlined, size: 16, color: AppColors.textSecondary),
                     const SizedBox(width: 4),
                     Text(
                       'Driver: ${package.driverName}',
                       style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
                     ),
                     const SizedBox(width: 4),
-                    Icon(Icons.star, size: 14, color: const Color(0xFFF59E0B)),
+                    const Icon(Icons.star, size: 14, color: Color(0xFFF59E0B)),
                     Text(
                       package.driverRating?.toStringAsFixed(1) ?? '',
-                      style: TextStyle(fontSize: 12, color: AppColors.textSecondary),
+                      style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
                     ),
                   ],
                 ),
@@ -410,18 +411,18 @@ class LivePackageCard extends StatelessWidget {
               // Stops & ETA
               Row(
                 children: [
-                  Icon(Icons.route, size: 16, color: AppColors.textSecondary),
+                  const Icon(Icons.route, size: 16, color: AppColors.textSecondary),
                   const SizedBox(width: 4),
                   Text(
                     'Stops: ${package.progressText}',
-                    style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
+                    style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
                   ),
                   const SizedBox(width: 12),
-                  Icon(Icons.timer_outlined, size: 16, color: AppColors.textSecondary),
+                  const Icon(Icons.timer_outlined, size: 16, color: AppColors.textSecondary),
                   const SizedBox(width: 4),
                   Text(
                     'ETA: ${package.estimatedTimeMinutes}min',
-                    style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
+                    style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
                   ),
                 ],
               ),
@@ -429,12 +430,12 @@ class LivePackageCard extends StatelessWidget {
               const SizedBox(height: 6),
               Row(
                 children: [
-                  Icon(Icons.list_alt, size: 16, color: AppColors.textSecondary),
+                  const Icon(Icons.list_alt, size: 16, color: AppColors.textSecondary),
                   const SizedBox(width: 4),
                   Text(
                     '${package.stops.where((s) => s.type == StopType.delivery).length} deliveries, '
                     '${package.stops.where((s) => s.type == StopType.returnPickup).length} return pickups',
-                    style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
+                    style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
                   ),
                 ],
               ),
@@ -443,14 +444,14 @@ class LivePackageCard extends StatelessWidget {
                 const SizedBox(height: 6),
                 Row(
                   children: [
-                    Icon(Icons.security, size: 16, color: AppColors.textSecondary),
+                    const Icon(Icons.security, size: 16, color: AppColors.textSecondary),
                     const SizedBox(width: 4),
                     Text(
                       'Security: ${[
                         if (package.biometricRequired) 'Biometric',
                         if (package.pinRequired) 'PIN',
                       ].join(' + ')}',
-                      style: TextStyle(fontSize: 12, color: AppColors.textSecondary),
+                      style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
                     ),
                   ],
                 ),
@@ -568,23 +569,23 @@ class LiveReturnCard extends StatelessWidget {
                   const SizedBox(width: 8),
                   _StatusBadge(label: _returnStatusLabel(ret.status), color: _returnStatusColor(ret.status)),
                   const Spacer(),
-                  Text(ret.timeSinceCreated, style: TextStyle(fontSize: 12, color: AppColors.textTertiary)),
+                  Text(ret.timeSinceCreated, style: const TextStyle(fontSize: 12, color: AppColors.textTertiary)),
                 ],
               ),
               const SizedBox(height: 10),
               // Customer
               Row(
                 children: [
-                  Icon(Icons.person_outline, size: 16, color: AppColors.textSecondary),
+                  const Icon(Icons.person_outline, size: 16, color: AppColors.textSecondary),
                   const SizedBox(width: 4),
                   Text(ret.customerName, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
                   const SizedBox(width: 8),
-                  Icon(Icons.star, size: 14, color: const Color(0xFFF59E0B)),
-                  Text(ret.customerRating.toStringAsFixed(1), style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                  const Icon(Icons.star, size: 14, color: Color(0xFFF59E0B)),
+                  Text(ret.customerRating.toStringAsFixed(1), style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                   const SizedBox(width: 8),
                   Text(
                     '${_ordinal(ret.customerReturnCount)} return',
-                    style: TextStyle(fontSize: 12, color: AppColors.textTertiary),
+                    style: const TextStyle(fontSize: 12, color: AppColors.textTertiary),
                   ),
                 ],
               ),
@@ -592,21 +593,21 @@ class LiveReturnCard extends StatelessWidget {
               // Item
               Row(
                 children: [
-                  Icon(Icons.shopping_bag_outlined, size: 16, color: AppColors.textSecondary),
+                  const Icon(Icons.shopping_bag_outlined, size: 16, color: AppColors.textSecondary),
                   const SizedBox(width: 4),
-                  Text('${ret.itemName} • â‚µ${ret.itemPrice.toStringAsFixed(0)}', style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+                  Text('${ret.itemName} • â‚µ${ret.itemPrice.toStringAsFixed(0)}', style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
                 ],
               ),
               const SizedBox(height: 4),
               // Reason
               Row(
                 children: [
-                  Icon(Icons.info_outline, size: 16, color: AppColors.textSecondary),
+                  const Icon(Icons.info_outline, size: 16, color: AppColors.textSecondary),
                   const SizedBox(width: 4),
                   Expanded(
                     child: Text(
                       '${ret.reason}${ret.reasonDetail != null ? " • \"${ret.reasonDetail}\"" : ""}',
-                      style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
+                      style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
@@ -618,7 +619,7 @@ class LiveReturnCard extends StatelessWidget {
                 Row(
                   children: [
                     if (ret.hasVideo) ...[
-                      Icon(Icons.videocam, size: 16, color: const Color(0xFF8B5CF6)),
+                      const Icon(Icons.videocam, size: 16, color: Color(0xFF8B5CF6)),
                       const SizedBox(width: 4),
                       Text(
                         'VIDEO (${_formatDuration(ret.videoEvidence!)})',
@@ -627,7 +628,7 @@ class LiveReturnCard extends StatelessWidget {
                       const SizedBox(width: 10),
                     ],
                     if (ret.hasVoiceNote) ...[
-                      Icon(Icons.mic, size: 16, color: const Color(0xFF3B82F6)),
+                      const Icon(Icons.mic, size: 16, color: Color(0xFF3B82F6)),
                       const SizedBox(width: 4),
                       Text(
                         'VOICE NOTE (${_formatDuration(ret.voiceNote!)})',
@@ -793,9 +794,9 @@ class LiveDriverCard extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          Icon(Icons.star, size: 14, color: const Color(0xFFF59E0B)),
-                          Text(' ${driver.rating} ', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
-                          Text('• ${driver.distanceMiles}mi away', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                          const Icon(Icons.star, size: 14, color: Color(0xFFF59E0B)),
+                          Text(' ${driver.rating} ', style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                          Text('• ${driver.distanceMiles}mi away', style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                         ],
                       ),
                     ],
@@ -825,7 +826,7 @@ class LiveDriverCard extends StatelessWidget {
                       color: AppColors.backgroundLight,
                       borderRadius: BorderRadius.circular(6),
                     ),
-                    child: Text(s, style: TextStyle(fontSize: 11, color: AppColors.textSecondary)),
+                    child: Text(s, style: const TextStyle(fontSize: 11, color: AppColors.textSecondary)),
                   )).toList(),
                 ),
               ],
@@ -973,7 +974,7 @@ class LiveTimelineWidget extends StatelessWidget {
                     if (entries[i].description != null)
                       Text(
                         entries[i].description!,
-                        style: TextStyle(fontSize: 11, color: AppColors.textTertiary),
+                        style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                       ),
                   ],
                 ),
@@ -999,7 +1000,7 @@ class LiveTimelineWidget extends StatelessWidget {
               const SizedBox(width: 10),
               Text(
                 'NOW - $currentLabel',
-                style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: kLiveColor),
+                style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: kLiveColor),
               ),
             ],
           ),
@@ -1120,7 +1121,7 @@ class LiveEmptyState extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               subtitle,
-              style: TextStyle(fontSize: 14, color: AppColors.textSecondary),
+              style: const TextStyle(fontSize: 14, color: AppColors.textSecondary),
               textAlign: TextAlign.center,
             ),
             if (suggestions != null && suggestions!.isNotEmpty) ...[
@@ -1132,7 +1133,7 @@ class LiveEmptyState extends StatelessWidget {
                   children: [
                     const Icon(Icons.check_circle_outline, size: 16, color: Color(0xFF10B981)),
                     const SizedBox(width: 6),
-                    Text(s, style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+                    Text(s, style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
                   ],
                 ),
               )),
@@ -1326,7 +1327,7 @@ class _SpecialTag extends StatelessWidget {
         children: [
           Icon(icon, size: 12, color: AppColors.textSecondary),
           const SizedBox(width: 3),
-          Text(label, style: TextStyle(fontSize: 10, color: AppColors.textSecondary)),
+          Text(label, style: const TextStyle(fontSize: 10, color: AppColors.textSecondary)),
         ],
       ),
     );
@@ -1359,7 +1360,7 @@ class _LiveActionChip extends StatelessWidget {
           children: [
             Icon(icon, size: 14, color: kLiveColor),
             const SizedBox(width: 4),
-            Text(label, style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: kLiveColor)),
+            Text(label, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: kLiveColor)),
           ],
         ),
       ),
@@ -1406,7 +1407,7 @@ class _DriverStat extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: TextStyle(fontSize: 10, color: AppColors.textTertiary)),
+        Text(label, style: const TextStyle(fontSize: 10, color: AppColors.textTertiary)),
         Text(value, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
       ],
     );

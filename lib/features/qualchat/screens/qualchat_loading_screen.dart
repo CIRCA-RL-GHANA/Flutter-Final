@@ -1,5 +1,6 @@
 /// qualChat Screen 0 — Loading & Permission Gate
 /// Seamless entry with zero-error authentication
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

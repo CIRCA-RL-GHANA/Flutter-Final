@@ -6,9 +6,9 @@
 ///  - Three separate confirmation checkboxes must all be checked.
 ///  - Version and content hash are sent to the server for legal evidence.
 ///  - Decline flow navigates away without granting access.
+library;
 
 import 'package:flutter/foundation.dart' show defaultTargetPlatform, TargetPlatform;
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/qpoints_tos_provider.dart';
@@ -713,6 +713,7 @@ class _ConsentCheckbox extends StatelessWidget {
           SizedBox(
             width: 24,
             height: 24,
+            // ignore: deprecated_member_use
             child: Checkbox(
               value: value,
               activeColor: kQpColor,

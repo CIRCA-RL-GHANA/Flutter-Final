@@ -2,6 +2,7 @@
 /// MARKET MODULE — Screen 9: Return Request & Evidence
 /// 4 Steps: Order Selection â†’ Evidence Collection â†’ Details â†’ Review
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -165,7 +166,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
         ),
         const SizedBox(height: 4),
-        Text(
+        const Text(
           'Choose which items from this order you want to return',
           style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
         ),
@@ -231,7 +232,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
                         ),
                         Text(
                           'Qty: ${item.quantity} • \$${item.total.toStringAsFixed(2)}',
-                          style: TextStyle(fontSize: 12, color: AppColors.textTertiary),
+                          style: const TextStyle(fontSize: 12, color: AppColors.textTertiary),
                         ),
                       ],
                     ),
@@ -255,7 +256,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
         ),
         const SizedBox(height: 4),
-        Text(
+        const Text(
           'Take photos of the items you wish to return',
           style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
         ),
@@ -327,21 +328,21 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
             color: AppColors.info.withValues(alpha: 0.08),
             borderRadius: BorderRadius.circular(12),
           ),
-          child: Column(
+          child: const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
                   Icon(Icons.info_outline, size: 18, color: AppColors.info),
-                  const SizedBox(width: 8),
-                  const Text('Photo Tips', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14)),
+                  SizedBox(width: 8),
+                  Text('Photo Tips', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14)),
                 ],
               ),
-              const SizedBox(height: 8),
-              const _TipRow('Show the full item clearly'),
-              const _TipRow('Include any damage or defects'),
-              const _TipRow('Photograph packaging and labels'),
-              const _TipRow('Good lighting improves processing'),
+              SizedBox(height: 8),
+              _TipRow('Show the full item clearly'),
+              _TipRow('Include any damage or defects'),
+              _TipRow('Photograph packaging and labels'),
+              _TipRow('Good lighting improves processing'),
             ],
           ),
         ),
@@ -365,8 +366,8 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
         ...ReturnReason.values.map((reason) {
           return RadioListTile<ReturnReason>(
             value: reason,
-            groupValue: _reason,
-            onChanged: (v) => setState(() => _reason = v!),
+            groupValue: _reason, // ignore: deprecated_member_use
+            onChanged: (v) => setState(() => _reason = v!), // ignore: deprecated_member_use
             title: Text(_reasonLabel(reason), style: const TextStyle(fontSize: 14)),
             activeColor: kMarketColor,
             contentPadding: EdgeInsets.zero,
@@ -381,7 +382,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
           onChanged: (v) => _description = v,
           decoration: InputDecoration(
             hintText: 'Describe the issue in detail...',
-            hintStyle: TextStyle(fontSize: 13, color: AppColors.textTertiary),
+            hintStyle: const TextStyle(fontSize: 13, color: AppColors.textTertiary),
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
@@ -397,8 +398,8 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
         ...RefundMethod.values.map((method) {
           return RadioListTile<RefundMethod>(
             value: method,
-            groupValue: _refundMethod,
-            onChanged: (v) => setState(() => _refundMethod = v!),
+            groupValue: _refundMethod, // ignore: deprecated_member_use
+            onChanged: (v) => setState(() => _refundMethod = v!), // ignore: deprecated_member_use
             title: Text(_refundLabel(method), style: const TextStyle(fontSize: 14)),
             activeColor: kMarketColor,
             contentPadding: EdgeInsets.zero,
@@ -595,7 +596,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 8),
-            Text(
+            const Text(
               'Your return request has been submitted.\nWe\'ll review it within 24-48 hours.',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 14, color: AppColors.textSecondary),

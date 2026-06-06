@@ -3,6 +3,7 @@
 /// Tabs: Overview, Staff, Products, Settings
 /// RBAC: Admin(fullAccess), BranchManager(branchScoped), Monitor(viewOnly)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,9 +31,9 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
       builder: (context, setupProv, ctxProv, _) {
         final place = setupProv.selectedPlace;
         if (place == null) {
-          return Scaffold(
-            appBar: const SetupAppBar(title: 'Place Detail'),
-            body: const SetupEmptyState(
+          return const Scaffold(
+            appBar: SetupAppBar(title: 'Place Detail'),
+            body: SetupEmptyState(
               icon: Icons.place,
               title: 'No place selected',
               subtitle: 'Select a place from the list',
@@ -201,11 +202,11 @@ class _OverviewTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.info_outline, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Place Information', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Place Information', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
               const SizedBox(height: 12),
@@ -307,11 +308,11 @@ class _ProductsTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.inventory_2, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Product Inventory', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Product Inventory', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
               const SizedBox(height: 12),
@@ -340,11 +341,11 @@ class _SettingsTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.settings, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Place Settings', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Place Settings', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
               const SizedBox(height: 12),
@@ -360,11 +361,11 @@ class _SettingsTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
-                  const Icon(Icons.warning, size: 18, color: AppColors.error),
-                  const SizedBox(width: 8),
-                  const Text('Danger Zone', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  Icon(Icons.warning, size: 18, color: AppColors.error),
+                  SizedBox(width: 8),
+                  Text('Danger Zone', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
               const SizedBox(height: 12),
@@ -446,7 +447,7 @@ class _SettingSwitchState extends State<_SettingSwitch> {
           Switch(
             value: _value,
             onChanged: (v) => setState(() => _value = v),
-            activeColor: kSetupColor,
+            activeThumbColor: kSetupColor,
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
           ),
         ],

@@ -4,6 +4,7 @@
 /// CartPreview, StatusTimeline, RatingStars, PriceTag, CategoryChip,
 /// MarketFilterChipRow, MarketSectionTitle, MarketSearchBar, etc.
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -225,7 +226,7 @@ class MerchantCard extends StatelessWidget {
                   if (merchant.tags.isNotEmpty)
                     Text(
                       merchant.tags.join(' • '),
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
                         color: AppColors.textSecondary,
                       ),
@@ -245,12 +246,12 @@ class MerchantCard extends StatelessWidget {
                       const SizedBox(width: 8),
                       Text(
                         '${merchant.distanceMiles}mi',
-                        style: TextStyle(fontSize: 12, color: AppColors.textSecondary),
+                        style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
                       ),
                       const SizedBox(width: 8),
                       Text(
                         merchant.deliveryTimeDisplay,
-                        style: TextStyle(fontSize: 12, color: AppColors.textSecondary),
+                        style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
                       ),
                     ],
                   ),
@@ -270,7 +271,7 @@ class MerchantCard extends StatelessWidget {
                           const SizedBox(width: 8),
                           Text(
                             'Min \$${merchant.minimumOrder.toStringAsFixed(0)}',
-                            style: TextStyle(fontSize: 12, color: AppColors.textSecondary),
+                            style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
                           ),
                         ],
                       ],
@@ -442,7 +443,7 @@ class MarketProductCard extends StatelessWidget {
                         const SizedBox(width: 2),
                         Text(
                           '${product.rating.toStringAsFixed(1)} (${product.ratingCount})',
-                          style: TextStyle(fontSize: 11, color: AppColors.textSecondary),
+                          style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
                         ),
                       ],
                     ),
@@ -460,7 +461,7 @@ class MarketProductCard extends StatelessWidget {
                           if (product.hasDiscount)
                             Text(
                               product.comparePriceDisplay,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 12,
                                 color: AppColors.textTertiary,
                                 decoration: TextDecoration.lineThrough,
@@ -561,7 +562,7 @@ class MarketProductCard extends StatelessWidget {
                     const SizedBox(height: 2),
                     Text(
                       product.description!,
-                      style: TextStyle(fontSize: 12, color: AppColors.textSecondary),
+                      style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -573,7 +574,7 @@ class MarketProductCard extends StatelessWidget {
                       const SizedBox(width: 2),
                       Text(
                         '${product.rating.toStringAsFixed(1)} (${product.ratingCount})',
-                        style: TextStyle(fontSize: 11, color: AppColors.textSecondary),
+                        style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
                       ),
                     ],
                   ),
@@ -581,7 +582,7 @@ class MarketProductCard extends StatelessWidget {
                     const SizedBox(height: 2),
                     Text(
                       product.customizationNote ?? 'Customizable',
-                      style: TextStyle(fontSize: 11, color: kMarketColor),
+                      style: const TextStyle(fontSize: 11, color: kMarketColor),
                     ),
                   ],
                 ],
@@ -599,7 +600,7 @@ class MarketProductCard extends StatelessWidget {
                 if (product.hasDiscount)
                   Text(
                     product.comparePriceDisplay,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       color: AppColors.textTertiary,
                       decoration: TextDecoration.lineThrough,
@@ -921,13 +922,13 @@ class MarketSearchBar extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Icon(Icons.search, color: AppColors.textTertiary, size: 22),
+            const Icon(Icons.search, color: AppColors.textTertiary, size: 22),
             const SizedBox(width: 10),
             Expanded(
               child: onTap != null
                   ? Text(
                       hint,
-                      style: TextStyle(fontSize: 14, color: AppColors.textTertiary),
+                      style: const TextStyle(fontSize: 14, color: AppColors.textTertiary),
                     )
                   : TextField(
                       controller: controller,
@@ -936,14 +937,14 @@ class MarketSearchBar extends StatelessWidget {
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: hint,
-                        hintStyle: TextStyle(fontSize: 14, color: AppColors.textTertiary),
+                        hintStyle: const TextStyle(fontSize: 14, color: AppColors.textTertiary),
                         isDense: true,
                         contentPadding: EdgeInsets.zero,
                       ),
                       style: const TextStyle(fontSize: 14),
                     ),
             ),
-            Icon(Icons.mic, color: AppColors.textTertiary, size: 22),
+            const Icon(Icons.mic, color: AppColors.textTertiary, size: 22),
           ],
         ),
       ),
@@ -1023,12 +1024,12 @@ class OrderStatusTimeline extends StatelessWidget {
                     if (event.detail != null)
                       Text(
                         event.detail!,
-                        style: TextStyle(fontSize: 12, color: AppColors.textSecondary),
+                        style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
                       ),
                     if (event.timestamp != null)
                       Text(
                         _formatTime(event.timestamp!),
-                        style: TextStyle(fontSize: 11, color: AppColors.textTertiary),
+                        style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                       ),
                   ],
                 ),
@@ -1165,7 +1166,7 @@ class MarketOrderCard extends StatelessWidget {
                       ),
                       Text(
                         '${order.id} • ${_timeAgo(order.createdAt)}',
-                        style: TextStyle(fontSize: 11, color: AppColors.textSecondary),
+                        style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
                       ),
                     ],
                   ),
@@ -1213,7 +1214,7 @@ class MarketOrderCard extends StatelessWidget {
                       ),
                       Text(
                         '\$${item.total.toStringAsFixed(2)}',
-                        style: TextStyle(fontSize: 12, color: AppColors.textSecondary),
+                        style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
                       ),
                     ],
                   ),
@@ -1221,7 +1222,7 @@ class MarketOrderCard extends StatelessWidget {
             if (order.items.length > 2)
               Text(
                 '+${order.items.length - 2} more items',
-                style: TextStyle(fontSize: 12, color: AppColors.textTertiary),
+                style: const TextStyle(fontSize: 12, color: AppColors.textTertiary),
               ),
             const Divider(height: 20),
             Row(
@@ -1302,7 +1303,7 @@ class MarketInfoRow extends StatelessWidget {
         children: [
           Icon(icon, size: 18, color: AppColors.textTertiary),
           const SizedBox(width: 10),
-          Text(label, style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+          Text(label, style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
           const Spacer(),
           Text(
             value,
@@ -1420,7 +1421,7 @@ class MarketKPIBadge extends StatelessWidget {
           const SizedBox(height: 2),
           Text(
             label,
-            style: TextStyle(fontSize: 11, color: AppColors.textSecondary),
+            style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
           ),
         ],
       ),
@@ -1465,7 +1466,7 @@ class MarketEmptyState extends StatelessWidget {
               const SizedBox(height: 8),
               Text(
                 subtitle!,
-                style: TextStyle(fontSize: 14, color: AppColors.textSecondary),
+                style: const TextStyle(fontSize: 14, color: AppColors.textSecondary),
                 textAlign: TextAlign.center,
               ),
             ],

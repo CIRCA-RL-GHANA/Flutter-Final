@@ -10,14 +10,6 @@ import '../widgets/buttons.dart';
 
 
 // OS palette — mirrors splash / welcome
-const Color _kBg        = IveTokens.bg;
-const Color _kSurface   = IveTokens.surface;
-const Color _kBorder    = IveTokens.hairline;
-const Color _kAccent    = IveTokens.accent;
-const Color _kAccentDim = IveTokens.accentPressed;
-const Color _kText      = IveTokens.label;
-const Color _kTextDim   = IveTokens.labelSecondary;
-const Color _kTextMuted = IveTokens.labelTertiary;
 /// Screen 9: Permissions Onboarding
 /// Just-in-time, benefit-focused permission requests
 class PermissionsScreen extends StatefulWidget {
@@ -110,7 +102,7 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                               child: Container(
                                 width: 44,
                                 height: 44,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   color: IveTokens.surface,
                                   borderRadius: IveTokens.brMd,
                                 ),
@@ -121,9 +113,9 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                                 ),
                               ),
                             ),
-                            Text(
+                            const Text(
                               'Step 7 of 8',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,
                                 color: IveTokens.labelTertiary,
@@ -260,7 +252,7 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                               Container(
                                 width: double.infinity,
                                 height: 160,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   color: IveTokens.surface,
                                   borderRadius: IveTokens.brXs,
                                 ),
@@ -273,7 +265,7 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                                       color: IveTokens.labelTertiary.withValues(alpha: 0.5),
                                     ),
                                     const SizedBox(height: 8),
-                                    Text(
+                                    const Text(
                                       'Feature Preview',
                                       style: TextStyle(
                                         fontSize: 12,
@@ -308,9 +300,9 @@ class _PermissionsScreenState extends State<PermissionsScreen>
                           onPressed: () => _onSkip(currentPerm),
                         ),
                         const SizedBox(height: 8),
-                        Text(
+                        const Text(
                           AppStrings.enableLater,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 12,
                             color: IveTokens.labelTertiary,
                           ),

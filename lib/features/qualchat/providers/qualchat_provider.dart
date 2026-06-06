@@ -1,6 +1,7 @@
 /// qualChat Module — State Management & Demo Data
 /// Provides all state for 15 screens + prompt widget
 /// Wired to SocialService with fallback demo data for offline mode.
+library;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' show RangeValues;
@@ -145,7 +146,7 @@ class QualChatProvider extends ChangeNotifier {
   /// Public accessor — preserved for backward compatibility.
   static final List<ChatUser> allUsers = _fallbackUsers;
 
-  List<ChatUser> _users = [];
+  final List<ChatUser> _users = [];
 
   List<ChatUser> get filteredUsers {
     var list = (_users.isNotEmpty ? _users : _fallbackUsers).toList();

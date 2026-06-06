@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/routes/app_routes.dart';
 
 class LiveOperationsScreen extends ConsumerStatefulWidget {
-  const LiveOperationsScreen({Key? key}) : super(key: key);
+  const LiveOperationsScreen({super.key});
 
   @override
   ConsumerState<LiveOperationsScreen> createState() =>

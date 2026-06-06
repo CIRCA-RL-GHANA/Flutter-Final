@@ -3,6 +3,7 @@
 /// Tabs: Overview, Audience, Performance, A/B Testing
 /// RBAC: Admin/SocialOfficer(fullAccess), Monitor(viewOnly)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,9 +31,9 @@ class _CampaignDetailScreenState extends State<CampaignDetailScreen> {
       builder: (context, setupProv, ctxProv, _) {
         final campaign = setupProv.selectedCampaign;
         if (campaign == null) {
-          return Scaffold(
-            appBar: const SetupAppBar(title: 'Campaign Detail'),
-            body: const SetupEmptyState(
+          return const Scaffold(
+            appBar: SetupAppBar(title: 'Campaign Detail'),
+            body: SetupEmptyState(
               icon: Icons.campaign,
               title: 'No campaign selected',
               subtitle: 'Select a campaign from the list',
@@ -202,11 +203,11 @@ class _OverviewTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.info_outline, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Campaign Details', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Campaign Details', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
               const SizedBox(height: 12),
@@ -226,11 +227,11 @@ class _OverviewTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.account_balance_wallet, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Budget Utilization', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Budget Utilization', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
               const SizedBox(height: 12),
@@ -280,11 +281,11 @@ class _AudienceTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.people, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Target Audience', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Target Audience', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
               const SizedBox(height: 12),
@@ -300,11 +301,11 @@ class _AudienceTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.filter_alt, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Engagement Funnel', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Engagement Funnel', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
               const SizedBox(height: 12),
@@ -377,11 +378,11 @@ class _PerformanceTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.show_chart, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Performance Trend', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Performance Trend', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
               const SizedBox(height: 12),
@@ -397,12 +398,12 @@ class _PerformanceTab extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  const _LegendDot(color: kSetupColor, label: 'Reach'),
-                  const _LegendDot(color: AppColors.success, label: 'Conversions'),
-                  const _LegendDot(color: AppColors.warning, label: 'Spend'),
+                  _LegendDot(color: kSetupColor, label: 'Reach'),
+                  _LegendDot(color: AppColors.success, label: 'Conversions'),
+                  _LegendDot(color: AppColors.warning, label: 'Spend'),
                 ],
               ),
             ],
@@ -481,7 +482,7 @@ class _ABTestingTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 100),
-      children: [
+      children: const [
         SetupSectionCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -489,30 +490,30 @@ class _ABTestingTab extends StatelessWidget {
               Row(
                 children: [
                   Icon(Icons.science, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('A/B Test Variants', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('A/B Test Variants', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
-              const SizedBox(height: 12),
-              const _TestVariant(
+              SizedBox(height: 12),
+              _TestVariant(
                 name: 'Variant A (Control)',
                 ctr: '3.2%',
                 convRate: '1.8%',
                 color: kSetupColor,
                 isWinning: true,
               ),
-              const Divider(height: 20),
+              Divider(height: 20),
               _TestVariant(
                 name: 'Variant B',
                 ctr: '2.7%',
                 convRate: '1.5%',
-                color: const Color(0xFF8B5CF6),
+                color: Color(0xFF8B5CF6),
                 isWinning: false,
               ),
             ],
           ),
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         SetupSectionCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -520,15 +521,15 @@ class _ABTestingTab extends StatelessWidget {
               Row(
                 children: [
                   Icon(Icons.tune, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Test Configuration', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Test Configuration', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
-              const SizedBox(height: 12),
-              const SetupInfoRow(label: 'Test Duration', value: '14 days'),
-              const SetupInfoRow(label: 'Traffic Split', value: '50/50'),
-              const SetupInfoRow(label: 'Confidence', value: '95%'),
-              const SetupInfoRow(label: 'Min. Sample', value: '1,000 per variant'),
+              SizedBox(height: 12),
+              SetupInfoRow(label: 'Test Duration', value: '14 days'),
+              SetupInfoRow(label: 'Traffic Split', value: '50/50'),
+              SetupInfoRow(label: 'Confidence', value: '95%'),
+              SetupInfoRow(label: 'Min. Sample', value: '1,000 per variant'),
             ],
           ),
         ),

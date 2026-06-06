@@ -3,6 +3,7 @@
 /// Complete order information: customer, items, delivery, special
 /// instructions, driver assignment, timeline, action buttons
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -107,19 +108,19 @@ class LiveOrderDetailScreen extends StatelessWidget {
                       children: [
                         Text(order.customerName, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700)),
                         const SizedBox(width: 8),
-                        Icon(Icons.star, size: 14, color: const Color(0xFFF59E0B)),
-                        Text(' ${order.customerRating}', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                        const Icon(Icons.star, size: 14, color: Color(0xFFF59E0B)),
+                        Text(' ${order.customerRating}', style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                         const SizedBox(width: 8),
-                        Text('• ${order.customerOrderCount} orders', style: TextStyle(fontSize: 12, color: AppColors.textTertiary)),
+                        Text('• ${order.customerOrderCount} orders', style: const TextStyle(fontSize: 12, color: AppColors.textTertiary)),
                       ],
                     ),
                     if (order.customerPhone != null) ...[
                       const SizedBox(height: 6),
                       Row(
                         children: [
-                          Icon(Icons.phone, size: 14, color: AppColors.textSecondary),
+                          const Icon(Icons.phone, size: 14, color: AppColors.textSecondary),
                           const SizedBox(width: 4),
-                          Text(order.customerPhone!, style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+                          Text(order.customerPhone!, style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
                         ],
                       ),
                     ],
@@ -127,9 +128,9 @@ class LiveOrderDetailScreen extends StatelessWidget {
                       const SizedBox(height: 4),
                       Row(
                         children: [
-                          Icon(Icons.email, size: 14, color: AppColors.textSecondary),
+                          const Icon(Icons.email, size: 14, color: AppColors.textSecondary),
                           const SizedBox(width: 4),
-                          Text(order.customerEmail!, style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+                          Text(order.customerEmail!, style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
                         ],
                       ),
                     ],
@@ -137,9 +138,9 @@ class LiveOrderDetailScreen extends StatelessWidget {
                       const SizedBox(height: 4),
                       Row(
                         children: [
-                          Icon(Icons.business, size: 14, color: AppColors.textSecondary),
+                          const Icon(Icons.business, size: 14, color: AppColors.textSecondary),
                           const SizedBox(width: 4),
-                          Text('${order.customerCompany}${order.deliveryReception != null ? " • Reception: ${order.deliveryReception}" : ""}', style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+                          Text('${order.customerCompany}${order.deliveryReception != null ? " • Reception: ${order.deliveryReception}" : ""}', style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
                         ],
                       ),
                     ],
@@ -184,9 +185,9 @@ class LiveOrderDetailScreen extends StatelessWidget {
                               children: [
                                 Text(item.name, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
                                 if (item.serialNumber != null)
-                                  Text('Serial: ${item.serialNumber}', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                                  Text('Serial: ${item.serialNumber}', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                                 if (item.stockLocation != null)
-                                  Text('Stock: ${item.stockLocation}', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                                  Text('Stock: ${item.stockLocation}', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                               ],
                             ),
                           ),
@@ -198,14 +199,14 @@ class LiveOrderDetailScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Subtotal: â‚µ${order.subtotal.toStringAsFixed(0)} • Delivery: â‚µ${order.deliveryFee.toStringAsFixed(0)}', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                        Text('Subtotal: â‚µ${order.subtotal.toStringAsFixed(0)} • Delivery: â‚µ${order.deliveryFee.toStringAsFixed(0)}', style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                         Text('TOTAL: â‚µ${order.total.toStringAsFixed(0)}', style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800, color: AppColors.textPrimary)),
                       ],
                     ),
                     const SizedBox(height: 4),
                     Align(
                       alignment: Alignment.centerRight,
-                      child: Text('Paid: ${order.paymentMethod}', style: TextStyle(fontSize: 12, color: AppColors.textTertiary)),
+                      child: Text('Paid: ${order.paymentMethod}', style: const TextStyle(fontSize: 12, color: AppColors.textTertiary)),
                     ),
                   ],
                 ),
@@ -221,11 +222,11 @@ class LiveOrderDetailScreen extends StatelessWidget {
                   children: [
                     Text(order.deliveryAddress, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
                     if (order.deliveryFloor != null)
-                      Text('Floor: ${order.deliveryFloor}${order.deliveryReception != null ? " • Reception: ${order.deliveryReception}" : ""}', style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+                      Text('Floor: ${order.deliveryFloor}${order.deliveryReception != null ? " • Reception: ${order.deliveryReception}" : ""}', style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
                     if (order.accessCode != null)
-                      Text('Access code: ${order.accessCode}', style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+                      Text('Access code: ${order.accessCode}', style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
                     if (order.parkingNote != null)
-                      Text('Parking: ${order.parkingNote}', style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+                      Text('Parking: ${order.parkingNote}', style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
                     const SizedBox(height: 10),
                     Wrap(
                       spacing: 8,
@@ -278,7 +279,7 @@ class LiveOrderDetailScreen extends StatelessWidget {
                       const SizedBox(height: 4),
                       Text(
                         'Recommended: ${prov.availableDrivers.isNotEmpty ? "${prov.availableDrivers.first.name} (${prov.availableDrivers.first.distanceMiles}mi, ${(prov.availableDrivers.first.completionRate * 100).toInt()}% rating)" : "None available"}',
-                        style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
+                        style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
                       ),
                     ],
                     const SizedBox(height: 10),
@@ -391,7 +392,7 @@ class _ActionChip extends StatelessWidget {
           children: [
             Icon(icon, size: 14, color: kLiveColor),
             const SizedBox(width: 4),
-            Text(label, style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: kLiveColor)),
+            Text(label, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: kLiveColor)),
           ],
         ),
       ),

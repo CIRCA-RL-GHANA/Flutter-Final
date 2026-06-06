@@ -1,5 +1,6 @@
 /// GO Screen 13 — Security Center
 /// Access control, audit trail, security settings
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -78,14 +79,14 @@ class _GoSecurityScreenState extends State<GoSecurityScreen> with SingleTickerPr
   Widget _buildOverview(GoProvider p) {
     return ListView(padding: const EdgeInsets.all(16), children: [
       // Security score
-      GoSectionCard(child: Column(children: [
-        const Text('SECURITY SCORE', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF9CA3AF))),
-        const SizedBox(height: 10),
-        const GoHealthGauge(score: 85, size: 110),
-        const SizedBox(height: 8),
-        const Text('Strong', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: kGoPositive)),
-        const SizedBox(height: 4),
-        const Text('2 recommendations to improve', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+      const GoSectionCard(child: Column(children: [
+        Text('SECURITY SCORE', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF9CA3AF))),
+        SizedBox(height: 10),
+        GoHealthGauge(score: 85, size: 110),
+        SizedBox(height: 8),
+        Text('Strong', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: kGoPositive)),
+        SizedBox(height: 4),
+        Text('2 recommendations to improve', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
       ])),
       const SizedBox(height: 14),
       // Status cards
@@ -94,14 +95,14 @@ class _GoSecurityScreenState extends State<GoSecurityScreen> with SingleTickerPr
       _StatusRow(icon: Icons.fingerprint, label: 'Biometric Auth', status: p.getSecuritySetting('biometricLogin') ? 'Enabled' : 'Disabled', isGood: p.getSecuritySetting('biometricLogin')),
       _StatusRow(icon: Icons.phonelink_lock, label: '2-Factor Auth', status: p.getSecuritySetting('twoFactorAuth') ? 'Enabled' : 'Disabled', isGood: p.getSecuritySetting('twoFactorAuth')),
       _StatusRow(icon: Icons.notifications_active, label: 'Transaction Alerts', status: p.getSecuritySetting('anomalyAlerts') ? 'On' : 'Off', isGood: p.getSecuritySetting('anomalyAlerts')),
-      _StatusRow(icon: Icons.lock, label: 'Auto-lock', status: '5 min', isGood: true),
-      _StatusRow(icon: Icons.devices, label: 'Known Devices', status: '2 devices', isGood: true),
+      const _StatusRow(icon: Icons.lock, label: 'Auto-lock', status: '5 min', isGood: true),
+      const _StatusRow(icon: Icons.devices, label: 'Known Devices', status: '2 devices', isGood: true),
       const SizedBox(height: 14),
       // Recommendations
       const GoSectionHeader(title: 'Recommendations', icon: Icons.lightbulb),
       const SizedBox(height: 8),
-      _RecommendCard(icon: Icons.lock, title: 'Enable 2FA', desc: 'Add an extra layer of security with two-factor authentication.', action: 'Enable'),
-      _RecommendCard(icon: Icons.password, title: 'Update PIN', desc: 'Your PIN hasn\'t been changed in 90 days.', action: 'Change'),
+      const _RecommendCard(icon: Icons.lock, title: 'Enable 2FA', desc: 'Add an extra layer of security with two-factor authentication.', action: 'Enable'),
+      const _RecommendCard(icon: Icons.password, title: 'Update PIN', desc: 'Your PIN hasn\'t been changed in 90 days.', action: 'Change'),
     ]);
   }
 
@@ -146,9 +147,9 @@ class _GoSecurityScreenState extends State<GoSecurityScreen> with SingleTickerPr
       GoSectionCard(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         const GoSectionHeader(title: 'Limits', icon: Icons.speed),
         const SizedBox(height: 8),
-        _LimitRow(label: 'Single Transaction', value: '50000 QP'),
-        _LimitRow(label: 'Daily Limit', value: '200000 QP'),
-        _LimitRow(label: 'Monthly Limit', value: '1000000 QP'),
+        const _LimitRow(label: 'Single Transaction', value: '50000 QP'),
+        const _LimitRow(label: 'Daily Limit', value: '200000 QP'),
+        const _LimitRow(label: 'Monthly Limit', value: '1000000 QP'),
         const SizedBox(height: 8),
         SizedBox(width: double.infinity, child: OutlinedButton(
           onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Limit increase request submitted'), backgroundColor: kGoColor)),
@@ -238,7 +239,7 @@ class _ToggleRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) => SwitchListTile(
     title: Text(label, style: const TextStyle(fontSize: 13)),
-    value: value, onChanged: onChanged, activeColor: kGoColor, dense: true, contentPadding: EdgeInsets.zero,
+    value: value, onChanged: onChanged, activeThumbColor: kGoColor, dense: true, contentPadding: EdgeInsets.zero,
   );
 }
 

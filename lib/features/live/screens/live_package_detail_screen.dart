@@ -3,9 +3,9 @@
 /// Full package detail: multi-stop progress, driver info,
 /// security settings, timeline, live tracking
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
@@ -76,7 +76,7 @@ class LivePackageDetailScreen extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(colors: [kLiveColor, kLiveAccent]),
+                  gradient: const LinearGradient(colors: [kLiveColor, kLiveAccent]),
                   borderRadius: BorderRadius.circular(14),
                 ),
                 child: Row(
@@ -130,9 +130,9 @@ class LivePackageDetailScreen extends StatelessWidget {
                               children: [
                                 const Icon(Icons.star, size: 12, color: Color(0xFFF59E0B)),
                                 const SizedBox(width: 2),
-                                Text('${driver.rating}', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                                Text('${driver.rating}', style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                                 const SizedBox(width: 8),
-                                Text('${driver.todayDeliveries} deliveries today', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                                Text('${driver.todayDeliveries} deliveries today', style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                               ],
                             ),
                           ],
@@ -177,7 +177,7 @@ class LivePackageDetailScreen extends StatelessWidget {
                                     ? const Icon(Icons.check, size: 14, color: Colors.white)
                                     : current
                                         ? const Icon(Icons.circle, size: 10, color: Colors.white)
-                                        : Text('${i + 1}', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.textTertiary)),
+                                        : Text('${i + 1}', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.textTertiary)),
                               ),
                             ),
                             if (!isLast)
@@ -203,8 +203,8 @@ class LivePackageDetailScreen extends StatelessWidget {
                                   ],
                                 ),
                                 Text(stop.address, style: TextStyle(fontSize: 13, fontWeight: current ? FontWeight.w600 : FontWeight.w400)),
-                                Text(stop.customerName, style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
-                                Text('${stop.etaMinutes} min', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                                Text(stop.customerName, style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                                Text('${stop.etaMinutes} min', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                               ],
                             ),
                           ),
@@ -263,12 +263,12 @@ class LivePackageDetailScreen extends StatelessWidget {
                 child: Container(
                   height: 120,
                   decoration: BoxDecoration(color: const Color(0xFFE5E7EB), borderRadius: BorderRadius.circular(12)),
-                  child: Center(
+                  child: const Center(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Icon(Icons.map, size: 32, color: AppColors.textTertiary),
-                        const SizedBox(height: 4),
+                        SizedBox(height: 4),
                         Text('Real-time driver location', style: TextStyle(fontSize: 12, color: AppColors.textTertiary)),
                       ],
                     ),

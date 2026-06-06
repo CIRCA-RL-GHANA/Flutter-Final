@@ -3,6 +3,7 @@
 /// Tabs: Overview, Eligible Products, Performance, Settings
 /// RBAC: Admin(full), BM(branch), SO(full), BSO(branch), Monitor(viewOnly)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,9 +31,9 @@ class _DiscountDetailScreenState extends State<DiscountDetailScreen> {
       builder: (context, setupProv, ctxProv, _) {
         final discount = setupProv.selectedDiscount;
         if (discount == null) {
-          return Scaffold(
-            appBar: const SetupAppBar(title: 'Discount Detail'),
-            body: const SetupEmptyState(
+          return const Scaffold(
+            appBar: SetupAppBar(title: 'Discount Detail'),
+            body: SetupEmptyState(
               icon: Icons.local_offer,
               title: 'No discount selected',
               subtitle: 'Select a discount tier from the list',
@@ -401,7 +402,7 @@ class _EligibleProductsTab extends StatelessWidget {
                       ),
                       Text(
                         discount.valueDisplay,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w700,
                           color: AppColors.success,
@@ -457,31 +458,31 @@ class _PerformanceTab extends StatelessWidget {
         const SizedBox(height: 16),
 
         // Redemption Rate Card
-        SetupSectionCard(
+        const SetupSectionCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SetupSectionTitle(title: 'Redemption Rate', icon: Icons.pie_chart),
-              const SizedBox(height: 8),
-              const _PerformanceBar(label: 'This week', value: 0.24, display: '24%'),
-              const SizedBox(height: 8),
-              const _PerformanceBar(label: 'Last week', value: 0.18, display: '18%'),
-              const SizedBox(height: 8),
-              const _PerformanceBar(label: 'This month', value: 0.21, display: '21%'),
+              SetupSectionTitle(title: 'Redemption Rate', icon: Icons.pie_chart),
+              SizedBox(height: 8),
+              _PerformanceBar(label: 'This week', value: 0.24, display: '24%'),
+              SizedBox(height: 8),
+              _PerformanceBar(label: 'Last week', value: 0.18, display: '18%'),
+              SizedBox(height: 8),
+              _PerformanceBar(label: 'This month', value: 0.21, display: '21%'),
             ],
           ),
         ),
 
         // Customer Insights
-        SetupSectionCard(
+        const SetupSectionCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SetupSectionTitle(title: 'Customer Insights', icon: Icons.people),
-              const SetupInfoRow(label: 'New Customers', value: '89 (36%)'),
-              const SetupInfoRow(label: 'Repeat Customers', value: '156 (64%)'),
-              const SetupInfoRow(label: 'Avg Savings/Customer', value: 'â‚µ51'),
-              const SetupInfoRow(label: 'Avg Order Value', value: 'â‚µ508 (+â‚µ45)'),
+              SetupSectionTitle(title: 'Customer Insights', icon: Icons.people),
+              SetupInfoRow(label: 'New Customers', value: '89 (36%)'),
+              SetupInfoRow(label: 'Repeat Customers', value: '156 (64%)'),
+              SetupInfoRow(label: 'Avg Savings/Customer', value: 'â‚µ51'),
+              SetupInfoRow(label: 'Avg Order Value', value: 'â‚µ508 (+â‚µ45)'),
             ],
           ),
         ),
@@ -537,25 +538,25 @@ class _SettingsTab extends StatelessWidget {
             ],
           ),
         ),
-        SetupSectionCard(
+        const SetupSectionCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SetupSectionTitle(title: 'Stacking Rules', icon: Icons.layers),
-              const SetupInfoRow(label: 'Can stack', value: 'No'),
-              const SetupInfoRow(label: 'Priority', value: 'Highest discount wins'),
-              const SetupInfoRow(label: 'Exclusions', value: 'None'),
+              SetupSectionTitle(title: 'Stacking Rules', icon: Icons.layers),
+              SetupInfoRow(label: 'Can stack', value: 'No'),
+              SetupInfoRow(label: 'Priority', value: 'Highest discount wins'),
+              SetupInfoRow(label: 'Exclusions', value: 'None'),
             ],
           ),
         ),
-        SetupSectionCard(
+        const SetupSectionCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SetupSectionTitle(title: 'Usage Limits', icon: Icons.speed),
-              const SetupInfoRow(label: 'Per customer', value: 'Unlimited'),
-              const SetupInfoRow(label: 'Total uses', value: 'Unlimited'),
-              const SetupInfoRow(label: 'Budget cap', value: 'None'),
+              SetupSectionTitle(title: 'Usage Limits', icon: Icons.speed),
+              SetupInfoRow(label: 'Per customer', value: 'Unlimited'),
+              SetupInfoRow(label: 'Total uses', value: 'Unlimited'),
+              SetupInfoRow(label: 'Budget cap', value: 'None'),
             ],
           ),
         ),

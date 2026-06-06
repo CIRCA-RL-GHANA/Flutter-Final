@@ -1,5 +1,6 @@
 /// qualChat Screen 3 — Hey Ya Journey (Owner Only)
 /// Dating timeline: track your connection journey and plan a date
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -156,7 +157,7 @@ class QualChatTimelineScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: Colors.white,
-          border: Border(top: BorderSide(color: const Color(0xFFE5E7EB))),
+          border: const Border(top: BorderSide(color: Color(0xFFE5E7EB))),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withValues(alpha: 0.05),

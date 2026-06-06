@@ -1,5 +1,6 @@
 /// Models for the Q Points Market system.
 /// These map to the backend entities and API response shapes.
+library;
 
 // ────────────────────────────────────────────
 // Enums

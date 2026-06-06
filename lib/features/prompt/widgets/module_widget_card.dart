@@ -3,6 +3,7 @@
 /// The universal wrapper for all 10 module widgets on the PROMPT screen.
 /// Handles 6 states, gestures, accessibility, view-only overlay, shimmer.
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -312,7 +313,7 @@ class _ErrorCard extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.error_outline, color: AppColors.error, size: 32),
+          const Icon(Icons.error_outline, color: AppColors.error, size: 32),
           const SizedBox(height: 8),
           Text(
             info.name,
@@ -378,7 +379,7 @@ class _EmptyCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 4),
-          Text(
+          const Text(
             'No data yet',
             style: TextStyle(
               fontSize: 12,
@@ -417,7 +418,7 @@ class _DisabledCard extends StatelessWidget {
         opacity: 0.35,
         child: Container(
           padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: IveTokens.surface,
             borderRadius: IveTokens.brLg,
           ),

@@ -1,6 +1,7 @@
 /// GO Screen 0 — Context Switcher (Pre-Entry)
 /// Full-screen modal for selecting operational financial context
 /// Trigger: Tapping GO widget on PROMPT screen
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

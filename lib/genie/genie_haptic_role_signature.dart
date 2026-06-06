@@ -10,6 +10,7 @@
 ///   • Audio: Web Audio API earcons (owner / admin / driver / default)
 ///   • Visual: exposes a Stream<RoleSignalEvent> for the pulse ring widget
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
 import 'dart:async';
 import 'package:flutter/foundation.dart';

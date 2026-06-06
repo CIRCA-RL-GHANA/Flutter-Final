@@ -1,6 +1,7 @@
 /// Alerts Screen 4 — Alert Composer (Create New Alert)
 /// Stepped wizard: Type â†’ Describe â†’ Assignment â†’ Review
 /// Admin/Branch Manager only
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

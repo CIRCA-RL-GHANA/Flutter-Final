@@ -1,9 +1,9 @@
 /// GO Screen 15 — Archive & History
 /// Transaction archive, historical analysis, compliance storage
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../models/go_models.dart';
 import '../providers/go_provider.dart';
@@ -134,37 +134,37 @@ class _GoArchiveScreenState extends State<GoArchiveScreen> with SingleTickerProv
   }
 
   Widget _buildAnalysis(GoProvider p) {
-    return ListView(padding: const EdgeInsets.all(16), children: [
+    return ListView(padding: const EdgeInsets.all(16), children: const [
       // Spending trends
       GoSectionCard(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        const GoSectionHeader(title: 'Spending Trends', icon: Icons.trending_down),
-        const SizedBox(height: 12),
-        const _TrendRow(month: 'January', amount: 12500, maxAmount: 18000),
-        const _TrendRow(month: 'February', amount: 15200, maxAmount: 18000),
-        const _TrendRow(month: 'March', amount: 18000, maxAmount: 18000),
-        const _TrendRow(month: 'April', amount: 11800, maxAmount: 18000),
-        const _TrendRow(month: 'May', amount: 14300, maxAmount: 18000),
-        const _TrendRow(month: 'June', amount: 16700, maxAmount: 18000),
+        GoSectionHeader(title: 'Spending Trends', icon: Icons.trending_down),
+        SizedBox(height: 12),
+        _TrendRow(month: 'January', amount: 12500, maxAmount: 18000),
+        _TrendRow(month: 'February', amount: 15200, maxAmount: 18000),
+        _TrendRow(month: 'March', amount: 18000, maxAmount: 18000),
+        _TrendRow(month: 'April', amount: 11800, maxAmount: 18000),
+        _TrendRow(month: 'May', amount: 14300, maxAmount: 18000),
+        _TrendRow(month: 'June', amount: 16700, maxAmount: 18000),
       ])),
-      const SizedBox(height: 14),
+      SizedBox(height: 14),
       // Top parties
       GoSectionCard(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        const GoSectionHeader(title: 'Top Transaction Partners', icon: Icons.people),
-        const SizedBox(height: 10),
-        const _TopPartyRow(rank: 1, name: 'Kofi Electronics', amount: '45,200 QP', txns: 28),
-        const _TopPartyRow(rank: 2, name: 'Ama Trading', amount: '32,100 QP', txns: 15),
-        const _TopPartyRow(rank: 3, name: 'Kwesi Mensah', amount: '18,500 QP', txns: 42),
-        const _TopPartyRow(rank: 4, name: 'TechHub GH', amount: '12,800 QP', txns: 8),
-        const _TopPartyRow(rank: 5, name: 'Abena Services', amount: '9,300 QP', txns: 11),
+        GoSectionHeader(title: 'Top Transaction Partners', icon: Icons.people),
+        SizedBox(height: 10),
+        _TopPartyRow(rank: 1, name: 'Kofi Electronics', amount: '45,200 QP', txns: 28),
+        _TopPartyRow(rank: 2, name: 'Ama Trading', amount: '32,100 QP', txns: 15),
+        _TopPartyRow(rank: 3, name: 'Kwesi Mensah', amount: '18,500 QP', txns: 42),
+        _TopPartyRow(rank: 4, name: 'TechHub GH', amount: '12,800 QP', txns: 8),
+        _TopPartyRow(rank: 5, name: 'Abena Services', amount: '9,300 QP', txns: 11),
       ])),
-      const SizedBox(height: 14),
+      SizedBox(height: 14),
       // Category breakdown
       GoSectionCard(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        const GoSectionHeader(title: 'Category Distribution', icon: Icons.pie_chart),
-        const SizedBox(height: 10),
+        GoSectionHeader(title: 'Category Distribution', icon: Icons.pie_chart),
+        SizedBox(height: 10),
         SizedBox(height: 150, child: Center(child: GoDonutChart(
-          values: const [42, 28, 18, 12],
-          colors: const [kGoColor, kGoInfo, kGoWarning, kGoPurple],
+          values: [42, 28, 18, 12],
+          colors: [kGoColor, kGoInfo, kGoWarning, kGoPurple],
         ))),
       ])),
     ]);
@@ -178,13 +178,13 @@ class _GoArchiveScreenState extends State<GoArchiveScreen> with SingleTickerProv
         Expanded(child: Text('All transaction records are retained for 7 years in compliance with regulatory requirements.', style: TextStyle(fontSize: 12, color: Color(0xFF1E40AF)))),
       ])),
       const SizedBox(height: 14),
-      GoSectionCard(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        const GoSectionHeader(title: 'Data Retention', icon: Icons.storage),
-        const SizedBox(height: 10),
-        const _RetentionRow(label: 'Transaction Records', period: '7 years', usage: '2.3 GB'),
-        const _RetentionRow(label: 'Audit Logs', period: '5 years', usage: '890 MB'),
-        const _RetentionRow(label: 'Documents', period: '10 years', usage: '1.1 GB'),
-        const _RetentionRow(label: 'Communication Logs', period: '3 years', usage: '340 MB'),
+      const GoSectionCard(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        GoSectionHeader(title: 'Data Retention', icon: Icons.storage),
+        SizedBox(height: 10),
+        _RetentionRow(label: 'Transaction Records', period: '7 years', usage: '2.3 GB'),
+        _RetentionRow(label: 'Audit Logs', period: '5 years', usage: '890 MB'),
+        _RetentionRow(label: 'Documents', period: '10 years', usage: '1.1 GB'),
+        _RetentionRow(label: 'Communication Logs', period: '3 years', usage: '340 MB'),
       ])),
       const SizedBox(height: 14),
       GoSectionCard(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

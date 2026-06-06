@@ -3,6 +3,7 @@
 /// Intelligent driver matching: recommended driver, alternatives,
 /// driver map view, assignment settings, confirmation
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -149,26 +150,26 @@ class _LiveDriverAssignmentScreenState extends State<LiveDriverAssignmentScreen>
                         color: const Color(0xFFE5E7EB),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Icon(Icons.map, size: 40, color: AppColors.textTertiary),
-                            const SizedBox(height: 8),
+                            SizedBox(height: 8),
                             Text('Interactive map showing all available drivers', style: TextStyle(fontSize: 12, color: AppColors.textTertiary)),
                           ],
                         ),
                       ),
                     ),
                     const SizedBox(height: 8),
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        _MapLegendDot(color: const Color(0xFF10B981), label: 'Available'),
-                        const SizedBox(width: 16),
-                        _MapLegendDot(color: const Color(0xFFF59E0B), label: 'Finishing soon'),
-                        const SizedBox(width: 16),
-                        const _MapLegendDot(color: kLiveColor, label: 'Unavailable'),
+                        _MapLegendDot(color: Color(0xFF10B981), label: 'Available'),
+                        SizedBox(width: 16),
+                        _MapLegendDot(color: Color(0xFFF59E0B), label: 'Finishing soon'),
+                        SizedBox(width: 16),
+                        _MapLegendDot(color: kLiveColor, label: 'Unavailable'),
                       ],
                     ),
                   ],
@@ -260,8 +261,8 @@ class _AssignmentConfirmation extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text('To: ${driver.name}', style: const TextStyle(fontSize: 15, color: AppColors.textSecondary)),
                 const SizedBox(height: 4),
-                Text('Estimated pickup: 11:48 AM', style: TextStyle(fontSize: 14, color: AppColors.textTertiary)),
-                Text('Estimated delivery: 12:04 PM', style: TextStyle(fontSize: 14, color: AppColors.textTertiary)),
+                const Text('Estimated pickup: 11:48 AM', style: TextStyle(fontSize: 14, color: AppColors.textTertiary)),
+                const Text('Estimated delivery: 12:04 PM', style: TextStyle(fontSize: 14, color: AppColors.textTertiary)),
               ],
             ),
           ),
@@ -332,7 +333,7 @@ class _DetailRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text('• $label', style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+          Text('• $label', style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
           Text(value, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
         ],
       ),
@@ -351,7 +352,7 @@ class _MapLegendDot extends StatelessWidget {
       children: [
         Container(width: 8, height: 8, decoration: BoxDecoration(shape: BoxShape.circle, color: color)),
         const SizedBox(width: 4),
-        Text(label, style: TextStyle(fontSize: 11, color: AppColors.textSecondary)),
+        Text(label, style: const TextStyle(fontSize: 11, color: AppColors.textSecondary)),
       ],
     );
   }
@@ -369,7 +370,7 @@ class _SettingToggle extends StatelessWidget {
       child: Row(
         children: [
           Expanded(child: Text(label, style: const TextStyle(fontSize: 13))),
-          Switch(value: value, onChanged: onChanged, activeColor: kLiveColor, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
+          Switch(value: value, onChanged: onChanged, activeThumbColor: kLiveColor, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
         ],
       ),
     );

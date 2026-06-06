@@ -3,6 +3,7 @@
 /// Tabs: Overview, Engagement, Audience, Boost
 /// RBAC: Admin(full), SO(full), BSO(branch), BM(branch), Monitor(viewOnly)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,9 +31,9 @@ class _SocialDetailScreenState extends State<SocialDetailScreen> {
       builder: (context, setupProv, ctxProv, _) {
         final post = setupProv.selectedPost;
         if (post == null) {
-          return Scaffold(
-            appBar: const SetupAppBar(title: 'Post Detail'),
-            body: const SetupEmptyState(
+          return const Scaffold(
+            appBar: SetupAppBar(title: 'Post Detail'),
+            body: SetupEmptyState(
               icon: Icons.share,
               title: 'No post selected',
               subtitle: 'Select a post from the social feed',
@@ -178,12 +179,12 @@ class _PostHeader extends StatelessWidget {
                     if (post.publishDate != null)
                       Text(
                         'Published ${setupTimeAgo(post.publishDate!)}',
-                        style: TextStyle(fontSize: 11, color: AppColors.textSecondary),
+                        style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
                       )
                     else if (post.scheduledDate != null)
                       Text(
                         'Scheduled: ${post.scheduledDate!.day}/${post.scheduledDate!.month}/${post.scheduledDate!.year}',
-                        style: TextStyle(fontSize: 11, color: kSetupColor),
+                        style: const TextStyle(fontSize: 11, color: kSetupColor),
                       ),
                   ],
                 ),
@@ -310,7 +311,7 @@ class _OverviewTab extends StatelessWidget {
                         const SizedBox(height: 4),
                         Text(
                           '${post.mediaType?.toUpperCase() ?? 'MEDIA'} attached',
-                          style: TextStyle(fontSize: 11, color: AppColors.textTertiary),
+                          style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                         ),
                       ],
                     ),
@@ -437,16 +438,16 @@ class _EngagementTab extends StatelessWidget {
         ),
 
         // Top Comments
-        SetupSectionCard(
+        const SetupSectionCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SetupSectionTitle(title: 'Top Comments', icon: Icons.chat_bubble_outline),
-              const _CommentTile(name: 'Kwame A.', text: 'Great product! Love it ðŸ‘', time: '3h ago'),
-              const Divider(height: 16),
-              const _CommentTile(name: 'Ama B.', text: 'Where can I get this?', time: '5h ago'),
-              const Divider(height: 16),
-              const _CommentTile(name: 'Kofi D.', text: 'Amazing quality, will order again', time: '7h ago'),
+              SetupSectionTitle(title: 'Top Comments', icon: Icons.chat_bubble_outline),
+              _CommentTile(name: 'Kwame A.', text: 'Great product! Love it ðŸ‘', time: '3h ago'),
+              Divider(height: 16),
+              _CommentTile(name: 'Ama B.', text: 'Where can I get this?', time: '5h ago'),
+              Divider(height: 16),
+              _CommentTile(name: 'Kofi D.', text: 'Amazing quality, will order again', time: '7h ago'),
             ],
           ),
         ),
@@ -478,51 +479,51 @@ class _AudienceTab extends StatelessWidget {
         const SizedBox(height: 16),
 
         // Demographics
-        SetupSectionCard(
+        const SetupSectionCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SetupSectionTitle(title: 'Age Distribution', icon: Icons.bar_chart),
-              const SizedBox(height: 8),
-              const _DemographicBar(label: '18-24', value: 0.22, display: '22%'),
-              const SizedBox(height: 6),
-              const _DemographicBar(label: '25-34', value: 0.38, display: '38%'),
-              const SizedBox(height: 6),
-              const _DemographicBar(label: '35-44', value: 0.25, display: '25%'),
-              const SizedBox(height: 6),
-              const _DemographicBar(label: '45-54', value: 0.10, display: '10%'),
-              const SizedBox(height: 6),
-              const _DemographicBar(label: '55+', value: 0.05, display: '5%'),
+              SetupSectionTitle(title: 'Age Distribution', icon: Icons.bar_chart),
+              SizedBox(height: 8),
+              _DemographicBar(label: '18-24', value: 0.22, display: '22%'),
+              SizedBox(height: 6),
+              _DemographicBar(label: '25-34', value: 0.38, display: '38%'),
+              SizedBox(height: 6),
+              _DemographicBar(label: '35-44', value: 0.25, display: '25%'),
+              SizedBox(height: 6),
+              _DemographicBar(label: '45-54', value: 0.10, display: '10%'),
+              SizedBox(height: 6),
+              _DemographicBar(label: '55+', value: 0.05, display: '5%'),
             ],
           ),
         ),
 
         // Gender
-        SetupSectionCard(
+        const SetupSectionCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SetupSectionTitle(title: 'Gender', icon: Icons.people_outline),
-              _DemographicBar(label: 'Female', value: 0.52, display: '52%', color: const Color(0xFFE91E63)),
-              const SizedBox(height: 6),
-              const _DemographicBar(label: 'Male', value: 0.45, display: '45%', color: kSetupColor),
-              const SizedBox(height: 6),
-              const _DemographicBar(label: 'Other', value: 0.03, display: '3%', color: AppColors.textTertiary),
+              SetupSectionTitle(title: 'Gender', icon: Icons.people_outline),
+              _DemographicBar(label: 'Female', value: 0.52, display: '52%', color: Color(0xFFE91E63)),
+              SizedBox(height: 6),
+              _DemographicBar(label: 'Male', value: 0.45, display: '45%', color: kSetupColor),
+              SizedBox(height: 6),
+              _DemographicBar(label: 'Other', value: 0.03, display: '3%', color: AppColors.textTertiary),
             ],
           ),
         ),
 
         // Location
-        SetupSectionCard(
+        const SetupSectionCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SetupSectionTitle(title: 'Top Locations', icon: Icons.location_on),
-              const SetupInfoRow(label: 'Accra', value: '42%'),
-              const SetupInfoRow(label: 'Kumasi', value: '18%'),
-              const SetupInfoRow(label: 'Tamale', value: '12%'),
-              const SetupInfoRow(label: 'Takoradi', value: '9%'),
-              const SetupInfoRow(label: 'Other', value: '19%'),
+              SetupSectionTitle(title: 'Top Locations', icon: Icons.location_on),
+              SetupInfoRow(label: 'Accra', value: '42%'),
+              SetupInfoRow(label: 'Kumasi', value: '18%'),
+              SetupInfoRow(label: 'Tamale', value: '12%'),
+              SetupInfoRow(label: 'Takoradi', value: '9%'),
+              SetupInfoRow(label: 'Other', value: '19%'),
             ],
           ),
         ),
@@ -594,26 +595,26 @@ class _BoostTab extends StatelessWidget {
         const SizedBox(height: 16),
 
         // Budget Options
-        SetupSectionCard(
+        const SetupSectionCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SetupSectionTitle(title: 'Budget Options', icon: Icons.monetization_on),
-              const _BoostOption(
+              SetupSectionTitle(title: 'Budget Options', icon: Icons.monetization_on),
+              _BoostOption(
                 budget: 'â‚µ50',
                 reach: '2,500 – 5,000',
                 duration: '3 days',
                 isRecommended: false,
               ),
-              const Divider(height: 16),
-              const _BoostOption(
+              Divider(height: 16),
+              _BoostOption(
                 budget: 'â‚µ150',
                 reach: '7,500 – 15,000',
                 duration: '7 days',
                 isRecommended: true,
               ),
-              const Divider(height: 16),
-              const _BoostOption(
+              Divider(height: 16),
+              _BoostOption(
                 budget: 'â‚µ500',
                 reach: '25,000 – 50,000',
                 duration: '14 days',
@@ -638,15 +639,15 @@ class _BoostTab extends StatelessWidget {
         ),
 
         // Performance Estimate
-        SetupSectionCard(
+        const SetupSectionCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SetupSectionTitle(title: 'Estimated Performance', icon: Icons.trending_up),
-              const SetupInfoRow(label: 'Impressions', value: '10,000 – 20,000'),
-              const SetupInfoRow(label: 'Clicks', value: '500 – 1,200'),
-              const SetupInfoRow(label: 'Engagement Rate', value: '3.5% – 5.2%'),
-              const SetupInfoRow(label: 'Cost per Click', value: 'â‚µ0.13 – â‚µ0.30'),
+              SetupSectionTitle(title: 'Estimated Performance', icon: Icons.trending_up),
+              SetupInfoRow(label: 'Impressions', value: '10,000 – 20,000'),
+              SetupInfoRow(label: 'Clicks', value: '500 – 1,200'),
+              SetupInfoRow(label: 'Engagement Rate', value: '3.5% – 5.2%'),
+              SetupInfoRow(label: 'Cost per Click', value: 'â‚µ0.13 – â‚µ0.30'),
             ],
           ),
         ),
@@ -735,7 +736,7 @@ class _HourBar extends StatelessWidget {
             child: LinearProgressIndicator(
               value: value.clamp(0.0, 1.0),
               backgroundColor: kSetupColor.withValues(alpha: 0.1),
-              valueColor: AlwaysStoppedAnimation<Color>(kSetupColor),
+              valueColor: const AlwaysStoppedAnimation<Color>(kSetupColor),
               minHeight: 6,
             ),
           ),

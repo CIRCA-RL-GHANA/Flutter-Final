@@ -10,6 +10,7 @@
 ///   • Bottom: Input area (chips + text field + mic button + '+' menu)
 ///   • Bottom: Pinned shortcut bar (max 4 role-specific quick actions)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,7 +19,6 @@ import '../core/design/ive_text.dart';
 import '../core/design/ive_tokens.dart';
 import '../core/routes/app_routes.dart';
 import '../core/theme/app_colors.dart';
-import '../features/prompt/models/rbac_models.dart';
 import '../features/prompt/providers/context_provider.dart';
 import '../features/prompt/widgets/global_header.dart';
 import 'genie_controller.dart';
@@ -161,9 +161,9 @@ class _GenieScreenState extends State<GenieScreen>
       context: context,
       barrierDismissible: false,
       builder: (ctx) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: IveTokens.brLg),
-        title: Row(
-          children: const [
+        shape: const RoundedRectangleBorder(borderRadius: IveTokens.brLg),
+        title: const Row(
+          children: [
             Icon(Icons.sos, color: IveTokens.danger, size: 24),
             SizedBox(width: 8),
             Text('Emergency SOS'),
@@ -589,7 +589,7 @@ class _InputArea extends StatelessWidget {
                   ValueListenableBuilder(
                     valueListenable: controller,
                     builder: (_, value, __) {
-                      if ((value as TextEditingValue).text.isEmpty) {
+                      if ((value).text.isEmpty) {
                         return const SizedBox.shrink();
                       }
                       return Padding(

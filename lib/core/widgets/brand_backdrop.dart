@@ -83,7 +83,7 @@ class _BloomPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final tau = 2 * math.pi;
+    const tau = 2 * math.pi;
 
     // Cyan bloom — orbits the upper-left.
     final cx = size.width * (0.25 + 0.12 * math.cos(t * tau));

@@ -3,9 +3,9 @@
 /// Individual driver analytics: delivery history, ratings,
 /// performance trends, feedback, and management actions
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../models/live_models.dart';
@@ -31,7 +31,7 @@ class LiveDriverPerformanceScreen extends StatelessWidget {
               SliverToBoxAdapter(
                 child: Container(
                   padding: EdgeInsets.fromLTRB(16, MediaQuery.of(context).padding.top + 8, 16, 16),
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     gradient: LinearGradient(colors: [kLiveColor, kLiveAccent], begin: Alignment.topLeft, end: Alignment.bottomRight),
                   ),
                   child: Column(
@@ -178,12 +178,12 @@ class LiveDriverPerformanceScreen extends StatelessWidget {
                         child: Container(
                           height: 120,
                           decoration: BoxDecoration(color: const Color(0xFFF3F4F6), borderRadius: BorderRadius.circular(12)),
-                          child: Center(
+                          child: const Center(
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Icon(Icons.show_chart, size: 32, color: AppColors.textTertiary),
-                                const SizedBox(height: 4),
+                                SizedBox(height: 4),
                                 Text('Performance trend chart', style: TextStyle(fontSize: 12, color: AppColors.textTertiary)),
                               ],
                             ),
@@ -212,8 +212,8 @@ class LiveDriverPerformanceScreen extends StatelessWidget {
                             _DetailRow(label: 'Deliveries today', value: '${driver.todayDeliveries}'),
                             _DetailRow(label: 'Customer rating', value: '${driver.rating} / 5.0'),
                             _DetailRow(label: 'On-time rate', value: '${driver.onTimeRate.toStringAsFixed(1)}%'),
-                            _DetailRow(label: 'Current zone', value: 'N/A'),
-                            _DetailRow(label: 'Phone', value: 'N/A'),
+                            const _DetailRow(label: 'Current zone', value: 'N/A'),
+                            const _DetailRow(label: 'Phone', value: 'N/A'),
                           ],
                         ),
                       ),
@@ -302,7 +302,7 @@ class _DetailRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+          Text(label, style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
           Text(value, style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: valueColor)),
         ],
       ),
@@ -332,7 +332,7 @@ class _FeedbackItem extends StatelessWidget {
                   color: const Color(0xFFF59E0B),
                 )),
                 const SizedBox(width: 6),
-                Text(feedback.customerName, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: AppColors.textSecondary)),
+                Text(feedback.customerName, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: AppColors.textSecondary)),
               ],
             ),
             if (feedback.comment.isNotEmpty) ...[

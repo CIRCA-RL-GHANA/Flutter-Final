@@ -1,5 +1,6 @@
 /// qualChat Screen 4 — My Preferences (Owner Only)
 /// Intelligent Preference System: Vibe settings, discovery, privacy
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -357,7 +358,7 @@ class _ToggleRow extends StatelessWidget {
           Switch(
             value: value,
             onChanged: onChanged,
-            activeColor: kChatColor,
+            activeThumbColor: kChatColor,
           ),
         ],
       ),

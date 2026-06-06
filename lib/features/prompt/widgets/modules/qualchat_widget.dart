@@ -2,6 +2,7 @@
 /// qualChat Widget (Communications Hub)
 /// Visible to: ALL roles (with Owner-only HeyYa section)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -62,12 +63,12 @@ class QualChatWidgetContent extends StatelessWidget {
               color: AppColors.inputFill,
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Row(
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                const _PresenceStat(label: 'Active', count: 92, color: AppColors.success),
-                const _PresenceStat(label: 'Idle', count: 28, color: AppColors.warning),
-                const _PresenceStat(label: 'Offline', count: 8, color: AppColors.textTertiary),
+                _PresenceStat(label: 'Active', count: 92, color: AppColors.success),
+                _PresenceStat(label: 'Idle', count: 28, color: AppColors.warning),
+                _PresenceStat(label: 'Offline', count: 8, color: AppColors.textTertiary),
               ],
             ),
           ),
@@ -110,15 +111,15 @@ class QualChatWidgetContent extends StatelessWidget {
                   color: const Color(0xFFFF6B6B).withValues(alpha: 0.15),
                 ),
               ),
-              child: Row(
+              child: const Row(
                 children: [
-                  const Text('ðŸ’˜', style: TextStyle(fontSize: 14)),
-                  const SizedBox(width: 6),
+                  Text('ðŸ’˜', style: TextStyle(fontSize: 14)),
+                  SizedBox(width: 6),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           'HeyYa Vibe Check',
                           style: TextStyle(
                             fontSize: 10,
@@ -126,7 +127,7 @@ class QualChatWidgetContent extends StatelessWidget {
                             color: Color(0xFFFF6B6B),
                           ),
                         ),
-                        const Text(
+                        Text(
                           '5 Sparks • 2 Matches',
                           style: TextStyle(
                             fontSize: 9,

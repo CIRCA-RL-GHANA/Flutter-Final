@@ -1,5 +1,6 @@
 /// qualChat Screen 13 — Settings
 /// Centralized config: notifications, privacy, media, appearance, accessibility, advanced
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -426,7 +427,7 @@ class _SettingsToggle extends StatelessWidget {
       subtitle: Text(subtitle, style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
       value: value,
       onChanged: onChanged,
-      activeColor: kChatColor,
+      activeThumbColor: kChatColor,
     );
   }
 }

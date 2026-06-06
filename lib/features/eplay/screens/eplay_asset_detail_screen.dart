@@ -3,6 +3,7 @@
 /// DRM content detail page: purchase â†’ adds to cloud locker.
 /// No file is downloaded — access lives in the server-side license.
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +11,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../providers/eplay_provider.dart';
-import 'eplay_hub_screen.dart' show kEPlayColor, kEPlayColorDark;
+import 'eplay_hub_screen.dart' show kEPlayColor;
 
 class EPlayAssetDetailScreen extends StatefulWidget {
   final Map<String, dynamic>? asset;
@@ -110,16 +111,16 @@ class _EPlayAssetDetailScreenState extends State<EPlayAssetDetailScreen> {
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(color: kEPlayColor.withValues(alpha: 0.2)),
                         ),
-                        child: Column(
+                        child: const Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(children: [
-                              const Icon(Icons.cloud_done, color: kEPlayColor, size: 20),
-                              const SizedBox(width: 8),
-                              const Text('e-Play Cloud Locker', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: kEPlayColor)),
+                              Icon(Icons.cloud_done, color: kEPlayColor, size: 20),
+                              SizedBox(width: 8),
+                              Text('e-Play Cloud Locker', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: kEPlayColor)),
                             ]),
-                            const SizedBox(height: 6),
-                            const Text(
+                            SizedBox(height: 6),
+                            Text(
                               'Your purchase grants perpetual cloud access — not a file download. Stream this content anytime from any device. Optionally pin for offline use.',
                               style: TextStyle(fontSize: 12, color: AppColors.textSecondary, height: 1.5),
                             ),

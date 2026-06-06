@@ -23,10 +23,8 @@ const Color _kBg        = IveTokens.bg;
 const Color _kSurface   = IveTokens.surface;
 const Color _kBorder    = IveTokens.hairline;
 const Color _kAccent    = IveTokens.accent;
-const Color _kAccentDim = IveTokens.accentPressed;
 const Color _kText      = IveTokens.label;
 const Color _kTextDim = IveTokens.labelSecondary;
-const Color _kTextMuted = IveTokens.labelTertiary;
 
 class _WelcomeScreenState extends State<WelcomeScreen>
     with SingleTickerProviderStateMixin {
@@ -152,21 +150,21 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                   const SizedBox(height: 28),
 
                   // ── Descriptor ────────────────────────────────────────
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 24),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           AppStrings.welcomeTagline,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.w700,
                             color: _kText,
                             height: 1.25,
                           ),
                         ),
-                        const SizedBox(height: 8),
+                        SizedBox(height: 8),
                         Text(
                           'Payments · Logistics · Commerce · Finance · AI',
                           style: TextStyle(
@@ -225,7 +223,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                                 ),
                               ),
                             ),
-                            Text(
+                            const Text(
                               'What is genie help?',
                               style: TextStyle(
                                 fontSize: 10,
@@ -264,10 +262,10 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     child: GestureDetector(
                     onTap: _onLogIn,
                     behavior: HitTestBehavior.opaque,
-                    child: SizedBox(
+                    child: const SizedBox(
                       width: double.infinity,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        padding: EdgeInsets.symmetric(vertical: 14),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -280,7 +278,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                             ),
                             Text(
                               AppStrings.logIn,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w600,
                                 color: _kAccent,
@@ -395,7 +393,7 @@ class _ModuleCard extends StatelessWidget {
                 const SizedBox(height: 2),
                 Text(
                   module.desc,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 11,
                     color: _kTextDim,
                     letterSpacing: 0.2,

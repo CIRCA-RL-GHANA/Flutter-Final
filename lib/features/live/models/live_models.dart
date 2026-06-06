@@ -4,6 +4,7 @@
 /// Orders, Packages, Returns, Drivers, Rides, Incidents, Analytics,
 /// Verification, Emergency, Settings, Notifications
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
 import 'package:flutter/material.dart';
 

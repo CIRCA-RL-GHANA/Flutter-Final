@@ -3,6 +3,7 @@
 /// Detailed return review with evidence gallery, customer history,
 /// adjudication options, and resolution workflow
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -124,9 +125,9 @@ class _LiveReturnReviewScreenState extends State<LiveReturnReviewScreen> {
                       children: [
                         const Icon(Icons.star, size: 14, color: Color(0xFFF59E0B)),
                         const SizedBox(width: 4),
-                        Text('${ret.customerRating} rating', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                        Text('${ret.customerRating} rating', style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                         const SizedBox(width: 12),
-                        Text('${ret.customerTotalOrders} orders', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                        Text('${ret.customerTotalOrders} orders', style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                         const SizedBox(width: 12),
                         Text('${ret.customerReturnCount} returns (${(ret.customerReturnCount / ret.customerTotalOrders * 100).toStringAsFixed(0)}%)', style: TextStyle(fontSize: 12, color: (ret.customerReturnCount / ret.customerTotalOrders * 100) > 15 ? kLiveColor : AppColors.textSecondary)),
                       ],
@@ -147,7 +148,7 @@ class _LiveReturnReviewScreenState extends State<LiveReturnReviewScreen> {
                     const SizedBox(height: 4),
                     Row(
                       children: [
-                        Text('Order #${ret.originalOrderId}', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                        Text('Order #${ret.originalOrderId}', style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                         const SizedBox(width: 12),
                         Text('â‚µ${ret.itemPrice.toStringAsFixed(2)}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: kLiveColor)),
                       ],
@@ -159,12 +160,12 @@ class _LiveReturnReviewScreenState extends State<LiveReturnReviewScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('REASON', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.textTertiary)),
+                          const Text('REASON', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.textTertiary)),
                           const SizedBox(height: 2),
                           Text(ret.reason, style: const TextStyle(fontSize: 13)),
                           if ((ret.reasonDetail ?? '').isNotEmpty) ...[
                             const SizedBox(height: 6),
-                            Text('CUSTOMER NOTES', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.textTertiary)),
+                            const Text('CUSTOMER NOTES', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.textTertiary)),
                             const SizedBox(height: 2),
                             Text('"${ret.reasonDetail ?? ''}"', style: const TextStyle(fontSize: 12, fontStyle: FontStyle.italic)),
                           ],
@@ -209,7 +210,7 @@ class _LiveReturnReviewScreenState extends State<LiveReturnReviewScreen> {
                             color: const Color(0xFFE5E7EB),
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Center(child: Icon(Icons.image, color: AppColors.textTertiary)),
+                          child: const Center(child: Icon(Icons.image, color: AppColors.textTertiary)),
                         ),
                       ),
                     ),
@@ -228,11 +229,11 @@ class _LiveReturnReviewScreenState extends State<LiveReturnReviewScreen> {
                     Container(
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(color: const Color(0xFFD1FAE5), borderRadius: BorderRadius.circular(8)),
-                      child: Column(
+                      child: const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text('AI Recommendation: APPROVE', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: Color(0xFF059669))),
-                          const SizedBox(height: 4),
+                          Text('AI Recommendation: APPROVE', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: Color(0xFF059669))),
+                          SizedBox(height: 4),
                           Text('Confidence: 87% • Evidence quality: Good • Customer history: Low risk', style: TextStyle(fontSize: 11, color: AppColors.textSecondary)),
                         ],
                       ),
@@ -251,10 +252,11 @@ class _LiveReturnReviewScreenState extends State<LiveReturnReviewScreen> {
                     final selected = opt == _selectedOption;
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 4),
-                      child: RadioListTile<AdjudicationOption>(
+                      child:
+                      RadioListTile<AdjudicationOption>(
                         value: opt,
-                        groupValue: _selectedOption,
-                        onChanged: (v) => setState(() => _selectedOption = v!),
+                        groupValue: _selectedOption, // ignore: deprecated_member_use
+                        onChanged: (v) => setState(() => _selectedOption = v!), // ignore: deprecated_member_use
                         title: Text(
                           opt == AdjudicationOption.approve ? 'Full Refund' : opt == AdjudicationOption.partialApprove ? 'Partial Refund' : opt == AdjudicationOption.offerStoreCredit ? 'Store Credit' : opt == AdjudicationOption.offerReplacement ? 'Replacement' : opt == AdjudicationOption.reject ? 'Reject' : opt.name,
                           style: TextStyle(fontSize: 13, fontWeight: selected ? FontWeight.w700 : FontWeight.w400),

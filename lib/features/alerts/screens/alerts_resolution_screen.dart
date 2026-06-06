@@ -1,5 +1,6 @@
 /// Alerts Screen 5 — Resolution Workspace
 /// Method selection, templates, composer, verification panel
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

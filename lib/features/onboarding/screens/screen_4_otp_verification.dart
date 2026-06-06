@@ -12,14 +12,8 @@ import '../widgets/onboarding_header.dart';
 
 
 // OS palette — mirrors splash / welcome
-const Color _kBg        = IveTokens.bg;
-const Color _kSurface   = IveTokens.surface;
-const Color _kBorder    = IveTokens.hairline;
-const Color _kAccent    = IveTokens.accent;
-const Color _kAccentDim = IveTokens.accentPressed;
-const Color _kText      = IveTokens.label;
+// ignore: unused_element
 const Color _kTextDim   = IveTokens.labelSecondary;
-const Color _kTextMuted = IveTokens.labelTertiary;
 /// Screen 4: OTP Verification (Secure)
 /// Maximum security with minimum friction
 class OtpVerificationScreen extends StatefulWidget {
@@ -127,8 +121,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
     }
   }
 
-  void _onKeyPressed(int index, RawKeyEvent event) {
-    if (event is RawKeyDownEvent &&
+  void _onKeyPressed(int index, KeyEvent event) {
+    if (event is KeyDownEvent &&
         event.logicalKey == LogicalKeyboardKey.backspace &&
         _otpControllers[index].text.isEmpty &&
         index > 0) {
@@ -192,13 +186,13 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
     if (success) {
       _startTimer();
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text(AppStrings.newCodeSent),
+        const SnackBar(
+          content: Text(AppStrings.newCodeSent),
           backgroundColor: IveTokens.success,
           behavior: SnackBarBehavior.floating,
           shape:
               RoundedRectangleBorder(borderRadius: IveTokens.brMd),
-          margin: const EdgeInsets.all(16),
+          margin: EdgeInsets.all(16),
         ),
       );
     }
@@ -234,7 +228,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                             horizontal: 16,
                             vertical: 12,
                           ),
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: IveTokens.surface,
                             borderRadius: IveTokens.brMd,
                           ),
@@ -261,9 +255,9 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                       ),
 
                       const SizedBox(height: 8),
-                      Text(
+                      const Text(
                         AppStrings.enterOtpCode,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 14,
                           color: IveTokens.labelSecondary,
                         ),
@@ -443,7 +437,7 @@ class _OtpDigitField extends StatelessWidget {
   final FocusNode focusNode;
   final bool isSuccess;
   final ValueChanged<String> onChanged;
-  final ValueChanged<RawKeyEvent> onKey;
+  final ValueChanged<KeyEvent> onKey;
 
   const _OtpDigitField({
     required this.controller,
@@ -455,9 +449,9 @@ class _OtpDigitField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RawKeyboardListener(
+    return KeyboardListener(
       focusNode: FocusNode(),
-      onKey: onKey,
+      onKeyEvent: onKey,
       child: AnimatedContainer(
         duration: IveTokens.dFast,
         decoration: BoxDecoration(

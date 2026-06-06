@@ -3,6 +3,7 @@
 /// Tabs: Overview, Transactions, Communication, Notes
 /// RBAC: Admin(full), BM(branch), SO(full), BSO(branch), Monitor(viewOnly)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,9 +31,9 @@ class _ConnectionDetailScreenState extends State<ConnectionDetailScreen> {
       builder: (context, setupProv, ctxProv, _) {
         final conn = setupProv.selectedConnection;
         if (conn == null) {
-          return Scaffold(
-            appBar: const SetupAppBar(title: 'Connection Detail'),
-            body: const SetupEmptyState(
+          return const Scaffold(
+            appBar: SetupAppBar(title: 'Connection Detail'),
+            body: SetupEmptyState(
               icon: Icons.hub,
               title: 'No connection selected',
               subtitle: 'Select a connection from the list',
@@ -554,11 +555,11 @@ class _NotesTab extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             border: Border.all(color: kSetupColor.withValues(alpha: 0.12)),
           ),
-          child: Row(
+          child: const Row(
             children: [
-              const Icon(Icons.add_circle_outline, color: kSetupColor, size: 20),
-              const SizedBox(width: 10),
-              const Text(
+              Icon(Icons.add_circle_outline, color: kSetupColor, size: 20),
+              SizedBox(width: 10),
+              Text(
                 'Add a new note...',
                 style: TextStyle(fontSize: 13, color: AppColors.textTertiary),
               ),

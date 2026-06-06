@@ -1,5 +1,6 @@
 /// GO Screen 12 — Reports Hub
 /// Standard/custom reports, real-time dashboards, export options
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -107,10 +108,10 @@ class _GoReportsScreenState extends State<GoReportsScreen> with SingleTickerProv
         // Date range
         const Text('DATE RANGE', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF9CA3AF))),
         const SizedBox(height: 6),
-        Row(children: [
-          Expanded(child: const _DateField(label: 'From')),
-          const SizedBox(width: 10),
-          Expanded(child: const _DateField(label: 'To')),
+        const Row(children: [
+          Expanded(child: _DateField(label: 'From')),
+          SizedBox(width: 10),
+          Expanded(child: _DateField(label: 'To')),
         ]),
         const SizedBox(height: 14),
         // Report type
@@ -142,12 +143,12 @@ class _GoReportsScreenState extends State<GoReportsScreen> with SingleTickerProv
         // Export format
         const Text('FORMAT', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF9CA3AF))),
         const SizedBox(height: 6),
-        Row(children: [
-          const _FormatChip(label: 'PDF', selected: true),
-          const SizedBox(width: 8),
-          const _FormatChip(label: 'CSV', selected: false),
-          const SizedBox(width: 8),
-          const _FormatChip(label: 'Excel', selected: false),
+        const Row(children: [
+          _FormatChip(label: 'PDF', selected: true),
+          SizedBox(width: 8),
+          _FormatChip(label: 'CSV', selected: false),
+          SizedBox(width: 8),
+          _FormatChip(label: 'Excel', selected: false),
         ]),
         const SizedBox(height: 16),
         SizedBox(width: double.infinity, child: ElevatedButton.icon(

@@ -3,6 +3,7 @@
 /// Tabs: Overview, Coverage, Vehicles, Analytics
 /// RBAC: Admin(fullAccess), BranchManager(branchScoped), Monitor(viewOnly)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -32,9 +33,9 @@ class _ZoneDetailScreenState extends State<ZoneDetailScreen> {
       builder: (context, setupProv, ctxProv, _) {
         final zone = setupProv.selectedZone;
         if (zone == null) {
-          return Scaffold(
-            appBar: const SetupAppBar(title: 'Zone Detail'),
-            body: const SetupEmptyState(
+          return const Scaffold(
+            appBar: SetupAppBar(title: 'Zone Detail'),
+            body: SetupEmptyState(
               icon: Icons.map,
               title: 'No zone selected',
               subtitle: 'Select a zone from the list',
@@ -184,11 +185,11 @@ class _OverviewTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.info_outline, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Zone Information', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Zone Information', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
               const SizedBox(height: 12),
@@ -230,11 +231,11 @@ class _CoverageTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.layers, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Coverage Details', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Coverage Details', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
               const SizedBox(height: 12),
@@ -327,22 +328,22 @@ class _AnalyticsTab extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 100),
       children: [
-        SetupSectionCard(
+        const SetupSectionCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
                   Icon(Icons.analytics, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Zone Performance', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Zone Performance', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
-              const SizedBox(height: 12),
-              const _MetricRow(label: 'Delivery Rate', value: 0.94, color: AppColors.success),
-              const _MetricRow(label: 'Coverage Score', value: 0.87, color: kSetupColor),
-              _MetricRow(label: 'Vehicle Utilization', value: 0.72, color: const Color(0xFF8B5CF6)),
-              const _MetricRow(label: 'On-Time %', value: 0.91, color: AppColors.warning),
+              SizedBox(height: 12),
+              _MetricRow(label: 'Delivery Rate', value: 0.94, color: AppColors.success),
+              _MetricRow(label: 'Coverage Score', value: 0.87, color: kSetupColor),
+              _MetricRow(label: 'Vehicle Utilization', value: 0.72, color: Color(0xFF8B5CF6)),
+              _MetricRow(label: 'On-Time %', value: 0.91, color: AppColors.warning),
             ],
           ),
         ),
@@ -351,11 +352,11 @@ class _AnalyticsTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.timeline, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Activity Summary', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Activity Summary', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
               const SizedBox(height: 12),

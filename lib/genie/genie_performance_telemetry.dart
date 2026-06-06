@@ -15,6 +15,7 @@
 /// endpoint periodically via [flush]. If offline, metrics are queued in
 /// SharedPreferences and flushed on reconnect.
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
 import 'dart:convert';
 import 'package:flutter/foundation.dart';

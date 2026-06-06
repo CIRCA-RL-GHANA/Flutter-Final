@@ -13,14 +13,6 @@ import '../widgets/onboarding_header.dart';
 
 
 // OS palette — mirrors splash / welcome
-const Color _kBg        = IveTokens.bg;
-const Color _kSurface   = IveTokens.surface;
-const Color _kBorder    = IveTokens.hairline;
-const Color _kAccent    = IveTokens.accent;
-const Color _kAccentDim = IveTokens.accentPressed;
-const Color _kText      = IveTokens.label;
-const Color _kTextDim   = IveTokens.labelSecondary;
-const Color _kTextMuted = IveTokens.labelTertiary;
 /// Screen 7: Biometric Setup (Adaptive)
 /// Security with convenience, not coercion
 class BiometricSetupScreen extends StatefulWidget {
@@ -200,15 +192,15 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
           const SizedBox(height: 32),
 
           // Benefits
-          _BenefitRow(
+          const _BenefitRow(
             icon: Icons.touch_app,
             text: AppStrings.biometricBenefit1,
           ),
-          _BenefitRow(
+          const _BenefitRow(
             icon: Icons.security,
             text: AppStrings.biometricBenefit2,
           ),
-          _BenefitRow(
+          const _BenefitRow(
             icon: Icons.vpn_key_off,
             text: AppStrings.biometricBenefit3,
           ),
@@ -218,7 +210,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
           // Toggle
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: IveTokens.surface,
               borderRadius: IveTokens.brXs,
             ),
@@ -238,7 +230,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
                   onChanged: (value) {
                     biometric.setBiometricEnabled(value);
                   },
-                  activeColor: IveTokens.accent,
+                  activeThumbColor: IveTokens.accent,
                 ),
               ],
             ),
@@ -272,10 +264,10 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
                     size: 24,
                   ),
                   const SizedBox(width: 12),
-                  Expanded(
+                  const Expanded(
                     child: Text(
                       AppStrings.biometricConsent,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 13,
                         color: IveTokens.labelSecondary,
                       ),
@@ -289,9 +281,9 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
           const SizedBox(height: 24),
 
           // Education text
-          Text(
+          const Text(
             AppStrings.changeAnytime,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 12,
               color: IveTokens.labelTertiary,
             ),
@@ -372,7 +364,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
               letterSpacing: 8,
               fontWeight: FontWeight.bold,
             ),
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               labelText: 'Enter PIN (4-6 digits)',
               counterText: '',
               border: OutlineInputBorder(
@@ -395,7 +387,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
               letterSpacing: 8,
               fontWeight: FontWeight.bold,
             ),
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               labelText: 'Confirm PIN',
               counterText: '',
               border: OutlineInputBorder(
@@ -419,7 +411,7 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
           const SizedBox(height: 8),
           const Text(
             'Your PIN will be used as a fallback authentication method',
-            style: const TextStyle(fontSize: 12, color: IveTokens.labelTertiary),
+            style: TextStyle(fontSize: 12, color: IveTokens.labelTertiary),
             textAlign: TextAlign.center,
           ),
 

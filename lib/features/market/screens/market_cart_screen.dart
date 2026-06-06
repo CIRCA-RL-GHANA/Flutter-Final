@@ -2,6 +2,7 @@
 /// MARKET MODULE — Screen 5: Cart & Bundling
 /// AI bundling suggestions, per-item controls, financial summary, promo
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -348,7 +349,7 @@ class MarketCartScreen extends StatelessWidget {
               ),
               Text(
                 '${prov.cartItemCount} items',
-                style: TextStyle(fontSize: 12, color: AppColors.textTertiary),
+                style: const TextStyle(fontSize: 12, color: AppColors.textTertiary),
               ),
             ],
           ),
@@ -484,7 +485,7 @@ class _CartItemTile extends StatelessWidget {
                     const SizedBox(height: 2),
                     Text(
                       item.customizationSummary,
-                      style: TextStyle(fontSize: 11, color: AppColors.textTertiary),
+                      style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -504,7 +505,7 @@ class _CartItemTile extends StatelessWidget {
                         const SizedBox(width: 6),
                         Text(
                           '(\$${item.unitPrice.toStringAsFixed(2)} ea)',
-                          style: TextStyle(fontSize: 11, color: AppColors.textTertiary),
+                          style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                         ),
                       ],
                     ],
@@ -558,7 +559,7 @@ class _SummaryRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+          Text(label, style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
           Text(
             value,
             style: TextStyle(

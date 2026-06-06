@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/semantics.dart';
 import 'package:provider/provider.dart';
 import '../../../core/design/ive.dart';
 import '../../../core/routes/app_routes.dart';
@@ -23,6 +22,7 @@ class SplashScreen extends StatefulWidget {
 const Color _kBg       = Color(0xFF000000);   // pure black — matches logo PNG background
 const Color _kGrid     = IveTokens.surface;   // subtle grid lines
 const Color _kAccent   = IveTokens.accent;    // electric blue — system authority
+// ignore: unused_element
 const Color _kAccentDim = Color(0xFF1E2A6E);  // dark navy — no IveToken equivalent
 
 class _SplashScreenState extends State<SplashScreen>

@@ -3,6 +3,7 @@
 /// Bottom sheet options menu (save, copy link, mute, follow, report).
 /// Report flow: 4-step wizard (reason, details, evidence, submit).
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -354,7 +355,7 @@ class _ReportFlowState extends State<_ReportFlow> {
                     onSelect: (r) => setState(() => _selectedReason = r),
                   ),
                   1 => _StepDetails(key: const ValueKey(1), controller: _detailsController),
-                  2 => _StepEvidence(key: const ValueKey(2)),
+                  2 => const _StepEvidence(key: ValueKey(2)),
                   3 => _StepReview(
                     key: const ValueKey(3),
                     reason: _selectedReason,
@@ -399,6 +400,8 @@ class _ReportFlowState extends State<_ReportFlow> {
                             } else {
                               setState(() => _submitting = true);
                               final prov = context.read<UpdatesProvider>();
+                              final nav = Navigator.of(context);
+                              final messenger = ScaffoldMessenger.of(context);
                               await prov.reportContent(
                                 contentId: 'update',
                                 contentType: 'update',
@@ -406,9 +409,9 @@ class _ReportFlowState extends State<_ReportFlow> {
                                 details: _detailsController.text,
                               );
                               if (mounted) {
-                                Navigator.pop(context);
-                                Navigator.pop(context);
-                                ScaffoldMessenger.of(context).showSnackBar(
+                                nav.pop();
+                                nav.pop();
+                                messenger.showSnackBar(
                                   const SnackBar(
                                     content: Text('Report submitted. Our team will review it within 24 hours.'),
                                     backgroundColor: kUpdatesColor,
@@ -520,8 +523,8 @@ class _StepDetails extends StatelessWidget {
             hintStyle: const TextStyle(fontSize: 13, color: AppColors.textTertiary),
             filled: true,
             fillColor: const Color(0xFF11131C),
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide(color: AppColors.inputBorder)),
-            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide(color: AppColors.inputBorder)),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: AppColors.inputBorder)),
+            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: AppColors.inputBorder)),
             focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: kUpdatesColor)),
           ),
         ),
@@ -571,8 +574,8 @@ class _StepEvidence extends StatelessWidget {
             hintStyle: const TextStyle(fontSize: 13, color: AppColors.textTertiary),
             filled: true,
             fillColor: const Color(0xFF11131C),
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide(color: AppColors.inputBorder)),
-            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide(color: AppColors.inputBorder)),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: AppColors.inputBorder)),
+            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: AppColors.inputBorder)),
             focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: kUpdatesColor)),
           ),
         ),

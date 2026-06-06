@@ -1,6 +1,7 @@
 /// GO Screen 1 — GO Page Hub (Unified Financial Command Center)
 /// 10 sections: Context Bar, Financial Pulse, Quick Actions, Exchange Hub,
 /// Party Info, Health Score, Recent Activity, Upcoming Events, Favorites, AI Insights
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -50,7 +51,7 @@ class _GoHubScreenState extends State<GoHubScreen> {
                         const SizedBox(height: 16),
 
                         // ── SECTION 3: Quick Actions ──────────
-                        GoSectionHeader(title: 'Quick Actions', icon: Icons.flash_on),
+                        const GoSectionHeader(title: 'Quick Actions', icon: Icons.flash_on),
                         _buildQuickActions(context),
                         const SizedBox(height: 16),
 
@@ -60,12 +61,12 @@ class _GoHubScreenState extends State<GoHubScreen> {
                         const SizedBox(height: 16),
 
                         // ── SECTION 5: Party Info ──────────
-                        GoSectionHeader(title: 'Transaction Flow', icon: Icons.account_tree_outlined),
+                        const GoSectionHeader(title: 'Transaction Flow', icon: Icons.account_tree_outlined),
                         _buildPartyInfo(),
                         const SizedBox(height: 16),
 
                         // ── SECTION 6: Financial Health ──────────
-                        GoSectionHeader(title: 'Financial Health', icon: Icons.favorite_border),
+                        const GoSectionHeader(title: 'Financial Health', icon: Icons.favorite_border),
                         _buildHealthSection(provider),
                         const SizedBox(height: 16),
 
@@ -75,7 +76,7 @@ class _GoHubScreenState extends State<GoHubScreen> {
                         const SizedBox(height: 16),
 
                         // ── SECTION 8: Upcoming Events ──────────
-                        GoSectionHeader(title: 'Upcoming (Next 7 days)', icon: Icons.event),
+                        const GoSectionHeader(title: 'Upcoming (Next 7 days)', icon: Icons.event),
                         _buildUpcomingSection(provider),
                         const SizedBox(height: 16),
 
@@ -85,7 +86,7 @@ class _GoHubScreenState extends State<GoHubScreen> {
                         const SizedBox(height: 16),
 
                         // ── SECTION 10: AI Insights ──────────
-                        GoSectionHeader(title: 'AI Insights', icon: Icons.auto_awesome),
+                        const GoSectionHeader(title: 'AI Insights', icon: Icons.auto_awesome),
                         _buildInsights(provider),
                         const SizedBox(height: 32),
                       ],
@@ -536,7 +537,7 @@ class _LiquidityBox extends StatelessWidget {
           children: [
             Text(label, style: TextStyle(fontSize: 10, color: color, fontWeight: FontWeight.w600)),
             const SizedBox(height: 4),
-            Text('${value.toStringAsFixed(0)}', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
+            Text(value.toStringAsFixed(0), style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
             const Text('QP', style: TextStyle(fontSize: 10, color: IveTokens.labelTertiary)),
             const SizedBox(height: 4),
             Text('${pct.toStringAsFixed(1)}%', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: color)),
@@ -644,14 +645,14 @@ class _AddFavAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.only(right: 14),
+      child: const Padding(
+        padding: EdgeInsets.only(right: 14),
         child: Column(
           children: [
-            CircleAvatar(radius: 24, backgroundColor: IveTokens.surface, child: const Icon(Icons.add, size: 20, color: IveTokens.labelTertiary)),
-            const SizedBox(height: 4),
-            const Text('+Add', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w500)),
-            const Text('New', style: TextStyle(fontSize: 9, color: IveTokens.labelTertiary)),
+            CircleAvatar(radius: 24, backgroundColor: IveTokens.surface, child: Icon(Icons.add, size: 20, color: IveTokens.labelTertiary)),
+            SizedBox(height: 4),
+            Text('+Add', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w500)),
+            Text('New', style: TextStyle(fontSize: 9, color: IveTokens.labelTertiary)),
           ],
         ),
       ),

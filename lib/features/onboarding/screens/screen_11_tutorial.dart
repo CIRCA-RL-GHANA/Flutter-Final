@@ -11,9 +11,12 @@ import '../widgets/progress_indicators.dart';
 
 // OS palette — mirrors splash / welcome
 const Color _kBg        = IveTokens.bg;
+// ignore: unused_element
 const Color _kSurface   = IveTokens.surface;
+// ignore: unused_element
 const Color _kBorder    = IveTokens.hairline;
 const Color _kAccent    = IveTokens.accent;
+// ignore: unused_element
 const Color _kAccentDim = IveTokens.accentPressed;
 const Color _kText      = IveTokens.label;
 const Color _kTextDim   = IveTokens.labelSecondary;
@@ -33,35 +36,35 @@ class _TutorialScreenState extends State<TutorialScreen> {
   static const int _totalSteps = 5;
 
   final List<_TutorialStep> _steps = [
-    _TutorialStep(
+    const _TutorialStep(
       title: 'Your genie help Screen',
       description: 'This is your personalized dashboard. Tap any widget to interact with it.',
       icon: Icons.dashboard_customize_outlined,
       color: _kAccent,
       instruction: 'Tap to explore widgets',
     ),
-    _TutorialStep(
+    const _TutorialStep(
       title: 'Widget Interactions',
       description: 'Swipe left/right to navigate. Long-press to customize. Tap to open.',
       icon: Icons.touch_app_outlined,
       color: IveTokens.success,
       instruction: 'Try swiping, tapping, and long-pressing',
     ),
-    _TutorialStep(
+    const _TutorialStep(
       title: 'Your Role Features',
       description: 'Based on your selected role, you have unique features and widgets.',
       icon: Icons.person_outline,
       color: _kAccent,
       instruction: 'Explore your role-specific tools',
     ),
-    _TutorialStep(
+    const _TutorialStep(
       title: 'Quick Actions',
       description: 'The most common tasks are just one tap away from your home screen.',
       icon: Icons.flash_on_outlined,
       color: IveTokens.warning,
       instruction: 'Try the quick action buttons',
     ),
-    _TutorialStep(
+    const _TutorialStep(
       title: 'Get Help Anytime',
       description: 'Tap the help icon anywhere in the app to get instant assistance.',
       icon: Icons.help_outline,
@@ -106,9 +109,9 @@ class _TutorialScreenState extends State<TutorialScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       AppStrings.tutorialTitle,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: _kText,

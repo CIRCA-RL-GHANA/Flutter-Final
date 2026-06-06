@@ -2,6 +2,7 @@
 /// Uses the Vibration API (navigator.vibrate). Earcons are intentionally
 /// no-op on web (Web Audio earcons removed for cross-SDK compatibility —
 /// `dart:web_audio` is no longer part of the Dart SDK).
+library;
 import 'dart:js_interop';
 import 'dart:js_interop_unsafe';
 

@@ -1,5 +1,6 @@
 /// GO Screen 14 — Integrations Hub
 /// Accounting, banking, business, custom integrations
+library;
 
 import 'package:flutter/material.dart';
 import '../../../core/routes/app_routes.dart';
@@ -81,9 +82,9 @@ class _GoIntegrationsScreenState extends State<GoIntegrationsScreen> with Single
               ),
               Expanded(
                 child: TabBarView(controller: _tabCtrl, children: [
-                  _buildCategoryList(integrations.where((i) => i.category == 'accounting').toList()),
-                  _buildCategoryList(integrations.where((i) => i.category == 'banking').toList()),
-                  _buildCategoryList(integrations.where((i) => i.category == 'business').toList()),
+                  _buildCategoryList(integrations.where((i) => i.category == IntegrationCategory.accounting).toList()),
+                  _buildCategoryList(integrations.where((i) => i.category == IntegrationCategory.banking).toList()),
+                  _buildCategoryList(integrations.where((i) => i.category == IntegrationCategory.business).toList()),
                   _buildCustomTab(),
                 ]),
               ),

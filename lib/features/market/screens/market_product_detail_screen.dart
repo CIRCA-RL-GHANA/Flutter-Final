@@ -2,6 +2,7 @@
 /// MARKET MODULE — Screen 4: Product Detail
 /// Media gallery, customization, quantity, fulfillment, nutrition, reviews
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -184,7 +185,7 @@ class _MarketProductDetailScreenState extends State<MarketProductDetailScreen> {
                     const SizedBox(height: 4),
                     Text(
                       product.description ?? '',
-                      style: TextStyle(fontSize: 14, color: AppColors.textSecondary, height: 1.4),
+                      style: const TextStyle(fontSize: 14, color: AppColors.textSecondary, height: 1.4),
                     ),
                   ],
                 ),
@@ -234,7 +235,7 @@ class _MarketProductDetailScreenState extends State<MarketProductDetailScreen> {
               const SizedBox(width: 6),
               Text(
                 '${product.rating} (${product.ratingCount} reviews)',
-                style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
+                style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
               ),
             ],
           ),
@@ -440,7 +441,7 @@ class _MarketProductDetailScreenState extends State<MarketProductDetailScreen> {
                       prov.selectedMerchant?.name ?? 'Store',
                       style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
                     ),
-                    Text(
+                    const Text(
                       'Tap to visit store',
                       style: TextStyle(fontSize: 12, color: AppColors.textTertiary),
                     ),
@@ -463,10 +464,10 @@ class _MarketProductDetailScreenState extends State<MarketProductDetailScreen> {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8, bottom: 8),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 8, bottom: 8),
                     child: Row(
-                      children: const [
+                      children: [
                         Icon(Icons.auto_awesome, size: 16, color: Color(0xFF8B5CF6)),
                         SizedBox(width: 6),
                         Text(
@@ -573,7 +574,7 @@ class _MarketProductDetailScreenState extends State<MarketProductDetailScreen> {
               ),
               Text(
                 '$_quantity Ã— \$${unitPrice.toStringAsFixed(2)}',
-                style: TextStyle(fontSize: 12, color: AppColors.textTertiary),
+                style: const TextStyle(fontSize: 12, color: AppColors.textTertiary),
               ),
             ],
           ),
@@ -651,7 +652,7 @@ class _NutritionRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+          Text(label, style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
           Text(value, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
         ],
       ),

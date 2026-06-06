@@ -9,6 +9,7 @@
 /// Degrades gracefully if microphone permission is denied or the API is
 /// unavailable in the current runtime.
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
 import 'package:flutter/foundation.dart';
 

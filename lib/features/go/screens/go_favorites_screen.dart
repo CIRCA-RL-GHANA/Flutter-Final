@@ -1,6 +1,7 @@
 /// GO Screen 7 — Favorites Hub
 /// Categorized grid (People/Businesses/Services/Internal),
 /// entity cards, relationship insights, bulk management, discovery
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

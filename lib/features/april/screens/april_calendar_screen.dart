@@ -1,6 +1,7 @@
 /// APRIL Screen 3 — Smart Calendar
 /// 5 view modes: day, week, month, agenda, year
 /// Event creation, meeting scheduling, day timeline
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -186,16 +187,16 @@ class AprilCalendarScreen extends StatelessWidget {
             const SizedBox(height: 20),
 
             // Quick Event Types
-            Wrap(
+            const Wrap(
               spacing: 8,
               runSpacing: 8,
               children: [
-                const _EventTypeChip(emoji: 'ðŸ“ž', label: 'Call', type: EventType.call),
-                const _EventTypeChip(emoji: 'ðŸ¤', label: 'Meeting', type: EventType.meeting),
-                const _EventTypeChip(emoji: 'ðŸ ', label: 'Personal', type: EventType.personal),
-                const _EventTypeChip(emoji: 'â°', label: 'Reminder', type: EventType.reminder),
-                const _EventTypeChip(emoji: 'âœˆï¸', label: 'Travel', type: EventType.travel),
-                const _EventTypeChip(emoji: 'ðŸŽ¯', label: 'Deadline', type: EventType.deadline),
+                _EventTypeChip(emoji: 'ðŸ“ž', label: 'Call', type: EventType.call),
+                _EventTypeChip(emoji: 'ðŸ¤', label: 'Meeting', type: EventType.meeting),
+                _EventTypeChip(emoji: 'ðŸ ', label: 'Personal', type: EventType.personal),
+                _EventTypeChip(emoji: 'â°', label: 'Reminder', type: EventType.reminder),
+                _EventTypeChip(emoji: 'âœˆï¸', label: 'Travel', type: EventType.travel),
+                _EventTypeChip(emoji: 'ðŸŽ¯', label: 'Deadline', type: EventType.deadline),
               ],
             ),
             const SizedBox(height: 16),

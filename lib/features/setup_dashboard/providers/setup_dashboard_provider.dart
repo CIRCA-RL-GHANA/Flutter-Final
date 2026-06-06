@@ -5,10 +5,10 @@
 /// Places, Zones, Bands, Branches, Campaigns, Social, Connections,
 /// Audit, Outlook, Q-Points, My Activity, Profile, Subscription, Interests
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
 import 'package:flutter/material.dart';
 import '../../../core/services/services.dart';
-import '../../../core/services/user_service.dart';
 import '../../prompt/models/rbac_models.dart';
 import '../models/setup_dashboard_models.dart';
 import '../models/setup_rbac.dart';
@@ -49,22 +49,22 @@ class SetupDashboardProvider extends ChangeNotifier {
   DashboardHeaderInfo? _headerInfoData;
 
   // Fallback-only sections (no backend endpoint yet)
-  List<MaintenanceRecord> _maintenanceRecords = [];
-  List<FuelEntry> _fuelEntries = [];
-  List<CustomerTab> _tabs = [];
-  List<TabTransaction> _tabTransactions = [];
-  List<DiscountTier> _discounts = [];
+  final List<MaintenanceRecord> _maintenanceRecords = [];
+  final List<FuelEntry> _fuelEntries = [];
+  final List<CustomerTab> _tabs = [];
+  final List<TabTransaction> _tabTransactions = [];
+  final List<DiscountTier> _discounts = [];
   List<StaffMember> _staff = [];
-  List<DeliveryZone> _zones = [];
+  final List<DeliveryZone> _zones = [];
   List<Branch> _branches = [];
   List<Campaign> _campaigns = [];
-  List<AuditEntry> _auditEntries = [];
-  List<KPIMetric> _kpiMetrics = [];
-  List<AIInsight> _aiInsights = [];
+  final List<AuditEntry> _auditEntries = [];
+  final List<KPIMetric> _kpiMetrics = [];
+  final List<AIInsight> _aiInsights = [];
   List<UserTask> _tasks = [];
-  List<UserGoal> _goals = [];
-  List<ActivityTimelineEntry> _timeline = [];
-  List<InterestRecommendation> _recommendations = [];
+  final List<UserGoal> _goals = [];
+  final List<ActivityTimelineEntry> _timeline = [];
+  final List<InterestRecommendation> _recommendations = [];
 
   // ═══════════════════════════════════════════════════════════════════════════
   // INIT — loads all API-backed data
@@ -311,7 +311,7 @@ class SetupDashboardProvider extends ChangeNotifier {
         lastUpdated: DateTime.now(),
       );
 
-  SyncState _syncState = SyncState.synced;
+  final SyncState _syncState = SyncState.synced;
   SyncState get syncState => _syncState;
 
   /// Get the cards visible for a given role, with proper access levels
@@ -566,7 +566,7 @@ class SetupDashboardProvider extends ChangeNotifier {
   /// All possible dashboard cards with hardcoded UI layout config
   List<DashboardCard> get _allDashboardCards => [
         // Row 1: Operations Snapshot
-        DashboardCard(
+        const DashboardCard(
           id: 'products',
           title: 'Products',
           icon: Icons.inventory_2,
@@ -582,15 +582,15 @@ class SetupDashboardProvider extends ChangeNotifier {
           },
           summaryLine: 'Reorder Alert (3 items)',
           actionLabels: ['View Products', 'Reorder Alert (3)'],
-          highlightColor: const Color(0xFF3B82F6),
+          highlightColor: Color(0xFF3B82F6),
         ),
-        DashboardCard(
+        const DashboardCard(
           id: 'vehicles',
           title: 'Vehicles',
           icon: Icons.local_shipping,
           route: '/setup/vehicles',
           subtitle: '24 Vehicles · 3 in maintenance',
-          statusDots: const [
+          statusDots: [
             StatusDot(color: Color(0xFF10B981), label: 'A'),
             StatusDot(color: Color(0xFFF59E0B), label: 'M'),
             StatusDot(color: Color(0xFFEF4444), label: 'O'),
@@ -605,7 +605,7 @@ class SetupDashboardProvider extends ChangeNotifier {
           summaryLine: 'Zones: East(12) West(8) Central(4)',
           actionLabels: ['Manage Fleet', 'Service Schedule'],
         ),
-        DashboardCard(
+        const DashboardCard(
           id: 'tabs',
           title: 'Customer Tabs',
           icon: Icons.receipt_long,
@@ -620,10 +620,10 @@ class SetupDashboardProvider extends ChangeNotifier {
           },
           summaryLine: 'Next repayment: Jan 15 (5 days)',
           actionLabels: ['View All Tabs', 'Send Reminders'],
-          highlightColor: const Color(0xFFF59E0B),
+          highlightColor: Color(0xFFF59E0B),
         ),
         // Row 2: Finance & Staff
-        DashboardCard(
+        const DashboardCard(
           id: 'discounts',
           title: 'Discount Tiers',
           icon: Icons.local_offer,
@@ -636,16 +636,16 @@ class SetupDashboardProvider extends ChangeNotifier {
           },
           summaryLine: 'Tier 1: ₵100→5% | Tier 2: ₵250→10%',
           actionLabels: ['Manage Discounts', 'Create New'],
-          highlightColor: const Color(0xFF10B981),
+          highlightColor: Color(0xFF10B981),
         ),
-        DashboardCard(
+        const DashboardCard(
           id: 'staff',
           title: 'Staff',
           icon: Icons.people,
           route: '/setup/staff',
           alertCount: 3,
           subtitle: '42 total · 28 online',
-          statusDots: const [
+          statusDots: [
             StatusDot(color: Color(0xFF10B981), label: 'On'),
             StatusDot(color: Color(0xFFF59E0B), label: 'Id'),
             StatusDot(color: Color(0xFFEF4444), label: 'Of'),
@@ -660,7 +660,7 @@ class SetupDashboardProvider extends ChangeNotifier {
           summaryLine: 'Pending Approvals: 3',
           actionLabels: ['View Staff', 'Approve (3)'],
         ),
-        DashboardCard(
+        const DashboardCard(
           id: 'activity_log',
           title: 'Activity Log',
           icon: Icons.history,
@@ -674,7 +674,7 @@ class SetupDashboardProvider extends ChangeNotifier {
           actionLabels: ['View Full Log', 'Export Today'],
         ),
         // Row 3: Logistics
-        DashboardCard(
+        const DashboardCard(
           id: 'places',
           title: 'Places',
           icon: Icons.place,
@@ -687,7 +687,7 @@ class SetupDashboardProvider extends ChangeNotifier {
           },
           actionLabels: ['View Places', 'Add New Place'],
         ),
-        DashboardCard(
+        const DashboardCard(
           id: 'delivery_zones',
           title: 'Delivery Zones',
           icon: Icons.map,
@@ -702,7 +702,7 @@ class SetupDashboardProvider extends ChangeNotifier {
           },
           actionLabels: ['Manage Zones', 'Optimize Routes'],
         ),
-        DashboardCard(
+        const DashboardCard(
           id: 'vehicle_bands',
           title: 'Vehicle Bands',
           icon: Icons.category,
@@ -716,13 +716,13 @@ class SetupDashboardProvider extends ChangeNotifier {
           summaryLine: 'Optimal: 70-85% · Alert: >90%',
           actionLabels: ['Manage Bands', 'Reassign Vehicles'],
         ),
-        DashboardCard(
+        const DashboardCard(
           id: 'branches',
           title: 'Branches',
           icon: Icons.business,
           route: '/setup/branches',
           subtitle: '12 total · 9 online',
-          statusDots: const [
+          statusDots: [
             StatusDot(color: Color(0xFF10B981), label: 'On'),
             StatusDot(color: Color(0xFF10B981), label: 'On'),
             StatusDot(color: Color(0xFFEF4444), label: 'Of'),
@@ -737,7 +737,7 @@ class SetupDashboardProvider extends ChangeNotifier {
           actionLabels: ['View All Branches', 'Add Branch'],
         ),
         // Row 4: Engagement
-        DashboardCard(
+        const DashboardCard(
           id: 'marketing',
           title: 'Marketing',
           icon: Icons.campaign,
@@ -751,9 +751,9 @@ class SetupDashboardProvider extends ChangeNotifier {
             'Conv': '1,234',
           },
           actionLabels: ['View Campaigns', 'Create New'],
-          highlightColor: const Color(0xFF8B5CF6),
+          highlightColor: Color(0xFF8B5CF6),
         ),
-        DashboardCard(
+        const DashboardCard(
           id: 'social',
           title: 'Social & Updates',
           icon: Icons.forum,
@@ -767,13 +767,13 @@ class SetupDashboardProvider extends ChangeNotifier {
           summaryLine: '+124 followers this week',
           actionLabels: ['View Feed', 'Create Post'],
         ),
-        DashboardCard(
+        const DashboardCard(
           id: 'connections',
           title: 'Connections',
           icon: Icons.handshake,
           route: '/setup/connections',
           subtitle: '342 total · Strength 85%',
-          statusDots: const [
+          statusDots: [
             StatusDot(color: Color(0xFF10B981), label: 'A'),
             StatusDot(color: Color(0xFFF59E0B), label: 'P'),
             StatusDot(color: Color(0xFF10B981), label: 'A'),
@@ -786,7 +786,7 @@ class SetupDashboardProvider extends ChangeNotifier {
           actionLabels: ['Manage Network', 'Import Contacts'],
         ),
         // Row 5: Branch Identity
-        DashboardCard(
+        const DashboardCard(
           id: 'profile',
           title: 'Branch Profile',
           icon: Icons.badge,
@@ -799,9 +799,9 @@ class SetupDashboardProvider extends ChangeNotifier {
           },
           summaryLine: 'Member since Jan 2022',
           actionLabels: ['Edit Profile', 'View Analytics'],
-          highlightColor: const Color(0xFF10B981),
+          highlightColor: Color(0xFF10B981),
         ),
-        DashboardCard(
+        const DashboardCard(
           id: 'outlook',
           title: 'Outlook & Analytics',
           icon: Icons.insights,
@@ -815,9 +815,9 @@ class SetupDashboardProvider extends ChangeNotifier {
             'Customers': '2,450',
           },
           actionLabels: ['View Analytics', 'Respond to Feedback'],
-          highlightColor: const Color(0xFF10B981),
+          highlightColor: Color(0xFF10B981),
         ),
-        DashboardCard(
+        const DashboardCard(
           id: 'subscription',
           title: 'Subscription',
           icon: Icons.diamond,
@@ -831,10 +831,10 @@ class SetupDashboardProvider extends ChangeNotifier {
             'Renews': '15 days',
           },
           actionLabels: ['Manage Plan', 'Add Q-Points'],
-          highlightColor: const Color(0xFF8B5CF6),
+          highlightColor: Color(0xFF8B5CF6),
         ),
         // Row 6: Personal & History
-        DashboardCard(
+        const DashboardCard(
           id: 'interests',
           title: 'Interests',
           icon: Icons.interests,
@@ -847,7 +847,7 @@ class SetupDashboardProvider extends ChangeNotifier {
           },
           actionLabels: ['Manage Interests', 'Discover More'],
         ),
-        DashboardCard(
+        const DashboardCard(
           id: 'qpoints',
           title: 'Q-Points History',
           icon: Icons.monetization_on,
@@ -860,9 +860,9 @@ class SetupDashboardProvider extends ChangeNotifier {
           },
           summaryLine: 'This month: +2,450 earned',
           actionLabels: ['View History', 'Transfer'],
-          highlightColor: const Color(0xFFFFD700),
+          highlightColor: Color(0xFFFFD700),
         ),
-        DashboardCard(
+        const DashboardCard(
           id: 'my_activity',
           title: 'My Activity',
           icon: Icons.task_alt,

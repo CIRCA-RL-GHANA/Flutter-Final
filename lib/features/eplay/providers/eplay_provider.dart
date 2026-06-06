@@ -5,6 +5,7 @@
 /// Delegates all API calls to EPlayService. Falls back to stub data
 /// when offline so the UI always renders.
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
 import 'package:flutter/foundation.dart';
 import '../../../core/services/eplay_service.dart';

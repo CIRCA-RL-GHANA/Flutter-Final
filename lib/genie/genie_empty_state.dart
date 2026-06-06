@@ -11,6 +11,7 @@
 ///   GenieEmptyState.forModule(GenieModule.market, role: UserRole.owner)
 ///   → GenieTipCard with a warm, opportunity-framing message.
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
 import '../features/prompt/models/rbac_models.dart';
 import 'genie_intent.dart';

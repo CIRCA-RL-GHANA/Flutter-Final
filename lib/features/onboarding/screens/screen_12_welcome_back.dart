@@ -13,6 +13,7 @@ const Color _kBg        = IveTokens.bg;
 const Color _kSurface   = IveTokens.surface;
 const Color _kBorder    = IveTokens.hairline;
 const Color _kAccent    = IveTokens.accent;
+// ignore: unused_element
 const Color _kAccentDim = IveTokens.accentPressed;
 const Color _kText      = IveTokens.label;
 const Color _kTextDim   = IveTokens.labelSecondary;
@@ -115,7 +116,7 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
                       child: Container(
                         width: 44,
                         height: 44,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: _kSurface,
                           borderRadius: IveTokens.brMd,
                         ),
@@ -200,10 +201,10 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
                                 borderRadius: IveTokens.brXs,
                                 border: Border.all(color: _kBorder),
                               ),
-                              child: Column(
+                              child: const Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text(
+                                  Text(
                                     "What's New",
                                     style: TextStyle(
                                       fontSize: 18,
@@ -211,7 +212,7 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
                                       color: _kText,
                                     ),
                                   ),
-                                  const SizedBox(height: 12),
+                                  SizedBox(height: 12),
                                   _NewFeatureItem(
                                     icon: Icons.auto_awesome,
                                     text: 'AI-powered recommendations',
@@ -381,7 +382,7 @@ class _NewFeatureItem extends StatelessWidget {
           const SizedBox(width: 12),
           Text(
             text,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14,
               color: _kTextDim,
             ),
@@ -413,7 +414,7 @@ class _StatItem extends StatelessWidget {
         const SizedBox(height: 4),
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 12,
             color: _kTextMuted,
           ),
@@ -451,7 +452,7 @@ class _QuickActionBtn extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               label,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 12,
                 color: _kTextDim,
                 height: 1.3,

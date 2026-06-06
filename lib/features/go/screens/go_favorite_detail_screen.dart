@@ -1,6 +1,7 @@
 /// GO Screen 8 — Favorite Detail
 /// Entity passport, relationship dashboard, financial relationship,
 /// communication hub, transaction tools, relationship management
+library;
 
 import 'package:flutter/material.dart';
 import '../../../core/routes/app_routes.dart';
@@ -173,7 +174,7 @@ class GoFavoriteDetailScreen extends StatelessWidget {
       ),
       const SizedBox(height: 8),
       Wrap(spacing: 6, children: [
-        Chip(label: const Text('Frequent', style: TextStyle(fontSize: 10)), backgroundColor: kGoColorLight, side: BorderSide.none, padding: EdgeInsets.zero, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
+        const Chip(label: Text('Frequent', style: TextStyle(fontSize: 10)), backgroundColor: kGoColorLight, side: BorderSide.none, padding: EdgeInsets.zero, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
         Chip(label: const Text('Verified', style: TextStyle(fontSize: 10)), backgroundColor: kGoPositive.withValues(alpha: 0.1), side: BorderSide.none, padding: EdgeInsets.zero, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
         ActionChip(label: const Text('+ Tag', style: TextStyle(fontSize: 10)), onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Tag added'))), backgroundColor: Colors.white, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: EdgeInsets.zero, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
       ]),

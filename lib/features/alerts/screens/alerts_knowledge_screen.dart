@@ -1,5 +1,6 @@
 /// Alerts Screen 7 — Knowledge Base Integration
 /// AI-suggested solutions, similarity scores, feedback loop
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

@@ -1,4 +1,5 @@
 /// Fintech â€º Insurance — Policy Purchase & Claims Screen
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -391,7 +392,9 @@ class _ClaimsSheetState extends State<ClaimsSheet> {
     if (mounted) {
       setState(() => _submitting = false);
       if (res.data != null) { widget.onSubmitted(); Navigator.pop(context); }
-      else ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(res.message ?? 'Failed')));
+      else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(res.message ?? 'Failed')));
+      }
     }
   }
 

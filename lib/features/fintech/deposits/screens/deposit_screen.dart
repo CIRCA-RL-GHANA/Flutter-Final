@@ -1,5 +1,6 @@
 /// Fintech â€º Deposits — Term Deposit Screen
 /// User picks a bank, amount, and term length to lock Q-Points.
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

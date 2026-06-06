@@ -88,7 +88,7 @@ class PlatformOverviewScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 6),
-                    Text(
+                    const Text(
                       'The global operating system for commerce.',
                       style: TextStyle(
                         fontSize: 14,
@@ -97,16 +97,16 @@ class PlatformOverviewScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 18),
-                    _Paragraph(
+                    const _Paragraph(
                       'Welcome. Before you begin, here\'s what genie help means for '
                       'you — depending on who you are and what you want to do.',
                     ),
 
                     // ── For Everyone ──
                     const SizedBox(height: 28),
-                    _SectionHeader(label: 'FOR EVERYONE', step: '01'),
+                    const _SectionHeader(label: 'FOR EVERYONE', step: '01'),
                     const SizedBox(height: 12),
-                    _Paragraph(
+                    const _Paragraph(
                       'genie help is a single, unified operating system that '
                       'replaces the many separate apps people use for payments, '
                       'shopping, ride-hailing, messaging, planning, and business '
@@ -116,7 +116,7 @@ class PlatformOverviewScreen extends StatelessWidget {
                       'and one intelligent assistant (Genie AI).',
                     ),
                     const SizedBox(height: 16),
-                    Text(
+                    const Text(
                       'Once you join, you\'ll have access to modules like:',
                       style: TextStyle(
                           fontSize: 13, color: _kTextDim, height: 1.55),
@@ -141,7 +141,7 @@ class PlatformOverviewScreen extends StatelessWidget {
                           'Access loans, deposits, and insurance from licensed institutions.'),
                     ]),
                     const SizedBox(height: 14),
-                    _Paragraph(
+                    const _Paragraph(
                       'Everything is available from a single home screen. And '
                       'Genie AI is present on every screen, offering insights, '
                       'forecasts, and fraud protection.',
@@ -149,9 +149,9 @@ class PlatformOverviewScreen extends StatelessWidget {
 
                     // ── Role by Role ──
                     const SizedBox(height: 32),
-                    _SectionHeader(label: 'ROLE BY ROLE', step: '02'),
+                    const _SectionHeader(label: 'ROLE BY ROLE', step: '02'),
                     const SizedBox(height: 6),
-                    Text(
+                    const Text(
                       'What genie help does for you, depending on who you are.',
                       style: TextStyle(
                         fontSize: 12,
@@ -346,9 +346,9 @@ class PlatformOverviewScreen extends StatelessWidget {
 
                     // ── Genie ──
                     const SizedBox(height: 32),
-                    _SectionHeader(label: 'GENIE AI', step: '03'),
+                    const _SectionHeader(label: 'GENIE AI', step: '03'),
                     const SizedBox(height: 12),
-                    _Paragraph(
+                    const _Paragraph(
                       'No matter your role, Genie is always available. Tap the '
                       'sparkle icon on any screen to ask questions, get '
                       'recommendations, or automate tasks. Genie can:',
@@ -369,14 +369,14 @@ class PlatformOverviewScreen extends StatelessWidget {
                           'Help you set savings goals and track progress.'),
                     ]),
                     const SizedBox(height: 14),
-                    _Paragraph(
+                    const _Paragraph(
                       'Genie works offline too — actions are queued and synced '
                       'when you reconnect.',
                     ),
 
                     // ── Differentiators ──
                     const SizedBox(height: 32),
-                    _SectionHeader(
+                    const _SectionHeader(
                         label: 'WHAT MAKES IT DIFFERENT', step: '04'),
                     const SizedBox(height: 12),
                     const _BulletList(items: [
@@ -396,9 +396,9 @@ class PlatformOverviewScreen extends StatelessWidget {
 
                     // ── Ready ──
                     const SizedBox(height: 32),
-                    _SectionHeader(label: 'READY TO BEGIN', step: '05'),
+                    const _SectionHeader(label: 'READY TO BEGIN', step: '05'),
                     const SizedBox(height: 12),
-                    _Paragraph(
+                    const _Paragraph(
                       'Tap GET STARTED to enter your phone number and set up '
                       'your account. The entire process takes only a few '
                       'minutes, and you\'ll have the full operating system at '
@@ -408,7 +408,7 @@ class PlatformOverviewScreen extends StatelessWidget {
                     const SizedBox(height: 28),
                     Container(height: 1, color: _kBorder),
                     const SizedBox(height: 18),
-                    Text(
+                    const Text(
                       'Welcome to the future of commerce.',
                       style: TextStyle(
                         fontSize: 12,
@@ -418,16 +418,16 @@ class PlatformOverviewScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 4),
-                    Text(
+                    const Text(
                       'genie help — The Global Operating System for Commerce.',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 12,
                         color: _kText,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                     const SizedBox(height: 14),
-                    Text(
+                    const Text(
                       'HUMNX LIMITED  Â·  Accra, Ghana',
                       style: TextStyle(
                         fontSize: 10,
@@ -750,7 +750,7 @@ class _RoleCard extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       subtitle,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
                         color: PlatformOverviewScreen._kTextDim,
                         height: 1.4,

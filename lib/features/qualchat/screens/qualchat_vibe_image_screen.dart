@@ -1,12 +1,12 @@
 /// qualChat Screen 5 — My Hey Ya Image (Owner Only)
 /// Vibe Snapshot Studio: photo management, analytics, AI enhancement
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/qualchat_provider.dart';
 import '../widgets/qualchat_widgets.dart';
 import '../../../core/services/ai_insights_notifier.dart';
-import '../../../core/routes/app_routes.dart';
 
 class QualChatVibeImageScreen extends StatelessWidget {
   const QualChatVibeImageScreen({super.key});

@@ -117,7 +117,7 @@ class AIInsightCard extends StatelessWidget {
             accent: Colors.amber.shade700);
       case 'trend':
       default:
-        return _InsightStyleConfig(
+        return const _InsightStyleConfig(
             icon:   Icons.insights_rounded,
             accent: AppColors.primary);
     }

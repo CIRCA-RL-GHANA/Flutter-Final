@@ -1,6 +1,7 @@
 /// Alerts Screen 9 — Templates Library
 /// Template grid (resolution/alert/communication/workflow),
 /// variable support, version control
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

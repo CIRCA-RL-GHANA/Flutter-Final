@@ -11,14 +11,6 @@ import '../widgets/onboarding_header.dart';
 
 
 // OS palette — mirrors splash / welcome
-const Color _kBg        = IveTokens.bg;
-const Color _kSurface   = IveTokens.surface;
-const Color _kBorder    = IveTokens.hairline;
-const Color _kAccent    = IveTokens.accent;
-const Color _kAccentDim = IveTokens.accentPressed;
-const Color _kText      = IveTokens.label;
-const Color _kTextDim   = IveTokens.labelSecondary;
-const Color _kTextMuted = IveTokens.labelTertiary;
 /// Screen 8: Role Selection (Multi-Tenant)
 /// Context-aware role assignment with future flexibility
 class RoleSelectionScreen extends StatefulWidget {
@@ -128,11 +120,11 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
                           // Sub-role selection
                           if (role.selectedCategory != null) ...[
                             const SizedBox(height: 24),
-                            Align(
+                            const Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
                                 'Select your specific role:',
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
                                   color: IveTokens.label,
@@ -164,7 +156,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
                             ),
                             child: Row(
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.info_outline,
                                   size: 18,
                                   color: IveTokens.accent,
@@ -177,7 +169,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
                                         : role.selectedCategory == RoleCategory.business
                                             ? 'Select the staff role you have been invited to join this business entity as.'
                                             : 'You can change your role anytime in settings.',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 12,
                                       color: IveTokens.accent,
                                     ),
@@ -219,21 +211,21 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
 
   Widget _buildIndividualSubRoles(RoleProvider role) {
     final subRoles = [
-      _SubRoleData(
+      const _SubRoleData(
         IndividualRole.buyer,
         'Buyer',
         'Primary shopping & social',
         Icons.shopping_bag_outlined,
         IveTokens.accent,
       ),
-      _SubRoleData(
+      const _SubRoleData(
         IndividualRole.deliveryPartner,
         'Delivery Partner',
         'Earn through deliveries',
         Icons.local_shipping_outlined,
         IveTokens.warning,
       ),
-      _SubRoleData(
+      const _SubRoleData(
         IndividualRole.transportProvider,
         'Transport Provider',
         'Offer rides',
@@ -258,21 +250,21 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen>
     // Owner is NOT listed here - Owner is the individual who created the entity,
     // not an assignable staff role. Business sub-roles are staff positions only.
     final subRoles = [
-      _SubRoleData(
+      const _SubRoleData(
         BusinessRole.administrator,
         'Administrator',
         'Day-to-day management',
         Icons.manage_accounts_outlined,
         IveTokens.success,
       ),
-      _SubRoleData(
+      const _SubRoleData(
         BusinessRole.branchManager,
         'Branch Manager',
         'Location-specific',
         Icons.store_outlined,
         IveTokens.warning,
       ),
-      _SubRoleData(
+      const _SubRoleData(
         BusinessRole.staff,
         'Staff',
         'Limited permissions',

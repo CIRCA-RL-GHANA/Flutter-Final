@@ -4,6 +4,7 @@
 /// RBAC: Owner(personal), Admin(full), BM(branch), Monitor/BrMon(view),
 ///        RO/BRO(view)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -116,24 +117,24 @@ class AuditScreen extends StatelessWidget {
               ),
 
               // ─── Action Type Filter ───────────────────────
-              SliverToBoxAdapter(
+              const SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
+                  padding: EdgeInsets.fromLTRB(20, 8, 20, 0),
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: [
                         _ActionTypeChip(label: 'All', icon: Icons.apps, isSelected: true),
-                        const SizedBox(width: 6),
+                        SizedBox(width: 6),
                         _ActionTypeChip(label: 'Create', icon: Icons.add_circle, color: AppColors.success),
-                        const SizedBox(width: 6),
+                        SizedBox(width: 6),
                         _ActionTypeChip(label: 'Update', icon: Icons.edit, color: kSetupColor),
-                        const SizedBox(width: 6),
+                        SizedBox(width: 6),
                         _ActionTypeChip(label: 'Delete', icon: Icons.delete, color: AppColors.error),
-                        const SizedBox(width: 6),
-                        _ActionTypeChip(label: 'Login', icon: Icons.login, color: const Color(0xFF8B5CF6)),
-                        const SizedBox(width: 6),
-                        _ActionTypeChip(label: 'Export', icon: Icons.download, color: const Color(0xFF6366F1)),
+                        SizedBox(width: 6),
+                        _ActionTypeChip(label: 'Login', icon: Icons.login, color: Color(0xFF8B5CF6)),
+                        SizedBox(width: 6),
+                        _ActionTypeChip(label: 'Export', icon: Icons.download, color: Color(0xFF6366F1)),
                       ],
                     ),
                   ),
@@ -326,7 +327,7 @@ class _AuditEntryCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '${_displayUser} Â· ${_displayRole}',
+                      '$_displayUser Â· $_displayRole',
                       style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                     ),
                   ],

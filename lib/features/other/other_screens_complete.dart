@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import '../../core/routes/app_routes.dart';
 
 class Alert {
@@ -20,7 +20,7 @@ class Alert {
 }
 
 class AlertsDashboard extends StatefulWidget {
-  const AlertsDashboard({Key? key}) : super(key: key);
+  const AlertsDashboard({super.key});
 
   @override
   State<AlertsDashboard> createState() => _AlertsDashboardState();
@@ -33,7 +33,7 @@ class _AlertsDashboardState extends State<AlertsDashboard> {
       title: 'Order Shipped',
       message: 'Your order #ORD001 has been shipped',
       type: 'order',
-      timestamp: DateTime.now().subtract(Duration(hours: 2)),
+      timestamp: DateTime.now().subtract(const Duration(hours: 2)),
       isRead: false,
     ),
     Alert(
@@ -41,7 +41,7 @@ class _AlertsDashboardState extends State<AlertsDashboard> {
       title: 'Payment Received',
       message: 'Payment of \$329.97 confirmed',
       type: 'payment',
-      timestamp: DateTime.now().subtract(Duration(hours: 5)),
+      timestamp: DateTime.now().subtract(const Duration(hours: 5)),
       isRead: false,
     ),
     Alert(
@@ -49,7 +49,7 @@ class _AlertsDashboardState extends State<AlertsDashboard> {
       title: 'Security Alert',
       message: 'New login from Chrome on Windows',
       type: 'security',
-      timestamp: DateTime.now().subtract(Duration(days: 1)),
+      timestamp: DateTime.now().subtract(const Duration(days: 1)),
       isRead: true,
     ),
   ];
@@ -92,7 +92,7 @@ class _AlertsDashboardState extends State<AlertsDashboard> {
 }
 
 class LiveDashboard extends StatelessWidget {
-  const LiveDashboard({Key? key}) : super(key: key);
+  const LiveDashboard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -115,13 +115,13 @@ class LiveDashboard extends StatelessWidget {
               child: Stack(
                 children: [
                   Container(height: 200, color: Colors.grey.shade200),
-                  Positioned(
+                  const Positioned(
                     top: 8,
                     right: 8,
                     child: Chip(
-                      label: const Text('LIVE'),
+                      label: Text('LIVE'),
                       backgroundColor: Colors.red,
-                      labelStyle: const TextStyle(color: Colors.white),
+                      labelStyle: TextStyle(color: Colors.white),
                     ),
                   ),
                   Positioned(
@@ -165,7 +165,7 @@ class LiveDashboard extends StatelessWidget {
                 ],
               ),
             );
-          }).toList(),
+          }),
         ],
       ),
     );
@@ -173,7 +173,7 @@ class LiveDashboard extends StatelessWidget {
 }
 
 class UserProfile extends StatelessWidget {
-  const UserProfile({Key? key}) : super(key: key);
+  const UserProfile({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -186,7 +186,7 @@ class UserProfile extends StatelessWidget {
             color: Colors.blue.shade50,
             child: Column(
               children: [
-                CircleAvatar(radius: 50, backgroundColor: Colors.blue, child: const Text('JD', style: TextStyle(color: Colors.white, fontSize: 24))),
+                const CircleAvatar(radius: 50, backgroundColor: Colors.blue, child: Text('JD', style: TextStyle(color: Colors.white, fontSize: 24))),
                 const SizedBox(height: 16),
                 const Text('John Doe', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
                 const Text('user@genieinprompt.app', style: TextStyle(color: Colors.grey)),
@@ -252,7 +252,7 @@ class UserProfile extends StatelessWidget {
 }
 
 class AppSettings extends StatefulWidget {
-  const AppSettings({Key? key}) : super(key: key);
+  const AppSettings({super.key});
 
   @override
   State<AppSettings> createState() => _AppSettingsState();
@@ -271,9 +271,9 @@ class _AppSettingsState extends State<AppSettings> {
       appBar: AppBar(title: const Text('Settings'), elevation: 0),
       body: ListView(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: const Text('Notifications', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          const Padding(
+            padding: EdgeInsets.all(16),
+            child: Text('Notifications', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
           ),
           SwitchListTile(
             title: const Text('Push Notifications'),
@@ -293,10 +293,10 @@ class _AppSettingsState extends State<AppSettings> {
             value: smsNotifications,
             onChanged: (val) => setState(() => smsNotifications = val),
           ),
-          Divider(),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: const Text('App Preferences', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          const Divider(),
+          const Padding(
+            padding: EdgeInsets.all(16),
+            child: Text('App Preferences', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
           ),
           ListTile(
             title: const Text('Theme'),
@@ -310,14 +310,14 @@ class _AppSettingsState extends State<AppSettings> {
             trailing: const Icon(Icons.chevron_right),
             onTap: () => _showLanguageDialog(),
           ),
-          Divider(),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: const Text('About', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          const Divider(),
+          const Padding(
+            padding: EdgeInsets.all(16),
+            child: Text('About', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
           ),
-          ListTile(
-            title: const Text('App Version'),
-            subtitle: const Text('1.0.0'),
+          const ListTile(
+            title: Text('App Version'),
+            subtitle: Text('1.0.0'),
           ),
           ListTile(
             title: const Text('Terms of Service'),

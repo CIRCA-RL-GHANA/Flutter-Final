@@ -443,6 +443,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       padding: const EdgeInsets.only(bottom: 12),
       child: Card(
         child: ListTile(
+          // ignore: deprecated_member_use
           leading: Radio<int>(value: index, groupValue: _selectedShipping, onChanged: (v) => setState(() => _selectedShipping = v!)),
           title: Text(name),
           trailing: Text(price, style: const TextStyle(fontWeight: FontWeight.bold)),
@@ -456,6 +457,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       padding: const EdgeInsets.only(bottom: 12),
       child: Card(
         child: ListTile(
+          // ignore: deprecated_member_use
           leading: Radio<int>(value: index, groupValue: _selectedPayment, onChanged: (v) => setState(() => _selectedPayment = v!)),
           title: Text(method),
         ),

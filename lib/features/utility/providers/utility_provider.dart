@@ -8,8 +8,8 @@
 /// Most of this provider is client-side / device-local. The init() method
 /// verifies backend connectivity via AuthService.getMe().
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../models/utility_models.dart';
 import '../../prompt/models/rbac_models.dart';
@@ -120,7 +120,7 @@ class UtilityProvider extends ChangeNotifier {
     ),
   ];
 
-  List<RecentActivity> _recentActivities = [];
+  final List<RecentActivity> _recentActivities = [];
 
   List<RecentActivity> get recentActivities =>
       _recentActivities.isNotEmpty ? _recentActivities : _fallbackRecentActivities;
@@ -656,7 +656,7 @@ class UtilityProvider extends ChangeNotifier {
     ),
   ];
 
-  List<HelpArticle> _helpArticles = [];
+  final List<HelpArticle> _helpArticles = [];
 
   List<HelpArticle> get helpArticles {
     final source = _helpArticles.isNotEmpty ? _helpArticles : _fallbackHelpArticles;
@@ -719,7 +719,7 @@ class UtilityProvider extends ChangeNotifier {
     ),
   ];
 
-  List<SupportTicket> _supportTickets = [];
+  final List<SupportTicket> _supportTickets = [];
 
   List<SupportTicket> get supportTickets =>
       _supportTickets.isNotEmpty ? _supportTickets : _fallbackSupportTickets;
@@ -812,7 +812,7 @@ class UtilityProvider extends ChangeNotifier {
 
   double get totalDataMB => _dataCategories.fold(0.0, (sum, c) => sum + c.sizeMB);
 
-  List<ConnectedApp> _connectedApps = [
+  final List<ConnectedApp> _connectedApps = [
     ConnectedApp(
       id: 'ca_1', name: 'Google', icon: Icons.g_mobiledata,
       permissions: ['Email', 'Profile'], connectedAt: DateTime(2023, 3, 15),
@@ -837,7 +837,7 @@ class UtilityProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<DataExportRequest> _exportRequests = [
+  final List<DataExportRequest> _exportRequests = [
     DataExportRequest(
       id: 'exp_1', format: DataExportFormat.json,
       status: DataExportStatus.ready,
@@ -963,7 +963,7 @@ class UtilityProvider extends ChangeNotifier {
   // U7 - ADVANCED DATA TOOLS STATE
   // ═══════════════════════════════════════════════════════════════════════════
 
-  StorageAnalytics _storageAnalytics = StorageAnalytics(
+  final StorageAnalytics _storageAnalytics = StorageAnalytics(
     totalMB: 50.0,
     usedMB: 12.4,
     breakdown: const [
@@ -979,7 +979,7 @@ class UtilityProvider extends ChangeNotifier {
 
   StorageAnalytics get storageAnalytics => _storageAnalytics;
 
-  List<DataBackup> _backups = [
+  final List<DataBackup> _backups = [
     DataBackup(
       id: 'bk_1', createdAt: DateTime.now().subtract(const Duration(hours: 2)),
       sizeMB: 12.4, status: BackupStatus.completed, type: BackupType.full,
@@ -1034,7 +1034,7 @@ class UtilityProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<SyncStatus> _syncStatuses = [
+  final List<SyncStatus> _syncStatuses = [
     SyncStatus(module: 'Messages', icon: Icons.chat, lastSynced: DateTime.now().subtract(const Duration(seconds: 30)),
         state: SyncState.synced, pendingItems: 0),
     SyncStatus(module: 'Contacts', icon: Icons.contacts, lastSynced: DateTime.now().subtract(const Duration(minutes: 5)),
@@ -1053,7 +1053,7 @@ class UtilityProvider extends ChangeNotifier {
   // U8 - SYSTEM MONITOR STATE
   // ═══════════════════════════════════════════════════════════════════════════
 
-  PerformanceSnapshot _performance = PerformanceSnapshot(
+  final PerformanceSnapshot _performance = PerformanceSnapshot(
     cpuUsage: 0.23,
     memoryUsage: 0.67,
     batteryLevel: 0.82,
@@ -1064,7 +1064,7 @@ class UtilityProvider extends ChangeNotifier {
 
   PerformanceSnapshot get performance => _performance;
 
-  DeviceInfoModel _deviceInfo = const DeviceInfoModel(
+  final DeviceInfoModel _deviceInfo = const DeviceInfoModel(
     deviceName: 'Pixel 7 Pro',
     osVersion: 'Android 14',
     appVersion: '1.0.5',
@@ -1115,7 +1115,7 @@ class UtilityProvider extends ChangeNotifier {
     ),
   ];
 
-  List<SystemLogEntry> _systemLogs = [];
+  final List<SystemLogEntry> _systemLogs = [];
 
   List<SystemLogEntry> get systemLogs =>
       _systemLogs.isNotEmpty ? _systemLogs : _fallbackSystemLogs;

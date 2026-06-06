@@ -1,5 +1,6 @@
 /// qualChat Screen 10 — Chat Thread (Enhanced)
 /// Immersive conversation: messages, composer, reactions, attachments, header menu
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,7 +8,6 @@ import '../models/qualchat_models.dart';
 import '../providers/qualchat_provider.dart';
 import '../widgets/qualchat_widgets.dart';
 import '../../../core/services/ai_insights_notifier.dart';
-import '../../../core/routes/app_routes.dart';
 
 class QualChatThreadScreen extends StatefulWidget {
   const QualChatThreadScreen({super.key});
@@ -36,10 +36,10 @@ class _QualChatThreadScreenState extends State<QualChatThreadScreen> {
         final messages = provider.messages;
 
         if (conversation == null) {
-          return Scaffold(
-            backgroundColor: const Color(0xFFF8F9FE),
-            appBar: const QualChatAppBar(title: 'Chat'),
-            body: const QualChatEmptyState(
+          return const Scaffold(
+            backgroundColor: Color(0xFFF8F9FE),
+            appBar: QualChatAppBar(title: 'Chat'),
+            body: QualChatEmptyState(
               icon: Icons.chat_bubble_outline,
               title: 'No conversation',
               message: 'Select a conversation to start chatting',

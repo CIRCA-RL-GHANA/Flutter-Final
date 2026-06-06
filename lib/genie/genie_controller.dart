@@ -5,6 +5,7 @@
 /// Handles: NLU → RBAC → Response building → Message thread management.
 /// Maintains conversation history, context memory, and offline queue.
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
 import 'dart:async';
 import 'package:flutter/foundation.dart';

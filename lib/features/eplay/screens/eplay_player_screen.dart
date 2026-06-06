@@ -3,13 +3,12 @@
 /// Unified player/reader for music, movies, podcasts, e-books, shows.
 /// Stream token is fetched from the server; no raw file URL is ever exposed.
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import '../../../core/theme/app_colors.dart';
 import '../../../core/services/ai_insights_notifier.dart';
-import 'eplay_hub_screen.dart' show kEPlayColor, kEPlayColorDark;
 
 class EPlayPlayerScreen extends StatefulWidget {
   final Map<String, dynamic>? asset;

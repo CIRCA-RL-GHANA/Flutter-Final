@@ -3,6 +3,7 @@
 /// Visible to: Branch Manager, Branch Response Officer, Driver, Response Officer
 /// Role-specific views per spec
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -235,11 +236,11 @@ class _DriverView extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               border: Border.all(color: AppColors.error.withValues(alpha: 0.2)),
             ),
-            child: Row(
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.sos, size: 14, color: AppColors.error),
-                const SizedBox(width: 6),
+                SizedBox(width: 6),
                 Text(
                   'Emergency SOS',
                   style: TextStyle(

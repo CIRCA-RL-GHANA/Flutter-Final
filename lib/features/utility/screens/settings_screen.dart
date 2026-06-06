@@ -2,6 +2,7 @@
 /// U1: SETTINGS & PREFERENCES Screen
 /// Theme, language, date/time format, haptics, sounds, updates, analytics
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -216,11 +217,11 @@ class SettingsScreen extends StatelessWidget {
               UtilitySectionCard(
                 child: Column(
                   children: [
-                    UtilityActionTile(
+                    const UtilityActionTile(
                       label: 'App Version',
                       subtitle: 'v2.4.1 (Build 241)',
                       icon: Icons.info_outline,
-                      iconColor: const Color(0xFF64748B),
+                      iconColor: Color(0xFF64748B),
                       showChevron: false,
                       onTap: null,
                     ),

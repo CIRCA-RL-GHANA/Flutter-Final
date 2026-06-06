@@ -3,6 +3,7 @@
 /// Reusable components: app bar, module cards, KPI badges, state cards,
 /// filter chips, section titles, permission gate, context badge
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -1474,14 +1475,14 @@ class SetupSkeletonCard extends StatelessWidget {
           ),
         ],
       ),
-      child: Column(
+      child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SetupSkeletonLoader(width: 120, height: 14),
-          const SizedBox(height: 10),
-          const SetupSkeletonLoader(height: 12),
-          const SizedBox(height: 8),
-          const SetupSkeletonLoader(width: 180, height: 12),
+          SetupSkeletonLoader(width: 120, height: 14),
+          SizedBox(height: 10),
+          SetupSkeletonLoader(height: 12),
+          SizedBox(height: 8),
+          SetupSkeletonLoader(width: 180, height: 12),
         ],
       ),
     );
@@ -1936,8 +1937,8 @@ class SetupOtpGate extends StatelessWidget {
       barrierDismissible: false,
       builder: (ctx) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: Row(
-          children: const [
+        title: const Row(
+          children: [
             Icon(Icons.lock_outline, color: kSetupColor, size: 22),
             SizedBox(width: 10),
             Text(
@@ -2091,9 +2092,9 @@ class SetupRedactedBanner extends StatelessWidget {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-      decoration: BoxDecoration(
-        color: const Color(0xFFF3F4F6),
-        border: const Border(
+      decoration: const BoxDecoration(
+        color: Color(0xFFF3F4F6),
+        border: Border(
           bottom: BorderSide(color: Color(0xFFD1D5DB), width: 1),
         ),
       ),
@@ -2272,9 +2273,9 @@ class SetupSOSButton extends StatelessWidget {
             ),
           ],
         ),
-        child: Row(
+        child: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             Icon(Icons.emergency, color: Colors.white, size: 24),
             SizedBox(width: 12),
             Text(

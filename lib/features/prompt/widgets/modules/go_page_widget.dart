@@ -2,6 +2,7 @@
 /// GO PAGE Widget (Financial Hub)
 /// Visible to: Owner, Administrator only
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -87,7 +88,7 @@ class _GoPageWidgetContentState extends State<GoPageWidgetContent>
           const SizedBox(height: 4),
 
           // Live Rate
-          Text(
+          const Text(
             '1 QP = 0.085 GHS',
             style: TextStyle(
               fontSize: 10,
@@ -98,7 +99,7 @@ class _GoPageWidgetContentState extends State<GoPageWidgetContent>
           const SizedBox(height: 12),
 
           // Quick Actions Row
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               _GoPageAction(icon: Icons.add_circle_outline, label: 'Buy'),

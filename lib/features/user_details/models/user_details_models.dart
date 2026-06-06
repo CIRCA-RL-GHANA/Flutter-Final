@@ -3,6 +3,7 @@
 /// Complete identity, security, privacy, accessibility, notifications,
 /// audit trail, and device management models
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
 import 'package:flutter/material.dart';
 

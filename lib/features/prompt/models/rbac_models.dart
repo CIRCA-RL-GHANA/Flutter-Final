@@ -2,6 +2,7 @@
 /// RBAC (Role-Based Access Control) Models
 /// Complete role, context, entity, and permission definitions
 /// ═══════════════════════════════════════════════════════════════════════════
+library;
 
 import 'package:flutter/material.dart';
 
@@ -96,7 +97,7 @@ class AppContextModel {
         );
 
   /// Display label for the context
-  String get displayLabel => '$name - ${roleLabel}';
+  String get displayLabel => '$name - $roleLabel';
 
   /// Human-readable role label
   String get roleLabel {
@@ -227,6 +228,7 @@ class WidgetVisibility {
   static const _hidden = _WidgetAccess.hidden;
 
   /// Master RBAC visibility matrix
+  // ignore: library_private_types_in_public_api
   static Map<PromptModule, _WidgetAccess> getAccessMap(UserRole role) {
     switch (role) {
       case UserRole.owner:
@@ -390,6 +392,7 @@ class WidgetVisibility {
   }
 
   /// ZapActionMenu items by role
+  // ignore: library_private_types_in_public_api
   static List<_ZapAction> getZapActions(UserRole role) {
     switch (role) {
       case UserRole.owner:

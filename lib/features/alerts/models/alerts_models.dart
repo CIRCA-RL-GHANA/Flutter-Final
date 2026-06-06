@@ -2,6 +2,7 @@
 /// Unified incident resolution tracking system
 /// Module Color: Red (0xFFEF4444)
 /// Visibility: All roles EXCEPT Owner
+library;
 
 // ═══════════════════════════════════════════
 // ENUMS

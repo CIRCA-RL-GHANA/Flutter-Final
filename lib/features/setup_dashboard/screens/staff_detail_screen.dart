@@ -3,6 +3,7 @@
 /// Tabs: Overview, Schedule, Tasks, Performance
 /// RBAC: Owner/Admin(fullAccess), BM(branchScoped), Monitor(viewOnly)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +12,6 @@ import '../../../core/theme/app_colors.dart';
 import '../../prompt/models/rbac_models.dart';
 import '../../prompt/providers/context_provider.dart';
 import '../models/setup_dashboard_models.dart';
-import '../models/setup_rbac.dart';
 import '../providers/setup_dashboard_provider.dart';
 import '../widgets/shared_widgets.dart';
 
@@ -32,9 +32,9 @@ class _StaffDetailScreenState extends State<StaffDetailScreen> {
       builder: (context, setupProv, ctxProv, _) {
         final staff = setupProv.selectedStaff;
         if (staff == null) {
-          return Scaffold(
-            appBar: const SetupAppBar(title: 'Staff Detail'),
-            body: const SetupEmptyState(
+          return const Scaffold(
+            appBar: SetupAppBar(title: 'Staff Detail'),
+            body: SetupEmptyState(
               icon: Icons.person,
               title: 'No staff member selected',
               subtitle: 'Select a staff member from the list',
@@ -210,11 +210,11 @@ class _OverviewTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.contact_phone, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Contact Info', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Contact Info', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
               const SizedBox(height: 12),
@@ -245,11 +245,11 @@ class _ScheduleTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.calendar_today, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Weekly Schedule', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Weekly Schedule', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
               const SizedBox(height: 12),
@@ -287,11 +287,11 @@ class _ScheduleTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.access_time, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Hours Summary', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Hours Summary', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
               const SizedBox(height: 12),
@@ -320,11 +320,11 @@ class _TasksTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.task_alt, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Task Completion', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Task Completion', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
               const SizedBox(height: 12),
@@ -413,18 +413,18 @@ class _PerformanceTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.analytics, size: 18, color: kSetupColor),
-                  const SizedBox(width: 8),
-                  const Text('Performance Metrics', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  SizedBox(width: 8),
+                  Text('Performance Metrics', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ],
               ),
               const SizedBox(height: 12),
               const _MetricBar(label: 'Attendance', value: 0.95, color: AppColors.success),
               _MetricBar(label: 'Task Completion', value: staff.tasksTotal > 0 ? staff.tasksCompleted / staff.tasksTotal : 0, color: kSetupColor),
               _MetricBar(label: 'Customer Satisfaction', value: staff.rating / 5.0, color: AppColors.accent),
-              _MetricBar(label: 'Efficiency', value: 0.82, color: const Color(0xFF8B5CF6)),
+              const _MetricBar(label: 'Efficiency', value: 0.82, color: Color(0xFF8B5CF6)),
             ],
           ),
         ),
@@ -495,8 +495,8 @@ class _RoleChangeButton extends StatelessWidget {
         cardId: 'staff',
         action: 'change_role',
         onVerified: performRoleChange,
-        child: IconButton(
-          icon: const Icon(Icons.manage_accounts_outlined, size: 22),
+        child: const IconButton(
+          icon: Icon(Icons.manage_accounts_outlined, size: 22),
           color: kSetupColor,
           tooltip: 'Change Role (OTP required)',
           onPressed: null, // Tap handled by SetupOtpGate wrapper.
@@ -588,9 +588,9 @@ class _RolePickerSheet extends StatelessWidget {
       builder: (ctx) => AlertDialog(
         backgroundColor: const Color(0xFF11131C),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: Text(
+        title: const Text(
           'Confirm Role Change',
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
         ),
         content: Column(
           mainAxisSize: MainAxisSize.min,

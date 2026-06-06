@@ -3,6 +3,7 @@
 /// Driver verifies return pickup: item inspection, photo evidence,
 /// condition assessment, and pickup confirmation
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -105,9 +106,9 @@ class _LiveReturnPickupScreenState extends State<LiveReturnPickupScreen> {
                             children: [
                               Text(ret.itemName, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700)),
                               const SizedBox(height: 4),
-                              Text('Customer: ${ret.customerName}', style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
-                              Text('Order #${ret.originalOrderId}', style: TextStyle(fontSize: 12, color: AppColors.textTertiary)),
-                              Text('Reason: ${ret.reason}', style: TextStyle(fontSize: 12, color: AppColors.textTertiary)),
+                              Text('Customer: ${ret.customerName}', style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+                              Text('Order #${ret.originalOrderId}', style: const TextStyle(fontSize: 12, color: AppColors.textTertiary)),
+                              Text('Reason: ${ret.reason}', style: const TextStyle(fontSize: 12, color: AppColors.textTertiary)),
                             ],
                           ),
                         ),
@@ -182,7 +183,7 @@ class _LiveReturnPickupScreenState extends State<LiveReturnPickupScreen> {
                               const SizedBox(height: 16),
                               Text(_photoTaken ? 'PHOTO CAPTURED âœ…' : 'CAPTURE RETURN ITEM PHOTOS', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: _photoTaken ? const Color(0xFF10B981) : AppColors.textPrimary)),
                               const SizedBox(height: 4),
-                              Text('Take clear photos of the return item for evidence', style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+                              const Text('Take clear photos of the return item for evidence', style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
                             ],
                           ),
                         ),
@@ -195,7 +196,7 @@ class _LiveReturnPickupScreenState extends State<LiveReturnPickupScreen> {
                               borderRadius: BorderRadius.circular(14),
                               border: Border.all(color: const Color(0xFFE5E7EB), width: 2),
                             ),
-                            child: Center(child: Icon(Icons.camera_alt, size: 48, color: AppColors.textTertiary)),
+                            child: const Center(child: Icon(Icons.camera_alt, size: 48, color: AppColors.textTertiary)),
                           ),
                         if (!_photoTaken) ...[
                           const SizedBox(height: 12),
@@ -323,8 +324,8 @@ class _ConditionOption extends StatelessWidget {
   Widget build(BuildContext context) {
     return RadioListTile<String>(
       value: value,
-      groupValue: groupValue,
-      onChanged: onChanged,
+      groupValue: groupValue, // ignore: deprecated_member_use
+      onChanged: onChanged, // ignore: deprecated_member_use
       title: Text(label, style: TextStyle(fontSize: 13, fontWeight: value == groupValue ? FontWeight.w700 : FontWeight.w400)),
       activeColor: kLiveColor,
       dense: true,
@@ -347,7 +348,7 @@ class _CheckItem extends StatelessWidget {
       child: Row(
         children: [
           Expanded(child: Text(label, style: const TextStyle(fontSize: 13))),
-          Switch(value: value, onChanged: onChanged, activeColor: kLiveColor, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
+          Switch(value: value, onChanged: onChanged, activeThumbColor: kLiveColor, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
         ],
       ),
     );
@@ -366,7 +367,7 @@ class _SummaryRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+          Text(label, style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
           Flexible(child: Text(value, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600), textAlign: TextAlign.end)),
         ],
       ),
