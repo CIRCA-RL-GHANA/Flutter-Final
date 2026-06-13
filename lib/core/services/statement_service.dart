@@ -54,4 +54,23 @@ class StatementService {
       fromJson: (json) => json as Map<String, dynamic>,
     );
   }
+
+  // ─── Provider-facing convenience methods ─────────────────────────────────
+
+  /// Create or update statement from plain content string.
+  Future<ApiResponse<Map<String, dynamic>>> createOrUpdate(
+    String content,
+  ) =>
+      createOrUpdateStatement({'content': content});
+
+  /// Replace statement via PUT with plain content string.
+  Future<ApiResponse<Map<String, dynamic>>> replaceStatement(
+    String content,
+  ) {
+    return _api.put<Map<String, dynamic>>(
+      ApiRoutes.statement.base,
+      data: {'content': content},
+      fromJson: (json) => json as Map<String, dynamic>,
+    );
+  }
 }

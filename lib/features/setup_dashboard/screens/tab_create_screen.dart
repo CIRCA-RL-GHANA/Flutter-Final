@@ -11,6 +11,7 @@ import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../prompt/providers/context_provider.dart';
 import '../providers/setup_dashboard_provider.dart';
+import '../providers/tabs_provider.dart';
 import '../widgets/shared_widgets.dart';
 
 class TabCreateScreen extends StatefulWidget {
@@ -59,16 +60,49 @@ class _TabCreateScreenState extends State<TabCreateScreen> {
     }
   }
 
-  void _submit() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: const Text('Customer tab created successfully!'),
-        backgroundColor: AppColors.success,
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      ),
-    );
-    Navigator.pop(context);
+  Future<void> _submit() async {
+    final tabsProvider = context.read<TabsProvider>();
+    final entityId = context.read<ContextProvider>().activeContext.id;
+
+    final data = {
+      'entityId': entityId,
+      'customerName': _customerNameCtrl.text.trim(),
+      'customerPhone': _customerPhoneCtrl.text.trim(),
+      'customerEmail': _customerEmailCtrl.text.trim(),
+      'customerType': _customerType,
+      'creditLimit': double.tryParse(_creditLimitCtrl.text.trim()) ?? 0.0,
+      'paymentDays': _paymentDays,
+      'interestRate': _interestRate,
+      'autoReminders': _autoReminders,
+      'requireApproval': _requireApproval,
+      'notes': _notesCtrl.text.trim(),
+    };
+
+    final result = await tabsProvider.createTab(data);
+
+    if (!mounted) return;
+
+    if (result != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('Customer tab created successfully!'),
+          backgroundColor: AppColors.success,
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        ),
+      );
+      Navigator.pop(context);
+    } else if (tabsProvider.error != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(tabsProvider.error!),
+          backgroundColor: AppColors.error,
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        ),
+      );
+      tabsProvider.clearError();
+    }
   }
 
   @override

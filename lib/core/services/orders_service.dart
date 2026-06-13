@@ -104,7 +104,7 @@ class OrdersService {
     required String review,
   }) async {
     return _api.post<Map<String, dynamic>>(
-      ApiRoutes.orders.byId(orderId),
+      '${ApiRoutes.orders.byId(orderId)}/rate',
       data: {'rating': rating, 'review': review},
       fromJson: (json) => json as Map<String, dynamic>,
     );

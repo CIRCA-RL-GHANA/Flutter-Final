@@ -64,6 +64,31 @@ class AlertsProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> createAlert(Map<String, dynamic> data) async {
+    try {
+      final newAlert = AlertItem(
+        id: 'INC-${DateTime.now().millisecondsSinceEpoch % 100000}',
+        title: (data['title'] as String? ?? 'Incident').replaceAll(RegExp(r'(?<=[a-z])([A-Z])'), r' $1').trim(),
+        description: data['body'] as String? ?? '',
+        priority: data['priority'] == 'critical'
+            ? AlertPriority.critical
+            : data['priority'] == 'high'
+                ? AlertPriority.high
+                : AlertPriority.medium,
+        status: AlertStatus.newAlert,
+        category: AlertCategory.other,
+        subCategory: data['category'] as String? ?? 'incident',
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+        createdBy: 'Driver',
+      );
+      _alerts.insert(0, newAlert);
+      notifyListeners();
+    } catch (e) {
+      debugPrint('AlertsProvider.createAlert error: $e');
+    }
+  }
+
   // ──── ALERTS DATA ────────────────────────────────────
 
   List<AlertItem> _alerts = [];

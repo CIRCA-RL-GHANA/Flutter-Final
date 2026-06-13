@@ -12,6 +12,7 @@ import '../../../core/theme/app_colors.dart';
 import '../models/live_models.dart';
 import '../widgets/live_widgets.dart';
 import '../../../core/services/ai_insights_notifier.dart';
+import '../../alerts/providers/alerts_provider.dart';
 
 class LiveIncidentReportScreen extends StatefulWidget {
   const LiveIncidentReportScreen({super.key});
@@ -142,6 +143,13 @@ class _LiveIncidentReportScreenState extends State<LiveIncidentReportScreen> {
                     onPressed: _step == 2
                         ? () {
                             HapticFeedback.mediumImpact();
+                            context.read<AlertsProvider>().createAlert({
+                              'title': _selectedType?.name ?? 'incident',
+                              'body': _descriptionController.text,
+                              'type': 'warning',
+                              'priority': _severity == IncidentSeverity.critical ? 'critical' : _severity == IncidentSeverity.major ? 'high' : 'medium',
+                              'category': 'incident',
+                            });
                             setState(() => _submitted = true);
                           }
                         : (_step == 0 && _selectedType == null)

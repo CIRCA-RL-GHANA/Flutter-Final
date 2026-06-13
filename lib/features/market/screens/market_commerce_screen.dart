@@ -1,6 +1,10 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
+import '../models/market_models.dart';
+import '../providers/market_provider.dart';
 import '../widgets/market_widgets.dart';
 
 class MarketCommerceScreen extends StatefulWidget {
@@ -13,189 +17,155 @@ class MarketCommerceScreen extends StatefulWidget {
 class _MarketCommerceScreenState extends State<MarketCommerceScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  final searchController = TextEditingController();
-  String selectedCategory = 'All';
-
-  final categories = ['All', 'Electronics', 'Fashion', 'Food', 'Books', 'Sports'];
-  final products = [
-    {'name': 'Wireless Earbuds', 'category': 'Electronics', 'price': 79.99, 'rating': 4.5},
-    {'name': 'Summer T-Shirt', 'category': 'Fashion', 'price': 19.99, 'rating': 4.0},
-    {'name': 'Organic Coffee', 'category': 'Food', 'price': 12.99, 'rating': 4.8},
-    {'name': 'Flutter Guide', 'category': 'Books', 'price': 39.99, 'rating': 4.7},
-    {'name': 'Yoga Mat', 'category': 'Sports', 'price': 24.99, 'rating': 4.3},
-  ];
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final prov = context.read<MarketProvider>();
+      if (prov.products.isEmpty) {
+        prov.loadProducts();
+      }
+      if (prov.orders.isEmpty) {
+        prov.loadOrders();
+      }
+    });
   }
 
   @override
   void dispose() {
     _tabController.dispose();
-    searchController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Market'),
-        elevation: 0,
-        bottom: TabBar(
-          controller: _tabController,
-          tabs: const [
-            Tab(text: 'Shop'),
-            Tab(text: 'Cart'),
-            Tab(text: 'Orders'),
-          ],
-        ),
-      ),
-      body: Column(
-        children: [
-          Consumer<AIInsightsNotifier>(
-            builder: (context, ai, _) {
-              if (ai.insights.isEmpty) return const SizedBox.shrink();
-              return Container(
-                color: kMarketColor.withValues(alpha: 0.07),
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                child: Row(children: [
-                  const Icon(Icons.auto_awesome, size: 14, color: kMarketColor),
-                  const SizedBox(width: 8),
-                  Expanded(child: Text('AI: ${ai.insights.first['title'] ?? ''}',
-                    style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kMarketColor),
-                    maxLines: 1, overflow: TextOverflow.ellipsis)),
-                ]),
-              );
-            },
-          ),
-          Expanded(child: TabBarView(
-            controller: _tabController,
-        children: [
-          // Shop Tab
-          ListView(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: TextField(
-                  controller: searchController,
-                  decoration: InputDecoration(
-                    hintText: 'Search products...',
-                    prefixIcon: const Icon(Icons.search),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
+    return Consumer<MarketProvider>(
+      builder: (context, prov, _) {
+        return Scaffold(
+          backgroundColor: const Color(0xFFF8F9FE),
+          appBar: AppBar(
+            title: const Text('Market'),
+            elevation: 0,
+            backgroundColor: Colors.white,
+            foregroundColor: const Color(0xFF1A1A1A),
+            actions: [
+              Stack(
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.shopping_cart_outlined),
+                    onPressed: () =>
+                        Navigator.pushNamed(context, AppRoutes.marketCart),
                   ),
-                ),
-              ),
-              // Category filter
-              SizedBox(
-                height: 50,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  itemCount: categories.length,
-                  itemBuilder: (context, index) {
-                    final category = categories[index];
-                    final isSelected = category == selectedCategory;
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 8),
-                      child: FilterChip(
-                        label: Text(category),
-                        selected: isSelected,
-                        onSelected: (selected) {
-                          setState(() {
-                            selectedCategory = category;
-                          });
-                        },
-                      ),
-                    );
-                  },
-                ),
-              ),
-              const SizedBox(height: 16),
-              // Products grid
-              GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 0.75,
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 12,
-                ),
-                itemCount: products.length,
-                itemBuilder: (context, index) {
-                  final product = products[index];
-                  return Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          height: 120,
-                          decoration: BoxDecoration(
-                            color: Colors.grey[300],
-                            borderRadius: const BorderRadius.vertical(
-                              top: Radius.circular(12),
+                  if (prov.cartItemCount > 0)
+                    Positioned(
+                      right: 6,
+                      top: 6,
+                      child: Container(
+                        width: 16,
+                        height: 16,
+                        decoration: const BoxDecoration(
+                          color: kMarketColor,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                          child: Text(
+                            '${prov.cartItemCount}',
+                            style: const TextStyle(
+                              fontSize: 9,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.white,
                             ),
                           ),
-                          child: const Center(
-                            child: Icon(Icons.image, size: 40, color: Colors.grey),
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            ],
+            bottom: TabBar(
+              controller: _tabController,
+              labelColor: kMarketColor,
+              unselectedLabelColor: const Color(0xFF6B7280),
+              indicatorColor: kMarketColor,
+              tabs: [
+                Tab(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const [
+                      Icon(Icons.store_outlined, size: 16),
+                      SizedBox(width: 4),
+                      Text('Shop'),
+                    ],
+                  ),
+                ),
+                Tab(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.shopping_cart_outlined, size: 16),
+                      const SizedBox(width: 4),
+                      const Text('Cart'),
+                      if (prov.cartItemCount > 0) ...[
+                        const SizedBox(width: 4),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 5, vertical: 1),
+                          decoration: BoxDecoration(
+                            color: kMarketColor,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Text(
+                            '${prov.cartItemCount}',
+                            style: const TextStyle(
+                              fontSize: 10,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700,
+                            ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                product['name'] as String,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              const SizedBox(height: 4),
-                              Row(
-                                children: [
-                                  Icon(Icons.star, size: 14, color: Colors.amber),
-                                  Text(
-                                    (product['rating'] as double).toString(),
-                                    style: const TextStyle(fontSize: 12),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                '\$${(product['price'] as double).toStringAsFixed(2)}',
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 14,
-                                ),
-                              ),
-                              const SizedBox(height: 4),
-                              SizedBox(
-                                width: double.infinity,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text('${product['name']} added to cart'),
-                                      ),
-                                    );
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    padding: const EdgeInsets.symmetric(vertical: 4),
-                                  ),
-                                  child: const Text('Add', style: TextStyle(fontSize: 12)),
-                                ),
-                              ),
-                            ],
+                      ],
+                    ],
+                  ),
+                ),
+                Tab(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const [
+                      Icon(Icons.receipt_outlined, size: 16),
+                      SizedBox(width: 4),
+                      Text('Orders'),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          body: Column(
+            children: [
+              Consumer<AIInsightsNotifier>(
+                builder: (context, ai, _) {
+                  if (ai.insights.isEmpty) return const SizedBox.shrink();
+                  return Container(
+                    color: kMarketColor.withValues(alpha: 0.07),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 6),
+                    child: Row(
+                      children: [
+                        const Icon(Icons.auto_awesome,
+                            size: 14, color: kMarketColor),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            'AI: ${ai.insights.first['title'] ?? ''}',
+                            style: const TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w500,
+                              color: kMarketColor,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       ],
@@ -203,49 +173,362 @@ class _MarketCommerceScreenState extends State<MarketCommerceScreen>
                   );
                 },
               ),
+              Expanded(
+                child: TabBarView(
+                  controller: _tabController,
+                  children: [
+                    _ShopTab(prov: prov),
+                    _CartTab(prov: prov),
+                    _OrdersTab(prov: prov),
+                  ],
+                ),
+              ),
             ],
           ),
+        );
+      },
+    );
+  }
+}
 
-          // Cart Tab
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(Icons.shopping_cart, size: 64, color: Colors.grey),
-                const SizedBox(height: 16),
-                const Text('Your cart is empty'),
-                const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: () {
-                    _tabController.index = 0;
-                  },
-                  child: const Text('Continue Shopping'),
+// ─── Shop Tab ────────────────────────────────────────────────────────────────
+
+class _ShopTab extends StatefulWidget {
+  final MarketProvider prov;
+  const _ShopTab({required this.prov});
+
+  @override
+  State<_ShopTab> createState() => _ShopTabState();
+}
+
+class _ShopTabState extends State<_ShopTab> {
+  final TextEditingController _searchCtrl = TextEditingController();
+  MerchantCategory _selectedCategory = MerchantCategory.all;
+
+  @override
+  void dispose() {
+    _searchCtrl.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final prov = widget.prov;
+    final query = _searchCtrl.text.toLowerCase();
+    final allProducts = _selectedCategory == MerchantCategory.all
+        ? prov.products
+        : prov.products
+            .where((p) => p.category == _selectedCategory)
+            .toList();
+    final filtered = query.isEmpty
+        ? allProducts
+        : allProducts
+            .where((p) => p.name.toLowerCase().contains(query))
+            .toList();
+
+    return prov.productsLoading && prov.products.isEmpty
+        ? const Center(
+            child: CircularProgressIndicator(color: kMarketColor))
+        : RefreshIndicator(
+            color: kMarketColor,
+            onRefresh: () => prov.loadProducts(),
+            child: CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
+                    child: TextField(
+                      controller: _searchCtrl,
+                      onChanged: (_) => setState(() {}),
+                      decoration: InputDecoration(
+                        hintText: 'Search products...',
+                        prefixIcon:
+                            const Icon(Icons.search, color: Color(0xFF9CA3AF)),
+                        filled: true,
+                        fillColor: const Color(0xFFF3F4F6),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none,
+                        ),
+                        contentPadding:
+                            const EdgeInsets.symmetric(vertical: 12),
+                      ),
+                    ),
+                  ),
                 ),
+                SliverToBoxAdapter(
+                  child: MarketCategoryChipRow(
+                    selected: _selectedCategory,
+                    onSelected: (cat) =>
+                        setState(() => _selectedCategory = cat),
+                  ),
+                ),
+                if (filtered.isEmpty)
+                  const SliverFillRemaining(
+                    child: MarketEmptyState(
+                      icon: Icons.shopping_bag_outlined,
+                      title: 'No products found',
+                      subtitle: 'Try a different search or category.',
+                    ),
+                  )
+                else
+                  SliverPadding(
+                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+                    sliver: SliverGrid(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 0.72,
+                        crossAxisSpacing: 12,
+                        mainAxisSpacing: 12,
+                      ),
+                      delegate: SliverChildBuilderDelegate(
+                        (context, index) {
+                          final product = filtered[index];
+                          return MarketProductCard(
+                            product: product,
+                            onTap: () {
+                              prov.selectProduct(product.id);
+                              Navigator.pushNamed(
+                                  context, AppRoutes.marketProductDetail);
+                            },
+                            onAddToCart: () {
+                              HapticFeedback.lightImpact();
+                              prov.addToCart(product);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content:
+                                      Text('${product.name} added to cart'),
+                                  backgroundColor: kMarketColor,
+                                  duration: const Duration(seconds: 1),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                        childCount: filtered.length,
+                      ),
+                    ),
+                  ),
               ],
             ),
-          ),
+          );
+  }
+}
 
-          // Orders Tab
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(Icons.receipt, size: 64, color: Colors.grey),
-                const SizedBox(height: 16),
-                const Text('No orders yet'),
-                const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: () {
-                    _tabController.index = 0;
-                  },
-                  child: const Text('Start Shopping'),
+// ─── Cart Tab ────────────────────────────────────────────────────────────────
+
+class _CartTab extends StatelessWidget {
+  final MarketProvider prov;
+  const _CartTab({required this.prov});
+
+  @override
+  Widget build(BuildContext context) {
+    final items = prov.cartItems;
+    if (items.isEmpty) {
+      return const MarketEmptyState(
+        icon: Icons.shopping_cart_outlined,
+        title: 'Your cart is empty',
+        subtitle: 'Add products from the Shop tab to get started.',
+      );
+    }
+
+    final summary = prov.cartSummary;
+    return Column(
+      children: [
+        Expanded(
+          child: ListView.builder(
+            padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
+            itemCount: items.length,
+            itemBuilder: (context, index) {
+              final item = items[index];
+              return Card(
+                margin: const EdgeInsets.only(bottom: 10),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 56,
+                        height: 56,
+                        decoration: BoxDecoration(
+                          color: kMarketColor.withValues(alpha: 0.08),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: item.product.imageUrl != null
+                            ? ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Image.network(
+                                  item.product.imageUrl!,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (_, __, ___) => const Icon(
+                                      Icons.image_outlined,
+                                      color: kMarketColor),
+                                ),
+                              )
+                            : const Icon(Icons.image_outlined,
+                                color: kMarketColor),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              item.product.name,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.w600, fontSize: 14),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              item.product.priceDisplay,
+                              style: const TextStyle(
+                                  color: kMarketColor,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 13),
+                            ),
+                          ],
+                        ),
+                      ),
+                      QuantitySelector(
+                        quantity: item.quantity,
+                        onChanged: (qty) {
+                          prov.updateCartItemQuantity(item.id, qty);
+                        },
+                      ),
+                    ],
+                  ),
                 ),
-              ],
-            ),
+              );
+            },
           ),
-        ],
-          )),
-        ],
+        ),
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.06),
+                  blurRadius: 8,
+                  offset: const Offset(0, -2))
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text('Subtotal',
+                      style:
+                          TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                  Text('\$${summary.subtotal.toStringAsFixed(2)}',
+                      style: const TextStyle(
+                          fontSize: 13, fontWeight: FontWeight.w600)),
+                ],
+              ),
+              const SizedBox(height: 4),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text('Delivery',
+                      style:
+                          TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                  Text(
+                      summary.deliveryFee == 0
+                          ? 'FREE'
+                          : '\$${summary.deliveryFee.toStringAsFixed(2)}',
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: summary.deliveryFee == 0
+                            ? kMarketColor
+                            : const Color(0xFF1A1A1A),
+                      )),
+                ],
+              ),
+              const Divider(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text('Total',
+                      style: TextStyle(
+                          fontSize: 15, fontWeight: FontWeight.w700)),
+                  Text('\$${summary.total.toStringAsFixed(2)}',
+                      style: const TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                          color: kMarketColor)),
+                ],
+              ),
+              const SizedBox(height: 12),
+              ElevatedButton(
+                onPressed: () =>
+                    Navigator.pushNamed(context, AppRoutes.marketCheckout),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: kMarketColor,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                ),
+                child: const Text('Checkout',
+                    style: TextStyle(
+                        fontSize: 15, fontWeight: FontWeight.w600)),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+// ─── Orders Tab ──────────────────────────────────────────────────────────────
+
+class _OrdersTab extends StatelessWidget {
+  final MarketProvider prov;
+  const _OrdersTab({required this.prov});
+
+  @override
+  Widget build(BuildContext context) {
+    if (prov.ordersLoading && prov.orders.isEmpty) {
+      return const Center(
+          child: CircularProgressIndicator(color: kMarketColor));
+    }
+
+    if (prov.orders.isEmpty) {
+      return const MarketEmptyState(
+        icon: Icons.receipt_long_outlined,
+        title: 'No orders yet',
+        subtitle: 'Your order history will appear here.',
+      );
+    }
+
+    return RefreshIndicator(
+      color: kMarketColor,
+      onRefresh: () => prov.loadOrders(),
+      child: ListView.builder(
+        padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
+        itemCount: prov.orders.length,
+        itemBuilder: (context, index) {
+          final order = prov.orders[index];
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: MarketOrderCard(
+              order: order,
+              onTap: () {
+                prov.selectOrder(order.id);
+                Navigator.pushNamed(context, AppRoutes.marketTransactions);
+              },
+            ),
+          );
+        },
       ),
     );
   }

@@ -32,3 +32,15 @@ export 'community_service.dart';
 export 'fintech_service.dart';
 // ── Enterprise Extension ─────────────────────────────────────────────────────
 export 'enterprise_service.dart';
+// ── New API Coverage Services ────────────────────────────────────────────────
+export 'interests_service.dart';
+export 'wallets_service.dart';
+export 'files_service.dart';
+export 'subscriptions_service.dart';
+export 'go_service.dart';
+export 'qpoints_market_service.dart';
+export 'alerts_service.dart';
+export 'campaigns_service.dart';
+export 'tabs_service.dart';
+export 'multi_channel_service.dart';
+export 'fulfillment_service.dart';

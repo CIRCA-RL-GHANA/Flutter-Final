@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
+import '../../../core/theme/app_colors.dart';
+import '../providers/updates_provider.dart';
 import '../widgets/updates_widgets.dart';
 
 class UpdatesSocialFeedScreen extends StatefulWidget {
@@ -13,200 +16,184 @@ class UpdatesSocialFeedScreen extends StatefulWidget {
 }
 
 class _UpdatesSocialFeedScreenState extends State<UpdatesSocialFeedScreen> {
-  final updates = [
-    {
-      'author': 'Tech Daily',
-      'avatar': 'TD',
-      'content': 'Just launched our new AI features! Check them out and let us know what you think.',
-      'image': null,
-      'likes': 1284,
-      'comments': 342,
-      'shares': 156,
-      'time': '2 hours ago',
-    },
-    {
-      'author': 'Jane Developer',
-      'avatar': 'JD',
-      'content': 'Finally shipped the new dashboard redesign. Took 3 months but it was worth it!',
-      'image': null,
-      'likes': 892,
-      'comments': 234,
-      'shares': 89,
-      'time': '4 hours ago',
-    },
-    {
-      'author': 'Community Team',
-      'avatar': 'CT',
-      'content': 'Thank you all for 50K members! We\'re so grateful for this amazing community.',
-      'image': null,
-      'likes': 3456,
-      'comments': 567,
-      'shares': 892,
-      'time': '6 hours ago',
-    },
-  ];
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final prov = context.read<UpdatesProvider>();
+      if (prov.updates.isEmpty) {
+        prov.loadUpdates();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Updates'),
-        elevation: 0,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () => Navigator.pushNamed(context, AppRoutes.updatesSearch),
-          ),
-        ],
-      ),
-      body: Column(
-        children: [
-          Consumer<AIInsightsNotifier>(
-            builder: (context, ai, _) {
-              if (ai.insights.isEmpty) return const SizedBox.shrink();
-              return Container(
-                color: kUpdatesColor.withValues(alpha: 0.07),
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                child: Row(children: [
-                  const Icon(Icons.auto_awesome, size: 14, color: kUpdatesColor),
-                  const SizedBox(width: 8),
-                  Expanded(child: Text('AI: ${ai.insights.first['title'] ?? ''}',
-                    style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kUpdatesColor),
-                    maxLines: 1, overflow: TextOverflow.ellipsis)),
-                ]),
-              );
-            },
-          ),
-          Expanded(child: ListView.separated(
-            itemCount: updates.length + 1,
-        separatorBuilder: (context, index) => const Divider(height: 0),
-        itemBuilder: (context, index) {
-          if (index == 0) {
-            // Compose section at top
-            return Container(
-              padding: const EdgeInsets.all(16),
-              color: Colors.grey[50],
-              child: Row(
+    return Consumer<UpdatesProvider>(
+      builder: (context, prov, _) {
+        final updates = prov.filteredUpdates(prov.activeFilter);
+
+        return Scaffold(
+          backgroundColor: AppColors.backgroundLight,
+          appBar: AppBar(
+            title: const Text('Updates'),
+            elevation: 0,
+            backgroundColor: Colors.white,
+            foregroundColor: AppColors.textPrimary,
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.search),
+                onPressed: () =>
+                    Navigator.pushNamed(context, AppRoutes.updatesSearch),
+              ),
+              Stack(
                 children: [
-                  CircleAvatar(
-                    radius: 24,
-                    backgroundColor: Colors.blue[300],
-                    child: const Icon(Icons.person, color: Colors.white),
+                  IconButton(
+                    icon: const Icon(Icons.notifications_outlined),
+                    onPressed: () => Navigator.pushNamed(
+                        context, AppRoutes.updatesNotifications),
                   ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Share an update...',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(24),
+                  if (prov.unreadNotificationCount > 0)
+                    Positioned(
+                      right: 8,
+                      top: 8,
+                      child: Container(
+                        width: 16,
+                        height: 16,
+                        decoration: const BoxDecoration(
+                          color: kUpdatesColor,
+                          shape: BoxShape.circle,
                         ),
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 12,
+                        child: Center(
+                          child: Text(
+                            '${prov.unreadNotificationCount}',
+                            style: const TextStyle(
+                              fontSize: 9,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
                 ],
               ),
-            );
-          }
-
-          final update = updates[index - 1];
-          return Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Author info
-                Row(
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: Colors.blue[300],
-                      child: Text(
-                        update['avatar'] as String,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+            ],
+          ),
+          body: Column(
+            children: [
+              Consumer<AIInsightsNotifier>(
+                builder: (context, ai, _) {
+                  if (ai.insights.isEmpty) return const SizedBox.shrink();
+                  return Container(
+                    color: kUpdatesColor.withValues(alpha: 0.07),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 6),
+                    child: Row(
                       children: [
-                        Text(
-                          update['author'] as String,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          update['time'] as String,
-                          style: TextStyle(color: Colors.grey[600], fontSize: 12),
+                        const Icon(Icons.auto_awesome,
+                            size: 14, color: kUpdatesColor),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            'AI: ${ai.insights.first['title'] ?? ''}',
+                            style: const TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w500,
+                              color: kUpdatesColor,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                       ],
                     ),
-                    const Spacer(),
-                    IconButton(
-                      icon: const Icon(Icons.more_horiz),
-                      onPressed: () => showModalBottomSheet(context: context, builder: (_) => const SizedBox(height: 150, child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [ListTile(leading: Icon(Icons.share), title: Text('Share')), ListTile(leading: Icon(Icons.flag), title: Text('Report'))]))),
-                      iconSize: 20,
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 12),
-                // Content
-                Text(update['content'] as String),
-                const SizedBox(height: 12),
-                // Actions
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    _ActionButton(
-                      icon: Icons.favorite_border,
-                      label: '${update['likes']}',
-                    ),
-                    _ActionButton(
-                      icon: Icons.comment_outlined,
-                      label: '${update['comments']}',
-                    ),
-                    _ActionButton(
-                      icon: Icons.share_outlined,
-                      label: '${update['shares']}',
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          );
-        },
-          )),
-        ],
-      ),
-    );
-  }
-}
-
-class _ActionButton extends StatelessWidget {
-  final IconData icon;
-  final String label;
-
-  const _ActionButton({
-    required this.icon,
-    required this.label,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Icon(icon, size: 18, color: Colors.grey[600]),
-        const SizedBox(width: 4),
-        Text(
-          label,
-          style: TextStyle(color: Colors.grey[600], fontSize: 12),
-        ),
-      ],
+                  );
+                },
+              ),
+              UpdatesFilterChipBar(
+                activeFilter: prov.activeFilter,
+                onFilterChanged: prov.setFilter,
+              ),
+              Expanded(
+                child: prov.isLoading && updates.isEmpty
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                            color: kUpdatesColor))
+                    : updates.isEmpty
+                        ? const UpdatesEmptyState(
+                            icon: Icons.feed,
+                            title: 'No updates yet',
+                            message:
+                                'Follow people or adjust your interests to see updates here.',
+                          )
+                        : RefreshIndicator(
+                            color: kUpdatesColor,
+                            onRefresh: () => prov.loadUpdates(),
+                            child: ListView.builder(
+                              padding:
+                                  const EdgeInsets.fromLTRB(14, 8, 14, 80),
+                              itemCount: updates.length,
+                              itemBuilder: (context, index) {
+                                final update = updates[index];
+                                return UpdateCard(
+                                  update: update,
+                                  onTap: () {
+                                    prov.selectUpdate(update);
+                                    Navigator.pushNamed(
+                                        context, AppRoutes.updatesDetail);
+                                  },
+                                  onLike: () {
+                                    HapticFeedback.lightImpact();
+                                    prov.toggleLike(update.id);
+                                  },
+                                  onComment: () {
+                                    prov.selectUpdate(update);
+                                    Navigator.pushNamed(
+                                        context, AppRoutes.updatesDetail);
+                                  },
+                                  onShare: () {
+                                    prov.selectUpdate(update);
+                                    Navigator.pushNamed(
+                                        context, AppRoutes.updatesShares);
+                                  },
+                                  onSave: () {
+                                    HapticFeedback.lightImpact();
+                                    prov.toggleSave(update.id);
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          update.isSavedByMe
+                                              ? 'Removed from saved'
+                                              : 'Saved to library',
+                                        ),
+                                        backgroundColor: kUpdatesColor,
+                                        duration:
+                                            const Duration(seconds: 1),
+                                      ),
+                                    );
+                                  },
+                                  onOptions: () {
+                                    prov.selectUpdate(update);
+                                    Navigator.pushNamed(
+                                        context, AppRoutes.updatesOptions);
+                                  },
+                                );
+                              },
+                            ),
+                          ),
+              ),
+            ],
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () =>
+                Navigator.pushNamed(context, AppRoutes.updatesCreate),
+            backgroundColor: kUpdatesColor,
+            child: const Icon(Icons.edit, color: Colors.white),
+          ),
+        );
+      },
     );
   }
 }

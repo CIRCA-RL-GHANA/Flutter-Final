@@ -200,6 +200,11 @@ class _LiveReturnRejectionScreenState extends State<LiveReturnRejectionScreen> {
                         ? null
                         : () {
                             HapticFeedback.heavyImpact();
+                            context.read<LiveProvider>().rejectReturn(
+                              ret.id,
+                              _selectedReason!,
+                              _customMessageController.text,
+                            );
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text('âŒ Return rejected. Customer notified.'), backgroundColor: kLiveColor),
                             );

@@ -138,6 +138,12 @@ class WishlistService {
     );
   }
 
+  // ─── Aliases for provider compatibility ──────────────────────────────────
+
+  /// Alias for [getTotalEstimatedValue] — consistent with provider API.
+  Future<ApiResponse<Map<String, dynamic>>> getTotalValue() =>
+      getTotalEstimatedValue();
+
   // ═══════════════════════════════════════════════════════════════════════
   // AI-ENHANCED METHODS
   // ═══════════════════════════════════════════════════════════════════════

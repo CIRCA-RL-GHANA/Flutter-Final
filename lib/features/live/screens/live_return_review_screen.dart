@@ -324,8 +324,9 @@ class _LiveReturnReviewScreenState extends State<LiveReturnReviewScreen> {
                   child: ElevatedButton.icon(
                     onPressed: () {
                       HapticFeedback.heavyImpact();
+                      context.read<LiveProvider>().approveReturn(ret.id);
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('âœ… Return approved!'), backgroundColor: Color(0xFF10B981)),
+                        const SnackBar(content: Text('Return approved!'), backgroundColor: Color(0xFF10B981)),
                       );
                       Navigator.pop(context);
                     },
