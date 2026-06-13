@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class QualChatPremiumScreen extends ConsumerStatefulWidget {
+class QualChatPremiumScreen extends StatefulWidget {
   final String? conversationId;
-  
+
   const QualChatPremiumScreen({
     super.key,
     this.conversationId,
   });
 
   @override
-  ConsumerState<QualChatPremiumScreen> createState() =>
-      _QualChatPremiumScreenState();
+  State<QualChatPremiumScreen> createState() => _QualChatPremiumScreenState();
 }
 
-class _QualChatPremiumScreenState extends ConsumerState<QualChatPremiumScreen> {
+class _QualChatPremiumScreenState extends State<QualChatPremiumScreen> {
   late TextEditingController messageController;
   final messages = <Map<String, dynamic>>[];
   bool isTyping = false;

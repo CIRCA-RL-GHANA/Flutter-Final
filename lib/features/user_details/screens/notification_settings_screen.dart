@@ -253,9 +253,9 @@ class NotificationSettingsScreen extends StatelessWidget {
   }
 
   void _pickTime(BuildContext context, TimeOfDay initial, bool isStart) async {
+    final udp = context.read<UserDetailsProvider>();
     final picked = await showTimePicker(context: context, initialTime: initial);
     if (picked != null) {
-      final udp = context.read<UserDetailsProvider>();
       final notif = udp.notifications;
       if (isStart) {
         udp.updateNotifications(notif.copyWith(quietHoursStart: picked));

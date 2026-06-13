@@ -92,9 +92,9 @@ class DeviceCheckProvider extends ChangeNotifier {
   Future<void> _checkNetwork() async {
     try {
       final result = await Connectivity().checkConnectivity();
-      if (result == ConnectivityResult.none) {
+      if (result.contains(ConnectivityResult.none) && result.length == 1) {
         _networkQuality = NetworkQuality.offline;
-      } else if (result == ConnectivityResult.wifi || result == ConnectivityResult.ethernet) {
+      } else if (result.contains(ConnectivityResult.wifi) || result.contains(ConnectivityResult.ethernet)) {
         _networkQuality = NetworkQuality.excellent;
       } else {
         _networkQuality = NetworkQuality.good;

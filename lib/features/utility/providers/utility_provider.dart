@@ -10,7 +10,6 @@
 /// ═══════════════════════════════════════════════════════════════════════════
 library;
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../models/utility_models.dart';
 import '../../prompt/models/rbac_models.dart';

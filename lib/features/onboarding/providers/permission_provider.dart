@@ -139,7 +139,7 @@ class PermissionProvider extends ChangeNotifier {
       case AppPermission.camera: return ph.Permission.camera;
       case AppPermission.microphone: return ph.Permission.microphone;
       case AppPermission.files: return ph.Permission.storage;
-      case AppPermission.calendar: return ph.Permission.calendarReadOnly;
+      case AppPermission.calendar: return ph.Permission.calendarFullAccess;
     }
   }
 

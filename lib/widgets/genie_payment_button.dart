@@ -62,7 +62,7 @@ class _GeniePaymentButtonState extends State<GeniePaymentButton> {
         metadata: widget.metadata,
       );
       setState(() => _result = 'Paid ${widget.amount} QP');
-      widget.onSuccess?.call(resp['transactionId'] as String);
+      widget.onSuccess?.call(resp.data?['transactionId'] as String? ?? '');
     } catch (e) {
       setState(() => _result = 'Payment failed');
       widget.onError?.call(e.toString());

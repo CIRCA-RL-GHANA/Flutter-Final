@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/routes/app_routes.dart';
 
-class LiveOperationsScreen extends ConsumerStatefulWidget {
+class LiveOperationsScreen extends StatefulWidget {
   const LiveOperationsScreen({super.key});
 
   @override
-  ConsumerState<LiveOperationsScreen> createState() =>
-      _LiveOperationsScreenState();
+  State<LiveOperationsScreen> createState() => _LiveOperationsScreenState();
 }
 
-class _LiveOperationsScreenState extends ConsumerState<LiveOperationsScreen> {
+class _LiveOperationsScreenState extends State<LiveOperationsScreen> {
   final liveEvents = [
     {
       'title': 'Flash Sale Live Now!',

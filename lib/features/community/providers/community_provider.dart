@@ -76,12 +76,8 @@ class CommunityProvider extends ChangeNotifier {
       );
       if (response.success && response.data != null) {
         final data = response.data!;
-        final items = (data['items'] as List? ?? [])
-            .map((e) => e as Map<String, dynamic>)
-            .toList();
-        _communities.addAll(items);
-        final total = data['total'] as int? ?? 0;
-        _discoverHasMore = _communities.length < total;
+        _communities.addAll(data);
+        _discoverHasMore = data.length >= 20;
         _discoverPage++;
       } else {
         _communities = _fallbackCommunities;

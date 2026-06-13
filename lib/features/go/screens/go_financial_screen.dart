@@ -1,24 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart' hide Consumer;
 import 'package:provider/provider.dart';
-import 'package:thepg/core/providers/service_providers.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/widgets/ai_price_widgets.dart';
 import '../../../core/widgets/ai_insight_card.dart';
 
-class GoFinancialScreen extends ConsumerStatefulWidget {
+class GoFinancialScreen extends StatefulWidget {
   const GoFinancialScreen({super.key});
 
   @override
-  ConsumerState<GoFinancialScreen> createState() => _GoFinancialScreenState();
+  State<GoFinancialScreen> createState() => _GoFinancialScreenState();
 }
 
-class _GoFinancialScreenState extends ConsumerState<GoFinancialScreen> {
+class _GoFinancialScreenState extends State<GoFinancialScreen> {
   @override
   Widget build(BuildContext context) {
-    ref.watch(ordersServiceProvider);
-    
     return Scaffold(
       appBar: AppBar(
         title: const Text('GO - Financial'),

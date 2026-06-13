@@ -1,17 +1,16 @@
 ﻿import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:thepg/core/providers/service_providers.dart';
+import 'package:provider/provider.dart';
+import '../../../core/services/ai_insights_notifier.dart';
 import '../widgets/market_widgets.dart';
 
-class MarketCommerceScreen extends ConsumerStatefulWidget {
-  const MarketCommerceScreen({Key? key}) : super(key: key);
+class MarketCommerceScreen extends StatefulWidget {
+  const MarketCommerceScreen({super.key});
 
   @override
-  ConsumerState<MarketCommerceScreen> createState() =>
-      _MarketCommerceScreenState();
+  State<MarketCommerceScreen> createState() => _MarketCommerceScreenState();
 }
 
-class _MarketCommerceScreenState extends ConsumerState<MarketCommerceScreen>
+class _MarketCommerceScreenState extends State<MarketCommerceScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   final searchController = TextEditingController();

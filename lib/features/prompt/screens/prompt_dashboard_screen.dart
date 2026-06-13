@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:thepg/core/providers/service_providers.dart';
+import 'package:provider/provider.dart';
 import 'package:thepg/core/routes/app_routes.dart';
+import '../../../core/services/chat_service.dart';
 
-class PromptDashboardScreen extends ConsumerStatefulWidget {
+class PromptDashboardScreen extends StatefulWidget {
   const PromptDashboardScreen({super.key});
 
   @override
-  ConsumerState<PromptDashboardScreen> createState() =>
-      _PromptDashboardScreenState();
+  State<PromptDashboardScreen> createState() => _PromptDashboardScreenState();
 }
 
-class _PromptDashboardScreenState extends ConsumerState<PromptDashboardScreen>
+class _PromptDashboardScreenState extends State<PromptDashboardScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
@@ -29,7 +28,7 @@ class _PromptDashboardScreenState extends ConsumerState<PromptDashboardScreen>
 
   @override
   Widget build(BuildContext context) {
-    final chatService = ref.watch(chatServiceProvider);
+    final chatService = Provider.of<ChatService>(context, listen: false);
     
     return Scaffold(
       appBar: AppBar(

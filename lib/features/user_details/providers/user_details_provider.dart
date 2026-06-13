@@ -5,7 +5,6 @@
 /// ═══════════════════════════════════════════════════════════════════════════
 library;
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../models/user_details_models.dart';
 import '../../prompt/models/rbac_models.dart';
