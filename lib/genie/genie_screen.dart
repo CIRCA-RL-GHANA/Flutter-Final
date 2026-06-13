@@ -39,6 +39,9 @@ class GenieScreen extends StatefulWidget {
 
 class _GenieScreenState extends State<GenieScreen>
     with SingleTickerProviderStateMixin {
+  static const String _sosMessage =
+      'Emergency alert has been sent. '
+      'Help is on the way.\n\nStay calm and keep this screen open.';
   late GenieController _controller;
   late TextEditingController _textCtrl;
   late ScrollController _scrollCtrl;
@@ -170,8 +173,7 @@ class _GenieScreenState extends State<GenieScreen>
           ],
         ),
         content: const Text(
-          'Emergency alert has been sent. '  
-          'Help is on the way.\n\nStay calm and keep this screen open.',
+          _sosMessage,
         ),
         actions: [
           TextButton(

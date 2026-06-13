@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:local_auth/local_auth.dart' as la;
 import '../../../core/services/user_service.dart';
 
 /// Biometric type enum
@@ -81,10 +82,30 @@ class BiometricProvider extends ChangeNotifier {
   }
 
   final UserService _userService = UserService();
+  final la.LocalAuthentication _localAuth = la.LocalAuthentication();
 
   // Track the userId to update biometric status
   String? _userId;
   void setUserId(String userId) => _userId = userId;
+
+  /// Detect available biometrics and set [_biometricType].
+  Future<void> detectAvailableBiometrics() async {
+    try {
+      final available = await _localAuth.getAvailableBiometrics();
+      if (available.contains(la.BiometricType.face)) {
+        _biometricType = BiometricType.faceId;
+      } else if (available.contains(la.BiometricType.fingerprint) ||
+                 available.contains(la.BiometricType.strong) ||
+                 available.contains(la.BiometricType.weak)) {
+        _biometricType = BiometricType.fingerprint;
+      } else {
+        _biometricType = BiometricType.none;
+      }
+    } catch (_) {
+      _biometricType = BiometricType.none;
+    }
+    notifyListeners();
+  }
 
   /// Setup biometrics
   Future<bool> setupBiometrics() async {
@@ -106,13 +127,29 @@ class BiometricProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      // Step 1: Request permission (local_auth)
-      await Future.delayed(const Duration(milliseconds: 500));
+      // Step 1: Check if biometrics are available
+      final bool canCheckBiometrics = await _localAuth.canCheckBiometrics;
+      final bool isDeviceSupported = await _localAuth.isDeviceSupported();
+      if (!canCheckBiometrics || !isDeviceSupported) {
+        _setupState = BiometricSetupState.failed;
+        _error = 'Biometric authentication is not available on this device.';
+        notifyListeners();
+        return false;
+      }
       _setupState = BiometricSetupState.enrolling;
       notifyListeners();
 
-      // Step 2: Capture biometric sample (local_auth)
-      await Future.delayed(const Duration(milliseconds: 500));
+      // Step 2: Capture biometric sample
+      final bool authenticated = await _localAuth.authenticate(
+        localizedReason: 'Please authenticate to enable biometric login',
+        options: const la.AuthenticationOptions(biometricOnly: true, stickyAuth: true),
+      );
+      if (!authenticated) {
+        _setupState = BiometricSetupState.failed;
+        _error = 'Biometric authentication failed. Please try again.';
+        notifyListeners();
+        return false;
+      }
       _setupState = BiometricSetupState.testing;
       notifyListeners();
 

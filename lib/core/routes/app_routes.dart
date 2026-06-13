@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../design/ive_text.dart';
 import '../design/ive_tokens.dart';
+import '../network/api_client.dart';
 import '../../features/onboarding/screens/screen_0_preloading.dart';
 import '../../features/onboarding/screens/screen_1_splash.dart';
 import '../../features/onboarding/screens/screen_2_welcome.dart';
@@ -452,6 +453,29 @@ class AppRoutes {
   static const String enterpriseConcierge = '/enterprise/concierge';
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
+    // Routes that do NOT require authentication
+    const publicRoutes = {
+      preLoading,
+      splash,
+      welcome,
+      platformOverview,
+      phoneInput,
+      otpVerification,
+      registration,
+      profilePhoto,
+      biometric,
+      roleSelection,
+      permissions,
+      success,
+      tutorial,
+      welcomeBack,
+      errorRecovery,
+    };
+
+    if (!publicRoutes.contains(settings.name) && !ApiClient.instance.isAuthenticated) {
+      return _buildRoute(const PreLoadingScreen(), settings);
+    }
+
     switch (settings.name) {
       case preLoading:
         return _buildRoute(const PreLoadingScreen(), settings);
@@ -464,7 +488,7 @@ class AppRoutes {
       case phoneInput:
         return _buildRoute(const PhoneInputScreen(), settings);
       case otpVerification:
-        final args = settings.arguments as Map<String, dynamic>?;
+        final args = settings.arguments is Map<String, dynamic> ? settings.arguments as Map<String, dynamic> : null;
         return _buildRoute(
           OtpVerificationScreen(
             phoneNumber: args?['phoneNumber'] ?? '',
@@ -489,7 +513,7 @@ class AppRoutes {
       case welcomeBack:
         return _buildRoute(const WelcomeBackScreen(), settings);
       case errorRecovery:
-        final args = settings.arguments as Map<String, dynamic>?;
+        final args = settings.arguments is Map<String, dynamic> ? settings.arguments as Map<String, dynamic> : null;
         return _buildRoute(
           ErrorRecoveryScreen(
             errorType: args?['errorType'] ?? ErrorType.network,
@@ -759,7 +783,7 @@ class AppRoutes {
       case qualChatOnboarding:
         return _buildRoute(const QualChatOnboardingScreen(), settings);
       case qualChatPremium:
-        final convId = settings.arguments as String?;
+        final convId = settings.arguments is String ? settings.arguments as String : null;
         return _buildRoute(QualChatPremiumScreen(conversationId: convId), settings);
 
       // APRIL Routes
@@ -788,17 +812,17 @@ class AppRoutes {
       case alertsFilter:
         return _buildRoute(const AlertsFilterScreen(), settings);
       case alertsDetail:
-        final alertId = (settings.arguments as String?) ?? '';
+        final alertId = (settings.arguments is String ? settings.arguments as String : null) ?? '';
         return _buildRoute(AlertsDetailScreen(alertId: alertId), settings);
       case alertsCompose:
         return _buildRoute(const AlertsComposerScreen(), settings);
       case alertsResolve:
-        final alertId = (settings.arguments as String?) ?? '';
+        final alertId = (settings.arguments is String ? settings.arguments as String : null) ?? '';
         return _buildRoute(AlertsResolutionScreen(alertId: alertId), settings);
       case alertsAnalytics:
         return _buildRoute(const AlertsAnalyticsScreen(), settings);
       case alertsKnowledge:
-        final alertId = settings.arguments as String?;
+        final alertId = settings.arguments is String ? settings.arguments as String : null;
         return _buildRoute(AlertsKnowledgeScreen(alertId: alertId), settings);
       case alertsBulk:
         return _buildRoute(const AlertsBulkScreen(), settings);
@@ -825,14 +849,14 @@ class AppRoutes {
       case goTabs:
         return _buildRoute(const GoTabsScreen(), settings);
       case goTabDetail:
-        final tabId = settings.arguments as String?;
+        final tabId = settings.arguments is String ? settings.arguments as String : null;
         return _buildRoute(GoTabDetailScreen(tabId: tabId), settings);
       case goRequests:
         return _buildRoute(const GoRequestsScreen(), settings);
       case goFavorites:
         return _buildRoute(const GoFavoritesScreen(), settings);
       case goFavoriteDetail:
-        final favId = settings.arguments as String?;
+        final favId = settings.arguments is String ? settings.arguments as String : null;
         return _buildRoute(GoFavoriteDetailScreen(favoriteId: favId), settings);
       case goBatch:
         return _buildRoute(const GoBatchScreen(), settings);
@@ -855,12 +879,12 @@ class AppRoutes {
       case eplayHub:
         return _buildRoute(const EPlayHubScreen(), settings);
       case eplayBrowse:
-        final args = settings.arguments as Map<String, dynamic>?;
+        final args = settings.arguments is Map<String, dynamic> ? settings.arguments as Map<String, dynamic> : null;
         return _buildRoute(EPlayBrowseScreen(initialType: args?['type'] as String?), settings);
       case eplayDetail:
-        return _buildRoute(EPlayAssetDetailScreen(asset: settings.arguments as Map<String, dynamic>?), settings);
+        return _buildRoute(EPlayAssetDetailScreen(asset: settings.arguments is Map<String, dynamic> ? settings.arguments as Map<String, dynamic> : null), settings);
       case eplayPlayer:
-        return _buildRoute(EPlayPlayerScreen(asset: settings.arguments as Map<String, dynamic>?), settings);
+        return _buildRoute(EPlayPlayerScreen(asset: settings.arguments is Map<String, dynamic> ? settings.arguments as Map<String, dynamic> : null), settings);
       case eplayLocker:
         return _buildRoute(const EPlayLockerScreen(), settings);
       case eplayCreatorStudio:
@@ -870,14 +894,14 @@ class AppRoutes {
       case communityHub:
         return _buildRoute(const CommunityHubScreen(), settings);
       case communityCreate:
-        final args = settings.arguments as Map<String, dynamic>?;
+        final args = settings.arguments is Map<String, dynamic> ? settings.arguments as Map<String, dynamic> : null;
         return _buildRoute(CommunityCreateScreen(initialType: args?['type'] as String?), settings);
       case communityMine:
         return _buildRoute(const CommunityHubScreen(), settings); // stub: reuse hub filtered
       case communityDetail:
-        return _buildRoute(CommunityDetailScreen(community: settings.arguments as Map<String, dynamic>?), settings);
+        return _buildRoute(CommunityDetailScreen(community: settings.arguments is Map<String, dynamic> ? settings.arguments as Map<String, dynamic> : null), settings);
       case communityMembers:
-        return _buildRoute(CommunityMembersScreen(community: settings.arguments as Map<String, dynamic>?), settings);
+        return _buildRoute(CommunityMembersScreen(community: settings.arguments is Map<String, dynamic> ? settings.arguments as Map<String, dynamic> : null), settings);
 
       // Fintech Module
       case fintechLoans:
@@ -885,7 +909,7 @@ class AppRoutes {
       case fintechLoanRepayment:
         return _buildRoute(
           LoanRepaymentScreen(
-            loan: (settings.arguments as Map<String, dynamic>?) ?? const <String, dynamic>{},
+            loan: (settings.arguments is Map<String, dynamic> ? settings.arguments as Map<String, dynamic> : null) ?? const <String, dynamic>{},
           ),
           settings,
         );
@@ -902,11 +926,11 @@ class AppRoutes {
       case enterpriseOnboarding:
         return _buildRoute(const EnterpriseOnboardingScreen(), settings);
       case enterpriseDashboard: {
-        final entityId = (settings.arguments as String?) ?? 'default';
+        final entityId = (settings.arguments is String ? settings.arguments as String : null) ?? 'default';
         return _buildRoute(EnterpriseDashboardScreen(entityId: entityId), settings);
       }
       case enterpriseConcierge: {
-        final entityId = (settings.arguments as String?) ?? 'default';
+        final entityId = (settings.arguments is String ? settings.arguments as String : null) ?? 'default';
         return _buildRoute(ConciergeEmbedScreen(entityId: entityId), settings);
       }
 

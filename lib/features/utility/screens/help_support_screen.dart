@@ -7,6 +7,7 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../models/utility_models.dart';
@@ -181,7 +182,20 @@ class _ContactCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => HapticFeedback.selectionClick(),
+      onTap: () async {
+        HapticFeedback.selectionClick();
+        switch (option.action) {
+          case 'email':
+            await launchUrl(Uri.parse('mailto:support@geniehelp.app'));
+            break;
+          case 'chat':
+            await launchUrl(Uri.parse('https://wa.me/15551234567'));
+            break;
+          case 'forum':
+            await launchUrl(Uri.parse('https://community.geniehelp.app'));
+            break;
+        }
+      },
       child: Container(
         width: 140,
         padding: const EdgeInsets.all(12),

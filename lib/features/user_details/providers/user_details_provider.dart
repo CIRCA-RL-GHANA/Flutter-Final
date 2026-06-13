@@ -5,6 +5,7 @@
 /// ═══════════════════════════════════════════════════════════════════════════
 library;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../models/user_details_models.dart';
 import '../../prompt/models/rbac_models.dart';
@@ -16,18 +17,14 @@ class UserDetailsProvider extends ChangeNotifier {
   final ProfileService _profileService;
   final AuthService _authService;
   final EntityService _entityService;
-  // ignore: unused_field
-  final UserService _userService;
 
   UserDetailsProvider({
     ProfileService? profileService,
     AuthService? authService,
     EntityService? entityService,
-    UserService? userService,
   })  : _profileService = profileService ?? ProfileService(),
         _authService = authService ?? AuthService(),
-        _entityService = entityService ?? EntityService(),
-        _userService = userService ?? UserService();
+        _entityService = entityService ?? EntityService();
 
   // ─── Loading / Error State ──────────────────────────────────────────────
   bool _isLoading = false;
@@ -274,8 +271,8 @@ class UserDetailsProvider extends ChangeNotifier {
 
       debugPrint('UserDetailsProvider: field update persisted');
     } catch (e) {
-      debugPrint('UserDetailsProvider: failed to persist field update: $e');
-      // Local state is already updated – user can retry later
+      debugPrint('[UserDetails] Failed to persist field update: $e');
+      // Local state is already updated — user can retry later
     }
   }
 

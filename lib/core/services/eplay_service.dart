@@ -84,7 +84,7 @@ class EPlayService {
         if (coverUrl != null) 'coverUrl': coverUrl,
         if (durationSeconds != null) 'durationSeconds': durationSeconds,
         if (rentalDurationDays != null) 'rentalDurationDays': rentalDurationDays,
-        if (tags != null) 'tags': tags.join(','),
+        if (tags != null) 'tags': tags,
         if (allowedRegions != null) 'allowedRegions': allowedRegions,
       },
       fromJson: (json) => json as Map<String, dynamic>,

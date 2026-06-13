@@ -134,7 +134,8 @@ class PaginatedResponse<T> {
     Map<String, dynamic> json,
     T Function(dynamic json) fromJsonT,
   ) {
-    final rawItems = json['items'] as List<dynamic>? ?? [];
+    // Support multiple backend key conventions
+    final rawItems = (json['items'] ?? json['data'] ?? json['results'] ?? json['records']) as List<dynamic>? ?? [];
     return PaginatedResponse<T>(
       items: rawItems.map((item) => fromJsonT(item)).toList(),
       total: json['total'] as int? ?? 0,

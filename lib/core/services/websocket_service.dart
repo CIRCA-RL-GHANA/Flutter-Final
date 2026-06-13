@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'package:socket_io_client/socket_io_client.dart' as io;
 import 'package:flutter/foundation.dart';
+import '../network/api_client.dart';
 
 class ChatMessage {
   final String id;
@@ -73,6 +74,7 @@ class WebSocketService extends ChangeNotifier {
   int _reconnectAttempts = 0;
   static const _maxReconnectAttempts = 10;
   bool _isDisposed = false;
+  bool _permanentlyDisconnected = false;
 
   factory WebSocketService() => _instance;
   
@@ -81,6 +83,13 @@ class WebSocketService extends ChangeNotifier {
   Stream<ChatMessage> get messages => _messageController.stream;
   Stream<TypingIndicator> get typing => _typingController.stream;
   Stream<bool> get connectionStatus => _connectionController.stream;
+
+  /// Resets the permanent-disconnect flag so the service can reconnect.
+  /// Call this when the user manually triggers a reconnect after max attempts.
+  void resetReconnect() {
+    _permanentlyDisconnected = false;
+    _reconnectAttempts = 0;
+  }
 
   bool get isConnected => _socket?.connected ?? false;
 
@@ -124,6 +133,8 @@ class WebSocketService extends ChangeNotifier {
     final s = _socket!;
     s.onConnect((_) {
       debugPrint('[WebSocket] Connected');
+      _reconnectTimer?.cancel();
+      _reconnectTimer = null;
       _reconnectAttempts = 0;
       _connectionController.add(true);
       notifyListeners();
@@ -255,21 +266,27 @@ class WebSocketService extends ChangeNotifier {
 
   /// Schedule reconnection
   void _scheduleReconnect(String baseUrl) {
+    if (_permanentlyDisconnected) return;
     if (_reconnectAttempts >= _maxReconnectAttempts) {
-      debugPrint('[WebSocket] Max reconnect attempts reached');
+      debugPrint('[WebSocket] Max reconnect attempts reached — permanently disconnecting');
+      _permanentlyDisconnected = true;
+      // Signal the app to re-authenticate; emit false so UI can react.
+      _connectionController.add(false);
       return;
     }
 
     _reconnectTimer?.cancel();
     _reconnectAttempts++;
-    
+
     final delaySeconds = (1000 * pow(1.5, _reconnectAttempts - 1)).toInt();
     debugPrint('[WebSocket] Reconnecting in ${delaySeconds}ms (attempt $_reconnectAttempts)');
 
     _reconnectTimer = Timer(Duration(milliseconds: delaySeconds), () {
       if (_currentToken != null && _currentUserId != null && baseUrl.isNotEmpty) {
+        final freshToken = ApiClient.instance.cachedToken ?? _currentToken!;
+        _currentToken = freshToken;
         connect(
-          token: _currentToken!,
+          token: freshToken,
           userId: _currentUserId!,
           baseUrl: baseUrl,
         );
@@ -280,8 +297,20 @@ class WebSocketService extends ChangeNotifier {
   /// Disconnect
   void disconnect() {
     _reconnectTimer?.cancel();
+    _reconnectTimer = null;
     _socket?.disconnect();
+    _socket?.dispose();
     _socket = null;
+  }
+
+  /// Disconnect and prevent any auto-reconnect. Call this on user logout.
+  /// Wire this up from the auth logout flow.
+  void disconnectForLogout() {
+    _permanentlyDisconnected = true;
+    _reconnectAttempts = _maxReconnectAttempts;
+    _currentToken = null;
+    _currentUserId = null;
+    disconnect();
   }
 
   /// Dispose
@@ -289,10 +318,12 @@ class WebSocketService extends ChangeNotifier {
   void dispose() {
     if (_isDisposed) return;
     _isDisposed = true;
-    disconnect();
     _messageController.close();
     _typingController.close();
     _connectionController.close();
+    _socket?.dispose();
+    _socket = null;
+    _reconnectTimer?.cancel();
     super.dispose();
   }
 }

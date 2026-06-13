@@ -247,7 +247,7 @@ class EnterpriseService {
 
   // ─── Pathway 1: QP Charge ─────────────────────────────────────────────────
 
-  Future<Map<String, dynamic>> chargeQp({
+  Future<ApiResponse<Map<String, dynamic>>> chargeQp({
     required String customerId,
     required String merchantEntityId,
     required double amount,
@@ -255,7 +255,7 @@ class EnterpriseService {
     Map<String, dynamic>? metadata,
   }) async {
     final resp = await _api.post<Map<String, dynamic>>(
-      '/api/v1/payments/qp/charge',
+      ApiRoutes.payments.qpCharge,
       data: {
         'customerId': customerId,
         'merchantEntityId': merchantEntityId,
@@ -265,15 +265,17 @@ class EnterpriseService {
       },
       fromJson: (json) => json as Map<String, dynamic>,
     );
-    if (resp.data == null) throw Exception(resp.message ?? 'QP charge failed');
-    return resp.data!;
+    if (resp.data == null) {
+      return ApiResponse.failure(ApiError(code: 'CHARGE_FAILED', message: resp.message ?? 'QP charge failed'));
+    }
+    return resp;
   }
 
   // ─── Pathway 5: Facilitator Institutions ─────────────────────────────────
 
   Future<ApiResponse<Map<String, dynamic>>> getInstitutionBalance(String entityId) async {
     return _api.get<Map<String, dynamic>>(
-      '/api/v1/facilitator/institutions/$entityId/balance',
+      ApiRoutes.facilitator.institutionBalance(entityId),
       fromJson: (json) => json as Map<String, dynamic>,
     );
   }
@@ -284,7 +286,7 @@ class EnterpriseService {
     String? reason,
   }) async {
     return _api.post<Map<String, dynamic>>(
-      '/api/v1/facilitator/institutions/issue',
+      ApiRoutes.facilitator.issueQp,
       data: {'entityId': entityId, 'amount': amount, if (reason != null) 'reason': reason},
       fromJson: (json) => json as Map<String, dynamic>,
     );
@@ -297,7 +299,7 @@ class EnterpriseService {
     String? reference,
   }) async {
     return _api.post<Map<String, dynamic>>(
-      '/api/v1/qpoints/settlement/initiate',
+      ApiRoutes.qpointSettlement.initiate,
       data: {
         'fromEntityId': fromEntityId,
         'toEntityId': toEntityId,
@@ -316,7 +318,7 @@ class EnterpriseService {
     required List<String> events,
   }) async {
     return _api.post<Map<String, dynamic>>(
-      '/api/v1/webhooks/subscriptions',
+      ApiRoutes.webhooks.subscriptions,
       data: {'entityId': entityId, 'url': url, 'events': events},
       fromJson: (json) => json as Map<String, dynamic>,
     );
@@ -325,7 +327,7 @@ class EnterpriseService {
   Future<ApiResponse<List<Map<String, dynamic>>>> listWebhookSubscriptions(
       String entityId) async {
     return _api.get<List<Map<String, dynamic>>>(
-      '/api/v1/webhooks/subscriptions/$entityId',
+      ApiRoutes.webhooks.subscriptionsByEntity(entityId),
       fromJson: (json) =>
           (json as List).map((e) => e as Map<String, dynamic>).toList(),
     );
@@ -337,9 +339,9 @@ class EnterpriseService {
     String entityId, {
     String? branchId,
   }) async {
-    final query = branchId != null ? '?branchId=$branchId' : '';
     return _api.get<Map<String, dynamic>>(
-      '/api/v1/enterprise/analytics/$entityId$query',
+      ApiRoutes.enterprise.analytics(entityId),
+      queryParameters: {if (branchId != null) 'branchId': branchId},
       fromJson: (json) => json as Map<String, dynamic>,
     );
   }
@@ -347,7 +349,7 @@ class EnterpriseService {
   Future<ApiResponse<List<Map<String, dynamic>>>> getBranchSummaries(
       String entityId) async {
     return _api.get<List<Map<String, dynamic>>>(
-      '/api/v1/enterprise/analytics/$entityId/branches',
+      ApiRoutes.enterprise.analyticsBranches(entityId),
       fromJson: (json) =>
           (json as List).map((e) => e as Map<String, dynamic>).toList(),
     );
@@ -357,9 +359,9 @@ class EnterpriseService {
     String entityId, {
     String? month,
   }) async {
-    final query = month != null ? '?month=$month' : '';
     return _api.get<Map<String, dynamic>>(
-      '/api/v1/enterprise/analytics/$entityId/fees$query',
+      ApiRoutes.enterprise.analyticsFees(entityId),
+      queryParameters: {if (month != null) 'month': month},
       fromJson: (json) => json as Map<String, dynamic>,
     );
   }
@@ -369,7 +371,7 @@ class EnterpriseService {
   Future<ApiResponse<List<Map<String, dynamic>>>> bulkCreateProducts(
       List<Map<String, dynamic>> products) async {
     return _api.post<List<Map<String, dynamic>>>(
-      '/api/v1/products/bulk',
+      ApiRoutes.enterprise.bulkProducts,
       data: {'products': products},
       fromJson: (json) =>
           (json as List).map((e) => e as Map<String, dynamic>).toList(),
@@ -379,7 +381,7 @@ class EnterpriseService {
   Future<ApiResponse<Map<String, dynamic>>> bulkUpdateStock(
       List<Map<String, dynamic>> updates) async {
     return _api.patch<Map<String, dynamic>>(
-      '/api/v1/products/bulk/stock',
+      ApiRoutes.enterprise.bulkStock,
       data: {'updates': updates},
       fromJson: (json) => json as Map<String, dynamic>,
     );
@@ -393,14 +395,13 @@ class EnterpriseService {
     int? limit,
     int? offset,
   }) async {
-    final params = <String, String>{};
-    if (status != null) params['status'] = status;
-    if (limit != null) params['limit'] = '$limit';
-    if (offset != null) params['offset'] = '$offset';
-    final query =
-        params.isNotEmpty ? '?${params.entries.map((e) => '${e.key}=${e.value}').join('&')}' : '';
     return _api.get<Map<String, dynamic>>(
-      '/api/v1/orders/branch/$branchId$query',
+      ApiRoutes.enterprise.ordersByBranch(branchId),
+      queryParameters: {
+        if (status != null) 'status': status,
+        if (limit != null) 'limit': '$limit',
+        if (offset != null) 'offset': '$offset',
+      },
       fromJson: (json) => json as Map<String, dynamic>,
     );
   }
@@ -408,7 +409,7 @@ class EnterpriseService {
   Future<ApiResponse<Map<String, dynamic>>> bulkUpdateOrderStatus(
       List<Map<String, dynamic>> updates) async {
     return _api.patch<Map<String, dynamic>>(
-      '/api/v1/orders/bulk/status',
+      ApiRoutes.enterprise.bulkOrderStatus,
       data: {'updates': updates},
       fromJson: (json) => json as Map<String, dynamic>,
     );

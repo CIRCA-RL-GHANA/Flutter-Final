@@ -396,10 +396,10 @@ class ProductService {
     required List<Map<String, dynamic>> products,
     int topN = 20,
   }) {
-    final documents = products.map((p) => {
-      'id': p['id'] ?? '',
-      'text': '${p['name'] ?? ''} ${p['description'] ?? ''} ${p['category'] ?? ''}',
-    }).toList();
+    final documents = products.whereType<Map<String, dynamic>>().map((p) => {
+      'id': (p['id'] ?? '').toString(),
+      'text': '${p['name'] ?? ''} ${p['description'] ?? ''} ${p['category'] ?? ''}'.trim(),
+    }).where((doc) => (doc['text'] as String).isNotEmpty).toList();
     return _aiService.searchDocuments(
       query: query,
       documents: documents,

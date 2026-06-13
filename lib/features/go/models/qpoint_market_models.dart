@@ -2,6 +2,8 @@
 /// These map to the backend entities and API response shapes.
 library;
 
+import 'package:flutter/foundation.dart';
+
 // ────────────────────────────────────────────
 // Enums
 // ────────────────────────────────────────────
@@ -12,15 +14,31 @@ enum QPointOrderStatus { open, filled, cancelled, expired }
 
 extension QPointOrderTypeX on QPointOrderType {
   String get value => name; // 'buy' | 'sell'
-  static QPointOrderType fromString(String s) =>
-      QPointOrderType.values.firstWhere((e) => e.name == s,
-          orElse: () => QPointOrderType.buy);
+  static QPointOrderType fromString(String s) {
+    return QPointOrderType.values.firstWhere(
+      (e) => e.name.toLowerCase() == s.toLowerCase(),
+      orElse: () {
+        // Unknown value from backend — assert in debug, fall back to buy in release
+        assert(false, 'Unknown QPointOrderType: $s');
+        debugPrint('[EnumParse] Unknown value: $s for QPointOrderType');
+        return QPointOrderType.buy;
+      },
+    );
+  }
 }
 
 extension QPointOrderStatusX on QPointOrderStatus {
-  static QPointOrderStatus fromString(String s) =>
-      QPointOrderStatus.values.firstWhere((e) => e.name == s,
-          orElse: () => QPointOrderStatus.open);
+  static QPointOrderStatus fromString(String s) {
+    return QPointOrderStatus.values.firstWhere(
+      (e) => e.name.toLowerCase() == s.toLowerCase(),
+      orElse: () {
+        // Unknown value from backend — assert in debug, fall back to open in release
+        assert(false, 'Unknown QPointOrderStatus: $s');
+        debugPrint('[EnumParse] Unknown value: $s for QPointOrderStatus');
+        return QPointOrderStatus.open;
+      },
+    );
+  }
 }
 
 // ────────────────────────────────────────────

@@ -134,6 +134,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
   void _handlePaste(String? value) {
     if (value == null || value.length < 6) return;
     final digits = value.replaceAll(RegExp(r'\D'), '');
+    if (digits.length != 6) return; // reject if not exactly 6 digits
     for (int i = 0; i < 6 && i < digits.length; i++) {
       _otpControllers[i].text = digits[i];
     }

@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import '../../../core/services/user_service.dart';
 
@@ -155,6 +156,14 @@ class PhoneAuthProvider extends ChangeNotifier {
       notifyListeners();
       return false;
     } catch (e) {
+      // Server-side rate limiting is enforced by the backend — this is UX-only
+      // Check if this looks like a rate-limit response
+      if (e is DioException && e.response?.statusCode == 429) {
+        _error = 'Too many attempts. Please wait before trying again.';
+        _otpState = OtpState.error;
+        notifyListeners();
+        return false;
+      }
       _otpAttemptsRemaining--;
       if (_otpAttemptsRemaining <= 0) {
         _error = 'Too many failed attempts. Please request a new code.';

@@ -49,8 +49,9 @@ class AIInsightsNotifier extends ChangeNotifier {
       if (resp.isSuccess && resp.data != null) {
         _insights = resp.data!;
       }
-    } catch (e) {
+    } catch (e, st) {
       _error = e.toString();
+      debugPrint('[AIInsights] loadPlannerInsights failed: $e\n$st');
     } finally {
       _loadingInsights = false;
       notifyListeners();
@@ -61,7 +62,9 @@ class AIInsightsNotifier extends ChangeNotifier {
     try {
       final resp = await _aiService.getPlannerSpending();
       if (resp.isSuccess) _spendingPattern = resp.data;
-    } catch (_) {}
+    } catch (e, st) {
+      debugPrint('[AIInsights] loadSpendingPattern failed: $e\n$st');
+    }
     notifyListeners();
   }
 
@@ -69,7 +72,9 @@ class AIInsightsNotifier extends ChangeNotifier {
     try {
       final resp = await _aiService.getPlannerForecast();
       if (resp.isSuccess) _forecast = resp.data;
-    } catch (_) {}
+    } catch (e, st) {
+      debugPrint('[AIInsights] loadForecast failed: $e\n$st');
+    }
     notifyListeners();
   }
 
@@ -92,7 +97,9 @@ class AIInsightsNotifier extends ChangeNotifier {
         _recommendations = resp.data!;
         notifyListeners();
       }
-    } catch (_) {}
+    } catch (e, st) {
+      debugPrint('[AIInsights] loadRecommendations failed: $e\n$st');
+    }
   }
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -117,8 +124,9 @@ class AIInsightsNotifier extends ChangeNotifier {
         topN:      topN,
       );
       _searchResults = resp.isSuccess ? (resp.data ?? []) : [];
-    } catch (e) {
+    } catch (e, st) {
       _error = e.toString();
+      debugPrint('[AIInsights] smartSearch failed: $e\n$st');
     } finally {
       _loadingSearch = false;
       notifyListeners();

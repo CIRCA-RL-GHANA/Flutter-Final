@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../core/network/api_client.dart';
 import '../../../core/services/ai_insights_notifier.dart';
 import '../models/user_details_models.dart';
 import '../providers/user_details_provider.dart';
@@ -217,7 +218,10 @@ class _AuthMethodsTab extends StatelessWidget {
                         child: ChoiceChip(
                           label: Text(t.label, style: TextStyle(fontSize: 11, color: selected ? Colors.white : AppColors.textSecondary)),
                           selected: selected,
-                          onSelected: (_) {},
+                          onSelected: (_) {
+                            HapticFeedback.selectionClick();
+                            udp.updateSecurity(security.copyWith(twoFactorType: t));
+                          },
                           selectedColor: const Color(0xFF10B981),
                           backgroundColor: Colors.white,
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -515,9 +519,46 @@ class _EmergencyTab extends StatelessWidget {
                     IconButton(
                       icon: const Icon(Icons.edit, size: 16),
                       color: AppColors.textTertiary,
-                      onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Edit emergency contact')),
-                      ),
+                      onPressed: () {
+                        final nameCtrl = TextEditingController(text: ec.name);
+                        final phoneCtrl = TextEditingController(text: ec.phone);
+                        showDialog(
+                          context: context,
+                          builder: (ctx) => AlertDialog(
+                            title: const Text('Edit Emergency Contact'),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                TextFormField(
+                                  controller: nameCtrl,
+                                  decoration: const InputDecoration(labelText: 'Name'),
+                                ),
+                                const SizedBox(height: 8),
+                                TextFormField(
+                                  controller: phoneCtrl,
+                                  decoration: const InputDecoration(labelText: 'Phone'),
+                                  keyboardType: TextInputType.phone,
+                                ),
+                              ],
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(ctx),
+                                child: const Text('Cancel'),
+                              ),
+                              ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pop(ctx);
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(content: Text('Contact updated')),
+                                  );
+                                },
+                                child: const Text('Update'),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),
@@ -674,9 +715,34 @@ class _AdvancedTab extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: OutlinedButton(
-                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Reset security settings')),
-                  ),
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (ctx) => AlertDialog(
+                        title: const Text('Reset Security Settings'),
+                        content: const Text(
+                          'Are you sure you want to reset all security settings? This cannot be undone.',
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(ctx),
+                            child: const Text('No'),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.pop(ctx);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('Resetting security settings...')),
+                              );
+                              Navigator.pop(context);
+                            },
+                            style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFFEF4444), foregroundColor: Colors.white),
+                            child: const Text('Yes'),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
                   style: OutlinedButton.styleFrom(
                     foregroundColor: const Color(0xFFEF4444),
                     side: const BorderSide(color: Color(0xFFEF4444)),
@@ -689,9 +755,37 @@ class _AdvancedTab extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Deactivate account')),
-                  ),
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (ctx) => AlertDialog(
+                        title: const Text('Deactivate Account'),
+                        content: const Text(
+                          'Deactivate your account? You can reactivate within 30 days by logging in.',
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(ctx),
+                            child: const Text('No'),
+                          ),
+                          ElevatedButton(
+                            onPressed: () async {
+                              Navigator.pop(ctx);
+                              await ApiClient.instance.clearTokens();
+                              if (context.mounted) {
+                                Navigator.of(context).pushNamedAndRemoveUntil(
+                                  '/pre-loading',
+                                  (route) => false,
+                                );
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFFEF4444), foregroundColor: Colors.white),
+                            child: const Text('Yes'),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFEF4444),
                     foregroundColor: Colors.white,

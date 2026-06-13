@@ -1,3 +1,5 @@
+// DEPRECATED: Use OrdersService (orders_service.dart) instead.
+// This file exists for legacy compatibility only.
 import '../network/api_client.dart';
 import '../network/api_response.dart';
 import '../constants/api_routes.dart';
@@ -6,6 +8,7 @@ import 'ai_service.dart';
 /// Service for order management and fulfillment.
 /// Maps to backend OrdersController.
 /// Extends basic order CRUD with AI-powered fraud detection and analytics.
+@Deprecated('Use OrdersService from orders_service.dart instead')
 class OrderService {
   final ApiClient _api;
   final AIService _aiService;

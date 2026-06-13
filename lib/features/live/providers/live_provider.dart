@@ -18,9 +18,6 @@ class LiveProvider extends ChangeNotifier {
 
   final OrderService _orderService = OrderService();
   final RideService _rideService = RideService();
-  // ignore: unused_field
-  final VehicleService _vehicleService = VehicleService();
-
   // ═══════════════════════════════════════════════════════════════════════════
   // LOADING / ERROR STATE
   // ═══════════════════════════════════════════════════════════════════════════
@@ -174,6 +171,8 @@ class LiveProvider extends ChangeNotifier {
 
   /// Assign a driver to an order via API.
   Future<void> assignDriver(String orderId, String driverId) async {
+    _isLoading = true;
+    notifyListeners();
     try {
       final response = await _orderService.updateOrderStatus(
         id: orderId,
@@ -185,7 +184,9 @@ class LiveProvider extends ChangeNotifier {
       } else {
         _error = response.message ?? 'Failed to assign driver';
       }
+      _isLoading = false;
     } catch (e) {
+      _isLoading = false;
       debugPrint('LiveProvider.assignDriver error: $e');
       _error = 'Failed to assign driver';
     }
@@ -204,6 +205,8 @@ class LiveProvider extends ChangeNotifier {
 
   /// Cancel an order via API.
   Future<void> cancelOrder(String orderId) async {
+    _isLoading = true;
+    notifyListeners();
     try {
       final response = await _orderService.updateOrderStatus(
         id: orderId,
@@ -214,7 +217,9 @@ class LiveProvider extends ChangeNotifier {
       } else {
         _error = response.message ?? 'Failed to cancel order';
       }
+      _isLoading = false;
     } catch (e) {
+      _isLoading = false;
       debugPrint('LiveProvider.cancelOrder error: $e');
       _error = 'Failed to cancel order';
     }
@@ -378,6 +383,8 @@ class LiveProvider extends ChangeNotifier {
 
   /// Approve a return via API.
   Future<void> approveReturn(String id) async {
+    _isLoading = true;
+    notifyListeners();
     try {
       final ret = _returns.firstWhere((r) => r.id == id);
       final response = await _orderService.createReturnRequest(
@@ -390,7 +397,9 @@ class LiveProvider extends ChangeNotifier {
       } else {
         _error = response.message ?? 'Failed to approve return';
       }
+      _isLoading = false;
     } catch (e) {
+      _isLoading = false;
       debugPrint('LiveProvider.approveReturn error: $e');
       _error = 'Failed to approve return';
     }
@@ -399,6 +408,8 @@ class LiveProvider extends ChangeNotifier {
 
   /// Reject a return via API.
   Future<void> rejectReturn(String id, RejectionReason reason, String notes) async {
+    _isLoading = true;
+    notifyListeners();
     try {
       final ret = _returns.firstWhere((r) => r.id == id);
       final response = await _orderService.createReturnRequest(
@@ -411,7 +422,9 @@ class LiveProvider extends ChangeNotifier {
       } else {
         _error = response.message ?? 'Failed to reject return';
       }
+      _isLoading = false;
     } catch (e) {
+      _isLoading = false;
       debugPrint('LiveProvider.rejectReturn error: $e');
       _error = 'Failed to reject return';
     }
@@ -768,13 +781,6 @@ class LiveProvider extends ChangeNotifier {
     if (value is int) return value;
     if (value is double) return value.toInt();
     return int.tryParse(value.toString()) ?? fallback;
-  }
-
-  // ignore: unused_element
-  List<String> _toStringList(dynamic value) {
-    if (value == null) return [];
-    if (value is List) return value.map((e) => e.toString()).toList();
-    return [];
   }
 
   DateTime? _parseDateTime(dynamic value) {

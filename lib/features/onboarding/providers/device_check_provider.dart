@@ -1,4 +1,9 @@
+import 'dart:io';
 import 'package:flutter/foundation.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:device_info_plus/device_info_plus.dart';
+import 'package:local_auth/local_auth.dart' as la;
 
 /// Network connectivity quality states
 enum NetworkQuality { excellent, good, poor, offline }
@@ -85,34 +90,71 @@ class DeviceCheckProvider extends ChangeNotifier {
   }
 
   Future<void> _checkNetwork() async {
-    await Future.delayed(const Duration(milliseconds: 300));
-    // In production: Use connectivity_plus to check real network
-    // Simulating a good connection for now
-    _networkQuality = NetworkQuality.good;
+    try {
+      final result = await Connectivity().checkConnectivity();
+      if (result == ConnectivityResult.none) {
+        _networkQuality = NetworkQuality.offline;
+      } else if (result == ConnectivityResult.wifi || result == ConnectivityResult.ethernet) {
+        _networkQuality = NetworkQuality.excellent;
+      } else {
+        _networkQuality = NetworkQuality.good;
+      }
+    } catch (_) {
+      _networkQuality = NetworkQuality.offline;
+    }
     _progress += 0.25;
     notifyListeners();
   }
 
   Future<void> _checkStorage() async {
-    await Future.delayed(const Duration(milliseconds: 200));
-    // In production: Use path_provider to check available storage
-    _hasEnoughStorage = true;
+    try {
+      final dir = await getApplicationDocumentsDirectory();
+      final stat = dir.statSync();
+      // Check if directory is accessible (proxy for storage availability)
+      _hasEnoughStorage = stat.type != FileSystemEntityType.notFound;
+    } catch (_) {
+      _hasEnoughStorage = true; // Allow on error
+    }
     _progress += 0.25;
     notifyListeners();
   }
 
   Future<void> _checkOsCompatibility() async {
-    await Future.delayed(const Duration(milliseconds: 250));
-    // In production: Use device_info_plus to check OS version
-    _isOsCompatible = true;
+    try {
+      final deviceInfo = DeviceInfoPlugin();
+      if (Platform.isAndroid) {
+        final info = await deviceInfo.androidInfo;
+        _isOsCompatible = info.version.sdkInt >= 21; // Android 5.0+
+      } else if (Platform.isIOS) {
+        final info = await deviceInfo.iosInfo;
+        final version = double.tryParse(info.systemVersion.split('.').first) ?? 0;
+        _isOsCompatible = version >= 13.0;
+      } else {
+        _isOsCompatible = true;
+      }
+    } catch (_) {
+      _isOsCompatible = true;
+    }
     _progress += 0.25;
     notifyListeners();
   }
 
   Future<void> _detectBiometrics() async {
-    await Future.delayed(const Duration(milliseconds: 350));
-    // In production: Use local_auth to detect biometric capability
-    _biometricCapability = BiometricCapability.fingerprint;
+    try {
+      final localAuth = la.LocalAuthentication();
+      final available = await localAuth.getAvailableBiometrics();
+      if (available.contains(la.BiometricType.face)) {
+        _biometricCapability = BiometricCapability.faceId;
+      } else if (available.contains(la.BiometricType.fingerprint) ||
+                 available.contains(la.BiometricType.strong) ||
+                 available.contains(la.BiometricType.weak)) {
+        _biometricCapability = BiometricCapability.fingerprint;
+      } else {
+        _biometricCapability = BiometricCapability.none;
+      }
+    } catch (_) {
+      _biometricCapability = BiometricCapability.none;
+    }
     _progress += 0.25;
     notifyListeners();
   }

@@ -166,6 +166,9 @@ class MarketProvider extends ChangeNotifier {
 
   List<MarketProduct> get products => _products;
 
+  List<MarketProduct> _searchResults = [];
+  List<MarketProduct> get searchResults => _searchResults;
+
   List<MarketProduct> getProductsForMerchant(String merchantId) =>
       _products.where((p) => p.merchantId == merchantId).toList();
 
@@ -219,12 +222,18 @@ class MarketProvider extends ChangeNotifier {
 
   /// Search products via API.
   Future<List<MarketProduct>> searchProducts(String query) async {
-    if (query.trim().isEmpty) return _products;
+    if (query.trim().isEmpty) {
+      _searchResults = _products;
+      notifyListeners();
+      return _products;
+    }
 
     try {
       final response = await _productService.searchProducts(query);
       if (response.success && response.data != null) {
-        return response.data!.map(_productFromJson).toList();
+        _searchResults = response.data!.map(_productFromJson).toList();
+        notifyListeners();
+        return _searchResults;
       }
     } catch (e) {
       debugPrint('MarketProvider.searchProducts error: $e');
@@ -232,7 +241,9 @@ class MarketProvider extends ChangeNotifier {
 
     // Fallback: filter local products by name
     final lowerQuery = query.toLowerCase();
-    return _products.where((p) => p.name.toLowerCase().contains(lowerQuery)).toList();
+    _searchResults = _products.where((p) => p.name.toLowerCase().contains(lowerQuery)).toList();
+    notifyListeners();
+    return _searchResults;
   }
 
   // ═══════════════════════════════════════════════════════════════════════════

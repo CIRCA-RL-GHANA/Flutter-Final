@@ -166,7 +166,44 @@ class NotificationSettingsScreen extends StatelessWidget {
                         SizedBox(
                           width: double.infinity,
                           child: OutlinedButton.icon(
-                              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Add new smart rule'))),
+                            onPressed: () {
+                              final nameCtrl = TextEditingController();
+                              showDialog(
+                                context: context,
+                                builder: (ctx) => AlertDialog(
+                                  title: const Text('New Smart Rule'),
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      TextField(
+                                        controller: nameCtrl,
+                                        decoration: const InputDecoration(
+                                          labelText: 'Rule name / condition',
+                                          hintText: 'e.g. When battery < 20%',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(ctx),
+                                      child: const Text('Cancel'),
+                                    ),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.pop(ctx);
+                                        if (nameCtrl.text.isNotEmpty) {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(content: Text('Rule "${nameCtrl.text}" saved')),
+                                          );
+                                        }
+                                      },
+                                      child: const Text('Save'),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
                             icon: const Icon(Icons.add, size: 16),
                             label: const Text('Add Rule'),
                             style: OutlinedButton.styleFrom(
@@ -218,7 +255,13 @@ class NotificationSettingsScreen extends StatelessWidget {
   void _pickTime(BuildContext context, TimeOfDay initial, bool isStart) async {
     final picked = await showTimePicker(context: context, initialTime: initial);
     if (picked != null) {
-      // Would update via provider
+      final udp = context.read<UserDetailsProvider>();
+      final notif = udp.notifications;
+      if (isStart) {
+        udp.updateNotifications(notif.copyWith(quietHoursStart: picked));
+      } else {
+        udp.updateNotifications(notif.copyWith(quietHoursEnd: picked));
+      }
     }
   }
 }

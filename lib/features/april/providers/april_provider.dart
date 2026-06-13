@@ -15,10 +15,6 @@ class AprilProvider extends ChangeNotifier {
   final CalendarService _calendarService = CalendarService();
   final WishlistService _wishlistService = WishlistService();
   final PlannerService _plannerService = PlannerService();
-  // ignore: unused_field
-  final StatementService _statementService = StatementService();
-  // ignore: unused_field
-  final AIService _aiService = AIService();
 
   // ──────────────────────────────────────────────
   //  LOADING / ERROR STATE
@@ -407,6 +403,9 @@ class AprilProvider extends ChangeNotifier {
     required String category,
     String? description,
   }) async {
+    if (_isLoading) return;
+    _isLoading = true;
+    notifyListeners();
     try {
       final response = await _plannerService.addTransaction(
         type: type,
@@ -417,29 +416,47 @@ class AprilProvider extends ChangeNotifier {
       if (response.success) {
         await loadTransactions();
       }
+      _isLoading = false;
+      notifyListeners();
     } catch (e) {
+      _isLoading = false;
+      notifyListeners();
       debugPrint('addTransaction error: $e');
     }
   }
 
   Future<void> updateTransaction(String id, Map<String, dynamic> data) async {
+    if (_isLoading) return;
+    _isLoading = true;
+    notifyListeners();
     try {
       final response = await _plannerService.updateTransaction(id, data);
       if (response.success) {
         await loadTransactions();
       }
+      _isLoading = false;
+      notifyListeners();
     } catch (e) {
+      _isLoading = false;
+      notifyListeners();
       debugPrint('updateTransaction error: $e');
     }
   }
 
   Future<void> deleteTransaction(String id) async {
+    if (_isLoading) return;
+    _isLoading = true;
+    notifyListeners();
     try {
       final response = await _plannerService.deleteTransaction(id);
       if (response.success) {
         await loadTransactions();
       }
+      _isLoading = false;
+      notifyListeners();
     } catch (e) {
+      _isLoading = false;
+      notifyListeners();
       debugPrint('deleteTransaction error: $e');
     }
   }
@@ -603,6 +620,9 @@ class AprilProvider extends ChangeNotifier {
     String? description,
     String? recurrence,
   }) async {
+    if (_isLoading) return;
+    _isLoading = true;
+    notifyListeners();
     try {
       final response = await _calendarService.createEvent(
         title: title,
@@ -614,29 +634,47 @@ class AprilProvider extends ChangeNotifier {
       if (response.success) {
         await loadEvents();
       }
+      _isLoading = false;
+      notifyListeners();
     } catch (e) {
+      _isLoading = false;
+      notifyListeners();
       debugPrint('createEvent error: $e');
     }
   }
 
   Future<void> updateEvent(String id, Map<String, dynamic> data) async {
+    if (_isLoading) return;
+    _isLoading = true;
+    notifyListeners();
     try {
       final response = await _calendarService.updateEvent(id, data);
       if (response.success) {
         await loadEvents();
       }
+      _isLoading = false;
+      notifyListeners();
     } catch (e) {
+      _isLoading = false;
+      notifyListeners();
       debugPrint('updateEvent error: $e');
     }
   }
 
   Future<void> deleteEvent(String id) async {
+    if (_isLoading) return;
+    _isLoading = true;
+    notifyListeners();
     try {
       final response = await _calendarService.deleteEvent(id);
       if (response.success) {
         await loadEvents();
       }
+      _isLoading = false;
+      notifyListeners();
     } catch (e) {
+      _isLoading = false;
+      notifyListeners();
       debugPrint('deleteEvent error: $e');
     }
   }
@@ -742,6 +780,9 @@ class AprilProvider extends ChangeNotifier {
     required String category,
     String? notes,
   }) async {
+    if (_isLoading) return;
+    _isLoading = true;
+    notifyListeners();
     try {
       final response = await _wishlistService.addItem(
         name: name,
@@ -753,29 +794,47 @@ class AprilProvider extends ChangeNotifier {
       if (response.success) {
         await loadWishlistItems();
       }
+      _isLoading = false;
+      notifyListeners();
     } catch (e) {
+      _isLoading = false;
+      notifyListeners();
       debugPrint('addWishlistItem error: $e');
     }
   }
 
   Future<void> updateWishlistItem(String id, Map<String, dynamic> data) async {
+    if (_isLoading) return;
+    _isLoading = true;
+    notifyListeners();
     try {
       final response = await _wishlistService.updateItem(id, data);
       if (response.success) {
         await loadWishlistItems();
       }
+      _isLoading = false;
+      notifyListeners();
     } catch (e) {
+      _isLoading = false;
+      notifyListeners();
       debugPrint('updateWishlistItem error: $e');
     }
   }
 
   Future<void> deleteWishlistItem(String id) async {
+    if (_isLoading) return;
+    _isLoading = true;
+    notifyListeners();
     try {
       final response = await _wishlistService.deleteItem(id);
       if (response.success) {
         await loadWishlistItems();
       }
+      _isLoading = false;
+      notifyListeners();
     } catch (e) {
+      _isLoading = false;
+      notifyListeners();
       debugPrint('deleteWishlistItem error: $e');
     }
   }

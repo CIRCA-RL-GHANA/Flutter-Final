@@ -6,6 +6,7 @@ library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/services/ai_insights_notifier.dart';
@@ -111,12 +112,33 @@ class _AvatarEditorScreenState extends State<AvatarEditorScreen> with SingleTick
 // Tab 1: Photo
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-class _PhotoTab extends StatelessWidget {
+class _PhotoTab extends StatefulWidget {
   final dynamic identity;
   const _PhotoTab({required this.identity});
 
   @override
+  State<_PhotoTab> createState() => _PhotoTabState();
+}
+
+class _PhotoTabState extends State<_PhotoTab> {
+  String? _selectedImagePath;
+
+  Future<void> _pickImage(ImageSource source) async {
+    HapticFeedback.selectionClick();
+    final picker = ImagePicker();
+    final file = await picker.pickImage(source: source);
+    if (file != null && mounted) {
+      setState(() => _selectedImagePath = file.path);
+      // Update the provider with the selected image path
+      if (mounted) {
+        context.read<UserDetailsProvider>().updateField();
+      }
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final identity = widget.identity;
     return ListView(
       padding: const EdgeInsets.all(20),
       children: [
@@ -136,10 +158,12 @@ class _PhotoTab extends StatelessWidget {
                 child: CircleAvatar(
                   radius: 72,
                   backgroundColor: const Color(0xFF6366F1).withValues(alpha: 0.1),
-                  child: Text(
-                    identity.displayName.isNotEmpty ? identity.displayName[0].toUpperCase() : 'U',
-                    style: const TextStyle(fontSize: 56, fontWeight: FontWeight.bold, color: Color(0xFF6366F1)),
-                  ),
+                  child: _selectedImagePath != null
+                      ? null
+                      : Text(
+                          identity.displayName.isNotEmpty ? identity.displayName[0].toUpperCase() : 'U',
+                          style: const TextStyle(fontSize: 56, fontWeight: FontWeight.bold, color: Color(0xFF6366F1)),
+                        ),
                 ),
               ),
               Positioned(
@@ -167,28 +191,46 @@ class _PhotoTab extends StatelessWidget {
           label: 'Take Photo',
           subtitle: 'Use camera to capture a new photo',
           color: const Color(0xFF6366F1),
-          onTap: () => HapticFeedback.selectionClick(),
+          onTap: () => _pickImage(ImageSource.camera),
         ),
         _PhotoAction(
           icon: Icons.photo_library,
           label: 'Choose from Gallery',
           subtitle: 'Select from your device photos',
           color: const Color(0xFF8B5CF6),
-          onTap: () => HapticFeedback.selectionClick(),
+          onTap: () => _pickImage(ImageSource.gallery),
         ),
         _PhotoAction(
           icon: Icons.emoji_emotions_outlined,
           label: 'Create Avatar',
           subtitle: 'Design a custom avatar illustration',
           color: const Color(0xFFF59E0B),
-          onTap: () => HapticFeedback.selectionClick(),
+          onTap: () {
+            HapticFeedback.selectionClick();
+            showDialog(
+              context: context,
+              builder: (_) => AlertDialog(
+                title: const Text('Create Avatar'),
+                content: const Text('Avatar creator coming soon'),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text('OK'),
+                  ),
+                ],
+              ),
+            );
+          },
         ),
         _PhotoAction(
           icon: Icons.delete_outline,
           label: 'Remove Photo',
           subtitle: 'Revert to initials avatar',
           color: AppColors.error,
-          onTap: () => HapticFeedback.selectionClick(),
+          onTap: () {
+            HapticFeedback.selectionClick();
+            setState(() => _selectedImagePath = null);
+          },
         ),
 
         const SizedBox(height: 20),
@@ -289,16 +331,16 @@ class _BrandingTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final brandColors = [
-      const Color(0xFF6366F1),
-      const Color(0xFF8B5CF6),
-      const Color(0xFF10B981),
-      const Color(0xFF3B82F6),
-      const Color(0xFFF59E0B),
-      const Color(0xFFEC4899),
-      const Color(0xFFEF4444),
-      const Color(0xFF06B6D4),
-      const Color(0xFF14B8A6),
-      const Color(0xFF78716C),
+      AppColors.roleIndividual,
+      AppColors.roleBusiness,
+      AppColors.success,
+      AppColors.roleTransport,
+      AppColors.secondary,
+      AppColors.accent,
+      AppColors.error,
+      AppColors.info,
+      AppColors.roleShop,
+      AppColors.roleDelivery,
     ];
 
     return ListView(
@@ -390,23 +432,30 @@ class _BrandingTab extends StatelessWidget {
                   ),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 20,
-                      backgroundColor: Colors.white24,
-                      child: Text('W', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-                    ),
-                    SizedBox(width: 12),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Wizdom Shop', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
-                        Text('Business Entity', style: TextStyle(color: Colors.white70, fontSize: 11)),
-                      ],
-                    ),
-                  ],
-                ),
+                child: Builder(
+                builder: (context) {
+                  final udp = Provider.of<UserDetailsProvider>(context, listen: false);
+                  final shopName = udp.entityName.isNotEmpty ? udp.entityName : 'My Shop';
+                  final initial = shopName.isNotEmpty ? shopName[0].toUpperCase() : 'S';
+                  return Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 20,
+                        backgroundColor: Colors.white24,
+                        child: Text(initial, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                      ),
+                      const SizedBox(width: 12),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(shopName, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+                          const Text('Business Entity', style: TextStyle(color: Colors.white70, fontSize: 11)),
+                        ],
+                      ),
+                    ],
+                  );
+                },
+              ),
               ),
             ],
           ),

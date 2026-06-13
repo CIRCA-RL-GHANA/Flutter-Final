@@ -1,4 +1,4 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// Screen 3: Create / Edit Entity Form
 /// 5-step stepper: Type â†’ Core Info â†’ Verification â†’ Role â†’ Review
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -14,8 +14,15 @@ import '../models/user_details_models.dart';
 import '../providers/user_details_provider.dart';
 import '../widgets/shared_widgets.dart';
 
-class CreateEntityScreen extends StatelessWidget {
+class CreateEntityScreen extends StatefulWidget {
   const CreateEntityScreen({super.key});
+
+  @override
+  State<CreateEntityScreen> createState() => _CreateEntityScreenState();
+}
+
+class _CreateEntityScreenState extends State<CreateEntityScreen> {
+  bool _verificationConfirmed = false;
 
   @override
   Widget build(BuildContext context) {
@@ -92,6 +99,9 @@ class CreateEntityScreen extends StatelessWidget {
                     if (udp.creationStep <= 1) {
                       udp.resetCreation();
                     } else {
+                      if (udp.creationStep == 3) {
+                        setState(() => _verificationConfirmed = false);
+                      }
                       udp.setCreationStep(udp.creationStep - 1);
                     }
                   },
@@ -99,6 +109,7 @@ class CreateEntityScreen extends StatelessWidget {
                     if (udp.creationStep >= UserDetailsProvider.totalCreationSteps - 1) {
                       // Submit
                       HapticFeedback.heavyImpact();
+                      setState(() => _verificationConfirmed = false);
                       udp.resetCreation();
                       Navigator.pop(context);
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -120,7 +131,7 @@ class CreateEntityScreen extends StatelessWidget {
     switch (udp.creationStep) {
       case 1: return udp.selectedEntityType != null;
       case 2: return udp.entityName.isNotEmpty;
-      case 3: return true; // Verification is optional
+      case 3: return _verificationConfirmed;
       case 4: return udp.selectedRole != null;
       default: return true;
     }
@@ -134,7 +145,11 @@ class CreateEntityScreen extends StatelessWidget {
       case 2:
         return const _Step2CoreInfo(key: ValueKey('step2'));
       case 3:
-        return const _Step3Verification(key: ValueKey('step3'));
+        return _Step3Verification(
+          key: const ValueKey('step3'),
+          verificationConfirmed: _verificationConfirmed,
+          onConfirmChanged: (v) => setState(() => _verificationConfirmed = v),
+        );
       case 4:
         return const _Step4RoleAssignment(key: ValueKey('step4'));
       default:
@@ -449,7 +464,14 @@ class _FormField extends StatelessWidget {
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 class _Step3Verification extends StatelessWidget {
-  const _Step3Verification({super.key});
+  final bool verificationConfirmed;
+  final ValueChanged<bool> onConfirmChanged;
+
+  const _Step3Verification({
+    super.key,
+    required this.verificationConfirmed,
+    required this.onConfirmChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -480,7 +502,7 @@ class _Step3Verification extends StatelessWidget {
             HapticFeedback.selectionClick();
             udp.sendEmailVerification();
           },
-          actionLabel: udp.emailVerificationSent ? 'Sent âœ“' : 'Send Code',
+          actionLabel: udp.emailVerificationSent ? 'Sent ✓' : 'Send Code',
         ),
         _VerificationStep(
           title: 'Phone Verification',
@@ -492,7 +514,7 @@ class _Step3Verification extends StatelessWidget {
             HapticFeedback.selectionClick();
             udp.sendPhoneVerification();
           },
-          actionLabel: udp.phoneVerificationSent ? 'Sent âœ“' : 'Send Code',
+          actionLabel: udp.phoneVerificationSent ? 'Sent ✓' : 'Send Code',
         ),
         _VerificationStep(
           title: 'Document Upload',
@@ -504,7 +526,7 @@ class _Step3Verification extends StatelessWidget {
             HapticFeedback.selectionClick();
             udp.setDocumentUploaded(true);
           },
-          actionLabel: udp.documentUploaded ? 'Uploaded âœ“' : 'Upload',
+          actionLabel: udp.documentUploaded ? 'Uploaded ✓' : 'Upload',
         ),
         _VerificationStep(
           title: 'Address Verification',
@@ -516,7 +538,17 @@ class _Step3Verification extends StatelessWidget {
             HapticFeedback.selectionClick();
             udp.setAddressVerified(true);
           },
-          actionLabel: udp.addressVerified ? 'Verified âœ“' : 'Verify',
+          actionLabel: udp.addressVerified ? 'Verified ✓' : 'Verify',
+        ),
+
+        const SizedBox(height: 8),
+        CheckboxListTile(
+          value: verificationConfirmed,
+          onChanged: (v) => onConfirmChanged(v ?? false),
+          title: const Text('I confirm all information provided is accurate'),
+          activeColor: color,
+          controlAffinity: ListTileControlAffinity.leading,
+          contentPadding: EdgeInsets.zero,
         ),
       ],
     );

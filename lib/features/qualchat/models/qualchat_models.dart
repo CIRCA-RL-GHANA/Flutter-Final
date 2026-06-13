@@ -125,6 +125,37 @@ class ChatUser {
     this.avgResponseMinutes = 5,
     this.isFavorite = false,
   });
+
+  factory ChatUser.fromJson(Map<String, dynamic> json) => ChatUser(
+        id: json['id'] as String? ?? '',
+        name: json['name'] as String? ?? '',
+        avatarUrl: json['avatarUrl'] as String?,
+        role: json['role'] as String? ?? '',
+        presence: PresenceStatus.values.firstWhere(
+          (e) => e.name == (json['presence'] as String? ?? ''),
+          orElse: () => PresenceStatus.offline,
+        ),
+        statusMessage: json['statusMessage'] as String?,
+        lastSeen: DateTime.tryParse(json['lastSeen'] as String? ?? '') ?? DateTime.now(),
+        department: json['department'] as String?,
+        distanceKm: (json['distanceKm'] as num?)?.toDouble(),
+        avgResponseMinutes: (json['avgResponseMinutes'] as num?)?.toInt() ?? 5,
+        isFavorite: json['isFavorite'] as bool? ?? false,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'avatarUrl': avatarUrl,
+        'role': role,
+        'presence': presence.name,
+        'statusMessage': statusMessage,
+        'lastSeen': lastSeen.toIso8601String(),
+        'department': department,
+        'distanceKm': distanceKm,
+        'avgResponseMinutes': avgResponseMinutes,
+        'isFavorite': isFavorite,
+      };
 }
 
 /// A single chat message
@@ -158,6 +189,49 @@ class ChatMessage {
     this.isPinned = false,
     this.replyToId,
   });
+
+  factory ChatMessage.fromJson(Map<String, dynamic> json) => ChatMessage(
+        id: json['id'] as String? ?? '',
+        senderId: json['senderId'] as String? ?? '',
+        senderName: json['senderName'] as String? ?? '',
+        type: MessageType.values.firstWhere(
+          (e) => e.name == (json['type'] as String? ?? ''),
+          orElse: () => MessageType.text,
+        ),
+        content: json['content'] as String? ?? '',
+        timestamp: DateTime.tryParse(json['timestamp'] as String? ?? '') ?? DateTime.now(),
+        status: DeliveryStatus.values.firstWhere(
+          (e) => e.name == (json['status'] as String? ?? ''),
+          orElse: () => DeliveryStatus.delivered,
+        ),
+        reactions: (json['reactions'] as List<dynamic>? ?? [])
+            .map((e) => MessageReaction.values.firstWhere(
+                  (r) => r.name == (e as String? ?? ''),
+                  orElse: () => MessageReaction.smile,
+                ))
+            .toList(),
+        attachmentUrl: json['attachmentUrl'] as String?,
+        attachmentName: json['attachmentName'] as String?,
+        attachmentSizeMb: (json['attachmentSizeMb'] as num?)?.toDouble(),
+        isPinned: json['isPinned'] as bool? ?? false,
+        replyToId: json['replyToId'] as String?,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'senderId': senderId,
+        'senderName': senderName,
+        'type': type.name,
+        'content': content,
+        'timestamp': timestamp.toIso8601String(),
+        'status': status.name,
+        'reactions': reactions.map((e) => e.name).toList(),
+        'attachmentUrl': attachmentUrl,
+        'attachmentName': attachmentName,
+        'attachmentSizeMb': attachmentSizeMb,
+        'isPinned': isPinned,
+        'replyToId': replyToId,
+      };
 }
 
 /// A conversation (individual or group)
@@ -197,6 +271,52 @@ class Conversation {
     this.typingUser,
     this.relationshipScore,
   });
+
+  factory Conversation.fromJson(Map<String, dynamic> json) => Conversation(
+        id: json['id'] as String? ?? '',
+        type: ChatType.values.firstWhere(
+          (e) => e.name == (json['type'] as String? ?? ''),
+          orElse: () => ChatType.individual,
+        ),
+        title: json['title'] as String? ?? '',
+        avatarUrl: json['avatarUrl'] as String?,
+        lastMessage: json['lastMessage'] as String? ?? '',
+        lastSenderName: json['lastSenderName'] as String? ?? '',
+        lastMessageTime: DateTime.tryParse(json['lastMessageTime'] as String? ?? '') ?? DateTime.now(),
+        unreadCount: (json['unreadCount'] as num?)?.toInt() ?? 0,
+        isPinned: json['isPinned'] as bool? ?? false,
+        isMuted: json['isMuted'] as bool? ?? false,
+        isArchived: json['isArchived'] as bool? ?? false,
+        priority: ConversationPriority.values.firstWhere(
+          (e) => e.name == (json['priority'] as String? ?? ''),
+          orElse: () => ConversationPriority.normal,
+        ),
+        participants: (json['participants'] as List<dynamic>? ?? [])
+            .map((e) => ChatUser.fromJson(e as Map<String, dynamic>))
+            .toList(),
+        onlineCount: (json['onlineCount'] as num?)?.toInt(),
+        typingUser: json['typingUser'] as String?,
+        relationshipScore: (json['relationshipScore'] as num?)?.toDouble(),
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'type': type.name,
+        'title': title,
+        'avatarUrl': avatarUrl,
+        'lastMessage': lastMessage,
+        'lastSenderName': lastSenderName,
+        'lastMessageTime': lastMessageTime.toIso8601String(),
+        'unreadCount': unreadCount,
+        'isPinned': isPinned,
+        'isMuted': isMuted,
+        'isArchived': isArchived,
+        'priority': priority.name,
+        'participants': participants.map((e) => e.toJson()).toList(),
+        'onlineCount': onlineCount,
+        'typingUser': typingUser,
+        'relationshipScore': relationshipScore,
+      };
 }
 
 /// A Hey Ya request (dating feature — Owner only)
@@ -230,6 +350,48 @@ class HeyYaRequest {
     this.intent = HeyYaIntent.any,
     this.compatibility,
   });
+
+  factory HeyYaRequest.fromJson(Map<String, dynamic> json) => HeyYaRequest(
+        id: json['id'] as String? ?? '',
+        person: ChatUser.fromJson(json['person'] as Map<String, dynamic>? ?? {}),
+        status: HeyYaStatus.values.firstWhere(
+          (e) => e.name == (json['status'] as String? ?? ''),
+          orElse: () => HeyYaStatus.pending,
+        ),
+        matchPercentage: (json['matchPercentage'] as num?)?.toInt() ?? 0,
+        message: json['message'] as String?,
+        sentAt: DateTime.tryParse(json['sentAt'] as String? ?? '') ?? DateTime.now(),
+        expiresAt: json['expiresAt'] != null
+            ? DateTime.tryParse(json['expiresAt'] as String? ?? '')
+            : null,
+        isSentByMe: json['isSentByMe'] as bool? ?? true,
+        viewCount: (json['viewCount'] as num?)?.toInt() ?? 0,
+        timeline: (json['timeline'] as List<dynamic>? ?? [])
+            .map((e) => TimelineEvent.fromJson(e as Map<String, dynamic>))
+            .toList(),
+        intent: HeyYaIntent.values.firstWhere(
+          (e) => e.name == (json['intent'] as String? ?? ''),
+          orElse: () => HeyYaIntent.any,
+        ),
+        compatibility: json['compatibility'] != null
+            ? CompatibilityBreakdown.fromJson(json['compatibility'] as Map<String, dynamic>)
+            : null,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'person': person.toJson(),
+        'status': status.name,
+        'matchPercentage': matchPercentage,
+        'message': message,
+        'sentAt': sentAt.toIso8601String(),
+        'expiresAt': expiresAt?.toIso8601String(),
+        'isSentByMe': isSentByMe,
+        'viewCount': viewCount,
+        'timeline': timeline.map((e) => e.toJson()).toList(),
+        'intent': intent.name,
+        'compatibility': compatibility?.toJson(),
+      };
 }
 
 /// Genie AI compatibility breakdown for a Hey Ya pair
@@ -247,6 +409,20 @@ class CompatibilityBreakdown {
   });
 
   int get overall => ((interests + vibe + lifestyle + values) / 4).round();
+
+  factory CompatibilityBreakdown.fromJson(Map<String, dynamic> json) => CompatibilityBreakdown(
+        interests: (json['interests'] as num?)?.toInt() ?? 0,
+        vibe: (json['vibe'] as num?)?.toInt() ?? 0,
+        lifestyle: (json['lifestyle'] as num?)?.toInt() ?? 0,
+        values: (json['values'] as num?)?.toInt() ?? 0,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'interests': interests,
+        'vibe': vibe,
+        'lifestyle': lifestyle,
+        'values': values,
+      };
 }
 
 /// A single event on the Hey Ya request timeline
@@ -262,6 +438,23 @@ class TimelineEvent {
     required this.timestamp,
     this.detail,
   });
+
+  factory TimelineEvent.fromJson(Map<String, dynamic> json) => TimelineEvent(
+        type: TimelineEventType.values.firstWhere(
+          (e) => e.name == (json['type'] as String? ?? ''),
+          orElse: () => TimelineEventType.sent,
+        ),
+        description: json['description'] as String? ?? '',
+        timestamp: DateTime.tryParse(json['timestamp'] as String? ?? '') ?? DateTime.now(),
+        detail: json['detail'] as String?,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'type': type.name,
+        'description': description,
+        'timestamp': timestamp.toIso8601String(),
+        'detail': detail,
+      };
 }
 
 /// Presence stats for the dashboard
@@ -283,6 +476,26 @@ class PresenceStats {
     this.idleChangePercent = 0,
     this.offlineChangePercent = 0,
   });
+
+  factory PresenceStats.fromJson(Map<String, dynamic> json) => PresenceStats(
+        online: (json['online'] as num?)?.toInt() ?? 0,
+        idle: (json['idle'] as num?)?.toInt() ?? 0,
+        offline: (json['offline'] as num?)?.toInt() ?? 0,
+        total: (json['total'] as num?)?.toInt() ?? 0,
+        onlineChangePercent: (json['onlineChangePercent'] as num?)?.toDouble() ?? 0,
+        idleChangePercent: (json['idleChangePercent'] as num?)?.toDouble() ?? 0,
+        offlineChangePercent: (json['offlineChangePercent'] as num?)?.toDouble() ?? 0,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'online': online,
+        'idle': idle,
+        'offline': offline,
+        'total': total,
+        'onlineChangePercent': onlineChangePercent,
+        'idleChangePercent': idleChangePercent,
+        'offlineChangePercent': offlineChangePercent,
+      };
 }
 
 /// Activity data point for heat-map / chart
@@ -296,6 +509,18 @@ class ActivityDataPoint {
     required this.value,
     required this.time,
   });
+
+  factory ActivityDataPoint.fromJson(Map<String, dynamic> json) => ActivityDataPoint(
+        label: json['label'] as String? ?? '',
+        value: (json['value'] as num?)?.toDouble() ?? 0,
+        time: DateTime.tryParse(json['time'] as String? ?? '') ?? DateTime.now(),
+      );
+
+  Map<String, dynamic> toJson() => {
+        'label': label,
+        'value': value,
+        'time': time.toIso8601String(),
+      };
 }
 
 /// Smart nudge card from AI wingmate
@@ -319,6 +544,31 @@ class SmartNudge {
     required this.reason,
     required this.createdAt,
   });
+
+  factory SmartNudge.fromJson(Map<String, dynamic> json) => SmartNudge(
+        id: json['id'] as String? ?? '',
+        type: NudgeType.values.firstWhere(
+          (e) => e.name == (json['type'] as String? ?? ''),
+          orElse: () => NudgeType.followUp,
+        ),
+        person: ChatUser.fromJson(json['person'] as Map<String, dynamic>? ?? {}),
+        matchPercentage: (json['matchPercentage'] as num?)?.toInt() ?? 0,
+        prompt: json['prompt'] as String? ?? '',
+        suggestedOpener: json['suggestedOpener'] as String? ?? '',
+        reason: json['reason'] as String? ?? '',
+        createdAt: DateTime.tryParse(json['createdAt'] as String? ?? '') ?? DateTime.now(),
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'type': type.name,
+        'person': person.toJson(),
+        'matchPercentage': matchPercentage,
+        'prompt': prompt,
+        'suggestedOpener': suggestedOpener,
+        'reason': reason,
+        'createdAt': createdAt.toIso8601String(),
+      };
 }
 
 /// Action center task
@@ -344,6 +594,43 @@ class ActionTask {
     required this.createdAt,
     this.quickActions = const [],
   });
+
+  factory ActionTask.fromJson(Map<String, dynamic> json) => ActionTask(
+        id: json['id'] as String? ?? '',
+        type: TaskType.values.firstWhere(
+          (e) => e.name == (json['type'] as String? ?? ''),
+          orElse: () => TaskType.communication,
+        ),
+        priority: TaskPriority.values.firstWhere(
+          (e) => e.name == (json['priority'] as String? ?? ''),
+          orElse: () => TaskPriority.medium,
+        ),
+        status: TaskStatus.values.firstWhere(
+          (e) => e.name == (json['status'] as String? ?? ''),
+          orElse: () => TaskStatus.actNow,
+        ),
+        title: json['title'] as String? ?? '',
+        description: json['description'] as String? ?? '',
+        dueDate: json['dueDate'] != null
+            ? DateTime.tryParse(json['dueDate'] as String? ?? '')
+            : null,
+        createdAt: DateTime.tryParse(json['createdAt'] as String? ?? '') ?? DateTime.now(),
+        quickActions: (json['quickActions'] as List<dynamic>? ?? [])
+            .map((e) => e as String? ?? '')
+            .toList(),
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'type': type.name,
+        'priority': priority.name,
+        'status': status.name,
+        'title': title,
+        'description': description,
+        'dueDate': dueDate?.toIso8601String(),
+        'createdAt': createdAt.toIso8601String(),
+        'quickActions': quickActions,
+      };
 }
 
 /// AI suggestion in action center or preferences
@@ -359,6 +646,20 @@ class AISuggestion {
     this.detail,
     this.isApplied = false,
   });
+
+  factory AISuggestion.fromJson(Map<String, dynamic> json) => AISuggestion(
+        id: json['id'] as String? ?? '',
+        text: json['text'] as String? ?? '',
+        detail: json['detail'] as String?,
+        isApplied: json['isApplied'] as bool? ?? false,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'text': text,
+        'detail': detail,
+        'isApplied': isApplied,
+      };
 }
 
 /// Conversation insight for the intelligence section
@@ -372,6 +673,21 @@ class ConversationInsight {
     required this.title,
     this.description,
   });
+
+  factory ConversationInsight.fromJson(Map<String, dynamic> json) => ConversationInsight(
+        priority: InsightPriority.values.firstWhere(
+          (e) => e.name == (json['priority'] as String? ?? ''),
+          orElse: () => InsightPriority.followUp,
+        ),
+        title: json['title'] as String? ?? '',
+        description: json['description'] as String?,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'priority': priority.name,
+        'title': title,
+        'description': description,
+      };
 }
 
 /// Hey Ya vibe image data
@@ -401,6 +717,36 @@ class VibeImage {
     this.remainingPercent = 100,
     this.analysisText,
   });
+
+  factory VibeImage.fromJson(Map<String, dynamic> json) => VibeImage(
+        id: json['id'] as String? ?? '',
+        imageUrl: json['imageUrl'] as String?,
+        isActive: json['isActive'] as bool? ?? true,
+        expiresAt: json['expiresAt'] != null
+            ? DateTime.tryParse(json['expiresAt'] as String? ?? '')
+            : null,
+        views: (json['views'] as num?)?.toInt() ?? 0,
+        likes: (json['likes'] as num?)?.toInt() ?? 0,
+        comments: (json['comments'] as num?)?.toInt() ?? 0,
+        connections: (json['connections'] as num?)?.toInt() ?? 0,
+        matches: (json['matches'] as num?)?.toInt() ?? 0,
+        remainingPercent: (json['remainingPercent'] as num?)?.toDouble() ?? 100,
+        analysisText: json['analysisText'] as String?,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'imageUrl': imageUrl,
+        'isActive': isActive,
+        'expiresAt': expiresAt?.toIso8601String(),
+        'views': views,
+        'likes': likes,
+        'comments': comments,
+        'connections': connections,
+        'matches': matches,
+        'remainingPercent': remainingPercent,
+        'analysisText': analysisText,
+      };
 }
 
 /// Preference weighting for compatibility algorithm
@@ -409,6 +755,16 @@ class CompatibilityWeight {
   final double percent;
 
   const CompatibilityWeight({required this.label, required this.percent});
+
+  factory CompatibilityWeight.fromJson(Map<String, dynamic> json) => CompatibilityWeight(
+        label: json['label'] as String? ?? '',
+        percent: (json['percent'] as num?)?.toDouble() ?? 0,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'label': label,
+        'percent': percent,
+      };
 }
 
 /// Archive item with metadata
@@ -427,6 +783,20 @@ class ArchivedChat {
 
   String get id => conversation.id;
   int get mediaCount => 0;
+
+  factory ArchivedChat.fromJson(Map<String, dynamic> json) => ArchivedChat(
+        conversation: Conversation.fromJson(json['conversation'] as Map<String, dynamic>? ?? {}),
+        archivedAt: DateTime.tryParse(json['archivedAt'] as String? ?? '') ?? DateTime.now(),
+        sizeMb: (json['sizeMb'] as num?)?.toDouble() ?? 0,
+        messageCount: (json['messageCount'] as num?)?.toInt() ?? 0,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'conversation': conversation.toJson(),
+        'archivedAt': archivedAt.toIso8601String(),
+        'sizeMb': sizeMb,
+        'messageCount': messageCount,
+      };
 }
 
 /// Onboarding step data
@@ -444,6 +814,22 @@ class OnboardingStep {
     this.iconEmoji,
     this.isCompleted = false,
   });
+
+  factory OnboardingStep.fromJson(Map<String, dynamic> json) => OnboardingStep(
+        stepNumber: (json['stepNumber'] as num?)?.toInt() ?? 0,
+        title: json['title'] as String? ?? '',
+        description: json['description'] as String? ?? '',
+        iconEmoji: json['iconEmoji'] as String?,
+        isCompleted: json['isCompleted'] as bool? ?? false,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'stepNumber': stepNumber,
+        'title': title,
+        'description': description,
+        'iconEmoji': iconEmoji,
+        'isCompleted': isCompleted,
+      };
 }
 
 /// Settings toggle item
@@ -457,6 +843,21 @@ class SettingsToggle {
     required this.value,
     required this.section,
   });
+
+  factory SettingsToggle.fromJson(Map<String, dynamic> json) => SettingsToggle(
+        label: json['label'] as String? ?? '',
+        value: json['value'] as bool? ?? false,
+        section: ChatSettingsSection.values.firstWhere(
+          (e) => e.name == (json['section'] as String? ?? ''),
+          orElse: () => ChatSettingsSection.notifications,
+        ),
+      );
+
+  Map<String, dynamic> toJson() => {
+        'label': label,
+        'value': value,
+        'section': section.name,
+      };
 }
 
 /// Connection success data point for the bar chart
@@ -465,6 +866,16 @@ class ConnectionSuccess {
   final bool isSuccess;
 
   const ConnectionSuccess({required this.index, required this.isSuccess});
+
+  factory ConnectionSuccess.fromJson(Map<String, dynamic> json) => ConnectionSuccess(
+        index: (json['index'] as num?)?.toInt() ?? 0,
+        isSuccess: json['isSuccess'] as bool? ?? false,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'index': index,
+        'isSuccess': isSuccess,
+      };
 }
 
 /// Nudge settings configuration
@@ -488,6 +899,28 @@ class NudgeSettings {
     this.reEngagementEnabled = true,
     this.newMatchesEnabled = true,
   });
+
+  factory NudgeSettings.fromJson(Map<String, dynamic> json) => NudgeSettings(
+        frequency: json['frequency'] as String? ?? 'Once daily',
+        timing: json['timing'] as String? ?? 'When I\'m usually active',
+        maxPerDay: (json['maxPerDay'] as num?)?.toInt() ?? 3,
+        followUpAfterDays: (json['followUpAfterDays'] as num?)?.toInt() ?? 3,
+        reEngagementAfterDays: (json['reEngagementAfterDays'] as num?)?.toInt() ?? 7,
+        followUpsEnabled: json['followUpsEnabled'] as bool? ?? true,
+        reEngagementEnabled: json['reEngagementEnabled'] as bool? ?? true,
+        newMatchesEnabled: json['newMatchesEnabled'] as bool? ?? true,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'frequency': frequency,
+        'timing': timing,
+        'maxPerDay': maxPerDay,
+        'followUpAfterDays': followUpAfterDays,
+        'reEngagementAfterDays': reEngagementAfterDays,
+        'followUpsEnabled': followUpsEnabled,
+        'reEngagementEnabled': reEngagementEnabled,
+        'newMatchesEnabled': newMatchesEnabled,
+      };
 }
 
 /// Task completion analytics
@@ -507,6 +940,24 @@ class TaskAnalytics {
     required this.mostCommonTask,
     required this.aiInsight,
   });
+
+  factory TaskAnalytics.fromJson(Map<String, dynamic> json) => TaskAnalytics(
+        completedThisWeek: (json['completedThisWeek'] as num?)?.toInt() ?? 0,
+        totalThisWeek: (json['totalThisWeek'] as num?)?.toInt() ?? 0,
+        avgCompletionDays: (json['avgCompletionDays'] as num?)?.toDouble() ?? 0,
+        mostProductiveDay: json['mostProductiveDay'] as String? ?? '',
+        mostCommonTask: json['mostCommonTask'] as String? ?? '',
+        aiInsight: json['aiInsight'] as String? ?? '',
+      );
+
+  Map<String, dynamic> toJson() => {
+        'completedThisWeek': completedThisWeek,
+        'totalThisWeek': totalThisWeek,
+        'avgCompletionDays': avgCompletionDays,
+        'mostProductiveDay': mostProductiveDay,
+        'mostCommonTask': mostCommonTask,
+        'aiInsight': aiInsight,
+      };
 }
 
 /// Group chat settings
@@ -526,6 +977,26 @@ class GroupSettings {
     this.adminOnlyPosting = false,
     this.addToFavorites = true,
   });
+
+  factory GroupSettings.fromJson(Map<String, dynamic> json) => GroupSettings(
+        name: json['name'] as String? ?? '',
+        members: (json['members'] as List<dynamic>? ?? [])
+            .map((e) => ChatUser.fromJson(e as Map<String, dynamic>))
+            .toList(),
+        showTypingIndicators: json['showTypingIndicators'] as bool? ?? true,
+        allowMedia: json['allowMedia'] as bool? ?? true,
+        adminOnlyPosting: json['adminOnlyPosting'] as bool? ?? false,
+        addToFavorites: json['addToFavorites'] as bool? ?? true,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'members': members.map((e) => e.toJson()).toList(),
+        'showTypingIndicators': showTypingIndicators,
+        'allowMedia': allowMedia,
+        'adminOnlyPosting': adminOnlyPosting,
+        'addToFavorites': addToFavorites,
+      };
 }
 
 /// Media item in recent media section
@@ -541,4 +1012,21 @@ class RecentMedia {
     this.thumbnailUrl,
     required this.timestamp,
   });
+
+  factory RecentMedia.fromJson(Map<String, dynamic> json) => RecentMedia(
+        id: json['id'] as String? ?? '',
+        type: MessageType.values.firstWhere(
+          (e) => e.name == (json['type'] as String? ?? ''),
+          orElse: () => MessageType.image,
+        ),
+        thumbnailUrl: json['thumbnailUrl'] as String?,
+        timestamp: DateTime.tryParse(json['timestamp'] as String? ?? '') ?? DateTime.now(),
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'type': type.name,
+        'thumbnailUrl': thumbnailUrl,
+        'timestamp': timestamp.toIso8601String(),
+      };
 }

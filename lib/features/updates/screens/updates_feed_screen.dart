@@ -28,8 +28,43 @@ class UpdatesFeedScreen extends StatelessWidget {
   }
 }
 
-class _Body extends StatelessWidget {
+class _Body extends StatefulWidget {
   const _Body();
+
+  @override
+  State<_Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<_Body> {
+  final ScrollController _scrollController = ScrollController();
+  bool _isLoadingMore = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_onScroll);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    if (_scrollController.position.pixels >=
+        _scrollController.position.maxScrollExtent - 200 &&
+        !_isLoadingMore) {
+      _loadMore();
+    }
+  }
+
+  Future<void> _loadMore() async {
+    if (_isLoadingMore) return;
+    setState(() => _isLoadingMore = true);
+    await context.read<UpdatesProvider>().loadUpdates();
+    if (mounted) setState(() => _isLoadingMore = false);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -149,9 +184,16 @@ class _Body extends StatelessWidget {
                         color: kUpdatesColor,
                         onRefresh: () => context.read<UpdatesProvider>().loadUpdates(),
                         child: ListView.builder(
+                          controller: _scrollController,
                           padding: const EdgeInsets.fromLTRB(14, 8, 14, 80),
-                          itemCount: sorted.length,
+                          itemCount: sorted.length + (_isLoadingMore ? 1 : 0),
                           itemBuilder: (context, index) {
+                            if (index == sorted.length) {
+                              return const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 16),
+                                child: Center(child: CircularProgressIndicator(color: kUpdatesColor, strokeWidth: 2)),
+                              );
+                            }
                             final update = sorted[index];
                             return UpdateCard(
                               update: update,

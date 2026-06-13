@@ -43,6 +43,12 @@ class ApiRoutes {
   static const multiChannel = _MultiChannelRoutes();
   static const fulfillment = _FulfillmentRoutes();
   static const concierge = _ConciergeRoutes();
+  // ── Q-Point Liquid Market ───────────────────────────────────────────────
+  static const qpointMarket = _QPointMarketRoutes();
+  // ── Facilitator / Settlement / Webhooks (Enterprise extension) ──────────
+  static const facilitator      = _FacilitatorRoutes();
+  static const qpointSettlement = _QPointSettlementRoutes();
+  static const webhooks         = _WebhookRoutes();
 }
 
 class _AuthRoutes {
@@ -458,6 +464,7 @@ class _PaymentRoutes {
   String get create       => '/payments';
   String refund(String id) => '/payments/$id/refund';
   String get history      => '/payments/history';
+  String get qpCharge     => '/payments/qp/charge';
 }
 
 class _GoRoutes {
@@ -571,6 +578,32 @@ class _EnterpriseRoutes {
   String branches(String id) => '/enterprise/profiles/$id/branches';
   String apiKeys(String id) => '/enterprise/profiles/$id/api-keys';
   String revokeKey(String id, String keyId) => '/enterprise/profiles/$id/api-keys/$keyId';
+  // ── Analytics ────────────────────────────────────────────────────────────
+  String analytics(String entityId) => '/enterprise/analytics/$entityId';
+  String analyticsBranches(String entityId) => '/enterprise/analytics/$entityId/branches';
+  String analyticsFees(String entityId) => '/enterprise/analytics/$entityId/fees';
+  // ── Bulk operations ──────────────────────────────────────────────────────
+  String get bulkProducts   => '/products/bulk';
+  String get bulkStock      => '/products/bulk/stock';
+  String ordersByBranch(String branchId) => '/orders/branch/$branchId';
+  String get bulkOrderStatus => '/orders/bulk/status';
+}
+
+class _FacilitatorRoutes {
+  const _FacilitatorRoutes();
+  String institutionBalance(String entityId) => '/facilitator/institutions/$entityId/balance';
+  String get issueQp        => '/facilitator/institutions/issue';
+}
+
+class _QPointSettlementRoutes {
+  const _QPointSettlementRoutes();
+  String get initiate => '/qpoints/settlement/initiate';
+}
+
+class _WebhookRoutes {
+  const _WebhookRoutes();
+  String get subscriptions       => '/webhooks/subscriptions';
+  String subscriptionsByEntity(String entityId) => '/webhooks/subscriptions/$entityId';
 }
 
 class _MultiChannelRoutes {
@@ -599,4 +632,66 @@ class _ConciergeRoutes {
   String sessionContext(String id) => '/concierge/sessions/$id/context';
   String sendMessage(String id) => '/concierge/sessions/$id/messages';
   String history(String id) => '/concierge/sessions/$id/messages';
+}
+
+// ── Q-Point Liquid Market ─────────────────────────────────────────────────────
+
+class _QPointMarketRoutes {
+  const _QPointMarketRoutes();
+
+  // ── Balance ────────────────────────────────────────────────────────────────
+  String get balance            => '/qpoints/balance';
+
+  // ── Order Book ────────────────────────────────────────────────────────────
+  String get orderBook          => '/qpoints/orders';
+  String get openOrders         => '/qpoints/orders/open';
+  String cancelOrder(String id) => '/qpoints/orders/$id';
+
+  // ── Instant Buy / Sell ────────────────────────────────────────────────────
+  String get cashIn             => '/qpoints/cashin';
+  String get cashOut            => '/qpoints/cashout';
+
+  // ── Trades ────────────────────────────────────────────────────────────────
+  String get trades             => '/qpoints/trades';
+
+  // ── Market Stats ──────────────────────────────────────────────────────────
+  String get market             => '/qpoints/market';
+
+  // ── Notifications ─────────────────────────────────────────────────────────
+  String get notifications      => '/qpoints/notifications';
+  String get notificationsRead  => '/qpoints/notifications/read';
+
+  // ── Terms of Service ──────────────────────────────────────────────────────
+  String get tos                => '/qpoints/tos';
+  String get tosStatus          => '/qpoints/tos/status';
+  String get tosAccept          => '/qpoints/tos/accept';
+
+  // ── Fee Schedule ──────────────────────────────────────────────────────────
+  String get fees               => '/qpoints/fees';
+
+  // ── Facilitators ──────────────────────────────────────────────────────────
+  String get facilitators       => '/qpoints/facilitators';
+  String get paymentAccounts    => '/qpoints/payment/accounts';
+  String get paymentRegister    => '/qpoints/payment/register';
+
+  // ── Cash Balance ──────────────────────────────────────────────────────────
+  String get cashBalance        => '/qpoints/payment/cash-balance';
+  String get cashBalanceRefresh => '/qpoints/payment/cash-balance/refresh';
+
+  // ── Deposit / Withdrawal ──────────────────────────────────────────────────
+  String get deposit            => '/qpoints/payment/deposit';
+  String get withdraw           => '/qpoints/payment/withdraw';
+
+  // ── Transaction History ───────────────────────────────────────────────────
+  String get paymentTransactions => '/qpoints/payment/transactions';
+  String paymentTransactionById(String id) => '/qpoints/payment/transactions/$id';
+
+  // ── Admin: Cross-Facilitator Bridge ───────────────────────────────────────
+  String get adminCrossFacilitatorBalances  => '/qpoints/admin/cross-facilitator/balances';
+  String get adminNetPosition               => '/qpoints/admin/cross-facilitator/net-position';
+  String get adminNettingTasks              => '/qpoints/admin/netting/tasks';
+  String adminNettingTaskComplete(String id) => '/qpoints/admin/netting/tasks/$id/complete';
+  String adminNettingTaskCancel(String id)   => '/qpoints/admin/netting/tasks/$id/cancel';
+  String get adminNettingRun                => '/qpoints/admin/netting/run';
+  String adminFacilitatorFund(String id)    => '/qpoints/admin/cross-facilitator/balances/$id/fund';
 }

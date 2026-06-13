@@ -115,6 +115,8 @@ class CommunityProvider extends ChangeNotifier {
       }
     } catch (_) {
       _myMemberships = [];
+      _error = 'Failed to load memberships';
+      notifyListeners();
     } finally {
       _isMineLoading = false;
       notifyListeners();

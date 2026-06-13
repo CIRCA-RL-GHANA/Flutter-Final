@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:permission_handler/permission_handler.dart' as ph;
 
 /// Permission group levels
 enum PermissionGroup { essential, enhanced, premium }
@@ -129,20 +130,36 @@ class PermissionProvider extends ChangeNotifier {
     }
   }
 
+  ph.Permission _toPhPermission(AppPermission p) {
+    switch (p) {
+      case AppPermission.notifications: return ph.Permission.notification;
+      case AppPermission.locationCoarse: return ph.Permission.locationWhenInUse;
+      case AppPermission.locationPrecise: return ph.Permission.locationAlways;
+      case AppPermission.contacts: return ph.Permission.contacts;
+      case AppPermission.camera: return ph.Permission.camera;
+      case AppPermission.microphone: return ph.Permission.microphone;
+      case AppPermission.files: return ph.Permission.storage;
+      case AppPermission.calendar: return ph.Permission.calendarReadOnly;
+    }
+  }
+
   /// Request a specific permission
   Future<bool> requestPermission(AppPermission permission) async {
     _isLoading = true;
     notifyListeners();
-
     try {
-      // Simulate platform permission request
-      await Future.delayed(const Duration(milliseconds: 500));
-
-      // In production: Use permission_handler package
-      _permissions[permission] = PermissionState.granted;
+      final phPerm = _toPhPermission(permission);
+      final status = await phPerm.request();
+      if (status.isGranted) {
+        _permissions[permission] = PermissionState.granted;
+      } else if (status.isPermanentlyDenied) {
+        _permissions[permission] = PermissionState.permanentlyDenied;
+      } else {
+        _permissions[permission] = PermissionState.denied;
+      }
       _isLoading = false;
       notifyListeners();
-      return true;
+      return status.isGranted;
     } catch (e) {
       _permissions[permission] = PermissionState.denied;
       _isLoading = false;

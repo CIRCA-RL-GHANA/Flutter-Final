@@ -30,19 +30,29 @@ class CommunityService {
   /// Discover public communities, optionally filtered by archetype type.
   ///
   /// [type] one of: library | playlist | theater | fair | hub | hangout | journal
-  Future<ApiResponse<Map<String, dynamic>>> discoverCommunities({
+  Future<ApiResponse<List<Map<String, dynamic>>>> discoverCommunities({
     String? type,
     int page = 1,
     int limit = 20,
   }) {
-    return _api.get<Map<String, dynamic>>(
+    return _api.get<List<Map<String, dynamic>>>(
       ApiRoutes.community.discover,
       queryParameters: {
         if (type != null) 'type': type,
         'page': page,
         'limit': limit,
       },
-      fromJson: (json) => json as Map<String, dynamic>,
+      fromJson: (json) {
+        if (json is List) {
+          return json.map((e) => e as Map<String, dynamic>).toList();
+        }
+        // Handle paginated envelope: { items: [...] } / { data: [...] } / { results: [...] }
+        if (json is Map<String, dynamic>) {
+          final list = (json['items'] ?? json['data'] ?? json['results'] ?? []) as List<dynamic>;
+          return list.map((e) => e as Map<String, dynamic>).toList();
+        }
+        return [];
+      },
     );
   }
 

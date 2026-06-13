@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'api_response.dart';
 import '../constants/env_config.dart';
 import '../constants/error_codes.dart';
@@ -13,7 +13,10 @@ class ApiClient {
   static const String _refreshTokenKey = 'auth_refresh_token';
 
   late final Dio _dio;
-  SharedPreferences? _prefs;
+  final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
+  String? _cachedAccessToken;
+  String? _cachedRefreshToken;
+  bool _initialized = false;
 
   // Singleton
   static ApiClient? _instance;
@@ -42,9 +45,11 @@ class ApiClient {
     _setupInterceptors();
   }
 
-  /// Initialize with SharedPreferences (call in main.dart)
+  /// Initialize secure storage (call in main.dart)
   Future<void> init() async {
-    _prefs = await SharedPreferences.getInstance();
+    _cachedAccessToken = await _secureStorage.read(key: _tokenKey);
+    _cachedRefreshToken = await _secureStorage.read(key: _refreshTokenKey);
+    _initialized = true;
   }
 
   /// Override the base URL (useful for different environments)
@@ -57,15 +62,18 @@ class ApiClient {
       InterceptorsWrapper(
         onRequest: (options, handler) async {
           // Attach auth token if available
-          final token = _prefs?.getString(_tokenKey);
-          if (token != null && token.isNotEmpty) {
-            options.headers['Authorization'] = 'Bearer $token';
+          if (_cachedAccessToken != null && _cachedAccessToken!.isNotEmpty) {
+            options.headers['Authorization'] = 'Bearer $_cachedAccessToken';
           }
 
           if (kDebugMode) {
             debugPrint('→ ${options.method} ${options.baseUrl}${options.path}');
-            if (options.data != null) {
+            final sensitivePatterns = ['/auth/', '/users/set-pin', '/users/verify', '/users/register', '/users/verify-otp'];
+            final isSensitive = sensitivePatterns.any((p) => options.path.contains(p));
+            if (options.data != null && !isSensitive) {
               debugPrint('  Body: ${options.data}');
+            } else if (options.data != null && isSensitive) {
+              debugPrint('  Body: [REDACTED - sensitive endpoint]');
             }
           }
 
@@ -86,13 +94,15 @@ class ApiClient {
             );
           }
 
-          // Handle 401 — try token refresh
-          if (error.response?.statusCode == 401) {
+          // Handle 401 — try token refresh (skip if this IS a refresh request or already retried)
+          if (error.response?.statusCode == 401 &&
+              error.requestOptions.extra['isRefreshRequest'] != true &&
+              error.requestOptions.extra['retried'] != true) {
             final refreshed = await _tryRefreshToken();
             if (refreshed) {
               // Retry original request with new token
-              final token = _prefs?.getString(_tokenKey);
-              error.requestOptions.headers['Authorization'] = 'Bearer $token';
+              error.requestOptions.extra['retried'] = true;
+              error.requestOptions.headers['Authorization'] = 'Bearer $_cachedAccessToken';
               try {
                 final response = await _dio.fetch(error.requestOptions);
                 return handler.resolve(response);
@@ -110,15 +120,16 @@ class ApiClient {
 
   /// Try to refresh the access token using the refresh token
   Future<bool> _tryRefreshToken() async {
-    final refreshToken = _prefs?.getString(_refreshTokenKey);
-    if (refreshToken == null || refreshToken.isEmpty) return false;
+    if (_cachedRefreshToken == null || _cachedRefreshToken!.isEmpty) return false;
 
     try {
-      final response = await Dio(
-        BaseOptions(baseUrl: _dio.options.baseUrl),
-      ).post(
+      final response = await _dio.post(
         '/auth/refresh',
-        data: {'refreshToken': refreshToken},
+        data: {'refreshToken': _cachedRefreshToken},
+        options: Options(
+          extra: {'isRefreshRequest': true},
+          receiveTimeout: const Duration(seconds: 30),
+        ),
       );
 
       if (response.statusCode == 200 && response.data != null) {
@@ -144,18 +155,24 @@ class ApiClient {
     required String accessToken,
     required String refreshToken,
   }) async {
-    await _prefs?.setString(_tokenKey, accessToken);
-    await _prefs?.setString(_refreshTokenKey, refreshToken);
+    _cachedAccessToken = accessToken;
+    _cachedRefreshToken = refreshToken;
+    await _secureStorage.write(key: _tokenKey, value: accessToken);
+    await _secureStorage.write(key: _refreshTokenKey, value: refreshToken);
   }
 
   Future<void> clearTokens() async {
-    await _prefs?.remove(_tokenKey);
-    await _prefs?.remove(_refreshTokenKey);
+    _cachedAccessToken = null;
+    _cachedRefreshToken = null;
+    await _secureStorage.delete(key: _tokenKey);
+    await _secureStorage.delete(key: _refreshTokenKey);
   }
 
+  /// Exposes the cached access token for services that need it (e.g. WebSocket reconnect).
+  String? get cachedToken => _cachedAccessToken;
+
   bool get isAuthenticated {
-    final token = _prefs?.getString(_tokenKey);
-    return token != null && token.isNotEmpty;
+    return _cachedAccessToken != null && _cachedAccessToken!.isNotEmpty;
   }
 
   // ─── HTTP Methods ─────────────────────────────────
@@ -166,6 +183,7 @@ class ApiClient {
     Map<String, dynamic>? queryParameters,
     T Function(dynamic json)? fromJson,
   }) async {
+    assert(_initialized, 'ApiClient.init() must be called before making requests');
     try {
       final response = await _dio.get(
         path,
@@ -186,6 +204,7 @@ class ApiClient {
     Map<String, dynamic>? queryParameters,
     T Function(dynamic json)? fromJson,
   }) async {
+    assert(_initialized, 'ApiClient.init() must be called before making requests');
     try {
       final response = await _dio.post(path, data: data, queryParameters: queryParameters);
       return _handleResponse<T>(response, fromJson);
@@ -203,6 +222,7 @@ class ApiClient {
     Map<String, dynamic>? queryParameters,
     T Function(dynamic json)? fromJson,
   }) async {
+    assert(_initialized, 'ApiClient.init() must be called before making requests');
     try {
       final response = await _dio.put(path, data: data, queryParameters: queryParameters);
       return _handleResponse<T>(response, fromJson);
@@ -219,6 +239,7 @@ class ApiClient {
     dynamic data,
     T Function(dynamic json)? fromJson,
   }) async {
+    assert(_initialized, 'ApiClient.init() must be called before making requests');
     try {
       final response = await _dio.patch(path, data: data);
       return _handleResponse<T>(response, fromJson);
@@ -236,6 +257,7 @@ class ApiClient {
     Map<String, dynamic>? queryParameters,
     T Function(dynamic json)? fromJson,
   }) async {
+    assert(_initialized, 'ApiClient.init() must be called before making requests');
     try {
       final response = await _dio.delete(path, data: data, queryParameters: queryParameters);
       return _handleResponse<T>(response, fromJson);
@@ -254,6 +276,7 @@ class ApiClient {
     Map<String, dynamic>? extraFields,
     T Function(dynamic json)? fromJson,
   }) async {
+    assert(_initialized, 'ApiClient.init() must be called before making requests');
     try {
       final formData = FormData.fromMap({
         fieldName: await MultipartFile.fromFile(filePath),
@@ -303,7 +326,7 @@ class ApiClient {
       return ApiResponse<T>(
         success: true,
         data: parsed,
-        statusCode: responseData['statusCode'] as int? ?? response.statusCode,
+        statusCode: (responseData['statusCode'] as num?)?.toInt() ?? response.statusCode,
         timestamp: responseData['timestamp'] as String?,
         path: responseData['path'] as String?,
       );

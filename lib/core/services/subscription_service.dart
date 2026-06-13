@@ -133,11 +133,15 @@ class SubscriptionService {
     if (!plansResp.isSuccess || plansResp.data == null) {
       return ApiResponse.failure(const ApiError(code: 'ERROR', message: 'Unable to fetch plans for AI analysis'));
     }
-    return _aiService.recommendSubscriptionPlan(
-      usageScore: usageScore,
-      currentTier: currentTier,
-      plans: plansResp.data!,
-    );
+    try {
+      return await _aiService.recommendSubscriptionPlan(
+        usageScore: usageScore,
+        currentTier: currentTier,
+        plans: plansResp.data!,
+      );
+    } catch (e) {
+      return ApiResponse.failure(ApiError(code: 'AI_ERROR', message: e.toString()));
+    }
   }
 
   /// Get AI-powered retention offer for a subscriber at risk of churn.

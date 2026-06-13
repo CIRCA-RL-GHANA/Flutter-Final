@@ -1,4 +1,5 @@
 ﻿import 'dart:async';
+import 'dart:math';
 import 'package:hive/hive.dart';
 import 'package:flutter/foundation.dart';
 
@@ -128,17 +129,22 @@ class SyncManager extends ChangeNotifier {
           debugPrint('[SyncManager] Synced: ${operation.type}');
         } catch (e) {
           operation.retryCount++;
-          
+
+          // Exponential backoff before recording the retry
+          final backoffSeconds = pow(2, operation.retryCount).toInt().clamp(1, 30);
+          await Future.delayed(Duration(seconds: backoffSeconds));
+
           final index = _syncBox.values
               .toList()
               .indexWhere((e) => e['id'] == operation.id);
-          
+
           if (index >= 0) {
             await _syncBox.putAt(index, operation.toJson());
           }
 
           _syncStatusController.add(SyncStatus.error);
           debugPrint('[SyncManager] Sync error: $e');
+          notifyListeners();
         }
       }
     } catch (e) {

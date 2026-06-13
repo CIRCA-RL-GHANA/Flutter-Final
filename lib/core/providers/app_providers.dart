@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 import '../../features/onboarding/providers/onboarding_provider.dart';
@@ -48,11 +49,19 @@ class AppProviders {
       ChangeNotifierProvider(create: (_) => PermissionProvider()),
 
       // PROMPT Screen Providers
-      ChangeNotifierProvider(create: (_) => ContextProvider()),
+      ChangeNotifierProvider(create: (_) {
+        final provider = ContextProvider();
+        provider.init().catchError((e) => debugPrint('[ContextProvider] init failed: $e'));
+        return provider;
+      }),
       ChangeNotifierProvider(create: (_) => PromptProvider()),
 
       // User Details Module Provider
-      ChangeNotifierProvider(create: (_) => UserDetailsProvider()),
+      ChangeNotifierProvider(create: (_) {
+        final provider = UserDetailsProvider();
+        provider.init().catchError((e) => debugPrint('[UserDetailsProvider] init failed: $e'));
+        return provider;
+      }),
 
       // Utility Module Provider
       ChangeNotifierProvider(create: (_) => UtilityProvider()),
@@ -68,10 +77,18 @@ class AppProviders {
       ChangeNotifierProvider(create: (_) => QPointsTosProvider()),
 
       // Market Module Provider
-      ChangeNotifierProvider(create: (_) => MarketProvider()),
+      ChangeNotifierProvider(create: (_) {
+        final provider = MarketProvider();
+        provider.init().catchError((e) => debugPrint('[MarketProvider] init failed: $e'));
+        return provider;
+      }),
 
       // Live Module Provider
-      ChangeNotifierProvider(create: (_) => LiveProvider()),
+      ChangeNotifierProvider(create: (_) {
+        final provider = LiveProvider();
+        provider.init().catchError((e) => debugPrint('[LiveProvider] init failed: $e'));
+        return provider;
+      }),
 
       // My Updates Module Provider
       ChangeNotifierProvider(create: (_) => UpdatesProvider()),
@@ -80,10 +97,18 @@ class AppProviders {
       ChangeNotifierProvider(create: (_) => QualChatProvider()),
 
       // APRIL Module Provider
-      ChangeNotifierProvider(create: (_) => AprilProvider()),
+      ChangeNotifierProvider(create: (_) {
+        final provider = AprilProvider();
+        provider.init().catchError((e) => debugPrint('[AprilProvider] init failed: $e'));
+        return provider;
+      }),
 
       // Alerts Module Provider
-      ChangeNotifierProvider(create: (_) => AlertsProvider()),
+      ChangeNotifierProvider(create: (_) {
+        final provider = AlertsProvider();
+        provider.init().catchError((e) => debugPrint('[AlertsProvider] init failed: $e'));
+        return provider;
+      }),
 
       // e-Play Module Provider
       ChangeNotifierProvider(create: (_) => EPlayProvider()),
@@ -114,7 +139,7 @@ class AppProviders {
       ChangeNotifierProvider(
         create: (_) {
           final storage = LocalStorageService();
-          storage.init();
+          storage.init().catchError((e) => debugPrint('[Storage] init failed: $e'));
           return storage;
         },
       ),
@@ -122,7 +147,7 @@ class AppProviders {
       ChangeNotifierProvider(
         create: (_) {
           final sync = SyncManager();
-          sync.init();
+          sync.init().catchError((e) => debugPrint('[SyncManager] init failed: $e'));
           return sync;
         },
       ),

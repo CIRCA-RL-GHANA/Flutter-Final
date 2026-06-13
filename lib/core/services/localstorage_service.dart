@@ -14,13 +14,13 @@ class LocalStorageService extends ChangeNotifier {
       _messagesBox = await Hive.openBox<Map>('local_messages');
       _conversationsBox = await Hive.openBox<Map>('local_conversations');
       _preferencesBox = await Hive.openBox<String>('preferences');
-      
+
       _isInitialized = true;
       debugPrint('[LocalStorage] Initialized');
-      
+
       notifyListeners();
-    } catch (e) {
-      debugPrint('[LocalStorage] Init error: $e');
+    } catch (e, st) {
+      debugPrint('[LocalStorage] Init error: $e\n$st');
     }
   }
 
@@ -32,8 +32,8 @@ class LocalStorageService extends ChangeNotifier {
       final key = '${conversationId}_${message['id'] ?? DateTime.now().millisecondsSinceEpoch}';
       await _messagesBox.put(key, message);
       debugPrint('[LocalStorage] Message saved: $key');
-    } catch (e) {
-      debugPrint('[LocalStorage] Save message error: $e');
+    } catch (e, st) {
+      debugPrint('[LocalStorage] Save message error: $e\n$st');
     }
   }
 
@@ -48,8 +48,8 @@ class LocalStorageService extends ChangeNotifier {
           .toList();
 
       return allMessages;
-    } catch (e) {
-      debugPrint('[LocalStorage] Get messages error: $e');
+    } catch (e, st) {
+      debugPrint('[LocalStorage] Get messages error: $e\n$st');
       return [];
     }
   }
@@ -61,8 +61,8 @@ class LocalStorageService extends ChangeNotifier {
     try {
       await _conversationsBox.put(conversation['id'], conversation);
       debugPrint('[LocalStorage] Conversation saved: ${conversation['id']}');
-    } catch (e) {
-      debugPrint('[LocalStorage] Save conversation error: $e');
+    } catch (e, st) {
+      debugPrint('[LocalStorage] Save conversation error: $e\n$st');
     }
   }
 
@@ -76,8 +76,8 @@ class LocalStorageService extends ChangeNotifier {
           .toList();
 
       return conversations;
-    } catch (e) {
-      debugPrint('[LocalStorage] Get conversations error: $e');
+    } catch (e, st) {
+      debugPrint('[LocalStorage] Get conversations error: $e\n$st');
       return [];
     }
   }
@@ -88,8 +88,8 @@ class LocalStorageService extends ChangeNotifier {
 
     try {
       await _preferencesBox.put(key, value);
-    } catch (e) {
-      debugPrint('[LocalStorage] Save preference error: $e');
+    } catch (e, st) {
+      debugPrint('[LocalStorage] Save preference error: $e\n$st');
     }
   }
 
@@ -107,8 +107,8 @@ class LocalStorageService extends ChangeNotifier {
       await _messagesBox.clear();
       await _conversationsBox.clear();
       debugPrint('[LocalStorage] Cleared all data');
-    } catch (e) {
-      debugPrint('[LocalStorage] Clear error: $e');
+    } catch (e, st) {
+      debugPrint('[LocalStorage] Clear error: $e\n$st');
     }
   }
 
@@ -121,8 +121,8 @@ class LocalStorageService extends ChangeNotifier {
       size += _messagesBox.values.length;
       size += _conversationsBox.values.length;
       return size;
-    } catch (e) {
-      debugPrint('[LocalStorage] Get size error: $e');
+    } catch (e, st) {
+      debugPrint('[LocalStorage] Get size error: $e\n$st');
       return 0;
     }
   }

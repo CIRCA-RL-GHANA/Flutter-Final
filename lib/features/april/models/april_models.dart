@@ -109,6 +109,27 @@ class VoiceCommand {
     required this.successful,
     this.result,
   });
+
+  factory VoiceCommand.fromJson(Map<String, dynamic> json) => VoiceCommand(
+        id: json['id'] as String? ?? '',
+        text: json['text'] as String? ?? '',
+        type: CommandType.values.firstWhere(
+          (e) => e.name == (json['type'] as String? ?? ''),
+          orElse: () => CommandType.text,
+        ),
+        timestamp: DateTime.tryParse(json['timestamp'] as String? ?? '') ?? DateTime.now(),
+        successful: json['successful'] as bool? ?? false,
+        result: json['result'] as String?,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'text': text,
+        'type': type.name,
+        'timestamp': timestamp.toIso8601String(),
+        'successful': successful,
+        'result': result,
+      };
 }
 
 /// Notification item
@@ -134,6 +155,38 @@ class AprilNotification {
     this.actions = const [],
     this.actionRoute,
   });
+
+  factory AprilNotification.fromJson(Map<String, dynamic> json) => AprilNotification(
+        id: json['id'] as String? ?? '',
+        type: AprilNotificationType.values.firstWhere(
+          (e) => e.name == (json['type'] as String? ?? ''),
+          orElse: () => AprilNotificationType.system,
+        ),
+        title: json['title'] as String? ?? '',
+        message: json['message'] as String? ?? '',
+        emoji: json['emoji'] as String?,
+        timestamp: DateTime.tryParse(json['timestamp'] as String? ?? '') ?? DateTime.now(),
+        isRead: json['isRead'] as bool? ?? false,
+        actions: (json['actions'] as List<dynamic>? ?? [])
+            .map((e) => NotificationAction.values.firstWhere(
+                  (a) => a.name == (e as String? ?? ''),
+                  orElse: () => NotificationAction.dismiss,
+                ))
+            .toList(),
+        actionRoute: json['actionRoute'] as String?,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'type': type.name,
+        'title': title,
+        'message': message,
+        'emoji': emoji,
+        'timestamp': timestamp.toIso8601String(),
+        'isRead': isRead,
+        'actions': actions.map((e) => e.name).toList(),
+        'actionRoute': actionRoute,
+      };
 }
 
 /// Plugin status indicator
@@ -151,6 +204,28 @@ class PluginStatus {
     this.badgeCount,
     required this.lastSynced,
   });
+
+  factory PluginStatus.fromJson(Map<String, dynamic> json) => PluginStatus(
+        plugin: AprilPlugin.values.firstWhere(
+          (e) => e.name == (json['plugin'] as String? ?? ''),
+          orElse: () => AprilPlugin.planner,
+        ),
+        syncStatus: SyncStatus.values.firstWhere(
+          (e) => e.name == (json['syncStatus'] as String? ?? ''),
+          orElse: () => SyncStatus.offline,
+        ),
+        statusText: json['statusText'] as String? ?? '',
+        badgeCount: (json['badgeCount'] as num?)?.toInt(),
+        lastSynced: DateTime.tryParse(json['lastSynced'] as String? ?? '') ?? DateTime.now(),
+      );
+
+  Map<String, dynamic> toJson() => {
+        'plugin': plugin.name,
+        'syncStatus': syncStatus.name,
+        'statusText': statusText,
+        'badgeCount': badgeCount,
+        'lastSynced': lastSynced.toIso8601String(),
+      };
 }
 
 /// Pending action item
@@ -172,6 +247,39 @@ class PendingAction {
     this.dueDate,
     this.sourcePlugin,
   });
+
+  factory PendingAction.fromJson(Map<String, dynamic> json) => PendingAction(
+        id: json['id'] as String? ?? '',
+        description: json['description'] as String? ?? '',
+        priority: ActionPriority.values.firstWhere(
+          (e) => e.name == (json['priority'] as String? ?? ''),
+          orElse: () => ActionPriority.medium,
+        ),
+        status: ActionStatus.values.firstWhere(
+          (e) => e.name == (json['status'] as String? ?? ''),
+          orElse: () => ActionStatus.pending,
+        ),
+        dueText: json['dueText'] as String?,
+        dueDate: json['dueDate'] != null
+            ? DateTime.tryParse(json['dueDate'] as String? ?? '')
+            : null,
+        sourcePlugin: json['sourcePlugin'] != null
+            ? AprilPlugin.values.firstWhere(
+                (e) => e.name == (json['sourcePlugin'] as String? ?? ''),
+                orElse: () => AprilPlugin.planner,
+              )
+            : null,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'description': description,
+        'priority': priority.name,
+        'status': status.name,
+        'dueText': dueText,
+        'dueDate': dueDate?.toIso8601String(),
+        'sourcePlugin': sourcePlugin?.name,
+      };
 }
 
 /// Financial transaction
@@ -201,6 +309,47 @@ class Transaction {
     this.recurringFrequency,
     this.hasReceipt = false,
   });
+
+  factory Transaction.fromJson(Map<String, dynamic> json) => Transaction(
+        id: json['id'] as String? ?? '',
+        title: json['title'] as String? ?? '',
+        amount: (json['amount'] as num?)?.toDouble() ?? 0.0,
+        type: TransactionType.values.firstWhere(
+          (e) => e.name == (json['type'] as String? ?? ''),
+          orElse: () => TransactionType.expense,
+        ),
+        category: TransactionCategory.values.firstWhere(
+          (e) => e.name == (json['category'] as String? ?? ''),
+          orElse: () => TransactionCategory.other,
+        ),
+        date: DateTime.tryParse(json['date'] as String? ?? '') ?? DateTime.now(),
+        description: json['description'] as String?,
+        tags: (json['tags'] as List<dynamic>? ?? [])
+            .map((e) => e as String? ?? '')
+            .toList(),
+        isRecurring: json['isRecurring'] as bool? ?? false,
+        recurringFrequency: json['recurringFrequency'] != null
+            ? RecurringFrequency.values.firstWhere(
+                (e) => e.name == (json['recurringFrequency'] as String? ?? ''),
+                orElse: () => RecurringFrequency.monthly,
+              )
+            : null,
+        hasReceipt: json['hasReceipt'] as bool? ?? false,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'title': title,
+        'amount': amount,
+        'type': type.name,
+        'category': category.name,
+        'date': date.toIso8601String(),
+        'description': description,
+        'tags': tags,
+        'isRecurring': isRecurring,
+        'recurringFrequency': recurringFrequency?.name,
+        'hasReceipt': hasReceipt,
+      };
 }
 
 /// Upcoming bill
@@ -224,6 +373,29 @@ class UpcomingBill {
   });
 
   bool get isOverdue => !isPaid && dueDate.isBefore(DateTime.now());
+
+  factory UpcomingBill.fromJson(Map<String, dynamic> json) => UpcomingBill(
+        id: json['id'] as String? ?? '',
+        name: json['name'] as String? ?? '',
+        amount: (json['amount'] as num?)?.toDouble() ?? 0.0,
+        dueDate: DateTime.tryParse(json['dueDate'] as String? ?? '') ?? DateTime.now(),
+        category: TransactionCategory.values.firstWhere(
+          (e) => e.name == (json['category'] as String? ?? ''),
+          orElse: () => TransactionCategory.other,
+        ),
+        isPaid: json['isPaid'] as bool? ?? false,
+        isAutoPay: json['isAutoPay'] as bool? ?? false,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'amount': amount,
+        'dueDate': dueDate.toIso8601String(),
+        'category': category.name,
+        'isPaid': isPaid,
+        'isAutoPay': isAutoPay,
+      };
 }
 
 /// Budget category
@@ -246,6 +418,30 @@ class BudgetCategory {
 
   double get percentage => limit > 0 ? (spent / limit).clamp(0.0, 1.5) : 0;
   double get remaining => limit - spent;
+
+  factory BudgetCategory.fromJson(Map<String, dynamic> json) => BudgetCategory(
+        id: json['id'] as String? ?? '',
+        name: json['name'] as String? ?? '',
+        category: TransactionCategory.values.firstWhere(
+          (e) => e.name == (json['category'] as String? ?? ''),
+          orElse: () => TransactionCategory.other,
+        ),
+        limit: (json['limit'] as num?)?.toDouble() ?? 0.0,
+        spent: (json['spent'] as num?)?.toDouble() ?? 0.0,
+        status: BudgetStatus.values.firstWhere(
+          (e) => e.name == (json['status'] as String? ?? ''),
+          orElse: () => BudgetStatus.onTrack,
+        ),
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'category': category.name,
+        'limit': limit,
+        'spent': spent,
+        'status': status.name,
+      };
 }
 
 /// Monthly financial summary
@@ -275,6 +471,28 @@ class MonthlySummary {
   double get totalIncome => income;
   double get totalExpenses => expenses;
   double get savingsRate => totalBalance > 0 ? (savings / totalBalance) * 100 : 0;
+
+  factory MonthlySummary.fromJson(Map<String, dynamic> json) => MonthlySummary(
+        totalBalance: (json['totalBalance'] as num?)?.toDouble() ?? 0.0,
+        balanceChange: (json['balanceChange'] as num?)?.toDouble() ?? 0.0,
+        income: (json['income'] as num?)?.toDouble() ?? 0.0,
+        incomeChange: (json['incomeChange'] as num?)?.toDouble() ?? 0.0,
+        expenses: (json['expenses'] as num?)?.toDouble() ?? 0.0,
+        expenseChange: (json['expenseChange'] as num?)?.toDouble() ?? 0.0,
+        savings: (json['savings'] as num?)?.toDouble() ?? 0.0,
+        savingsChange: (json['savingsChange'] as num?)?.toDouble() ?? 0.0,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'totalBalance': totalBalance,
+        'balanceChange': balanceChange,
+        'income': income,
+        'incomeChange': incomeChange,
+        'expenses': expenses,
+        'expenseChange': expenseChange,
+        'savings': savings,
+        'savingsChange': savingsChange,
+      };
 }
 
 /// Calendar event
@@ -310,6 +528,53 @@ class CalendarEvent {
     this.colorIndex = 0,
     this.reminderMinutes = const [15],
   });
+
+  factory CalendarEvent.fromJson(Map<String, dynamic> json) => CalendarEvent(
+        id: json['id'] as String? ?? '',
+        title: json['title'] as String? ?? '',
+        type: EventType.values.firstWhere(
+          (e) => e.name == (json['type'] as String? ?? ''),
+          orElse: () => EventType.personal,
+        ),
+        startTime: DateTime.tryParse(json['startTime'] as String? ?? '') ?? DateTime.now(),
+        endTime: DateTime.tryParse(json['endTime'] as String? ?? '') ?? DateTime.now(),
+        isAllDay: json['isAllDay'] as bool? ?? false,
+        location: json['location'] as String?,
+        description: json['description'] as String?,
+        guests: (json['guests'] as List<dynamic>? ?? [])
+            .map((e) => e as String? ?? '')
+            .toList(),
+        status: EventStatus.values.firstWhere(
+          (e) => e.name == (json['status'] as String? ?? ''),
+          orElse: () => EventStatus.confirmed,
+        ),
+        availability: Availability.values.firstWhere(
+          (e) => e.name == (json['availability'] as String? ?? ''),
+          orElse: () => Availability.busy,
+        ),
+        calendarName: json['calendarName'] as String?,
+        colorIndex: (json['colorIndex'] as num?)?.toInt() ?? 0,
+        reminderMinutes: (json['reminderMinutes'] as List<dynamic>? ?? [15])
+            .map((e) => (e as num?)?.toInt() ?? 15)
+            .toList(),
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'title': title,
+        'type': type.name,
+        'startTime': startTime.toIso8601String(),
+        'endTime': endTime.toIso8601String(),
+        'isAllDay': isAllDay,
+        'location': location,
+        'description': description,
+        'guests': guests,
+        'status': status.name,
+        'availability': availability.name,
+        'calendarName': calendarName,
+        'colorIndex': colorIndex,
+        'reminderMinutes': reminderMinutes,
+      };
 }
 
 /// Wishlist item
@@ -347,6 +612,50 @@ class WishlistItem {
   });
 
   double get savedPercentage => price > 0 ? (savedAmount / price * 100).clamp(0, 100) : 0;
+
+  factory WishlistItem.fromJson(Map<String, dynamic> json) => WishlistItem(
+        id: json['id'] as String? ?? '',
+        name: json['name'] as String? ?? '',
+        imageUrl: json['imageUrl'] as String?,
+        priority: WishlistPriority.values.firstWhere(
+          (e) => e.name == (json['priority'] as String? ?? ''),
+          orElse: () => WishlistPriority.medium,
+        ),
+        price: (json['price'] as num?)?.toDouble() ?? 0.0,
+        savedAmount: (json['savedAmount'] as num?)?.toDouble() ?? 0,
+        category: json['category'] as String?,
+        tags: (json['tags'] as List<dynamic>? ?? [])
+            .map((e) => e as String? ?? '')
+            .toList(),
+        desiredBy: json['desiredBy'] != null
+            ? DateTime.tryParse(json['desiredBy'] as String? ?? '')
+            : null,
+        url: json['url'] as String?,
+        notes: json['notes'] as String?,
+        availability: ItemAvailability.values.firstWhere(
+          (e) => e.name == (json['availability'] as String? ?? ''),
+          orElse: () => ItemAvailability.unknown,
+        ),
+        isPurchased: json['isPurchased'] as bool? ?? false,
+        addedAt: DateTime.tryParse(json['addedAt'] as String? ?? '') ?? DateTime.now(),
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'imageUrl': imageUrl,
+        'priority': priority.name,
+        'price': price,
+        'savedAmount': savedAmount,
+        'category': category,
+        'tags': tags,
+        'desiredBy': desiredBy?.toIso8601String(),
+        'url': url,
+        'notes': notes,
+        'availability': availability.name,
+        'isPurchased': isPurchased,
+        'addedAt': addedAt.toIso8601String(),
+      };
 }
 
 /// Personal statement card data
@@ -370,6 +679,33 @@ class StatementCardData {
     this.isLocked = false,
     this.highlights = const [],
   });
+
+  factory StatementCardData.fromJson(Map<String, dynamic> json) => StatementCardData(
+        type: StatementCard.values.firstWhere(
+          (e) => e.name == (json['type'] as String? ?? ''),
+          orElse: () => StatementCard.lifestyle,
+        ),
+        title: json['title'] as String? ?? '',
+        emoji: json['emoji'] as String? ?? '',
+        summary: json['summary'] as String? ?? '',
+        completionPercent: (json['completionPercent'] as num?)?.toInt() ?? 0,
+        lastUpdated: DateTime.tryParse(json['lastUpdated'] as String? ?? '') ?? DateTime.now(),
+        isLocked: json['isLocked'] as bool? ?? false,
+        highlights: (json['highlights'] as List<dynamic>? ?? [])
+            .map((e) => e as String? ?? '')
+            .toList(),
+      );
+
+  Map<String, dynamic> toJson() => {
+        'type': type.name,
+        'title': title,
+        'emoji': emoji,
+        'summary': summary,
+        'completionPercent': completionPercent,
+        'lastUpdated': lastUpdated.toIso8601String(),
+        'isLocked': isLocked,
+        'highlights': highlights,
+      };
 }
 
 /// Statement version for version control
@@ -387,6 +723,22 @@ class StatementVersion {
     required this.changeComment,
     this.changedBy,
   });
+
+  factory StatementVersion.fromJson(Map<String, dynamic> json) => StatementVersion(
+        id: json['id'] as String? ?? '',
+        versionNumber: (json['versionNumber'] as num?)?.toInt() ?? 0,
+        createdAt: DateTime.tryParse(json['createdAt'] as String? ?? '') ?? DateTime.now(),
+        changeComment: json['changeComment'] as String? ?? '',
+        changedBy: json['changedBy'] as String?,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'versionNumber': versionNumber,
+        'createdAt': createdAt.toIso8601String(),
+        'changeComment': changeComment,
+        'changedBy': changedBy,
+      };
 }
 
 /// Settings toggle item
@@ -402,6 +754,20 @@ class AprilSettingsToggle {
     this.subtitle,
     required this.value,
   });
+
+  factory AprilSettingsToggle.fromJson(Map<String, dynamic> json) => AprilSettingsToggle(
+        key: json['key'] as String? ?? '',
+        title: json['title'] as String? ?? '',
+        subtitle: json['subtitle'] as String?,
+        value: json['value'] as bool? ?? false,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'key': key,
+        'title': title,
+        'subtitle': subtitle,
+        'value': value,
+      };
 }
 
 /// Spending analytics data point
@@ -415,6 +781,23 @@ class SpendingDataPoint {
     required this.amount,
     this.category,
   });
+
+  factory SpendingDataPoint.fromJson(Map<String, dynamic> json) => SpendingDataPoint(
+        label: json['label'] as String? ?? '',
+        amount: (json['amount'] as num?)?.toDouble() ?? 0.0,
+        category: json['category'] != null
+            ? TransactionCategory.values.firstWhere(
+                (e) => e.name == (json['category'] as String? ?? ''),
+                orElse: () => TransactionCategory.other,
+              )
+            : null,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'label': label,
+        'amount': amount,
+        'category': category?.name,
+      };
 }
 
 /// Financial health score
@@ -433,6 +816,22 @@ class FinancialHealth {
 
   /// Alias for UI compatibility
   List<String> get tips => recommendations;
+
+  factory FinancialHealth.fromJson(Map<String, dynamic> json) => FinancialHealth(
+        score: (json['score'] as num?)?.toInt() ?? 0,
+        grade: json['grade'] as String? ?? '',
+        summary: json['summary'] as String? ?? '',
+        recommendations: (json['recommendations'] as List<dynamic>? ?? [])
+            .map((e) => e as String? ?? '')
+            .toList(),
+      );
+
+  Map<String, dynamic> toJson() => {
+        'score': score,
+        'grade': grade,
+        'summary': summary,
+        'recommendations': recommendations,
+      };
 }
 
 /// Wishlist collection
@@ -452,4 +851,22 @@ class WishlistCollection {
     required this.totalValue,
     this.isShared = false,
   });
+
+  factory WishlistCollection.fromJson(Map<String, dynamic> json) => WishlistCollection(
+        id: json['id'] as String? ?? '',
+        name: json['name'] as String? ?? '',
+        emoji: json['emoji'] as String? ?? '',
+        itemCount: (json['itemCount'] as num?)?.toInt() ?? 0,
+        totalValue: (json['totalValue'] as num?)?.toDouble() ?? 0.0,
+        isShared: json['isShared'] as bool? ?? false,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'emoji': emoji,
+        'itemCount': itemCount,
+        'totalValue': totalValue,
+        'isShared': isShared,
+      };
 }

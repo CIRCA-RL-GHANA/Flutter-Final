@@ -159,7 +159,7 @@ class WishlistService {
 
   /// Get AI-powered purchase recommendations for wishlist items.
   /// Uses collaborative filtering based on user's wishlist profile.
-  Future<ApiResponse<List<Map<String, dynamic>>>> getAIRecommendations({
+  Future<ApiResponse<Map<String, dynamic>>> getAIRecommendations({
     int topN = 10,
   }) async {
     final wishlistResp = await getWishlist();
@@ -173,6 +173,9 @@ class WishlistService {
       final price = (item['estimatedPrice'] as num?)?.toDouble() ?? 0.0;
       preferenceVector[category] = (preferenceVector[category] ?? 0) + price;
     }
-    return _aiService.getRecommendations();
+    return _aiService.generateRecommendations({
+      'preferenceVector': preferenceVector,
+      'topN': topN,
+    });
   }
 }

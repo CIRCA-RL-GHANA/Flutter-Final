@@ -22,6 +22,7 @@ class _GoTransferScreenState extends State<GoTransferScreen> {
   final _messageCtrl = TextEditingController();
   final _searchCtrl = TextEditingController();
   double _amount = 0;
+  String? _amountError;
   String? _receiverId;
   String _receiverName = '';
   String _category = 'Personal';
@@ -29,6 +30,8 @@ class _GoTransferScreenState extends State<GoTransferScreen> {
   bool _termsAccepted = false;
   bool _processing = false;
   bool? _success;
+
+  bool get _isAmountValid => _amount > 0 && _amount <= 1000000 && _amountError == null;
 
   @override
   void dispose() { _amountCtrl.dispose(); _messageCtrl.dispose(); _searchCtrl.dispose(); super.dispose(); }
@@ -174,16 +177,41 @@ class _GoTransferScreenState extends State<GoTransferScreen> {
             const Text('AMOUNT', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF9CA3AF))),
             const SizedBox(height: 6),
             TextField(
-              controller: _amountCtrl, keyboardType: TextInputType.number, textAlign: TextAlign.center,
+              controller: _amountCtrl, keyboardType: const TextInputType.numberWithOptions(decimal: true), textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
-              decoration: InputDecoration(suffixText: 'QP', hintText: '0', border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none), filled: true, fillColor: const Color(0xFFF3F4F6)),
-              onChanged: (v) => setState(() => _amount = double.tryParse(v) ?? 0),
+              decoration: InputDecoration(
+                suffixText: 'QP', hintText: '0',
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+                filled: true, fillColor: const Color(0xFFF3F4F6),
+                errorText: _amountError,
+              ),
+              onChanged: (v) {
+                final parsed = double.tryParse(v);
+                setState(() {
+                  if (v.isEmpty || parsed == null) {
+                    _amount = 0;
+                    _amountError = null;
+                  } else if (parsed <= 0) {
+                    _amount = 0;
+                    _amountError = 'Amount must be greater than zero';
+                  } else if (parsed > 1000000) {
+                    _amount = parsed;
+                    _amountError = 'Amount exceeds maximum limit';
+                  } else if (v.contains('.') && v.split('.').last.length > 2) {
+                    _amount = parsed;
+                    _amountError = 'Maximum 2 decimal places allowed';
+                  } else {
+                    _amount = parsed;
+                    _amountError = null;
+                  }
+                });
+              },
             ),
             const SizedBox(height: 6),
             Text('Available: ${p.liquidity.available.toStringAsFixed(0)} QP', style: const TextStyle(fontSize: 11, color: kGoColor, fontWeight: FontWeight.w600)),
           ])),
           const SizedBox(height: 10),
-          Wrap(spacing: 8, children: [100, 500, 1000, 5000].map((v) => ActionChip(label: Text('$v'), backgroundColor: Colors.white, side: const BorderSide(color: Color(0xFF1C1C2E)), onPressed: () { _amountCtrl.text = '$v'; setState(() => _amount = v.toDouble()); })).toList()),
+          Wrap(spacing: 8, children: [100, 500, 1000, 5000].map((v) => ActionChip(label: Text('$v'), backgroundColor: Colors.white, side: const BorderSide(color: Color(0xFF1C1C2E)), onPressed: () { _amountCtrl.text = '$v'; setState(() { _amount = v.toDouble(); _amountError = null; }); })).toList()),
           const SizedBox(height: 14),
           // Message
           TextField(
@@ -221,7 +249,7 @@ class _GoTransferScreenState extends State<GoTransferScreen> {
             ])),
           ],
         ])),
-        _buildFooter(() => setState(() => _step = 0), _amount > 0 ? () => setState(() => _step = 2) : null, 'Review'),
+        _buildFooter(() => setState(() => _step = 0), _isAmountValid ? () => setState(() => _step = 2) : null, 'Review'),
       ],
     );
   }

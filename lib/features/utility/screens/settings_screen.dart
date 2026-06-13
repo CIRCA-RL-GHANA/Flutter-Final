@@ -6,6 +6,7 @@ library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/services/ai_insights_notifier.dart';
@@ -14,8 +15,30 @@ import '../providers/utility_provider.dart';
 import '../../../core/routes/app_routes.dart';
 import '../widgets/shared_widgets.dart';
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
+
+  @override
+  State<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
+  String _versionString = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _loadVersion();
+  }
+
+  Future<void> _loadVersion() async {
+    final info = await PackageInfo.fromPlatform();
+    if (mounted) {
+      setState(() {
+        _versionString = 'v${info.version} (Build ${info.buildNumber})';
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -217,11 +240,11 @@ class SettingsScreen extends StatelessWidget {
               UtilitySectionCard(
                 child: Column(
                   children: [
-                    const UtilityActionTile(
+                    UtilityActionTile(
                       label: 'App Version',
-                      subtitle: 'v2.4.1 (Build 241)',
+                      subtitle: _versionString.isEmpty ? 'Loading...' : _versionString,
                       icon: Icons.info_outline,
-                      iconColor: Color(0xFF64748B),
+                      iconColor: const Color(0xFF64748B),
                       showChevron: false,
                       onTap: null,
                     ),
@@ -237,8 +260,8 @@ class SettingsScreen extends StatelessWidget {
                       label: 'Open Source Licenses',
                       icon: Icons.code,
                       iconColor: const Color(0xFF64748B),
-                      onTap: () => ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Open source licenses')),
+                      onTap: () => Navigator.of(context).push(
+                        MaterialPageRoute(builder: (_) => const LicensePage()),
                       ),
                     ),
                   ],

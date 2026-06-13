@@ -13,18 +13,10 @@ import '../models/rbac_models.dart';
 class PromptProvider extends ChangeNotifier {
   // ─── Services ───────────────────────────────────────────────────────────
   final ProductService _productService;
-  // ignore: unused_field
-  final AIService _aiService;
-  // ignore: unused_field
-  final OrderService _orderService;
 
   PromptProvider({
     ProductService? productService,
-    AIService? aiService,
-    OrderService? orderService,
-  })  : _productService = productService ?? ProductService(),
-        _aiService = aiService ?? AIService(),
-        _orderService = orderService ?? OrderService();
+  })  : _productService = productService ?? ProductService();
 
   // ─── Global Loading / Error State ───────────────────────────────────────
   final bool _isLoading = false;

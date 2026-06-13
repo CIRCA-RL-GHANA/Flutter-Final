@@ -247,15 +247,22 @@ class RideService {
   }
 
   /// Get AI-powered ride route optimization suggestions.
-  /// Summarizes route considerations based on input coordinates.
+  /// Uses the AI pricing/ride endpoint to compute optimized route data.
   Future<ApiResponse<Map<String, dynamic>>> getRouteOptimization({
     required double pickupLat,
     required double pickupLng,
     required double dropoffLat,
     required double dropoffLng,
   }) {
-    final routeDescription =
-        'Route from ($pickupLat, $pickupLng) to ($dropoffLat, $dropoffLng)';
-    return _aiService.detectIntent(routeDescription);
+    return _api.post<Map<String, dynamic>>(
+      ApiRoutes.ai.ridePrice,
+      data: {
+        'pickupLat': pickupLat,
+        'pickupLng': pickupLng,
+        'dropoffLat': dropoffLat,
+        'dropoffLng': dropoffLng,
+      },
+      fromJson: (json) => json as Map<String, dynamic>,
+    );
   }
 }

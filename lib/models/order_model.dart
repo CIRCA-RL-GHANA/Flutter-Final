@@ -20,14 +20,14 @@ class OrderModel {
   });
 
   factory OrderModel.fromJson(Map<String, dynamic> json) => OrderModel(
-        id: json['id'] as String,
-        customerId: json['customerId'] as String,
-        orderType: json['orderType'] as String,
-        orderStatus: json['orderStatus'] as String,
-        pickupAddress: json['pickupAddress'] as String,
-        dropoffAddress: json['dropoffAddress'] as String,
-        baseFare: (json['baseFare'] as num).toDouble(),
-        totalFare: (json['totalFare'] as num).toDouble(),
+        id: json['id'] as String? ?? '',
+        customerId: json['customerId'] as String? ?? '',
+        orderType: json['orderType'] as String? ?? '',
+        orderStatus: json['orderStatus'] as String? ?? '',
+        pickupAddress: json['pickupAddress'] as String? ?? '',
+        dropoffAddress: json['dropoffAddress'] as String? ?? '',
+        baseFare: (json['baseFare'] as num? ?? 0).toDouble(),
+        totalFare: (json['totalFare'] as num? ?? 0).toDouble(),
       );
 
   Map<String, dynamic> toJson() => {

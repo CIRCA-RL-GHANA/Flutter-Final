@@ -106,8 +106,8 @@ class ChatService extends ChangeNotifier {
   // or unarchive endpoints. These are documented no-ops returning false/empty
   // so callers can handle them gracefully without crashing.
 
-  /// Not supported by the backend. Returns false; callers should hide the UI
-  /// option or show an "unavailable" message.
+  /// Backend does not expose a DELETE /messages endpoint.
+  /// Always returns false. Use session archiving instead.
   Future<bool> deleteMessage(String messageId) async {
     if (kDebugMode) {
       debugPrint('[ChatService] deleteMessage: backend does not expose a DELETE endpoint.');
@@ -121,7 +121,7 @@ class ChatService extends ChangeNotifier {
     return result.isSuccess;
   }
 
-  /// Not supported by the backend. Returns true (idempotent no-op).
+  /// Backend does not expose an unarchive endpoint. Always returns true (no-op).
   Future<bool> unarchiveConversation(String conversationId) async => true;
 
   /// Search is done client-side (no backend search endpoint for chat sessions).

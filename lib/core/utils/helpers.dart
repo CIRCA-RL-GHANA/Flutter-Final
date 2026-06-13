@@ -83,6 +83,8 @@ class Validators {
     return null;
   }
 
+  /// Validates an email address. Returns null if valid or if empty (email is optional in this app).
+  /// To require email, check for empty separately before calling this validator.
   static String? validateEmail(String? value) {
     if (value == null || value.trim().isEmpty) return null; // Optional
     if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value.trim())) {
@@ -110,6 +112,20 @@ class Validators {
     if (!RegExp(r'^\d+$').hasMatch(value)) return 'PIN must contain only digits';
     // Check for simple patterns
     if (RegExp(r'^(\d)\1+$').hasMatch(value)) return 'PIN is too simple';
+    if (_isSequentialPin(value)) return 'PIN is too simple. Avoid sequences like 1234 or 9876.';
     return null;
+  }
+
+  static bool _isSequentialPin(String pin) {
+    if (pin.length < 4) return false;
+    bool ascending = true;
+    bool descending = true;
+    for (int i = 0; i < pin.length - 1; i++) {
+      final curr = int.parse(pin[i]);
+      final next = int.parse(pin[i + 1]);
+      if (next != curr + 1) ascending = false;
+      if (next != curr - 1) descending = false;
+    }
+    return ascending || descending;
   }
 }

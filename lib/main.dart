@@ -1,7 +1,9 @@
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart' hide Consumer;
 import 'package:provider/provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -13,33 +15,51 @@ import 'core/network/api_client.dart';
 import 'features/onboarding/providers/onboarding_provider.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  runZonedGuarded(() async {
+    WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize Hive for local storage
-  await Hive.initFlutter();
+    // FLUTTER-074: Warn in debug mode if ENVIRONMENT dart-define is not set
+    assert(() {
+      if (const String.fromEnvironment('ENVIRONMENT').isEmpty) {
+        debugPrint('[ENV WARNING] ENVIRONMENT dart-define not set. Defaulting to production.');
+      }
+      return true;
+    }());
 
-  // Initialize API client (loads saved auth tokens)
-  await ApiClient.instance.init();
+    // FLUTTER-047: Initialize Hive for local storage — guarded so corruption doesn't crash
+    try {
+      await Hive.initFlutter();
+    } catch (e, st) {
+      debugPrint('[HIVE INIT ERROR] $e\n$st');
+    }
 
-  // Set preferred orientations
-  await SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
+    // FLUTTER-046: Initialize API client (loads saved auth tokens) — guarded so failures are logged
+    try {
+      await ApiClient.instance.init();
+    } catch (e, st) {
+      debugPrint('[API CLIENT INIT ERROR] $e\n$st');
+    }
 
-  // Set system UI overlay style — aligned to brand-dark surfaces
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.light,
-      statusBarBrightness: Brightness.dark,
-      systemNavigationBarColor: IveTokens.bg,
-      systemNavigationBarIconBrightness: Brightness.light,
-      systemNavigationBarDividerColor: IveTokens.hairline,
-    ),
-  );
+    // Set preferred orientations
+    await SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
 
-  runApp(const ProviderScope(child: PromptGenieApp()));
+    // Set system UI overlay style — aligned to brand-dark surfaces
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.light,
+        statusBarBrightness: Brightness.dark,
+        systemNavigationBarColor: IveTokens.bg,
+        systemNavigationBarIconBrightness: Brightness.light,
+        systemNavigationBarDividerColor: IveTokens.hairline,
+      ),
+    );
+
+    runApp(const PromptGenieApp());
+  }, (error, stack) => debugPrint('[UNHANDLED] $error\n$stack'));
 }
 
 class PromptGenieApp extends StatelessWidget {

@@ -1,5 +1,6 @@
 import '../../core/network/api_client.dart';
 import '../../core/network/api_response.dart';
+import '../../core/constants/api_routes.dart';
 import '../../features/go/models/qpoint_market_models.dart';
 
 /// Service for the Q Points liquid market.
@@ -12,7 +13,7 @@ class QPointMarketService {
   // ── Balance ──────────────────────────────────────────────────────────────
 
   Future<ApiResponse<QPointMarketBalance>> getBalance() => _api.get(
-        '/qpoints/balance',
+        ApiRoutes.qpointMarket.balance,
         fromJson: (json) =>
             QPointMarketBalance.fromJson(json as Map<String, dynamic>),
       );
@@ -20,13 +21,13 @@ class QPointMarketService {
   // ── Order Book ───────────────────────────────────────────────────────────
 
   Future<ApiResponse<QPointOrderBook>> getOrderBook() => _api.get(
-        '/qpoints/orders',
+        ApiRoutes.qpointMarket.orderBook,
         fromJson: (json) =>
             QPointOrderBook.fromJson(json as Map<String, dynamic>),
       );
 
   Future<ApiResponse<List<QPointOrder>>> getOpenOrders() => _api.get(
-        '/qpoints/orders/open',
+        ApiRoutes.qpointMarket.openOrders,
         fromJson: (json) => (json as List<dynamic>)
             .map((e) => QPointOrder.fromJson(e as Map<String, dynamic>))
             .toList(),
@@ -41,14 +42,14 @@ class QPointMarketService {
     required double quantity,
   }) =>
       _api.post(
-        '/qpoints/orders',
+        ApiRoutes.qpointMarket.orderBook,
         data: {'type': type, 'price': price, 'quantity': quantity},
         fromJson: (json) => json as Map<String, dynamic>,
       );
 
   Future<ApiResponse<Map<String, dynamic>>> cancelOrder(String orderId) =>
       _api.delete(
-        '/qpoints/orders/$orderId',
+        ApiRoutes.qpointMarket.cancelOrder(orderId),
         fromJson: (json) => json as Map<String, dynamic>,
       );
 
@@ -56,14 +57,14 @@ class QPointMarketService {
 
   Future<ApiResponse<Map<String, dynamic>>> cashIn(double quantity) =>
       _api.post(
-        '/qpoints/cashin',
+        ApiRoutes.qpointMarket.cashIn,
         data: {'quantity': quantity},
         fromJson: (json) => json as Map<String, dynamic>,
       );
 
   Future<ApiResponse<Map<String, dynamic>>> cashOut(double quantity) =>
       _api.post(
-        '/qpoints/cashout',
+        ApiRoutes.qpointMarket.cashOut,
         data: {'quantity': quantity},
         fromJson: (json) => json as Map<String, dynamic>,
       );
@@ -75,7 +76,7 @@ class QPointMarketService {
     int offset = 0,
   }) =>
       _api.get(
-        '/qpoints/trades',
+        ApiRoutes.qpointMarket.trades,
         queryParameters: {'limit': limit, 'offset': offset},
         fromJson: (json) => json as Map<String, dynamic>,
       );
@@ -83,7 +84,7 @@ class QPointMarketService {
   // ── Market Stats ─────────────────────────────────────────────────────────
 
   Future<ApiResponse<QPointMarketStats>> getMarketStats() => _api.get(
-        '/qpoints/market',
+        ApiRoutes.qpointMarket.market,
         fromJson: (json) =>
             QPointMarketStats.fromJson(json as Map<String, dynamic>),
       );
@@ -95,7 +96,7 @@ class QPointMarketService {
     int offset = 0,
   }) =>
       _api.get(
-        '/qpoints/notifications',
+        ApiRoutes.qpointMarket.notifications,
         queryParameters: {'limit': limit, 'offset': offset},
         fromJson: (json) => json as Map<String, dynamic>,
       );
@@ -105,7 +106,7 @@ class QPointMarketService {
     bool all = false,
   }) =>
       _api.post(
-        '/qpoints/notifications/read',
+        ApiRoutes.qpointMarket.notificationsRead,
         data: all ? {'all': true} : {'notificationIds': ids ?? []},
         fromJson: (json) => json as Map<String, dynamic>,
       );
@@ -114,14 +115,14 @@ class QPointMarketService {
 
   /// Returns the current ToS version, effective date, content hash, and full text.
   Future<ApiResponse<QPointsTosContent>> getCurrentTos() => _api.get(
-        '/qpoints/tos',
+        ApiRoutes.qpointMarket.tos,
         fromJson: (json) =>
             QPointsTosContent.fromJson(json as Map<String, dynamic>),
       );
 
   /// Returns whether the current user has accepted the current ToS version.
   Future<ApiResponse<QPointsTosStatus>> getTosStatus() => _api.get(
-        '/qpoints/tos/status',
+        ApiRoutes.qpointMarket.tosStatus,
         fromJson: (json) =>
             QPointsTosStatus.fromJson(json as Map<String, dynamic>),
       );
@@ -136,7 +137,7 @@ class QPointMarketService {
     required String platform,
   }) =>
       _api.post(
-        '/qpoints/tos/accept',
+        ApiRoutes.qpointMarket.tosAccept,
         data: {
           'tosVersion': tosVersion,
           'readConfirmed': readConfirmed,
@@ -152,7 +153,7 @@ class QPointMarketService {
   /// Returns the current fee schedule as required by TOS Section 7.1.
   /// Does NOT require ToS acceptance — always publicly accessible.
   Future<ApiResponse<QPointFeeSchedule>> getFeeSchedule() => _api.get(
-        '/qpoints/fees',
+        ApiRoutes.qpointMarket.fees,
         fromJson: (json) =>
             QPointFeeSchedule.fromJson(json as Map<String, dynamic>),
       );
@@ -166,7 +167,7 @@ class QPointMarketService {
     String countryCode,
   ) =>
       _api.get(
-        '/qpoints/facilitators',
+        ApiRoutes.qpointMarket.facilitators,
         queryParameters: {'country': countryCode},
         fromJson: (json) => (json as List<dynamic>)
             .map((e) =>
@@ -177,7 +178,7 @@ class QPointMarketService {
   /// Returns all registered facilitator accounts for the authenticated user.
   Future<ApiResponse<List<QPointFacilitatorAccount>>>
       getMyFacilitatorAccounts() => _api.get(
-            '/qpoints/payment/accounts',
+            ApiRoutes.qpointMarket.paymentAccounts,
             fromJson: (json) => (json as List<dynamic>)
                 .map((e) => QPointFacilitatorAccount.fromJson(
                     e as Map<String, dynamic>))
@@ -199,7 +200,7 @@ class QPointMarketService {
     String? phone,
   }) =>
       _api.post(
-        '/qpoints/payment/register',
+        ApiRoutes.qpointMarket.paymentRegister,
         data: {
           if (provider != null) 'provider': provider,
           'email': email,
@@ -221,7 +222,7 @@ class QPointMarketService {
   /// Admin only — requires admin JWT.
   Future<ApiResponse<List<AiFacilitatorBalance>>> getCrossFacilitatorBalances() =>
       _api.get(
-        '/qpoints/admin/cross-facilitator/balances',
+        ApiRoutes.qpointMarket.adminCrossFacilitatorBalances,
         fromJson: (json) => (json as List<dynamic>)
             .map((e) => AiFacilitatorBalance.fromJson(e as Map<String, dynamic>))
             .toList(),
@@ -231,7 +232,7 @@ class QPointMarketService {
   /// Admin only.
   Future<ApiResponse<CrossFacilitatorNetPosition>> getNetPositionSummary() =>
       _api.get(
-        '/qpoints/admin/cross-facilitator/net-position',
+        ApiRoutes.qpointMarket.adminNetPosition,
         fromJson: (json) =>
             CrossFacilitatorNetPosition.fromJson(json as Map<String, dynamic>),
       );
@@ -239,7 +240,7 @@ class QPointMarketService {
   /// Lists netting/rebalancing tasks, optionally filtered by status.
   Future<ApiResponse<List<NettingTask>>> listNettingTasks({String? status}) =>
       _api.get(
-        '/qpoints/admin/netting/tasks',
+        ApiRoutes.qpointMarket.adminNettingTasks,
         queryParameters: {if (status != null) 'status': status},
         fromJson: (json) => (json as List<dynamic>)
             .map((e) => NettingTask.fromJson(e as Map<String, dynamic>))
@@ -253,7 +254,7 @@ class QPointMarketService {
     String? notes,
   }) =>
       _api.post(
-        '/qpoints/admin/netting/tasks/$taskId/complete',
+        ApiRoutes.qpointMarket.adminNettingTaskComplete(taskId),
         data: {
           'transferReference': transferReference,
           if (notes != null) 'notes': notes,
@@ -267,7 +268,7 @@ class QPointMarketService {
     String? notes,
   }) =>
       _api.post(
-        '/qpoints/admin/netting/tasks/$taskId/cancel',
+        ApiRoutes.qpointMarket.adminNettingTaskCancel(taskId),
         data: {if (notes != null) 'notes': notes},
         fromJson: (json) => NettingTask.fromJson(json as Map<String, dynamic>),
       );
@@ -275,7 +276,7 @@ class QPointMarketService {
   /// Triggers an immediate netting analysis run (normally runs hourly via cron).
   Future<ApiResponse<Map<String, dynamic>>> triggerManualNettingRun() =>
       _api.post(
-        '/qpoints/admin/netting/run',
+        ApiRoutes.qpointMarket.adminNettingRun,
         data: {},
         fromJson: (json) => json as Map<String, dynamic>,
       );
@@ -287,7 +288,7 @@ class QPointMarketService {
     required double amountUsd,
   }) =>
       _api.post(
-        '/qpoints/admin/cross-facilitator/balances/$facilitatorId/fund',
+        ApiRoutes.qpointMarket.adminFacilitatorFund(facilitatorId),
         data: {'amountUsd': amountUsd},
         fromJson: (json) =>
             AiFacilitatorBalance.fromJson(json as Map<String, dynamic>),
@@ -314,14 +315,14 @@ class QPointMarketService {
   }) {
     if (forceRefresh) {
       return _api.post(
-        '/qpoints/payment/cash-balance/refresh',
+        ApiRoutes.qpointMarket.cashBalanceRefresh,
         data: {},
         fromJson: (json) =>
             FacilitatorCashBalance.fromJson(json as Map<String, dynamic>),
       );
     }
     return _api.get(
-      '/qpoints/payment/cash-balance',
+      ApiRoutes.qpointMarket.cashBalance,
       fromJson: (json) =>
           FacilitatorCashBalance.fromJson(json as Map<String, dynamic>),
     );
@@ -340,7 +341,7 @@ class QPointMarketService {
     String currency = 'USD',
   }) {
     return _api.post(
-      '/qpoints/payment/deposit',
+      ApiRoutes.qpointMarket.deposit,
       data: {'amount': amount, 'currency': currency},
       fromJson: (json) =>
           FacilitatorTransactionResult.fromJson(json as Map<String, dynamic>),
@@ -359,7 +360,7 @@ class QPointMarketService {
     String? payoutMethodId,
   }) {
     return _api.post(
-      '/qpoints/payment/withdraw',
+      ApiRoutes.qpointMarket.withdraw,
       data: {
         'amount': amount,
         'currency': currency,
@@ -378,7 +379,8 @@ class QPointMarketService {
     int offset = 0,
   }) {
     return _api.get(
-      '/qpoints/payment/transactions?limit=$limit&offset=$offset',
+      ApiRoutes.qpointMarket.paymentTransactions,
+      queryParameters: {'limit': limit, 'offset': offset},
       fromJson: (json) =>
           FacilitatorTransactionPage.fromJson(json as Map<String, dynamic>),
     );
@@ -387,7 +389,7 @@ class QPointMarketService {
   /// Returns a single transaction by ID.
   Future<ApiResponse<FacilitatorTransaction>> getTransaction(String id) {
     return _api.get(
-      '/qpoints/payment/transactions/$id',
+      ApiRoutes.qpointMarket.paymentTransactionById(id),
       fromJson: (json) =>
           FacilitatorTransaction.fromJson(json as Map<String, dynamic>),
     );
