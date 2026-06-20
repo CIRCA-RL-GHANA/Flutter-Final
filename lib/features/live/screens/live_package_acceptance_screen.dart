@@ -12,7 +12,6 @@ import '../../../core/theme/app_colors.dart';
 import '../models/live_models.dart';
 import '../providers/live_provider.dart';
 import '../widgets/live_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class LivePackageAcceptanceScreen extends StatefulWidget {
   const LivePackageAcceptanceScreen({super.key});
@@ -40,38 +39,12 @@ class _LivePackageAcceptanceScreenState extends State<LivePackageAcceptanceScree
           body: ListView(
             padding: const EdgeInsets.all(16),
             children: [
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    margin: const EdgeInsets.only(bottom: 12),
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                    decoration: BoxDecoration(
-                      color: kLiveColor.withValues(alpha: 0.07),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: kLiveColor),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            'AI: ${ai.insights.first['title'] ?? ''}',
-                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kLiveColor),
-                            maxLines: 1, overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
               // Countdown timer banner
               Container(
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(colors: [Color(0xFFF59E0B), Color(0xFFEF4444)]),
-                  borderRadius: BorderRadius.circular(14),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: Row(
                   children: [
@@ -202,9 +175,8 @@ class _LivePackageAcceptanceScreenState extends State<LivePackageAcceptanceScree
           ),
           bottomNavigationBar: Container(
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
-              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 8, offset: const Offset(0, -2))],
             ),
             child: Row(
               children: [
@@ -228,7 +200,7 @@ class _LivePackageAcceptanceScreenState extends State<LivePackageAcceptanceScree
                     },
                     icon: const Icon(Icons.check, size: 18),
                     label: const Text('ACCEPT PACKAGE', style: TextStyle(fontWeight: FontWeight.w700)),
-                    style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10B981), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
+                    style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10B981), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                   ),
                 ),
               ],
@@ -274,7 +246,7 @@ class _AcceptedView extends StatelessWidget {
                   onPressed: onStartNavigation,
                   icon: const Icon(Icons.navigation, size: 18),
                   label: const Text('START NAVIGATION', style: TextStyle(fontWeight: FontWeight.w700)),
-                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF3B82F6), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 16), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
+                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF3B82F6), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 16), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                 ),
               ),
               const SizedBox(height: 8),

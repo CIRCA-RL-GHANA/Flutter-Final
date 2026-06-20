@@ -150,4 +150,46 @@ class IveTokens {
   /// Resolves a module's canonical accent by key. Unknown keys fall back to
   /// the brand accent so the UI never paints a missing module in a raw hex.
   static Color moduleColor(String key) => moduleColors[key] ?? accent;
+
+  // ─── Commerce OS Color System — Perfection Pass (Phase 1) ─────────────────
+  // Cold (System) — deep dark surfaces with luminance steps
+  static const Color voidColor    = Color(0xFF08080F); // deepest void (= bg)
+  static const Color void2Color   = Color(0xFF0B0B14); // near-void overlay
+  static const Color surfaceColor = Color(0xFF0E0E1A); // default surface
+  static const Color raisedColor  = Color(0xFF14141F); // raised card / modal
+  static const Color hairColor    = Color(0xFF1C1C2E); // hairline divider
+  static const Color hair2Color   = Color(0xFF26263A); // stronger divider
+  static const Color accentColor  = Color(0xFF4361EE); // primary action blue
+  static const Color accentSoftBlue = Color(0x264361EE); // blue ambient glow
+
+  // Warm (Genie) — RESERVED for Genie intelligence layer only
+  static const Color genieColor  = Color(0xFFC9A84C); // Genie gold
+  static const Color genieBright = Color(0xFFE6C766); // Genie highlight
+  static const Color genieSoft   = Color(0x1AC9A84C); // Genie ambient bg
+  static const Color genieLine   = Color(0x44C9A84C); // Genie border
+
+  // Semantic signals
+  static const Color okColor   = Color(0xFF34D399); // success / ok
+  static const Color warnColor = Color(0xFFF5B544); // warning
+  static const Color badColor  = Color(0xFFF26D6D); // error / danger
+  static const Color infoColor = Color(0xFF5BA8E8); // information
+
+  // Ink hierarchy (text)
+  static const Color inkColor   = Color(0xFFE8E8F0); // primary (integers)
+  static const Color ink2Color  = Color(0xFFA6A6BE); // secondary (decimals)
+  static const Color muteColor  = Color(0xFF6B6B88); // muted (units, labels)
+  static const Color faintColor = Color(0xFF41415A); // faint (disabled)
+
+  // ─── Luminance lift (replaces shadows — Move 03) ──────────────────────────
+  /// Top inner highlight simulates surface elevation without any BoxShadow.
+  /// Apply as a LinearGradient top stop on raised surfaces.
+  static const Color topHighlight = Color(0x0FFFFFFF); // white ~6 %
+
+  // ─── Canonical radius system (Perfection Pass audit — Move 01) ────────────
+  /// Atoms: chips, tags, small buttons.
+  static const double rAtom      = 6.0;
+  /// Containers: inputs, cards, list rows, sheets.
+  static const double rContainer = 10.0;
+  /// Pills: fully rounded (large chips, toggles).
+  static const double rChip      = 100.0;
 }

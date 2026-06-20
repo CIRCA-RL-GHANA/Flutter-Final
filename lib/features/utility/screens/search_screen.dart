@@ -1,4 +1,4 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// U3: OMNISCIENT SEARCH Screen
 /// Cross-module search with category filters, recent searches,
 /// quick suggestions, real-time results
@@ -8,8 +8,7 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/services/ai_insights_notifier.dart';
+import '../../../core/design/ive.dart';
 import '../../../core/services/ai_service.dart';
 import '../models/utility_models.dart';
 import '../providers/utility_provider.dart';
@@ -27,12 +26,16 @@ class _SearchScreenState extends State<SearchScreen> {
   late FocusNode _focusNode;
   List<Map<String, dynamic>> _aiResults = [];
   bool _aiLoading = false;
+  bool _focused = false;
 
   @override
   void initState() {
     super.initState();
     _controller = TextEditingController();
     _focusNode = FocusNode();
+    _focusNode.addListener(() {
+      if (mounted) setState(() => _focused = _focusNode.hasFocus);
+    });
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _focusNode.requestFocus();
     });
@@ -79,13 +82,13 @@ class _SearchScreenState extends State<SearchScreen> {
         final hasQuery = prov.searchQuery.isNotEmpty;
 
         return Scaffold(
-          backgroundColor: const Color(0xFF08080F),
+          backgroundColor: IveTokens.voidColor,
           appBar: UtilityAppBar(
             title: 'Search',
             actions: [
               if (hasQuery)
                 IconButton(
-                  icon: const Icon(Icons.clear, size: 20, color: AppColors.textPrimary),
+                  icon: const Icon(Icons.clear, size: 20, color: IveTokens.inkColor),
                   onPressed: () {
                     _controller.clear();
                     prov.clearSearch();
@@ -96,62 +99,68 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
           body: Column(
             children: [
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    color: kUtilityColor.withValues(alpha: 0.07),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: kUtilityColor),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            'AI: ${ai.insights.first['title'] ?? ''}',
-                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kUtilityColor),
-                            maxLines: 1, overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-
-              // ─── Search Bar ────────────────────────────────
+              // ─── Genie-style search input (OmniSearch P1) ─────
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
-                child: Container(
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(14),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.04),
-                        blurRadius: 10,
-                        offset: const Offset(0, 2),
+                    // Genie gold border on focus, hairline at rest
+                    color: const Color(0xFF0E0E1A),
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: _focused
+                          ? IveTokens.genieLine
+                          : IveTokens.hairColor,
+                      width: _focused ? 1.5 : 1,
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      // Spark appears on focus (Move 16 — OmniSearch Genie focus)
+                      Padding(
+                        padding: const EdgeInsets.only(left: 14),
+                        child: AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 180),
+                          child: _focused
+                              ? const Icon(
+                                  Icons.auto_awesome_rounded,
+                                  key: ValueKey('spark'),
+                                  color: IveTokens.genieColor,
+                                  size: 18,
+                                )
+                              : const Icon(
+                                  Icons.search_rounded,
+                                  key: ValueKey('search'),
+                                  color: IveTokens.muteColor,
+                                  size: 18,
+                                ),
+                        ),
+                      ),
+                      Expanded(
+                        child: TextField(
+                          controller: _controller,
+                          focusNode: _focusNode,
+                          onChanged: (q) {
+                            prov.updateSearchQuery(q);
+                            _runAISearch(q, prov);
+                          },
+                          onSubmitted: (q) {
+                            if (q.isNotEmpty) prov.addRecentSearch(q);
+                          },
+                          style: const TextStyle(
+                            color: Color(0xFFE8E8F0),
+                            fontSize: 15,
+                          ),
+                          decoration: const InputDecoration(
+                            hintText: 'Search everything',
+                            hintStyle: TextStyle(color: Color(0xFF6B6B88), fontSize: 15),
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+                          ),
+                        ),
                       ),
                     ],
-                  ),
-                  child: TextField(
-                    controller: _controller,
-                    focusNode: _focusNode,
-                    onChanged: (q) {
-                      prov.updateSearchQuery(q);
-                      _runAISearch(q, prov);
-                    },
-                    onSubmitted: (q) {
-                      if (q.isNotEmpty) prov.addRecentSearch(q);
-                    },
-
-                    decoration: const InputDecoration(
-                      hintText: 'Search everything...',
-                      hintStyle: TextStyle(color: AppColors.textTertiary, fontSize: 15),
-                      prefixIcon: Icon(Icons.search, color: AppColors.textTertiary),
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                    ),
                   ),
                 ),
               ),
@@ -226,19 +235,16 @@ class _SearchIdleView extends StatelessWidget {
         if (prov.recentSearches.isNotEmpty) ...[
           Row(
             children: [
-              const Text(
-                'Recent Searches',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textPrimary),
-              ),
+              Text('Recent searches', style: IveType.callout.copyWith(fontWeight: FontWeight.w600)),
               const Spacer(),
               TextButton(
                 onPressed: prov.clearRecentSearches,
                 style: TextButton.styleFrom(
-                  foregroundColor: AppColors.textTertiary,
+                  foregroundColor: IveTokens.muteColor,
                   padding: EdgeInsets.zero,
                   minimumSize: const Size(0, 0),
                 ),
-                child: const Text('Clear', style: TextStyle(fontSize: 12)),
+                child: Text('Clear', style: IveType.caption.copyWith(color: IveTokens.muteColor)),
               ),
             ],
           ),
@@ -255,19 +261,16 @@ class _SearchIdleView extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: AppColors.inputBorder),
+                  color: IveTokens.raisedColor,
+                  borderRadius: BorderRadius.circular(IveTokens.rChip),
+                  border: Border.all(color: IveTokens.hairColor),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.history, size: 14, color: AppColors.textTertiary),
+                    const Icon(Icons.history, size: 14, color: IveTokens.muteColor),
                     const SizedBox(width: 6),
-                    Text(
-                      s.query,
-                      style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
-                    ),
+                    Text(s.query, style: IveType.caption.copyWith(color: IveTokens.ink2Color)),
                   ],
                 ),
               ),
@@ -277,10 +280,7 @@ class _SearchIdleView extends StatelessWidget {
         ],
 
         // Quick Suggestions
-        const Text(
-          'Quick Suggestions',
-          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textPrimary),
-        ),
+        Text('Quick suggestions', style: IveType.callout.copyWith(fontWeight: FontWeight.w600)),
         const SizedBox(height: 8),
         UtilitySectionCard(
           child: Column(
@@ -423,7 +423,7 @@ class _SearchResults extends StatelessWidget {
                     height: 40,
                     decoration: BoxDecoration(
                       color: result.iconColor.withValues(alpha: 0.1),
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                     child: Icon(result.icon, size: 20, color: result.iconColor),
                   ),
@@ -436,7 +436,7 @@ class _SearchResults extends StatelessWidget {
                           color: Color(0xFF8B5CF6),
                           shape: BoxShape.circle,
                         ),
-                        child: const Icon(Icons.auto_awesome, size: 7, color: Colors.white),
+                        child: const Icon(Icons.auto_awesome, size: 7, color: IveTokens.inkColor),
                       ),
                     ),
                 ],
@@ -448,18 +448,11 @@ class _SearchResults extends StatelessWidget {
                   children: [
                     Text(
                       result.title,
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: isAITop ? FontWeight.w600 : FontWeight.w500,
-                        color: AppColors.textPrimary,
-                      ),
+                      style: IveType.callout.copyWith(fontWeight: isAITop ? FontWeight.w600 : FontWeight.w500),
                     ),
                     Text(
                       result.subtitle,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: AppColors.textTertiary,
-                      ),
+                      style: IveType.caption.copyWith(color: IveTokens.muteColor),
                     ),
                   ],
                 ),

@@ -1,4 +1,4 @@
-/// GO Screen 7 — Favorites Hub
+﻿/// GO Screen 7 — Favorites Hub
 /// Categorized grid (People/Businesses/Services/Internal),
 /// entity cards, relationship insights, bulk management, discovery
 library;
@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 import '../models/go_models.dart';
 import '../providers/go_provider.dart';
 import '../widgets/go_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class GoFavoritesScreen extends StatefulWidget {
   const GoFavoritesScreen({super.key});
@@ -54,28 +53,6 @@ class _GoFavoritesScreenState extends State<GoFavoritesScreen> {
                   ),
                   style: const TextStyle(fontSize: 13),
                 ),
-              ),
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.recommendations.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    color: kGoColor.withValues(alpha: 0.07),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: kGoColor),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            'AI suggests: ${ai.recommendations.first['name'] ?? ''}',
-                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kGoColor),
-                            maxLines: 1, overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
               ),
               // Category pills
               SizedBox(
@@ -157,38 +134,9 @@ class _FavoriteGridCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.all(14),
-        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(14), border: Border.all(color: const Color(0xFFE5E7EB)), boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 6, offset: const Offset(0, 2))]),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CircleAvatar(
-              radius: 26,
-              backgroundColor: _catColor.withValues(alpha: 0.15),
-              child: Text(fav.name.substring(0, 1), style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: _catColor)),
-            ),
-            const SizedBox(height: 10),
-            Text(fav.name, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600), textAlign: TextAlign.center, maxLines: 1, overflow: TextOverflow.ellipsis),
-            Text(fav.role, style: const TextStyle(fontSize: 10, color: Color(0xFF9CA3AF)), textAlign: TextAlign.center, maxLines: 1, overflow: TextOverflow.ellipsis),
-            const SizedBox(height: 6),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-              decoration: BoxDecoration(color: _catColor.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(8)),
-              child: Text(fav.category.name, style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600, color: _catColor)),
-            ),
-            const SizedBox(height: 4),
-            Text('${fav.transactionCount} txns', style: const TextStyle(fontSize: 10, color: Color(0xFF9CA3AF))),
-          ],
+        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: const Color(0xFFE5E7EB)),
         ),
       ),
     );
-  }
-
-  Color get _catColor {
-    switch (fav.category) {
-      case FavoriteCategory.people: return kGoColor;
-      case FavoriteCategory.businesses: return kGoInfo;
-      case FavoriteCategory.services: return kGoPurple;
-      case FavoriteCategory.internal: return kGoWarning;
-    }
   }
 }

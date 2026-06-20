@@ -11,7 +11,6 @@ import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../providers/live_provider.dart';
 import '../widgets/live_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class LiveReturnPickupScreen extends StatefulWidget {
   const LiveReturnPickupScreen({super.key});
@@ -65,28 +64,6 @@ class _LiveReturnPickupScreenState extends State<LiveReturnPickupScreen> {
                 ),
               ),
 
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    color: kLiveColor.withValues(alpha: 0.07),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: kLiveColor),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            'AI: ${ai.insights.first['title'] ?? ''}',
-                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kLiveColor),
-                            maxLines: 1, overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
 
               Expanded(
                 child: IndexedStack(
@@ -193,7 +170,7 @@ class _LiveReturnPickupScreenState extends State<LiveReturnPickupScreen> {
                             height: 200,
                             decoration: BoxDecoration(
                               color: const Color(0xFFF3F4F6),
-                              borderRadius: BorderRadius.circular(14),
+                              borderRadius: BorderRadius.circular(10),
                               border: Border.all(color: const Color(0xFFE5E7EB), width: 2),
                             ),
                             child: const Center(child: Icon(Icons.camera_alt, size: 48, color: AppColors.textTertiary)),
@@ -206,13 +183,13 @@ class _LiveReturnPickupScreenState extends State<LiveReturnPickupScreen> {
                               onPressed: () => setState(() => _photoTaken = true),
                               icon: const Icon(Icons.camera_alt, size: 18),
                               label: const Text('CAPTURE PHOTO', style: TextStyle(fontWeight: FontWeight.w700)),
-                              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF3B82F6), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
+                              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF3B82F6), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                             ),
                           ),
                         ] else
                           Container(
                             height: 200,
-                            decoration: BoxDecoration(color: const Color(0xFFD1FAE5), borderRadius: BorderRadius.circular(14)),
+                            decoration: BoxDecoration(color: const Color(0xFFD1FAE5), borderRadius: BorderRadius.circular(10)),
                             child: const Center(child: Icon(Icons.check_circle, size: 64, color: Color(0xFF10B981))),
                           ),
                       ],
@@ -262,9 +239,8 @@ class _LiveReturnPickupScreenState extends State<LiveReturnPickupScreen> {
           ),
           bottomNavigationBar: Container(
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
-              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 8, offset: const Offset(0, -2))],
             ),
             child: Row(
               children: [
@@ -296,7 +272,7 @@ class _LiveReturnPickupScreenState extends State<LiveReturnPickupScreen> {
                       backgroundColor: _step == 2 ? const Color(0xFF10B981) : kLiveColor,
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                     ),
                     child: Text(
                       _step == 0 ? 'NEXT: PHOTO EVIDENCE' : _step == 1 ? 'NEXT: CONFIRM' : 'âœ… CONFIRM PICKUP',

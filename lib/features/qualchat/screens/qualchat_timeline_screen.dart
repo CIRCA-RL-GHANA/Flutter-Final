@@ -3,11 +3,9 @@
 library;
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../models/qualchat_models.dart';
 import '../providers/qualchat_provider.dart';
 import '../widgets/qualchat_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/routes/app_routes.dart';
 
 class QualChatTimelineScreen extends StatelessWidget {
@@ -57,22 +55,6 @@ class QualChatTimelineScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Consumer<AIInsightsNotifier>(
-            builder: (context, ai, _) {
-              if (ai.insights.isEmpty) return const SizedBox.shrink();
-              return Container(
-                color: kChatColor.withValues(alpha: 0.07),
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                child: Row(children: [
-                  const Icon(Icons.auto_awesome, size: 14, color: kChatColor),
-                  const SizedBox(width: 8),
-                  Expanded(child: Text('AI: ${ai.insights.first['title'] ?? ''}',
-                    style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kChatColor),
-                    maxLines: 1, overflow: TextOverflow.ellipsis)),
-                ]),
-              );
-            },
-          ),
           // Header card
           Container(
             margin: const EdgeInsets.all(16),
@@ -155,16 +137,9 @@ class QualChatTimelineScreen extends StatelessWidget {
       // Action panel
       bottomNavigationBar: Container(
         padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.white,
-          border: const Border(top: BorderSide(color: Color(0xFFE5E7EB))),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.05),
-              blurRadius: 10,
-              offset: const Offset(0, -2),
-            ),
-          ],
+          border: Border(top: BorderSide(color: Color(0xFFE5E7EB))),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -264,7 +239,7 @@ class _TimelineItem extends StatelessWidget {
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: const Color(0xFFE5E7EB)),
               ),
               child: Column(

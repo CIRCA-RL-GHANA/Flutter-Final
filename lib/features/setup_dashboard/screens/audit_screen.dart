@@ -8,7 +8,6 @@ library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../prompt/models/rbac_models.dart';
 import '../../prompt/providers/context_provider.dart';
@@ -150,7 +149,7 @@ class AuditScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
                         color: AppColors.warning.withValues(alpha: 0.08),
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(10),
                         border: Border.all(color: AppColors.warning.withValues(alpha: 0.3)),
                       ),
                       child: Row(
@@ -197,35 +196,7 @@ class AuditScreen extends StatelessWidget {
                 )
               else
               // ─── AI Insights ─────────────────────────────────────────
-              SliverToBoxAdapter(
-                child: Consumer<AIInsightsNotifier>(
-                  builder: (context, ai, _) {
-                    if (ai.insights.isEmpty) return const SizedBox.shrink();
-                    return Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: kSetupColor.withValues(alpha: 0.07),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                        child: Row(
-                          children: [
-                            const Icon(Icons.auto_awesome, size: 14, color: kSetupColor),
-                            const SizedBox(width: 8),
-                            Expanded(
-                              child: Text(
-                                'AI: ${ai.insights.first['title'] ?? ''}',
-                                style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kSetupColor),
-                                maxLines: 1, overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
+              const SliverToBoxAdapter(
               ),
               SliverPadding(
                   padding: const EdgeInsets.fromLTRB(20, 16, 20, 100),
@@ -281,19 +252,12 @@ class _AuditEntryCard extends StatelessWidget {
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(10),
         border: entry.outcome == AuditOutcome.suspicious
             ? Border.all(color: AppColors.warning.withValues(alpha: 0.3))
             : entry.outcome == AuditOutcome.failure
                 ? Border.all(color: AppColors.error.withValues(alpha: 0.3))
                 : null,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.04),
-            blurRadius: 10,
-            offset: const Offset(0, 2),
-          ),
-        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

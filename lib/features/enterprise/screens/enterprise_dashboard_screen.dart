@@ -4,12 +4,11 @@
 library;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
+import '../../../core/design/ive.dart';
 import '../../../core/services/enterprise_service.dart';
 
-const _kGold = Color(0xFFD4A017);
-const _kCyan = Color(0xFF00BCD4);
-const _kBg = Color(0xFF0A0A0F);
-const _kCard = Color(0xFF11131C);
 
 class EnterpriseDashboardScreen extends StatefulWidget {
   final String entityId;
@@ -63,33 +62,44 @@ class _EnterpriseDashboardScreenState extends State<EnterpriseDashboardScreen>
     }
   }
 
-  Future<void> _revokeKey(String keyId) async {
-    await _svc.revokeApiKey(widget.entityId, keyId);
-    _loadAll();
+  Future<void> _revokeKey(String keyId, String label) async {
+    if (!mounted) return;
+    final confirmed = await showVerifySheet(
+      context,
+      title: 'Revoke $label',
+      confirmLabel: 'Revoke $label',
+      subtitle: 'This key will stop working immediately.',
+      isDestructive: true,
+      onConfirm: () async {
+        final res = await _svc.revokeApiKey(widget.entityId, keyId);
+        return res.success ? null : 'Failed to revoke. Try again.';
+      },
+    );
+    if (confirmed) _loadAll();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: _kBg,
+      backgroundColor: IveTokens.voidColor,
       appBar: AppBar(
-        backgroundColor: _kBg,
-        foregroundColor: Colors.white,
+        backgroundColor: IveTokens.voidColor,
+        foregroundColor: IveTokens.inkColor,
         title: Text(
           _profile?['legalName'] ?? 'Enterprise Dashboard',
-          style: const TextStyle(fontWeight: FontWeight.bold),
+          style: IveType.title3,
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.refresh, color: _kCyan),
+            icon: const Icon(Icons.refresh, color: IveTokens.infoColor),
             onPressed: _loadAll,
           ),
         ],
         bottom: TabBar(
           controller: _tabs,
-          indicatorColor: _kGold,
-          labelColor: _kGold,
-          unselectedLabelColor: Colors.white38,
+          indicatorColor: IveTokens.accentColor,
+          labelColor: IveTokens.accentColor,
+          unselectedLabelColor: IveTokens.muteColor,
           tabs: const [
             Tab(text: 'Overview'),
             Tab(text: 'API Keys'),
@@ -99,7 +109,7 @@ class _EnterpriseDashboardScreenState extends State<EnterpriseDashboardScreen>
         ),
       ),
       body: _loadingProfile
-          ? const Center(child: CircularProgressIndicator(color: _kGold))
+          ? const IveListSkeleton(rows: 6)
           : TabBarView(
               controller: _tabs,
               children: [
@@ -121,7 +131,7 @@ class _EnterpriseDashboardScreenState extends State<EnterpriseDashboardScreen>
     final status = _profile!['status'] as String? ?? 'unknown';
     final pathways =
         (_profile!['enabledPathways'] as List?)?.cast<int>() ?? [];
-    final statusColor = status == 'active' ? Colors.green : Colors.orange;
+    final statusColor = status == 'active' ? IveTokens.okColor : IveTokens.warnColor;
 
     return ListView(
       padding: const EdgeInsets.all(20),
@@ -138,8 +148,7 @@ class _EnterpriseDashboardScreenState extends State<EnterpriseDashboardScreen>
         _statCard('Fulfillment Tasks', '${_tasks.length} total', icon: Icons.local_shipping),
         const SizedBox(height: 20),
         if (pathways.isNotEmpty) ...[
-          const Text('Enabled Pathways',
-              style: TextStyle(color: _kCyan, fontWeight: FontWeight.bold)),
+          Text('Enabled Pathways', style: IveType.callout.copyWith(color: IveTokens.infoColor, fontWeight: FontWeight.bold)),
           const SizedBox(height: 8),
           Wrap(
             spacing: 8,
@@ -147,8 +156,9 @@ class _EnterpriseDashboardScreenState extends State<EnterpriseDashboardScreen>
             children: pathways
                 .map((p) => Chip(
                       label: Text('Pathway $p',
-                          style: const TextStyle(color: Colors.black, fontSize: 12)),
-                      backgroundColor: _kGold,
+                          style: const TextStyle(color: Colors.white, fontSize: 12)),
+                      backgroundColor: IveTokens.accentColor.withValues(alpha: 0.2),
+                      side: const BorderSide(color: IveTokens.accentColor),
                     ))
                 .toList(),
           ),
@@ -162,66 +172,92 @@ class _EnterpriseDashboardScreenState extends State<EnterpriseDashboardScreen>
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
-        ElevatedButton.icon(
-          style: ElevatedButton.styleFrom(
-              backgroundColor: _kGold, foregroundColor: Colors.black),
-          onPressed: () => _showCreateApiKeyDialog(),
-          icon: const Icon(Icons.add),
-          label: const Text('Create API Key'),
+        IveButton.primary(
+          label: 'Create API key',
+          onPressed: _showCreateApiKeyDialog,
         ),
         const SizedBox(height: 16),
         if (_apiKeys.isEmpty)
-          const Center(
-              child: Text('No API keys yet.',
-                  style: TextStyle(color: Colors.white38))),
+          Center(child: Text('No API keys yet.', style: IveType.callout.copyWith(color: IveTokens.muteColor))),
         ..._apiKeys.map((k) => _apiKeyCard(k)),
       ],
     );
   }
 
-  Widget _apiKeyCard(Map<String, dynamic> key) => Card(
-        color: _kCard,
-        margin: const EdgeInsets.only(bottom: 12),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        child: ListTile(
-          leading: const Icon(Icons.vpn_key, color: _kGold),
-          title: Text(key['label'] as String? ?? '—',
-              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-          subtitle: Text(
-            'Prefix: ${key['keyPrefix'] ?? '—'} • ${(key['isActive'] == true) ? 'Active' : 'Inactive'}',
-            style: const TextStyle(color: Colors.white54, fontSize: 12),
+  Widget _apiKeyCard(Map<String, dynamic> key) {
+    final label = key['label'] as String? ?? '—';
+    final prefix = key['keyPrefix'] as String? ?? '—';
+    final active = key['isActive'] == true;
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: BoxDecoration(
+        color: IveTokens.raisedColor,
+        borderRadius: BorderRadius.circular(IveTokens.rContainer),
+        border: Border.all(color: IveTokens.hairColor, width: 1),
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.vpn_key_rounded, color: IveTokens.accentColor, size: 20),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(label, style: IveType.headline),
+                const SizedBox(height: 2),
+                // Key prefix in mono (spec: display key in mono)
+                Text(
+                  prefix,
+                  style: GoogleFonts.ibmPlexMono(
+                    fontSize: 12,
+                    color: IveTokens.muteColor,
+                    letterSpacing: 0.5,
+                  ),
+                ),
+              ],
+            ),
           ),
-          trailing: IconButton(
-            icon: const Icon(Icons.delete_outline, color: Colors.redAccent),
-            tooltip: 'Revoke key',
-            onPressed: () => _revokeKey(key['id'] as String),
+          // Active indicator — quiet dot
+          Container(
+            width: 7, height: 7,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: active ? IveTokens.okColor : IveTokens.muteColor,
+            ),
           ),
-        ),
-      );
+          const SizedBox(width: 12),
+          IconButton(
+            icon: const Icon(Icons.block_rounded, size: 18, color: IveTokens.badColor),
+            tooltip: 'Revoke',
+            onPressed: () => _revokeKey(key['id'] as String, label),
+          ),
+        ],
+      ),
+    );
+  }
 
   void _showCreateApiKeyDialog() {
     final labelCtrl = TextEditingController();
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        backgroundColor: _kCard,
-        title: const Text('New API Key', style: TextStyle(color: Colors.white)),
+        backgroundColor: IveTokens.raisedColor,
+        title: Text('New API key', style: IveType.title3),
         content: TextField(
           controller: labelCtrl,
-          style: const TextStyle(color: Colors.white),
-          decoration: const InputDecoration(
-            labelText: 'Key Label',
-            labelStyle: TextStyle(color: Colors.white60),
+          style: IveType.body.copyWith(color: IveTokens.inkColor),
+          decoration: InputDecoration(
+            labelText: 'Key label',
+            labelStyle: IveType.callout.copyWith(color: IveTokens.muteColor),
           ),
         ),
         actions: [
           TextButton(
-            child: const Text('Cancel', style: TextStyle(color: Colors.white38)),
+            child: Text('Cancel', style: IveType.callout.copyWith(color: IveTokens.muteColor)),
             onPressed: () => Navigator.pop(context),
           ),
-          ElevatedButton(
-            style:
-                ElevatedButton.styleFrom(backgroundColor: _kGold, foregroundColor: Colors.black),
+          TextButton(
             onPressed: () async {
               Navigator.pop(context);
               final res = await _svc.createApiKey(
@@ -231,13 +267,11 @@ class _EnterpriseDashboardScreenState extends State<EnterpriseDashboardScreen>
               );
               if (mounted && res.success) {
                 final raw = res.data?['rawKey'] as String?;
-                if (raw != null) {
-                  _showKeyOnce(raw);
-                }
+                if (raw != null) _showKeyOnce(raw);
                 _loadAll();
               }
             },
-            child: const Text('Create'),
+            child: Text('Create', style: IveType.callout.copyWith(color: IveTokens.accentColor, fontWeight: FontWeight.w600)),
           ),
         ],
       ),
@@ -245,31 +279,90 @@ class _EnterpriseDashboardScreenState extends State<EnterpriseDashboardScreen>
   }
 
   void _showKeyOnce(String rawKey) {
-    showDialog(
+    showModalBottomSheet<void>(
       context: context,
-      builder: (_) => AlertDialog(
-        backgroundColor: _kCard,
-        title: const Text('Save Your Key', style: TextStyle(color: Colors.white)),
-        content: Column(
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      barrierColor: Colors.black54,
+      builder: (_) => Container(
+        padding: EdgeInsets.fromLTRB(
+          IveTokens.s5,
+          IveTokens.s4,
+          IveTokens.s5,
+          IveTokens.s5 + MediaQuery.of(context).padding.bottom,
+        ),
+        decoration: const BoxDecoration(
+          color: IveTokens.raisedColor,
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(IveTokens.rContainer),
+          ),
+          border: Border(
+            top: BorderSide(color: IveTokens.hairColor, width: 1),
+          ),
+        ),
+        child: Column(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'This key will not be shown again. Copy it now.',
-              style: TextStyle(color: Colors.white60, fontSize: 13),
+            Center(
+              child: Container(
+                width: 36, height: 4,
+                margin: const EdgeInsets.only(bottom: IveTokens.s4),
+                decoration: BoxDecoration(
+                  color: IveTokens.muteColor.withValues(alpha: 0.35),
+                  borderRadius: BorderRadius.circular(IveTokens.rChip),
+                ),
+              ),
             ),
-            const SizedBox(height: 12),
-            SelectableText(rawKey,
-                style: const TextStyle(color: _kGold, fontFamily: 'monospace')),
+            Text('Your API key', style: IveType.title3),
+            const SizedBox(height: IveTokens.s2),
+            // "Shown once" — stated clearly, once (spec P1)
+            Text(
+              'Shown once. Copy it now — you cannot retrieve it again.',
+              style: IveType.callout.copyWith(color: IveTokens.warnColor),
+            ),
+            const SizedBox(height: IveTokens.s4),
+            // Key in mono (spec P1)
+            GestureDetector(
+              onTap: () {
+                Clipboard.setData(ClipboardData(text: rawKey));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Copied to clipboard')),
+                );
+              },
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(IveTokens.s4),
+                decoration: BoxDecoration(
+                  color: IveTokens.surfaceColor,
+                  borderRadius: BorderRadius.circular(IveTokens.rAtom),
+                  border: Border.all(color: IveTokens.hairColor, width: 1),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: SelectableText(
+                        rawKey,
+                        style: GoogleFonts.ibmPlexMono(
+                          fontSize: 13,
+                          color: IveTokens.inkColor,
+                          letterSpacing: 0.4,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: IveTokens.s3),
+                    const Icon(Icons.copy_rounded, size: 16, color: IveTokens.muteColor),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: IveTokens.s6),
+            IveButton.primary(
+              label: 'Done',
+              onPressed: () => Navigator.pop(context),
+            ),
           ],
         ),
-        actions: [
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                backgroundColor: _kGold, foregroundColor: Colors.black),
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Done'),
-          ),
-        ],
       ),
     );
   }
@@ -279,43 +372,52 @@ class _EnterpriseDashboardScreenState extends State<EnterpriseDashboardScreen>
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
-        ElevatedButton.icon(
-          style: ElevatedButton.styleFrom(
-              backgroundColor: _kCyan, foregroundColor: Colors.black),
-          onPressed: () => _showAddChannelDialog(),
-          icon: const Icon(Icons.add_link),
-          label: const Text('Add Channel'),
+        IveButton.primary(
+          label: 'Add channel',
+          onPressed: _showAddChannelDialog,
         ),
         const SizedBox(height: 16),
         if (_channels.isEmpty)
-          const Center(
-              child: Text('No channels connected.',
-                  style: TextStyle(color: Colors.white38))),
+          Center(child: Text('No channels connected.', style: IveType.callout.copyWith(color: IveTokens.muteColor))),
         ..._channels.map((c) => _channelCard(c)),
       ],
     );
   }
 
-  Widget _channelCard(Map<String, dynamic> ch) => Card(
-        color: _kCard,
+  Widget _channelCard(Map<String, dynamic> ch) => Container(
         margin: const EdgeInsets.only(bottom: 12),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        child: ListTile(
-          leading: const Icon(Icons.sync_alt, color: _kCyan),
-          title: Text(ch['channelName'] as String? ?? '—',
-              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-          subtitle: Text(
-            '${(ch['channelType'] as String? ?? '').toUpperCase()} • ${ch['syncStatus'] ?? 'idle'}',
-            style: const TextStyle(color: Colors.white54, fontSize: 12),
-          ),
-          trailing: IconButton(
-            icon: const Icon(Icons.sync, color: _kCyan),
-            tooltip: 'Sync now',
-            onPressed: () async {
-              await _svc.syncChannel(ch['id'] as String);
-              _loadAll();
-            },
-          ),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        decoration: BoxDecoration(
+          color: IveTokens.raisedColor,
+          borderRadius: BorderRadius.circular(IveTokens.rContainer),
+          border: Border.all(color: IveTokens.hairColor, width: 1),
+        ),
+        child: Row(
+          children: [
+            const Icon(Icons.sync_alt, color: IveTokens.infoColor, size: 20),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(ch['channelName'] as String? ?? '—', style: IveType.headline),
+                  const SizedBox(height: 2),
+                  Text(
+                    '${(ch['channelType'] as String? ?? '').toUpperCase()} • ${ch['syncStatus'] ?? 'idle'}',
+                    style: IveType.caption.copyWith(color: IveTokens.muteColor),
+                  ),
+                ],
+              ),
+            ),
+            IconButton(
+              icon: const Icon(Icons.sync_rounded, color: IveTokens.infoColor, size: 18),
+              tooltip: 'Sync now',
+              onPressed: () async {
+                await _svc.syncChannel(ch['id'] as String);
+                _loadAll();
+              },
+            ),
+          ],
         ),
       );
 
@@ -327,26 +429,26 @@ class _EnterpriseDashboardScreenState extends State<EnterpriseDashboardScreen>
       context: context,
       builder: (_) => StatefulBuilder(
         builder: (ctx, setS) => AlertDialog(
-          backgroundColor: _kCard,
-          title: const Text('Add Channel', style: TextStyle(color: Colors.white)),
+          backgroundColor: IveTokens.raisedColor,
+          title: Text('Add channel', style: IveType.title3),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
                 controller: nameCtrl,
-                style: const TextStyle(color: Colors.white),
-                decoration: const InputDecoration(
-                    labelText: 'Channel Name',
-                    labelStyle: TextStyle(color: Colors.white60)),
+                style: IveType.body.copyWith(color: IveTokens.inkColor),
+                decoration: InputDecoration(
+                    labelText: 'Channel name',
+                    labelStyle: IveType.callout.copyWith(color: IveTokens.muteColor)),
               ),
               const SizedBox(height: 12),
               DropdownButtonFormField<String>(
                 initialValue: selectedType,
-                dropdownColor: _kCard,
-                style: const TextStyle(color: Colors.white),
-                decoration: const InputDecoration(
+                dropdownColor: IveTokens.raisedColor,
+                style: IveType.body.copyWith(color: IveTokens.inkColor),
+                decoration: InputDecoration(
                     labelText: 'Type',
-                    labelStyle: TextStyle(color: Colors.white60)),
+                    labelStyle: IveType.callout.copyWith(color: IveTokens.muteColor)),
                 items: types
                     .map((t) => DropdownMenuItem(value: t, child: Text(t)))
                     .toList(),
@@ -356,13 +458,10 @@ class _EnterpriseDashboardScreenState extends State<EnterpriseDashboardScreen>
           ),
           actions: [
             TextButton(
-              child:
-                  const Text('Cancel', style: TextStyle(color: Colors.white38)),
+              child: Text('Cancel', style: IveType.callout.copyWith(color: IveTokens.muteColor)),
               onPressed: () => Navigator.pop(context),
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: _kCyan, foregroundColor: Colors.black),
+            TextButton(
               onPressed: () async {
                 Navigator.pop(context);
                 await _svc.registerChannel(
@@ -372,7 +471,7 @@ class _EnterpriseDashboardScreenState extends State<EnterpriseDashboardScreen>
                 );
                 _loadAll();
               },
-              child: const Text('Connect'),
+              child: Text('Connect', style: IveType.callout.copyWith(color: IveTokens.accentColor, fontWeight: FontWeight.w600)),
             ),
           ],
         ),
@@ -386,9 +485,7 @@ class _EnterpriseDashboardScreenState extends State<EnterpriseDashboardScreen>
       padding: const EdgeInsets.all(16),
       children: [
         if (_tasks.isEmpty)
-          const Center(
-              child: Text('No fulfillment tasks yet.',
-                  style: TextStyle(color: Colors.white38))),
+          Center(child: Text('No fulfillment tasks yet.', style: IveType.callout.copyWith(color: IveTokens.muteColor))),
         ..._tasks.map((t) => _taskCard(t)),
       ],
     );
@@ -397,60 +494,68 @@ class _EnterpriseDashboardScreenState extends State<EnterpriseDashboardScreen>
   Widget _taskCard(Map<String, dynamic> task) {
     final status = task['status'] as String? ?? 'pending';
     final statusColor = switch (status) {
-      'delivered' => Colors.green,
-      'failed' || 'cancelled' => Colors.red,
-      'dispatched' || 'in_transit' => _kCyan,
-      _ => Colors.orange,
+      'delivered' => IveTokens.okColor,
+      'failed' || 'cancelled' => IveTokens.badColor,
+      'dispatched' || 'in_transit' => IveTokens.infoColor,
+      _ => IveTokens.warnColor,
     };
-    return Card(
-      color: _kCard,
+    return Container(
       margin: const EdgeInsets.only(bottom: 12),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: ListTile(
-        leading: const Icon(Icons.local_shipping, color: _kGold),
-        title: Text(
-          'Order: ${task['orderId'] ?? '—'}',
-          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-        ),
-        subtitle: Text(
-          '${(task['provider'] as String? ?? '').replaceAll('_', ' ')} • ${task['trackingId'] ?? 'No tracking'}',
-          style: const TextStyle(color: Colors.white54, fontSize: 12),
-        ),
-        trailing: Chip(
-          label: Text(status.replaceAll('_', ' ').toUpperCase(),
-              style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
-          backgroundColor: statusColor.withValues(alpha: 0.15),
-          side: BorderSide(color: statusColor),
-          labelStyle: TextStyle(color: statusColor),
-        ),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: BoxDecoration(
+        color: IveTokens.raisedColor,
+        borderRadius: BorderRadius.circular(IveTokens.rContainer),
+        border: Border.all(color: IveTokens.hairColor, width: 1),
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.local_shipping_rounded, color: IveTokens.accentColor, size: 20),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Order ${task['orderId'] ?? '—'}', style: IveType.headline),
+                const SizedBox(height: 2),
+                Text(
+                  '${(task['provider'] as String? ?? '').replaceAll('_', ' ')} • ${task['trackingId'] ?? 'No tracking'}',
+                  style: IveType.caption.copyWith(color: IveTokens.muteColor),
+                ),
+              ],
+            ),
+          ),
+          Chip(
+            label: Text(status.replaceAll('_', ' ').toUpperCase(),
+                style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
+            backgroundColor: statusColor.withValues(alpha: 0.12),
+            side: BorderSide(color: statusColor),
+            labelStyle: TextStyle(color: statusColor),
+            padding: EdgeInsets.zero,
+          ),
+        ],
       ),
     );
   }
 
   Widget _statCard(String label, String value,
-      {IconData? icon, Color iconColor = _kGold}) =>
+      {IconData? icon, Color iconColor = IveTokens.accentColor}) =>
       Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: _kCard,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: const Color(0xFF2D2D44)),
+          color: IveTokens.raisedColor,
+          borderRadius: BorderRadius.circular(IveTokens.rContainer),
+          border: Border.all(color: IveTokens.hairColor, width: 1),
         ),
         child: Row(
           children: [
             if (icon != null) ...[
-              Icon(icon, color: iconColor, size: 28),
+              Icon(icon, color: iconColor, size: 24),
               const SizedBox(width: 16),
             ],
             Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(label,
-                  style: const TextStyle(color: Colors.white54, fontSize: 12)),
+              Text(label, style: IveType.caption.copyWith(color: IveTokens.muteColor)),
               const SizedBox(height: 4),
-              Text(value,
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16)),
+              Text(value, style: IveType.headline),
             ]),
           ],
         ),

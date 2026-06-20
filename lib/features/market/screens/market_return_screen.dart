@@ -7,7 +7,6 @@ library;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../models/market_models.dart';
 import '../providers/market_provider.dart';
 import '../widgets/market_widgets.dart';
@@ -48,28 +47,6 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
           appBar: const MarketAppBar(title: 'Return Request'),
           body: Column(
             children: [
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    color: kMarketColor.withValues(alpha: 0.07),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: kMarketColor),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            'AI: ${ai.insights.first['title'] ?? ''}',
-                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kMarketColor),
-                            maxLines: 1, overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
 
               _buildStepIndicator(),
               Expanded(
@@ -188,7 +165,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(14),
+                borderRadius: BorderRadius.circular(10),
                 border: Border.all(
                   color: isSelected ? kMarketColor : AppColors.inputBorder,
                   width: isSelected ? 2 : 1,
@@ -326,7 +303,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
             color: AppColors.info.withValues(alpha: 0.08),
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(10),
           ),
           child: const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -383,9 +360,9 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
           decoration: InputDecoration(
             hintText: 'Describe the issue in detail...',
             hintStyle: const TextStyle(fontSize: 13, color: AppColors.textTertiary),
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(10),
               borderSide: const BorderSide(color: kMarketColor, width: 2),
             ),
             contentPadding: const EdgeInsets.all(14),
@@ -457,7 +434,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: kMarketColorLight,
-            borderRadius: BorderRadius.circular(14),
+            borderRadius: BorderRadius.circular(10),
           ),
           child: Row(
             children: [
@@ -521,9 +498,8 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
         top: 12,
         bottom: MediaQuery.of(context).padding.bottom + 12,
       ),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
-        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10, offset: const Offset(0, -2))],
       ),
       child: Row(
         children: [
@@ -534,7 +510,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
                 style: OutlinedButton.styleFrom(
                   foregroundColor: kMarketColor,
                   side: const BorderSide(color: kMarketColor),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   padding: const EdgeInsets.symmetric(vertical: 14),
                 ),
                 child: const Text('Back'),
@@ -557,7 +533,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
                 backgroundColor: _step == 3 ? AppColors.warning : kMarketColor,
                 foregroundColor: Colors.white,
                 disabledBackgroundColor: kMarketColor.withValues(alpha: 0.4),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 padding: const EdgeInsets.symmetric(vertical: 14),
                 elevation: 0,
               ),
@@ -614,7 +590,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: kMarketColor,
                 foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 padding: const EdgeInsets.symmetric(vertical: 14),
               ),
               child: const Text('Done'),

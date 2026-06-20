@@ -9,7 +9,6 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../../prompt/providers/context_provider.dart';
 import '../providers/user_details_provider.dart';
 import '../widgets/shared_widgets.dart';
@@ -74,22 +73,6 @@ class _AvatarEditorScreenState extends State<AvatarEditorScreen> with SingleTick
           ),
           body: Column(
             children: [
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    color: AppColors.primary.withValues(alpha: 0.07),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Row(children: [
-                      const Icon(Icons.auto_awesome, size: 14, color: AppColors.primary),
-                      const SizedBox(width: 8),
-                      Expanded(child: Text('AI: ${ai.insights.first['title'] ?? ''}',
-                        style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: AppColors.primary),
-                        maxLines: 1, overflow: TextOverflow.ellipsis)),
-                    ]),
-                  );
-                },
-              ),
               Expanded(
                 child: TabBarView(
                   controller: _tabController,
@@ -174,7 +157,6 @@ class _PhotoTabState extends State<_PhotoTab> {
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: Color(0xFF6366F1),
-                    boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 6, offset: Offset(0, 2))],
                   ),
                   child: const Icon(Icons.camera_alt, size: 20, color: Colors.white),
                 ),
@@ -395,7 +377,7 @@ class _BrandingTab extends StatelessWidget {
                 height: 100,
                 decoration: BoxDecoration(
                   color: const Color(0xFF6366F1).withValues(alpha: 0.04),
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: const Color(0xFF6366F1).withValues(alpha: 0.15), style: BorderStyle.solid),
                 ),
                 child: const Column(
@@ -430,7 +412,7 @@ class _BrandingTab extends StatelessWidget {
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: Builder(
                 builder: (context) {
@@ -481,9 +463,6 @@ class _ColorDot extends StatelessWidget {
           shape: BoxShape.circle,
           color: color,
           border: selected ? Border.all(color: Colors.white, width: 3) : null,
-          boxShadow: selected
-              ? [BoxShadow(color: color.withValues(alpha: 0.4), blurRadius: 8, spreadRadius: 1)]
-              : null,
         ),
         child: selected ? const Icon(Icons.check, size: 16, color: Colors.white) : null,
       ),
@@ -554,7 +533,7 @@ class _ConsistencyTabState extends State<_ConsistencyTab> {
                     height: 48,
                     decoration: BoxDecoration(
                       color: color.withValues(alpha: 0.1),
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(10),
                       border: Border.all(color: color.withValues(alpha: 0.2)),
                     ),
                     child: Center(

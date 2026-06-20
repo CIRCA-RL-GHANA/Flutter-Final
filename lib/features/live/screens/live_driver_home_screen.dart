@@ -12,7 +12,6 @@ import '../../../core/routes/app_routes.dart';
 import '../models/live_models.dart';
 import '../providers/live_provider.dart';
 import '../widgets/live_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class LiveDriverHomeScreen extends StatelessWidget {
   const LiveDriverHomeScreen({super.key});
@@ -99,30 +98,7 @@ class LiveDriverHomeScreen extends StatelessWidget {
               ),
 
               // AI Driver Insights
-              SliverToBoxAdapter(
-                child: Consumer<AIInsightsNotifier>(
-                  builder: (context, ai, _) {
-                    if (ai.insights.isEmpty) return const SizedBox.shrink();
-                    return Container(
-                      margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: kLiveColor.withValues(alpha: 0.07),
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: kLiveColor.withValues(alpha: 0.25)),
-                      ),
-                      child: Column(
-                        children: ai.insights.take(2).map((i) => Row(
-                          children: [
-                            const Icon(Icons.auto_awesome, size: 13, color: kLiveColor),
-                            const SizedBox(width: 8),
-                            Expanded(child: Text(i['label'] as String? ?? '', style: const TextStyle(fontSize: 12, color: kLiveColor), maxLines: 1, overflow: TextOverflow.ellipsis)),
-                          ],
-                        )).toList(),
-                      ),
-                    );
-                  },
-                ),
+              const SliverToBoxAdapter(
               ),
 
               // Active Package
@@ -261,16 +237,10 @@ class _QuickAction extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: BorderRadius.circular(10),
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 12),
-        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12), boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 6, offset: const Offset(0, 2))]),
-        child: Column(
-          children: [
-            Icon(icon, size: 22, color: color),
-            const SizedBox(height: 4),
-            Text(label, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: AppColors.textSecondary), textAlign: TextAlign.center),
-          ],
+        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10),
         ),
       ),
     );

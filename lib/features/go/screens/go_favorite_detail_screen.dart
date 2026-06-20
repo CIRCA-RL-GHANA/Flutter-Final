@@ -1,4 +1,4 @@
-/// GO Screen 8 — Favorite Detail
+﻿/// GO Screen 8 — Favorite Detail
 /// Entity passport, relationship dashboard, financial relationship,
 /// communication hub, transaction tools, relationship management
 library;
@@ -6,7 +6,6 @@ library;
 import 'package:flutter/material.dart';
 import '../../../core/routes/app_routes.dart';
 import 'package:provider/provider.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../models/go_models.dart';
 import '../providers/go_provider.dart';
 import '../widgets/go_widgets.dart';
@@ -27,34 +26,6 @@ class GoFavoriteDetailScreen extends StatelessWidget {
           body: ListView(
             padding: const EdgeInsets.all(16),
             children: [
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 14),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: kGoColor.withValues(alpha: 0.07),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                      child: Row(
-                        children: [
-                          const Icon(Icons.auto_awesome, size: 14, color: kGoColor),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: Text(
-                              'AI: ${ai.insights.first['title'] ?? ''}',
-                              style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kGoColor),
-                              maxLines: 2, overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
               // 1 — Entity passport
               _buildPassport(fav),
               const SizedBox(height: 14),
@@ -170,7 +141,7 @@ class GoFavoriteDetailScreen extends StatelessWidget {
         width: double.infinity,
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(color: const Color(0xFFF3F4F6), borderRadius: BorderRadius.circular(8)),
-        child: const Text('No notes yet. Tap to add a note.', style: TextStyle(fontSize: 12, color: Color(0xFF9CA3AF))),
+        child: const Text('No notes yet. Add a note.', style: TextStyle(fontSize: 12, color: Color(0xFF9CA3AF))),
       ),
       const SizedBox(height: 8),
       Wrap(spacing: 6, children: [
@@ -213,7 +184,7 @@ class _Badge extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
-    decoration: BoxDecoration(color: color.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(12)),
+    decoration: BoxDecoration(color: color.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(10)),
     child: Text(label, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: color)),
   );
 }

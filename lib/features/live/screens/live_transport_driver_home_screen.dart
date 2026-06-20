@@ -1,4 +1,4 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// LIVE MODULE — Screen 16: Driver Home (Transport)
 /// Transport driver dashboard: active ride, earnings, availability,
 /// ride queue, vehicle info, and quick actions
@@ -13,7 +13,6 @@ import '../../../core/routes/app_routes.dart';
 import '../models/live_models.dart';
 import '../providers/live_provider.dart';
 import '../widgets/live_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class LiveTransportDriverHomeScreen extends StatelessWidget {
   const LiveTransportDriverHomeScreen({super.key});
@@ -79,7 +78,7 @@ class LiveTransportDriverHomeScreen extends StatelessWidget {
                       // Earnings card
                       Container(
                         padding: const EdgeInsets.all(14),
-                        decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(14)),
+                        decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(10)),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -96,33 +95,7 @@ class LiveTransportDriverHomeScreen extends StatelessWidget {
                 ),
               ),
 
-              SliverToBoxAdapter(
-                child: Consumer<AIInsightsNotifier>(
-                  builder: (context, ai, _) {
-                    if (ai.insights.isEmpty) return const SizedBox.shrink();
-                    return Container(
-                      margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                      decoration: BoxDecoration(
-                        color: kLiveColor.withValues(alpha: 0.07),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Row(
-                        children: [
-                          const Icon(Icons.auto_awesome, size: 14, color: kLiveColor),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: Text(
-                              'AI: ${ai.insights.first['title'] ?? ''}',
-                              style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kLiveColor),
-                              maxLines: 1, overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
+              const SliverToBoxAdapter(
               ),
 
               // Active ride
@@ -261,12 +234,12 @@ class _ActiveRideCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(14),
+      borderRadius: BorderRadius.circular(10),
       child: Container(
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
           gradient: const LinearGradient(colors: [kLiveColor, kLiveAccent]),
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -320,8 +293,7 @@ class _RideRequestCard extends StatelessWidget {
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(14),
-        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8, offset: const Offset(0, 2))],
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -381,16 +353,10 @@ class _QuickAction extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: BorderRadius.circular(10),
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 12),
-        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12), boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 6, offset: const Offset(0, 2))]),
-        child: Column(
-          children: [
-            Icon(icon, size: 22, color: color),
-            const SizedBox(height: 4),
-            Text(label, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: AppColors.textSecondary)),
-          ],
+        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10),
         ),
       ),
     );

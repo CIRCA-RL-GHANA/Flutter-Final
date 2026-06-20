@@ -1,4 +1,4 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// COMMUNITY MODULE — Community Detail Screen
 /// Adaptive detail view; UI surface adapts to community type.
 /// Theater â†’ linked asset; Hangout â†’ event date/location; Fair â†’ listings, etc.
@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../providers/community_provider.dart';
 import 'community_hub_screen.dart' show kCommunityArchetypes;
 
@@ -56,8 +55,8 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> with Sing
 
   @override
   Widget build(BuildContext context) {
-    return Consumer2<AIInsightsNotifier, CommunityProvider>(
-      builder: (context, ai, community, _) {
+    return Consumer<CommunityProvider>(
+      builder: (context, community, _) {
         final _ = _comm['id'] as String?;
         return Scaffold(
           backgroundColor: AppColors.backgroundLight,
@@ -137,17 +136,6 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> with Sing
                 _typeSpecificBanner(),
 
                 // ── AI insight ────────────────────────────────────────
-                if (ai.insights.isNotEmpty)
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(color: _color.withValues(alpha: 0.07), borderRadius: BorderRadius.circular(10), border: Border.all(color: _color.withValues(alpha: 0.2))),
-                    child: Row(children: [
-                      Icon(Icons.auto_awesome, color: _color, size: 14),
-                      const SizedBox(width: 8),
-                      Expanded(child: Text(ai.insights.first['title'] ?? '', style: const TextStyle(fontSize: 11))),
-                    ]),
-                  ),
 
                 // ── Tab views ─────────────────────────────────────────
                 Expanded(
@@ -183,7 +171,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> with Sing
 
   Widget _typeSpecificBanner() {
     return switch (_type) {
-      'theater' => _infoBanner(Icons.live_tv, 'Next screening: Tonight 8 PM WAT', 'Tap to sync your watch session'),
+      'theater' => _infoBanner(Icons.live_tv, 'Next screening: Tonight 8 PM WAT', 'Sync your watch session'),
       'hangout' => _infoBanner(Icons.event, 'Next event: Sat, 24 May Â· Accra Hub', 'In-person & virtual attendance'),
       'fair'    => _infoBanner(Icons.storefront, 'Fair active until Dec 31', '24 listings available'),
       'journal' => _infoBanner(Icons.book, '12 shared entries this week', 'Community blog & documentation'),
@@ -195,7 +183,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> with Sing
     return Container(
       margin: const EdgeInsets.fromLTRB(16, 8, 16, 0),
       padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(color: _color.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(12), border: Border.all(color: _color.withValues(alpha: 0.2))),
+      decoration: BoxDecoration(color: _color.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(10), border: Border.all(color: _color.withValues(alpha: 0.2))),
       child: Row(children: [
         Icon(icon, color: _color, size: 22),
         const SizedBox(width: 12),
@@ -259,7 +247,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> with Sing
 
     return Card(
       margin: const EdgeInsets.only(bottom: 10),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Padding(
         padding: const EdgeInsets.all(14),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

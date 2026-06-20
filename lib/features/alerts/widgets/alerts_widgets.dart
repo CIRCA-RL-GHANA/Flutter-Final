@@ -1,4 +1,4 @@
-/// Alerts Module — Shared Reusable UI Components
+﻿/// Alerts Module — Shared Reusable UI Components
 /// Module Color: Red (0xFFEF4444)
 /// Visibility: All roles EXCEPT Owner
 library;
@@ -88,7 +88,7 @@ class AlertsSectionCard extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(10),
         border: Border.all(color: const Color(0xFFE5E7EB)),
       ),
       child: Column(
@@ -210,7 +210,7 @@ class PendingAlertCard extends StatelessWidget {
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
           color: isSelected ? kAlertsColorLight : Colors.white,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(10),
           border: Border(
             left: BorderSide(color: borderColor, width: 4),
             top: BorderSide(color: isSelected ? kAlertsColor : const Color(0xFFE5E7EB)),
@@ -328,7 +328,7 @@ class ResolvedAlertCard extends StatelessWidget {
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(10),
           border: const Border(
             left: BorderSide(color: kAlertsResolved, width: 4),
             top: BorderSide(color: Color(0xFF1C1C2E)),
@@ -611,7 +611,7 @@ class KnowledgeItemCard extends StatelessWidget {
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(10),
           border: Border.all(color: const Color(0xFFE5E7EB)),
         ),
         child: Column(
@@ -689,7 +689,7 @@ class AlertTemplateCard extends StatelessWidget {
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(10),
           border: Border.all(color: const Color(0xFFE5E7EB)),
         ),
         child: Column(
@@ -748,7 +748,7 @@ class ResolverLeaderboardTile extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(10),
         border: Border.all(color: const Color(0xFFE5E7EB)),
       ),
       child: Row(

@@ -1,4 +1,4 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// MARKET MODULE — Screen 2: Branch Main View
 /// Merchant profile with 5 tabs: Updates Â· Deals Â· Shop Â· Info Â· Returns
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -7,7 +7,6 @@ library;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/routes/app_routes.dart';
 import '../models/market_models.dart';
 import '../providers/market_provider.dart';
@@ -56,22 +55,6 @@ class _MarketBranchScreenState extends State<MarketBranchScreen>
           backgroundColor: AppColors.backgroundLight,
           body: Column(
             children: [
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    color: kMarketColor.withValues(alpha: 0.07),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Row(children: [
-                      const Icon(Icons.auto_awesome, size: 14, color: kMarketColor),
-                      const SizedBox(width: 8),
-                      Expanded(child: Text('AI: ${ai.insights.first['title'] ?? ''}',
-                        style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kMarketColor),
-                        maxLines: 1, overflow: TextOverflow.ellipsis)),
-                    ]),
-                  );
-                },
-              ),
               Expanded(
                 child: NestedScrollView(
                   headerSliverBuilder: (context, innerBoxIsScrolled) => [
@@ -156,8 +139,7 @@ class _MarketBranchScreenState extends State<MarketBranchScreen>
                         height: 56,
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(14),
-                          boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.2), blurRadius: 8)],
+                          borderRadius: BorderRadius.circular(10),
                         ),
                         child: const Icon(Icons.store, size: 28, color: kMarketColor),
                       ),
@@ -320,7 +302,7 @@ class _UpdatesTab extends StatelessWidget {
         final post = posts[i];
         return Card(
           margin: const EdgeInsets.only(bottom: 12),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           elevation: 0,
           color: Colors.white,
           child: Padding(
@@ -871,7 +853,7 @@ class _ReturnsTab extends StatelessWidget {
         final video = videos[i];
         return Card(
           margin: const EdgeInsets.only(bottom: 12),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           elevation: 0,
           color: Colors.white,
           child: Padding(

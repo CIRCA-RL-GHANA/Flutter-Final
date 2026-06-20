@@ -1,4 +1,4 @@
-import 'dart:async';
+﻿import 'dart:async';
 import 'package:flutter/foundation.dart';
 
 /// Debouncer utility for text input
@@ -88,7 +88,7 @@ class Validators {
   static String? validateEmail(String? value) {
     if (value == null || value.trim().isEmpty) return null; // Optional
     if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value.trim())) {
-      return 'Please enter a valid email address';
+      return 'Enter a valid email address';
     }
     return null;
   }

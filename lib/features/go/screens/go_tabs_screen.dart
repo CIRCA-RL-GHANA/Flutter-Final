@@ -1,4 +1,4 @@
-/// GO Screen 4 — My Tabs
+﻿/// GO Screen 4 — My Tabs
 /// Credit health dashboard, filter bar, accordion tab cards,
 /// bulk operations, analytics panel
 library;
@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 import '../models/go_models.dart';
 import '../providers/go_provider.dart';
 import '../widgets/go_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class GoTabsScreen extends StatefulWidget {
   const GoTabsScreen({super.key});
@@ -50,28 +49,6 @@ class _GoTabsScreenState extends State<GoTabsScreen> with SingleTickerProviderSt
                   const SizedBox(width: 10),
                   Expanded(child: _SummaryBox(label: 'NET', value: '${(totalOwed - totalOwe).toStringAsFixed(0)} QP', color: totalOwed >= totalOwe ? kGoPositive : kGoNegative)),
                 ]),
-              ),
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    color: kGoColor.withValues(alpha: 0.07),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: kGoColor),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            'AI: ${ai.insights.first['title'] ?? ''}',
-                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kGoColor),
-                            maxLines: 1, overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
               ),
               // Filter + tabs
               Container(
@@ -144,7 +121,7 @@ class _GoTabsScreenState extends State<GoTabsScreen> with SingleTickerProviderSt
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16),
       padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12), border: Border.all(color: const Color(0xFFE5E7EB))),
+      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: const Color(0xFFE5E7EB))),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         const Text('TAB ANALYTICS', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF9CA3AF))),
         const SizedBox(height: 10),

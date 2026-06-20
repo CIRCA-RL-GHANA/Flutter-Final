@@ -326,8 +326,24 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
                       if (_isSuccess)
                         const _SuccessIndicator()
                       else if (_isVerifying)
-                        const CircularProgressIndicator(
-                          color: IveTokens.accent,
+                        // Content-shaped skeleton replaces spinner (Move 06)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: Column(
+                            children: [
+                              IveSkeleton(
+                                width: double.infinity,
+                                height: 3,
+                                radius: BorderRadius.circular(IveTokens.rChip),
+                              ),
+                              const SizedBox(height: IveTokens.s2),
+                              IveSkeleton(
+                                width: 120,
+                                height: 12,
+                                radius: BorderRadius.circular(IveTokens.rAtom),
+                              ),
+                            ],
+                          ),
                         )
                       else ...[
                         // Timer display
@@ -433,7 +449,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
   }
 }
 
-class _OtpDigitField extends StatelessWidget {
+class _OtpDigitField extends StatefulWidget {
   final TextEditingController controller;
   final FocusNode focusNode;
   final bool isSuccess;
@@ -449,45 +465,99 @@ class _OtpDigitField extends StatelessWidget {
   });
 
   @override
+  State<_OtpDigitField> createState() => _OtpDigitFieldState();
+}
+
+class _OtpDigitFieldState extends State<_OtpDigitField>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _fillCtrl;
+  late final Animation<double> _scaleAnim;
+
+  @override
+  void initState() {
+    super.initState();
+    _fillCtrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 120),
+    );
+    _scaleAnim = Tween<double>(begin: 1.0, end: 1.06).animate(
+      CurvedAnimation(parent: _fillCtrl, curve: Curves.easeOut),
+    );
+    widget.controller.addListener(_onControllerChanged);
+    widget.focusNode.addListener(_onFocusChanged);
+  }
+
+  void _onControllerChanged() {
+    if (!mounted) return;
+    setState(() {});
+    if (widget.controller.text.isNotEmpty) {
+      _fillCtrl.forward().then((_) {
+        if (mounted) _fillCtrl.reverse();
+      });
+    }
+  }
+
+  void _onFocusChanged() {
+    if (mounted) setState(() {});
+  }
+
+  @override
+  void dispose() {
+    widget.controller.removeListener(_onControllerChanged);
+    widget.focusNode.removeListener(_onFocusChanged);
+    _fillCtrl.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final filled = widget.controller.text.isNotEmpty;
+    final focused = widget.focusNode.hasFocus;
+
     return KeyboardListener(
       focusNode: FocusNode(),
-      onKeyEvent: onKey,
-      child: AnimatedContainer(
-        duration: IveTokens.dFast,
-        decoration: BoxDecoration(
-          color: isSuccess
-              ? IveTokens.success.withValues(alpha: 0.1)
-              : IveTokens.surface,
-          borderRadius: IveTokens.brMd,
-          border: Border.all(
-            color: isSuccess
-                ? IveTokens.success
-                : focusNode.hasFocus
-                    ? IveTokens.accent
-                    : IveTokens.hairline,
-            width: focusNode.hasFocus || isSuccess ? 2 : 1,
+      onKeyEvent: widget.onKey,
+      child: AnimatedBuilder(
+        animation: _scaleAnim,
+        builder: (_, child) =>
+            Transform.scale(scale: _scaleAnim.value, child: child),
+        child: AnimatedContainer(
+          duration: IveTokens.dFast,
+          decoration: BoxDecoration(
+            color: widget.isSuccess
+                ? IveTokens.okColor.withValues(alpha: 0.10)
+                : filled
+                    ? IveTokens.accentSoftBlue
+                    : IveTokens.surfaceColor,
+            borderRadius: BorderRadius.circular(IveTokens.rContainer),
+            border: Border.all(
+              color: widget.isSuccess
+                  ? IveTokens.okColor
+                  : (filled || focused)
+                      ? IveTokens.accentColor
+                      : IveTokens.hairColor,
+              width: (widget.isSuccess || filled || focused) ? 2 : 1,
+            ),
           ),
-        ),
-        child: TextField(
-          controller: controller,
-          focusNode: focusNode,
-          keyboardType: TextInputType.number,
-          textAlign: TextAlign.center,
-          maxLength: 1,
-          onChanged: onChanged,
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: isSuccess ? IveTokens.success : IveTokens.label,
-          ),
-          inputFormatters: [
-            FilteringTextInputFormatter.digitsOnly,
-          ],
-          decoration: const InputDecoration(
-            counterText: '',
-            border: InputBorder.none,
-            contentPadding: EdgeInsets.zero,
+          child: TextField(
+            controller: widget.controller,
+            focusNode: widget.focusNode,
+            keyboardType: TextInputType.number,
+            textAlign: TextAlign.center,
+            maxLength: 1,
+            onChanged: widget.onChanged,
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w700,
+              color:
+                  widget.isSuccess ? IveTokens.okColor : IveTokens.inkColor,
+            ),
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            decoration: const InputDecoration(
+              counterText: '',
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.zero,
+            ),
           ),
         ),
       ),
@@ -506,33 +576,20 @@ class _SuccessIndicator extends StatelessWidget {
           tween: Tween(begin: 0, end: 1),
           duration: const Duration(milliseconds: 600),
           curve: Curves.elasticOut,
-          builder: (context, value, child) {
-            return Transform.scale(
-              scale: value,
-              child: Container(
-                width: 64,
-                height: 64,
-                decoration: const BoxDecoration(
-                  color: IveTokens.success,
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(
-                  Icons.check,
-                  color: IveTokens.surface,
-                  size: 32,
-                ),
-              ),
-            );
-          },
-        ),
-        const SizedBox(height: 16),
-        const Text(
-          'Verified!',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-            color: IveTokens.success,
+          builder: (context, value, child) => Transform.scale(
+            scale: value,
+            child: child,
           ),
+          child: const Icon(
+            Icons.check_circle_rounded,
+            color: IveTokens.okColor,
+            size: 56,
+          ),
+        ),
+        const SizedBox(height: IveTokens.s3),
+        Text(
+          'Verified',
+          style: IveType.title3.copyWith(color: IveTokens.okColor),
         ),
       ],
     );

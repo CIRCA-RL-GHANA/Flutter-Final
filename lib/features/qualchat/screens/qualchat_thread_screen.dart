@@ -1,13 +1,15 @@
-/// qualChat Screen 10 — Chat Thread (Enhanced)
+﻿/// qualChat Screen 10 — Chat Thread (Enhanced)
 /// Immersive conversation: messages, composer, reactions, attachments, header menu
 library;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '../../../core/constants/app_animations.dart';
+import '../../../core/design/ive.dart';
 import '../models/qualchat_models.dart';
 import '../providers/qualchat_provider.dart';
 import '../widgets/qualchat_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class QualChatThreadScreen extends StatefulWidget {
   const QualChatThreadScreen({super.key});
@@ -20,6 +22,8 @@ class _QualChatThreadScreenState extends State<QualChatThreadScreen> {
   final TextEditingController _messageCtrl = TextEditingController();
   final ScrollController _scrollCtrl = ScrollController();
   bool _showAttachments = false;
+  // Fold state: collapses chat bubbles → summary card (spec P1, dpThreadFold = 400ms)
+  bool _folded = false;
 
   @override
   void dispose() {
@@ -37,7 +41,7 @@ class _QualChatThreadScreenState extends State<QualChatThreadScreen> {
 
         if (conversation == null) {
           return const Scaffold(
-            backgroundColor: Color(0xFFF8F9FE),
+            backgroundColor: IveTokens.voidColor,
             appBar: QualChatAppBar(title: 'Chat'),
             body: QualChatEmptyState(
               icon: Icons.chat_bubble_outline,
@@ -48,18 +52,19 @@ class _QualChatThreadScreenState extends State<QualChatThreadScreen> {
         }
 
         return Scaffold(
-          backgroundColor: const Color(0xFFF1F5F9),
+          backgroundColor: IveTokens.voidColor,
           // Thread Header
           appBar: AppBar(
-            backgroundColor: Colors.white,
+            backgroundColor: IveTokens.voidColor,
             elevation: 0,
+            surfaceTintColor: Colors.transparent,
             leading: IconButton(
-              icon: const Icon(Icons.arrow_back, color: Color(0xFF1A1A1A)),
+              icon: const Icon(Icons.arrow_back, color: IveTokens.inkColor),
               onPressed: () => Navigator.pop(context),
             ),
             title: Row(
               children: [
-                // Avatar with presence
+                // Avatar with presence dot
                 Stack(
                   children: [
                     CircleAvatar(
@@ -78,9 +83,9 @@ class _QualChatThreadScreenState extends State<QualChatThreadScreen> {
                           width: 10,
                           height: 10,
                           decoration: BoxDecoration(
-                            color: const Color(0xFF10B981),
+                            color: IveTokens.okColor,
                             shape: BoxShape.circle,
-                            border: Border.all(color: Colors.white, width: 2),
+                            border: Border.all(color: IveTokens.voidColor, width: 2),
                           ),
                         ),
                       ),
@@ -93,18 +98,18 @@ class _QualChatThreadScreenState extends State<QualChatThreadScreen> {
                     children: [
                       Text(
                         conversation.title,
-                        style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: Color(0xFF1A1A1A)),
+                        style: IveType.callout.copyWith(fontWeight: FontWeight.w600),
                         overflow: TextOverflow.ellipsis,
                       ),
                       Text(
                         conversation.type == ChatType.group
                             ? '${conversation.participants.length} members'
                             : conversation.typingUser != null
-                                ? 'typing...'
+                                ? 'typing…'
                                 : 'Online',
                         style: TextStyle(
                           fontSize: 12,
-                          color: conversation.typingUser != null ? kChatColor : const Color(0xFF10B981),
+                          color: conversation.typingUser != null ? kChatColor : IveTokens.okColor,
                         ),
                       ),
                     ],
@@ -113,6 +118,22 @@ class _QualChatThreadScreenState extends State<QualChatThreadScreen> {
               ],
             ),
             actions: [
+              // Fold toggle — collapses bubbles to summary card (spec P1)
+              IconButton(
+                icon: AnimatedSwitcher(
+                  duration: AppAnimations.dpStateChange,
+                  child: Icon(
+                    _folded ? Icons.unfold_more_rounded : Icons.unfold_less_rounded,
+                    key: ValueKey(_folded),
+                    color: _folded ? kChatColor : IveTokens.muteColor,
+                    size: 20,
+                  ),
+                ),
+                onPressed: () {
+                  HapticFeedback.lightImpact();
+                  setState(() => _folded = !_folded);
+                },
+              ),
               IconButton(
                 icon: const Icon(Icons.call, color: kChatColor, size: 22),
                 onPressed: () {
@@ -130,7 +151,7 @@ class _QualChatThreadScreenState extends State<QualChatThreadScreen> {
                 },
               ),
               PopupMenuButton<String>(
-                icon: const Icon(Icons.more_vert, color: Color(0xFF1A1A1A)),
+                icon: const Icon(Icons.more_vert, color: IveTokens.inkColor),
                 onSelected: (value) {
                   switch (value) {
                     case 'search':
@@ -162,41 +183,38 @@ class _QualChatThreadScreenState extends State<QualChatThreadScreen> {
                   }
                 },
                 itemBuilder: (_) => const [
-                  PopupMenuItem(value: 'search', child: Text('ðŸ” Search in Chat')),
-                  PopupMenuItem(value: 'mute', child: Text('ðŸ”‡ Mute Notifications')),
-                  PopupMenuItem(value: 'pin', child: Text('ðŸ“Œ Pin Conversation')),
-                  PopupMenuItem(value: 'archive', child: Text('ðŸ“¦ Archive Chat')),
+                  PopupMenuItem(value: 'search', child: Text('Search in chat')),
+                  PopupMenuItem(value: 'mute', child: Text('Mute notifications')),
+                  PopupMenuItem(value: 'pin', child: Text('Pin conversation')),
+                  PopupMenuItem(value: 'archive', child: Text('Archive chat')),
                   PopupMenuDivider(),
-                  PopupMenuItem(value: 'report', child: Text('ðŸš© Report')),
-                  PopupMenuItem(value: 'block', child: Text('ðŸš« Block User')),
+                  PopupMenuItem(value: 'report', child: Text('Report')),
+                  PopupMenuItem(value: 'block', child: Text('Block user')),
                 ],
               ),
             ],
           ),
-          body: Consumer<AIInsightsNotifier>(
-            builder: (context, aiNotifier, _) => Column(
+          body: Column(
             children: [
-              // AI Conversation Sentiment Banner
-              if (aiNotifier.insights.isNotEmpty)
-                _AISentimentBanner(insight: aiNotifier.insights.first),
-              // Messages
+              // Messages with fold animation (spec P1, dpThreadFold = 400ms)
               Expanded(
-                child: messages.isEmpty
+                child: _folded
+                    ? _FoldSummaryCard(
+                        messages: messages,
+                        onUnfold: () => setState(() => _folded = false),
+                      )
+                    : AnimatedSwitcher(
+                        duration: AppAnimations.dpThreadFold,
+                        child: messages.isEmpty
                     ? Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(Icons.chat_bubble_outline, size: 64, color: kChatColor.withValues(alpha: 0.3)),
                             const SizedBox(height: 16),
-                            const Text(
-                              'Start a conversation! ðŸ’¬',
-                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Color(0xFF6B7280)),
-                            ),
+                            Text('Start a conversation', style: IveType.headline),
                             const SizedBox(height: 4),
-                            const Text(
-                              'Send a message to begin',
-                              style: TextStyle(fontSize: 13, color: Color(0xFF9CA3AF)),
-                            ),
+                            Text('Send a message to begin', style: IveType.caption.copyWith(color: IveTokens.muteColor)),
                           ],
                         ),
                       )
@@ -223,43 +241,30 @@ class _QualChatThreadScreenState extends State<QualChatThreadScreen> {
                           );
                         },
                       ),
+                      ),
               ),
 
               // Attachment panel
               if (_showAttachments)
                 Container(
                   padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border(top: BorderSide(color: Colors.grey.shade200)),
+                  decoration: const BoxDecoration(
+                    color: IveTokens.raisedColor,
+                    border: Border(top: BorderSide(color: IveTokens.hairColor, width: 1)),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      _AttachmentOption(icon: Icons.photo, label: 'Photo', color: const Color(0xFF10B981), onTap: () => setState(() => _showAttachments = false)),
+                      _AttachmentOption(icon: Icons.photo, label: 'Photo', color: IveTokens.okColor, onTap: () => setState(() => _showAttachments = false)),
                       _AttachmentOption(icon: Icons.camera_alt, label: 'Camera', color: kChatColor, onTap: () => setState(() => _showAttachments = false)),
-                      _AttachmentOption(icon: Icons.insert_drive_file, label: 'File', color: const Color(0xFF3B82F6), onTap: () => setState(() => _showAttachments = false)),
-                      _AttachmentOption(icon: Icons.location_on, label: 'Location', color: const Color(0xFFF59E0B), onTap: () => setState(() => _showAttachments = false)),
-                      _AttachmentOption(icon: Icons.contact_phone, label: 'Contact', color: const Color(0xFF8B5CF6), onTap: () => setState(() => _showAttachments = false)),
+                      _AttachmentOption(icon: Icons.insert_drive_file, label: 'File', color: IveTokens.infoColor, onTap: () => setState(() => _showAttachments = false)),
+                      _AttachmentOption(icon: Icons.location_on, label: 'Location', color: IveTokens.warnColor, onTap: () => setState(() => _showAttachments = false)),
+                      _AttachmentOption(icon: Icons.contact_phone, label: 'Contact', color: IveTokens.accentColor, onTap: () => setState(() => _showAttachments = false)),
                       _AttachmentOption(icon: Icons.poll, label: 'Poll', color: const Color(0xFFEC4899), onTap: () => setState(() => _showAttachments = false)),
                     ],
                   ),
                 ),
 
-              // AI Smart Reply Strip
-              if (aiNotifier.recommendations.isNotEmpty)
-                _AISmartReplyStrip(
-                  suggestions: aiNotifier.recommendations
-                      .take(3)
-                      .map((r) => r['name'] as String? ?? '')
-                      .toList(),
-                  onTap: (text) {
-                    _messageCtrl.text = text;
-                    _messageCtrl.selection = TextSelection.fromPosition(
-                      TextPosition(offset: text.length),
-                    );
-                  },
-                ),
               // Smart Composer
               _SmartComposer(
                 controller: _messageCtrl,
@@ -271,7 +276,6 @@ class _QualChatThreadScreenState extends State<QualChatThreadScreen> {
                 onAttachment: () => setState(() => _showAttachments = !_showAttachments),
               ),
             ],
-          ),
           ),
         );
       },
@@ -309,84 +313,6 @@ class _QualChatThreadScreenState extends State<QualChatThreadScreen> {
   }
 }
 
-class _AISentimentBanner extends StatelessWidget {
-  final dynamic insight;
-  const _AISentimentBanner({required this.insight});
-
-  @override
-  Widget build(BuildContext context) {
-    final label = insight?.label as String? ?? '';
-    final type = insight?.type as String? ?? '';
-    final emoji = type == 'positive' ? 'ðŸ˜Š' : type == 'negative' ? 'ðŸ˜Ÿ' : 'ðŸ¤';
-    if (label.isEmpty) return const SizedBox.shrink();
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 7),
-      color: kChatColor.withValues(alpha: 0.06),
-      child: Row(
-        children: [
-          Text(emoji, style: const TextStyle(fontSize: 14)),
-          const SizedBox(width: 8),
-          Expanded(
-            child: Text(
-              'AI: $label',
-              style: const TextStyle(fontSize: 12, color: kChatColor, fontWeight: FontWeight.w500),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _AISmartReplyStrip extends StatelessWidget {
-  final List<String> suggestions;
-  final ValueChanged<String> onTap;
-  const _AISmartReplyStrip({required this.suggestions, required this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    if (suggestions.isEmpty) return const SizedBox.shrink();
-    return Container(
-      height: 40,
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border(top: BorderSide(color: Colors.grey.shade200)),
-      ),
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        itemCount: suggestions.length,
-        separatorBuilder: (_, __) => const SizedBox(width: 8),
-        itemBuilder: (context, i) => GestureDetector(
-          onTap: () => onTap(suggestions[i]),
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-            decoration: BoxDecoration(
-              color: kChatColor.withValues(alpha: 0.08),
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: kChatColor.withValues(alpha: 0.3)),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Icon(Icons.auto_awesome, size: 12, color: kChatColor),
-                const SizedBox(width: 4),
-                Text(
-                  suggestions[i],
-                  style: const TextStyle(fontSize: 12, color: kChatColor, fontWeight: FontWeight.w500),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class _DateSeparator extends StatelessWidget {
   final DateTime date;
   const _DateSeparator({required this.date});
@@ -407,16 +333,80 @@ class _DateSeparator extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: Row(
         children: [
-          Expanded(child: Divider(color: Colors.grey.shade300)),
+          const Expanded(child: Divider(color: IveTokens.hairColor)),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: Text(
-              label,
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: Colors.grey.shade500),
-            ),
+            child: Text(label, style: IveType.caption.copyWith(color: IveTokens.muteColor, fontWeight: FontWeight.w500)),
           ),
-          Expanded(child: Divider(color: Colors.grey.shade300)),
+          const Expanded(child: Divider(color: IveTokens.hairColor)),
         ],
+      ),
+    );
+  }
+}
+
+/// Fold summary card shown when user collapses the thread (spec P1).
+/// Bubbles → summary card with sentiment as one quiet word.
+class _FoldSummaryCard extends StatelessWidget {
+  final List<dynamic> messages;
+  final VoidCallback onUnfold;
+  const _FoldSummaryCard({required this.messages, required this.onUnfold});
+
+  String _sentiment() {
+    final n = messages.length;
+    if (n == 0) return 'quiet';
+    if (n >= 30) return 'lively';
+    if (n >= 15) return 'active';
+    if (n >= 6) return 'warm';
+    if (n >= 2) return 'light';
+    return 'quiet';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final recent = messages.reversed.take(3).toList().reversed.toList();
+    return GestureDetector(
+      onTap: onUnfold,
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: IveTokens.raisedColor,
+          borderRadius: BorderRadius.circular(IveTokens.rContainer),
+          border: Border.all(color: kChatColor.withValues(alpha: 0.3), width: 1),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              children: [
+                const Icon(Icons.unfold_more_rounded, size: 14, color: kChatColor),
+                const SizedBox(width: 6),
+                Expanded(
+                  child: Text(
+                    '${messages.length} messages',
+                    style: IveType.caption.copyWith(fontWeight: FontWeight.w600, color: kChatColor),
+                  ),
+                ),
+                // Sentiment — one quiet word (spec P1)
+                Text(_sentiment(), style: IveType.caption.copyWith(color: IveTokens.muteColor)),
+              ],
+            ),
+            const SizedBox(height: 10),
+            ...recent.map((msg) => Padding(
+              padding: const EdgeInsets.only(bottom: 6),
+              child: Text(
+                msg.content ?? '',
+                style: IveType.caption.copyWith(color: IveTokens.ink2Color),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            )),
+            const SizedBox(height: 4),
+            Text('Expand', style: IveType.caption.copyWith(color: IveTokens.muteColor)),
+          ],
+        ),
       ),
     );
   }
@@ -432,10 +422,9 @@ class _SmartComposer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(8, 8, 8, 12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border(top: BorderSide(color: Colors.grey.shade200)),
-        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8, offset: const Offset(0, -2))],
+      decoration: const BoxDecoration(
+        color: IveTokens.raisedColor,
+        border: Border(top: BorderSide(color: IveTokens.hairColor, width: 1)),
       ),
       child: SafeArea(
         child: Row(
@@ -451,18 +440,21 @@ class _SmartComposer extends StatelessWidget {
               child: Container(
                 constraints: const BoxConstraints(maxHeight: 120),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF3F4F6),
-                  borderRadius: BorderRadius.circular(20),
+                  color: IveTokens.surfaceColor,
+                  borderRadius: BorderRadius.circular(IveTokens.rChip),
+                  border: Border.all(color: IveTokens.hairColor, width: 1),
                 ),
                 child: TextField(
                   controller: controller,
                   maxLines: null,
                   textCapitalization: TextCapitalization.sentences,
-                  decoration: const InputDecoration(
-                    hintText: 'Type a message...',
-                    hintStyle: TextStyle(fontSize: 14, color: Color(0xFF9CA3AF)),
+                  style: IveType.body,
+                  cursorColor: kChatColor,
+                  decoration: InputDecoration(
+                    hintText: 'Message',
+                    hintStyle: IveType.body.copyWith(color: IveTokens.muteColor),
                     border: InputBorder.none,
-                    contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                   ),
                 ),
               ),
@@ -470,7 +462,7 @@ class _SmartComposer extends StatelessWidget {
             const SizedBox(width: 4),
             // Emoji
             IconButton(
-              icon: const Icon(Icons.emoji_emotions_outlined, color: Color(0xFF6B7280)),
+              icon: const Icon(Icons.emoji_emotions_outlined, color: IveTokens.muteColor),
               onPressed: () {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Reaction added')),
@@ -489,13 +481,13 @@ class _SmartComposer extends StatelessWidget {
                     width: 40,
                     height: 40,
                     decoration: BoxDecoration(
-                      color: hasText ? kChatColor : const Color(0xFFF3F4F6),
+                      color: hasText ? kChatColor : IveTokens.surfaceColor,
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
-                      hasText ? Icons.send : Icons.mic,
+                      hasText ? Icons.send_rounded : Icons.mic_none_rounded,
                       size: 20,
-                      color: hasText ? Colors.white : const Color(0xFF6B7280),
+                      color: hasText ? IveTokens.inkColor : IveTokens.muteColor,
                     ),
                   ),
                 );
@@ -532,7 +524,7 @@ class _AttachmentOption extends StatelessWidget {
             child: Icon(icon, color: color),
           ),
           const SizedBox(height: 6),
-          Text(label, style: TextStyle(fontSize: 11, color: Colors.grey.shade600)),
+          Text(label, style: IveType.caption.copyWith(color: IveTokens.muteColor)),
         ],
       ),
     );

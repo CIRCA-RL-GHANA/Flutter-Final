@@ -1,4 +1,4 @@
-/// GO Screen 5 — Tab Detail
+﻿/// GO Screen 5 — Tab Detail
 /// Tab identity card, financial snapshot, transaction timeline,
 /// settlement interface, negotiation tools, documents, audit trail
 library;
@@ -6,7 +6,6 @@ library;
 import 'package:flutter/material.dart';
 import '../../../core/routes/app_routes.dart';
 import 'package:provider/provider.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../models/go_models.dart';
 import '../providers/go_provider.dart';
 import '../widgets/go_widgets.dart';
@@ -39,34 +38,6 @@ class _GoTabDetailScreenState extends State<GoTabDetailScreen> {
           body: ListView(
             padding: const EdgeInsets.all(16),
             children: [
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 14),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: kGoColor.withValues(alpha: 0.07),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                      child: Row(
-                        children: [
-                          const Icon(Icons.auto_awesome, size: 14, color: kGoColor),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: Text(
-                              'AI insight: ${ai.insights.first['title'] ?? ''}',
-                              style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kGoColor),
-                              maxLines: 2, overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
               // 1 — Identity card
               _buildIdentityCard(tab),
               const SizedBox(height: 14),
@@ -326,7 +297,7 @@ class _StatusBadge extends StatelessWidget {
       case TabStatus.frozen: c = kGoInfo; t = 'Frozen';
       case TabStatus.closed: c = const Color(0xFF9CA3AF); t = 'Closed';
     }
-    return Container(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4), decoration: BoxDecoration(color: c.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(12)), child: Text(t, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: c)));
+    return Container(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4), decoration: BoxDecoration(color: c.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(10)), child: Text(t, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: c)));
   }
 }
 

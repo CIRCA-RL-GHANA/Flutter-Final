@@ -2,9 +2,7 @@
 library;
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../../../core/services/fintech_service.dart';
-import '../../../../core/services/ai_insights_notifier.dart';
 
 const _kTeal = Color(0xFF009688);
 
@@ -102,20 +100,6 @@ class _InsuranceScreenState extends State<InsuranceScreen>
         ),
       ),
       body: Column(children: [
-        Consumer<AIInsightsNotifier>(builder: (context, ai, _) {
-          if (ai.insights.isEmpty) return const SizedBox.shrink();
-          return Container(
-            color: _kTeal.withValues(alpha: 0.06),
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-            child: Row(children: [
-              const Icon(Icons.auto_awesome, size: 14, color: _kTeal),
-              const SizedBox(width: 8),
-              Expanded(child: Text('Genie: ${ai.insights.first['label'] ?? 'Protect your assets'}',
-                style: const TextStyle(fontSize: 11, color: _kTeal),
-                maxLines: 1, overflow: TextOverflow.ellipsis)),
-            ]),
-          );
-        }),
         Expanded(child: TabBarView(controller: _tabs, children: [
           _buildBrowseTab(),
           _buildPoliciesTab(),
@@ -208,7 +192,7 @@ class _PurchaseCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
     padding: const EdgeInsets.all(16),
-    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12), border: Border.all(color: const Color(0xFFE5E7EB))),
+    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: const Color(0xFFE5E7EB))),
     child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       const Text('Purchase Policy', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
       const SizedBox(height: 12),

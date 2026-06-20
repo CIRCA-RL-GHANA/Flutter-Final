@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/design/ive_empty_state.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../prompt/providers/context_provider.dart';
@@ -100,7 +99,7 @@ class ProductsScreen extends StatelessWidget {
                     height: 44,
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(10),
                       border: Border.all(color: AppColors.inputBorder),
                     ),
                     child: Row(
@@ -139,35 +138,7 @@ class ProductsScreen extends StatelessWidget {
                 ),
               ] else if (setupProv.isGridView) ...[
               // ─── AI Insights ─────────────────────────────────────────
-              SliverToBoxAdapter(
-                child: Consumer<AIInsightsNotifier>(
-                  builder: (context, ai, _) {
-                    if (ai.insights.isEmpty) return const SizedBox.shrink();
-                    return Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: kSetupColor.withValues(alpha: 0.07),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                        child: Row(
-                          children: [
-                            const Icon(Icons.auto_awesome, size: 14, color: kSetupColor),
-                            const SizedBox(width: 8),
-                            Expanded(
-                              child: Text(
-                                'AI: ${ai.insights.first['title'] ?? ''}',
-                                style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kSetupColor),
-                                maxLines: 1, overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
+              const SliverToBoxAdapter(
               ),
                 SliverPadding(
                   padding: const EdgeInsets.fromLTRB(20, 16, 20, 100),
@@ -222,14 +193,7 @@ class _ProductGridCard extends StatelessWidget {
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(14),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.04),
-              blurRadius: 10,
-              offset: const Offset(0, 2),
-            ),
-          ],
+          borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -338,14 +302,7 @@ class _ProductListTile extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(14),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.04),
-            blurRadius: 10,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
         children: [

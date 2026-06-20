@@ -1,4 +1,4 @@
-/// Alerts Screen 1.1 — Advanced Search & Discovery
+﻿/// Alerts Screen 1.1 — Advanced Search & Discovery
 /// Full-width search bar, grouped results by status, search highlighting,
 /// AI suggestions, recent/saved searches
 library;
@@ -6,7 +6,6 @@ library;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../models/alerts_models.dart';
 import '../providers/alerts_provider.dart';
 import '../widgets/alerts_widgets.dart';
@@ -103,35 +102,6 @@ class _AlertsSearchScreenState extends State<AlertsSearchScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // ──── AI SUGGESTIONS (dynamic) ────
-          Consumer<AIInsightsNotifier>(
-            builder: (ctx, aiNotifier, _) {
-              final aiRecs = aiNotifier.recommendations;
-              final chips = aiRecs.isNotEmpty
-                  ? aiRecs
-                      .take(4)
-                      .map((r) => r['name']?.toString() ?? r['id']?.toString() ?? '')
-                      .where((s) => s.isNotEmpty)
-                      .toList()
-                  : const [
-                      'Unresolved payment issues',
-                      'Critical system alerts',
-                      'Overdue SLA alerts',
-                      'Driver complaints this week',
-                    ];
-              final isAI = aiRecs.isNotEmpty;
-              return AlertsSectionCard(
-                title: isAI ? '✨ AI Smart Suggestions' : 'ðŸ¤– AI Suggestions',
-                child: Column(
-                  children: chips
-                      .map((label) => _SuggestionChip(
-                            label: label,
-                            onTap: () => _runQuery(label),
-                          ))
-                      .toList(),
-                ),
-              );
-            },
-          ),
           const SizedBox(height: 16),
 
           // ──── RECENT SEARCHES ────
@@ -170,7 +140,7 @@ class _AlertsSearchScreenState extends State<AlertsSearchScreen> {
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
               color: kAlertsInfoLight,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(10),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -211,32 +181,6 @@ class _AlertsSearchScreenState extends State<AlertsSearchScreen> {
                 style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280)),
               ),
               const Spacer(),
-              Consumer<AIInsightsNotifier>(
-                builder: (ctx, ai, _) => ai.searchResults.isNotEmpty
-                    ? Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
-                        decoration: BoxDecoration(
-                          color: kAlertsInfo.withValues(alpha: 0.08),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: const Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(Icons.auto_awesome, size: 11, color: kAlertsInfo),
-                            SizedBox(width: 3),
-                            Text(
-                              'AI ranked',
-                              style: TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.w600,
-                                color: kAlertsInfo,
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    : const SizedBox.shrink(),
-              ),
             ],
           ),
           const SizedBox(height: 12),
@@ -281,39 +225,6 @@ class _AlertsSearchScreenState extends State<AlertsSearchScreen> {
           const SizedBox(width: 8),
           Text(text, style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
         ],
-      ),
-    );
-  }
-}
-
-// ──────────────────────────────────────────────
-// Suggestion Chip
-// ──────────────────────────────────────────────
-
-class _SuggestionChip extends StatelessWidget {
-  final String label;
-  final VoidCallback onTap;
-  const _SuggestionChip({required this.label, required this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 8),
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-        decoration: BoxDecoration(
-          color: const Color(0xFFF3F4F6),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Row(
-          children: [
-            const Icon(Icons.auto_awesome, size: 16, color: kAlertsCritical),
-            const SizedBox(width: 10),
-            Expanded(child: Text(label, style: const TextStyle(fontSize: 13))),
-            const Icon(Icons.arrow_forward_ios, size: 12, color: Color(0xFF9CA3AF)),
-          ],
-        ),
       ),
     );
   }

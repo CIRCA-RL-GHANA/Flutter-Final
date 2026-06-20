@@ -1,4 +1,4 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// GenieScreen – The Universal Modal Interface
 ///
 /// Replaces the PromptScreen as the default home of the app.
@@ -508,13 +508,6 @@ class _InputArea extends StatelessWidget {
       decoration: const BoxDecoration(
         color: IveTokens.surface,
         border: Border(top: BorderSide(color: IveTokens.hairline)),
-        boxShadow: [
-          BoxShadow(
-            color: Color(0x14000000),
-            blurRadius: 12,
-            offset: Offset(0, -2),
-          ),
-        ],
       ),
       padding: EdgeInsets.only(
         left: 12,
@@ -632,15 +625,6 @@ class _InputArea extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: isListening ? AppColors.error : AppColors.primary,
-                  boxShadow: isListening
-                      ? [
-                          BoxShadow(
-                            color: AppColors.error.withValues(alpha: 0.4),
-                            blurRadius: 12,
-                            spreadRadius: 2,
-                          )
-                        ]
-                      : null,
                 ),
                 child: Icon(
                   isListening ? Icons.stop : Icons.mic,

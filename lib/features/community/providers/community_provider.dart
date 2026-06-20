@@ -1,4 +1,4 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// ═══════════════════════════════════════════════════════════════════════════
 /// Community Provider — State Management
 ///
 /// Manages community discovery, memberships, and post state.
@@ -192,7 +192,7 @@ class CommunityProvider extends ChangeNotifier {
         notifyListeners();
         return response.data;
       }
-      _error = 'Failed to create community. Please try again.';
+      _error = 'Failed to create community. Try again.';
       notifyListeners();
       return null;
     } catch (e) {

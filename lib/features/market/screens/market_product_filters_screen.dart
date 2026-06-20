@@ -1,4 +1,4 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// MARKET MODULE — Screen 3.1: Product Filters
 /// Advanced product filtering: price, dietary, availability, category
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -7,7 +7,6 @@ library;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../models/market_models.dart';
 import '../providers/market_provider.dart';
 import '../widgets/market_widgets.dart';
@@ -46,33 +45,11 @@ class _MarketProductFiltersScreenState extends State<MarketProductFiltersScreen>
           body: ListView(
             padding: const EdgeInsets.all(16),
             children: [
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    color: kMarketColor.withValues(alpha: 0.07),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: kMarketColor),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            'AI: ${ai.insights.first['title'] ?? ''}',
-                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kMarketColor),
-                            maxLines: 1, overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
               // Price range
               const _SectionHeader(title: 'Price Range', icon: Icons.attach_money),
               const SizedBox(height: 8),
               Card(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 elevation: 0,
                 color: Colors.white,
                 child: Padding(
@@ -121,7 +98,7 @@ class _MarketProductFiltersScreenState extends State<MarketProductFiltersScreen>
               const _SectionHeader(title: 'Dietary Preferences', icon: Icons.eco),
               const SizedBox(height: 8),
               Card(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 elevation: 0,
                 color: Colors.white,
                 child: Padding(
@@ -163,7 +140,7 @@ class _MarketProductFiltersScreenState extends State<MarketProductFiltersScreen>
               const _SectionHeader(title: 'Availability', icon: Icons.inventory),
               const SizedBox(height: 8),
               Card(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 elevation: 0,
                 color: Colors.white,
                 child: Column(
@@ -193,7 +170,7 @@ class _MarketProductFiltersScreenState extends State<MarketProductFiltersScreen>
               const _SectionHeader(title: 'Minimum Rating', icon: Icons.star),
               const SizedBox(height: 8),
               Card(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 elevation: 0,
                 color: Colors.white,
                 child: Padding(
@@ -223,7 +200,7 @@ class _MarketProductFiltersScreenState extends State<MarketProductFiltersScreen>
               const _SectionHeader(title: 'More Options', icon: Icons.settings),
               const SizedBox(height: 8),
               Card(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 elevation: 0,
                 color: Colors.white,
                 child: Column(
@@ -265,9 +242,8 @@ class _MarketProductFiltersScreenState extends State<MarketProductFiltersScreen>
               top: 12,
               bottom: MediaQuery.of(context).padding.bottom + 12,
             ),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
-              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10, offset: const Offset(0, -2))],
             ),
             child: Row(
               children: [
@@ -277,7 +253,7 @@ class _MarketProductFiltersScreenState extends State<MarketProductFiltersScreen>
                     style: OutlinedButton.styleFrom(
                       foregroundColor: kMarketColor,
                       side: const BorderSide(color: kMarketColor),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                       padding: const EdgeInsets.symmetric(vertical: 14),
                     ),
                     child: const Text('Clear All'),
@@ -291,7 +267,7 @@ class _MarketProductFiltersScreenState extends State<MarketProductFiltersScreen>
                     style: ElevatedButton.styleFrom(
                       backgroundColor: kMarketColor,
                       foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       elevation: 0,
                     ),

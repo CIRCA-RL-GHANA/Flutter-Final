@@ -1,11 +1,10 @@
-/// APRIL Screen 3 — Smart Calendar
+﻿/// APRIL Screen 3 — Smart Calendar
 /// 5 view modes: day, week, month, agenda, year
 /// Event creation, meeting scheduling, day timeline
 library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../models/april_models.dart';
 import '../providers/april_provider.dart';
 import '../widgets/april_widgets.dart';
@@ -85,42 +84,6 @@ class AprilCalendarScreen extends StatelessWidget {
               ),
 
               // AI Event Insights strip
-              Consumer<AIInsightsNotifier>(
-                builder: (ctx, aiNotifier, _) {
-                  final insights = aiNotifier.insights;
-                  if (insights.isEmpty) return const SizedBox.shrink();
-                  final first = insights.first;
-                  final label = first['label']?.toString() ?? first['text']?.toString() ?? '';
-                  if (label.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    margin: const EdgeInsets.fromLTRB(16, 4, 16, 0),
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
-                    decoration: BoxDecoration(
-                      color: kAprilColor.withValues(alpha: 0.08),
-                      borderRadius: BorderRadius.circular(9),
-                      border: Border.all(color: kAprilColor.withValues(alpha: 0.2)),
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.auto_awesome, size: 13, color: kAprilColorDark),
-                        const SizedBox(width: 6),
-                        Expanded(
-                          child: Text(
-                            'AI: $label',
-                            style: const TextStyle(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w600,
-                              color: kAprilColorDark,
-                            ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
 
               // Calendar Body
               Expanded(
@@ -210,7 +173,7 @@ class AprilCalendarScreen extends StatelessWidget {
                 filled: true,
                 fillColor: const Color(0xFFF3F4F6),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(10),
                   borderSide: BorderSide.none,
                 ),
                 contentPadding: const EdgeInsets.symmetric(vertical: 12),
@@ -225,7 +188,7 @@ class AprilCalendarScreen extends StatelessWidget {
                   backgroundColor: kAprilColor,
                   foregroundColor: Colors.black,
                   padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 ),
                 child: const Text('Create Event', style: TextStyle(fontWeight: FontWeight.w600)),
               ),
@@ -648,7 +611,7 @@ class _YearView extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: isCurrent ? kAprilColor.withValues(alpha: 0.1) : Colors.white,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(10),
               border: Border.all(
                 color: isCurrent ? kAprilColor : const Color(0xFFE5E7EB),
               ),

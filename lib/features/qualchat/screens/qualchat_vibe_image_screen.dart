@@ -3,10 +3,8 @@
 library;
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../providers/qualchat_provider.dart';
 import '../widgets/qualchat_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class QualChatVibeImageScreen extends StatelessWidget {
   const QualChatVibeImageScreen({super.key});
@@ -59,22 +57,6 @@ class QualChatVibeImageScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Consumer<AIInsightsNotifier>(
-              builder: (context, ai, _) {
-                if (ai.insights.isEmpty) return const SizedBox.shrink();
-                return Container(
-                  color: const Color(0xFF06B6D4).withValues(alpha: 0.07),
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                  child: Row(children: [
-                    const Icon(Icons.auto_awesome, size: 14, color: Color(0xFF06B6D4)),
-                    const SizedBox(width: 8),
-                    Expanded(child: Text('AI: ${ai.insights.first['title'] ?? ''}',
-                      style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: Color(0xFF06B6D4)),
-                      maxLines: 1, overflow: TextOverflow.ellipsis)),
-                  ]),
-                );
-              },
-            ),
             // Photo placeholder
             Container(
               margin: const EdgeInsets.all(16),
@@ -303,7 +285,7 @@ class _VibeAction extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 12),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(10),
             border: Border.all(color: const Color(0xFFE5E7EB)),
           ),
           child: Column(

@@ -1,4 +1,4 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// SCREEN 12 — Update Insights (Business Roles)
 /// Reach, impressions, engagement rate, time-based analytics, AI insights,
 /// audience demographics, content performance, ROI metrics.
@@ -8,7 +8,6 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/theme/app_colors.dart';
 import '../models/updates_models.dart';
 import '../providers/updates_provider.dart';
@@ -87,22 +86,6 @@ class _BodyState extends State<_Body> {
             padding: const EdgeInsets.all(14),
             child: Column(
               children: [
-                Consumer<AIInsightsNotifier>(
-                  builder: (context, ai, _) {
-                    if (ai.insights.isEmpty) return const SizedBox.shrink();
-                    return Container(
-                      color: kUpdatesColor.withValues(alpha: 0.07),
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                      child: Row(children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: kUpdatesColor),
-                        const SizedBox(width: 8),
-                        Expanded(child: Text('AI: ${ai.insights.first['title'] ?? ''}',
-                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kUpdatesColor),
-                          maxLines: 1, overflow: TextOverflow.ellipsis)),
-                      ]),
-                    );
-                  },
-                ),
                 // Overview metrics
                 _OverviewMetrics(insight: insight),
 
@@ -294,8 +277,7 @@ class _MetricCard extends StatelessWidget {
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 6)],
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -339,7 +321,7 @@ class _EngagementRateCard extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(10),
         border: Border.all(color: kUpdatesColor.withValues(alpha: 0.15)),
       ),
       child: Row(

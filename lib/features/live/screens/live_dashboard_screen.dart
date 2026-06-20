@@ -14,7 +14,6 @@ import '../../../core/routes/app_routes.dart';
 import '../models/live_models.dart';
 import '../providers/live_provider.dart';
 import '../widgets/live_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class LiveDashboardScreen extends StatefulWidget {
   const LiveDashboardScreen({super.key});
@@ -65,10 +64,9 @@ class _LiveDashboardScreenState extends State<LiveDashboardScreen> with SingleTi
                 Container(
                   width: 10,
                   height: 10,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: kLiveColor,
-                    boxShadow: [BoxShadow(color: kLiveColor.withValues(alpha: 0.4), blurRadius: 6, spreadRadius: 1)],
                   ),
                 ),
               ],
@@ -109,28 +107,6 @@ class _LiveDashboardScreenState extends State<LiveDashboardScreen> with SingleTi
           ),
           body: Column(
             children: [
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    color: kLiveColor.withValues(alpha: 0.07),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: kLiveColor),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            'AI: ${ai.insights.first['title'] ?? ''}',
-                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kLiveColor),
-                            maxLines: 1, overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
               Expanded(
                 child: TabBarView(
                   controller: _tabController,
@@ -403,7 +379,7 @@ class _PackagesView extends StatelessWidget {
                     backgroundColor: kLiveColor,
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 12),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   ),
                 ),
               ),

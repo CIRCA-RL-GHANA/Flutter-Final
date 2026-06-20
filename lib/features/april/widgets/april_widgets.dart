@@ -1,4 +1,4 @@
-/// APRIL Module — Shared Widgets
+﻿/// APRIL Module — Shared Widgets
 /// Personal Assistant & Command Core
 /// Module Color: Gold 0xFFFFD700
 library;
@@ -91,9 +91,6 @@ class AprilSectionCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8, offset: const Offset(0, 2)),
-        ],
       ),
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -172,7 +169,7 @@ class AprilEmptyState extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: kAprilColor,
                   foregroundColor: Colors.black,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                 ),
                 child: Text(ctaLabel!, style: const TextStyle(fontWeight: FontWeight.w600)),
@@ -229,13 +226,6 @@ class AprilVoiceButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: colors[state],
           shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: (colors[state] ?? kAprilAccent).withValues(alpha: 0.3),
-              blurRadius: 16,
-              offset: const Offset(0, 4),
-            ),
-          ],
         ),
         child: state == VoiceState.processing
             ? const Padding(
@@ -292,10 +282,7 @@ class PluginCard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(14),
-          boxShadow: [
-            BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8, offset: const Offset(0, 2)),
-          ],
+          borderRadius: BorderRadius.circular(10),
         ),
         child: Stack(
           children: [
@@ -583,10 +570,7 @@ class TransactionCard extends StatelessWidget {
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: [
-            BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 6, offset: const Offset(0, 2)),
-          ],
+          borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
           children: [
@@ -595,7 +579,7 @@ class TransactionCard extends StatelessWidget {
               height: 44,
               decoration: BoxDecoration(
                 color: (isIncome ? const Color(0xFF10B981) : kAprilColor).withValues(alpha: 0.1),
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(10),
               ),
               child: Center(
                 child: Text(
@@ -691,10 +675,7 @@ class BudgetProgressBar extends StatelessWidget {
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: [
-            BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 6, offset: const Offset(0, 2)),
-          ],
+          borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -776,11 +757,8 @@ class CalendarEventTile extends StatelessWidget {
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(10),
           border: Border(left: BorderSide(color: color, width: 4)),
-          boxShadow: [
-            BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 6, offset: const Offset(0, 2)),
-          ],
         ),
         child: Row(
           children: [
@@ -889,10 +867,7 @@ class WishlistItemCard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(14),
-          boxShadow: [
-            BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8, offset: const Offset(0, 2)),
-          ],
+          borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -1013,10 +988,7 @@ class StatementCardWidget extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(14),
-          boxShadow: [
-            BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8, offset: const Offset(0, 2)),
-          ],
+          borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

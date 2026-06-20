@@ -1,18 +1,18 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// ─────────────────────────────────────────────────────────────────────────────
 /// LIVE MODULE — Screen 13: Delivery Verification Flow
 /// Multi-method verification: PIN entry, photo capture,
 /// signature, biometric, proof of delivery, and confirmation
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// ─────────────────────────────────────────────────────────────────────────────
 library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import '../../../core/theme/app_colors.dart';
+import '../../../core/design/ive.dart';
 import '../models/live_models.dart';
 import '../providers/live_provider.dart';
 import '../widgets/live_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class LiveDeliveryVerificationScreen extends StatefulWidget {
   const LiveDeliveryVerificationScreen({super.key});
@@ -22,7 +22,7 @@ class LiveDeliveryVerificationScreen extends StatefulWidget {
 }
 
 class _LiveDeliveryVerificationScreenState extends State<LiveDeliveryVerificationScreen> {
-  int _step = 0; // 0=PIN, 1=Photo, 2=Signature, 3=Complete
+  int _step = 0; // 0=PIN, 1=Photo, 2=Signature
   bool _pinVerified = false;
   bool _photoTaken = false;
   bool _signatureCollected = false;
@@ -32,6 +32,15 @@ class _LiveDeliveryVerificationScreenState extends State<LiveDeliveryVerificatio
   void dispose() {
     _pinController.dispose();
     super.dispose();
+  }
+
+  bool get _canProceed {
+    switch (_step) {
+      case 0: return _pinVerified;
+      case 1: return _photoTaken;
+      case 2: return _signatureCollected;
+      default: return false;
+    }
   }
 
   @override
@@ -44,67 +53,38 @@ class _LiveDeliveryVerificationScreenState extends State<LiveDeliveryVerificatio
           return _CompletionView(package: pkg, onDone: () => Navigator.pop(context));
         }
 
+        const stepLabels = ['PIN', 'Photo', 'Signature'];
+
         return Scaffold(
-          backgroundColor: AppColors.backgroundLight,
+          backgroundColor: IveTokens.voidColor,
           appBar: LiveAppBar(
-            title: _step == 0 ? 'PIN Verification' : _step == 1 ? 'Photo Evidence' : 'Digital Signature',
+            title: stepLabels[_step],
           ),
           body: Column(
             children: [
-              // Step progress
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                color: Colors.white,
-                child: Row(
-                  children: [
-                    _StepDot(label: 'PIN', active: _step >= 0, completed: _pinVerified),
-                    Expanded(child: Container(height: 2, color: _pinVerified ? const Color(0xFF10B981) : const Color(0xFFE5E7EB))),
-                    _StepDot(label: 'Photo', active: _step >= 1, completed: _photoTaken),
-                    Expanded(child: Container(height: 2, color: _photoTaken ? const Color(0xFF10B981) : const Color(0xFFE5E7EB))),
-                    _StepDot(label: 'Sign', active: _step >= 2, completed: _signatureCollected),
-                  ],
+              // StepBar replacing custom dots (spec P1 — gold checkpoint pulse)
+              Padding(
+                padding: const EdgeInsets.fromLTRB(
+                  IveTokens.s4, IveTokens.s3, IveTokens.s4, 0,
                 ),
-              ),
-
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    color: Colors.green.shade50,
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Row(
-                      children: [
-                        Icon(Icons.verified_user, size: 14, color: Colors.green.shade700),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            'AI verification: ${ai.insights.first['title'] ?? ''}',
-                            style: TextStyle(fontSize: 11, color: Colors.green.shade700),
-                            maxLines: 1, overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
+                child: StepBar(
+                  steps: stepLabels,
+                  currentStep: _step,
+                ),
               ),
 
               Expanded(
                 child: IndexedStack(
                   index: _step,
                   children: [
-                    // Step 0: PIN Verification
                     _PinStep(
                       controller: _pinController,
                       verified: _pinVerified,
                       onVerify: () {
                         HapticFeedback.heavyImpact();
-                        setState(() {
-                          _pinVerified = true;
-                        });
+                        setState(() => _pinVerified = true);
                       },
                     ),
-                    // Step 1: Photo Evidence
                     _PhotoStep(
                       taken: _photoTaken,
                       onCapture: () {
@@ -112,7 +92,6 @@ class _LiveDeliveryVerificationScreenState extends State<LiveDeliveryVerificatio
                         setState(() => _photoTaken = true);
                       },
                     ),
-                    // Step 2: Signature
                     _SignatureStep(
                       collected: _signatureCollected,
                       onSign: () {
@@ -127,42 +106,41 @@ class _LiveDeliveryVerificationScreenState extends State<LiveDeliveryVerificatio
             ],
           ),
           bottomNavigationBar: Container(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 8, offset: const Offset(0, -2))],
+            padding: EdgeInsets.fromLTRB(
+              IveTokens.s4,
+              IveTokens.s3,
+              IveTokens.s4,
+              IveTokens.s4 + MediaQuery.of(context).padding.bottom,
+            ),
+            decoration: const BoxDecoration(
+              color: IveTokens.surfaceColor,
+              border: Border(top: BorderSide(color: IveTokens.hairColor, width: 1)),
             ),
             child: Row(
               children: [
-                if (_step > 0)
+                if (_step > 0) ...[
                   Expanded(
-                    child: OutlinedButton(
+                    child: IveButton.secondary(
+                      label: 'Back',
                       onPressed: () => setState(() => _step--),
-                      style: OutlinedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 14)),
-                      child: const Text('BACK'),
                     ),
                   ),
-                if (_step > 0) const SizedBox(width: 12),
+                  const SizedBox(width: IveTokens.s3),
+                ],
                 Expanded(
                   flex: 2,
-                  child: ElevatedButton(
-                    onPressed: _canProceed
-                        ? () {
+                  child: _canProceed
+                      ? IveButton.primary(
+                          label: _step == 2 ? 'Complete delivery' : 'Next',
+                          onPressed: () {
                             HapticFeedback.mediumImpact();
                             setState(() => _step++);
-                          }
-                        : null,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: _step == 2 ? const Color(0xFF10B981) : kLiveColor,
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                    ),
-                    child: Text(
-                      _step == 0 ? 'NEXT: TAKE PHOTO' : _step == 1 ? 'NEXT: SIGNATURE' : 'âœ… COMPLETE DELIVERY',
-                      style: const TextStyle(fontWeight: FontWeight.w700),
-                    ),
-                  ),
+                          },
+                        )
+                      : IveButton.primary(
+                          label: _step == 2 ? 'Complete delivery' : 'Next',
+                          onPressed: null,
+                        ),
                 ),
               ],
             ),
@@ -171,20 +149,9 @@ class _LiveDeliveryVerificationScreenState extends State<LiveDeliveryVerificatio
       },
     );
   }
-
-  bool get _canProceed {
-    switch (_step) {
-      case 0:
-        return _pinVerified;
-      case 1:
-        return _photoTaken;
-      case 2:
-        return _signatureCollected;
-      default:
-        return false;
-    }
-  }
 }
+
+// ─── PIN Step ─────────────────────────────────────────────────────────────────
 
 class _PinStep extends StatelessWidget {
   final TextEditingController controller;
@@ -195,65 +162,89 @@ class _PinStep extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(IveTokens.s4),
       children: [
-        const SizedBox(height: 20),
+        const SizedBox(height: IveTokens.s5),
         Center(
           child: Column(
             children: [
               Container(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(IveTokens.s4),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: verified ? const Color(0xFF10B981).withValues(alpha: 0.1) : kLiveColor.withValues(alpha: 0.1),
+                  color: (verified ? IveTokens.okColor : kLiveColor).withValues(alpha: 0.12),
                 ),
                 child: Icon(
-                  verified ? Icons.check_circle : Icons.dialpad,
+                  verified ? Icons.check_circle_rounded : Icons.dialpad_rounded,
                   size: 48,
-                  color: verified ? const Color(0xFF10B981) : kLiveColor,
+                  color: verified ? IveTokens.okColor : kLiveColor,
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: IveTokens.s4),
               Text(
-                verified ? 'PIN VERIFIED âœ…' : 'ENTER CUSTOMER PIN',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: verified ? const Color(0xFF10B981) : AppColors.textPrimary),
+                verified ? 'PIN verified' : 'Enter delivery PIN',
+                style: IveType.title3.copyWith(
+                  color: verified ? IveTokens.okColor : IveTokens.inkColor,
+                ),
               ),
-              const SizedBox(height: 4),
-              const Text('Ask the customer for their 4-digit delivery PIN', style: TextStyle(fontSize: 13, color: AppColors.textSecondary), textAlign: TextAlign.center),
+              const SizedBox(height: IveTokens.s1),
+              Text(
+                'Ask the customer for their 4-digit delivery PIN',
+                style: IveType.callout.copyWith(color: IveTokens.muteColor),
+                textAlign: TextAlign.center,
+              ),
             ],
           ),
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: IveTokens.s6),
         if (!verified) ...[
           TextField(
             controller: controller,
             keyboardType: TextInputType.number,
             textAlign: TextAlign.center,
             maxLength: 4,
-            style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w800, letterSpacing: 16),
+            // PIN in large mono (spec P1)
+            style: GoogleFonts.ibmPlexMono(
+              fontSize: 32,
+              fontWeight: FontWeight.w700,
+              letterSpacing: 16,
+              color: IveTokens.inkColor,
+              fontFeatures: [const FontFeature.tabularFigures()],
+            ),
+            cursorColor: kLiveColor,
             decoration: InputDecoration(
-              hintText: '• • • •',
+              hintText: '· · · ·',
+              hintStyle: GoogleFonts.ibmPlexMono(
+                fontSize: 24,
+                color: IveTokens.faintColor,
+                letterSpacing: 16,
+              ),
               counterText: '',
               filled: true,
-              fillColor: const Color(0xFF11131C),
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: const BorderSide(color: Color(0xFF1C1C2E))),
-              focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: const BorderSide(color: kLiveColor, width: 2)),
+              fillColor: IveTokens.surfaceColor,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(IveTokens.rContainer),
+                borderSide: const BorderSide(color: IveTokens.hairColor),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(IveTokens.rContainer),
+                borderSide: const BorderSide(color: IveTokens.hairColor),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(IveTokens.rContainer),
+                borderSide: const BorderSide(color: kLiveColor, width: 1.5),
+              ),
             ),
           ),
-          const SizedBox(height: 16),
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: onVerify,
-              style: ElevatedButton.styleFrom(backgroundColor: kLiveColor, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
-              child: const Text('VERIFY PIN', style: TextStyle(fontWeight: FontWeight.w700)),
-            ),
-          ),
+          const SizedBox(height: IveTokens.s4),
+          IveButton.primary(label: 'Verify PIN', onPressed: onVerify),
         ],
       ],
     );
   }
 }
+
+// ─── Photo Step ───────────────────────────────────────────────────────────────
 
 class _PhotoStep extends StatelessWidget {
   final bool taken;
@@ -263,77 +254,72 @@ class _PhotoStep extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(IveTokens.s4),
       children: [
-        const SizedBox(height: 20),
+        const SizedBox(height: IveTokens.s5),
         Center(
           child: Column(
             children: [
               Container(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(IveTokens.s4),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: taken ? const Color(0xFF10B981).withValues(alpha: 0.1) : const Color(0xFF3B82F6).withValues(alpha: 0.1),
+                  color: (taken ? IveTokens.okColor : IveTokens.accentColor).withValues(alpha: 0.12),
                 ),
                 child: Icon(
-                  taken ? Icons.check_circle : Icons.camera_alt,
+                  taken ? Icons.check_circle_rounded : Icons.camera_alt_rounded,
                   size: 48,
-                  color: taken ? const Color(0xFF10B981) : const Color(0xFF3B82F6),
+                  color: taken ? IveTokens.okColor : IveTokens.accentColor,
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: IveTokens.s4),
               Text(
-                taken ? 'PHOTO CAPTURED âœ…' : 'PROOF OF DELIVERY PHOTO',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: taken ? const Color(0xFF10B981) : AppColors.textPrimary),
+                taken ? 'Photo captured' : 'Proof of delivery',
+                style: IveType.title3.copyWith(
+                  color: taken ? IveTokens.okColor : IveTokens.inkColor,
+                ),
               ),
-              const SizedBox(height: 4),
-              const Text('Take a clear photo of the delivered package', style: TextStyle(fontSize: 13, color: AppColors.textSecondary), textAlign: TextAlign.center),
+              const SizedBox(height: IveTokens.s1),
+              Text(
+                'Take a clear photo of the delivered package',
+                style: IveType.callout.copyWith(color: IveTokens.muteColor),
+                textAlign: TextAlign.center,
+              ),
             ],
           ),
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: IveTokens.s6),
+        Container(
+          height: 200,
+          decoration: BoxDecoration(
+            color: taken
+                ? IveTokens.okColor.withValues(alpha: 0.10)
+                : IveTokens.surfaceColor,
+            borderRadius: BorderRadius.circular(IveTokens.rContainer),
+            border: Border.all(
+              color: taken ? IveTokens.okColor.withValues(alpha: 0.4) : IveTokens.hairColor,
+            ),
+          ),
+          child: Center(
+            child: taken
+                ? const Icon(Icons.check_circle_rounded, size: 56, color: IveTokens.okColor)
+                : Column(mainAxisSize: MainAxisSize.min, children: [
+                    const Icon(Icons.camera_alt_rounded, size: 40, color: IveTokens.muteColor),
+                    const SizedBox(height: IveTokens.s2),
+                    Text('Capture', style: IveType.caption.copyWith(color: IveTokens.muteColor)),
+                  ]),
+          ),
+        ),
         if (!taken) ...[
-          Container(
-            height: 200,
-            decoration: BoxDecoration(
-              color: const Color(0xFFF3F4F6),
-              borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: const Color(0xFFE5E7EB), style: BorderStyle.solid, width: 2),
-            ),
-            child: const Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(Icons.camera_alt, size: 48, color: AppColors.textTertiary),
-                  SizedBox(height: 8),
-                  Text('Tap to capture photo', style: TextStyle(fontSize: 13, color: AppColors.textTertiary)),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 16),
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton.icon(
-              onPressed: onCapture,
-              icon: const Icon(Icons.camera_alt, size: 18),
-              label: const Text('CAPTURE PHOTO', style: TextStyle(fontWeight: FontWeight.w700)),
-              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF3B82F6), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
-            ),
-          ),
-        ] else
-          Container(
-            height: 200,
-            decoration: BoxDecoration(
-              color: const Color(0xFFD1FAE5),
-              borderRadius: BorderRadius.circular(14),
-            ),
-            child: const Center(child: Icon(Icons.check_circle, size: 64, color: Color(0xFF10B981))),
-          ),
+          const SizedBox(height: IveTokens.s4),
+          IveButton.primary(label: 'Capture photo', onPressed: onCapture),
+        ],
       ],
     );
   }
 }
+
+// ─── Signature Step ───────────────────────────────────────────────────────────
 
 class _SignatureStep extends StatelessWidget {
   final bool collected;
@@ -344,77 +330,83 @@ class _SignatureStep extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(IveTokens.s4),
       children: [
-        const SizedBox(height: 20),
+        const SizedBox(height: IveTokens.s5),
         Center(
           child: Column(
             children: [
               Container(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(IveTokens.s4),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: collected ? const Color(0xFF10B981).withValues(alpha: 0.1) : const Color(0xFF8B5CF6).withValues(alpha: 0.1),
+                  color: (collected ? IveTokens.okColor : IveTokens.warnColor).withValues(alpha: 0.12),
                 ),
                 child: Icon(
-                  collected ? Icons.check_circle : Icons.edit,
+                  collected ? Icons.check_circle_rounded : Icons.draw_rounded,
                   size: 48,
-                  color: collected ? const Color(0xFF10B981) : const Color(0xFF8B5CF6),
+                  color: collected ? IveTokens.okColor : IveTokens.warnColor,
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: IveTokens.s4),
               Text(
-                collected ? 'SIGNATURE COLLECTED âœ…' : 'DIGITAL SIGNATURE',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: collected ? const Color(0xFF10B981) : AppColors.textPrimary),
+                collected ? 'Signature collected' : 'Digital signature',
+                style: IveType.title3.copyWith(
+                  color: collected ? IveTokens.okColor : IveTokens.inkColor,
+                ),
               ),
-              const SizedBox(height: 4),
-              const Text('Have the customer sign below to confirm delivery', style: TextStyle(fontSize: 13, color: AppColors.textSecondary), textAlign: TextAlign.center),
+              const SizedBox(height: IveTokens.s1),
+              Text(
+                'Have the customer sign below to confirm delivery',
+                style: IveType.callout.copyWith(color: IveTokens.muteColor),
+                textAlign: TextAlign.center,
+              ),
             ],
           ),
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: IveTokens.s6),
+        Container(
+          height: 160,
+          decoration: BoxDecoration(
+            color: collected
+                ? IveTokens.okColor.withValues(alpha: 0.10)
+                : IveTokens.surfaceColor,
+            borderRadius: BorderRadius.circular(IveTokens.rContainer),
+            border: Border.all(
+              color: collected
+                  ? IveTokens.okColor.withValues(alpha: 0.4)
+                  : IveTokens.warnColor.withValues(alpha: 0.4),
+              width: 1.5,
+            ),
+          ),
+          child: Center(
+            child: collected
+                ? const Icon(Icons.check_circle_rounded, size: 56, color: IveTokens.okColor)
+                : Text(
+                    'Sign here',
+                    style: IveType.callout.copyWith(
+                      color: IveTokens.faintColor,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+          ),
+        ),
         if (!collected) ...[
-          Container(
-            height: 160,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: const Color(0xFF8B5CF6), width: 2),
-            ),
-            child: const Center(
-              child: Text('Sign here', style: TextStyle(fontSize: 16, color: AppColors.textTertiary, fontStyle: FontStyle.italic)),
+          Align(
+            alignment: Alignment.centerRight,
+            child: TextButton(
+              onPressed: onClear,
+              child: Text('Clear', style: IveType.callout.copyWith(color: IveTokens.muteColor)),
             ),
           ),
-          const SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              TextButton(onPressed: onClear, child: const Text('Clear', style: TextStyle(color: AppColors.textSecondary))),
-            ],
-          ),
-          const SizedBox(height: 8),
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton.icon(
-              onPressed: onSign,
-              icon: const Icon(Icons.done, size: 18),
-              label: const Text('CONFIRM SIGNATURE', style: TextStyle(fontWeight: FontWeight.w700)),
-              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF8B5CF6), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
-            ),
-          ),
-        ] else
-          Container(
-            height: 160,
-            decoration: BoxDecoration(
-              color: const Color(0xFFD1FAE5),
-              borderRadius: BorderRadius.circular(14),
-            ),
-            child: const Center(child: Icon(Icons.check_circle, size: 64, color: Color(0xFF10B981))),
-          ),
+          IveButton.primary(label: 'Confirm signature', onPressed: onSign),
+        ],
       ],
     );
   }
 }
+
+// ─── Completion View ──────────────────────────────────────────────────────────
 
 class _CompletionView extends StatelessWidget {
   final LivePackage package;
@@ -424,50 +416,52 @@ class _CompletionView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundLight,
-      appBar: const LiveAppBar(title: 'Delivery Complete'),
+      backgroundColor: IveTokens.voidColor,
+      appBar: const LiveAppBar(title: 'Delivery complete'),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(IveTokens.s6),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                padding: const EdgeInsets.all(24),
-                decoration: BoxDecoration(shape: BoxShape.circle, color: const Color(0xFF10B981).withValues(alpha: 0.1)),
-                child: const Icon(Icons.celebration, size: 64, color: Color(0xFF10B981)),
+                padding: const EdgeInsets.all(IveTokens.s6),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: IveTokens.okColor.withValues(alpha: 0.12),
+                ),
+                child: const Icon(Icons.check_circle_rounded, size: 64, color: IveTokens.okColor),
               ),
-              const SizedBox(height: 20),
-              const Text('ðŸŽ‰ DELIVERY VERIFIED!', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
-              const SizedBox(height: 8),
-              Text('Package ${package.id} delivered successfully', style: const TextStyle(fontSize: 14, color: AppColors.textSecondary)),
-              const SizedBox(height: 4),
-              const Text('All verification steps completed', style: TextStyle(fontSize: 13, color: Color(0xFF10B981), fontWeight: FontWeight.w600)),
-              const SizedBox(height: 24),
+              const SizedBox(height: IveTokens.s5),
+              Text('Delivery verified', style: IveType.title1),
+              const SizedBox(height: IveTokens.s2),
+              Text(
+                'Package ${package.id} delivered successfully',
+                style: IveType.callout.copyWith(color: IveTokens.ink2Color),
+              ),
+              const SizedBox(height: IveTokens.s5),
               Container(
-                padding: const EdgeInsets.all(14),
-                decoration: BoxDecoration(color: const Color(0xFFD1FAE5), borderRadius: BorderRadius.circular(12)),
+                width: double.infinity,
+                padding: const EdgeInsets.all(IveTokens.s4),
+                decoration: BoxDecoration(
+                  color: IveTokens.raisedColor,
+                  borderRadius: BorderRadius.circular(IveTokens.rContainer),
+                  border: Border.all(color: IveTokens.hairColor),
+                ),
                 child: const Column(
                   children: [
-                    Row(children: [Icon(Icons.check, size: 16, color: Color(0xFF059669)), SizedBox(width: 6), Text('PIN verified', style: TextStyle(fontSize: 13, color: Color(0xFF059669)))]),
-                    SizedBox(height: 4),
-                    Row(children: [Icon(Icons.check, size: 16, color: Color(0xFF059669)), SizedBox(width: 6), Text('Photo evidence captured', style: TextStyle(fontSize: 13, color: Color(0xFF059669)))]),
-                    SizedBox(height: 4),
-                    Row(children: [Icon(Icons.check, size: 16, color: Color(0xFF059669)), SizedBox(width: 6), Text('Digital signature collected', style: TextStyle(fontSize: 13, color: Color(0xFF059669)))]),
-                    SizedBox(height: 4),
-                    Row(children: [Icon(Icons.check, size: 16, color: Color(0xFF059669)), SizedBox(width: 6), Text('GPS location logged', style: TextStyle(fontSize: 13, color: Color(0xFF059669)))]),
+                    _CheckRow('PIN verified'),
+                    SizedBox(height: IveTokens.s2),
+                    _CheckRow('Photo evidence captured'),
+                    SizedBox(height: IveTokens.s2),
+                    _CheckRow('Signature collected'),
+                    SizedBox(height: IveTokens.s2),
+                    _CheckRow('GPS location logged'),
                   ],
                 ),
               ),
-              const SizedBox(height: 24),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: onDone,
-                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10B981), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 16), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
-                  child: const Text('BACK TO HOME', style: TextStyle(fontWeight: FontWeight.w700)),
-                ),
-              ),
+              const SizedBox(height: IveTokens.s6),
+              IveButton.primary(label: 'Back to home', onPressed: onDone),
             ],
           ),
         ),
@@ -476,33 +470,14 @@ class _CompletionView extends StatelessWidget {
   }
 }
 
-class _StepDot extends StatelessWidget {
+class _CheckRow extends StatelessWidget {
   final String label;
-  final bool active;
-  final bool completed;
-  const _StepDot({required this.label, required this.active, required this.completed});
+  const _CheckRow(this.label);
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          width: 28, height: 28,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: completed ? const Color(0xFF10B981) : active ? kLiveColor : const Color(0xFFE5E7EB),
-          ),
-          child: Center(
-            child: completed
-                ? const Icon(Icons.check, size: 16, color: Colors.white)
-                : active
-                    ? const Icon(Icons.circle, size: 8, color: Colors.white)
-                    : null,
-          ),
-        ),
-        const SizedBox(height: 4),
-        Text(label, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: active ? AppColors.textPrimary : AppColors.textTertiary)),
-      ],
-    );
-  }
+  Widget build(BuildContext context) => Row(children: [
+    const Icon(Icons.check_circle_rounded, size: 16, color: IveTokens.okColor),
+    const SizedBox(width: IveTokens.s2),
+    Text(label, style: IveType.callout),
+  ]);
 }

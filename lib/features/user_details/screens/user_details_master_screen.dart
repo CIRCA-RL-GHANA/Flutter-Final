@@ -10,7 +10,6 @@ import 'package:provider/provider.dart';
 import '../../../core/design/ive_tokens.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../../prompt/providers/context_provider.dart';
 import '../models/user_details_models.dart';
 import '../providers/user_details_provider.dart';
@@ -91,23 +90,7 @@ class UserDetailsMasterScreen extends StatelessWidget {
                 ],
               ),
               // ─── AI Insights ────────────────────────────────────
-              SliverToBoxAdapter(
-                child: Consumer<AIInsightsNotifier>(
-                  builder: (context, ai, _) {
-                    if (ai.insights.isEmpty) return const SizedBox.shrink();
-                    return Container(
-                      color: AppColors.primary.withValues(alpha: 0.07),
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                      child: Row(children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: AppColors.primary),
-                        const SizedBox(width: 8),
-                        Expanded(child: Text('AI: ${ai.insights.first['title'] ?? ''}',
-                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: AppColors.primary),
-                          maxLines: 1, overflow: TextOverflow.ellipsis)),
-                      ]),
-                    );
-                  },
-                ),
+              const SliverToBoxAdapter(
               ),
               // ─── Identity Section ─────────────────────────
               SliverToBoxAdapter(
@@ -461,10 +444,7 @@ class _StatChip extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: [
-            BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 8, offset: const Offset(0, 2)),
-          ],
+          borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
           children: [
@@ -572,14 +552,11 @@ class _ContextCard extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 4),
         decoration: BoxDecoration(
           color: isActive ? color.withValues(alpha: 0.1) : Colors.white,
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(10),
           border: Border.all(
             color: isActive ? color : Colors.grey.withValues(alpha: 0.15),
             width: isActive ? 2 : 1,
           ),
-          boxShadow: isActive
-              ? [BoxShadow(color: color.withValues(alpha: 0.15), blurRadius: 8, offset: const Offset(0, 2))]
-              : null,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -624,7 +601,7 @@ class _AddContextCard extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 4),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(10),
           border: Border.all(color: Colors.grey.withValues(alpha: 0.2), style: BorderStyle.solid),
         ),
         child: Column(
@@ -958,11 +935,8 @@ class _StickyFooter extends StatelessWidget {
         bottom: MediaQuery.of(context).padding.bottom + 12,
         top: 12,
       ),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
-        boxShadow: [
-          BoxShadow(color: Colors.black.withValues(alpha: 0.06), blurRadius: 10, offset: const Offset(0, -2)),
-        ],
       ),
       child: Row(
         children: [

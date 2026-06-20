@@ -1,11 +1,10 @@
-/// APRIL Screen 4 — Wishlist Command Center
+﻿/// APRIL Screen 4 — Wishlist Command Center
 /// 4 view modes: grid, list, priority, timeline
 /// Item management, collections, savings tracking
 library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../models/april_models.dart';
 import '../providers/april_provider.dart';
 import '../widgets/april_widgets.dart';
@@ -66,7 +65,7 @@ class AprilWishlistScreen extends StatelessWidget {
                   gradient: const LinearGradient(
                     colors: [Color(0xFFFFF8E1), Color(0xFFFFECB3)],
                   ),
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -95,11 +94,11 @@ class AprilWishlistScreen extends StatelessWidget {
                           filled: true,
                           fillColor: const Color(0xFF11131C),
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(10),
                             borderSide: const BorderSide(color: Color(0xFF1C1C2E)),
                           ),
                           enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(10),
                             borderSide: const BorderSide(color: Color(0xFF1C1C2E)),
                           ),
                           contentPadding: const EdgeInsets.symmetric(vertical: 10),
@@ -112,7 +111,7 @@ class AprilWishlistScreen extends StatelessWidget {
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           color: provider.wishlistPriorityFilter != null ? kAprilColor : Colors.white,
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(10),
                           border: Border.all(color: const Color(0xFFE5E7EB)),
                         ),
                         child: Icon(Icons.filter_list, size: 20, color: provider.wishlistPriorityFilter != null ? Colors.black : const Color(0xFF6B7280)),
@@ -180,37 +179,6 @@ class AprilWishlistScreen extends StatelessWidget {
                     : Column(
                         children: [
                           // AI recommendations strip
-                          Consumer<AIInsightsNotifier>(
-                            builder: (ctx, aiNotifier, _) {
-                              final recs = aiNotifier.recommendations;
-                              if (recs.isEmpty) return const SizedBox.shrink();
-                              return Container(
-                                margin: const EdgeInsets.fromLTRB(16, 4, 16, 4),
-                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
-                                decoration: BoxDecoration(
-                                  color: kAprilColor.withValues(alpha: 0.08),
-                                  borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(color: kAprilColor.withValues(alpha: 0.2)),
-                                ),
-                                child: Row(
-                                  children: [
-                                    const Icon(Icons.auto_awesome, size: 14, color: kAprilColorDark),
-                                    const SizedBox(width: 6),
-                                    Expanded(
-                                      child: Text(
-                                        'AI — ${recs.length} personalised picks based on your interests',
-                                        style: const TextStyle(
-                                          fontSize: 11,
-                                          fontWeight: FontWeight.w600,
-                                          color: kAprilColorDark,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
-                          ),
                           Expanded(child: _buildListView(context, provider)),
                         ],
                       ),
@@ -307,7 +275,7 @@ class AprilWishlistScreen extends StatelessWidget {
                 prefixIcon: const Icon(Icons.link, color: kAprilColorDark),
                 filled: true,
                 fillColor: const Color(0xFFF3F4F6),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
                 contentPadding: const EdgeInsets.symmetric(vertical: 12),
               ),
             ),
@@ -323,7 +291,7 @@ class AprilWishlistScreen extends StatelessWidget {
                 prefixIcon: const Icon(Icons.shopping_bag, color: Color(0xFF9CA3AF)),
                 filled: true,
                 fillColor: const Color(0xFFF3F4F6),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
                 contentPadding: const EdgeInsets.symmetric(vertical: 12),
               ),
             ),
@@ -336,7 +304,7 @@ class AprilWishlistScreen extends StatelessWidget {
                 prefixIcon: const Icon(Icons.attach_money, color: Color(0xFF9CA3AF)),
                 filled: true,
                 fillColor: const Color(0xFFF3F4F6),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
                 contentPadding: const EdgeInsets.symmetric(vertical: 12),
               ),
             ),
@@ -349,7 +317,7 @@ class AprilWishlistScreen extends StatelessWidget {
                   backgroundColor: kAprilColor,
                   foregroundColor: Colors.black,
                   padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 ),
                 child: const Text('Add to Wishlist', style: TextStyle(fontWeight: FontWeight.w600)),
               ),
@@ -374,7 +342,7 @@ class _WishlistListTile extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(10),
         border: Border.all(color: const Color(0xFFE5E7EB)),
       ),
       child: Row(

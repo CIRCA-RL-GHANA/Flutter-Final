@@ -7,7 +7,6 @@ library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../prompt/providers/context_provider.dart';
 import '../providers/setup_dashboard_provider.dart';
@@ -122,28 +121,6 @@ class _TabCreateScreenState extends State<TabCreateScreen> {
           ),
           body: Column(
             children: [
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    color: kSetupColor.withValues(alpha: 0.07),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: kSetupColor),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            "AI: ${ai.insights.first['title'] ?? ''}",
-                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kSetupColor),
-                            maxLines: 1, overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
               _TabStepIndicator(
                 currentStep: _currentStep,
                 stepCount: _stepCount,
@@ -284,12 +261,12 @@ class _CustomerStep extends StatelessWidget {
                 margin: EdgeInsets.only(right: t == 'Individual' ? 5 : 0, left: t == 'Business' ? 5 : 0),
                 child: InkWell(
                   onTap: () => onTypeChanged(t),
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(10),
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 14),
                     decoration: BoxDecoration(
                       color: isSelected ? kSetupColor.withValues(alpha: 0.08) : Colors.white,
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(10),
                       border: Border.all(
                         color: isSelected ? kSetupColor.withValues(alpha: 0.3) : Colors.grey.shade300,
                       ),
@@ -385,7 +362,7 @@ class _CreditSettingsStep extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 14),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(10),
             border: Border.all(color: Colors.grey.shade300),
           ),
           child: DropdownButtonHideUnderline(
@@ -408,7 +385,7 @@ class _CreditSettingsStep extends StatelessWidget {
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(10),
             border: Border.all(color: Colors.grey.shade200),
           ),
           child: Row(
@@ -442,7 +419,7 @@ class _CreditSettingsStep extends StatelessWidget {
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
             color: AppColors.warning.withValues(alpha: 0.06),
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(10),
             border: Border.all(color: AppColors.warning.withValues(alpha: 0.15)),
           ),
           child: const Row(
@@ -528,7 +505,7 @@ class _PaymentTermsStep extends StatelessWidget {
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(10),
             border: Border.all(color: Colors.grey.shade200),
           ),
           child: Row(
@@ -623,7 +600,7 @@ class _TabReviewStep extends StatelessWidget {
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
             color: kSetupColor.withValues(alpha: 0.06),
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(10),
             border: Border.all(color: kSetupColor.withValues(alpha: 0.15)),
           ),
           child: const Row(
@@ -668,7 +645,7 @@ class _TabReviewStep extends StatelessWidget {
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
             color: AppColors.success.withValues(alpha: 0.06),
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(10),
             border: Border.all(color: AppColors.success.withValues(alpha: 0.15)),
           ),
           child: Row(
@@ -731,15 +708,8 @@ class _TabNavBar extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.06),
-            blurRadius: 10,
-            offset: const Offset(0, -2),
-          ),
-        ],
       ),
       child: SafeArea(
         top: false,
@@ -755,7 +725,7 @@ class _TabNavBar extends StatelessWidget {
                     foregroundColor: AppColors.textSecondary,
                     side: BorderSide(color: Colors.grey.shade300),
                     padding: const EdgeInsets.symmetric(vertical: 14),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   ),
                 ),
               ),
@@ -769,7 +739,7 @@ class _TabNavBar extends StatelessWidget {
                   backgroundColor: isLast ? AppColors.success : kSetupColor,
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   elevation: 0,
                 ),
               ),

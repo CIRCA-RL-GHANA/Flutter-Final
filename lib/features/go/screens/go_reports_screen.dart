@@ -7,8 +7,6 @@ import 'package:provider/provider.dart';
 import '../models/go_models.dart';
 import '../providers/go_provider.dart';
 import '../widgets/go_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
-import '../../../core/widgets/ai_price_widgets.dart';
 
 class GoReportsScreen extends StatefulWidget {
   const GoReportsScreen({super.key});
@@ -70,22 +68,10 @@ class _GoReportsScreenState extends State<GoReportsScreen> with SingleTickerProv
       padding: const EdgeInsets.all(16),
       children: [
         // ─── AI Spending Summary ─────────────────────────────
-        Consumer<AIInsightsNotifier>(
-          builder: (ctx, notifier, _) {
-            if (notifier.spendingPattern == null) return const SizedBox.shrink();
-            return Padding(
-              padding: const EdgeInsets.only(bottom: 16),
-              child: AISpendingSummaryCard(
-                spendingData: notifier.spendingPattern,
-                isLoading: notifier.loadingInsights,
-              ),
-            );
-          },
-        ),
         // ─── Standard Report Tiles ─────────────────────────────
         ...reports.map((r) => Container(
           margin: const EdgeInsets.only(bottom: 10),
-          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12), border: Border.all(color: const Color(0xFFE5E7EB))),
+          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: const Color(0xFFE5E7EB))),
           child: ListTile(
             leading: Container(padding: const EdgeInsets.all(8), decoration: BoxDecoration(color: kGoColorLight, borderRadius: BorderRadius.circular(8)), child: Icon(r.$3, color: kGoColor, size: 20)),
             title: Text(r.$1, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
@@ -172,7 +158,7 @@ class _GoReportsScreenState extends State<GoReportsScreen> with SingleTickerProv
         return Container(
           margin: const EdgeInsets.only(bottom: 10),
           padding: const EdgeInsets.all(14),
-          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12), border: Border.all(color: const Color(0xFFE5E7EB))),
+          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: const Color(0xFFE5E7EB))),
           child: Row(children: [
             Container(padding: const EdgeInsets.all(8), decoration: BoxDecoration(color: kGoColorLight, borderRadius: BorderRadius.circular(8)), child: const Icon(Icons.description, color: kGoColor, size: 20)),
             const SizedBox(width: 10),

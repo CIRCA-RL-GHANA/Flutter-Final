@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 
 class QualChatPremiumScreen extends StatefulWidget {
   final String? conversationId;
@@ -69,7 +69,7 @@ class _QualChatPremiumScreenState extends State<QualChatPremiumScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
                 color: Colors.amber[200],
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(10),
               ),
               child: const Row(
                 children: [
@@ -148,7 +148,7 @@ class _QualChatPremiumScreenState extends State<QualChatPremiumScreen> {
                           ),
                           decoration: BoxDecoration(
                             color: isMe ? Colors.blue[600] : Colors.grey[200],
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,

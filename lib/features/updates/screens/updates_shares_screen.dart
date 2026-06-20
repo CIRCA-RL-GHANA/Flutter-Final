@@ -1,4 +1,4 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// SCREEN 4 — Shares List & Actions
 /// Two-pane layout: share history (who shared, platform, reach) and
 /// share actions (copy link, platform icons, QR code).
@@ -8,7 +8,6 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/theme/app_colors.dart';
 import '../models/updates_models.dart';
 import '../providers/updates_provider.dart';
@@ -41,22 +40,6 @@ class _Body extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Consumer<AIInsightsNotifier>(
-                  builder: (context, ai, _) {
-                    if (ai.insights.isEmpty) return const SizedBox.shrink();
-                    return Container(
-                      color: kUpdatesColor.withValues(alpha: 0.07),
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                      child: Row(children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: kUpdatesColor),
-                        const SizedBox(width: 8),
-                        Expanded(child: Text('AI: ${ai.insights.first['title'] ?? ''}',
-                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kUpdatesColor),
-                          maxLines: 1, overflow: TextOverflow.ellipsis)),
-                      ]),
-                    );
-                  },
-                ),
                 // Share Stats Summary
                 _ShareStatsBanner(stats: prov.shareStats),
 
@@ -158,7 +141,7 @@ class _Body extends StatelessWidget {
               width: 200, height: 200,
               decoration: BoxDecoration(
                 color: Colors.grey.shade100,
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: Colors.grey.shade200),
               ),
               child: const Center(
@@ -196,7 +179,7 @@ class _ShareStatsBanner extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(10),
         border: Border.all(color: kUpdatesColor.withValues(alpha: 0.15)),
       ),
       child: Row(

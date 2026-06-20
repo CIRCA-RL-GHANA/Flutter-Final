@@ -8,7 +8,6 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/theme/app_colors.dart';
 import '../models/updates_models.dart';
 import '../providers/updates_provider.dart';
@@ -41,29 +40,12 @@ class _Body extends StatelessWidget {
             padding: const EdgeInsets.all(14),
             child: Column(
               children: [
-                Consumer<AIInsightsNotifier>(
-                  builder: (context, ai, _) {
-                    if (ai.insights.isEmpty) return const SizedBox.shrink();
-                    return Container(
-                      color: kUpdatesColor.withValues(alpha: 0.07),
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                      child: Row(children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: kUpdatesColor),
-                        const SizedBox(width: 8),
-                        Expanded(child: Text('AI: ${ai.insights.first['title'] ?? ''}',
-                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kUpdatesColor),
-                          maxLines: 1, overflow: TextOverflow.ellipsis)),
-                      ]),
-                    );
-                  },
-                ),
                 // Update preview
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                    boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 6)],
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: Row(
                     children: [
@@ -371,9 +353,8 @@ class _ReportFlowState extends State<_ReportFlow> {
           // Navigation buttons
           Container(
             padding: EdgeInsets.fromLTRB(16, 12, 16, 12 + MediaQuery.of(context).viewPadding.bottom),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
-              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8, offset: const Offset(0, -2))],
             ),
             child: Row(
               children: [
@@ -552,14 +533,14 @@ class _StepEvidence extends StatelessWidget {
           padding: const EdgeInsets.all(24),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(10),
             border: Border.all(color: Colors.grey.shade200, style: BorderStyle.solid),
           ),
           child: Column(
             children: [
               Icon(Icons.cloud_upload_outlined, size: 40, color: kUpdatesColor.withValues(alpha: 0.4)),
               const SizedBox(height: 8),
-              const Text('Tap to upload', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: kUpdatesColor)),
+              const Text('Upload', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: kUpdatesColor)),
               const Text('PNG, JPG up to 5MB', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
             ],
           ),
@@ -597,11 +578,11 @@ class _StepReview extends StatelessWidget {
       children: [
         const Text('Review your report', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
         const SizedBox(height: 4),
-        const Text('Please confirm the details before submitting.', style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+        const Text('Confirm details before submitting.', style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
         const SizedBox(height: 16),
         Container(
           padding: const EdgeInsets.all(14),
-          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12)),
+          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

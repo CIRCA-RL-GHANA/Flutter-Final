@@ -1,4 +1,4 @@
-/// GO Screen 2B — Sell QPoints Flow
+﻿/// GO Screen 2B — Sell QPoints Flow
 /// Mirror of Buy flow with sell-specific differences:
 /// Destination selection, minimum 500 QP, processing time warning,
 /// additional verification for large amounts
@@ -9,7 +9,6 @@ import 'package:provider/provider.dart';
 import '../models/go_models.dart';
 import '../providers/go_provider.dart';
 import '../widgets/go_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class GoSellScreen extends StatefulWidget {
   const GoSellScreen({super.key});
@@ -39,28 +38,6 @@ class _GoSellScreenState extends State<GoSellScreen> {
           appBar: const GoAppBar(title: 'Sell QPoints'),
           body: Column(
             children: [
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    color: kGoColor.withValues(alpha: 0.07),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: kGoColor),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            'AI: ${ai.insights.first['title'] ?? ''}',
-                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kGoColor),
-                            maxLines: 1, overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
               GoStepIndicator(currentStep: _step, totalSteps: 5, labels: const ['Destination', 'Amount', 'Review', 'Verify', 'Done']),
               Expanded(child: _buildStep(provider)),
             ],
@@ -97,7 +74,7 @@ class _GoSellScreenState extends State<GoSellScreen> {
                   child: Container(
                     margin: const EdgeInsets.only(bottom: 10),
                     padding: const EdgeInsets.all(14),
-                    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12), border: Border.all(color: sel ? kGoColor : const Color(0xFFE5E7EB), width: sel ? 2 : 1)),
+                    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: sel ? kGoColor : const Color(0xFFE5E7EB), width: sel ? 2 : 1)),
                     child: Row(
                       children: [
                         // ignore: deprecated_member_use
@@ -309,7 +286,7 @@ class _GoSellScreenState extends State<GoSellScreen> {
       const SizedBox(height: 16),
       Text(_success == true ? 'Withdrawal Initiated!' : 'Withdrawal Failed', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: _success == true ? kGoPositive : kGoNegative)),
       const SizedBox(height: 8),
-      Text(_success == true ? 'Your funds will arrive in 1-3 business days.' : 'Please try again.', style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+      Text(_success == true ? 'Your funds will arrive in 1-3 business days.' : 'Try again.', style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
       const SizedBox(height: 24),
       ElevatedButton(onPressed: () => Navigator.pop(context), style: ElevatedButton.styleFrom(backgroundColor: kGoColor, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))), child: const Text('Done')),
     ]));

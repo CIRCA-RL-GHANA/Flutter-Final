@@ -12,7 +12,6 @@ import '../../../core/theme/app_colors.dart';
 import '../models/live_models.dart';
 import '../providers/live_provider.dart';
 import '../widgets/live_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class LivePackageCreationScreen extends StatefulWidget {
   const LivePackageCreationScreen({super.key});
@@ -67,28 +66,6 @@ class _LivePackageCreationScreenState extends State<LivePackageCreationScreen> {
                 ),
               ),
 
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    color: kLiveColor.withValues(alpha: 0.07),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: kLiveColor),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            'AI: ${ai.insights.first['title'] ?? ''}',
-                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kLiveColor),
-                            maxLines: 1, overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
 
               // Step content
               Expanded(
@@ -134,9 +111,8 @@ class _LivePackageCreationScreenState extends State<LivePackageCreationScreen> {
           ),
           bottomNavigationBar: Container(
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
-              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 8, offset: const Offset(0, -2))],
             ),
             child: Row(
               children: [
@@ -167,7 +143,7 @@ class _LivePackageCreationScreenState extends State<LivePackageCreationScreen> {
                       backgroundColor: _step == 2 ? const Color(0xFF10B981) : kLiveColor,
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                     ),
                     child: Text(
                       _step == 0 ? 'CONTINUE TO SECURITY' : _step == 1 ? 'REVIEW PACKAGE' : 'âœ… CREATE PACKAGE',
@@ -292,7 +268,7 @@ class _PackageConfigStep extends StatelessWidget {
             height: 120,
             decoration: BoxDecoration(
               color: const Color(0xFFE5E7EB),
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(10),
             ),
             child: Center(
               child: Column(

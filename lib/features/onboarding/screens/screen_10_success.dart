@@ -1,4 +1,4 @@
-﻿import 'dart:math';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import '../../../core/design/ive.dart';
 import 'package:provider/provider.dart';
@@ -186,16 +186,9 @@ class _SuccessScreenState extends State<SuccessScreen>
                         child: Container(
                           width: 100,
                           height: 100,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                             color: IveTokens.success,
-                            boxShadow: [
-                              BoxShadow(
-                                color: IveTokens.success.withValues(alpha: 0.4),
-                                blurRadius: 24,
-                                spreadRadius: 4,
-                              ),
-                            ],
                           ),
                           child: const Icon(
                             Icons.check,

@@ -1,4 +1,4 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// LIVE MODULE — Screen 18: Live Analytics Dashboard
 /// Real-time operations analytics: KPIs, delivery zones,
 /// bottleneck alerts, performance trends, predictive insights
@@ -13,7 +13,6 @@ import '../../../core/routes/app_routes.dart';
 import '../models/live_models.dart';
 import '../providers/live_provider.dart';
 import '../widgets/live_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class LiveAnalyticsScreen extends StatelessWidget {
   const LiveAnalyticsScreen({super.key});
@@ -51,32 +50,6 @@ class LiveAnalyticsScreen extends StatelessWidget {
             child: ListView(
               padding: const EdgeInsets.all(16),
               children: [
-                Consumer<AIInsightsNotifier>(
-                  builder: (context, ai, _) {
-                    if (ai.insights.isEmpty) return const SizedBox.shrink();
-                    return Container(
-                      margin: const EdgeInsets.only(bottom: 12),
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                      decoration: BoxDecoration(
-                        color: kLiveColor.withValues(alpha: 0.07),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Row(
-                        children: [
-                          const Icon(Icons.auto_awesome, size: 14, color: kLiveColor),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: Text(
-                              'AI Analytics: ${ai.insights.first['title'] ?? ''}',
-                              style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kLiveColor),
-                              maxLines: 1, overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
                 // Key Metrics
                 const Text('ðŸ“Š KEY METRICS',
                     style:
@@ -217,7 +190,7 @@ class LiveAnalyticsScreen extends StatelessWidget {
                     height: 120,
                     decoration: BoxDecoration(
                         color: const Color(0xFFF3F4F6),
-                        borderRadius: BorderRadius.circular(12)),
+                        borderRadius: BorderRadius.circular(10)),
                     child: const Center(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,

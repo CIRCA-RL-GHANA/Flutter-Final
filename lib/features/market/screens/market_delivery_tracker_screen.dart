@@ -5,18 +5,56 @@
 library;
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../../../core/design/ive_tokens.dart';
-import '../../../core/theme/app_colors.dart';
+import '../../../core/design/ive.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../models/market_models.dart';
 import '../providers/market_provider.dart';
 import '../widgets/market_widgets.dart';
 
-class MarketDeliveryTrackerScreen extends StatelessWidget {
+class MarketDeliveryTrackerScreen extends StatefulWidget {
   const MarketDeliveryTrackerScreen({super.key});
+
+  @override
+  State<MarketDeliveryTrackerScreen> createState() => _MarketDeliveryTrackerScreenState();
+}
+
+class _MarketDeliveryTrackerScreenState extends State<MarketDeliveryTrackerScreen>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _pinDropCtrl;
+  late final Animation<double> _pinScale;
+  late final Animation<Offset> _pinSlide;
+  bool _pinShown = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _pinDropCtrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 480),
+    );
+    // Elastic out — drop from above and settle with 1 bounce
+    _pinScale = CurvedAnimation(parent: _pinDropCtrl, curve: Curves.elasticOut);
+    _pinSlide = Tween<Offset>(
+      begin: const Offset(0, -0.4),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(parent: _pinDropCtrl, curve: Curves.easeOut));
+  }
+
+  @override
+  void dispose() {
+    _pinDropCtrl.dispose();
+    super.dispose();
+  }
+
+  void _triggerPinDrop() {
+    if (!_pinShown) {
+      _pinShown = true;
+      _pinDropCtrl.forward();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +72,10 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
           );
         }
 
+        if (tracking.isDriverApproaching) _triggerPinDrop();
+
         return Scaffold(
-          backgroundColor: AppColors.backgroundLight,
+          backgroundColor: IveTokens.voidColor,
           body: CustomScrollView(
             slivers: [
               // Map + AppBar
@@ -50,7 +90,7 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
                       color: Colors.white.withValues(alpha: 0.9),
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(Icons.arrow_back, size: 20, color: AppColors.textPrimary),
+                    child: const Icon(Icons.arrow_back, size: 20, color: IveTokens.voidColor),
                   ),
                   onPressed: () => Navigator.pop(context),
                 ),
@@ -62,7 +102,7 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
                         color: Colors.white.withValues(alpha: 0.9),
                         shape: BoxShape.circle,
                       ),
-                      child: const Icon(Icons.phone, size: 20, color: AppColors.textPrimary),
+                      child: const Icon(Icons.phone, size: 20, color: IveTokens.voidColor),
                     ),
                     onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Calling driver...'), behavior: SnackBarBehavior.floating)),
                   ),
@@ -87,17 +127,23 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
                         child: Container(
                           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                           decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12),
-                            boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.15), blurRadius: 8)],
+                            color: IveTokens.raisedColor,
+                            borderRadius: BorderRadius.circular(IveTokens.rContainer),
+                            border: Border.all(color: IveTokens.hairColor, width: 1),
                           ),
                           child: Column(
                             children: [
+                              // ETA in mono (spec P1)
                               Text(
-                              '${tracking.etaMinutes} min',
-                                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800, color: kMarketColorDark),
+                                '${tracking.etaMinutes} min',
+                                style: GoogleFonts.ibmPlexMono(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700,
+                                  color: IveTokens.inkColor,
+                                  fontFeatures: [const FontFeature.tabularFigures()],
+                                ),
                               ),
-                              const Text('ETA', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                              Text('ETA', style: IveType.caption.copyWith(color: IveTokens.muteColor)),
                             ],
                           ),
                         ),
@@ -106,26 +152,6 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              // AI Insights
-              SliverToBoxAdapter(
-                child: Consumer<AIInsightsNotifier>(
-                  builder: (context, ai, _) {
-                    if (ai.insights.isEmpty) return const SizedBox.shrink();
-                    return Container(
-                      color: kMarketColor.withValues(alpha: 0.07),
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                      child: Row(children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: kMarketColor),
-                        const SizedBox(width: 8),
-                        Expanded(child: Text('AI: ${ai.insights.first['title'] ?? ''}',
-                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kMarketColor),
-                          maxLines: 1, overflow: TextOverflow.ellipsis)),
-                      ]),
-                    );
-                  },
-                ),
-              ),
-
               // Content
               SliverToBoxAdapter(
                 child: Padding(
@@ -141,9 +167,15 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
                       // Delivery timeline
                       _buildTimeline(tracking),
                       const SizedBox(height: 16),
-                      // PIN verification
+                      // PIN verification — drops in with elastic-out bounce
                       if (tracking.isDriverApproaching)
-                        _buildPINCard(tracking),
+                        SlideTransition(
+                          position: _pinSlide,
+                          child: ScaleTransition(
+                            scale: _pinScale,
+                            child: _buildPINCard(tracking),
+                          ),
+                        ),
                       const SizedBox(height: 16),
                       // Safety features
                       _buildSafetyCard(context),
@@ -178,7 +210,7 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               color: statusColor.withValues(alpha: 0.15),
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(statusIcon, size: 28, color: statusColor),
           ),
@@ -198,7 +230,7 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
                 const SizedBox(height: 2),
                 Text(
                   '${tracking.distanceMiles.toStringAsFixed(1)} mi away • ${tracking.etaMinutes} min ETA',
-                  style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
+                  style: const TextStyle(fontSize: 13, color: IveTokens.ink2Color),
                 ),
               ],
             ),
@@ -209,58 +241,59 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
   }
 
   Widget _buildDriverCard(BuildContext context, DeliveryTracking tracking) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-      elevation: 0,
-      color: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.all(14),
-        child: Row(
-          children: [
-            // Driver avatar
-            Container(
-              width: 52,
-              height: 52,
-              decoration: BoxDecoration(
-                color: kMarketColorLight,
-                borderRadius: BorderRadius.circular(14),
-              ),
-              child: const Icon(Icons.person, size: 28, color: kMarketColor),
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: IveTokens.raisedColor,
+        borderRadius: BorderRadius.circular(IveTokens.rContainer),
+        border: Border.all(color: IveTokens.hairColor, width: 1),
+      ),
+      child: Row(
+        children: [
+          // Driver avatar
+          Container(
+            width: 52,
+            height: 52,
+            decoration: BoxDecoration(
+              color: kMarketColor.withValues(alpha: 0.12),
+              borderRadius: BorderRadius.circular(IveTokens.rContainer),
             ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    tracking.driverName,
-                    style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15),
-                  ),
-                  Row(
-                    children: [
-                      const Icon(Icons.star, size: 14, color: AppColors.accent),
-                      const SizedBox(width: 3),
-                      Text(
-                        '${tracking.driverRating}',
-                        style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        tracking.vehicleInfo,
-                        style: const TextStyle(fontSize: 12, color: AppColors.textTertiary),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+            child: const Icon(Icons.person, size: 28, color: kMarketColor),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  tracking.driverName,
+                  style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15, color: IveTokens.inkColor),
+                ),
+                Row(
+                  children: [
+                    const Icon(Icons.star, size: 14, color: IveTokens.warnColor),
+                    const SizedBox(width: 3),
+                    Text(
+                      '${tracking.driverRating}',
+                      style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: IveTokens.inkColor),
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      tracking.vehicleInfo,
+                      style: const TextStyle(fontSize: 12, color: IveTokens.muteColor),
+                    ),
+                  ],
+                ),
+              ],
             ),
+          ),
             // Contact buttons
             IconButton(
               icon: Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: kMarketColorLight,
-                  borderRadius: BorderRadius.circular(10),
+                  color: kMarketColor.withValues(alpha: 0.12),
+                  borderRadius: BorderRadius.circular(IveTokens.rAtom),
                 ),
                 child: const Icon(Icons.chat, size: 18, color: kMarketColor),
               ),
@@ -270,17 +303,16 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
               icon: Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: kMarketColorLight,
-                  borderRadius: BorderRadius.circular(10),
+                  color: kMarketColor.withValues(alpha: 0.12),
+                  borderRadius: BorderRadius.circular(IveTokens.rAtom),
                 ),
-              child: const Icon(Icons.phone, size: 18, color: kMarketColor),
+                child: const Icon(Icons.phone, size: 18, color: kMarketColor),
               ),
               onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Calling driver...'), behavior: SnackBarBehavior.floating)),
             ),
           ],
         ),
-      ),
-    );
+      );
   }
 
   Widget _buildTimeline(DeliveryTracking tracking) {
@@ -300,9 +332,9 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
                       height: 20,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: isCompleted ? kMarketColor : Colors.white,
+                        color: isCompleted ? kMarketColor : IveTokens.raisedColor,
                         border: Border.all(
-                          color: isCompleted ? kMarketColor : AppColors.inputBorder,
+                          color: isCompleted ? kMarketColor : IveTokens.hairColor,
                           width: 2,
                         ),
                       ),
@@ -314,7 +346,7 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
                       Container(
                         width: 2,
                         height: 28,
-                        color: isCompleted ? kMarketColor : AppColors.inputBorder,
+                        color: isCompleted ? kMarketColor : IveTokens.hairColor,
                       ),
                   ],
                 ),
@@ -328,13 +360,13 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: isCompleted ? FontWeight.w600 : FontWeight.w400,
-                          color: isCompleted ? AppColors.textPrimary : AppColors.textTertiary,
+                          color: isCompleted ? IveTokens.inkColor : IveTokens.muteColor,
                         ),
                       ),
                       if (event.timestamp != null)
                         Text(
                           '${event.timestamp!.hour}:${event.timestamp!.minute.toString().padLeft(2, '0')}',
-                          style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
+                          style: const TextStyle(fontSize: 11, color: IveTokens.muteColor),
                         ),
                     ],
                   ),
@@ -347,37 +379,37 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
   }
 
   Widget _buildPINCard(DeliveryTracking tracking) {
+    // PIN in large mono with dark themed card + gold border (spec P1)
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(IveTokens.s5),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        gradient: const LinearGradient(
-          colors: [Color(0xFF8B5CF6), Color(0xFF6D28D9)],
-        ),
+        color: IveTokens.raisedColor,
+        borderRadius: BorderRadius.circular(IveTokens.rContainer),
+        border: Border.all(color: IveTokens.accentColor.withValues(alpha: 0.4), width: 1.5),
       ),
       child: Column(
         children: [
-          const Icon(Icons.pin, size: 32, color: Colors.white),
-          const SizedBox(height: 8),
-          const Text(
-            'Delivery PIN',
-            style: TextStyle(fontSize: 14, color: Colors.white70),
-          ),
-          const SizedBox(height: 4),
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            const Icon(Icons.pin_rounded, size: 16, color: IveTokens.accentColor),
+            const SizedBox(width: 6),
+            Text('Delivery PIN', style: IveType.caption.copyWith(color: IveTokens.muteColor)),
+          ]),
+          const SizedBox(height: IveTokens.s3),
           Text(
-            tracking.deliveryPin ?? '',
-            style: const TextStyle(
-              fontSize: 36,
-              fontWeight: FontWeight.w900,
-              letterSpacing: 8,
-              color: Colors.white,
+            tracking.deliveryPin ?? '—',
+            style: GoogleFonts.ibmPlexMono(
+              fontSize: 40,
+              fontWeight: FontWeight.w700,
+              letterSpacing: 12,
+              color: IveTokens.inkColor,
+              fontFeatures: [const FontFeature.tabularFigures()],
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: IveTokens.s2),
           Text(
-            'Share this PIN with the driver to confirm delivery',
+            'Share with the driver to confirm delivery.',
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 12, color: Colors.white.withValues(alpha: 0.7)),
+            style: IveType.caption.copyWith(color: IveTokens.muteColor),
           ),
         ],
       ),
@@ -439,13 +471,13 @@ class MarketDeliveryTrackerScreen extends StatelessWidget {
   Color _stepColor(DeliveryStep step) {
     switch (step) {
       case DeliveryStep.confirmed:
-        return AppColors.info;
+        return IveTokens.infoColor;
       case DeliveryStep.preparing:
-        return AppColors.warning;
+        return IveTokens.warnColor;
       case DeliveryStep.onTheWay:
         return kMarketColor;
       case DeliveryStep.delivered:
-        return kMarketColor;
+        return IveTokens.okColor;
     }
   }
 }
@@ -469,7 +501,7 @@ class _SafetyOption extends StatelessWidget {
       leading: Icon(icon, color: kMarketColor),
       title: Text(title, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
       subtitle: Text(subtitle, style: const TextStyle(fontSize: 12)),
-      trailing: const Icon(Icons.chevron_right, color: AppColors.textTertiary),
+      trailing: const Icon(Icons.chevron_right, color: IveTokens.muteColor),
       onTap: onTap,
       contentPadding: EdgeInsets.zero,
     );

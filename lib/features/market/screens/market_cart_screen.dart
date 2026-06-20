@@ -11,7 +11,6 @@ import '../../../core/routes/app_routes.dart';
 import '../models/market_models.dart';
 import '../providers/market_provider.dart';
 import '../widgets/market_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class MarketCartScreen extends StatelessWidget {
   const MarketCartScreen({super.key});
@@ -64,42 +63,6 @@ class MarketCartScreen extends StatelessWidget {
                     _buildPromoSection(context, prov),
                     // AI Recommendations strip
                     const SizedBox(height: 16),
-                    Consumer<AIInsightsNotifier>(
-                      builder: (context, ai, _) {
-                        if (ai.recommendations.isEmpty) return const SizedBox.shrink();
-                        return Container(
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: kMarketColor.withValues(alpha: 0.05),
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: kMarketColor.withValues(alpha: 0.2)),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Row(
-                                children: [
-                                  Icon(Icons.auto_awesome, size: 14, color: kMarketColor),
-                                  SizedBox(width: 6),
-                                  Text('You might also want', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: kMarketColor)),
-                                ],
-                              ),
-                              const SizedBox(height: 8),
-                              Wrap(
-                                spacing: 6,
-                                runSpacing: 4,
-                                children: ai.recommendations.take(4).map((r) => Chip(
-                                  label: Text(r['name'] as String? ?? '', style: const TextStyle(fontSize: 11)),
-                                  backgroundColor: kMarketColor.withValues(alpha: 0.08),
-                                  side: BorderSide.none,
-                                  padding: EdgeInsets.zero,
-                                )).toList(),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
                     // Financial summary
                     const SizedBox(height: 16),
                     _buildFinancialSummary(summary),
@@ -114,7 +77,7 @@ class MarketCartScreen extends StatelessWidget {
 
   Widget _buildFulfillmentToggle(BuildContext context, MarketProvider prov) {
     return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       elevation: 0,
       color: Colors.white,
       child: Padding(
@@ -167,7 +130,7 @@ class MarketCartScreen extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(10),
         gradient: const LinearGradient(
           colors: [Color(0xFF8B5CF6), Color(0xFF6D28D9)],
         ),
@@ -219,7 +182,7 @@ class MarketCartScreen extends StatelessWidget {
 
   Widget _buildFreeDeliveryProgress(CartSummary summary) {
     return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       elevation: 0,
       color: Colors.white,
       child: Padding(
@@ -256,7 +219,7 @@ class MarketCartScreen extends StatelessWidget {
 
   Widget _buildPromoSection(BuildContext context, MarketProvider prov) {
     return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       elevation: 0,
       color: Colors.white,
       child: Padding(
@@ -333,9 +296,8 @@ class MarketCartScreen extends StatelessWidget {
         top: 12,
         bottom: MediaQuery.of(context).padding.bottom + 12,
       ),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
-        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10, offset: const Offset(0, -2))],
       ),
       child: Row(
         children: [
@@ -360,7 +322,7 @@ class MarketCartScreen extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: kMarketColor,
                 foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 elevation: 0,
               ),
@@ -452,7 +414,7 @@ class _CartItemTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.only(bottom: 12),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       elevation: 0,
       color: Colors.white,
       child: Padding(

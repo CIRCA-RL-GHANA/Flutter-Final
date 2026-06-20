@@ -4,8 +4,6 @@ library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../core/services/ai_insights_notifier.dart';
-import '../../../core/widgets/ai_price_widgets.dart';
 import '../models/april_models.dart';
 import '../providers/april_provider.dart';
 import '../widgets/april_widgets.dart';
@@ -185,18 +183,6 @@ class _OverviewTab extends StatelessWidget {
         const SizedBox(height: 16),
 
         // AI Spending Insights
-        Consumer<AIInsightsNotifier>(
-          builder: (ctx, aiNotifier, _) {
-            if (aiNotifier.spendingPattern == null) return const SizedBox.shrink();
-            return Padding(
-              padding: const EdgeInsets.only(bottom: 16),
-              child: AISpendingSummaryCard(
-                spendingData: aiNotifier.spendingPattern,
-                isLoading: aiNotifier.loadingInsights,
-              ),
-            );
-          },
-        ),
 
         // Monthly Summary Row
         Row(
@@ -307,11 +293,11 @@ class _TransactionsTab extends StatelessWidget {
               filled: true,
               fillColor: const Color(0xFF11131C),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(10),
                 borderSide: const BorderSide(color: Color(0xFF1C1C2E)),
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(10),
                 borderSide: const BorderSide(color: Color(0xFF1C1C2E)),
               ),
               contentPadding: const EdgeInsets.symmetric(vertical: 10),
@@ -390,7 +376,7 @@ class _BudgetsTab extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(14),
+            borderRadius: BorderRadius.circular(10),
             border: Border.all(color: const Color(0xFFE5E7EB)),
           ),
           child: Column(
@@ -446,7 +432,7 @@ class _BudgetsTab extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: kAprilAccent.withValues(alpha: 0.05),
-            borderRadius: BorderRadius.circular(14),
+            borderRadius: BorderRadius.circular(10),
             border: Border.all(color: kAprilAccent.withValues(alpha: 0.2)),
           ),
           child: Row(
@@ -641,7 +627,7 @@ class _SummaryMini extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(10),
         border: Border.all(color: const Color(0xFFE5E7EB)),
       ),
       child: Column(

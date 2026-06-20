@@ -1,17 +1,17 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// Screen 6: Privacy Control Center
-/// Data map visualization, control toggles, transparency panel
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// Privacy Control Center
 library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/services/ai_insights_notifier.dart';
+import '../../../core/design/ive.dart';
 import '../models/user_details_models.dart';
 import '../providers/user_details_provider.dart';
 import '../widgets/shared_widgets.dart';
+
+// Module accent: user = cyan
+const Color _kModuleColor = IveTokens.moduleUser;
 
 class PrivacyCenterScreen extends StatelessWidget {
   const PrivacyCenterScreen({super.key});
@@ -24,58 +24,38 @@ class PrivacyCenterScreen extends StatelessWidget {
         final categories = udp.dataCategories;
 
         return Scaffold(
-          backgroundColor: const Color(0xFF08080F),
+          backgroundColor: IveTokens.voidColor,
           appBar: const ModuleHeader(
             title: 'Privacy Center',
-            contextColor: Color(0xFF8B5CF6),
+            contextColor: _kModuleColor,
           ),
           body: ListView(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(IveTokens.s5),
             children: [
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    color: AppColors.primary.withValues(alpha: 0.07),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: AppColors.primary),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            'AI: ${ai.insights.first['title'] ?? ''}',
-                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: AppColors.primary),
-                            maxLines: 1, overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-              // ─── Privacy Score ──────────────────────────────
+              // ── Privacy Score (arc animates real-time) ───────────────
               _PrivacyScoreCard(score: privacy.privacyScore),
 
-              const SizedBox(height: 16),
+              const SizedBox(height: IveTokens.s4),
 
-              // ─── Data Map ──────────────────────────────────
-              SectionCard(
+              // ── Data Map ────────────────────────────────────────────
+              _DarkCard(
                 child: CollapsibleSection(
                   title: 'Your Data Map',
                   icon: Icons.bubble_chart,
-                  iconColor: const Color(0xFF8B5CF6),
+                  iconColor: _kModuleColor,
                   child: _DataMap(categories: categories),
                 ),
               ),
 
-              // ─── Profile Visibility ────────────────────────
-              SectionCard(
+              const SizedBox(height: IveTokens.s3),
+
+              // ── Profile Visibility ──────────────────────────────────
+              _DarkCard(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Profile Visibility', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textPrimary)),
-                    const SizedBox(height: 10),
+                    const _SectionLabel('Profile Visibility'),
+                    const SizedBox(height: IveTokens.s2 + 2),
                     ...ProfileVisibility.values.map((v) => _RadioOption<ProfileVisibility>(
                           value: v,
                           groupValue: privacy.profileVisibility,
@@ -86,40 +66,50 @@ class PrivacyCenterScreen extends StatelessWidget {
                                   ? Icons.people
                                   : Icons.lock,
                           onChanged: (val) {
-                            if (val != null) udp.setProfileVisibility(val);
+                            if (val != null) {
+                              HapticFeedback.lightImpact();
+                              udp.setProfileVisibility(val);
+                            }
                           },
                         )),
                   ],
                 ),
               ),
 
-              // ─── Data Sharing ──────────────────────────────
-              SectionCard(
+              const SizedBox(height: IveTokens.s3),
+
+              // ── Data Sharing ────────────────────────────────────────
+              _DarkCard(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Data Sharing Level', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textPrimary)),
-                    const SizedBox(height: 10),
+                    const _SectionLabel('Data Sharing Level'),
+                    const SizedBox(height: IveTokens.s2 + 2),
                     ...DataSharingLevel.values.map((v) => _RadioOption<DataSharingLevel>(
                           value: v,
                           groupValue: privacy.dataSharingLevel,
                           label: v.label,
                           icon: Icons.share,
                           onChanged: (val) {
-                            if (val != null) udp.setDataSharing(val);
+                            if (val != null) {
+                              HapticFeedback.lightImpact();
+                              udp.setDataSharing(val);
+                            }
                           },
                         )),
                   ],
                 ),
               ),
 
-              // ─── Location Tracking ─────────────────────────
-              SectionCard(
+              const SizedBox(height: IveTokens.s3),
+
+              // ── Location Tracking ───────────────────────────────────
+              _DarkCard(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Location Tracking', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textPrimary)),
-                    const SizedBox(height: 10),
+                    const _SectionLabel('Location Tracking'),
+                    const SizedBox(height: IveTokens.s2 + 2),
                     ...LocationTracking.values.map((v) => _RadioOption<LocationTracking>(
                           value: v,
                           groupValue: privacy.locationTracking,
@@ -130,15 +120,20 @@ class PrivacyCenterScreen extends StatelessWidget {
                                   ? Icons.location_searching
                                   : Icons.location_off,
                           onChanged: (val) {
-                            if (val != null) udp.setLocationTracking(val);
+                            if (val != null) {
+                              HapticFeedback.lightImpact();
+                              udp.setLocationTracking(val);
+                            }
                           },
                         )),
                   ],
                 ),
               ),
 
-              // ─── Toggles ──────────────────────────────────
-              SectionCard(
+              const SizedBox(height: IveTokens.s3),
+
+              // ── Toggles ─────────────────────────────────────────────
+              _DarkCard(
                 child: Column(
                   children: [
                     SettingsToggle(
@@ -146,100 +141,92 @@ class PrivacyCenterScreen extends StatelessWidget {
                       label: 'Contact Sync',
                       subtitle: 'Sync phone contacts with app',
                       value: privacy.contactSyncEnabled,
-                      onChanged: (v) => udp.toggleContactSync(v),
-                      activeColor: const Color(0xFF8B5CF6),
+                      onChanged: (v) {
+                        HapticFeedback.lightImpact();
+                        udp.toggleContactSync(v);
+                      },
+                      activeColor: _kModuleColor,
                     ),
-                    const Divider(height: 1),
+                    const Divider(height: 1, color: IveTokens.hairColor),
                     SettingsToggle(
                       icon: Icons.analytics_outlined,
                       label: 'Usage Analytics',
                       subtitle: 'Help improve the app with anonymized data',
                       value: privacy.usageAnalyticsEnabled,
-                      onChanged: (v) => udp.toggleAnalytics(v),
-                      activeColor: const Color(0xFF8B5CF6),
+                      onChanged: (v) {
+                        HapticFeedback.lightImpact();
+                        udp.toggleAnalytics(v);
+                      },
+                      activeColor: _kModuleColor,
                     ),
                   ],
                 ),
               ),
 
-              // ─── Data Export ────────────────────────────────
-              SectionCard(
+              const SizedBox(height: IveTokens.s3),
+
+              // ── Data Export ─────────────────────────────────────────
+              _DarkCard(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Row(
-                      children: [
-                        Icon(Icons.download_outlined, size: 18, color: Color(0xFF3B82F6)),
-                        SizedBox(width: 8),
-                        Text('Data Export', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textPrimary)),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
-                    if (privacy.lastDataExport != null)
+                    const Row(children: [
+                      Icon(Icons.download_outlined, size: 18, color: IveTokens.accentColor),
+                      SizedBox(width: IveTokens.s2),
+                      _SectionLabel('Data Export'),
+                    ]),
+                    if (privacy.lastDataExport != null) ...[
+                      const SizedBox(height: IveTokens.s1),
                       Text(
                         'Last export: ${_formatDate(privacy.lastDataExport!)}',
-                        style: const TextStyle(fontSize: 12, color: AppColors.textTertiary),
+                        style: const TextStyle(fontSize: 12, color: IveTokens.muteColor),
                       ),
-                    const SizedBox(height: 10),
-                    SizedBox(
-                      width: double.infinity,
-                      child: OutlinedButton.icon(
-                        onPressed: () {
-                          HapticFeedback.mediumImpact();
-                          udp.requestDataExport();
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Data export initiated. You\'ll receive it via email.')),
-                          );
-                        },
-                        icon: const Icon(Icons.download, size: 16),
-                        label: const Text('Request Data Export (GDPR)'),
-                        style: OutlinedButton.styleFrom(
-                          foregroundColor: const Color(0xFF3B82F6),
-                          side: const BorderSide(color: Color(0xFF3B82F6)),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                        ),
-                      ),
+                    ],
+                    const SizedBox(height: IveTokens.s2 + 2),
+                    IveButton.secondary(
+                      label: 'Request Data Export (GDPR)',
+                      onPressed: () {
+                        HapticFeedback.mediumImpact();
+                        udp.requestDataExport();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Data export initiated. You\'ll receive it via email.')),
+                        );
+                      },
                     ),
                   ],
                 ),
               ),
 
-              // ─── Account Deletion ──────────────────────────
-              SectionCard(
-                borderColor: const Color(0xFFEF4444).withValues(alpha: 0.15),
+              const SizedBox(height: IveTokens.s3),
+
+              // ── Account Deletion ────────────────────────────────────
+              _DarkCard(
+                borderColor: IveTokens.badColor.withValues(alpha: 0.2),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Row(
-                      children: [
-                        Icon(Icons.delete_forever, size: 18, color: Color(0xFFEF4444)),
-                        SizedBox(width: 8),
-                        Text('Delete Account', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFFEF4444))),
-                      ],
-                    ),
-                    const SizedBox(height: 6),
+                    const Row(children: [
+                      Icon(Icons.delete_forever, size: 18, color: IveTokens.badColor),
+                      SizedBox(width: IveTokens.s2),
+                      Text('Delete Account',
+                          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: IveTokens.badColor)),
+                    ]),
+                    const SizedBox(height: IveTokens.s1 + 2),
                     const Text(
                       'Permanently delete your account and all associated data. This cannot be undone.',
-                      style: TextStyle(fontSize: 12, color: AppColors.textTertiary, height: 1.4),
+                      style: TextStyle(fontSize: 12, color: IveTokens.muteColor, height: 1.4),
                     ),
-                    const SizedBox(height: 10),
-                    SizedBox(
-                      width: double.infinity,
-                      child: OutlinedButton(
-                        onPressed: () => _showDeleteConfirmation(context),
-                        style: OutlinedButton.styleFrom(
-                          foregroundColor: const Color(0xFFEF4444),
-                          side: const BorderSide(color: Color(0xFFEF4444)),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                        ),
-                        child: const Text('Delete My Account'),
-                      ),
+                    const SizedBox(height: IveTokens.s2 + 2),
+                    IveButton.primary(
+                      label: 'Delete My Account',
+                      isDestructive: true,
+                      onPressed: () => _showDeleteConfirmation(context, udp),
                     ),
                   ],
                 ),
               ),
 
-              const SizedBox(height: 30),
+              const SizedBox(height: IveTokens.s8),
             ],
           ),
         );
@@ -247,99 +234,168 @@ class PrivacyCenterScreen extends StatelessWidget {
     );
   }
 
-  String _formatDate(DateTime dt) {
-    return '${dt.day}/${dt.month}/${dt.year}';
-  }
+  String _formatDate(DateTime dt) => '${dt.day}/${dt.month}/${dt.year}';
 
-  void _showDeleteConfirmation(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Text('Delete Account?', style: TextStyle(fontWeight: FontWeight.w700)),
-        content: const Text(
-          'This will permanently delete all your data across all contexts. This action cannot be reversed.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
-          ),
-          ElevatedButton(
-            onPressed: () => Navigator.pop(context),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFFEF4444),
-              foregroundColor: Colors.white,
-            ),
-            child: const Text('Delete'),
-          ),
-        ],
-      ),
+  Future<void> _showDeleteConfirmation(BuildContext context, UserDetailsProvider udp) async {
+    HapticFeedback.heavyImpact();
+    await showVerifySheet(
+      context,
+      title: 'Delete Account',
+      confirmLabel: 'Delete account',
+      subtitle: 'All your data will be permanently erased across every context. This cannot be undone.',
+      isDestructive: true,
+      onConfirm: () async => null,
     );
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// Privacy Score Card
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ── Dark card container ──────────────────────────────────────────────────────
 
-class _PrivacyScoreCard extends StatelessWidget {
+class _DarkCard extends StatelessWidget {
+  final Widget child;
+  final Color? borderColor;
+  const _DarkCard({required this.child, this.borderColor});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(IveTokens.s4),
+      margin: const EdgeInsets.only(bottom: 0),
+      decoration: BoxDecoration(
+        color: IveTokens.raisedColor,
+        borderRadius: BorderRadius.circular(IveTokens.rContainer),
+        border: Border.all(color: borderColor ?? IveTokens.hairColor, width: 1),
+      ),
+      child: child,
+    );
+  }
+}
+
+// ── Section label ────────────────────────────────────────────────────────────
+
+class _SectionLabel extends StatelessWidget {
+  final String text;
+  const _SectionLabel(this.text);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(text,
+        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: IveTokens.inkColor));
+  }
+}
+
+// ── Privacy Score Card — animates arc in real-time ──────────────────────────
+
+class _PrivacyScoreCard extends StatefulWidget {
   final int score;
   const _PrivacyScoreCard({required this.score});
 
   @override
-  Widget build(BuildContext context) {
-    final color = score >= 80
-        ? const Color(0xFF10B981)
-        : score >= 50
-            ? const Color(0xFFF59E0B)
-            : const Color(0xFFEF4444);
+  State<_PrivacyScoreCard> createState() => _PrivacyScoreCardState();
+}
 
-    return SectionCard(
-      child: Row(
-        children: [
-          SizedBox(
-            width: 64,
-            height: 64,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                CircularProgressIndicator(
-                  value: score / 100,
-                  strokeWidth: 6,
-                  backgroundColor: Colors.grey.withValues(alpha: 0.1),
-                  valueColor: AlwaysStoppedAnimation<Color>(color),
+class _PrivacyScoreCardState extends State<_PrivacyScoreCard>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _ctrl;
+  late Animation<double> _anim;
+  double _fromScore = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _ctrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 600),
+    );
+    _anim = Tween<double>(begin: 0, end: widget.score.toDouble())
+        .animate(CurvedAnimation(parent: _ctrl, curve: Curves.easeOut));
+    _ctrl.forward();
+  }
+
+  @override
+  void didUpdateWidget(_PrivacyScoreCard old) {
+    super.didUpdateWidget(old);
+    if (old.score != widget.score) {
+      _fromScore = _anim.value;
+      _anim = Tween<double>(begin: _fromScore, end: widget.score.toDouble())
+          .animate(CurvedAnimation(parent: _ctrl, curve: Curves.easeOut));
+      _ctrl
+        ..reset()
+        ..forward();
+    }
+  }
+
+  @override
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();
+  }
+
+  Color _arcColor(double v) {
+    if (v >= 80) return IveTokens.okColor;
+    if (v >= 50) return IveTokens.warnColor;
+    return IveTokens.badColor;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _DarkCard(
+      child: AnimatedBuilder(
+        animation: _anim,
+        builder: (context, _) {
+          final v = _anim.value;
+          final color = _arcColor(v);
+          return Row(
+            children: [
+              SizedBox(
+                width: 68,
+                height: 68,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    CircularProgressIndicator(
+                      value: v / 100,
+                      strokeWidth: 5,
+                      backgroundColor: IveTokens.hairColor,
+                      valueColor: AlwaysStoppedAnimation<Color>(color),
+                    ),
+                    Text(
+                      v.round().toString(),
+                      style: GoogleFonts.ibmPlexMono(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                        color: color,
+                        fontFeatures: const [FontFeature.tabularFigures()],
+                      ),
+                    ),
+                  ],
                 ),
-                Text(
-                  '$score',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: color),
+              ),
+              const SizedBox(width: IveTokens.s4),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('Privacy Score',
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: IveTokens.inkColor)),
+                    const SizedBox(height: 2),
+                    Text(
+                      v >= 80 ? 'Your privacy is well protected' : 'Consider improving your privacy settings',
+                      style: const TextStyle(fontSize: 12, color: IveTokens.muteColor),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text('Privacy Score', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.textPrimary)),
-                const SizedBox(height: 2),
-                Text(
-                  score >= 80 ? 'Your privacy is well protected' : 'Consider improving your privacy settings',
-                  style: const TextStyle(fontSize: 12, color: AppColors.textTertiary),
-                ),
-              ],
-            ),
-          ),
-        ],
+              ),
+            ],
+          );
+        },
       ),
     );
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// Data Map Visualization
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ── Data Map Visualization ───────────────────────────────────────────────────
 
 class _DataMap extends StatelessWidget {
   final List<DataCategory> categories;
@@ -349,15 +405,15 @@ class _DataMap extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 8),
+        const SizedBox(height: IveTokens.s2),
         Wrap(
-          spacing: 8,
-          runSpacing: 8,
+          spacing: IveTokens.s2,
+          runSpacing: IveTokens.s2,
           alignment: WrapAlignment.center,
           children: categories.map((cat) => _DataBubble(category: cat)).toList(),
         ),
-        const SizedBox(height: 16),
-        ...categories.map((cat) => _DataCategoryDetail(category: cat)),
+        const SizedBox(height: IveTokens.s4),
+        ...categories.map((cat) => _DataCategoryRow(category: cat)),
       ],
     );
   }
@@ -400,24 +456,34 @@ class _DataBubble extends StatelessWidget {
   void _showDataDetail(BuildContext context, DataCategory cat) {
     showModalBottomSheet(
       context: context,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
-      builder: (_) => Padding(
-        padding: const EdgeInsets.all(24),
+      backgroundColor: Colors.transparent,
+      builder: (_) => Container(
+        padding: EdgeInsets.fromLTRB(
+            IveTokens.s5, IveTokens.s4, IveTokens.s5,
+            IveTokens.s5 + MediaQuery.of(context).padding.bottom),
+        decoration: const BoxDecoration(
+          color: IveTokens.raisedColor,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(IveTokens.rContainer)),
+          border: Border(top: BorderSide(color: IveTokens.hairColor, width: 1)),
+        ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
-              child: Container(width: 36, height: 4, decoration: BoxDecoration(color: AppColors.inputBorder, borderRadius: BorderRadius.circular(2))),
+              child: Container(
+                width: 36, height: 4,
+                decoration: BoxDecoration(color: IveTokens.hair2Color, borderRadius: BorderRadius.circular(2)),
+              ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: IveTokens.s4),
             Text(cat.name, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: cat.color)),
-            const SizedBox(height: 8),
+            const SizedBox(height: IveTokens.s2),
             DetailRow(icon: Icons.info_outline, label: 'Description', value: cat.description),
             DetailRow(icon: Icons.flag, label: 'Purpose', value: cat.purpose),
             DetailRow(icon: Icons.visibility, label: 'Who can see', value: cat.visibility),
             DetailRow(icon: Icons.timer, label: 'Retention', value: cat.retention),
-            const SizedBox(height: 20),
+            const SizedBox(height: IveTokens.s5),
           ],
         ),
       ),
@@ -425,35 +491,34 @@ class _DataBubble extends StatelessWidget {
   }
 }
 
-class _DataCategoryDetail extends StatelessWidget {
+class _DataCategoryRow extends StatelessWidget {
   final DataCategory category;
-  const _DataCategoryDetail({required this.category});
+  const _DataCategoryRow({required this.category});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.only(bottom: IveTokens.s2),
       child: Row(
         children: [
           Container(
-            width: 10,
-            height: 10,
+            width: 10, height: 10,
             decoration: BoxDecoration(shape: BoxShape.circle, color: category.color),
           ),
-          const SizedBox(width: 8),
+          const SizedBox(width: IveTokens.s2),
           Expanded(
-            child: Text(category.name, style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+            child: Text(category.name,
+                style: const TextStyle(fontSize: 12, color: IveTokens.ink2Color)),
           ),
-          Text(category.retention, style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+          Text(category.retention,
+              style: const TextStyle(fontSize: 11, color: IveTokens.muteColor)),
         ],
       ),
     );
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// Radio Option
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ── Radio Option ─────────────────────────────────────────────────────────────
 
 class _RadioOption<T> extends StatelessWidget {
   final T value;
@@ -474,32 +539,31 @@ class _RadioOption<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     final selected = value == groupValue;
     return InkWell(
-      onTap: () {
-        HapticFeedback.selectionClick();
-        onChanged(value);
-      },
-      borderRadius: BorderRadius.circular(8),
+      onTap: () => onChanged(value),
+      borderRadius: BorderRadius.circular(IveTokens.rXs),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8),
+        padding: const EdgeInsets.symmetric(vertical: IveTokens.s2),
         child: Row(
           children: [
-            Icon(icon, size: 18, color: selected ? const Color(0xFF8B5CF6) : AppColors.textTertiary),
-            const SizedBox(width: 10),
+            Icon(icon, size: 18, color: selected ? _kModuleColor : IveTokens.muteColor),
+            const SizedBox(width: IveTokens.s2 + 2),
             Expanded(
               child: Text(
                 label,
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: selected ? FontWeight.w600 : FontWeight.w400,
-                  color: selected ? const Color(0xFF8B5CF6) : AppColors.textPrimary,
+                  color: selected ? _kModuleColor : IveTokens.inkColor,
                 ),
               ),
             ),
             Radio<T>(
               value: value,
-              groupValue: groupValue, // ignore: deprecated_member_use
-              onChanged: onChanged, // ignore: deprecated_member_use
-              activeColor: const Color(0xFF8B5CF6),
+              // ignore: deprecated_member_use
+              groupValue: groupValue,
+              // ignore: deprecated_member_use
+              onChanged: onChanged,
+              activeColor: _kModuleColor,
             ),
           ],
         ),

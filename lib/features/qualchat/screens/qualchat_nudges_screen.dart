@@ -1,4 +1,4 @@
-/// qualChat Screen 11 — Smart Nudges
+﻿/// qualChat Screen 11 — Smart Nudges
 /// AI wingmate: swipe deck, nudge types, AI decision mode, settings
 library;
 
@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 import '../models/qualchat_models.dart';
 import '../providers/qualchat_provider.dart';
 import '../widgets/qualchat_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class QualChatNudgesScreen extends StatelessWidget {
   const QualChatNudgesScreen({super.key});
@@ -38,28 +37,6 @@ class QualChatNudgesScreen extends StatelessWidget {
                 )
               : Column(
                   children: [
-                    Consumer<AIInsightsNotifier>(
-                      builder: (context, ai, _) {
-                        if (ai.insights.isEmpty) return const SizedBox.shrink();
-                        return Container(
-                          color: kChatColor.withValues(alpha: 0.07),
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                          child: Row(
-                            children: [
-                              const Icon(Icons.auto_awesome, size: 14, color: kChatColor),
-                              const SizedBox(width: 8),
-                              Expanded(
-                                child: Text(
-                                  'AI: ${ai.insights.first['title'] ?? ''}',
-                                  style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kChatColor),
-                                  maxLines: 1, overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
                     // Header stats
                     Container(
                       margin: const EdgeInsets.fromLTRB(16, 16, 16, 8),
@@ -68,7 +45,7 @@ class QualChatNudgesScreen extends StatelessWidget {
                         gradient: LinearGradient(
                           colors: [kChatColor.withValues(alpha: 0.08), kChatColorLight],
                         ),
-                        borderRadius: BorderRadius.circular(14),
+                        borderRadius: BorderRadius.circular(10),
                       ),
                       child: Row(
                         children: [
@@ -286,9 +263,6 @@ class _NudgeCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(color: Colors.black.withValues(alpha: 0.06), blurRadius: 16, offset: const Offset(0, 4)),
-        ],
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -369,7 +343,7 @@ class _NudgeCard extends StatelessWidget {
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
                 color: kChatColor.withValues(alpha: 0.05),
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: kChatColor.withValues(alpha: 0.2)),
               ),
               child: Column(

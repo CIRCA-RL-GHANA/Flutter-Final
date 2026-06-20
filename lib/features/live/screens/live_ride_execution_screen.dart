@@ -15,7 +15,6 @@ import '../../../core/routes/app_routes.dart';
 import '../models/live_models.dart';
 import '../providers/live_provider.dart';
 import '../widgets/live_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class LiveRideExecutionScreen extends StatefulWidget {
   const LiveRideExecutionScreen({super.key});
@@ -67,28 +66,6 @@ class _LiveRideExecutionScreenState extends State<LiveRideExecutionScreen> {
                 ),
               ),
 
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    color: Colors.green.shade50,
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Row(
-                      children: [
-                        Icon(Icons.security, size: 14, color: Colors.green.shade700),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            'AI ride safety: ${ai.insights.first['title'] ?? ''}',
-                            style: TextStyle(fontSize: 11, color: Colors.green.shade700),
-                            maxLines: 1, overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
 
               Expanded(
                 child: IndexedStack(
@@ -111,9 +88,8 @@ class _LiveRideExecutionScreenState extends State<LiveRideExecutionScreen> {
           ),
           bottomNavigationBar: Container(
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
-              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 8, offset: const Offset(0, -2))],
             ),
             child: _phase == 0
                 ? SizedBox(
@@ -125,7 +101,7 @@ class _LiveRideExecutionScreenState extends State<LiveRideExecutionScreen> {
                       },
                       icon: const Icon(Icons.location_on, size: 18),
                       label: const Text('ARRIVED AT PICKUP', style: TextStyle(fontWeight: FontWeight.w700)),
-                      style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF3B82F6), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 16), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
+                      style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF3B82F6), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 16), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                     ),
                   )
                 : _phase == 1
@@ -144,7 +120,7 @@ class _LiveRideExecutionScreenState extends State<LiveRideExecutionScreen> {
                             backgroundColor: _identityVerified ? const Color(0xFF10B981) : const Color(0xFFE5E7EB),
                             foregroundColor: Colors.white,
                             padding: const EdgeInsets.symmetric(vertical: 16),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                           ),
                         ),
                       )
@@ -168,7 +144,7 @@ class _LiveRideExecutionScreenState extends State<LiveRideExecutionScreen> {
                               },
                               icon: const Icon(Icons.flag, size: 18),
                               label: const Text('END TRIP', style: TextStyle(fontWeight: FontWeight.w700)),
-                              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10B981), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
+                              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10B981), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                             ),
                           ),
                         ],
@@ -340,7 +316,7 @@ class _VerifyView extends StatelessWidget {
                 },
                 icon: const Icon(Icons.verified_user, size: 18),
                 label: const Text('CONFIRM IDENTITY', style: TextStyle(fontWeight: FontWeight.w700)),
-                style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10B981), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
+                style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10B981), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
               ),
             ),
           ),
@@ -361,7 +337,7 @@ class _InTripView extends StatelessWidget {
         // Live map
         Container(
           height: 200,
-          decoration: BoxDecoration(color: const Color(0xFFE5E7EB), borderRadius: BorderRadius.circular(14)),
+          decoration: BoxDecoration(color: const Color(0xFFE5E7EB), borderRadius: BorderRadius.circular(10)),
           child: const Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -381,7 +357,7 @@ class _InTripView extends StatelessWidget {
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
             gradient: const LinearGradient(colors: [Color(0xFF10B981), Color(0xFF059669)]),
-            borderRadius: BorderRadius.circular(14),
+            borderRadius: BorderRadius.circular(10),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -480,17 +456,7 @@ class _RideCompleteView extends StatelessWidget {
               const SizedBox(height: 16),
               Container(
                 padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(14), boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8)]),
-                child: Column(
-                  children: [
-                    const Text('EARNINGS', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.textTertiary)),
-                    const SizedBox(height: 4),
-                    Text('â‚µ${ride.fare.toStringAsFixed(0)}', style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w900, color: Color(0xFF10B981))),
-                    const SizedBox(height: 8),
-                    _CompletionRow(label: 'Distance', value: '${ride.distanceKm.toStringAsFixed(1)} km'),
-                    _CompletionRow(label: 'Duration', value: '${ride.etaMinutes} min'),
-                    _CompletionRow(label: 'Payment', value: ride.paymentMethod),
-                  ],
+                decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10),
                 ),
               ),
               const SizedBox(height: 24),
@@ -498,7 +464,7 @@ class _RideCompleteView extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: onDone,
-                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10B981), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 16), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
+                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10B981), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 16), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                   child: const Text('BACK TO HOME', style: TextStyle(fontWeight: FontWeight.w700)),
                 ),
               ),
@@ -593,26 +559,6 @@ class _TripStat extends StatelessWidget {
   }
 }
 
-class _CompletionRow extends StatelessWidget {
-  final String label;
-  final String value;
-  const _CompletionRow({required this.label, required this.value});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 4),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(label, style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
-          Text(value, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-        ],
-      ),
-    );
-  }
-}
-
 // ─── Route Map Card ───────────────────────────────────────────────────────────
 /// Shows pickup → drop-off route with an "Open in Maps" deep-link.
 /// Replaces a native map tile when google_maps_flutter is not in use.
@@ -647,7 +593,7 @@ class _RouteMapCard extends StatelessWidget {
       height: 180,
       decoration: BoxDecoration(
         color: IveTokens.surface,
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(10),
         border: IveTokens.cardBorder,
       ),
       child: Stack(

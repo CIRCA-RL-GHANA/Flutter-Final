@@ -1,4 +1,4 @@
-﻿import 'dart:math';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
 
@@ -233,16 +233,8 @@ class _GlowPulseState extends State<GlowPulse>
       animation: _controller,
       builder: (context, child) {
         return Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: widget.glowColor
-                    .withValues(alpha: 0.3 + 0.3 * _controller.value),
-                blurRadius: widget.maxBlur * (0.5 + 0.5 * _controller.value),
-                spreadRadius: 2 + 4 * _controller.value,
-              ),
-            ],
           ),
           child: widget.child,
         );

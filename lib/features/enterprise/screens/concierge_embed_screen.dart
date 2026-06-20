@@ -1,4 +1,4 @@
-/// Enterprise â€º Concierge Embed Screen
+﻿/// Enterprise â€º Concierge Embed Screen
 /// Allows enterprise accounts to test and manage their AI Concierge sessions —
 /// open a session, send messages, and view the response thread.
 library;
@@ -150,7 +150,7 @@ class _ConciergeEmbedScreenState extends State<ConciergeEmbedScreen> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 32, vertical: 14),
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12)),
+                      borderRadius: BorderRadius.circular(10)),
                 ),
                 onPressed: _loading ? null : _startSession,
                 child: _loading
@@ -212,7 +212,7 @@ class _ConciergeEmbedScreenState extends State<ConciergeEmbedScreen> {
             maxWidth: MediaQuery.of(context).size.width * 0.75),
         decoration: BoxDecoration(
           color: isUser ? _kGold.withValues(alpha: 0.15) : _kCard,
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(10),
           border: Border.all(
               color: isUser ? _kGold.withValues(alpha: 0.4) : const Color(0xFF2D2D44)),
         ),

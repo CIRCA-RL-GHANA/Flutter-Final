@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../theme/brand.dart';
 
@@ -182,15 +182,6 @@ class _BrandButtonState extends State<BrandButton> {
             colors: [Brand.cyan, Brand.cyanDim],
           ),
           borderRadius: radius,
-          boxShadow: _enabled
-              ? [
-                  BoxShadow(
-                    color: Brand.cyan.withValues(alpha: _hovered ? 0.38 : 0.24),
-                    blurRadius: _hovered ? 28 : 18,
-                    offset: const Offset(0, 6),
-                  ),
-                ]
-              : null,
         );
       case BrandButtonVariant.secondary:
         return BoxDecoration(
@@ -214,15 +205,6 @@ class _BrandButtonState extends State<BrandButton> {
         return BoxDecoration(
           color: Brand.danger,
           borderRadius: radius,
-          boxShadow: _enabled
-              ? [
-                  BoxShadow(
-                    color: Brand.danger.withValues(alpha: _hovered ? 0.36 : 0.22),
-                    blurRadius: _hovered ? 24 : 16,
-                    offset: const Offset(0, 6),
-                  ),
-                ]
-              : null,
         );
     }
   }

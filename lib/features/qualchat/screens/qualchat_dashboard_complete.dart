@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 import '../models/qualchat_models.dart';
 import '../providers/qualchat_provider.dart';
 import '../widgets/qualchat_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class QualChatDashboardScreen extends StatefulWidget {
   const QualChatDashboardScreen({super.key});
@@ -123,22 +122,6 @@ class _QualChatDashboardScreenState extends State<QualChatDashboardScreen> {
       onRefresh: _loadConversations,
       child: Column(
         children: [
-          Consumer<AIInsightsNotifier>(
-            builder: (context, ai, _) {
-              if (ai.insights.isEmpty) return const SizedBox.shrink();
-              return Container(
-                color: kChatColor.withValues(alpha: 0.07),
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                child: Row(children: [
-                  const Icon(Icons.auto_awesome, size: 14, color: kChatColor),
-                  const SizedBox(width: 8),
-                  Expanded(child: Text('AI: ${ai.insights.first['title'] ?? ''}',
-                    style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kChatColor),
-                    maxLines: 1, overflow: TextOverflow.ellipsis)),
-                ]),
-              );
-            },
-          ),
           // Search bar
           Padding(
             padding: const EdgeInsets.all(16),
@@ -169,7 +152,7 @@ class _QualChatDashboardScreenState extends State<QualChatDashboardScreen> {
                 filled: true,
                 fillColor: const Color(0xFFF3F4F6),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(10),
                   borderSide: BorderSide.none,
                 ),
                 contentPadding: const EdgeInsets.symmetric(vertical: 12),

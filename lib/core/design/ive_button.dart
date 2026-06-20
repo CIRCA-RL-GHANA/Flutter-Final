@@ -178,7 +178,26 @@ class _IveButtonState extends State<IveButton> {
         border: border,
         borderRadius: IveTokens.brMd,
       ),
-      child: Center(child: content),
+      // Luminance lift: a faint top-edge highlight replaces any shadow
+      // (Move 03 — Weightless Depth).
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          if (isPrimary && !disabled)
+            const DecoratedBox(
+              decoration: BoxDecoration(
+                borderRadius: IveTokens.brMd,
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [IveTokens.topHighlight, Colors.transparent],
+                  stops: [0.0, 0.45],
+                ),
+              ),
+            ),
+          Center(child: content),
+        ],
+      ),
     );
 
     // Press-scale gives a tactile, physical response.

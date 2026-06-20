@@ -1,4 +1,4 @@
-/// GO Screen 6 — Request Center
+﻿/// GO Screen 6 — Request Center
 /// 3-tab interface: My Requests, Pending Approval, Templates
 /// 8 request types, creation flow, status pipeline
 library;
@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 import '../models/go_models.dart';
 import '../providers/go_provider.dart';
 import '../widgets/go_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class GoRequestsScreen extends StatefulWidget {
   const GoRequestsScreen({super.key});
@@ -49,28 +48,6 @@ class _GoRequestsScreenState extends State<GoRequestsScreen> with SingleTickerPr
                   const SizedBox(width: 8),
                   _CountBadge(label: 'Approved', count: myReqs.where((r) => r.status == RequestStatus.approved).length, color: kGoPositive),
                 ]),
-              ),
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    color: kGoColor.withValues(alpha: 0.07),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: kGoColor),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            'AI: ${ai.insights.first['title'] ?? ''}',
-                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kGoColor),
-                            maxLines: 1, overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
               ),
               Container(
                 color: Colors.white,
@@ -143,7 +120,7 @@ class _GoRequestsScreenState extends State<GoRequestsScreen> with SingleTickerPr
         final t = templates[i];
         return Container(
           margin: const EdgeInsets.only(bottom: 10),
-          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12), border: Border.all(color: const Color(0xFFE5E7EB))),
+          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: const Color(0xFFE5E7EB))),
           child: ListTile(
             leading: Container(padding: const EdgeInsets.all(8), decoration: BoxDecoration(color: kGoColorLight, borderRadius: BorderRadius.circular(8)), child: Icon(t.$2, color: kGoColor, size: 20)),
             title: Text(t.$1, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
@@ -160,7 +137,7 @@ class _GoRequestsScreenState extends State<GoRequestsScreen> with SingleTickerPr
     return Container(
       height: 300,
       padding: const EdgeInsets.all(16),
-      decoration: const BoxDecoration(color: Colors.white, borderRadius: BorderRadius.vertical(top: Radius.circular(20)), boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10)]),
+      decoration: const BoxDecoration(color: Colors.white, borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Row(children: [
           const Text('New Request', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),

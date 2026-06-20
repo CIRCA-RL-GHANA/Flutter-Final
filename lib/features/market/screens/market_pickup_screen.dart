@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../models/market_models.dart';
 import '../providers/market_provider.dart';
 import '../widgets/market_widgets.dart';
@@ -44,28 +43,6 @@ class _MarketPickupScreenState extends State<MarketPickupScreen> {
           appBar: const MarketAppBar(title: 'Self-Pickup'),
           body: Column(
             children: [
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    color: kMarketColor.withValues(alpha: 0.07),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: kMarketColor),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            'AI: ${ai.insights.first['title'] ?? ''}',
-                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kMarketColor),
-                            maxLines: 1, overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
 
               // Phase progress
               _buildPhaseProgress(),
@@ -174,9 +151,8 @@ class _MarketPickupScreenState extends State<MarketPickupScreen> {
         top: 12,
         bottom: MediaQuery.of(context).padding.bottom + 12,
       ),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
-        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10, offset: const Offset(0, -2))],
       ),
       child: Row(
         children: [
@@ -191,7 +167,7 @@ class _MarketPickupScreenState extends State<MarketPickupScreen> {
                 style: OutlinedButton.styleFrom(
                   foregroundColor: kMarketColor,
                   side: const BorderSide(color: kMarketColor),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   padding: const EdgeInsets.symmetric(vertical: 14),
                 ),
                 child: const Text('Back'),
@@ -214,7 +190,7 @@ class _MarketPickupScreenState extends State<MarketPickupScreen> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: kMarketColor,
                 foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 padding: const EdgeInsets.symmetric(vertical: 14),
                 elevation: 0,
               ),
@@ -465,7 +441,7 @@ class _VerificationPhase extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: const Color(0xFF8B5CF6), width: 2),
                 ),
                 child: Text(
@@ -607,7 +583,7 @@ class _HandoffPhaseState extends State<_HandoffPhase> {
         const SizedBox(height: 12),
         // Report issue
         Card(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           elevation: 0,
           color: AppColors.error.withValues(alpha: 0.05),
           child: ListTile(
@@ -695,7 +671,7 @@ class _CompletePhase extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(14),
+            borderRadius: BorderRadius.circular(10),
             gradient: const LinearGradient(
               colors: [Color(0xFF8B5CF6), Color(0xFF6D28D9)],
             ),

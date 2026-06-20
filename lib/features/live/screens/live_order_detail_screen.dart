@@ -7,12 +7,12 @@ library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import '../../../core/theme/app_colors.dart';
+import '../../../core/design/ive.dart';
 import '../../../core/routes/app_routes.dart';
 import '../providers/live_provider.dart';
 import '../widgets/live_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class LiveOrderDetailScreen extends StatelessWidget {
   const LiveOrderDetailScreen({super.key});
@@ -23,13 +23,13 @@ class LiveOrderDetailScreen extends StatelessWidget {
       builder: (context, prov, _) {
         final order = prov.selectedOrder ?? prov.orders.first;
         return Scaffold(
-          backgroundColor: AppColors.backgroundLight,
+          backgroundColor: IveTokens.voidColor,
           appBar: LiveAppBar(
             title: 'Order #${order.id} • ${order.priority.name.toUpperCase()}',
             actions: [
               IconButton(
                 icon: const Icon(Icons.more_vert, size: 20),
-                color: AppColors.textSecondary,
+                color: IveTokens.ink2Color,
                 onPressed: () {
                   showModalBottomSheet(
                     context: context,
@@ -38,44 +38,18 @@ class LiveOrderDetailScreen extends StatelessWidget {
                   );
                 },
               ),
-              IconButton(icon: const Icon(Icons.download, size: 20), color: AppColors.textSecondary, onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Exporting...')))),
+              IconButton(icon: const Icon(Icons.download, size: 20), color: IveTokens.ink2Color, onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Exporting...')))),
             ],
           ),
           body: ListView(
             padding: const EdgeInsets.all(16),
             children: [
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    margin: const EdgeInsets.only(bottom: 12),
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                    decoration: BoxDecoration(
-                      color: kLiveColor.withValues(alpha: 0.07),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: kLiveColor),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            'AI: ${ai.insights.first['title'] ?? ''}',
-                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kLiveColor),
-                            maxLines: 1, overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
               // Status bar
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: order.priorityColor.withValues(alpha: 0.1),
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: order.priorityColor.withValues(alpha: 0.2)),
                 ),
                 child: Row(
@@ -87,10 +61,24 @@ class LiveOrderDetailScreen extends StatelessWidget {
                       style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: order.priorityColor),
                     ),
                     const Spacer(),
-                    Text(
-                      'Preparation: ${(order.preparationProgress * 100).toInt()}%',
-                      style: TextStyle(fontSize: 12, color: order.priorityColor),
-                    ),
+                    if (order.driverEtaMinutes != null)
+                      Text.rich(TextSpan(children: [
+                        TextSpan(text: 'ETA ', style: TextStyle(fontSize: 11, color: order.priorityColor)),
+                        TextSpan(
+                          text: '${order.driverEtaMinutes} min',
+                          style: GoogleFonts.ibmPlexMono(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w700,
+                            color: order.priorityColor,
+                            fontFeatures: [const FontFeature.tabularFigures()],
+                          ),
+                        ),
+                      ])),
+                    if (order.driverEtaMinutes == null)
+                      Text(
+                        'Prep: ${(order.preparationProgress * 100).toInt()}%',
+                        style: TextStyle(fontSize: 12, color: order.priorityColor),
+                      ),
                   ],
                 ),
               ),
@@ -109,18 +97,18 @@ class LiveOrderDetailScreen extends StatelessWidget {
                         Text(order.customerName, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700)),
                         const SizedBox(width: 8),
                         const Icon(Icons.star, size: 14, color: Color(0xFFF59E0B)),
-                        Text(' ${order.customerRating}', style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                        Text(' ${order.customerRating}', style: const TextStyle(fontSize: 12, color: IveTokens.ink2Color)),
                         const SizedBox(width: 8),
-                        Text('• ${order.customerOrderCount} orders', style: const TextStyle(fontSize: 12, color: AppColors.textTertiary)),
+                        Text('• ${order.customerOrderCount} orders', style: const TextStyle(fontSize: 12, color: IveTokens.muteColor)),
                       ],
                     ),
                     if (order.customerPhone != null) ...[
                       const SizedBox(height: 6),
                       Row(
                         children: [
-                          const Icon(Icons.phone, size: 14, color: AppColors.textSecondary),
+                          const Icon(Icons.phone, size: 14, color: IveTokens.ink2Color),
                           const SizedBox(width: 4),
-                          Text(order.customerPhone!, style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+                          Text(order.customerPhone!, style: const TextStyle(fontSize: 13, color: IveTokens.ink2Color)),
                         ],
                       ),
                     ],
@@ -128,9 +116,9 @@ class LiveOrderDetailScreen extends StatelessWidget {
                       const SizedBox(height: 4),
                       Row(
                         children: [
-                          const Icon(Icons.email, size: 14, color: AppColors.textSecondary),
+                          const Icon(Icons.email, size: 14, color: IveTokens.ink2Color),
                           const SizedBox(width: 4),
-                          Text(order.customerEmail!, style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+                          Text(order.customerEmail!, style: const TextStyle(fontSize: 13, color: IveTokens.ink2Color)),
                         ],
                       ),
                     ],
@@ -138,9 +126,9 @@ class LiveOrderDetailScreen extends StatelessWidget {
                       const SizedBox(height: 4),
                       Row(
                         children: [
-                          const Icon(Icons.business, size: 14, color: AppColors.textSecondary),
+                          const Icon(Icons.business, size: 14, color: IveTokens.ink2Color),
                           const SizedBox(width: 4),
-                          Text('${order.customerCompany}${order.deliveryReception != null ? " • Reception: ${order.deliveryReception}" : ""}', style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+                          Text('${order.customerCompany}${order.deliveryReception != null ? " • Reception: ${order.deliveryReception}" : ""}', style: const TextStyle(fontSize: 13, color: IveTokens.ink2Color)),
                         ],
                       ),
                     ],
@@ -173,10 +161,10 @@ class LiveOrderDetailScreen extends StatelessWidget {
                             width: 40,
                             height: 40,
                             decoration: BoxDecoration(
-                              color: AppColors.backgroundLight,
+                              color: IveTokens.voidColor,
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            child: const Icon(Icons.shopping_bag, size: 20, color: AppColors.textTertiary),
+                            child: const Icon(Icons.shopping_bag, size: 20, color: IveTokens.muteColor),
                           ),
                           const SizedBox(width: 10),
                           Expanded(
@@ -185,9 +173,9 @@ class LiveOrderDetailScreen extends StatelessWidget {
                               children: [
                                 Text(item.name, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
                                 if (item.serialNumber != null)
-                                  Text('Serial: ${item.serialNumber}', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                                  Text('Serial: ${item.serialNumber}', style: const TextStyle(fontSize: 11, color: IveTokens.muteColor)),
                                 if (item.stockLocation != null)
-                                  Text('Stock: ${item.stockLocation}', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                                  Text('Stock: ${item.stockLocation}', style: const TextStyle(fontSize: 11, color: IveTokens.muteColor)),
                               ],
                             ),
                           ),
@@ -199,14 +187,14 @@ class LiveOrderDetailScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Subtotal: â‚µ${order.subtotal.toStringAsFixed(0)} • Delivery: â‚µ${order.deliveryFee.toStringAsFixed(0)}', style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
-                        Text('TOTAL: â‚µ${order.total.toStringAsFixed(0)}', style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800, color: AppColors.textPrimary)),
+                        Text('Subtotal: â‚µ${order.subtotal.toStringAsFixed(0)} • Delivery: â‚µ${order.deliveryFee.toStringAsFixed(0)}', style: const TextStyle(fontSize: 12, color: IveTokens.ink2Color)),
+                        Text('TOTAL: â‚µ${order.total.toStringAsFixed(0)}', style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800, color: IveTokens.inkColor)),
                       ],
                     ),
                     const SizedBox(height: 4),
                     Align(
                       alignment: Alignment.centerRight,
-                      child: Text('Paid: ${order.paymentMethod}', style: const TextStyle(fontSize: 12, color: AppColors.textTertiary)),
+                      child: Text('Paid: ${order.paymentMethod}', style: const TextStyle(fontSize: 12, color: IveTokens.muteColor)),
                     ),
                   ],
                 ),
@@ -222,11 +210,11 @@ class LiveOrderDetailScreen extends StatelessWidget {
                   children: [
                     Text(order.deliveryAddress, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
                     if (order.deliveryFloor != null)
-                      Text('Floor: ${order.deliveryFloor}${order.deliveryReception != null ? " • Reception: ${order.deliveryReception}" : ""}', style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+                      Text('Floor: ${order.deliveryFloor}${order.deliveryReception != null ? " • Reception: ${order.deliveryReception}" : ""}', style: const TextStyle(fontSize: 13, color: IveTokens.ink2Color)),
                     if (order.accessCode != null)
-                      Text('Access code: ${order.accessCode}', style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+                      Text('Access code: ${order.accessCode}', style: const TextStyle(fontSize: 13, color: IveTokens.ink2Color)),
                     if (order.parkingNote != null)
-                      Text('Parking: ${order.parkingNote}', style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+                      Text('Parking: ${order.parkingNote}', style: const TextStyle(fontSize: 13, color: IveTokens.ink2Color)),
                     const SizedBox(height: 10),
                     Wrap(
                       spacing: 8,
@@ -275,12 +263,22 @@ class LiveOrderDetailScreen extends StatelessWidget {
                           : 'Currently: Unassigned',
                       style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                     ),
-                    if (order.assignedDriverName == null) ...[
-                      const SizedBox(height: 4),
-                      Text(
-                        'Recommended: ${prov.availableDrivers.isNotEmpty ? "${prov.availableDrivers.first.name} (${prov.availableDrivers.first.distanceMiles}mi, ${(prov.availableDrivers.first.completionRate * 100).toInt()}% rating)" : "None available"}',
-                        style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
-                      ),
+                    if (order.assignedDriverName == null && prov.availableDrivers.isNotEmpty) ...[
+                      const SizedBox(height: 6),
+                      // AI-recommended driver — quiet gold mark (spec P1)
+                      Row(children: [
+                        const Icon(Icons.auto_awesome_rounded, size: 12, color: IveTokens.accentColor),
+                        const SizedBox(width: 4),
+                        Text(
+                          prov.availableDrivers.first.name,
+                          style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: IveTokens.accentColor),
+                        ),
+                        const SizedBox(width: 6),
+                        Text(
+                          '${prov.availableDrivers.first.distanceMiles}mi · ${(prov.availableDrivers.first.completionRate * 100).toInt()}%',
+                          style: const TextStyle(fontSize: 12, color: IveTokens.muteColor),
+                        ),
+                      ]),
                     ],
                     const SizedBox(height: 10),
                     Wrap(
@@ -309,60 +307,50 @@ class LiveOrderDetailScreen extends StatelessWidget {
               const SizedBox(height: 16),
             ],
           ),
-          bottomNavigationBar: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+          bottomNavigationBar: Container(
+            color: IveTokens.voidColor,
+            padding: const EdgeInsets.fromLTRB(
+              IveTokens.s4, IveTokens.s2, IveTokens.s4, IveTokens.s4,
+            ),
+            child: SafeArea(
               child: Row(
                 children: [
                   Expanded(
-                    child: ElevatedButton(
-                      onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Preparation complete'))),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF10B981),
-                        foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(vertical: 14),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    flex: 3,
+                    child: IveButton.primary(
+                      label: 'Complete prep',
+                      onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Preparation complete')),
                       ),
-                      child: const Text('COMPLETE PREP', style: TextStyle(fontWeight: FontWeight.w700)),
                     ),
                   ),
-                  const SizedBox(width: 8),
-                  OutlinedButton(
-                    onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Order on hold'))),
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: const Color(0xFFF59E0B),
-                      padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  const SizedBox(width: IveTokens.s2),
+                  Expanded(
+                    flex: 2,
+                    child: IveButton.secondary(
+                      label: 'Hold',
+                      onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Order on hold')),
+                      ),
                     ),
-                    child: const Text('HOLD', style: TextStyle(fontWeight: FontWeight.w700)),
                   ),
-                  const SizedBox(width: 8),
-                  OutlinedButton(
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (ctx) => AlertDialog(
-                          title: const Text('Cancel Order'),
-                          content: const Text('Are you sure you want to cancel this order?'),
-                          actions: [
-                            TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('NO')),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.pop(ctx);
-                                Navigator.pop(context);
-                              },
-                              child: const Text('YES, CANCEL'),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: kLiveColor,
-                      padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  const SizedBox(width: IveTokens.s2),
+                  Expanded(
+                    flex: 2,
+                    child: IveButton.secondary(
+                      label: 'Cancel',
+                      onPressed: () => showVerifySheet(
+                        context,
+                        title: 'Cancel order',
+                        confirmLabel: 'Cancel order',
+                        subtitle: 'This cannot be undone.',
+                        isDestructive: true,
+                        onConfirm: () async {
+                          Navigator.pop(context);
+                          return null;
+                        },
+                      ),
                     ),
-                    child: const Text('CANCEL', style: TextStyle(fontWeight: FontWeight.w700)),
                   ),
                 ],
               ),

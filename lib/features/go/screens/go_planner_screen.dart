@@ -1,4 +1,4 @@
-/// GO Screen 10 — Financial Planner
+﻿/// GO Screen 10 — Financial Planner
 /// Cash flow forecast, budget manager, goal setting
 library;
 
@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 import '../models/go_models.dart';
 import '../providers/go_provider.dart';
 import '../widgets/go_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class GoPlannerScreen extends StatefulWidget {
   const GoPlannerScreen({super.key});
@@ -31,28 +30,6 @@ class _GoPlannerScreenState extends State<GoPlannerScreen> with SingleTickerProv
         appBar: const GoAppBar(title: 'Financial Planner'),
         body: Column(
           children: [
-            Consumer<AIInsightsNotifier>(
-              builder: (context, ai, _) {
-                if (ai.insights.isEmpty) return const SizedBox.shrink();
-                return Container(
-                  color: kGoColor.withValues(alpha: 0.07),
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  child: Row(
-                    children: [
-                      const Icon(Icons.auto_awesome, size: 14, color: kGoColor),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: Text(
-                          'AI: ${ai.insights.first['title'] ?? ''}',
-                          style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: kGoColor),
-                          maxLines: 1, overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
             Container(
               color: Colors.white,
               child: TabBar(
@@ -188,7 +165,7 @@ class _SummaryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
     padding: const EdgeInsets.all(14),
-    decoration: BoxDecoration(color: color.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(12)),
+    decoration: BoxDecoration(color: color.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(10)),
     child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text(label, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: color)),
       const SizedBox(height: 4),
@@ -246,7 +223,7 @@ class _GoalCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12), border: Border.all(color: const Color(0xFFE5E7EB))),
+      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: const Color(0xFFE5E7EB))),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Row(children: [
           Container(padding: const EdgeInsets.all(8), decoration: BoxDecoration(color: kGoColorLight, borderRadius: BorderRadius.circular(8)), child: Icon(_goalIcon, color: kGoColor, size: 20)),

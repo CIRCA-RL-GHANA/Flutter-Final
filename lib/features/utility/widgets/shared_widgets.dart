@@ -1,17 +1,16 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// ──────────────────────────────────────────────────────────────────────────
 /// Shared Widgets for Utility Module
 /// Reusable components: metric cards, section headers, utility tiles,
 /// filter chips, status indicators, info panels
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// ──────────────────────────────────────────────────────────────────────────
 library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../../core/theme/app_colors.dart';
+import '../../../core/design/ive.dart';
 
 // ─── Utility Module Color ────────────────────────────────────────────────────
 
-/// The canonical module color for Utility (Slate)
 const Color kUtilityColor = Color(0xFF64748B);
 
 // ─── Utility App Bar ─────────────────────────────────────────────────────────
@@ -36,7 +35,7 @@ class UtilityAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: IveTokens.voidColor,
       surfaceTintColor: Colors.transparent,
       elevation: 0,
       leading: showBackButton
@@ -45,7 +44,7 @@ class UtilityAppBar extends StatelessWidget implements PreferredSizeWidget {
                 const SizedBox(width: 4),
                 IconButton(
                   icon: const Icon(Icons.arrow_back, size: 22),
-                  color: AppColors.textPrimary,
+                  color: IveTokens.inkColor,
                   onPressed: () => Navigator.pop(context),
                 ),
                 Container(
@@ -60,14 +59,7 @@ class UtilityAppBar extends StatelessWidget implements PreferredSizeWidget {
             )
           : leading,
       leadingWidth: showBackButton ? 70 : 56,
-      title: Text(
-        title,
-        style: const TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.w700,
-          color: AppColors.textPrimary,
-        ),
-      ),
+      title: Text(title, style: IveType.title3),
       centerTitle: true,
       actions: actions,
     );
@@ -99,15 +91,9 @@ class MetricCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(14),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.04),
-            blurRadius: 10,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        color: IveTokens.raisedColor,
+        borderRadius: BorderRadius.circular(IveTokens.rContainer),
+        border: Border.all(color: IveTokens.hairColor, width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -118,8 +104,8 @@ class MetricCard extends StatelessWidget {
                 width: 32,
                 height: 32,
                 decoration: BoxDecoration(
-                  color: color.withValues(alpha: 0.1),
-                  borderRadius: BorderRadius.circular(8),
+                  color: color.withValues(alpha: 0.12),
+                  borderRadius: BorderRadius.circular(IveTokens.rAtom),
                 ),
                 child: Icon(icon, size: 18, color: color),
               ),
@@ -128,23 +114,9 @@ class MetricCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 10),
-          Text(
-            value,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w700,
-              color: AppColors.textPrimary,
-            ),
-          ),
+          Text(value, style: IveType.headline),
           const SizedBox(height: 2),
-          Text(
-            label,
-            style: const TextStyle(
-              fontSize: 11,
-              color: AppColors.textTertiary,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
+          Text(label, style: IveType.caption.copyWith(color: IveTokens.muteColor, fontWeight: FontWeight.w500)),
           if (percentage != null) ...[
             const SizedBox(height: 8),
             ClipRRect(
@@ -186,16 +158,9 @@ class UtilitySectionCard extends StatelessWidget {
       padding: padding ?? const EdgeInsets.all(16),
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: borderColor != null ? Border.all(color: borderColor!) : null,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.04),
-            blurRadius: 10,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        color: IveTokens.raisedColor,
+        borderRadius: BorderRadius.circular(IveTokens.rContainer),
+        border: Border.all(color: borderColor ?? IveTokens.hairColor, width: 1),
       ),
       child: child,
     );
@@ -239,14 +204,7 @@ class UtilitySectionTitle extends StatelessWidget {
             Icon(icon, size: 18, color: iconColor ?? kUtilityColor),
             const SizedBox(width: 8),
           ],
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w600,
-              color: AppColors.textPrimary,
-            ),
-          ),
+          Text(title, style: IveType.callout.copyWith(fontWeight: FontWeight.w600)),
           const Spacer(),
           if (trailing != null) trailing!,
         ],
@@ -286,7 +244,7 @@ class UtilityActionTile extends StatelessWidget {
               onTap!();
             }
           : null,
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(IveTokens.rContainer),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 4),
         child: Row(
@@ -295,8 +253,8 @@ class UtilityActionTile extends StatelessWidget {
               width: 36,
               height: 36,
               decoration: BoxDecoration(
-                color: (iconColor ?? kUtilityColor).withValues(alpha: 0.1),
-                borderRadius: BorderRadius.circular(10),
+                color: (iconColor ?? kUtilityColor).withValues(alpha: 0.12),
+                borderRadius: BorderRadius.circular(IveTokens.rAtom),
               ),
               child: Icon(icon, size: 18, color: iconColor ?? kUtilityColor),
             ),
@@ -305,22 +263,9 @@ class UtilityActionTile extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    label,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.textPrimary,
-                    ),
-                  ),
+                  Text(label, style: IveType.callout.copyWith(fontWeight: FontWeight.w500)),
                   if (subtitle != null)
-                    Text(
-                      subtitle!,
-                      style: const TextStyle(
-                        fontSize: 11,
-                        color: AppColors.textTertiary,
-                      ),
-                    ),
+                    Text(subtitle!, style: IveType.caption.copyWith(color: IveTokens.muteColor)),
                 ],
               ),
             ),
@@ -328,7 +273,7 @@ class UtilityActionTile extends StatelessWidget {
             if (showChevron && onTap != null)
               const Padding(
                 padding: EdgeInsets.only(left: 4),
-                child: Icon(Icons.chevron_right, size: 18, color: AppColors.textTertiary),
+                child: Icon(Icons.chevron_right, size: 18, color: IveTokens.muteColor),
               ),
           ],
         ),
@@ -368,32 +313,19 @@ class UtilityToggleTile extends StatelessWidget {
             width: 36,
             height: 36,
             decoration: BoxDecoration(
-              color: (value ? color : AppColors.textTertiary).withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(10),
+              color: (value ? color : IveTokens.muteColor).withValues(alpha: 0.12),
+              borderRadius: BorderRadius.circular(IveTokens.rAtom),
             ),
-            child: Icon(icon, size: 18, color: value ? color : AppColors.textTertiary),
+            child: Icon(icon, size: 18, color: value ? color : IveTokens.muteColor),
           ),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  label,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.textPrimary,
-                  ),
-                ),
+                Text(label, style: IveType.callout.copyWith(fontWeight: FontWeight.w500)),
                 if (subtitle != null)
-                  Text(
-                    subtitle!,
-                    style: const TextStyle(
-                      fontSize: 11,
-                      color: AppColors.textTertiary,
-                    ),
-                  ),
+                  Text(subtitle!, style: IveType.caption.copyWith(color: IveTokens.muteColor)),
               ],
             ),
           ),
@@ -448,10 +380,10 @@ class UtilityFilterChipRow extends StatelessWidget {
               duration: const Duration(milliseconds: 200),
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
               decoration: BoxDecoration(
-                color: selected ? color : Colors.white,
-                borderRadius: BorderRadius.circular(18),
+                color: selected ? color : IveTokens.raisedColor,
+                borderRadius: BorderRadius.circular(IveTokens.rChip),
                 border: Border.all(
-                  color: selected ? color : AppColors.inputBorder,
+                  color: selected ? color : IveTokens.hairColor,
                 ),
               ),
               child: Text(
@@ -459,7 +391,7 @@ class UtilityFilterChipRow extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
-                  color: selected ? Colors.white : AppColors.textSecondary,
+                  color: selected ? IveTokens.inkColor : IveTokens.ink2Color,
                 ),
               ),
             ),
@@ -492,8 +424,8 @@ class UtilityStatusIndicator extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: color.withValues(alpha: 0.2)),
+        borderRadius: BorderRadius.circular(IveTokens.rAtom),
+        border: Border.all(color: color.withValues(alpha: 0.25)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -511,11 +443,7 @@ class UtilityStatusIndicator extends StatelessWidget {
           ],
           Text(
             label,
-            style: TextStyle(
-              fontSize: 11,
-              fontWeight: FontWeight.w600,
-              color: color,
-            ),
+            style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: color),
           ),
         ],
       ),
@@ -553,30 +481,15 @@ class UtilityEmptyState extends StatelessWidget {
               width: 72,
               height: 72,
               decoration: BoxDecoration(
-                color: kUtilityColor.withValues(alpha: 0.1),
+                color: kUtilityColor.withValues(alpha: 0.12),
                 shape: BoxShape.circle,
               ),
               child: Icon(icon, size: 36, color: kUtilityColor),
             ),
             const SizedBox(height: 16),
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: AppColors.textPrimary,
-              ),
-              textAlign: TextAlign.center,
-            ),
+            Text(title, style: IveType.headline, textAlign: TextAlign.center),
             const SizedBox(height: 6),
-            Text(
-              subtitle,
-              style: const TextStyle(
-                fontSize: 13,
-                color: AppColors.textTertiary,
-              ),
-              textAlign: TextAlign.center,
-            ),
+            Text(subtitle, style: IveType.caption.copyWith(color: IveTokens.muteColor), textAlign: TextAlign.center),
             if (actionLabel != null && onAction != null) ...[
               const SizedBox(height: 20),
               TextButton(
@@ -628,11 +541,7 @@ class PercentageRing extends StatelessWidget {
           ),
           Text(
             label ?? '${(percentage * 100).toStringAsFixed(0)}%',
-            style: TextStyle(
-              fontSize: size * 0.22,
-              fontWeight: FontWeight.w700,
-              color: AppColors.textPrimary,
-            ),
+            style: TextStyle(fontSize: size * 0.22, fontWeight: FontWeight.w700, color: IveTokens.inkColor),
           ),
         ],
       ),
@@ -670,15 +579,9 @@ class QuickActionGridItem extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(14),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.04),
-              blurRadius: 10,
-              offset: const Offset(0, 2),
-            ),
-          ],
+          color: IveTokens.raisedColor,
+          borderRadius: BorderRadius.circular(IveTokens.rContainer),
+          border: Border.all(color: IveTokens.hairColor, width: 1),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -690,8 +593,8 @@ class QuickActionGridItem extends StatelessWidget {
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: color.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(12),
+                    color: color.withValues(alpha: 0.12),
+                    borderRadius: BorderRadius.circular(IveTokens.rContainer),
                   ),
                   child: Icon(icon, size: 22, color: color),
                 ),
@@ -703,17 +606,13 @@ class QuickActionGridItem extends StatelessWidget {
                       width: 18,
                       height: 18,
                       decoration: const BoxDecoration(
-                        color: Color(0xFFEF4444),
+                        color: IveTokens.badColor,
                         shape: BoxShape.circle,
                       ),
                       child: Center(
                         child: Text(
                           badgeCount! > 9 ? '9+' : '$badgeCount',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 9,
-                            fontWeight: FontWeight.w700,
-                          ),
+                          style: const TextStyle(color: IveTokens.inkColor, fontSize: 9, fontWeight: FontWeight.w700),
                         ),
                       ),
                     ),
@@ -723,11 +622,7 @@ class QuickActionGridItem extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               label,
-              style: const TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-                color: AppColors.textPrimary,
-              ),
+              style: IveType.caption.copyWith(fontWeight: FontWeight.w500),
               textAlign: TextAlign.center,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,

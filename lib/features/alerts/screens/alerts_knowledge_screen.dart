@@ -1,4 +1,4 @@
-/// Alerts Screen 7 — Knowledge Base Integration
+﻿/// Alerts Screen 7 — Knowledge Base Integration
 /// AI-suggested solutions, similarity scores, feedback loop
 library;
 
@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 import '../models/alerts_models.dart';
 import '../providers/alerts_provider.dart';
 import '../widgets/alerts_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class AlertsKnowledgeScreen extends StatefulWidget {
   final String? alertId;
@@ -44,29 +43,13 @@ class _AlertsKnowledgeScreenState extends State<AlertsKnowledgeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Consumer<AIInsightsNotifier>(
-                  builder: (context, ai, _) {
-                    if (ai.insights.isEmpty) return const SizedBox.shrink();
-                    return Container(
-                      color: kAlertsColor.withValues(alpha: 0.07),
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                      child: Row(children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: kAlertsColor),
-                        const SizedBox(width: 8),
-                        Expanded(child: Text('AI: ${ai.insights.first['title'] ?? ''}',
-                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kAlertsColor),
-                          maxLines: 1, overflow: TextOverflow.ellipsis)),
-                      ]),
-                    );
-                  },
-                ),
                 // ──── CONTEXT BANNER ────
                 if (alert != null) ...[
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
                       color: kAlertsCriticalLight,
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                     child: Row(
                       children: [
@@ -129,7 +112,7 @@ class _AlertsKnowledgeScreenState extends State<AlertsKnowledgeScreen> {
                   padding: const EdgeInsets.all(14),
                   decoration: BoxDecoration(
                     color: kAlertsInfoLight,
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: Column(
                     children: [

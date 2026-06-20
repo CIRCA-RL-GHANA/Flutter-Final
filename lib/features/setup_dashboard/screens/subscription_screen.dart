@@ -7,7 +7,6 @@ library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../prompt/providers/context_provider.dart';
 import '../models/setup_dashboard_models.dart';
@@ -76,7 +75,7 @@ class SubscriptionScreen extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                             decoration: BoxDecoration(
                               color: AppColors.success.withValues(alpha: 0.1),
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(10),
                             ),
                             child: Text(
                               '✨ Free Trial — ${sub.daysInFreeTrial} days left',
@@ -88,7 +87,7 @@ class SubscriptionScreen extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                             decoration: BoxDecoration(
                               color: AppColors.info.withValues(alpha: 0.1),
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(10),
                             ),
                             child: Text(
                               'Renews in ${sub.daysUntilRenewal} days',
@@ -103,35 +102,7 @@ class SubscriptionScreen extends StatelessWidget {
 
               // ─── Usage Metrics ────────────────────────────
               // ─── AI Insights ─────────────────────────────────────────
-              SliverToBoxAdapter(
-                child: Consumer<AIInsightsNotifier>(
-                  builder: (context, ai, _) {
-                    if (ai.insights.isEmpty) return const SizedBox.shrink();
-                    return Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: kSetupColor.withValues(alpha: 0.07),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                        child: Row(
-                          children: [
-                            const Icon(Icons.auto_awesome, size: 14, color: kSetupColor),
-                            const SizedBox(width: 8),
-                            Expanded(
-                              child: Text(
-                                'AI: ${ai.insights.first['title'] ?? ''}',
-                                style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kSetupColor),
-                                maxLines: 1, overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
+              const SliverToBoxAdapter(
               ),
               SliverToBoxAdapter(
                 child: Padding(
@@ -219,13 +190,6 @@ class SubscriptionScreen extends StatelessWidget {
                             end: Alignment.bottomRight,
                           ),
                           borderRadius: BorderRadius.circular(16),
-                          boxShadow: [
-                            BoxShadow(
-                              color: const Color(0xFF8B5CF6).withValues(alpha: 0.3),
-                              blurRadius: 16,
-                              offset: const Offset(0, 6),
-                            ),
-                          ],
                         ),
                         child: Row(
                           children: [
@@ -233,7 +197,7 @@ class SubscriptionScreen extends StatelessWidget {
                               padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
                                 color: Colors.white.withValues(alpha: 0.2),
-                                borderRadius: BorderRadius.circular(12),
+                                borderRadius: BorderRadius.circular(10),
                               ),
                               child: const Icon(Icons.rocket_launch, size: 24, color: Colors.white),
                             ),

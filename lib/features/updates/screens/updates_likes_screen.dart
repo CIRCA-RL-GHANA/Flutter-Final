@@ -1,4 +1,4 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// SCREEN 3 — Likes List
 /// Shows who liked an update: search/filter, mutual connections, online
 /// indicators, follow buttons, reaction type badges.
@@ -8,7 +8,6 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/theme/app_colors.dart';
 import '../models/updates_models.dart';
 import '../providers/updates_provider.dart';
@@ -71,7 +70,7 @@ class _BodyState extends State<_Body> with SingleTickerProviderStateMixin {
                 child: Center(
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                    decoration: BoxDecoration(color: kUpdatesColor.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(12)),
+                    decoration: BoxDecoration(color: kUpdatesColor.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(10)),
                     child: Text('${prov.likers.length}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: kUpdatesColor)),
                   ),
                 ),
@@ -80,28 +79,6 @@ class _BodyState extends State<_Body> with SingleTickerProviderStateMixin {
           ),
           body: Column(
             children: [
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    color: kUpdatesColor.withValues(alpha: 0.07),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: kUpdatesColor),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            'AI: ${ai.insights.first['title'] ?? ''}',
-                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kUpdatesColor),
-                            maxLines: 1, overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
 
               // Search bar
               Padding(
@@ -236,7 +213,7 @@ class _ReactionChip extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
         color: isSelected ? kUpdatesColor.withValues(alpha: 0.1) : Colors.white,
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(100),
         border: Border.all(color: isSelected ? kUpdatesColor : Colors.grey.shade200),
       ),
       child: Row(

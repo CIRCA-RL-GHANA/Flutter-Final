@@ -9,7 +9,6 @@ import 'package:provider/provider.dart';
 import '../../../core/design/ive_tokens.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../providers/market_provider.dart';
 import '../widgets/market_widgets.dart';
 
@@ -107,61 +106,7 @@ class _MarketExploreScreenState extends State<MarketExploreScreen> {
               : CustomScrollView(
                   slivers: [
                     // ─── AI Personalized Recommendations Banner ────
-                    SliverToBoxAdapter(
-                      child: Consumer<AIInsightsNotifier>(
-                        builder: (ctx, notifier, _) {
-                          final recs = notifier.recommendations;
-                          if (recs.isEmpty) return const SizedBox.shrink();
-                          return Container(
-                            margin: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-                            padding: const EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF8B5CF6).withValues(alpha: 0.06),
-                              borderRadius: BorderRadius.circular(12),
-                              border: Border.all(
-                                color: const Color(0xFF8B5CF6).withValues(alpha: 0.15),
-                              ),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Row(
-                                  children: [
-                                    Icon(Icons.auto_awesome, size: 14, color: Color(0xFF8B5CF6)),
-                                    SizedBox(width: 6),
-                                    Text(
-                                      'Recommended for you',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w700,
-                                        color: Color(0xFF8B5CF6),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 8),
-                                Wrap(
-                                  spacing: 6,
-                                  runSpacing: 6,
-                                  children: recs.take(4).map((r) {
-                                    final name = r['name']?.toString() ?? r['id']?.toString() ?? '';
-                                    return GestureDetector(
-                                      onTap: () => Navigator.pushNamed(context, AppRoutes.marketSearch),
-                                      child: Chip(
-                                        label: Text(name, style: const TextStyle(fontSize: 11)),
-                                        backgroundColor: const Color(0xFF8B5CF6).withValues(alpha: 0.1),
-                                        side: BorderSide(color: const Color(0xFF8B5CF6).withValues(alpha: 0.2)),
-                                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                        visualDensity: VisualDensity.compact,
-                                      ),
-                                    );
-                                  }).toList(),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
+                    const SliverToBoxAdapter(
                     ),
                     SliverPadding(
                       padding: const EdgeInsets.all(16),
@@ -240,12 +185,9 @@ class _MarketExploreScreenState extends State<MarketExploreScreen> {
                   children: [
                     Container(
                       padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.white,
                         shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(color: Colors.black.withValues(alpha: 0.15), blurRadius: 6),
-                        ],
                       ),
                       child: Icon(
                         Icons.store,
@@ -259,9 +201,6 @@ class _MarketExploreScreenState extends State<MarketExploreScreen> {
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(6),
-                        boxShadow: [
-                          BoxShadow(color: Colors.black.withValues(alpha: 0.1), blurRadius: 4),
-                        ],
                       ),
                       child: Text(
                         merchant.name,
@@ -287,7 +226,7 @@ class _MarketExploreScreenState extends State<MarketExploreScreen> {
               backgroundColor: Colors.white,
               foregroundColor: kMarketColor,
               elevation: 4,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
               padding: const EdgeInsets.symmetric(vertical: 14),
             ),
           ),

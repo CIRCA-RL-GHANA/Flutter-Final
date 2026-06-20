@@ -1,4 +1,4 @@
-/// Q Points Market Screen — Full production implementation
+﻿/// Q Points Market Screen — Full production implementation
 /// Sections: Stats Bar | Order Book | Place Order | Open Orders | Trade History
 ///
 /// Access is gated behind Q Points ToS acceptance (v1.0.0).
@@ -243,7 +243,7 @@ class _StatsBanner extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
               color: Colors.green.shade700,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(10),
             ),
             child: const Row(
               mainAxisSize: MainAxisSize.min,
@@ -383,13 +383,6 @@ class _CashBalanceCard extends StatelessWidget {
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: IveTokens.moduleUpdates.withValues(alpha: 0.25),
-            blurRadius: 12,
-            offset: const Offset(0, 4),
-          ),
-        ],
       ),
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
       child: Column(
@@ -777,9 +770,9 @@ class _ActionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Material(
         color: color.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(10),
         child: InkWell(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(10),
           onTap: onTap,
           child: Padding(
             padding: const EdgeInsets.all(16),
@@ -985,7 +978,7 @@ class _OpenOrderTile extends StatelessWidget {
 
     return Card(
       margin: const EdgeInsets.only(bottom: 8),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Padding(
         padding: const EdgeInsets.all(14),
         child: Row(
@@ -1098,7 +1091,7 @@ class _TradeTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Card(
         margin: const EdgeInsets.only(bottom: 8),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         child: ListTile(
           leading: CircleAvatar(
             backgroundColor: kMarketColor.withValues(alpha: 0.1),
@@ -1249,7 +1242,7 @@ class _PlaceOrderSheetState extends State<_PlaceOrderSheet> {
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 14),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12)),
+                        borderRadius: BorderRadius.circular(10)),
                   ),
                   onPressed: provider.isPlacingOrder
                       ? null
@@ -1440,7 +1433,7 @@ class _CashInOutSheetState extends State<_CashInOutSheet> {
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12)),
+                          borderRadius: BorderRadius.circular(10)),
                     ),
                     onPressed: isLoading
                         ? null
@@ -1800,7 +1793,7 @@ class _TransactionTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Card(
         margin: const EdgeInsets.only(bottom: 8),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         child: ListTile(
           leading: CircleAvatar(
             backgroundColor: _typeColor(transaction.type).withValues(alpha: 0.1),
@@ -1928,7 +1921,7 @@ class _DepositSheetState extends State<_DepositSheet> {
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
                   color: Colors.green.shade50,
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: Colors.green.shade200),
                 ),
                 child: Row(children: [
@@ -1949,7 +1942,7 @@ class _DepositSheetState extends State<_DepositSheet> {
                     backgroundColor: kMarketColor,
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12)),
+                        borderRadius: BorderRadius.circular(10)),
                     padding: const EdgeInsets.symmetric(vertical: 14),
                   ),
                   onPressed: () => Navigator.pop(context),
@@ -1980,7 +1973,7 @@ class _DepositSheetState extends State<_DepositSheet> {
                     labelText: 'Amount (USD)',
                     prefixText: '\$ ',
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12)),
+                        borderRadius: BorderRadius.circular(10)),
                   ),
                   validator: (v) {
                     final n = double.tryParse(v?.trim() ?? '');
@@ -1999,7 +1992,7 @@ class _DepositSheetState extends State<_DepositSheet> {
                     backgroundColor: IveTokens.accent,
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12)),
+                        borderRadius: BorderRadius.circular(10)),
                     padding: const EdgeInsets.symmetric(vertical: 14),
                   ),
                   onPressed: provider.isInitiatingDeposit
@@ -2102,7 +2095,7 @@ class _WithdrawSheetState extends State<_WithdrawSheet> {
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
                   color: Colors.purple.shade50,
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: Colors.purple.shade200),
                 ),
                 child: Row(children: [
@@ -2123,7 +2116,7 @@ class _WithdrawSheetState extends State<_WithdrawSheet> {
                     backgroundColor: kMarketColor,
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12)),
+                        borderRadius: BorderRadius.circular(10)),
                     padding: const EdgeInsets.symmetric(vertical: 14),
                   ),
                   onPressed: () => Navigator.pop(context),
@@ -2154,7 +2147,7 @@ class _WithdrawSheetState extends State<_WithdrawSheet> {
                     labelText: 'Amount (USD)',
                     prefixText: '\$ ',
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12)),
+                        borderRadius: BorderRadius.circular(10)),
                   ),
                   validator: (v) {
                     final n = double.tryParse(v?.trim() ?? '');
@@ -2173,7 +2166,7 @@ class _WithdrawSheetState extends State<_WithdrawSheet> {
                     backgroundColor: IveTokens.moduleUpdates,
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12)),
+                        borderRadius: BorderRadius.circular(10)),
                     padding: const EdgeInsets.symmetric(vertical: 14),
                   ),
                   onPressed: provider.isInitiatingWithdrawal

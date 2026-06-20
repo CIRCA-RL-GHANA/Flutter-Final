@@ -13,7 +13,6 @@ import '../../../core/routes/app_routes.dart';
 import '../models/live_models.dart';
 import '../providers/live_provider.dart';
 import '../widgets/live_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class LivePackagesScreen extends StatefulWidget {
   const LivePackagesScreen({super.key});
@@ -57,22 +56,6 @@ class _LivePackagesScreenState extends State<LivePackagesScreen> with SingleTick
           body: Column(
             children: [
               // AI insights strip
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    color: kLiveColor.withValues(alpha: 0.06),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.auto_awesome, size: 13, color: kLiveColor),
-                        const SizedBox(width: 8),
-                        Expanded(child: Text('AI: ${ai.insights.first['title'] ?? ''}', style: const TextStyle(fontSize: 12, color: kLiveColor), maxLines: 1, overflow: TextOverflow.ellipsis)),
-                      ],
-                    ),
-                  );
-                },
-              ),
               Container(
                 color: Colors.white,
                 child: TabBar(
@@ -104,9 +87,8 @@ class _LivePackagesScreenState extends State<LivePackagesScreen> with SingleTick
           ),
           bottomNavigationBar: Container(
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
-              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 8, offset: const Offset(0, -2))],
             ),
             child: Row(
               children: [
@@ -115,7 +97,7 @@ class _LivePackagesScreenState extends State<LivePackagesScreen> with SingleTick
                     onPressed: () => Navigator.pushNamed(context, AppRoutes.livePackageCreation),
                     icon: const Icon(Icons.add, size: 18),
                     label: const Text('CREATE NEW PACKAGE', style: TextStyle(fontWeight: FontWeight.w700)),
-                    style: ElevatedButton.styleFrom(backgroundColor: kLiveColor, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
+                    style: ElevatedButton.styleFrom(backgroundColor: kLiveColor, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                   ),
                 ),
                 const SizedBox(width: 8),

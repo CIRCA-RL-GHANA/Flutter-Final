@@ -1,4 +1,4 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// ═══════════════════════════════════════════════════════════════════════════
 /// GenieController – Central Orchestrator (ChangeNotifier)
 ///
 /// Sits between the GenieScreen UI and all module services/providers.
@@ -149,7 +149,7 @@ class GenieController extends ChangeNotifier {
     if (sanitized.rejected) {
       await GenieTactileActions.onError();
       _addGenieMessage(
-        text: 'I couldn\'t process that input. Please try again.',
+        text: 'I couldn\'t process that input. Try again.',
         cardType: GenieCardType.text,
       );
       return;

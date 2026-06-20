@@ -1,4 +1,4 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// SD1.4-DETAIL: DISCOUNT TIER DETAIL — 4-Tab Deep View
 /// Tabs: Overview, Eligible Products, Performance, Settings
 /// RBAC: Admin(full), BM(branch), SO(full), BSO(branch), Monitor(viewOnly)
@@ -7,7 +7,6 @@ library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../prompt/providers/context_provider.dart';
 import '../models/setup_dashboard_models.dart';
@@ -48,28 +47,6 @@ class _DiscountDetailScreenState extends State<DiscountDetailScreen> {
             children: [
               _DiscountHeader(discount: discount),
               const SizedBox(height: 12),
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    color: kSetupColor.withValues(alpha: 0.07),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: kSetupColor),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            "AI: ${ai.insights.first['title'] ?? ''}",
-                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kSetupColor),
-                            maxLines: 1, overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
               SetupDetailTabBar(
                 tabs: _tabs,
                 selectedIndex: _tabIndex,
@@ -123,7 +100,7 @@ class _DiscountHeader extends StatelessWidget {
             height: 48,
             decoration: BoxDecoration(
               color: kSetupColor.withValues(alpha: 0.15),
-              borderRadius: BorderRadius.circular(14),
+              borderRadius: BorderRadius.circular(10),
             ),
             child: const Icon(Icons.local_offer, color: kSetupColor, size: 24),
           ),
@@ -345,7 +322,7 @@ class _EligibleProductsTab extends StatelessWidget {
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
                 color: kSetupColor.withValues(alpha: 0.06),
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(10),
               ),
               child: Row(
                 children: [

@@ -1,4 +1,4 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// e-PLAY MODULE — Cloud Locker Screen
 /// The user's personal library of purchased / licensed digital content.
 /// Content is never on-device unless pinned for temporary offline cache.
@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../providers/eplay_provider.dart';
 import 'eplay_hub_screen.dart' show kEPlayColor, kEPlayColorDark;
 
@@ -40,8 +39,8 @@ class _EPlayLockerScreenState extends State<EPlayLockerScreen> with SingleTicker
 
   @override
   Widget build(BuildContext context) {
-    return Consumer2<AIInsightsNotifier, EPlayProvider>(
-      builder: (context, ai, eplay, _) {
+    return Consumer<EPlayProvider>(
+      builder: (context, eplay, _) {
         final items = eplay.lockerItems;
         final pinned = items.where((i) => i['isPinned'] == true).toList();
         final rentals = items.where((i) {
@@ -77,21 +76,6 @@ class _EPlayLockerScreenState extends State<EPlayLockerScreen> with SingleTicker
           body: Column(
             children: [
               // ── AI insight ──────────────────────────────────────────────
-              if (ai.insights.isNotEmpty)
-                Container(
-                  margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: kEPlayColor.withValues(alpha: 0.08),
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: kEPlayColor.withValues(alpha: 0.2)),
-                  ),
-                  child: Row(children: [
-                    const Icon(Icons.auto_awesome, color: kEPlayColor, size: 16),
-                    const SizedBox(width: 8),
-                    Expanded(child: Text(ai.insights.first['title'] ?? '', style: const TextStyle(fontSize: 12))),
-                  ]),
-                ),
 
               // ── Stats bar ───────────────────────────────────────────────
               Container(
@@ -99,7 +83,7 @@ class _EPlayLockerScreenState extends State<EPlayLockerScreen> with SingleTicker
                 padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(colors: [kEPlayColor.withValues(alpha: 0.12), kEPlayColorDark.withValues(alpha: 0.07)]),
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -174,8 +158,7 @@ class _EPlayLockerScreenState extends State<EPlayLockerScreen> with SingleTicker
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(14),
-        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 6, offset: const Offset(0, 2))],
+        borderRadius: BorderRadius.circular(10),
       ),
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
@@ -184,7 +167,7 @@ class _EPlayLockerScreenState extends State<EPlayLockerScreen> with SingleTicker
           height: 52,
           decoration: BoxDecoration(
             gradient: LinearGradient(colors: colors),
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(10),
           ),
           child: Icon(_iconForType(type), color: Colors.white, size: 26),
         ),

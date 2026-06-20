@@ -10,7 +10,6 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 // ignore: unused_import
 import '../models/updates_models.dart';
 import '../providers/updates_provider.dart';
@@ -84,10 +83,9 @@ class _BodyState extends State<_Body> {
             ),
             Container(
               width: 10, height: 10,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: kUpdatesColor,
-                boxShadow: [BoxShadow(color: kUpdatesColor.withValues(alpha: 0.3), blurRadius: 4)],
               ),
             ),
           ],
@@ -127,19 +125,9 @@ class _BodyState extends State<_Body> {
           ),
         ],
       ),
-      body: Consumer2<UpdatesProvider, AIInsightsNotifier>(
-        builder: (context, prov, aiNotifier, _) {
+      body: Consumer<UpdatesProvider>(
+        builder: (context, prov, _) {
           final updates = prov.filteredUpdates(prov.activeFilter);
-          // AI: if recommendations exist, boost recommended IDs to the top
-          final recIds = aiNotifier.recommendations
-              .map((r) => r['id']?.toString() ?? '')
-              .toSet();
-          final sorted = recIds.isEmpty
-              ? updates
-              : [
-                  ...updates.where((u) => recIds.contains(u.id)),
-                  ...updates.where((u) => !recIds.contains(u.id)),
-                ];
           return Column(
             children: [
               // Filter bar
@@ -147,34 +135,9 @@ class _BodyState extends State<_Body> {
                 activeFilter: prov.activeFilter,
                 onFilterChanged: prov.setFilter,
               ),
-              // AI personalized feed indicator
-              if (recIds.isNotEmpty)
-                Container(
-                  margin: const EdgeInsets.fromLTRB(14, 8, 14, 0),
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
-                  decoration: BoxDecoration(
-                    color: kUpdatesColor.withValues(alpha: 0.07),
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: kUpdatesColor.withValues(alpha: 0.18)),
-                  ),
-                  child: const Row(
-                    children: [
-                      Icon(Icons.auto_awesome, size: 14, color: kUpdatesColor),
-                      SizedBox(width: 6),
-                      Text(
-                        'AI — Personalised feed order',
-                        style: TextStyle(
-                          fontSize: 11,
-                          fontWeight: FontWeight.w600,
-                          color: kUpdatesColor,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
               // Feed list
               Expanded(
-                child: sorted.isEmpty
+                child: updates.isEmpty
                     ? const UpdatesEmptyState(
                         icon: Icons.feed,
                         title: 'No updates yet',
@@ -186,15 +149,15 @@ class _BodyState extends State<_Body> {
                         child: ListView.builder(
                           controller: _scrollController,
                           padding: const EdgeInsets.fromLTRB(14, 8, 14, 80),
-                          itemCount: sorted.length + (_isLoadingMore ? 1 : 0),
+                          itemCount: updates.length + (_isLoadingMore ? 1 : 0),
                           itemBuilder: (context, index) {
-                            if (index == sorted.length) {
+                            if (index == updates.length) {
                               return const Padding(
                                 padding: EdgeInsets.symmetric(vertical: 16),
                                 child: Center(child: CircularProgressIndicator(color: kUpdatesColor, strokeWidth: 2)),
                               );
                             }
-                            final update = sorted[index];
+                            final update = updates[index];
                             return UpdateCard(
                               update: update,
                               onTap: () {

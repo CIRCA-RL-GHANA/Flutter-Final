@@ -1,4 +1,4 @@
-/// qualChat Screen 4 — My Preferences (Owner Only)
+﻿/// qualChat Screen 4 — My Preferences (Owner Only)
 /// Intelligent Preference System: Vibe settings, discovery, privacy
 library;
 
@@ -8,7 +8,6 @@ import '../models/qualchat_models.dart';
 import '../providers/qualchat_provider.dart';
 import '../widgets/qualchat_widgets.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class QualChatPreferencesScreen extends StatelessWidget {
   const QualChatPreferencesScreen({super.key});
@@ -38,29 +37,6 @@ class QualChatPreferencesScreen extends StatelessWidget {
           body: SingleChildScrollView(
             child: Column(
               children: [
-                Consumer<AIInsightsNotifier>(
-                  builder: (context, ai, _) {
-                    if (ai.insights.isEmpty) return const SizedBox.shrink();
-                    return Container(
-                      color: kChatColor.withValues(alpha: 0.07),
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                      width: double.infinity,
-                      child: Row(
-                        children: [
-                          const Icon(Icons.auto_awesome, size: 14, color: kChatColor),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: Text(
-                              'AI: ${ai.insights.first['title'] ?? ''}',
-                              style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kChatColor),
-                              maxLines: 1, overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
                 // Core Status
                 QualChatSectionCard(
                   title: 'Core Status',

@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+﻿import 'package:flutter/foundation.dart';
 import '../../../core/services/services.dart';
 
 /// Username availability state
@@ -142,13 +142,13 @@ class ProfileProvider extends ChangeNotifier {
         return true;
       } else {
         _isLoading = false;
-        _error = response.error?.userMessage ?? "Couldn't save profile. Please try again";
+        _error = response.error?.userMessage ?? "Couldn't save profile. Try again";
         notifyListeners();
         return false;
       }
     } catch (e) {
       _isLoading = false;
-      _error = "Couldn't save profile. Please try again";
+      _error = "Couldn't save profile. Try again";
       notifyListeners();
       return false;
     }

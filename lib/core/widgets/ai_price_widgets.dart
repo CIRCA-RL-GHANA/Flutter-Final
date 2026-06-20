@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
 
 /// Displays the AI-computed surge multiplier and fare breakdown for a ride.
@@ -214,13 +214,6 @@ class AISpendingSummaryCard extends StatelessWidget {
       decoration: BoxDecoration(
         color:        Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color:      Colors.black.withValues(alpha: 0.06),
-            blurRadius: 10,
-            offset:     const Offset(0, 3),
-          ),
-        ],
       ),
       padding: const EdgeInsets.all(16),
       child: Column(

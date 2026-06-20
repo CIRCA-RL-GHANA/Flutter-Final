@@ -4,7 +4,6 @@ library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../models/april_models.dart';
 import '../providers/april_provider.dart';
 import '../widgets/april_widgets.dart';
@@ -43,77 +42,6 @@ class AprilStatementScreen extends StatelessWidget {
               const SizedBox(height: 16),
 
               // AI Assistant Section (real NLP keywords + sentiment)
-              Consumer<AIInsightsNotifier>(
-                builder: (ctx, aiNotifier, _) {
-                  final insights = aiNotifier.insights;
-                  return Container(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [kAprilAccent.withValues(alpha: 0.05), kAprilAccent.withValues(alpha: 0.1)],
-                      ),
-                      borderRadius: BorderRadius.circular(14),
-                      border: Border.all(color: kAprilAccent.withValues(alpha: 0.2)),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Row(
-                          children: [
-                            Text('ðŸ¤–', style: TextStyle(fontSize: 20)),
-                            SizedBox(width: 8),
-                            Text('AI Writing Assistant', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700)),
-                          ],
-                        ),
-                        const SizedBox(height: 8),
-                        const Text(
-                          'Let APRIL help you refine and complete your personal statement sections.',
-                          style: TextStyle(fontSize: 13, color: Color(0xFF6B7280)),
-                        ),
-                        // AI keyword insights strip
-                        if (insights.isNotEmpty) ...
-                          insights.take(1).map((i) {
-                            final label = i['label']?.toString() ?? i['text']?.toString() ?? '';
-                            if (label.isEmpty) return const SizedBox.shrink();
-                            return Padding(
-                              padding: const EdgeInsets.only(top: 10, bottom: 2),
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                                decoration: BoxDecoration(
-                                  color: kAprilAccent.withValues(alpha: 0.08),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: Row(
-                                  children: [
-                                    const Icon(Icons.auto_awesome, size: 13, color: kAprilAccent),
-                                    const SizedBox(width: 6),
-                                    Expanded(
-                                      child: Text(
-                                        'AI insight: $label',
-                                        style: const TextStyle(fontSize: 11, color: kAprilAccent, fontWeight: FontWeight.w600),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          }),
-                        const SizedBox(height: 12),
-                        Wrap(
-                          spacing: 8,
-                          runSpacing: 8,
-                          children: [
-                            _AIActionChip(label: '✏️ Draft section', onTap: () => ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text('Running AI action...')))),
-                            _AIActionChip(label: '🔍 Review & refine', onTap: () => ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text('Running AI action...')))),
-                            _AIActionChip(label: '📊 Suggest highlights', onTap: () => ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text('Running AI action...')))),
-                            _AIActionChip(label: '🌐 Translate', onTap: () => ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text('Running AI action...')))),
-                          ],
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
               const SizedBox(height: 16),
 
               // Security & Privacy
@@ -121,7 +49,7 @@ class AprilStatementScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(14),
+                  borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: const Color(0xFFE5E7EB)),
                 ),
                 child: Row(
@@ -258,7 +186,7 @@ class AprilStatementScreen extends StatelessWidget {
                       filled: true,
                       fillColor: const Color(0xFFF3F4F6),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide.none,
                       ),
                     ),
@@ -281,7 +209,7 @@ class AprilStatementScreen extends StatelessWidget {
                         backgroundColor: kAprilColor,
                         foregroundColor: Colors.black,
                         padding: const EdgeInsets.symmetric(vertical: 14),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                       ),
                       child: const Text('Save Changes', style: TextStyle(fontWeight: FontWeight.w600)),
                     ),
@@ -459,28 +387,6 @@ class _OverallProgressCard extends StatelessWidget {
             ],
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _AIActionChip extends StatelessWidget {
-  final String label;
-  final VoidCallback onTap;
-  const _AIActionChip({required this.label, required this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: kAprilAccent.withValues(alpha: 0.3)),
-        ),
-        child: Text(label, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500)),
       ),
     );
   }

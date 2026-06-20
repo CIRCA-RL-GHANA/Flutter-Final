@@ -1,4 +1,4 @@
-/// Enterprise â€º Onboarding Screen
+﻿/// Enterprise â€º Onboarding Screen
 /// Allows an account owner to register their business on the Genie Enterprise
 /// platform (pathways 1–5), upload KYB documents, and view profile status.
 library;
@@ -193,7 +193,7 @@ class _EnterpriseOnboardingScreenState
                     foregroundColor: Colors.black,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12)),
+                        borderRadius: BorderRadius.circular(10)),
                   ),
                   onPressed: _loading ? null : _submit,
                   child: _loading

@@ -105,8 +105,7 @@ class _EPlayPlayerScreenState extends State<EPlayPlayerScreen> with TickerProvid
                       height: 220,
                       decoration: BoxDecoration(
                         color: Colors.white.withValues(alpha: 0.12),
-                        borderRadius: BorderRadius.circular(_type == 'ebook' ? 12 : 110),
-                        boxShadow: [BoxShadow(color: colors[0].withValues(alpha: 0.6), blurRadius: 40, spreadRadius: 10)],
+                        borderRadius: BorderRadius.circular(_type == 'ebook' ? 10 : 110),
                       ),
                       child: Icon(_iconForType(_type), color: Colors.white, size: 100),
                     ),
@@ -185,7 +184,7 @@ class _EPlayPlayerScreenState extends State<EPlayPlayerScreen> with TickerProvid
                       child: Container(
                         width: 72,
                         height: 72,
-                        decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle, boxShadow: [BoxShadow(color: Colors.white.withValues(alpha: 0.3), blurRadius: 20)]),
+                        decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
                         child: Icon(_isPlaying ? Icons.pause : Icons.play_arrow, color: colors[0], size: 40),
                       ),
                     ),

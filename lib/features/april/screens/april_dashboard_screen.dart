@@ -4,8 +4,6 @@ library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../core/services/ai_insights_notifier.dart';
-import '../../../core/widgets/ai_insight_card.dart';
 import '../models/april_models.dart';
 import '../providers/april_provider.dart';
 import '../widgets/april_widgets.dart';
@@ -234,25 +232,6 @@ class AprilDashboardScreen extends StatelessWidget {
                     const SizedBox(height: 16),
 
                     // ──── AI INSIGHTS PANEL ────
-                    Consumer<AIInsightsNotifier>(
-                      builder: (ctx, aiNotifier, _) {
-                        final insights = aiNotifier.insights;
-                        if (insights.isEmpty) return const SizedBox.shrink();
-                        return AprilSectionCard(
-                          title: '✨ AI Insights',
-                          child: Column(
-                            children: [
-                              ...insights.take(2).map(
-                                (i) => Padding(
-                                  padding: const EdgeInsets.only(bottom: 8),
-                                  child: AIInsightCard(insight: i),
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
                     const SizedBox(height: 16),
 
                     // ──── PLUGIN QUICK ACCESS GRID ────
@@ -303,7 +282,7 @@ class AprilDashboardScreen extends StatelessWidget {
                               filled: true,
                               fillColor: IveTokens.surface,
                               border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
+                                borderRadius: BorderRadius.circular(10),
                                 borderSide: BorderSide.none,
                               ),
                               contentPadding: const EdgeInsets.symmetric(vertical: 12),
@@ -337,7 +316,7 @@ class AprilDashboardScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(14),
+                        borderRadius: BorderRadius.circular(10),
                         border: Border.all(color: IveTokens.hairline),
                       ),
                       child: Column(

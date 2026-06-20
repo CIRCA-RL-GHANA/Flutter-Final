@@ -93,7 +93,7 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
           iconColor: IveTokens.danger,
           title: AppStrings.serverBusy,
           message: widget.errorMessage ??
-              'Our servers are experiencing high traffic. Please try again shortly.',
+              'Our servers are experiencing high traffic. Try again shortly.',
           primaryAction: AppStrings.tryAgain,
           primaryIcon: Icons.refresh,
           secondaryAction: 'Use Demo Mode',
@@ -194,7 +194,7 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
           icon: Icons.fingerprint,
           iconColor: IveTokens.warning,
           title: 'Biometric Changed',
-          message: 'Your biometric data has changed. Please verify with your PIN or password.',
+          message: 'Your biometric data has changed. Verify with your PIN or password.',
           primaryAction: 'Use PIN',
           primaryIcon: Icons.pin,
           secondaryAction: 'Use Password',

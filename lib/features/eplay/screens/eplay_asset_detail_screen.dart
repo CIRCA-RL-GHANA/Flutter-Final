@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../providers/eplay_provider.dart';
 import 'eplay_hub_screen.dart' show kEPlayColor;
 
@@ -29,195 +28,117 @@ class _EPlayAssetDetailScreenState extends State<EPlayAssetDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AIInsightsNotifier>(
-      builder: (context, ai, _) {
-        final colors = _colorForType(_asset['type'] as String? ?? 'music');
-        return Scaffold(
-          backgroundColor: AppColors.backgroundDark,
-          body: CustomScrollView(
-            slivers: [
-              // ── Hero ─────────────────────────────────────────────────
-              SliverAppBar(
-                expandedHeight: 280,
-                pinned: true,
-                backgroundColor: colors[1],
-                foregroundColor: Colors.white,
-                flexibleSpace: FlexibleSpaceBar(
-                  background: Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: colors),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const SizedBox(height: 60),
-                        Container(
-                          width: 120,
-                          height: 120,
-                          decoration: BoxDecoration(
-                            color: Colors.white.withValues(alpha: 0.15),
-                            borderRadius: BorderRadius.circular(24),
-                          ),
-                          child: Icon(_iconForType(_asset['type'] as String? ?? 'music'), color: Colors.white, size: 56),
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          _asset['title'] as String? ?? 'Untitled',
-                          style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          _asset['creator'] as String? ?? '',
-                          style: const TextStyle(color: Colors.white70, fontSize: 14),
-                        ),
-                      ],
-                    ),
-                  ),
+    final type = _asset['type'] as String? ?? 'other';
+    final title = _asset['title'] as String? ?? 'Untitled';
+    final creator = _asset['creator'] as String? ?? 'Unknown';
+    final price = _asset['price'] as num? ?? 0;
+    final rating = _asset['rating'] as num? ?? 0;
+    final downloads = _asset['downloads'] as num? ?? 0;
+    final colors = _colorForType(type);
+    final icon = _iconForType(type);
+
+    return Scaffold(
+      backgroundColor: AppColors.backgroundLight,
+      body: CustomScrollView(
+        slivers: [
+          // ── Hero cover ──────────────────────────────────────────
+          SliverAppBar(
+            expandedHeight: 260,
+            pinned: true,
+            backgroundColor: colors[0],
+            foregroundColor: Colors.white,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(colors: colors, begin: Alignment.topLeft, end: Alignment.bottomRight),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 60),
+                    Icon(icon, size: 80, color: Colors.white.withValues(alpha: 0.9)),
+                    const SizedBox(height: 12),
+                    _typeBadge(type, Colors.white),
+                  ],
                 ),
               ),
+            ),
+          ),
 
-              // ── Body ─────────────────────────────────────────────────
-              SliverToBoxAdapter(
-                child: Container(
-                  decoration: const BoxDecoration(
-                    color: AppColors.backgroundLight,
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-                  ),
-                  padding: const EdgeInsets.all(20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+          // ── Content ─────────────────────────────────────────────
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w800)),
+                  const SizedBox(height: 4),
+                  Text('by $creator', style: const TextStyle(fontSize: 14, color: AppColors.textSecondary)),
+
+                  const SizedBox(height: 16),
+
+                  // Stats
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      // Type badge + price
-                      Row(
-                        children: [
-                          _typeBadge(_asset['type'] as String? ?? 'music', colors[0]),
-                          const Spacer(),
-                          Text(
-                            _asset['price'] as String? ?? '',
-                            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: colors[0]),
-                          ),
-                          const SizedBox(width: 4),
-                          const Text(' / Q Points', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-
-                      // Cloud Locker explanation
-                      Container(
-                        padding: const EdgeInsets.all(14),
-                        decoration: BoxDecoration(
-                          color: kEPlayColor.withValues(alpha: 0.07),
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: kEPlayColor.withValues(alpha: 0.2)),
-                        ),
-                        child: const Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(children: [
-                              Icon(Icons.cloud_done, color: kEPlayColor, size: 20),
-                              SizedBox(width: 8),
-                              Text('e-Play Cloud Locker', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: kEPlayColor)),
-                            ]),
-                            SizedBox(height: 6),
-                            Text(
-                              'Your purchase grants perpetual cloud access — not a file download. Stream this content anytime from any device. Optionally pin for offline use.',
-                              style: TextStyle(fontSize: 12, color: AppColors.textSecondary, height: 1.5),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-
-                      // AI insight
-                      if (ai.insights.isNotEmpty)
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 16),
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(color: Colors.amber.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(10), border: Border.all(color: Colors.amber.withValues(alpha: 0.3))),
-                          child: Row(children: [
-                            const Icon(Icons.auto_awesome, color: Colors.amber, size: 16),
-                            const SizedBox(width: 8),
-                            Expanded(child: Text(ai.insights.first['title'] ?? '', style: const TextStyle(fontSize: 12, color: AppColors.textPrimary))),
-                          ]),
-                        ),
-
-                      // About
-                      const Text('About this content', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                      const SizedBox(height: 8),
-                      const Text(
-                        'Experience authentic African creativity. This content is protected by e-Play DRM — accessible only within the Genie app for the authenticated license holder.',
-                        style: TextStyle(fontSize: 13, color: AppColors.textSecondary, height: 1.6),
-                      ),
-                      const SizedBox(height: 20),
-
-                      // Stats row
-                      Row(children: [
-                        _stat(Icons.headphones, _asset['plays'] as String? ?? '0', 'Plays'),
-                        const SizedBox(width: 16),
-                        _stat(Icons.star, '4.7', 'Rating'),
-                        const SizedBox(width: 16),
-                        _stat(Icons.people, '1.2K', 'Owners'),
-                      ]),
-                      const SizedBox(height: 24),
-
-                      // Access rights
-                      _accessRow(Icons.lock_open, 'Perpetual Cloud Access', 'Stream forever after purchase'),
-                      _accessRow(Icons.phone_android, 'Cross-device', 'Access from any Genie login'),
-                      _accessRow(Icons.download_done, 'Offline Pin', 'Pin for temporary offline use'),
-                      _accessRow(Icons.block, 'No Resale', 'DRM-protected — not transferable'),
-
-                      const SizedBox(height: 32),
-
-                      // CTA
-                      SizedBox(
-                        width: double.infinity,
-                        child: _owned
-                            ? ElevatedButton.icon(
-                                onPressed: () => Navigator.pushNamed(context, AppRoutes.eplayPlayer, arguments: _asset),
-                                icon: const Icon(Icons.play_arrow),
-                                label: const Text('Play Now'),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: AppColors.success,
-                                  foregroundColor: Colors.white,
-                                  padding: const EdgeInsets.symmetric(vertical: 16),
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                                ),
-                              )
-                            : ElevatedButton.icon(
-                                onPressed: _purchasing ? null : _purchase,
-                                icon: _purchasing ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2)) : const Icon(Icons.add_shopping_cart),
-                                label: Text(_purchasing ? 'Processing…' : 'Add to Cloud Locker'),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: kEPlayColor,
-                                  foregroundColor: Colors.white,
-                                  padding: const EdgeInsets.symmetric(vertical: 16),
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                                ),
-                              ),
-                      ),
-                      const SizedBox(height: 16),
-
-                      if (!_owned)
-                        OutlinedButton.icon(
-                          onPressed: () => Navigator.pushNamed(context, AppRoutes.eplayPlayer, arguments: {..._asset, 'preview': true}),
-                          icon: const Icon(Icons.preview, color: kEPlayColor),
-                          label: const Text('Preview 90s', style: TextStyle(color: kEPlayColor)),
-                          style: OutlinedButton.styleFrom(
-                            side: const BorderSide(color: kEPlayColor),
-                            minimumSize: const Size(double.infinity, 52),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                          ),
-                        ),
-                      const SizedBox(height: 32),
+                      _stat(Icons.star, rating.toStringAsFixed(1), 'Rating'),
+                      _stat(Icons.download, '${downloads}K', 'Downloads'),
+                      _stat(Icons.lock_open, 'DRM', 'Protected'),
                     ],
                   ),
-                ),
+
+                  const Divider(height: 32),
+
+                  // Access info
+                  const Text('What you get', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 12),
+                  _accessRow(Icons.cloud, 'Cloud Locker Access', 'Stream anytime, anywhere'),
+                  _accessRow(Icons.devices, 'Multi-device', 'Up to 3 devices'),
+                  _accessRow(Icons.update, 'Lifetime Access', 'No expiry after purchase'),
+
+                  const SizedBox(height: 24),
+
+                  // Price + CTA
+                  Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text('Price', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                          Text(
+                            price == 0 ? 'Free' : '\$${price.toStringAsFixed(2)}',
+                            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w800, color: kEPlayColor),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: _owned || _purchasing ? null : _purchase,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: _owned ? AppColors.success : kEPlayColor,
+                            foregroundColor: Colors.white,
+                            disabledBackgroundColor: AppColors.inputBorder,
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                          ),
+                          child: _purchasing
+                              ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
+                              : Text(_owned ? 'In Locker' : price == 0 ? 'Add to Locker' : 'Purchase',
+                                  style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15)),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 32),
+                ],
               ),
-            ],
+            ),
           ),
-        );
-      },
+        ],
+      ),
     );
   }
 

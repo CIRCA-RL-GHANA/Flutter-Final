@@ -12,7 +12,6 @@ import '../../../core/theme/app_colors.dart';
 import '../models/live_models.dart';
 import '../providers/live_provider.dart';
 import '../widgets/live_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class LiveMultiHopTransferScreen extends StatefulWidget {
   const LiveMultiHopTransferScreen({super.key});
@@ -60,28 +59,6 @@ class _LiveMultiHopTransferScreenState extends State<LiveMultiHopTransferScreen>
                 ),
               ),
 
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    color: kLiveColor.withValues(alpha: 0.07),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: kLiveColor),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            'AI: ${ai.insights.first['title'] ?? ''}',
-                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kLiveColor),
-                            maxLines: 1, overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
 
               Expanded(
                 child: IndexedStack(
@@ -113,9 +90,8 @@ class _LiveMultiHopTransferScreenState extends State<LiveMultiHopTransferScreen>
           ),
           bottomNavigationBar: Container(
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
-              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 8, offset: const Offset(0, -2))],
             ),
             child: Row(
               children: [
@@ -136,7 +112,7 @@ class _LiveMultiHopTransferScreenState extends State<LiveMultiHopTransferScreen>
                       backgroundColor: _step == 2 ? const Color(0xFF10B981) : kLiveColor,
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                     ),
                     child: Text(
                       _step == 0 ? 'NEXT: VERIFY' : _step == 1 ? 'NEXT: HANDOFF' : 'âœ… COMPLETE TRANSFER',
@@ -206,7 +182,7 @@ class _ScanStep extends StatelessWidget {
             height: 200,
             decoration: BoxDecoration(
               color: const Color(0xFFF3F4F6),
-              borderRadius: BorderRadius.circular(14),
+              borderRadius: BorderRadius.circular(10),
               border: Border.all(color: const Color(0xFF8B5CF6).withValues(alpha: 0.3), width: 2),
             ),
             child: const Center(
@@ -227,7 +203,7 @@ class _ScanStep extends StatelessWidget {
               onPressed: onScan,
               icon: const Icon(Icons.qr_code_scanner, size: 18),
               label: const Text('SCAN QR CODE', style: TextStyle(fontWeight: FontWeight.w700)),
-              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF8B5CF6), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
+              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF8B5CF6), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
             ),
           ),
           const SizedBox(height: 8),
@@ -298,7 +274,7 @@ class _VerifyStep extends StatelessWidget {
                 onPressed: onVerify,
                 icon: const Icon(Icons.verified, size: 18),
                 label: const Text('VERIFY CONDITION', style: TextStyle(fontWeight: FontWeight.w700)),
-                style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10B981), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
+                style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10B981), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
               ),
             ),
           ),
@@ -371,7 +347,7 @@ class _HandoffStep extends StatelessWidget {
             padding: const EdgeInsets.only(top: 8),
             child: Container(
               padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(color: const Color(0xFFFEF3C7), borderRadius: BorderRadius.circular(12)),
+              decoration: BoxDecoration(color: const Color(0xFFFEF3C7), borderRadius: BorderRadius.circular(10)),
               child: const Row(
                 children: [
                   Icon(Icons.warning, size: 16, color: Color(0xFFF59E0B)),
@@ -394,7 +370,7 @@ class _HandoffStep extends StatelessWidget {
                 },
                 icon: const Icon(Icons.handshake, size: 18),
                 label: const Text('CONFIRM HANDOFF', style: TextStyle(fontWeight: FontWeight.w700)),
-                style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10B981), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
+                style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10B981), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
               ),
             ),
           ),
@@ -435,7 +411,7 @@ class _TransferCompleteView extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: onDone,
-                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10B981), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 16), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
+                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10B981), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 16), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                   child: const Text('BACK TO HOME', style: TextStyle(fontWeight: FontWeight.w700)),
                 ),
               ),

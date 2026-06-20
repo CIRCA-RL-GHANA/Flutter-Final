@@ -1,4 +1,4 @@
-/// GO Module — Shared Reusable UI Components
+﻿/// GO Module — Shared Reusable UI Components
 /// Module Color: Emerald Green (0xFF10B981)
 /// Visibility: Owner + Administrator only
 library;
@@ -80,7 +80,7 @@ class GoSectionCard extends StatelessWidget {
       padding: padding ?? const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(10),
         border: Border.all(color: borderColor ?? const Color(0xFFE5E7EB)),
       ),
       child: child,
@@ -396,7 +396,7 @@ class GoTabCard extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 10),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(10),
           border: Border.all(color: const Color(0xFFE5E7EB)),
         ),
         child: Row(
@@ -475,7 +475,7 @@ class GoRequestCard extends StatelessWidget {
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(10),
           border: Border.all(color: const Color(0xFFE5E7EB)),
         ),
         child: Column(
@@ -522,7 +522,7 @@ class GoFavoriteCard extends StatelessWidget {
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(10),
           border: Border.all(color: const Color(0xFFE5E7EB)),
         ),
         child: Column(

@@ -106,13 +106,6 @@ class _CardShell extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: accentColor.withValues(alpha: 0.2), width: 1.5),
-        boxShadow: [
-          BoxShadow(
-            color: accentColor.withValues(alpha: 0.08),
-            blurRadius: 16,
-            offset: const Offset(0, 4),
-          ),
-        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -508,7 +501,7 @@ class _FeedCard extends StatelessWidget {
             const SizedBox(width: 12),
             const Expanded(
               child: Text(
-                'Your personalised feed is ready. Tap to browse.',
+                'Your personalised feed is ready. Browse.',
                 style: TextStyle(fontSize: 13),
               ),
             ),
@@ -732,7 +725,7 @@ class _ChatListCard extends StatelessWidget {
             ),
             const SizedBox(width: 12),
             const Expanded(
-              child: Text('Tap to open your conversations.',
+              child: Text('Open your conversations.',
                   style: TextStyle(fontSize: 13)),
             ),
             _CardActionButton(
@@ -933,7 +926,7 @@ class _HelpGuideCard extends StatelessWidget {
                   Icon(Icons.help_outline, color: color, size: 28),
                   const SizedBox(width: 12),
                   const Expanded(
-                    child: Text('Tap to open the help center.',
+                    child: Text('Open the help center.',
                         style: TextStyle(fontSize: 13)),
                   ),
                   _CardActionButton(label: 'Help', color: color, onTap: () => Navigator.pushNamed(context, AppRoutes.utilityHelp)),
@@ -1027,7 +1020,7 @@ class _ComingSoonCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       decoration: BoxDecoration(
         color: AppColors.inputFill,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(10),
         border: Border.all(color: AppColors.inputBorder),
       ),
       child: const Row(
@@ -1055,7 +1048,7 @@ class _ErrorCard extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: AppColors.error.withValues(alpha: 0.06),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(10),
         border: Border.all(color: AppColors.error.withValues(alpha: 0.2)),
       ),
       child: Row(

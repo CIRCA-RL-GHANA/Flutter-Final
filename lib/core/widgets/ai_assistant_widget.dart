@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../services/ai_assistant_service.dart';
 import '../theme/app_colors.dart';
@@ -111,13 +111,6 @@ class _AIAssistantWidgetState extends State<AIAssistantWidget>
           decoration: BoxDecoration(
             color:        Theme.of(context).cardColor,
             borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color:      Colors.black.withValues(alpha: 0.15),
-                blurRadius: 20,
-                offset:     const Offset(0, 8),
-              ),
-            ],
           ),
           child: Column(
             children: [

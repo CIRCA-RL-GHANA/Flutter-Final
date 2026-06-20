@@ -1,4 +1,4 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// SD1.1-DETAIL: PRODUCT DETAIL — 5-Tab Deep View
 /// Tabs: Overview, Inventory, Pricing, Media, Analytics
 /// RBAC: Owner/Admin(fullAccess), BM(branchScoped), Monitor(viewOnly),
@@ -10,7 +10,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/design/ive_empty_state.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../prompt/providers/context_provider.dart';
 import '../models/setup_dashboard_models.dart';
@@ -51,28 +50,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             children: [
               // ─── Product Header ────────────────────────────
               _ProductHeader(product: product),
-              const SizedBox(height: 12),              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    color: kSetupColor.withValues(alpha: 0.07),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: kSetupColor),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            "AI: ${ai.insights.first['title'] ?? ''}",
-                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kSetupColor),
-                            maxLines: 1, overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),              // ─── Tab Bar ──────────────────────────────────
+              // ─── Tab Bar ──────────────────────────────────
               SetupDetailTabBar(
                 tabs: _tabs,
                 selectedIndex: _tabIndex,
@@ -114,26 +92,19 @@ class _ProductHeader extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
-            blurRadius: 12,
-            offset: const Offset(0, 4),
-          ),
-        ],
       ),
       child: Row(
         children: [
           // Product image
           ClipRRect(
-            borderRadius: BorderRadius.circular(14),
+            borderRadius: BorderRadius.circular(10),
             child: product.imageUrls.isNotEmpty
                 ? CachedNetworkImage(
                     imageUrl: product.imageUrls.first,
                     width: 64,
                     height: 64,
                     fit: BoxFit.cover,
-                    placeholder: (_, __) => IveSkeleton(width: 64, height: 64, radius: BorderRadius.circular(14)),
+                    placeholder: (_, __) => IveSkeleton(width: 64, height: 64, radius: BorderRadius.circular(10)),
                     errorWidget: (_, __, ___) => Container(
                       width: 64,
                       height: 64,

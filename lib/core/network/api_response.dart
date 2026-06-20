@@ -1,4 +1,4 @@
-/// Standardized API response wrapper.
+﻿/// Standardized API response wrapper.
 /// Matches the backend TransformInterceptor output format.
 class ApiResponse<T> {
   final bool success;
@@ -96,7 +96,7 @@ class ApiError {
       case 'NETWORK_ERROR':
         return 'No internet connection. Please check your network.';
       case 'TIMEOUT':
-        return 'Request timed out. Please try again.';
+        return 'Request timed out. Try again.';
       case 'UNAUTHORIZED':
         return 'Session expired. Please login again.';
       case 'INSUFFICIENT_BALANCE':

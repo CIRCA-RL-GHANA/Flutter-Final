@@ -1,4 +1,4 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// COMMUNITY MODULE — Hub Screen
 /// Discover all 7 UGO community archetypes:
 /// Library Â· Playlist Â· Theater Â· Fair Â· Hub Â· Hangout Â· Journal
@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../providers/community_provider.dart';
 
 const Color kCommunityColor = Color(0xFF0891B2);       // Cyan-700
@@ -47,8 +46,8 @@ class _CommunityHubScreenState extends State<CommunityHubScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer2<AIInsightsNotifier, CommunityProvider>(
-      builder: (context, ai, community, _) {
+    return Consumer<CommunityProvider>(
+      builder: (context, community, _) {
         final filtered = _filterType == null
             ? community.communities
             : community.communities.where((c) => c['type'] == _filterType).toList();
@@ -101,25 +100,6 @@ class _CommunityHubScreenState extends State<CommunityHubScreen> {
                   ),
                 ),
               ),
-
-              // ── AI insight ────────────────────────────────────────────
-              if (ai.insights.isNotEmpty)
-                SliverToBoxAdapter(
-                  child: Container(
-                    margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: kCommunityColor.withValues(alpha: 0.08),
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: kCommunityColor.withValues(alpha: 0.2)),
-                    ),
-                    child: Row(children: [
-                      const Icon(Icons.auto_awesome, color: kCommunityColor, size: 16),
-                      const SizedBox(width: 8),
-                      Expanded(child: Text(ai.insights.first['title'] ?? '', style: const TextStyle(fontSize: 12))),
-                    ]),
-                  ),
-                ),
 
               // ── 7 archetypes grid ──────────────────────────────────────
               const SliverToBoxAdapter(
@@ -190,8 +170,7 @@ class _CommunityHubScreenState extends State<CommunityHubScreen> {
         decoration: BoxDecoration(
           gradient: LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight,
             colors: [color.withValues(alpha: 0.85), color]),
-          borderRadius: BorderRadius.circular(14),
-          boxShadow: [BoxShadow(color: color.withValues(alpha: 0.3), blurRadius: 8, offset: const Offset(0, 3))],
+          borderRadius: BorderRadius.circular(10),
         ),
         padding: const EdgeInsets.all(14),
         child: Column(
@@ -213,11 +192,10 @@ class _CommunityHubScreenState extends State<CommunityHubScreen> {
     final color = Color(arch['color'] as int);
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
-      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(14),
-        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 6, offset: const Offset(0, 2))]),
+      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10)),
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-        leading: Container(width: 44, height: 44, decoration: BoxDecoration(color: color.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(12)),
+        leading: Container(width: 44, height: 44, decoration: BoxDecoration(color: color.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(10)),
           child: Icon(arch['icon'] as IconData, color: color)),
         title: Text(community['name']!, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14)),
         subtitle: Text((arch['label'] as String), style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),

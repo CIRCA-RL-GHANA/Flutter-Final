@@ -1,4 +1,4 @@
-/// qualChat Screen 7 — New Chat (Enhanced)
+﻿/// qualChat Screen 7 — New Chat (Enhanced)
 /// Intelligent recipient selection: individual + group creation
 library;
 
@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 import '../models/qualchat_models.dart';
 import '../providers/qualchat_provider.dart';
 import '../widgets/qualchat_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class QualChatNewChatScreen extends StatelessWidget {
   const QualChatNewChatScreen({super.key});
@@ -30,28 +29,6 @@ class QualChatNewChatScreen extends StatelessWidget {
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.recommendations.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    color: kChatColor.withValues(alpha: 0.07),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: kChatColor),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            'AI suggests: ${ai.recommendations.first['name'] ?? ''}',
-                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kChatColor),
-                            maxLines: 1, overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
               // Chat type toggle
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -108,7 +85,7 @@ class QualChatNewChatScreen extends StatelessWidget {
                 prefixIcon: const Icon(Icons.search, color: Color(0xFF9CA3AF)),
                 filled: true,
                 fillColor: const Color(0xFFF3F4F6),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
                 contentPadding: const EdgeInsets.symmetric(vertical: 12),
               ),
             ),
@@ -218,7 +195,7 @@ class QualChatNewChatScreen extends StatelessWidget {
                 hintText: 'Project Alpha Sync',
                 filled: true,
                 fillColor: const Color(0xFFF3F4F6),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
               ),
             ),
             const SizedBox(height: 16),
@@ -299,7 +276,7 @@ class QualChatNewChatScreen extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: kChatColor,
                       foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                       padding: const EdgeInsets.symmetric(vertical: 14),
                     ),
                     child: const Text('Create Group'),
@@ -311,7 +288,7 @@ class QualChatNewChatScreen extends StatelessWidget {
                   style: OutlinedButton.styleFrom(
                     foregroundColor: const Color(0xFF6B7280),
                     side: const BorderSide(color: Color(0xFF1C1C2E)),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                     padding: const EdgeInsets.symmetric(vertical: 14),
                   ),
                   child: const Text('Cancel'),
@@ -375,7 +352,7 @@ class _SelectedRecipientCard extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: kChatColor.withValues(alpha: 0.05),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(10),
         border: Border.all(color: kChatColor.withValues(alpha: 0.2)),
       ),
       child: Column(

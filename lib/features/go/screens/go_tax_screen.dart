@@ -1,10 +1,9 @@
-/// GO Screen 11 — Tax & Compliance
+﻿/// GO Screen 11 — Tax & Compliance
 /// Transaction categorization, report generator, regulatory dashboard
 library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../models/go_models.dart';
 import '../providers/go_provider.dart';
 import '../widgets/go_widgets.dart';
@@ -36,28 +35,6 @@ class _GoTaxScreenState extends State<GoTaxScreen> with SingleTickerProviderStat
         appBar: const GoAppBar(title: 'Tax & Compliance'),
         body: Column(
           children: [
-            Consumer<AIInsightsNotifier>(
-              builder: (context, ai, _) {
-                if (ai.insights.isEmpty) return const SizedBox.shrink();
-                return Container(
-                  color: kGoColor.withValues(alpha: 0.07),
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                  child: Row(
-                    children: [
-                      const Icon(Icons.auto_awesome, size: 14, color: kGoColor),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: Text(
-                          'AI tax: ${ai.insights.first['title'] ?? ''}',
-                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kGoColor),
-                          maxLines: 1, overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
             Container(
               color: Colors.white,
               child: TabBar(
@@ -214,7 +191,7 @@ class _TaxCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
     padding: const EdgeInsets.all(14),
-    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12), border: Border.all(color: const Color(0xFFE5E7EB))),
+    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: const Color(0xFFE5E7EB))),
     child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Row(children: [
         Icon(icon, size: 14, color: color),

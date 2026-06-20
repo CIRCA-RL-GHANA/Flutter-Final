@@ -12,7 +12,6 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
 import '../providers/market_provider.dart';
 import '../widgets/market_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class MarketHubScreen extends StatefulWidget {
   const MarketHubScreen({super.key});
@@ -223,15 +222,9 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
                       Container(
                         width: 8,
                         height: 8,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           color: kMarketColor,
-                          boxShadow: [
-                            BoxShadow(
-                              color: kMarketColor.withValues(alpha: 0.5),
-                              blurRadius: 4,
-                            ),
-                          ],
                         ),
                       ),
                       const SizedBox(width: 8),
@@ -358,14 +351,7 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(14),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.04),
-                        blurRadius: 8,
-                        offset: const Offset(0, 2),
-                      ),
-                    ],
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: Column(
                     children: [
@@ -373,7 +359,7 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           color: kMarketColor.withValues(alpha: 0.1),
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(10),
                         ),
                         child: Icon(icon, size: 22, color: kMarketColor),
                       ),
@@ -399,77 +385,7 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
   }
 
   Widget _buildAIPanel(MarketProvider prov) {
-    return Consumer<AIInsightsNotifier>(
-      builder: (context, aiNotifier, _) {
-        final liveInsights = aiNotifier.insights;
-        return Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          padding: const EdgeInsets.all(14),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                const Color(0xFF8B5CF6).withValues(alpha: 0.08),
-                kMarketColor.withValues(alpha: 0.06),
-              ],
-            ),
-            borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: const Color(0xFF8B5CF6).withValues(alpha: 0.15)),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Row(
-                children: [
-                  Icon(Icons.auto_awesome, size: 16, color: Color(0xFF8B5CF6)),
-                  SizedBox(width: 6),
-                  Text(
-                    'AI Optimization',
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xFF8B5CF6),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10),
-              if (liveInsights.isNotEmpty)
-                ...liveInsights.take(3).map((insight) => Padding(
-                      padding: const EdgeInsets.only(bottom: 6),
-                      child: Row(
-                        children: [
-                          const Icon(Icons.lightbulb_outline, size: 14, color: Color(0xFF8B5CF6)),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: Text(
-                              insight['label'] as String? ?? '',
-                              style: const TextStyle(fontSize: 12, color: AppColors.textPrimary),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ))
-              else
-                ...prov.aiSuggestions.map((s) => Padding(
-                      padding: const EdgeInsets.only(bottom: 6),
-                      child: Row(
-                        children: [
-                          Icon(s.icon, size: 14, color: s.color),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: Text(
-                              s.message,
-                              style: const TextStyle(fontSize: 12, color: AppColors.textPrimary),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )),
-            ],
-          ),
-        );
-      },
-    );
+    return const SizedBox.shrink();
   }
 
   Widget _buildTransactionButton(BuildContext context, MarketProvider prov) {
@@ -482,14 +398,7 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(14),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.04),
-                blurRadius: 8,
-                offset: const Offset(0, 2),
-              ),
-            ],
+            borderRadius: BorderRadius.circular(10),
           ),
           child: Row(
             children: [
@@ -497,7 +406,7 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: kMarketColor.withValues(alpha: 0.1),
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: const Icon(Icons.receipt_long, size: 24, color: kMarketColor),
               ),
@@ -558,7 +467,7 @@ class _MarketHubScreenState extends State<MarketHubScreen> {
               gradient: const LinearGradient(
                 colors: [kMarketColor, kMarketColorDark],
               ),
-              borderRadius: BorderRadius.circular(14),
+              borderRadius: BorderRadius.circular(10),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

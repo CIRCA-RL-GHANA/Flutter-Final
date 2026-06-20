@@ -1,4 +1,4 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// e-PLAY MODULE — Browse Screen
 /// Filterable content catalogue by type (music / movie / podcast / ebook / show)
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../providers/eplay_provider.dart';
 import 'eplay_hub_screen.dart' show kEPlayColor, kEPlayColorDark;
 
@@ -63,8 +62,8 @@ class _EPlayBrowseScreenState extends State<EPlayBrowseScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer2<AIInsightsNotifier, EPlayProvider>(
-      builder: (context, ai, eplay, _) {
+    return Consumer<EPlayProvider>(
+      builder: (context, eplay, _) {
         final items = _filtered(eplay.assets);
         return Scaffold(
           backgroundColor: AppColors.backgroundLight,
@@ -86,7 +85,7 @@ class _EPlayBrowseScreenState extends State<EPlayBrowseScreen> {
                     prefixIcon: const Icon(Icons.search, color: Colors.white54),
                     filled: true,
                     fillColor: Colors.white.withValues(alpha: 0.15),
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
                     contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 12),
                   ),
                 ),
@@ -96,21 +95,6 @@ class _EPlayBrowseScreenState extends State<EPlayBrowseScreen> {
           body: Column(
             children: [
               // ── AI insight ──────────────────────────────────────────────
-              if (ai.insights.isNotEmpty)
-                Container(
-                  margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: kEPlayColor.withValues(alpha: 0.08),
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: kEPlayColor.withValues(alpha: 0.2)),
-                  ),
-                  child: Row(children: [
-                    const Icon(Icons.auto_awesome, color: kEPlayColor, size: 16),
-                    const SizedBox(width: 8),
-                    Expanded(child: Text(ai.insights.first['title'] ?? '', style: const TextStyle(fontSize: 12, color: AppColors.textPrimary))),
-                  ]),
-                ),
 
               // ── Type filter chips ────────────────────────────────────
               SizedBox(
@@ -180,8 +164,7 @@ class _EPlayBrowseScreenState extends State<EPlayBrowseScreen> {
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(14),
-          boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.06), blurRadius: 8, offset: const Offset(0, 2))],
+          borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

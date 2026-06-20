@@ -6,8 +6,6 @@ library;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/services/ai_insights_notifier.dart';
-import '../../../core/widgets/ai_insight_card.dart';
 import '../models/alerts_models.dart';
 import '../providers/alerts_provider.dart';
 import '../widgets/alerts_widgets.dart';
@@ -142,46 +140,6 @@ class AlertsDashboardScreen extends StatelessWidget {
 
               // ──── AI PRIORITY INSIGHTS ────
               if (provider.dashboardTab == AlertDashboardTab.pending)
-                Consumer<AIInsightsNotifier>(
-                  builder: (ctx, notifier, _) {
-                    final insights = notifier.insights;
-                    if (insights.isEmpty) return const SizedBox.shrink();
-                    // Filter to risk/anomaly insights that are relevant to alerts
-                    final alertInsights = insights
-                        .where((i) =>
-                            (i['type'] as String? ?? '').contains('risk') ||
-                            (i['type'] as String? ?? '').contains('anomaly') ||
-                            (i['impact'] as String? ?? '') == 'negative')
-                        .take(2)
-                        .toList();
-                    if (alertInsights.isEmpty) return const SizedBox.shrink();
-                    return Container(
-                      padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
-                      color: Colors.white,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Row(
-                            children: [
-                              Icon(Icons.auto_awesome, size: 13, color: IveTokens.moduleUpdates),
-                              SizedBox(width: 5),
-                              Text(
-                                'AI Risk Intelligence',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
-                                  color: IveTokens.moduleUpdates,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 6),
-                          ...alertInsights.map((i) => AIInsightCard(insight: i)),
-                        ],
-                      ),
-                    );
-                  },
-                ),
 
               // ──── SYNC STATUS ────
               Container(
@@ -387,9 +345,6 @@ class _TabSegment extends StatelessWidget {
           decoration: BoxDecoration(
             color: isSelected ? Colors.white : Colors.transparent,
             borderRadius: BorderRadius.circular(8),
-            boxShadow: isSelected
-                ? [BoxShadow(color: Colors.black.withValues(alpha: 0.06), blurRadius: 4)]
-                : null,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,

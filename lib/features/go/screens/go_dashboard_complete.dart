@@ -1,4 +1,4 @@
-/// GO Dashboard Screen — Main Financial Hub
+﻿/// GO Dashboard Screen — Main Financial Hub
 /// P2P, Wallets, Investments, Cards, Quick Actions
 /// Complete production implementation with search, error handling, real-time updates
 
@@ -8,9 +8,9 @@ import 'package:provider/provider.dart';
 import '../models/go_models.dart';
 import '../providers/go_provider.dart';
 import '../widgets/go_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
-import '../../../core/widgets/ai_insight_card.dart';
-import '../../../core/design/ive_tokens.dart';
+import '../../../core/design/ive.dart';
+import '../../../core/design/value_display.dart';
+import '../../../core/design/genie_strip.dart';
 import '../../../core/routes/app_routes.dart';
 
 class GODashboardScreen extends StatefulWidget {
@@ -23,6 +23,7 @@ class GODashboardScreen extends StatefulWidget {
 class _GODashboardScreenState extends State<GODashboardScreen> {
   late TextEditingController _searchController;
   bool _showRecentOnly = false;
+  bool _genieVisible = true;
 
   @override
   void initState() {
@@ -47,10 +48,6 @@ class _GODashboardScreenState extends State<GODashboardScreen> {
       provider.loadCards(),
       provider.loadFavoriteRecipients(),
     ]);
-    // Load AI insights alongside dashboard data
-    final aiNotifier = context.read<AIInsightsNotifier>();
-    unawaited(aiNotifier.loadPlannerInsights());
-    unawaited(aiNotifier.loadSpendingPattern());
   }
 
   @override
@@ -92,10 +89,9 @@ class _GODashboardScreenState extends State<GODashboardScreen> {
             ),
             body: RefreshIndicator(
               onRefresh: _loadDashboardData,
+              color: IveTokens.accentColor,
               child: provider.isLoading
-                  ? const Center(
-                      child: CircularProgressIndicator(color: IveTokens.accent),
-                    )
+                  ? const IveListSkeleton(rows: 7)
                   : SingleChildScrollView(
                       physics: const AlwaysScrollableScrollPhysics(),
                       child: Column(
@@ -104,8 +100,8 @@ class _GODashboardScreenState extends State<GODashboardScreen> {
                           // ─── Balance Summary Card ───────────────────────────
                           _buildBalanceCard(provider),
 
-                          // ─── AI Insights Banner ─────────────────────────────
-                          _buildAIInsightsBanner(),
+                          // ─── Genie Strip (one per screen) ──────────────────
+                          _buildGenieStrip(),
 
                           // ─── Quick Action Buttons ───────────────────────────
                           _buildQuickActions(context),
@@ -134,83 +130,50 @@ class _GODashboardScreenState extends State<GODashboardScreen> {
   }
 
   Widget _buildBalanceCard(GOProvider provider) {
+    // Flat surface + luminance lift. No gradient, no shadow (Move 03).
     return Container(
-      margin: const EdgeInsets.all(16),
-      padding: const EdgeInsets.all(20),
+      margin: const EdgeInsets.all(IveTokens.s4),
+      padding: const EdgeInsets.all(IveTokens.s5),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [IveTokens.accent, IveTokens.accentPressed],
+        color: IveTokens.raisedColor,
+        borderRadius: BorderRadius.circular(IveTokens.rContainer),
+        border: Border.all(color: IveTokens.hairColor, width: 1),
+        // Luminance lift via gradient (Move 03)
+        gradient: const LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [IveTokens.topHighlight, Colors.transparent],
+          stops: [0.0, 0.3],
         ),
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: IveTokens.accent.withValues(alpha: 0.4),
-            blurRadius: 12,
-            offset: const Offset(0, 4),
-          ),
-        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Total Balance',
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: IveTokens.label,
-            ),
+            ‘Total balance’,
+            style: IveType.caption.copyWith(color: IveTokens.muteColor),
           ),
-          const SizedBox(height: 8),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Text(
-                  '\$${provider.totalBalance.toStringAsFixed(2)}',
-                  style: const TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.w900,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.2),
-                  borderRadius: BorderRadius.circular(6),
-                ),
-                child: const Text(
-                  'â†‘ 2.4%',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ],
+          const SizedBox(height: IveTokens.s2),
+          // ValueDisplay with count-up on first load
+          ValueDisplay(
+            amount: provider.totalBalance,
+            unit: r’$’,
+            integerSize: 36,
+            countUp: true,
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: IveTokens.s4),
+          // Income / Spent in ink2 (recede below hero number)
           Row(
             children: [
               Expanded(
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(
-                      Icons.trending_up_rounded,
-                      size: 16,
-                      color: Colors.green.shade300,
-                    ),
-                    const SizedBox(width: 6),
+                    const Icon(Icons.arrow_upward_rounded, size: 13, color: IveTokens.okColor),
+                    const SizedBox(width: 4),
                     Text(
-                      'Income: \$${provider.monthlyIncome.toStringAsFixed(0)}',
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: IveTokens.label,
-                      ),
+                      ‘\$${provider.monthlyIncome.toStringAsFixed(0)}’,
+                      style: IveType.footnote.copyWith(color: IveTokens.ink2Color),
                     ),
                   ],
                 ),
@@ -219,18 +182,11 @@ class _GODashboardScreenState extends State<GODashboardScreen> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(
-                      Icons.trending_down_rounded,
-                      size: 16,
-                      color: Colors.red.shade300,
-                    ),
-                    const SizedBox(width: 6),
+                    const Icon(Icons.arrow_downward_rounded, size: 13, color: IveTokens.badColor),
+                    const SizedBox(width: 4),
                     Text(
-                      'Spent: \$${provider.monthlySpent.toStringAsFixed(0)}',
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: IveTokens.label,
-                      ),
+                      ‘\$${provider.monthlySpent.toStringAsFixed(0)}’,
+                      style: IveType.footnote.copyWith(color: IveTokens.ink2Color),
                     ),
                   ],
                 ),
@@ -389,11 +345,8 @@ class _GODashboardScreenState extends State<GODashboardScreen> {
         padding: const EdgeInsets.all(16),
         child: Center(
           child: Text(
-            'No transactions yet',
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.grey.shade600,
-            ),
+            'No transactions yet.',
+            style: IveType.footnote.copyWith(color: IveTokens.muteColor),
           ),
         ),
       );
@@ -469,46 +422,17 @@ class _GODashboardScreenState extends State<GODashboardScreen> {
       ),
     );
   }
-  Widget _buildAIInsightsBanner() {
-    return Consumer<AIInsightsNotifier>(
-      builder: (ctx, notifier, _) {
-        if (notifier.loadingInsights) {
-          return const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: LinearProgressIndicator(
-              backgroundColor: IveTokens.surface,
-              valueColor: AlwaysStoppedAnimation<Color>(IveTokens.accent),
-            ),
-          );
-        }
-        final allInsights = notifier.insights;
-        if (allInsights.isEmpty) return const SizedBox.shrink();
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'AI Insights',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w700,
-                  color: IveTokens.label,
-                ),
-              ),
-              const SizedBox(height: 8),
-              ...allInsights.take(2).map(
-                (i) => Padding(
-                  padding: const EdgeInsets.only(bottom: 6),
-                  child: AIInsightCard(insight: i),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
+  Widget _buildGenieStrip() {
+    if (!_genieVisible) return const SizedBox.shrink();
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: IveTokens.s4, vertical: IveTokens.s2),
+      child: GenieStrip(
+        message: "Spending's up 12% this week. Transfer surplus to savings.",
+        onDismiss: () => setState(() => _genieVisible = false),
+      ),
     );
-  }}
+  }
+}
 
 // ────────────────────────────────────────────────────────────────────────────
 // COMPONENTS
@@ -576,7 +500,7 @@ class _WalletCard extends StatelessWidget {
             Color.fromARGB(255, 29 + wallet.id.length * 8, 64, 175),
           ],
         ),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -628,8 +552,8 @@ class _CardItem extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: IveTokens.surface,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade200),
+        borderRadius: BorderRadius.circular(IveTokens.rContainer),
+        border: Border.all(color: IveTokens.hairline, width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -676,15 +600,15 @@ class _TransactionTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final isIncome = transaction.type == 'income';
     final sign = isIncome ? '+' : '-';
-    final color = isIncome ? Colors.green : Colors.red;
+    final color = isIncome ? IveTokens.okColor : IveTokens.badColor;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: IveTokens.surface,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.grey.shade200),
+        borderRadius: BorderRadius.circular(IveTokens.rContainer),
+        border: Border.all(color: IveTokens.hairline, width: 1),
       ),
       child: Row(
         children: [

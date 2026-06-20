@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../services/ai_insights_notifier.dart';
 import '../theme/app_colors.dart';
@@ -67,13 +67,6 @@ class _AISmartSearchBarState extends State<AISmartSearchBar> {
           decoration: BoxDecoration(
             color:        Theme.of(context).cardColor,
             borderRadius: BorderRadius.circular(30),
-            boxShadow: [
-              BoxShadow(
-                color:      Colors.black.withValues(alpha: 0.08),
-                blurRadius: 12,
-                offset:     const Offset(0, 3),
-              ),
-            ],
           ),
           child: TextField(
             controller:  _ctrl,
@@ -125,14 +118,7 @@ class _AISmartSearchBarState extends State<AISmartSearchBar> {
                 constraints: const BoxConstraints(maxHeight: 200),
                 decoration:  BoxDecoration(
                   color:        Theme.of(context).cardColor,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                      color:      Colors.black.withValues(alpha: 0.08),
-                      blurRadius: 12,
-                      offset:     const Offset(0, 4),
-                    ),
-                  ],
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: ListView.builder(
                   padding:     const EdgeInsets.symmetric(vertical: 6),

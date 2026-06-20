@@ -1,4 +1,4 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// SCREEN 5 — Saved Updates Library
 /// Grid/List/Calendar view, collections management, batch operations,
 /// search within saved, sort options.
@@ -8,7 +8,6 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
 import '../models/updates_models.dart';
@@ -77,28 +76,6 @@ class _BodyState extends State<_Body> {
           ),
           body: Column(
             children: [
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    color: kUpdatesColor.withValues(alpha: 0.07),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: kUpdatesColor),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            'AI: ${ai.insights.first['title'] ?? ''}',
-                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kUpdatesColor),
-                            maxLines: 1, overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
 
               // Batch action bar
               if (_isBatchMode && _selectedIds.isNotEmpty)
@@ -156,7 +133,7 @@ class _BodyState extends State<_Body> {
                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                         decoration: BoxDecoration(
                           border: Border.all(color: kUpdatesColor, style: BorderStyle.solid),
-                          borderRadius: BorderRadius.circular(18),
+                          borderRadius: BorderRadius.circular(100),
                         ),
                         child: const Row(
                           mainAxisSize: MainAxisSize.min,
@@ -300,7 +277,7 @@ class _CollectionChip extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
         color: isSelected ? kUpdatesColor : (color ?? kUpdatesColor).withValues(alpha: 0.06),
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(100),
         border: Border.all(color: isSelected ? kUpdatesColor : (color ?? Colors.grey.shade200)),
       ),
       child: Row(
@@ -360,9 +337,8 @@ class _GridView extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(10),
               border: isSelected ? Border.all(color: kUpdatesColor, width: 2) : null,
-              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 6)],
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -449,7 +425,6 @@ class _ListView extends StatelessWidget {
               color: Colors.white,
               borderRadius: BorderRadius.circular(10),
               border: isSelected ? Border.all(color: kUpdatesColor, width: 2) : null,
-              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 4)],
             ),
             child: Row(
               children: [

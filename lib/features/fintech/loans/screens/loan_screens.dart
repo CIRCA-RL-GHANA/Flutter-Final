@@ -3,9 +3,7 @@
 library;
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../../../core/services/fintech_service.dart';
-import '../../../../core/services/ai_insights_notifier.dart';
 import '../../../../core/routes/app_routes.dart';
 
 const _kGold = Color(0xFFD4A017);
@@ -128,26 +126,6 @@ class _LoanApplicationScreenState extends State<LoanApplicationScreen>
       body: Column(
         children: [
           // Genie AI strip
-          Consumer<AIInsightsNotifier>(
-            builder: (context, ai, _) {
-              if (ai.insights.isEmpty) return const SizedBox.shrink();
-              return Container(
-                color: _kGold.withValues(alpha: 0.07),
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                child: Row(children: [
-                  const Icon(Icons.auto_awesome, size: 14, color: _kGold),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      'Genie: ${ai.insights.first['label'] ?? 'Loan tips available'}',
-                      style: const TextStyle(fontSize: 11, color: _kGold),
-                      maxLines: 1, overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ]),
-              );
-            },
-          ),
           Expanded(
             child: TabBarView(
               controller: _tabs,
@@ -417,7 +395,7 @@ class _Card extends StatelessWidget {
   Widget build(BuildContext context) => Container(
     padding: const EdgeInsets.all(16),
     decoration: BoxDecoration(
-      color: Colors.white, borderRadius: BorderRadius.circular(12),
+      color: Colors.white, borderRadius: BorderRadius.circular(10),
       border: Border.all(color: const Color(0xFFE5E7EB)),
     ),
     child: child,

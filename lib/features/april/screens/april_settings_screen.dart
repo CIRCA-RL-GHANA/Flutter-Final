@@ -1,4 +1,4 @@
-/// APRIL Screen 6 — APRIL Settings
+﻿/// APRIL Screen 6 — APRIL Settings
 /// 7 sections: General, Voice, Plugins, Notifications, Privacy, Advanced, Help
 library;
 
@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../providers/april_provider.dart';
 import '../widgets/april_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/routes/app_routes.dart';
 
 class AprilSettingsScreen extends StatelessWidget {
@@ -24,24 +23,6 @@ class AprilSettingsScreen extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             children: [
               // ──── AI SETTINGS SUGGESTION ────
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    margin: const EdgeInsets.only(bottom: 12),
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF007AFF).withValues(alpha: 0.07),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Row(children: [
-                      const Icon(Icons.auto_awesome, size: 14, color: Color(0xFF007AFF)),
-                      const SizedBox(width: 8),
-                      Expanded(child: Text('AI: ${ai.insights.first['label'] ?? 'Personalized settings suggested'}', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: Color(0xFF007AFF)), maxLines: 1, overflow: TextOverflow.ellipsis)),
-                    ]),
-                  );
-                },
-              ),
               // ──── GENERAL ────
               _SettingsSection(
                 title: 'ðŸ  General',
@@ -431,7 +412,7 @@ class _SettingsSection extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(14),
+            borderRadius: BorderRadius.circular(10),
             border: Border.all(color: const Color(0xFFE5E7EB)),
           ),
           child: Column(

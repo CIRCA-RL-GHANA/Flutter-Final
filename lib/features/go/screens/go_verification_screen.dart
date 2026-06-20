@@ -6,8 +6,6 @@ library;
 
 import 'package:flutter/material.dart';
 import '../../../core/routes/app_routes.dart';
-import 'package:provider/provider.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../models/go_models.dart';
 import '../widgets/go_widgets.dart';
 
@@ -16,7 +14,7 @@ class GoVerificationScreen extends StatefulWidget {
   final String subtitle;
   final double? amount;
   final VoidCallback? onVerified;
-  const GoVerificationScreen({super.key, this.title = 'Verify Action', this.subtitle = 'Please verify your identity to proceed.', this.amount, this.onVerified});
+  const GoVerificationScreen({super.key, this.title = 'Verify Action', this.subtitle = 'Verify your identity to proceed.', this.amount, this.onVerified});
 
   /// Show as a bottom sheet
   static Future<bool?> show(BuildContext context, {String title = 'Verify Action', String subtitle = 'Confirm to proceed.', double? amount}) {
@@ -61,22 +59,6 @@ class _GoVerificationScreenState extends State<GoVerificationScreen> with Single
       children: [
         // Drag handle
         Container(margin: const EdgeInsets.only(top: 10), width: 40, height: 4, decoration: BoxDecoration(color: const Color(0xFFD1D5DB), borderRadius: BorderRadius.circular(2))),
-        Consumer<AIInsightsNotifier>(
-          builder: (context, ai, _) {
-            if (ai.insights.isEmpty) return const SizedBox.shrink();
-            return Container(
-              color: kGoColor.withValues(alpha: 0.07),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-              child: Row(children: [
-                const Icon(Icons.auto_awesome, size: 14, color: kGoColor),
-                const SizedBox(width: 8),
-                Expanded(child: Text('AI: ${ai.insights.first['title'] ?? ''}',
-                  style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kGoColor),
-                  maxLines: 1, overflow: TextOverflow.ellipsis)),
-              ]),
-            );
-          },
-        ),
         Padding(
           padding: const EdgeInsets.all(16),
           child: Column(children: [
@@ -138,7 +120,7 @@ class _GoVerificationScreenState extends State<GoVerificationScreen> with Single
       child: Container(
         margin: const EdgeInsets.only(bottom: 10),
         padding: const EdgeInsets.all(14),
-        decoration: BoxDecoration(color: sel ? kGoColorLight : Colors.white, borderRadius: BorderRadius.circular(12), border: Border.all(color: sel ? kGoColor : const Color(0xFFE5E7EB), width: sel ? 2 : 1)),
+        decoration: BoxDecoration(color: sel ? kGoColorLight : Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: sel ? kGoColor : const Color(0xFFE5E7EB), width: sel ? 2 : 1)),
         child: Row(children: [
           Container(
             padding: const EdgeInsets.all(10),
@@ -244,7 +226,7 @@ class _GoVerificationScreenState extends State<GoVerificationScreen> with Single
           const SizedBox(height: 20),
           Text(_selectedMethod == GoVerificationMethod.faceId ? 'Scanning face...' : _selectedMethod == GoVerificationMethod.fingerprint ? 'Reading fingerprint...' : 'Verifying...', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
           const SizedBox(height: 8),
-          const Text('Please hold still', style: TextStyle(fontSize: 12, color: Color(0xFF9CA3AF))),
+          const Text('Hold still', style: TextStyle(fontSize: 12, color: Color(0xFF9CA3AF))),
         ]));
       case GoVerificationState.verified:
         return const Center(child: Column(mainAxisSize: MainAxisSize.min, children: [
@@ -260,7 +242,7 @@ class _GoVerificationScreenState extends State<GoVerificationScreen> with Single
           const SizedBox(height: 16),
           const Text('Verification Failed', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: kGoNegative)),
           const SizedBox(height: 8),
-          const Text('Please try again with a different method.', style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+          const Text('Try a different method.', style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
           const SizedBox(height: 24),
           ElevatedButton(onPressed: () => setState(() { _state = GoVerificationState.pending; _selectedMethod = null; }), style: ElevatedButton.styleFrom(backgroundColor: kGoColor, foregroundColor: Colors.white), child: const Text('Try Again')),
         ]));

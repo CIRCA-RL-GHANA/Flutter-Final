@@ -1,12 +1,12 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// ──────────────────────────────────────────────────────────────────────────
 /// Shared Widgets for User Details Module
 /// Reusable components: collapsible sections, edit fields, status badges, etc.
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// ──────────────────────────────────────────────────────────────────────────
 library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../../core/theme/app_colors.dart';
+import '../../../core/design/ive.dart';
 
 // ─── Collapsible Section ─────────────────────────────────────────────────────
 
@@ -73,27 +73,23 @@ class _CollapsibleSectionState extends State<CollapsibleSection>
       children: [
         InkWell(
           onTap: _toggle,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(IveTokens.rContainer),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 4),
             child: Row(
               children: [
-                Icon(widget.icon, size: 20, color: widget.iconColor ?? AppColors.primaryLight),
+                Icon(widget.icon, size: 20, color: widget.iconColor ?? IveTokens.accentColor),
                 const SizedBox(width: 10),
                 Expanded(
                   child: Text(
                     widget.title,
-                    style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.textPrimary,
-                    ),
+                    style: IveType.callout.copyWith(fontWeight: FontWeight.w600),
                   ),
                 ),
                 AnimatedRotation(
                   turns: _expanded ? 0.5 : 0.0,
                   duration: const Duration(milliseconds: 250),
-                  child: const Icon(Icons.expand_more, size: 20, color: AppColors.textTertiary),
+                  child: const Icon(Icons.expand_more, size: 20, color: IveTokens.muteColor),
                 ),
               ],
             ),
@@ -134,12 +130,12 @@ class DetailRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(IveTokens.rContainer),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 4),
         child: Row(
           children: [
-            Icon(icon, size: 18, color: AppColors.textTertiary),
+            Icon(icon, size: 18, color: IveTokens.muteColor),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
@@ -147,27 +143,16 @@ class DetailRow extends StatelessWidget {
                 children: [
                   Text(
                     label,
-                    style: const TextStyle(
-                      fontSize: 11,
-                      color: AppColors.textTertiary,
-                      fontWeight: FontWeight.w500,
-                    ),
+                    style: IveType.caption.copyWith(color: IveTokens.muteColor),
                   ),
                   const SizedBox(height: 2),
-                  Text(
-                    value,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      color: AppColors.textPrimary,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
+                  Text(value, style: IveType.body),
                 ],
               ),
             ),
             if (trailing != null) trailing!,
             if (editable && onTap != null)
-              const Icon(Icons.edit, size: 14, color: AppColors.textTertiary),
+              const Icon(Icons.edit, size: 14, color: IveTokens.muteColor),
           ],
         ),
       ),
@@ -195,8 +180,8 @@ class StatusBadge extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: color.withValues(alpha: 0.2)),
+        borderRadius: BorderRadius.circular(IveTokens.rAtom),
+        border: Border.all(color: color.withValues(alpha: 0.25)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -245,28 +230,15 @@ class SettingsToggle extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(
         children: [
-          Icon(icon, size: 20, color: value ? (activeColor ?? AppColors.primaryLight) : AppColors.textTertiary),
+          Icon(icon, size: 20, color: value ? (activeColor ?? IveTokens.accentColor) : IveTokens.muteColor),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  label,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.textPrimary,
-                  ),
-                ),
+                Text(label, style: IveType.callout.copyWith(fontWeight: FontWeight.w500)),
                 if (subtitle != null)
-                  Text(
-                    subtitle!,
-                    style: const TextStyle(
-                      fontSize: 11,
-                      color: AppColors.textTertiary,
-                    ),
-                  ),
+                  Text(subtitle!, style: IveType.caption.copyWith(color: IveTokens.muteColor)),
               ],
             ),
           ),
@@ -276,7 +248,7 @@ class SettingsToggle extends StatelessWidget {
               HapticFeedback.selectionClick();
               onChanged(v);
             },
-            activeThumbColor: activeColor ?? AppColors.primaryLight,
+            activeThumbColor: activeColor ?? IveTokens.accentColor,
           ),
         ],
       ),
@@ -305,16 +277,9 @@ class SectionCard extends StatelessWidget {
       padding: padding ?? const EdgeInsets.all(16),
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: borderColor != null ? Border.all(color: borderColor!) : null,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.04),
-            blurRadius: 10,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        color: IveTokens.raisedColor,
+        borderRadius: BorderRadius.circular(IveTokens.rContainer),
+        border: Border.all(color: borderColor ?? IveTokens.hairColor, width: 1),
       ),
       child: child,
     );
@@ -341,7 +306,7 @@ class ModuleHeader extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: IveTokens.voidColor,
       surfaceTintColor: Colors.transparent,
       elevation: 0,
       leading: Row(
@@ -349,7 +314,7 @@ class ModuleHeader extends StatelessWidget implements PreferredSizeWidget {
           const SizedBox(width: 4),
           IconButton(
             icon: const Icon(Icons.arrow_back, size: 22),
-            color: AppColors.textPrimary,
+            color: IveTokens.inkColor,
             onPressed: () => Navigator.pop(context),
           ),
           if (contextColor != null)
@@ -364,14 +329,7 @@ class ModuleHeader extends StatelessWidget implements PreferredSizeWidget {
         ],
       ),
       leadingWidth: contextColor != null ? 70 : 56,
-      title: Text(
-        title,
-        style: const TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.w700,
-          color: AppColors.textPrimary,
-        ),
-      ),
+      title: Text(title, style: IveType.title3),
       centerTitle: true,
       actions: actions,
     );
@@ -432,55 +390,46 @@ class _EditFieldModalState extends State<EditFieldModal> {
             child: Container(
               width: 36, height: 4,
               decoration: BoxDecoration(
-                color: AppColors.inputBorder,
-                borderRadius: BorderRadius.circular(2),
+                color: IveTokens.muteColor.withValues(alpha: 0.35),
+                borderRadius: BorderRadius.circular(IveTokens.rChip),
               ),
             ),
           ),
           const SizedBox(height: 16),
-          Text(
-            widget.title,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-              color: AppColors.textPrimary,
-            ),
-          ),
+          Text(widget.title, style: IveType.title3),
           const SizedBox(height: 16),
           TextField(
             controller: _controller,
             maxLines: widget.maxLines,
             autofocus: true,
+            style: IveType.body,
+            cursorColor: IveTokens.accentColor,
             decoration: InputDecoration(
               hintText: widget.hint,
+              hintStyle: IveType.body.copyWith(color: IveTokens.muteColor),
               filled: true,
-              fillColor: AppColors.inputFill,
+              fillColor: IveTokens.surfaceColor,
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide.none,
+                borderRadius: BorderRadius.circular(IveTokens.rContainer),
+                borderSide: const BorderSide(color: IveTokens.hairColor, width: 1),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(IveTokens.rContainer),
+                borderSide: const BorderSide(color: IveTokens.hairColor, width: 1),
               ),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(color: AppColors.primaryLight),
+                borderRadius: BorderRadius.circular(IveTokens.rContainer),
+                borderSide: const BorderSide(color: IveTokens.accentColor, width: 1.5),
               ),
             ),
           ),
           const SizedBox(height: 16),
-          SizedBox(
-            width: double.infinity,
-            height: 48,
-            child: ElevatedButton(
-              onPressed: () {
-                widget.onSave(_controller.text.trim());
-                Navigator.pop(context);
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.primary,
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-              ),
-              child: const Text('Save', style: TextStyle(fontWeight: FontWeight.w600)),
-            ),
+          IveButton.primary(
+            label: 'Save',
+            onPressed: () {
+              widget.onSave(_controller.text.trim());
+              Navigator.pop(context);
+            },
           ),
         ],
       ),
@@ -493,10 +442,10 @@ class _EditFieldModalState extends State<EditFieldModal> {
 Color contextTypeColor(dynamic entityType) {
   final name = entityType.toString().split('.').last;
   switch (name) {
-    case 'personal': return const Color(0xFF6366F1);
+    case 'personal': return IveTokens.accentColor;
     case 'business': return const Color(0xFF8B5CF6);
-    case 'branch': return const Color(0xFF10B981);
-    default: return AppColors.textTertiary;
+    case 'branch': return IveTokens.okColor;
+    default: return IveTokens.muteColor;
   }
 }
 

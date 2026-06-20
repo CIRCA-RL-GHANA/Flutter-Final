@@ -1,10 +1,9 @@
-/// GO Screen 15 — Archive & History
+﻿/// GO Screen 15 — Archive & History
 /// Transaction archive, historical analysis, compliance storage
 library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../models/go_models.dart';
 import '../providers/go_provider.dart';
 import '../widgets/go_widgets.dart';
@@ -47,28 +46,6 @@ class _GoArchiveScreenState extends State<GoArchiveScreen> with SingleTickerProv
                 ),
                 style: const TextStyle(fontSize: 13),
               ),
-            ),
-            Consumer<AIInsightsNotifier>(
-              builder: (context, ai, _) {
-                if (ai.insights.isEmpty) return const SizedBox.shrink();
-                return Container(
-                  color: kGoColor.withValues(alpha: 0.07),
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                  child: Row(
-                    children: [
-                      const Icon(Icons.auto_awesome, size: 14, color: kGoColor),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: Text(
-                          'AI: ${ai.insights.first['title'] ?? ''}',
-                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kGoColor),
-                          maxLines: 1, overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              },
             ),
             Container(
               color: Colors.transparent,
@@ -226,7 +203,7 @@ class _ArchiveCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12), border: Border.all(color: const Color(0xFFE5E7EB))),
+      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: const Color(0xFFE5E7EB))),
       child: Row(children: [
         Container(
           padding: const EdgeInsets.all(8),

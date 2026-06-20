@@ -37,8 +37,6 @@ class _GenieHapticPulseRingState extends State<GenieHapticPulseRing>
   late final Animation<double> _scale;
   late final Animation<double> _opacity;
 
-  Color _color = const Color(0xFF22BDD8);
-
   @override
   void initState() {
     super.initState();
@@ -61,7 +59,6 @@ class _GenieHapticPulseRingState extends State<GenieHapticPulseRing>
 
   void _onPulse(RoleSignalEvent event) {
     if (!mounted) return;
-    setState(() => _color = event.pulseColor);
     _controller.forward(from: 0.0);
   }
 
@@ -87,15 +84,8 @@ class _GenieHapticPulseRingState extends State<GenieHapticPulseRing>
                   scale: _scale.value,
                   child: Container(
                     // Size matches the child via LayoutBuilder inside child
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                          color: _color.withValues(alpha: 0.65),
-                          blurRadius: 18,
-                          spreadRadius: 6,
-                        ),
-                      ],
                     ),
                     child: child,
                   ),

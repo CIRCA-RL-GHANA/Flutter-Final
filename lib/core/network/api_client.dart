@@ -1,4 +1,4 @@
-import 'package:dio/dio.dart';
+﻿import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'api_response.dart';
@@ -365,7 +365,7 @@ class ApiClient {
       case DioExceptionType.sendTimeout:
       case DioExceptionType.receiveTimeout:
         code = ErrorCodes.timeout;
-        message = 'Connection timed out. Please try again.';
+        message = 'Connection timed out. Try again.';
         break;
       case DioExceptionType.connectionError:
         code = ErrorCodes.connectionRefused;

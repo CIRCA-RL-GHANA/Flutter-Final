@@ -7,7 +7,6 @@ library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../prompt/providers/context_provider.dart';
 import '../models/setup_dashboard_models.dart';
@@ -90,28 +89,6 @@ class _CampaignCreateScreenState extends State<CampaignCreateScreen> {
           ),
           body: Column(
             children: [
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    color: kSetupColor.withValues(alpha: 0.07),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: kSetupColor),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            "AI: ${ai.insights.first['title'] ?? ''}",
-                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kSetupColor),
-                            maxLines: 1, overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
               _CampaignStepIndicator(
                 currentStep: _currentStep,
                 stepCount: _stepCount,
@@ -341,7 +318,7 @@ class _AudienceStep extends StatelessWidget {
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
             color: kSetupColor.withValues(alpha: 0.06),
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(10),
           ),
           child: Row(
             children: [
@@ -365,12 +342,12 @@ class _AudienceStep extends StatelessWidget {
             margin: const EdgeInsets.only(bottom: 8),
             child: InkWell(
               onTap: () => onToggle(name),
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(10),
               child: Container(
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
                   color: isSelected ? kSetupColor.withValues(alpha: 0.06) : Colors.white,
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(10),
                   border: Border.all(
                     color: isSelected ? kSetupColor.withValues(alpha: 0.3) : Colors.grey.shade200,
                   ),
@@ -504,7 +481,7 @@ class _BudgetStep extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 14),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(10),
             border: Border.all(color: Colors.grey.shade300),
           ),
           child: DropdownButtonHideUnderline(
@@ -527,7 +504,7 @@ class _BudgetStep extends StatelessWidget {
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
             color: AppColors.info.withValues(alpha: 0.06),
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(10),
             border: Border.all(color: AppColors.info.withValues(alpha: 0.15)),
           ),
           child: const Column(
@@ -593,7 +570,7 @@ class _ContentStep extends StatelessWidget {
           height: 160,
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(14),
+            borderRadius: BorderRadius.circular(10),
             border: Border.all(color: kSetupColor.withValues(alpha: 0.3)),
           ),
           child: Center(
@@ -675,7 +652,7 @@ class _CampaignReviewStep extends StatelessWidget {
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
             color: kSetupColor.withValues(alpha: 0.06),
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(10),
             border: Border.all(color: kSetupColor.withValues(alpha: 0.15)),
           ),
           child: const Row(
@@ -747,15 +724,8 @@ class _CampaignNavBar extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.06),
-            blurRadius: 10,
-            offset: const Offset(0, -2),
-          ),
-        ],
       ),
       child: SafeArea(
         top: false,
@@ -771,7 +741,7 @@ class _CampaignNavBar extends StatelessWidget {
                     foregroundColor: AppColors.textSecondary,
                     side: BorderSide(color: Colors.grey.shade300),
                     padding: const EdgeInsets.symmetric(vertical: 14),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   ),
                 ),
               ),
@@ -785,7 +755,7 @@ class _CampaignNavBar extends StatelessWidget {
                   backgroundColor: isLast ? AppColors.success : kSetupColor,
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   elevation: 0,
                 ),
               ),
@@ -818,12 +788,12 @@ class _SelectionTile extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 8),
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(10),
         child: Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
             color: isSelected ? kSetupColor.withValues(alpha: 0.06) : Colors.white,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(10),
             border: Border.all(
               color: isSelected ? kSetupColor.withValues(alpha: 0.3) : Colors.grey.shade200,
               width: isSelected ? 1.5 : 1,
@@ -867,12 +837,12 @@ class _DatePickerTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: BorderRadius.circular(10),
       child: Container(
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(10),
           border: Border.all(color: Colors.grey.shade300),
         ),
         child: Column(

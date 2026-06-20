@@ -3,9 +3,7 @@
 library;
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../../../core/services/fintech_service.dart';
-import '../../../../core/services/ai_insights_notifier.dart';
 
 const _kIndigo = Color(0xFF22BDD8);
 
@@ -82,24 +80,6 @@ class _DepositScreenState extends State<DepositScreen> {
       ),
       body: Column(
         children: [
-          Consumer<AIInsightsNotifier>(
-            builder: (context, ai, _) {
-              if (ai.insights.isEmpty) return const SizedBox.shrink();
-              return Container(
-                color: _kIndigo.withValues(alpha: 0.06),
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                child: Row(children: [
-                  const Icon(Icons.auto_awesome, size: 14, color: _kIndigo),
-                  const SizedBox(width: 8),
-                  Expanded(child: Text(
-                    'Genie: ${ai.insights.first['label'] ?? 'Earn interest on locked QP'}',
-                    style: const TextStyle(fontSize: 11, color: _kIndigo),
-                    maxLines: 1, overflow: TextOverflow.ellipsis,
-                  )),
-                ]),
-              );
-            },
-          ),
           Expanded(child: ListView(padding: const EdgeInsets.all(16), children: [
             // Create deposit card
             _DepositCard(
@@ -145,7 +125,7 @@ class _DepositCard extends StatelessWidget {
   Widget build(BuildContext context) => Container(
     padding: const EdgeInsets.all(16),
     decoration: BoxDecoration(
-      color: Colors.white, borderRadius: BorderRadius.circular(12),
+      color: Colors.white, borderRadius: BorderRadius.circular(10),
       border: Border.all(color: const Color(0xFFE5E7EB)),
     ),
     child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

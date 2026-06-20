@@ -1,4 +1,4 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// MARKET MODULE — Screen 4: Product Detail
 /// Media gallery, customization, quantity, fulfillment, nutrition, reviews
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../models/market_models.dart';
 import '../providers/market_provider.dart';
 import '../widgets/market_widgets.dart';
@@ -379,7 +378,7 @@ class _MarketProductDetailScreenState extends State<MarketProductDetailScreen> {
             if (_showNutrition) ...[
               const SizedBox(height: 8),
               Card(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 elevation: 0,
                 color: Colors.white,
                 child: Padding(
@@ -442,7 +441,7 @@ class _MarketProductDetailScreenState extends State<MarketProductDetailScreen> {
                       style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
                     ),
                     const Text(
-                      'Tap to visit store',
+                      'Visit store',
                       style: TextStyle(fontSize: 12, color: AppColors.textTertiary),
                     ),
                   ],
@@ -457,82 +456,6 @@ class _MarketProductDetailScreenState extends State<MarketProductDetailScreen> {
           const SizedBox(height: 100),
 
           // ─── AI Similar Products ───────────────────────────────
-          Consumer<AIInsightsNotifier>(
-            builder: (ctx, notifier, _) {
-              final recs = notifier.recommendations;
-              if (recs.isEmpty) return const SizedBox.shrink();
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.only(top: 8, bottom: 8),
-                    child: Row(
-                      children: [
-                        Icon(Icons.auto_awesome, size: 16, color: Color(0xFF8B5CF6)),
-                        SizedBox(width: 6),
-                        Text(
-                          'AI — You might also like',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700,
-                            color: Color(0xFF1F2937),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 90,
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: recs.take(6).length,
-                      separatorBuilder: (_, __) => const SizedBox(width: 8),
-                      itemBuilder: (ctx2, i) {
-                        final r = recs[i];
-                        final name = r['name']?.toString() ?? r['id']?.toString() ?? 'Product';
-                        final score = ((r['score'] as num?)?.toDouble() ?? 0) * 100;
-                        return Container(
-                          width: 130,
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF8B5CF6).withValues(alpha: 0.06),
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(
-                              color: const Color(0xFF8B5CF6).withValues(alpha: 0.15),
-                            ),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                name,
-                                style: const TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                '${score.toStringAsFixed(0)}% match',
-                                style: const TextStyle(
-                                  fontSize: 10,
-                                  color: Color(0xFF8B5CF6),
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                ],
-              );
-            },
-          ),
         ],
       ),
     );
@@ -557,9 +480,8 @@ class _MarketProductDetailScreenState extends State<MarketProductDetailScreen> {
         top: 12,
         bottom: MediaQuery.of(context).padding.bottom + 12,
       ),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
-        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10, offset: const Offset(0, -2))],
       ),
       child: Row(
         children: [
@@ -610,7 +532,7 @@ class _MarketProductDetailScreenState extends State<MarketProductDetailScreen> {
                 backgroundColor: kMarketColor,
                 foregroundColor: Colors.white,
                 disabledBackgroundColor: AppColors.textTertiary.withValues(alpha: 0.3),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 elevation: 0,
               ),

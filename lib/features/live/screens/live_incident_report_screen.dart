@@ -11,7 +11,6 @@ import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../models/live_models.dart';
 import '../widgets/live_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../../alerts/providers/alerts_provider.dart';
 
 class LiveIncidentReportScreen extends StatefulWidget {
@@ -64,28 +63,6 @@ class _LiveIncidentReportScreenState extends State<LiveIncidentReportScreen> {
             ),
           ),
 
-          Consumer<AIInsightsNotifier>(
-            builder: (context, ai, _) {
-              if (ai.insights.isEmpty) return const SizedBox.shrink();
-              return Container(
-                color: kLiveColor.withValues(alpha: 0.07),
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                child: Row(
-                  children: [
-                    const Icon(Icons.auto_awesome, size: 14, color: kLiveColor),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        'AI: ${ai.insights.first['title'] ?? ''}',
-                        style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kLiveColor),
-                        maxLines: 1, overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
 
           Expanded(
             child: IndexedStack(
@@ -118,9 +95,8 @@ class _LiveIncidentReportScreenState extends State<LiveIncidentReportScreen> {
           // Bottom bar
           Container(
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
-              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 8, offset: const Offset(0, -2))],
             ),
             child: Row(
               children: [
@@ -161,7 +137,7 @@ class _LiveIncidentReportScreenState extends State<LiveIncidentReportScreen> {
                       backgroundColor: _step == 2 ? kLiveColor : AppColors.primary,
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                     ),
                     child: Text(
                       _step == 2 ? 'Submit Report' : 'Continue',
@@ -462,7 +438,7 @@ class _ReviewStep extends StatelessWidget {
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
             gradient: LinearGradient(colors: [kLiveColor.withValues(alpha: 0.1), kLiveAccent.withValues(alpha: 0.05)]),
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(10),
             border: Border.all(color: kLiveColor.withValues(alpha: 0.2)),
           ),
           child: const Column(
@@ -470,7 +446,7 @@ class _ReviewStep extends StatelessWidget {
               Icon(Icons.fact_check, size: 28, color: kLiveColor),
               SizedBox(height: 6),
               Text('Review Your Report', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: kLiveColor)),
-              Text('Please verify all details before submitting', style: TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
+              Text('Verify all details before submitting', style: TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
             ],
           ),
         ),
@@ -543,7 +519,7 @@ class _SubmittedView extends StatelessWidget {
                   backgroundColor: AppColors.primary,
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 ),
                 child: const Text('Done', style: TextStyle(fontWeight: FontWeight.w700)),
               ),

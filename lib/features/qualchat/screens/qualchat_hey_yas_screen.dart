@@ -1,4 +1,4 @@
-/// qualChat Screen 2 — Hey Ya (Owner Only)
+﻿/// qualChat Screen 2 — Hey Ya (Owner Only)
 /// Dating feature: express romantic interest, get AI-matched, plan a date
 library;
 
@@ -8,7 +8,6 @@ import '../models/qualchat_models.dart';
 import '../providers/qualchat_provider.dart';
 import '../widgets/qualchat_widgets.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 const _kTabLabels = {
   HeyYaTab.all: 'All',
@@ -74,28 +73,6 @@ class QualChatHeyYasScreen extends StatelessWidget {
                 ),
               ),
               // AI insight strip
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.recommendations.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    color: kChatColor.withValues(alpha: 0.07),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: kChatColor),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            'Genie AI match: ${ai.recommendations.first['name'] ?? ''}',
-                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kChatColor),
-                            maxLines: 1, overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
               // Tabs
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),

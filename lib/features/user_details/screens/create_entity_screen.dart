@@ -1,4 +1,4 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// Screen 3: Create / Edit Entity Form
 /// 5-step stepper: Type â†’ Core Info â†’ Verification â†’ Role â†’ Review
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../../prompt/models/rbac_models.dart';
 import '../models/user_details_models.dart';
 import '../providers/user_details_provider.dart';
@@ -46,28 +45,6 @@ class _CreateEntityScreenState extends State<CreateEntityScreen> {
           ),
           body: Column(
             children: [
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    color: AppColors.primary.withValues(alpha: 0.07),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: AppColors.primary),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            'AI: ${ai.insights.first['title'] ?? ''}',
-                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: AppColors.primary),
-                            maxLines: 1, overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
 
               // Progress indicator
               if (udp.creationStep > 0)
@@ -275,9 +252,6 @@ class _TypeCard extends StatelessWidget {
             color: selected ? type.color : Colors.grey.withValues(alpha: 0.15),
             width: selected ? 2 : 1,
           ),
-          boxShadow: selected
-              ? [BoxShadow(color: type.color.withValues(alpha: 0.1), blurRadius: 8)]
-              : [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 6)],
         ),
         child: InkWell(
           onTap: onTap,
@@ -291,7 +265,7 @@ class _TypeCard extends StatelessWidget {
                   height: 48,
                   decoration: BoxDecoration(
                     color: type.color.withValues(alpha: 0.12),
-                    borderRadius: BorderRadius.circular(14),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: Icon(type.icon, size: 24, color: type.color),
                 ),
@@ -439,15 +413,15 @@ class _FormField extends StatelessWidget {
               filled: true,
               fillColor: const Color(0xFF11131C),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(10),
                 borderSide: BorderSide(color: Colors.grey.withValues(alpha: 0.15)),
               ),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(10),
                 borderSide: BorderSide(color: color),
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(10),
                 borderSide: BorderSide(color: Colors.grey.withValues(alpha: 0.15)),
               ),
               contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 14),
@@ -587,7 +561,7 @@ class _VerificationStep extends StatelessWidget {
               height: 44,
               decoration: BoxDecoration(
                 color: (completed ? const Color(0xFF10B981) : color).withValues(alpha: 0.1),
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(10),
               ),
               child: Icon(
                 completed ? Icons.check_circle : icon,
@@ -660,13 +634,13 @@ class _Step4RoleAssignment extends StatelessWidget {
                 HapticFeedback.selectionClick();
                 udp.selectRole(role);
               },
-              borderRadius: BorderRadius.circular(14),
+              borderRadius: BorderRadius.circular(10),
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
                   color: selected ? color.withValues(alpha: 0.06) : Colors.white,
-                  borderRadius: BorderRadius.circular(14),
+                  borderRadius: BorderRadius.circular(10),
                   border: Border.all(
                     color: selected ? color : Colors.grey.withValues(alpha: 0.15),
                     width: selected ? 2 : 1,
@@ -756,11 +730,8 @@ class _StepNavigation extends StatelessWidget {
         bottom: MediaQuery.of(context).padding.bottom + 12,
         top: 12,
       ),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
-        boxShadow: [
-          BoxShadow(color: Colors.black.withValues(alpha: 0.06), blurRadius: 10, offset: const Offset(0, -2)),
-        ],
       ),
       child: Row(
         children: [
@@ -770,7 +741,7 @@ class _StepNavigation extends StatelessWidget {
               style: OutlinedButton.styleFrom(
                 foregroundColor: AppColors.textSecondary,
                 side: const BorderSide(color: AppColors.inputBorder),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 padding: const EdgeInsets.symmetric(vertical: 14),
               ),
               child: Text(step <= 1 ? 'Cancel' : 'Back'),
@@ -785,7 +756,7 @@ class _StepNavigation extends StatelessWidget {
                 backgroundColor: color,
                 foregroundColor: Colors.white,
                 disabledBackgroundColor: color.withValues(alpha: 0.3),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 padding: const EdgeInsets.symmetric(vertical: 14),
               ),
               child: Text(

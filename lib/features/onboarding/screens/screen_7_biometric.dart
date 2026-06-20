@@ -170,15 +170,6 @@ class _BiometricSetupScreenState extends State<BiometricSetupScreen>
                   color: IveTokens.accent.withValues(alpha: 
                     0.08 + 0.05 * _animController.value,
                   ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: IveTokens.accent.withValues(alpha: 
-                        0.1 + 0.1 * _animController.value,
-                      ),
-                      blurRadius: 20 + 10 * _animController.value,
-                      spreadRadius: 2,
-                    ),
-                  ],
                 ),
                 child: Icon(
                   _getBiometricIcon(biometric.biometricType),

@@ -1,4 +1,4 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// SD1.2-DETAIL: VEHICLE DETAIL — 5-Tab Deep View
 /// Tabs: Overview, Maintenance, Fuel, Routes, Driver
 /// RBAC: Owner/Admin(fullAccess), BM(branchScoped), Monitor(viewOnly),
@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../core/design/ive_tokens.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../prompt/providers/context_provider.dart';
 import '../models/setup_dashboard_models.dart';
@@ -55,28 +54,6 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
               // ─── Vehicle Header ────────────────────────────
               _VehicleHeader(vehicle: vehicle),
               const SizedBox(height: 12),
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    color: kSetupColor.withValues(alpha: 0.07),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: kSetupColor),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            "AI: ${ai.insights.first['title'] ?? ''}",
-                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kSetupColor),
-                            maxLines: 1, overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
               SetupDetailTabBar(
                 tabs: _tabs,
                 selectedIndex: _tabIndex,
@@ -124,13 +101,6 @@ class _VehicleHeader extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
-            blurRadius: 12,
-            offset: const Offset(0, 4),
-          ),
-        ],
       ),
       child: Row(
         children: [
@@ -139,7 +109,7 @@ class _VehicleHeader extends StatelessWidget {
             height: 56,
             decoration: BoxDecoration(
               color: _statusColor.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(14),
+              borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(Icons.local_shipping, size: 28, color: _statusColor),
           ),
@@ -272,17 +242,10 @@ class _MaintenanceCard extends StatelessWidget {
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(10),
         border: record.isUrgent
             ? Border.all(color: AppColors.error.withValues(alpha: 0.3))
             : null,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.04),
-            blurRadius: 10,
-            offset: const Offset(0, 2),
-          ),
-        ],
       ),
       child: Row(
         children: [
@@ -394,14 +357,7 @@ class _FuelEntryCard extends StatelessWidget {
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(14),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.04),
-            blurRadius: 10,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
         children: [
@@ -569,7 +525,7 @@ class _VehicleRouteCard extends StatelessWidget {
       height: 180,
       decoration: BoxDecoration(
         color: IveTokens.surface,
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(10),
         border: IveTokens.cardBorder,
       ),
       child: Stack(

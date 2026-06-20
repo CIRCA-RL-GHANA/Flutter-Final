@@ -11,7 +11,6 @@ import '../../../core/routes/app_routes.dart';
 import '../models/market_models.dart';
 import '../providers/market_provider.dart';
 import '../widgets/market_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class MarketCheckoutScreen extends StatefulWidget {
   const MarketCheckoutScreen({super.key});
@@ -195,7 +194,7 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
         const SizedBox(height: 12),
         // Delivery note
         Card(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           elevation: 0,
           color: Colors.white,
           child: Padding(
@@ -235,32 +234,6 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
       padding: const EdgeInsets.all(16),
       children: [
         // AI security notice
-        Consumer<AIInsightsNotifier>(
-          builder: (context, ai, _) {
-            if (ai.insights.isEmpty) return const SizedBox.shrink();
-            return Container(
-              margin: const EdgeInsets.only(bottom: 16),
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-              decoration: BoxDecoration(
-                color: const Color(0xFF10B981).withValues(alpha: 0.07),
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: const Color(0xFF10B981).withValues(alpha: 0.3)),
-              ),
-              child: const Row(
-                children: [
-                  Icon(Icons.verified_user_outlined, size: 16, color: Color(0xFF10B981)),
-                  SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      'AI fraud protection active — your payment is being monitored',
-                      style: TextStyle(fontSize: 12, color: Color(0xFF10B981), fontWeight: FontWeight.w500),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
         const Text(
           'Select Payment Method',
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
@@ -275,7 +248,7 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(14),
+                borderRadius: BorderRadius.circular(10),
                 border: Border.all(
                   color: isSelected ? kMarketColor : AppColors.inputBorder,
                   width: isSelected ? 2 : 1,
@@ -344,7 +317,7 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
           style: OutlinedButton.styleFrom(
             foregroundColor: kMarketColor,
             side: const BorderSide(color: kMarketColor),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             padding: const EdgeInsets.symmetric(vertical: 14),
           ),
         ),
@@ -439,9 +412,8 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
         top: 12,
         bottom: MediaQuery.of(context).padding.bottom + 12,
       ),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
-        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10, offset: const Offset(0, -2))],
       ),
       child: Row(
         children: [
@@ -452,7 +424,7 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
                 style: OutlinedButton.styleFrom(
                   foregroundColor: kMarketColor,
                   side: const BorderSide(color: kMarketColor),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   padding: const EdgeInsets.symmetric(vertical: 14),
                 ),
                 child: const Text('Back'),
@@ -475,7 +447,7 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
                 backgroundColor: kMarketColor,
                 foregroundColor: Colors.white,
                 disabledBackgroundColor: kMarketColor.withValues(alpha: 0.4),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 padding: const EdgeInsets.symmetric(vertical: 14),
                 elevation: 0,
               ),
@@ -539,7 +511,7 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
             Text(
               order != null
                   ? 'Your order has been placed successfully.\nYou can track it in My Transactions.'
-                  : 'Something went wrong. Please try again or check your Q Points balance.',
+                  : 'Something went wrong. Try again or check your Q Points balance.',
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 14, color: AppColors.textSecondary),
             ),
@@ -560,7 +532,7 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: kMarketColor,
                 foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 padding: const EdgeInsets.symmetric(vertical: 14),
               ),
               child: const Text('Track Order'),

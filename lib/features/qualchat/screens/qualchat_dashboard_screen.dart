@@ -1,4 +1,4 @@
-/// qualChat Screen 1 — Dashboard (Enhanced)
+﻿/// qualChat Screen 1 — Dashboard (Enhanced)
 /// Mode toggle, Vibe Check (Owner), Presence Hub, Insights, Archive
 library;
 
@@ -9,7 +9,6 @@ import '../providers/qualchat_provider.dart';
 import '../widgets/qualchat_widgets.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/design/ive_tokens.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class QualChatDashboardScreen extends StatelessWidget {
   const QualChatDashboardScreen({super.key});
@@ -79,34 +78,6 @@ class QualChatDashboardScreen extends StatelessWidget {
                 ),
 
                 // Mode toggle (Owner only)
-                Consumer<AIInsightsNotifier>(
-                  builder: (context, ai, _) {
-                    if (ai.insights.isEmpty) return const SizedBox.shrink();
-                    return Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                      decoration: BoxDecoration(
-                        color: kChatColor.withValues(alpha: 0.06),
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: kChatColor.withValues(alpha: 0.2)),
-                      ),
-                      child: Row(
-                        children: [
-                          const Icon(Icons.auto_awesome, size: 14, color: kChatColor),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: Text(
-                              'AI: ${ai.insights.first['title'] ?? ''}',
-                              style: const TextStyle(fontSize: 12, color: kChatColor, fontWeight: FontWeight.w500),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
                 ModeToggle(
                   mode: provider.mode,
                   onChanged: provider.setMode,
@@ -256,7 +227,7 @@ class QualChatDashboardScreen extends StatelessWidget {
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: kChatSocial.withValues(alpha: 0.05),
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: kChatSocial.withValues(alpha: 0.2)),
               ),
               child: Column(

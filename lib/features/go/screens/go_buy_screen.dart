@@ -1,4 +1,4 @@
-/// GO Screen 2A — Buy QPoints Flow (5-Step Process)
+﻿/// GO Screen 2A — Buy QPoints Flow (5-Step Process)
 /// Step 1: Gateway Selection, Step 2: Amount, Step 3: Review,
 /// Step 4: Security, Step 5: Processing/Confirmation
 library;
@@ -9,7 +9,6 @@ import 'package:provider/provider.dart';
 import '../models/go_models.dart';
 import '../providers/go_provider.dart';
 import '../widgets/go_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class GoBuyScreen extends StatefulWidget {
   const GoBuyScreen({super.key});
@@ -40,28 +39,6 @@ class _GoBuyScreenState extends State<GoBuyScreen> {
           appBar: const GoAppBar(title: 'Buy QPoints'),
           body: Column(
             children: [
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    color: kGoColor.withValues(alpha: 0.07),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: kGoColor),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            'AI: ${ai.insights.first['title'] ?? ''}',
-                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kGoColor),
-                            maxLines: 1, overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
               GoStepIndicator(currentStep: _step, totalSteps: 5, labels: const ['Gateway', 'Amount', 'Review', 'Verify', 'Done']),
               Expanded(
                 child: AnimatedSwitcher(
@@ -119,7 +96,7 @@ class _StepGateway extends StatelessWidget {
                   padding: const EdgeInsets.all(14),
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: selected ? kGoColor : const Color(0xFFE5E7EB), width: selected ? 2 : 1),
                   ),
                   child: Row(
@@ -447,7 +424,7 @@ class _StepResult extends StatelessWidget {
           const SizedBox(height: 16),
           const Text('Transaction Failed', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: kGoNegative)),
           const SizedBox(height: 8),
-          const Text('Please try again or contact support.', style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+          const Text('Try again or contact support.', style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
           const SizedBox(height: 24),
           ElevatedButton(onPressed: onRetry, style: ElevatedButton.styleFrom(backgroundColor: kGoColor, foregroundColor: Colors.white, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))), child: const Text('Retry')),
           TextButton(onPressed: () => Navigator.pushNamed(context, AppRoutes.utilityHelp), child: const Text('Contact Support')),

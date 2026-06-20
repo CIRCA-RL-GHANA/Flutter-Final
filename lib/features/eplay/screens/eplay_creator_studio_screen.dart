@@ -1,4 +1,4 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// e-PLAY MODULE — Creator Studio Screen
 /// Creators open their "digital branch", upload content, manage royalties.
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -7,7 +7,6 @@ library;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../providers/eplay_provider.dart';
 import 'eplay_hub_screen.dart' show kEPlayColor, kEPlayColorDark;
 
@@ -44,8 +43,8 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
 
   @override
   Widget build(BuildContext context) {
-    return Consumer2<AIInsightsNotifier, EPlayProvider>(
-      builder: (context, ai, eplay, _) {
+    return Consumer<EPlayProvider>(
+      builder: (context, eplay, _) {
         final hasProfile = eplay.creatorProfile != null;
         return Scaffold(
           backgroundColor: AppColors.backgroundLight,
@@ -66,7 +65,7 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
           body: eplay.isCreatorLoading
               ? const Center(child: CircularProgressIndicator())
               : hasProfile
-                  ? _buildStudio(ai, eplay)
+                  ? _buildStudio(eplay)
                   : _buildOnboarding(eplay),
         );
       },
@@ -114,7 +113,7 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
                 backgroundColor: kEPlayColor,
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(vertical: 16),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
               ),
             ),
           ),
@@ -130,7 +129,7 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
       child: Row(children: [
         Container(
           width: 48, height: 48,
-          decoration: BoxDecoration(color: kEPlayColor.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(12)),
+          decoration: BoxDecoration(color: kEPlayColor.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(10)),
           child: Center(child: Text(value, style: const TextStyle(color: kEPlayColor, fontWeight: FontWeight.bold, fontSize: 14))),
         ),
         const SizedBox(width: 16),
@@ -141,13 +140,13 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
 
   // ── Creator Studio ────────────────────────────────────────────────────────
 
-  Widget _buildStudio(AIInsightsNotifier ai, EPlayProvider eplay) {
+  Widget _buildStudio(EPlayProvider eplay) {
     return TabBarView(
       controller: _tabs,
       children: [
         _buildMyContent(),
         _buildUploadTab(),
-        _buildAnalyticsTab(ai),
+        _buildAnalyticsTab(),
       ],
     );
   }
@@ -159,7 +158,7 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
       itemCount: items.length,
       itemBuilder: (ctx, i) => Card(
         margin: const EdgeInsets.only(bottom: 10),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         child: ListTile(
           leading: Container(
             width: 44, height: 44,
@@ -202,11 +201,11 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
           const SizedBox(height: 20),
           const Text('Title', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
           const SizedBox(height: 8),
-          TextField(controller: _titleCtrl, decoration: InputDecoration(hintText: 'e.g. Afrobeats Vol. 4', filled: true, fillColor: AppColors.inputFill, border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none))),
+          TextField(controller: _titleCtrl, decoration: InputDecoration(hintText: 'e.g. Afrobeats Vol. 4', filled: true, fillColor: AppColors.inputFill, border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none))),
           const SizedBox(height: 16),
           const Text('Price (Q Points)', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
           const SizedBox(height: 8),
-          TextField(controller: _priceCtrl, keyboardType: TextInputType.number, decoration: InputDecoration(hintText: 'e.g. 5', prefixText: 'QP ', filled: true, fillColor: AppColors.inputFill, border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none))),
+          TextField(controller: _priceCtrl, keyboardType: TextInputType.number, decoration: InputDecoration(hintText: 'e.g. 5', prefixText: 'QP ', filled: true, fillColor: AppColors.inputFill, border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none))),
           const SizedBox(height: 16),
           // Upload area
           GestureDetector(
@@ -217,13 +216,13 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
               width: double.infinity, height: 120,
               decoration: BoxDecoration(
                 color: AppColors.inputFill,
-                borderRadius: BorderRadius.circular(14),
+                borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: AppColors.inputBorder, style: BorderStyle.solid),
               ),
               child: const Column(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Icon(Icons.cloud_upload_outlined, size: 36, color: AppColors.textTertiary),
                 SizedBox(height: 8),
-                Text('Tap to upload encrypted content file', style: TextStyle(color: AppColors.textSecondary, fontSize: 13)),
+                Text('Upload encrypted content file', style: TextStyle(color: AppColors.textSecondary, fontSize: 13)),
                 Text('Your file is encrypted before reaching our servers', style: TextStyle(color: AppColors.textTertiary, fontSize: 11)),
               ]),
             ),
@@ -238,7 +237,7 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
               style: ElevatedButton.styleFrom(
                 backgroundColor: kEPlayColor, foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(vertical: 15),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
               ),
             ),
           ),
@@ -247,22 +246,11 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
     );
   }
 
-  Widget _buildAnalyticsTab(AIInsightsNotifier ai) {
+  Widget _buildAnalyticsTab() {
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
-        if (ai.insights.isNotEmpty)
-          Container(
-            margin: const EdgeInsets.only(bottom: 16),
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(color: kEPlayColor.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(12), border: Border.all(color: kEPlayColor.withValues(alpha: 0.2))),
-            child: Row(children: [
-              const Icon(Icons.auto_awesome, color: kEPlayColor, size: 16),
-              const SizedBox(width: 8),
-              Expanded(child: Text(ai.insights.first['title'] ?? '', style: const TextStyle(fontSize: 12))),
-            ]),
-          ),
-        _analyticsCard('Total Earnings', 'â‚µ127 QP', Icons.account_balance_wallet, Colors.teal),
+        _analyticsCard('Total Earnings', '₵127 QP', Icons.account_balance_wallet, Colors.teal),
         _analyticsCard('Total Plays',    '4,820',    Icons.play_circle,             kEPlayColor),
         _analyticsCard('Unique Buyers',  '312',      Icons.people,                  AppColors.success),
         _analyticsCard('Avg. Rating',    '4.7 â˜…',    Icons.star,                    AppColors.warning),
@@ -273,9 +261,9 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
   Widget _analyticsCard(String label, String value, IconData icon, Color color) {
     return Card(
       margin: const EdgeInsets.only(bottom: 12),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: ListTile(
-        leading: Container(width: 44, height: 44, decoration: BoxDecoration(color: color.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(12)), child: Icon(icon, color: color)),
+        leading: Container(width: 44, height: 44, decoration: BoxDecoration(color: color.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(10)), child: Icon(icon, color: color)),
         title: Text(label, style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
         trailing: Text(value, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: color)),
       ),

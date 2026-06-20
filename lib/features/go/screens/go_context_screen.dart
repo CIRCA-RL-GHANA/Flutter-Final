@@ -1,11 +1,10 @@
-/// GO Screen 0 — Context Switcher (Pre-Entry)
+﻿/// GO Screen 0 — Context Switcher (Pre-Entry)
 /// Full-screen modal for selecting operational financial context
 /// Trigger: Tapping GO widget on PROMPT screen
 library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../models/go_models.dart';
 import '../providers/go_provider.dart';
 import '../widgets/go_widgets.dart';
@@ -122,34 +121,6 @@ class GoContextScreen extends StatelessWidget {
 
                 const SizedBox(height: 20),
 
-                Consumer<AIInsightsNotifier>(
-                  builder: (context, ai, _) {
-                    if (ai.insights.isEmpty) return const SizedBox.shrink();
-                    return Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 12),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: kGoColor.withValues(alpha: 0.07),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                        child: Row(
-                          children: [
-                            const Icon(Icons.auto_awesome, size: 14, color: kGoColor),
-                            const SizedBox(width: 8),
-                            Expanded(
-                              child: Text(
-                                'AI: ${ai.insights.first['title'] ?? ''}',
-                                style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kGoColor),
-                                maxLines: 1, overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
 
                 // ── Context Grid ──────────────────────────
                 Expanded(
@@ -214,7 +185,7 @@ class _ContextCard extends StatelessWidget {
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
           color: isSelected ? kGoColorLight : Colors.white,
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(10),
           border: Border.all(color: isSelected ? kGoColor : const Color(0xFFE5E7EB), width: isSelected ? 2 : 1),
         ),
         child: Column(

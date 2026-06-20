@@ -1,4 +1,4 @@
-/// qualChat Screen 6 — Presence Dashboard (Enhanced)
+﻿/// qualChat Screen 6 — Presence Dashboard (Enhanced)
 /// Real-Time Operations Center: presence, heatmap, user cards
 library;
 
@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 import '../models/qualchat_models.dart';
 import '../providers/qualchat_provider.dart';
 import '../widgets/qualchat_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/routes/app_routes.dart';
 
 class QualChatPresenceScreen extends StatelessWidget {
@@ -39,29 +38,6 @@ class QualChatPresenceScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Consumer<AIInsightsNotifier>(
-                  builder: (context, ai, _) {
-                    if (ai.insights.isEmpty) return const SizedBox.shrink();
-                    return Container(
-                      color: kChatColor.withValues(alpha: 0.07),
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                      width: double.infinity,
-                      child: Row(
-                        children: [
-                          const Icon(Icons.auto_awesome, size: 14, color: kChatColor),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: Text(
-                              'AI: ${ai.insights.first['title'] ?? ''}',
-                              style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kChatColor),
-                              maxLines: 1, overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
                 // Live overview
                 Padding(
                   padding: const EdgeInsets.all(16),
@@ -191,7 +167,7 @@ class QualChatPresenceScreen extends StatelessWidget {
                       filled: true,
                       fillColor: const Color(0xFFF3F4F6),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide.none,
                       ),
                       contentPadding: const EdgeInsets.symmetric(vertical: 12),
@@ -316,7 +292,7 @@ class _ExpandableUserCardState extends State<_ExpandableUserCard> {
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(10),
           border: Border.all(color: const Color(0xFFE5E7EB)),
         ),
         child: Column(

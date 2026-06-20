@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+﻿import 'package:flutter/foundation.dart';
 import '../../../core/services/qpoint_market_service.dart';
 import '../models/qpoint_market_models.dart';
 
@@ -61,7 +61,7 @@ class QPointMarketProvider extends ChangeNotifier {
   /// Human-readable bridge suspension message (null when bridge is active).
   String? get bridgeUnavailableMessage => isBridgeActive
       ? null
-      : 'Cash-out via this payment method is temporarily limited. Please try again later.';
+      : 'Cash-out via this payment method is temporarily limited. Try again later.';
 
   bool isLoadingBridgeStatus = false;
 
@@ -398,7 +398,7 @@ class QPointMarketProvider extends ChangeNotifier {
       return true;
     }
 
-    depositError = res.message ?? 'Deposit failed. Please try again.';
+    depositError = res.message ?? 'Deposit failed. Try again.';
     notifyListeners();
     return false;
   }
@@ -428,7 +428,7 @@ class QPointMarketProvider extends ChangeNotifier {
       return true;
     }
 
-    withdrawalError = res.message ?? 'Withdrawal failed. Please try again.';
+    withdrawalError = res.message ?? 'Withdrawal failed. Try again.';
     notifyListeners();
     return false;
   }

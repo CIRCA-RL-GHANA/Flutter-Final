@@ -41,7 +41,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
       description: 'This is your personalized dashboard. Tap any widget to interact with it.',
       icon: Icons.dashboard_customize_outlined,
       color: _kAccent,
-      instruction: 'Tap to explore widgets',
+      instruction: 'Explore widgets',
     ),
     const _TutorialStep(
       title: 'Widget Interactions',

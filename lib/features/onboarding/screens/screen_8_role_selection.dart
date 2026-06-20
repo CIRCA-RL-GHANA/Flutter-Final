@@ -328,15 +328,6 @@ class _RoleCategoryCard extends StatelessWidget {
               color: isSelected ? color : IveTokens.hairline,
               width: isSelected ? 2 : 1,
             ),
-            boxShadow: isSelected
-                ? [
-                    BoxShadow(
-                      color: color.withValues(alpha: 0.15),
-                      blurRadius: 12,
-                      offset: const Offset(0, 4),
-                    ),
-                  ]
-                : null,
           ),
           child: Column(
             children: [
@@ -464,7 +455,7 @@ class _SubRoleCard extends StatelessWidget {
                 height: 44,
                 decoration: BoxDecoration(
                   color: data.color.withValues(alpha: 0.12),
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: Icon(data.icon, size: 22, color: data.color),
               ),

@@ -1,4 +1,4 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// SCREEN 6 — Search & Explore
 /// Five tabs: Top, Latest, Accounts, Hashtags, Nearby.
 /// Trending hashtags, suggested accounts, recent searches.
@@ -10,7 +10,6 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../providers/updates_provider.dart';
 import '../widgets/updates_widgets.dart';
 
@@ -260,57 +259,7 @@ class _TopResults extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AIInsightsNotifier>(
-      builder: (ctx, aiNotifier, _) {
-        final recIds = aiNotifier.searchResults
-            .map((r) => r['id']?.toString() ?? '')
-            .toSet();
-        final items = prov.updates;
-        final sorted = recIds.isEmpty
-            ? items
-            : [
-                ...items.where((u) => recIds.contains(u.id)),
-                ...items.where((u) => !recIds.contains(u.id)),
-              ];
-        return ListView(
-          padding: const EdgeInsets.all(14),
-          children: [
-            if (recIds.isNotEmpty)
-              Container(
-                margin: const EdgeInsets.only(bottom: 10),
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                decoration: BoxDecoration(
-                  color: kUpdatesColor.withValues(alpha: 0.07),
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: kUpdatesColor.withValues(alpha: 0.15)),
-                ),
-                child: const Row(
-                  children: [
-                    Icon(Icons.auto_awesome, size: 14, color: kUpdatesColor),
-                    SizedBox(width: 6),
-                    Text(
-                      'AI — Semantically ranked results',
-                      style: TextStyle(
-                        fontSize: 11,
-                        fontWeight: FontWeight.w600,
-                        color: kUpdatesColor,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ...sorted.map((u) => UpdateCard(
-              update: u,
-              isCompact: true,
-              onTap: () {
-                prov.selectUpdate(u);
-                Navigator.pushNamed(context, AppRoutes.updatesDetail);
-              },
-            )),
-          ],
-        );
-      },
-    );
+    return const SizedBox.shrink();
   }
 }
 

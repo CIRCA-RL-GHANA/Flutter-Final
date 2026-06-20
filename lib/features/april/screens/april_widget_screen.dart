@@ -1,4 +1,4 @@
-/// APRIL Screen 0 — PROMPT Screen Integration (APRIL Widget)
+﻿/// APRIL Screen 0 — PROMPT Screen Integration (APRIL Widget)
 /// Voice activation, quick actions, pending actions, plugin status
 library;
 
@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 import '../models/april_models.dart';
 import '../providers/april_provider.dart';
 import '../widgets/april_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class AprilWidgetScreen extends StatelessWidget {
   const AprilWidgetScreen({super.key});
@@ -23,35 +22,12 @@ class AprilWidgetScreen extends StatelessWidget {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
             ),
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(10),
             border: Border.all(color: const Color(0xFFE5E5E7)),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.05),
-                blurRadius: 12,
-                offset: const Offset(0, 4),
-              ),
-            ],
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    color: kAprilColor.withValues(alpha: 0.07),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Row(children: [
-                      const Icon(Icons.auto_awesome, size: 14, color: kAprilColor),
-                      const SizedBox(width: 8),
-                      Expanded(child: Text('AI: ${ai.insights.first['title'] ?? ''}',
-                        style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kAprilColor),
-                        maxLines: 1, overflow: TextOverflow.ellipsis)),
-                    ]),
-                  );
-                },
-              ),
               // ──── VOICE ACTIVATION PANEL ────
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
@@ -73,7 +49,7 @@ class AprilWidgetScreen extends StatelessWidget {
                           Text(
                             provider.voiceState == VoiceState.listening
                                 ? 'Listening...'
-                                : 'Tap to speak',
+                                : 'Speak',
                             style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280)),
                           ),
                         ],
@@ -223,7 +199,7 @@ class _QuickActionChip extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 12),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(10),
             border: Border.all(color: const Color(0xFFE5E5E7)),
           ),
           child: Row(

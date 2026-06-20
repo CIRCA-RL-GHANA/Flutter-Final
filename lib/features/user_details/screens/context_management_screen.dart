@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../../prompt/models/rbac_models.dart';
 import '../../prompt/providers/context_provider.dart';
 import '../models/user_details_models.dart';
@@ -33,28 +32,6 @@ class ContextManagementScreen extends StatelessWidget {
           ),
           body: Column(
             children: [
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    color: AppColors.primary.withValues(alpha: 0.07),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: AppColors.primary),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            'AI: ${ai.insights.first['title'] ?? ''}',
-                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: AppColors.primary),
-                            maxLines: 1, overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
 
               // ─── Search Bar ──────────────────────────────
               Padding(
@@ -67,7 +44,7 @@ class ContextManagementScreen extends StatelessWidget {
                     filled: true,
                     fillColor: const Color(0xFF11131C),
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide.none,
                     ),
                     contentPadding: const EdgeInsets.symmetric(vertical: 10),
@@ -161,11 +138,8 @@ class ContextManagementScreen extends StatelessWidget {
               bottom: MediaQuery.of(context).padding.bottom + 12,
               top: 12,
             ),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
-              boxShadow: [
-                BoxShadow(color: Colors.black.withValues(alpha: 0.06), blurRadius: 10, offset: const Offset(0, -2)),
-              ],
             ),
             child: SizedBox(
               width: double.infinity,
@@ -177,7 +151,7 @@ class ContextManagementScreen extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF6366F1),
                   foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 ),
               ),
             ),
@@ -226,7 +200,7 @@ class _ContextTile extends StatelessWidget {
                   height: 48,
                   decoration: BoxDecoration(
                     gradient: contextTypeGradient(context.entityType),
-                    borderRadius: BorderRadius.circular(14),
+                    borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: color.withValues(alpha: 0.2)),
                   ),
                   child: Center(

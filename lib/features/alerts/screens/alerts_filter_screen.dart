@@ -9,7 +9,6 @@ import 'package:provider/provider.dart';
 import '../models/alerts_models.dart';
 import '../providers/alerts_provider.dart';
 import '../widgets/alerts_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class AlertsFilterScreen extends StatefulWidget {
   const AlertsFilterScreen({super.key});
@@ -71,22 +70,6 @@ class _AlertsFilterScreenState extends State<AlertsFilterScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Consumer<AIInsightsNotifier>(
-                  builder: (context, ai, _) {
-                    if (ai.insights.isEmpty) return const SizedBox.shrink();
-                    return Container(
-                      color: kAlertsColor.withValues(alpha: 0.07),
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                      child: Row(children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: kAlertsColor),
-                        const SizedBox(width: 8),
-                        Expanded(child: Text('AI: ${ai.insights.first['title'] ?? ''}',
-                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kAlertsColor),
-                          maxLines: 1, overflow: TextOverflow.ellipsis)),
-                      ]),
-                    );
-                  },
-                ),
                 // ──── FILTER PRESETS ────
                 AlertsSectionCard(
                   title: 'âš¡ Quick Presets',
@@ -237,10 +220,9 @@ class _AlertsFilterScreenState extends State<AlertsFilterScreen> {
           // ──── STICKY FOOTER ────
           bottomNavigationBar: Container(
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
-              border: const Border(top: BorderSide(color: Color(0xFF1C1C2E))),
-              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 8, offset: const Offset(0, -2))],
+              border: Border(top: BorderSide(color: Color(0xFF1C1C2E))),
             ),
             child: SafeArea(
               child: Row(
@@ -383,7 +365,7 @@ class _FilterAccordion extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(10),
         border: Border.all(color: const Color(0xFFE5E7EB)),
       ),
       child: Theme(

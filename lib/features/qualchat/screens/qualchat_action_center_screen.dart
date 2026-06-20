@@ -1,4 +1,4 @@
-/// qualChat Screen 12 — Action Center
+﻿/// qualChat Screen 12 — Action Center
 /// Task manager: priority sections, AI suggestions, profile completeness, analytics
 library;
 
@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 import '../models/qualchat_models.dart';
 import '../providers/qualchat_provider.dart';
 import '../widgets/qualchat_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class QualChatActionCenterScreen extends StatelessWidget {
   const QualChatActionCenterScreen({super.key});
@@ -43,32 +42,6 @@ class QualChatActionCenterScreen extends StatelessWidget {
           body: ListView(
             padding: const EdgeInsets.all(16),
             children: [
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    margin: const EdgeInsets.only(bottom: 12),
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                    decoration: BoxDecoration(
-                      color: kChatColor.withValues(alpha: 0.07),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: kChatColor),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            'AI: ${ai.insights.first['title'] ?? ''}',
-                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kChatColor),
-                            maxLines: 1, overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
               // Profile completeness bar
               QualChatSectionCard(
                 title: 'ðŸŽ¯ Profile Completeness',
@@ -287,17 +260,11 @@ class _TaskCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(10),
         border: Border(
           left: BorderSide(
               color: priorityColors[task.priority] ?? kChatColor, width: 4),
         ),
-        boxShadow: [
-          BoxShadow(
-              color: Colors.black.withValues(alpha: 0.03),
-              blurRadius: 8,
-              offset: const Offset(0, 2))
-        ],
       ),
       child: Padding(
         padding: const EdgeInsets.all(14),
@@ -426,7 +393,7 @@ class _AISuggestionCard extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(10),
         border: Border.all(color: kChatColor.withValues(alpha: 0.2)),
       ),
       child: Column(

@@ -86,7 +86,7 @@ class _ModuleWidgetCardState extends State<ModuleWidgetCard>
         position: _slideAnimation,
         child: Semantics(
           label: '${info.name} widget. ${info.description}. '
-              '${widget.isViewOnly ? "View only." : "Tap to open."}',
+              '${widget.isViewOnly ? "View only." : "Open."}',
           button: !widget.isViewOnly,
           child: GestureDetector(
             onTapDown: widget.isViewOnly
@@ -160,13 +160,6 @@ class _NormalCard extends StatelessWidget {
           color: IveTokens.surface,
           borderRadius: IveTokens.brLg,
           border: Border.all(color: info.color.withValues(alpha: 0.12), width: 1),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.12),
-              blurRadius: 12,
-              offset: const Offset(0, 4),
-            ),
-          ],
         ),
         child: ClipRRect(
           borderRadius: IveTokens.brLg,
@@ -229,16 +222,9 @@ class _LoadingCardState extends State<_LoadingCard>
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: IveTokens.surface,
         borderRadius: IveTokens.brLg,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.12),
-            blurRadius: 12,
-            offset: const Offset(0, 4),
-          ),
-        ],
       ),
       child: AnimatedBuilder(
         animation: _shimmerController,
@@ -302,13 +288,6 @@ class _ErrorCard extends StatelessWidget {
         color: IveTokens.surface,
         borderRadius: IveTokens.brLg,
         border: Border.all(color: AppColors.error.withValues(alpha: 0.4), width: 1.5),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.12),
-            blurRadius: 12,
-            offset: const Offset(0, 4),
-          ),
-        ],
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -358,13 +337,6 @@ class _EmptyCard extends StatelessWidget {
         color: IveTokens.surface,
         borderRadius: IveTokens.brLg,
         border: Border.all(color: AppColors.inputBorder),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.12),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

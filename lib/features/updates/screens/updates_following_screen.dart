@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/design/ive_tokens.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/theme/app_colors.dart';
 import '../models/updates_models.dart';
 import '../providers/updates_provider.dart';
@@ -62,7 +61,7 @@ class _BodyState extends State<_Body> with SingleTickerProviderStateMixin {
               Center(
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                  decoration: BoxDecoration(color: kUpdatesColor.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(12)),
+                  decoration: BoxDecoration(color: kUpdatesColor.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(10)),
                   child: Text('${prov.followingCount}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: kUpdatesColor)),
                 ),
               ),
@@ -75,28 +74,6 @@ class _BodyState extends State<_Body> with SingleTickerProviderStateMixin {
           ),
           body: Column(
             children: [
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    color: kUpdatesColor.withValues(alpha: 0.07),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: kUpdatesColor),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            'AI: ${ai.insights.first['title'] ?? ''}',
-                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kUpdatesColor),
-                            maxLines: 1, overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
 
               // Bulk action bar
               if (_isBulkMode && _selectedIds.isNotEmpty)
@@ -135,9 +112,8 @@ class _BodyState extends State<_Body> with SingleTickerProviderStateMixin {
 
               // Tabs
               Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
-                  boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 4, offset: const Offset(0, 2))],
                 ),
                 child: TabBar(
                   controller: _tabController,
@@ -259,9 +235,8 @@ class _FollowingList extends StatelessWidget {
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(10),
             border: isSelected ? Border.all(color: kUpdatesColor, width: 2) : null,
-            boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 4)],
           ),
           child: Row(
             children: [
@@ -466,7 +441,7 @@ class _ListsView extends StatelessWidget {
             margin: const EdgeInsets.only(bottom: 10),
             decoration: BoxDecoration(
               color: kUpdatesColor.withValues(alpha: 0.04),
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(10),
               border: Border.all(color: kUpdatesColor.withValues(alpha: 0.2), style: BorderStyle.solid),
             ),
             child: const Row(
@@ -486,8 +461,7 @@ class _ListsView extends StatelessWidget {
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
-            boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 4)],
+            borderRadius: BorderRadius.circular(10),
           ),
           child: Row(
             children: [

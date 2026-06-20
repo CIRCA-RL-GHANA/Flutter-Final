@@ -1,4 +1,4 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+﻿/// ═══════════════════════════════════════════════════════════════════════════
 /// LIVE MODULE — Operations Feed
 /// Real-time operations log wired to LiveProvider: active orders,
 /// driver status, package events, and return updates
@@ -11,7 +11,6 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
 import '../providers/live_provider.dart';
 import '../widgets/live_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class LiveOperationsScreen extends StatefulWidget {
   const LiveOperationsScreen({super.key});
@@ -79,32 +78,6 @@ class _LiveOperationsScreenState extends State<LiveOperationsScreen> {
                         padding: const EdgeInsets.all(16),
                         children: [
                           // AI insights strip
-                          Consumer<AIInsightsNotifier>(
-                            builder: (context, ai, _) {
-                              if (ai.insights.isEmpty) return const SizedBox.shrink();
-                              return Container(
-                                margin: const EdgeInsets.only(bottom: 12),
-                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                                decoration: BoxDecoration(
-                                  color: kLiveColor.withValues(alpha: 0.07),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Row(
-                                  children: [
-                                    const Icon(Icons.auto_awesome, size: 14, color: kLiveColor),
-                                    const SizedBox(width: 8),
-                                    Expanded(
-                                      child: Text(
-                                        'AI: ${ai.insights.first['title'] ?? ''}',
-                                        style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kLiveColor),
-                                        maxLines: 1, overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
-                          ),
 
                           // Operations overview metrics
                           LiveSectionCard(

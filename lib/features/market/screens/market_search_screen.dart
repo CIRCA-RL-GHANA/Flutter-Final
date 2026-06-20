@@ -1,4 +1,4 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// MARKET MODULE — Screen 1.1: Unified Market Search
 /// Full-screen modal with search bar, recent searches, quick filters,
 /// tabbed results (Merchants / Products / Deals), AI suggestions
@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../models/market_models.dart';
 import '../providers/market_provider.dart';
 import '../widgets/market_widgets.dart';
@@ -198,10 +197,7 @@ class _MarketSearchScreenState extends State<MarketSearchScreen> with SingleTick
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8, offset: const Offset(0, 2)),
-              ],
+              borderRadius: BorderRadius.circular(10),
             ),
             child: Row(
               children: [
@@ -210,7 +206,7 @@ class _MarketSearchScreenState extends State<MarketSearchScreen> with SingleTick
                   height: 48,
                   decoration: BoxDecoration(
                     color: kMarketColor.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: const Icon(Icons.store, color: kMarketColor),
                 ),
@@ -319,7 +315,7 @@ class _MarketSearchScreenState extends State<MarketSearchScreen> with SingleTick
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
             gradient: const LinearGradient(colors: [kMarketColor, kMarketColorDark]),
-            borderRadius: BorderRadius.circular(14),
+            borderRadius: BorderRadius.circular(10),
           ),
           child: Row(
             children: [
@@ -375,91 +371,6 @@ class _AISearchSuggestionBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AIInsightsNotifier>(
-      builder: (ctx, notifier, _) {
-        final results = notifier.searchResults;
-
-        // When no query & no AI results — show a generic AI prompt banner
-        if (query.isEmpty && results.isEmpty) {
-          return Container(
-            margin: const EdgeInsets.all(16),
-            padding: const EdgeInsets.all(14),
-            decoration: BoxDecoration(
-              color: const Color(0xFF8B5CF6).withValues(alpha: 0.06),
-              borderRadius: BorderRadius.circular(14),
-              border: Border.all(
-                  color: const Color(0xFF8B5CF6).withValues(alpha: 0.15)),
-            ),
-            child: const Row(
-              children: [
-                Icon(Icons.auto_awesome,
-                    size: 18, color: Color(0xFF8B5CF6)),
-                SizedBox(width: 10),
-                Expanded(
-                  child: Text(
-                    'AI-powered search — type anything and get\nsemantically ranked results.',
-                    style: TextStyle(fontSize: 12, color: AppColors.textSecondary),
-                  ),
-                ),
-              ],
-            ),
-          );
-        }
-
-        // When AI search results exist — show them as suggestion chips
-        if (results.isNotEmpty) {
-          return Container(
-            margin:  const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color:        const Color(0xFF8B5CF6).withValues(alpha: 0.05),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Row(
-                  children: [
-                    Icon(Icons.auto_awesome, size: 14, color: Color(0xFF8B5CF6)),
-                    SizedBox(width: 4),
-                    Text('AI Suggestions',
-                        style: TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xFF8B5CF6))),
-                  ],
-                ),
-                const SizedBox(height: 8),
-                Wrap(
-                  spacing: 6,
-                  runSpacing: 6,
-                  children: results.take(6).map((r) {
-                    final label = r['id']?.toString() ?? '';
-                    return GestureDetector(
-                      onTap: () => onSuggestionTap(label),
-                      child: Chip(
-                        label: Text(label,
-                            style: const TextStyle(fontSize: 11)),
-                        backgroundColor:
-                            const Color(0xFF8B5CF6).withValues(alpha: 0.08),
-                        side: BorderSide(
-                            color: const Color(0xFF8B5CF6)
-                                .withValues(alpha: 0.2)),
-                        labelStyle:
-                            const TextStyle(color: Color(0xFF8B5CF6)),
-                        padding: EdgeInsets.zero,
-                        visualDensity: VisualDensity.compact,
-                      ),
-                    );
-                  }).toList(),
-                ),
-              ],
-            ),
-          );
-        }
-
-        return const SizedBox.shrink();
-      },
-    );
+    return const SizedBox.shrink();
   }
 }

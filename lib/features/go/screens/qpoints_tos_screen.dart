@@ -11,6 +11,7 @@ library;
 import 'package:flutter/foundation.dart' show defaultTargetPlatform, TargetPlatform;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../core/design/ive_tokens.dart';
 import '../providers/qpoints_tos_provider.dart';
 import '../models/qpoint_market_models.dart';
 
@@ -49,6 +50,7 @@ class QPointsTosScreen extends StatefulWidget {
 
 class _QPointsTosScreenState extends State<QPointsTosScreen> {
   final ScrollController _scrollController = ScrollController();
+  double _scrollProgress = 0.0;
 
   @override
   void initState() {
@@ -66,12 +68,16 @@ class _QPointsTosScreenState extends State<QPointsTosScreen> {
   }
 
   void _onScroll() {
-    final provider = context.read<QPointsTosProvider>();
-    if (!provider.hasScrolledToBottom) {
-      final pos = _scrollController.position;
-      if (pos.pixels >= pos.maxScrollExtent - 40) {
-        provider.setScrolledToBottom();
+    final pos = _scrollController.position;
+    if (pos.maxScrollExtent > 0) {
+      final progress = (pos.pixels / pos.maxScrollExtent).clamp(0.0, 1.0);
+      if ((progress - _scrollProgress).abs() > 0.005) {
+        setState(() => _scrollProgress = progress);
       }
+    }
+    final provider = context.read<QPointsTosProvider>();
+    if (!provider.hasScrolledToBottom && pos.pixels >= pos.maxScrollExtent - 40) {
+      provider.setScrolledToBottom();
     }
   }
 
@@ -128,7 +134,7 @@ class _QPointsTosScreenState extends State<QPointsTosScreen> {
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             Text(
-              'Please read and accept to continue',
+              'Read and accept to continue',
               style: TextStyle(fontSize: 11, color: Colors.white70),
             ),
           ],
@@ -179,6 +185,20 @@ class _QPointsTosScreenState extends State<QPointsTosScreen> {
 
           return Column(
             children: [
+              // ── Scroll progress indicator (spec P1: type rhythm + scroll-progress)
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 80),
+                height: 3,
+                child: LinearProgressIndicator(
+                  value: _scrollProgress,
+                  backgroundColor: IveTokens.hairColor,
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    _scrollProgress >= 1.0 ? IveTokens.okColor : kQpColor,
+                  ),
+                  minHeight: 3,
+                ),
+              ),
+
               // ── Version banner ───────────────────────────────────────────
               _VersionBanner(tos: tos),
 
@@ -559,15 +579,8 @@ class _ConsentFooter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.08),
-            blurRadius: 8,
-            offset: const Offset(0, -2),
-          ),
-        ],
       ),
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 20),
       child: Column(

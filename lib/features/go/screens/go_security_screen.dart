@@ -1,11 +1,10 @@
-/// GO Screen 13 — Security Center
+﻿/// GO Screen 13 — Security Center
 /// Access control, audit trail, security settings
 library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../providers/go_provider.dart';
 import '../widgets/go_widgets.dart';
 
@@ -31,28 +30,6 @@ class _GoSecurityScreenState extends State<GoSecurityScreen> with SingleTickerPr
         appBar: const GoAppBar(title: 'Security Center'),
         body: Column(
           children: [
-            Consumer<AIInsightsNotifier>(
-              builder: (context, ai, _) {
-                if (ai.insights.isEmpty) return const SizedBox.shrink();
-                return Container(
-                  color: kGoColor.withValues(alpha: 0.07),
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                  child: Row(
-                    children: [
-                      const Icon(Icons.auto_awesome, size: 14, color: kGoColor),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: Text(
-                          'AI security: ${ai.insights.first['title'] ?? ''}',
-                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kGoColor),
-                          maxLines: 1, overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
             Container(
               color: Colors.white,
               child: TabBar(
@@ -220,7 +197,7 @@ class _RecommendCard extends StatelessWidget {
   Widget build(BuildContext context) => Container(
     margin: const EdgeInsets.only(bottom: 10),
     padding: const EdgeInsets.all(14),
-    decoration: BoxDecoration(color: kGoWarning.withValues(alpha: 0.06), borderRadius: BorderRadius.circular(12), border: Border.all(color: kGoWarning.withValues(alpha: 0.2))),
+    decoration: BoxDecoration(color: kGoWarning.withValues(alpha: 0.06), borderRadius: BorderRadius.circular(10), border: Border.all(color: kGoWarning.withValues(alpha: 0.2))),
     child: Row(children: [
       Icon(icon, size: 20, color: kGoWarning),
       const SizedBox(width: 10),

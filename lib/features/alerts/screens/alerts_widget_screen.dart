@@ -1,4 +1,4 @@
-/// Alerts Screen 0 — PROMPT Screen Integration (Alerts Widget)
+﻿/// Alerts Screen 0 — PROMPT Screen Integration (Alerts Widget)
 /// Glass morphism card, metrics row, resolved preview, resolver avatars,
 /// mini donut chart, real-time badge
 library;
@@ -9,7 +9,6 @@ import '../../../core/routes/app_routes.dart';
 import '../models/alerts_models.dart';
 import '../providers/alerts_provider.dart';
 import '../widgets/alerts_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class AlertsWidgetScreen extends StatelessWidget {
   const AlertsWidgetScreen({super.key});
@@ -25,35 +24,12 @@ class AlertsWidgetScreen extends StatelessWidget {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
             ),
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(10),
             border: Border.all(color: const Color(0xFFE5E7EB)),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.05),
-                blurRadius: 12,
-                offset: const Offset(0, 4),
-              ),
-            ],
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    color: kAlertsColor.withValues(alpha: 0.07),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Row(children: [
-                      const Icon(Icons.auto_awesome, size: 14, color: kAlertsColor),
-                      const SizedBox(width: 8),
-                      Expanded(child: Text('AI: ${ai.insights.first['title'] ?? ''}',
-                        style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kAlertsColor),
-                        maxLines: 1, overflow: TextOverflow.ellipsis)),
-                    ]),
-                  );
-                },
-              ),
               // ──── HEADER ROW ────
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),

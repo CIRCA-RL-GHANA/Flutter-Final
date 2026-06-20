@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+﻿import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../design/ive_button.dart';
@@ -90,7 +90,7 @@ class _ErrorBoundaryState extends State<ErrorBoundary> {
                     child: Text(
                       // Never expose raw exceptions to users in release builds.
                       kReleaseMode
-                          ? 'An unexpected error occurred. Please try again.'
+                          ? 'An unexpected error occurred. Try again.'
                           : _errorMessage,
                       style: IveType.callout,
                       textAlign: TextAlign.center,

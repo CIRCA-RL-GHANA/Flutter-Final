@@ -1,4 +1,4 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// e-PLAY MODULE — Hub Screen
 /// Digital goods marketplace hub for African creators.
 /// Entry point: category carousel, featured content, creator spotlight.
@@ -10,7 +10,6 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../providers/eplay_provider.dart';
 
 // ── Module color
@@ -67,8 +66,8 @@ class _EPlayHubScreenState extends State<EPlayHubScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer2<AIInsightsNotifier, EPlayProvider>(
-      builder: (context, ai, eplay, _) {
+    return Consumer<EPlayProvider>(
+      builder: (context, eplay, _) {
         return AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle.light,
           child: Scaffold(
@@ -103,30 +102,6 @@ class _EPlayHubScreenState extends State<EPlayHubScreen> {
                     background: _buildHeroBackground(),
                   ),
                 ),
-
-                // ── AI Insight banner ───────────────────────────────────
-                if (ai.insights.isNotEmpty)
-                  SliverToBoxAdapter(
-                    child: Container(
-                      margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(colors: [kEPlayColor.withValues(alpha: 0.12), kEPlayColorDark.withValues(alpha: 0.06)]),
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: kEPlayColor.withValues(alpha: 0.25)),
-                      ),
-                      child: Row(children: [
-                        const Icon(Icons.auto_awesome, color: kEPlayColor, size: 18),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            ai.insights.first['title'] ?? '',
-                            style: const TextStyle(fontSize: 13, color: AppColors.textPrimary),
-                          ),
-                        ),
-                      ]),
-                    ),
-                  ),
 
                 // ── Category pills ──────────────────────────────────────
                 SliverToBoxAdapter(child: _buildCategoryRow()),
@@ -243,7 +218,6 @@ class _EPlayHubScreenState extends State<EPlayHubScreen> {
                 color: isSelected ? kEPlayColor : Colors.white,
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(color: isSelected ? kEPlayColor : AppColors.inputBorder),
-                boxShadow: isSelected ? [BoxShadow(color: kEPlayColor.withValues(alpha: 0.3), blurRadius: 8, offset: const Offset(0, 2))] : [],
               ),
               child: Row(children: [
                 Icon(icon, size: 16, color: isSelected ? Colors.white : AppColors.textSecondary),
@@ -296,7 +270,6 @@ class _EPlayHubScreenState extends State<EPlayHubScreen> {
               decoration: BoxDecoration(
                 gradient: LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, colors: colors),
                 borderRadius: BorderRadius.circular(16),
-                boxShadow: [BoxShadow(color: colors[0].withValues(alpha: 0.35), blurRadius: 10, offset: const Offset(0, 4))],
               ),
               padding: const EdgeInsets.all(14),
               child: Column(
@@ -341,7 +314,7 @@ class _EPlayHubScreenState extends State<EPlayHubScreen> {
         onTap: onTap,
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 14),
-          decoration: BoxDecoration(color: color.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(14), border: Border.all(color: color.withValues(alpha: 0.25))),
+          decoration: BoxDecoration(color: color.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(10), border: Border.all(color: color.withValues(alpha: 0.25))),
           child: Column(children: [
             Icon(icon, color: color, size: 24),
             const SizedBox(height: 6),

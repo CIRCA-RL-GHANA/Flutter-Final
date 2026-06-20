@@ -11,7 +11,6 @@ import '../../../core/theme/app_colors.dart';
 import '../models/live_models.dart';
 import '../providers/live_provider.dart';
 import '../widgets/live_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../../../core/routes/app_routes.dart';
 
 class LiveDriverPerformanceScreen extends StatelessWidget {
@@ -78,35 +77,7 @@ class LiveDriverPerformanceScreen extends StatelessWidget {
                 ),
               ),
 
-              SliverToBoxAdapter(
-                child: Consumer<AIInsightsNotifier>(
-                  builder: (context, ai, _) {
-                    if (ai.insights.isEmpty) return const SizedBox.shrink();
-                    return Container(
-                      margin: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: kLiveColor.withValues(alpha: 0.07),
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: kLiveColor.withValues(alpha: 0.2)),
-                      ),
-                      child: Row(
-                        children: [
-                          const Icon(Icons.auto_awesome, size: 14, color: kLiveColor),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: Text(
-                              'AI: ${ai.insights.first['title'] ?? ''}',
-                              style: const TextStyle(fontSize: 12, color: kLiveColor, fontWeight: FontWeight.w500),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
+              const SliverToBoxAdapter(
               ),
 
               SliverToBoxAdapter(
@@ -177,7 +148,7 @@ class LiveDriverPerformanceScreen extends StatelessWidget {
                         iconColor: const Color(0xFF10B981),
                         child: Container(
                           height: 120,
-                          decoration: BoxDecoration(color: const Color(0xFFF3F4F6), borderRadius: BorderRadius.circular(12)),
+                          decoration: BoxDecoration(color: const Color(0xFFF3F4F6), borderRadius: BorderRadius.circular(10)),
                           child: const Center(
                             child: Column(
                               mainAxisSize: MainAxisSize.min,

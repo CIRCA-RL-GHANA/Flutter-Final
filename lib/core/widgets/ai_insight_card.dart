@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
 
 /// Displays a single AI insight card with type-based icon and colour coding.
@@ -28,15 +28,8 @@ class AIInsightCard extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 12),
         decoration: BoxDecoration(
           color:        Theme.of(context).cardColor,
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(10),
           border:       Border(left: BorderSide(color: config.accent, width: 4)),
-          boxShadow: [
-            BoxShadow(
-              color:      Colors.black.withValues(alpha: 0.05),
-              blurRadius: 8,
-              offset:     const Offset(0, 3),
-            ),
-          ],
         ),
         child: Padding(
           padding: const EdgeInsets.all(14),

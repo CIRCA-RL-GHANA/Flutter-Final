@@ -6,9 +6,6 @@ library;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/services/ai_insights_notifier.dart';
-import '../../../core/widgets/ai_price_widgets.dart';
-import '../../../core/widgets/ai_insight_card.dart';
 import '../providers/go_provider.dart';
 import '../widgets/go_widgets.dart';
 
@@ -107,52 +104,7 @@ class _GoFinancialScreenState extends State<GoFinancialScreen> {
                 ),
 
                 // ── AI Widgets ────────────────────────────────────────────
-                SliverToBoxAdapter(
-                  child: Consumer<AIInsightsNotifier>(
-                    builder: (ctx, notifier, _) {
-                      return Column(
-                        children: [
-                          if (notifier.spendingPattern != null &&
-                              notifier.spendingPattern!.isNotEmpty)
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-                              child: AISpendingSummaryCard(
-                                spendingData: notifier.spendingPattern,
-                                isLoading: notifier.loadingInsights,
-                              ),
-                            ),
-                          if (notifier.insights.isNotEmpty)
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Row(
-                                    children: [
-                                      Icon(Icons.auto_awesome,
-                                          size: 14, color: kGoPurple),
-                                      SizedBox(width: 6),
-                                      Text(
-                                        'AI Financial Insights',
-                                        style: TextStyle(
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w600,
-                                          color: Color(0xFF1A1A1A),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 6),
-                                  ...notifier.insights.take(2).map(
-                                        (i) => AIInsightCard(insight: i),
-                                      ),
-                                ],
-                              ),
-                            ),
-                        ],
-                      );
-                    },
-                  ),
+                const SliverToBoxAdapter(
                 ),
 
                 // ── Transactions Header ───────────────────────────────────
@@ -350,7 +302,7 @@ class _ActionButton extends StatelessWidget {
             height: 54,
             decoration: BoxDecoration(
               color: color.withValues(alpha: 0.12),
-              borderRadius: BorderRadius.circular(14),
+              borderRadius: BorderRadius.circular(10),
               border: Border.all(color: color.withValues(alpha: 0.3)),
             ),
             child: Icon(icon, color: color, size: 22),

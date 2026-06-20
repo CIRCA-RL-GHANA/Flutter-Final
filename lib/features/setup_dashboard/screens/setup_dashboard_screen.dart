@@ -1,16 +1,15 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// ─────────────────────────────────────────────────────────────────────────────
 /// SD0: SETUP DASHBOARD HUB — Master Entry Point
 /// 6-row adaptive card matrix with role-based filtering
 /// Rows: Operations, Finance & Staff, Logistics, Engagement,
 ///        Branch Identity, Personal & History
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// ─────────────────────────────────────────────────────────────────────────────
 library;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import '../../../core/services/ai_insights_notifier.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/design/ive_tokens.dart';
+import '../../../core/design/ive.dart';
 import '../../prompt/models/rbac_models.dart';
 import '../../prompt/providers/context_provider.dart';
 import '../models/setup_dashboard_models.dart';
@@ -25,99 +24,127 @@ class SetupDashboardScreen extends StatefulWidget {
   State<SetupDashboardScreen> createState() => _SetupDashboardScreenState();
 }
 
-class _SetupDashboardScreenState extends State<SetupDashboardScreen> {
+class _SetupDashboardScreenState extends State<SetupDashboardScreen>
+    with SingleTickerProviderStateMixin {
   String _searchQuery = '';
+  bool _genieVisible = true;
+  late final AnimationController _staggerCtrl;
+
+  @override
+  void initState() {
+    super.initState();
+    _staggerCtrl = AnimationController(vsync: this, duration: const Duration(milliseconds: 1200));
+    if (!WidgetsBinding.instance.accessibilityFeatures.disableAnimations) {
+      _staggerCtrl.forward();
+    } else {
+      _staggerCtrl.value = 1.0;
+    }
+  }
+
+  @override
+  void dispose() {
+    _staggerCtrl.dispose();
+    super.dispose();
+  }
+
+  /// Fade animation for card at flat index [i] out of [total] visible cards.
+  Animation<double> _cardFade(int i, int total) {
+    const revealMs = 200;
+    const staggerMs = 60; // AppAnimations.dpStagger = 60ms
+    final totalMs = ((total - 1) * staggerMs + revealMs).toDouble().clamp(revealMs.toDouble(), 2000.0);
+    final start = (i * staggerMs / totalMs).clamp(0.0, 1.0);
+    final end = ((i * staggerMs + revealMs) / totalMs).clamp(0.0, 1.0);
+    return CurvedAnimation(
+      parent: _staggerCtrl,
+      curve: Interval(start, end, curve: Curves.easeOut),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Consumer2<SetupDashboardProvider, ContextProvider>(
       builder: (context, setupProv, ctxProv, _) {
         final role = ctxProv.currentRole;
-        final cards = setupProv.getCardsForRole(role);
+        // Spec P1: only render permitted (fully-actionable) cards — no greyed-out locked cards
+        final cards = setupProv.getCardsForRole(role).where((c) => !c.isViewOnly).toList();
         final header = setupProv.headerInfo;
 
-        // Filter cards by search query
         final filteredCards = _searchQuery.isEmpty
             ? cards
             : cards.where((c) =>
                 c.title.toLowerCase().contains(_searchQuery.toLowerCase())).toList();
 
-        // Group cards into rows
         final rows = _groupCardsIntoRows(filteredCards);
 
+        // Flat index counter for stagger — pre-count total visible cards
+        final totalCards = filteredCards.length;
+        var flatIndex = 0;
+
         return Scaffold(
-          backgroundColor: IveTokens.bg,
-          appBar: const SetupAppBar(title: 'Setup Dashboard'),
+          backgroundColor: IveTokens.voidColor,
+          appBar: _DarkSetupAppBar(
+            title: 'Setup',
+            onBack: () => Navigator.pop(context),
+          ),
           body: RefreshIndicator(
             color: kSetupColor,
-            onRefresh: () async {
-              await setupProv.refreshSection('hub');
-            },
+            backgroundColor: IveTokens.raisedColor,
+            onRefresh: () async => setupProv.refreshSection('hub'),
             child: CustomScrollView(
               slivers: [
-                // ─── Header Banner ────────────────────────────
+                // ─── Header ─────────────────────────────────
                 SliverToBoxAdapter(
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
+                    padding: const EdgeInsets.fromLTRB(
+                      IveTokens.s4, IveTokens.s3, IveTokens.s4, 0,
+                    ),
                     child: _HeaderBanner(header: header, role: role),
                   ),
                 ),
 
-                // ─── Search Bar ───────────────────────────────
-              // ─── AI Insights ─────────────────────────────────────────
-              SliverToBoxAdapter(
-                child: Consumer<AIInsightsNotifier>(
-                  builder: (context, ai, _) {
-                    if (ai.insights.isEmpty) return const SizedBox.shrink();
-                    return Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: kSetupColor.withValues(alpha: 0.07),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                        child: Row(
-                          children: [
-                            const Icon(Icons.auto_awesome, size: 14, color: kSetupColor),
-                            const SizedBox(width: 8),
-                            Expanded(
-                              child: Text(
-                                'AI: ${ai.insights.first['title'] ?? ''}',
-                                style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kSetupColor),
-                                maxLines: 1, overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          ],
-                        ),
+                // ─── Genie health strip (max one per screen) ─
+                if (_genieVisible)
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(
+                        IveTokens.s4, IveTokens.s3, IveTokens.s4, 0,
                       ),
-                    );
-                  },
-                ),
-              ),
+                      child: GenieStrip(
+                        message: 'Configure your modules to unlock the full Commerce OS experience.',
+                        onDismiss: () => setState(() => _genieVisible = false),
+                      ),
+                    ),
+                  ),
+
+                // ─── Search ──────────────────────────────────
                 SliverToBoxAdapter(
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
-                    child: _SearchBar(
-                      onChanged: (q) => setState(() => _searchQuery = q),
+                    padding: const EdgeInsets.fromLTRB(
+                      IveTokens.s4, IveTokens.s4, IveTokens.s4, 0,
                     ),
+                    child: _DarkSearchBar(onChanged: (q) => setState(() => _searchQuery = q)),
                   ),
                 ),
 
-                // ─── Card Rows ────────────────────────────────
+                // ─── Card Rows ───────────────────────────────
                 ...rows.entries.map((entry) {
                   final rowCards = entry.value;
                   if (rowCards.isEmpty) return const SliverToBoxAdapter(child: SizedBox.shrink());
+
+                  // Capture start index for this row's stagger
+                  final rowStartIndex = flatIndex;
+                  flatIndex += rowCards.length;
+
                   return SliverToBoxAdapter(
                     child: Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
+                      padding: const EdgeInsets.fromLTRB(
+                        IveTokens.s4, IveTokens.s4, IveTokens.s4, 0,
+                      ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SetupSectionTitle(
-                            title: entry.key,
-                            icon: _rowIcon(entry.key),
-                          ),
+                          _RowLabel(title: entry.key, icon: _rowIcon(entry.key)),
+                          const SizedBox(height: IveTokens.s3),
                           LayoutBuilder(
                             builder: (context, constraints) {
                               final crossAxisCount =
@@ -128,23 +155,23 @@ class _SetupDashboardScreenState extends State<SetupDashboardScreen> {
                                 physics: const NeverScrollableScrollPhysics(),
                                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: crossAxisCount,
-                                  crossAxisSpacing: 10,
-                                  mainAxisSpacing: 10,
+                                  crossAxisSpacing: IveTokens.s2,
+                                  mainAxisSpacing: IveTokens.s2,
                                   childAspectRatio: 0.78,
                                 ),
                                 itemCount: rowCards.length,
                                 itemBuilder: (context, i) {
                                   final card = rowCards[i];
-                                  return SetupModuleCard(
-                                    card: card,
-                                    onTap: () {
-                                      // For view-only cards, navigate but also show
-                                      // a brief tooltip so users know their access level.
-                                      if (card.isViewOnly) {
-                                        showSetupRbacTooltip(context, card.id);
-                                      }
-                                      Navigator.pushNamed(context, card.route);
-                                    },
+                                  final cardFlatIdx = rowStartIndex + i;
+                                  return FadeTransition(
+                                    opacity: _cardFade(cardFlatIdx, totalCards),
+                                    child: _DarkModuleCard(
+                                      card: card,
+                                      onTap: () {
+                                        HapticFeedback.lightImpact();
+                                        Navigator.pushNamed(context, card.route);
+                                      },
+                                    ),
                                   );
                                 },
                               );
@@ -156,25 +183,26 @@ class _SetupDashboardScreenState extends State<SetupDashboardScreen> {
                   );
                 }),
 
-                // ─── Empty State ──────────────────────────
+                // ─── Empty State ─────────────────────────────
                 if (filteredCards.isEmpty && _searchQuery.isNotEmpty)
                   const SliverToBoxAdapter(
                     child: Padding(
-                      padding: EdgeInsets.all(40),
-                      child: SetupEmptyState(
+                      padding: EdgeInsets.all(IveTokens.s10),
+                      child: IveEmptyState(
                         icon: Icons.search_off,
                         title: 'No modules found',
-                        subtitle: 'Try a different search term',
+                        message: 'Try a different search term',
                       ),
                     ),
                   ),
 
-                // ─── SOS Button (Owner/Admin/BranchManager only) ──
+                // ─── SOS Button ──────────────────────────────
                 SliverToBoxAdapter(
-                  child: SetupSOSButton(onPressed: () => Navigator.pushNamed(context, AppRoutes.liveEmergencySOS)),
+                  child: SetupSOSButton(
+                    onPressed: () => Navigator.pushNamed(context, AppRoutes.liveEmergencySOS),
+                  ),
                 ),
 
-                // ─── Bottom Spacer ────────────────────────────
                 const SliverToBoxAdapter(child: SizedBox(height: 100)),
               ],
             ),
@@ -184,57 +212,67 @@ class _SetupDashboardScreenState extends State<SetupDashboardScreen> {
     );
   }
 
-  /// Group cards into named rows
   Map<String, List<DashboardCard>> _groupCardsIntoRows(List<DashboardCard> cards) {
-    final Map<String, List<String>> rowDefinitions = {
-      'Operations Snapshot': ['products', 'vehicles', 'tabs'],
+    final rowDefinitions = <String, List<String>>{
+      'Operations': ['products', 'vehicles', 'tabs'],
       'Finance & Staff': ['discounts', 'staff', 'activity_log'],
       'Logistics': ['places', 'delivery_zones', 'vehicle_bands', 'branches'],
       'Engagement': ['marketing', 'social', 'connections'],
-      'Branch Identity': ['profile', 'outlook', 'subscription'],
-      'Personal & History': ['interests', 'qpoints', 'my_activity'],
+      'Branch identity': ['profile', 'outlook', 'subscription'],
+      'Personal': ['interests', 'qpoints', 'my_activity'],
     };
 
-    final Map<String, List<DashboardCard>> rows = {};
+    final result = <String, List<DashboardCard>>{};
     for (final entry in rowDefinitions.entries) {
       final rowCards = entry.value
           .map((id) {
-            try {
-              return cards.firstWhere((c) => c.id == id);
-            } catch (_) {
-              return null;
-            }
+            try { return cards.firstWhere((c) => c.id == id); } catch (_) { return null; }
           })
           .whereType<DashboardCard>()
           .toList();
-      if (rowCards.isNotEmpty) {
-        rows[entry.key] = rowCards;
-      }
+      if (rowCards.isNotEmpty) result[entry.key] = rowCards;
     }
-    return rows;
+    return result;
   }
 
-  IconData _rowIcon(String rowTitle) {
-    switch (rowTitle) {
-      case 'Operations Snapshot':
-        return Icons.inventory_2;
-      case 'Finance & Staff':
-        return Icons.account_balance;
-      case 'Logistics':
-        return Icons.local_shipping;
-      case 'Engagement':
-        return Icons.campaign;
-      case 'Branch Identity':
-        return Icons.badge;
-      case 'Personal & History':
-        return Icons.person;
-      default:
-        return Icons.grid_view;
+  IconData _rowIcon(String row) {
+    switch (row) {
+      case 'Operations': return Icons.inventory_2;
+      case 'Finance & Staff': return Icons.account_balance;
+      case 'Logistics': return Icons.local_shipping;
+      case 'Engagement': return Icons.campaign;
+      case 'Branch identity': return Icons.badge;
+      case 'Personal': return Icons.person;
+      default: return Icons.grid_view;
     }
   }
 }
 
-// ─── Header Banner ───────────────────────────────────────────────────────────
+// ─── Dark App Bar ─────────────────────────────────────────────────────────────
+
+class _DarkSetupAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final String title;
+  final VoidCallback onBack;
+
+  const _DarkSetupAppBar({required this.title, required this.onBack});
+
+  @override
+  Size get preferredSize => const Size.fromHeight(56);
+
+  @override
+  Widget build(BuildContext context) => AppBar(
+    backgroundColor: IveTokens.voidColor,
+    surfaceTintColor: Colors.transparent,
+    elevation: 0,
+    leading: IconButton(
+      icon: const Icon(Icons.arrow_back, color: IveTokens.inkColor, size: 22),
+      onPressed: onBack,
+    ),
+    title: Text(title, style: IveType.headline),
+  );
+}
+
+// ─── Header Banner ────────────────────────────────────────────────────────────
 
 class _HeaderBanner extends StatelessWidget {
   final DashboardHeaderInfo header;
@@ -245,28 +283,19 @@ class _HeaderBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(IveTokens.s4),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            kSetupColor.withValues(alpha: 0.08),
-            kSetupColor.withValues(alpha: 0.02),
-          ],
-        ),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: kSetupColor.withValues(alpha: 0.15)),
+        color: IveTokens.raisedColor,
+        borderRadius: BorderRadius.circular(IveTokens.rContainer),
+        border: Border.all(color: IveTokens.hairColor, width: 1),
       ),
       child: Row(
         children: [
-          // Avatar
           Container(
-            width: 48,
-            height: 48,
+            width: 44, height: 44,
             decoration: BoxDecoration(
-              color: kSetupColor.withValues(alpha: 0.15),
-              borderRadius: BorderRadius.circular(14),
+              color: kSetupColor.withValues(alpha: 0.12),
+              borderRadius: BorderRadius.circular(IveTokens.rAtom),
             ),
             child: Center(
               child: Text(
@@ -279,32 +308,20 @@ class _HeaderBanner extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: 14),
-          // Info
+          const SizedBox(width: IveTokens.s3),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Welcome, ${header.userName}',
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.textPrimary,
-                  ),
-                ),
+                Text('Welcome, ${header.userName}', style: IveType.callout),
                 const SizedBox(height: 2),
                 Text(
-                  '${header.roleName} Â· ${header.branchName}',
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: AppColors.textSecondary,
-                  ),
+                  '${header.roleName} · ${header.branchName}',
+                  style: IveType.caption.copyWith(color: IveTokens.muteColor),
                 ),
               ],
             ),
           ),
-          // Sync indicator
           _SyncBadge(state: header.syncState),
         ],
       ),
@@ -312,7 +329,7 @@ class _HeaderBanner extends StatelessWidget {
   }
 }
 
-// ─── Sync Badge ──────────────────────────────────────────────────────────────
+// ─── Sync Badge ───────────────────────────────────────────────────────────────
 
 class _SyncBadge extends StatelessWidget {
   final SyncState state;
@@ -323,93 +340,153 @@ class _SyncBadge extends StatelessWidget {
     final Color color;
     final String label;
     final IconData icon;
-
     switch (state) {
       case SyncState.synced:
-        color = AppColors.success;
-        label = 'Synced';
-        icon = Icons.cloud_done;
+        color = IveTokens.okColor; label = 'Synced'; icon = Icons.cloud_done;
         break;
       case SyncState.syncing:
-        color = kSetupColor;
-        label = 'Syncing';
-        icon = Icons.sync;
+        color = kSetupColor; label = 'Syncing'; icon = Icons.sync;
         break;
       case SyncState.offline:
-        color = AppColors.error;
-        label = 'Offline';
-        icon = Icons.cloud_off;
+        color = IveTokens.badColor; label = 'Offline'; icon = Icons.cloud_off;
         break;
     }
-
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: IveTokens.s2, vertical: 4),
       decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: color.withValues(alpha: 0.2)),
+        color: color.withValues(alpha: 0.12),
+        borderRadius: BorderRadius.circular(IveTokens.rAtom),
+        border: Border.all(color: color.withValues(alpha: 0.25)),
       ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: 14, color: color),
-          const SizedBox(width: 4),
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 11,
-              fontWeight: FontWeight.w600,
-              color: color,
-            ),
-          ),
-        ],
-      ),
+      child: Row(mainAxisSize: MainAxisSize.min, children: [
+        Icon(icon, size: 12, color: color),
+        const SizedBox(width: 4),
+        Text(label, style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: color)),
+      ]),
     );
   }
 }
 
-// ─── Search Bar ──────────────────────────────────────────────────────────────
+// ─── Dark Search Bar ──────────────────────────────────────────────────────────
 
-class _SearchBar extends StatelessWidget {
+class _DarkSearchBar extends StatelessWidget {
   final ValueChanged<String> onChanged;
+  const _DarkSearchBar({required this.onChanged});
 
-  const _SearchBar({required this.onChanged});
+  @override
+  Widget build(BuildContext context) => Container(
+    height: 44,
+    decoration: BoxDecoration(
+      color: IveTokens.surfaceColor,
+      borderRadius: BorderRadius.circular(IveTokens.rAtom),
+      border: Border.all(color: IveTokens.hairColor, width: 1),
+    ),
+    child: Row(
+      children: [
+        const SizedBox(width: IveTokens.s4),
+        const Icon(Icons.search, size: 18, color: IveTokens.muteColor),
+        const SizedBox(width: IveTokens.s3),
+        Expanded(
+          child: TextField(
+            style: const TextStyle(fontSize: 14, color: IveTokens.inkColor),
+            cursorColor: IveTokens.accentColor,
+            decoration: const InputDecoration(
+              hintText: 'Search modules…',
+              hintStyle: TextStyle(fontSize: 14, color: IveTokens.muteColor),
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.zero,
+              isDense: true,
+            ),
+            onChanged: onChanged,
+          ),
+        ),
+        const SizedBox(width: IveTokens.s4),
+      ],
+    ),
+  );
+}
+
+// ─── Row Label ────────────────────────────────────────────────────────────────
+
+class _RowLabel extends StatelessWidget {
+  final String title;
+  final IconData icon;
+  const _RowLabel({required this.title, required this.icon});
+
+  @override
+  Widget build(BuildContext context) => Row(children: [
+    Icon(icon, size: 14, color: IveTokens.muteColor),
+    const SizedBox(width: IveTokens.s2),
+    Text(title.toUpperCase(), style: IveType.caption.copyWith(
+      color: IveTokens.muteColor,
+      letterSpacing: 0.6,
+      fontWeight: FontWeight.w700,
+    )),
+  ]);
+}
+
+// ─── Dark Module Card ─────────────────────────────────────────────────────────
+
+class _DarkModuleCard extends StatelessWidget {
+  final DashboardCard card;
+  final VoidCallback? onTap;
+  const _DarkModuleCard({required this.card, this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 44,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppColors.inputBorder),
-      ),
-      child: Row(
-        children: [
-          const SizedBox(width: 14),
-          const Icon(Icons.search, size: 20, color: AppColors.textTertiary),
-          const SizedBox(width: 10),
-          Expanded(
-            child: TextField(
-              decoration: const InputDecoration(
-                hintText: 'Search modules, settings...',
-                hintStyle: TextStyle(
-                  fontSize: 14,
-                  color: AppColors.textTertiary,
-                ),
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.zero,
-                isDense: true,
-              ),
-              style: const TextStyle(
-                fontSize: 14,
-                color: AppColors.textPrimary,
-              ),
-              onChanged: onChanged,
-            ),
+    final accentColor = card.highlightColor ?? kSetupColor;
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(IveTokens.s3),
+        decoration: BoxDecoration(
+          color: IveTokens.raisedColor,
+          borderRadius: BorderRadius.circular(IveTokens.rContainer),
+          border: Border.all(
+            color: card.hasAlerts
+                ? IveTokens.badColor.withValues(alpha: 0.5)
+                : IveTokens.hairColor,
+            width: card.hasAlerts ? 1.5 : 1,
           ),
-          const SizedBox(width: 14),
-        ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Icon row
+            Row(children: [
+              Container(
+                width: 34, height: 34,
+                decoration: BoxDecoration(
+                  color: accentColor.withValues(alpha: 0.12),
+                  borderRadius: BorderRadius.circular(IveTokens.rAtom),
+                ),
+                child: Icon(card.icon, size: 18, color: accentColor),
+              ),
+              const Spacer(),
+              if (card.hasAlerts)
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: IveTokens.badColor.withValues(alpha: 0.12),
+                    borderRadius: BorderRadius.circular(IveTokens.rAtom),
+                  ),
+                  child: Row(mainAxisSize: MainAxisSize.min, children: [
+                    const Icon(Icons.warning_amber, size: 10, color: IveTokens.badColor),
+                    const SizedBox(width: 2),
+                    Text('${card.alertCount}', style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: IveTokens.badColor)),
+                  ]),
+                ),
+            ]),
+            const Spacer(),
+            // Title
+            Text(card.title, style: IveType.callout, maxLines: 2, overflow: TextOverflow.ellipsis),
+            if (card.subtitle != null) ...[
+              const SizedBox(height: 2),
+              Text(card.subtitle!, style: IveType.caption.copyWith(color: IveTokens.muteColor), maxLines: 1, overflow: TextOverflow.ellipsis),
+            ],
+          ],
+        ),
       ),
     );
   }

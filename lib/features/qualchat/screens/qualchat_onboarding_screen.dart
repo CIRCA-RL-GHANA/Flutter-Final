@@ -1,4 +1,4 @@
-/// qualChat Screen 14 — Onboarding Flow
+﻿/// qualChat Screen 14 — Onboarding Flow
 /// 4-step flow: Welcome & Permissions â†’ Role Config â†’ Profile Setup â†’ Quick Tour
 library;
 
@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 import '../models/qualchat_models.dart';
 import '../providers/qualchat_provider.dart';
 import '../widgets/qualchat_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class QualChatOnboardingScreen extends StatelessWidget {
   const QualChatOnboardingScreen({super.key});
@@ -21,22 +20,6 @@ class QualChatOnboardingScreen extends StatelessWidget {
           body: SafeArea(
             child: Column(
               children: [
-                Consumer<AIInsightsNotifier>(
-                  builder: (context, ai, _) {
-                    if (ai.insights.isEmpty) return const SizedBox.shrink();
-                    return Container(
-                      color: const Color(0xFF06B6D4).withValues(alpha: 0.07),
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                      child: Row(children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: Color(0xFF06B6D4)),
-                        const SizedBox(width: 8),
-                        Expanded(child: Text('AI: ${ai.insights.first['title'] ?? ''}',
-                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: Color(0xFF06B6D4)),
-                          maxLines: 1, overflow: TextOverflow.ellipsis)),
-                      ]),
-                    );
-                  },
-                ),
                 // Step indicator
                 _StepIndicator(current: provider.onboardingStep, total: 4),
 
@@ -166,7 +149,7 @@ class _PermissionItem extends StatelessWidget {
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: granted ? const Color(0xFFECFDF5) : const Color(0xFFF3F4F6),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(10),
         border: Border.all(
           color: granted ? const Color(0xFF10B981).withValues(alpha: 0.3) : const Color(0xFFE5E7EB),
         ),
@@ -248,9 +231,6 @@ class _RoleConfigStep extends StatelessWidget {
                     color: isSelected ? kChatColor : const Color(0xFFE5E7EB),
                     width: isSelected ? 2 : 1,
                   ),
-                  boxShadow: isSelected
-                      ? [BoxShadow(color: kChatColor.withValues(alpha: 0.1), blurRadius: 12)]
-                      : null,
                 ),
                 child: Row(
                   children: [
@@ -351,7 +331,7 @@ class _ProfileSetupStep extends StatelessWidget {
               hintText: 'How should others see you?',
               filled: true,
               fillColor: const Color(0xFFF3F4F6),
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
               prefixIcon: const Icon(Icons.person_outline, color: kChatColor),
             ),
           ),
@@ -366,7 +346,7 @@ class _ProfileSetupStep extends StatelessWidget {
               hintText: 'Tell us about yourself...',
               filled: true,
               fillColor: const Color(0xFFF3F4F6),
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
               prefixIcon: const Icon(Icons.edit_note, color: kChatColor),
             ),
           ),
@@ -425,7 +405,7 @@ class _ProfileSetupStep extends StatelessWidget {
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
               color: const Color(0xFFF0F9FF),
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(10),
               border: Border.all(color: kChatColor.withValues(alpha: 0.2)),
             ),
             child: Row(
@@ -513,7 +493,7 @@ class _QuickTourStep extends StatelessWidget {
               gradient: LinearGradient(
                 colors: [kChatColor.withValues(alpha: 0.08), kChatColorLight],
               ),
-              borderRadius: BorderRadius.circular(14),
+              borderRadius: BorderRadius.circular(10),
             ),
             child: const Row(
               children: [
@@ -550,7 +530,7 @@ class _TourFeature extends StatelessWidget {
           height: 48,
           decoration: BoxDecoration(
             color: color.withValues(alpha: 0.1),
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(10),
           ),
           child: Icon(icon, color: color),
         ),
@@ -614,7 +594,7 @@ class _StepNavigation extends StatelessWidget {
               onPressed: onBack,
               style: OutlinedButton.styleFrom(
                 side: const BorderSide(color: kChatColor),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
               ),
               child: const Text('Back', style: TextStyle(color: kChatColor, fontWeight: FontWeight.w600)),
@@ -626,7 +606,7 @@ class _StepNavigation extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: kChatColor,
                 foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 padding: const EdgeInsets.symmetric(vertical: 14),
               ),
               child: Text(

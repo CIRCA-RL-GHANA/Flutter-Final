@@ -1,4 +1,4 @@
-/// qualChat Screen 8 — Chat List (Enhanced)
+﻿/// qualChat Screen 8 — Chat List (Enhanced)
 /// Smart inbox: tabs, pinned, search, swipe actions, FAB
 library;
 
@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 import '../models/qualchat_models.dart';
 import '../providers/qualchat_provider.dart';
 import '../widgets/qualchat_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class QualChatChatListScreen extends StatelessWidget {
   const QualChatChatListScreen({super.key});
@@ -75,33 +74,6 @@ class QualChatChatListScreen extends StatelessWidget {
               ),
 
               // AI priority hint
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
-                    decoration: BoxDecoration(
-                      color: kChatColor.withValues(alpha: 0.06),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.auto_awesome, size: 13, color: kChatColor),
-                        const SizedBox(width: 6),
-                        Expanded(
-                          child: Text(
-                            'AI: ${ai.insights.first['title'] ?? ''}',
-                            style: const TextStyle(fontSize: 12, color: kChatColor),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
 
               // Search
               Padding(
@@ -114,7 +86,7 @@ class QualChatChatListScreen extends StatelessWidget {
                     prefixIcon: const Icon(Icons.search, color: Color(0xFF9CA3AF)),
                     filled: true,
                     fillColor: const Color(0xFFF3F4F6),
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
                     contentPadding: const EdgeInsets.symmetric(vertical: 12),
                   ),
                 ),

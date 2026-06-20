@@ -1,4 +1,4 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 /// COMMUNITY MODULE — Create Community Screen
 /// User picks type â†’ fills details â†’ creates a community space.
 /// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 import '../providers/community_provider.dart';
 import 'community_hub_screen.dart' show kCommunityColor, kCommunityColorDark;
 
@@ -59,9 +58,7 @@ class _CommunityCreateScreenState extends State<CommunityCreateScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AIInsightsNotifier>(
-      builder: (context, ai, _) {
-        final arch = _selectedArchetype;
+    final arch = _selectedArchetype;
         final color = arch != null ? Color(arch['color'] as int) : kCommunityColor;
 
         return Scaffold(
@@ -99,9 +96,8 @@ class _CommunityCreateScreenState extends State<CommunityCreateScreen> {
                         duration: const Duration(milliseconds: 200),
                         decoration: BoxDecoration(
                           color: isSelected ? c : Colors.white,
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(10),
                           border: Border.all(color: isSelected ? c : AppColors.inputBorder, width: 2),
-                          boxShadow: isSelected ? [BoxShadow(color: c.withValues(alpha: 0.3), blurRadius: 8, offset: const Offset(0, 3))] : [],
                         ),
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                         child: Row(children: [
@@ -129,19 +125,6 @@ class _CommunityCreateScreenState extends State<CommunityCreateScreen> {
 
                 const SizedBox(height: 24),
 
-                // ── AI insight ────────────────────────────────────────
-                if (ai.insights.isNotEmpty)
-                  Container(
-                    margin: const EdgeInsets.only(bottom: 16),
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(color: kCommunityColor.withValues(alpha: 0.07), borderRadius: BorderRadius.circular(10), border: Border.all(color: kCommunityColor.withValues(alpha: 0.2))),
-                    child: Row(children: [
-                      const Icon(Icons.auto_awesome, color: kCommunityColor, size: 16),
-                      const SizedBox(width: 8),
-                      Expanded(child: Text(ai.insights.first['title'] ?? '', style: const TextStyle(fontSize: 12))),
-                    ]),
-                  ),
-
                 // ── Step 2: Details ────────────────────────────────────
                 const Text('Details', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 12),
@@ -152,7 +135,7 @@ class _CommunityCreateScreenState extends State<CommunityCreateScreen> {
                     labelText: 'Community Name',
                     hintText: 'e.g. Accra Book Club',
                     filled: true, fillColor: AppColors.inputFill,
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
                   ),
                 ),
                 const SizedBox(height: 12),
@@ -162,7 +145,7 @@ class _CommunityCreateScreenState extends State<CommunityCreateScreen> {
                   decoration: InputDecoration(
                     labelText: 'Description (optional)',
                     filled: true, fillColor: AppColors.inputFill,
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
                   ),
                 ),
                 const SizedBox(height: 12),
@@ -172,7 +155,7 @@ class _CommunityCreateScreenState extends State<CommunityCreateScreen> {
                     labelText: 'Tags (comma-separated)',
                     hintText: 'e.g. books, africa, fiction',
                     filled: true, fillColor: AppColors.inputFill,
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
                   ),
                 ),
 
@@ -222,7 +205,7 @@ class _CommunityCreateScreenState extends State<CommunityCreateScreen> {
                       disabledBackgroundColor: AppColors.inputBorder,
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(vertical: 15),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                     ),
                   ),
                 ),
@@ -231,13 +214,11 @@ class _CommunityCreateScreenState extends State<CommunityCreateScreen> {
             ),
           ),
         );
-      },
-    );
   }
 
   Future<void> _create() async {
     if (_nameCtrl.text.trim().isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Please enter a community name.')));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Enter a community name.')));
       return;
     }
     setState(() => _creating = true);

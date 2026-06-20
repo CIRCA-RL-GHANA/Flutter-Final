@@ -10,7 +10,6 @@ import '../providers/go_provider.dart';
 import '../widgets/go_widgets.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/design/ive_tokens.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class GoHubScreen extends StatefulWidget {
   const GoHubScreen({super.key});
@@ -371,44 +370,28 @@ class _GoHubScreenState extends State<GoHubScreen> {
     );
   }
 
-  // ── Section 10: Insights ──────────
+  // ── Section 10: Insights (provider data only) ──────────
   Widget _buildInsights(GoProvider provider) {
-    return Consumer<AIInsightsNotifier>(
-      builder: (context, ai, _) {
-        final liveInsights = ai.insights;
-        return GoSectionCard(
-          child: Column(
-            children: [
-              if (liveInsights.isNotEmpty) ...
-                liveInsights.take(4).map((ins) => Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4),
-                  child: Row(
-                    children: [
-                      const Icon(Icons.auto_awesome, size: 16, color: kGoColor),
-                      const SizedBox(width: 10),
-                      Expanded(child: Text(ins['label'] as String? ?? '', style: const TextStyle(fontSize: 13))),
-                    ],
-                  ),
-                ))
-              else ...
-                provider.insights.map((ins) => Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4),
-                  child: Row(
-                    children: [
-                      Icon(ins.icon, size: 16, color: kGoColor),
-                      const SizedBox(width: 10),
-                      Expanded(child: Text(ins.text, style: const TextStyle(fontSize: 13))),
-                      if (ins.isActionable) GestureDetector(
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.goFinancial),
-                        child: Text(ins.actionLabel ?? 'View', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: kGoColor)),
-                      ),
-                    ],
-                  ),
-                )),
-            ],
-          ),
-        );
-      },
+    return GoSectionCard(
+      child: Column(
+        children: [
+          ...provider.insights.map((ins) => Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4),
+            child: Row(
+              children: [
+                Icon(ins.icon, size: 16, color: kGoColor),
+                const SizedBox(width: 10),
+                Expanded(child: Text(ins.text, style: const TextStyle(fontSize: 13))),
+                if (ins.isActionable) GestureDetector(
+                  onTap: () => Navigator.pushNamed(context, AppRoutes.goFinancial),
+                  child: Text(ins.actionLabel ?? 'View',
+                      style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: kGoColor)),
+                ),
+              ],
+            ),
+          )),
+        ],
+      ),
     );
   }
 

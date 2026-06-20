@@ -53,10 +53,9 @@ class UpdatesAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 Container(
                   width: 10, height: 10,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: kUpdatesColor,
-                    boxShadow: [BoxShadow(color: kUpdatesColor.withValues(alpha: 0.3), blurRadius: 4)],
                   ),
                 ),
               ],
@@ -109,11 +108,10 @@ class UpdateCard extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 4),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(10),
           border: update.isAnnouncement
               ? const Border(left: BorderSide(color: Color(0xFF3B82F6), width: 3))
               : null,
-          boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8, offset: const Offset(0, 2))],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -316,7 +314,7 @@ class _MediaPreview extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                 decoration: BoxDecoration(
                   color: Colors.black.withValues(alpha: 0.6),
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: Text(
                   '1/${update.mediaUrls.length}',
@@ -682,9 +680,8 @@ class UpdatesFilterChipBar extends StatelessWidget {
 
     return Container(
       height: 48,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
-        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 4, offset: const Offset(0, 2))],
       ),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -758,8 +755,7 @@ class UpdatesSectionCard extends StatelessWidget {
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(14),
-        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 8, offset: const Offset(0, 2))],
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

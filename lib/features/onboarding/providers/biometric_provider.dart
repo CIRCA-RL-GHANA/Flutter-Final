@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+﻿import 'package:flutter/foundation.dart';
 import 'package:local_auth/local_auth.dart' as la;
 import '../../../core/services/user_service.dart';
 
@@ -146,7 +146,7 @@ class BiometricProvider extends ChangeNotifier {
       );
       if (!authenticated) {
         _setupState = BiometricSetupState.failed;
-        _error = 'Biometric authentication failed. Please try again.';
+        _error = 'Biometric authentication failed. Try again.';
         notifyListeners();
         return false;
       }

@@ -1,4 +1,4 @@
-/// Alerts Screen 9 — Templates Library
+﻿/// Alerts Screen 9 — Templates Library
 /// Template grid (resolution/alert/communication/workflow),
 /// variable support, version control
 library;
@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 import '../models/alerts_models.dart';
 import '../providers/alerts_provider.dart';
 import '../widgets/alerts_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class AlertsTemplatesScreen extends StatefulWidget {
   const AlertsTemplatesScreen({super.key});
@@ -67,22 +66,6 @@ class _AlertsTemplatesScreenState extends State<AlertsTemplatesScreen> with Sing
           ),
           body: Column(
             children: [
-              Consumer<AIInsightsNotifier>(
-                builder: (context, ai, _) {
-                  if (ai.insights.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    color: kAlertsColor.withValues(alpha: 0.07),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Row(children: [
-                      const Icon(Icons.auto_awesome, size: 14, color: kAlertsColor),
-                      const SizedBox(width: 8),
-                      Expanded(child: Text('AI: ${ai.insights.first['title'] ?? ''}',
-                        style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kAlertsColor),
-                        maxLines: 1, overflow: TextOverflow.ellipsis)),
-                    ]),
-                  );
-                },
-              ),
               Expanded(
                 child: TabBarView(
                   controller: _tabController,
@@ -278,7 +261,7 @@ class _ExpandableTemplateCardState extends State<_ExpandableTemplateCard> {
       margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(10),
         border: Border.all(color: const Color(0xFFE5E7EB)),
       ),
       child: Column(

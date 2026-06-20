@@ -1,4 +1,4 @@
-/// Alerts Screen 6 — Analytics Dashboard
+﻿/// Alerts Screen 6 — Analytics Dashboard
 /// Volume trends, SLA compliance, category distribution,
 /// team workload, resolver leaderboard
 library;
@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 import '../models/alerts_models.dart';
 import '../providers/alerts_provider.dart';
 import '../widgets/alerts_widgets.dart';
-import '../../../core/services/ai_insights_notifier.dart';
 
 class AlertsAnalyticsScreen extends StatelessWidget {
   const AlertsAnalyticsScreen({super.key});
@@ -26,24 +25,6 @@ class AlertsAnalyticsScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // ──── AI ANALYTICS INSIGHT ────
-                Consumer<AIInsightsNotifier>(
-                  builder: (context, ai, _) {
-                    if (ai.insights.isEmpty) return const SizedBox.shrink();
-                    return Container(
-                      margin: const EdgeInsets.only(bottom: 12),
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                      decoration: BoxDecoration(
-                        color: kAlertsColor.withValues(alpha: 0.07),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Row(children: [
-                        const Icon(Icons.auto_awesome, size: 14, color: kAlertsColor),
-                        const SizedBox(width: 8),
-                        Expanded(child: Text('AI: ${ai.insights.first['label'] ?? 'Analytics insights available'}', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: kAlertsColor), maxLines: 1, overflow: TextOverflow.ellipsis)),
-                      ]),
-                    );
-                  },
-                ),
                 // ──── KEY METRICS ────
                 Row(
                   children: [
@@ -287,7 +268,7 @@ class _MetricCard extends StatelessWidget {
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(10),
           border: Border.all(color: const Color(0xFFE5E7EB)),
         ),
         child: Column(

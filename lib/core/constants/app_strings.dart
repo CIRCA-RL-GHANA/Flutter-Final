@@ -1,4 +1,4 @@
-class AppStrings {
+﻿class AppStrings {
   AppStrings._();
 
   // App
@@ -31,7 +31,7 @@ class AppStrings {
   static const String enterPhoneSubtitle = "We'll send a verification code";
   static const String continueBtn = 'Continue';
   static const String useEmailInstead = 'Use email instead';
-  static const String invalidNumber = 'Please enter a valid mobile number';
+  static const String invalidNumber = 'Enter a valid mobile number';
   static const String networkErrorNumber = "Can't verify number. Try again or use email";
   static const String rateLimited = 'Too many attempts. Please wait 5 minutes';
   static const String unsupportedCountry = 'Service not available in your region yet';

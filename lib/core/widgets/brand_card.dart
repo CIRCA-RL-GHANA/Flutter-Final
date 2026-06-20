@@ -14,8 +14,6 @@ class BrandCard extends StatelessWidget {
     required this.child,
     this.padding = const EdgeInsets.all(Brand.space5),
     this.radius = Brand.radiusLg,
-    this.elevation = 1,
-    this.glow = false,
     this.glass = false,
     this.gradient,
     this.border,
@@ -34,8 +32,6 @@ class BrandCard extends StatelessWidget {
         key: key,
         padding: padding,
         radius: radius,
-        elevation: 2,
-        glow: true,
         border: Border.all(color: Brand.cyan.withValues(alpha: 0.45), width: 1.5),
         onTap: onTap,
         child: child,
@@ -53,7 +49,6 @@ class BrandCard extends StatelessWidget {
         key: key,
         padding: padding,
         radius: radius,
-        elevation: 1,
         glass: true,
         onTap: onTap,
         child: child,
@@ -62,28 +57,10 @@ class BrandCard extends StatelessWidget {
   final Widget child;
   final EdgeInsetsGeometry padding;
   final double radius;
-
-  /// 0 = flat, 1 = subtle, 2 = floating, 3 = modal.
-  final int elevation;
-  final bool glow;
   final bool glass;
   final Gradient? gradient;
   final BoxBorder? border;
   final VoidCallback? onTap;
-
-  List<BoxShadow>? get _shadow {
-    final base = switch (elevation) {
-      0 => null,
-      1 => Brand.elevation1,
-      2 => Brand.elevation2,
-      _ => Brand.elevation3,
-    };
-    if (!glow) return base;
-    return [
-      ...(base ?? const <BoxShadow>[]),
-      BoxShadow(color: Brand.cyan.withValues(alpha: 0.18), blurRadius: 32, spreadRadius: 0),
-    ];
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +75,6 @@ class BrandCard extends StatelessWidget {
         gradient: gradient,
         borderRadius: br,
         border: border ?? Border.all(color: Brand.outline, width: 1),
-        boxShadow: _shadow,
       ),
       child: child,
     );
