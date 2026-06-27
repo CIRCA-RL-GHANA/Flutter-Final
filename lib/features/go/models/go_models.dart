@@ -1,4 +1,4 @@
-/// GO Module — Unified Financial Center
+/// GO Module  Unified Financial Center
 /// All data models, enums, and value objects
 /// Module Color: Emerald Green (0xFF10B981)
 /// Visibility: Owner + Administrator only
@@ -6,9 +6,9 @@ library;
 
 import 'package:flutter/material.dart';
 
-// ═══════════════════════════════════════════
+// 
 // ENUMS
-// ═══════════════════════════════════════════
+// 
 
 /// Financial context type for context switcher (Screen 0)
 enum FinancialContextType { personal, business, branch, entity }
@@ -106,9 +106,9 @@ enum HealthMetric { liquidity, debtRatio, cashFlow, reserveDepth, gatewayDiversi
 /// SLA status for escalation
 enum EscalationTier { level1, level2, level3, managerReview }
 
-// ═══════════════════════════════════════════
+// 
 // CORE DATA MODELS
-// ═══════════════════════════════════════════
+// 
 
 /// Financial context for context switcher
 class FinancialContext {
@@ -151,10 +151,10 @@ class FinancialContext {
 
   String get typeEmoji {
     switch (type) {
-      case FinancialContextType.personal: return '👤';
-      case FinancialContextType.business: return '🏢';
-      case FinancialContextType.branch: return '🏪';
-      case FinancialContextType.entity: return '🌐';
+      case FinancialContextType.personal: return '';
+      case FinancialContextType.business: return '';
+      case FinancialContextType.branch: return '';
+      case FinancialContextType.entity: return '';
     }
   }
 
@@ -203,10 +203,10 @@ class PaymentGateway {
 
   String get statusLabel {
     switch (status) {
-      case GatewayStatus.live: return '🟢 Live';
-      case GatewayStatus.pending: return '🟡 Pending';
-      case GatewayStatus.offline: return '🔴 Offline';
-      case GatewayStatus.setupRequired: return '🔴 Setup Required';
+      case GatewayStatus.live: return ' Live';
+      case GatewayStatus.pending: return ' Pending';
+      case GatewayStatus.offline: return ' Offline';
+      case GatewayStatus.setupRequired: return ' Setup Required';
     }
   }
 
@@ -283,14 +283,14 @@ class GoTransaction {
 
   String get statusEmoji {
     switch (status) {
-      case TransactionStatus.completed: return '✅';
-      case TransactionStatus.pending: return '🕓';
-      case TransactionStatus.processing: return '⏳';
-      case TransactionStatus.failed: return '❌';
-      case TransactionStatus.cancelled: return '🚫';
-      case TransactionStatus.disputed: return '⚠️';
-      case TransactionStatus.reversed: return '↩️';
-      case TransactionStatus.draft: return '📝';
+      case TransactionStatus.completed: return '';
+      case TransactionStatus.pending: return '';
+      case TransactionStatus.processing: return '';
+      case TransactionStatus.failed: return '';
+      case TransactionStatus.cancelled: return '';
+      case TransactionStatus.disputed: return '';
+      case TransactionStatus.reversed: return '';
+      case TransactionStatus.draft: return '';
     }
   }
 
@@ -644,11 +644,11 @@ class FinancialGoal {
 
   String get typeEmoji {
     switch (type) {
-      case GoalType.savings: return '🏦';
-      case GoalType.investment: return '📈';
-      case GoalType.debtReduction: return '💳';
-      case GoalType.revenue: return '💰';
-      case GoalType.custom: return '🎯';
+      case GoalType.savings: return '';
+      case GoalType.investment: return '';
+      case GoalType.debtReduction: return '';
+      case GoalType.revenue: return '';
+      case GoalType.custom: return '';
     }
   }
 

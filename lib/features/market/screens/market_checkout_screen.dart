@@ -1,7 +1,7 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// MARKET MODULE — Screen 6: Order Summary & Payment
+/// 
+/// MARKET MODULE  Screen 6: Order Summary & Payment
 /// Progress indicator, payment method selection, order review, terms
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -120,7 +120,7 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
     );
   }
 
-  // ── Step 1: Review ───────────────────────────────────────────────
+  //  Step 1: Review 
   Widget _buildReviewStep(MarketProvider prov, CartSummary? summary) {
     return ListView(
       padding: const EdgeInsets.all(16),
@@ -160,7 +160,7 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
                       height: 40,
                       decoration: BoxDecoration(
                         color: kMarketColorLight,
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(10),
                       ),
                       child: const Icon(Icons.image, size: 18, color: kMarketColor),
                     ),
@@ -227,7 +227,7 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
     );
   }
 
-  // ── Step 2: Payment ──────────────────────────────────────────────
+  //  Step 2: Payment 
   Widget _buildPaymentStep(MarketProvider prov) {
     _selectedPaymentId ??= prov.defaultPaymentMethod.id;
     return ListView(
@@ -295,7 +295,7 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                       decoration: BoxDecoration(
                         color: kMarketColorLight,
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: BorderRadius.circular(6),
                       ),
                       child: const Text(
                         'DEFAULT',
@@ -326,7 +326,7 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
     );
   }
 
-  // ── Step 3: Confirm ──────────────────────────────────────────────
+  //  Step 3: Confirm 
   Widget _buildConfirmStep(MarketProvider prov, CartSummary? summary) {
     final selectedPayment = prov.paymentMethods
         .where((m) => m.id == _selectedPaymentId)
@@ -488,7 +488,7 @@ class _MarketCheckoutScreenState extends State<MarketCheckoutScreen> {
       context: context,
       barrierDismissible: false,
       builder: (ctx) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

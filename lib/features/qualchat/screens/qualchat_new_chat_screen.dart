@@ -1,8 +1,10 @@
-﻿/// qualChat Screen 7 — New Chat (Enhanced)
+/// qualChat Screen 7  New Chat (Enhanced)
 /// Intelligent recipient selection: individual + group creation
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:provider/provider.dart';
 import '../models/qualchat_models.dart';
 import '../providers/qualchat_provider.dart';
@@ -16,7 +18,7 @@ class QualChatNewChatScreen extends StatelessWidget {
     return Consumer<QualChatProvider>(
       builder: (context, provider, _) {
         return Scaffold(
-          backgroundColor: const Color(0xFFF8F9FE),
+          backgroundColor: IveTokens.bg,
           appBar: QualChatAppBar(
             title: 'New Chat',
             actions: [
@@ -35,13 +37,13 @@ class QualChatNewChatScreen extends StatelessWidget {
                 child: Row(
                   children: [
                     _TypeChip(
-                      label: 'ðŸ‘¤ Individual',
+                      label: ' Individual',
                       isSelected: provider.newChatType == ChatType.individual,
                       onTap: () => provider.setNewChatType(ChatType.individual),
                     ),
                     const SizedBox(width: 8),
                     _TypeChip(
-                      label: 'ðŸ‘¥ Group',
+                      label: ' Group',
                       isSelected: provider.newChatType == ChatType.group,
                       onTap: () => provider.setNewChatType(ChatType.group),
                     ),
@@ -66,11 +68,11 @@ class QualChatNewChatScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Heading
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Text(
               'WHO TO CHAT WITH?',
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Color(0xFF6B7280), letterSpacing: 0.5),
+              style: IveType.caption.copyWith(color: IveTokens.mute, letterSpacing: 0.5),
             ),
           ),
 
@@ -81,11 +83,11 @@ class QualChatNewChatScreen extends StatelessWidget {
               autofocus: true,
               decoration: InputDecoration(
                 hintText: 'Search name, role, or department...',
-                hintStyle: const TextStyle(fontSize: 14, color: Color(0xFF9CA3AF)),
-                prefixIcon: const Icon(Icons.search, color: Color(0xFF9CA3AF)),
+                hintStyle: IveType.body.copyWith(color: IveTokens.ink2),
+                prefixIcon: const Icon(Icons.search, color: IveTokens.ink2),
                 filled: true,
-                fillColor: const Color(0xFFF3F4F6),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+                fillColor: IveTokens.surfaceRaised,
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(IveTokens.rSm), borderSide: BorderSide.none),
                 contentPadding: const EdgeInsets.symmetric(vertical: 12),
               ),
             ),
@@ -99,12 +101,12 @@ class QualChatNewChatScreen extends StatelessWidget {
             child: Row(
               children: RecipientFilter.values.map((f) {
                 final labels = {
-                  RecipientFilter.online: 'ðŸ‘¤ Online',
-                  RecipientFilter.favorites: 'ðŸŒŸ Favorites',
-                  RecipientFilter.recent: 'ðŸ‘¥ Recent',
-                  RecipientFilter.department: 'ðŸ¢ Department',
-                  RecipientFilter.nearby: 'ðŸ“ Nearby',
-                  RecipientFilter.recommended: 'ðŸŽ¯ Recommended',
+                  RecipientFilter.online: ' Online',
+                  RecipientFilter.favorites: ' Favorites',
+                  RecipientFilter.recent: ' Recent',
+                  RecipientFilter.department: ' Department',
+                  RecipientFilter.nearby: ' Nearby',
+                  RecipientFilter.recommended: ' Recommended',
                 };
                 return Padding(
                   padding: const EdgeInsets.only(right: 6),
@@ -113,16 +115,14 @@ class QualChatNewChatScreen extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                       decoration: BoxDecoration(
-                        color: provider.recipientFilter == f ? kChatColor.withValues(alpha: 0.1) : const Color(0xFFF3F4F6),
-                        borderRadius: BorderRadius.circular(16),
-                        border: provider.recipientFilter == f ? Border.all(color: kChatColor) : null,
+                        color: provider.recipientFilter == f ? IveTokens.moduleQualChat.withValues(alpha: 0.12) : IveTokens.surfaceRaised,
+                        borderRadius: BorderRadius.circular(IveTokens.rSm),
+                        border: provider.recipientFilter == f ? Border.all(color: IveTokens.moduleQualChat) : null,
                       ),
                       child: Text(
                         labels[f]!,
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                          color: provider.recipientFilter == f ? kChatColor : const Color(0xFF6B7280),
+                        style: IveType.subhead.copyWith(
+                          color: provider.recipientFilter == f ? IveTokens.moduleQualChat : IveTokens.mute,
                         ),
                       ),
                     ),
@@ -139,11 +139,11 @@ class QualChatNewChatScreen extends StatelessWidget {
           ],
 
           // Recommended connections
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Text(
               'RECOMMENDED CONNECTIONS',
-              style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: Color(0xFF6B7280), letterSpacing: 0.5),
+              style: IveType.caption.copyWith(color: IveTokens.mute, letterSpacing: 0.5),
             ),
           ),
           Expanded(
@@ -158,11 +158,11 @@ class QualChatNewChatScreen extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       if (u.presence == PresenceStatus.online)
-                        const Text('ðŸ’¬', style: TextStyle(fontSize: 14)),
+                        const Text('', style: TextStyle(fontSize: 14)),
                       const SizedBox(width: 4),
                       Text(
                         _timeAgo(u.lastSeen),
-                        style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF)),
+                        style: IveType.footnote.copyWith(color: IveTokens.ink2),
                       ),
                     ],
                   ),
@@ -182,9 +182,9 @@ class QualChatNewChatScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               'Create Group Chat',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFF1A1A1A)),
+              style: IveType.bodyEmphasis.copyWith(color: IveTokens.ink),
             ),
             const SizedBox(height: 16),
 
@@ -194,8 +194,8 @@ class QualChatNewChatScreen extends StatelessWidget {
                 labelText: 'Group Name',
                 hintText: 'Project Alpha Sync',
                 filled: true,
-                fillColor: const Color(0xFFF3F4F6),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+                fillColor: IveTokens.surfaceRaised,
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(IveTokens.rSm), borderSide: BorderSide.none),
               ),
             ),
             const SizedBox(height: 16),
@@ -203,31 +203,31 @@ class QualChatNewChatScreen extends StatelessWidget {
             // Members
             Text(
               'Members (${provider.groupMembers.length}):',
-              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFF1A1A1A)),
+              style: IveType.bodyEmphasis.copyWith(color: IveTokens.ink),
             ),
             const SizedBox(height: 8),
             if (provider.groupMembers.isEmpty)
-              const Text('No members added yet', style: TextStyle(fontSize: 13, color: Color(0xFF9CA3AF)))
+              Text('No members added yet', style: IveType.body.copyWith(color: IveTokens.ink2))
             else
               ...provider.groupMembers.map((m) {
                 return ListTile(
                   contentPadding: EdgeInsets.zero,
                   leading: CircleAvatar(
                     radius: 18,
-                    backgroundColor: kChatColor.withValues(alpha: 0.1),
-                    child: Text(m.name[0], style: const TextStyle(color: kChatColor, fontWeight: FontWeight.w700)),
+                    backgroundColor: IveTokens.moduleQualChat.withValues(alpha: 0.1),
+                    child: Text(m.name[0], style: IveType.bodyEmphasis.copyWith(color: IveTokens.moduleQualChat)),
                   ),
-                  title: Text(m.name, style: const TextStyle(fontSize: 14)),
+                  title: Text(m.name, style: IveType.body.copyWith(color: IveTokens.ink)),
                   trailing: TextButton(
                     onPressed: () => provider.removeGroupMember(m.id),
-                    child: const Text('Remove', style: TextStyle(fontSize: 12, color: Color(0xFFEF4444))),
+                    child: Text('Remove', style: IveType.caption.copyWith(color: IveTokens.danger)),
                   ),
                 );
               }),
             const SizedBox(height: 12),
 
             // Add members
-            const Text('Add more:', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
+            Text('Add more:', style: IveType.subhead.copyWith(color: IveTokens.ink)),
             const SizedBox(height: 8),
             ...QualChatProvider.allUsers.where((u) =>
                 !provider.groupMembers.any((m) => m.id == u.id)).take(4).map((u) {
@@ -237,16 +237,16 @@ class QualChatNewChatScreen extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 18,
-                      backgroundColor: kChatColor.withValues(alpha: 0.1),
-                      child: Text(u.name[0], style: const TextStyle(color: kChatColor, fontWeight: FontWeight.w700)),
+                      backgroundColor: IveTokens.moduleQualChat.withValues(alpha: 0.1),
+                      child: Text(u.name[0], style: IveType.bodyEmphasis.copyWith(color: IveTokens.moduleQualChat)),
                     ),
                     Positioned(right: 0, bottom: 0, child: PresenceDot(status: u.presence, size: 10)),
                   ],
                 ),
-                title: Text(u.name, style: const TextStyle(fontSize: 14)),
-                subtitle: Text(u.role, style: const TextStyle(fontSize: 12, color: Color(0xFF9CA3AF))),
+                title: Text(u.name, style: IveType.body.copyWith(color: IveTokens.ink)),
+                subtitle: Text(u.role, style: IveType.caption.copyWith(color: IveTokens.ink2)),
                 trailing: IconButton(
-                  icon: const Icon(Icons.add_circle_outline, color: kChatColor),
+                  icon: const Icon(Icons.add_circle_outline, color: IveTokens.moduleQualChat),
                   onPressed: () => provider.addGroupMember(u),
                 ),
               );
@@ -254,7 +254,7 @@ class QualChatNewChatScreen extends StatelessWidget {
             const SizedBox(height: 16),
 
             // Group settings
-            const Text('Group Settings:', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+            Text('Group Settings:', style: IveType.bodyEmphasis.copyWith(color: IveTokens.ink)),
             const SizedBox(height: 8),
             const _GroupToggle(label: 'Show typing indicators', value: true),
             const _GroupToggle(label: 'Allow media', value: true),
@@ -266,32 +266,24 @@ class QualChatNewChatScreen extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: ElevatedButton(
+                  child: IveButton.primary(
+                    label: 'Create Group',
                     onPressed: () {
                       Navigator.pop(context);
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Group created successfully!'), backgroundColor: kChatColor),
+                        SnackBar(
+                          content: const Text('Group created successfully!'),
+                          backgroundColor: IveTokens.moduleQualChat,
+                        ),
                       );
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: kChatColor,
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                    ),
-                    child: const Text('Create Group'),
                   ),
                 ),
                 const SizedBox(width: 12),
-                OutlinedButton(
+                IveButton.secondary(
+                  label: 'Cancel',
                   onPressed: () => Navigator.pop(context),
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: const Color(0xFF6B7280),
-                    side: const BorderSide(color: Color(0xFF1C1C2E)),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                    padding: const EdgeInsets.symmetric(vertical: 14),
-                  ),
-                  child: const Text('Cancel'),
+                  expand: false,
                 ),
               ],
             ),
@@ -324,15 +316,14 @@ class _TypeChip extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 10),
           decoration: BoxDecoration(
-            color: isSelected ? kChatColor : const Color(0xFFF3F4F6),
-            borderRadius: BorderRadius.circular(10),
+            color: isSelected ? IveTokens.moduleQualChat : IveTokens.surfaceRaised,
+            borderRadius: BorderRadius.circular(IveTokens.rSm),
           ),
           child: Text(
             label,
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 13, fontWeight: FontWeight.w600,
-              color: isSelected ? Colors.white : const Color(0xFF6B7280),
+            style: IveType.subhead.copyWith(
+              color: isSelected ? IveTokens.bg : IveTokens.mute,
             ),
           ),
         ),
@@ -351,16 +342,16 @@ class _SelectedRecipientCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: kChatColor.withValues(alpha: 0.05),
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: kChatColor.withValues(alpha: 0.2)),
+        color: IveTokens.moduleQualChat.withValues(alpha: 0.05),
+        borderRadius: BorderRadius.circular(IveTokens.rSm),
+        border: Border.all(color: IveTokens.moduleQualChat.withValues(alpha: 0.2)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             'SELECTED: ${user.name}',
-            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: kChatColor, letterSpacing: 0.5),
+            style: IveType.caption.copyWith(color: IveTokens.moduleQualChat, letterSpacing: 0.5),
           ),
           const SizedBox(height: 8),
           Row(
@@ -368,40 +359,32 @@ class _SelectedRecipientCard extends StatelessWidget {
               PresenceDot(status: user.presence),
               const SizedBox(width: 6),
               Text(
-                '${user.presence.name[0].toUpperCase()}${user.presence.name.substring(1)} • ${user.role}',
-                style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
+                '${user.presence.name[0].toUpperCase()}${user.presence.name.substring(1)}  ${user.role}',
+                style: IveType.caption.copyWith(color: IveTokens.mute),
               ),
             ],
           ),
           const SizedBox(height: 4),
           Text(
             'Average response: ${user.avgResponseMinutes} minutes',
-            style: const TextStyle(fontSize: 12, color: Color(0xFF9CA3AF)),
+            style: IveType.footnote.copyWith(color: IveTokens.ink2),
           ),
           const SizedBox(height: 12),
           Row(
             children: [
               Expanded(
-                child: ElevatedButton.icon(
+                child: IveButton.primary(
+                  label: 'Start Chat',
+                  icon: Icons.chat,
                   onPressed: () => Navigator.pushNamed(context, '/qualchat/thread'),
-                  icon: const Icon(Icons.chat, size: 16),
-                  label: const Text('Start Chat'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: kChatColor, foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                  ),
                 ),
               ),
               const SizedBox(width: 8),
-              OutlinedButton.icon(
-                onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Calling...'))),
-                icon: const Icon(Icons.call, size: 16),
-                label: const Text('Call'),
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: kChatColor,
-                  side: const BorderSide(color: kChatColor),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                ),
+              IveButton.secondary(
+                label: 'Call',
+                icon: Icons.call,
+                onPressed: () => AppToast.show(context, 'Calling...'),
+                expand: false,
               ),
             ],
           ),
@@ -425,10 +408,10 @@ class _GroupToggle extends StatelessWidget {
           Icon(
             value ? Icons.check_box : Icons.check_box_outline_blank,
             size: 20,
-            color: value ? kChatColor : const Color(0xFF9CA3AF),
+            color: value ? IveTokens.moduleQualChat : IveTokens.ink2,
           ),
           const SizedBox(width: 8),
-          Text(label, style: const TextStyle(fontSize: 13, color: Color(0xFF1A1A1A))),
+          Text(label, style: IveType.body.copyWith(color: IveTokens.ink)),
         ],
       ),
     );

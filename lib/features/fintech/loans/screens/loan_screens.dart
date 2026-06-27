@@ -1,4 +1,4 @@
-/// Fintech â€º Loans — Loan Application Screen
+/// Fintech  Loans  Loan Application Screen
 /// Shows competing FI offers, lets user apply & tracks repayment progress.
 library;
 
@@ -218,12 +218,12 @@ class _LoanApplicationScreenState extends State<LoanApplicationScreen>
   InputDecoration _inputDecoration(String hint) => InputDecoration(
     hintText: hint,
     filled: true, fillColor: const Color(0xFF11131C),
-    border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: const BorderSide(color: Color(0xFF1C1C2E))),
+    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: Color(0xFF1C1C2E))),
     contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
   );
 }
 
-// ─── Loan Repayment Screen ────────────────────────────────────────────────────
+//  Loan Repayment Screen 
 
 class LoanRepaymentScreen extends StatefulWidget {
   final Map<String, dynamic> loan;
@@ -281,7 +281,7 @@ class _LoanRepaymentScreenState extends State<LoanRepaymentScreen> {
             decoration: InputDecoration(
               hintText: 'Amount in QP',
               filled: true, fillColor: Colors.grey.shade50,
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
               contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
             ),
           ),
@@ -302,7 +302,7 @@ class _LoanRepaymentScreenState extends State<LoanRepaymentScreen> {
   }
 }
 
-// ─── Shared sub-widgets ───────────────────────────────────────────────────────
+//  Shared sub-widgets 
 
 class LoanOfferTile extends StatelessWidget {
   final Map<String, dynamic> offer;
@@ -332,7 +332,7 @@ class LoanOfferTile extends StatelessWidget {
           const SizedBox(width: 12),
           Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text('Rate: $rate% p.a.', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
-            Text('Max: ${offer['maxAmount'] ?? '–'} QP', style: const TextStyle(color: Colors.grey, fontSize: 12)),
+            Text('Max: ${offer['maxAmount'] ?? ''} QP', style: const TextStyle(color: Colors.grey, fontSize: 12)),
           ])),
           if (isSelected) const Icon(Icons.check_circle, color: _kGold),
         ]),
@@ -371,7 +371,7 @@ class _LoanTile extends StatelessWidget {
               AppRoutes.fintechLoanRepayment,
               arguments: loan,
             ),
-            child: const Text('Repay Now â†’'),
+            child: const Text('Repay Now '),
           ),
       ]),
     );
@@ -419,7 +419,7 @@ class _StatusChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-    decoration: BoxDecoration(color: color.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(20)),
+    decoration: BoxDecoration(color: color.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(10)),
     child: Text(label, style: TextStyle(fontSize: 11, color: color, fontWeight: FontWeight.w600)),
   );
 }

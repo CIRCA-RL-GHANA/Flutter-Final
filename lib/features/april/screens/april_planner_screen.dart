@@ -1,12 +1,14 @@
-/// APRIL Screen 2 — Planner Command Center (Financial Dashboard)
+/// APRIL Screen 2  Planner Command Center (Financial Dashboard)
 /// 4 tabs: Overview, Transactions, Budgets, Analytics
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:provider/provider.dart';
 import '../models/april_models.dart';
 import '../providers/april_provider.dart';
 import '../widgets/april_widgets.dart';
+import '../../../core/design/ive.dart';
 import '../../../core/routes/app_routes.dart';
 
 class AprilPlannerScreen extends StatefulWidget {
@@ -41,17 +43,17 @@ class _AprilPlannerScreenState extends State<AprilPlannerScreen> with SingleTick
     return Consumer<AprilProvider>(
       builder: (context, provider, _) {
         return Scaffold(
-          backgroundColor: const Color(0xFFF8F9FE),
+          backgroundColor: IveTokens.bg,
           appBar: AprilAppBar(
-            title: 'ðŸ’° Planner',
+            title: 'Planner',
             actions: [
-              IconButton(icon: const Icon(Icons.download, size: 22), onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Downloading...')))),
+              IconButton(icon: const Icon(Icons.download, size: 22), onPressed: () => AppToast.show(context, 'Downloading...')),
             ],
             bottom: TabBar(
               controller: _tabController,
-              labelColor: kAprilColorDark,
-              unselectedLabelColor: const Color(0xFF9CA3AF),
-              indicatorColor: kAprilColor,
+              labelColor: IveTokens.genieBright,
+              unselectedLabelColor: IveTokens.ink2,
+              indicatorColor: IveTokens.genie,
               labelStyle: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
               tabs: const [
                 Tab(text: 'Overview'),
@@ -72,8 +74,8 @@ class _AprilPlannerScreenState extends State<AprilPlannerScreen> with SingleTick
           ),
           floatingActionButton: FloatingActionButton.extended(
             onPressed: () => _showAddTransaction(context, provider),
-            backgroundColor: kAprilColor,
-            foregroundColor: Colors.black,
+            backgroundColor: IveTokens.genie,
+            foregroundColor: IveTokens.bg,
             icon: const Icon(Icons.add, size: 20),
             label: const Text('Add', style: TextStyle(fontWeight: FontWeight.w600)),
           ),
@@ -87,7 +89,7 @@ class _AprilPlannerScreenState extends State<AprilPlannerScreen> with SingleTick
       context: context,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
       ),
       builder: (ctx) => Padding(
         padding: EdgeInsets.fromLTRB(20, 20, 20, MediaQuery.of(ctx).viewInsets.bottom + 20),
@@ -96,12 +98,12 @@ class _AprilPlannerScreenState extends State<AprilPlannerScreen> with SingleTick
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
-              child: Container(width: 40, height: 4, decoration: BoxDecoration(color: const Color(0xFFE5E7EB), borderRadius: BorderRadius.circular(2))),
+              child: Container(width: 40, height: 4, decoration: BoxDecoration(color: IveTokens.hairline2, borderRadius: BorderRadius.circular(IveTokens.rXs))),
             ),
             const SizedBox(height: 16),
             const Text('Add Transaction', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
             const SizedBox(height: 4),
-            const Text('Quick add a new transaction', style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+            const Text('Quick add a new transaction', style: TextStyle(fontSize: 13, color: IveTokens.mute)),
             const SizedBox(height: 20),
 
             // Quick Add Presets
@@ -109,10 +111,10 @@ class _AprilPlannerScreenState extends State<AprilPlannerScreen> with SingleTick
               spacing: 8,
               runSpacing: 8,
               children: [
-                _QuickAddChip(label: 'â˜• Coffee', amount: '15.00', category: TransactionCategory.dining),
-                _QuickAddChip(label: 'ðŸš• Ride', amount: '25.00', category: TransactionCategory.transport),
-                _QuickAddChip(label: 'ðŸ›’ Groceries', amount: '120.00', category: TransactionCategory.groceries),
-                _QuickAddChip(label: 'ðŸ’Š Medicine', amount: '45.00', category: TransactionCategory.healthcare),
+                _QuickAddChip(label: ' Coffee', amount: '15.00', category: TransactionCategory.dining),
+                _QuickAddChip(label: ' Ride', amount: '25.00', category: TransactionCategory.transport),
+                _QuickAddChip(label: 'Groceries', amount: '120.00', category: TransactionCategory.groceries),
+                _QuickAddChip(label: 'Medicine', amount: '45.00', category: TransactionCategory.healthcare),
               ],
             ),
             const SizedBox(height: 16),
@@ -120,7 +122,7 @@ class _AprilPlannerScreenState extends State<AprilPlannerScreen> with SingleTick
             const SizedBox(height: 8),
             ListTile(
               contentPadding: EdgeInsets.zero,
-              leading: const Icon(Icons.edit, color: kAprilColorDark),
+              leading: const Icon(Icons.edit, color: IveTokens.genieBright),
               title: const Text('Detailed Entry', style: TextStyle(fontWeight: FontWeight.w600)),
               subtitle: const Text('Add with full details', style: TextStyle(fontSize: 12)),
               trailing: const Icon(Icons.chevron_right),
@@ -133,9 +135,9 @@ class _AprilPlannerScreenState extends State<AprilPlannerScreen> with SingleTick
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Tab 1: OVERVIEW
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 class _OverviewTab extends StatelessWidget {
   final AprilProvider provider;
   const _OverviewTab({required this.provider});
@@ -151,30 +153,30 @@ class _OverviewTab extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             gradient: const LinearGradient(
-              colors: [Color(0xFF181B27), Color(0xFF11131C)],
+              colors: [IveTokens.surfaceRaised, IveTokens.surface],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: const Color(0xFF22273A), width: 1),
+            borderRadius: BorderRadius.circular(IveTokens.rSm),
+            border: Border.all(color: IveTokens.hairline2, width: 1),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Current Balance', style: TextStyle(color: Colors.white70, fontSize: 13)),
+              const Text('Current Balance', style: TextStyle(color: IveTokens.ink2, fontSize: 13)),
               const SizedBox(height: 4),
               Text(
-                'â‚µ${summary.currentBalance.toStringAsFixed(2)}',
-                style: const TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.w800),
+                '${summary.currentBalance.toStringAsFixed(2)}',
+                style: IveType.title1.copyWith(color: IveTokens.ink),
               ),
               const SizedBox(height: 16),
               Row(
                 children: [
-                  _BalanceStat(label: 'Income', value: 'â‚µ${summary.totalIncome.toStringAsFixed(0)}', icon: Icons.arrow_upward, color: const Color(0xFF10B981)),
+                  _BalanceStat(label: 'Income', value: '${summary.totalIncome.toStringAsFixed(0)}', icon: Icons.arrow_upward, color: IveTokens.success),
                   const SizedBox(width: 20),
-                  _BalanceStat(label: 'Expenses', value: 'â‚µ${summary.totalExpenses.toStringAsFixed(0)}', icon: Icons.arrow_downward, color: const Color(0xFFEF4444)),
+                  _BalanceStat(label: 'Expenses', value: '${summary.totalExpenses.toStringAsFixed(0)}', icon: Icons.arrow_downward, color: IveTokens.danger),
                   const SizedBox(width: 20),
-                  _BalanceStat(label: 'Savings', value: 'â‚µ${summary.savingsRate.toStringAsFixed(0)}%', icon: Icons.savings, color: kAprilColor),
+                  _BalanceStat(label: 'Savings', value: '${summary.savingsRate.toStringAsFixed(0)}%', icon: Icons.savings, color: IveTokens.genie),
                 ],
               ),
             ],
@@ -187,21 +189,21 @@ class _OverviewTab extends StatelessWidget {
         // Monthly Summary Row
         Row(
           children: [
-            Expanded(child: _SummaryMini(emoji: 'ðŸ“Š', title: 'Transactions', value: '${provider.transactions.length}')),
+            Expanded(child: _SummaryMini(emoji: '', title: 'Transactions', value: '${provider.transactions.length}')),
             const SizedBox(width: 12),
-            Expanded(child: _SummaryMini(emoji: 'ðŸ“…', title: 'Bills Due', value: '${provider.upcomingBills.length}')),
+            Expanded(child: _SummaryMini(emoji: '', title: 'Bills Due', value: '${provider.upcomingBills.length}')),
             const SizedBox(width: 12),
-            Expanded(child: _SummaryMini(emoji: 'ðŸŽ¯', title: 'Budgets', value: '${provider.budgetCategories.length}')),
+            Expanded(child: _SummaryMini(emoji: '', title: 'Budgets', value: '${provider.budgetCategories.length}')),
           ],
         ),
         const SizedBox(height: 16),
 
         // Upcoming Bills
         AprilSectionCard(
-          title: 'ðŸ“… Upcoming Bills',
+          title: ' Upcoming Bills',
           trailing: TextButton(
             onPressed: () => Navigator.pushNamed(context, AppRoutes.aprilStatement),
-            child: const Text('See all', style: TextStyle(fontSize: 12, color: kAprilColorDark)),
+            child: const Text('See all', style: TextStyle(fontSize: 12, color: IveTokens.genieBright)),
           ),
           child: Column(
             children: provider.upcomingBills.map((bill) => Padding(
@@ -213,14 +215,14 @@ class _OverviewTab extends StatelessWidget {
                     height: 36,
                     decoration: BoxDecoration(
                       color: bill.isOverdue
-                          ? const Color(0xFFEF4444).withValues(alpha: 0.1)
-                          : kAprilColor.withValues(alpha: 0.1),
-                      borderRadius: BorderRadius.circular(8),
+                          ? IveTokens.danger.withValues(alpha: 0.1)
+                          : IveTokens.genie.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(IveTokens.rSm),
                     ),
                     child: Icon(
                       Icons.receipt_long,
                       size: 18,
-                      color: bill.isOverdue ? const Color(0xFFEF4444) : kAprilColorDark,
+                      color: bill.isOverdue ? IveTokens.danger : IveTokens.genieBright,
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -235,14 +237,14 @@ class _OverviewTab extends StatelessWidget {
                               : 'Due in ${bill.dueDate.difference(DateTime.now()).inDays} days',
                           style: TextStyle(
                             fontSize: 11,
-                            color: bill.isOverdue ? const Color(0xFFEF4444) : const Color(0xFF6B7280),
+                            color: bill.isOverdue ? IveTokens.danger : IveTokens.mute,
                           ),
                         ),
                       ],
                     ),
                   ),
                   Text(
-                    'â‚µ${bill.amount.toStringAsFixed(2)}',
+                    '${bill.amount.toStringAsFixed(2)}',
                     style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
                   ),
                 ],
@@ -254,10 +256,10 @@ class _OverviewTab extends StatelessWidget {
 
         // Recent Transactions
         AprilSectionCard(
-          title: 'ðŸ§¾ Recent Transactions',
+          title: ' Recent Transactions',
           trailing: TextButton(
             onPressed: () => Navigator.pushNamed(context, AppRoutes.aprilStatement),
-            child: const Text('View all', style: TextStyle(fontSize: 12, color: kAprilColorDark)),
+            child: const Text('View all', style: TextStyle(fontSize: 12, color: IveTokens.genieBright)),
           ),
           child: Column(
             children: provider.transactions.take(5).map((t) => TransactionCard(transaction: t)).toList(),
@@ -269,9 +271,9 @@ class _OverviewTab extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Tab 2: TRANSACTIONS
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 class _TransactionsTab extends StatelessWidget {
   final AprilProvider provider;
   const _TransactionsTab({required this.provider});
@@ -288,17 +290,17 @@ class _TransactionsTab extends StatelessWidget {
             onChanged: provider.setTransactionSearch,
             decoration: InputDecoration(
               hintText: 'Search transactions...',
-              hintStyle: const TextStyle(fontSize: 14, color: Color(0xFF9CA3AF)),
-              prefixIcon: const Icon(Icons.search, color: Color(0xFF9CA3AF)),
+              hintStyle: const TextStyle(fontSize: 14, color: IveTokens.ink2),
+              prefixIcon: const Icon(Icons.search, color: IveTokens.ink2),
               filled: true,
-              fillColor: const Color(0xFF11131C),
+              fillColor: IveTokens.surface,
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: const BorderSide(color: Color(0xFF1C1C2E)),
+                borderRadius: BorderRadius.circular(IveTokens.rSm),
+                borderSide: const BorderSide(color: IveTokens.hairline),
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: const BorderSide(color: Color(0xFF1C1C2E)),
+                borderRadius: BorderRadius.circular(IveTokens.rSm),
+                borderSide: const BorderSide(color: IveTokens.hairline),
               ),
               contentPadding: const EdgeInsets.symmetric(vertical: 10),
             ),
@@ -346,22 +348,22 @@ class _TransactionsTab extends StatelessWidget {
 
   String _categoryLabel(TransactionCategory c) {
     switch (c) {
-      case TransactionCategory.dining: return 'ðŸ½ï¸ Dining';
-      case TransactionCategory.groceries: return 'ðŸ›’ Groceries';
-      case TransactionCategory.transport: return 'ðŸš— Transport';
-      case TransactionCategory.healthcare: return 'ðŸ’Š Health';
-      case TransactionCategory.entertainment: return 'ðŸŽ¬ Fun';
-      case TransactionCategory.shopping: return 'ðŸ›ï¸ Shop';
-      case TransactionCategory.utilities: return 'ðŸ“„ Bills';
-      case TransactionCategory.education: return 'ðŸ“š Edu';
+      case TransactionCategory.dining: return ' Dining';
+      case TransactionCategory.groceries: return 'Groceries';
+      case TransactionCategory.transport: return ' Transport';
+      case TransactionCategory.healthcare: return 'Health';
+      case TransactionCategory.entertainment: return ' Fun';
+      case TransactionCategory.shopping: return ' Shop';
+      case TransactionCategory.utilities: return ' Bills';
+      case TransactionCategory.education: return ' Edu';
       default: return c.name;
     }
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Tab 3: BUDGETS
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 class _BudgetsTab extends StatelessWidget {
   final AprilProvider provider;
   const _BudgetsTab({required this.provider});
@@ -375,19 +377,19 @@ class _BudgetsTab extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: const Color(0xFFE5E7EB)),
+            color: IveTokens.surface,
+            borderRadius: BorderRadius.circular(IveTokens.rSm),
+            border: Border.all(color: IveTokens.hairline),
           ),
           child: Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Total Budget', style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                  const Text('Total Budget', style: TextStyle(fontSize: 13, color: IveTokens.mute)),
                   Text(
-                    'â‚µ${provider.budgetCategories.fold<double>(0, (sum, b) => sum + b.limit).toStringAsFixed(0)}',
-                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                    '${provider.budgetCategories.fold<double>(0, (sum, b) => sum + b.limit).toStringAsFixed(0)}',
+                    style: IveType.monoEmphasis.copyWith(fontSize: 16, color: IveTokens.ink),
                   ),
                 ],
               ),
@@ -395,22 +397,22 @@ class _BudgetsTab extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Total Spent', style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                  const Text('Total Spent', style: TextStyle(fontSize: 13, color: IveTokens.mute)),
                   Text(
-                    'â‚µ${provider.budgetCategories.fold<double>(0, (sum, b) => sum + b.spent).toStringAsFixed(0)}',
-                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFFEF4444)),
+                    '${provider.budgetCategories.fold<double>(0, (sum, b) => sum + b.spent).toStringAsFixed(0)}',
+                    style: IveType.monoEmphasis.copyWith(fontSize: 16, color: IveTokens.danger),
                   ),
                 ],
               ),
               const SizedBox(height: 12),
               ClipRRect(
-                borderRadius: BorderRadius.circular(4),
+                borderRadius: BorderRadius.circular(IveTokens.rXs),
                 child: LinearProgressIndicator(
                   value: (provider.budgetCategories.fold<double>(0, (s, b) => s + b.spent) /
                       provider.budgetCategories.fold<double>(0, (s, b) => s + b.limit))
                       .clamp(0.0, 1.0),
-                  backgroundColor: const Color(0xFFF3F4F6),
-                  valueColor: const AlwaysStoppedAnimation(kAprilColor),
+                  backgroundColor: IveTokens.hairline,
+                  valueColor: const AlwaysStoppedAnimation(IveTokens.genie),
                   minHeight: 6,
                 ),
               ),
@@ -431,23 +433,23 @@ class _BudgetsTab extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: kAprilAccent.withValues(alpha: 0.05),
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: kAprilAccent.withValues(alpha: 0.2)),
+            color: IveTokens.accentSoft,
+            borderRadius: BorderRadius.circular(IveTokens.rSm),
+            border: Border.all(color: IveTokens.accent.withValues(alpha: 0.2)),
           ),
           child: Row(
             children: [
-              const Text('ðŸ’¡', style: TextStyle(fontSize: 24)),
+              const Text('', style: TextStyle(fontSize: 24)),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Budget Insight', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+                    const Text('Budget Insight', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: IveTokens.ink)),
                     const SizedBox(height: 2),
                     Text(
                       'Your dining spend is ${provider.budgetCategories.isNotEmpty ? '34%' : '0%'} higher than last month. Consider setting a weekly limit.',
-                      style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
+                      style: const TextStyle(fontSize: 12, color: IveTokens.mute),
                     ),
                   ],
                 ),
@@ -461,9 +463,9 @@ class _BudgetsTab extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Tab 4: ANALYTICS
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 class _AnalyticsTab extends StatelessWidget {
   final AprilProvider provider;
   const _AnalyticsTab({required this.provider});
@@ -478,13 +480,13 @@ class _AnalyticsTab extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: const Color(0xFFE5E7EB)),
+            color: IveTokens.surface,
+            borderRadius: BorderRadius.circular(IveTokens.rSm),
+            border: Border.all(color: IveTokens.hairline),
           ),
           child: Column(
             children: [
-              const Text('Financial Health Score', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+              const Text('Financial Health Score', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: IveTokens.ink)),
               const SizedBox(height: 16),
               SizedBox(
                 width: 120,
@@ -498,22 +500,22 @@ class _AnalyticsTab extends StatelessWidget {
                       child: CircularProgressIndicator(
                         value: fh.score / 100,
                         strokeWidth: 10,
-                        backgroundColor: const Color(0xFFF3F4F6),
+                        backgroundColor: IveTokens.hairline,
                         valueColor: AlwaysStoppedAnimation(_scoreColor(fh.score)),
                       ),
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('${fh.score}', style: TextStyle(fontSize: 32, fontWeight: FontWeight.w800, color: _scoreColor(fh.score))),
-                        Text(fh.grade, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFF6B7280))),
+                        Text('${fh.score}', style: IveType.monoEmphasis.copyWith(fontSize: 32, color: _scoreColor(fh.score))),
+                        Text(fh.grade, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: IveTokens.mute)),
                       ],
                     ),
                   ],
                 ),
               ),
               const SizedBox(height: 16),
-              Text(fh.summary, textAlign: TextAlign.center, style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+              Text(fh.summary, textAlign: TextAlign.center, style: const TextStyle(fontSize: 13, color: IveTokens.mute)),
             ],
           ),
         ),
@@ -521,7 +523,7 @@ class _AnalyticsTab extends StatelessWidget {
 
         // Spending Trend
         AprilSectionCard(
-          title: 'ðŸ“ˆ Spending Trend',
+          title: ' Spending Trend',
           child: SizedBox(
             height: 160,
             child: Row(
@@ -535,7 +537,7 @@ class _AnalyticsTab extends StatelessWidget {
                     children: [
                       Text(
                         '${(dp.amount / 1000).toStringAsFixed(1)}k',
-                        style: const TextStyle(fontSize: 9, color: Color(0xFF6B7280)),
+                        style: IveType.monoSmall.copyWith(fontSize: 9),
                       ),
                       const SizedBox(height: 4),
                       Container(
@@ -543,13 +545,13 @@ class _AnalyticsTab extends StatelessWidget {
                         height: height,
                         decoration: BoxDecoration(
                           color: dp.label == provider.spendingData.last.label
-                              ? kAprilColor
-                              : kAprilColor.withValues(alpha: 0.3),
-                          borderRadius: BorderRadius.circular(4),
+                              ? IveTokens.genie
+                              : IveTokens.genie.withValues(alpha: 0.3),
+                          borderRadius: BorderRadius.circular(IveTokens.rXs),
                         ),
                       ),
                       const SizedBox(height: 4),
-                      Text(dp.label, style: const TextStyle(fontSize: 10, color: Color(0xFF6B7280))),
+                      Text(dp.label, style: const TextStyle(fontSize: 10, color: IveTokens.mute)),
                     ],
                   ),
                 );
@@ -561,16 +563,16 @@ class _AnalyticsTab extends StatelessWidget {
 
         // Improvement Tips
         AprilSectionCard(
-          title: 'ðŸŽ¯ Improvement Tips',
+          title: ' Improvement Tips',
           child: Column(
             children: fh.tips.map((tip) => Padding(
               padding: const EdgeInsets.only(bottom: 8),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('•', style: TextStyle(fontSize: 16, color: kAprilColorDark)),
+                  const Text('', style: TextStyle(fontSize: 16, color: IveTokens.genieBright)),
                   const SizedBox(width: 8),
-                  Expanded(child: Text(tip, style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280)))),
+                  Expanded(child: Text(tip, style: const TextStyle(fontSize: 13, color: IveTokens.mute))),
                 ],
               ),
             )).toList(),
@@ -582,15 +584,15 @@ class _AnalyticsTab extends StatelessWidget {
   }
 
   Color _scoreColor(int score) {
-    if (score >= 80) return const Color(0xFF10B981);
-    if (score >= 60) return kAprilColor;
-    return const Color(0xFFEF4444);
+    if (score >= 80) return IveTokens.success;
+    if (score >= 60) return IveTokens.genie;
+    return IveTokens.danger;
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // SHARED MINI WIDGETS
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _BalanceStat extends StatelessWidget {
   final String label, value;
@@ -607,11 +609,11 @@ class _BalanceStat extends StatelessWidget {
           children: [
             Icon(icon, size: 14, color: color),
             const SizedBox(width: 4),
-            Text(label, style: const TextStyle(color: Colors.white60, fontSize: 11)),
+            Text(label, style: const TextStyle(color: IveTokens.ink2, fontSize: 11)),
           ],
         ),
         const SizedBox(height: 2),
-        Text(value, style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700)),
+        Text(value, style: IveType.monoEmphasis.copyWith(fontSize: 14, color: IveTokens.ink)),
       ],
     );
   }
@@ -626,16 +628,16 @@ class _SummaryMini extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: const Color(0xFFE5E7EB)),
+        color: IveTokens.surface,
+        borderRadius: BorderRadius.circular(IveTokens.rSm),
+        border: Border.all(color: IveTokens.hairline),
       ),
       child: Column(
         children: [
           Text(emoji, style: const TextStyle(fontSize: 20)),
           const SizedBox(height: 4),
-          Text(value, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
-          Text(title, style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
+          Text(value, style: IveType.monoEmphasis.copyWith(fontSize: 18, color: IveTokens.ink)),
+          Text(title, style: const TextStyle(fontSize: 11, color: IveTokens.mute)),
         ],
       ),
     );
@@ -656,16 +658,16 @@ class _FilterChip extends StatelessWidget {
         margin: const EdgeInsets.only(right: 8),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
         decoration: BoxDecoration(
-          color: selected ? kAprilColor : Colors.white,
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: selected ? kAprilColor : const Color(0xFFE5E7EB)),
+          color: selected ? IveTokens.genie : IveTokens.surface,
+          borderRadius: BorderRadius.circular(IveTokens.rSm),
+          border: Border.all(color: selected ? IveTokens.genie : IveTokens.hairline),
         ),
         child: Text(
           label,
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w500,
-            color: selected ? Colors.black : const Color(0xFF6B7280),
+            color: selected ? IveTokens.bg : IveTokens.mute,
           ),
         ),
       ),
@@ -685,11 +687,11 @@ class _QuickAddChip extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
         decoration: BoxDecoration(
-          color: kAprilColor.withValues(alpha: 0.1),
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: kAprilColor.withValues(alpha: 0.3)),
+          color: IveTokens.genie.withValues(alpha: 0.1),
+          borderRadius: BorderRadius.circular(IveTokens.rSm),
+          border: Border.all(color: IveTokens.genie.withValues(alpha: 0.3)),
         ),
-        child: Text('$label â‚µ$amount', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500)),
+        child: Text('$label $amount', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: IveTokens.ink)),
       ),
     );
   }

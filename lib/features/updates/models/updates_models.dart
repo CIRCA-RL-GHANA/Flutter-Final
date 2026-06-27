@@ -1,14 +1,14 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// MY UPDATES MODULE — Data Models
+/// 
+/// MY UPDATES MODULE  Data Models
 /// Comprehensive models for the social updates/feed module:
 /// Updates, Comments, Engagement, Notifications, Interests, Following,
 /// Shares, Reports, Polls, Collections, Insights
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'package:flutter/material.dart';
 
-// ─── Enums ──────────────────────────────────────────────────────────────────
+//  Enums 
 
 /// Content type for an update
 enum UpdateContentType { text, image, video, audio, poll, document, product, event }
@@ -73,7 +73,7 @@ enum SearchTab { top, latest, accounts, hashtags, nearby }
 /// Options menu section
 enum OptionsSection { engagement, contentManagement, sharing, advanced, accessibility }
 
-// ─── Data Models ────────────────────────────────────────────────────────────
+//  Data Models 
 
 /// A mention reference in update content
 class UserMention {
@@ -159,7 +159,7 @@ class UpdateEntity {
   final String entityAvatar;
   final bool isVerified;
   final String authorRole;
-  final String? contextPath; // "Business → Main Branch"
+  final String? contextPath; // "Business  Main Branch"
   final UpdateContentType contentType;
   final List<String> mediaUrls;
   final String caption;
@@ -368,7 +368,7 @@ class UserInterest {
     required this.category,
     required this.name,
     this.description = '',
-    this.icon = '📌',
+    this.icon = '',
     this.followerCount = 0,
     this.relevanceScore = 0.0,
     this.isFollowing = false,

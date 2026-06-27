@@ -1,8 +1,8 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SCREEN 8 — Create Update
+/// 
+/// SCREEN 8  Create Update
 /// Full composer: media attach, text with mentions/hashtags, poll builder,
 /// visibility picker, scheduling, preview before publish.
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -102,7 +102,7 @@ class _BodyState extends State<_Body> {
                 foregroundColor: Colors.white,
                 disabledBackgroundColor: Colors.grey.shade200,
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
               ),
               child: Text(_isScheduleMode ? 'Schedule' : 'Publish', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
             ),
@@ -172,6 +172,7 @@ class _BodyState extends State<_Body> {
                   hintText: 'What\'s happening? Share an update...',
                   hintStyle: TextStyle(fontSize: 15, color: AppColors.textTertiary),
                   border: InputBorder.none,
+              filled: false,
                   counterStyle: TextStyle(fontSize: 10, color: AppColors.textTertiary),
                 ),
               ),
@@ -263,7 +264,7 @@ class _BodyState extends State<_Body> {
                           hintText: 'Ask a question...',
                           filled: true,
                           fillColor: AppColors.inputFill,
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide.none),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
                           contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                         ),
                       ),
@@ -280,7 +281,7 @@ class _BodyState extends State<_Body> {
                                   hintText: 'Option ${entry.key + 1}',
                                   filled: true,
                                   fillColor: AppColors.inputFill,
-                                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide.none),
+                                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
                                   contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                                 ),
                               ),
@@ -372,7 +373,7 @@ class _BodyState extends State<_Body> {
   void _showVisibilityPicker(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(10))),
       builder: (_) => Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -432,7 +433,7 @@ class _BodyState extends State<_Body> {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         title: const Text('Discard update?', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
         content: const Text('Your draft will be lost.', style: TextStyle(fontSize: 13)),
         actions: [
@@ -453,7 +454,7 @@ class _BodyState extends State<_Body> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(10))),
       builder: (_) => DraggableScrollableSheet(
         initialChildSize: 0.7,
         minChildSize: 0.5,
@@ -517,7 +518,7 @@ class _BodyState extends State<_Body> {
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           color: kUpdatesColor.withValues(alpha: 0.04),
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(10),
                           border: Border.all(color: kUpdatesColor.withValues(alpha: 0.15)),
                         ),
                         child: Column(
@@ -575,7 +576,7 @@ class _BodyState extends State<_Body> {
   String _formatDate(DateTime d) => '${d.day}/${d.month} ${d.hour}:${d.minute.toString().padLeft(2, '0')}';
 }
 
-// ─── Toolbar Button ─────────────────────────────────────────────────────────
+//  Toolbar Button 
 
 class _ToolbarButton extends StatelessWidget {
   final IconData icon;

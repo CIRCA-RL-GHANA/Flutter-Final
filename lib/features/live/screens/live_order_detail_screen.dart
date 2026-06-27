@@ -1,11 +1,12 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// LIVE MODULE — Screen 3: Order Detail Expansion
+/// 
+/// LIVE MODULE  Screen 3: Order Detail Expansion
 /// Complete order information: customer, items, delivery, special
 /// instructions, driver assignment, timeline, action buttons
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +26,7 @@ class LiveOrderDetailScreen extends StatelessWidget {
         return Scaffold(
           backgroundColor: IveTokens.voidColor,
           appBar: LiveAppBar(
-            title: 'Order #${order.id} • ${order.priority.name.toUpperCase()}',
+            title: 'Order #${order.id}  ${order.priority.name.toUpperCase()}',
             actions: [
               IconButton(
                 icon: const Icon(Icons.more_vert, size: 20),
@@ -33,12 +34,12 @@ class LiveOrderDetailScreen extends StatelessWidget {
                 onPressed: () {
                   showModalBottomSheet(
                     context: context,
-                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
+                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(10))),
                     builder: (_) => const SizedBox(height: 120),
                   );
                 },
               ),
-              IconButton(icon: const Icon(Icons.download, size: 20), color: IveTokens.ink2Color, onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Exporting...')))),
+              IconButton(icon: const Icon(Icons.download, size: 20), color: IveTokens.ink2Color, onPressed: () => AppToast.show(context, 'Exporting...')),
             ],
           ),
           body: ListView(
@@ -99,7 +100,7 @@ class LiveOrderDetailScreen extends StatelessWidget {
                         const Icon(Icons.star, size: 14, color: Color(0xFFF59E0B)),
                         Text(' ${order.customerRating}', style: const TextStyle(fontSize: 12, color: IveTokens.ink2Color)),
                         const SizedBox(width: 8),
-                        Text('• ${order.customerOrderCount} orders', style: const TextStyle(fontSize: 12, color: IveTokens.muteColor)),
+                        Text(' ${order.customerOrderCount} orders', style: const TextStyle(fontSize: 12, color: IveTokens.muteColor)),
                       ],
                     ),
                     if (order.customerPhone != null) ...[
@@ -128,7 +129,7 @@ class LiveOrderDetailScreen extends StatelessWidget {
                         children: [
                           const Icon(Icons.business, size: 14, color: IveTokens.ink2Color),
                           const SizedBox(width: 4),
-                          Text('${order.customerCompany}${order.deliveryReception != null ? " • Reception: ${order.deliveryReception}" : ""}', style: const TextStyle(fontSize: 13, color: IveTokens.ink2Color)),
+                          Text('${order.customerCompany}${order.deliveryReception != null ? "  Reception: ${order.deliveryReception}" : ""}', style: const TextStyle(fontSize: 13, color: IveTokens.ink2Color)),
                         ],
                       ),
                     ],
@@ -136,9 +137,9 @@ class LiveOrderDetailScreen extends StatelessWidget {
                     Wrap(
                       spacing: 8,
                       children: [
-                        _ActionChip(label: 'CALL', icon: Icons.phone, onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Calling...')))),
+                        _ActionChip(label: 'CALL', icon: Icons.phone, onTap: () => AppToast.show(context, 'Calling...')),
                         _ActionChip(label: 'MESSAGE', icon: Icons.message, onTap: () => Navigator.pushNamed(context, AppRoutes.qualChatDashboard)),
-                        _ActionChip(label: 'VIEW PROFILE', icon: Icons.person, onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Loading profile...')))),
+                        _ActionChip(label: 'VIEW PROFILE', icon: Icons.person, onTap: () => AppToast.show(context, 'Loading profile...')),
                       ],
                     ),
                   ],
@@ -162,7 +163,7 @@ class LiveOrderDetailScreen extends StatelessWidget {
                             height: 40,
                             decoration: BoxDecoration(
                               color: IveTokens.voidColor,
-                              borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(10),
                             ),
                             child: const Icon(Icons.shopping_bag, size: 20, color: IveTokens.muteColor),
                           ),
@@ -179,7 +180,7 @@ class LiveOrderDetailScreen extends StatelessWidget {
                               ],
                             ),
                           ),
-                          Text('â‚µ${item.price.toStringAsFixed(0)}', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                          Text('${item.price.toStringAsFixed(0)}', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                         ],
                       ),
                     )),
@@ -187,8 +188,8 @@ class LiveOrderDetailScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Subtotal: â‚µ${order.subtotal.toStringAsFixed(0)} • Delivery: â‚µ${order.deliveryFee.toStringAsFixed(0)}', style: const TextStyle(fontSize: 12, color: IveTokens.ink2Color)),
-                        Text('TOTAL: â‚µ${order.total.toStringAsFixed(0)}', style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800, color: IveTokens.inkColor)),
+                        Text('Subtotal: ${order.subtotal.toStringAsFixed(0)}  Delivery: ${order.deliveryFee.toStringAsFixed(0)}', style: const TextStyle(fontSize: 12, color: IveTokens.ink2Color)),
+                        Text('TOTAL: ${order.total.toStringAsFixed(0)}', style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800, color: IveTokens.inkColor)),
                       ],
                     ),
                     const SizedBox(height: 4),
@@ -204,13 +205,13 @@ class LiveOrderDetailScreen extends StatelessWidget {
               LiveSectionCard(
                 title: 'DELIVERY DETAILS',
                 icon: Icons.location_on,
-                iconColor: kLiveColor,
+                iconColor: IveTokens.moduleLive,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(order.deliveryAddress, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
                     if (order.deliveryFloor != null)
-                      Text('Floor: ${order.deliveryFloor}${order.deliveryReception != null ? " • Reception: ${order.deliveryReception}" : ""}', style: const TextStyle(fontSize: 13, color: IveTokens.ink2Color)),
+                      Text('Floor: ${order.deliveryFloor}${order.deliveryReception != null ? "  Reception: ${order.deliveryReception}" : ""}', style: const TextStyle(fontSize: 13, color: IveTokens.ink2Color)),
                     if (order.accessCode != null)
                       Text('Access code: ${order.accessCode}', style: const TextStyle(fontSize: 13, color: IveTokens.ink2Color)),
                     if (order.parkingNote != null)
@@ -219,7 +220,7 @@ class LiveOrderDetailScreen extends StatelessWidget {
                     Wrap(
                       spacing: 8,
                       children: [
-                        _ActionChip(label: 'OPEN IN MAPS', icon: Icons.map, onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Opening maps...')))),
+                        _ActionChip(label: 'OPEN IN MAPS', icon: Icons.map, onTap: () => AppToast.show(context, 'Opening maps...')),
                         _ActionChip(label: 'COPY ADDRESS', icon: Icons.copy, onTap: () => HapticFeedback.lightImpact()),
                       ],
                     ),
@@ -241,8 +242,8 @@ class LiveOrderDetailScreen extends StatelessWidget {
                       Wrap(
                         spacing: 8,
                         children: [
-                          _ActionChip(label: 'ADD INSTRUCTION', icon: Icons.add, onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Add instruction...')))),
-                          _ActionChip(label: 'EDIT', icon: Icons.edit, onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Edit instructions...')))),
+                          _ActionChip(label: 'ADD INSTRUCTION', icon: Icons.add, onTap: () => AppToast.show(context, 'Add instruction...')),
+                          _ActionChip(label: 'EDIT', icon: Icons.edit, onTap: () => AppToast.show(context, 'Edit instructions...')),
                         ],
                       ),
                     ],
@@ -265,7 +266,7 @@ class LiveOrderDetailScreen extends StatelessWidget {
                     ),
                     if (order.assignedDriverName == null && prov.availableDrivers.isNotEmpty) ...[
                       const SizedBox(height: 6),
-                      // AI-recommended driver — quiet gold mark (spec P1)
+                      // AI-recommended driver  quiet gold mark (spec P1)
                       Row(children: [
                         const Icon(Icons.auto_awesome_rounded, size: 12, color: IveTokens.accentColor),
                         const SizedBox(width: 4),
@@ -275,7 +276,7 @@ class LiveOrderDetailScreen extends StatelessWidget {
                         ),
                         const SizedBox(width: 6),
                         Text(
-                          '${prov.availableDrivers.first.distanceMiles}mi · ${(prov.availableDrivers.first.completionRate * 100).toInt()}%',
+                          '${prov.availableDrivers.first.distanceMiles}mi  ${(prov.availableDrivers.first.completionRate * 100).toInt()}%',
                           style: const TextStyle(fontSize: 12, color: IveTokens.muteColor),
                         ),
                       ]),
@@ -285,8 +286,8 @@ class LiveOrderDetailScreen extends StatelessWidget {
                       spacing: 8,
                       children: [
                         _ActionChip(label: 'ASSIGN DRIVER', icon: Icons.person_add, onTap: () => Navigator.pushNamed(context, AppRoutes.liveDriverAssignment)),
-                        _ActionChip(label: 'AUTO-ASSIGN', icon: Icons.auto_fix_high, onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Auto-assigning...')))),
-                        _ActionChip(label: 'SELF-PICKUP', icon: Icons.store, onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Marked for self-pickup')))),
+                        _ActionChip(label: 'AUTO-ASSIGN', icon: Icons.auto_fix_high, onTap: () => AppToast.show(context, 'Auto-assigning...')),
+                        _ActionChip(label: 'SELF-PICKUP', icon: Icons.store, onTap: () => AppToast.show(context, 'Marked for self-pickup')),
                       ],
                     ),
                   ],
@@ -371,16 +372,16 @@ class _ActionChip extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: BorderRadius.circular(10),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-        decoration: BoxDecoration(border: Border.all(color: kLiveColor.withValues(alpha: 0.3)), borderRadius: BorderRadius.circular(8)),
+        decoration: BoxDecoration(border: Border.all(color: IveTokens.moduleLive.withValues(alpha: 0.3)), borderRadius: BorderRadius.circular(10)),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, size: 14, color: kLiveColor),
+            Icon(icon, size: 14, color: IveTokens.moduleLive),
             const SizedBox(width: 4),
-            Text(label, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: kLiveColor)),
+            Text(label, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: IveTokens.moduleLive)),
           ],
         ),
       ),

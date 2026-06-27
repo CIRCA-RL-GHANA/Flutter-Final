@@ -1,13 +1,14 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// LIVE MODULE — Screen 15: Multi-Hop Transfer Flow
+/// 
+/// LIVE MODULE  Screen 15: Multi-Hop Transfer Flow
 /// Package hand-off between drivers: scan verification,
 /// condition check, chain-of-custody log, transfer confirmation
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '../../../core/design/ive.dart';
 import '../../../core/theme/app_colors.dart';
 import '../models/live_models.dart';
 import '../providers/live_provider.dart';
@@ -38,7 +39,7 @@ class _LiveMultiHopTransferScreenState extends State<LiveMultiHopTransferScreen>
         }
 
         return Scaffold(
-          backgroundColor: AppColors.backgroundLight,
+          backgroundColor: IveTokens.bg,
           appBar: LiveAppBar(
             title: _step == 0 ? 'Scan Package' : _step == 1 ? 'Verify Condition' : 'Confirm Handoff',
           ),
@@ -46,14 +47,14 @@ class _LiveMultiHopTransferScreenState extends State<LiveMultiHopTransferScreen>
             children: [
               // Step indicator
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                color: Colors.white,
+                padding: const EdgeInsets.symmetric(horizontal: IveTokens.s4, vertical: IveTokens.s2),
+                color: IveTokens.surface,
                 child: Row(
                   children: [
                     _TransferStep(label: 'Scan', index: 0, current: _step, completed: _scanned),
-                    Expanded(child: Container(height: 2, color: _scanned ? const Color(0xFF10B981) : const Color(0xFFE5E7EB))),
+                    Expanded(child: Container(height: 2, color: _scanned ? IveTokens.success : IveTokens.hairline)),
                     _TransferStep(label: 'Verify', index: 1, current: _step, completed: _conditionVerified),
-                    Expanded(child: Container(height: 2, color: _conditionVerified ? const Color(0xFF10B981) : const Color(0xFFE5E7EB))),
+                    Expanded(child: Container(height: 2, color: _conditionVerified ? IveTokens.success : IveTokens.hairline)),
                     _TransferStep(label: 'Handoff', index: 2, current: _step, completed: _handoffConfirmed),
                   ],
                 ),
@@ -89,35 +90,23 @@ class _LiveMultiHopTransferScreenState extends State<LiveMultiHopTransferScreen>
             ],
           ),
           bottomNavigationBar: Container(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-            decoration: const BoxDecoration(
-              color: Colors.white,
-            ),
+            padding: const EdgeInsets.fromLTRB(IveTokens.s4, IveTokens.s2, IveTokens.s4, IveTokens.s6),
+            decoration: const BoxDecoration(color: IveTokens.surface),
             child: Row(
               children: [
                 if (_step > 0)
                   Expanded(
-                    child: OutlinedButton(
+                    child: IveButton.secondary(
+                      label: 'BACK',
                       onPressed: () => setState(() => _step--),
-                      style: OutlinedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 14)),
-                      child: const Text('BACK'),
                     ),
                   ),
-                if (_step > 0) const SizedBox(width: 12),
+                if (_step > 0) const SizedBox(width: IveTokens.s3),
                 Expanded(
                   flex: 2,
-                  child: ElevatedButton(
+                  child: IveButton.primary(
+                    label: _step == 0 ? 'NEXT: VERIFY' : _step == 1 ? 'NEXT: HANDOFF' : 'COMPLETE TRANSFER',
                     onPressed: _canProceed ? () => setState(() => _step++) : null,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: _step == 2 ? const Color(0xFF10B981) : kLiveColor,
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                    ),
-                    child: Text(
-                      _step == 0 ? 'NEXT: VERIFY' : _step == 1 ? 'NEXT: HANDOFF' : 'âœ… COMPLETE TRANSFER',
-                      style: const TextStyle(fontWeight: FontWeight.w700),
-                    ),
                   ),
                 ),
               ],
@@ -151,74 +140,70 @@ class _ScanStep extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(IveTokens.s4),
       children: [
-        const SizedBox(height: 20),
+        const SizedBox(height: IveTokens.s5),
         Center(
           child: Column(
             children: [
               Container(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(IveTokens.s4),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: scanned ? const Color(0xFF10B981).withValues(alpha: 0.1) : const Color(0xFF8B5CF6).withValues(alpha: 0.1),
+                  color: scanned ? IveTokens.success.withValues(alpha: 0.1) : IveTokens.accent.withValues(alpha: 0.1),
                 ),
                 child: Icon(
                   scanned ? Icons.check_circle : Icons.qr_code_scanner,
                   size: 48,
-                  color: scanned ? const Color(0xFF10B981) : const Color(0xFF8B5CF6),
+                  color: scanned ? IveTokens.success : IveTokens.accent,
                 ),
               ),
-              const SizedBox(height: 16),
-              Text(scanned ? 'PACKAGE SCANNED âœ…' : 'SCAN PACKAGE QR CODE', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: scanned ? const Color(0xFF10B981) : AppColors.textPrimary)),
-              const SizedBox(height: 4),
-              Text('Scan the QR code on package ${package.id}', style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+              const SizedBox(height: IveTokens.s4),
+              Text(scanned ? 'PACKAGE SCANNED' : 'SCAN PACKAGE QR CODE', style: IveType.headline.copyWith(fontWeight: FontWeight.w800, color: scanned ? IveTokens.success : IveTokens.ink)),
+              const SizedBox(height: IveTokens.s1),
+              Text('Scan the QR code on package ${package.id}', style: IveType.subhead),
             ],
           ),
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: IveTokens.s6),
         if (!scanned) ...[
           Container(
             height: 200,
             decoration: BoxDecoration(
-              color: const Color(0xFFF3F4F6),
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: const Color(0xFF8B5CF6).withValues(alpha: 0.3), width: 2),
+              color: IveTokens.surfaceRaised,
+              borderRadius: const BorderRadius.all(Radius.circular(IveTokens.rSm)),
+              border: Border.all(color: IveTokens.accent.withValues(alpha: 0.3), width: 2),
             ),
             child: const Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.qr_code_scanner, size: 48, color: AppColors.textTertiary),
-                  SizedBox(height: 8),
-                  Text('Point camera at QR code', style: TextStyle(fontSize: 13, color: AppColors.textTertiary)),
+                  Icon(Icons.qr_code_scanner, size: 48, color: IveTokens.mute),
+                  SizedBox(height: IveTokens.s2),
+                  Text('Point camera at QR code', style: TextStyle(fontSize: 13, color: IveTokens.mute)),
                 ],
               ),
             ),
           ),
-          const SizedBox(height: 12),
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton.icon(
-              onPressed: onScan,
-              icon: const Icon(Icons.qr_code_scanner, size: 18),
-              label: const Text('SCAN QR CODE', style: TextStyle(fontWeight: FontWeight.w700)),
-              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF8B5CF6), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
-            ),
+          const SizedBox(height: IveTokens.s3),
+          IveButton.primary(
+            label: 'SCAN QR CODE',
+            icon: Icons.qr_code_scanner,
+            onPressed: onScan,
           ),
-          const SizedBox(height: 8),
-          Center(child: TextButton(onPressed: onScan, child: const Text('Enter code manually', style: TextStyle(color: AppColors.textSecondary)))),
+          const SizedBox(height: IveTokens.s2),
+          Center(child: IveButton.text(label: 'Enter code manually', onPressed: onScan)),
         ] else
           LiveSectionCard(
             title: 'PACKAGE VERIFIED',
             icon: Icons.verified,
-            iconColor: const Color(0xFF10B981),
+            iconColor: IveTokens.success,
             child: Column(
               children: [
                 _TransferInfoRow(label: 'Package ID', value: package.id),
                 _TransferInfoRow(label: 'Type', value: package.type.name.toUpperCase()),
                 _TransferInfoRow(label: 'Stops remaining', value: '${package.stops.where((s) => s.status != StopStatus.completed).length}'),
-                _TransferInfoRow(label: 'Value', value: 'â‚µ${package.driverEarnings.toStringAsFixed(0)}'),
+                _TransferInfoRow(label: 'Value', value: '${package.driverEarnings.toStringAsFixed(0)}'),
               ],
             ),
           ),
@@ -241,7 +226,7 @@ class _VerifyStep extends StatelessWidget {
         const LiveSectionCard(
           title: 'CONDITION CHECK',
           icon: Icons.checklist,
-          iconColor: Color(0xFF3B82F6),
+          iconColor: IveTokens.accent,
           child: Column(
             children: [
               _ConditionCheckItem(label: 'Package seal intact', checked: true),
@@ -255,7 +240,7 @@ class _VerifyStep extends StatelessWidget {
         const LiveSectionCard(
           title: 'CHAIN OF CUSTODY',
           icon: Icons.link,
-          iconColor: Color(0xFF8B5CF6),
+          iconColor: IveTokens.accent,
           child: Column(
             children: [
               _CustodyEntry(name: 'Branch Warehouse', time: '09:15 AM', action: 'Created'),
@@ -267,15 +252,11 @@ class _VerifyStep extends StatelessWidget {
 
         if (!verified)
           Padding(
-            padding: const EdgeInsets.only(top: 8),
-            child: SizedBox(
-              width: double.infinity,
-              child: ElevatedButton.icon(
-                onPressed: onVerify,
-                icon: const Icon(Icons.verified, size: 18),
-                label: const Text('VERIFY CONDITION', style: TextStyle(fontWeight: FontWeight.w700)),
-                style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10B981), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
-              ),
+            padding: const EdgeInsets.only(top: IveTokens.s2),
+            child: IveButton.primary(
+              label: 'VERIFY CONDITION',
+              icon: Icons.verified,
+              onPressed: onVerify,
             ),
           ),
       ],
@@ -298,27 +279,27 @@ class _HandoffStep extends StatelessWidget {
         LiveSectionCard(
           title: 'RECEIVING DRIVER',
           icon: Icons.person,
-          iconColor: const Color(0xFF3B82F6),
+          iconColor: IveTokens.accent,
           child: Row(
             children: [
               CircleAvatar(
                 radius: 22,
-                backgroundColor: const Color(0xFF3B82F6).withValues(alpha: 0.1),
-                child: const Text('SC', style: TextStyle(fontWeight: FontWeight.w700, color: Color(0xFF3B82F6))),
+                backgroundColor: IveTokens.accentSoft,
+                child: const Text('SC', style: TextStyle(fontWeight: FontWeight.w700, color: IveTokens.accent)),
               ),
-              const SizedBox(width: 12),
-              const Expanded(
+              const SizedBox(width: IveTokens.s3),
+              Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Sarah Chen', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                    Text('Sarah Chen', style: IveType.callout.copyWith(fontWeight: FontWeight.w700, color: IveTokens.ink)),
                     Row(
                       children: [
-                        Icon(Icons.star, size: 12, color: Color(0xFFF59E0B)),
-                        SizedBox(width: 2),
-                        Text('4.7', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
-                        SizedBox(width: 8),
-                        Text('ID verified âœ…', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                        const Icon(Icons.star, size: 12, color: IveTokens.warning),
+                        const SizedBox(width: 2),
+                        Text('4.7', style: IveType.footnote),
+                        const SizedBox(width: IveTokens.s2),
+                        Text('ID verified', style: IveType.footnote.copyWith(color: IveTokens.success)),
                       ],
                     ),
                   ],
@@ -331,7 +312,7 @@ class _HandoffStep extends StatelessWidget {
         LiveSectionCard(
           title: 'TRANSFER DETAILS',
           icon: Icons.swap_horiz,
-          iconColor: kLiveColor,
+          iconColor: IveTokens.moduleLive,
           child: Column(
             children: [
               _TransferInfoRow(label: 'Package', value: package.id),
@@ -344,15 +325,15 @@ class _HandoffStep extends StatelessWidget {
 
         if (!confirmed)
           Padding(
-            padding: const EdgeInsets.only(top: 8),
+            padding: const EdgeInsets.only(top: IveTokens.s2),
             child: Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(color: const Color(0xFFFEF3C7), borderRadius: BorderRadius.circular(10)),
+              padding: const EdgeInsets.all(IveTokens.s3),
+              decoration: const BoxDecoration(color: IveTokens.surfaceRaised, borderRadius: BorderRadius.all(Radius.circular(IveTokens.rSm))),
               child: const Row(
                 children: [
-                  Icon(Icons.warning, size: 16, color: Color(0xFFF59E0B)),
-                  SizedBox(width: 8),
-                  Expanded(child: Text('Both drivers must confirm this transfer. Custody will be logged automatically.', style: TextStyle(fontSize: 12, color: Color(0xFF92400E)))),
+                  Icon(Icons.warning, size: 16, color: IveTokens.warning),
+                  SizedBox(width: IveTokens.s2),
+                  Expanded(child: Text('Both drivers must confirm this transfer. Custody will be logged automatically.', style: TextStyle(fontSize: 12, color: IveTokens.warning))),
                 ],
               ),
             ),
@@ -360,18 +341,14 @@ class _HandoffStep extends StatelessWidget {
 
         if (!confirmed)
           Padding(
-            padding: const EdgeInsets.only(top: 12),
-            child: SizedBox(
-              width: double.infinity,
-              child: ElevatedButton.icon(
-                onPressed: () {
-                  HapticFeedback.heavyImpact();
-                  onConfirm();
-                },
-                icon: const Icon(Icons.handshake, size: 18),
-                label: const Text('CONFIRM HANDOFF', style: TextStyle(fontWeight: FontWeight.w700)),
-                style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10B981), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
-              ),
+            padding: const EdgeInsets.only(top: IveTokens.s3),
+            child: IveButton.primary(
+              label: 'CONFIRM HANDOFF',
+              icon: Icons.handshake,
+              onPressed: () {
+                HapticFeedback.heavyImpact();
+                onConfirm();
+              },
             ),
           ),
       ],
@@ -387,34 +364,27 @@ class _TransferCompleteView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundLight,
+      backgroundColor: IveTokens.bg,
       appBar: const LiveAppBar(title: 'Transfer Complete'),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(IveTokens.s6),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                padding: const EdgeInsets.all(24),
-                decoration: BoxDecoration(shape: BoxShape.circle, color: const Color(0xFF10B981).withValues(alpha: 0.1)),
-                child: const Icon(Icons.handshake, size: 64, color: Color(0xFF10B981)),
+                padding: const EdgeInsets.all(IveTokens.s6),
+                decoration: BoxDecoration(shape: BoxShape.circle, color: IveTokens.success.withValues(alpha: 0.1)),
+                child: const Icon(Icons.handshake, size: 64, color: IveTokens.success),
               ),
-              const SizedBox(height: 20),
-              const Text('ðŸ¤ TRANSFER COMPLETE!', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
-              const SizedBox(height: 8),
-              Text('Package ${package.id} handed off successfully', style: const TextStyle(fontSize: 14, color: AppColors.textSecondary)),
-              const SizedBox(height: 4),
-              const Text('Chain of custody updated', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: Color(0xFF10B981))),
-              const SizedBox(height: 24),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: onDone,
-                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10B981), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 16), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
-                  child: const Text('BACK TO HOME', style: TextStyle(fontWeight: FontWeight.w700)),
-                ),
-              ),
+              const SizedBox(height: IveTokens.s5),
+              Text('TRANSFER COMPLETE!', style: IveType.title2.copyWith(fontWeight: FontWeight.w900, color: IveTokens.ink)),
+              const SizedBox(height: IveTokens.s2),
+              Text('Package ${package.id} handed off successfully', style: IveType.callout),
+              const SizedBox(height: IveTokens.s1),
+              Text('Chain of custody updated', style: IveType.subhead.copyWith(fontWeight: FontWeight.w600, color: IveTokens.success)),
+              const SizedBox(height: IveTokens.s6),
+              IveButton.primary(label: 'BACK TO HOME', onPressed: onDone),
             ],
           ),
         ),
@@ -438,14 +408,14 @@ class _TransferStep extends StatelessWidget {
           width: 28, height: 28,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: completed ? const Color(0xFF10B981) : index == current ? kLiveColor : const Color(0xFFE5E7EB),
+            color: completed ? IveTokens.success : index == current ? IveTokens.moduleLive : IveTokens.hairline,
           ),
           child: Center(
-            child: completed ? const Icon(Icons.check, size: 16, color: Colors.white) : index == current ? const Icon(Icons.circle, size: 8, color: Colors.white) : null,
+            child: completed ? const Icon(Icons.check, size: 16, color: IveTokens.ink) : index == current ? const Icon(Icons.circle, size: 8, color: IveTokens.ink) : null,
           ),
         ),
-        const SizedBox(height: 4),
-        Text(label, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: index <= current ? AppColors.textPrimary : AppColors.textTertiary)),
+        const SizedBox(height: IveTokens.s1),
+        Text(label, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: index <= current ? IveTokens.ink : IveTokens.mute)),
       ],
     );
   }
@@ -459,12 +429,12 @@ class _ConditionCheckItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 6),
+      padding: const EdgeInsets.only(bottom: IveTokens.s1 + 2),
       child: Row(
         children: [
-          Icon(checked ? Icons.check_circle : Icons.radio_button_unchecked, size: 18, color: checked ? const Color(0xFF10B981) : AppColors.textTertiary),
-          const SizedBox(width: 8),
-          Text(label, style: TextStyle(fontSize: 13, color: checked ? AppColors.textPrimary : AppColors.textTertiary)),
+          Icon(checked ? Icons.check_circle : Icons.radio_button_unchecked, size: 18, color: checked ? IveTokens.success : IveTokens.mute),
+          const SizedBox(width: IveTokens.s2),
+          Text(label, style: IveType.subhead.copyWith(color: checked ? IveTokens.ink : IveTokens.mute)),
         ],
       ),
     );
@@ -480,20 +450,20 @@ class _CustodyEntry extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.only(bottom: IveTokens.s2),
       child: Row(
         children: [
           Container(
             width: 8, height: 8,
-            decoration: BoxDecoration(shape: BoxShape.circle, color: action == 'Current' ? kLiveColor : const Color(0xFF10B981)),
+            decoration: BoxDecoration(shape: BoxShape.circle, color: action == 'Current' ? IveTokens.moduleLive : IveTokens.success),
           ),
-          const SizedBox(width: 10),
+          const SizedBox(width: IveTokens.s2 + 2),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(name, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-                Text('$time — $action', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                Text(name, style: IveType.subhead.copyWith(fontWeight: FontWeight.w600, color: IveTokens.ink)),
+                Text('$time  $action', style: IveType.caption),
               ],
             ),
           ),

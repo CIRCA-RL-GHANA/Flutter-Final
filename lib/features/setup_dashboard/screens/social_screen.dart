@@ -1,12 +1,13 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD1.11: SOCIAL — Social Media & Updates
+/// 
+/// SD1.11: SOCIAL  Social Media & Updates
 /// Post feed, scheduled content, engagement metrics
 /// RBAC: Owner(personal), Admin(full), BM(branch), SO(full), BSO(branch),
 ///        Monitor/BrMon(view), RO/BRO(view), Driver(view)
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/theme/app_colors.dart';
@@ -37,13 +38,13 @@ class SocialScreen extends StatelessWidget {
             ),
             floatingActionButton: SetupRbacFAB(
               cardId: 'social',
-              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Create new post'))),
+              onPressed: () => AppToast.show(context, 'Create new post'),
               label: 'New Post',
               icon: Icons.edit,
             ),
           body: CustomScrollView(
             slivers: [
-              // ─── Engagement KPIs ──────────────────────────
+              //  Engagement KPIs 
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -71,7 +72,7 @@ class SocialScreen extends StatelessWidget {
                           label: 'Avg. Engage',
                           value: (() {
                             final published = posts.where((p) => p.status == PostStatus.published).toList();
-                            if (published.isEmpty) return '—';
+                            if (published.isEmpty) return '';
                             final avg = published.fold<double>(0, (s, p) => s + p.engagementRate) / published.length;
                             return '${avg.toStringAsFixed(1)}%';
                           })(),
@@ -84,7 +85,7 @@ class SocialScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Status Filter ────────────────────────────
+              //  Status Filter 
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -105,7 +106,7 @@ class SocialScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Platform Distribution ────────────────────
+              //  Platform Distribution 
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -132,7 +133,7 @@ class SocialScreen extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                               decoration: BoxDecoration(
                                 color: kSetupColor.withValues(alpha: 0.06),
-                                borderRadius: BorderRadius.circular(20),
+                                borderRadius: BorderRadius.circular(10),
                               ),
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
@@ -157,7 +158,7 @@ class SocialScreen extends StatelessWidget {
                   child: SetupSectionTitle(title: 'Posts', icon: Icons.forum),
                 ),
               ),
-              // ─── AI Insights ─────────────────────────────────────────
+              //  AI Insights 
               const SliverToBoxAdapter(
               ),
               SliverPadding(
@@ -318,7 +319,7 @@ class _PostStat extends StatelessWidget {
   }
 }
 
-// ─── Content Type Chip ───────────────────────────────────────────────────────
+//  Content Type Chip 
 
 class _ContentTypeChip extends StatelessWidget {
   final String label;
@@ -340,7 +341,7 @@ class _ContentTypeChip extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
         color: isSelected ? c.withValues(alpha: 0.12) : Colors.white,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(10),
         border: Border.all(
           color: isSelected ? c.withValues(alpha: 0.4) : AppColors.inputBorder,
         ),
@@ -361,7 +362,7 @@ class _ContentTypeChip extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
             decoration: BoxDecoration(
               color: c.withValues(alpha: 0.15),
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(10),
             ),
             child: Text(
               '$count',

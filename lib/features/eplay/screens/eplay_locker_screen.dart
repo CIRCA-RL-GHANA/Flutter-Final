@@ -1,8 +1,8 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// e-PLAY MODULE — Cloud Locker Screen
+/// 
+/// e-PLAY MODULE  Cloud Locker Screen
 /// The user's personal library of purchased / licensed digital content.
 /// Content is never on-device unless pinned for temporary offline cache.
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -75,9 +75,9 @@ class _EPlayLockerScreenState extends State<EPlayLockerScreen> with SingleTicker
           ),
           body: Column(
             children: [
-              // ── AI insight ──────────────────────────────────────────────
+              //  AI insight 
 
-              // ── Stats bar ───────────────────────────────────────────────
+              //  Stats bar 
               Container(
                 margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
                 padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
@@ -96,7 +96,7 @@ class _EPlayLockerScreenState extends State<EPlayLockerScreen> with SingleTicker
                 ),
               ),
 
-              // ── Tab content ─────────────────────────────────────────────
+              //  Tab content 
               Expanded(
                 child: eplay.isLockerLoading
                     ? const Center(child: CircularProgressIndicator())

@@ -431,10 +431,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_secure_storage
-      sha256: d422162d8792c92c94ab49ee8a730d8d799d68b1f46dc03e3e0a363b3910cecc
+      sha256: "9cad52d75ebc511adfae3d447d5d13da15a55a92c9410e50f67335b6d21d16ea"
       url: "https://pub.dev"
     source: hosted
-    version: "9.1.0"
+    version: "9.2.4"
   flutter_secure_storage_linux:
     dependency: transitive
     description:
@@ -463,18 +463,18 @@ packages:
     dependency: transitive
     description:
       name: flutter_secure_storage_web
-      sha256: cb8dcc88a97a7ec7458a51cb3a4487697bd5a52603b25f1a93764d04eb3d1d5f
+      sha256: f4ebff989b4f07b2656fb16b47852c0aab9fed9b4ec1c70103368337bc1886a9
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.0"
+    version: "1.2.1"
   flutter_secure_storage_windows:
     dependency: transitive
     description:
       name: flutter_secure_storage_windows
-      sha256: "90d92332b961f4cc6ba9ed4904c768dceef723b92ba40b41bece32461b7892c3"
+      sha256: b20b07cb5ed4ed74fc567b78a72936203f587eba460af1df11281c9326cd3709
       url: "https://pub.dev"
     source: hosted
-    version: "3.1.1"
+    version: "3.1.2"
   flutter_shaders:
     dependency: transitive
     description:

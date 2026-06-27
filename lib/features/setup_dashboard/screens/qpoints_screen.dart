@@ -1,12 +1,13 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD3.4: Q-POINTS — Balance, Transactions, Redemption
+/// 
+/// SD3.4: Q-POINTS  Balance, Transactions, Redemption
 /// Balance header, transaction history, type-colored entries
 /// RBAC: Owner(all), Admin(entity), BM(branch), SO(entity),
 ///        BSO(branch), Monitor/BrMon(view), RO/BRO(limited), Driver(own)
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../prompt/providers/context_provider.dart';
@@ -44,13 +45,13 @@ class QPointsScreen extends StatelessWidget {
             ),
             floatingActionButton: SetupRbacFAB(
               cardId: 'qpoints',
-              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Buy QPoints'))),
+              onPressed: () => AppToast.show(context, 'Buy QPoints'),
               label: 'Buy QP',
               icon: Icons.add_shopping_cart,
             ),
           body: CustomScrollView(
             slivers: [
-              // ─── Balance Header ───────────────────────────
+              //  Balance Header 
               SliverToBoxAdapter(
                 child: Container(
                   margin: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -96,7 +97,7 @@ class QPointsScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Tier Badge ───────────────────────────────
+              //  Tier Badge 
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -112,7 +113,7 @@ class QPointsScreen extends StatelessWidget {
                           padding: const EdgeInsets.all(6),
                           decoration: BoxDecoration(
                             color: AppColors.accent.withValues(alpha: 0.15),
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           child: const Icon(Icons.star, size: 18, color: AppColors.accent),
                         ),
@@ -142,7 +143,7 @@ class QPointsScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Quick Actions ───────────────────────────
+              //  Quick Actions 
               const SliverToBoxAdapter(
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -160,7 +161,7 @@ class QPointsScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Earning Summary ──────────────────────────
+              //  Earning Summary 
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -205,7 +206,7 @@ class QPointsScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Transaction History ──────────────────────
+              //  Transaction History 
               const SliverToBoxAdapter(
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
@@ -213,7 +214,7 @@ class QPointsScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── AI Insights ─────────────────────────────────────────
+              //  AI Insights 
               const SliverToBoxAdapter(
               ),
               SliverPadding(
@@ -307,7 +308,7 @@ class _TransactionCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  '${tx.type.name.toUpperCase()} Â· ${setupTimeAgo(tx.date)}',
+                  '${tx.type.name.toUpperCase()}  ${setupTimeAgo(tx.date)}',
                   style: const TextStyle(fontSize: 10, color: AppColors.textTertiary),
                 ),
               ],
@@ -327,7 +328,7 @@ class _TransactionCard extends StatelessWidget {
   }
 }
 
-// ─── Quick Action ────────────────────────────────────────────────────────────
+//  Quick Action 
 
 class _QuickAction extends StatelessWidget {
   final IconData icon;
@@ -362,7 +363,7 @@ class _QuickAction extends StatelessWidget {
   }
 }
 
-// ─── Breakdown Stat ──────────────────────────────────────────────────────────
+//  Breakdown Stat 
 
 class _BreakdownStat extends StatelessWidget {
   final String label;

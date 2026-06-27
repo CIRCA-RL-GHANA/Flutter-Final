@@ -1,7 +1,7 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// MARKET MODULE — Screen 7: My Transactions Dashboard
+/// 
+/// MARKET MODULE  Screen 7: My Transactions Dashboard
 /// Active orders, order history, returns, rides, FAB for new order
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -137,7 +137,7 @@ class _MarketTransactionsScreenState extends State<MarketTransactionsScreen>
   }
 }
 
-// ── KPI Card ───────────────────────────────────────────────────────
+//  KPI Card 
 class _KPICard extends StatelessWidget {
   final IconData icon;
   final String label;
@@ -179,7 +179,7 @@ class _KPICard extends StatelessWidget {
   }
 }
 
-// ── Active Orders Tab ──────────────────────────────────────────────
+//  Active Orders Tab 
 class _ActiveTab extends StatelessWidget {
   final MarketProvider prov;
 
@@ -218,7 +218,7 @@ class _ActiveTab extends StatelessWidget {
   }
 }
 
-// ── History Tab ────────────────────────────────────────────────────
+//  History Tab 
 class _HistoryTab extends StatelessWidget {
   final MarketProvider prov;
 
@@ -253,7 +253,7 @@ class _HistoryTab extends StatelessWidget {
   }
 }
 
-// ── Returns Tab ────────────────────────────────────────────────────
+//  Returns Tab 
 class _ReturnsTab extends StatelessWidget {
   final MarketProvider prov;
 
@@ -317,7 +317,7 @@ class _ReturnsTab extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '${ret.items.length} item(s) • ${ret.reason.name}',
+                  '${ret.items.length} item(s)  ${ret.reason.name}',
                   style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
                 ),
                 const SizedBox(height: 8),
@@ -353,7 +353,7 @@ class _ReturnsTab extends StatelessWidget {
   }
 }
 
-// ── Rides Tab ──────────────────────────────────────────────────────
+//  Rides Tab 
 class _RidesTab extends StatelessWidget {
   final MarketProvider prov;
 
@@ -495,7 +495,7 @@ class _RidesTab extends StatelessWidget {
   }
 }
 
-// ── Order Card ─────────────────────────────────────────────────────
+//  Order Card 
 class _OrderCard extends StatelessWidget {
   final MarketOrder order;
   final VoidCallback? onTap;
@@ -553,7 +553,7 @@ class _OrderCard extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(
                       color: order.statusColor.withValues(alpha: 0.1),
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                     child: Text(
                       order.statusLabel,

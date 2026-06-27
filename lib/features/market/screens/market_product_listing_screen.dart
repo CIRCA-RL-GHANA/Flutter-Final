@@ -1,7 +1,7 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// MARKET MODULE — Screen 3: Product Listing & Selection
+/// 
+/// MARKET MODULE  Screen 3: Product Listing & Selection
 /// Full-screen product catalog with grid/list toggle, sort, categories
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -211,7 +211,7 @@ class _MarketProductListingScreenState extends State<MarketProductListingScreen>
     showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
       ),
       builder: (ctx) {
         return Padding(
@@ -226,7 +226,7 @@ class _MarketProductListingScreenState extends State<MarketProductListingScreen>
                   height: 4,
                   decoration: BoxDecoration(
                     color: AppColors.inputBorder,
-                    borderRadius: BorderRadius.circular(2),
+                    borderRadius: BorderRadius.circular(6),
                   ),
                 ),
               ),

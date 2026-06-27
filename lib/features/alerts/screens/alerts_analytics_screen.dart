@@ -1,4 +1,4 @@
-﻿/// Alerts Screen 6 — Analytics Dashboard
+/// Alerts Screen 6  Analytics Dashboard
 /// Volume trends, SLA compliance, category distribution,
 /// team workload, resolver leaderboard
 library;
@@ -24,12 +24,12 @@ class AlertsAnalyticsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // ──── AI ANALYTICS INSIGHT ────
-                // ──── KEY METRICS ────
+                //  AI ANALYTICS INSIGHT 
+                //  KEY METRICS 
                 Row(
                   children: [
                     _MetricCard(
-                      emoji: 'ðŸ“Š',
+                      emoji: '"',
                       label: 'Total',
                       value: '${provider.totalCount}',
                       sub: 'alerts',
@@ -37,7 +37,7 @@ class AlertsAnalyticsScreen extends StatelessWidget {
                     ),
                     const SizedBox(width: 10),
                     _MetricCard(
-                      emoji: 'â±ï¸',
+                      emoji: '',
                       label: 'Avg Resolution',
                       value: '${provider.avgResolutionTime.inHours}h ${provider.avgResolutionTime.inMinutes % 60}m',
                       sub: 'time',
@@ -49,7 +49,7 @@ class AlertsAnalyticsScreen extends StatelessWidget {
                 Row(
                   children: [
                     _MetricCard(
-                      emoji: 'âœ…',
+                      emoji: '',
                       label: 'SLA Compliance',
                       value: '${provider.slaCompliancePercent}%',
                       sub: 'on-time',
@@ -57,7 +57,7 @@ class AlertsAnalyticsScreen extends StatelessWidget {
                     ),
                     const SizedBox(width: 10),
                     _MetricCard(
-                      emoji: 'ðŸ”´',
+                      emoji: '"',
                       label: 'Pending',
                       value: '${provider.pendingCount}',
                       sub: 'open alerts',
@@ -67,9 +67,9 @@ class AlertsAnalyticsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
 
-                // ──── VOLUME TRENDS ────
+                //  VOLUME TRENDS 
                 AlertsSectionCard(
-                  title: 'ðŸ“ˆ Alert Volume (7 Days)',
+                  title: '" Alert Volume (7 Days)',
                   child: SizedBox(
                     height: 160,
                     child: _BarChart(data: provider.volumeByDay),
@@ -77,9 +77,9 @@ class AlertsAnalyticsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
 
-                // ──── CATEGORY DISTRIBUTION ────
+                //  CATEGORY DISTRIBUTION 
                 AlertsSectionCard(
-                  title: 'ðŸ—‚ï¸ Category Distribution',
+                  title: ' Category Distribution',
                   child: Column(
                     children: provider.categoryDistribution.map((dp) {
                       final maxCount = provider.categoryDistribution.fold<int>(0, (m, d) => d.count > m ? d.count : m);
@@ -93,9 +93,9 @@ class AlertsAnalyticsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
 
-                // ──── SLA COMPLIANCE GAUGE ────
+                //  SLA COMPLIANCE GAUGE 
                 AlertsSectionCard(
-                  title: 'â±ï¸ SLA Compliance',
+                  title: ' SLA Compliance',
                   child: Column(
                     children: [
                       SizedBox(
@@ -147,9 +147,9 @@ class AlertsAnalyticsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
 
-                // ──── ISSUE DISTRIBUTION DONUT ────
+                //  ISSUE DISTRIBUTION DONUT 
                 AlertsSectionCard(
-                  title: 'ðŸ© Issue Mix',
+                  title: ' Issue Mix',
                   child: Row(
                     children: [
                       MiniDonutChart(data: provider.issueDistribution, size: 80),
@@ -181,9 +181,9 @@ class AlertsAnalyticsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
 
-                // ──── RESOLVER LEADERBOARD ────
+                //  RESOLVER LEADERBOARD 
                 AlertsSectionCard(
-                  title: 'ðŸ† Top Resolvers',
+                  title: ' Top Resolvers',
                   child: Column(
                     children: [
                       for (int i = 0; i < provider.topResolvers.length; i++)
@@ -196,9 +196,9 @@ class AlertsAnalyticsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
 
-                // ──── TEAM WORKLOAD ────
+                //  TEAM WORKLOAD 
                 AlertsSectionCard(
-                  title: 'ðŸ‘¥ Team Workload',
+                  title: 'Team Workload',
                   child: Column(
                     children: provider.staff.map((s) => Container(
                       margin: const EdgeInsets.only(bottom: 8),
@@ -227,7 +227,7 @@ class AlertsAnalyticsScreen extends StatelessWidget {
                                     s.activeAlerts >= 5 ? kAlertsColor : s.activeAlerts >= 3 ? kAlertsWarning : kAlertsResolved,
                                   ),
                                   minHeight: 6,
-                                  borderRadius: BorderRadius.circular(3),
+                                  borderRadius: BorderRadius.circular(6),
                                 ),
                               ],
                             ),
@@ -248,9 +248,9 @@ class AlertsAnalyticsScreen extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 // Metric Card
-// ──────────────────────────────────────────────
+// 
 
 class _MetricCard extends StatelessWidget {
   final String emoji;
@@ -291,9 +291,9 @@ class _MetricCard extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 // Bar Chart
-// ──────────────────────────────────────────────
+// 
 
 class _BarChart extends StatelessWidget {
   final List<AlertAnalyticsPoint> data;
@@ -318,7 +318,7 @@ class _BarChart extends StatelessWidget {
                   height: height,
                   decoration: BoxDecoration(
                     color: kAlertsColor.withValues(alpha: 0.7),
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius: BorderRadius.circular(6),
                   ),
                 ),
                 const SizedBox(height: 4),
@@ -332,9 +332,9 @@ class _BarChart extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 // Distribution Bar
-// ──────────────────────────────────────────────
+// 
 
 class _DistributionBar extends StatelessWidget {
   final String label;
@@ -356,7 +356,7 @@ class _DistributionBar extends StatelessWidget {
               backgroundColor: const Color(0xFFE5E7EB),
               valueColor: const AlwaysStoppedAnimation(kAlertsColor),
               minHeight: 8,
-              borderRadius: BorderRadius.circular(4),
+              borderRadius: BorderRadius.circular(6),
             ),
           ),
           const SizedBox(width: 8),
@@ -367,9 +367,9 @@ class _DistributionBar extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 // Legend Dot
-// ──────────────────────────────────────────────
+// 
 
 class _LegendDot extends StatelessWidget {
   final Color color;

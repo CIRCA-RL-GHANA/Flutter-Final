@@ -6,8 +6,8 @@ import 'ive_tokens.dart';
 /// Refined list row with optically-centered leading icon, numeral-aware
 /// trailing amount, and optional swipe-to-reveal a single primary action.
 ///
-/// Subtitle rule: carry *new* information (time, source, status) — never
-/// restate the title. If title is "Ama Mensah", subtitle ≠ "@ama". Use "2m ago".
+/// Subtitle rule: carry *new* information (time, source, status)  never
+/// restate the title. If title is "Ama Mensah", subtitle  "@ama". Use "2m ago".
 ///
 /// Only one swipe action is allowed per spec. Triggers [HapticFeedback.lightImpact]
 /// at the dismiss threshold.
@@ -29,7 +29,7 @@ class ListRow extends StatelessWidget {
 
   final String title;
 
-  /// New information only — time, context, gateway, status.
+  /// New information only  time, context, gateway, status.
   final String? subtitle;
 
   final Widget? leading;
@@ -45,7 +45,7 @@ class ListRow extends StatelessWidget {
 
   final VoidCallback? onTap;
 
-  /// Action revealed by swiping end → start. One action only.
+  /// Action revealed by swiping end  start. One action only.
   final VoidCallback? swipeAction;
   final String? swipeActionLabel;
   final Color? swipeActionColor;
@@ -218,7 +218,7 @@ class _NumeralTrailing extends StatelessWidget {
     final absVal = amount.abs();
     final intPart = absVal.truncate();
     final decPart = ((absVal - intPart) * 100).round();
-    final sign = negative ? '−' : '';
+    final sign = negative ? '' : '';
 
     return RichText(
       textAlign: TextAlign.end,

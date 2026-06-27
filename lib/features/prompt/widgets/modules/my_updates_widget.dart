@@ -1,7 +1,7 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 /// MY UPDATES Widget (Social Feed)
 /// Visible to: Owner, Administrator only
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -96,7 +96,7 @@ class MyUpdatesWidgetContent extends StatelessWidget {
                 ),
                 const SizedBox(height: 6),
                 const Text(
-                  'New arrivals just dropped! ðŸŽ‰ Check out our latest collection...',
+                  'New arrivals just dropped!  Check out our latest collection...',
                   style: TextStyle(fontSize: 11, color: AppColors.textSecondary),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,

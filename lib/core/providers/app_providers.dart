@@ -134,31 +134,31 @@ class AppProviders {
       // Community Module Provider
       ChangeNotifierProvider(create: (_) => CommunityProvider()),
 
-      // ── Wallets Module Provider ─────────────────────────────────────────
+      //  Wallets Module Provider 
       ChangeNotifierProvider(create: (_) => WalletsProvider()),
 
-      // ── Subscriptions Module Provider ───────────────────────────────────
+      //  Subscriptions Module Provider 
       ChangeNotifierProvider(create: (_) => SubscriptionsProvider()),
 
-      // ── April Module — Wishlist & Statement Providers ───────────────────
+      //  April Module  Wishlist & Statement Providers 
       ChangeNotifierProvider(create: (_) => WishlistProvider()),
       ChangeNotifierProvider(create: (_) => StatementProvider()),
 
-      // ── Setup Dashboard Extended Providers ─────────────────────────────
+      //  Setup Dashboard Extended Providers 
       ChangeNotifierProvider(create: (_) => CampaignsProvider()),
       ChangeNotifierProvider(create: (_) => TabsProvider()),
       ChangeNotifierProvider(create: (_) => InterestsProvider()),
       ChangeNotifierProvider(create: (_) => MultiChannelProvider()),
       ChangeNotifierProvider(create: (_) => FulfillmentProvider()),
 
-      // ── AI Cross-Cutting Providers ──────────────────────────────────────
+      //  AI Cross-Cutting Providers 
       // AI Assistant: conversational AI chat available app-wide
       ChangeNotifierProvider(create: (_) => AIAssistantService()),
 
       // AI Insights Notifier: financial / planner AI state
       ChangeNotifierProvider(create: (_) => AIInsightsNotifier()),
 
-      // ── Infrastructure Services ─────────────────────────────────────────
+      //  Infrastructure Services 
       ChangeNotifierProvider(create: (_) => WebSocketService()),
 
       // ChatService is a ChangeNotifier (real-time state).
@@ -166,12 +166,12 @@ class AppProviders {
         create: (_) => ChatService(),
       ),
 
-      // OrdersService is a stateless API service — use plain Provider.
+      // OrdersService is a stateless API service  use plain Provider.
       Provider<OrdersService>(
         create: (_) => OrdersService(),
       ),
 
-      // ── Stateless API Services ──────────────────────────────────────────
+      //  Stateless API Services 
       Provider<WalletsService>(create: (_) => WalletsService()),
       Provider<FilesService>(create: (_) => FilesService()),
       Provider<SubscriptionsService>(create: (_) => SubscriptionsService()),

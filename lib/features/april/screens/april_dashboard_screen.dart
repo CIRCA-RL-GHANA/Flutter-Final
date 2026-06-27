@@ -1,398 +1,245 @@
-/// APRIL Screen 1 — ActionCore Dashboard (Home Hub)
-/// Master header, voice center, notifications, plugin grid, command bar, status
-library;
-
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../models/april_models.dart';
-import '../providers/april_provider.dart';
-import '../widgets/april_widgets.dart';
 import '../../../core/design/ive_tokens.dart';
-import '../../../core/routes/app_routes.dart';
+import '../../../core/design/ive_text.dart';
 
-class AprilDashboardScreen extends StatelessWidget {
+class AprilDashboardScreen extends StatefulWidget {
   const AprilDashboardScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Consumer<AprilProvider>(
-      builder: (context, provider, _) {
-        return Scaffold(
-          backgroundColor: IveTokens.bg,
-          body: CustomScrollView(
-            slivers: [
-              // ──── MASTER HEADER (Sticky) ────
-              SliverAppBar(
-                pinned: true,
-                expandedHeight: 140,
-                backgroundColor: Colors.white,
-                foregroundColor: IveTokens.label,
-                elevation: 0,
-                actions: [
-                  IconButton(
-                    icon: const Icon(Icons.refresh, size: 22),
-                    onPressed: provider.refreshSync,
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.settings, size: 22),
-                    onPressed: () => Navigator.pushNamed(context, '/april/settings'),
-                  ),
-                ],
-                flexibleSpace: FlexibleSpaceBar(
-                  background: SafeArea(
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                width: 40,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                  color: kAprilColor.withValues(alpha: 0.15),
-                                  shape: BoxShape.circle,
-                                ),
-                                child: const Icon(Icons.person, color: kAprilColorDark),
-                              ),
-                              const SizedBox(width: 12),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    provider.userName,
-                                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-                                  ),
-                                  Row(
-                                    children: [
-                                      Container(
-                                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                                        decoration: BoxDecoration(
-                                          color: kAprilColor.withValues(alpha: 0.15),
-                                          borderRadius: BorderRadius.circular(4),
-                                        ),
-                                        child: const Text('Owner', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: kAprilColorDark)),
-                                      ),
-                                      const SizedBox(width: 6),
-                                      const Text('Personal Context', style: TextStyle(fontSize: 12, color: IveTokens.labelSecondary)),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 12),
-                          Text(
-                            _greeting(provider.userName),
-                            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                          ),
-                          const SizedBox(height: 4),
-                          Row(
-                            children: [
-                              Text(
-                                '${provider.pendingActionCount} actions pending',
-                                style: TextStyle(
-                                  fontSize: 13,
-                                  color: provider.pendingActionCount > 0
-                                      ? IveTokens.danger
-                                      : IveTokens.success,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              const Text(' • ', style: TextStyle(color: IveTokens.labelTertiary)),
-                              Text(
-                                'Last sync: ${_timeAgo(provider.lastSync)}',
-                                style: const TextStyle(fontSize: 13, color: IveTokens.labelSecondary),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+  State<AprilDashboardScreen> createState() => _AprilDashboardScreenState();
+}
 
-              SliverPadding(
-                padding: const EdgeInsets.all(16),
-                sliver: SliverList(
-                  delegate: SliverChildListDelegate([
-                    // ──── VOICE COMMAND CENTER ────
-                    AprilSectionCard(
-                      title: 'Voice Command Center',
-                      child: Column(
-                        children: [
-                          const SizedBox(height: 8),
-                          AprilVoiceButton(
-                            state: provider.voiceState,
-                            size: 80,
-                            onTap: () {
-                              if (provider.voiceState == VoiceState.idle) {
-                                provider.setVoiceState(VoiceState.listening);
-                              } else {
-                                provider.setVoiceState(VoiceState.idle);
-                              }
-                            },
-                            onLongPress: () => provider.setVoiceState(VoiceState.listening),
-                          ),
-                          const SizedBox(height: 12),
-                          Text(
-                            provider.voiceState == VoiceState.listening
-                                ? 'Listening...'
-                                : provider.voiceState == VoiceState.processing
-                                    ? 'Processing...'
-                                    : 'Tap & Speak',
-                            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-                          ),
-                          const SizedBox(height: 4),
-                          const Text(
-                            'Say "Add meeting with Alex tomorrow"',
-                            style: TextStyle(fontSize: 12, color: IveTokens.labelSecondary),
-                          ),
-                          const SizedBox(height: 16),
+class _AprilDashboardScreenState extends State<AprilDashboardScreen>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _breathe;
+  late final Animation<double> _scale;
 
-                          // Voice history (collapsible)
-                          ExpansionTile(
-                            title: const Text('Recent Commands', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-                            tilePadding: EdgeInsets.zero,
-                            childrenPadding: EdgeInsets.zero,
-                            children: provider.voiceHistory.take(5).map((cmd) => Dismissible(
-                              key: ValueKey(cmd.id),
-                              onDismissed: (_) => provider.removeVoiceCommand(cmd.id),
-                              background: Container(color: IveTokens.danger),
-                              child: ListTile(
-                                dense: true,
-                                contentPadding: EdgeInsets.zero,
-                                leading: Icon(
-                                  cmd.type == CommandType.voice ? Icons.mic : Icons.keyboard,
-                                  size: 18,
-                                  color: cmd.successful ? kAprilSuccess : IveTokens.danger,
-                                ),
-                                title: Text(cmd.text, style: const TextStyle(fontSize: 13)),
-                                subtitle: Text(
-                                  cmd.result ?? '',
-                                  style: const TextStyle(fontSize: 11, color: IveTokens.labelSecondary),
-                                ),
-                                trailing: Text(
-                                  _timeAgo(cmd.timestamp),
-                                  style: const TextStyle(fontSize: 10, color: IveTokens.labelTertiary),
-                                ),
-                              ),
-                            )).toList(),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 16),
+  @override
+  void initState() {
+    super.initState();
+    _breathe = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2),
+    )..repeat(reverse: true);
 
-                    // ──── SMART NOTIFICATIONS PANEL ────
-                    AprilSectionCard(
-                      title: 'Notifications',
-                      trailing: provider.unreadNotificationCount > 0
-                          ? Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                              decoration: BoxDecoration(
-                                color: IveTokens.danger,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Text(
-                                '${provider.unreadNotificationCount}',
-                                style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white),
-                              ),
-                            )
-                          : null,
-                      child: Column(
-                        children: [
-                          if (provider.notifications.isEmpty)
-                            const Padding(
-                              padding: EdgeInsets.symmetric(vertical: 16),
-                              child: Text('All caught up! 🎉', style: TextStyle(color: IveTokens.labelSecondary)),
-                            )
-                          else
-                            ...provider.notifications.map((n) => AprilNotificationCard(
-                              notification: n,
-                              onDismiss: () => provider.dismissNotification(n.id),
-                            )),
-                          if (provider.notifications.length > 2) ...[
-                            const SizedBox(height: 8),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                TextButton(
-                                  onPressed: provider.markAllNotificationsRead,
-                                  child: const Text('Mark all read', style: TextStyle(fontSize: 12, color: kAprilColorDark)),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-
-                    // ──── AI INSIGHTS PANEL ────
-                    const SizedBox(height: 16),
-
-                    // ──── PLUGIN QUICK ACCESS GRID ────
-                    const Text(
-                      'Plugins',
-                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
-                    ),
-                    const SizedBox(height: 12),
-                    GridView.count(
-                      crossAxisCount: 2,
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      mainAxisSpacing: 12,
-                      crossAxisSpacing: 12,
-                      childAspectRatio: 1.3,
-                      children: provider.pluginStatuses.map((ps) {
-                        final routes = {
-                          AprilPlugin.planner: '/april/planner',
-                          AprilPlugin.calendar: '/april/calendar',
-                          AprilPlugin.wishlist: '/april/wishlist',
-                          AprilPlugin.statement: '/april/statement',
-                        };
-                        return PluginCard(
-                          plugin: ps.plugin,
-                          syncStatus: ps.syncStatus,
-                          statusText: ps.statusText,
-                          badgeCount: ps.badgeCount,
-                          onTap: () => Navigator.pushNamed(context, routes[ps.plugin]!),
-                        );
-                      }).toList(),
-                    ),
-                    const SizedBox(height: 16),
-
-                    // ──── QUICK COMMAND BAR ────
-                    AprilSectionCard(
-                      title: 'Quick Command',
-                      child: Column(
-                        children: [
-                          TextField(
-                            decoration: InputDecoration(
-                              hintText: 'Type a command...',
-                              hintStyle: const TextStyle(fontSize: 14, color: IveTokens.labelTertiary),
-                              prefixIcon: const Icon(Icons.terminal, color: IveTokens.labelTertiary),
-                              suffixIcon: IconButton(
-                                icon: const Icon(Icons.help_outline, size: 20, color: IveTokens.labelTertiary),
-                                onPressed: () => Navigator.pushNamed(context, AppRoutes.utilityHelp),
-                              ),
-                              filled: true,
-                              fillColor: IveTokens.surface,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide.none,
-                              ),
-                              contentPadding: const EdgeInsets.symmetric(vertical: 12),
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Wrap(
-                            spacing: 6,
-                            runSpacing: 6,
-                            children: ['Add expense', 'Schedule meeting', 'Check balance', 'Add to wishlist']
-                                .map((t) => GestureDetector(
-                                      onTap: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Running: $t'), duration: const Duration(seconds: 1))),
-                                      child: Container(
-                                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                                        decoration: BoxDecoration(
-                                          color: kAprilColor.withValues(alpha: 0.08),
-                                          borderRadius: BorderRadius.circular(8),
-                                        ),
-                                        child: Text(t, style: const TextStyle(fontSize: 11, color: kAprilColorDark)),
-                                      ),
-                                    ))
-                                .toList(),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-
-                    // ──── SYSTEM STATUS FOOTER ────
-                    Container(
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: IveTokens.hairline),
-                      ),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text('APRIL v2.1.0', style: TextStyle(fontSize: 12, color: IveTokens.labelSecondary)),
-                              Row(
-                                children: [
-                                  Container(width: 6, height: 6, decoration: const BoxDecoration(color: IveTokens.success, shape: BoxShape.circle)),
-                                  const SizedBox(width: 4),
-                                  const Text('All systems synced', style: TextStyle(fontSize: 12, color: IveTokens.success)),
-                                ],
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 8),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text('Storage: 124 MB / 1 GB', style: TextStyle(fontSize: 11, color: IveTokens.labelTertiary)),
-                              GestureDetector(
-                                onTap: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (ctx) => AlertDialog(
-                                      title: const Text('Emergency Stop'),
-                                      content: const Text('This will immediately halt all APRIL processes. Are you sure?'),
-                                      actions: [
-                                        TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.pop(ctx);
-                                            ScaffoldMessenger.of(context).showSnackBar(
-                                              const SnackBar(content: Text('APRIL processes stopped.')),
-                                            );
-                                          },
-                                          child: const Text('Stop', style: TextStyle(color: Colors.red)),
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                                },
-                                child: const Text(
-                                  'ðŸ›‘ Emergency Stop',
-                                  style: TextStyle(fontSize: 11, color: IveTokens.danger, fontWeight: FontWeight.w600),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 80),
-                  ]),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
+    _scale = Tween<double>(begin: 0.97, end: 1.03).animate(
+      CurvedAnimation(parent: _breathe, curve: Curves.easeInOut),
     );
   }
 
-  String _greeting(String name) {
-    final hour = DateTime.now().hour;
-    if (hour < 12) return 'Good morning, $name! â˜€ï¸';
-    if (hour < 17) return 'Good afternoon, $name! ðŸŒ¤ï¸';
-    return 'Good evening, $name! ðŸŒ™';
+  @override
+  void dispose() {
+    _breathe.dispose();
+    super.dispose();
   }
 
-  String _timeAgo(DateTime dt) {
-    final diff = DateTime.now().difference(dt);
-    if (diff.inDays > 0) return '${diff.inDays}d ago';
-    if (diff.inHours > 0) return '${diff.inHours}h ago';
-    return '${diff.inMinutes}m ago';
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: IveTokens.bg,
+      body: SafeArea(
+        bottom: false,
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: IveTokens.s5),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: IveTokens.s5),
+              Text('APRIL · ACTION CORE', style: IveType.monoCaps),
+              const SizedBox(height: IveTokens.s2),
+              Text('Your second mind.', style: IveType.title1),
+              const SizedBox(height: IveTokens.s8),
+              Center(child: _OrbButton(scale: _scale)),
+              const SizedBox(height: IveTokens.s6),
+              _ActionGrid(),
+              const SizedBox(height: IveTokens.s5),
+              Text('RECENT', style: IveType.monoCaps),
+              const SizedBox(height: IveTokens.s3),
+              _RecentCommands(),
+              const SizedBox(height: IveTokens.s8),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _OrbButton extends StatelessWidget {
+  const _OrbButton({required this.scale});
+
+  final Animation<double> scale;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        AnimatedBuilder(
+          animation: scale,
+          builder: (context, child) => Transform.scale(
+            scale: scale.value,
+            child: child,
+          ),
+          child: Container(
+            width: 100,
+            height: 100,
+            decoration: BoxDecoration(
+              color: IveTokens.genieSoft,
+              shape: BoxShape.circle,
+              border: Border.all(color: IveTokens.genieLine, width: 1.5),
+            ),
+            child: Center(
+              child: Container(
+                width: 12,
+                height: 28,
+                decoration: BoxDecoration(
+                  color: IveTokens.genie,
+                  borderRadius: BorderRadius.circular(IveTokens.rPill),
+                ),
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: IveTokens.s3),
+        Text('Tap to speak', style: IveType.caption),
+      ],
+    );
+  }
+}
+
+class _ActionCard {
+  const _ActionCard({required this.title, required this.subtitle});
+
+  final String title;
+  final String subtitle;
+}
+
+class _ActionGrid extends StatelessWidget {
+  static const _cards = [
+    _ActionCard(title: 'Plan my week', subtitle: '3 deadlines synced'),
+    _ActionCard(title: 'Settle tabs', subtitle: '2 open · 340 QP'),
+    _ActionCard(title: 'Draft a reply', subtitle: 'qualChat · Ama'),
+    _ActionCard(title: 'Forecast cash', subtitle: 'next 30 days'),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.count(
+      crossAxisCount: 2,
+      crossAxisSpacing: IveTokens.s3,
+      mainAxisSpacing: IveTokens.s3,
+      childAspectRatio: 1.8,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      children: _cards.map((c) => _ActionCardWidget(card: c)).toList(),
+    );
+  }
+}
+
+class _ActionCardWidget extends StatelessWidget {
+  const _ActionCardWidget({required this.card});
+
+  final _ActionCard card;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(IveTokens.s3),
+      decoration: BoxDecoration(
+        color: IveTokens.surface,
+        borderRadius: BorderRadius.circular(IveTokens.rContainer),
+        border: Border.all(color: IveTokens.hairline, width: 1),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            card.title,
+            style: IveType.callout.copyWith(
+              color: IveTokens.ink,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: 2),
+          Text(card.subtitle, style: IveType.caption),
+        ],
+      ),
+    );
+  }
+}
+
+class _RecentCommand {
+  const _RecentCommand({
+    required this.text,
+    required this.time,
+    required this.dotColor,
+  });
+
+  final String text;
+  final String time;
+  final Color dotColor;
+}
+
+class _RecentCommands extends StatelessWidget {
+  static const _commands = [
+    _RecentCommand(
+      text: '"Move 200 QP to savings"',
+      time: '2m',
+      dotColor: IveTokens.success,
+    ),
+    _RecentCommand(
+      text: '"Summarise the Osu thread"',
+      time: '1h',
+      dotColor: IveTokens.info,
+    ),
+    _RecentCommand(
+      text: '"Reorder cocoa — needs approval"',
+      time: '3h',
+      dotColor: IveTokens.genie,
+    ),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: _commands
+          .map((cmd) => Padding(
+                padding: const EdgeInsets.only(bottom: IveTokens.s3),
+                child: _RecentCommandRow(command: cmd),
+              ))
+          .toList(),
+    );
+  }
+}
+
+class _RecentCommandRow extends StatelessWidget {
+  const _RecentCommandRow({required this.command});
+
+  final _RecentCommand command;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Container(
+          width: 6,
+          height: 6,
+          decoration: BoxDecoration(
+            color: command.dotColor,
+            shape: BoxShape.circle,
+          ),
+        ),
+        const SizedBox(width: IveTokens.s3),
+        Expanded(
+          child: Text(
+            command.text,
+            style: IveType.callout.copyWith(color: IveTokens.ink),
+          ),
+        ),
+        const SizedBox(width: IveTokens.s2),
+        Text(command.time, style: IveType.caption),
+      ],
+    );
   }
 }

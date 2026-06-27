@@ -1,8 +1,10 @@
-﻿/// qualChat Screen 14 — Onboarding Flow
-/// 4-step flow: Welcome & Permissions â†’ Role Config â†’ Profile Setup â†’ Quick Tour
+/// qualChat Screen 14  Onboarding Flow
+/// 4-step flow: Welcome & Permissions  Role Config  Profile Setup  Quick Tour
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:provider/provider.dart';
 import '../models/qualchat_models.dart';
 import '../providers/qualchat_provider.dart';
@@ -16,7 +18,7 @@ class QualChatOnboardingScreen extends StatelessWidget {
     return Consumer<QualChatProvider>(
       builder: (context, provider, _) {
         return Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: IveTokens.bg,
           body: SafeArea(
             child: Column(
               children: [
@@ -71,7 +73,7 @@ class QualChatOnboardingScreen extends StatelessWidget {
   }
 }
 
-// ──── Step 0: Welcome & Permissions ────
+//  Step 0: Welcome & Permissions 
 class _WelcomeStep extends StatelessWidget {
   const _WelcomeStep({super.key});
 
@@ -86,25 +88,21 @@ class _WelcomeStep extends StatelessWidget {
             width: 120,
             height: 120,
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [kChatColor.withValues(alpha: 0.1), kChatColorLight],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
+              color: IveTokens.moduleQualChat.withValues(alpha: 0.12),
               shape: BoxShape.circle,
             ),
-            child: const Icon(Icons.chat_bubble, size: 56, color: kChatColor),
+            child: const Icon(Icons.chat_bubble, size: 56, color: IveTokens.moduleQualChat),
           ),
           const SizedBox(height: 32),
-          const Text(
-            'Welcome to qualChat! ðŸ’¬',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800, color: Color(0xFF1A1A1A)),
+          Text(
+            'Welcome to qualChat!',
+            style: IveType.title2.copyWith(color: IveTokens.ink),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 12),
-          const Text(
+          Text(
             'Your intelligent communications hub.\nConnect, chat, and build meaningful relationships.',
-            style: TextStyle(fontSize: 15, color: Color(0xFF6B7280), height: 1.5),
+            style: IveType.body.copyWith(color: IveTokens.mute, height: 1.5),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 40),
@@ -148,36 +146,37 @@ class _PermissionItem extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: granted ? const Color(0xFFECFDF5) : const Color(0xFFF3F4F6),
-        borderRadius: BorderRadius.circular(10),
+        color: granted ? IveTokens.success.withValues(alpha: 0.08) : IveTokens.surfaceRaised,
+        borderRadius: BorderRadius.circular(IveTokens.rSm),
         border: Border.all(
-          color: granted ? const Color(0xFF10B981).withValues(alpha: 0.3) : const Color(0xFFE5E7EB),
+          color: granted ? IveTokens.success.withValues(alpha: 0.3) : IveTokens.hairline,
         ),
       ),
       child: Row(
         children: [
-          Icon(icon, color: granted ? const Color(0xFF10B981) : const Color(0xFF6B7280)),
+          Icon(icon, color: granted ? IveTokens.success : IveTokens.mute),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
-                Text(description, style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
+                Text(title, style: IveType.bodyEmphasis.copyWith(color: IveTokens.ink)),
+                Text(description, style: IveType.caption.copyWith(color: IveTokens.mute)),
               ],
             ),
           ),
           if (granted)
-            const Icon(Icons.check_circle, color: Color(0xFF10B981), size: 24)
+            const Icon(Icons.check_circle, color: IveTokens.success, size: 24)
           else
             OutlinedButton(
-              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Permission granted'))),
+              onPressed: () => AppToast.show(context, 'Permission granted'),
               style: OutlinedButton.styleFrom(
-                side: const BorderSide(color: kChatColor),
+                side: const BorderSide(color: IveTokens.moduleQualChat),
+                foregroundColor: IveTokens.moduleQualChat,
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(IveTokens.rSm)),
               ),
-              child: const Text('Grant', style: TextStyle(fontSize: 12, color: kChatColor)),
+              child: Text('Grant', style: IveType.caption.copyWith(color: IveTokens.moduleQualChat)),
             ),
         ],
       ),
@@ -185,7 +184,7 @@ class _PermissionItem extends StatelessWidget {
   }
 }
 
-// ──── Step 1: Role Configuration ────
+//  Step 1: Role Configuration 
 class _RoleConfigStep extends StatelessWidget {
   final QualChatProvider provider;
   const _RoleConfigStep({super.key, required this.provider});
@@ -197,25 +196,25 @@ class _RoleConfigStep extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'How will you use qualChat? ðŸŽ¯',
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: Color(0xFF1A1A1A)),
+          Text(
+            'How will you use qualChat?',
+            style: IveType.title3.copyWith(color: IveTokens.ink),
           ),
           const SizedBox(height: 8),
-          const Text(
+          Text(
             'This helps us personalize your experience',
-            style: TextStyle(fontSize: 14, color: Color(0xFF6B7280)),
+            style: IveType.body.copyWith(color: IveTokens.mute),
           ),
           const SizedBox(height: 32),
 
           ...ChatUsageType.values.map((type) {
             final isSelected = provider.selectedUsageType == type;
             final configs = {
-              ChatUsageType.socialDating: {'emoji': 'ðŸ’–', 'title': 'Social & Dating', 'desc': 'Connect with new people, find matches, build relationships'},
-              ChatUsageType.professionalNetworking: {'emoji': 'ðŸ’¼', 'title': 'Professional Networking', 'desc': 'Business communication, networking'},
-              ChatUsageType.teamCommunications: {'emoji': 'ðŸ‘¥', 'title': 'Team Communications', 'desc': 'Team collaboration and group messaging'},
-              ChatUsageType.driverConnections: {'emoji': 'ðŸš—', 'title': 'Driver Connections', 'desc': 'Connect with drivers and coordinate rides'},
-              ChatUsageType.monitoring: {'emoji': 'ðŸ“Š', 'title': 'Monitoring', 'desc': 'Monitor and manage communications'},
+              ChatUsageType.socialDating: {'emoji': '', 'title': 'Social & Dating', 'desc': 'Connect with new people, find matches, build relationships'},
+              ChatUsageType.professionalNetworking: {'emoji': '', 'title': 'Professional Networking', 'desc': 'Business communication, networking'},
+              ChatUsageType.teamCommunications: {'emoji': '', 'title': 'Team Communications', 'desc': 'Team collaboration and group messaging'},
+              ChatUsageType.driverConnections: {'emoji': '', 'title': 'Driver Connections', 'desc': 'Connect with drivers and coordinate rides'},
+              ChatUsageType.monitoring: {'emoji': '', 'title': 'Monitoring', 'desc': 'Monitor and manage communications'},
             };
             final config = configs[type]!;
 
@@ -225,10 +224,10 @@ class _RoleConfigStep extends StatelessWidget {
                 margin: const EdgeInsets.only(bottom: 16),
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: isSelected ? kChatColor.withValues(alpha: 0.08) : Colors.white,
-                  borderRadius: BorderRadius.circular(16),
+                  color: isSelected ? IveTokens.moduleQualChat.withValues(alpha: 0.08) : IveTokens.surface,
+                  borderRadius: BorderRadius.circular(IveTokens.rSm),
                   border: Border.all(
-                    color: isSelected ? kChatColor : const Color(0xFFE5E7EB),
+                    color: isSelected ? IveTokens.moduleQualChat : IveTokens.hairline,
                     width: isSelected ? 2 : 1,
                   ),
                 ),
@@ -242,22 +241,20 @@ class _RoleConfigStep extends StatelessWidget {
                         children: [
                           Text(
                             config['title']!,
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
-                              color: isSelected ? kChatColorDark : const Color(0xFF1A1A1A),
+                            style: IveType.bodyEmphasis.copyWith(
+                              color: isSelected ? IveTokens.moduleQualChat : IveTokens.ink,
                             ),
                           ),
                           const SizedBox(height: 4),
                           Text(
                             config['desc']!,
-                            style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280)),
+                            style: IveType.caption.copyWith(color: IveTokens.mute),
                           ),
                         ],
                       ),
                     ),
                     if (isSelected)
-                      const Icon(Icons.check_circle, color: kChatColor, size: 28),
+                      const Icon(Icons.check_circle, color: IveTokens.moduleQualChat, size: 28),
                   ],
                 ),
               ),
@@ -269,7 +266,7 @@ class _RoleConfigStep extends StatelessWidget {
   }
 }
 
-// ──── Step 2: Profile Setup ────
+//  Step 2: Profile Setup 
 class _ProfileSetupStep extends StatelessWidget {
   final QualChatProvider provider;
   const _ProfileSetupStep({super.key, required this.provider});
@@ -281,14 +278,14 @@ class _ProfileSetupStep extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Set up your profile ✨',
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: Color(0xFF1A1A1A)),
+          Text(
+            'Set up your profile',
+            style: IveType.title3.copyWith(color: IveTokens.ink),
           ),
           const SizedBox(height: 8),
-          const Text(
+          Text(
             'Make a great first impression',
-            style: TextStyle(fontSize: 14, color: Color(0xFF6B7280)),
+            style: IveType.body.copyWith(color: IveTokens.mute),
           ),
           const SizedBox(height: 32),
 
@@ -301,10 +298,10 @@ class _ProfileSetupStep extends StatelessWidget {
                   height: 100,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: kChatColor.withValues(alpha: 0.1),
-                    border: Border.all(color: kChatColor, width: 3),
+                    color: IveTokens.moduleQualChat.withValues(alpha: 0.1),
+                    border: Border.all(color: IveTokens.moduleQualChat, width: 3),
                   ),
-                  child: const Icon(Icons.person, size: 48, color: kChatColor),
+                  child: const Icon(Icons.person, size: 48, color: IveTokens.moduleQualChat),
                 ),
                 Positioned(
                   bottom: 0,
@@ -314,9 +311,9 @@ class _ProfileSetupStep extends StatelessWidget {
                     height: 32,
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
-                      color: kChatColor,
+                      color: IveTokens.moduleQualChat,
                     ),
-                    child: const Icon(Icons.camera_alt, size: 16, color: Colors.white),
+                    child: const Icon(Icons.camera_alt, size: 16, color: IveTokens.ink),
                   ),
                 ),
               ],
@@ -330,9 +327,9 @@ class _ProfileSetupStep extends StatelessWidget {
               labelText: 'Display Name',
               hintText: 'How should others see you?',
               filled: true,
-              fillColor: const Color(0xFFF3F4F6),
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-              prefixIcon: const Icon(Icons.person_outline, color: kChatColor),
+              fillColor: IveTokens.surfaceRaised,
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(IveTokens.rSm), borderSide: BorderSide.none),
+              prefixIcon: const Icon(Icons.person_outline, color: IveTokens.moduleQualChat),
             ),
           ),
           const SizedBox(height: 16),
@@ -345,17 +342,17 @@ class _ProfileSetupStep extends StatelessWidget {
               labelText: 'Bio',
               hintText: 'Tell us about yourself...',
               filled: true,
-              fillColor: const Color(0xFFF3F4F6),
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-              prefixIcon: const Icon(Icons.edit_note, color: kChatColor),
+              fillColor: IveTokens.surfaceRaised,
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(IveTokens.rSm), borderSide: BorderSide.none),
+              prefixIcon: const Icon(Icons.edit_note, color: IveTokens.moduleQualChat),
             ),
           ),
           const SizedBox(height: 16),
 
           // Vibe tags
-          const Text(
-            'Select your vibes ðŸŽµ',
-            style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+          Text(
+            'Select your vibes',
+            style: IveType.bodyEmphasis.copyWith(color: IveTokens.ink),
           ),
           const SizedBox(height: 8),
           Wrap(
@@ -364,33 +361,32 @@ class _ProfileSetupStep extends StatelessWidget {
             children: VibeTag.values.map((tag) {
               final isSelected = provider.selectedVibeTags.contains(tag);
               final tagEmojis = {
-                VibeTag.adventurous: 'ðŸ”ï¸',
-                VibeTag.creative: 'ðŸŽ¨',
-                VibeTag.nerdy: 'ðŸ¤“',
-                VibeTag.foodie: 'ðŸ•',
-                VibeTag.musical: 'ðŸŽµ',
-                VibeTag.pets: 'ðŸ¾',
-                VibeTag.travel: 'âœˆï¸',
-                VibeTag.gaming: 'ðŸŽ®',
-                VibeTag.calm: 'ðŸ˜Œ',
+                VibeTag.adventurous: '',
+                VibeTag.creative: '',
+                VibeTag.nerdy: '',
+                VibeTag.foodie: '',
+                VibeTag.musical: '',
+                VibeTag.pets: '',
+                VibeTag.travel: '',
+                VibeTag.gaming: '',
+                VibeTag.calm: '',
               };
               return GestureDetector(
                 onTap: () => provider.toggleVibeTag(tag),
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                   decoration: BoxDecoration(
-                    color: isSelected ? kChatColor : const Color(0xFFF3F4F6),
-                    borderRadius: BorderRadius.circular(20),
+                    color: isSelected ? IveTokens.moduleQualChat : IveTokens.surfaceRaised,
+                    borderRadius: BorderRadius.circular(IveTokens.rSm),
                     border: Border.all(
-                      color: isSelected ? kChatColor : const Color(0xFFE5E7EB),
+                      color: isSelected ? IveTokens.moduleQualChat : IveTokens.hairline,
                     ),
                   ),
                   child: Text(
                     '${tagEmojis[tag] ?? ''} ${tag.name}',
-                    style: TextStyle(
-                      fontSize: 13,
+                    style: IveType.caption.copyWith(
                       fontWeight: FontWeight.w500,
-                      color: isSelected ? Colors.white : const Color(0xFF374151),
+                      color: isSelected ? IveTokens.bg : IveTokens.ink2,
                     ),
                   ),
                 ),
@@ -404,18 +400,18 @@ class _ProfileSetupStep extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
-              color: const Color(0xFFF0F9FF),
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: kChatColor.withValues(alpha: 0.2)),
+              color: IveTokens.info.withValues(alpha: 0.08),
+              borderRadius: BorderRadius.circular(IveTokens.rSm),
+              border: Border.all(color: IveTokens.moduleQualChat.withValues(alpha: 0.2)),
             ),
             child: Row(
               children: [
-                Icon(Icons.info_outline, size: 20, color: kChatColor.withValues(alpha: 0.7)),
+                Icon(Icons.info_outline, size: 20, color: IveTokens.moduleQualChat.withValues(alpha: 0.7)),
                 const SizedBox(width: 10),
-                const Expanded(
+                Expanded(
                   child: Text(
                     'Your profile is only visible to people you choose. You can change these settings anytime.',
-                    style: TextStyle(fontSize: 12, color: Color(0xFF374151)),
+                    style: IveType.caption.copyWith(color: IveTokens.ink2),
                   ),
                 ),
               ],
@@ -427,7 +423,7 @@ class _ProfileSetupStep extends StatelessWidget {
   }
 }
 
-// ──── Step 3: Quick Tour ────
+//  Step 3: Quick Tour 
 class _QuickTourStep extends StatelessWidget {
   const _QuickTourStep({super.key});
 
@@ -437,50 +433,50 @@ class _QuickTourStep extends StatelessWidget {
       padding: const EdgeInsets.all(32),
       child: Column(
         children: [
-          const Text(
-            'You\'re all set! ðŸŽ‰',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800, color: Color(0xFF1A1A1A)),
+          Text(
+            "You're all set!",
+            style: IveType.title2.copyWith(color: IveTokens.ink),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 8),
-          const Text(
-            'Here\'s what you can do with qualChat',
-            style: TextStyle(fontSize: 14, color: Color(0xFF6B7280)),
+          Text(
+            "Here's what you can do with qualChat",
+            style: IveType.body.copyWith(color: IveTokens.mute),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 32),
 
           const _TourFeature(
             icon: Icons.chat_bubble,
-            color: kChatColor,
+            color: IveTokens.moduleQualChat,
             title: 'Smart Chat',
             description: 'AI-powered messaging with smart replies and nudges',
           ),
           const SizedBox(height: 16),
-          const _TourFeature(
+          _TourFeature(
             icon: Icons.favorite,
-            color: Color(0xFFEC4899),
+            color: kChatSocial,
             title: 'Hey Ya Connections',
             description: 'Find and connect with compatible people',
           ),
           const SizedBox(height: 16),
           const _TourFeature(
             icon: Icons.visibility,
-            color: Color(0xFF10B981),
+            color: IveTokens.success,
             title: 'Presence Tracking',
-            description: 'See who\'s online and available in real-time',
+            description: "See who's online and available in real-time",
           ),
           const SizedBox(height: 16),
           const _TourFeature(
             icon: Icons.auto_awesome,
-            color: Color(0xFF8B5CF6),
+            color: IveTokens.genie,
             title: 'AI Wingmate',
             description: 'Smart nudges and suggestions to build connections',
           ),
           const SizedBox(height: 16),
           const _TourFeature(
             icon: Icons.shield,
-            color: Color(0xFFF59E0B),
+            color: IveTokens.warning,
             title: 'Privacy First',
             description: 'Full control over your visibility and data',
           ),
@@ -490,19 +486,18 @@ class _QuickTourStep extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [kChatColor.withValues(alpha: 0.08), kChatColorLight],
-              ),
-              borderRadius: BorderRadius.circular(10),
+              color: IveTokens.moduleQualChat.withValues(alpha: 0.08),
+              borderRadius: BorderRadius.circular(IveTokens.rSm),
+              border: Border.all(color: IveTokens.moduleQualChat.withValues(alpha: 0.2)),
             ),
-            child: const Row(
+            child: Row(
               children: [
-                Text('ðŸ’¡', style: TextStyle(fontSize: 24)),
-                SizedBox(width: 12),
+                const Text('', style: TextStyle(fontSize: 24)),
+                const SizedBox(width: 12),
                 Expanded(
                   child: Text(
-                    'Tip: Use the mode toggle on your dashboard to switch between Social ðŸ’– and Professional ðŸ’¼ modes anytime!',
-                    style: TextStyle(fontSize: 13, color: Color(0xFF374151)),
+                    'Tip: Use the mode toggle on your dashboard to switch between Social  and Professional  modes anytime!',
+                    style: IveType.caption.copyWith(color: IveTokens.ink2),
                   ),
                 ),
               ],
@@ -530,7 +525,7 @@ class _TourFeature extends StatelessWidget {
           height: 48,
           decoration: BoxDecoration(
             color: color.withValues(alpha: 0.1),
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(IveTokens.rSm),
           ),
           child: Icon(icon, color: color),
         ),
@@ -539,8 +534,8 @@ class _TourFeature extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),
-              Text(description, style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+              Text(title, style: IveType.bodyEmphasis.copyWith(color: IveTokens.ink)),
+              Text(description, style: IveType.caption.copyWith(color: IveTokens.mute)),
             ],
           ),
         ),
@@ -565,8 +560,8 @@ class _StepIndicator extends StatelessWidget {
               height: 4,
               margin: const EdgeInsets.symmetric(horizontal: 3),
               decoration: BoxDecoration(
-                color: i <= current ? kChatColor : const Color(0xFFE5E7EB),
-                borderRadius: BorderRadius.circular(2),
+                color: i <= current ? IveTokens.moduleQualChat : IveTokens.hairline,
+                borderRadius: BorderRadius.circular(IveTokens.rXs),
               ),
             ),
           );
@@ -590,29 +585,16 @@ class _StepNavigation extends StatelessWidget {
       child: Row(
         children: [
           if (onBack != null)
-            OutlinedButton(
+            IveButton.secondary(
+              label: 'Back',
               onPressed: onBack,
-              style: OutlinedButton.styleFrom(
-                side: const BorderSide(color: kChatColor),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-              ),
-              child: const Text('Back', style: TextStyle(color: kChatColor, fontWeight: FontWeight.w600)),
+              expand: false,
             ),
           if (onBack != null) const SizedBox(width: 12),
           Expanded(
-            child: ElevatedButton(
+            child: IveButton.primary(
+              label: isLast ? 'Get Started' : 'Continue',
               onPressed: onNext,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: kChatColor,
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                padding: const EdgeInsets.symmetric(vertical: 14),
-              ),
-              child: Text(
-                isLast ? 'Get Started ðŸš€' : 'Continue',
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
-              ),
             ),
           ),
         ],

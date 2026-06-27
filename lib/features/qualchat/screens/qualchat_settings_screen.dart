@@ -1,8 +1,9 @@
-﻿/// qualChat Screen 13 — Settings
+/// qualChat Screen 13  Settings
 /// Centralized config: notifications, privacy, media, appearance, accessibility, advanced
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
 import 'package:provider/provider.dart';
 import '../providers/qualchat_provider.dart';
 import '../widgets/qualchat_widgets.dart';
@@ -20,11 +21,11 @@ class QualChatSettingsScreen extends StatelessWidget {
           body: ListView(
             padding: const EdgeInsets.all(16),
             children: [
-              // ──── NOTIFICATIONS ────
+              //  NOTIFICATIONS 
               _SettingsSection(
                 icon: Icons.notifications,
                 title: 'Notifications',
-                emoji: 'ðŸ””',
+                emoji: '"',
                 children: [
                   _SettingsToggle(
                     title: 'Message Notifications',
@@ -66,11 +67,11 @@ class QualChatSettingsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // ──── PRIVACY ────
+              //  PRIVACY 
               _SettingsSection(
                 icon: Icons.shield,
                 title: 'Privacy',
-                emoji: 'ðŸ”’',
+                emoji: '"',
                 children: [
                   _SettingsToggle(
                     title: 'Read Receipts',
@@ -106,11 +107,11 @@ class QualChatSettingsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // ──── MEDIA ────
+              //  MEDIA 
               _SettingsSection(
                 icon: Icons.photo_library,
                 title: 'Media & Storage',
-                emoji: 'ðŸ“¸',
+                emoji: '"',
                 children: [
                   _SettingsToggle(
                     title: 'Auto-download Media',
@@ -144,11 +145,11 @@ class QualChatSettingsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // ──── APPEARANCE ────
+              //  APPEARANCE 
               _SettingsSection(
                 icon: Icons.palette,
                 title: 'Appearance',
-                emoji: 'ðŸŽ¨',
+                emoji: '',
                 children: [
                   // Font size
                   Padding(
@@ -168,7 +169,7 @@ class QualChatSettingsScreen extends StatelessWidget {
                           onSelectionChanged: (v) => provider.setFontSizeIndex(v.first),
                           style: ButtonStyle(
                             backgroundColor: WidgetStateProperty.resolveWith((states) {
-                              if (states.contains(WidgetState.selected)) return kChatColor;
+                              if (states.contains(WidgetState.selected)) return IveTokens.moduleQualChat;
                               return null;
                             }),
                           ),
@@ -186,7 +187,7 @@ class QualChatSettingsScreen extends StatelessWidget {
                         const SizedBox(height: 8),
                         Row(
                           children: List.generate(4, (i) {
-                            final colors = [kChatColor, const Color(0xFF8B5CF6), const Color(0xFFEC4899), const Color(0xFF10B981)];
+                            final colors = [IveTokens.moduleQualChat, const Color(0xFF8B5CF6), const Color(0xFFEC4899), const Color(0xFF10B981)];
                             final labels = ['Cyan', 'Purple', 'Pink', 'Green'];
                             return Expanded(
                               child: GestureDetector(
@@ -237,7 +238,7 @@ class QualChatSettingsScreen extends StatelessWidget {
                           onSelectionChanged: (v) => provider.setBubbleStyleIndex(v.first),
                           style: ButtonStyle(
                             backgroundColor: WidgetStateProperty.resolveWith((states) {
-                              if (states.contains(WidgetState.selected)) return kChatColor;
+                              if (states.contains(WidgetState.selected)) return IveTokens.moduleQualChat;
                               return null;
                             }),
                           ),
@@ -249,11 +250,11 @@ class QualChatSettingsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // ──── ACCESSIBILITY ────
+              //  ACCESSIBILITY 
               _SettingsSection(
                 icon: Icons.accessibility,
                 title: 'Accessibility',
-                emoji: 'â™¿',
+                emoji: '',
                 children: [
                   _SettingsToggle(
                     title: 'High Contrast',
@@ -277,11 +278,11 @@ class QualChatSettingsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // ──── ADVANCED ────
+              //  ADVANCED 
               _SettingsSection(
                 icon: Icons.settings,
                 title: 'Advanced',
-                emoji: 'âš™ï¸',
+                emoji: '',
                 children: [
                   _SettingsAction(
                     title: 'Export Chat History',
@@ -359,7 +360,7 @@ class _SettingsSection extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -399,7 +400,7 @@ class _SettingsToggle extends StatelessWidget {
       subtitle: Text(subtitle, style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
       value: value,
       onChanged: onChanged,
-      activeThumbColor: kChatColor,
+      activeThumbColor: IveTokens.moduleQualChat,
     );
   }
 }
@@ -415,7 +416,7 @@ class _SettingsAction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(icon, color: color ?? kChatColor),
+      leading: Icon(icon, color: color ?? IveTokens.moduleQualChat),
       title: Text(title, style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: color)),
       subtitle: Text(subtitle, style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
       trailing: const Icon(Icons.chevron_right, size: 20, color: Color(0xFF9CA3AF)),

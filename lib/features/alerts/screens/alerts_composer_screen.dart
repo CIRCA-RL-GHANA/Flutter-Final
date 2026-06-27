@@ -1,5 +1,5 @@
-/// Alerts Screen 4 — Alert Composer (Create New Alert)
-/// Stepped wizard: Type â†’ Describe â†’ Assignment â†’ Review
+/// Alerts Screen 4  Alert Composer (Create New Alert)
+/// Stepped wizard: Type ' Describe ' Assignment ' Review
 /// Admin/Branch Manager only
 library;
 
@@ -49,7 +49,7 @@ class _AlertsComposerScreenState extends State<AlertsComposerScreen> {
               children: [
                 const Text('New Alert', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
                 Text(
-                  'Step ${_step + 1} of 4 — ${_stepLabel(_step)}',
+                  'Step ${_step + 1} of 4  ${_stepLabel(_step)}',
                   style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
                 ),
               ],
@@ -58,7 +58,7 @@ class _AlertsComposerScreenState extends State<AlertsComposerScreen> {
           body: Column(
             children: [
 
-              // ──── STEP INDICATOR ────
+              //  STEP INDICATOR 
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 color: Colors.white,
@@ -69,14 +69,14 @@ class _AlertsComposerScreenState extends State<AlertsComposerScreen> {
                       margin: const EdgeInsets.symmetric(horizontal: 2),
                       decoration: BoxDecoration(
                         color: i <= _step ? kAlertsColor : const Color(0xFFE5E7EB),
-                        borderRadius: BorderRadius.circular(2),
+                        borderRadius: BorderRadius.circular(6),
                       ),
                     ),
                   )),
                 ),
               ),
 
-              // ──── STEP CONTENT ────
+              //  STEP CONTENT 
               Expanded(
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.all(16),
@@ -89,7 +89,7 @@ class _AlertsComposerScreenState extends State<AlertsComposerScreen> {
             ],
           ),
 
-          // ──── NAVIGATION FOOTER ────
+          //  NAVIGATION FOOTER 
           bottomNavigationBar: Container(
             padding: const EdgeInsets.all(16),
             decoration: const BoxDecoration(
@@ -170,9 +170,9 @@ class _AlertsComposerScreenState extends State<AlertsComposerScreen> {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 // Step 1: Type & Priority
-// ──────────────────────────────────────────────
+// 
 
 class _StepType extends StatelessWidget {
   final AlertCategory category;
@@ -189,7 +189,7 @@ class _StepType extends StatelessWidget {
       children: [
         // Category selection
         AlertsSectionCard(
-          title: 'ðŸ“‚ Issue Category',
+          title: ' Issue Category',
           child: Wrap(
             spacing: 8,
             runSpacing: 8,
@@ -221,13 +221,13 @@ class _StepType extends StatelessWidget {
 
         // Priority selection
         AlertsSectionCard(
-          title: 'ðŸš© Priority Level',
+          title: ' Priority Level',
           child: Column(
             children: [
-              _PriorityOption(label: 'ðŸš¨ Critical — Immediate action required', value: AlertPriority.critical, current: priority, color: kAlertsCritical, onTap: () => onPriorityChanged(AlertPriority.critical)),
-              _PriorityOption(label: 'ðŸ”¥ High — Needs urgent attention', value: AlertPriority.high, current: priority, color: kAlertsColor, onTap: () => onPriorityChanged(AlertPriority.high)),
-              _PriorityOption(label: 'âš ï¸ Medium — Standard response time', value: AlertPriority.medium, current: priority, color: kAlertsWarning, onTap: () => onPriorityChanged(AlertPriority.medium)),
-              _PriorityOption(label: 'â„¹ï¸ Low — Can be scheduled', value: AlertPriority.low, current: priority, color: kAlertsInfo, onTap: () => onPriorityChanged(AlertPriority.low)),
+              _PriorityOption(label: ' Critical  Immediate action required', value: AlertPriority.critical, current: priority, color: kAlertsCritical, onTap: () => onPriorityChanged(AlertPriority.critical)),
+              _PriorityOption(label: ' High  Needs urgent attention', value: AlertPriority.high, current: priority, color: kAlertsColor, onTap: () => onPriorityChanged(AlertPriority.high)),
+              _PriorityOption(label: ' Medium  Standard response time', value: AlertPriority.medium, current: priority, color: kAlertsWarning, onTap: () => onPriorityChanged(AlertPriority.medium)),
+              _PriorityOption(label: ' Low  Can be scheduled', value: AlertPriority.low, current: priority, color: kAlertsInfo, onTap: () => onPriorityChanged(AlertPriority.low)),
             ],
           ),
         ),
@@ -236,8 +236,8 @@ class _StepType extends StatelessWidget {
   }
 
   String _emoji(AlertCategory c) {
-    const map = { AlertCategory.payment: 'ðŸ’³', AlertCategory.shipment: 'ðŸ“¦', AlertCategory.system: 'âš™ï¸', AlertCategory.driverRide: 'ðŸš—', AlertCategory.returnRefund: 'â†©ï¸', AlertCategory.account: 'ðŸ‘¤', AlertCategory.security: 'ðŸ”’', AlertCategory.other: 'ðŸ“‹' };
-    return map[c] ?? 'ðŸ“‹';
+    const map = { AlertCategory.payment: '', AlertCategory.shipment: '', AlertCategory.system: ', AlertCategory.driverRide: '', AlertCategory.returnRefund: ', AlertCategory.account: '', AlertCategory.security: '', AlertCategory.other: '"' };
+    return map[c] ?? '"';
   }
 
   String _label(AlertCategory c) {
@@ -280,9 +280,9 @@ class _PriorityOption extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 // Step 2: Describe
-// ──────────────────────────────────────────────
+// 
 
 class _StepDescribe extends StatelessWidget {
   final TextEditingController titleController;
@@ -296,7 +296,7 @@ class _StepDescribe extends StatelessWidget {
     return Column(
       children: [
         AlertsSectionCard(
-          title: 'âœï¸ Alert Details',
+          title: ' Alert Details',
           child: Column(
             children: [
               _FormField(label: 'Title', hint: 'Brief, descriptive title...', controller: titleController),
@@ -311,7 +311,7 @@ class _StepDescribe extends StatelessWidget {
 
         // Quick templates
         AlertsSectionCard(
-          title: 'ðŸ“ Quick Templates',
+          title: ' Quick Templates',
           child: Column(
             children: [
               _TemplateChip(label: 'Payment issue template', onTap: () {
@@ -381,7 +381,7 @@ class _TemplateChip extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
           color: const Color(0xFFF3F4F6),
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
           children: [
@@ -396,9 +396,9 @@ class _TemplateChip extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 // Step 3: Assignment
-// ──────────────────────────────────────────────
+// 
 
 class _StepAssignment extends StatelessWidget {
   final List<AlertStaffMember> staff;
@@ -412,7 +412,7 @@ class _StepAssignment extends StatelessWidget {
     return Column(
       children: [
         AlertsSectionCard(
-          title: 'ðŸ‘¤ Assign To',
+          title: 'Assign To',
           child: Column(
             children: [
               // Auto-assign option
@@ -458,9 +458,9 @@ class _StepAssignment extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 // Step 4: Review
-// ──────────────────────────────────────────────
+// 
 
 class _StepReview extends StatelessWidget {
   final AlertCategory category;
@@ -475,7 +475,7 @@ class _StepReview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertsSectionCard(
-      title: 'ðŸ“‹ Review Alert',
+      title: ' Review Alert',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -488,7 +488,7 @@ class _StepReview extends StatelessWidget {
           Container(
             width: double.infinity,
             padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(color: const Color(0xFFF3F4F6), borderRadius: BorderRadius.circular(8)),
+            decoration: BoxDecoration(color: const Color(0xFFF3F4F6), borderRadius: BorderRadius.circular(10)),
             child: Text(description.isEmpty ? '(not set)' : description, style: const TextStyle(fontSize: 13)),
           ),
           const SizedBox(height: 8),
@@ -500,8 +500,8 @@ class _StepReview extends StatelessWidget {
   }
 
   String _emoji(AlertCategory c) {
-    const map = { AlertCategory.payment: 'ðŸ’³', AlertCategory.shipment: 'ðŸ“¦', AlertCategory.system: 'âš™ï¸', AlertCategory.driverRide: 'ðŸš—', AlertCategory.returnRefund: 'â†©ï¸', AlertCategory.account: 'ðŸ‘¤', AlertCategory.security: 'ðŸ”’', AlertCategory.other: 'ðŸ“‹' };
-    return map[c] ?? 'ðŸ“‹';
+    const map = { AlertCategory.payment: '', AlertCategory.shipment: '', AlertCategory.system: ', AlertCategory.driverRide: '', AlertCategory.returnRefund: ', AlertCategory.account: '', AlertCategory.security: '', AlertCategory.other: '"' };
+    return map[c] ?? '"';
   }
 
   String _catLabel(AlertCategory c) {
@@ -511,10 +511,10 @@ class _StepReview extends StatelessWidget {
 
   String _priorityLabel(AlertPriority p) {
     switch (p) {
-      case AlertPriority.critical: return 'ðŸš¨ Critical';
-      case AlertPriority.high: return 'ðŸ”¥ High';
-      case AlertPriority.medium: return 'âš ï¸ Medium';
-      case AlertPriority.low: return 'â„¹ï¸ Low';
+      case AlertPriority.critical: return ' Critical';
+      case AlertPriority.high: return ' High';
+      case AlertPriority.medium: return ' Medium';
+      case AlertPriority.low: return ' Low';
     }
   }
 }

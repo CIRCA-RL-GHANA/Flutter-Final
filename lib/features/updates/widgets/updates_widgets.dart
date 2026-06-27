@@ -1,9 +1,9 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// MY UPDATES MODULE — Shared Widgets
+/// 
+/// MY UPDATES MODULE  Shared Widgets
 /// Reusable UI components: UpdatesAppBar, UpdateCard, CommentItem,
 /// NotificationItem, InterestCard, FollowedEntityCard, FilterChipBar,
 /// EngagementBar, EmptyState, SectionCard, etc.
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -11,15 +11,15 @@ import 'package:flutter/services.dart';
 import '../../../core/theme/app_colors.dart';
 import '../models/updates_models.dart';
 
-// ─── Module Colors ──────────────────────────────────────────────────────────
+//  Module Colors 
 
-/// The canonical module color for MY UPDATES (Pink — Social)
+/// The canonical module color for MY UPDATES (Pink  Social)
 const Color kUpdatesColor = Color(0xFFEC4899);
 const Color kUpdatesColorLight = Color(0xFFFCE7F3);
 const Color kUpdatesColorDark = Color(0xFF9D174D);
 const Color kUpdatesAccent = Color(0xFF8B5CF6);
 
-// ─── Updates App Bar ────────────────────────────────────────────────────────
+//  Updates App Bar 
 
 class UpdatesAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -76,7 +76,7 @@ class UpdatesAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-// ─── Update Card ────────────────────────────────────────────────────────────
+//  Update Card 
 
 class UpdateCard extends StatelessWidget {
   final UpdateEntity update;
@@ -165,7 +165,7 @@ class UpdateCard extends StatelessWidget {
                               const SizedBox(width: 4),
                               Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
-                                decoration: BoxDecoration(color: const Color(0xFFDBEAFE), borderRadius: BorderRadius.circular(4)),
+                                decoration: BoxDecoration(color: const Color(0xFFDBEAFE), borderRadius: BorderRadius.circular(6)),
                                 child: const Text('Official', style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600, color: Color(0xFF2563EB))),
                               ),
                             ],
@@ -174,10 +174,10 @@ class UpdateCard extends StatelessWidget {
                         Row(
                           children: [
                             Text(update.authorRole, style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
-                            const Text(' • ', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                            const Text('  ', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                             Text(_timeAgo(update.createdAt), style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                             if (update.isEdited) ...[
-                              const Text(' • ', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                              const Text('  ', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                               const Text('edited', style: TextStyle(fontSize: 10, fontStyle: FontStyle.italic, color: AppColors.textTertiary)),
                             ],
                           ],
@@ -266,7 +266,7 @@ class UpdateCard extends StatelessWidget {
   }
 }
 
-// ─── Media Preview ──────────────────────────────────────────────────────────
+//  Media Preview 
 
 class _MediaPreview extends StatelessWidget {
   final UpdateEntity update;
@@ -329,14 +329,14 @@ class _MediaPreview extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 decoration: BoxDecoration(
                   color: Colors.white.withValues(alpha: 0.9),
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: Row(
                   children: [
                     const Icon(Icons.play_arrow, size: 20, color: kUpdatesColor),
                     const SizedBox(width: 6),
                     Expanded(
-                      child: Container(height: 3, decoration: BoxDecoration(color: kUpdatesColor.withValues(alpha: 0.2), borderRadius: BorderRadius.circular(2))),
+                      child: Container(height: 3, decoration: BoxDecoration(color: kUpdatesColor.withValues(alpha: 0.2), borderRadius: BorderRadius.circular(6))),
                     ),
                     const SizedBox(width: 6),
                     const Text('2:30', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
@@ -350,7 +350,7 @@ class _MediaPreview extends StatelessWidget {
   }
 }
 
-// ─── Poll Preview ───────────────────────────────────────────────────────────
+//  Poll Preview 
 
 class _PollPreview extends StatelessWidget {
   final UpdatePoll poll;
@@ -372,7 +372,7 @@ class _PollPreview extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                   decoration: BoxDecoration(
                     color: opt.id == poll.selectedOptionId ? kUpdatesColor.withValues(alpha: 0.1) : Colors.grey.shade50,
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: opt.id == poll.selectedOptionId ? kUpdatesColor : Colors.grey.shade200),
                   ),
                   child: Row(
@@ -389,7 +389,7 @@ class _PollPreview extends StatelessWidget {
                       width: (opt.percentage / 100) * 200,
                       decoration: BoxDecoration(
                         color: kUpdatesColor.withValues(alpha: 0.06),
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                   ),
@@ -397,7 +397,7 @@ class _PollPreview extends StatelessWidget {
             ),
           )),
           Text(
-            '${poll.totalVotes} votes • ${_timeLeft(poll.endsAt)}',
+            '${poll.totalVotes} votes  ${_timeLeft(poll.endsAt)}',
             style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
           ),
         ],
@@ -414,7 +414,7 @@ class _PollPreview extends StatelessWidget {
   }
 }
 
-// ─── Engagement Bar ─────────────────────────────────────────────────────────
+//  Engagement Bar 
 
 class _EngagementBar extends StatelessWidget {
   final UpdateEntity update;
@@ -486,7 +486,7 @@ class _EngagementButton extends StatelessWidget {
         HapticFeedback.lightImpact();
         onTap?.call();
       },
-      borderRadius: BorderRadius.circular(20),
+      borderRadius: BorderRadius.circular(10),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
         child: Row(
@@ -504,7 +504,7 @@ class _EngagementButton extends StatelessWidget {
   }
 }
 
-// ─── Comment Item ───────────────────────────────────────────────────────────
+//  Comment Item 
 
 class CommentItem extends StatelessWidget {
   final UpdateComment comment;
@@ -589,7 +589,7 @@ class CommentItem extends StatelessWidget {
   }
 }
 
-// ─── Notification Item ──────────────────────────────────────────────────────
+//  Notification Item 
 
 class NotificationItem extends StatelessWidget {
   final UpdateNotification notification;
@@ -656,7 +656,7 @@ class NotificationItem extends StatelessWidget {
       };
 }
 
-// ─── Filter Chip Bar ────────────────────────────────────────────────────────
+//  Filter Chip Bar 
 
 class UpdatesFilterChipBar extends StatelessWidget {
   final FeedFilter activeFilter;
@@ -699,7 +699,7 @@ class UpdatesFilterChipBar extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
                   color: isActive ? kUpdatesColor : Colors.grey.shade50,
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: isActive ? kUpdatesColor : Colors.grey.shade200),
                 ),
                 child: Row(
@@ -730,7 +730,7 @@ class UpdatesFilterChipBar extends StatelessWidget {
   }
 }
 
-// ─── Section Card ───────────────────────────────────────────────────────────
+//  Section Card 
 
 class UpdatesSectionCard extends StatelessWidget {
   final String title;
@@ -784,7 +784,7 @@ class UpdatesSectionCard extends StatelessWidget {
   }
 }
 
-// ─── Empty State ────────────────────────────────────────────────────────────
+//  Empty State 
 
 class UpdatesEmptyState extends StatelessWidget {
   final IconData icon;
@@ -842,7 +842,7 @@ class UpdatesEmptyState extends StatelessWidget {
   }
 }
 
-// ─── Liker Item ─────────────────────────────────────────────────────────────
+//  Liker Item 
 
 class LikerItem extends StatelessWidget {
   final UpdateLiker liker;
@@ -904,14 +904,14 @@ class LikerItem extends StatelessWidget {
                 foregroundColor: kUpdatesColor,
                 side: const BorderSide(color: kUpdatesColor),
                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
               ),
               child: const Text('Follow', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600)),
             )
           else
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              decoration: BoxDecoration(color: kUpdatesColor.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(8)),
+              decoration: BoxDecoration(color: kUpdatesColor.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(10)),
               child: const Text('Following', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: kUpdatesColor)),
             ),
         ],
@@ -920,7 +920,7 @@ class LikerItem extends StatelessWidget {
   }
 }
 
-// ─── Helpers ────────────────────────────────────────────────────────────────
+//  Helpers 
 
 String _timeAgo(DateTime dt) {
   final diff = DateTime.now().difference(dt);

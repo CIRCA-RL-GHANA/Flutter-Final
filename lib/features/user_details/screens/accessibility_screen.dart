@@ -1,13 +1,13 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 /// Screen 8: Accessibility Suite
 /// Vision, Hearing, Motor, Cognitive sections + Preset management
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import '../../../core/theme/app_colors.dart';
+import '../../../core/design/ive.dart';
 import '../models/user_details_models.dart';
 import '../providers/user_details_provider.dart';
 import '../widgets/shared_widgets.dart';
@@ -23,23 +23,23 @@ class AccessibilityScreen extends StatelessWidget {
         final presets = udp.accessibilityPresets;
 
         return Scaffold(
-          backgroundColor: const Color(0xFF08080F),
+          backgroundColor: IveTokens.bg,
           appBar: ModuleHeader(
             title: 'Accessibility',
-            contextColor: const Color(0xFF06B6D4),
+            contextColor: IveTokens.moduleUser,
             actions: [
               TextButton.icon(
                 onPressed: () => _showSavePreset(context, udp),
                 icon: const Icon(Icons.save_outlined, size: 16),
-                label: const Text('Save', style: TextStyle(fontSize: 12)),
+                label: Text('Save', style: IveType.caption),
               ),
             ],
           ),
           body: ListView(
             padding: const EdgeInsets.all(20),
             children: [
-              // ─── Quick Presets ──────────────────────────────
-              const Text('Quick Presets', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textSecondary)),
+              //  Quick Presets 
+              Text('Quick Presets', style: IveType.bodyEmphasis.copyWith(color: IveTokens.ink2)),
               const SizedBox(height: 10),
               SizedBox(
                 height: 80,
@@ -63,38 +63,38 @@ class AccessibilityScreen extends StatelessWidget {
 
               const SizedBox(height: 16),
 
-              // ─── Vision ────────────────────────────────────
+              //  Vision 
               SectionCard(
                 child: CollapsibleSection(
                   title: 'Vision',
                   icon: Icons.visibility,
-                  iconColor: const Color(0xFF3B82F6),
+                  iconColor: IveTokens.accent,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Text Scale
-                      const Text('Text Size', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.textSecondary)),
+                      Text('Text Size', style: IveType.bodyEmphasis.copyWith(color: IveTokens.ink2)),
                       const SizedBox(height: 4),
                       Row(
                         children: [
-                          const Text('A', style: TextStyle(fontSize: 12, color: AppColors.textTertiary)),
+                          Text('A', style: IveType.caption.copyWith(color: IveTokens.mute)),
                           Expanded(
                             child: Slider(
                               value: a11y.textScale,
                               min: 0.8,
                               max: 2.0,
                               divisions: 12,
-                              activeColor: const Color(0xFF3B82F6),
+                              activeColor: IveTokens.accent,
                               onChanged: (v) => udp.setTextScale(v),
                             ),
                           ),
-                          Text('A', style: TextStyle(fontSize: 12 * a11y.textScale, color: AppColors.textPrimary, fontWeight: FontWeight.w600)),
+                          Text('A', style: IveType.caption.copyWith(fontSize: 12 * a11y.textScale, color: IveTokens.ink, fontWeight: FontWeight.w600)),
                         ],
                       ),
                       Center(
                         child: Text(
                           '${(a11y.textScale * 100).toInt()}%',
-                          style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Color(0xFF3B82F6)),
+                          style: IveType.caption.copyWith(fontWeight: FontWeight.w600, color: IveTokens.accent),
                         ),
                       ),
                       const SizedBox(height: 8),
@@ -104,14 +104,14 @@ class AccessibilityScreen extends StatelessWidget {
                         width: double.infinity,
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: a11y.highContrast ? Colors.black : Colors.grey.withValues(alpha: 0.05),
-                          borderRadius: BorderRadius.circular(10),
+                          color: a11y.highContrast ? IveTokens.bg : IveTokens.hairline.withValues(alpha: 0.05),
+                          borderRadius: BorderRadius.circular(IveTokens.rSm),
                         ),
                         child: Text(
                           'The quick brown fox jumps over the lazy dog.',
                           style: TextStyle(
                             fontSize: 14 * a11y.textScale,
-                            color: a11y.highContrast ? Colors.white : AppColors.textPrimary,
+                            color: a11y.highContrast ? IveTokens.ink : IveTokens.ink,
                             fontWeight: a11y.highContrast ? FontWeight.w700 : FontWeight.w400,
                           ),
                         ),
@@ -124,7 +124,7 @@ class AccessibilityScreen extends StatelessWidget {
                         subtitle: 'Enhanced colors for readability',
                         value: a11y.highContrast,
                         onChanged: (v) => udp.toggleHighContrast(v),
-                        activeColor: const Color(0xFF3B82F6),
+                        activeColor: IveTokens.accent,
                       ),
                       SettingsToggle(
                         icon: Icons.zoom_in,
@@ -132,19 +132,19 @@ class AccessibilityScreen extends StatelessWidget {
                         subtitle: 'Pinch to magnify any area',
                         value: a11y.screenMagnifier,
                         onChanged: (v) => udp.updateAccessibility(a11y.copyWith(screenMagnifier: v)),
-                        activeColor: const Color(0xFF3B82F6),
+                        activeColor: IveTokens.accent,
                       ),
                     ],
                   ),
                 ),
               ),
 
-              // ─── Hearing ───────────────────────────────────
+              //  Hearing 
               SectionCard(
                 child: CollapsibleSection(
                   title: 'Hearing',
                   icon: Icons.hearing,
-                  iconColor: const Color(0xFF10B981),
+                  iconColor: IveTokens.success,
                   initiallyExpanded: false,
                   child: Column(
                     children: [
@@ -154,7 +154,7 @@ class AccessibilityScreen extends StatelessWidget {
                         subtitle: 'Flash screen for audio notifications',
                         value: a11y.visualAlerts,
                         onChanged: (v) => udp.updateAccessibility(a11y.copyWith(visualAlerts: v)),
-                        activeColor: const Color(0xFF10B981),
+                        activeColor: IveTokens.success,
                       ),
                       SettingsToggle(
                         icon: Icons.closed_caption,
@@ -162,7 +162,7 @@ class AccessibilityScreen extends StatelessWidget {
                         subtitle: 'Show captions for audio/video',
                         value: a11y.captionsEnabled,
                         onChanged: (v) => udp.updateAccessibility(a11y.copyWith(captionsEnabled: v)),
-                        activeColor: const Color(0xFF10B981),
+                        activeColor: IveTokens.success,
                       ),
                       SettingsToggle(
                         icon: Icons.headphones,
@@ -170,25 +170,25 @@ class AccessibilityScreen extends StatelessWidget {
                         subtitle: 'Combine stereo into single channel',
                         value: a11y.monoAudio,
                         onChanged: (v) => udp.updateAccessibility(a11y.copyWith(monoAudio: v)),
-                        activeColor: const Color(0xFF10B981),
+                        activeColor: IveTokens.success,
                       ),
 
                       // Volume balance
                       const SizedBox(height: 8),
-                      const Text('Audio Balance', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.textSecondary)),
+                      Text('Audio Balance', style: IveType.bodyEmphasis.copyWith(color: IveTokens.ink2)),
                       Row(
                         children: [
-                          const Text('L', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                          Text('L', style: IveType.caption.copyWith(color: IveTokens.mute)),
                           Expanded(
                             child: Slider(
                               value: a11y.volumeBalance,
                               min: 0.0,
                               max: 1.0,
-                              activeColor: const Color(0xFF10B981),
+                              activeColor: IveTokens.success,
                               onChanged: (v) => udp.updateAccessibility(a11y.copyWith(volumeBalance: v)),
                             ),
                           ),
-                          const Text('R', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                          Text('R', style: IveType.caption.copyWith(color: IveTokens.mute)),
                         ],
                       ),
                     ],
@@ -196,31 +196,31 @@ class AccessibilityScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Motor ────────────────────────────────────
+              //  Motor 
               SectionCard(
                 child: CollapsibleSection(
                   title: 'Motor',
                   icon: Icons.touch_app,
-                  iconColor: const Color(0xFFF59E0B),
+                  iconColor: IveTokens.warning,
                   initiallyExpanded: false,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Touch sensitivity
-                      const Text('Touch Sensitivity', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.textSecondary)),
+                      Text('Touch Sensitivity', style: IveType.bodyEmphasis.copyWith(color: IveTokens.ink2)),
                       Row(
                         children: [
-                          const Text('Light', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                          Text('Light', style: IveType.caption.copyWith(color: IveTokens.mute)),
                           Expanded(
                             child: Slider(
                               value: a11y.touchSensitivity,
                               min: 0.0,
                               max: 1.0,
-                              activeColor: const Color(0xFFF59E0B),
+                              activeColor: IveTokens.warning,
                               onChanged: (v) => udp.updateAccessibility(a11y.copyWith(touchSensitivity: v)),
                             ),
                           ),
-                          const Text('Firm', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                          Text('Firm', style: IveType.caption.copyWith(color: IveTokens.mute)),
                         ],
                       ),
                       const SizedBox(height: 4),
@@ -230,7 +230,7 @@ class AccessibilityScreen extends StatelessWidget {
                         subtitle: 'Replace complex gestures with taps',
                         value: a11y.gestureSimplification,
                         onChanged: (v) => udp.updateAccessibility(a11y.copyWith(gestureSimplification: v)),
-                        activeColor: const Color(0xFFF59E0B),
+                        activeColor: IveTokens.warning,
                       ),
                       SettingsToggle(
                         icon: Icons.switch_access_shortcut,
@@ -238,7 +238,7 @@ class AccessibilityScreen extends StatelessWidget {
                         subtitle: 'Navigate with external switch',
                         value: a11y.switchControl,
                         onChanged: (v) => udp.updateAccessibility(a11y.copyWith(switchControl: v)),
-                        activeColor: const Color(0xFFF59E0B),
+                        activeColor: IveTokens.warning,
                       ),
                       SettingsToggle(
                         icon: Icons.mic,
@@ -246,19 +246,19 @@ class AccessibilityScreen extends StatelessWidget {
                         subtitle: 'Navigate using voice commands',
                         value: a11y.voiceControl,
                         onChanged: (v) => udp.updateAccessibility(a11y.copyWith(voiceControl: v)),
-                        activeColor: const Color(0xFFF59E0B),
+                        activeColor: IveTokens.warning,
                       ),
                     ],
                   ),
                 ),
               ),
 
-              // ─── Cognitive ─────────────────────────────────
+              //  Cognitive 
               SectionCard(
                 child: CollapsibleSection(
                   title: 'Cognitive',
                   icon: Icons.psychology,
-                  iconColor: const Color(0xFF8B5CF6),
+                  iconColor: IveTokens.accent,
                   initiallyExpanded: false,
                   child: Column(
                     children: [
@@ -268,7 +268,7 @@ class AccessibilityScreen extends StatelessWidget {
                         subtitle: 'Minimize animations and transitions',
                         value: a11y.reducedMotion,
                         onChanged: (v) => udp.toggleReducedMotion(v),
-                        activeColor: const Color(0xFF8B5CF6),
+                        activeColor: IveTokens.accent,
                       ),
                       SettingsToggle(
                         icon: Icons.dashboard_customize,
@@ -276,7 +276,7 @@ class AccessibilityScreen extends StatelessWidget {
                         subtitle: 'Reduce visual complexity',
                         value: a11y.simplifiedLayout,
                         onChanged: (v) => udp.updateAccessibility(a11y.copyWith(simplifiedLayout: v)),
-                        activeColor: const Color(0xFF8B5CF6),
+                        activeColor: IveTokens.accent,
                       ),
                       SettingsToggle(
                         icon: Icons.center_focus_strong,
@@ -284,7 +284,7 @@ class AccessibilityScreen extends StatelessWidget {
                         subtitle: 'Highlight active elements clearly',
                         value: a11y.focusAssist,
                         onChanged: (v) => udp.updateAccessibility(a11y.copyWith(focusAssist: v)),
-                        activeColor: const Color(0xFF8B5CF6),
+                        activeColor: IveTokens.accent,
                       ),
                       SettingsToggle(
                         icon: Icons.auto_stories,
@@ -292,7 +292,7 @@ class AccessibilityScreen extends StatelessWidget {
                         subtitle: 'Line highlighting and reading guide',
                         value: a11y.readingAssistance,
                         onChanged: (v) => udp.updateAccessibility(a11y.copyWith(readingAssistance: v)),
-                        activeColor: const Color(0xFF8B5CF6),
+                        activeColor: IveTokens.accent,
                       ),
                     ],
                   ),
@@ -312,7 +312,7 @@ class AccessibilityScreen extends StatelessWidget {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(IveTokens.rSm))),
       builder: (_) => Padding(
         padding: EdgeInsets.only(
           left: 24, right: 24, top: 20,
@@ -325,11 +325,11 @@ class AccessibilityScreen extends StatelessWidget {
             Center(
               child: Container(
                 width: 36, height: 4,
-                decoration: BoxDecoration(color: AppColors.inputBorder, borderRadius: BorderRadius.circular(2)),
+                decoration: BoxDecoration(color: IveTokens.hairline2, borderRadius: BorderRadius.circular(IveTokens.rXs)),
               ),
             ),
             const SizedBox(height: 16),
-            const Text('Save as Preset', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.textPrimary)),
+            Text('Save as Preset', style: IveType.title3.copyWith(color: IveTokens.ink)),
             const SizedBox(height: 12),
             TextField(
               controller: controller,
@@ -337,31 +337,22 @@ class AccessibilityScreen extends StatelessWidget {
               decoration: InputDecoration(
                 hintText: 'Preset name',
                 filled: true,
-                fillColor: AppColors.inputFill,
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+                fillColor: IveTokens.hairline2,
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(IveTokens.rSm), borderSide: BorderSide.none),
               ),
             ),
             const SizedBox(height: 12),
-            SizedBox(
-              width: double.infinity,
-              height: 48,
-              child: ElevatedButton(
-                onPressed: () {
-                  if (controller.text.trim().isNotEmpty) {
-                    udp.saveCurrentAsPreset(controller.text.trim());
-                    Navigator.pop(context);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Preset "${controller.text.trim()}" saved')),
-                    );
-                  }
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF06B6D4),
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                ),
-                child: const Text('Save Preset', style: TextStyle(fontWeight: FontWeight.w600)),
-              ),
+            IveButton.primary(
+              label: 'Save Preset',
+              onPressed: () {
+                if (controller.text.trim().isNotEmpty) {
+                  udp.saveCurrentAsPreset(controller.text.trim());
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Preset "${controller.text.trim()}" saved')),
+                  );
+                }
+              },
             ),
           ],
         ),
@@ -370,9 +361,9 @@ class AccessibilityScreen extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Preset Card
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _PresetCard extends StatelessWidget {
   final AccessibilityPreset preset;
@@ -394,29 +385,28 @@ class _PresetCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
+        duration: IveTokens.dFast,
         width: 88,
         margin: const EdgeInsets.only(right: 8),
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: active ? const Color(0xFF06B6D4).withValues(alpha: 0.1) : Colors.white,
-          borderRadius: BorderRadius.circular(10),
+          color: active ? IveTokens.moduleUser.withValues(alpha: 0.1) : IveTokens.surface,
+          borderRadius: BorderRadius.circular(IveTokens.rSm),
           border: Border.all(
-            color: active ? const Color(0xFF06B6D4) : Colors.grey.withValues(alpha: 0.15),
+            color: active ? IveTokens.moduleUser : IveTokens.hairline,
             width: active ? 2 : 1,
           ),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(_icon, size: 22, color: active ? const Color(0xFF06B6D4) : AppColors.textTertiary),
+            Icon(_icon, size: 22, color: active ? IveTokens.moduleUser : IveTokens.mute),
             const SizedBox(height: 6),
             Text(
               preset.name,
-              style: TextStyle(
-                fontSize: 10,
+              style: IveType.caption.copyWith(
                 fontWeight: active ? FontWeight.w700 : FontWeight.w500,
-                color: active ? const Color(0xFF06B6D4) : AppColors.textSecondary,
+                color: active ? IveTokens.moduleUser : IveTokens.ink2,
               ),
               textAlign: TextAlign.center,
               maxLines: 2,

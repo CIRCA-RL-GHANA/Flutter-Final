@@ -1,9 +1,9 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD1.7: DELIVERY ZONES — Zone Management
+/// 
+/// SD1.7: DELIVERY ZONES  Zone Management
 /// Zone list, coverage, fee structure, vehicle assignment
 /// RBAC: Admin(full), BM(branch), Monitor/BrMon(view), RO/BRO(view),
 ///        Driver(view)
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -77,7 +77,7 @@ class ZonesScreen extends StatelessWidget {
                   child: SetupSectionTitle(title: 'All Zones', icon: Icons.map),
                 ),
               ),
-              // ─── AI Insights ─────────────────────────────────────────
+              //  AI Insights 
               const SliverToBoxAdapter(
               ),
               SliverPadding(
@@ -144,7 +144,7 @@ class _ZoneCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'â‚µ${zone.fee.toStringAsFixed(0)} fee Â· ${zone.estimatedTime}',
+                      '${zone.fee.toStringAsFixed(0)} fee  ${zone.estimatedTime}',
                       style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                     ),
                   ],
@@ -166,7 +166,7 @@ class _ZoneCard extends StatelessWidget {
             children: [
               _ZoneStat(label: 'Vehicles', value: '${zone.vehicleCount}'),
               _ZoneStat(label: 'Deliveries', value: '${zone.dailyDeliveries}/day'),
-              _ZoneStat(label: 'Coverage', value: '${zone.coverageKm2} kmÂ²'),
+              _ZoneStat(label: 'Coverage', value: '${zone.coverageKm2} km'),
               _ZoneStat(label: 'Population', value: _formatPop(zone.populationServed)),
             ],
           ),

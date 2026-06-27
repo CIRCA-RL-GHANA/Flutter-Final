@@ -5,9 +5,9 @@ import 'ive_tokens.dart';
 /// Numeral rhythm widget for monetary and financial values.
 ///
 /// Enforces the three-tier visual hierarchy:
-///   • Integer part  — [integerSize] / full opacity / [IveTokens.inkColor]
-///   • Decimal part  — 70 % of integer size / [IveTokens.ink2Color]
-///   • Unit / symbol — same size as integer / [IveTokens.muteColor]
+///    Integer part   [integerSize] / full opacity / [IveTokens.inkColor]
+///    Decimal part   70 % of integer size / [IveTokens.ink2Color]
+///    Unit / symbol  same size as integer / [IveTokens.muteColor]
 ///
 /// Uses IBM Plex Mono with tabular figures so digits never reflow.
 ///
@@ -35,10 +35,10 @@ class ValueDisplay extends StatefulWidget {
     this.textAlign = TextAlign.start,
   });
 
-  /// Numeric value. Negative values prepend '−'.
+  /// Numeric value. Negative values prepend ''.
   final double amount;
 
-  /// Currency / unit symbol (e.g. '\$', '₵', 'QP'). Empty = no unit.
+  /// Currency / unit symbol (e.g. '\$', '', 'QP'). Empty = no unit.
   final String unit;
 
   /// If true, unit precedes the number (e.g. '\$1,200'). Else follows ('1,200 QP').
@@ -47,7 +47,7 @@ class ValueDisplay extends StatefulWidget {
   /// Font size for the integer portion (decimal = 70 %, unit = same).
   final double integerSize;
 
-  /// When true, count from 0 → [amount] on first render.
+  /// When true, count from 0  [amount] on first render.
   final bool countUp;
 
   /// Duration of the count-up animation.
@@ -133,7 +133,7 @@ class _ValueDisplayState extends State<ValueDisplay>
         final absVal = val.abs();
         final intPart = absVal.truncate();
         final decPart = ((absVal - intPart) * 100).round();
-        final intStr = '${negative ? '−' : ''}${_fmtInt(intPart)}';
+        final intStr = '${negative ? '' : ''}${_fmtInt(intPart)}';
         final decStr = '.${decPart.toString().padLeft(2, '0')}';
 
         final unitSpan = TextSpan(

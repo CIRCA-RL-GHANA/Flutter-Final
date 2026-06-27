@@ -1,9 +1,10 @@
-﻿/// APRIL Screen 4 — Wishlist Command Center
+/// APRIL Screen 4  Wishlist Command Center
 /// 4 view modes: grid, list, priority, timeline
 /// Item management, collections, savings tracking
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
 import 'package:provider/provider.dart';
 import '../models/april_models.dart';
 import '../providers/april_provider.dart';
@@ -19,7 +20,7 @@ class AprilWishlistScreen extends StatelessWidget {
         return Scaffold(
           backgroundColor: const Color(0xFFF8F9FE),
           appBar: AprilAppBar(
-            title: 'ðŸŽ Wishlist',
+            title: ' Wishlist',
             actions: [
               if (provider.highPriorityWishlistCount > 0)
                 Padding(
@@ -45,7 +46,7 @@ class AprilWishlistScreen extends StatelessWidget {
                   value: v,
                   child: Row(
                     children: [
-                      Icon(_viewIcon(v), size: 18, color: provider.wishlistView == v ? kAprilColorDark : const Color(0xFF6B7280)),
+                      Icon(_viewIcon(v), size: 18, color: provider.wishlistView == v ? IveTokens.genieBright : const Color(0xFF6B7280)),
                       const SizedBox(width: 8),
                       Text(v.name[0].toUpperCase() + v.name.substring(1),
                         style: TextStyle(fontWeight: provider.wishlistView == v ? FontWeight.w600 : FontWeight.w400)),
@@ -71,10 +72,10 @@ class AprilWishlistScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     _WishlistStat(label: 'Items', value: '${provider.filteredWishlistItems.length}'),
-                    Container(width: 1, height: 30, color: kAprilColorDark.withValues(alpha: 0.2)),
-                    _WishlistStat(label: 'Total Value', value: 'â‚µ${provider.totalWishlistValue.toStringAsFixed(0)}'),
-                    Container(width: 1, height: 30, color: kAprilColorDark.withValues(alpha: 0.2)),
-                    _WishlistStat(label: 'Saved', value: 'â‚µ${provider.totalWishlistSaved.toStringAsFixed(0)}'),
+                    Container(width: 1, height: 30, color: IveTokens.genieBright.withValues(alpha: 0.2)),
+                    _WishlistStat(label: 'Total Value', value: '${provider.totalWishlistValue.toStringAsFixed(0)}'),
+                    Container(width: 1, height: 30, color: IveTokens.genieBright.withValues(alpha: 0.2)),
+                    _WishlistStat(label: 'Saved', value: '${provider.totalWishlistSaved.toStringAsFixed(0)}'),
                   ],
                 ),
               ),
@@ -110,7 +111,7 @@ class AprilWishlistScreen extends StatelessWidget {
                       icon: Container(
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: provider.wishlistPriorityFilter != null ? kAprilColor : Colors.white,
+                          color: provider.wishlistPriorityFilter != null ? IveTokens.genie : Colors.white,
                           borderRadius: BorderRadius.circular(10),
                           border: Border.all(color: const Color(0xFFE5E7EB)),
                         ),
@@ -147,10 +148,10 @@ class AprilWishlistScreen extends StatelessWidget {
                       margin: const EdgeInsets.only(right: 8),
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                       decoration: BoxDecoration(
-                        color: provider.wishlistView == v ? kAprilColor : Colors.white,
-                        borderRadius: BorderRadius.circular(8),
+                        color: provider.wishlistView == v ? IveTokens.genie : Colors.white,
+                        borderRadius: BorderRadius.circular(10),
                         border: Border.all(
-                          color: provider.wishlistView == v ? kAprilColor : const Color(0xFFE5E7EB),
+                          color: provider.wishlistView == v ? IveTokens.genie : const Color(0xFFE5E7EB),
                         ),
                       ),
                       child: Row(
@@ -187,7 +188,7 @@ class AprilWishlistScreen extends StatelessWidget {
           ),
           floatingActionButton: FloatingActionButton.extended(
             onPressed: () => _showAddItem(context),
-            backgroundColor: kAprilColor,
+            backgroundColor: IveTokens.genie,
             foregroundColor: Colors.black,
             icon: const Icon(Icons.add, size: 20),
             label: const Text('Add Item', style: TextStyle(fontWeight: FontWeight.w600)),
@@ -239,11 +240,11 @@ class AprilWishlistScreen extends StatelessWidget {
 
   String _priorityStars(WishlistPriority p) {
     switch (p) {
-      case WishlistPriority.low: return 'â­';
-      case WishlistPriority.medium: return 'â­â­';
-      case WishlistPriority.high: return 'â­â­â­';
-      case WishlistPriority.veryHigh: return 'â­â­â­â­';
-      case WishlistPriority.critical: return 'â­â­â­â­â­';
+      case WishlistPriority.low: return '';
+      case WishlistPriority.medium: return '';
+      case WishlistPriority.high: return '';
+      case WishlistPriority.veryHigh: return '';
+      case WishlistPriority.critical: return '';
     }
   }
 
@@ -252,7 +253,7 @@ class AprilWishlistScreen extends StatelessWidget {
       context: context,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
       ),
       builder: (ctx) => Padding(
         padding: EdgeInsets.fromLTRB(20, 20, 20, MediaQuery.of(ctx).viewInsets.bottom + 20),
@@ -260,7 +261,7 @@ class AprilWishlistScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(child: Container(width: 40, height: 4, decoration: BoxDecoration(color: const Color(0xFFE5E7EB), borderRadius: BorderRadius.circular(2)))),
+            Center(child: Container(width: 40, height: 4, decoration: BoxDecoration(color: const Color(0xFFE5E7EB), borderRadius: BorderRadius.circular(6)))),
             const SizedBox(height: 16),
             const Text('Add to Wishlist', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
             const SizedBox(height: 4),
@@ -272,7 +273,7 @@ class AprilWishlistScreen extends StatelessWidget {
               decoration: InputDecoration(
                 hintText: 'Paste product URL to auto-fill...',
                 hintStyle: const TextStyle(fontSize: 14, color: Color(0xFF9CA3AF)),
-                prefixIcon: const Icon(Icons.link, color: kAprilColorDark),
+                prefixIcon: const Icon(Icons.link, color: IveTokens.genieBright),
                 filled: true,
                 fillColor: const Color(0xFFF3F4F6),
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
@@ -299,7 +300,7 @@ class AprilWishlistScreen extends StatelessWidget {
             TextField(
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                hintText: 'Price (â‚µ)',
+                hintText: 'Price ()',
                 hintStyle: const TextStyle(fontSize: 14, color: Color(0xFF9CA3AF)),
                 prefixIcon: const Icon(Icons.attach_money, color: Color(0xFF9CA3AF)),
                 filled: true,
@@ -314,7 +315,7 @@ class AprilWishlistScreen extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () => Navigator.pop(ctx),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: kAprilColor,
+                  backgroundColor: IveTokens.genie,
                   foregroundColor: Colors.black,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -329,9 +330,9 @@ class AprilWishlistScreen extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // List Tile View
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 class _WishlistListTile extends StatelessWidget {
   final WishlistItem item;
   const _WishlistListTile({required this.item});
@@ -352,10 +353,10 @@ class _WishlistListTile extends StatelessWidget {
             width: 56,
             height: 56,
             decoration: BoxDecoration(
-              color: kAprilColor.withValues(alpha: 0.1),
+              color: IveTokens.genie.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(10),
             ),
-            child: const Icon(Icons.shopping_bag, color: kAprilColorDark),
+            child: const Icon(Icons.shopping_bag, color: IveTokens.genieBright),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -366,18 +367,18 @@ class _WishlistListTile extends StatelessWidget {
                 const SizedBox(height: 2),
                 Row(
                   children: [
-                    Text('â‚µ${item.price.toStringAsFixed(2)}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: kAprilColorDark)),
+                    Text('${item.price.toStringAsFixed(2)}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: IveTokens.genieBright)),
                     const SizedBox(width: 8),
                     Text('${item.savedPercentage.toStringAsFixed(0)}% saved', style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
                   ],
                 ),
                 const SizedBox(height: 4),
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(2),
+                  borderRadius: BorderRadius.circular(6),
                   child: LinearProgressIndicator(
                     value: (item.savedAmount / item.price).clamp(0.0, 1.0),
                     backgroundColor: const Color(0xFFF3F4F6),
-                    valueColor: const AlwaysStoppedAnimation(kAprilSuccess),
+                    valueColor: const AlwaysStoppedAnimation(IveTokens.success),
                     minHeight: 3,
                   ),
                 ),
@@ -392,9 +393,9 @@ class _WishlistListTile extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// Priority View — Grouped by priority
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
+// Priority View  Grouped by priority
+// 
 class _PriorityView extends StatelessWidget {
   final List<WishlistItem> items;
   const _PriorityView({required this.items});
@@ -433,9 +434,9 @@ class _PriorityView extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// Timeline View — Items by added date
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
+// Timeline View  Items by added date
+// 
 class _TimelineView extends StatelessWidget {
   final List<WishlistItem> items;
   const _TimelineView({required this.items});
@@ -462,9 +463,9 @@ class _TimelineView extends StatelessWidget {
                       width: 10,
                       height: 10,
                       decoration: BoxDecoration(
-                        color: kAprilColor,
+                        color: IveTokens.genie,
                         shape: BoxShape.circle,
-                        border: Border.all(color: kAprilColorDark, width: 2),
+                        border: Border.all(color: IveTokens.genieBright, width: 2),
                       ),
                     ),
                     Expanded(child: Container(width: 2, color: i == sorted.length - 1 ? Colors.transparent : const Color(0xFFE5E7EB))),
@@ -486,9 +487,9 @@ class _TimelineView extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // SHARED MINI WIDGETS
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _WishlistStat extends StatelessWidget {
   final String label, value;
@@ -498,7 +499,7 @@ class _WishlistStat extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(value, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: kAprilColorDark)),
+        Text(value, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: IveTokens.genieBright)),
         const SizedBox(height: 2),
         Text(label, style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
       ],

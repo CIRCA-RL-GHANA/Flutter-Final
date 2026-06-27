@@ -1,10 +1,11 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 /// Screen 3: Create / Edit Entity Form
-/// 5-step stepper: Type â†’ Core Info â†’ Verification â†’ Role â†’ Review
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 5-step stepper: Type ' Core Info ' Verification ' Role ' Review
+/// 
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
@@ -135,9 +136,9 @@ class _CreateEntityScreenState extends State<CreateEntityScreen> {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Step Progress
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _StepProgress extends StatelessWidget {
   final int currentStep;
@@ -197,9 +198,9 @@ class _StepProgress extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Step 1: Entity Type Selection
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _Step1TypeSelection extends StatelessWidget {
   const _Step1TypeSelection({super.key});
@@ -247,7 +248,7 @@ class _TypeCard extends StatelessWidget {
         duration: const Duration(milliseconds: 200),
         decoration: BoxDecoration(
           color: selected ? type.color.withValues(alpha: 0.06) : Colors.white,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(10),
           border: Border.all(
             color: selected ? type.color : Colors.grey.withValues(alpha: 0.15),
             width: selected ? 2 : 1,
@@ -255,7 +256,7 @@ class _TypeCard extends StatelessWidget {
         ),
         child: InkWell(
           onTap: onTap,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(10),
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Row(
@@ -301,9 +302,9 @@ class _TypeCard extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Step 2: Core Info
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _Step2CoreInfo extends StatelessWidget {
   const _Step2CoreInfo({super.key});
@@ -433,9 +434,9 @@ class _FormField extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Step 3: Verification
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _Step3Verification extends StatelessWidget {
   final bool verificationConfirmed;
@@ -476,7 +477,7 @@ class _Step3Verification extends StatelessWidget {
             HapticFeedback.selectionClick();
             udp.sendEmailVerification();
           },
-          actionLabel: udp.emailVerificationSent ? 'Sent ✓' : 'Send Code',
+          actionLabel: udp.emailVerificationSent ? 'Sent ' : 'Send Code',
         ),
         _VerificationStep(
           title: 'Phone Verification',
@@ -488,7 +489,7 @@ class _Step3Verification extends StatelessWidget {
             HapticFeedback.selectionClick();
             udp.sendPhoneVerification();
           },
-          actionLabel: udp.phoneVerificationSent ? 'Sent ✓' : 'Send Code',
+          actionLabel: udp.phoneVerificationSent ? 'Sent ' : 'Send Code',
         ),
         _VerificationStep(
           title: 'Document Upload',
@@ -500,7 +501,7 @@ class _Step3Verification extends StatelessWidget {
             HapticFeedback.selectionClick();
             udp.setDocumentUploaded(true);
           },
-          actionLabel: udp.documentUploaded ? 'Uploaded ✓' : 'Upload',
+          actionLabel: udp.documentUploaded ? 'Uploaded ' : 'Upload',
         ),
         _VerificationStep(
           title: 'Address Verification',
@@ -512,7 +513,7 @@ class _Step3Verification extends StatelessWidget {
             HapticFeedback.selectionClick();
             udp.setAddressVerified(true);
           },
-          actionLabel: udp.addressVerified ? 'Verified ✓' : 'Verify',
+          actionLabel: udp.addressVerified ? 'Verified ' : 'Verify',
         ),
 
         const SizedBox(height: 8),
@@ -597,9 +598,9 @@ class _VerificationStep extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Step 4: Role Assignment
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _Step4RoleAssignment extends StatelessWidget {
   const _Step4RoleAssignment({super.key});
@@ -699,9 +700,9 @@ class _Step4RoleAssignment extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Step Navigation
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _StepNavigation extends StatelessWidget {
   final int step;

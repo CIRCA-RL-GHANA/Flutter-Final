@@ -60,7 +60,7 @@ class _PromptDashboardScreenState extends State<PromptDashboardScreen>
                 );
               }
 
-              // getConversations() returns ApiResponse — unwrap .data for the list.
+              // getConversations() returns ApiResponse  unwrap .data for the list.
               final conversations = snapshot.data?.data ?? [];
 
               return conversations.isEmpty
@@ -154,7 +154,7 @@ class _PromptDashboardScreenState extends State<PromptDashboardScreen>
                   context: context,
                   applicationName: 'genie help',
                   applicationVersion: '1.0',
-                  applicationLegalese: '© 2026 CIRCA-RL. All rights reserved.',
+                  applicationLegalese: ' 2026 CIRCA-RL. All rights reserved.',
                 ),
               ),
             ],

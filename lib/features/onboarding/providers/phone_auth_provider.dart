@@ -76,10 +76,18 @@ class PhoneAuthProvider extends ChangeNotifier {
       final response = await _userService.checkPhone(formattedNumber);
 
       if (response.success && response.data != null) {
-        final exists = response.data!['exists'] as bool? ?? false;
-        _numberCheckResult = exists
+        final data = response.data!;
+        debugPrint('[checkNumber] response: $data');
+        final isRegistered = data['isRegistered'] as bool? ?? false;
+        final exists      = data['exists']       as bool? ?? false;
+        // A fully registered user has both passwordHash and socialUsername.
+        // A skeleton user (started OTP, never finished) has exists:true, isRegistered:false.
+        // Route skeleton to OTP+registration so they can complete signup.
+        _numberCheckResult = isRegistered
             ? NumberCheckResult.existingUser
-            : NumberCheckResult.newUser;
+            : exists
+                ? NumberCheckResult.newUser   // skeleton — complete signup
+                : NumberCheckResult.newUser;  // brand new — create account
       } else {
         _numberCheckResult = NumberCheckResult.error;
         _error = response.error?.userMessage ?? "Can't verify number. Try again.";
@@ -147,7 +155,7 @@ class PhoneAuthProvider extends ChangeNotifier {
       _otpAttemptsRemaining--;
       final errorMsg = response.error?.message ?? 'Invalid code';
       if (_otpAttemptsRemaining <= 0) {
-        _error = 'Too many failed attempts. Please request a new code.';
+        _error = 'Too many failed attempts. Request a new code.';
         _otpState = OtpState.error;
       } else {
         _error = '$errorMsg. $_otpAttemptsRemaining attempts remaining.';
@@ -156,17 +164,17 @@ class PhoneAuthProvider extends ChangeNotifier {
       notifyListeners();
       return false;
     } catch (e) {
-      // Server-side rate limiting is enforced by the backend — this is UX-only
+      // Server-side rate limiting is enforced by the backend  this is UX-only
       // Check if this looks like a rate-limit response
       if (e is DioException && e.response?.statusCode == 429) {
-        _error = 'Too many attempts. Please wait before trying again.';
+        _error = 'Too many attempts. Wait a moment, then try again.';
         _otpState = OtpState.error;
         notifyListeners();
         return false;
       }
       _otpAttemptsRemaining--;
       if (_otpAttemptsRemaining <= 0) {
-        _error = 'Too many failed attempts. Please request a new code.';
+        _error = 'Too many failed attempts. Request a new code.';
         _otpState = OtpState.error;
       } else {
         _error = 'Invalid code. $_otpAttemptsRemaining attempts remaining.';
@@ -180,7 +188,7 @@ class PhoneAuthProvider extends ChangeNotifier {
   /// Resend OTP
   Future<bool> resendOtp() async {
     if (_resendAttemptsRemaining <= 0) {
-      _error = 'Too many attempts. Please wait 5 minutes';
+      _error = 'Too many attempts. Wait 5 minutes, then try again.';
       notifyListeners();
       return false;
     }

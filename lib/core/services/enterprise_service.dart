@@ -14,7 +14,7 @@ class EnterpriseService {
 
   EnterpriseService([ApiClient? api]) : _api = api ?? ApiClient.instance;
 
-  // ─── Enterprise Profiles ──────────────────────────────────────────────────
+  //  Enterprise Profiles 
 
   Future<ApiResponse<Map<String, dynamic>>> registerEnterprise({
     required String legalName,
@@ -70,7 +70,7 @@ class EnterpriseService {
     );
   }
 
-  // ─── API Keys ─────────────────────────────────────────────────────────────
+  //  API Keys 
 
   Future<ApiResponse<Map<String, dynamic>>> createApiKey(
     String entityId, {
@@ -106,7 +106,7 @@ class EnterpriseService {
     );
   }
 
-  // ─── Multi-Channel ────────────────────────────────────────────────────────
+  //  Multi-Channel 
 
   Future<ApiResponse<Map<String, dynamic>>> registerChannel({
     required String entityId,
@@ -147,7 +147,7 @@ class EnterpriseService {
     );
   }
 
-  // ─── Fulfillment ──────────────────────────────────────────────────────────
+  //  Fulfillment 
 
   Future<ApiResponse<Map<String, dynamic>>> createRoutingRule({
     required String entityId,
@@ -195,7 +195,7 @@ class EnterpriseService {
     );
   }
 
-  // ─── Agentic Concierge ────────────────────────────────────────────────────
+  //  Agentic Concierge 
 
   Future<ApiResponse<Map<String, dynamic>>> createConciergeSession({
     required String entityId,
@@ -245,7 +245,7 @@ class EnterpriseService {
     );
   }
 
-  // ─── Pathway 1: QP Charge ─────────────────────────────────────────────────
+  //  Pathway 1: QP Charge 
 
   Future<ApiResponse<Map<String, dynamic>>> chargeQp({
     required String customerId,
@@ -271,7 +271,7 @@ class EnterpriseService {
     return resp;
   }
 
-  // ─── Pathway 5: Facilitator Institutions ─────────────────────────────────
+  //  Pathway 5: Facilitator Institutions 
 
   Future<ApiResponse<Map<String, dynamic>>> getInstitutionBalance(String entityId) async {
     return _api.get<Map<String, dynamic>>(
@@ -310,7 +310,7 @@ class EnterpriseService {
     );
   }
 
-  // ─── Webhooks ─────────────────────────────────────────────────────────────
+  //  Webhooks 
 
   Future<ApiResponse<Map<String, dynamic>>> subscribeWebhook({
     required String entityId,
@@ -333,7 +333,7 @@ class EnterpriseService {
     );
   }
 
-  // ─── Analytics ──────────────────────────────────────────────────────────
+  //  Analytics 
 
   Future<ApiResponse<Map<String, dynamic>>> getAnalytics(
     String entityId, {
@@ -366,7 +366,7 @@ class EnterpriseService {
     );
   }
 
-  // ─── Products (Bulk) ────────────────────────────────────────────────────
+  //  Products (Bulk) 
 
   Future<ApiResponse<List<Map<String, dynamic>>>> bulkCreateProducts(
       List<Map<String, dynamic>> products) async {
@@ -387,7 +387,7 @@ class EnterpriseService {
     );
   }
 
-  // ─── Orders (Entity-scoped) ─────────────────────────────────────────────
+  //  Orders (Entity-scoped) 
 
   Future<ApiResponse<Map<String, dynamic>>> getOrdersByBranch(
     String branchId, {

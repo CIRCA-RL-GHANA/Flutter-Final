@@ -1,8 +1,8 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD1.1: PRODUCTS — Inventory Management
+/// 
+/// SD1.1: PRODUCTS  Inventory Management
 /// Grid/list view, search, filter by category/stock, product detail
 /// RBAC: Admin(full), BM(branch), Monitor/BrMon(view), RO/BRO(view)
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -55,7 +55,7 @@ class ProductsScreen extends StatelessWidget {
             ),
             body: CustomScrollView(
             slivers: [
-              // ─── Summary Cards ────────────────────────────
+              //  Summary Cards 
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -91,7 +91,7 @@ class ProductsScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Search ───────────────────────────────────
+              //  Search 
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
@@ -113,6 +113,7 @@ class ProductsScreen extends StatelessWidget {
                               hintText: 'Search products by name, SKU, category...',
                               hintStyle: TextStyle(fontSize: 13, color: AppColors.textTertiary),
                               border: InputBorder.none,
+              filled: false,
                               contentPadding: EdgeInsets.zero,
                               isDense: true,
                             ),
@@ -127,7 +128,7 @@ class ProductsScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Product List ─────────────────────────────
+              //  Product List 
               if (products.isEmpty) ...[
                 const SliverFillRemaining(
                   child: SetupEmptyState(
@@ -137,7 +138,7 @@ class ProductsScreen extends StatelessWidget {
                   ),
                 ),
               ] else if (setupProv.isGridView) ...[
-              // ─── AI Insights ─────────────────────────────────────────
+              //  AI Insights 
               const SliverToBoxAdapter(
               ),
                 SliverPadding(
@@ -175,7 +176,7 @@ class ProductsScreen extends StatelessWidget {
   }
 }
 
-// ─── Product Grid Card ───────────────────────────────────────────────────────
+//  Product Grid Card 
 
 class _ProductGridCard extends StatelessWidget {
   final Product product;
@@ -237,7 +238,7 @@ class _ProductGridCard extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  'â‚µ${product.currentPrice.toStringAsFixed(0)}',
+                  '${product.currentPrice.toStringAsFixed(0)}',
                   style: const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w700,
@@ -247,7 +248,7 @@ class _ProductGridCard extends StatelessWidget {
                 if (product.hasDiscount) ...[
                   const SizedBox(width: 6),
                   Text(
-                    'â‚µ${product.basePrice.toStringAsFixed(0)}',
+                    '${product.basePrice.toStringAsFixed(0)}',
                     style: const TextStyle(
                       fontSize: 11,
                       color: AppColors.textTertiary,
@@ -284,7 +285,7 @@ class _ProductGridCard extends StatelessWidget {
   }
 }
 
-// ─── Product List Tile ───────────────────────────────────────────────────────
+//  Product List Tile 
 
 class _ProductListTile extends StatelessWidget {
   final Product product;
@@ -346,14 +347,14 @@ class _ProductListTile extends StatelessWidget {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  '${product.category} Â· ${product.sku}',
+                  '${product.category}  ${product.sku}',
                   style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                 ),
                 const SizedBox(height: 4),
                 Row(
                   children: [
                     Text(
-                      'â‚µ${product.currentPrice.toStringAsFixed(0)}',
+                      '${product.currentPrice.toStringAsFixed(0)}',
                       style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w700,
@@ -374,7 +375,7 @@ class _ProductListTile extends StatelessWidget {
   }
 }
 
-// ─── Stock Badge ─────────────────────────────────────────────────────────────
+//  Stock Badge 
 
 class _StockBadge extends StatelessWidget {
   final Product product;

@@ -4,10 +4,10 @@ import '../../../core/services/services.dart';
 /// Role category
 enum RoleCategory { individual, business }
 
-/// Individual sub-roles — content creation requires a Digital branch (commercial activity)
+/// Individual sub-roles  content creation requires a Digital branch (commercial activity)
 enum IndividualRole { buyer, deliveryPartner, transportProvider }
 
-/// Business sub-roles — Owner is NOT a business staff role.
+/// Business sub-roles  Owner is NOT a business staff role.
 /// Owner is automatically granted to the individual who creates the entity.
 enum BusinessRole { administrator, branchManager, staff }
 
@@ -92,25 +92,29 @@ class RoleProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Save role selection to backend by creating entity
+  /// Save role selection to backend by creating entity.
+  /// Backend only needs { userId } — role/category are inferred server-side.
   Future<bool> saveRole() async {
     _isLoading = true;
     notifyListeners();
 
     try {
-      final roleType = _selectedCategory == RoleCategory.individual
-          ? 'individual'
-          : 'business';
-      final subRole = _selectedCategory == RoleCategory.individual
-          ? _individualRole?.name ?? ''
-          : _businessRole?.name ?? '';
+      // Resolve userId: use stored value or fetch from JWT session
+      String userId = _userId ?? '';
+      if (userId.isEmpty) {
+        final me = await AuthService().getMe();
+        if (me.success && me.data != null) {
+          userId = (me.data!['id'] as String?) ?? '';
+        }
+      }
 
-      final response = await _entityService.createIndividual(
-        ownerId: _userId ?? '',
-        entityType: roleType,
-        role: subRole,
-        displayName: subRole,
-      );
+      if (userId.isEmpty) {
+        _isLoading = false;
+        notifyListeners();
+        return false;
+      }
+
+      final response = await _entityService.createIndividual(userId: userId);
 
       _isLoading = false;
       notifyListeners();

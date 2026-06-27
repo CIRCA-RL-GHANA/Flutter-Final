@@ -112,7 +112,7 @@ Future<void> voiceStop() async {
   try {
     _recognition?.callMethod<JSAny?>('stop'.toJS);
   } catch (_) {
-    // Ignore — onend will fire regardless
+    // Ignore  onend will fire regardless
   }
 }
 

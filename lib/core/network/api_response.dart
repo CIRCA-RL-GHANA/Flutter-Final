@@ -1,4 +1,4 @@
-﻿/// Standardized API response wrapper.
+/// Standardized API response wrapper.
 /// Matches the backend TransformInterceptor output format.
 class ApiResponse<T> {
   final bool success;
@@ -56,7 +56,7 @@ class ApiResponse<T> {
     );
   }
 
-  /// Alias for [success] — preferred form used throughout service layer.
+  /// Alias for [success]  preferred form used throughout service layer.
   bool get isSuccess => success;
 
   /// Whether this response has data

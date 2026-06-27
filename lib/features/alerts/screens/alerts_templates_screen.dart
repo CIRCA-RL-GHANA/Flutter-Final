@@ -1,4 +1,4 @@
-﻿/// Alerts Screen 9 — Templates Library
+/// Alerts Screen 9  Templates Library
 /// Template grid (resolution/alert/communication/workflow),
 /// variable support, version control
 library;
@@ -57,10 +57,10 @@ class _AlertsTemplatesScreenState extends State<AlertsTemplatesScreen> with Sing
               tabAlignment: TabAlignment.start,
               tabs: [
                 Tab(text: 'All (${provider.templates.length})'),
-                Tab(text: 'âœ… Resolution (${provider.templatesByType(AlertTemplateType.resolution).length})'),
-                Tab(text: 'ðŸš¨ Alert (${provider.templatesByType(AlertTemplateType.alert).length})'),
-                Tab(text: 'ðŸ“§ Comms (${provider.templatesByType(AlertTemplateType.communication).length})'),
-                Tab(text: 'ðŸ”„ Workflow (${provider.templatesByType(AlertTemplateType.workflow).length})'),
+                Tab(text: ' Resolution (${provider.templatesByType(AlertTemplateType.resolution).length})'),
+                Tab(text: ' Alert (${provider.templatesByType(AlertTemplateType.alert).length})'),
+                Tab(text: '" Comms (${provider.templatesByType(AlertTemplateType.communication).length})'),
+                Tab(text: '" Workflow (${provider.templatesByType(AlertTemplateType.workflow).length})'),
               ],
             ),
           ),
@@ -89,7 +89,7 @@ class _AlertsTemplatesScreenState extends State<AlertsTemplatesScreen> with Sing
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(10))),
       builder: (context) => Padding(
         padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
         child: Container(
@@ -98,7 +98,7 @@ class _AlertsTemplatesScreenState extends State<AlertsTemplatesScreen> with Sing
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(child: Container(width: 40, height: 4, margin: const EdgeInsets.only(bottom: 16), decoration: BoxDecoration(color: const Color(0xFFE5E7EB), borderRadius: BorderRadius.circular(2)))),
+              Center(child: Container(width: 40, height: 4, margin: const EdgeInsets.only(bottom: 16), decoration: BoxDecoration(color: const Color(0xFFE5E7EB), borderRadius: BorderRadius.circular(6)))),
               const Text('Create Template', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
               const SizedBox(height: 16),
               TextField(
@@ -148,9 +148,9 @@ class _AlertsTemplatesScreenState extends State<AlertsTemplatesScreen> with Sing
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 // Template List
-// ──────────────────────────────────────────────
+// 
 
 class _TemplateList extends StatelessWidget {
   final List<AlertTemplate> templates;
@@ -178,9 +178,9 @@ class _TemplateList extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 // Expandable Template Card
-// ──────────────────────────────────────────────
+// 
 
 class _ExpandableTemplateCard extends StatefulWidget {
   final AlertTemplate template;
@@ -199,7 +199,7 @@ class _ExpandableTemplateCardState extends State<_ExpandableTemplateCard> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(10))),
       builder: (_) => Padding(
         padding: EdgeInsets.only(
           left: 20, right: 20, top: 20,
@@ -209,7 +209,7 @@ class _ExpandableTemplateCardState extends State<_ExpandableTemplateCard> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(child: Container(width: 40, height: 4, margin: const EdgeInsets.only(bottom: 16), decoration: BoxDecoration(color: const Color(0xFFE5E7EB), borderRadius: BorderRadius.circular(2)))),
+            Center(child: Container(width: 40, height: 4, margin: const EdgeInsets.only(bottom: 16), decoration: BoxDecoration(color: const Color(0xFFE5E7EB), borderRadius: BorderRadius.circular(6)))),
             const Text('Edit Template', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
             const SizedBox(height: 16),
             TextField(
@@ -318,7 +318,7 @@ class _ExpandableTemplateCardState extends State<_ExpandableTemplateCard> {
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       color: const Color(0xFFF3F4F6),
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                     child: Text(widget.template.content, style: const TextStyle(fontSize: 13, height: 1.5)),
                   ),
@@ -352,7 +352,7 @@ class _ExpandableTemplateCardState extends State<_ExpandableTemplateCard> {
                           style: OutlinedButton.styleFrom(
                             foregroundColor: kAlertsColor,
                             side: const BorderSide(color: kAlertsColor),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                           ),
                         ),
                       ),
@@ -365,7 +365,7 @@ class _ExpandableTemplateCardState extends State<_ExpandableTemplateCard> {
                           style: OutlinedButton.styleFrom(
                             foregroundColor: const Color(0xFF6B7280),
                             side: const BorderSide(color: Color(0xFF1C1C2E)),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                           ),
                         ),
                       ),

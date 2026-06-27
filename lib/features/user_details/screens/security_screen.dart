@@ -1,7 +1,7 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 /// Screen 5: Security Deep Dive
 /// 4 tabs: Auth Methods, Devices & Sessions, Emergency, Advanced
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -90,9 +90,9 @@ class _SecurityScreenState extends State<SecurityScreen> with SingleTickerProvid
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Tab 1: Auth Methods
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _AuthMethodsTab extends StatelessWidget {
   final SecuritySettings security;
@@ -276,9 +276,9 @@ class _AuthMethodCard extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Tab 2: Devices & Sessions
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _DevicesTab extends StatelessWidget {
   final SecuritySettings security;
@@ -408,7 +408,7 @@ class _SessionCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    '${session.os} • ${session.location}',
+                    '${session.os}  ${session.location}',
                     style: IveType.caption.copyWith(color: IveTokens.muteColor),
                   ),
                 ],
@@ -455,7 +455,7 @@ class _SecurityEventCard extends StatelessWidget {
                 Text(event.description, style: IveType.callout),
                 if (event.deviceName != null || event.location != null)
                   Text(
-                    [event.deviceName, event.location].whereType<String>().join(' • '),
+                    [event.deviceName, event.location].whereType<String>().join('  '),
                     style: IveType.caption.copyWith(color: IveTokens.muteColor),
                   ),
               ],
@@ -467,9 +467,9 @@ class _SecurityEventCard extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Tab 3: Emergency
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _EmergencyTab extends StatelessWidget {
   final dynamic identity;
@@ -509,7 +509,7 @@ class _EmergencyTab extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(ec.name, style: IveType.callout.copyWith(fontWeight: FontWeight.w600)),
-                          Text('${ec.relationship} • ${ec.phone}', style: IveType.caption.copyWith(color: IveTokens.muteColor)),
+                          Text('${ec.relationship}  ${ec.phone}', style: IveType.caption.copyWith(color: IveTokens.muteColor)),
                         ],
                       ),
                     ),
@@ -614,9 +614,9 @@ class _EmergencyTab extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Tab 4: Advanced Security
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _AdvancedTab extends StatelessWidget {
   final SecuritySettings security;

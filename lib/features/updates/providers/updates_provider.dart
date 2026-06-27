@@ -1,9 +1,9 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// MY UPDATES MODULE — State Provider
+/// 
+/// MY UPDATES MODULE  State Provider
 /// ChangeNotifier with API-first + fallback demo data for all screens:
 /// Feed, Comments, Likes, Shares, Saved, Search, Notifications,
 /// Interests, Following, Insights, Reports
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -11,9 +11,9 @@ import '../../../core/services/services.dart';
 import '../models/updates_models.dart';
 
 class UpdatesProvider extends ChangeNotifier {
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SERVICE INSTANCES & LOADING STATE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   final SocialService _socialService = SocialService();
 
@@ -28,9 +28,9 @@ class UpdatesProvider extends ChangeNotifier {
     await loadUpdates();
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 1: FEED STATE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   FeedFilter _activeFilter = FeedFilter.forYou;
   FeedFilter get activeFilter => _activeFilter;
@@ -48,9 +48,9 @@ class UpdatesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 2: UPDATES (API-first + fallback)
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   List<UpdateEntity> _updates = [];
 
@@ -156,7 +156,7 @@ class UpdatesProvider extends ChangeNotifier {
   }
 
   void toggleSave(String updateId) {
-    // Local-only — no save endpoint
+    // Local-only  no save endpoint
     final source = updates;
     final idx = source.indexWhere((u) => u.id == updateId);
     if (idx != -1) {
@@ -177,9 +177,9 @@ class UpdatesProvider extends ChangeNotifier {
     }
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 3: COMMENTS (fallback-only)
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   CommentSort _commentSort = CommentSort.top;
   CommentSort get commentSort => _commentSort;
@@ -194,18 +194,18 @@ class UpdatesProvider extends ChangeNotifier {
   List<UpdateComment> get comments =>
       _comments.isNotEmpty ? _comments : _fallbackComments;
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 4: LIKES (fallback-only)
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   final List<UpdateLiker> _likers = [];
 
   List<UpdateLiker> get likers =>
       _likers.isNotEmpty ? _likers : _fallbackLikers;
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 5: SHARES (fallback-only)
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   final List<UpdateShare> _shares = [];
 
@@ -223,9 +223,9 @@ class UpdatesProvider extends ChangeNotifier {
     shareGrowth: 12.0,
   );
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 6: NOTIFICATIONS (fallback-only)
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   final List<UpdateNotification> _notifications = [];
 
@@ -239,9 +239,9 @@ class UpdatesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // SECTION 7: INTERESTS (fallback-only — ownerId not available)
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
+  // SECTION 7: INTERESTS (fallback-only  ownerId not available)
+  // 
 
   final List<UserInterest> _interests = [];
 
@@ -252,9 +252,9 @@ class UpdatesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 8: FOLLOWING (fallback-only)
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   final List<FollowedEntity> _following = [];
 
@@ -286,9 +286,9 @@ class UpdatesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 9: SEARCH (fallback-only)
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   SearchTab _searchTab = SearchTab.top;
   SearchTab get searchTab => _searchTab;
@@ -308,9 +308,9 @@ class UpdatesProvider extends ChangeNotifier {
   List<SearchAccount> get searchAccounts =>
       _searchAccounts.isNotEmpty ? _searchAccounts : _fallbackSearchAccounts;
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 10: INSIGHTS
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   UpdateInsight get insight => const UpdateInsight(
     totalReach: 1245,
@@ -337,9 +337,9 @@ class UpdatesProvider extends ChangeNotifier {
     ],
   );
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 11: SAVED COLLECTIONS (fallback-only)
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   SavedViewMode _savedViewMode = SavedViewMode.grid;
   SavedViewMode get savedViewMode => _savedViewMode;
@@ -354,9 +354,9 @@ class UpdatesProvider extends ChangeNotifier {
   List<SavedCollection> get collections =>
       _collections.isNotEmpty ? _collections : _fallbackCollections;
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // JSON → MODEL HELPER
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
+  // JSON  MODEL HELPER
+  // 
 
   /// Best-effort mapping from API JSON to [UpdateEntity].
   /// Fields that don't exist in the response default safely.
@@ -449,9 +449,9 @@ class UpdatesProvider extends ChangeNotifier {
     );
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // REPORT CONTENT
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   Future<bool> reportContent({
     required String contentId,
@@ -472,9 +472,9 @@ class UpdatesProvider extends ChangeNotifier {
     }
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // FALLBACK DATA
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   static final List<UpdateEntity> _fallbackUpdates = [
     UpdateEntity(
@@ -484,10 +484,10 @@ class UpdatesProvider extends ChangeNotifier {
       entityAvatar: 'W',
       isVerified: true,
       authorRole: 'Owner',
-      contextPath: 'Business → Main Branch',
+      contextPath: 'Business  Main Branch',
       contentType: UpdateContentType.image,
       mediaUrls: [],
-      caption: 'New arrivals just dropped! 🎉 Check out our latest collection of premium items. Quality meets style in every piece. #NewArrivals #ShopNow #Business',
+      caption: 'New arrivals just dropped!  Check out our latest collection of premium items. Quality meets style in every piece. #NewArrivals #ShopNow #Business',
       hashtags: ['NewArrivals', 'ShopNow', 'Business'],
       visibility: UpdateVisibility.publicAll,
       createdAt: DateTime.now().subtract(const Duration(hours: 2)),
@@ -513,9 +513,9 @@ class UpdatesProvider extends ChangeNotifier {
       entityAvatar: 'T',
       isVerified: true,
       authorRole: 'Admin',
-      contextPath: 'Business → HQ',
+      contextPath: 'Business  HQ',
       contentType: UpdateContentType.text,
-      caption: '📢 ANNOUNCEMENT: We\'re hiring! Looking for talented Flutter developers to join our growing team. Apply now at careers.techcorp.gh\n\n#Hiring #FlutterDev #GhanaJobs #TechCareers',
+      caption: ' ANNOUNCEMENT: We\'re hiring! Looking for talented Flutter developers to join our growing team. Apply now at careers.techcorp.gh\n\n#Hiring #FlutterDev #GhanaJobs #TechCareers',
       hashtags: ['Hiring', 'FlutterDev', 'GhanaJobs'],
       visibility: UpdateVisibility.publicAll,
       createdAt: DateTime.now().subtract(const Duration(hours: 5)),
@@ -541,7 +541,7 @@ class UpdatesProvider extends ChangeNotifier {
       authorRole: 'Admin',
       contentType: UpdateContentType.video,
       mediaUrls: [],
-      caption: 'Behind the scenes at our new warehouse! 📦 See how we ensure freshness from farm to your table. Thanks for the 10K followers milestone! 🎉',
+      caption: 'Behind the scenes at our new warehouse!  See how we ensure freshness from farm to your table. Thanks for the 10K followers milestone! ',
       hashtags: ['FreshFood', 'BehindTheScenes', 'FarmToTable'],
       visibility: UpdateVisibility.publicAll,
       createdAt: DateTime.now().subtract(const Duration(hours: 8)),
@@ -566,7 +566,7 @@ class UpdatesProvider extends ChangeNotifier {
       isVerified: true,
       authorRole: 'Owner',
       contentType: UpdateContentType.poll,
-      caption: 'What product category should we expand into next? Your vote matters! 🗳️',
+      caption: 'What product category should we expand into next? Your vote matters! ',
       hashtags: ['Poll', 'Community', 'YourVoice'],
       visibility: UpdateVisibility.followersOnly,
       createdAt: DateTime.now().subtract(const Duration(days: 1)),
@@ -583,10 +583,10 @@ class UpdatesProvider extends ChangeNotifier {
       poll: UpdatePoll(
         question: 'What category should we expand into?',
         options: [
-          const PollOption(id: 'p1', text: 'Electronics 📱', votes: 128, percentage: 42.0),
-          const PollOption(id: 'p2', text: 'Fashion 👗', votes: 95, percentage: 31.0),
-          const PollOption(id: 'p3', text: 'Home & Garden 🏡', votes: 52, percentage: 17.0),
-          const PollOption(id: 'p4', text: 'Sports & Fitness 🏋️', votes: 30, percentage: 10.0),
+          const PollOption(id: 'p1', text: 'Electronics ', votes: 128, percentage: 42.0),
+          const PollOption(id: 'p2', text: 'Fashion ', votes: 95, percentage: 31.0),
+          const PollOption(id: 'p3', text: 'Home & Garden ', votes: 52, percentage: 17.0),
+          const PollOption(id: 'p4', text: 'Sports & Fitness ', votes: 30, percentage: 10.0),
         ],
         totalVotes: 305,
         hasVoted: true,
@@ -605,7 +605,7 @@ class UpdatesProvider extends ChangeNotifier {
       contextPath: 'Logistics Provider',
       contentType: UpdateContentType.image,
       mediaUrls: [],
-      caption: 'Fleet expansion! 🚚 We\'ve added 5 new electric vehicles to our delivery fleet. Going green for a sustainable future! 🌱 #GreenLogistics #EcoFriendly',
+      caption: 'Fleet expansion!  We\'ve added 5 new electric vehicles to our delivery fleet. Going green for a sustainable future!  #GreenLogistics #EcoFriendly',
       hashtags: ['GreenLogistics', 'EcoFriendly', 'FleetExpansion'],
       visibility: UpdateVisibility.publicAll,
       createdAt: DateTime.now().subtract(const Duration(days: 1, hours: 4)),
@@ -632,7 +632,7 @@ class UpdatesProvider extends ChangeNotifier {
       authorRole: 'Individual',
       contentType: UpdateContentType.audio,
       mediaUrls: [],
-      caption: '🎤 Voice update: Sharing my thoughts on the latest fintech trends in Ghana. Exciting times ahead! #Fintech #GhanaRising',
+      caption: ' Voice update: Sharing my thoughts on the latest fintech trends in Ghana. Exciting times ahead! #Fintech #GhanaRising',
       hashtags: ['Fintech', 'GhanaRising'],
       visibility: UpdateVisibility.publicAll,
       createdAt: DateTime.now().subtract(const Duration(days: 2)),
@@ -657,7 +657,7 @@ class UpdatesProvider extends ChangeNotifier {
       username: 'JohnDoe',
       userAvatar: 'J',
       isVerified: true,
-      text: 'Amazing collection! Can\'t wait to check them out in store. 🔥',
+      text: 'Amazing collection! Can\'t wait to check them out in store. ',
       createdAt: DateTime.now().subtract(const Duration(hours: 1)),
       likesCount: 12,
       isLikedByMe: true,
@@ -668,7 +668,7 @@ class UpdatesProvider extends ChangeNotifier {
           username: 'WizdomShop',
           userAvatar: 'W',
           isVerified: true,
-          text: 'Thanks John! Visit us this weekend for exclusive previews 🎁',
+          text: 'Thanks John! Visit us this weekend for exclusive previews ',
           createdAt: DateTime.now().subtract(const Duration(minutes: 45)),
           likesCount: 5,
         ),
@@ -687,7 +687,7 @@ class UpdatesProvider extends ChangeNotifier {
       userId: 'user2',
       username: 'JaneSmith',
       userAvatar: 'J',
-      text: 'Do you ship internationally? I\'d love to order from abroad! 🌍',
+      text: 'Do you ship internationally? I\'d love to order from abroad! ',
       createdAt: DateTime.now().subtract(const Duration(hours: 2)),
       likesCount: 8,
       replies: [
@@ -718,7 +718,7 @@ class UpdatesProvider extends ChangeNotifier {
       id: 'c4',
       userId: 'user4',
       username: 'LocalShopper',
-      text: 'Best shop in town! Been a customer for 2 years now 💯',
+      text: 'Best shop in town! Been a customer for 2 years now ',
       createdAt: DateTime.now().subtract(const Duration(hours: 4)),
       likesCount: 6,
     ),
@@ -727,7 +727,7 @@ class UpdatesProvider extends ChangeNotifier {
       userId: 'user7',
       username: 'FashionBlogger',
       userAvatar: 'F',
-      text: 'Love the new designs! Would love to collaborate on a review 📸',
+      text: 'Love the new designs! Would love to collaborate on a review ',
       createdAt: DateTime.now().subtract(const Duration(hours: 5)),
       likesCount: 4,
     ),
@@ -781,7 +781,7 @@ class UpdatesProvider extends ChangeNotifier {
     UpdateShare(
       userId: 's3', username: 'AccraBiz', isVerified: true,
       followerCount: 3400, platform: 'Facebook',
-      addedComment: 'Supporting local businesses! 🇬🇭',
+      addedComment: 'Supporting local businesses! ',
       sharedAt: DateTime.now().subtract(const Duration(hours: 5)),
     ),
   ];
@@ -825,7 +825,7 @@ class UpdatesProvider extends ChangeNotifier {
     ),
     UpdateNotification(
       id: 'n7', type: UpdateNotificationType.like,
-      title: 'Milestone', body: 'Your update reached 100 likes! 🎉',
+      title: 'Milestone', body: 'Your update reached 100 likes! ',
       targetUpdateId: 'u3',
       createdAt: DateTime.now().subtract(const Duration(hours: 8)),
       isRead: true,
@@ -833,16 +833,16 @@ class UpdatesProvider extends ChangeNotifier {
   ];
 
   static final List<UserInterest> _fallbackInterests = [
-    const UserInterest(id: 'i1', category: InterestCategory.business, name: 'Entrepreneurship', icon: '💼', description: 'Startup news and business growth tips', followerCount: 12400, relevanceScore: 92.0, isFollowing: true, weight: 0.8),
-    const UserInterest(id: 'i2', category: InterestCategory.finance, name: 'Digital Banking', icon: '🏦', description: 'Fintech and mobile money trends', followerCount: 8900, relevanceScore: 85.0, isFollowing: true, weight: 0.7),
-    const UserInterest(id: 'i3', category: InterestCategory.technology, name: 'AI & Machine Learning', icon: '🤖', description: 'Artificial intelligence breakthroughs', followerCount: 15600, relevanceScore: 78.0, isFollowing: false, weight: 0.5),
-    const UserInterest(id: 'i4', category: InterestCategory.technology, name: 'Mobile Development', icon: '📱', description: 'Flutter, React Native and native dev', followerCount: 9200, relevanceScore: 88.0, isFollowing: true, weight: 0.9),
-    const UserInterest(id: 'i5', category: InterestCategory.logistics, name: 'Last-Mile Delivery', icon: '🚚', description: 'Delivery innovation and logistics', followerCount: 4500, relevanceScore: 72.0, isFollowing: false, weight: 0.4),
-    const UserInterest(id: 'i6', category: InterestCategory.social, name: 'Local Events', icon: '🎉', description: 'Community events and networking', followerCount: 6800, relevanceScore: 65.0, isFollowing: true, weight: 0.6),
-    const UserInterest(id: 'i7', category: InterestCategory.business, name: 'Startup Funding', icon: '💰', description: 'Venture capital and fundraising', followerCount: 7300, relevanceScore: 80.0, isFollowing: false, weight: 0.5),
-    const UserInterest(id: 'i8', category: InterestCategory.health, name: 'Wellness', icon: '🧘', description: 'Health tips and wellness trends', followerCount: 11200, relevanceScore: 45.0, isFollowing: false, weight: 0.3),
-    const UserInterest(id: 'i9', category: InterestCategory.education, name: 'Online Learning', icon: '📚', description: 'Courses, certifications and skills', followerCount: 14000, relevanceScore: 70.0, isFollowing: false, weight: 0.5),
-    const UserInterest(id: 'i10', category: InterestCategory.entertainment, name: 'Creative Content', icon: '🎨', description: 'Art, design and media creation', followerCount: 8600, relevanceScore: 55.0, isFollowing: false, weight: 0.4),
+    const UserInterest(id: 'i1', category: InterestCategory.business, name: 'Entrepreneurship', icon: '', description: 'Startup news and business growth tips', followerCount: 12400, relevanceScore: 92.0, isFollowing: true, weight: 0.8),
+    const UserInterest(id: 'i2', category: InterestCategory.finance, name: 'Digital Banking', icon: '', description: 'Fintech and mobile money trends', followerCount: 8900, relevanceScore: 85.0, isFollowing: true, weight: 0.7),
+    const UserInterest(id: 'i3', category: InterestCategory.technology, name: 'AI & Machine Learning', icon: '', description: 'Artificial intelligence breakthroughs', followerCount: 15600, relevanceScore: 78.0, isFollowing: false, weight: 0.5),
+    const UserInterest(id: 'i4', category: InterestCategory.technology, name: 'Mobile Development', icon: '', description: 'Flutter, React Native and native dev', followerCount: 9200, relevanceScore: 88.0, isFollowing: true, weight: 0.9),
+    const UserInterest(id: 'i5', category: InterestCategory.logistics, name: 'Last-Mile Delivery', icon: '', description: 'Delivery innovation and logistics', followerCount: 4500, relevanceScore: 72.0, isFollowing: false, weight: 0.4),
+    const UserInterest(id: 'i6', category: InterestCategory.social, name: 'Local Events', icon: '', description: 'Community events and networking', followerCount: 6800, relevanceScore: 65.0, isFollowing: true, weight: 0.6),
+    const UserInterest(id: 'i7', category: InterestCategory.business, name: 'Startup Funding', icon: '', description: 'Venture capital and fundraising', followerCount: 7300, relevanceScore: 80.0, isFollowing: false, weight: 0.5),
+    const UserInterest(id: 'i8', category: InterestCategory.health, name: 'Wellness', icon: '', description: 'Health tips and wellness trends', followerCount: 11200, relevanceScore: 45.0, isFollowing: false, weight: 0.3),
+    const UserInterest(id: 'i9', category: InterestCategory.education, name: 'Online Learning', icon: '', description: 'Courses, certifications and skills', followerCount: 14000, relevanceScore: 70.0, isFollowing: false, weight: 0.5),
+    const UserInterest(id: 'i10', category: InterestCategory.entertainment, name: 'Creative Content', icon: '', description: 'Art, design and media creation', followerCount: 8600, relevanceScore: 55.0, isFollowing: false, weight: 0.4),
   ];
 
   static final List<FollowedEntity> _fallbackFollowing = [

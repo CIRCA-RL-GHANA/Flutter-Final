@@ -1,9 +1,9 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// Wallets Provider — State Management
+/// 
+/// Wallets Provider  State Management
 ///
 /// Manages wallet balance and wallet data.
 /// Delegates all API calls to WalletsService.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'package:flutter/foundation.dart';
@@ -15,7 +15,7 @@ class WalletsProvider extends ChangeNotifier {
   WalletsProvider({WalletsService? service})
       : _service = service ?? WalletsService();
 
-  // ─── State ────────────────────────────────────────────────────────────────
+  //  State 
 
   Map<String, dynamic>? _balance;
   Map<String, dynamic>? get balance => _balance;
@@ -34,7 +34,7 @@ class WalletsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Load ─────────────────────────────────────────────────────────────────
+  //  Load 
 
   Future<void> loadBalance() async {
     _isLoading = true;

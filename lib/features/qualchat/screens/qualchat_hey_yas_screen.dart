@@ -1,8 +1,10 @@
-﻿/// qualChat Screen 2 — Hey Ya (Owner Only)
+/// qualChat Screen 2  Hey Ya (Owner Only)
 /// Dating feature: express romantic interest, get AI-matched, plan a date
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:provider/provider.dart';
 import '../models/qualchat_models.dart';
 import '../providers/qualchat_provider.dart';
@@ -13,7 +15,7 @@ const _kTabLabels = {
   HeyYaTab.all: 'All',
   HeyYaTab.sent: 'Sparked',
   HeyYaTab.received: 'Into Me',
-  HeyYaTab.matches: 'Matched ðŸ’˜',
+  HeyYaTab.matches: 'Matched ',
 };
 
 const _kStatusLabels = {
@@ -35,7 +37,7 @@ class QualChatHeyYasScreen extends StatelessWidget {
         return Scaffold(
           backgroundColor: const Color(0xFFF8F9FE),
           appBar: QualChatAppBar(
-            title: 'Hey Ya ðŸ’–',
+            title: 'Hey Ya ',
             actions: [
               PopupMenuButton<String>(
                 icon: const Icon(Icons.filter_list),
@@ -57,11 +59,11 @@ class QualChatHeyYasScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                 child: const Row(
                   children: [
-                    Text('ðŸ’˜', style: TextStyle(fontSize: 16)),
+                    Text('', style: TextStyle(fontSize: 16)),
                     SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        'Spark interest Â· Get matched by Genie AI Â· Plan your date',
+                        'Spark interest  Get matched by Genie AI  Plan your date',
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
@@ -86,7 +88,7 @@ class QualChatHeyYasScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(vertical: 8),
                           decoration: BoxDecoration(
                             color: isSelected ? kChatSocial : Colors.transparent,
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           child: Text(
                             _kTabLabels[tab] ?? tab.name,
@@ -131,8 +133,8 @@ class QualChatHeyYasScreen extends StatelessWidget {
                     ? const QualChatEmptyState(
                         icon: Icons.favorite_border,
                         title: 'No sparks yet',
-                        message: 'Send a Hey Ya to someone you like — tell them\nyou\'re interested and pick a date idea ✨',
-                        ctaLabel: '✨ Send Hey Ya',
+                        message: 'Send a Hey Ya to someone you like  tell them\nyou\'re interested and pick a date idea ',
+                        ctaLabel: ' Send Hey Ya',
                       )
                     : ListView.builder(
                         itemCount: heyYas.length,
@@ -167,8 +169,8 @@ class QualChatHeyYasScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: ElevatedButton.icon(
-                    onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Hey Ya sent!'))),
-                    icon: const Text('💖'),
+                    onPressed: () => AppToast.show(context, 'Hey Ya sent!'),
+                    icon: const Text(''),
                     label: const Text('Send Hey Ya'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: kChatSocial,
@@ -183,8 +185,8 @@ class QualChatHeyYasScreen extends StatelessWidget {
                   icon: const Icon(Icons.explore_outlined, size: 16),
                   label: const Text('Discover'),
                   style: OutlinedButton.styleFrom(
-                    foregroundColor: kChatColor,
-                    side: const BorderSide(color: kChatColor),
+                    foregroundColor: IveTokens.moduleQualChat,
+                    side: const BorderSide(color: IveTokens.moduleQualChat),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   ),
                 ),
@@ -212,16 +214,16 @@ class _StatusChip extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(
-            color: isSelected ? kChatColor.withValues(alpha: 0.1) : const Color(0xFFF3F4F6),
-            borderRadius: BorderRadius.circular(16),
-            border: isSelected ? Border.all(color: kChatColor) : null,
+            color: isSelected ? IveTokens.moduleQualChat.withValues(alpha: 0.1) : const Color(0xFFF3F4F6),
+            borderRadius: BorderRadius.circular(10),
+            border: isSelected ? Border.all(color: IveTokens.moduleQualChat) : null,
           ),
           child: Text(
             label,
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w600,
-              color: isSelected ? kChatColor : const Color(0xFF6B7280),
+              color: isSelected ? IveTokens.moduleQualChat : const Color(0xFF6B7280),
             ),
           ),
         ),

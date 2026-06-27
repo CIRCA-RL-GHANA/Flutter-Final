@@ -1,8 +1,8 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD1.6-DETAIL: SOCIAL POST DETAIL — 4-Tab Deep View
+/// 
+/// SD1.6-DETAIL: SOCIAL POST DETAIL  4-Tab Deep View
 /// Tabs: Overview, Engagement, Audience, Boost
 /// RBAC: Admin(full), SO(full), BSO(branch), BM(branch), Monitor(viewOnly)
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -72,7 +72,7 @@ class _SocialDetailScreenState extends State<SocialDetailScreen> {
   }
 }
 
-// ─── Header ──────────────────────────────────────────────────────────────────
+//  Header 
 
 class _PostHeader extends StatelessWidget {
   final SocialPost post;
@@ -98,7 +98,7 @@ class _PostHeader extends StatelessWidget {
             kSetupColor.withValues(alpha: 0.02),
           ],
         ),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(10),
         border: Border.all(color: kSetupColor.withValues(alpha: 0.15)),
       ),
       child: Column(
@@ -130,7 +130,7 @@ class _PostHeader extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                           decoration: BoxDecoration(
                             color: statusColor.withValues(alpha: 0.1),
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           child: Text(
                             post.status.name,
@@ -200,7 +200,7 @@ class _PostHeader extends StatelessWidget {
   }
 }
 
-// ─── Overview Tab ────────────────────────────────────────────────────────────
+//  Overview Tab 
 
 class _OverviewTab extends StatelessWidget {
   final SocialPost post;
@@ -312,7 +312,7 @@ class _OverviewTab extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
                       color: kSetupColor.withValues(alpha: 0.08),
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                     child: Text(
                       p.name[0].toUpperCase() + p.name.substring(1),
@@ -334,7 +334,7 @@ class _OverviewTab extends StatelessWidget {
   }
 }
 
-// ─── Engagement Tab ──────────────────────────────────────────────────────────
+//  Engagement Tab 
 
 class _EngagementTab extends StatelessWidget {
   final SocialPost post;
@@ -420,7 +420,7 @@ class _EngagementTab extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SetupSectionTitle(title: 'Top Comments', icon: Icons.chat_bubble_outline),
-              _CommentTile(name: 'Kwame A.', text: 'Great product! Love it ðŸ‘', time: '3h ago'),
+              _CommentTile(name: 'Kwame A.', text: 'Great product! Love it ', time: '3h ago'),
               Divider(height: 16),
               _CommentTile(name: 'Ama B.', text: 'Where can I get this?', time: '5h ago'),
               Divider(height: 16),
@@ -434,7 +434,7 @@ class _EngagementTab extends StatelessWidget {
   }
 }
 
-// ─── Audience Tab ────────────────────────────────────────────────────────────
+//  Audience Tab 
 
 class _AudienceTab extends StatelessWidget {
   final SocialPost post;
@@ -510,7 +510,7 @@ class _AudienceTab extends StatelessWidget {
   }
 }
 
-// ─── Boost Tab ───────────────────────────────────────────────────────────────
+//  Boost Tab 
 
 class _BoostTab extends StatelessWidget {
   final SocialPost post;
@@ -578,22 +578,22 @@ class _BoostTab extends StatelessWidget {
             children: [
               SetupSectionTitle(title: 'Budget Options', icon: Icons.monetization_on),
               _BoostOption(
-                budget: 'â‚µ50',
-                reach: '2,500 – 5,000',
+                budget: '50',
+                reach: '2,500  5,000',
                 duration: '3 days',
                 isRecommended: false,
               ),
               Divider(height: 16),
               _BoostOption(
-                budget: 'â‚µ150',
-                reach: '7,500 – 15,000',
+                budget: '150',
+                reach: '7,500  15,000',
                 duration: '7 days',
                 isRecommended: true,
               ),
               Divider(height: 16),
               _BoostOption(
-                budget: 'â‚µ500',
-                reach: '25,000 – 50,000',
+                budget: '500',
+                reach: '25,000  50,000',
                 duration: '14 days',
                 isRecommended: false,
               ),
@@ -607,7 +607,7 @@ class _BoostTab extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SetupSectionTitle(title: 'Target Audience', icon: Icons.filter_alt),
-              const SetupInfoRow(label: 'Age', value: '18 – 45'),
+              const SetupInfoRow(label: 'Age', value: '18  45'),
               const SetupInfoRow(label: 'Location', value: 'Greater Accra, Ashanti'),
               const SetupInfoRow(label: 'Interests', value: 'Shopping, Food & Dining'),
               SetupInfoRow(label: 'Platforms', value: post.platforms.map((p) => p.name).join(', ')),
@@ -621,10 +621,10 @@ class _BoostTab extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SetupSectionTitle(title: 'Estimated Performance', icon: Icons.trending_up),
-              SetupInfoRow(label: 'Impressions', value: '10,000 – 20,000'),
-              SetupInfoRow(label: 'Clicks', value: '500 – 1,200'),
-              SetupInfoRow(label: 'Engagement Rate', value: '3.5% – 5.2%'),
-              SetupInfoRow(label: 'Cost per Click', value: 'â‚µ0.13 – â‚µ0.30'),
+              SetupInfoRow(label: 'Impressions', value: '10,000  20,000'),
+              SetupInfoRow(label: 'Clicks', value: '500  1,200'),
+              SetupInfoRow(label: 'Engagement Rate', value: '3.5%  5.2%'),
+              SetupInfoRow(label: 'Cost per Click', value: '0.13  0.30'),
             ],
           ),
         ),
@@ -634,7 +634,7 @@ class _BoostTab extends StatelessWidget {
   }
 }
 
-// ─── Helper Widgets ──────────────────────────────────────────────────────────
+//  Helper Widgets 
 
 String _formatNumber(int n) {
   if (n >= 1000000) return '${(n / 1000000).toStringAsFixed(1)}M';
@@ -669,7 +669,7 @@ class _EngagementBar extends StatelessWidget {
         ),
         Expanded(
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(3),
+            borderRadius: BorderRadius.circular(6),
             child: LinearProgressIndicator(
               value: value.clamp(0.0, 1.0),
               backgroundColor: color.withValues(alpha: 0.1),
@@ -709,7 +709,7 @@ class _HourBar extends StatelessWidget {
         ),
         Expanded(
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(3),
+            borderRadius: BorderRadius.circular(6),
             child: LinearProgressIndicator(
               value: value.clamp(0.0, 1.0),
               backgroundColor: kSetupColor.withValues(alpha: 0.1),
@@ -749,7 +749,7 @@ class _CommentTile extends StatelessWidget {
           height: 28,
           decoration: BoxDecoration(
             color: kSetupColor.withValues(alpha: 0.12),
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(10),
           ),
           child: Center(
             child: Text(
@@ -804,7 +804,7 @@ class _DemographicBar extends StatelessWidget {
         ),
         Expanded(
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(3),
+            borderRadius: BorderRadius.circular(6),
             child: LinearProgressIndicator(
               value: value.clamp(0.0, 1.0),
               backgroundColor: c.withValues(alpha: 0.1),
@@ -864,7 +864,7 @@ class _BoostOption extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
                       decoration: BoxDecoration(
                         color: kSetupColor,
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: BorderRadius.circular(6),
                       ),
                       child: const Text(
                         'BEST VALUE',
@@ -876,7 +876,7 @@ class _BoostOption extends StatelessWidget {
               ),
               const SizedBox(height: 2),
               Text(
-                '$duration Â· $reach reach',
+                '$duration  $reach reach',
                 style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
               ),
             ],

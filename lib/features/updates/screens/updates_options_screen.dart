@@ -1,13 +1,14 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SCREEN 7 / 7A — Options Menu + Report Flow
+/// 
+/// SCREEN 7 / 7A  Options Menu + Report Flow
 /// Bottom sheet options menu (save, copy link, mute, follow, report).
 /// Report flow: 4-step wizard (reason, details, evidence, submit).
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '../../../core/design/ive.dart';
 import '../../../core/theme/app_colors.dart';
 import '../models/updates_models.dart';
 import '../providers/updates_provider.dart';
@@ -44,8 +45,8 @@ class _Body extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
+                    color: IveTokens.surface,
+                    borderRadius: BorderRadius.circular(IveTokens.rSm),
                   ),
                   child: Row(
                     children: [
@@ -197,7 +198,7 @@ class _Body extends StatelessWidget {
   void _showMuteOptions(BuildContext context, String name) {
     showModalBottomSheet(
       context: context,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(IveTokens.rSm))),
       builder: (_) => Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -228,7 +229,7 @@ class _Body extends StatelessWidget {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(IveTokens.rSm)),
         title: const Text('Block Entity?', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
         content: Text('Are you sure you want to block $name? They won\'t be able to see your profile or interact with your updates.', style: const TextStyle(fontSize: 13)),
         actions: [
@@ -252,7 +253,7 @@ class _Body extends StatelessWidget {
   }
 }
 
-// ─── Option Tile ────────────────────────────────────────────────────────────
+//  Option Tile 
 
 class _OptionTile extends StatelessWidget {
   final IconData icon;
@@ -269,7 +270,7 @@ class _OptionTile extends StatelessWidget {
       contentPadding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
       leading: Container(
         width: 36, height: 36,
-        decoration: BoxDecoration(color: (color ?? kUpdatesColor).withValues(alpha: 0.08), borderRadius: BorderRadius.circular(8)),
+        decoration: BoxDecoration(color: (color ?? kUpdatesColor).withValues(alpha: 0.08), borderRadius: BorderRadius.circular(IveTokens.rSm)),
         child: Icon(icon, size: 18, color: color ?? kUpdatesColor),
       ),
       title: Text(label, style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: color ?? AppColors.textPrimary)),
@@ -280,7 +281,7 @@ class _OptionTile extends StatelessWidget {
   }
 }
 
-// ─── Screen 7A: Report Flow ─────────────────────────────────────────────────
+//  Screen 7A: Report Flow 
 
 class _ReportFlow extends StatefulWidget {
   const _ReportFlow();
@@ -320,7 +321,7 @@ class _ReportFlowState extends State<_ReportFlow> {
           // Progress bar
           LinearProgressIndicator(
             value: (_step + 1) / 4,
-            backgroundColor: Colors.grey.shade100,
+            backgroundColor: IveTokens.hairline2,
             valueColor: const AlwaysStoppedAnimation(kUpdatesColor),
             minHeight: 3,
           ),
@@ -354,7 +355,7 @@ class _ReportFlowState extends State<_ReportFlow> {
           Container(
             padding: EdgeInsets.fromLTRB(16, 12, 16, 12 + MediaQuery.of(context).viewPadding.bottom),
             decoration: const BoxDecoration(
-              color: Colors.white,
+              color: IveTokens.surface,
             ),
             child: Row(
               children: [
@@ -365,7 +366,7 @@ class _ReportFlowState extends State<_ReportFlow> {
                       style: OutlinedButton.styleFrom(
                         foregroundColor: AppColors.textSecondary,
                         padding: const EdgeInsets.symmetric(vertical: 14),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(IveTokens.rSm)),
                       ),
                       child: const Text('Back'),
                     ),
@@ -405,10 +406,10 @@ class _ReportFlowState extends State<_ReportFlow> {
                         : null,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: _step == 3 ? AppColors.error : kUpdatesColor,
-                      foregroundColor: Colors.white,
-                      disabledBackgroundColor: Colors.grey.shade200,
+                      foregroundColor: IveTokens.ink,
+                      disabledBackgroundColor: IveTokens.hairline2,
                       padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(IveTokens.rSm)),
                     ),
                     child: Text(
                       _step == 3 ? (_submitting ? 'Submitting...' : 'Submit Report') : 'Continue',
@@ -431,7 +432,7 @@ class _ReportFlowState extends State<_ReportFlow> {
   }
 }
 
-// ─── Report Steps ───────────────────────────────────────────────────────────
+//  Report Steps 
 
 class _StepReason extends StatelessWidget {
   final ReportReason? selectedReason;
@@ -454,9 +455,9 @@ class _StepReason extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: selectedReason == r ? kUpdatesColor.withValues(alpha: 0.06) : Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: selectedReason == r ? kUpdatesColor : Colors.grey.shade200),
+                color: selectedReason == r ? kUpdatesColor.withValues(alpha: 0.06) : IveTokens.surface,
+                borderRadius: BorderRadius.circular(IveTokens.rSm),
+                border: Border.all(color: selectedReason == r ? kUpdatesColor : IveTokens.hairline),
               ),
               child: Row(
                 children: [
@@ -464,10 +465,10 @@ class _StepReason extends StatelessWidget {
                     width: 20, height: 20,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      border: Border.all(color: selectedReason == r ? kUpdatesColor : Colors.grey.shade300, width: 2),
+                      border: Border.all(color: selectedReason == r ? kUpdatesColor : IveTokens.hairline2, width: 2),
                       color: selectedReason == r ? kUpdatesColor : Colors.transparent,
                     ),
-                    child: selectedReason == r ? const Icon(Icons.check, size: 12, color: Colors.white) : null,
+                    child: selectedReason == r ? const Icon(Icons.check, size: 12, color: IveTokens.ink) : null,
                   ),
                   const SizedBox(width: 10),
                   Expanded(child: Text(r.name, style: TextStyle(fontSize: 13, fontWeight: selectedReason == r ? FontWeight.w600 : FontWeight.w400))),
@@ -503,14 +504,14 @@ class _StepDetails extends StatelessWidget {
             hintText: 'Describe what happened...',
             hintStyle: const TextStyle(fontSize: 13, color: AppColors.textTertiary),
             filled: true,
-            fillColor: const Color(0xFF11131C),
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: AppColors.inputBorder)),
-            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: AppColors.inputBorder)),
-            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: kUpdatesColor)),
+            fillColor: IveTokens.surface,
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(IveTokens.rSm), borderSide: const BorderSide(color: AppColors.inputBorder)),
+            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(IveTokens.rSm), borderSide: const BorderSide(color: AppColors.inputBorder)),
+            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(IveTokens.rSm), borderSide: const BorderSide(color: kUpdatesColor)),
           ),
         ),
         const SizedBox(height: 8),
-        const Text('Optional — but helpful for our review team.', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+        const Text('Optional  but helpful for our review team.', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
       ],
     );
   }
@@ -532,9 +533,9 @@ class _StepEvidence extends StatelessWidget {
           width: double.infinity,
           padding: const EdgeInsets.all(24),
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: Colors.grey.shade200, style: BorderStyle.solid),
+            color: IveTokens.surface,
+            borderRadius: BorderRadius.circular(IveTokens.rSm),
+            border: Border.all(color: IveTokens.hairline, style: BorderStyle.solid),
           ),
           child: Column(
             children: [
@@ -554,10 +555,10 @@ class _StepEvidence extends StatelessWidget {
             hintText: 'https://...',
             hintStyle: const TextStyle(fontSize: 13, color: AppColors.textTertiary),
             filled: true,
-            fillColor: const Color(0xFF11131C),
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: AppColors.inputBorder)),
-            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: AppColors.inputBorder)),
-            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: kUpdatesColor)),
+            fillColor: IveTokens.surface,
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(IveTokens.rSm), borderSide: const BorderSide(color: AppColors.inputBorder)),
+            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(IveTokens.rSm), borderSide: const BorderSide(color: AppColors.inputBorder)),
+            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(IveTokens.rSm), borderSide: const BorderSide(color: kUpdatesColor)),
           ),
         ),
       ],
@@ -582,7 +583,7 @@ class _StepReview extends StatelessWidget {
         const SizedBox(height: 16),
         Container(
           padding: const EdgeInsets.all(14),
-          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10)),
+          decoration: BoxDecoration(color: IveTokens.surface, borderRadius: BorderRadius.circular(IveTokens.rSm)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -600,13 +601,13 @@ class _StepReview extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: const Color(0xFFFEF3C7),
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: const Color(0xFFF59E0B).withValues(alpha: 0.3)),
+            color: IveTokens.warning.withValues(alpha: 0.08),
+            borderRadius: BorderRadius.circular(IveTokens.rSm),
+            border: Border.all(color: IveTokens.warning.withValues(alpha: 0.3)),
           ),
           child: const Row(
             children: [
-              Icon(Icons.info_outline, size: 18, color: Color(0xFFF59E0B)),
+              Icon(Icons.info_outline, size: 18, color: IveTokens.warning),
               SizedBox(width: 8),
               Expanded(
                 child: Text('False reports may result in account restrictions.', style: TextStyle(fontSize: 12, color: AppColors.textPrimary)),

@@ -1,8 +1,8 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// MARKET MODULE — Screen 1.2: Advanced Filters
+/// 
+/// MARKET MODULE  Screen 1.2: Advanced Filters
 /// Bottom-sheet style screen with price range, delivery options,
 /// dietary preferences, merchant attributes, sort, save filter sets
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -55,7 +55,7 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         children: [
-          // ── Price Range ──
+          //  Price Range 
           const _SectionHeader(title: 'Price Range', expanded: true),
           Row(
             children: [
@@ -79,7 +79,7 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
           ),
           const SizedBox(height: 8),
 
-          // ── Delivery Options ──
+          //  Delivery Options 
           const _SectionHeader(title: 'Delivery Options'),
           _FilterTile(
             label: 'Delivery only',
@@ -114,7 +114,7 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
           ),
           const SizedBox(height: 8),
 
-          // ── Dietary & Preferences ──
+          //  Dietary & Preferences 
           const _SectionHeader(title: 'Dietary & Preferences'),
           Wrap(
             spacing: 8,
@@ -129,7 +129,7 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                   decoration: BoxDecoration(
                     color: isActive ? kMarketColor.withValues(alpha: 0.1) : Colors.white,
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: isActive ? kMarketColor : AppColors.inputBorder),
                   ),
                   child: Row(
@@ -156,7 +156,7 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
           ),
           const SizedBox(height: 16),
 
-          // ── Merchant Attributes ──
+          //  Merchant Attributes 
           const _SectionHeader(title: 'Merchant Attributes'),
           SwitchListTile(
             dense: true,
@@ -184,7 +184,7 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
           ),
           const SizedBox(height: 8),
 
-          // ── Rating ──
+          //  Rating 
           const _SectionHeader(title: 'Minimum Rating'),
           Row(
             children: List.generate(5, (i) {
@@ -197,7 +197,7 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     decoration: BoxDecoration(
                       color: _minRating >= starVal ? kMarketColor.withValues(alpha: 0.1) : Colors.white,
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(10),
                       border: Border.all(
                         color: _minRating >= starVal ? kMarketColor : AppColors.inputBorder,
                       ),
@@ -226,7 +226,7 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
           ),
           const SizedBox(height: 16),
 
-          // ── Sort Options ──
+          //  Sort Options 
           const _SectionHeader(title: 'Sort By'),
           ..._sortOptions.map((opt) {
             final (sort, label, icon) = opt;
@@ -248,7 +248,7 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
           }),
           const SizedBox(height: 16),
 
-          // ── Save Filter ──
+          //  Save Filter 
           OutlinedButton.icon(
             onPressed: _saveFilter,
             icon: const Icon(Icons.bookmark_border, size: 18),
@@ -264,7 +264,7 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
           const SizedBox(height: 80),
         ],
       ),
-      // ── Sticky Footer ──
+      //  Sticky Footer 
       bottomNavigationBar: Container(
         padding: const EdgeInsets.fromLTRB(16, 12, 16, 28),
         decoration: const BoxDecoration(
@@ -371,34 +371,34 @@ class _MarketFiltersScreenState extends State<MarketFiltersScreen> {
   String _dietaryLabel(DietaryPreference d) {
     switch (d) {
       case DietaryPreference.vegetarian:
-        return '🥬';
+        return '';
       case DietaryPreference.vegan:
-        return '🌱';
+        return '';
       case DietaryPreference.glutenFree:
-        return '🌾';
+        return '';
       case DietaryPreference.halal:
-        return '🕌';
+        return '';
       case DietaryPreference.kosher:
-        return '✡';
+        return '';
       case DietaryPreference.organic:
-        return '🌿';
+        return '';
     }
   }
 
   String _dietaryEmoji(DietaryPreference d) {
     switch (d) {
       case DietaryPreference.vegetarian:
-        return '🥬';
+        return '';
       case DietaryPreference.vegan:
-        return '🌱';
+        return '';
       case DietaryPreference.glutenFree:
-        return '🌾';
+        return '';
       case DietaryPreference.halal:
-        return '🕌';
+        return '';
       case DietaryPreference.kosher:
-        return '✡';
+        return '';
       case DietaryPreference.organic:
-        return '🌿';
+        return '';
     }
   }
 
@@ -493,7 +493,7 @@ class _PricePreset extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 10),
           decoration: BoxDecoration(
             color: active ? kMarketColor.withValues(alpha: 0.1) : Colors.white,
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(10),
             border: Border.all(color: active ? kMarketColor : AppColors.inputBorder),
           ),
           child: Center(

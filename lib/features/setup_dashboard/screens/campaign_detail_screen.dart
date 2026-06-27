@@ -1,8 +1,8 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD2.4-DETAIL: CAMPAIGN DETAIL — 4-Tab Deep View
+/// 
+/// SD2.4-DETAIL: CAMPAIGN DETAIL  4-Tab Deep View
 /// Tabs: Overview, Audience, Performance, A/B Testing
 /// RBAC: Admin/SocialOfficer(fullAccess), Monitor(viewOnly)
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -99,7 +99,7 @@ class _CampaignHeader extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
         children: [
@@ -135,7 +135,7 @@ class _CampaignHeader extends StatelessWidget {
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      'â‚µ${campaign.budget.toStringAsFixed(0)}',
+                      '${campaign.budget.toStringAsFixed(0)}',
                       style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.textSecondary),
                     ),
                   ],
@@ -190,8 +190,8 @@ class _OverviewTab extends StatelessWidget {
               SetupInfoRow(label: 'Campaign ID', value: campaign.id),
               SetupInfoRow(label: 'Type', value: campaign.type.name),
               SetupInfoRow(label: 'Goal', value: campaign.goal.name),
-              SetupInfoRow(label: 'Budget', value: 'â‚µ${campaign.budget.toStringAsFixed(0)}'),
-              SetupInfoRow(label: 'Spent', value: 'â‚µ${campaign.spent.toStringAsFixed(0)}'),
+              SetupInfoRow(label: 'Budget', value: '${campaign.budget.toStringAsFixed(0)}'),
+              SetupInfoRow(label: 'Spent', value: '${campaign.spent.toStringAsFixed(0)}'),
               SetupInfoRow(label: 'ROI', value: '${campaign.roi.toStringAsFixed(1)}%', valueColor: campaign.roi > 100 ? AppColors.success : AppColors.warning),
               if (campaign.daysLeft > 0)
                 SetupInfoRow(label: 'Days Left', value: '${campaign.daysLeft}'),
@@ -212,7 +212,7 @@ class _OverviewTab extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               ClipRRect(
-                borderRadius: BorderRadius.circular(4),
+                borderRadius: BorderRadius.circular(6),
                 child: LinearProgressIndicator(
                   value: (campaign.budgetUtilization / 100).clamp(0.0, 1.0),
                   minHeight: 10,
@@ -226,8 +226,8 @@ class _OverviewTab extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('â‚µ${campaign.spent.toStringAsFixed(0)} spent', style: const TextStyle(fontSize: 11, color: AppColors.textSecondary)),
-                  Text('â‚µ${campaign.budget.toStringAsFixed(0)} total', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                  Text('${campaign.spent.toStringAsFixed(0)} spent', style: const TextStyle(fontSize: 11, color: AppColors.textSecondary)),
+                  Text('${campaign.budget.toStringAsFixed(0)} total', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                 ],
               ),
             ],
@@ -319,7 +319,7 @@ class _FunnelRow extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           ClipRRect(
-            borderRadius: BorderRadius.circular(3),
+            borderRadius: BorderRadius.circular(6),
             child: LinearProgressIndicator(
               value: fraction.clamp(0.0, 1.0),
               minHeight: 8,
@@ -550,7 +550,7 @@ class _TestVariant extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(
                     color: AppColors.success.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius: BorderRadius.circular(6),
                   ),
                   child: const Text('WINNING', style: TextStyle(fontSize: 9, fontWeight: FontWeight.w700, color: AppColors.success)),
                 ),

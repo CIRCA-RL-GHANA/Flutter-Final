@@ -55,7 +55,7 @@ class StatementService {
     );
   }
 
-  // ─── Provider-facing convenience methods ─────────────────────────────────
+  //  Provider-facing convenience methods 
 
   /// Create or update statement from plain content string.
   Future<ApiResponse<Map<String, dynamic>>> createOrUpdate(

@@ -36,7 +36,7 @@ class OrdersService {
     );
   }
 
-  /// Alias used by MarketProvider — fetches orders for the authenticated user.
+  /// Alias used by MarketProvider  fetches orders for the authenticated user.
   Future<ApiResponse<List<Map<String, dynamic>>>> getUserOrders({
     String userId = 'me',
     int limit = 20,
@@ -122,6 +122,22 @@ class OrdersService {
     );
   }
 
+  /// Named-param alias used by LiveProvider.
+  Future<ApiResponse<Map<String, dynamic>>> updateOrderStatus({
+    required String id,
+    required String status,
+    String? notes,
+  }) {
+    return _api.patch<Map<String, dynamic>>(
+      ApiRoutes.orders.updateStatus(id),
+      data: {
+        'status': status,
+        if (notes != null) 'notes': notes,
+      },
+      fromJson: (json) => json as Map<String, dynamic>,
+    );
+  }
+
   /// Get all returns filed by the authenticated user.
   Future<ApiResponse<List<Map<String, dynamic>>>> getReturns() async {
     return _api.get<List<Map<String, dynamic>>>(
@@ -136,7 +152,7 @@ class OrdersService {
     );
   }
 
-  /// Alias used by MarketProvider — fetches returns for the authenticated user.
+  /// Alias used by MarketProvider  fetches returns for the authenticated user.
   Future<ApiResponse<List<Map<String, dynamic>>>> getReturnRequests(
           [String userId = 'me']) =>
       getReturns();

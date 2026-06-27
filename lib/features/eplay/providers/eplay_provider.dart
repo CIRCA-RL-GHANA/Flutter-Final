@@ -1,10 +1,10 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// e-Play Provider — State Management
+/// 
+/// e-Play Provider  State Management
 ///
 /// Manages content browsing, cloud locker, and creator studio state.
 /// Delegates all API calls to EPlayService. Falls back to stub data
 /// when offline so the UI always renders.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'package:flutter/foundation.dart';
@@ -16,7 +16,7 @@ class EPlayProvider extends ChangeNotifier {
   EPlayProvider({EPlayService? service})
       : _service = service ?? EPlayService();
 
-  // ─── Loading / Error State ────────────────────────────────────────────────
+  //  Loading / Error State 
 
   bool _isBrowseLoading = false;
   bool get isBrowseLoading => _isBrowseLoading;
@@ -35,7 +35,7 @@ class EPlayProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Browse State ─────────────────────────────────────────────────────────
+  //  Browse State 
 
   List<Map<String, dynamic>> _assets = [];
   List<Map<String, dynamic>> get assets => _assets;
@@ -96,7 +96,7 @@ class EPlayProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Cloud Locker State ───────────────────────────────────────────────────
+  //  Cloud Locker State 
 
   List<Map<String, dynamic>> _lockerItems = [];
   List<Map<String, dynamic>> get lockerItems => _lockerItems;
@@ -150,7 +150,7 @@ class EPlayProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Creator Profile State ────────────────────────────────────────────────
+  //  Creator Profile State 
 
   Map<String, dynamic>? _creatorProfile;
   Map<String, dynamic>? get creatorProfile => _creatorProfile;
@@ -166,7 +166,7 @@ class EPlayProvider extends ChangeNotifier {
         _creatorProfile = response.data;
       }
     } catch (_) {
-      // no creator profile yet — that's fine
+      // no creator profile yet  that's fine
     } finally {
       _isCreatorLoading = false;
       notifyListeners();
@@ -193,7 +193,7 @@ class EPlayProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Fallback / Offline Data ──────────────────────────────────────────────
+  //  Fallback / Offline Data 
 
   static final List<Map<String, dynamic>> _fallbackCatalogue = List.generate(
     20,

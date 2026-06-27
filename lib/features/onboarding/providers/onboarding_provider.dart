@@ -134,10 +134,10 @@ class OnboardingProvider extends ChangeNotifier {
 
   void setProfileData({
     String? photoPath,
-    required String username,
+    String? username,
   }) {
     _profilePhotoPath = photoPath;
-    _username = username;
+    if (username != null) _username = username;
     _profileSetup = true;
     notifyListeners();
   }

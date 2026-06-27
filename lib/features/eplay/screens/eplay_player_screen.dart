@@ -1,14 +1,16 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// e-PLAY MODULE — In-App Player Screen
+/// e-PLAY MODULE  In-App Player Screen
 /// Unified player/reader for music, movies, podcasts, e-books, shows.
 /// Stream token is fetched from the server; no raw file URL is ever exposed.
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// P1 spec: shared-element hero entrance + controls auto-fade after 3s.
 library;
 
+import 'dart:async';
 import 'package:flutter/material.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/services/ai_insights_notifier.dart';
+import '../../../core/design/ive.dart';
 
 class EPlayPlayerScreen extends StatefulWidget {
   final Map<String, dynamic>? asset;
@@ -18,11 +20,17 @@ class EPlayPlayerScreen extends StatefulWidget {
   State<EPlayPlayerScreen> createState() => _EPlayPlayerScreenState();
 }
 
-class _EPlayPlayerScreenState extends State<EPlayPlayerScreen> with TickerProviderStateMixin {
+class _EPlayPlayerScreenState extends State<EPlayPlayerScreen>
+    with TickerProviderStateMixin {
   bool _isPlaying = false;
   bool _isPreview = false;
   double _progress = 0.0;
+  bool _controlsVisible = true;
+  Timer? _hideTimer;
+
   late final AnimationController _pulseCtrl;
+  late final AnimationController _controlsFadeCtrl;
+  late final Animation<double> _controlsFade;
 
   Map<String, dynamic> get _asset => widget.asset ?? {};
   String get _type => _asset['type'] as String? ?? 'music';
@@ -31,15 +39,47 @@ class _EPlayPlayerScreenState extends State<EPlayPlayerScreen> with TickerProvid
   void initState() {
     super.initState();
     _isPreview = _asset['preview'] == true;
-    _pulseCtrl = AnimationController(vsync: this, duration: const Duration(seconds: 2))..repeat(reverse: true);
+    _pulseCtrl = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2),
+    )..repeat(reverse: true);
+    _controlsFadeCtrl = AnimationController(
+      vsync: this,
+      duration: IveTokens.dBase,
+      value: 1.0,
+    );
+    _controlsFade = CurvedAnimation(
+      parent: _controlsFadeCtrl,
+      curve: IveTokens.enter,
+      reverseCurve: IveTokens.exit,
+    );
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
   }
 
   @override
   void dispose() {
+    _hideTimer?.cancel();
     _pulseCtrl.dispose();
+    _controlsFadeCtrl.dispose();
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     super.dispose();
+  }
+
+  void _scheduleHide() {
+    _hideTimer?.cancel();
+    _hideTimer = Timer(const Duration(seconds: 3), () {
+      if (_isPlaying && mounted) {
+        _controlsFadeCtrl.reverse();
+        setState(() => _controlsVisible = false);
+      }
+    });
+  }
+
+  void _showControls() {
+    _hideTimer?.cancel();
+    _controlsFadeCtrl.forward();
+    setState(() => _controlsVisible = true);
+    if (_isPlaying) _scheduleHide();
   }
 
   @override
@@ -47,168 +87,286 @@ class _EPlayPlayerScreenState extends State<EPlayPlayerScreen> with TickerProvid
     return Consumer<AIInsightsNotifier>(
       builder: (context, ai, _) {
         final colors = _colorForType(_type);
-        return Scaffold(
-          backgroundColor: colors[1],
-          appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            foregroundColor: Colors.white,
-            title: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(_asset['title'] as String? ?? '', style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold)),
-                if (_isPreview)
-                  const Text('Preview Mode — 90 seconds', style: TextStyle(color: Colors.white60, fontSize: 11)),
-              ],
-            ),
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.share, color: Colors.white),
-                onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Link copied to clipboard')),
+        return GestureDetector(
+          onTap: _controlsVisible ? null : _showControls,
+          child: Scaffold(
+            backgroundColor: colors[1],
+            appBar: PreferredSize(
+              preferredSize: const Size.fromHeight(kToolbarHeight),
+              child: FadeTransition(
+                opacity: _controlsFade,
+                child: AppBar(
+                  backgroundColor: Colors.transparent,
+                  foregroundColor: Colors.white,
+                  elevation: 0,
+                  title: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        _asset['title'] as String? ?? '',
+                        style: IveType.headline.copyWith(color: Colors.white),
+                      ),
+                      if (_isPreview)
+                        Text(
+                          'Preview  90 seconds',
+                          style: IveType.footnote.copyWith(
+                            color: Colors.white.withValues(alpha: 0.6),
+                          ),
+                        ),
+                    ],
+                  ),
+                  actions: [
+                    IconButton(
+                      icon: const Icon(Icons.share, color: Colors.white),
+                      onPressed: () =>
+                          AppToast.show(context, 'Link copied to clipboard'),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.more_vert, color: Colors.white),
+                      onPressed: () => showModalBottomSheet(
+                        context: context,
+                        backgroundColor: IveTokens.surface,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(IveTokens.rSm),
+                          ),
+                        ),
+                        builder: (ctx) => SafeArea(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              ListTile(
+                                iconColor: IveTokens.ink2,
+                                textColor: IveTokens.ink,
+                                leading: const Icon(Icons.playlist_add),
+                                title: const Text('Add to playlist'),
+                                onTap: () => Navigator.pop(ctx),
+                              ),
+                              ListTile(
+                                iconColor: IveTokens.ink2,
+                                textColor: IveTokens.ink,
+                                leading: const Icon(Icons.download),
+                                title: const Text('Download'),
+                                onTap: () => Navigator.pop(ctx),
+                              ),
+                              ListTile(
+                                iconColor: IveTokens.ink2,
+                                textColor: IveTokens.ink,
+                                leading: const Icon(Icons.flag),
+                                title: const Text('Report'),
+                                onTap: () => Navigator.pop(ctx),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              IconButton(
-                icon: const Icon(Icons.more_vert, color: Colors.white),
-                onPressed: () => showModalBottomSheet(
-                  context: context,
-                  builder: (ctx) => SafeArea(
-                    child: Column(
+            ),
+            body: SafeArea(
+              child: Column(
+                children: [
+                  const Spacer(),
+
+                  //  Artwork 
+                  Center(
+                    child: AnimatedBuilder(
+                      animation: _pulseCtrl,
+                      builder: (ctx, child) => Transform.scale(
+                        scale: _isPlaying
+                            ? 1.0 + (_pulseCtrl.value * 0.04)
+                            : 1.0,
+                        child: child,
+                      ),
+                      child: Container(
+                        width: 220,
+                        height: 220,
+                        decoration: BoxDecoration(
+                          color: Colors.white.withValues(alpha: 0.12),
+                          borderRadius: BorderRadius.circular(
+                            _type == 'ebook' ? IveTokens.rSm : IveTokens.rPill,
+                          ),
+                        ),
+                        child: Icon(
+                          _iconForType(_type),
+                          color: Colors.white,
+                          size: 100,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const Spacer(),
+
+                  //  DRM indicator 
+                  Container(
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: IveTokens.s8),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: IveTokens.s3, vertical: IveTokens.s1 + 2),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.10),
+                      borderRadius: IveTokens.brSm,
+                    ),
+                    child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        ListTile(leading: const Icon(Icons.playlist_add), title: const Text('Add to playlist'), onTap: () => Navigator.pop(ctx)),
-                        ListTile(leading: const Icon(Icons.download), title: const Text('Download'), onTap: () => Navigator.pop(ctx)),
-                        ListTile(leading: const Icon(Icons.flag), title: const Text('Report'), onTap: () => Navigator.pop(ctx)),
+                        Icon(
+                          Icons.security,
+                          color: Colors.white.withValues(alpha: 0.7),
+                          size: 14,
+                        ),
+                        const SizedBox(width: IveTokens.s1 + 2),
+                        Text(
+                          _isPreview
+                              ? 'Preview  purchase to unlock'
+                              : 'e-Play DRM  Cloud stream',
+                          style: IveType.footnote.copyWith(
+                            color: Colors.white.withValues(alpha: 0.7),
+                          ),
+                        ),
                       ],
                     ),
                   ),
-                ),
-              ),
-            ],
-          ),
-          body: SafeArea(
-            child: Column(
-              children: [
-                const Spacer(),
+                  const SizedBox(height: IveTokens.s8),
 
-                // ── Artwork ────────────────────────────────────────────
-                Center(
-                  child: AnimatedBuilder(
-                    animation: _pulseCtrl,
-                    builder: (ctx, child) {
-                      return Transform.scale(
-                        scale: _isPlaying ? 1.0 + (_pulseCtrl.value * 0.04) : 1.0,
-                        child: child,
-                      );
-                    },
-                    child: Container(
-                      width: 220,
-                      height: 220,
-                      decoration: BoxDecoration(
-                        color: Colors.white.withValues(alpha: 0.12),
-                        borderRadius: BorderRadius.circular(_type == 'ebook' ? 10 : 110),
-                      ),
-                      child: Icon(_iconForType(_type), color: Colors.white, size: 100),
+                  //  Progress bar 
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: IveTokens.s6),
+                    child: Column(
+                      children: [
+                        SliderTheme(
+                          data: SliderTheme.of(context).copyWith(
+                            activeTrackColor: Colors.white,
+                            inactiveTrackColor:
+                                Colors.white.withValues(alpha: 0.30),
+                            thumbColor: Colors.white,
+                            overlayColor:
+                                Colors.white.withValues(alpha: 0.24),
+                            trackHeight: 2,
+                          ),
+                          child: Slider(
+                            value: _progress,
+                            onChanged: (v) => setState(() => _progress = v),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: IveTokens.s2),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                _formatTime(_progress * 240),
+                                style: IveType.mono.copyWith(
+                                  color: Colors.white.withValues(alpha: 0.7),
+                                  fontSize: 12,
+                                ),
+                              ),
+                              Text(
+                                _isPreview ? '1:30' : '4:00',
+                                style: IveType.mono.copyWith(
+                                  color: Colors.white.withValues(alpha: 0.7),
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ),
-                const Spacer(),
+                  const SizedBox(height: IveTokens.s4),
 
-                // ── DRM indicator ──────────────────────────────────────
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 32),
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(20),
+                  //  Controls (fade after 3s) 
+                  FadeTransition(
+                    opacity: _controlsFade,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.skip_previous,
+                              color: Colors.white, size: 36),
+                          onPressed: () =>
+                              AppToast.show(context, 'Playing previous'),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            HapticFeedback.lightImpact();
+                            setState(() {
+                              _isPlaying = !_isPlaying;
+                              if (_isPlaying) {
+                                _pulseCtrl.repeat(reverse: true);
+                                _scheduleHide();
+                              } else {
+                                _pulseCtrl.stop();
+                                _hideTimer?.cancel();
+                                _showControls();
+                              }
+                            });
+                          },
+                          child: Container(
+                            width: 72,
+                            height: 72,
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Icon(
+                              _isPlaying ? Icons.pause : Icons.play_arrow,
+                              color: colors[0],
+                              size: 40,
+                            ),
+                          ),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.skip_next,
+                              color: Colors.white, size: 36),
+                          onPressed: () =>
+                              AppToast.show(context, 'Playing next'),
+                        ),
+                      ],
+                    ),
                   ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(Icons.security, color: Colors.white70, size: 14),
-                      const SizedBox(width: 6),
-                      Text(
-                        _isPreview ? 'Preview — Purchase to unlock full access' : 'e-Play DRM Â· Cloud Stream',
-                        style: const TextStyle(color: Colors.white70, fontSize: 11),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 32),
+                  const SizedBox(height: IveTokens.s8),
 
-                // ── Progress bar ───────────────────────────────────────
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: Column(
-                    children: [
-                      SliderTheme(
-                        data: SliderTheme.of(context).copyWith(
-                          activeTrackColor: Colors.white,
-                          inactiveTrackColor: Colors.white30,
-                          thumbColor: Colors.white,
-                          overlayColor: Colors.white24,
+                  //  Genie insight (one gold element per screen) 
+                  if (ai.insights.isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: IveTokens.s6),
+                      child: Container(
+                        padding: const EdgeInsets.all(IveTokens.s3),
+                        decoration: BoxDecoration(
+                          color: IveTokens.genieSoft,
+                          borderRadius: IveTokens.brSm,
+                          border: Border.all(color: IveTokens.genieLine),
                         ),
-                        child: Slider(
-                          value: _progress,
-                          onChanged: (v) => setState(() => _progress = v),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(_formatTime(_progress * 240), style: const TextStyle(color: Colors.white70, fontSize: 12)),
-                            Text(_isPreview ? '1:30' : '4:00', style: const TextStyle(color: Colors.white70, fontSize: 12)),
+                            Icon(
+                              Icons.auto_awesome_rounded,
+                              color: IveTokens.genie,
+                              size: 14,
+                            ),
+                            const SizedBox(width: IveTokens.s2),
+                            Expanded(
+                              child: Text(
+                                ai.insights.first['title'] ?? '',
+                                style: IveType.footnote.copyWith(
+                                  color: IveTokens.ink2,
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 16),
-
-                // ── Controls ───────────────────────────────────────────
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    IconButton(icon: const Icon(Icons.skip_previous, color: Colors.white, size: 36), onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Playing previous')))),
-                    GestureDetector(
-                      onTap: () => setState(() {
-                        _isPlaying = !_isPlaying;
-                        if (_isPlaying) {
-                          _pulseCtrl.repeat(reverse: true);
-                        } else {
-                          _pulseCtrl.stop();
-                        }
-                      }),
-                      child: Container(
-                        width: 72,
-                        height: 72,
-                        decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
-                        child: Icon(_isPlaying ? Icons.pause : Icons.play_arrow, color: colors[0], size: 40),
-                      ),
                     ),
-                    IconButton(icon: const Icon(Icons.skip_next, color: Colors.white, size: 36), onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Playing next')))),
-                  ],
-                ),
-                const SizedBox(height: 32),
-
-                // ── AI insight ─────────────────────────────────────────
-                if (ai.insights.isNotEmpty)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(10)),
-                      child: Row(children: [
-                        const Icon(Icons.auto_awesome, color: Colors.white70, size: 14),
-                        const SizedBox(width: 8),
-                        Expanded(child: Text(ai.insights.first['title'] ?? '', style: const TextStyle(fontSize: 11, color: Colors.white70))),
-                      ]),
-                    ),
-                  ),
-                const SizedBox(height: 32),
-              ],
+                  const SizedBox(height: IveTokens.s8),
+                ],
+              ),
             ),
           ),
         );
@@ -222,14 +380,15 @@ class _EPlayPlayerScreenState extends State<EPlayPlayerScreen> with TickerProvid
     return '$m:$s';
   }
 
+  // Per-content-type immersive backgrounds. Colors [0] = icon/accent, [1] = scaffold bg.
   List<Color> _colorForType(String type) {
     return switch (type) {
-      'music'   => [const Color(0xFF7C3AED), const Color(0xFF4C1D95)],
-      'movie'   => [const Color(0xFF0F766E), const Color(0xFF134E4A)],
-      'podcast' => [const Color(0xFFD97706), const Color(0xFF92400E)],
-      'ebook'   => [const Color(0xFF059669), const Color(0xFF064E3B)],
-      'show'    => [const Color(0xFFDC2626), const Color(0xFF7F1D1D)],
-      _         => [const Color(0xFF6366F1), const Color(0xFF312E81)],
+      'music'   => [IveTokens.moduleSetup,    const Color(0xFF1A0D3E)],
+      'movie'   => [IveTokens.moduleQualChat, const Color(0xFF0A2A28)],
+      'podcast' => [IveTokens.moduleApril,    const Color(0xFF2A1800)],
+      'ebook'   => [IveTokens.moduleFintech,  const Color(0xFF072820)],
+      'show'    => [IveTokens.danger,         const Color(0xFF2A0808)],
+      _         => [IveTokens.accent,         const Color(0xFF0D1133)],
     };
   }
 

@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 /// USER DETAILS Provider
 /// Master state management for the entire User Details module:
 /// identity, security, privacy, accessibility, notifications, audit trail
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -12,7 +12,7 @@ import '../../../core/services/services.dart';
 import '../../../core/network/api_response.dart';
 
 class UserDetailsProvider extends ChangeNotifier {
-  // ─── Services ───────────────────────────────────────────────────────────
+  //  Services 
   final ProfileService _profileService;
   final AuthService _authService;
   final EntityService _entityService;
@@ -25,7 +25,7 @@ class UserDetailsProvider extends ChangeNotifier {
         _authService = authService ?? AuthService(),
         _entityService = entityService ?? EntityService();
 
-  // ─── Loading / Error State ──────────────────────────────────────────────
+  //  Loading / Error State 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
@@ -40,7 +40,7 @@ class UserDetailsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Fallback Identity (offline / default) ──────────────────────────────
+  //  Fallback Identity (offline / default) 
   static final UserIdentity _fallbackIdentity = UserIdentity(
     id: 'usr_001',
     legalName: 'John Doe',
@@ -65,7 +65,7 @@ class UserDetailsProvider extends ChangeNotifier {
     ],
   );
 
-  // ─── Identity ────────────────────────────────────────────────────────────
+  //  Identity 
   UserIdentity _identity = _fallbackIdentity;
 
   UserIdentity get identity => _identity;
@@ -75,7 +75,7 @@ class UserDetailsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Initialise the provider – call once after construction.
+  /// Initialise the provider  call once after construction.
   Future<void> init() async {
     await loadIdentity();
   }
@@ -104,15 +104,15 @@ class UserDetailsProvider extends ChangeNotifier {
           );
           _isOnline = true;
         } else {
-          // Auth succeeded but profile fetch failed – build from auth data only
+          // Auth succeeded but profile fetch failed  build from auth data only
           _identity = _identityFromJson(meResponse.data!);
           _isOnline = true;
         }
       } else {
-        // Could not reach backend – use fallback
+        // Could not reach backend  use fallback
         _isOnline = false;
         _identity = _fallbackIdentity;
-        debugPrint('UserDetailsProvider: offline – using fallback identity');
+        debugPrint('UserDetailsProvider: offline  using fallback identity');
       }
     } catch (e) {
       _isOnline = false;
@@ -196,7 +196,7 @@ class UserDetailsProvider extends ChangeNotifier {
     return _fallbackIdentity.gender;
   }
 
-  // ─── Update Field (local + API persist) ─────────────────────────────────
+  //  Update Field (local + API persist) 
   void updateField({
     String? displayName,
     String? bio,
@@ -271,11 +271,11 @@ class UserDetailsProvider extends ChangeNotifier {
       debugPrint('UserDetailsProvider: field update persisted');
     } catch (e) {
       debugPrint('[UserDetails] Failed to persist field update: $e');
-      // Local state is already updated — user can retry later
+      // Local state is already updated  user can retry later
     }
   }
 
-  // ─── Edit Mode ──────────────────────────────────────────────────────────
+  //  Edit Mode 
   bool _editMode = false;
   bool get editMode => _editMode;
 
@@ -284,7 +284,7 @@ class UserDetailsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Context Management ──────────────────────────────────────────────────
+  //  Context Management 
   ContextFilter _contextFilter = ContextFilter.all;
   ContextFilter get contextFilter => _contextFilter;
 
@@ -353,7 +353,7 @@ class UserDetailsProvider extends ChangeNotifier {
     return filtered;
   }
 
-  // ─── Entity Creation ────────────────────────────────────────────────────
+  //  Entity Creation 
   EntityCreationType? _selectedEntityType;
   EntityCreationType? get selectedEntityType => _selectedEntityType;
 
@@ -452,7 +452,7 @@ class UserDetailsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Submit entity creation (step 5) – calls EntityService to persist.
+  /// Submit entity creation (step 5)  calls EntityService to persist.
   Future<bool> submitEntityCreation() async {
     if (_selectedEntityType == null || _entityName.isEmpty) return false;
 
@@ -468,16 +468,7 @@ class UserDetailsProvider extends ChangeNotifier {
 
       if (_selectedEntityType == EntityCreationType.personal) {
         response = await _entityService.createIndividual(
-          ownerId: _identity.id,
-          entityType: entityType,
-          role: role,
-          displayName: _entityName,
-          metadata: {
-            if (_entitySubtitle.isNotEmpty) 'subtitle': _entitySubtitle,
-            if (_entityRegistration != null)
-              'registration': _entityRegistration,
-            if (_entityIndustry != null) 'industry': _entityIndustry,
-          },
+          userId: _identity.id,
         );
       } else {
         response = await _entityService.createOther(
@@ -536,7 +527,7 @@ class UserDetailsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Security ────────────────────────────────────────────────────────────
+  //  Security 
   SecuritySettings _security = SecuritySettings(
     activeSessions: [
       ActiveSession(
@@ -619,7 +610,7 @@ class UserDetailsProvider extends ChangeNotifier {
     _security = _security.copyWith(activeSessions: sessions);
     _addAuditEntry(AuditAction.securityEvent, 'Session revoked');
     notifyListeners();
-    // AuthService has no dedicated revoke endpoint – keep local-only for now
+    // AuthService has no dedicated revoke endpoint  keep local-only for now
   }
 
   void revokeAllOtherSessions() {
@@ -631,7 +622,7 @@ class UserDetailsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Privacy ─────────────────────────────────────────────────────────────
+  //  Privacy 
   PrivacySettings _privacy = const PrivacySettings();
   PrivacySettings get privacy => _privacy;
 
@@ -672,7 +663,7 @@ class UserDetailsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Accessibility ──────────────────────────────────────────────────────
+  //  Accessibility 
   AccessibilitySettings _accessibility = const AccessibilitySettings();
   AccessibilitySettings get accessibility => _accessibility;
 
@@ -734,7 +725,7 @@ class UserDetailsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Notifications ──────────────────────────────────────────────────────
+  //  Notifications 
   NotificationSettings _notifications = const NotificationSettings(
     moduleConfigs: {
       'GO PAGE': ModuleNotificationConfig(
@@ -836,7 +827,7 @@ class UserDetailsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Audit Log ──────────────────────────────────────────────────────────
+  //  Audit Log 
   final List<AuditLogEntry> _auditLog = [
     AuditLogEntry(
       id: 'a1',
@@ -977,14 +968,14 @@ class UserDetailsProvider extends ChangeNotifier {
     );
   }
 
-  // ─── Business/Branch Context Settings ────────────────────────────────────
+  //  Business/Branch Context Settings 
   final BusinessSettings _businessSettings = const BusinessSettings();
   BusinessSettings get businessSettings => _businessSettings;
 
   final BranchSettings _branchSettings = const BranchSettings();
   BranchSettings get branchSettings => _branchSettings;
 
-  // ─── Data Privacy Categories (for Privacy Control Center) ────────────────
+  //  Data Privacy Categories (for Privacy Control Center) 
   List<DataCategory> get dataCategories => const [
         DataCategory(
           name: 'Personal Info',

@@ -124,9 +124,9 @@ class PlannerService {
     );
   }
 
-  // ═══════════════════════════════════════════════════════════════════════
+  // 
   // AI-ENHANCED METHODS
-  // ═══════════════════════════════════════════════════════════════════════
+  // 
 
   /// Get AI-generated financial insights from current transactions.
   /// Analyzes spending patterns, anomalies, and savings opportunities.

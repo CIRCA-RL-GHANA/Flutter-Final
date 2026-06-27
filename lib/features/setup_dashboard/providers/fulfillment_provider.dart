@@ -1,9 +1,9 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// Fulfillment Provider — State Management
+/// 
+/// Fulfillment Provider  State Management
 ///
 /// Manages fulfillment rules and dispatch tasks.
 /// Delegates all API calls to FulfillmentService.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'package:flutter/foundation.dart';
@@ -15,7 +15,7 @@ class FulfillmentProvider extends ChangeNotifier {
   FulfillmentProvider({FulfillmentService? service})
       : _service = service ?? FulfillmentService();
 
-  // ─── State ────────────────────────────────────────────────────────────────
+  //  State 
 
   List<dynamic> _rules = [];
   List<dynamic> get rules => _rules;
@@ -34,7 +34,7 @@ class FulfillmentProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Rules ────────────────────────────────────────────────────────────────
+  //  Rules 
 
   Future<void> loadRules(String entityId) async {
     _isLoading = true;
@@ -83,7 +83,7 @@ class FulfillmentProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Tasks ────────────────────────────────────────────────────────────────
+  //  Tasks 
 
   Future<void> loadTasks(String entityId, {String? status}) async {
     _isLoading = true;

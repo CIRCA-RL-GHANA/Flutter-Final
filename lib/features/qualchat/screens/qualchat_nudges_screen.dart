@@ -1,8 +1,9 @@
-﻿/// qualChat Screen 11 — Smart Nudges
+/// qualChat Screen 11  Smart Nudges
 /// AI wingmate: swipe deck, nudge types, AI decision mode, settings
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
 import 'package:provider/provider.dart';
 import '../models/qualchat_models.dart';
 import '../providers/qualchat_provider.dart';
@@ -24,7 +25,7 @@ class QualChatNudgesScreen extends StatelessWidget {
             title: 'Smart Nudges',
             actions: [
               IconButton(
-                icon: const Icon(Icons.tune, color: kChatColor),
+                icon: const Icon(Icons.tune, color: IveTokens.moduleQualChat),
                 onPressed: () => _showNudgeSettings(context, provider),
               ),
             ],
@@ -33,7 +34,7 @@ class QualChatNudgesScreen extends StatelessWidget {
               ? const QualChatEmptyState(
                   icon: Icons.auto_awesome,
                   title: 'All caught up!',
-                  message: "No nudges right now. We'll notify you when there's something to act on ðŸŒŸ",
+                  message: "No nudges right now. We'll notify you when there's something to act on ",
                 )
               : Column(
                   children: [
@@ -43,24 +44,24 @@ class QualChatNudgesScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
-                          colors: [kChatColor.withValues(alpha: 0.08), kChatColorLight],
+                          colors: [IveTokens.moduleQualChat.withValues(alpha: 0.08), IveTokens.accentSoft],
                         ),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Row(
                         children: [
-                          const Icon(Icons.auto_awesome, color: kChatColor),
+                          const Icon(Icons.auto_awesome, color: IveTokens.moduleQualChat),
                           const SizedBox(width: 12),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 const Text(
-                                  'AI Wingmate Active ðŸ¤–',
+                                  'AI Wingmate Active ',
                                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
                                 ),
                                 Text(
-                                  '${nudges.length} nudges to review • ${currentIndex + 1} of ${nudges.length}',
+                                  '${nudges.length} nudges to review  ${currentIndex + 1} of ${nudges.length}',
                                   style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
                                 ),
                               ],
@@ -82,8 +83,8 @@ class QualChatNudgesScreen extends StatelessWidget {
                               height: 4,
                               margin: const EdgeInsets.symmetric(horizontal: 2),
                               decoration: BoxDecoration(
-                                color: i <= currentIndex ? kChatColor : const Color(0xFFE5E7EB),
-                                borderRadius: BorderRadius.circular(2),
+                                color: i <= currentIndex ? IveTokens.moduleQualChat : const Color(0xFFE5E7EB),
+                                borderRadius: BorderRadius.circular(6),
                               ),
                             ),
                           );
@@ -91,14 +92,14 @@ class QualChatNudgesScreen extends StatelessWidget {
                       ),
                     ),
 
-                    // Swipe deck — current nudge
+                    // Swipe deck  current nudge
                     Expanded(
                       child: currentIndex < nudges.length
                           ? _NudgeCard(nudge: nudges[currentIndex])
                           : const QualChatEmptyState(
                               icon: Icons.check_circle_outline,
                               title: 'All reviewed!',
-                              message: 'You\'ve gone through all nudges. Nice work! ðŸŽ‰',
+                              message: 'You\'ve gone through all nudges. Nice work! ',
                             ),
                     ),
 
@@ -140,7 +141,7 @@ class QualChatNudgesScreen extends StatelessWidget {
                             // Custom
                             _ActionCircle(
                               icon: Icons.auto_fix_high,
-                              color: kChatColor,
+                              color: IveTokens.moduleQualChat,
                               label: 'AI Do',
                               onTap: () => provider.handleNudgeAction(
                                 NudgeAction.custom,
@@ -161,16 +162,16 @@ class QualChatNudgesScreen extends StatelessWidget {
       context: context,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
       ),
       builder: (_) => const _NudgeSettingsSheet(),
     );
   }
 }
-// ── Stateful Auto-mode toggle ─────────────────────────────────────ðŸ“Ž Follow-ups',
+//  Stateful Auto-mode toggle " Follow-ups',
 
 
-// ── Nudge Settings Sheet ──────────────────────────────────────────
+//  Nudge Settings Sheet 
 class _NudgeSettingsSheet extends StatelessWidget {
   const _NudgeSettingsSheet();
 
@@ -200,7 +201,7 @@ class _NudgeSettingsSheet extends StatelessWidget {
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: Text(typeLabels[t] ?? t.name, style: const TextStyle(fontSize: 13)),
-            trailing: const Icon(Icons.check_circle, color: kChatColor, size: 20),
+            trailing: const Icon(Icons.check_circle, color: IveTokens.moduleQualChat, size: 20),
           )),
         ],
       ),
@@ -208,7 +209,7 @@ class _NudgeSettingsSheet extends StatelessWidget {
   }
 }
 
-// ── Stateful Auto-mode toggle ─────────────────────────────────────
+//  Stateful Auto-mode toggle 
 class _AutoModeToggle extends StatefulWidget {
   const _AutoModeToggle();
 
@@ -226,7 +227,7 @@ class _AutoModeToggleState extends State<_AutoModeToggle> {
         Switch(
           value: _auto,
           onChanged: (v) => setState(() => _auto = v),
-          activeThumbColor: kChatColor,
+          activeThumbColor: IveTokens.moduleQualChat,
         ),
         const Text('Auto', style: TextStyle(fontSize: 10, color: Color(0xFF6B7280))),
       ],
@@ -241,11 +242,11 @@ class _NudgeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final typeIcons = {
-      NudgeType.followUp: 'ðŸ“Ž',
-      NudgeType.reEngagement: 'ðŸ¤',
-      NudgeType.profileUpdate: 'ðŸ“',
-      NudgeType.compatibility: 'ðŸ’«',
-      NudgeType.activity: 'âš¡',
+      NudgeType.followUp: '"',
+      NudgeType.reEngagement: '',
+      NudgeType.profileUpdate: '"',
+      NudgeType.compatibility: '',
+      NudgeType.activity: '',
     };
     final priority = nudge.matchPercentage >= 90
         ? TaskPriority.high
@@ -262,7 +263,7 @@ class _NudgeCard extends StatelessWidget {
       margin: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -273,20 +274,20 @@ class _NudgeCard extends StatelessWidget {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  (priorityColors[priority] ?? kChatColor).withValues(alpha: 0.08),
+                  (priorityColors[priority] ?? IveTokens.moduleQualChat).withValues(alpha: 0.08),
                   Colors.white,
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
               borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
               ),
             ),
             child: Row(
               children: [
-                Text(typeIcons[nudge.type] ?? 'ðŸ’¬', style: const TextStyle(fontSize: 28)),
+                Text(typeIcons[nudge.type] ?? '', style: const TextStyle(fontSize: 28)),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Column(
@@ -302,7 +303,7 @@ class _NudgeCard extends StatelessWidget {
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                             decoration: BoxDecoration(
-                              color: (priorityColors[priority] ?? kChatColor).withValues(alpha: 0.15),
+                              color: (priorityColors[priority] ?? IveTokens.moduleQualChat).withValues(alpha: 0.15),
                               borderRadius: BorderRadius.circular(6),
                             ),
                             child: Text(
@@ -310,7 +311,7 @@ class _NudgeCard extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 10,
                                 fontWeight: FontWeight.w700,
-                                color: priorityColors[priority] ?? kChatColor,
+                                color: priorityColors[priority] ?? IveTokens.moduleQualChat,
                               ),
                             ),
                           ),
@@ -342,20 +343,20 @@ class _NudgeCard extends StatelessWidget {
               margin: const EdgeInsets.fromLTRB(20, 8, 20, 8),
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                color: kChatColor.withValues(alpha: 0.05),
+                color: IveTokens.moduleQualChat.withValues(alpha: 0.05),
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: kChatColor.withValues(alpha: 0.2)),
+                border: Border.all(color: IveTokens.moduleQualChat.withValues(alpha: 0.2)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.auto_awesome, size: 16, color: kChatColor.withValues(alpha: 0.7)),
+                      Icon(Icons.auto_awesome, size: 16, color: IveTokens.moduleQualChat.withValues(alpha: 0.7)),
                       const SizedBox(width: 6),
                       const Text(
                         'AI Suggestion',
-                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: kChatColor),
+                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: IveTokens.moduleQualChat),
                       ),
                     ],
                   ),
@@ -375,10 +376,10 @@ class _NudgeCard extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 18,
-                  backgroundColor: kChatColor.withValues(alpha: 0.15),
+                  backgroundColor: IveTokens.moduleQualChat.withValues(alpha: 0.15),
                   child: Text(
                     nudge.person.name[0].toUpperCase(),
-                    style: const TextStyle(fontWeight: FontWeight.w700, color: kChatColor),
+                    style: const TextStyle(fontWeight: FontWeight.w700, color: IveTokens.moduleQualChat),
                   ),
                 ),
                 const SizedBox(width: 10),
@@ -401,7 +402,7 @@ class _NudgeCard extends StatelessWidget {
                 SizedBox(
                   width: 60,
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius: BorderRadius.circular(6),
                     child: LinearProgressIndicator(
                       value: nudge.matchPercentage / 100.0,
                       backgroundColor: const Color(0xFFE5E7EB),
@@ -409,7 +410,7 @@ class _NudgeCard extends StatelessWidget {
                         nudge.matchPercentage > 80
                             ? const Color(0xFF10B981)
                             : nudge.matchPercentage > 50
-                                ? kChatColor
+                                ? IveTokens.moduleQualChat
                                 : const Color(0xFFF59E0B),
                       ),
                       minHeight: 6,

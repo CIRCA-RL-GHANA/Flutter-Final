@@ -1,4 +1,5 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import '../../../core/utils/app_toast.dart';
 
 class QualChatPremiumScreen extends StatefulWidget {
   final String? conversationId;
@@ -192,7 +193,7 @@ class _QualChatPremiumScreenState extends State<QualChatPremiumScreen> {
                     decoration: InputDecoration(
                       hintText: 'Ask QualChat...',
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(24),
+                        borderRadius: BorderRadius.circular(10),
                       ),
                       contentPadding: const EdgeInsets.symmetric(
                         horizontal: 16,
@@ -200,7 +201,7 @@ class _QualChatPremiumScreenState extends State<QualChatPremiumScreen> {
                       ),
                       suffixIcon: IconButton(
                         icon: const Icon(Icons.attach_file),
-                        onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Attach file'))),
+                        onPressed: () => AppToast.show(context, 'Attach file'),
                       ),
                     ),
                   ),

@@ -14,7 +14,7 @@ class ChatService extends ChangeNotifier {
       : _api = api ?? ApiClient.instance,
         _aiService = aiService ?? AIService();
 
-  // ─── Sessions ─────────────────────────────────────────────────────────────
+  //  Sessions 
 
   /// Fetch all chat sessions for the authenticated user.
   Future<ApiResponse<List<Map<String, dynamic>>>> getConversations({
@@ -58,7 +58,7 @@ class ChatService extends ChangeNotifier {
     );
   }
 
-  // ─── Messages ──────────────────────────────────────────────────────────────
+  //  Messages 
 
   /// Fetch messages for a session (newest-last order).
   Future<ApiResponse<List<Map<String, dynamic>>>> getMessages(
@@ -101,7 +101,7 @@ class ChatService extends ChangeNotifier {
     );
   }
 
-  // ─── Backend-unsupported operations ────────────────────────────────────────
+  //  Backend-unsupported operations 
   // The backend's /social/chat specification does not include delete, archive,
   // or unarchive endpoints. These are documented no-ops returning false/empty
   // so callers can handle them gracefully without crashing.
@@ -137,9 +137,9 @@ class ChatService extends ChangeNotifier {
         .toList();
   }
 
-  // ─── AI-enhanced methods ───────────────────────────────────────────────────
+  //  AI-enhanced methods 
 
-  /// Analyse message sentiment (-1 → +1, label, confidence).
+  /// Analyse message sentiment (-1  +1, label, confidence).
   Future<Map<String, dynamic>?> analyzeMessageSentiment(String message) async {
     final response = await _aiService.analyzeSentiment(message);
     return response.isSuccess ? response.data : null;

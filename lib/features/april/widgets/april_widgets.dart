@@ -1,26 +1,23 @@
-﻿/// APRIL Module — Shared Widgets
+/// APRIL Module  Shared Widgets
 /// Personal Assistant & Command Core
-/// Module Color: Gold 0xFFFFD700
+/// Module Color: Gold (IveTokens.moduleApril / IveTokens.genie)
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
 import '../models/april_models.dart';
 
-// ──────────────────────────────────────────────
+// 
 //  COLOR CONSTANTS
-// ──────────────────────────────────────────────
+//  APRIL EXCEPTION: multiple gold/genie tokens are intentional here.
+// 
 
-const Color kAprilColor = Color(0xFFFFD700);
-const Color kAprilColorLight = Color(0xFFFFF8E1);
-const Color kAprilColorDark = Color(0xFFF5A623);
-const Color kAprilAccent = Color(0xFF6750A4);
-const Color kAprilVoice = Color(0xFFFF453A);
-const Color kAprilSuccess = Color(0xFF0F9D58);
-const Color kAprilProcessing = Color(0xFFFFB800);
+// All APRIL colors use IveTokens directly — no local constants needed.
+// APRIL exception: multiple gold/genie tokens are intentional here.
 
-// ──────────────────────────────────────────────
+// 
 //  APRIL APP BAR
-// ──────────────────────────────────────────────
+// 
 
 class AprilAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -36,8 +33,8 @@ class AprilAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
-      foregroundColor: const Color(0xFF1A1A1A),
+      backgroundColor: IveTokens.surface,
+      foregroundColor: IveTokens.ink,
       elevation: 0,
       leading: leading ??
           (Navigator.canPop(context)
@@ -53,7 +50,7 @@ class AprilAppBar extends StatelessWidget implements PreferredSizeWidget {
             width: 8,
             height: 8,
             decoration: const BoxDecoration(
-              color: kAprilColor,
+              color: IveTokens.genie,
               shape: BoxShape.circle,
             ),
           ),
@@ -63,7 +60,7 @@ class AprilAppBar extends StatelessWidget implements PreferredSizeWidget {
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w700,
-              color: Color(0xFF1A1A1A),
+              color: IveTokens.ink,
             ),
           ),
         ],
@@ -74,9 +71,9 @@ class AprilAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 //  SECTION CARD
-// ──────────────────────────────────────────────
+// 
 
 class AprilSectionCard extends StatelessWidget {
   final String title;
@@ -89,8 +86,8 @@ class AprilSectionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        color: IveTokens.surface,
+        borderRadius: IveTokens.brSm,
       ),
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -102,7 +99,7 @@ class AprilSectionCard extends StatelessWidget {
                 Expanded(
                   child: Text(
                     title,
-                    style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: Color(0xFF1A1A1A)),
+                    style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: IveTokens.ink),
                   ),
                 ),
                 if (trailing != null) trailing!,
@@ -117,9 +114,9 @@ class AprilSectionCard extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 //  EMPTY STATE
-// ──────────────────────────────────────────────
+// 
 
 class AprilEmptyState extends StatelessWidget {
   final IconData icon;
@@ -149,30 +146,26 @@ class AprilEmptyState extends StatelessWidget {
               width: 72,
               height: 72,
               decoration: BoxDecoration(
-                color: kAprilColor.withValues(alpha: 0.1),
+                color: IveTokens.genieSoft,
                 shape: BoxShape.circle,
               ),
-              child: Icon(icon, size: 36, color: kAprilColor),
+              child: Icon(icon, size: 36, color: IveTokens.genie),
             ),
             const SizedBox(height: 16),
-            Text(title, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w700)),
+            Text(title, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w700, color: IveTokens.ink)),
             const SizedBox(height: 8),
             Text(
               message,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 14, color: Color(0xFF6B7280), height: 1.4),
+              style: const TextStyle(fontSize: 14, color: IveTokens.mute, height: 1.4),
             ),
             if (ctaLabel != null) ...[
               const SizedBox(height: 20),
-              ElevatedButton(
+              IveButton.primary(
+                label: ctaLabel!,
                 onPressed: onCta,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: kAprilColor,
-                  foregroundColor: Colors.black,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                ),
-                child: Text(ctaLabel!, style: const TextStyle(fontWeight: FontWeight.w600)),
+                expand: false,
+                compact: true,
               ),
             ],
           ],
@@ -182,9 +175,9 @@ class AprilEmptyState extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 //  VOICE BUTTON
-// ──────────────────────────────────────────────
+// 
 
 class AprilVoiceButton extends StatelessWidget {
   final VoiceState state;
@@ -203,11 +196,11 @@ class AprilVoiceButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = {
-      VoiceState.idle: kAprilAccent,
-      VoiceState.listening: kAprilVoice,
-      VoiceState.processing: kAprilProcessing,
-      VoiceState.success: kAprilSuccess,
-      VoiceState.error: const Color(0xFFEF4444),
+      VoiceState.idle: IveTokens.accent,
+      VoiceState.listening: IveTokens.danger,
+      VoiceState.processing: IveTokens.warning,
+      VoiceState.success: IveTokens.success,
+      VoiceState.error: IveTokens.danger,
     };
     final icons = {
       VoiceState.idle: Icons.mic,
@@ -230,17 +223,17 @@ class AprilVoiceButton extends StatelessWidget {
         child: state == VoiceState.processing
             ? const Padding(
                 padding: EdgeInsets.all(20),
-                child: CircularProgressIndicator(color: Colors.white, strokeWidth: 3),
+                child: CircularProgressIndicator(color: IveTokens.ink, strokeWidth: 3),
               )
-            : Icon(icons[state], color: Colors.white, size: size * 0.4),
+            : Icon(icons[state], color: IveTokens.ink, size: size * 0.4),
       ),
     );
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 //  PLUGIN CARD (Quick Access)
-// ──────────────────────────────────────────────
+// 
 
 class PluginCard extends StatelessWidget {
   final AprilPlugin plugin;
@@ -263,17 +256,17 @@ class PluginCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pluginData = {
-      AprilPlugin.planner: {'icon': Icons.account_balance_wallet, 'emoji': 'ðŸ“Š', 'name': 'Planner'},
-      AprilPlugin.calendar: {'icon': Icons.calendar_month, 'emoji': 'ðŸ“…', 'name': 'Calendar'},
-      AprilPlugin.wishlist: {'icon': Icons.card_giftcard, 'emoji': 'ðŸŽ', 'name': 'Wishlist'},
-      AprilPlugin.statement: {'icon': Icons.description, 'emoji': 'ðŸ“', 'name': 'Statement'},
+      AprilPlugin.planner: {'icon': Icons.account_balance_wallet, 'emoji': '', 'name': 'Planner'},
+      AprilPlugin.calendar: {'icon': Icons.calendar_month, 'emoji': '', 'name': 'Calendar'},
+      AprilPlugin.wishlist: {'icon': Icons.card_giftcard, 'emoji': '', 'name': 'Wishlist'},
+      AprilPlugin.statement: {'icon': Icons.description, 'emoji': '', 'name': 'Statement'},
     };
     final data = pluginData[plugin]!;
     final syncColors = {
-      SyncStatus.synced: const Color(0xFF10B981),
-      SyncStatus.pending: const Color(0xFFF59E0B),
-      SyncStatus.error: const Color(0xFFEF4444),
-      SyncStatus.offline: const Color(0xFF6B7280),
+      SyncStatus.synced: IveTokens.success,
+      SyncStatus.pending: IveTokens.warning,
+      SyncStatus.error: IveTokens.danger,
+      SyncStatus.offline: IveTokens.mute,
     };
 
     return GestureDetector(
@@ -281,8 +274,8 @@ class PluginCard extends StatelessWidget {
       onLongPress: onLongPress,
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
+          color: IveTokens.surface,
+          borderRadius: IveTokens.brSm,
         ),
         child: Stack(
           children: [
@@ -295,12 +288,12 @@ class PluginCard extends StatelessWidget {
                   const SizedBox(height: 6),
                   Text(
                     data['name'] as String,
-                    style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+                    style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: IveTokens.ink),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     statusText,
-                    style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280)),
+                    style: const TextStyle(fontSize: 11, color: IveTokens.mute),
                     textAlign: TextAlign.center,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -329,12 +322,12 @@ class PluginCard extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFEF4444),
-                    borderRadius: BorderRadius.circular(8),
+                    color: IveTokens.danger,
+                    borderRadius: IveTokens.brSm,
                   ),
                   child: Text(
                     '$badgeCount',
-                    style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: Colors.white),
+                    style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: IveTokens.ink),
                   ),
                 ),
               ),
@@ -345,9 +338,9 @@ class PluginCard extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 //  PENDING ACTION TILE
-// ──────────────────────────────────────────────
+// 
 
 class PendingActionTile extends StatelessWidget {
   final PendingAction action;
@@ -359,10 +352,10 @@ class PendingActionTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final priorityColors = {
-      ActionPriority.critical: const Color(0xFFEF4444),
-      ActionPriority.high: const Color(0xFFF59E0B),
-      ActionPriority.medium: kAprilColor,
-      ActionPriority.low: const Color(0xFF10B981),
+      ActionPriority.critical: IveTokens.danger,
+      ActionPriority.high: IveTokens.warning,
+      ActionPriority.medium: IveTokens.genie,
+      ActionPriority.low: IveTokens.success,
     };
 
     return GestureDetector(
@@ -370,8 +363,8 @@ class PendingActionTile extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
-          color: const Color(0xFFF8F9FE),
-          borderRadius: BorderRadius.circular(10),
+          color: IveTokens.surfaceRaised,
+          borderRadius: IveTokens.brSm,
         ),
         child: Row(
           children: [
@@ -387,7 +380,7 @@ class PendingActionTile extends StatelessWidget {
             Expanded(
               child: Text(
                 action.description,
-                style: const TextStyle(fontSize: 13, color: Color(0xFF374151)),
+                style: const TextStyle(fontSize: 13, color: IveTokens.ink2),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -400,8 +393,8 @@ class PendingActionTile extends StatelessWidget {
                   fontSize: 11,
                   fontWeight: FontWeight.w500,
                   color: action.priority == ActionPriority.critical
-                      ? const Color(0xFFEF4444)
-                      : const Color(0xFF6B7280),
+                      ? IveTokens.danger
+                      : IveTokens.mute,
                 ),
               ),
             ],
@@ -412,9 +405,9 @@ class PendingActionTile extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 //  NOTIFICATION CARD
-// ──────────────────────────────────────────────
+// 
 
 class AprilNotificationCard extends StatelessWidget {
   final AprilNotification notification;
@@ -431,31 +424,31 @@ class AprilNotificationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final typeColors = {
-      AprilNotificationType.financial: kAprilColor,
-      AprilNotificationType.calendar: const Color(0xFF3B82F6),
-      AprilNotificationType.wishlist: const Color(0xFF8B5CF6),
-      AprilNotificationType.personal: const Color(0xFF10B981),
-      AprilNotificationType.system: const Color(0xFF6B7280),
+      AprilNotificationType.financial: IveTokens.genie,
+      AprilNotificationType.calendar: IveTokens.accent,
+      AprilNotificationType.wishlist: IveTokens.genieBright,
+      AprilNotificationType.personal: IveTokens.success,
+      AprilNotificationType.system: IveTokens.mute,
     };
 
     return Dismissible(
       key: ValueKey(notification.id),
       onDismissed: (_) => onDismiss?.call(),
       background: Container(
-        color: const Color(0xFFEF4444),
+        color: IveTokens.danger,
         alignment: Alignment.centerRight,
         padding: const EdgeInsets.only(right: 16),
-        child: const Icon(Icons.delete, color: Colors.white),
+        child: const Icon(Icons.delete, color: IveTokens.ink),
       ),
       child: GestureDetector(
         onTap: onTap,
         child: Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: IveTokens.surface,
             border: Border(
               left: BorderSide(
-                color: typeColors[notification.type] ?? kAprilColor,
+                color: typeColors[notification.type] ?? IveTokens.genie,
                 width: 3,
               ),
             ),
@@ -471,19 +464,19 @@ class AprilNotificationCard extends StatelessWidget {
                   Expanded(
                     child: Text(
                       notification.title,
-                      style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                      style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: IveTokens.ink),
                     ),
                   ),
                   Text(
                     _timeAgo(notification.timestamp),
-                    style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF)),
+                    style: const TextStyle(fontSize: 11, color: IveTokens.ink2),
                   ),
                 ],
               ),
               const SizedBox(height: 4),
               Text(
                 notification.message,
-                style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280)),
+                style: const TextStyle(fontSize: 13, color: IveTokens.mute),
               ),
               if (notification.actions.isNotEmpty) ...[
                 const SizedBox(height: 8),
@@ -509,7 +502,7 @@ class AprilNotificationCard extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w600,
-                            color: typeColors[notification.type] ?? kAprilColor,
+                            color: typeColors[notification.type] ?? IveTokens.genie,
                           ),
                         ),
                       ),
@@ -532,9 +525,9 @@ class AprilNotificationCard extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 //  TRANSACTION CARD
-// ──────────────────────────────────────────────
+// 
 
 class TransactionCard extends StatelessWidget {
   final Transaction transaction;
@@ -545,21 +538,21 @@ class TransactionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final categoryEmojis = {
-      TransactionCategory.dining: 'ðŸ”',
-      TransactionCategory.groceries: 'ðŸ›’',
-      TransactionCategory.transport: 'ðŸš—',
-      TransactionCategory.entertainment: 'ðŸŽ¬',
-      TransactionCategory.utilities: 'ðŸ’¡',
-      TransactionCategory.housing: 'ðŸ ',
-      TransactionCategory.healthcare: 'ðŸ¥',
-      TransactionCategory.education: 'ðŸ“š',
-      TransactionCategory.shopping: 'ðŸ›ï¸',
-      TransactionCategory.salary: 'ðŸ’µ',
-      TransactionCategory.freelance: 'ðŸ’»',
-      TransactionCategory.investment: 'ðŸ“ˆ',
-      TransactionCategory.subscription: 'ðŸ“±',
-      TransactionCategory.insurance: 'ðŸ›¡ï¸',
-      TransactionCategory.other: 'ðŸ“‹',
+      TransactionCategory.dining: '',
+      TransactionCategory.groceries: '',
+      TransactionCategory.transport: '',
+      TransactionCategory.entertainment: '',
+      TransactionCategory.utilities: '',
+      TransactionCategory.housing: '',
+      TransactionCategory.healthcare: '',
+      TransactionCategory.education: '',
+      TransactionCategory.shopping: '',
+      TransactionCategory.salary: '',
+      TransactionCategory.freelance: '',
+      TransactionCategory.investment: '',
+      TransactionCategory.subscription: '',
+      TransactionCategory.insurance: '',
+      TransactionCategory.other: '',
     };
     final isIncome = transaction.type == TransactionType.income;
 
@@ -569,8 +562,8 @@ class TransactionCard extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 8),
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
+          color: IveTokens.surface,
+          borderRadius: IveTokens.brSm,
         ),
         child: Row(
           children: [
@@ -578,12 +571,14 @@ class TransactionCard extends StatelessWidget {
               width: 44,
               height: 44,
               decoration: BoxDecoration(
-                color: (isIncome ? const Color(0xFF10B981) : kAprilColor).withValues(alpha: 0.1),
-                borderRadius: BorderRadius.circular(10),
+                color: isIncome
+                    ? IveTokens.success.withValues(alpha: 0.1)
+                    : IveTokens.genieSoft,
+                borderRadius: IveTokens.brSm,
               ),
               child: Center(
                 child: Text(
-                  categoryEmojis[transaction.category] ?? 'ðŸ“‹',
+                  categoryEmojis[transaction.category] ?? '',
                   style: const TextStyle(fontSize: 20),
                 ),
               ),
@@ -595,22 +590,22 @@ class TransactionCard extends StatelessWidget {
                 children: [
                   Text(
                     transaction.title,
-                    style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                    style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: IveTokens.ink),
                   ),
                   const SizedBox(height: 2),
                   Row(
                     children: [
                       Text(
                         transaction.category.name,
-                        style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
+                        style: const TextStyle(fontSize: 12, color: IveTokens.mute),
                       ),
                       if (transaction.isRecurring) ...[
                         const SizedBox(width: 6),
-                        const Icon(Icons.repeat, size: 12, color: Color(0xFF6B7280)),
+                        const Icon(Icons.repeat, size: 12, color: IveTokens.mute),
                       ],
                       if (transaction.hasReceipt) ...[
                         const SizedBox(width: 6),
-                        const Icon(Icons.receipt_long, size: 12, color: Color(0xFF6B7280)),
+                        const Icon(Icons.receipt_long, size: 12, color: IveTokens.mute),
                       ],
                     ],
                   ),
@@ -621,16 +616,16 @@ class TransactionCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  '${isIncome ? '+' : '-'} â‚µ${transaction.amount.toStringAsFixed(2)}',
+                  '${isIncome ? '+' : '-'} ${transaction.amount.toStringAsFixed(2)}',
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w700,
-                    color: isIncome ? const Color(0xFF10B981) : const Color(0xFFEF4444),
+                    color: isIncome ? IveTokens.success : IveTokens.danger,
                   ),
                 ),
                 Text(
                   _formatDate(transaction.date),
-                  style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF)),
+                  style: const TextStyle(fontSize: 11, color: IveTokens.ink2),
                 ),
               ],
             ),
@@ -649,9 +644,9 @@ class TransactionCard extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 //  BUDGET PROGRESS BAR
-// ──────────────────────────────────────────────
+// 
 
 class BudgetProgressBar extends StatelessWidget {
   final BudgetCategory budget;
@@ -662,10 +657,10 @@ class BudgetProgressBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final statusColors = {
-      BudgetStatus.onTrack: const Color(0xFF10B981),
-      BudgetStatus.warning: const Color(0xFFF59E0B),
-      BudgetStatus.overBudget: const Color(0xFFEF4444),
-      BudgetStatus.completed: const Color(0xFF6B7280),
+      BudgetStatus.onTrack: IveTokens.success,
+      BudgetStatus.warning: IveTokens.warning,
+      BudgetStatus.overBudget: IveTokens.danger,
+      BudgetStatus.completed: IveTokens.mute,
     };
 
     return GestureDetector(
@@ -674,8 +669,8 @@ class BudgetProgressBar extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 12),
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
+          color: IveTokens.surface,
+          borderRadius: IveTokens.brSm,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -683,9 +678,9 @@ class BudgetProgressBar extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(budget.name, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+                Text(budget.name, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: IveTokens.ink)),
                 Text(
-                  'â‚µ${budget.spent.toStringAsFixed(0)} / â‚µ${budget.limit.toStringAsFixed(0)}',
+                  '${budget.spent.toStringAsFixed(0)} / ${budget.limit.toStringAsFixed(0)}',
                   style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
@@ -696,19 +691,19 @@ class BudgetProgressBar extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             ClipRRect(
-              borderRadius: BorderRadius.circular(4),
+              borderRadius: IveTokens.brXs,
               child: LinearProgressIndicator(
                 value: budget.percentage.clamp(0.0, 1.0),
-                backgroundColor: const Color(0xFFE5E7EB),
-                valueColor: AlwaysStoppedAnimation(statusColors[budget.status] ?? kAprilColor),
+                backgroundColor: IveTokens.hairline2,
+                valueColor: AlwaysStoppedAnimation(statusColors[budget.status] ?? IveTokens.genie),
                 minHeight: 8,
               ),
             ),
             if (budget.status == BudgetStatus.overBudget) ...[
               const SizedBox(height: 4),
               Text(
-                'Over by â‚µ${(-budget.remaining).toStringAsFixed(0)}',
-                style: const TextStyle(fontSize: 11, color: Color(0xFFEF4444), fontWeight: FontWeight.w500),
+                'Over by ${(-budget.remaining).toStringAsFixed(0)}',
+                style: const TextStyle(fontSize: 11, color: IveTokens.danger, fontWeight: FontWeight.w500),
               ),
             ],
           ],
@@ -718,9 +713,9 @@ class BudgetProgressBar extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 //  CALENDAR EVENT TILE
-// ──────────────────────────────────────────────
+// 
 
 class CalendarEventTile extends StatelessWidget {
   final CalendarEvent event;
@@ -729,25 +724,25 @@ class CalendarEventTile extends StatelessWidget {
   const CalendarEventTile({super.key, required this.event, this.onTap});
 
   static const _eventColors = [
-    Color(0xFF3B82F6), // blue
-    Color(0xFF8B5CF6), // purple
-    Color(0xFF10B981), // green
-    Color(0xFFEF4444), // red
-    Color(0xFFF59E0B), // amber
-    Color(0xFFEC4899), // pink
+    IveTokens.accent,    // blue
+    IveTokens.genieBright, // gold-bright (APRIL exception)
+    IveTokens.success,   // green
+    IveTokens.danger,    // red
+    IveTokens.warning,   // amber
+    IveTokens.genie,     // gold (APRIL exception)
   ];
 
   @override
   Widget build(BuildContext context) {
     final color = _eventColors[event.colorIndex % _eventColors.length];
     final typeEmojis = {
-      EventType.meeting: 'ðŸ‘¥',
-      EventType.call: 'ðŸ“ž',
-      EventType.personal: 'ðŸ½ï¸',
-      EventType.travel: 'âœˆï¸',
-      EventType.deadline: 'â°',
-      EventType.reminder: 'ðŸ””',
-      EventType.allDay: 'ðŸ“…',
+      EventType.meeting: '',
+      EventType.call: '',
+      EventType.personal: '',
+      EventType.travel: '',
+      EventType.deadline: '',
+      EventType.reminder: '',
+      EventType.allDay: '',
     };
 
     return GestureDetector(
@@ -756,8 +751,8 @@ class CalendarEventTile extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 8),
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
+          color: IveTokens.surface,
+          borderRadius: IveTokens.brSm,
           border: Border(left: BorderSide(color: color, width: 4)),
         ),
         child: Row(
@@ -774,12 +769,12 @@ class CalendarEventTile extends StatelessWidget {
                   if (!event.isAllDay)
                     Text(
                       _formatTime(event.endTime),
-                      style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF)),
+                      style: const TextStyle(fontSize: 11, color: IveTokens.ink2),
                     ),
                 ],
               ),
             ),
-            Container(width: 1, height: 40, color: const Color(0xFFE5E7EB)),
+            Container(width: 1, height: 40, color: IveTokens.hairline),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
@@ -787,12 +782,12 @@ class CalendarEventTile extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Text(typeEmojis[event.type] ?? 'ðŸ“…', style: const TextStyle(fontSize: 14)),
+                      Text(typeEmojis[event.type] ?? '', style: const TextStyle(fontSize: 14)),
                       const SizedBox(width: 6),
                       Expanded(
                         child: Text(
                           event.title,
-                          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: IveTokens.ink),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
@@ -802,7 +797,7 @@ class CalendarEventTile extends StatelessWidget {
                     const SizedBox(height: 2),
                     Text(
                       event.location!,
-                      style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
+                      style: const TextStyle(fontSize: 12, color: IveTokens.mute),
                     ),
                   ],
                   if (event.guests.isNotEmpty) ...[
@@ -828,9 +823,9 @@ class CalendarEventTile extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 //  WISHLIST ITEM CARD
-// ──────────────────────────────────────────────
+// 
 
 class WishlistItemCard extends StatelessWidget {
   final WishlistItem item;
@@ -848,11 +843,11 @@ class WishlistItemCard extends StatelessWidget {
       WishlistPriority.critical: 5,
     };
     final availabilityColors = {
-      ItemAvailability.inStock: const Color(0xFF10B981),
-      ItemAvailability.outOfStock: const Color(0xFFEF4444),
-      ItemAvailability.preOrder: const Color(0xFFF59E0B),
-      ItemAvailability.discontinued: const Color(0xFF6B7280),
-      ItemAvailability.unknown: const Color(0xFF9CA3AF),
+      ItemAvailability.inStock: IveTokens.success,
+      ItemAvailability.outOfStock: IveTokens.danger,
+      ItemAvailability.preOrder: IveTokens.warning,
+      ItemAvailability.discontinued: IveTokens.mute,
+      ItemAvailability.unknown: IveTokens.ink2,
     };
     final availabilityLabels = {
       ItemAvailability.inStock: 'In Stock',
@@ -866,8 +861,8 @@ class WishlistItemCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
+          color: IveTokens.surface,
+          borderRadius: IveTokens.brSm,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -876,14 +871,14 @@ class WishlistItemCard extends StatelessWidget {
             Container(
               height: 100,
               decoration: BoxDecoration(
-                color: kAprilColor.withValues(alpha: 0.08),
+                color: IveTokens.genieSoft,
                 borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(14),
-                  topRight: Radius.circular(14),
+                  topLeft: Radius.circular(IveTokens.rSm),
+                  topRight: Radius.circular(IveTokens.rSm),
                 ),
               ),
               child: Center(
-                child: Icon(Icons.image_outlined, size: 36, color: kAprilColor.withValues(alpha: 0.4)),
+                child: Icon(Icons.image_outlined, size: 36, color: IveTokens.genieLine),
               ),
             ),
             Padding(
@@ -896,13 +891,13 @@ class WishlistItemCard extends StatelessWidget {
                     children: List.generate(5, (i) => Icon(
                       i < (priorityStars[item.priority] ?? 1) ? Icons.star : Icons.star_border,
                       size: 14,
-                      color: kAprilColor,
+                      color: IveTokens.genie,
                     )),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     item.name,
-                    style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                    style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: IveTokens.ink),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -910,13 +905,13 @@ class WishlistItemCard extends StatelessWidget {
                     const SizedBox(height: 2),
                     Text(
                       item.category!,
-                      style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280)),
+                      style: const TextStyle(fontSize: 11, color: IveTokens.mute),
                     ),
                   ],
                   const SizedBox(height: 6),
                   Text(
-                    'â‚µ${item.price.toStringAsFixed(2)}',
-                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFF1A1A1A)),
+                    '${item.price.toStringAsFixed(2)}',
+                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: IveTokens.ink),
                   ),
                   // Savings progress
                   if (item.savedAmount > 0) ...[
@@ -925,11 +920,11 @@ class WishlistItemCard extends StatelessWidget {
                       children: [
                         Expanded(
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(3),
+                            borderRadius: IveTokens.brXs,
                             child: LinearProgressIndicator(
                               value: item.savedPercentage / 100,
-                              backgroundColor: const Color(0xFFE5E7EB),
-                              valueColor: const AlwaysStoppedAnimation(Color(0xFF10B981)),
+                              backgroundColor: IveTokens.hairline2,
+                              valueColor: const AlwaysStoppedAnimation(IveTokens.success),
                               minHeight: 6,
                             ),
                           ),
@@ -937,7 +932,7 @@ class WishlistItemCard extends StatelessWidget {
                         const SizedBox(width: 8),
                         Text(
                           '${item.savedPercentage.toInt()}%',
-                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF10B981)),
+                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: IveTokens.success),
                         ),
                       ],
                     ),
@@ -947,8 +942,8 @@ class WishlistItemCard extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                     decoration: BoxDecoration(
-                      color: (availabilityColors[item.availability] ?? const Color(0xFF9CA3AF)).withValues(alpha: 0.1),
-                      borderRadius: BorderRadius.circular(4),
+                      color: (availabilityColors[item.availability] ?? IveTokens.ink2).withValues(alpha: 0.1),
+                      borderRadius: IveTokens.brXs,
                     ),
                     child: Text(
                       availabilityLabels[item.availability] ?? '',
@@ -969,9 +964,9 @@ class WishlistItemCard extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 //  STATEMENT CARD WIDGET
-// ──────────────────────────────────────────────
+// 
 
 class StatementCardWidget extends StatelessWidget {
   final StatementCardData card;
@@ -987,8 +982,8 @@ class StatementCardWidget extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 12),
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
+          color: IveTokens.surface,
+          borderRadius: IveTokens.brSm,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -1006,16 +1001,16 @@ class StatementCardWidget extends StatelessWidget {
                           Expanded(
                             child: Text(
                               card.title,
-                              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+                              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: IveTokens.ink),
                             ),
                           ),
                           if (card.isLocked)
-                            const Icon(Icons.lock, size: 16, color: Color(0xFF6B7280)),
+                            const Icon(Icons.lock, size: 16, color: IveTokens.mute),
                         ],
                       ),
                       Text(
                         card.summary,
-                        style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
+                        style: const TextStyle(fontSize: 12, color: IveTokens.mute),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -1030,16 +1025,16 @@ class StatementCardWidget extends StatelessWidget {
               children: [
                 Expanded(
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius: IveTokens.brXs,
                     child: LinearProgressIndicator(
                       value: card.completionPercent / 100,
-                      backgroundColor: const Color(0xFFE5E7EB),
+                      backgroundColor: IveTokens.hairline2,
                       valueColor: AlwaysStoppedAnimation(
                         card.completionPercent >= 80
-                            ? const Color(0xFF10B981)
+                            ? IveTokens.success
                             : card.completionPercent >= 50
-                                ? kAprilColor
-                                : const Color(0xFFF59E0B),
+                                ? IveTokens.genie
+                                : IveTokens.warning,
                       ),
                       minHeight: 6,
                     ),
@@ -1048,7 +1043,7 @@ class StatementCardWidget extends StatelessWidget {
                 const SizedBox(width: 10),
                 Text(
                   '${card.completionPercent}%',
-                  style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Color(0xFF6B7280)),
+                  style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: IveTokens.mute),
                 ),
               ],
             ),
@@ -1061,12 +1056,12 @@ class StatementCardWidget extends StatelessWidget {
                 children: card.highlights.map((h) => Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                   decoration: BoxDecoration(
-                    color: kAprilColor.withValues(alpha: 0.08),
-                    borderRadius: BorderRadius.circular(6),
+                    color: IveTokens.genieSoft,
+                    borderRadius: IveTokens.brXs,
                   ),
                   child: Text(
                     h,
-                    style: const TextStyle(fontSize: 11, color: Color(0xFF374151)),
+                    style: const TextStyle(fontSize: 11, color: IveTokens.ink2),
                   ),
                 )).toList(),
               ),
@@ -1074,7 +1069,7 @@ class StatementCardWidget extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               'Updated ${_timeAgo(card.lastUpdated)}',
-              style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF)),
+              style: const TextStyle(fontSize: 11, color: IveTokens.ink2),
             ),
           ],
         ),

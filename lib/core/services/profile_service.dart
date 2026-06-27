@@ -136,9 +136,9 @@ class ProfileService {
     );
   }
 
-  // ═══════════════════════════════════════════════════════════════════════
+  // 
   // AI-ENHANCED METHODS
-  // ═══════════════════════════════════════════════════════════════════════
+  // 
 
   /// Extract keywords from user bio for interest tagging.
   Future<ApiResponse<Map<String, dynamic>>> extractBioKeywords(

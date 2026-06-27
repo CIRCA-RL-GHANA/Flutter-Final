@@ -1,4 +1,4 @@
-﻿/// GO Dashboard Screen — Main Financial Hub
+/// GO Dashboard Screen  Main Financial Hub
 /// P2P, Wallets, Investments, Cards, Quick Actions
 /// Complete production implementation with search, error handling, real-time updates
 
@@ -97,25 +97,25 @@ class _GODashboardScreenState extends State<GODashboardScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // ─── Balance Summary Card ───────────────────────────
+                          //  Balance Summary Card 
                           _buildBalanceCard(provider),
 
-                          // ─── Genie Strip (one per screen) ──────────────────
+                          //  Genie Strip (one per screen) 
                           _buildGenieStrip(),
 
-                          // ─── Quick Action Buttons ───────────────────────────
+                          //  Quick Action Buttons 
                           _buildQuickActions(context),
 
-                          // ─── Active Wallets ──────────────────────────────────
+                          //  Active Wallets 
                           _buildWalletsSection(provider),
 
-                          // ─── Latest Cards ───────────────────────────────────
+                          //  Latest Cards 
                           _buildCardsSection(provider),
 
-                          // ─── Recent Transactions ────────────────────────────
+                          //  Recent Transactions 
                           _buildRecentTransactions(provider),
 
-                          // ─── Quick Recipients ───────────────────────────────
+                          //  Quick Recipients 
                           _buildFavoriteRecipients(provider),
 
                           const SizedBox(height: 24),
@@ -150,14 +150,14 @@ class _GODashboardScreenState extends State<GODashboardScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            ‘Total balance’,
+            'Total balance',
             style: IveType.caption.copyWith(color: IveTokens.muteColor),
           ),
           const SizedBox(height: IveTokens.s2),
           // ValueDisplay with count-up on first load
           ValueDisplay(
             amount: provider.totalBalance,
-            unit: r’$’,
+            unit: r'$',
             integerSize: 36,
             countUp: true,
           ),
@@ -172,7 +172,7 @@ class _GODashboardScreenState extends State<GODashboardScreen> {
                     const Icon(Icons.arrow_upward_rounded, size: 13, color: IveTokens.okColor),
                     const SizedBox(width: 4),
                     Text(
-                      ‘\$${provider.monthlyIncome.toStringAsFixed(0)}’,
+                      '\$${provider.monthlyIncome.toStringAsFixed(0)}',
                       style: IveType.footnote.copyWith(color: IveTokens.ink2Color),
                     ),
                   ],
@@ -185,7 +185,7 @@ class _GODashboardScreenState extends State<GODashboardScreen> {
                     const Icon(Icons.arrow_downward_rounded, size: 13, color: IveTokens.badColor),
                     const SizedBox(width: 4),
                     Text(
-                      ‘\$${provider.monthlySpent.toStringAsFixed(0)}’,
+                      '\$${provider.monthlySpent.toStringAsFixed(0)}',
                       style: IveType.footnote.copyWith(color: IveTokens.ink2Color),
                     ),
                   ],
@@ -434,9 +434,9 @@ class _GODashboardScreenState extends State<GODashboardScreen> {
   }
 }
 
-// ────────────────────────────────────────────────────────────────────────────
+// 
 // COMPONENTS
-// ────────────────────────────────────────────────────────────────────────────
+// 
 
 class _QuickActionButton extends StatelessWidget {
   final IconData icon;
@@ -463,7 +463,7 @@ class _QuickActionButton extends StatelessWidget {
             height: 60,
             decoration: BoxDecoration(
               color: color.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(icon, color: color, size: 28),
           ),
@@ -568,7 +568,7 @@ class _CardItem extends StatelessWidget {
             ),
           ),
           Text(
-            '•••• ${card.lastFour}',
+            ' ${card.lastFour}',
             style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w700,

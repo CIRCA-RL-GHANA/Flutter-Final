@@ -138,15 +138,15 @@ class WishlistService {
     );
   }
 
-  // ─── Aliases for provider compatibility ──────────────────────────────────
+  //  Aliases for provider compatibility 
 
-  /// Alias for [getTotalEstimatedValue] — consistent with provider API.
+  /// Alias for [getTotalEstimatedValue]  consistent with provider API.
   Future<ApiResponse<Map<String, dynamic>>> getTotalValue() =>
       getTotalEstimatedValue();
 
-  // ═══════════════════════════════════════════════════════════════════════
+  // 
   // AI-ENHANCED METHODS
-  // ═══════════════════════════════════════════════════════════════════════
+  // 
 
   /// Get wishlist items with AI-computed purchase likelihood scores.
   /// Returns items sorted by conversion probability (highest first).

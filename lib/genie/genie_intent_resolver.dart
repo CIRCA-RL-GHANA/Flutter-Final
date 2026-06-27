@@ -1,10 +1,10 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// GenieIntentResolver – NLU via Keyword-Regex Tree
+/// 
+/// GenieIntentResolver  NLU via Keyword-Regex Tree
 ///
 /// Maps raw text (from voice or keyboard) to a structured GenieIntent.
 /// Uses a priority-ordered list of pattern sets per module. ~200 built-in
 /// intents covering all platform actions. Fully offline, no server call.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'genie_intent.dart';
@@ -36,7 +36,7 @@ class GenieIntentResolver {
         _resolveGenieNative(text);
   }
 
-  // ─── GO PAGE ───────────────────────────────────────────────────────────────
+  //  GO PAGE 
   static GenieIntent? _resolveGoPage(String t) {
     if (_any(t, ['balance', 'qpoints balance', 'qp balance', 'how many qp',
         'my balance', 'check balance', 'wallet'])) {
@@ -79,7 +79,7 @@ class GenieIntentResolver {
     return null;
   }
 
-  // ─── MARKET ────────────────────────────────────────────────────────────────
+  //  MARKET 
   static GenieIntent? _resolveMarket(String t) {
     if (_any(t, ['nearby shops', 'show shops', 'browse', 'shops near me',
         'explore market', 'market'])) {
@@ -123,7 +123,7 @@ class GenieIntentResolver {
     return null;
   }
 
-  // ─── e-PLAY ─────────────────────────────────────────────────────────────────
+  //  e-PLAY 
   static GenieIntent? _resolveEPlay(String t) {
     if (_any(t, ['my locker', 'cloud locker', 'e-play locker', 'eplay locker',
         'my digital content', 'my purchased content'])) {
@@ -152,7 +152,7 @@ class GenieIntentResolver {
     return null;
   }
 
-  // ─── COMMUNITY ─────────────────────────────────────────────────────────────
+  //  COMMUNITY 
   static GenieIntent? _resolveCommunity(String t) {
     if (_any(t, ['my communities', 'communities i joined', 'joined communities'])) {
       return const GenieIntent(module: GenieModule.community, action: 'my_communities', requiresFullScreen: true);
@@ -176,7 +176,7 @@ class GenieIntentResolver {
     return null;
   }
 
-  // ─── MY UPDATES ───────────────────────────────────────────────────────────
+  //  MY UPDATES 
   static GenieIntent? _resolveMyUpdates(String t) {
     if (_any(t, ['feed', 'my feed', 'show my feed', 'updates feed', 'news feed'])) {
       return const GenieIntent(module: GenieModule.myUpdates, action: 'show_feed');
@@ -201,7 +201,7 @@ class GenieIntentResolver {
     return null;
   }
 
-  // ─── LIVE ──────────────────────────────────────────────────────────────────
+  //  LIVE 
   static GenieIntent? _resolveLive(String t) {
     if (_any(t, ['incoming orders', 'incoming', 'new orders', 'pending orders'])) {
       return const GenieIntent(module: GenieModule.live, action: 'incoming_orders');
@@ -241,7 +241,7 @@ class GenieIntentResolver {
     return null;
   }
 
-  // ─── ALERTS ────────────────────────────────────────────────────────────────
+  //  ALERTS 
   static GenieIntent? _resolveAlerts(String t) {
     if (_any(t, ['alerts', 'recent alerts', 'alert list', 'show alerts',
         'my alerts'])) {
@@ -260,7 +260,7 @@ class GenieIntentResolver {
     return null;
   }
 
-  // ─── QUALCHAT ──────────────────────────────────────────────────────────────
+  //  QUALCHAT 
   static GenieIntent? _resolveQualChat(String t) {
     if (_any(t, ['chats', 'recent chats', 'messages', 'my messages',
         'chat list'])) {
@@ -288,7 +288,7 @@ class GenieIntentResolver {
     return null;
   }
 
-  // ─── APRIL ─────────────────────────────────────────────────────────────────
+  //  APRIL 
   static GenieIntent? _resolveApril(String t) {
     if (_any(t, ['reminders', 'any reminders', 'my reminders', 'schedule',
         'upcoming'])) {
@@ -315,7 +315,7 @@ class GenieIntentResolver {
     return null;
   }
 
-  // ─── SETUP DASHBOARD ──────────────────────────────────────────────────────
+  //  SETUP DASHBOARD 
   static GenieIntent? _resolveSetupDashboard(String t) {
     if (_any(t, ['operations', 'operations overview', 'dashboard overview',
         'my operations', 'setup overview'])) {
@@ -349,7 +349,7 @@ class GenieIntentResolver {
     return null;
   }
 
-  // ─── USER DETAILS ──────────────────────────────────────────────────────────
+  //  USER DETAILS 
   static GenieIntent? _resolveUserDetails(String t) {
     if (_any(t, ['profile strength', 'complete profile', 'profile completeness',
         'my profile'])) {
@@ -375,7 +375,7 @@ class GenieIntentResolver {
     return null;
   }
 
-  // ─── UTILITY ───────────────────────────────────────────────────────────────
+  //  UTILITY 
   static GenieIntent? _resolveUtility(String t) {
     if (_any(t, ['notifications', 'my notifications', 'notification hub',
         'notification center'])) {
@@ -400,7 +400,7 @@ class GenieIntentResolver {
     return null;
   }
 
-  // ─── FULL-SCREEN NAVIGATION COMMANDS ─────────────────────────────────────
+  //  FULL-SCREEN NAVIGATION COMMANDS 
   static GenieIntent? _resolveNavigation(String t) {
     final moduleMap = {
       'go page': GenieModule.goPage,
@@ -435,7 +435,7 @@ class GenieIntentResolver {
     return null;
   }
 
-  // ─── FINTECH ──────────────────────────────────────────────────────────────
+  //  FINTECH 
   static GenieIntent? _resolveFintech(String t) {
     if (_any(t, ['apply for loan', 'need a loan', 'loan for', 'borrow qp',
         'borrow money', 'get a loan', 'loan application', 'take a loan'])) {
@@ -471,7 +471,7 @@ class GenieIntentResolver {
     return null;
   }
 
-  // ─── ENTERPRISE ───────────────────────────────────────────────────────────
+  //  ENTERPRISE 
   static GenieIntent? _resolveEnterprise(String t) {
     if (_any(t, ['register enterprise', 'onboard enterprise', 'enterprise onboarding',
         'enterprise setup', 'add enterprise', 'create enterprise'])) {
@@ -516,7 +516,7 @@ class GenieIntentResolver {
     return null;
   }
 
-  // ─── GENIE NATIVE ─────────────────────────────────────────────────────────
+  //  GENIE NATIVE 
   static GenieIntent? _resolveGenieNative(String t) {
     if (_any(t, ['classic dashboard', 'show classic', 'old dashboard',
         'widget dashboard'])) {
@@ -529,7 +529,7 @@ class GenieIntentResolver {
     return null;
   }
 
-  // ─── Helpers ──────────────────────────────────────────────────────────────
+  //  Helpers 
   static bool _any(String text, List<String> patterns) =>
       patterns.any((p) => text.contains(p));
 

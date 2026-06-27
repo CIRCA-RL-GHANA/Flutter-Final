@@ -1,8 +1,10 @@
-﻿/// qualChat Screen 4 — My Preferences (Owner Only)
+/// qualChat Screen 4  My Preferences (Owner Only)
 /// Intelligent Preference System: Vibe settings, discovery, privacy
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:provider/provider.dart';
 import '../models/qualchat_models.dart';
 import '../providers/qualchat_provider.dart';
@@ -19,7 +21,7 @@ class QualChatPreferencesScreen extends StatelessWidget {
         return Scaffold(
           backgroundColor: const Color(0xFFF8F9FE),
           appBar: QualChatAppBar(
-            title: 'My Vibe Settings ðŸŽ›ï¸',
+            title: 'My Vibe Settings ',
             actions: [
               TextButton(
                 onPressed: () => showDialog(context: context, builder: (_) => AlertDialog(
@@ -27,7 +29,7 @@ class QualChatPreferencesScreen extends StatelessWidget {
                   content: const Text('This will reset all your vibe preferences to defaults.'),
                   actions: [
                     TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
-                    ElevatedButton(onPressed: () { Navigator.pop(context); ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Settings reset to defaults'))); }, child: const Text('Reset')),
+                    ElevatedButton(onPressed: () { Navigator.pop(context); AppToast.show(context, 'Settings reset to defaults'); }, child: const Text('Reset')),
                   ],
                 )),
                 child: const Text('Reset', style: TextStyle(color: Color(0xFFEF4444))),
@@ -43,7 +45,7 @@ class QualChatPreferencesScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       _ToggleRow(
-                        emoji: 'ðŸŒŸ',
+                        emoji: '',
                         label: 'Open to new connections',
                         subtitle: provider.isOpenToConnections ? 'Active - Sparkling!' : 'Paused',
                         value: provider.isOpenToConnections,
@@ -51,7 +53,7 @@ class QualChatPreferencesScreen extends StatelessWidget {
                       ),
                       const Divider(height: 24),
                       _ToggleRow(
-                        emoji: 'ðŸ›¡ï¸',
+                        emoji: '',
                         label: 'Incognito Mode',
                         subtitle: provider.incognitoMode ? 'Your profile is hidden' : 'Your profile is visible',
                         value: provider.incognitoMode,
@@ -73,7 +75,7 @@ class QualChatPreferencesScreen extends StatelessWidget {
                           const Text('Age: ', style: TextStyle(fontSize: 14, color: Color(0xFF1A1A1A))),
                           Text(
                             '${provider.ageRange.start.toInt()} - ${provider.ageRange.end.toInt()}',
-                            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: kChatColor),
+                            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: IveTokens.moduleQualChat),
                           ),
                         ],
                       ),
@@ -93,7 +95,7 @@ class QualChatPreferencesScreen extends StatelessWidget {
                           const Text('Distance: ', style: TextStyle(fontSize: 14, color: Color(0xFF1A1A1A))),
                           Text(
                             '${provider.distanceKm.toInt()}km',
-                            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: kChatColor),
+                            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: IveTokens.moduleQualChat),
                           ),
                         ],
                       ),
@@ -126,7 +128,7 @@ class QualChatPreferencesScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                           decoration: BoxDecoration(
                             color: isSelected ? kChatSocial : const Color(0xFFF3F4F6),
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(10),
                             border: isSelected ? null : Border.all(color: const Color(0xFFE5E7EB)),
                           ),
                           child: Text(
@@ -158,12 +160,12 @@ class QualChatPreferencesScreen extends StatelessWidget {
                               children: [
                                 Text(w.label, style: const TextStyle(fontSize: 13, color: Color(0xFF1A1A1A))),
                                 Text('${w.percent.toInt()}%',
-                                    style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: kChatColor)),
+                                    style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: IveTokens.moduleQualChat)),
                               ],
                             ),
                             const SizedBox(height: 6),
                             ClipRRect(
-                              borderRadius: BorderRadius.circular(4),
+                              borderRadius: BorderRadius.circular(6),
                               child: LinearProgressIndicator(
                                 value: w.percent / 100,
                                 backgroundColor: const Color(0xFFE5E7EB),
@@ -203,18 +205,18 @@ class QualChatPreferencesScreen extends StatelessWidget {
                         content: const Text('This will permanently delete your QualChat history.'),
                         actions: [
                           TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
-                          ElevatedButton(onPressed: () { Navigator.pop(context); ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('History cleared'))); }, style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFFEF4444)), child: const Text('Clear')),
+                          ElevatedButton(onPressed: () { Navigator.pop(context); AppToast.show(context, 'History cleared'); }, style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFFEF4444)), child: const Text('Clear')),
                         ],
                       ))),
                       const SizedBox(width: 8),
-                      _DataButton(label: 'Export Data', icon: Icons.download, onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Exporting your data...')))),
+                      _DataButton(label: 'Export Data', icon: Icons.download, onTap: () => AppToast.show(context, 'Exporting your data...')),
                       const SizedBox(width: 8),
                       _DataButton(label: 'Delete Account', icon: Icons.warning_amber, onTap: () => showDialog(context: context, builder: (_) => AlertDialog(
                         title: const Text('Delete Account?'),
                         content: const Text('This will permanently delete your QualChat account and all data. This cannot be undone.'),
                         actions: [
                           TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
-                          ElevatedButton(onPressed: () { Navigator.pop(context); ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Account deletion requested'))); }, style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFFEF4444)), child: const Text('Delete')),
+                          ElevatedButton(onPressed: () { Navigator.pop(context); AppToast.show(context, 'Account deletion requested'); }, style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFFEF4444)), child: const Text('Delete')),
                         ],
                       )), isDestructive: true),
                     ],
@@ -227,10 +229,10 @@ class QualChatPreferencesScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [kChatColor.withValues(alpha: 0.1), kChatSocial.withValues(alpha: 0.1)],
+                      colors: [IveTokens.moduleQualChat.withValues(alpha: 0.1), kChatSocial.withValues(alpha: 0.1)],
                     ),
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: kChatColor.withValues(alpha: 0.2)),
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: IveTokens.moduleQualChat.withValues(alpha: 0.2)),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -248,9 +250,9 @@ class QualChatPreferencesScreen extends StatelessWidget {
                         children: [
                           Expanded(
                             child: ElevatedButton(
-                              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('AI suggestions applied'))),
+                              onPressed: () => AppToast.show(context, 'AI suggestions applied'),
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: kChatColor,
+                                backgroundColor: IveTokens.moduleQualChat,
                                 foregroundColor: Colors.white,
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                               ),
@@ -261,8 +263,8 @@ class QualChatPreferencesScreen extends StatelessWidget {
                           OutlinedButton(
                             onPressed: () => Navigator.pushNamed(context, AppRoutes.utilityHelp),
                             style: OutlinedButton.styleFrom(
-                              foregroundColor: kChatColor,
-                              side: const BorderSide(color: kChatColor),
+                              foregroundColor: IveTokens.moduleQualChat,
+                              side: const BorderSide(color: IveTokens.moduleQualChat),
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                             ),
                             child: const Text('Learn More'),
@@ -283,15 +285,15 @@ class QualChatPreferencesScreen extends StatelessWidget {
 
   String _tagEmoji(VibeTag tag) {
     switch (tag) {
-      case VibeTag.adventurous: return 'ðŸƒ';
-      case VibeTag.creative: return 'ðŸŽ¨';
-      case VibeTag.nerdy: return 'ðŸ“š';
-      case VibeTag.foodie: return 'ðŸ³';
-      case VibeTag.musical: return 'ðŸŽµ';
-      case VibeTag.pets: return 'ðŸ¶';
-      case VibeTag.travel: return 'ðŸŒ';
-      case VibeTag.gaming: return 'ðŸŽ®';
-      case VibeTag.calm: return 'ðŸ§˜';
+      case VibeTag.adventurous: return '';
+      case VibeTag.creative: return '';
+      case VibeTag.nerdy: return '"';
+      case VibeTag.foodie: return '';
+      case VibeTag.musical: return '';
+      case VibeTag.pets: return '';
+      case VibeTag.travel: return '';
+      case VibeTag.gaming: return '';
+      case VibeTag.calm: return '';
     }
   }
 }
@@ -334,7 +336,7 @@ class _ToggleRow extends StatelessWidget {
           Switch(
             value: value,
             onChanged: onChanged,
-            activeThumbColor: kChatColor,
+            activeThumbColor: IveTokens.moduleQualChat,
           ),
         ],
       ),
@@ -367,7 +369,7 @@ class _DataButton extends StatelessWidget {
           side: BorderSide(
             color: isDestructive ? const Color(0xFFEF4444).withValues(alpha: 0.3) : const Color(0xFFE5E7EB),
           ),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 8),
         ),
       ),
@@ -385,7 +387,7 @@ class _RecommendationItem extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 4),
       child: Row(
         children: [
-          const Text('•  ', style: TextStyle(color: kChatColor)),
+          const Text('  ', style: TextStyle(color: IveTokens.moduleQualChat)),
           Expanded(
             child: Text(text, style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
           ),

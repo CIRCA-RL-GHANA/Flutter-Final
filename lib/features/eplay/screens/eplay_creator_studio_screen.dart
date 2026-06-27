@@ -1,7 +1,7 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// e-PLAY MODULE — Creator Studio Screen
+/// 
+/// e-PLAY MODULE  Creator Studio Screen
 /// Creators open their "digital branch", upload content, manage royalties.
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -72,7 +72,7 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
     );
   }
 
-  // ── Onboarding: Open digital branch ──────────────────────────────────────
+  //  Onboarding: Open digital branch 
 
   Widget _buildOnboarding(EPlayProvider eplay) {
     return SingleChildScrollView(
@@ -90,13 +90,13 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
           const Text('Open Your Digital Branch', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppColors.textPrimary), textAlign: TextAlign.center),
           const SizedBox(height: 10),
           const Text(
-            'Sell music, movies, podcasts, e-books and shows directly to your audience. You keep 85% — Genie keeps 15%.',
+            'Sell music, movies, podcasts, e-books and shows directly to your audience. You keep 85%  Genie keeps 15%.',
             style: TextStyle(fontSize: 14, color: AppColors.textSecondary, height: 1.6),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 32),
           _onboardingStat('85%', 'Creator royalty'),
-          _onboardingStat('âˆž',   'Content you can upload'),
+          _onboardingStat('',   'Content you can upload'),
           _onboardingStat('DRM', 'IP protected by default'),
           _onboardingStat('QP',  'Micro-payment ready'),
           const SizedBox(height: 40),
@@ -138,7 +138,7 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
     );
   }
 
-  // ── Creator Studio ────────────────────────────────────────────────────────
+  //  Creator Studio 
 
   Widget _buildStudio(EPlayProvider eplay) {
     return TabBarView(
@@ -166,7 +166,7 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
             child: const Icon(Icons.music_note, color: kEPlayColor),
           ),
           title: Text(items[i], style: const TextStyle(fontWeight: FontWeight.w600)),
-          subtitle: const Text('Published Â· â‚µ5 QP', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+          subtitle: const Text('Published  5 QP', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
           trailing: PopupMenuButton(
             itemBuilder: (_) => const [
               PopupMenuItem(value: 'edit', child: Text('Edit')),
@@ -233,7 +233,7 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
             child: ElevatedButton.icon(
               onPressed: _uploading ? null : () => setState(() => _uploading = !_uploading),
               icon: _uploading ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2)) : const Icon(Icons.upload),
-              label: Text(_uploading ? 'Uploading…' : 'Upload & Publish'),
+              label: Text(_uploading ? 'Uploading' : 'Upload & Publish'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: kEPlayColor, foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(vertical: 15),
@@ -250,10 +250,10 @@ class _EPlayCreatorStudioScreenState extends State<EPlayCreatorStudioScreen> wit
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
-        _analyticsCard('Total Earnings', '₵127 QP', Icons.account_balance_wallet, Colors.teal),
+        _analyticsCard('Total Earnings', '127 QP', Icons.account_balance_wallet, Colors.teal),
         _analyticsCard('Total Plays',    '4,820',    Icons.play_circle,             kEPlayColor),
         _analyticsCard('Unique Buyers',  '312',      Icons.people,                  AppColors.success),
-        _analyticsCard('Avg. Rating',    '4.7 â˜…',    Icons.star,                    AppColors.warning),
+        _analyticsCard('Avg. Rating',    '4.7 ',    Icons.star,                    AppColors.warning),
       ],
     );
   }

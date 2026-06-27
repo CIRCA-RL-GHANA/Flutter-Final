@@ -44,7 +44,7 @@ class ErrorTracking {
     );
   }
 
-  // ── Internal ──────────────────────────────────────────────────────
+  //  Internal 
 
   static void _report(
     Object error,
@@ -54,9 +54,9 @@ class ErrorTracking {
   }) {
     // Always log in debug
     if (kDebugMode) {
-      debugPrint('╔══ ERROR [$context] ══');
-      debugPrint('║ $error');
-      debugPrint('╚══ STACK ══');
+      debugPrint(' ERROR [$context] ');
+      debugPrint(' $error');
+      debugPrint(' STACK ');
       debugPrint('$stack');
     }
 

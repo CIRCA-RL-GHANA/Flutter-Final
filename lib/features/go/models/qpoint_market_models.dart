@@ -4,9 +4,9 @@ library;
 
 import 'package:flutter/foundation.dart';
 
-// ────────────────────────────────────────────
+// 
 // Enums
-// ────────────────────────────────────────────
+// 
 
 enum QPointOrderType { buy, sell }
 
@@ -18,7 +18,7 @@ extension QPointOrderTypeX on QPointOrderType {
     return QPointOrderType.values.firstWhere(
       (e) => e.name.toLowerCase() == s.toLowerCase(),
       orElse: () {
-        // Unknown value from backend — assert in debug, fall back to buy in release
+        // Unknown value from backend  assert in debug, fall back to buy in release
         assert(false, 'Unknown QPointOrderType: $s');
         debugPrint('[EnumParse] Unknown value: $s for QPointOrderType');
         return QPointOrderType.buy;
@@ -32,7 +32,7 @@ extension QPointOrderStatusX on QPointOrderStatus {
     return QPointOrderStatus.values.firstWhere(
       (e) => e.name.toLowerCase() == s.toLowerCase(),
       orElse: () {
-        // Unknown value from backend — assert in debug, fall back to open in release
+        // Unknown value from backend  assert in debug, fall back to open in release
         assert(false, 'Unknown QPointOrderStatus: $s');
         debugPrint('[EnumParse] Unknown value: $s for QPointOrderStatus');
         return QPointOrderStatus.open;
@@ -41,9 +41,9 @@ extension QPointOrderStatusX on QPointOrderStatus {
   }
 }
 
-// ────────────────────────────────────────────
+// 
 // Market Balance
-// ────────────────────────────────────────────
+// 
 
 class QPointMarketBalance {
   final double balance;
@@ -59,9 +59,9 @@ class QPointMarketBalance {
       );
 }
 
-// ────────────────────────────────────────────
+// 
 // Order
-// ────────────────────────────────────────────
+// 
 
 class QPointOrder {
   final String id;
@@ -101,9 +101,9 @@ class QPointOrder {
       );
 }
 
-// ────────────────────────────────────────────
+// 
 // Trade
-// ────────────────────────────────────────────
+// 
 
 class QPointTrade {
   final String id;
@@ -146,9 +146,9 @@ class QPointTrade {
       );
 }
 
-// ────────────────────────────────────────────
+// 
 // Order Book
-// ────────────────────────────────────────────
+// 
 
 class OrderBookLevel {
   final double price;
@@ -187,9 +187,9 @@ class QPointOrderBook {
       );
 }
 
-// ────────────────────────────────────────────
+// 
 // Market Stats
-// ────────────────────────────────────────────
+// 
 
 class QPointMarketStats {
   final double? lastPrice;
@@ -224,9 +224,9 @@ class QPointMarketStats {
       );
 }
 
-// ────────────────────────────────────────────
+// 
 // Notification
-// ────────────────────────────────────────────
+// 
 
 class QPointNotification {
   final String id;
@@ -256,9 +256,9 @@ class QPointNotification {
       );
 }
 
-// ────────────────────────────────────────────
+// 
 // Terms of Service Models
-// ────────────────────────────────────────────
+// 
 
 /// Full ToS document returned by GET /qpoints/tos
 class QPointsTosContent {
@@ -303,9 +303,9 @@ class QPointsTosStatus {
       );
 }
 
-// ────────────────────────────────────────────
-// Fee Schedule (TOS §7.1)
-// ────────────────────────────────────────────
+// 
+// Fee Schedule (TOS 7.1)
+// 
 
 /// Fee schedule returned by GET /qpoints/fees (TOS Section 7.1)
 class QPointFeeSchedule {
@@ -329,15 +329,15 @@ class QPointFeeSchedule {
                 .toDouble(),
         feeChargeTo: j['feeChargeTo'] as String? ?? j['fee_charge_to'] as String? ?? 'taker',
         pegRate: j['pegRate'] as String? ?? j['peg_rate'] as String? ?? '1.00 Q Points = \$1.00 USD (fixed)',
-        // Backend returns 'taxDisclosure' — map it to description field
+        // Backend returns 'taxDisclosure'  map it to description field
         description: j['taxDisclosure'] as String? ??
             j['description'] as String? ?? '',
       );
 }
 
-// ────────────────────────────────────────────
-// Facilitator Models (TOS §2.2)
-// ────────────────────────────────────────────
+// 
+// Facilitator Models (TOS 2.2)
+// 
 
 /// Option for a select-type account field (e.g. account type choices).
 class QPointFieldOption {
@@ -442,9 +442,9 @@ class QPointFacilitatorAccount {
       );
 }
 
-// ────────────────────────────────────────────
+// 
 // Cross-Facilitator Bridge Models
-// ────────────────────────────────────────────
+// 
 
 /// AI Participant's cash balance at a specific payment facilitator.
 class AiFacilitatorBalance {
@@ -572,7 +572,7 @@ class CrossFacilitatorNetPosition {
       );
 }
 
-// ── Facilitator Cash Balance (Zen of User Balance) ────────────────────────────
+//  Facilitator Cash Balance (Zen of User Balance) 
 
 /// Real-time cash balance at the user's primary payment facilitator.
 /// Fetched server-to-server and cached for 30 seconds on the backend.
@@ -641,7 +641,7 @@ class FacilitatorCashBalance {
       );
 }
 
-// ── FacilitatorPosition (AI bridge health) ────────────────────────────────────
+//  FacilitatorPosition (AI bridge health) 
 
 class FacilitatorPosition {
   final String facilitatorId;

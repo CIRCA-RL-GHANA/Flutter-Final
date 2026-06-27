@@ -210,9 +210,9 @@ class RideService {
     );
   }
 
-  // ═══════════════════════════════════════════════════════════════════════
+  // 
   // AI-ENHANCED METHODS
-  // ═══════════════════════════════════════════════════════════════════════
+  // 
 
   /// Get AI-computed dynamic pricing for a ride with surge multiplier.
   /// Returns basePrice, surgeMultiplier, finalPrice, and pricing factors.

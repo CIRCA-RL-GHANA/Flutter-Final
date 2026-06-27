@@ -1,21 +1,17 @@
-﻿import 'dart:async';
+import 'dart:async';
 import 'package:flutter/material.dart';
-import '../../../core/design/ive.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '../../../core/design/ive.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/constants/app_strings.dart';
 import '../../../core/utils/responsive.dart';
+import '../../../core/utils/app_toast.dart';
 import '../providers/phone_auth_provider.dart';
 import '../providers/onboarding_provider.dart';
 import '../widgets/onboarding_header.dart';
+import '../widgets/onboarding_loading_overlay.dart';
 
-
-// OS palette — mirrors splash / welcome
-// ignore: unused_element
-const Color _kTextDim   = IveTokens.labelSecondary;
-/// Screen 4: OTP Verification (Secure)
-/// Maximum security with minimum friction
+/// Screen 05 — OTP verification, step 02/08.
 class OtpVerificationScreen extends StatefulWidget {
   final String phoneNumber;
   final String countryCode;
@@ -27,20 +23,22 @@ class OtpVerificationScreen extends StatefulWidget {
   });
 
   @override
-  State<OtpVerificationScreen> createState() => _OtpVerificationScreenState();
+  State<OtpVerificationScreen> createState() =>
+      _OtpVerificationScreenState();
 }
 
 class _OtpVerificationScreenState extends State<OtpVerificationScreen>
     with SingleTickerProviderStateMixin {
-  final List<TextEditingController> _otpControllers =
+  final List<TextEditingController> _controllers =
       List.generate(6, (_) => TextEditingController());
-  final List<FocusNode> _focusNodes = List.generate(6, (_) => FocusNode());
+  final List<FocusNode> _focusNodes =
+      List.generate(6, (_) => FocusNode());
 
-  late AnimationController _shakeController;
-  late Animation<double> _shakeAnimation;
+  late AnimationController _shakeCtrl;
+  late Animation<double> _shakeAnim;
 
   Timer? _timer;
-  int _remainingSeconds = 299; // 4:59
+  int _remainingSeconds = 299;
   bool _canResend = false;
   bool _isVerifying = false;
   bool _isSuccess = false;
@@ -48,42 +46,32 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
   @override
   void initState() {
     super.initState();
-    _shakeController = AnimationController(
-      duration: const Duration(milliseconds: 600),
+    _shakeCtrl = AnimationController(
+      duration: const Duration(milliseconds: 500),
       vsync: this,
     );
-    _shakeAnimation = Tween(begin: 0.0, end: 8.0)
+    _shakeAnim = Tween(begin: 0.0, end: 8.0)
         .chain(CurveTween(curve: Curves.elasticIn))
-        .animate(_shakeController);
+        .animate(_shakeCtrl);
 
     _startTimer();
-
-    // Auto-focus first field
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _focusNodes[0].requestFocus();
-    });
+    WidgetsBinding.instance.addPostFrameCallback(
+        (_) => _focusNodes[0].requestFocus());
   }
 
   void _startTimer() {
     _remainingSeconds = 299;
     _canResend = false;
     _timer?.cancel();
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (t) {
       if (!mounted) {
-        timer.cancel();
+        t.cancel();
         return;
       }
       setState(() {
         _remainingSeconds--;
-        if (_remainingSeconds <= 0) {
-          _canResend = true;
-          timer.cancel();
-        }
-        // Allow first resend after 30 seconds
-        if (_remainingSeconds <= 269) {
-          // 299 - 30
-          _canResend = true;
-        }
+        if (_remainingSeconds <= 269) _canResend = true;
+        if (_remainingSeconds <= 0) t.cancel();
       });
       context.read<PhoneAuthProvider>().updateTimer(_remainingSeconds);
     });
@@ -92,54 +80,47 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
   @override
   void dispose() {
     _timer?.cancel();
-    _shakeController.dispose();
-    for (var c in _otpControllers) {
+    _shakeCtrl.dispose();
+    for (final c in _controllers) {
       c.dispose();
     }
-    for (var n in _focusNodes) {
+    for (final n in _focusNodes) {
       n.dispose();
     }
     super.dispose();
   }
 
   String get _formattedTime {
-    final minutes = (_remainingSeconds ~/ 60).toString().padLeft(2, '0');
-    final seconds = (_remainingSeconds % 60).toString().padLeft(2, '0');
-    return '$minutes:$seconds';
+    final m = (_remainingSeconds ~/ 60).toString().padLeft(2, '0');
+    final s = (_remainingSeconds % 60).toString().padLeft(2, '0');
+    return '$m:$s';
   }
 
   void _onDigitEntered(int index, String value) {
     if (value.length == 1 && index < 5) {
-      // Auto-advance
       _focusNodes[index + 1].requestFocus();
     }
+    final otp = _controllers.map((c) => c.text).join();
+    if (otp.length == 6) _verifyOtp(otp);
+  }
 
-    // Check if all 6 digits are entered â†’ auto-submit
-    final otp = _otpControllers.map((c) => c.text).join();
-    if (otp.length == 6) {
-      _verifyOtp(otp);
+  void _distributePaste(String digits) {
+    final code = digits.replaceAll(RegExp(r'[^0-9]'), '');
+    final len = code.length.clamp(0, 6);
+    for (int i = 0; i < 6; i++) {
+      _controllers[i].text = i < len ? code[i] : '';
     }
+    _focusNodes[(len - 1).clamp(0, 5)].requestFocus();
+    final otp = _controllers.map((c) => c.text).join();
+    if (otp.length == 6) _verifyOtp(otp);
   }
 
   void _onKeyPressed(int index, KeyEvent event) {
     if (event is KeyDownEvent &&
         event.logicalKey == LogicalKeyboardKey.backspace &&
-        _otpControllers[index].text.isEmpty &&
+        _controllers[index].text.isEmpty &&
         index > 0) {
       _focusNodes[index - 1].requestFocus();
-    }
-  }
-
-  // ignore: unused_element
-  void _handlePaste(String? value) {
-    if (value == null || value.length < 6) return;
-    final digits = value.replaceAll(RegExp(r'\D'), '');
-    if (digits.length != 6) return; // reject if not exactly 6 digits
-    for (int i = 0; i < 6 && i < digits.length; i++) {
-      _otpControllers[i].text = digits[i];
-    }
-    if (digits.length >= 6) {
-      _verifyOtp(digits.substring(0, 6));
     }
   }
 
@@ -158,20 +139,24 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
         _isVerifying = false;
       });
       HapticFeedback.heavyImpact();
-
-      // Wait for success animation
-      await Future.delayed(const Duration(seconds: 1));
+      await Future.delayed(const Duration(milliseconds: 800));
       if (!mounted) return;
 
       context.read<OnboardingProvider>().completeOtp();
-      Navigator.of(context).pushReplacementNamed(AppRoutes.registration);
+      final isReturning =
+          context.read<OnboardingProvider>().isReturningUser;
+      if (isReturning) {
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            AppRoutes.welcomeBack, (r) => false);
+      } else {
+        Navigator.of(context)
+            .pushReplacementNamed(AppRoutes.registration);
+      }
     } else {
       setState(() => _isVerifying = false);
-      _shakeController.forward().then((_) => _shakeController.reset());
+      _shakeCtrl.forward().then((_) => _shakeCtrl.reset());
       HapticFeedback.heavyImpact();
-
-      // Clear fields
-      for (var c in _otpControllers) {
+      for (final c in _controllers) {
         c.clear();
       }
       _focusNodes[0].requestFocus();
@@ -181,21 +166,10 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
   Future<void> _resendOtp() async {
     final auth = context.read<PhoneAuthProvider>();
     final success = await auth.resendOtp();
-
     if (!mounted) return;
-
     if (success) {
       _startTimer();
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text(AppStrings.newCodeSent),
-          backgroundColor: IveTokens.success,
-          behavior: SnackBarBehavior.floating,
-          shape:
-              RoundedRectangleBorder(borderRadius: IveTokens.brMd),
-          margin: EdgeInsets.all(16),
-        ),
-      );
+      AppToast.success(context, 'New code sent.');
     }
   }
 
@@ -203,245 +177,141 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
   Widget build(BuildContext context) {
     final auth = context.watch<PhoneAuthProvider>();
 
-    return Scaffold(
-      backgroundColor: IveTokens.bg,
-      body: SafeArea(
-        child: Responsive.constrained(
-          child: Column(
-            children: [
-              OnboardingHeader(
-                title: AppStrings.verifyNumber,
-                currentStep: 2,
-                totalSteps: 8,
-                onBack: () => Navigator.pop(context),
-              ),
+    return OnboardingLoadingOverlay(
+      isLoading: _isVerifying,
+      child: Scaffold(
+        backgroundColor: IveTokens.bg,
+        body: SafeArea(
+          child: Responsive.constrained(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                OnboardingHeader(
+                  title: 'Enter the code',
+                  subtitle:
+                      'Sent to ${widget.countryCode} ${widget.phoneNumber}',
+                  currentStep: 2,
+                  totalSteps: 8,
+                ),
 
-              Expanded(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: Column(
-                    children: [
-                      // Phone number display with edit
-                      GestureDetector(
-                        onTap: () => Navigator.pop(context),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 12,
-                          ),
-                          decoration: const BoxDecoration(
-                            color: IveTokens.surface,
-                            borderRadius: IveTokens.brMd,
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                '${widget.countryCode} ${widget.phoneNumber}',
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  color: IveTokens.label,
-                                ),
-                              ),
-                              const SizedBox(width: 8),
-                              const Icon(
-                                Icons.edit,
-                                size: 16,
-                                color: IveTokens.accent,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-
-                      const SizedBox(height: 8),
-                      const Text(
-                        AppStrings.enterOtpCode,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: IveTokens.labelSecondary,
-                        ),
-                      ),
-
-                      const SizedBox(height: 32),
-
-                      // OTP Input Matrix
-                      AnimatedBuilder(
-                        animation: _shakeAnimation,
-                        builder: (context, child) {
-                          return Transform.translate(
+                Expanded(
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // 6 OTP boxes
+                        AnimatedBuilder(
+                          animation: _shakeAnim,
+                          builder: (context, child) =>
+                              Transform.translate(
                             offset: Offset(
-                              _shakeAnimation.value *
-                                  (_shakeController.isAnimating
-                                      ? ((_shakeController.value * 10).toInt() %
+                              _shakeAnim.value *
+                                  (_shakeCtrl.isAnimating
+                                      ? (_shakeCtrl.value * 10).toInt() %
                                                   2 ==
                                               0
-                                          ? 1
-                                          : -1)
-                                      : 0),
+                                          ? 1.0
+                                          : -1.0
+                                      : 0.0),
                               0,
                             ),
                             child: child,
-                          );
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: List.generate(6, (index) {
-                            return Container(
-                              width: 50,
-                              height: 56,
-                              margin:
-                                  const EdgeInsets.symmetric(horizontal: 5),
-                              child: _OtpDigitField(
-                                controller: _otpControllers[index],
-                                focusNode: _focusNodes[index],
-                                isSuccess: _isSuccess,
-                                onChanged: (value) =>
-                                    _onDigitEntered(index, value),
-                                onKey: (event) =>
-                                    _onKeyPressed(index, event),
-                              ),
-                            );
-                          }),
-                        ),
-                      ),
-
-                      // Error message
-                      if (auth.error != null) ...[
-                        const SizedBox(height: 16),
-                        Text(
-                          auth.error!,
-                          style: const TextStyle(
-                            fontSize: 13,
-                            color: IveTokens.danger,
                           ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-
-                      const SizedBox(height: 32),
-
-                      // Timer / Resend
-                      if (_isSuccess)
-                        const _SuccessIndicator()
-                      else if (_isVerifying)
-                        // Content-shaped skeleton replaces spinner (Move 06)
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
-                          child: Column(
-                            children: [
-                              IveSkeleton(
-                                width: double.infinity,
-                                height: 3,
-                                radius: BorderRadius.circular(IveTokens.rChip),
-                              ),
-                              const SizedBox(height: IveTokens.s2),
-                              IveSkeleton(
-                                width: 120,
-                                height: 12,
-                                radius: BorderRadius.circular(IveTokens.rAtom),
-                              ),
-                            ],
-                          ),
-                        )
-                      else ...[
-                        // Timer display
-                        if (!_canResend)
-                          Column(
-                            children: [
-                              // Circular timer
-                              SizedBox(
-                                width: 60,
-                                height: 60,
-                                child: Stack(
-                                  alignment: Alignment.center,
-                                  children: [
-                                    CircularProgressIndicator(
-                                      value: _remainingSeconds / 299,
-                                      strokeWidth: 3,
-                                      backgroundColor: IveTokens.surface,
-                                      valueColor:
-                                          const AlwaysStoppedAnimation<Color>(
-                                        IveTokens.accent,
-                                      ),
-                                    ),
-                                    Text(
-                                      _formattedTime,
-                                      style: const TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w600,
-                                        color: IveTokens.label,
-                                      ),
-                                    ),
-                                  ],
+                          child: Row(
+                            children: List.generate(6, (i) {
+                              return Expanded(
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                      right: i < 5 ? 8 : 0),
+                                  child: _OtpBox(
+                                    controller: _controllers[i],
+                                    focusNode: _focusNodes[i],
+                                    isSuccess: _isSuccess,
+                                    onChanged: (v) =>
+                                        _onDigitEntered(i, v),
+                                    onKey: (e) =>
+                                        _onKeyPressed(i, e),
+                                    onPaste: _distributePaste,
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                '${AppStrings.resendCode} $_formattedTime',
-                                style: const TextStyle(
-                                  fontSize: 13,
-                                color: IveTokens.labelTertiary,
-                                ),
-                              ),
-                            ],
+                              );
+                            }),
                           ),
+                        ),
 
-                        if (_canResend)
-                          TextButton(
-                            onPressed:
-                                auth.resendAttemptsRemaining > 0
-                                    ? _resendOtp
-                                    : null,
-                            child: Text(
-                              _remainingSeconds <= 0
-                                  ? AppStrings.codeExpired
-                                  : 'Resend Code',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                                color: auth.resendAttemptsRemaining > 0
-                                    ? IveTokens.accent
-                                    : IveTokens.labelTertiary,
-                              ),
+                        if (auth.error != null) ...[
+                          const SizedBox(height: 12),
+                          Text(
+                            auth.error!,
+                            style: const TextStyle(
+                              fontSize: 13,
+                              color: IveTokens.danger,
                             ),
                           ),
+                        ],
 
-                        const SizedBox(height: 32),
+                        const SizedBox(height: 16),
 
-                        // Alternative methods
-                        const Text(
-                          'Didn\'t receive a code?',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: IveTokens.labelSecondary,
-                          ),
-                        ),
-                        const SizedBox(height: 12),
-                        _AlternativeMethodButton(
-                          icon: Icons.phone,
-                          label: AppStrings.getCodeViaCall,
-                          onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Sending code via call...'))),
-                        ),
-                        const SizedBox(height: 8),
-                        _AlternativeMethodButton(
-                          icon: Icons.chat_bubble_outline,
-                          label: AppStrings.receiveOnWhatsApp,
-                          onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Sending code via WhatsApp...'))),
-                        ),
-                        const SizedBox(height: 8),
-                        _AlternativeMethodButton(
-                          icon: Icons.email_outlined,
-                          label: AppStrings.sendToEmail,
-                          onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Sending code to email...'))),
+                        // Resend row
+                        Row(
+                          mainAxisAlignment:
+                              MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              _canResend
+                                  ? 'Code expired'
+                                  : 'Resend in $_formattedTime',
+                              style: const TextStyle(
+                                fontSize: 13,
+                                color: IveTokens.mute,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: _canResend &&
+                                      auth.resendAttemptsRemaining >
+                                          0
+                                  ? _resendOtp
+                                  : null,
+                              child: Text(
+                                'Resend code',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w600,
+                                  color: _canResend &&
+                                          auth.resendAttemptsRemaining >
+                                              0
+                                      ? IveTokens.accent
+                                      : IveTokens.mute,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
-                    ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+
+                // VERIFY button
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 16, 20, 32),
+                  child: IveButton.primary(
+                    label: 'VERIFY',
+                    isLoading: _isVerifying,
+                    onPressed: _isSuccess
+                        ? null
+                        : () {
+                            final otp = _controllers
+                                .map((c) => c.text)
+                                .join();
+                            if (otp.length == 6) _verifyOtp(otp);
+                          },
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -449,45 +319,75 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
   }
 }
 
-class _OtpDigitField extends StatefulWidget {
+// ── Paste-aware formatter ─────────────────────────────────────────────────────
+
+class _PasteAwareFormatter extends TextInputFormatter {
+  final void Function(String digits) onPaste;
+  _PasteAwareFormatter(this.onPaste);
+
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
+    final digits = newValue.text.replaceAll(RegExp(r'[^0-9]'), '');
+    if (digits.length > 1) {
+      // Distribute paste asynchronously so we're not modifying state
+      // from within a formatter call.
+      Future.microtask(() => onPaste(digits));
+      return oldValue;
+    }
+    final single = digits.isEmpty ? '' : digits[0];
+    return newValue.copyWith(
+      text: single,
+      selection: TextSelection.collapsed(offset: single.length),
+    );
+  }
+}
+
+// ── Single OTP digit box ──────────────────────────────────────────────────────
+
+class _OtpBox extends StatefulWidget {
   final TextEditingController controller;
   final FocusNode focusNode;
   final bool isSuccess;
   final ValueChanged<String> onChanged;
   final ValueChanged<KeyEvent> onKey;
+  final void Function(String digits) onPaste;
 
-  const _OtpDigitField({
+  const _OtpBox({
     required this.controller,
     required this.focusNode,
     required this.isSuccess,
     required this.onChanged,
     required this.onKey,
+    required this.onPaste,
   });
 
   @override
-  State<_OtpDigitField> createState() => _OtpDigitFieldState();
+  State<_OtpBox> createState() => _OtpBoxState();
 }
 
-class _OtpDigitFieldState extends State<_OtpDigitField>
+class _OtpBoxState extends State<_OtpBox>
     with SingleTickerProviderStateMixin {
-  late final AnimationController _fillCtrl;
-  late final Animation<double> _scaleAnim;
+  late AnimationController _fillCtrl;
+  late Animation<double> _scaleAnim;
 
   @override
   void initState() {
     super.initState();
     _fillCtrl = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 120),
+      duration: const Duration(milliseconds: 100),
     );
-    _scaleAnim = Tween<double>(begin: 1.0, end: 1.06).animate(
+    _scaleAnim = Tween<double>(begin: 1.0, end: 1.05).animate(
       CurvedAnimation(parent: _fillCtrl, curve: Curves.easeOut),
     );
-    widget.controller.addListener(_onControllerChanged);
+    widget.controller.addListener(_onCtrlChanged);
     widget.focusNode.addListener(_onFocusChanged);
   }
 
-  void _onControllerChanged() {
+  void _onCtrlChanged() {
     if (!mounted) return;
     setState(() {});
     if (widget.controller.text.isNotEmpty) {
@@ -503,7 +403,7 @@ class _OtpDigitFieldState extends State<_OtpDigitField>
 
   @override
   void dispose() {
-    widget.controller.removeListener(_onControllerChanged);
+    widget.controller.removeListener(_onCtrlChanged);
     widget.focusNode.removeListener(_onFocusChanged);
     _fillCtrl.dispose();
     super.dispose();
@@ -514,6 +414,17 @@ class _OtpDigitFieldState extends State<_OtpDigitField>
     final filled = widget.controller.text.isNotEmpty;
     final focused = widget.focusNode.hasFocus;
 
+    Color borderCol;
+    if (widget.isSuccess) {
+      borderCol = IveTokens.success;
+    } else if (focused) {
+      borderCol = IveTokens.accent;
+    } else if (filled) {
+      borderCol = IveTokens.hairline2;
+    } else {
+      borderCol = IveTokens.hairline;
+    }
+
     return KeyboardListener(
       focusNode: FocusNode(),
       onKeyEvent: widget.onKey,
@@ -523,20 +434,16 @@ class _OtpDigitFieldState extends State<_OtpDigitField>
             Transform.scale(scale: _scaleAnim.value, child: child),
         child: AnimatedContainer(
           duration: IveTokens.dFast,
+          height: 56,
           decoration: BoxDecoration(
             color: widget.isSuccess
-                ? IveTokens.okColor.withValues(alpha: 0.10)
-                : filled
-                    ? IveTokens.accentSoftBlue
-                    : IveTokens.surfaceColor,
-            borderRadius: BorderRadius.circular(IveTokens.rContainer),
+                ? IveTokens.success.withValues(alpha: 0.08)
+                : IveTokens.surface,
+            borderRadius:
+                BorderRadius.circular(IveTokens.rSm),
             border: Border.all(
-              color: widget.isSuccess
-                  ? IveTokens.okColor
-                  : (filled || focused)
-                      ? IveTokens.accentColor
-                      : IveTokens.hairColor,
-              width: (widget.isSuccess || filled || focused) ? 2 : 1,
+              color: borderCol,
+              width: (focused || widget.isSuccess) ? 1.5 : 1,
             ),
           ),
           child: TextField(
@@ -544,97 +451,27 @@ class _OtpDigitFieldState extends State<_OtpDigitField>
             focusNode: widget.focusNode,
             keyboardType: TextInputType.number,
             textAlign: TextAlign.center,
-            maxLength: 1,
             onChanged: widget.onChanged,
             style: TextStyle(
-              fontSize: 24,
+              fontSize: 22,
               fontWeight: FontWeight.w700,
               color:
-                  widget.isSuccess ? IveTokens.okColor : IveTokens.inkColor,
+                  widget.isSuccess ? IveTokens.success : IveTokens.ink,
             ),
-            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            inputFormatters: [
+              _PasteAwareFormatter(widget.onPaste),
+            ],
+            textAlignVertical: TextAlignVertical.center,
             decoration: const InputDecoration(
               counterText: '',
               border: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              filled: false,
               contentPadding: EdgeInsets.zero,
+              isCollapsed: true,
             ),
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class _SuccessIndicator extends StatelessWidget {
-  const _SuccessIndicator();
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        TweenAnimationBuilder<double>(
-          tween: Tween(begin: 0, end: 1),
-          duration: const Duration(milliseconds: 600),
-          curve: Curves.elasticOut,
-          builder: (context, value, child) => Transform.scale(
-            scale: value,
-            child: child,
-          ),
-          child: const Icon(
-            Icons.check_circle_rounded,
-            color: IveTokens.okColor,
-            size: 56,
-          ),
-        ),
-        const SizedBox(height: IveTokens.s3),
-        Text(
-          'Verified',
-          style: IveType.title3.copyWith(color: IveTokens.okColor),
-        ),
-      ],
-    );
-  }
-}
-
-class _AlternativeMethodButton extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final VoidCallback onTap;
-
-  const _AlternativeMethodButton({
-    required this.icon,
-    required this.label,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        decoration: BoxDecoration(
-          borderRadius: IveTokens.brMd,
-          border: Border.all(color: IveTokens.hairline),
-        ),
-        child: Row(
-          children: [
-            Icon(icon, size: 20, color: IveTokens.labelSecondary),
-            const SizedBox(width: 12),
-            Text(
-              label,
-              style: const TextStyle(
-                fontSize: 14,
-                color: IveTokens.labelSecondary,
-              ),
-            ),
-            const Spacer(),
-            const Icon(
-              Icons.arrow_forward_ios,
-              size: 14,
-              color: IveTokens.labelTertiary,
-            ),
-          ],
         ),
       ),
     );

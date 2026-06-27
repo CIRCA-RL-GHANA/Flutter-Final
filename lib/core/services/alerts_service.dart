@@ -1,5 +1,5 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// Alerts Service — Flutter ↔ Backend Integration
+/// 
+/// Alerts Service  Flutter  Backend Integration
 ///
 /// Maps to AlertsController endpoints:
 ///   GET    /alerts
@@ -12,7 +12,7 @@
 ///   GET    /alerts/analytics
 ///   GET    /alerts/templates
 ///   GET    /alerts/search
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import '../network/api_client.dart';
@@ -23,7 +23,7 @@ class AlertsService {
 
   AlertsService([ApiClient? api]) : _api = api ?? ApiClient.instance;
 
-  // ─── Alerts CRUD ──────────────────────────────────────────────────────────
+  //  Alerts CRUD 
 
   Future<ApiResponse<List<dynamic>>> getAlerts({
     String? status,
@@ -86,7 +86,7 @@ class AlertsService {
     return _api.delete<void>('/alerts/$id');
   }
 
-  // ─── Analytics & Templates ────────────────────────────────────────────────
+  //  Analytics & Templates 
 
   Future<ApiResponse<Map<String, dynamic>>> getAnalytics() {
     return _api.get<Map<String, dynamic>>(
@@ -102,7 +102,7 @@ class AlertsService {
     );
   }
 
-  // ─── Search ───────────────────────────────────────────────────────────────
+  //  Search 
 
   Future<ApiResponse<List<dynamic>>> searchAlerts(String query) {
     return _api.get<List<dynamic>>(

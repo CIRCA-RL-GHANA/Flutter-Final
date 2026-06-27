@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Investment {
@@ -273,7 +273,7 @@ class _InvestmentsDashboardState extends State<InvestmentsDashboard> {
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: overallROI >= 0 ? Colors.green.shade50 : Colors.red.shade50,
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(10),
               ),
               child: Text(
                 'Overall ROI: ${overallROI.toStringAsFixed(2)}%',

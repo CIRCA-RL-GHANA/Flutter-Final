@@ -1,8 +1,10 @@
-﻿/// GO Screen 10 — Financial Planner
+/// GO Screen 10  Financial Planner
 /// Cash flow forecast, budget manager, goal setting
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:provider/provider.dart';
 import '../models/go_models.dart';
 import '../providers/go_provider.dart';
@@ -34,8 +36,8 @@ class _GoPlannerScreenState extends State<GoPlannerScreen> with SingleTickerProv
               color: Colors.white,
               child: TabBar(
                 controller: _tabCtrl,
-                labelColor: kGoColor, unselectedLabelColor: const Color(0xFF9CA3AF),
-                indicatorColor: kGoColor, indicatorSize: TabBarIndicatorSize.label,
+                labelColor: IveTokens.moduleGo, unselectedLabelColor: const Color(0xFF9CA3AF),
+                indicatorColor: IveTokens.moduleGo, indicatorSize: TabBarIndicatorSize.label,
                 labelStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
                 tabs: const [Tab(text: 'Cash Flow'), Tab(text: 'Budget'), Tab(text: 'Goals')],
               ),
@@ -58,9 +60,9 @@ class _GoPlannerScreenState extends State<GoPlannerScreen> with SingleTickerProv
     return ListView(padding: const EdgeInsets.all(16), children: [
       // Summary cards
       Row(children: [
-        Expanded(child: _SummaryCard(label: 'Inflow (30d)', value: '${forecast.fold<double>(0, (s, c) => s + c.income).toStringAsFixed(0)} QP', color: kGoPositive)),
+        Expanded(child: _SummaryCard(label: 'Inflow (30d)', value: '${forecast.fold<double>(0, (s, c) => s + c.income).toStringAsFixed(0)} QP', color: IveTokens.success)),
         const SizedBox(width: 10),
-        Expanded(child: _SummaryCard(label: 'Outflow (30d)', value: '${forecast.fold<double>(0, (s, c) => s + c.expense).toStringAsFixed(0)} QP', color: kGoNegative)),
+        Expanded(child: _SummaryCard(label: 'Outflow (30d)', value: '${forecast.fold<double>(0, (s, c) => s + c.expense).toStringAsFixed(0)} QP', color: IveTokens.danger)),
       ]),
       const SizedBox(height: 14),
       // Cash flow chart (simplified bars)
@@ -76,30 +78,30 @@ class _GoPlannerScreenState extends State<GoPlannerScreen> with SingleTickerProv
               SizedBox(width: 60, child: Text(point.label, style: const TextStyle(fontSize: 10, color: Color(0xFF9CA3AF)))),
               Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Row(children: [
-                  Expanded(flex: (point.income / maxVal * 100).round().clamp(1, 100).toInt(), child: Container(height: 6, decoration: BoxDecoration(color: kGoPositive, borderRadius: BorderRadius.circular(3)))),
+                  Expanded(flex: (point.income / maxVal * 100).round().clamp(1, 100).toInt(), child: Container(height: 6, decoration: BoxDecoration(color: IveTokens.success, borderRadius: BorderRadius.circular(6)))),
                   Expanded(flex: (100 - (point.income / maxVal * 100).round()).clamp(1, 100).toInt(), child: const SizedBox()),
                 ]),
                 const SizedBox(height: 2),
                 Row(children: [
-                  Expanded(flex: (point.expense / maxVal * 100).round().clamp(1, 100).toInt(), child: Container(height: 6, decoration: BoxDecoration(color: kGoNegative.withValues(alpha: 0.6), borderRadius: BorderRadius.circular(3)))),
+                  Expanded(flex: (point.expense / maxVal * 100).round().clamp(1, 100).toInt(), child: Container(height: 6, decoration: BoxDecoration(color: IveTokens.danger.withValues(alpha: 0.6), borderRadius: BorderRadius.circular(6)))),
                   Expanded(flex: (100 - (point.expense / maxVal * 100).round()).clamp(1, 100).toInt(), child: const SizedBox()),
                 ]),
               ])),
-              SizedBox(width: 60, child: Text('${net >= 0 ? '+' : ''}${net.toStringAsFixed(0)}', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: net >= 0 ? kGoPositive : kGoNegative), textAlign: TextAlign.end)),
+              SizedBox(width: 60, child: Text('${net >= 0 ? '+' : ''}${net.toStringAsFixed(0)}', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: net >= 0 ? IveTokens.success : IveTokens.danger), textAlign: TextAlign.end)),
             ]),
           );
         }),
         const SizedBox(height: 8),
         Row(children: [
-          const _LegendDot(color: kGoPositive, label: 'Inflow'),
+          const _LegendDot(color: IveTokens.success, label: 'Inflow'),
           const SizedBox(width: 16),
-          _LegendDot(color: kGoNegative.withValues(alpha: 0.6), label: 'Outflow'),
+          _LegendDot(color: IveTokens.danger.withValues(alpha: 0.6), label: 'Outflow'),
         ]),
       ])),
       const SizedBox(height: 14),
       // AI Prediction
-      GoSectionCard(borderColor: kGoInfo.withValues(alpha: 0.3), child: const Row(children: [
-        Icon(Icons.auto_awesome, size: 18, color: kGoInfo),
+      GoSectionCard(borderColor: IveTokens.info.withValues(alpha: 0.3), child: const Row(children: [
+        Icon(Icons.auto_awesome, size: 18, color: IveTokens.info),
         SizedBox(width: 10),
         Expanded(child: Text('AI Prediction: Your net cash flow is expected to be positive for the next 30 days. Consider allocating surplus to savings goals.', style: TextStyle(fontSize: 12, color: Color(0xFF1E40AF)))),
       ])),
@@ -120,7 +122,7 @@ class _GoPlannerScreenState extends State<GoPlannerScreen> with SingleTickerProv
         SizedBox(
           height: 120, width: 120,
           child: Stack(alignment: Alignment.center, children: [
-            SizedBox(height: 120, width: 120, child: CircularProgressIndicator(value: utilization, strokeWidth: 10, backgroundColor: const Color(0xFFE5E7EB), valueColor: AlwaysStoppedAnimation(utilization > 0.9 ? kGoNegative : utilization > 0.7 ? kGoWarning : kGoColor))),
+            SizedBox(height: 120, width: 120, child: CircularProgressIndicator(value: utilization, strokeWidth: 10, backgroundColor: const Color(0xFFE5E7EB), valueColor: AlwaysStoppedAnimation(utilization > 0.9 ? IveTokens.danger : utilization > 0.7 ? IveTokens.warning : IveTokens.moduleGo))),
             Column(mainAxisSize: MainAxisSize.min, children: [
               Text('${(utilization * 100).toStringAsFixed(0)}%', style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w700)),
               const Text('used', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
@@ -138,8 +140,8 @@ class _GoPlannerScreenState extends State<GoPlannerScreen> with SingleTickerProv
       SizedBox(width: double.infinity, child: OutlinedButton.icon(
         icon: const Icon(Icons.add, size: 18),
         label: const Text('Add Category'),
-        onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Add budget category'))),
-        style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 12)),
+        onPressed: () => AppToast.show(context, 'Add budget category'),
+        style: OutlinedButton.styleFrom(foregroundColor: IveTokens.moduleGo, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 12)),
       )),
     ]);
   }
@@ -152,8 +154,8 @@ class _GoPlannerScreenState extends State<GoPlannerScreen> with SingleTickerProv
       SizedBox(width: double.infinity, child: ElevatedButton.icon(
         icon: const Icon(Icons.add, size: 18),
         label: const Text('Set New Goal'),
-        onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Set up a new financial goal'))),
-        style: ElevatedButton.styleFrom(backgroundColor: kGoColor, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+        onPressed: () => AppToast.show(context, 'Set up a new financial goal'),
+        style: ElevatedButton.styleFrom(backgroundColor: IveTokens.moduleGo, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
       )),
     ]);
   }
@@ -203,11 +205,11 @@ class _BudgetCatRow extends StatelessWidget {
           Text('${cat.spent.toStringAsFixed(0)} / ${cat.allocated.toStringAsFixed(0)}', style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
         ]),
         const SizedBox(height: 6),
-        ClipRRect(borderRadius: BorderRadius.circular(3), child: LinearProgressIndicator(
+        ClipRRect(borderRadius: BorderRadius.circular(6), child: LinearProgressIndicator(
           value: pct.clamp(0, 1),
           minHeight: 5,
           backgroundColor: const Color(0xFFE5E7EB),
-          valueColor: AlwaysStoppedAnimation(pct > 0.9 ? kGoNegative : pct > 0.7 ? kGoWarning : cat.color),
+          valueColor: AlwaysStoppedAnimation(pct > 0.9 ? IveTokens.danger : pct > 0.7 ? IveTokens.warning : cat.color),
         )),
       ]),
     );
@@ -226,19 +228,19 @@ class _GoalCard extends StatelessWidget {
       decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: const Color(0xFFE5E7EB))),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Row(children: [
-          Container(padding: const EdgeInsets.all(8), decoration: BoxDecoration(color: kGoColorLight, borderRadius: BorderRadius.circular(8)), child: Icon(_goalIcon, color: kGoColor, size: 20)),
+          Container(padding: const EdgeInsets.all(8), decoration: BoxDecoration(color: IveTokens.surfaceRaised, borderRadius: BorderRadius.circular(10)), child: Icon(_goalIcon, color: IveTokens.moduleGo, size: 20)),
           const SizedBox(width: 10),
           Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(goal.title, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
             Text(goal.type.name, style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
           ])),
           Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-            Text('${(pct * 100).toStringAsFixed(0)}%', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: kGoColor)),
+            Text('${(pct * 100).toStringAsFixed(0)}%', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: IveTokens.moduleGo)),
             Text('of ${goal.targetAmount.toStringAsFixed(0)} QP', style: const TextStyle(fontSize: 10, color: Color(0xFF9CA3AF))),
           ]),
         ]),
         const SizedBox(height: 10),
-        ClipRRect(borderRadius: BorderRadius.circular(4), child: LinearProgressIndicator(value: pct.clamp(0, 1), minHeight: 8, backgroundColor: const Color(0xFFE5E7EB), valueColor: const AlwaysStoppedAnimation(kGoColor))),
+        ClipRRect(borderRadius: BorderRadius.circular(6), child: LinearProgressIndicator(value: pct.clamp(0, 1), minHeight: 8, backgroundColor: const Color(0xFFE5E7EB), valueColor: const AlwaysStoppedAnimation(IveTokens.moduleGo))),
         const SizedBox(height: 6),
         Row(children: [
           Text('${goal.currentAmount.toStringAsFixed(0)} QP saved', style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),

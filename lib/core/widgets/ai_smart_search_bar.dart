@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../services/ai_insights_notifier.dart';
 import '../theme/app_colors.dart';
@@ -17,7 +17,7 @@ class AISmartSearchBar extends StatefulWidget {
     super.key,
     required this.documents,
     this.onResultSelected,
-    this.hintText  = 'AI-powered search…',
+    this.hintText  = 'AI-powered search',
     this.accentColor,
   });
 

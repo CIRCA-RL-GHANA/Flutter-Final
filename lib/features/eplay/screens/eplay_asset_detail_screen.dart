@@ -1,13 +1,13 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// e-PLAY MODULE — Asset Detail Screen
-/// DRM content detail page: purchase â†’ adds to cloud locker.
-/// No file is downloaded — access lives in the server-side license.
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
+/// e-PLAY MODULE  Asset Detail Screen
+/// DRM content detail page: purchase  adds to cloud locker.
+/// No file is downloaded  access lives in the server-side license.
+/// 
 library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../core/theme/app_colors.dart';
+import '../../../core/design/ive.dart';
 import '../../../core/routes/app_routes.dart';
 import '../providers/eplay_provider.dart';
 import 'eplay_hub_screen.dart' show kEPlayColor;
@@ -38,15 +38,15 @@ class _EPlayAssetDetailScreenState extends State<EPlayAssetDetailScreen> {
     final icon = _iconForType(type);
 
     return Scaffold(
-      backgroundColor: AppColors.backgroundLight,
+      backgroundColor: IveTokens.bg,
       body: CustomScrollView(
         slivers: [
-          // ── Hero cover ──────────────────────────────────────────
+          //  Hero cover 
           SliverAppBar(
             expandedHeight: 260,
             pinned: true,
             backgroundColor: colors[0],
-            foregroundColor: Colors.white,
+            foregroundColor: IveTokens.ink,
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
                 decoration: BoxDecoration(
@@ -56,25 +56,25 @@ class _EPlayAssetDetailScreenState extends State<EPlayAssetDetailScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const SizedBox(height: 60),
-                    Icon(icon, size: 80, color: Colors.white.withValues(alpha: 0.9)),
+                    Icon(icon, size: 80, color: IveTokens.ink.withValues(alpha: 0.9)),
                     const SizedBox(height: 12),
-                    _typeBadge(type, Colors.white),
+                    _typeBadge(type, IveTokens.ink),
                   ],
                 ),
               ),
             ),
           ),
 
-          // ── Content ─────────────────────────────────────────────
+          //  Content 
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w800)),
+                  Text(title, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: IveTokens.ink)),
                   const SizedBox(height: 4),
-                  Text('by $creator', style: const TextStyle(fontSize: 14, color: AppColors.textSecondary)),
+                  Text('by $creator', style: const TextStyle(fontSize: 14, color: IveTokens.ink2)),
 
                   const SizedBox(height: 16),
 
@@ -88,10 +88,10 @@ class _EPlayAssetDetailScreenState extends State<EPlayAssetDetailScreen> {
                     ],
                   ),
 
-                  const Divider(height: 32),
+                  Divider(height: 32, color: IveTokens.hairline),
 
                   // Access info
-                  const Text('What you get', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                  const Text('What you get', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: IveTokens.ink)),
                   const SizedBox(height: 12),
                   _accessRow(Icons.cloud, 'Cloud Locker Access', 'Stream anytime, anywhere'),
                   _accessRow(Icons.devices, 'Multi-device', 'Up to 3 devices'),
@@ -105,28 +105,19 @@ class _EPlayAssetDetailScreenState extends State<EPlayAssetDetailScreen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text('Price', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                          const Text('Price', style: TextStyle(fontSize: 11, color: IveTokens.mute)),
                           Text(
                             price == 0 ? 'Free' : '\$${price.toStringAsFixed(2)}',
-                            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w800, color: kEPlayColor),
+                            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w800, color: IveTokens.moduleEplay),
                           ),
                         ],
                       ),
                       const SizedBox(width: 16),
                       Expanded(
-                        child: ElevatedButton(
+                        child: IveButton.primary(
+                          label: _owned ? 'In Locker' : price == 0 ? 'Add to Locker' : 'Purchase',
                           onPressed: _owned || _purchasing ? null : _purchase,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: _owned ? AppColors.success : kEPlayColor,
-                            foregroundColor: Colors.white,
-                            disabledBackgroundColor: AppColors.inputBorder,
-                            padding: const EdgeInsets.symmetric(vertical: 14),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                          ),
-                          child: _purchasing
-                              ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
-                              : Text(_owned ? 'In Locker' : price == 0 ? 'Add to Locker' : 'Purchase',
-                                  style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15)),
+                          isLoading: _purchasing,
                         ),
                       ),
                     ],
@@ -156,8 +147,8 @@ class _EPlayAssetDetailScreenState extends State<EPlayAssetDetailScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: const Text('Added to your Cloud Locker!'),
-          backgroundColor: AppColors.success,
-          action: SnackBarAction(label: 'View Locker', textColor: Colors.white, onPressed: () => Navigator.pushNamed(context, AppRoutes.eplayLocker)),
+          backgroundColor: IveTokens.success,
+          action: SnackBarAction(label: 'View Locker', textColor: IveTokens.ink, onPressed: () => Navigator.pushNamed(context, AppRoutes.eplayLocker)),
         ),
       );
     }
@@ -166,17 +157,21 @@ class _EPlayAssetDetailScreenState extends State<EPlayAssetDetailScreen> {
   Widget _typeBadge(String type, Color color) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-      decoration: BoxDecoration(color: color.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(8), border: Border.all(color: color.withValues(alpha: 0.3))),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(IveTokens.rSm),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
+      ),
       child: Text(type.toUpperCase(), style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: color)),
     );
   }
 
   Widget _stat(IconData icon, String value, String label) {
     return Column(children: [
-      Icon(icon, color: AppColors.textSecondary, size: 18),
+      Icon(icon, color: IveTokens.ink2, size: 18),
       const SizedBox(height: 2),
-      Text(value, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
-      Text(label, style: const TextStyle(fontSize: 10, color: AppColors.textTertiary)),
+      Text(value, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: IveTokens.ink)),
+      Text(label, style: const TextStyle(fontSize: 10, color: IveTokens.mute)),
     ]);
   }
 
@@ -184,11 +179,11 @@ class _EPlayAssetDetailScreenState extends State<EPlayAssetDetailScreen> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(children: [
-        Icon(icon, color: kEPlayColor, size: 18),
+        Icon(icon, color: IveTokens.moduleEplay, size: 18),
         const SizedBox(width: 12),
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text(title, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
-          Text(subtitle, style: const TextStyle(fontSize: 11, color: AppColors.textSecondary)),
+          Text(title, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13, color: IveTokens.ink)),
+          Text(subtitle, style: const TextStyle(fontSize: 11, color: IveTokens.ink2)),
         ]),
       ]),
     );
@@ -201,7 +196,7 @@ class _EPlayAssetDetailScreenState extends State<EPlayAssetDetailScreen> {
       'podcast' => [const Color(0xFFD97706), const Color(0xFFB45309)],
       'ebook'   => [const Color(0xFF059669), const Color(0xFF0D9488)],
       'show'    => [const Color(0xFFDC2626), const Color(0xFFB91C1C)],
-      _         => [const Color(0xFF6366F1), const Color(0xFF4F46E5)],
+      _         => [IveTokens.accent, const Color(0xFF4F46E5)],
     };
   }
 

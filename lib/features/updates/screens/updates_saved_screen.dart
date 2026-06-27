@@ -1,8 +1,8 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SCREEN 5 — Saved Updates Library
+/// 
+/// SCREEN 5  Saved Updates Library
 /// Grid/List/Calendar view, collections management, batch operations,
 /// search within saved, sort options.
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -181,7 +181,7 @@ class _BodyState extends State<_Body> {
   void _showMoveToCollectionSheet(BuildContext context, UpdatesProvider prov) {
     showModalBottomSheet(
       context: context,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(10))),
       builder: (_) => Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -193,7 +193,7 @@ class _BodyState extends State<_Body> {
             ...prov.collections.map((c) => ListTile(
               leading: Container(
                 width: 32, height: 32,
-                decoration: BoxDecoration(color: c.color.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(8)),
+                decoration: BoxDecoration(color: c.color.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(10)),
                 child: Icon(Icons.folder, size: 16, color: c.color),
               ),
               title: Text(c.name, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
@@ -217,7 +217,7 @@ class _BodyState extends State<_Body> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(10))),
       builder: (_) => Padding(
         padding: EdgeInsets.fromLTRB(16, 16, 16, 16 + MediaQuery.of(context).viewInsets.bottom),
         child: Column(
@@ -262,7 +262,7 @@ class _BodyState extends State<_Body> {
   }
 }
 
-// ─── Collection Chip ────────────────────────────────────────────────────────
+//  Collection Chip 
 
 class _CollectionChip extends StatelessWidget {
   final String label;
@@ -289,7 +289,7 @@ class _CollectionChip extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
             decoration: BoxDecoration(
               color: isSelected ? Colors.white.withValues(alpha: 0.2) : Colors.grey.shade200,
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(10),
             ),
             child: Text('$count', style: TextStyle(fontSize: 9, fontWeight: FontWeight.w700, color: isSelected ? Colors.white : AppColors.textSecondary)),
           ),
@@ -299,7 +299,7 @@ class _CollectionChip extends StatelessWidget {
   }
 }
 
-// ─── Grid View ──────────────────────────────────────────────────────────────
+//  Grid View 
 
 class _GridView extends StatelessWidget {
   final List<dynamic> saved;
@@ -348,7 +348,7 @@ class _GridView extends StatelessWidget {
                   height: 80,
                   decoration: BoxDecoration(
                     color: kUpdatesColor.withValues(alpha: 0.06),
-                    borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+                    borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
                   ),
                   child: Stack(
                     children: [
@@ -389,7 +389,7 @@ class _GridView extends StatelessWidget {
   }
 }
 
-// ─── List View ──────────────────────────────────────────────────────────────
+//  List View 
 
 class _ListView extends StatelessWidget {
   final List<dynamic> saved;
@@ -444,7 +444,7 @@ class _ListView extends StatelessWidget {
                   width: 48, height: 48,
                   decoration: BoxDecoration(
                     color: kUpdatesColor.withValues(alpha: 0.08),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: Icon(_contentIcon(update.contentType), size: 20, color: kUpdatesColor.withValues(alpha: 0.4)),
                 ),

@@ -1,8 +1,9 @@
-/// qualChat Screen 5 — My Hey Ya Image (Owner Only)
+/// qualChat Screen 5  My Hey Ya Image (Owner Only)
 /// Vibe Snapshot Studio: photo management, analytics, AI enhancement
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive_tokens.dart';
 import '../providers/qualchat_provider.dart';
 import '../widgets/qualchat_widgets.dart';
 
@@ -15,13 +16,13 @@ class QualChatVibeImageScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FE),
       appBar: QualChatAppBar(
-        title: 'My Vibe Snapshot ðŸ“¸',
+        title: 'My Vibe Snapshot "',
         actions: [
           IconButton(icon: const Icon(Icons.more_vert), onPressed: () {
           showModalBottomSheet(
             context: context,
             shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+              borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
             ),
             builder: (_) => SafeArea(
               child: Column(
@@ -63,7 +64,7 @@ class QualChatVibeImageScreen extends StatelessWidget {
               height: 220,
               decoration: BoxDecoration(
                 color: kChatSocial.withValues(alpha: 0.1),
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: kChatSocial.withValues(alpha: 0.2)),
               ),
               child: Center(
@@ -76,7 +77,7 @@ class QualChatVibeImageScreen extends StatelessWidget {
                       'YOUR PHOTO',
                       style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: kChatSocial),
                     ),
-                    const Text('16:9 • HD', style: TextStyle(fontSize: 12, color: Color(0xFF9CA3AF))),
+                    const Text('16:9  HD', style: TextStyle(fontSize: 12, color: Color(0xFF9CA3AF))),
                   ],
                 ),
               ),
@@ -89,7 +90,7 @@ class QualChatVibeImageScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'Status: ðŸŸ¢ Active • Public • Sparkling!',
+                    'Status:  Active  Public  Sparkling!',
                     style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFF1A1A1A)),
                   ),
                   const SizedBox(height: 4),
@@ -100,7 +101,7 @@ class QualChatVibeImageScreen extends StatelessWidget {
                   const SizedBox(height: 8),
                   // Progress bar
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius: BorderRadius.circular(6),
                     child: LinearProgressIndicator(
                       value: vibe.remainingPercent / 100,
                       backgroundColor: const Color(0xFFE5E7EB),
@@ -122,10 +123,10 @@ class QualChatVibeImageScreen extends StatelessWidget {
               title: 'Performance Metrics',
               child: Column(
                 children: [
-                  _MetricRow(emoji: 'ðŸ‘ï¸', label: '${_abbr(vibe.views)} views', detail: 'â†‘12% from last'),
-                  _MetricRow(emoji: 'â¤ï¸', label: '${vibe.likes} likes', detail: 'Top 15%'),
-                  _MetricRow(emoji: 'ðŸ’¬', label: '${vibe.comments} comments', detail: 'Engagement: High'),
-                  _MetricRow(emoji: 'ðŸ‘¥', label: '${vibe.connections} connections', detail: '${vibe.matches} matches'),
+                  _MetricRow(emoji: '', label: '${_abbr(vibe.views)} views', detail: '+12% from last'),
+                  _MetricRow(emoji: '', label: '${vibe.likes} likes', detail: 'Top 15%'),
+                  _MetricRow(emoji: '', label: '${vibe.comments} comments', detail: 'Engagement: High'),
+                  _MetricRow(emoji: '', label: '${vibe.connections} connections', detail: '${vibe.matches} matches'),
                 ],
               ),
             ),
@@ -144,27 +145,27 @@ class QualChatVibeImageScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(
                 children: [
-                  _VibeAction(icon: '🧃', label: 'Refresh', onTap: () {
+                  _VibeAction(icon: '', label: 'Refresh', onTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Refreshing vibe...')),
                     );
                   }),
-                  _VibeAction(icon: '✏️', label: 'Edit', onTap: () {
+                  _VibeAction(icon: '', label: 'Edit', onTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Opening editor...')),
                     );
                   }),
-                  _VibeAction(icon: '🔄', label: 'Cycle', onTap: () {
+                  _VibeAction(icon: '', label: 'Cycle', onTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Cycling vibe image...')),
                     );
                   }),
-                  _VibeAction(icon: '📊', label: 'Stats', onTap: () {
+                  _VibeAction(icon: '', label: 'Stats', onTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Loading stats...')),
                     );
                   }),
-                  _VibeAction(icon: '⬇️', label: 'Save', onTap: () {
+                  _VibeAction(icon: '', label: 'Save', onTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Saving...')),
                     );
@@ -189,8 +190,8 @@ class QualChatVibeImageScreen extends StatelessWidget {
                             );
                           },
                           style: OutlinedButton.styleFrom(
-                            foregroundColor: kChatColor,
-                            side: const BorderSide(color: kChatColor),
+                            foregroundColor: IveTokens.moduleQualChat,
+                            side: const BorderSide(color: IveTokens.moduleQualChat),
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                           ),
                           child: const Text('Set as Profile'),
@@ -205,8 +206,8 @@ class QualChatVibeImageScreen extends StatelessWidget {
                             );
                           },
                           style: OutlinedButton.styleFrom(
-                            foregroundColor: kChatColor,
-                            side: const BorderSide(color: kChatColor),
+                            foregroundColor: IveTokens.moduleQualChat,
+                            side: const BorderSide(color: IveTokens.moduleQualChat),
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                           ),
                           child: const Text('Schedule Next'),

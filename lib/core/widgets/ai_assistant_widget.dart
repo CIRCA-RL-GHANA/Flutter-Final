@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../services/ai_assistant_service.dart';
 import '../theme/app_colors.dart';
@@ -178,7 +178,7 @@ class _AIAssistantWidgetState extends State<AIAssistantWidget>
                         controller: _controller,
                         onSubmitted: (_) => _send(),
                         decoration: InputDecoration(
-                          hintText:       'Ask anything…',
+                          hintText:       'Ask anything',
                           hintStyle:      const TextStyle(fontSize: 13),
                           isDense:        true,
                           contentPadding: const EdgeInsets.symmetric(

@@ -18,7 +18,7 @@ class AiChatMessage {
   });
 }
 
-/// Conversational AI assistant — wraps AIService inference calls and
+/// Conversational AI assistant  wraps AIService inference calls and
 /// maintains in-memory conversation history for context.
 class AIAssistantService extends ChangeNotifier {
   final AIService _aiService;
@@ -34,9 +34,9 @@ class AIAssistantService extends ChangeNotifier {
   bool                 get isLoading  => _isLoading;
   String?              get error      => _error;
 
-  // ─────────────────────────────────────────────────────────────────────────
+  // 
   // SEND MESSAGE
-  // ─────────────────────────────────────────────────────────────────────────
+  // 
 
   /// Send a user message and receive an AI-generated reply.
   /// [modelId] must correspond to an active backend AIModel record
@@ -78,7 +78,7 @@ class AIAssistantService extends ChangeNotifier {
       final sentimentResult = await sentimentFuture;
       final intentResult    = await intentFuture;
 
-      String assistantContent = 'Thinking…';
+      String assistantContent = 'Thinking';
       if (inferenceResp.isSuccess && inferenceResp.data != null) {
         assistantContent =
             inferenceResp.data!['output']?['content'] as String? ??
@@ -109,9 +109,9 @@ class AIAssistantService extends ChangeNotifier {
     }
   }
 
-  // ─────────────────────────────────────────────────────────────────────────
+  // 
   // QUICK ACTIONS
-  // ─────────────────────────────────────────────────────────────────────────
+  // 
 
   /// Analyse the sentiment of any arbitrary text (no conversation context).
   Future<Map<String, dynamic>?> quickSentiment(String text) async {
@@ -145,9 +145,9 @@ class AIAssistantService extends ChangeNotifier {
     return resp.isSuccess ? resp.data : null;
   }
 
-  // ─────────────────────────────────────────────────────────────────────────
+  // 
   // HISTORY MANAGEMENT
-  // ─────────────────────────────────────────────────────────────────────────
+  // 
 
   void clearHistory() {
     _history.clear();

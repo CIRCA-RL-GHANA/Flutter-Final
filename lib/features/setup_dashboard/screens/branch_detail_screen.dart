@@ -1,8 +1,8 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD2.1-DETAIL: BRANCH DETAIL — 4-Tab Deep View
+/// 
+/// SD2.1-DETAIL: BRANCH DETAIL  4-Tab Deep View
 /// Tabs: Overview, Staff, Vehicles, Performance
 /// RBAC: Admin(fullAccess), Monitor(viewOnly)
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -91,7 +91,7 @@ class _BranchHeader extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
         children: [
@@ -110,7 +110,7 @@ class _BranchHeader extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(branch.name, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
-                Text('${branch.type} Â· ${branch.area ?? 'N/A'}', style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                Text('${branch.type}  ${branch.area ?? 'N/A'}', style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                 const SizedBox(height: 4),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
@@ -159,7 +159,7 @@ class _OverviewTab extends StatelessWidget {
       children: [
         Row(
           children: [
-            Expanded(child: SetupStatCard(label: 'Revenue', value: 'â‚µ${(branch.monthlyRevenue / 1000).toStringAsFixed(0)}K', icon: Icons.attach_money, color: AppColors.success)),
+            Expanded(child: SetupStatCard(label: 'Revenue', value: '${(branch.monthlyRevenue / 1000).toStringAsFixed(0)}K', icon: Icons.attach_money, color: AppColors.success)),
             const SizedBox(width: 10),
             Expanded(child: SetupStatCard(label: 'Staff', value: '${branch.staffCount}', icon: Icons.people)),
             const SizedBox(width: 10),
@@ -183,7 +183,7 @@ class _OverviewTab extends StatelessWidget {
               SetupInfoRow(label: 'Type', value: branch.type),
               SetupInfoRow(label: 'Manager', value: branch.managerName ?? 'Unassigned'),
               SetupInfoRow(label: 'Area', value: branch.area ?? 'N/A'),
-              SetupInfoRow(label: 'Monthly Revenue', value: 'â‚µ${branch.monthlyRevenue.toStringAsFixed(0)}'),
+              SetupInfoRow(label: 'Monthly Revenue', value: '${branch.monthlyRevenue.toStringAsFixed(0)}'),
             ],
           ),
         ),
@@ -324,9 +324,9 @@ class _PerformanceTab extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 12),
-              SetupInfoRow(label: 'Products', value: 'â‚µ${(branch.monthlyRevenue * 0.65).toStringAsFixed(0)}'),
-              SetupInfoRow(label: 'Services', value: 'â‚µ${(branch.monthlyRevenue * 0.25).toStringAsFixed(0)}'),
-              SetupInfoRow(label: 'Other', value: 'â‚µ${(branch.monthlyRevenue * 0.10).toStringAsFixed(0)}'),
+              SetupInfoRow(label: 'Products', value: '${(branch.monthlyRevenue * 0.65).toStringAsFixed(0)}'),
+              SetupInfoRow(label: 'Services', value: '${(branch.monthlyRevenue * 0.25).toStringAsFixed(0)}'),
+              SetupInfoRow(label: 'Other', value: '${(branch.monthlyRevenue * 0.10).toStringAsFixed(0)}'),
             ],
           ),
         ),
@@ -358,7 +358,7 @@ class _PerformanceBar extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           ClipRRect(
-            borderRadius: BorderRadius.circular(3),
+            borderRadius: BorderRadius.circular(6),
             child: LinearProgressIndicator(
               value: value.clamp(0.0, 1.0),
               minHeight: 6,

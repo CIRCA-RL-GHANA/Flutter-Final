@@ -1,8 +1,8 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 /// U2: NOTIFICATION CENTER Screen
 /// Filterable notification feed with read/unread/archive, swipe actions,
 /// notification type chips, priority indicators
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -48,7 +48,7 @@ class NotificationCenterScreen extends StatelessWidget {
           body: Column(
             children: [
 
-              // ─── Status Filter Chips ──────────────────────
+              //  Status Filter Chips 
               Padding(
                 padding: const EdgeInsets.only(top: 8),
                 child: UtilityFilterChipRow(
@@ -63,7 +63,7 @@ class NotificationCenterScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Type Filter Chips ────────────────────────
+              //  Type Filter Chips 
               Padding(
                 padding: const EdgeInsets.only(top: 8),
                 child: SizedBox(
@@ -92,7 +92,7 @@ class NotificationCenterScreen extends StatelessWidget {
 
               const SizedBox(height: 8),
 
-              // ─── Notification List ────────────────────────
+              //  Notification List 
               Expanded(
                 child: filtered.isEmpty
                     ? const UtilityEmptyState(
@@ -166,7 +166,7 @@ class NotificationCenterScreen extends StatelessWidget {
   }
 }
 
-// ─── Type Filter Chip ────────────────────────────────────────────────────────
+//  Type Filter Chip 
 
 class _TypeChip extends StatelessWidget {
   final String label;
@@ -208,7 +208,7 @@ class _TypeChip extends StatelessWidget {
   }
 }
 
-// ─── Notification Card ───────────────────────────────────────────────────────
+//  Notification Card 
 
 class _NotificationCard extends StatelessWidget {
   final NotificationItem notification;

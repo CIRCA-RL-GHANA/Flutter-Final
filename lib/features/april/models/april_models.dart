@@ -1,11 +1,11 @@
-/// APRIL Module — Data Models
+/// APRIL Module  Data Models
 /// Personal Assistant & Command Core: ActionCore, Planner, Calendar, Wishlist, Statement
 /// Module Color: Gold 0xFFFFD700
 library;
 
-// ──────────────────────────────────────────────
+// 
 //  ENUMS
-// ──────────────────────────────────────────────
+// 
 
 enum AprilWidgetState { loading, loaded, error, empty }
 
@@ -88,9 +88,9 @@ enum ActionPriority { critical, high, medium, low }
 /// Action status
 enum ActionStatus { pending, inProgress, completed, overdue, cancelled }
 
-// ──────────────────────────────────────────────
+// 
 //  DATA MODELS
-// ──────────────────────────────────────────────
+// 
 
 /// Voice command entry
 class VoiceCommand {

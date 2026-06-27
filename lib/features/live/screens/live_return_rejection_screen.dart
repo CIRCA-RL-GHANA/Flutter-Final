@@ -1,11 +1,12 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// LIVE MODULE — Screen 8: Return Rejection Flow
+/// 
+/// LIVE MODULE  Screen 8: Return Rejection Flow
 /// Structured rejection with required reason, evidence review,
 /// customer communication template, and appeal info
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
@@ -50,18 +51,18 @@ class _LiveReturnRejectionScreenState extends State<LiveReturnRejectionScreen> {
                 decoration: BoxDecoration(
                   color: const Color(0xFFFEE2E2),
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: kLiveColor.withValues(alpha: 0.3)),
+                  border: Border.all(color: IveTokens.moduleLive.withValues(alpha: 0.3)),
                 ),
                 child: Row(
                   children: [
-                    const Icon(Icons.warning, size: 20, color: kLiveColor),
+                    const Icon(Icons.warning, size: 20, color: IveTokens.moduleLive),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text('Rejecting return for:', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: kLiveColor)),
-                          Text('${ret.itemName} — â‚µ${ret.itemPrice.toStringAsFixed(2)}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700)),
+                          const Text('Rejecting return for:', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: IveTokens.moduleLive)),
+                          Text('${ret.itemName}  ${ret.itemPrice.toStringAsFixed(2)}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700)),
                           Text('Customer: ${ret.customerName}', style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                         ],
                       ),
@@ -76,7 +77,7 @@ class _LiveReturnRejectionScreenState extends State<LiveReturnRejectionScreen> {
               LiveSectionCard(
                 title: 'REJECTION REASON (REQUIRED)',
                 icon: Icons.error_outline,
-                iconColor: kLiveColor,
+                iconColor: IveTokens.moduleLive,
                 child: Column(
                   children: RejectionReason.values.map((reason) {
                     final selected = reason == _selectedReason;
@@ -91,7 +92,7 @@ class _LiveReturnRejectionScreenState extends State<LiveReturnRejectionScreen> {
                           style: TextStyle(fontSize: 13, fontWeight: selected ? FontWeight.w700 : FontWeight.w400),
                         ),
                         subtitle: Text(_reasonDescription(reason), style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
-                        activeColor: kLiveColor,
+                        activeColor: IveTokens.moduleLive,
                         dense: true,
                         contentPadding: EdgeInsets.zero,
                         visualDensity: VisualDensity.compact,
@@ -133,15 +134,15 @@ class _LiveReturnRejectionScreenState extends State<LiveReturnRejectionScreen> {
                 iconColor: const Color(0xFF8B5CF6),
                 child: Container(
                   padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(color: const Color(0xFFF3E8FF), borderRadius: BorderRadius.circular(8)),
+                  decoration: BoxDecoration(color: const Color(0xFFF3E8FF), borderRadius: BorderRadius.circular(10)),
                   child: const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('Customer Appeal Rights', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Color(0xFF6B21A8))),
                       SizedBox(height: 4),
-                      Text('• Customer can appeal within 7 days', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
-                      Text('• Appeal goes to senior response officer', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
-                      Text('• Customer will be notified of their options', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                      Text(' Customer can appeal within 7 days', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                      Text(' Appeal goes to senior response officer', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                      Text(' Customer will be notified of their options', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                     ],
                   ),
                 ),
@@ -178,7 +179,7 @@ class _LiveReturnRejectionScreenState extends State<LiveReturnRejectionScreen> {
                               _customMessageController.text,
                             );
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('âŒ Return rejected. Customer notified.'), backgroundColor: kLiveColor),
+                              const SnackBar(content: Text(' Return rejected. Customer notified.'), backgroundColor: IveTokens.moduleLive),
                             );
                             Navigator.pop(context);
                             Navigator.pop(context);
@@ -186,7 +187,7 @@ class _LiveReturnRejectionScreenState extends State<LiveReturnRejectionScreen> {
                     icon: const Icon(Icons.cancel, size: 18),
                     label: const Text('CONFIRM REJECTION', style: TextStyle(fontWeight: FontWeight.w700)),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: _selectedReason == null ? const Color(0xFFE5E7EB) : kLiveColor,
+                      backgroundColor: _selectedReason == null ? const Color(0xFFE5E7EB) : IveTokens.moduleLive,
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -265,7 +266,7 @@ class _RejectionToggle extends StatelessWidget {
       child: Row(
         children: [
           Expanded(child: Text(label, style: const TextStyle(fontSize: 13))),
-          Switch(value: value, onChanged: onChanged, activeThumbColor: kLiveColor, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
+          Switch(value: value, onChanged: onChanged, activeThumbColor: IveTokens.moduleLive, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
         ],
       ),
     );

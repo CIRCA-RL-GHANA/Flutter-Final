@@ -1,14 +1,14 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// GenieVoice – STT/TTS Abstraction Layer
+/// 
+/// GenieVoice  STT/TTS Abstraction Layer
 ///
 /// Wraps speech recognition (STT) behind a clean interface that delegates to
 /// a platform implementation via conditional imports:
-///   • Web (PWA)  → browser's Web Speech API (`SpeechRecognition`).
-///   • Native     → currently a no-op stub. Plug in `speech_to_text` when
+///    Web (PWA)   browser's Web Speech API (`SpeechRecognition`).
+///    Native      currently a no-op stub. Plug in `speech_to_text` when
 ///     the package is added to pubspec.
 /// Degrades gracefully if microphone permission is denied or the API is
 /// unavailable in the current runtime.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'package:flutter/foundation.dart';

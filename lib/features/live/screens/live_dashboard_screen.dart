@@ -1,11 +1,12 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// LIVE MODULE — Screen 1: Live Dashboard (Main Operations View)
+/// 
+/// LIVE MODULE  Screen 1: Live Dashboard (Main Operations View)
 /// Central command center: Tab bar (Orders/Returns/Packages),
 /// operations overview, urgent actions, predictive insights, controls
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
@@ -66,13 +67,13 @@ class _LiveDashboardScreenState extends State<LiveDashboardScreen> with SingleTi
                   height: 10,
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
-                    color: kLiveColor,
+                    color: IveTokens.moduleLive,
                   ),
                 ),
               ],
             ),
             leadingWidth: 70,
-            title: const Text('LIVE • Operations', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: AppColors.textPrimary)),
+            title: const Text('LIVE  Operations', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: AppColors.textPrimary)),
             actions: [
               IconButton(icon: const Icon(Icons.business, size: 20), color: AppColors.textSecondary, onPressed: () => Navigator.pushNamed(context, AppRoutes.setupDashboard)),
               IconButton(
@@ -84,18 +85,18 @@ class _LiveDashboardScreenState extends State<LiveDashboardScreen> with SingleTi
                 color: AppColors.textSecondary,
                 onPressed: () => Navigator.pushNamed(context, AppRoutes.utilityNotifications),
               ),
-              IconButton(icon: const Icon(Icons.my_location, size: 20), color: AppColors.textSecondary, onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Locating...')))),
+              IconButton(icon: const Icon(Icons.my_location, size: 20), color: AppColors.textSecondary, onPressed: () => AppToast.show(context, 'Locating...')),
               IconButton(
                 icon: const Icon(Icons.sos, size: 20),
-                color: kLiveColor,
+                color: IveTokens.moduleLive,
                 onPressed: () => Navigator.pushNamed(context, AppRoutes.liveEmergencySOS),
               ),
             ],
             bottom: TabBar(
               controller: _tabController,
-              indicatorColor: kLiveColor,
+              indicatorColor: IveTokens.moduleLive,
               indicatorWeight: 3,
-              labelColor: kLiveColor,
+              labelColor: IveTokens.moduleLive,
               unselectedLabelColor: AppColors.textSecondary,
               labelStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
               tabs: [
@@ -125,7 +126,7 @@ class _LiveDashboardScreenState extends State<LiveDashboardScreen> with SingleTi
   }
 }
 
-// ─── Orders View ─────────────────────────────────────────────────────────────
+//  Orders View 
 
 class _OrdersView extends StatelessWidget {
   final LiveProvider prov;
@@ -134,7 +135,7 @@ class _OrdersView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
-      color: kLiveColor,
+      color: IveTokens.moduleLive,
       onRefresh: () async {
         HapticFeedback.mediumImpact();
         await prov.loadOrders();
@@ -172,7 +173,7 @@ class _OrdersView extends StatelessWidget {
                 ),
                 LiveMetricBadge(
                   label: "Today's Revenue",
-                  value: 'â‚µ${prov.metrics.todayRevenue.toStringAsFixed(0)}',
+                  value: '${prov.metrics.todayRevenue.toStringAsFixed(0)}',
                   icon: Icons.attach_money,
                   color: IveTokens.moduleUpdates,
                 ),
@@ -184,7 +185,7 @@ class _OrdersView extends StatelessWidget {
             LiveSectionCard(
               title: 'URGENT ACTIONS (${prov.urgentActionItems.length})',
               icon: Icons.warning_amber,
-              iconColor: kLiveColor,
+              iconColor: IveTokens.moduleLive,
               child: Column(
                 children: prov.urgentActionItems.map((a) => Padding(
                   padding: const EdgeInsets.only(bottom: 8),
@@ -200,10 +201,10 @@ class _OrdersView extends StatelessWidget {
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                             decoration: BoxDecoration(
-                              color: kLiveColor.withValues(alpha: 0.1),
+                              color: IveTokens.moduleLive.withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(6),
                             ),
-                            child: Text(act, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: kLiveColor)),
+                            child: Text(act, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: IveTokens.moduleLive)),
                           ),
                         ),
                       )),
@@ -236,7 +237,7 @@ class _OrdersView extends StatelessWidget {
             children: [
               const Text('Orders', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
               const Spacer(),
-              TextButton(onPressed: () => Navigator.pushNamed(context, AppRoutes.liveOrders), child: const Text('View All', style: TextStyle(color: kLiveColor, fontSize: 13))),
+              TextButton(onPressed: () => Navigator.pushNamed(context, AppRoutes.liveOrders), child: const Text('View All', style: TextStyle(color: IveTokens.moduleLive, fontSize: 13))),
             ],
           ),
           const SizedBox(height: 8),
@@ -260,16 +261,16 @@ class _OrdersView extends StatelessWidget {
                   onPressed: () => Navigator.pushNamed(context, AppRoutes.liveDriverAssignment),
                   icon: const Icon(Icons.select_all, size: 16),
                   label: const Text('BULK ASSIGN'),
-                  style: OutlinedButton.styleFrom(foregroundColor: kLiveColor, padding: const EdgeInsets.symmetric(vertical: 12)),
+                  style: OutlinedButton.styleFrom(foregroundColor: IveTokens.moduleLive, padding: const EdgeInsets.symmetric(vertical: 12)),
                 ),
               ),
               const SizedBox(width: 8),
               Expanded(
                 child: OutlinedButton.icon(
-                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Auto-assigning...'))),
+                  onPressed: () => AppToast.show(context, 'Auto-assigning...'),
                   icon: const Icon(Icons.auto_fix_high, size: 16),
                   label: const Text('AUTO-ASSIGN'),
-                  style: OutlinedButton.styleFrom(foregroundColor: kLiveColor, padding: const EdgeInsets.symmetric(vertical: 12)),
+                  style: OutlinedButton.styleFrom(foregroundColor: IveTokens.moduleLive, padding: const EdgeInsets.symmetric(vertical: 12)),
                 ),
               ),
             ],
@@ -280,7 +281,7 @@ class _OrdersView extends StatelessWidget {
   }
 }
 
-// ─── Returns View ────────────────────────────────────────────────────────────
+//  Returns View 
 
 class _ReturnsView extends StatelessWidget {
   final LiveProvider prov;
@@ -317,16 +318,16 @@ class _ReturnsView extends StatelessWidget {
                   onPressed: () => Navigator.pushNamed(context, AppRoutes.liveReturnReview),
                   icon: const Icon(Icons.checklist, size: 16),
                   label: const Text('BULK REVIEW'),
-                  style: OutlinedButton.styleFrom(foregroundColor: kLiveColor, padding: const EdgeInsets.symmetric(vertical: 12)),
+                  style: OutlinedButton.styleFrom(foregroundColor: IveTokens.moduleLive, padding: const EdgeInsets.symmetric(vertical: 12)),
                 ),
               ),
               const SizedBox(width: 8),
               Expanded(
                 child: OutlinedButton.icon(
-                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Auto-approving...'))),
+                  onPressed: () => AppToast.show(context, 'Auto-approving...'),
                   icon: const Icon(Icons.auto_awesome, size: 16),
-                  label: const Text('AUTO-APPROVE <â‚µ50'),
-                  style: OutlinedButton.styleFrom(foregroundColor: kLiveColor, padding: const EdgeInsets.symmetric(vertical: 12)),
+                  label: const Text('AUTO-APPROVE <50'),
+                  style: OutlinedButton.styleFrom(foregroundColor: IveTokens.moduleLive, padding: const EdgeInsets.symmetric(vertical: 12)),
                 ),
               ),
             ],
@@ -337,7 +338,7 @@ class _ReturnsView extends StatelessWidget {
   }
 }
 
-// ─── Packages View ───────────────────────────────────────────────────────────
+//  Packages View 
 
 class _PackagesView extends StatelessWidget {
   final LiveProvider prov;
@@ -376,7 +377,7 @@ class _PackagesView extends StatelessWidget {
                   icon: const Icon(Icons.add, size: 16),
                   label: const Text('CREATE NEW PACKAGE'),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: kLiveColor,
+                    backgroundColor: IveTokens.moduleLive,
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 12),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

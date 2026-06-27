@@ -1,7 +1,7 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 /// ALERTS Widget (Resolution Log)
 /// Visible to: ALL roles EXCEPT Owner
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -39,7 +39,7 @@ class AlertsWidgetContent extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
                   color: AppColors.success.withValues(alpha: 0.1),
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: const Text(
                   '12 resolved',
@@ -57,7 +57,7 @@ class AlertsWidgetContent extends StatelessWidget {
 
           // Filter Summary
           const Text(
-            'Last 7 days • 12 resolved • 2 pending',
+            'Last 7 days  12 resolved  2 pending',
             style: TextStyle(
               fontSize: 10,
               color: AppColors.textTertiary,
@@ -125,7 +125,7 @@ class _AlertItem extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
       decoration: BoxDecoration(
         color: AppColors.inputFill,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
         children: [
@@ -179,7 +179,7 @@ class _DistributionBar extends StatelessWidget {
             height: 6,
             decoration: BoxDecoration(
               color: color.withValues(alpha: 0.7),
-              borderRadius: BorderRadius.circular(3),
+              borderRadius: BorderRadius.circular(6),
             ),
           ),
           const SizedBox(height: 2),

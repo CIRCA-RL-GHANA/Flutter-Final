@@ -1,11 +1,12 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD1.8: VEHICLE BANDS — Fleet Grouping
+/// 
+/// SD1.8: VEHICLE BANDS  Fleet Grouping
 /// Band list, utilization, vehicle assignment
 /// RBAC: Admin(full), BM(branch), Monitor/BrMon(view)
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../prompt/providers/context_provider.dart';
@@ -35,13 +36,13 @@ class BandsScreen extends StatelessWidget {
             ),
             floatingActionButton: SetupRbacFAB(
               cardId: 'vehicle_bands',
-              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Create new vehicle band'))),
+              onPressed: () => AppToast.show(context, 'Create new vehicle band'),
               label: 'New Band',
               icon: Icons.add,
             ),
           body: CustomScrollView(
             slivers: [
-              // ─── KPI Row ──────────────────────────────────
+              //  KPI Row 
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -67,7 +68,7 @@ class BandsScreen extends StatelessWidget {
                         child: KPIBadge(
                           label: 'Avg. Utilization',
                           value: bands.isEmpty
-                              ? '—'
+                              ? ''
                               : '${(bands.fold<double>(0, (sum, b) => sum + b.utilization) / bands.length).round()}%',
                           icon: Icons.speed,
                           color: (() {
@@ -82,7 +83,7 @@ class BandsScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Fleet Health ─────────────────────────────
+              //  Fleet Health 
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -101,7 +102,7 @@ class BandsScreen extends StatelessWidget {
                               padding: const EdgeInsets.all(6),
                               decoration: BoxDecoration(
                                 color: AppColors.success.withValues(alpha: 0.1),
-                                borderRadius: BorderRadius.circular(8),
+                                borderRadius: BorderRadius.circular(10),
                               ),
                               child: const Icon(Icons.health_and_safety, size: 16, color: AppColors.success),
                             ),
@@ -117,7 +118,7 @@ class BandsScreen extends StatelessWidget {
                           children: [
                             Expanded(child: _FleetStat(label: 'Capacity', value: '${bands.fold<int>(0, (s, b) => s + b.maxCapacity)}', icon: Icons.garage)),
                             const SizedBox(width: 10),
-                            Expanded(child: _FleetStat(label: 'Maint. Cost', value: 'â‚µ${bands.fold<double>(0, (s, b) => s + b.maintenanceCostMonthly).toStringAsFixed(0)}/mo', icon: Icons.build)),
+                            Expanded(child: _FleetStat(label: 'Maint. Cost', value: '${bands.fold<double>(0, (s, b) => s + b.maintenanceCostMonthly).toStringAsFixed(0)}/mo', icon: Icons.build)),
                             const SizedBox(width: 10),
                             Expanded(child: _FleetStat(label: 'Available', value: '${bands.fold<int>(0, (s, b) => s + b.maxCapacity - b.vehicleCount)}', icon: Icons.check_circle, color: AppColors.success)),
                           ],
@@ -134,7 +135,7 @@ class BandsScreen extends StatelessWidget {
                   child: SetupSectionTitle(title: 'All Bands', icon: Icons.category),
                 ),
               ),
-              // ─── AI Insights ─────────────────────────────────────────
+              //  AI Insights 
               const SliverToBoxAdapter(
               ),
               SliverPadding(
@@ -227,7 +228,7 @@ class _BandCard extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           ClipRRect(
-            borderRadius: BorderRadius.circular(3),
+            borderRadius: BorderRadius.circular(6),
             child: LinearProgressIndicator(
               value: (band.utilization / 100).clamp(0.0, 1.0),
               backgroundColor: AppColors.inputBorder,
@@ -244,7 +245,7 @@ class _BandCard extends StatelessWidget {
                 style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
               ),
               Text(
-                'â‚µ${band.maintenanceCostMonthly.toStringAsFixed(0)}/mo',
+                '${band.maintenanceCostMonthly.toStringAsFixed(0)}/mo',
                 style: const TextStyle(fontSize: 12, color: AppColors.textTertiary),
               ),
             ],
@@ -255,7 +256,7 @@ class _BandCard extends StatelessWidget {
   }
 }
 
-// ─── Fleet Stat ──────────────────────────────────────────────────────────────
+//  Fleet Stat 
 
 class _FleetStat extends StatelessWidget {
   final String label;

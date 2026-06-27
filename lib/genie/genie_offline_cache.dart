@@ -1,16 +1,16 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 /// GenieOfflineCache
 ///
 /// Pre-computes and caches the 200 most frequent intents per role along with
 /// their required static data so Genie can respond meaningfully without a
 /// network connection.
 ///
-/// Recommendation 2 — Offline Intent Cache:
-///   • Stores intent responses in SharedPreferences (localStorage on web)
-///   • Provides static fallback payloads for every GenieModule
-///   • Detects sync conflicts when offline mutations rejoin the network
-///   • Exposes a SyncConflict model consumed by GenieSyncConflictCard
-/// ═══════════════════════════════════════════════════════════════════════════
+/// Recommendation 2  Offline Intent Cache:
+///    Stores intent responses in SharedPreferences (localStorage on web)
+///    Provides static fallback payloads for every GenieModule
+///    Detects sync conflicts when offline mutations rejoin the network
+///    Exposes a SyncConflict model consumed by GenieSyncConflictCard
+/// 
 library;
 
 import 'dart:convert';
@@ -20,7 +20,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../features/prompt/models/rbac_models.dart';
 import 'genie_intent.dart';
 
-// ─── Sync Conflict Model ─────────────────────────────────────────────────────
+//  Sync Conflict Model 
 
 /// Represents a resource modified both offline and on the server.
 class SyncConflict {
@@ -59,7 +59,7 @@ class SyncConflict {
       );
 }
 
-// ─── Cache Payload ────────────────────────────────────────────────────────────
+//  Cache Payload 
 
 /// A cached Genie response payload (text + card data).
 class CachedIntentResponse {
@@ -95,14 +95,14 @@ class CachedIntentResponse {
       DateTime.now().difference(cachedAt) > maxAge;
 }
 
-// ─── Cache Key Builder ────────────────────────────────────────────────────────
+//  Cache Key Builder 
 
 String _cacheKey(UserRole role, GenieModule module, String action) =>
     'genie_cache_${role.name}_${module.name}_$action';
 
 const String _conflictQueueKey = 'genie_sync_conflicts';
 
-// ─── Main Service ─────────────────────────────────────────────────────────────
+//  Main Service 
 
 class GenieOfflineCache {
   GenieOfflineCache._();
@@ -113,7 +113,7 @@ class GenieOfflineCache {
     _prefs ??= await SharedPreferences.getInstance();
   }
 
-  // ─── Intent Response Cache ───────────────────────────────────────────────
+  //  Intent Response Cache 
 
   /// Persist a live server response so it's available offline later.
   static Future<void> store(
@@ -147,7 +147,7 @@ class GenieOfflineCache {
     }
   }
 
-  // ─── Static Fallback Payloads ─────────────────────────────────────────────
+  //  Static Fallback Payloads 
   /// Returns a role-appropriate offline fallback for common intents.
   /// Used when the cache has no fresh entry.
   static CachedIntentResponse? staticFallback(
@@ -168,7 +168,7 @@ class GenieOfflineCache {
         }
         if (action == 'transaction_history') {
           return CachedIntentResponse(
-            text: 'Offline — showing cached transactions:',
+            text: 'Offline  showing cached transactions:',
             cardType: 'transaction',
             cardData: const {'transactions': [], 'offline': true},
             cachedAt: now,
@@ -176,9 +176,9 @@ class GenieOfflineCache {
         }
       case GenieModule.live:
         if (action == 'emergency_sos') {
-          // SOS is allowed offline — queued for network sync
+          // SOS is allowed offline  queued for network sync
           return CachedIntentResponse(
-            text: '🆘 SOS signal queued. Will transmit when online.',
+            text: ' SOS signal queued. Will transmit when online.',
             cardType: 'confirmation',
             cardData: const {'action': 'sos', 'offline': true, 'queued': true},
             cachedAt: now,
@@ -186,7 +186,7 @@ class GenieOfflineCache {
         }
         if (action == 'available_packages') {
           return CachedIntentResponse(
-            text: 'Offline — showing last cached packages:',
+            text: 'Offline  showing last cached packages:',
             cardType: 'driverDelivery',
             cardData: const {'packages': [], 'offline': true},
             cachedAt: now,
@@ -213,7 +213,7 @@ class GenieOfflineCache {
     );
   }
 
-  // ─── Sync Conflict Queue ─────────────────────────────────────────────────
+  //  Sync Conflict Queue 
 
   /// Record a conflict detected on reconnection for the user to resolve.
   static Future<void> addConflict(SyncConflict conflict) async {
@@ -235,7 +235,7 @@ class GenieOfflineCache {
     await _prefs?.setString(
         _conflictQueueKey, jsonEncode(remaining.map((c) => c.toJson()).toList()));
     debugPrint(
-        '[GenieOfflineCache] Conflict $resourceId resolved — '
+        '[GenieOfflineCache] Conflict $resourceId resolved  '
         '${acceptLocal ? "local" : "server"} version accepted.');
   }
 
@@ -252,7 +252,7 @@ class GenieOfflineCache {
     }
   }
 
-  // ─── Cache Invalidation ───────────────────────────────────────────────────
+  //  Cache Invalidation 
   static Future<void> clearAll() async {
     final keys = _prefs?.getKeys() ?? {};
     for (final key in keys) {

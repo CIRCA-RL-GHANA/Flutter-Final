@@ -32,12 +32,12 @@ class PrivacyCenterScreen extends StatelessWidget {
           body: ListView(
             padding: const EdgeInsets.all(IveTokens.s5),
             children: [
-              // ── Privacy Score (arc animates real-time) ───────────────
+              //  Privacy Score (arc animates real-time) 
               _PrivacyScoreCard(score: privacy.privacyScore),
 
               const SizedBox(height: IveTokens.s4),
 
-              // ── Data Map ────────────────────────────────────────────
+              //  Data Map 
               _DarkCard(
                 child: CollapsibleSection(
                   title: 'Your Data Map',
@@ -49,7 +49,7 @@ class PrivacyCenterScreen extends StatelessWidget {
 
               const SizedBox(height: IveTokens.s3),
 
-              // ── Profile Visibility ──────────────────────────────────
+              //  Profile Visibility 
               _DarkCard(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,7 +78,7 @@ class PrivacyCenterScreen extends StatelessWidget {
 
               const SizedBox(height: IveTokens.s3),
 
-              // ── Data Sharing ────────────────────────────────────────
+              //  Data Sharing 
               _DarkCard(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,7 +103,7 @@ class PrivacyCenterScreen extends StatelessWidget {
 
               const SizedBox(height: IveTokens.s3),
 
-              // ── Location Tracking ───────────────────────────────────
+              //  Location Tracking 
               _DarkCard(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -132,7 +132,7 @@ class PrivacyCenterScreen extends StatelessWidget {
 
               const SizedBox(height: IveTokens.s3),
 
-              // ── Toggles ─────────────────────────────────────────────
+              //  Toggles 
               _DarkCard(
                 child: Column(
                   children: [
@@ -165,7 +165,7 @@ class PrivacyCenterScreen extends StatelessWidget {
 
               const SizedBox(height: IveTokens.s3),
 
-              // ── Data Export ─────────────────────────────────────────
+              //  Data Export 
               _DarkCard(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -199,7 +199,7 @@ class PrivacyCenterScreen extends StatelessWidget {
 
               const SizedBox(height: IveTokens.s3),
 
-              // ── Account Deletion ────────────────────────────────────
+              //  Account Deletion 
               _DarkCard(
                 borderColor: IveTokens.badColor.withValues(alpha: 0.2),
                 child: Column(
@@ -249,7 +249,7 @@ class PrivacyCenterScreen extends StatelessWidget {
   }
 }
 
-// ── Dark card container ──────────────────────────────────────────────────────
+//  Dark card container 
 
 class _DarkCard extends StatelessWidget {
   final Widget child;
@@ -272,7 +272,7 @@ class _DarkCard extends StatelessWidget {
   }
 }
 
-// ── Section label ────────────────────────────────────────────────────────────
+//  Section label 
 
 class _SectionLabel extends StatelessWidget {
   final String text;
@@ -285,7 +285,7 @@ class _SectionLabel extends StatelessWidget {
   }
 }
 
-// ── Privacy Score Card — animates arc in real-time ──────────────────────────
+//  Privacy Score Card  animates arc in real-time 
 
 class _PrivacyScoreCard extends StatefulWidget {
   final int score;
@@ -395,7 +395,7 @@ class _PrivacyScoreCardState extends State<_PrivacyScoreCard>
   }
 }
 
-// ── Data Map Visualization ───────────────────────────────────────────────────
+//  Data Map Visualization 
 
 class _DataMap extends StatelessWidget {
   final List<DataCategory> categories;
@@ -473,7 +473,7 @@ class _DataBubble extends StatelessWidget {
             Center(
               child: Container(
                 width: 36, height: 4,
-                decoration: BoxDecoration(color: IveTokens.hair2Color, borderRadius: BorderRadius.circular(2)),
+                decoration: BoxDecoration(color: IveTokens.hair2Color, borderRadius: BorderRadius.circular(6)),
               ),
             ),
             const SizedBox(height: IveTokens.s4),
@@ -518,7 +518,7 @@ class _DataCategoryRow extends StatelessWidget {
   }
 }
 
-// ── Radio Option ─────────────────────────────────────────────────────────────
+//  Radio Option 
 
 class _RadioOption<T> extends StatelessWidget {
   final T value;

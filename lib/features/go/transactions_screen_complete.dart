@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Transaction {
@@ -257,7 +257,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
             decoration: InputDecoration(
               hintText: 'Search transactions...',
               prefixIcon: const Icon(Icons.search),
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
               filled: true,
               fillColor: const Color(0xFF11131C),
             ),

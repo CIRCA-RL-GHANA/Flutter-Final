@@ -1,4 +1,4 @@
-﻿/// qualChat Screen 10 — Chat Thread (Enhanced)
+/// qualChat Screen 10  Chat Thread (Enhanced)
 /// Immersive conversation: messages, composer, reactions, attachments, header menu
 library;
 
@@ -22,7 +22,7 @@ class _QualChatThreadScreenState extends State<QualChatThreadScreen> {
   final TextEditingController _messageCtrl = TextEditingController();
   final ScrollController _scrollCtrl = ScrollController();
   bool _showAttachments = false;
-  // Fold state: collapses chat bubbles → summary card (spec P1, dpThreadFold = 400ms)
+  // Fold state: collapses chat bubbles  summary card (spec P1, dpThreadFold = 400ms)
   bool _folded = false;
 
   @override
@@ -69,10 +69,10 @@ class _QualChatThreadScreenState extends State<QualChatThreadScreen> {
                   children: [
                     CircleAvatar(
                       radius: 18,
-                      backgroundColor: kChatColor.withValues(alpha: 0.15),
+                      backgroundColor: IveTokens.moduleQualChat.withValues(alpha: 0.15),
                       child: Text(
                         conversation.title[0].toUpperCase(),
-                        style: const TextStyle(fontWeight: FontWeight.w700, color: kChatColor, fontSize: 16),
+                        style: const TextStyle(fontWeight: FontWeight.w700, color: IveTokens.moduleQualChat, fontSize: 16),
                       ),
                     ),
                     if (conversation.type == ChatType.individual)
@@ -105,11 +105,11 @@ class _QualChatThreadScreenState extends State<QualChatThreadScreen> {
                         conversation.type == ChatType.group
                             ? '${conversation.participants.length} members'
                             : conversation.typingUser != null
-                                ? 'typing…'
+                                ? 'typing'
                                 : 'Online',
                         style: TextStyle(
                           fontSize: 12,
-                          color: conversation.typingUser != null ? kChatColor : IveTokens.okColor,
+                          color: conversation.typingUser != null ? IveTokens.moduleQualChat : IveTokens.okColor,
                         ),
                       ),
                     ],
@@ -118,14 +118,14 @@ class _QualChatThreadScreenState extends State<QualChatThreadScreen> {
               ],
             ),
             actions: [
-              // Fold toggle — collapses bubbles to summary card (spec P1)
+              // Fold toggle  collapses bubbles to summary card (spec P1)
               IconButton(
                 icon: AnimatedSwitcher(
                   duration: AppAnimations.dpStateChange,
                   child: Icon(
                     _folded ? Icons.unfold_more_rounded : Icons.unfold_less_rounded,
                     key: ValueKey(_folded),
-                    color: _folded ? kChatColor : IveTokens.muteColor,
+                    color: _folded ? IveTokens.moduleQualChat : IveTokens.muteColor,
                     size: 20,
                   ),
                 ),
@@ -135,7 +135,7 @@ class _QualChatThreadScreenState extends State<QualChatThreadScreen> {
                 },
               ),
               IconButton(
-                icon: const Icon(Icons.call, color: kChatColor, size: 22),
+                icon: const Icon(Icons.call, color: IveTokens.moduleQualChat, size: 22),
                 onPressed: () {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Calling...')),
@@ -143,7 +143,7 @@ class _QualChatThreadScreenState extends State<QualChatThreadScreen> {
                 },
               ),
               IconButton(
-                icon: const Icon(Icons.videocam, color: kChatColor, size: 22),
+                icon: const Icon(Icons.videocam, color: IveTokens.moduleQualChat, size: 22),
                 onPressed: () {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Starting video call...')),
@@ -210,7 +210,7 @@ class _QualChatThreadScreenState extends State<QualChatThreadScreen> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(Icons.chat_bubble_outline, size: 64, color: kChatColor.withValues(alpha: 0.3)),
+                            Icon(Icons.chat_bubble_outline, size: 64, color: IveTokens.moduleQualChat.withValues(alpha: 0.3)),
                             const SizedBox(height: 16),
                             Text('Start a conversation', style: IveType.headline),
                             const SizedBox(height: 4),
@@ -256,7 +256,7 @@ class _QualChatThreadScreenState extends State<QualChatThreadScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       _AttachmentOption(icon: Icons.photo, label: 'Photo', color: IveTokens.okColor, onTap: () => setState(() => _showAttachments = false)),
-                      _AttachmentOption(icon: Icons.camera_alt, label: 'Camera', color: kChatColor, onTap: () => setState(() => _showAttachments = false)),
+                      _AttachmentOption(icon: Icons.camera_alt, label: 'Camera', color: IveTokens.moduleQualChat, onTap: () => setState(() => _showAttachments = false)),
                       _AttachmentOption(icon: Icons.insert_drive_file, label: 'File', color: IveTokens.infoColor, onTap: () => setState(() => _showAttachments = false)),
                       _AttachmentOption(icon: Icons.location_on, label: 'Location', color: IveTokens.warnColor, onTap: () => setState(() => _showAttachments = false)),
                       _AttachmentOption(icon: Icons.contact_phone, label: 'Contact', color: IveTokens.accentColor, onTap: () => setState(() => _showAttachments = false)),
@@ -291,11 +291,11 @@ class _QualChatThreadScreenState extends State<QualChatThreadScreen> {
           mainAxisSize: MainAxisSize.min,
           children: ChatReportReason.values.map((reason) {
             final labels = {
-              ChatReportReason.spam: 'ðŸš« Spam',
-              ChatReportReason.harassment: 'ðŸ˜  Harassment',
-              ChatReportReason.inappropriate: 'âš ï¸ Inappropriate Content',
-              ChatReportReason.impersonation: 'ðŸŽ­ Impersonation',
-              ChatReportReason.other: 'ðŸ“ Other',
+              ChatReportReason.spam: ' Spam',
+              ChatReportReason.harassment: ' Harassment',
+              ChatReportReason.inappropriate: ' Inappropriate Content',
+              ChatReportReason.impersonation: ' Impersonation',
+              ChatReportReason.other: '" Other',
             };
             return ListTile(
               title: Text(labels[reason]!, style: const TextStyle(fontSize: 14)),
@@ -346,7 +346,7 @@ class _DateSeparator extends StatelessWidget {
 }
 
 /// Fold summary card shown when user collapses the thread (spec P1).
-/// Bubbles → summary card with sentiment as one quiet word.
+/// Bubbles  summary card with sentiment as one quiet word.
 class _FoldSummaryCard extends StatelessWidget {
   final List<dynamic> messages;
   final VoidCallback onUnfold;
@@ -373,7 +373,7 @@ class _FoldSummaryCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: IveTokens.raisedColor,
           borderRadius: BorderRadius.circular(IveTokens.rContainer),
-          border: Border.all(color: kChatColor.withValues(alpha: 0.3), width: 1),
+          border: Border.all(color: IveTokens.moduleQualChat.withValues(alpha: 0.3), width: 1),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -381,15 +381,15 @@ class _FoldSummaryCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                const Icon(Icons.unfold_more_rounded, size: 14, color: kChatColor),
+                const Icon(Icons.unfold_more_rounded, size: 14, color: IveTokens.moduleQualChat),
                 const SizedBox(width: 6),
                 Expanded(
                   child: Text(
                     '${messages.length} messages',
-                    style: IveType.caption.copyWith(fontWeight: FontWeight.w600, color: kChatColor),
+                    style: IveType.caption.copyWith(fontWeight: FontWeight.w600, color: IveTokens.moduleQualChat),
                   ),
                 ),
-                // Sentiment — one quiet word (spec P1)
+                // Sentiment  one quiet word (spec P1)
                 Text(_sentiment(), style: IveType.caption.copyWith(color: IveTokens.muteColor)),
               ],
             ),
@@ -432,7 +432,7 @@ class _SmartComposer extends StatelessWidget {
           children: [
             // Attachment button
             IconButton(
-              icon: const Icon(Icons.add_circle_outline, color: kChatColor, size: 26),
+              icon: const Icon(Icons.add_circle_outline, color: IveTokens.moduleQualChat, size: 26),
               onPressed: onAttachment,
             ),
             // Text field
@@ -449,11 +449,12 @@ class _SmartComposer extends StatelessWidget {
                   maxLines: null,
                   textCapitalization: TextCapitalization.sentences,
                   style: IveType.body,
-                  cursorColor: kChatColor,
+                  cursorColor: IveTokens.moduleQualChat,
                   decoration: InputDecoration(
                     hintText: 'Message',
                     hintStyle: IveType.body.copyWith(color: IveTokens.muteColor),
                     border: InputBorder.none,
+              filled: false,
                     contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                   ),
                 ),
@@ -481,7 +482,7 @@ class _SmartComposer extends StatelessWidget {
                     width: 40,
                     height: 40,
                     decoration: BoxDecoration(
-                      color: hasText ? kChatColor : IveTokens.surfaceColor,
+                      color: hasText ? IveTokens.moduleQualChat : IveTokens.surfaceColor,
                       shape: BoxShape.circle,
                     ),
                     child: Icon(

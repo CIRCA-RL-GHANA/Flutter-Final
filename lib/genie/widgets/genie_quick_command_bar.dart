@@ -1,10 +1,10 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// GenieQuickCommandBar – Bottom Chip Row
+/// 
+/// GenieQuickCommandBar  Bottom Chip Row
 ///
 /// Horizontally scrollable row of contextual quick-action chips.
 /// Chips are RBAC-filtered and role-specific. Snaps to center on scroll.
-/// Minimum 48Ã—48 dp touch target on each chip.
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// Minimum 4848 dp touch target on each chip.
+/// 
 library;
 
 import 'package:flutter/material.dart';

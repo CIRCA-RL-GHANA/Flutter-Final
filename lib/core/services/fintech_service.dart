@@ -13,7 +13,7 @@ class FintechService {
 
   FintechService([ApiClient? api]) : _api = api ?? ApiClient.instance;
 
-  // ─── Loans ──────────────────────────────────────────────────────────────
+  //  Loans 
 
   /// Apply for a loan from a specific FI entity.
   Future<ApiResponse<Map<String, dynamic>>> applyForLoan({
@@ -68,7 +68,7 @@ class FintechService {
     );
   }
 
-  // ─── Deposits ───────────────────────────────────────────────────────────
+  //  Deposits 
 
   /// Lock Q-Points as a term deposit with a verified FI.
   Future<ApiResponse<Map<String, dynamic>>> createDeposit({
@@ -96,7 +96,7 @@ class FintechService {
     );
   }
 
-  // ─── Insurance ──────────────────────────────────────────────────────────
+  //  Insurance 
 
   /// Purchase an insurance policy.
   Future<ApiResponse<Map<String, dynamic>>> purchasePolicy({
@@ -158,7 +158,7 @@ class FintechService {
     );
   }
 
-  // ─── Credit Data ─────────────────────────────────────────────────────────
+  //  Credit Data 
 
   /// Request a credit score for a subject user (FI only, requires consent).
   Future<ApiResponse<Map<String, dynamic>>> requestCreditScore({

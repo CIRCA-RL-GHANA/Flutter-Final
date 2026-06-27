@@ -1,5 +1,5 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// Community Service — Flutter ↔ Backend Integration
+/// 
+/// Community Service  Flutter  Backend Integration
 ///
 /// Maps to CommunityController endpoints:
 ///   GET    /community              (discover)
@@ -13,7 +13,7 @@
 ///   GET    /community/:id/posts
 ///   POST   /community/:id/posts
 ///   DELETE /community/:id/posts/:postId
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import '../network/api_client.dart';
@@ -25,7 +25,7 @@ class CommunityService {
 
   CommunityService([ApiClient? api]) : _api = api ?? ApiClient.instance;
 
-  // ─── Discovery ───────────────────────────────────────────────────────────
+  //  Discovery 
 
   /// Discover public communities, optionally filtered by archetype type.
   ///
@@ -73,7 +73,7 @@ class CommunityService {
     );
   }
 
-  // ─── Lifecycle ───────────────────────────────────────────────────────────
+  //  Lifecycle 
 
   /// Create a new community.
   ///
@@ -119,7 +119,7 @@ class CommunityService {
     );
   }
 
-  // ─── Members ─────────────────────────────────────────────────────────────
+  //  Members 
 
   /// Get paginated member list for a community.
   Future<ApiResponse<Map<String, dynamic>>> getMembers(
@@ -147,7 +147,7 @@ class CommunityService {
     );
   }
 
-  // ─── Posts ───────────────────────────────────────────────────────────────
+  //  Posts 
 
   /// Get paginated posts for a community.
   ///

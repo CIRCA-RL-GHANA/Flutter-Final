@@ -1,11 +1,12 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// LIVE MODULE — Screen 14: Return Pickup Verification
+/// 
+/// LIVE MODULE  Screen 14: Return Pickup Verification
 /// Driver verifies return pickup: item inspection, photo evidence,
 /// condition assessment, and pickup confirmation
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
@@ -56,8 +57,8 @@ class _LiveReturnPickupScreenState extends State<LiveReturnPickupScreen> {
                       margin: EdgeInsets.only(right: i < 2 ? 4 : 0),
                       height: 4,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(2),
-                        color: i <= _step ? kLiveColor : const Color(0xFFE5E7EB),
+                        borderRadius: BorderRadius.circular(6),
+                        color: i <= _step ? IveTokens.moduleLive : const Color(0xFFE5E7EB),
                       ),
                     ),
                   )),
@@ -77,7 +78,7 @@ class _LiveReturnPickupScreenState extends State<LiveReturnPickupScreen> {
                         LiveSectionCard(
                           title: 'RETURN ITEM',
                           icon: Icons.assignment_return,
-                          iconColor: kLiveColor,
+                          iconColor: IveTokens.moduleLive,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -97,9 +98,9 @@ class _LiveReturnPickupScreenState extends State<LiveReturnPickupScreen> {
                           iconColor: const Color(0xFF3B82F6),
                           child: Column(
                             children: [
-                              _ConditionOption(label: 'âœ… Good — Matches description', value: 'good', groupValue: _condition, onChanged: (v) => setState(() => _condition = v!)),
-                              _ConditionOption(label: 'âš ï¸ Fair — Minor discrepancies', value: 'fair', groupValue: _condition, onChanged: (v) => setState(() => _condition = v!)),
-                              _ConditionOption(label: 'âŒ Poor — Significant damage', value: 'poor', groupValue: _condition, onChanged: (v) => setState(() => _condition = v!)),
+                              _ConditionOption(label: ' Good  Matches description', value: 'good', groupValue: _condition, onChanged: (v) => setState(() => _condition = v!)),
+                              _ConditionOption(label: ' Fair  Minor discrepancies', value: 'fair', groupValue: _condition, onChanged: (v) => setState(() => _condition = v!)),
+                              _ConditionOption(label: ' Poor  Significant damage', value: 'poor', groupValue: _condition, onChanged: (v) => setState(() => _condition = v!)),
                             ],
                           ),
                         ),
@@ -158,7 +159,7 @@ class _LiveReturnPickupScreenState extends State<LiveReturnPickupScreen> {
                                 ),
                               ),
                               const SizedBox(height: 16),
-                              Text(_photoTaken ? 'PHOTO CAPTURED âœ…' : 'CAPTURE RETURN ITEM PHOTOS', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: _photoTaken ? const Color(0xFF10B981) : AppColors.textPrimary)),
+                              Text(_photoTaken ? 'PHOTO CAPTURED ' : 'CAPTURE RETURN ITEM PHOTOS', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: _photoTaken ? const Color(0xFF10B981) : AppColors.textPrimary)),
                               const SizedBox(height: 4),
                               const Text('Take clear photos of the return item for evidence', style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
                             ],
@@ -205,8 +206,8 @@ class _LiveReturnPickupScreenState extends State<LiveReturnPickupScreen> {
                             children: [
                               Container(
                                 padding: const EdgeInsets.all(14),
-                                decoration: BoxDecoration(shape: BoxShape.circle, color: kLiveColor.withValues(alpha: 0.1)),
-                                child: const Icon(Icons.assignment_return, size: 36, color: kLiveColor),
+                                decoration: BoxDecoration(shape: BoxShape.circle, color: IveTokens.moduleLive.withValues(alpha: 0.1)),
+                                child: const Icon(Icons.assignment_return, size: 36, color: IveTokens.moduleLive),
                               ),
                               const SizedBox(height: 12),
                               const Text('CONFIRM RETURN PICKUP', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
@@ -263,19 +264,19 @@ class _LiveReturnPickupScreenState extends State<LiveReturnPickupScreen> {
                       } else {
                         HapticFeedback.heavyImpact();
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('âœ… Return pickup confirmed!'), backgroundColor: Color(0xFF10B981)),
+                          const SnackBar(content: Text(' Return pickup confirmed!'), backgroundColor: Color(0xFF10B981)),
                         );
                         Navigator.pop(context);
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: _step == 2 ? const Color(0xFF10B981) : kLiveColor,
+                      backgroundColor: _step == 2 ? const Color(0xFF10B981) : IveTokens.moduleLive,
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                     ),
                     child: Text(
-                      _step == 0 ? 'NEXT: PHOTO EVIDENCE' : _step == 1 ? 'NEXT: CONFIRM' : 'âœ… CONFIRM PICKUP',
+                      _step == 0 ? 'NEXT: PHOTO EVIDENCE' : _step == 1 ? 'NEXT: CONFIRM' : ' CONFIRM PICKUP',
                       style: const TextStyle(fontWeight: FontWeight.w700),
                     ),
                   ),
@@ -303,7 +304,7 @@ class _ConditionOption extends StatelessWidget {
       groupValue: groupValue, // ignore: deprecated_member_use
       onChanged: onChanged, // ignore: deprecated_member_use
       title: Text(label, style: TextStyle(fontSize: 13, fontWeight: value == groupValue ? FontWeight.w700 : FontWeight.w400)),
-      activeColor: kLiveColor,
+      activeColor: IveTokens.moduleLive,
       dense: true,
       contentPadding: EdgeInsets.zero,
       visualDensity: VisualDensity.compact,
@@ -324,7 +325,7 @@ class _CheckItem extends StatelessWidget {
       child: Row(
         children: [
           Expanded(child: Text(label, style: const TextStyle(fontSize: 13))),
-          Switch(value: value, onChanged: onChanged, activeThumbColor: kLiveColor, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
+          Switch(value: value, onChanged: onChanged, activeThumbColor: IveTokens.moduleLive, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
         ],
       ),
     );

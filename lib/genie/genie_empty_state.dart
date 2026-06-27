@@ -1,7 +1,7 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 /// GenieEmptyState
 ///
-/// Recommendation 12 — Empty States as Delight.
+/// Recommendation 12  Empty States as Delight.
 ///
 /// Returns a contextual Genie message for every module's empty state,
 /// turning "No data" into an opportunity: Genie proactively suggests an
@@ -9,8 +9,8 @@
 ///
 /// Usage:
 ///   GenieEmptyState.forModule(GenieModule.market, role: UserRole.owner)
-///   → GenieTipCard with a warm, opportunity-framing message.
-/// ═══════════════════════════════════════════════════════════════════════════
+///    GenieTipCard with a warm, opportunity-framing message.
+/// 
 library;
 
 import '../features/prompt/models/rbac_models.dart';
@@ -50,7 +50,7 @@ class GenieEmptyState {
       case GenieModule.live:
         return const GenieTipCard(
           id: 'empty_live_orders',
-          message: 'No orders right now — great time to review your delivery routes. '
+          message: 'No orders right now  great time to review your delivery routes. '
               'Say "Optimise my route" and I\'ll plan it.',
           actionLabel: 'Optimise route',
           actionIntent: GenieIntent(module: GenieModule.live, action: 'optimise_route'),
@@ -59,7 +59,7 @@ class GenieEmptyState {
       case GenieModule.qualChat:
         return const GenieTipCard(
           id: 'empty_qualchat',
-          message: 'No conversations yet. Start one — say "Message Alex" and I\'ll connect you.',
+          message: 'No conversations yet. Start one  say "Message Alex" and I\'ll connect you.',
           actionLabel: 'Start a chat',
           actionIntent: GenieIntent(module: GenieModule.qualChat, action: 'new_conversation'),
         );
@@ -103,7 +103,7 @@ class GenieEmptyState {
       case GenieModule.alerts:
         return const GenieTipCard(
           id: 'empty_alerts',
-          message: 'All clear — no active alerts. You can ask me to send a '
+          message: 'All clear  no active alerts. You can ask me to send a '
               'test alert or configure notification preferences.',
           actionLabel: 'Alert settings',
           actionIntent: GenieIntent(module: GenieModule.setupDashboard, action: 'alert_settings'),
@@ -115,7 +115,7 @@ class GenieEmptyState {
           message: role == UserRole.owner
               ? 'Your dashboard is a blank canvas. Say "Add a branch" or '
                 '"Set up my shop" to begin building your business.'
-              : 'Nothing configured yet. Your admin will set this up — '
+              : 'Nothing configured yet. Your admin will set this up  '
                 'ask me to remind them.',
           actionLabel: role == UserRole.owner ? 'Add a branch' : 'Remind admin',
           actionIntent: role == UserRole.owner
@@ -130,7 +130,7 @@ class GenieEmptyState {
       default:
         return const GenieTipCard(
           id: 'empty_generic',
-          message: 'Nothing here yet. Ask me anything — I\'m here to help.',
+          message: 'Nothing here yet. Ask me anything  I\'m here to help.',
           actionLabel: 'What can you do?',
           actionIntent: GenieIntent(module: GenieModule.genie, action: 'help'),
         );

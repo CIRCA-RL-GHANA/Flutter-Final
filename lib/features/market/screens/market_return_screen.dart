@@ -1,7 +1,7 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// MARKET MODULE — Screen 9: Return Request & Evidence
-/// 4 Steps: Order Selection â†’ Evidence Collection â†’ Details â†’ Review
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
+/// MARKET MODULE  Screen 9: Return Request & Evidence
+/// 4 Steps: Order Selection ' Evidence Collection ' Details ' Review
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -133,7 +133,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
     );
   }
 
-  // ── Step 1: Item Selection ─────────────────────────────────────
+  //  Step 1: Item Selection 
   Widget _buildItemSelection(MarketOrder order) {
     return ListView(
       padding: const EdgeInsets.all(16),
@@ -190,7 +190,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
                   ),
                   const SizedBox(width: 12),
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(10),
                     child: Container(
                       width: 48,
                       height: 48,
@@ -208,7 +208,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
                           style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
                         ),
                         Text(
-                          'Qty: ${item.quantity} • \$${item.total.toStringAsFixed(2)}',
+                          'Qty: ${item.quantity}  \$${item.total.toStringAsFixed(2)}',
                           style: const TextStyle(fontSize: 12, color: AppColors.textTertiary),
                         ),
                       ],
@@ -223,7 +223,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
     );
   }
 
-  // ── Step 2: Evidence Collection ────────────────────────────────
+  //  Step 2: Evidence Collection 
   Widget _buildEvidenceCollection() {
     return ListView(
       padding: const EdgeInsets.all(16),
@@ -327,7 +327,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
     );
   }
 
-  // ── Step 3: Details ────────────────────────────────────────────
+  //  Step 3: Details 
   Widget _buildDetailsStep() {
     return ListView(
       padding: const EdgeInsets.all(16),
@@ -386,7 +386,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
     );
   }
 
-  // ── Step 4: Review ─────────────────────────────────────────────
+  //  Step 4: Review 
   Widget _buildReviewStep(MarketOrder order) {
     final selectedItemsList = order.items
         .where((i) => _selectedItems.contains(i.productId))
@@ -553,7 +553,7 @@ class _MarketReturnScreenState extends State<MarketReturnScreen> {
       context: context,
       barrierDismissible: false,
       builder: (ctx) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

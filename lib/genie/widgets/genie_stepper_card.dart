@@ -1,12 +1,12 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 /// GenieStepperCard
 ///
 /// Inline stepper card that displays real-time orchestration progress.
 /// Subscribes to [GenieOutbox.progressStream] and highlights the current step.
 /// Provides a Cancel button that triggers rollback via [onCancel].
 ///
-/// Recommendation 4 — User-Visible Progress with rollback.
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// Recommendation 4  User-Visible Progress with rollback.
+/// 
 library;
 
 import 'dart:async';

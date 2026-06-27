@@ -1,8 +1,10 @@
-﻿/// APRIL Screen 6 — APRIL Settings
+/// APRIL Screen 6  APRIL Settings
 /// 7 sections: General, Voice, Plugins, Notifications, Privacy, Advanced, Help
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../providers/april_provider.dart';
@@ -18,14 +20,14 @@ class AprilSettingsScreen extends StatelessWidget {
       builder: (context, provider, _) {
         return Scaffold(
           backgroundColor: const Color(0xFFF8F9FE),
-          appBar: const AprilAppBar(title: 'âš™ï¸ APRIL Settings'),
+          appBar: const AprilAppBar(title: ' APRIL Settings'),
           body: ListView(
             padding: const EdgeInsets.all(16),
             children: [
-              // ──── AI SETTINGS SUGGESTION ────
-              // ──── GENERAL ────
+              //  AI SETTINGS SUGGESTION 
+              //  GENERAL 
               _SettingsSection(
-                title: 'ðŸ  General',
+                title: ' General',
                 children: [
                   _SettingsToggle(
                     label: 'Dark Mode',
@@ -57,7 +59,7 @@ class AprilSettingsScreen extends StatelessWidget {
                         if (context.mounted) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                              content: Text('Open device Settings → General → Language & Region to change language.'),
+                              content: Text('Open device Settings  General  Language & Region to change language.'),
                               behavior: SnackBarBehavior.floating,
                             ),
                           );
@@ -69,9 +71,9 @@ class AprilSettingsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // ──── VOICE ────
+              //  VOICE 
               _SettingsSection(
-                title: 'ðŸŽ¤ Voice',
+                title: ' Voice',
                 children: [
                   _SettingsToggle(
                     label: 'Voice Activation',
@@ -99,7 +101,7 @@ class AprilSettingsScreen extends StatelessWidget {
                     subtitle: 'Improve recognition accuracy',
                     icon: Icons.record_voice_over,
                     onTap: () => ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Voice Training — improving recognition accuracy')),
+                      const SnackBar(content: Text('Voice Training  improving recognition accuracy')),
                     ),
                     trailing: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
@@ -114,9 +116,9 @@ class AprilSettingsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // ──── PLUGINS ────
+              //  PLUGINS 
               _SettingsSection(
-                title: 'ðŸ“¦ Plugins',
+                title: ' Plugins',
                 children: [
                   _SettingsToggle(
                     label: 'Planner Plugin',
@@ -156,9 +158,9 @@ class AprilSettingsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // ──── NOTIFICATIONS ────
+              //  NOTIFICATIONS 
               _SettingsSection(
-                title: 'ðŸ”” Notifications',
+                title: '" Notifications',
                 children: [
                   _SettingsToggle(
                     label: 'Push Notifications',
@@ -192,9 +194,9 @@ class AprilSettingsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // ──── PRIVACY ────
+              //  PRIVACY 
               _SettingsSection(
-                title: 'ðŸ”’ Privacy & Security',
+                title: 'Privacy & Security',
                 children: [
                   _SettingsToggle(
                     label: 'Biometric Lock',
@@ -229,9 +231,9 @@ class AprilSettingsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // ──── ADVANCED ────
+              //  ADVANCED 
               _SettingsSection(
-                title: 'ðŸ”§ Advanced',
+                title: ' Advanced',
                 children: [
                   _SettingsTile(
                     label: 'Backup Frequency',
@@ -304,14 +306,14 @@ class AprilSettingsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // ──── HELP ────
+              //  HELP 
               _SettingsSection(
-                title: 'â“ Help & Support',
+                title: ' Help & Support',
                 children: [
                   _SettingsTile(label: 'Getting Started', subtitle: 'Learn how to use APRIL', icon: Icons.school, onTap: () => Navigator.pushNamed(context, AppRoutes.utilityHelp)),
                   _SettingsTile(label: 'FAQs', subtitle: 'Common questions answered', icon: Icons.quiz, onTap: () => Navigator.pushNamed(context, AppRoutes.utilityHelp)),
                   _SettingsTile(label: 'Contact Support', subtitle: 'Get help from our team', icon: Icons.support_agent, onTap: () => Navigator.pushNamed(context, AppRoutes.utilityHelp)),
-                  _SettingsTile(label: 'Report Bug', subtitle: 'Help us improve', icon: Icons.bug_report, onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Bug report submitted')))),
+                  _SettingsTile(label: 'Report Bug', subtitle: 'Help us improve', icon: Icons.bug_report, onTap: () => AppToast.show(context, 'Bug report submitted')),
                 ],
               ),
               const SizedBox(height: 16),
@@ -337,21 +339,21 @@ class AprilSettingsScreen extends StatelessWidget {
   void _showAutoLockPicker(BuildContext context, AprilProvider provider) {
     showModalBottomSheet(
       context: context,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(10))),
       builder: (ctx) => Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(child: Container(width: 40, height: 4, decoration: BoxDecoration(color: const Color(0xFFE5E7EB), borderRadius: BorderRadius.circular(2)))),
+            Center(child: Container(width: 40, height: 4, decoration: BoxDecoration(color: const Color(0xFFE5E7EB), borderRadius: BorderRadius.circular(6)))),
             const SizedBox(height: 16),
             const Text('Auto-Lock Timer', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
             const SizedBox(height: 16),
             ...[1, 5, 10, 15, 30].map((m) => ListTile(
               contentPadding: EdgeInsets.zero,
               title: Text('$m minute${m > 1 ? 's' : ''}'),
-              trailing: provider.autoLockMinutes == m ? const Icon(Icons.check, color: kAprilColorDark) : null,
+              trailing: provider.autoLockMinutes == m ? const Icon(Icons.check, color: IveTokens.genieBright) : null,
               onTap: () {
                 provider.setAutoLockMinutes(m);
                 Navigator.pop(ctx);
@@ -366,21 +368,21 @@ class AprilSettingsScreen extends StatelessWidget {
   void _showBackupPicker(BuildContext context, AprilProvider provider) {
     showModalBottomSheet(
       context: context,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(10))),
       builder: (ctx) => Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(child: Container(width: 40, height: 4, decoration: BoxDecoration(color: const Color(0xFFE5E7EB), borderRadius: BorderRadius.circular(2)))),
+            Center(child: Container(width: 40, height: 4, decoration: BoxDecoration(color: const Color(0xFFE5E7EB), borderRadius: BorderRadius.circular(6)))),
             const SizedBox(height: 16),
             const Text('Backup Frequency', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
             const SizedBox(height: 16),
             ...['Daily', 'Weekly', 'Monthly', 'Manual'].map((f) => ListTile(
               contentPadding: EdgeInsets.zero,
               title: Text(f),
-              trailing: provider.backupFrequency == f ? const Icon(Icons.check, color: kAprilColorDark) : null,
+              trailing: provider.backupFrequency == f ? const Icon(Icons.check, color: IveTokens.genieBright) : null,
               onTap: () {
                 provider.setBackupFrequency(f);
                 Navigator.pop(ctx);
@@ -393,9 +395,9 @@ class AprilSettingsScreen extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // SHARED SETTINGS WIDGETS
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _SettingsSection extends StatelessWidget {
   final String title;
@@ -442,13 +444,13 @@ class _SettingsToggle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(icon, color: kAprilColorDark, size: 22),
+      leading: Icon(icon, color: IveTokens.genieBright, size: 22),
       title: Text(label, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
       subtitle: Text(subtitle, style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
       trailing: Switch(
         value: value,
         onChanged: onChanged,
-        activeThumbColor: kAprilColor,
+        activeThumbColor: IveTokens.genie,
       ),
     );
   }
@@ -465,7 +467,7 @@ class _SettingsTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(icon, color: isDestructive ? const Color(0xFFEF4444) : kAprilColorDark, size: 22),
+      leading: Icon(icon, color: isDestructive ? const Color(0xFFEF4444) : IveTokens.genieBright, size: 22),
       title: Text(label, style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: isDestructive ? const Color(0xFFEF4444) : null)),
       subtitle: Text(subtitle, style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
       trailing: trailing ?? const Icon(Icons.chevron_right, color: Color(0xFF9CA3AF)),
@@ -482,7 +484,7 @@ class _ThemeSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themes = [
-      {'name': 'Gold', 'color': kAprilColor},
+      {'name': 'Gold', 'color': IveTokens.genie},
       {'name': 'Blue', 'color': const Color(0xFF3B82F6)},
       {'name': 'Purple', 'color': const Color(0xFF7C3AED)},
       {'name': 'Green', 'color': const Color(0xFF10B981)},
@@ -491,7 +493,7 @@ class _ThemeSelector extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       child: Row(
         children: [
-          const Icon(Icons.palette, color: kAprilColorDark, size: 22),
+          const Icon(Icons.palette, color: IveTokens.genieBright, size: 22),
           const SizedBox(width: 16),
           const Expanded(
             child: Column(

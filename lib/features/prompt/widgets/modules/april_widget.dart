@@ -1,7 +1,7 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 /// APRIL Widget (Personal Assistant)
 /// Visible to: Owner ONLY (completely hidden for other roles)
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -22,7 +22,7 @@ class AprilWidgetContent extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(10),
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -44,7 +44,7 @@ class AprilWidgetContent extends StatelessWidget {
                 height: 28,
                 decoration: BoxDecoration(
                   color: color.withValues(alpha: 0.15),
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: Icon(Icons.assistant, size: 16, color: color),
               ),
@@ -117,7 +117,7 @@ class AprilWidgetContent extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: AppColors.info.withValues(alpha: 0.06),
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(10),
               border: Border.all(color: AppColors.info.withValues(alpha: 0.12)),
             ),
             child: const Row(
@@ -126,7 +126,7 @@ class AprilWidgetContent extends StatelessWidget {
                 SizedBox(width: 6),
                 Expanded(
                   child: Text(
-                    'Bill due tomorrow: â‚µ150',
+                    'Bill due tomorrow: 150',
                     style: TextStyle(fontSize: 10, color: AppColors.textSecondary),
                   ),
                 ),
@@ -142,10 +142,10 @@ class AprilWidgetContent extends StatelessWidget {
   String _getGreeting() {
     final hour = DateTime.now().hour;
     final emoji = hour < 12
-        ? 'ðŸŒ¤ï¸'
+        ? ''
         : hour < 18
-            ? 'â˜€ï¸'
-            : 'ðŸŒ™';
+            ? ''
+            : '';
     final period = hour < 12
         ? 'morning'
         : hour < 18
@@ -167,7 +167,7 @@ class _QuickCommand extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
       decoration: BoxDecoration(
         color: AppColors.inputFill,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
         children: [

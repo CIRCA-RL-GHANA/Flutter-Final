@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import '../core/theme/app_colors.dart';
+import '../theme/app_colors.dart';
 
 /// A banner that slides in from the top when the device goes offline
 /// and automatically disappears when connectivity is restored.

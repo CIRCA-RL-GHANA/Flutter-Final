@@ -1,10 +1,10 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// GenieRBACEnforcer – Real-Time Role-Based Access Control for Genie
+/// 
+/// GenieRBACEnforcer  Real-Time Role-Based Access Control for Genie
 ///
 /// Hard-codes the EXACT same visibility matrix as the PROMPT screen.
 /// Every intent is validated here before execution. The enforcer never
-/// reveals the existence of forbidden data – it redirects politely.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// reveals the existence of forbidden data  it redirects politely.
+/// 
 library;
 
 import '../features/prompt/models/rbac_models.dart';
@@ -13,7 +13,7 @@ import 'genie_intent.dart';
 class GenieRBACEnforcer {
   GenieRBACEnforcer._();
 
-  // ─── Module Visibility Matrix ─────────────────────────────────────────────
+  //  Module Visibility Matrix 
   /// Returns true if the given role may access the module at all.
   static bool canAccessModule(UserRole role, GenieModule module) {
     switch (module) {
@@ -79,7 +79,7 @@ class GenieRBACEnforcer {
     }
   }
 
-  // ─── Sub-Module / Action Restrictions ────────────────────────────────────
+  //  Sub-Module / Action Restrictions 
   /// Returns true if the role may perform the specific action within a module.
   static bool canPerformAction(
       UserRole role, GenieModule module, String action) {
@@ -103,7 +103,7 @@ class GenieRBACEnforcer {
           return role == UserRole.administrator ||
               role == UserRole.branchManager;
         }
-        // Owner: personal features only — no business entity management
+        // Owner: personal features only  no business entity management
         if (role == UserRole.owner) return _isPersonalSetupAction(action);
         // Social Officer can only access social/updates-related rows
         if (role == UserRole.socialOfficer ||
@@ -175,7 +175,7 @@ class GenieRBACEnforcer {
   }
 
   /// Actions within Setup Dashboard that are scoped to personal features.
-  /// Owner may only perform these — business entity management is excluded.
+  /// Owner may only perform these  business entity management is excluded.
   static bool _isPersonalSetupAction(String action) {
     const personalActions = {
       'open', 'profile', 'outlook', 'personal_metrics', 'my_activity',
@@ -185,7 +185,7 @@ class GenieRBACEnforcer {
     return personalActions.any((a) => action.contains(a));
   }
 
-  // ─── Polite Denial Message ────────────────────────────────────────────────
+  //  Polite Denial Message 
   /// Returns a user-friendly denial message without revealing forbidden data.
   static String getDenialMessage(
       UserRole role, GenieModule module, String action) {
@@ -229,7 +229,7 @@ class GenieRBACEnforcer {
     }
   }
 
-  // ─── Smart Chips per Role ─────────────────────────────────────────────────
+  //  Smart Chips per Role 
   /// Default quick-chips based on role for the bottom chip bar.
   static List<GenieChip> getDefaultChips(UserRole role) {
     switch (role) {
@@ -237,43 +237,43 @@ class GenieRBACEnforcer {
         return const [
           GenieChip(
             label: 'Balance',
-            emoji: '💰',
+            emoji: '',
             module: GenieModule.goPage,
             intent: GenieIntent(module: GenieModule.goPage, action: 'check_balance'),
           ),
           GenieChip(
             label: 'Feed',
-            emoji: '📰',
+            emoji: '',
             module: GenieModule.myUpdates,
             intent: GenieIntent(module: GenieModule.myUpdates, action: 'show_feed'),
           ),
           GenieChip(
-            label: 'Hey Ya',
-            emoji: '✨',
+            label: 'Hey ya',
+            emoji: '',
             module: GenieModule.qualChat,
             intent: GenieIntent(module: GenieModule.qualChat, action: 'hey_ya'),
           ),
           GenieChip(
             label: 'e-Play',
-            emoji: '🎵',
+            emoji: '',
             module: GenieModule.eplay,
             intent: GenieIntent(module: GenieModule.eplay, action: 'open_locker', requiresFullScreen: true),
           ),
           GenieChip(
             label: 'Communities',
-            emoji: '🌍',
+            emoji: '',
             module: GenieModule.community,
             intent: GenieIntent(module: GenieModule.community, action: 'my_communities', requiresFullScreen: true),
           ),
           GenieChip(
             label: 'Reminders',
-            emoji: '📅',
+            emoji: '',
             module: GenieModule.april,
             intent: GenieIntent(module: GenieModule.april, action: 'reminders'),
           ),
           GenieChip(
             label: 'Chats',
-            emoji: '💬',
+            emoji: '',
             module: GenieModule.qualChat,
             intent: GenieIntent(module: GenieModule.qualChat, action: 'recent_chats'),
           ),
@@ -282,44 +282,44 @@ class GenieRBACEnforcer {
       case UserRole.administrator:
         return const [
           GenieChip(
-            label: 'QP Balance',
-            emoji: '💰',
+            label: 'QP balance',
+            emoji: '',
             module: GenieModule.goPage,
             intent: GenieIntent(module: GenieModule.goPage, action: 'check_balance'),
           ),
           GenieChip(
-            label: 'Sales Today',
-            emoji: '📈',
+            label: 'Sales today',
+            emoji: '',
             module: GenieModule.setupDashboard,
             intent: GenieIntent(module: GenieModule.setupDashboard, action: 'sales_today'),
           ),
           GenieChip(
             label: 'Chats',
-            emoji: '💬',
+            emoji: '',
             module: GenieModule.qualChat,
             intent: GenieIntent(module: GenieModule.qualChat, action: 'recent_chats'),
           ),
           GenieChip(
             label: 'Alerts',
-            emoji: '🔔',
+            emoji: '',
             module: GenieModule.alerts,
             intent: GenieIntent(module: GenieModule.alerts, action: 'recent_alerts'),
           ),
           GenieChip(
             label: 'Market',
-            emoji: '🛍️',
+            emoji: '',
             module: GenieModule.market,
             intent: GenieIntent(module: GenieModule.market, action: 'browse_shops'),
           ),
           GenieChip(
             label: 'e-Play',
-            emoji: '🎵',
+            emoji: '',
             module: GenieModule.eplay,
             intent: GenieIntent(module: GenieModule.eplay, action: 'open_locker', requiresFullScreen: true),
           ),
           GenieChip(
             label: 'Communities',
-            emoji: '🌍',
+            emoji: '',
             module: GenieModule.community,
             intent: GenieIntent(module: GenieModule.community, action: 'discover', requiresFullScreen: true),
           ),
@@ -329,31 +329,31 @@ class GenieRBACEnforcer {
         return const [
           GenieChip(
             label: 'Incoming',
-            emoji: '📥',
+            emoji: '',
             module: GenieModule.live,
             intent: GenieIntent(module: GenieModule.live, action: 'incoming_orders'),
           ),
           GenieChip(
-            label: 'Active Orders',
-            emoji: '🚚',
+            label: 'Active orders',
+            emoji: '',
             module: GenieModule.live,
             intent: GenieIntent(module: GenieModule.live, action: 'active_packages'),
           ),
           GenieChip(
             label: 'Staff',
-            emoji: '👥',
+            emoji: '',
             module: GenieModule.setupDashboard,
             intent: GenieIntent(module: GenieModule.setupDashboard, action: 'staff_list'),
           ),
           GenieChip(
             label: 'Chats',
-            emoji: '💬',
+            emoji: '',
             module: GenieModule.qualChat,
             intent: GenieIntent(module: GenieModule.qualChat, action: 'recent_chats'),
           ),
           GenieChip(
             label: 'Alerts',
-            emoji: '🔔',
+            emoji: '',
             module: GenieModule.alerts,
             intent: GenieIntent(module: GenieModule.alerts, action: 'recent_alerts'),
           ),
@@ -362,26 +362,26 @@ class GenieRBACEnforcer {
       case UserRole.driver:
         return const [
           GenieChip(
-            label: 'Current Delivery',
-            emoji: '🗺️',
+            label: 'Current delivery',
+            emoji: '',
             module: GenieModule.live,
             intent: GenieIntent(module: GenieModule.live, action: 'current_delivery'),
           ),
           GenieChip(
             label: 'Available',
-            emoji: '📦',
+            emoji: '',
             module: GenieModule.live,
             intent: GenieIntent(module: GenieModule.live, action: 'available_packages'),
           ),
           GenieChip(
-            label: 'Chat Fleet',
-            emoji: '💬',
+            label: 'Chat fleet',
+            emoji: '',
             module: GenieModule.qualChat,
             intent: GenieIntent(module: GenieModule.qualChat, action: 'fleet_chat'),
           ),
           GenieChip(
             label: 'SOS',
-            emoji: '🆘',
+            emoji: '',
             module: GenieModule.live,
             intent: GenieIntent(module: GenieModule.live, action: 'emergency_sos'),
           ),
@@ -392,19 +392,19 @@ class GenieRBACEnforcer {
         return const [
           GenieChip(
             label: 'Alerts',
-            emoji: '🔔',
+            emoji: '',
             module: GenieModule.alerts,
             intent: GenieIntent(module: GenieModule.alerts, action: 'recent_alerts'),
           ),
           GenieChip(
-            label: 'Live Feed',
-            emoji: '📡',
+            label: 'Live feed',
+            emoji: '',
             module: GenieModule.live,
             intent: GenieIntent(module: GenieModule.live, action: 'live_operations'),
           ),
           GenieChip(
             label: 'Chats',
-            emoji: '💬',
+            emoji: '',
             module: GenieModule.qualChat,
             intent: GenieIntent(module: GenieModule.qualChat, action: 'recent_chats'),
           ),
@@ -414,19 +414,19 @@ class GenieRBACEnforcer {
         return const [
           GenieChip(
             label: 'Chats',
-            emoji: '💬',
+            emoji: '',
             module: GenieModule.qualChat,
             intent: GenieIntent(module: GenieModule.qualChat, action: 'recent_chats'),
           ),
           GenieChip(
             label: 'Profile',
-            emoji: '👤',
+            emoji: '',
             module: GenieModule.userDetails,
             intent: GenieIntent(module: GenieModule.userDetails, action: 'profile_strength'),
           ),
           GenieChip(
             label: 'Settings',
-            emoji: '⚙️',
+            emoji: '',
             module: GenieModule.utility,
             intent: GenieIntent(module: GenieModule.utility, action: 'settings'),
           ),
@@ -434,29 +434,29 @@ class GenieRBACEnforcer {
     }
   }
 
-  // ─── Pinned Shortcuts per Role ────────────────────────────────────────────
+  //  Pinned Shortcuts per Role 
   static List<GeniePinnedShortcut> getDefaultPinnedShortcuts(UserRole role) {
     switch (role) {
       case UserRole.owner:
         return const [
           GeniePinnedShortcut(
             label: 'Balance',
-            emoji: '💰',
+            emoji: '',
             intent: GenieIntent(module: GenieModule.goPage, action: 'check_balance'),
           ),
           GeniePinnedShortcut(
             label: 'Chats',
-            emoji: '💬',
+            emoji: '',
             intent: GenieIntent(module: GenieModule.qualChat, action: 'recent_chats'),
           ),
           GeniePinnedShortcut(
             label: 'Feed',
-            emoji: '📰',
+            emoji: '',
             intent: GenieIntent(module: GenieModule.myUpdates, action: 'show_feed'),
           ),
           GeniePinnedShortcut(
             label: 'Settings',
-            emoji: '⚙️',
+            emoji: '',
             intent: GenieIntent(module: GenieModule.utility, action: 'settings'),
           ),
         ];
@@ -464,23 +464,23 @@ class GenieRBACEnforcer {
       case UserRole.administrator:
         return const [
           GeniePinnedShortcut(
-            label: 'QP Balance',
-            emoji: '💰',
+            label: 'QP balance',
+            emoji: '',
             intent: GenieIntent(module: GenieModule.goPage, action: 'check_balance'),
           ),
           GeniePinnedShortcut(
             label: 'Sales',
-            emoji: '📈',
+            emoji: '',
             intent: GenieIntent(module: GenieModule.setupDashboard, action: 'sales_today'),
           ),
           GeniePinnedShortcut(
             label: 'Chats',
-            emoji: '💬',
+            emoji: '',
             intent: GenieIntent(module: GenieModule.qualChat, action: 'recent_chats'),
           ),
           GeniePinnedShortcut(
             label: 'Alerts',
-            emoji: '🔔',
+            emoji: '',
             intent: GenieIntent(module: GenieModule.alerts, action: 'recent_alerts'),
           ),
         ];
@@ -489,22 +489,22 @@ class GenieRBACEnforcer {
         return const [
           GeniePinnedShortcut(
             label: 'Delivery',
-            emoji: '🗺️',
+            emoji: '',
             intent: GenieIntent(module: GenieModule.live, action: 'current_delivery'),
           ),
           GeniePinnedShortcut(
-            label: 'Chat Fleet',
-            emoji: '💬',
+            label: 'Chat fleet',
+            emoji: '',
             intent: GenieIntent(module: GenieModule.qualChat, action: 'fleet_chat'),
           ),
           GeniePinnedShortcut(
             label: 'Available',
-            emoji: '📦',
+            emoji: '',
             intent: GenieIntent(module: GenieModule.live, action: 'available_packages'),
           ),
           GeniePinnedShortcut(
             label: 'SOS',
-            emoji: '🆘',
+            emoji: '',
             intent: GenieIntent(module: GenieModule.live, action: 'emergency_sos'),
           ),
         ];
@@ -513,22 +513,22 @@ class GenieRBACEnforcer {
         return const [
           GeniePinnedShortcut(
             label: 'Chats',
-            emoji: '💬',
+            emoji: '',
             intent: GenieIntent(module: GenieModule.qualChat, action: 'recent_chats'),
           ),
           GeniePinnedShortcut(
             label: 'Profile',
-            emoji: '👤',
+            emoji: '',
             intent: GenieIntent(module: GenieModule.userDetails, action: 'profile_strength'),
           ),
           GeniePinnedShortcut(
             label: 'Notifications',
-            emoji: '🔔',
+            emoji: '',
             intent: GenieIntent(module: GenieModule.utility, action: 'notifications'),
           ),
           GeniePinnedShortcut(
             label: 'Settings',
-            emoji: '⚙️',
+            emoji: '',
             intent: GenieIntent(module: GenieModule.utility, action: 'settings'),
           ),
         ];

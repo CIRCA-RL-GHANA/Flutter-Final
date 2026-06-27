@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/design/ive.dart';
 import '../../../core/routes/app_routes.dart';
+import '../../../core/widgets/hex_mark.dart';
 import '../providers/device_check_provider.dart';
 
-/// Screen 0: Pre-Loading Validation (hidden device check).
-/// Runs before splash to validate device capability.
 class PreLoadingScreen extends StatefulWidget {
   const PreLoadingScreen({super.key});
 
@@ -41,10 +40,8 @@ class _PreLoadingScreenState extends State<PreLoadingScreen> {
     switch (deviceCheck.errorType) {
       case DeviceCheckError.insufficientStorage:
         _showErrorScreen(
-          icon: Icons.storage_rounded,
           title: 'Not enough storage',
-          message: deviceCheck.errorMessage ??
-              'You need at least 100MB of free storage to use genie help.',
+          message: 'Free up at least 100MB to continue.',
           actionLabel: 'Open storage settings',
           onAction: () {},
           secondaryLabel: 'Try anyway',
@@ -54,29 +51,26 @@ class _PreLoadingScreenState extends State<PreLoadingScreen> {
         break;
       case DeviceCheckError.incompatibleOs:
         _showErrorScreen(
-          icon: Icons.system_update_rounded,
           title: 'OS update required',
           message: deviceCheck.errorMessage ??
-              'genie help requires iOS 13+ or Android 8+. Please update your device.',
+              'iOS 13+ or Android 8+ required.',
           actionLabel: 'Check for updates',
           onAction: () {},
         );
         break;
       case DeviceCheckError.noNetwork:
         _showErrorScreen(
-          icon: Icons.wifi_off_rounded,
           title: 'No internet connection',
-          message: 'You appear to be offline. Some features will be limited.',
+          message: 'You appear to be offline.',
           actionLabel: 'Try again',
           onAction: _runChecks,
-          secondaryLabel: 'Continue in offline mode',
+          secondaryLabel: 'Continue offline',
           onSecondary: () =>
               Navigator.of(context).pushReplacementNamed(AppRoutes.splash),
         );
         break;
       default:
         _showErrorScreen(
-          icon: Icons.error_outline_rounded,
           title: 'Something went wrong',
           message: deviceCheck.errorMessage ?? 'An unexpected error occurred.',
           actionLabel: 'Retry',
@@ -86,7 +80,6 @@ class _PreLoadingScreenState extends State<PreLoadingScreen> {
   }
 
   void _showErrorScreen({
-    required IconData icon,
     required String title,
     required String message,
     required String actionLabel,
@@ -96,7 +89,6 @@ class _PreLoadingScreenState extends State<PreLoadingScreen> {
   }) {
     setState(() {
       _errorWidget = _ErrorDisplay(
-        icon: icon,
         title: title,
         message: message,
         actionLabel: actionLabel,
@@ -109,88 +101,165 @@ class _PreLoadingScreenState extends State<PreLoadingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return IveScaffold(
-      child: _errorWidget ??
-          Consumer<DeviceCheckProvider>(
-            builder: (context, deviceCheck, _) {
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: 36,
-                      height: 36,
-                      child: CircularProgressIndicator(
-                        value: deviceCheck.progress,
-                        strokeWidth: 2,
-                        backgroundColor: IveTokens.surfaceRaised,
-                        valueColor: const AlwaysStoppedAnimation<Color>(
-                            IveTokens.accent),
+    if (_errorWidget != null) return _errorWidget!;
+
+    return Scaffold(
+      backgroundColor: IveTokens.bg,
+      body: Consumer<DeviceCheckProvider>(
+        builder: (context, deviceCheck, _) {
+          return SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Spacer(flex: 3),
+
+                  // Hex mark with traveling arc — the loading indicator
+                  const Center(child: HexMark(size: 56, animated: true)),
+                  const SizedBox(height: 20),
+
+                  // Eyebrow
+                  Center(
+                    child: Text(
+                      'COMMERCE OS',
+                      style: IveType.mono.copyWith(
+                        fontSize: 10,
+                        color: IveTokens.mute,
+                        letterSpacing: 2.0,
                       ),
                     ),
-                    const SizedBox(height: IveTokens.s5),
-                    Text('Preparing genie help', style: IveType.callout),
-                    const SizedBox(height: IveTokens.s4),
-                    _CheckRow(
-                        label: 'Network',
-                        isDone: deviceCheck.progress >= 0.25),
-                    _CheckRow(
-                        label: 'Storage',
-                        isDone: deviceCheck.progress >= 0.50),
-                    _CheckRow(
-                        label: 'Compatibility',
-                        isDone: deviceCheck.progress >= 0.75),
-                    _CheckRow(
-                        label: 'Security',
-                        isDone: deviceCheck.progress >= 1.0),
-                  ],
-                ),
-              );
-            },
-          ),
+                  ),
+                  const SizedBox(height: 6),
+
+                  // Heading
+                  Center(
+                    child: Text(
+                      'Initializing',
+                      style: IveType.display.copyWith(
+                        fontSize: 22,
+                        fontWeight: FontWeight.w700,
+                        color: IveTokens.ink,
+                        letterSpacing: -0.3,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+
+                  // Progress line
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeOut,
+                    height: 2,
+                    width: (MediaQuery.of(context).size.width - 40) *
+                        deviceCheck.progress,
+                    decoration: BoxDecoration(
+                      color: IveTokens.accent,
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                  ),
+                  // Track
+                  Container(
+                    height: 2,
+                    color: IveTokens.hairline,
+                    margin: const EdgeInsets.only(top: 0),
+                  ),
+
+                  const SizedBox(height: 28),
+
+                  // Check rows
+                  _CheckRow(
+                    label: 'Network',
+                    progress: deviceCheck.progress,
+                    doneAt: 0.25,
+                  ),
+                  _CheckRow(
+                    label: 'Storage',
+                    progress: deviceCheck.progress,
+                    doneAt: 0.50,
+                  ),
+                  _CheckRow(
+                    label: 'Compatibility',
+                    progress: deviceCheck.progress,
+                    doneAt: 0.75,
+                  ),
+                  _CheckRow(
+                    label: 'Security',
+                    progress: deviceCheck.progress,
+                    doneAt: 1.0,
+                  ),
+
+                  const Spacer(flex: 4),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }
 
 class _CheckRow extends StatelessWidget {
   final String label;
-  final bool isDone;
-  const _CheckRow({required this.label, required this.isDone});
+  final double progress;
+  final double doneAt;
+
+  const _CheckRow({
+    required this.label,
+    required this.progress,
+    required this.doneAt,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final isDone = progress >= doneAt;
+    final isChecking = !isDone && progress >= doneAt - 0.25;
+
+    final Color statusColor = isDone
+        ? IveTokens.success
+        : isChecking
+            ? IveTokens.warning
+            : IveTokens.mute;
+
+    final String statusText = isDone
+        ? 'OK'
+        : isChecking
+            ? 'CHECKING'
+            : '';
+
     return Padding(
-      padding: const EdgeInsets.symmetric(
-          vertical: IveTokens.s1, horizontal: IveTokens.s12),
+      padding: const EdgeInsets.symmetric(vertical: 9),
       child: Row(
-        mainAxisSize: MainAxisSize.min,
         children: [
-          AnimatedSwitcher(
-            duration: IveTokens.dFast,
-            child: isDone
-                ? const Icon(Icons.check_rounded,
-                    color: IveTokens.success,
-                    size: 14,
-                    key: ValueKey('done'))
-                : const SizedBox(
-                    width: 14,
-                    height: 14,
-                    key: ValueKey('loading'),
-                    child: CircularProgressIndicator(
-                      strokeWidth: 1.2,
-                      color: IveTokens.labelTertiary,
-                    ),
-                  ),
-          ),
-          const SizedBox(width: IveTokens.s3),
           Text(
             label,
-            style: IveType.footnote.copyWith(
-              color: isDone
-                  ? IveTokens.labelSecondary
-                  : IveTokens.labelTertiary,
+            style: IveType.mono.copyWith(
+              fontSize: 12,
+              color: isDone ? IveTokens.ink2 : IveTokens.mute,
+              letterSpacing: 0.2,
             ),
           ),
+          const Spacer(),
+          if (statusText.isNotEmpty) ...[
+            Container(
+              width: 5,
+              height: 5,
+              decoration: BoxDecoration(
+                color: statusColor,
+                shape: BoxShape.circle,
+              ),
+            ),
+            const SizedBox(width: 6),
+            Text(
+              statusText,
+              style: IveType.mono.copyWith(
+                fontSize: 11,
+                color: statusColor,
+                letterSpacing: 0.5,
+              ),
+            ),
+          ],
         ],
       ),
     );
@@ -198,7 +267,6 @@ class _CheckRow extends StatelessWidget {
 }
 
 class _ErrorDisplay extends StatelessWidget {
-  final IconData icon;
   final String title;
   final String message;
   final String actionLabel;
@@ -207,7 +275,6 @@ class _ErrorDisplay extends StatelessWidget {
   final VoidCallback? onSecondary;
 
   const _ErrorDisplay({
-    required this.icon,
     required this.title,
     required this.message,
     required this.actionLabel,
@@ -218,38 +285,30 @@ class _ErrorDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(IveTokens.s8),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Center(
-              child: Container(
-                width: 56,
-                height: 56,
-                decoration: const BoxDecoration(
-                  color: IveTokens.surface,
-                  borderRadius: IveTokens.brSm,
-                  border: Border.fromBorderSide(IveTokens.hairlineSide),
-                ),
-                child: Icon(icon, size: 24, color: IveTokens.danger),
-              ),
-            ),
-            const SizedBox(height: IveTokens.s6),
-            Text(title,
-                style: IveType.title3, textAlign: TextAlign.center),
-            const SizedBox(height: IveTokens.s2),
-            Text(message,
-                style: IveType.callout, textAlign: TextAlign.center),
-            const SizedBox(height: IveTokens.s8),
-            IveButton.primary(label: actionLabel, onPressed: onAction),
-            if (secondaryLabel != null && onSecondary != null) ...[
-              const SizedBox(height: IveTokens.s3),
-              IveButton.text(label: secondaryLabel!, onPressed: onSecondary!),
+    return Scaffold(
+      backgroundColor: IveTokens.bg,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(title,
+                  style: IveType.title3.copyWith(color: IveTokens.ink),
+                  textAlign: TextAlign.center),
+              const SizedBox(height: 8),
+              Text(message,
+                  style: IveType.callout.copyWith(color: IveTokens.ink2),
+                  textAlign: TextAlign.center),
+              const SizedBox(height: 32),
+              IveButton.primary(label: actionLabel, onPressed: onAction),
+              if (secondaryLabel != null && onSecondary != null) ...[
+                const SizedBox(height: 12),
+                IveButton.text(label: secondaryLabel!, onPressed: onSecondary!),
+              ],
             ],
-          ],
+          ),
         ),
       ),
     );

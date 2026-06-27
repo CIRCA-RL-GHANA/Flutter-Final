@@ -1,5 +1,5 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// e-Play Service — Flutter ↔ Backend Integration
+/// 
+/// e-Play Service  Flutter  Backend Integration
 ///
 /// Maps to EplayController endpoints:
 ///   POST   /eplay/creator/open
@@ -12,7 +12,7 @@
 ///   POST   /eplay/locker/purchase
 ///   GET    /eplay/locker/:assetId/stream
 ///   PATCH  /eplay/locker/:id/pin
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import '../network/api_client.dart';
@@ -24,7 +24,7 @@ class EPlayService {
 
   EPlayService([ApiClient? api]) : _api = api ?? ApiClient.instance;
 
-  // ─── Creator Onboarding ──────────────────────────────────────────────────
+  //  Creator Onboarding 
 
   /// Open (register) a creator profile. Creator receives royalties per sale.
   Future<ApiResponse<Map<String, dynamic>>> openCreatorProfile({
@@ -53,7 +53,7 @@ class EPlayService {
     );
   }
 
-  // ─── Content Management ──────────────────────────────────────────────────
+  //  Content Management 
 
   /// Upload / register a new digital asset (creator only).
   ///
@@ -91,7 +91,7 @@ class EPlayService {
     );
   }
 
-  /// Move an asset from draft → published state.
+  /// Move an asset from draft  published state.
   Future<ApiResponse<Map<String, dynamic>>> publishAsset(String assetId) {
     return _api.patch<Map<String, dynamic>>(
       ApiRoutes.eplay.publishAsset(assetId),
@@ -99,7 +99,7 @@ class EPlayService {
     );
   }
 
-  // ─── Discovery ───────────────────────────────────────────────────────────
+  //  Discovery 
 
   /// Browse all published digital assets with optional type filter.
   ///
@@ -128,9 +128,9 @@ class EPlayService {
     );
   }
 
-  // ─── Cloud Locker (Purchased Licenses) ───────────────────────────────────
+  //  Cloud Locker (Purchased Licenses) 
 
-  /// Get the current user's cloud locker — all purchased / licensed assets.
+  /// Get the current user's cloud locker  all purchased / licensed assets.
   Future<ApiResponse<Map<String, dynamic>>> getLocker() {
     return _api.get<Map<String, dynamic>>(
       ApiRoutes.eplay.locker,

@@ -1,10 +1,11 @@
-/// GO Screen 3 — Verification Modal
+/// GO Screen 3  Verification Modal
 /// Universal bottom-sheet verification with 4 methods:
 /// Face ID, Fingerprint, PIN, OTP
 /// 4 states: pending, verifying, verified, failed
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
 import '../../../core/routes/app_routes.dart';
 import '../models/go_models.dart';
 import '../widgets/go_widgets.dart';
@@ -27,7 +28,7 @@ class GoVerificationScreen extends StatefulWidget {
         maxChildSize: 0.9,
         minChildSize: 0.5,
         builder: (ctx, scrollCtrl) => Container(
-          decoration: const BoxDecoration(color: Colors.white, borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+          decoration: const BoxDecoration(color: Colors.white, borderRadius: BorderRadius.vertical(top: Radius.circular(10))),
           child: GoVerificationScreen(title: title, subtitle: subtitle, amount: amount, onVerified: () => Navigator.pop(ctx, true)),
         ),
       ),
@@ -58,7 +59,7 @@ class _GoVerificationScreenState extends State<GoVerificationScreen> with Single
     return Column(
       children: [
         // Drag handle
-        Container(margin: const EdgeInsets.only(top: 10), width: 40, height: 4, decoration: BoxDecoration(color: const Color(0xFFD1D5DB), borderRadius: BorderRadius.circular(2))),
+        Container(margin: const EdgeInsets.only(top: 10), width: 40, height: 4, decoration: BoxDecoration(color: const Color(0xFFD1D5DB), borderRadius: BorderRadius.circular(6))),
         Padding(
           padding: const EdgeInsets.all(16),
           child: Column(children: [
@@ -67,15 +68,15 @@ class _GoVerificationScreenState extends State<GoVerificationScreen> with Single
             Text(widget.subtitle, style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)), textAlign: TextAlign.center),
             if (widget.amount != null) ...[
               const SizedBox(height: 8),
-              Text('${widget.amount!.toStringAsFixed(2)} QP', style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w700, color: kGoColor)),
+              Text('${widget.amount!.toStringAsFixed(2)} QP', style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w700, color: IveTokens.moduleGo)),
             ],
           ]),
         ),
         if (_state == GoVerificationState.pending) ...[
           TabBar(
             controller: _tabCtrl,
-            labelColor: kGoColor, unselectedLabelColor: const Color(0xFF9CA3AF),
-            indicatorColor: kGoColor, indicatorSize: TabBarIndicatorSize.label,
+            labelColor: IveTokens.moduleGo, unselectedLabelColor: const Color(0xFF9CA3AF),
+            indicatorColor: IveTokens.moduleGo, indicatorSize: TabBarIndicatorSize.label,
             labelStyle: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600),
             tabs: const [Tab(text: 'Quick'), Tab(text: 'Detail'), Tab(text: 'Security'), Tab(text: 'Help')],
           ),
@@ -120,19 +121,19 @@ class _GoVerificationScreenState extends State<GoVerificationScreen> with Single
       child: Container(
         margin: const EdgeInsets.only(bottom: 10),
         padding: const EdgeInsets.all(14),
-        decoration: BoxDecoration(color: sel ? kGoColorLight : Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: sel ? kGoColor : const Color(0xFFE5E7EB), width: sel ? 2 : 1)),
+        decoration: BoxDecoration(color: sel ? IveTokens.surfaceRaised : Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: sel ? IveTokens.moduleGo : const Color(0xFFE5E7EB), width: sel ? 2 : 1)),
         child: Row(children: [
           Container(
             padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(color: kGoColorLight, borderRadius: BorderRadius.circular(10)),
-            child: Icon(icon, color: kGoColor, size: 24),
+            decoration: BoxDecoration(color: IveTokens.surfaceRaised, borderRadius: BorderRadius.circular(10)),
+            child: Icon(icon, color: IveTokens.moduleGo, size: 24),
           ),
           const SizedBox(width: 12),
           Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(title, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
             Text(desc, style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
           ])),
-          if (sel) const Icon(Icons.check_circle, color: kGoColor, size: 20),
+          if (sel) const Icon(Icons.check_circle, color: IveTokens.moduleGo, size: 20),
         ]),
       ),
     );
@@ -154,7 +155,7 @@ class _GoVerificationScreenState extends State<GoVerificationScreen> with Single
       const SizedBox(height: 16),
       SizedBox(width: double.infinity, child: ElevatedButton(
         onPressed: _selectedMethod != null ? _startVerification : null,
-        style: ElevatedButton.styleFrom(backgroundColor: kGoColor, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+        style: ElevatedButton.styleFrom(backgroundColor: IveTokens.moduleGo, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
         child: const Text('Proceed with Verification', style: TextStyle(fontWeight: FontWeight.w600)),
       )),
     ]);
@@ -166,9 +167,9 @@ class _GoVerificationScreenState extends State<GoVerificationScreen> with Single
       GoSectionCard(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         const Text('VERIFICATION PREFERENCES', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF9CA3AF))),
         const Divider(height: 16),
-        SwitchListTile(title: const Text('Require for all transactions', style: TextStyle(fontSize: 13)), value: _requireAll, onChanged: (v) => setState(() => _requireAll = v), activeThumbColor: kGoColor, dense: true),
-        SwitchListTile(title: const Text('Biometric preferred', style: TextStyle(fontSize: 13)), value: _biometricPreferred, onChanged: (v) => setState(() => _biometricPreferred = v), activeThumbColor: kGoColor, dense: true),
-        SwitchListTile(title: const Text('Remember device (7 days)', style: TextStyle(fontSize: 13)), value: _rememberDevice, onChanged: (v) => setState(() => _rememberDevice = v), activeThumbColor: kGoColor, dense: true),
+        SwitchListTile(title: const Text('Require for all transactions', style: TextStyle(fontSize: 13)), value: _requireAll, onChanged: (v) => setState(() => _requireAll = v), activeThumbColor: IveTokens.moduleGo, dense: true),
+        SwitchListTile(title: const Text('Biometric preferred', style: TextStyle(fontSize: 13)), value: _biometricPreferred, onChanged: (v) => setState(() => _biometricPreferred = v), activeThumbColor: IveTokens.moduleGo, dense: true),
+        SwitchListTile(title: const Text('Remember device (7 days)', style: TextStyle(fontSize: 13)), value: _rememberDevice, onChanged: (v) => setState(() => _rememberDevice = v), activeThumbColor: IveTokens.moduleGo, dense: true),
       ])),
       const SizedBox(height: 10),
       const GoSectionCard(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -187,13 +188,13 @@ class _GoVerificationScreenState extends State<GoVerificationScreen> with Single
       _buildFAQ('Why do I need to verify?', 'Verification protects your account from unauthorized transactions and ensures compliance with financial regulations.'),
       _buildFAQ('What if biometric fails?', 'You can always use PIN or OTP as fallback methods. If issues persist, contact support.'),
       _buildFAQ('How is my data protected?', 'All verification data is encrypted end-to-end and never stored on our servers.'),
-      _buildFAQ('Can I change my verification method?', 'Yes, go to Security tab in this modal or visit Settings â†’ Security to manage preferences.'),
+      _buildFAQ('Can I change my verification method?', 'Yes, go to Security tab in this modal or visit Settings > Security to manage preferences.'),
       const SizedBox(height: 16),
       OutlinedButton.icon(
         icon: const Icon(Icons.support_agent, size: 18),
         label: const Text('Contact Support'),
         onPressed: () => Navigator.pushNamed(context, AppRoutes.utilityHelp),
-        style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 12)),
+        style: OutlinedButton.styleFrom(foregroundColor: IveTokens.moduleGo, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 12)),
       ),
     ]);
   }
@@ -222,7 +223,7 @@ class _GoVerificationScreenState extends State<GoVerificationScreen> with Single
     switch (_state) {
       case GoVerificationState.verifying:
         return Center(child: Column(mainAxisSize: MainAxisSize.min, children: [
-          const SizedBox(width: 64, height: 64, child: CircularProgressIndicator(strokeWidth: 4, color: kGoColor)),
+          const SizedBox(width: 64, height: 64, child: CircularProgressIndicator(strokeWidth: 4, color: IveTokens.moduleGo)),
           const SizedBox(height: 20),
           Text(_selectedMethod == GoVerificationMethod.faceId ? 'Scanning face...' : _selectedMethod == GoVerificationMethod.fingerprint ? 'Reading fingerprint...' : 'Verifying...', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
           const SizedBox(height: 8),
@@ -230,21 +231,21 @@ class _GoVerificationScreenState extends State<GoVerificationScreen> with Single
         ]));
       case GoVerificationState.verified:
         return const Center(child: Column(mainAxisSize: MainAxisSize.min, children: [
-          Icon(Icons.check_circle, size: 72, color: kGoPositive),
+          Icon(Icons.check_circle, size: 72, color: IveTokens.success),
           SizedBox(height: 16),
-          Text('Verified!', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: kGoPositive)),
+          Text('Verified!', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: IveTokens.success)),
           SizedBox(height: 8),
           Text('Identity confirmed successfully.', style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
         ]));
       case GoVerificationState.failed:
         return Center(child: Column(mainAxisSize: MainAxisSize.min, children: [
-          const Icon(Icons.error_outline, size: 72, color: kGoNegative),
+          const Icon(Icons.error_outline, size: 72, color: IveTokens.danger),
           const SizedBox(height: 16),
-          const Text('Verification Failed', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: kGoNegative)),
+          const Text('Verification Failed', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: IveTokens.danger)),
           const SizedBox(height: 8),
           const Text('Try a different method.', style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
           const SizedBox(height: 24),
-          ElevatedButton(onPressed: () => setState(() { _state = GoVerificationState.pending; _selectedMethod = null; }), style: ElevatedButton.styleFrom(backgroundColor: kGoColor, foregroundColor: Colors.white), child: const Text('Try Again')),
+          ElevatedButton(onPressed: () => setState(() { _state = GoVerificationState.pending; _selectedMethod = null; }), style: ElevatedButton.styleFrom(backgroundColor: IveTokens.moduleGo, foregroundColor: Colors.white), child: const Text('Try Again')),
         ]));
       default:
         return const SizedBox.shrink();

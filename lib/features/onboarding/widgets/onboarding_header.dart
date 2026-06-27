@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import '../../../core/design/ive_tokens.dart';
+import '../../../core/design/ive_text.dart';
+import '../../../core/widgets/hex_mark.dart';
 
-// OS palette — shared with splash / welcome
-const Color _kSurface   = Color(0xFF0E0E1A);
-const Color _kBorder    = Color(0xFF1C1C2E);
-const Color _kAccent    = Color(0xFF22BDD8);
-const Color _kText      = Color(0xFFE8E8F0);
-const Color _kTextDim   = Color(0xFF9A9AB2);
-
-/// OS-aesthetic onboarding header.
+/// Onboarding header used by screens 04–10.
 ///
-/// Renders:
-///   [←]              03 / 08
-///   ──────────────[fill]─────
-///   Title text
-///   Optional subtitle
+/// When [currentStep] is provided, renders:
+///   [HexMark] COMMERCE OS                [0X / 08]
+///   ─────────────────────────────────────────── (accent progress)
+///   Title
+///   Subtitle (optional)
+///
+/// Otherwise renders:
+///   [← back]
+///   Title
+///   Subtitle (optional)
 class OnboardingHeader extends StatelessWidget {
   final String title;
   final String? subtitle;
@@ -40,15 +41,27 @@ class OnboardingHeader extends StatelessWidget {
         : null;
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(24, 16, 24, 20),
+      padding: const EdgeInsets.fromLTRB(20, 16, 20, 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // ── Nav row ───────────────────────────────────────────────────
+          // Nav row
           Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Back button — icon only, no container
-              if (onBack != null)
+              if (hasStep) ...[
+                const HexMark(size: 22),
+                const SizedBox(width: 8),
+                Text(
+                  'COMMERCE OS',
+                  style: IveType.mono.copyWith(
+                    fontSize: 10,
+                    color: IveTokens.ink,
+                    letterSpacing: 1.5,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ] else if (onBack != null)
                 GestureDetector(
                   onTap: onBack,
                   behavior: HitTestBehavior.opaque,
@@ -57,32 +70,28 @@ class OnboardingHeader extends StatelessWidget {
                     child: Icon(
                       Icons.arrow_back_ios_new,
                       size: 16,
-                      color: _kTextDim,
+                      color: IveTokens.ink2,
                     ),
                   ),
-                )
-              else
-                const SizedBox(width: 24),
+                ),
 
               const Spacer(),
 
-              // Step counter
               if (stepStr != null)
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: _kSurface,
-                    border: Border.all(color: _kBorder),
-                    borderRadius: BorderRadius.circular(4),
+                    color: IveTokens.surface,
+                    border: Border.all(color: IveTokens.hairline),
+                    borderRadius: BorderRadius.circular(IveTokens.rXs),
                   ),
                   child: Text(
                     stepStr,
-                    style: const TextStyle(
+                    style: IveType.mono.copyWith(
                       fontSize: 10,
                       fontWeight: FontWeight.w600,
-                      color: _kTextDim,
+                      color: IveTokens.ink2,
                       letterSpacing: 1.2,
-                      fontFeatures: [FontFeature.tabularFigures()],
                     ),
                   ),
                 ),
@@ -94,41 +103,44 @@ class OnboardingHeader extends StatelessWidget {
             ],
           ),
 
-          const SizedBox(height: 16),
+          const SizedBox(height: 12),
 
-          // ── Thin progress bar ─────────────────────────────────────────
+          // Progress line
           if (hasStep) ...[
             ClipRRect(
-              borderRadius: BorderRadius.circular(2),
+              borderRadius: BorderRadius.circular(IveTokens.rPill),
               child: LinearProgressIndicator(
                 value: currentStep! / totalSteps!,
-                backgroundColor: _kBorder,
-                valueColor: const AlwaysStoppedAnimation<Color>(_kAccent),
+                backgroundColor: IveTokens.hairline,
+                valueColor:
+                    const AlwaysStoppedAnimation<Color>(IveTokens.accent),
                 minHeight: 2,
               ),
             ),
             const SizedBox(height: 20),
-          ],
+          ] else
+            const SizedBox(height: 4),
 
-          // ── Title ─────────────────────────────────────────────────────
+          // Title
           Text(
             title,
-            style: const TextStyle(
-              fontSize: 20,
+            style: IveType.display.copyWith(
+              fontSize: 24,
               fontWeight: FontWeight.w700,
-              color: _kText,
-              height: 1.25,
+              color: IveTokens.ink,
+              height: 1.2,
+              letterSpacing: -0.3,
             ),
           ),
 
-          // ── Subtitle ──────────────────────────────────────────────────
+          // Subtitle
           if (subtitle != null) ...[
             const SizedBox(height: 6),
             Text(
               subtitle!,
               style: const TextStyle(
                 fontSize: 13,
-                color: _kTextDim,
+                color: IveTokens.ink2,
                 height: 1.5,
               ),
             ),

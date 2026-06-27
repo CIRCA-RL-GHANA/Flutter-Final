@@ -1,4 +1,4 @@
-﻿import 'package:dio/dio.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'api_response.dart';
@@ -67,7 +67,7 @@ class ApiClient {
           }
 
           if (kDebugMode) {
-            debugPrint('→ ${options.method} ${options.baseUrl}${options.path}');
+            debugPrint(' ${options.method} ${options.baseUrl}${options.path}');
             final sensitivePatterns = ['/auth/', '/users/set-pin', '/users/verify', '/users/register', '/users/verify-otp'];
             final isSensitive = sensitivePatterns.any((p) => options.path.contains(p));
             if (options.data != null && !isSensitive) {
@@ -82,7 +82,7 @@ class ApiClient {
         onResponse: (response, handler) {
           if (kDebugMode) {
             debugPrint(
-              '← ${response.statusCode} ${response.requestOptions.path}',
+              ' ${response.statusCode} ${response.requestOptions.path}',
             );
           }
           return handler.next(response);
@@ -90,11 +90,11 @@ class ApiClient {
         onError: (error, handler) async {
           if (kDebugMode) {
             debugPrint(
-              '✗ ${error.response?.statusCode ?? "?"} ${error.requestOptions.path}: ${error.message}',
+              ' ${error.response?.statusCode ?? "?"} ${error.requestOptions.path}: ${error.message}',
             );
           }
 
-          // Handle 401 — try token refresh (skip if this IS a refresh request or already retried)
+          // Handle 401  try token refresh (skip if this IS a refresh request or already retried)
           if (error.response?.statusCode == 401 &&
               error.requestOptions.extra['isRefreshRequest'] != true &&
               error.requestOptions.extra['retried'] != true) {
@@ -144,12 +144,12 @@ class ApiClient {
       if (kDebugMode) debugPrint('Token refresh failed: $e');
     }
 
-    // Refresh failed — clear tokens
+    // Refresh failed  clear tokens
     await clearTokens();
     return false;
   }
 
-  // ─── Token Management ─────────────────────────────
+  //  Token Management 
 
   Future<void> saveTokens({
     required String accessToken,
@@ -175,7 +175,7 @@ class ApiClient {
     return _cachedAccessToken != null && _cachedAccessToken!.isNotEmpty;
   }
 
-  // ─── HTTP Methods ─────────────────────────────────
+  //  HTTP Methods 
 
   /// Generic GET request
   Future<ApiResponse<T>> get<T>(
@@ -292,7 +292,7 @@ class ApiClient {
     }
   }
 
-  // ─── Response Handling ────────────────────────────
+  //  Response Handling 
 
   /// Parse backend response envelope: { data, statusCode, timestamp, path }
   ApiResponse<T> _handleResponse<T>(

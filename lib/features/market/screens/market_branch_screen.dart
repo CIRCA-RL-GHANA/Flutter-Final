@@ -1,7 +1,7 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// MARKET MODULE — Screen 2: Branch Main View
-/// Merchant profile with 5 tabs: Updates Â· Deals Â· Shop Â· Info Â· Returns
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
+/// MARKET MODULE  Screen 2: Branch Main View
+/// Merchant profile with 5 tabs: Updates  Deals  Shop  Info  Returns
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -213,7 +213,7 @@ class _MarketBranchScreenState extends State<MarketBranchScreen>
                         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                         decoration: BoxDecoration(
                           color: merchant.statusColor.withValues(alpha: 0.25),
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(10),
                         ),
                         child: Text(
                           merchant.status.name.toUpperCase(),
@@ -253,7 +253,7 @@ class _MarketBranchScreenState extends State<MarketBranchScreen>
   }
 }
 
-// ── Stat pill ──────────────────────────────────────────────────────
+//  Stat pill 
 class _StatPill extends StatelessWidget {
   final IconData icon;
   final String label;
@@ -274,7 +274,7 @@ class _StatPill extends StatelessWidget {
   }
 }
 
-// ── Tab 1: Updates ─────────────────────────────────────────────────
+//  Tab 1: Updates 
 class _UpdatesTab extends StatelessWidget {
   final MarketProvider prov;
   final Merchant merchant;
@@ -400,7 +400,7 @@ class _PostAction extends StatelessWidget {
   }
 }
 
-// ── Tab 2: Deals ───────────────────────────────────────────────────
+//  Tab 2: Deals 
 class _DealsTab extends StatelessWidget {
   final MarketProvider prov;
   final Merchant merchant;
@@ -428,7 +428,7 @@ class _DealsTab extends StatelessWidget {
         return Container(
           margin: const EdgeInsets.only(bottom: 12),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(10),
             gradient: const LinearGradient(
               colors: [kMarketColor, kMarketColorDark],
               begin: Alignment.topLeft,
@@ -486,7 +486,7 @@ class _DealsTab extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
                     color: Colors.white.withValues(alpha: 0.2),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: Text(
                     deal.valueDisplay,
@@ -556,7 +556,7 @@ class _DealsTab extends StatelessWidget {
   }
 }
 
-// ── Tab 3: Shop ────────────────────────────────────────────────────
+//  Tab 3: Shop 
 class _ShopTab extends StatelessWidget {
   final MarketProvider prov;
   final Merchant merchant;
@@ -682,7 +682,7 @@ class _ShopTab extends StatelessWidget {
   }
 }
 
-// ── Tab 4: Info ────────────────────────────────────────────────────
+//  Tab 4: Info 
 class _InfoTab extends StatelessWidget {
   final Merchant merchant;
 
@@ -811,7 +811,7 @@ class _InfoTab extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     decoration: BoxDecoration(
                       color: kMarketColorLight,
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                     child: Text(
                       '#$tag',
@@ -828,7 +828,7 @@ class _InfoTab extends StatelessWidget {
   }
 }
 
-// ── Tab 5: Rejected Returns ────────────────────────────────────────
+//  Tab 5: Rejected Returns 
 class _ReturnsTab extends StatelessWidget {
   final MarketProvider prov;
 
@@ -879,7 +879,7 @@ class _ReturnsTab extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                             decoration: BoxDecoration(
                               color: Colors.black54,
-                              borderRadius: BorderRadius.circular(4),
+                              borderRadius: BorderRadius.circular(6),
                             ),
                             child: Text(
                               video.durationDisplay,
@@ -894,7 +894,7 @@ class _ReturnsTab extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                             decoration: BoxDecoration(
                               color: AppColors.error.withValues(alpha: 0.8),
-                              borderRadius: BorderRadius.circular(4),
+                              borderRadius: BorderRadius.circular(6),
                             ),
                             child: const Text(
                               'REJECTED',

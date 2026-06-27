@@ -1,11 +1,12 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 /// Shared Widgets for Setup Dashboard Module
 /// Reusable components: app bar, module cards, KPI badges, state cards,
 /// filter chips, section titles, permission gate, context badge
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/services/product_service.dart';
@@ -16,7 +17,7 @@ import '../models/setup_dashboard_models.dart';
 import '../models/setup_rbac.dart';
 import '../providers/setup_dashboard_provider.dart';
 
-// ─── Setup Dashboard Module Color ────────────────────────────────────────────
+//  Setup Dashboard Module Color 
 
 /// The canonical module color for Setup Dashboard.
 ///
@@ -25,7 +26,7 @@ import '../providers/setup_dashboard_provider.dart';
 /// every Setup Dashboard surface (KPI badges, FABs, RBAC chips, etc.).
 const Color kSetupColor = Color(0xFF22BDD8);
 
-// ─── Setup App Bar ───────────────────────────────────────────────────────────
+//  Setup App Bar 
 
 class SetupAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -85,7 +86,7 @@ class SetupAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-// ─── Setup Module Card (Hub Card) ────────────────────────────────────────────
+//  Setup Module Card (Hub Card) 
 
 class SetupModuleCard extends StatelessWidget {
   final DashboardCard card;
@@ -114,7 +115,7 @@ class SetupModuleCard extends StatelessWidget {
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(10),
             border: card.hasAlerts
                 ? Border.all(color: AppColors.error.withValues(alpha: 0.4), width: 1.5)
                 : card.isViewOnly
@@ -125,7 +126,7 @@ class SetupModuleCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              // ─── Row 1: Icon + Badge Cluster ───────────
+              //  Row 1: Icon + Badge Cluster 
               Row(
                 children: [
                   Container(
@@ -143,7 +144,7 @@ class SetupModuleCard extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                       decoration: BoxDecoration(
                         color: AppColors.error.withValues(alpha: 0.1),
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(10),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -166,7 +167,7 @@ class SetupModuleCard extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                       decoration: BoxDecoration(
                         color: AppColors.textTertiary.withValues(alpha: 0.1),
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(10),
                       ),
                       child: const Row(
                         mainAxisSize: MainAxisSize.min,
@@ -188,7 +189,7 @@ class SetupModuleCard extends StatelessWidget {
               ),
               const SizedBox(height: 8),
 
-              // ─── Title + Subtitle ──────────────────────
+              //  Title + Subtitle 
               Text(
                 card.title,
                 style: const TextStyle(
@@ -213,7 +214,7 @@ class SetupModuleCard extends StatelessWidget {
                 ),
               ],
 
-              // ─── Status Dots (fleet / staff viz) ──────
+              //  Status Dots (fleet / staff viz) 
               if (card.statusDots.isNotEmpty) ...[
                 const SizedBox(height: 6),
                 Wrap(
@@ -242,7 +243,7 @@ class SetupModuleCard extends StatelessWidget {
                 ),
               ],
 
-              // ─── Progress Bar ─────────────────────────
+              //  Progress Bar 
               if (card.progress != null) ...[
                 const SizedBox(height: 6),
                 if (card.progressLabel != null)
@@ -252,7 +253,7 @@ class SetupModuleCard extends StatelessWidget {
                   ),
                 const SizedBox(height: 3),
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(3),
+                  borderRadius: BorderRadius.circular(6),
                   child: LinearProgressIndicator(
                     value: card.progress!.clamp(0.0, 1.0),
                     backgroundColor: accentColor.withValues(alpha: 0.1),
@@ -270,7 +271,7 @@ class SetupModuleCard extends StatelessWidget {
 
               const SizedBox(height: 4),
 
-              // ─── Metrics (compact) ────────────────────
+              //  Metrics (compact) 
               ...card.metrics.entries.take(2).map((e) => Padding(
                     padding: const EdgeInsets.only(bottom: 1),
                     child: Row(
@@ -296,7 +297,7 @@ class SetupModuleCard extends StatelessWidget {
                     ),
                   )),
 
-              // ─── Summary Line ─────────────────────────
+              //  Summary Line 
               if (card.summaryLine != null) ...[
                 const SizedBox(height: 3),
                 Text(
@@ -311,7 +312,7 @@ class SetupModuleCard extends StatelessWidget {
                 ),
               ],
 
-              // ─── Action Labels ────────────────────────
+              //  Action Labels 
               if (card.actionLabels.isNotEmpty) ...[
                 const Spacer(),
                 Row(
@@ -360,7 +361,7 @@ class SetupModuleCard extends StatelessWidget {
   }
 }
 
-// ─── Setup Section Card ──────────────────────────────────────────────────────
+//  Setup Section Card 
 
 class SetupSectionCard extends StatelessWidget {
   final Widget child;
@@ -384,7 +385,7 @@ class SetupSectionCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(10),
         border: borderColor != null ? Border.all(color: borderColor!) : null,
       ),
       child: child,
@@ -403,7 +404,7 @@ class SetupSectionCard extends StatelessWidget {
   }
 }
 
-// ─── Section Title ───────────────────────────────────────────────────────────
+//  Section Title 
 
 class SetupSectionTitle extends StatelessWidget {
   final String title;
@@ -445,7 +446,7 @@ class SetupSectionTitle extends StatelessWidget {
   }
 }
 
-// ─── KPI Badge ───────────────────────────────────────────────────────────────
+//  KPI Badge 
 
 class KPIBadge extends StatelessWidget {
   final String label;
@@ -485,7 +486,7 @@ class KPIBadge extends StatelessWidget {
                   height: 32,
                   decoration: BoxDecoration(
                     color: badgeColor.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: Icon(icon, size: 18, color: badgeColor),
                 ),
@@ -551,7 +552,7 @@ class KPIBadge extends StatelessWidget {
   }
 }
 
-// ─── Setup Action Tile ───────────────────────────────────────────────────────
+//  Setup Action Tile 
 
 class SetupActionTile extends StatelessWidget {
   final String label;
@@ -633,7 +634,7 @@ class SetupActionTile extends StatelessWidget {
   }
 }
 
-// ─── Filter Chip Row ─────────────────────────────────────────────────────────
+//  Filter Chip Row 
 
 class SetupFilterChipRow extends StatelessWidget {
   final List<String> labels;
@@ -692,7 +693,7 @@ class SetupFilterChipRow extends StatelessWidget {
   }
 }
 
-// ─── Status Indicator ────────────────────────────────────────────────────────
+//  Status Indicator 
 
 class SetupStatusIndicator extends StatelessWidget {
   final String label;
@@ -712,7 +713,7 @@ class SetupStatusIndicator extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(10),
         border: Border.all(color: color.withValues(alpha: 0.2)),
       ),
       child: Row(
@@ -743,7 +744,7 @@ class SetupStatusIndicator extends StatelessWidget {
   }
 }
 
-// ─── Context Badge (role-colored pill) ───────────────────────────────────────
+//  Context Badge (role-colored pill) 
 
 class ContextBadge extends StatelessWidget {
   final String label;
@@ -789,7 +790,7 @@ class ContextBadge extends StatelessWidget {
   }
 }
 
-// ─── Empty State ─────────────────────────────────────────────────────────────
+//  Empty State 
 
 class SetupEmptyState extends StatelessWidget {
   final IconData icon;
@@ -858,7 +859,7 @@ class SetupEmptyState extends StatelessWidget {
   }
 }
 
-// ─── Error State ─────────────────────────────────────────────────────────────
+//  Error State 
 
 class SetupErrorState extends StatelessWidget {
   final String title;
@@ -930,7 +931,7 @@ class SetupErrorState extends StatelessWidget {
   }
 }
 
-// ─── Loading State ───────────────────────────────────────────────────────────
+//  Loading State 
 
 class SetupLoadingState extends StatelessWidget {
   final String? message;
@@ -971,7 +972,7 @@ class SetupLoadingState extends StatelessWidget {
   }
 }
 
-// ─── Permission Gate ─────────────────────────────────────────────────────────
+//  Permission Gate 
 
 class PermissionGate extends StatelessWidget {
   final CardAccessLevel access;
@@ -999,7 +1000,7 @@ class PermissionGate extends StatelessWidget {
   }
 }
 
-// ─── Data Scope Indicator ────────────────────────────────────────────────────
+//  Data Scope Indicator 
 
 class DataScopeIndicator extends StatelessWidget {
   final CardAccessLevel access;
@@ -1046,7 +1047,7 @@ class DataScopeIndicator extends StatelessWidget {
   }
 }
 
-// ─── Percentage Ring ─────────────────────────────────────────────────────────
+//  Percentage Ring 
 
 class SetupPercentageRing extends StatelessWidget {
   final double percentage;
@@ -1094,7 +1095,7 @@ class SetupPercentageRing extends StatelessWidget {
   }
 }
 
-// ─── Helpers ─────────────────────────────────────────────────────────────────
+//  Helpers 
 
 String setupTimeAgo(DateTime dt) {
   final diff = DateTime.now().difference(dt);
@@ -1105,7 +1106,7 @@ String setupTimeAgo(DateTime dt) {
   return '${dt.day}/${dt.month}';
 }
 
-// ─── Setup Detail Tab Bar ────────────────────────────────────────────────────
+//  Setup Detail Tab Bar 
 
 /// Horizontal scrollable tab bar for detail screens
 class SetupDetailTabBar extends StatelessWidget {
@@ -1162,7 +1163,7 @@ class SetupDetailTabBar extends StatelessWidget {
   }
 }
 
-// ─── Setup Form Field ────────────────────────────────────────────────────────
+//  Setup Form Field 
 
 /// Styled text field for setup forms
 class SetupFormField extends StatelessWidget {
@@ -1244,7 +1245,7 @@ class SetupFormField extends StatelessWidget {
   }
 }
 
-// ─── Setup Confirm Dialog ────────────────────────────────────────────────────
+//  Setup Confirm Dialog 
 
 /// Confirmation dialog with destructive / normal actions
 Future<bool> showSetupConfirmDialog({
@@ -1258,7 +1259,7 @@ Future<bool> showSetupConfirmDialog({
   final result = await showDialog<bool>(
     context: context,
     builder: (ctx) => AlertDialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       title: Text(title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
       content: Text(message, style: const TextStyle(fontSize: 14, color: AppColors.textSecondary)),
       actions: [
@@ -1279,7 +1280,7 @@ Future<bool> showSetupConfirmDialog({
   return result ?? false;
 }
 
-// ─── Setup FAB ───────────────────────────────────────────────────────────────
+//  Setup FAB 
 
 /// Floating action button styled for setup module
 class SetupFAB extends StatelessWidget {
@@ -1305,7 +1306,7 @@ class SetupFAB extends StatelessWidget {
         foregroundColor: Colors.white,
         icon: Icon(icon, size: 20),
         label: Text(label!, style: const TextStyle(fontWeight: FontWeight.w600)),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         elevation: 4,
       );
     }
@@ -1314,14 +1315,14 @@ class SetupFAB extends StatelessWidget {
       backgroundColor: kSetupColor,
       foregroundColor: Colors.white,
       mini: mini,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       elevation: 4,
       child: Icon(icon, size: mini ? 20 : 24),
     );
   }
 }
 
-// ─── Adaptive Grid ───────────────────────────────────────────────────────────
+//  Adaptive Grid 
 
 /// Responsive grid that adjusts columns based on available width
 class AdaptiveGrid extends StatelessWidget {
@@ -1362,7 +1363,7 @@ class AdaptiveGrid extends StatelessWidget {
   }
 }
 
-// ─── Skeleton Loader ─────────────────────────────────────────────────────────
+//  Skeleton Loader 
 
 /// Shimmer-like skeleton loading placeholder
 class SetupSkeletonLoader extends StatefulWidget {
@@ -1452,7 +1453,7 @@ class SetupSkeletonCard extends StatelessWidget {
   }
 }
 
-// ─── Setup Bottom Sheet ──────────────────────────────────────────────────────
+//  Setup Bottom Sheet 
 
 /// Show a styled bottom sheet with drag handle
 Future<T?> showSetupBottomSheet<T>({
@@ -1472,7 +1473,7 @@ Future<T?> showSetupBottomSheet<T>({
       ),
       decoration: const BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -1484,7 +1485,7 @@ Future<T?> showSetupBottomSheet<T>({
             margin: const EdgeInsets.symmetric(vertical: 12),
             decoration: BoxDecoration(
               color: Colors.grey.shade300,
-              borderRadius: BorderRadius.circular(2),
+              borderRadius: BorderRadius.circular(6),
             ),
           ),
           Flexible(child: builder(ctx)),
@@ -1494,7 +1495,7 @@ Future<T?> showSetupBottomSheet<T>({
   );
 }
 
-// ─── Setup Search Bar ────────────────────────────────────────────────────────
+//  Setup Search Bar 
 
 /// Reusable search bar for list screens
 class SetupSearchBar extends StatelessWidget {
@@ -1526,6 +1527,7 @@ class SetupSearchBar extends StatelessWidget {
           hintStyle: const TextStyle(fontSize: 13, color: AppColors.textTertiary),
           prefixIcon: const Icon(Icons.search, size: 20, color: AppColors.textTertiary),
           border: InputBorder.none,
+              filled: false,
           contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         ),
       ),
@@ -1533,7 +1535,7 @@ class SetupSearchBar extends StatelessWidget {
   }
 }
 
-// ─── Setup Info Row ──────────────────────────────────────────────────────────
+//  Setup Info Row 
 
 /// Key-value row for detail views
 class SetupInfoRow extends StatelessWidget {
@@ -1588,7 +1590,7 @@ class SetupInfoRow extends StatelessWidget {
   }
 }
 
-// ─── Setup Stat Card ─────────────────────────────────────────────────────────
+//  Setup Stat Card 
 
 /// Mini stat card for detail screen headers
 class SetupStatCard extends StatelessWidget {
@@ -1638,22 +1640,22 @@ class SetupStatCard extends StatelessWidget {
   }
 }
 
-// ─── RBAC Gate Widget ────────────────────────────────────────────────────────
+//  RBAC Gate Widget 
 
 /// Wraps screen content and enforces role-based access control.
 ///
-/// - [CardAccessLevel.hidden] â†’ shows "No Access" placeholder.
-/// - [CardAccessLevel.viewOnly] / [CardAccessLevel.branchViewOnly] â†’ shows
+/// - [CardAccessLevel.hidden] ' shows "No Access" placeholder.
+/// - [CardAccessLevel.viewOnly] / [CardAccessLevel.branchViewOnly] ' shows
 ///   a non-intrusive banner at the top, child remains visible but FABs and
 ///   edit actions should check [canEdit] separately.
-/// - All other levels â†’ child is rendered normally.
+/// - All other levels ' child is rendered normally.
 class SetupRbacGate extends StatelessWidget {
   const SetupRbacGate({
     super.key,
     required this.cardId,
     required this.child,
     this.noAccessMessage = 'You do not have access to this section.',
-    this.viewOnlyMessage = 'You have view-only access.',
+    this.viewOnlyMessage = 'View-only access.',
   });
 
   final String cardId;
@@ -1767,7 +1769,7 @@ class _ViewOnlyBanner extends StatelessWidget {
   }
 }
 
-// ─── RBAC-Aware FAB ──────────────────────────────────────────────────────────
+//  RBAC-Aware FAB 
 
 /// A floating action button that is only shown when the current user role
 /// has edit/create permissions for the given [cardId].
@@ -1807,7 +1809,7 @@ class SetupRbacFAB extends StatelessWidget {
   }
 }
 
-// ─── RBAC Action Guard ───────────────────────────────────────────────────────
+//  RBAC Action Guard 
 
 /// Convenience widget that shows or hides its child based on edit permission.
 ///
@@ -1838,7 +1840,7 @@ class SetupActionGuard extends StatelessWidget {
   }
 }
 
-// ─── OTP Gate ────────────────────────────────────────────────────────────────
+//  OTP Gate 
 
 /// Wraps an action that requires OTP/PIN verification before proceeding.
 ///
@@ -1892,7 +1894,7 @@ class SetupOtpGate extends StatelessWidget {
       context: context,
       barrierDismissible: false,
       builder: (ctx) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         title: const Row(
           children: [
             Icon(Icons.lock_outline, color: kSetupColor, size: 22),
@@ -1926,7 +1928,7 @@ class SetupOtpGate extends StatelessWidget {
                 letterSpacing: 8,
               ),
               decoration: InputDecoration(
-                hintText: 'â— â— â— â— â— â—',
+                hintText: '     ',
                 hintStyle: const TextStyle(letterSpacing: 8, color: AppColors.textTertiary),
                 counterText: '',
                 filled: true,
@@ -1971,7 +1973,7 @@ class SetupOtpGate extends StatelessWidget {
   }
 }
 
-// ─── Export Button (RBAC-gated) ───────────────────────────────────────────────
+//  Export Button (RBAC-gated) 
 
 /// Export button that is only rendered when [role] is allowed to export
 /// [dataType] per [SetupDashboardRBAC.canExport].
@@ -2031,7 +2033,7 @@ class SetupExportButton extends StatelessWidget {
   }
 }
 
-// ─── Redacted Data Banner ────────────────────────────────────────────────────
+//  Redacted Data Banner 
 
 /// Displayed at the top of a screen when the current role sees redacted data.
 /// (Spec: Monitor/BranchMonitor see audit logs with PII masked.)
@@ -2043,7 +2045,7 @@ class SetupRedactedBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final text = message ??
-        'Redacted view — user identities and sensitive fields are masked '
+        'Redacted view  user identities and sensitive fields are masked '
         'per your role permissions.';
     return Container(
       width: double.infinity,
@@ -2074,7 +2076,7 @@ class SetupRedactedBanner extends StatelessWidget {
   }
 }
 
-// ─── OTP Guard (programmatic) ─────────────────────────────────────────────────
+//  OTP Guard (programmatic) 
 
 /// Programmatic OTP guard for use in [onPressed] / [onTap] callbacks
 /// (e.g., FAB taps) where wrapping with [SetupOtpGate] is impractical.
@@ -2098,7 +2100,7 @@ Future<void> showSetupOtpGuard(
     context: context,
     barrierDismissible: false,
     builder: (ctx) => AlertDialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       title: const Row(
         children: [
           Icon(Icons.lock_outline, color: kSetupColor, size: 22),
@@ -2132,17 +2134,17 @@ Future<void> showSetupOtpGuard(
               letterSpacing: 8,
             ),
             decoration: const InputDecoration(
-              hintText: 'â— â— â— â— â— â—',
+              hintText: '     ',
               hintStyle: TextStyle(letterSpacing: 8, color: AppColors.textTertiary),
               counterText: '',
               filled: true,
               fillColor: Color(0xFF11131C),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(12)),
+                borderRadius: BorderRadius.all(Radius.circular(10)),
                 borderSide: BorderSide(color: kSetupColor),
               ),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(12)),
+                borderRadius: BorderRadius.all(Radius.circular(10)),
                 borderSide: BorderSide(color: kSetupColor, width: 2),
               ),
             ),
@@ -2168,7 +2170,7 @@ Future<void> showSetupOtpGuard(
   }
 }
 
-// ─── RBAC Tooltip Helper ─────────────────────────────────────────────────────
+//  RBAC Tooltip Helper 
 
 /// Shows a role-scoped tooltip [SnackBar] when the user taps a restricted
 /// feature. Call this from [onTap] handlers of disabled buttons.
@@ -2195,9 +2197,9 @@ void showSetupRbacTooltip(BuildContext context, String cardId) {
   );
 }
 
-// ─── SOS Button ─────────────────────────────────────────────────────────────
+//  SOS Button 
 
-/// Emergency SOS button — visible to Owner, Administrator, Branch Manager only.
+/// Emergency SOS button  visible to Owner, Administrator, Branch Manager only.
 /// Spec: Roles without access see nothing (SizedBox.shrink).
 class SetupSOSButton extends StatelessWidget {
   const SetupSOSButton({super.key, this.onPressed});
@@ -2220,7 +2222,7 @@ class SetupSOSButton extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: AppColors.error,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(10),
         ),
         child: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -2246,7 +2248,7 @@ class SetupSOSButton extends StatelessWidget {
     await showDialog<void>(
       context: context,
       builder: (ctx) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         backgroundColor: const Color(0xFFFFF1F1),
         title: const Row(
           children: [
@@ -2285,14 +2287,14 @@ class SetupSOSButton extends StatelessWidget {
                   'source': 'setup_dashboard',
                 });
               } catch (_) {
-                // Silently absorb — the user-facing SnackBar always confirms
+                // Silently absorb  the user-facing SnackBar always confirms
                 // so the operator knows the signal was sent locally even if
                 // the API call fails transiently.
               }
               if (!context.mounted) return;
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
-                  content: Text('SOS signal sent — help is on the way.'),
+                  content: Text('SOS signal sent  help is on the way.'),
                   backgroundColor: AppColors.error,
                   behavior: SnackBarBehavior.floating,
                 ),
@@ -2307,7 +2309,7 @@ class SetupSOSButton extends StatelessWidget {
   }
 }
 
-// ─── Role Context Badge ───────────────────────────────────────────────────────
+//  Role Context Badge 
 
 /// Compact pill showing the active role with spec-accurate color coding.
 class SetupRoleBadge extends StatelessWidget {

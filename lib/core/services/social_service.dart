@@ -231,9 +231,9 @@ class SocialService {
     );
   }
 
-  // ═══════════════════════════════════════════════════════════════════════
+  // 
   // AI-ENHANCED METHODS
-  // ═══════════════════════════════════════════════════════════════════════
+  // 
 
   /// Analyze sentiment of a social message or update.
   /// Returns score (-1 to +1), label, confidence.

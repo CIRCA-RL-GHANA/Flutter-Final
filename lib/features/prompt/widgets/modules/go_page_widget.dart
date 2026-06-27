@@ -1,7 +1,7 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 /// GO PAGE Widget (Financial Hub)
 /// Visible to: Owner, Administrator only
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -114,7 +114,7 @@ class _GoPageWidgetContentState extends State<GoPageWidgetContent>
           // Recent Activity
           const _RecentTransaction(
             title: '+500 QP from Bob',
-            subtitle: 'Transfer • 1h ago',
+            subtitle: 'Transfer  1h ago',
             isPositive: true,
           ),
         ],

@@ -274,7 +274,7 @@ class _MarketBrowseScreenState extends State<MarketBrowseScreen> {
                   },
                 )
               : null,
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
           filled: true,
           fillColor: Colors.grey.shade100,
         ),
@@ -377,7 +377,7 @@ class _MarketBrowseScreenState extends State<MarketBrowseScreen> {
                 Row(
                   children: [
                     const Icon(Icons.star, color: Colors.amber),
-                    Text(' ${product.rating} • ${product.reviews} reviews'),
+                    Text(' ${product.rating}  ${product.reviews} reviews'),
                   ],
                 ),
                 const SizedBox(height: 16),

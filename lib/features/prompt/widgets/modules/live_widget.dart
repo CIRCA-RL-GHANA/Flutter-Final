@@ -1,8 +1,8 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 /// LIVE Widget (Real-Time Operations)
 /// Visible to: Branch Manager, Branch Response Officer, Driver, Response Officer
 /// Role-specific views per spec
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -49,7 +49,7 @@ class LiveWidgetContent extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
                   color: AppColors.success.withValues(alpha: 0.1),
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: const Text(
                   'Active',
@@ -76,7 +76,7 @@ class LiveWidgetContent extends StatelessWidget {
   }
 }
 
-// ─── Branch Manager / Response Officer View ─────────────────────────────────
+//  Branch Manager / Response Officer View 
 
 class _ManagerView extends StatelessWidget {
   final Color color;
@@ -101,14 +101,14 @@ class _ManagerView extends StatelessWidget {
           // Incoming Orders
           _LiveItem(
             title: 'Order #ORD-2041',
-            subtitle: 'Alice • 3 items',
+            subtitle: 'Alice  3 items',
             trailing: 'ASSIGN',
             color: color,
           ),
           const SizedBox(height: 6),
           const _LiveItem(
             title: 'Order #ORD-2042',
-            subtitle: 'Bob • 1 item',
+            subtitle: 'Bob  1 item',
             trailing: 'SELF-PICKUP',
             color: AppColors.success,
           ),
@@ -120,7 +120,7 @@ class _ManagerView extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: color.withValues(alpha: 0.06),
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(10),
             ),
             child: Row(
               children: [
@@ -146,7 +146,7 @@ class _ManagerView extends StatelessWidget {
   }
 }
 
-// ─── Driver View ─────────────────────────────────────────────────────────────
+//  Driver View 
 
 class _DriverView extends StatelessWidget {
   final DriverType? driverType;
@@ -164,7 +164,7 @@ class _DriverView extends StatelessWidget {
             // Transport driver view
             _LiveItem(
               title: 'Ride #R-901',
-              subtitle: '2.3km • â‚µ12.50',
+              subtitle: '2.3km  12.50',
               trailing: 'ACCEPT',
               color: color,
             ),
@@ -173,7 +173,7 @@ class _DriverView extends StatelessWidget {
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: AppColors.inputFill,
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(10),
               ),
               child: Row(
                 children: [
@@ -196,7 +196,7 @@ class _DriverView extends StatelessWidget {
             // Shop/Logistics driver view
             _LiveItem(
               title: 'Package #P-789',
-              subtitle: '2 stops • 8.3 miles',
+              subtitle: '2 stops  8.3 miles',
               trailing: 'START',
               color: color,
             ),
@@ -205,7 +205,7 @@ class _DriverView extends StatelessWidget {
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: AppColors.inputFill,
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(10),
               ),
               child: Row(
                 children: [
@@ -217,7 +217,7 @@ class _DriverView extends StatelessWidget {
                   ),
                   const Spacer(),
                   const Text(
-                    'Verified âœ“',
+                    'Verified "',
                     style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600,
                         color: AppColors.textPrimary),
                   ),
@@ -258,7 +258,7 @@ class _DriverView extends StatelessWidget {
   }
 }
 
-// ─── Shared Components ──────────────────────────────────────────────────────
+//  Shared Components 
 
 class _LivePulse extends StatefulWidget {
   final Color color;
@@ -359,7 +359,7 @@ class _LiveItem extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
       decoration: BoxDecoration(
         color: AppColors.inputFill,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
         children: [

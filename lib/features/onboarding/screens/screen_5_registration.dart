@@ -1,21 +1,22 @@
-﻿import 'package:flutter/material.dart';
-import '../../../core/design/ive.dart';
+import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '../../../core/design/ive.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/constants/app_strings.dart';
 import '../../../core/utils/responsive.dart';
-import '../../../core/utils/helpers.dart';
+import '../../../core/utils/app_toast.dart';
+import '../providers/phone_auth_provider.dart';
 import '../providers/registration_provider.dart';
 import '../providers/onboarding_provider.dart';
-import '../widgets/buttons.dart';
+import '../../../core/services/auth_service.dart';
+import '../../../core/services/user_service.dart';
 import '../widgets/onboarding_header.dart';
+import '../widgets/onboarding_loading_overlay.dart';
 
+enum _LookupStatus { idle, checking, available, taken }
 
-// OS palette — mirrors splash / welcome
-// ignore: unused_element
-const Color _kTextDim   = IveTokens.labelSecondary;
-/// Screen 5: User Registration (Comprehensive)
-/// Progressive profiling with privacy-first approach
+/// Screen 06 — Registration, step 03/08.
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({super.key});
 
@@ -24,485 +25,510 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
-  late TextEditingController _firstNameController;
-  late TextEditingController _lastNameController;
-  late TextEditingController _emailController;
+  final _userService = UserService();
 
-  final _formKey = GlobalKey<FormState>();
+  final _fullNameCtrl  = TextEditingController();
+  final _usernameCtrl  = TextEditingController();
+  final _emailCtrl     = TextEditingController();
+  final _passwordCtrl  = TextEditingController();
+
+  final _fullNameFocus  = FocusNode();
+  final _usernameFocus  = FocusNode();
+  final _emailFocus     = FocusNode();
+  final _passwordFocus  = FocusNode();
+
+  bool _obscurePassword    = true;
+  bool _usernameUserEdited = false; // stops auto-sync once user touches the field
+  _LookupStatus _status    = _LookupStatus.idle;
+  Timer? _debounce;
 
   @override
   void initState() {
     super.initState();
     final reg = context.read<RegistrationProvider>();
-    _firstNameController = TextEditingController(text: reg.firstName);
-    _lastNameController = TextEditingController(text: reg.lastName);
-    _emailController = TextEditingController(text: reg.email);
+    if (reg.fullName.isNotEmpty)  _fullNameCtrl.text  = reg.fullName;
+    if (reg.username.isNotEmpty)  _usernameCtrl.text  = reg.username;
+    if (reg.email.isNotEmpty)     _emailCtrl.text     = reg.email;
+    if (reg.password.isNotEmpty)  _passwordCtrl.text  = reg.password;
+
+    for (final n in [_fullNameFocus, _usernameFocus, _emailFocus, _passwordFocus]) {
+      n.addListener(() { if (mounted) setState(() {}); });
+    }
+
+    _fullNameCtrl.addListener(_onFullNameChanged);
+    _usernameCtrl.addListener(_onUsernameChanged);
+    _passwordCtrl.addListener(() { if (mounted) setState(() {}); });
+    _emailCtrl.addListener(() { if (mounted) setState(() {}); });
   }
 
-  @override
-  void dispose() {
-    _firstNameController.dispose();
-    _lastNameController.dispose();
-    _emailController.dispose();
-    super.dispose();
+  // ── Full name sync ────────────────────────────────────────────────────────
+
+  void _onFullNameChanged() {
+    final full  = _fullNameCtrl.text.trim();
+    final parts = full.split(RegExp(r'\s+'));
+    final reg   = context.read<RegistrationProvider>();
+    reg.setFirstName(parts.isNotEmpty ? parts.first : '');
+    reg.setLastName(parts.length > 1 ? parts.sublist(1).join(' ') : '');
+
+    // Auto-fill username from full name unless user has overridden it
+    if (!_usernameUserEdited) {
+      final derived = full.toLowerCase().replaceAll(RegExp(r'[^a-z0-9_]'), '');
+      _usernameCtrl.value = TextEditingValue(
+        text: derived,
+        selection: TextSelection.collapsed(offset: derived.length),
+      );
+      // _onUsernameChanged fires from the controller change
+    }
+    if (mounted) setState(() {});
   }
 
-  Future<void> _onSaveAndContinue() async {
-    if (!_formKey.currentState!.validate()) return;
+  // ── Username lookup ───────────────────────────────────────────────────────
 
+  void _onUsernameChanged() {
+    final val = _usernameCtrl.text.trim();
     final reg = context.read<RegistrationProvider>();
+    reg.setUsername(val);
+    reg.setWireId(val.isNotEmpty ? '@$val' : '');
+
+    if (val.length < 3) {
+      _debounce?.cancel();
+      if (mounted) setState(() => _status = _LookupStatus.idle);
+      return;
+    }
+
+    setState(() => _status = _LookupStatus.checking);
+    _debounce?.cancel();
+    _debounce = Timer(const Duration(milliseconds: 500), () => _checkUsername(val));
+  }
+
+  Future<void> _checkUsername(String username) async {
+    final res = await _userService.checkUsername(username);
+    if (!mounted || _usernameCtrl.text.trim() != username) return;
+    final available = res.success && (res.data?['available'] as bool? ?? false);
+    setState(() => _status = available ? _LookupStatus.available : _LookupStatus.taken);
+  }
+
+  // ── Validation ────────────────────────────────────────────────────────────
+
+  bool get _canContinue {
+    final reg = context.read<RegistrationProvider>();
+    return _fullNameCtrl.text.trim().length >= 2 &&
+        (_status == _LookupStatus.available) &&
+        _emailCtrl.text.trim().isNotEmpty &&
+        reg.dateOfBirth != null &&
+        reg.isPasswordValid;
+  }
+
+  // ── Submit ────────────────────────────────────────────────────────────────
+
+  Future<void> _onContinue() async {
+    final reg       = context.read<RegistrationProvider>();
     final onboarding = context.read<OnboardingProvider>();
 
+    final email = _emailCtrl.text.trim();
+    if (!RegExp(r'^[\w\-.]+@([\w-]+\.)+[\w-]{2,}$').hasMatch(email)) {
+      AppToast.error(context, 'Enter a valid email address.');
+      return;
+    }
+
+    reg.setEmail(email);
+    reg.setPassword(_passwordCtrl.text);
+
     final success = await reg.saveRegistration(
-      phoneNumber: onboarding.phoneNumber,
-      socialUsername: onboarding.username,
-      wireId: '',
-      password: '',
+      phoneNumber: context.read<PhoneAuthProvider>().formattedNumber,
     );
     if (!mounted) return;
 
     if (success) {
+      await AuthService().login(
+        identifier: context.read<PhoneAuthProvider>().formattedNumber,
+        password: _passwordCtrl.text,
+      );
+      if (!mounted) return;
       onboarding.setRegistrationData(
-        firstName: _firstNameController.text.trim(),
-        lastName: _lastNameController.text.trim(),
-        email: _emailController.text.trim(),
+        firstName: reg.firstName,
+        lastName:  reg.lastName,
+        email:     email,
         dateOfBirth: reg.dateOfBirth,
       );
-
       Navigator.of(context).pushNamed(AppRoutes.profilePhoto);
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(reg.error ?? AppStrings.couldntSave),
-          backgroundColor: IveTokens.danger,
-          behavior: SnackBarBehavior.floating,
-          shape: const RoundedRectangleBorder(borderRadius: IveTokens.brMd),
-        ),
-      );
-    }
-  }
-
-  void _showDatePicker() async {
-    final reg = context.read<RegistrationProvider>();
-    final now = DateTime.now();
-
-    final picked = await showDatePicker(
-      context: context,
-      initialDate: reg.dateOfBirth ?? DateTime(now.year - 18, now.month, now.day),
-      firstDate: DateTime(now.year - 120),
-      lastDate: DateTime(now.year - 13, now.month, now.day),
-      builder: (context, child) {
-        return Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: const ColorScheme.light(
-              primary: IveTokens.accent,
-              onPrimary: IveTokens.surface,
-              surface: IveTokens.surface,
-              onSurface: IveTokens.label,
-            ),
-          ),
-          child: child!,
-        );
-      },
-    );
-
-    if (picked != null) {
-      reg.setDateOfBirth(picked);
+      AppToast.error(context, reg.error ?? 'Registration failed.');
     }
   }
 
   @override
+  void dispose() {
+    _debounce?.cancel();
+    _fullNameCtrl.removeListener(_onFullNameChanged);
+    _usernameCtrl.removeListener(_onUsernameChanged);
+    _fullNameCtrl.dispose();
+    _usernameCtrl.dispose();
+    _emailCtrl.dispose();
+    _passwordCtrl.dispose();
+    _fullNameFocus.dispose();
+    _usernameFocus.dispose();
+    _emailFocus.dispose();
+    _passwordFocus.dispose();
+    super.dispose();
+  }
+
+  // ── Build ─────────────────────────────────────────────────────────────────
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: IveTokens.bg,
-      body: SafeArea(
-        child: Responsive.constrained(
-          child: Column(
-            children: [
-              OnboardingHeader(
-                title: AppStrings.basicInfo,
-                subtitle: 'Tell us a bit about yourself',
-                currentStep: 3,
-                totalSteps: 8,
-                onBack: () => Navigator.pop(context),
-                trailing: TextButton(
-                  onPressed: () {
-                    // Skip and complete later
-                    Navigator.of(context).pushNamed(AppRoutes.profilePhoto);
-                  },
-                  child: const Text(
-                    AppStrings.completeLater,
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: IveTokens.labelTertiary,
+    return Consumer<RegistrationProvider>(
+      builder: (context, reg, _) => OnboardingLoadingOverlay(
+        isLoading: reg.isLoading,
+        child: Scaffold(
+          backgroundColor: IveTokens.bg,
+          body: SafeArea(
+            child: Responsive.constrained(
+              child: Column(
+                children: [
+                  OnboardingHeader(
+                    title: 'Your details',
+                    subtitle: 'Tell us who you are.',
+                    currentStep: 3,
+                    totalSteps: 8,
+                  ),
+
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // FULL NAME
+                          const _FieldLabel('FULL NAME'),
+                          const SizedBox(height: 6),
+                          _InputBox(
+                            controller: _fullNameCtrl,
+                            focusNode: _fullNameFocus,
+                            hint: 'Kwame Mensah',
+                            nextFocus: _usernameFocus,
+                            textCapitalization: TextCapitalization.words,
+                            keyboardType: TextInputType.name,
+                          ),
+
+                          const SizedBox(height: 16),
+
+                          // USERNAME
+                          const _FieldLabel('USERNAME'),
+                          const SizedBox(height: 6),
+                          _InputBox(
+                            controller: _usernameCtrl,
+                            focusNode: _usernameFocus,
+                            hint: 'kwamemensah',
+                            nextFocus: _emailFocus,
+                            keyboardType: TextInputType.text,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(RegExp(r'[a-z0-9_]')),
+                            ],
+                            onTap: () => _usernameUserEdited = true,
+                            suffix: _StatusIcon(status: _status),
+                            caption: _statusCaption,
+                            captionColor: _statusCaptionColor,
+                          ),
+
+                          const SizedBox(height: 16),
+
+                          // EMAIL
+                          const _FieldLabel('EMAIL'),
+                          const SizedBox(height: 6),
+                          _InputBox(
+                            controller: _emailCtrl,
+                            focusNode: _emailFocus,
+                            hint: 'kwame@mail.com',
+                            nextFocus: _passwordFocus,
+                            keyboardType: TextInputType.emailAddress,
+                          ),
+
+                          const SizedBox(height: 16),
+
+                          // DATE OF BIRTH
+                          const _FieldLabel('DATE OF BIRTH'),
+                          const SizedBox(height: 6),
+                          _DobField(
+                            value: reg.dateOfBirth,
+                            onPick: reg.setDateOfBirth,
+                          ),
+
+                          const SizedBox(height: 16),
+
+                          // PASSWORD
+                          const _FieldLabel('PASSWORD'),
+                          const SizedBox(height: 6),
+                          _InputBox(
+                            controller: _passwordCtrl,
+                            focusNode: _passwordFocus,
+                            hint: '••••••••',
+                            obscure: _obscurePassword,
+                            keyboardType: TextInputType.visiblePassword,
+                            textInputAction: TextInputAction.done,
+                            suffix: GestureDetector(
+                              onTap: () => setState(
+                                  () => _obscurePassword = !_obscurePassword),
+                              child: Icon(
+                                _obscurePassword
+                                    ? Icons.visibility_outlined
+                                    : Icons.visibility_off_outlined,
+                                size: 18,
+                                color: IveTokens.mute,
+                              ),
+                            ),
+                            onChanged: reg.setPassword,
+                          ),
+
+                          const SizedBox(height: 32),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ),
 
-              Expanded(
-                child: Consumer<RegistrationProvider>(
-                  builder: (context, reg, child) {
-                    return SingleChildScrollView(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: Form(
-                        key: _formKey,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // Field 1: Full Name
-                            const _SectionLabel(
-                              label: AppStrings.legalFullName,
-                              hint: AppStrings.nameHint,
-                            ),
-                            const SizedBox(height: 8),
-                            TextFormField(
-                              controller: _firstNameController,
-                              onChanged: reg.setFirstName,
-                              validator: Validators.validateName,
-                              textCapitalization: TextCapitalization.words,
-                              decoration: const InputDecoration(
-                                labelText: AppStrings.firstName,
-                                prefixIcon: Icon(Icons.person_outline, size: 20),
-                                border: OutlineInputBorder(
-                                  borderRadius: IveTokens.brXs,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 12),
-                            TextFormField(
-                              controller: _lastNameController,
-                              onChanged: reg.setLastName,
-                              validator: Validators.validateName,
-                              textCapitalization: TextCapitalization.words,
-                              decoration: const InputDecoration(
-                                labelText: AppStrings.lastName,
-                                prefixIcon: Icon(Icons.person_outline, size: 20),
-                                border: OutlineInputBorder(
-                                  borderRadius: IveTokens.brXs,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            const Text(
-                              AppStrings.forIdentityVerification,
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: IveTokens.labelTertiary,
-                              ),
-                            ),
-
-                            const SizedBox(height: 24),
-
-                            // Field 2: Email (Optional)
-                            const _SectionLabel(
-                              label: AppStrings.emailOptional,
-                              hint: AppStrings.emailSubtitle,
-                            ),
-                            const SizedBox(height: 8),
-                            TextFormField(
-                              controller: _emailController,
-                              onChanged: reg.setEmail,
-                              validator: Validators.validateEmail,
-                              keyboardType: TextInputType.emailAddress,
-                              decoration: const InputDecoration(
-                                labelText: 'Email address',
-                                prefixIcon: Icon(Icons.email_outlined, size: 20),
-                                border: OutlineInputBorder(
-                                  borderRadius: IveTokens.brXs,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            // Email incentive
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 12,
-                                vertical: 8,
-                              ),
-                              decoration: BoxDecoration(
-                                color: IveTokens.accent.withValues(alpha: 0.1),
-                                borderRadius: IveTokens.brXs,
-                              ),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.star,
-                                    size: 16,
-                                    color: IveTokens.accent.withValues(alpha: 0.8),
-                                  ),
-                                  const SizedBox(width: 8),
-                                  const Text(
-                                    AppStrings.emailIncentive,
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w500,
-                                      color: IveTokens.labelSecondary,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-
-                            const SizedBox(height: 24),
-
-                            // Field 3: Date of Birth
-                            const _SectionLabel(
-                              label: AppStrings.dateOfBirth,
-                              hint: AppStrings.dobPrivacy,
-                            ),
-                            const SizedBox(height: 8),
-                            GestureDetector(
-                              onTap: _showDatePicker,
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 16,
-                                  vertical: 16,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: IveTokens.surface,
-                                  borderRadius: IveTokens.brXs,
-                                  border: Border.all(
-                                    color: IveTokens.hairline,
-                                  ),
-                                ),
-                                child: Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.calendar_today_outlined,
-                                      size: 20,
-                                      color: IveTokens.labelTertiary,
-                                    ),
-                                    const SizedBox(width: 12),
-                                    Text(
-                                      reg.dateOfBirth != null
-                                          ? '${reg.dateOfBirth!.month}/${reg.dateOfBirth!.day}/${reg.dateOfBirth!.year}'
-                                          : 'Select date of birth',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        color: reg.dateOfBirth != null
-                                            ? IveTokens.label
-                                            : IveTokens.labelTertiary,
-                                      ),
-                                    ),
-                                    const Spacer(),
-                                    const Icon(
-                                      Icons.keyboard_arrow_down,
-                                      color: IveTokens.labelTertiary,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-
-                            const SizedBox(height: 32),
-
-                            // Privacy Dashboard
-                            _PrivacyDashboard(
-                              marketingEmails: reg.marketingEmails,
-                              dataSharing: reg.dataSharing,
-                              personalizedAds: reg.personalizedAds,
-                              onMarketingChanged: reg.setMarketingEmails,
-                              onDataSharingChanged: reg.setDataSharing,
-                              onAdsChanged: reg.setPersonalizedAds,
-                            ),
-
-                            const SizedBox(height: 32),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-
-              // Bottom action
-              Consumer<RegistrationProvider>(
-                builder: (context, reg, child) {
-                  return Padding(
-                    padding: const EdgeInsets.fromLTRB(24, 16, 24, 32),
-                    child: PrimaryButton(
-                      text: AppStrings.saveAndContinue,
-                      icon: Icons.arrow_forward,
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 16, 20, 32),
+                    child: IveButton.primary(
+                      label: 'CONTINUE',
                       isLoading: reg.isLoading,
-                      onPressed: reg.canProceed ? _onSaveAndContinue : null,
-                      margin: EdgeInsets.zero,
+                      onPressed: _canContinue ? _onContinue : null,
                     ),
-                  );
-                },
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),
     );
   }
+
+  String? get _statusCaption {
+    switch (_status) {
+      case _LookupStatus.available: return 'Available';
+      case _LookupStatus.taken:     return 'Already taken';
+      case _LookupStatus.checking:  return 'Checking…';
+      case _LookupStatus.idle:      return null;
+    }
+  }
+
+  Color get _statusCaptionColor {
+    switch (_status) {
+      case _LookupStatus.available: return IveTokens.success;
+      case _LookupStatus.taken:     return IveTokens.danger;
+      default:                      return IveTokens.mute;
+    }
+  }
 }
 
-class _SectionLabel extends StatelessWidget {
-  final String label;
-  final String hint;
+// ── Status suffix icon ────────────────────────────────────────────────────────
 
-  const _SectionLabel({required this.label, required this.hint});
+class _StatusIcon extends StatelessWidget {
+  final _LookupStatus status;
+  const _StatusIcon({required this.status});
 
   @override
   Widget build(BuildContext context) {
+    switch (status) {
+      case _LookupStatus.checking:
+        return const SizedBox(
+          width: 16,
+          height: 16,
+          child: CircularProgressIndicator(
+            strokeWidth: 1.5,
+            color: IveTokens.mute,
+          ),
+        );
+      case _LookupStatus.available:
+        return const Icon(Icons.check_circle_outline,
+            size: 18, color: IveTokens.success);
+      case _LookupStatus.taken:
+        return const Icon(Icons.cancel_outlined,
+            size: 18, color: IveTokens.danger);
+      case _LookupStatus.idle:
+        return const SizedBox.shrink();
+    }
+  }
+}
+
+// ── Shared widgets ────────────────────────────────────────────────────────────
+
+class _FieldLabel extends StatelessWidget {
+  final String text;
+  const _FieldLabel(this.text);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: IveType.mono.copyWith(
+        fontSize: 10,
+        fontWeight: FontWeight.w600,
+        color: IveTokens.mute,
+        letterSpacing: 1.4,
+      ),
+    );
+  }
+}
+
+class _InputBox extends StatelessWidget {
+  final TextEditingController controller;
+  final FocusNode focusNode;
+  final String hint;
+  final bool obscure;
+  final TextInputType keyboardType;
+  final TextInputAction textInputAction;
+  final TextCapitalization textCapitalization;
+  final FocusNode? nextFocus;
+  final Widget? suffix;
+  final ValueChanged<String>? onChanged;
+  final VoidCallback? onTap;
+  final List<TextInputFormatter>? inputFormatters;
+  final String? caption;
+  final Color? captionColor;
+
+  const _InputBox({
+    required this.controller,
+    required this.focusNode,
+    required this.hint,
+    this.obscure = false,
+    this.keyboardType = TextInputType.text,
+    this.textInputAction = TextInputAction.next,
+    this.textCapitalization = TextCapitalization.none,
+    this.nextFocus,
+    this.suffix,
+    this.onChanged,
+    this.onTap,
+    this.inputFormatters,
+    this.caption,
+    this.captionColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final focused = focusNode.hasFocus;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: IveTokens.label,
+        AnimatedContainer(
+          duration: IveTokens.dFast,
+          decoration: BoxDecoration(
+            color: IveTokens.surface,
+            borderRadius: BorderRadius.circular(IveTokens.rSm),
+            border: Border.all(
+              color: focused ? IveTokens.accent : IveTokens.hairline,
+              width: focused ? 1.5 : 1,
+            ),
+          ),
+          child: TextField(
+            controller: controller,
+            focusNode: focusNode,
+            obscureText: obscure,
+            keyboardType: keyboardType,
+            textInputAction: textInputAction,
+            textCapitalization: textCapitalization,
+            inputFormatters: inputFormatters,
+            onTap: onTap,
+            onSubmitted: nextFocus != null
+                ? (_) => FocusScope.of(context).requestFocus(nextFocus)
+                : null,
+            onChanged: onChanged,
+            style: const TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w500,
+              color: IveTokens.ink,
+            ),
+            decoration: InputDecoration(
+              hintText: hint,
+              hintStyle: const TextStyle(fontSize: 15, color: IveTokens.mute),
+              suffixIcon: suffix != null
+                  ? Padding(
+                      padding: const EdgeInsets.only(right: 14),
+                      child: suffix,
+                    )
+                  : null,
+              suffixIconConstraints: const BoxConstraints(minWidth: 36),
+              border: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+              isCollapsed: false,
+            ),
           ),
         ),
-        const SizedBox(height: 2),
-        Text(
-          hint,
-          style: const TextStyle(
-            fontSize: 12,
-            color: IveTokens.labelTertiary,
+        if (caption != null) ...[
+          const SizedBox(height: 5),
+          Text(
+            caption!,
+            style: TextStyle(
+              fontSize: 11,
+              color: captionColor ?? IveTokens.mute,
+              fontWeight: FontWeight.w500,
+            ),
           ),
-        ),
+        ],
       ],
     );
   }
 }
 
-class _PrivacyDashboard extends StatelessWidget {
-  final bool marketingEmails;
-  final bool dataSharing;
-  final bool personalizedAds;
-  final ValueChanged<bool> onMarketingChanged;
-  final ValueChanged<bool> onDataSharingChanged;
-  final ValueChanged<bool> onAdsChanged;
+class _DobField extends StatelessWidget {
+  final DateTime? value;
+  final ValueChanged<DateTime?> onPick;
+  const _DobField({required this.value, required this.onPick});
 
-  const _PrivacyDashboard({
-    required this.marketingEmails,
-    required this.dataSharing,
-    required this.personalizedAds,
-    required this.onMarketingChanged,
-    required this.onDataSharingChanged,
-    required this.onAdsChanged,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: IveTokens.surface,
-        borderRadius: IveTokens.brXs,
-        border: Border.all(color: IveTokens.hairline),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Row(
-            children: [
-              Icon(Icons.shield_outlined, size: 20, color: IveTokens.accent),
-              SizedBox(width: 8),
-              Text(
-                'Privacy Preferences',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: IveTokens.label,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-
-          _PrivacyToggle(
-            label: AppStrings.marketingEmails,
-            value: marketingEmails,
-            onChanged: onMarketingChanged,
-          ),
-          _PrivacyToggle(
-            label: AppStrings.dataSharing,
-            value: dataSharing,
-            onChanged: onDataSharingChanged,
-          ),
-          _PrivacyToggle(
-            label: AppStrings.personalizedAds,
-            value: personalizedAds,
-            onChanged: onAdsChanged,
-          ),
-
-          const Divider(height: 24),
-
-          // Legal links
-          const Wrap(
-            spacing: 16,
-            runSpacing: 8,
-            children: [
-              _LegalLink(label: AppStrings.termsOfService),
-              _LegalLink(label: AppStrings.privacyPolicy),
-              _LegalLink(label: AppStrings.dataProcessing),
-            ],
-          ),
-        ],
-      ),
-    );
+  String get _display {
+    if (value == null) return 'DD / MM / YYYY';
+    final d = value!.day.toString().padLeft(2, '0');
+    final m = value!.month.toString().padLeft(2, '0');
+    return '$d / $m / ${value!.year}';
   }
-}
-
-class _PrivacyToggle extends StatelessWidget {
-  final String label;
-  final bool value;
-  final ValueChanged<bool> onChanged;
-
-  const _PrivacyToggle({
-    required this.label,
-    required this.value,
-    required this.onChanged,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            label,
-            style: const TextStyle(
-              fontSize: 14,
-              color: IveTokens.labelSecondary,
-            ),
-          ),
-          Switch.adaptive(
-            value: value,
-            onChanged: onChanged,
-            activeThumbColor: IveTokens.accent,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _LegalLink extends StatelessWidget {
-  final String label;
-
-  const _LegalLink({required this.label});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        // Open legal document
+      onTap: () async {
+        final now = DateTime.now();
+        final picked = await showDatePicker(
+          context: context,
+          initialDate: value ?? DateTime(now.year - 18, now.month, now.day),
+          firstDate: DateTime(now.year - 120),
+          lastDate: DateTime(now.year - 13, now.month, now.day),
+          builder: (ctx, child) => Theme(
+            data: Theme.of(ctx).copyWith(
+              colorScheme: const ColorScheme.dark(
+                primary: IveTokens.accent,
+                surface: IveTokens.surface,
+                onSurface: IveTokens.ink,
+              ),
+            ),
+            child: child!,
+          ),
+        );
+        if (picked != null) onPick(picked);
       },
-      child: Text(
-        label,
-        style: const TextStyle(
-          fontSize: 12,
-          color: IveTokens.accent,
-          decoration: TextDecoration.underline,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        decoration: BoxDecoration(
+          color: IveTokens.surface,
+          borderRadius: BorderRadius.circular(IveTokens.rSm),
+          border: Border.all(color: IveTokens.hairline),
+        ),
+        child: Row(
+          children: [
+            Text(
+              _display,
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
+                color: value != null ? IveTokens.ink : IveTokens.mute,
+              ),
+            ),
+            const Spacer(),
+            const Icon(Icons.keyboard_arrow_down,
+                size: 18, color: IveTokens.mute),
+          ],
         ),
       ),
     );

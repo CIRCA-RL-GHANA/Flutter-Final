@@ -1,10 +1,10 @@
-﻿/// ═══════════════════════════════════════════════════════════════════════════
-/// GenieController – Central Orchestrator (ChangeNotifier)
+/// 
+/// GenieController  Central Orchestrator (ChangeNotifier)
 ///
 /// Sits between the GenieScreen UI and all module services/providers.
-/// Handles: NLU → RBAC → Response building → Message thread management.
+/// Handles: NLU  RBAC  Response building  Message thread management.
 /// Maintains conversation history, context memory, and offline queue.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'dart:async';
@@ -18,7 +18,6 @@ import 'genie_intent.dart';
 import 'genie_intent_resolver.dart';
 import 'genie_offline_cache.dart';
 import 'genie_onboarding.dart';
-import 'genie_outbox.dart';
 import 'genie_performance_telemetry.dart';
 import 'genie_rbac_enforcer.dart';
 import 'genie_tactile_actions.dart';
@@ -32,7 +31,7 @@ class GenieController extends ChangeNotifier {
     _init();
   }
 
-  // ─── State ─────────────────────────────────────────────────────────────────
+  //  State 
   final List<GenieMessage> _messages = [];
   List<GenieMessage> get messages => List.unmodifiable(_messages);
 
@@ -45,7 +44,7 @@ class GenieController extends ChangeNotifier {
   bool _isOnline = true;
   bool get isOnline => _isOnline;
 
-  // Pinned floating tiles (module → card data)
+  // Pinned floating tiles (module  card data)
   final Map<GenieModule, Map<String, dynamic>> _pinnedTiles = {};
   Map<GenieModule, Map<String, dynamic>> get pinnedTiles =>
       Map.unmodifiable(_pinnedTiles);
@@ -53,47 +52,10 @@ class GenieController extends ChangeNotifier {
   UserRole get _role => _contextProvider.currentRole;
   AppContextModel get _activeContext => _contextProvider.activeContext;
 
-  // ─── Init ──────────────────────────────────────────────────────────────────
+  //  Init
   void _init() {
-    // Bootstrap persistent services
-    unawaited(_bootstrapServices());
-    _sendGreeting();
+    unawaited(GenieOfflineCache.init());
     _configureVoice();
-  }
-
-  Future<void> _bootstrapServices() async {
-    await Future.wait([
-      GenieOfflineCache.init(),
-      GenieOutbox.init(),
-      GenieOnboarding.init(),
-      GeniePerformanceTelemetry.init(),
-    ]);
-    // Fire role signature on first open
-    await GenieHapticRoleSignature.onGenieOpen(_role);
-    // Resume any interrupted orchestrations
-    final pending = GenieOutbox.getPendingOrchestrations();
-    if (pending.isNotEmpty) {
-      _addGenieMessage(
-        text: 'Resuming ${pending.length} incomplete action(s) from your last session…',
-        cardType: GenieCardType.text,
-        cardData: {'pendingOrchestrations': pending.map((o) => o.id).toList()},
-      );
-    }
-    // Show onboarding greeting on first launch
-    if (GenieOnboarding.isFirstLaunchForRole(_role)) {
-      final greet = GenieOnboarding.greetingForRole(_role);
-      _addGenieMessage(
-        text: greet.headline,
-        cardType: GenieCardType.greeting,
-        cardData: {
-          'subline': greet.subline,
-          'examples': greet.exampleCommands,
-          'ctaLabel': greet.ctaLabel,
-          'isOnboarding': true,
-        },
-      );
-      await GenieOnboarding.markFirstLaunchComplete(_role);
-    }
   }
 
   void _configureVoice() {
@@ -110,41 +72,10 @@ class GenieController extends ChangeNotifier {
   GenieVoiceStatus _voiceStatus = GenieVoiceStatus.idle;
   GenieVoiceStatus get voiceStatus => _voiceStatus;
 
-  // ─── Greeting ─────────────────────────────────────────────────────────────
-  void _sendGreeting() {
-    final hour = DateTime.now().hour;
-    final timeGreet = hour < 12
-        ? 'Good morning'
-        : hour < 17
-            ? 'Good afternoon'
-            : 'Good evening';
-
-    final name = _activeContext.name.isNotEmpty
-        ? _activeContext.name
-        : 'there';
-
-    final roleLabel = _activeContext.roleLabel;
-    final greeting = '$timeGreet, $roleLabel $name. '
-        'I\'m Genie — tap a shortcut, type, or say "Hey Genie" '
-        'to get started. What can I do for you?';
-
-    _addGenieMessage(
-      text: greeting,
-      cardType: GenieCardType.greeting,
-      cardData: {
-        'role': _role.name,
-        'name': name,
-        'chips': GenieRBACEnforcer.getDefaultChips(_role)
-            .map((c) => {'label': c.label, 'emoji': c.emoji})
-            .toList(),
-      },
-    );
-  }
-
-  // ─── Main Input Handler ────────────────────────────────────────────────────
+  //  Main Input Handler
   /// Entry point for all text, voice, and chip inputs.
   Future<void> handleInput(String rawInput) async {
-    // ── 1. Input Sanitization ──────────────────────────────────────────────
+    //  1. Input Sanitization 
     final sanitized = GenieInputSanitizer.sanitize(rawInput);
     if (sanitized.rejected) {
       await GenieTactileActions.onError();
@@ -157,7 +88,7 @@ class GenieController extends ChangeNotifier {
     final input = sanitized.cleanedText;
     if (input.isEmpty) return;
 
-    // ── 2. Telemetry: start task completion timer ──────────────────────────
+    //  2. Telemetry: start task completion timer 
     final timerKey = 'task_${DateTime.now().millisecondsSinceEpoch}';
     GeniePerformanceTelemetry.startTimer(timerKey);
 
@@ -166,7 +97,7 @@ class GenieController extends ChangeNotifier {
     _isProcessing = true;
     notifyListeners();
 
-    // ── 3. Intent Resolution ──────────────────────────────────────────────
+    //  3. Intent Resolution 
     GeniePerformanceTelemetry.startTimer('nlu_resolve');
     final intent = GenieIntentResolver.resolve(input) ??
         const GenieIntent(module: GenieModule.genie, action: 'unknown');
@@ -174,7 +105,7 @@ class GenieController extends ChangeNotifier {
         'nlu_resolve', TelemetryEventType.modelInference,
         meta: {'module': intent.module.name, 'action': intent.action});
 
-    // ── 4. Confusion detection ────────────────────────────────────────────
+    //  4. Confusion detection 
     if (intent.action == 'unknown') {
       final shouldShowLifeline = await GenieOnboarding.recordIntentFailure();
       if (shouldShowLifeline) {
@@ -195,7 +126,7 @@ class GenieController extends ChangeNotifier {
       await GenieOnboarding.resetConfusion();
     }
 
-    // ── 5. RBAC gate ──────────────────────────────────────────────────────
+    //  5. RBAC gate 
     if (!GenieRBACEnforcer.canPerformAction(_role, intent.module, intent.action)) {
       final denial = GenieRBACEnforcer.getDenialMessage(
           _role, intent.module, intent.action);
@@ -206,7 +137,7 @@ class GenieController extends ChangeNotifier {
       return;
     }
 
-    // ── 6. Offline handling with cache ────────────────────────────────────
+    //  6. Offline handling with cache 
     if (!_isOnline) {
       final cached = GenieOfflineCache.retrieve(_role, intent.module, intent.action)
           ?? GenieOfflineCache.staticFallback(_role, intent.module, intent.action);
@@ -230,7 +161,7 @@ class GenieController extends ChangeNotifier {
       return;
     }
 
-    // ── 7. Build response ─────────────────────────────────────────────────
+    //  7. Build response 
     await Future.delayed(const Duration(milliseconds: 300));
     final response = _buildResponse(intent);
     await GenieTactileActions.onSuccess();
@@ -240,7 +171,7 @@ class GenieController extends ChangeNotifier {
       cardData: response.cardData,
     );
 
-    // ── 8. Cache the live response for offline use ────────────────────────
+    //  8. Cache the live response for offline use 
     unawaited(GenieOfflineCache.store(
       _role,
       intent.module,
@@ -253,7 +184,7 @@ class GenieController extends ChangeNotifier {
       ),
     ));
 
-    // ── 9. Stop task completion timer ─────────────────────────────────────
+    //  9. Stop task completion timer 
     GeniePerformanceTelemetry.stopTimer(
         timerKey, TelemetryEventType.taskCompletion,
         meta: {'module': intent.module.name, 'action': intent.action});
@@ -289,7 +220,7 @@ class GenieController extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Response Builder ─────────────────────────────────────────────────────
+  //  Response Builder 
   _GenieResponse _buildResponse(GenieIntent intent) {
     switch (intent.module) {
       case GenieModule.goPage:
@@ -373,7 +304,7 @@ class GenieController extends ChangeNotifier {
         );
       default:
         return const _GenieResponse(
-          text: 'Opening GO PAGE…',
+          text: 'Opening GO PAGE',
           cardType: GenieCardType.comingSoon,
         );
     }
@@ -423,7 +354,7 @@ class GenieController extends ChangeNotifier {
         );
       default:
         return const _GenieResponse(
-          text: 'Opening MARKET…',
+          text: 'Opening MARKET',
           cardType: GenieCardType.comingSoon,
         );
     }
@@ -450,7 +381,7 @@ class GenieController extends ChangeNotifier {
         );
       default:
         return const _GenieResponse(
-          text: 'Opening MY UPDATES…',
+          text: 'Opening MY UPDATES',
           cardType: GenieCardType.comingSoon,
         );
     }
@@ -493,7 +424,7 @@ class GenieController extends ChangeNotifier {
         );
       case 'emergency_sos':
         return const _GenieResponse(
-          text: '🆘 SOS activated. Emergency services and fleet manager notified.',
+          text: ' SOS activated. Emergency services and fleet manager notified.',
           cardType: GenieCardType.confirmation,
           cardData: {'action': 'sos'},
         );
@@ -505,7 +436,7 @@ class GenieController extends ChangeNotifier {
         );
       default:
         return const _GenieResponse(
-          text: 'Opening LIVE…',
+          text: 'Opening LIVE',
           cardType: GenieCardType.comingSoon,
         );
     }
@@ -538,7 +469,7 @@ class GenieController extends ChangeNotifier {
         );
       default:
         return const _GenieResponse(
-          text: 'Opening ALERTS…',
+          text: 'Opening ALERTS',
           cardType: GenieCardType.comingSoon,
         );
     }
@@ -566,7 +497,7 @@ class GenieController extends ChangeNotifier {
       case 'direct_message':
         final recipient = intent.params['recipient'] ?? 'contact';
         return _GenieResponse(
-          text: 'Opening chat with $recipient…',
+          text: 'Opening chat with $recipient',
           cardType: GenieCardType.comingSoon,
           cardData: {'recipient': recipient},
         );
@@ -578,7 +509,7 @@ class GenieController extends ChangeNotifier {
         );
       default:
         return const _GenieResponse(
-          text: 'Opening qualChat…',
+          text: 'Opening qualChat',
           cardType: GenieCardType.comingSoon,
         );
     }
@@ -617,7 +548,7 @@ class GenieController extends ChangeNotifier {
         );
       default:
         return const _GenieResponse(
-          text: 'Opening APRIL personal assistant…',
+          text: 'Opening APRIL personal assistant',
           cardType: GenieCardType.comingSoon,
         );
     }
@@ -643,12 +574,12 @@ class GenieController extends ChangeNotifier {
         );
       case 'sales_today':
         return const _GenieResponse(
-          text: 'Today\'s sales: 47 orders · 128,500 QP revenue.',
+          text: 'Today\'s sales: 47 orders  128,500 QP revenue.',
           cardType: GenieCardType.text,
         );
       default:
         return const _GenieResponse(
-          text: 'Opening SETUP DASHBOARD…',
+          text: 'Opening SETUP DASHBOARD',
           cardType: GenieCardType.comingSoon,
         );
     }
@@ -665,13 +596,13 @@ class GenieController extends ChangeNotifier {
       case 'switch_context':
         final ctx = intent.params['context'] ?? 'context';
         return _GenieResponse(
-          text: 'Switching to $ctx context…',
+          text: 'Switching to $ctx context',
           cardType: GenieCardType.confirmation,
           cardData: {'action': 'switch_context', 'context': ctx},
         );
       default:
         return const _GenieResponse(
-          text: 'Opening USER DETAILS…',
+          text: 'Opening USER DETAILS',
           cardType: GenieCardType.comingSoon,
         );
     }
@@ -700,7 +631,7 @@ class GenieController extends ChangeNotifier {
         );
       default:
         return const _GenieResponse(
-          text: 'Opening UTILITY…',
+          text: 'Opening UTILITY',
           cardType: GenieCardType.comingSoon,
         );
     }
@@ -710,7 +641,7 @@ class GenieController extends ChangeNotifier {
     switch (intent.action) {
       case 'classic_dashboard':
         return const _GenieResponse(
-          text: 'Switching to classic dashboard…',
+          text: 'Switching to classic dashboard',
           cardType: GenieCardType.comingSoon,
           cardData: {'action': 'classic'},
         );
@@ -722,8 +653,8 @@ class GenieController extends ChangeNotifier {
         );
       default:
         return const _GenieResponse(
-          text: 'I didn\'t quite catch that. Try “check balance”, '
-              '“incoming orders”, or say “Hey Genie help”.',
+          text: 'I didn\'t quite catch that. Try "check balance", '
+              '"incoming orders", or say "Hey Genie help".',
           cardType: GenieCardType.text,
         );
     }
@@ -733,7 +664,7 @@ class GenieController extends ChangeNotifier {
     switch (intent.action) {
       case 'open_locker':
         return const _GenieResponse(
-          text: 'Here\'s your e-Play Cloud Locker — your purchased digital content:',
+          text: 'Here\'s your e-Play Cloud Locker  your purchased digital content:',
           cardType: GenieCardType.feedCard,
           cardData: {
             'type': 'eplay_locker',
@@ -750,7 +681,7 @@ class GenieController extends ChangeNotifier {
         );
       case 'creator_studio':
         return const _GenieResponse(
-          text: 'Opening your Creator Studio — manage content, earnings and royalties:',
+          text: 'Opening your Creator Studio  manage content, earnings and royalties:',
           cardType: GenieCardType.operationsOverview,
           cardData: {'type': 'creator_studio'},
         );
@@ -762,7 +693,7 @@ class GenieController extends ChangeNotifier {
         );
       default:
         return const _GenieResponse(
-          text: 'Opening e-Play…',
+          text: 'Opening e-Play',
           cardType: GenieCardType.comingSoon,
         );
     }
@@ -772,7 +703,7 @@ class GenieController extends ChangeNotifier {
     switch (intent.action) {
       case 'apply_loan':
         return _GenieResponse(
-          text: 'Opening loan application — comparing offers from verified FIs…',
+          text: 'Opening loan application  comparing offers from verified FIs',
           cardType: GenieCardType.comingSoon,
           cardData: {'action': 'apply_loan', ...intent.params},
         );
@@ -790,7 +721,7 @@ class GenieController extends ChangeNotifier {
         );
       case 'create_deposit':
         return _GenieResponse(
-          text: 'Opening term deposit — lock your QPoints and earn interest:',
+          text: 'Opening term deposit  lock your QPoints and earn interest:',
           cardType: GenieCardType.comingSoon,
           cardData: {'action': 'create_deposit', ...intent.params},
         );
@@ -820,7 +751,7 @@ class GenieController extends ChangeNotifier {
         );
       default:
         return const _GenieResponse(
-          text: 'Opening Fintech services…',
+          text: 'Opening Fintech services',
           cardType: GenieCardType.comingSoon,
         );
     }
@@ -830,7 +761,7 @@ class GenieController extends ChangeNotifier {
     switch (intent.action) {
       case 'onboard':
         return const _GenieResponse(
-          text: 'Opening Enterprise Onboarding — register your business for API access:',
+          text: 'Opening Enterprise Onboarding  register your business for API access:',
           cardType: GenieCardType.comingSoon,
           cardData: {'action': 'enterprise_onboard'},
         );
@@ -842,7 +773,7 @@ class GenieController extends ChangeNotifier {
         );
       case 'create_api_key':
         return const _GenieResponse(
-          text: 'Opening API key generator — your key will be shown once:',
+          text: 'Opening API key generator  your key will be shown once:',
           cardType: GenieCardType.comingSoon,
           cardData: {'action': 'create_api_key'},
         );
@@ -854,19 +785,19 @@ class GenieController extends ChangeNotifier {
         );
       case 'channels':
         return const _GenieResponse(
-          text: 'Opening multi-channel management — connect Shopify, Amazon, Walmart and more:',
+          text: 'Opening multi-channel management  connect Shopify, Amazon, Walmart and more:',
           cardType: GenieCardType.comingSoon,
           cardData: {'action': 'channels'},
         );
       case 'fulfillment':
         return const _GenieResponse(
-          text: 'Opening fulfillment routing — set providers and dispatch orders:',
+          text: 'Opening fulfillment routing  set providers and dispatch orders:',
           cardType: GenieCardType.comingSoon,
           cardData: {'action': 'fulfillment'},
         );
       case 'concierge':
         return const _GenieResponse(
-          text: 'Opening the Agentic Concierge embed — start an AI session:',
+          text: 'Opening the Agentic Concierge embed  start an AI session:',
           cardType: GenieCardType.comingSoon,
           cardData: {'action': 'concierge'},
         );
@@ -878,7 +809,7 @@ class GenieController extends ChangeNotifier {
         );
       default:
         return const _GenieResponse(
-          text: 'Opening Enterprise hub…',
+          text: 'Opening Enterprise hub',
           cardType: GenieCardType.comingSoon,
         );
     }
@@ -908,19 +839,19 @@ class GenieController extends ChangeNotifier {
         );
       case 'create':
         return const _GenieResponse(
-          text: 'Create a new community — pick a type to get started:',
+          text: 'Create a new community  pick a type to get started:',
           cardType: GenieCardType.comingSoon,
           cardData: {'action': 'community_create'},
         );
       default:
         return const _GenieResponse(
-          text: 'Opening Communities…',
+          text: 'Opening Communities',
           cardType: GenieCardType.comingSoon,
         );
     }
   }
 
-  // ─── Voice Controls ───────────────────────────────────────────────────────
+  //  Voice Controls 
   Future<void> startVoice() async {
     await GenieTactileActions.onTap();
     await GenieVoice.instance.startListening();
@@ -930,7 +861,7 @@ class GenieController extends ChangeNotifier {
     await GenieVoice.instance.stopListening();
   }
 
-  // ─── Pinned Tiles ─────────────────────────────────────────────────────────
+  //  Pinned Tiles 
   void pinTile(GenieModule module, Map<String, dynamic> data) {
     _pinnedTiles[module] = data;
     notifyListeners();
@@ -941,7 +872,7 @@ class GenieController extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Offline Queue ────────────────────────────────────────────────────────
+  //  Offline Queue 
   final List<GenieIntent> _offlineQueue = [];
 
   void _queueOfflineIntent(GenieIntent intent) {
@@ -960,7 +891,7 @@ class GenieController extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Called when the user manually switches role — fires the role signature.
+  /// Called when the user manually switches role  fires the role signature.
   Future<void> onRoleSwitch(UserRole newRole) async {
     await GenieHapticRoleSignature.onRoleSwitch(newRole);
   }
@@ -973,7 +904,7 @@ class GenieController extends ChangeNotifier {
     final queued = List.of(_offlineQueue);
     _offlineQueue.clear();
     _addGenieMessage(
-      text: 'Back online! Replaying ${queued.length} queued action(s)…',
+      text: 'Back online! Replaying ${queued.length} queued action(s)',
       cardType: GenieCardType.text,
     );
     for (final intent in queued) {
@@ -981,7 +912,7 @@ class GenieController extends ChangeNotifier {
     }
   }
 
-  // ─── Message Helpers ──────────────────────────────────────────────────────
+  //  Message Helpers 
   void _addUserMessage(String text) {
     _messages.add(GenieMessage(
       id: '${DateTime.now().millisecondsSinceEpoch}-user',
@@ -1018,7 +949,6 @@ class GenieController extends ChangeNotifier {
 
   void clearHistory() {
     _messages.clear();
-    _sendGreeting();
     notifyListeners();
   }
 }

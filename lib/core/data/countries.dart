@@ -1,11 +1,11 @@
-// ─────────────────────────────────────────────────────────────
+// 
 // Canonical country catalogue.
 //
 // One source of truth for country pickers, dial-code lookups,
 // flag rendering and address forms.
 //
 // Coverage: every ISO 3166-1 alpha-2 entry that has an E.164
-// calling code — sovereign states plus officially-listed
+// calling code  sovereign states plus officially-listed
 // dependent territories. 249 entries total, alphabetised by
 // English short name.
 //
@@ -15,7 +15,7 @@
 // to render as raw two-letter boxes. The `CountryFlag` widget
 // below renders a clean ISO-code chip that is pixel-identical
 // on every platform we support.
-// ─────────────────────────────────────────────────────────────
+// 
 
 import 'package:flutter/material.dart';
 import '../design/ive_tokens.dart';
@@ -39,7 +39,7 @@ class Country {
 
   /// Legacy: regional-indicator emoji form of the flag.
   /// Kept for backwards compatibility, but prefer [CountryFlag]
-  /// for any UI rendering — the emoji form is unreliable on
+  /// for any UI rendering  the emoji form is unreliable on
   /// Windows / Chrome where flag glyphs are not shipped.
   String get flag => flagOf(iso);
 
@@ -49,7 +49,7 @@ class Country {
 
 /// Builds the flag emoji for a 2-letter ISO 3166-1 alpha-2 code.
 /// Returns a white-flag fallback for invalid input. Note: many
-/// desktop platforms render this as raw text — prefer
+/// desktop platforms render this as raw text  prefer
 /// [CountryFlag] for visible UI.
 String flagOf(String iso) {
   if (iso.length != 2) return '\u{1F3F3}';
@@ -64,7 +64,7 @@ String flagOf(String iso) {
 }
 
 /// Cross-platform country flag chip. Renders the two-letter ISO
-/// code in a tight, restrained badge — visually consistent on
+/// code in a tight, restrained badge  visually consistent on
 /// iOS, Android, Web, Windows, macOS and Linux. Sized to match
 /// the surrounding text by default.
 class CountryFlag extends StatelessWidget {
@@ -83,7 +83,7 @@ class CountryFlag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final code = iso.length == 2 ? iso.toUpperCase() : '··';
+    final code = iso.length == 2 ? iso.toUpperCase() : '';
     final double height = size * 1.25;
     final double width = size * 1.85;
     return Container(
@@ -110,18 +110,18 @@ class CountryFlag extends StatelessWidget {
   }
 }
 
-/// Countries pinned to the top of pickers — the markets the product
+/// Countries pinned to the top of pickers  the markets the product
 /// serves first. Order is intentional, not alphabetical.
 const List<String> kPopularCountryIsos = <String>[
   'GH', 'NG', 'KE', 'ZA', 'US', 'GB', 'CA', 'IN', 'AE', 'AU',
   'DE', 'FR', 'BR', 'JP', 'MX',
 ];
 
-/// Full alphabetised catalogue. Do not reorder — UI groups assume
+/// Full alphabetised catalogue. Do not reorder  UI groups assume
 /// this list is sorted by `name` ascending.
 const List<Country> kCountries = <Country>[
   Country(iso: 'AF', name: 'Afghanistan', dialCode: '+93'),
-  Country(iso: 'AX', name: 'Åland Islands', dialCode: '+358'),
+  Country(iso: 'AX', name: 'land Islands', dialCode: '+358'),
   Country(iso: 'AL', name: 'Albania', dialCode: '+355'),
   Country(iso: 'DZ', name: 'Algeria', dialCode: '+213'),
   Country(iso: 'AS', name: 'American Samoa', dialCode: '+1684'),
@@ -175,10 +175,10 @@ const List<Country> kCountries = <Country>[
   Country(iso: 'CD', name: 'Congo (DRC)', dialCode: '+243'),
   Country(iso: 'CK', name: 'Cook Islands', dialCode: '+682'),
   Country(iso: 'CR', name: 'Costa Rica', dialCode: '+506'),
-  Country(iso: 'CI', name: "Côte d'Ivoire", dialCode: '+225'),
+  Country(iso: 'CI', name: "Cte d'Ivoire", dialCode: '+225'),
   Country(iso: 'HR', name: 'Croatia', dialCode: '+385'),
   Country(iso: 'CU', name: 'Cuba', dialCode: '+53'),
-  Country(iso: 'CW', name: 'Curaçao', dialCode: '+599'),
+  Country(iso: 'CW', name: 'Curaao', dialCode: '+599'),
   Country(iso: 'CY', name: 'Cyprus', dialCode: '+357'),
   Country(iso: 'CZ', name: 'Czechia', dialCode: '+420'),
   Country(iso: 'DK', name: 'Denmark', dialCode: '+45'),
@@ -301,11 +301,11 @@ const List<Country> kCountries = <Country>[
   Country(iso: 'PT', name: 'Portugal', dialCode: '+351'),
   Country(iso: 'PR', name: 'Puerto Rico', dialCode: '+1787'),
   Country(iso: 'QA', name: 'Qatar', dialCode: '+974'),
-  Country(iso: 'RE', name: 'Réunion', dialCode: '+262'),
+  Country(iso: 'RE', name: 'Runion', dialCode: '+262'),
   Country(iso: 'RO', name: 'Romania', dialCode: '+40'),
   Country(iso: 'RU', name: 'Russia', dialCode: '+7'),
   Country(iso: 'RW', name: 'Rwanda', dialCode: '+250'),
-  Country(iso: 'BL', name: 'Saint Barthélemy', dialCode: '+590'),
+  Country(iso: 'BL', name: 'Saint Barthlemy', dialCode: '+590'),
   Country(iso: 'SH', name: 'Saint Helena', dialCode: '+290'),
   Country(iso: 'KN', name: 'Saint Kitts and Nevis', dialCode: '+1869'),
   Country(iso: 'LC', name: 'Saint Lucia', dialCode: '+1758'),
@@ -314,7 +314,7 @@ const List<Country> kCountries = <Country>[
   Country(iso: 'VC', name: 'Saint Vincent and the Grenadines', dialCode: '+1784'),
   Country(iso: 'WS', name: 'Samoa', dialCode: '+685'),
   Country(iso: 'SM', name: 'San Marino', dialCode: '+378'),
-  Country(iso: 'ST', name: 'São Tomé and Príncipe', dialCode: '+239'),
+  Country(iso: 'ST', name: 'So Tom and Prncipe', dialCode: '+239'),
   Country(iso: 'SA', name: 'Saudi Arabia', dialCode: '+966'),
   Country(iso: 'SN', name: 'Senegal', dialCode: '+221'),
   Country(iso: 'RS', name: 'Serbia', dialCode: '+381'),
@@ -348,7 +348,7 @@ const List<Country> kCountries = <Country>[
   Country(iso: 'TO', name: 'Tonga', dialCode: '+676'),
   Country(iso: 'TT', name: 'Trinidad and Tobago', dialCode: '+1868'),
   Country(iso: 'TN', name: 'Tunisia', dialCode: '+216'),
-  Country(iso: 'TR', name: 'Türkiye', dialCode: '+90'),
+  Country(iso: 'TR', name: 'Trkiye', dialCode: '+90'),
   Country(iso: 'TM', name: 'Turkmenistan', dialCode: '+993'),
   Country(iso: 'TC', name: 'Turks and Caicos Islands', dialCode: '+1649'),
   Country(iso: 'TV', name: 'Tuvalu', dialCode: '+688'),

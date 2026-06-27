@@ -1,11 +1,12 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD3.1: PROFILE — User/Entity Profile
+/// 
+/// SD3.1: PROFILE  User/Entity Profile
 /// Profile info, completeness, skills, social links, rating
 /// RBAC: All roles (personal/entity/branch scope varies)
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/theme/app_colors.dart';
@@ -37,13 +38,13 @@ class ProfileScreen extends StatelessWidget {
             ),
             floatingActionButton: SetupRbacFAB(
               cardId: 'profile',
-              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Edit profile'))),
+              onPressed: () => AppToast.show(context, 'Edit profile'),
               label: 'Edit',
               icon: Icons.edit,
             ),
           body: CustomScrollView(
             slivers: [
-              // ─── Profile Header ───────────────────────────
+              //  Profile Header 
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -86,7 +87,7 @@ class ProfileScreen extends StatelessWidget {
                         ],
                         const SizedBox(height: 4),
                         Text(
-                          '${profile.title} Â· ${profile.company}',
+                          '${profile.title}  ${profile.company}',
                           style: const TextStyle(fontSize: 14, color: AppColors.textSecondary),
                         ),
                         const SizedBox(height: 12),
@@ -130,8 +131,8 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Contact Info ─────────────────────────────
-              // ─── AI Insights ─────────────────────────────────────────
+              //  Contact Info 
+              //  AI Insights 
               const SliverToBoxAdapter(
               ),
               SliverToBoxAdapter(
@@ -167,7 +168,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Bio ──────────────────────────────────────
+              //  Bio 
               if (profile.bio != null)
                 SliverToBoxAdapter(
                   child: Padding(
@@ -187,7 +188,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
 
-              // ─── Skills ───────────────────────────────────
+              //  Skills 
               if (profile.skills.isNotEmpty)
                 SliverToBoxAdapter(
                   child: Padding(
@@ -204,7 +205,7 @@ class ProfileScreen extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                               decoration: BoxDecoration(
                                 color: kSetupColor.withValues(alpha: 0.1),
-                                borderRadius: BorderRadius.circular(16),
+                                borderRadius: BorderRadius.circular(10),
                               ),
                               child: Text(
                                 skill,
@@ -218,7 +219,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
 
-              // ─── Social Links ──────────────────────────
+              //  Social Links 
               if (profile.socialLinks.isNotEmpty)
                 SliverToBoxAdapter(
                   child: Padding(
@@ -243,7 +244,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
 
-              // ─── Activity Summary ─────────────────────────
+              //  Activity Summary 
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -290,7 +291,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── SOS Button (Owner / Admin / BranchManager only) ─────
+              //  SOS Button (Owner / Admin / BranchManager only) 
               SliverToBoxAdapter(
                 child: SetupSOSButton(
                   onPressed: () => Navigator.pushNamed(context, AppRoutes.liveEmergencySOS),
@@ -325,7 +326,7 @@ class ProfileScreen extends StatelessWidget {
   }
 }
 
-// ─── Profile Stat ────────────────────────────────────────────────────────────
+//  Profile Stat 
 
 class _ProfileStat extends StatelessWidget {
   final String label;

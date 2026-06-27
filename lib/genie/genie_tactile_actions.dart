@@ -1,34 +1,34 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// GenieTactileActions – Haptic Feedback Service
+/// 
+/// GenieTactileActions  Haptic Feedback Service
 ///
 /// Centralised haptic & audio feedback for every Genie interaction type.
 /// Maps action categories to platform haptic patterns.
 /// All methods are no-ops if haptics are disabled in accessibility settings.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'package:flutter/services.dart';
 
 enum GenieTactileEvent {
-  /// Light tick – social, chat, informational taps
+  /// Light tick  social, chat, informational taps
   lightTick,
-  /// Medium impact – navigation, card expansion
+  /// Medium impact  navigation, card expansion
   mediumImpact,
-  /// Heavy / deep pulse – financial transactions (finance module)
+  /// Heavy / deep pulse  financial transactions (finance module)
   heavyPulse,
-  /// Double pulse – destructive / irreversible action confirmation
+  /// Double pulse  destructive / irreversible action confirmation
   doubleConfirm,
-  /// Success pattern – action completed successfully
+  /// Success pattern  action completed successfully
   success,
-  /// Error pattern – action failed or denied
+  /// Error pattern  action failed or denied
   error,
-  /// Drag edge tension – approaching swipe threshold
+  /// Drag edge tension  approaching swipe threshold
   dragTension,
-  /// SOS – urgent, escalating pulses
+  /// SOS  urgent, escalating pulses
   sos,
-  /// Orchestration step tick – fires on each completed outbox step
+  /// Orchestration step tick  fires on each completed outbox step
   orchestrationStepTick,
-  /// Role signature – fired via GenieHapticRoleSignature, listed here for
+  /// Role signature  fired via GenieHapticRoleSignature, listed here for
   /// completeness so callers can trigger from the enum without importing
   /// the separate class.
   roleSignature,
@@ -83,7 +83,7 @@ class GenieTactileActions {
         await HapticFeedback.lightImpact();
 
       case GenieTactileEvent.roleSignature:
-        // Delegate to GenieHapticRoleSignature — called directly with the
+        // Delegate to GenieHapticRoleSignature  called directly with the
         // current role; this case exists for enum completeness only.
         await HapticFeedback.mediumImpact();
     }

@@ -1,11 +1,13 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// LIVE MODULE — Screen 6: Returns Tab
+/// 
+/// LIVE MODULE  Screen 6: Returns Tab
 /// Filtered return requests with sub-tabs, bulk actions,
 /// evidence previews, and auto-approve controls
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
@@ -49,8 +51,8 @@ class _LiveReturnsScreenState extends State<LiveReturnsScreen> with SingleTicker
           appBar: LiveAppBar(
             title: 'Returns Management',
             actions: [
-              IconButton(icon: const Icon(Icons.filter_list, size: 20), color: AppColors.textSecondary, onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Filter returns...')))),
-              IconButton(icon: const Icon(Icons.search, size: 20), color: AppColors.textSecondary, onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Search returns...')))),
+              IconButton(icon: const Icon(Icons.filter_list, size: 20), color: AppColors.textSecondary, onPressed: () => AppToast.show(context, 'Filter returns...')),
+              IconButton(icon: const Icon(Icons.search, size: 20), color: AppColors.textSecondary, onPressed: () => AppToast.show(context, 'Search returns...')),
             ],
           ),
           body: Column(
@@ -59,9 +61,9 @@ class _LiveReturnsScreenState extends State<LiveReturnsScreen> with SingleTicker
                 color: Colors.white,
                 child: TabBar(
                   controller: _tabController,
-                  labelColor: kLiveColor,
+                  labelColor: IveTokens.moduleLive,
                   unselectedLabelColor: AppColors.textTertiary,
-                  indicatorColor: kLiveColor,
+                  indicatorColor: IveTokens.moduleLive,
                   labelStyle: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700),
                   tabs: [
                     Tab(text: 'PENDING (${pending.length})'),
@@ -96,13 +98,13 @@ class _LiveReturnsScreenState extends State<LiveReturnsScreen> with SingleTicker
                     onPressed: () => Navigator.pushNamed(context, AppRoutes.liveReturnReview),
                     icon: const Icon(Icons.check_circle, size: 16),
                     label: const Text('BULK REVIEW', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700)),
-                    style: OutlinedButton.styleFrom(foregroundColor: kLiveColor, padding: const EdgeInsets.symmetric(vertical: 12)),
+                    style: OutlinedButton.styleFrom(foregroundColor: IveTokens.moduleLive, padding: const EdgeInsets.symmetric(vertical: 12)),
                   ),
                 ),
                 const SizedBox(width: 8),
                 Expanded(
                   child: OutlinedButton.icon(
-                    onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Auto-approving returns...'))),
+                    onPressed: () => AppToast.show(context, 'Auto-approving returns...'),
                     icon: const Icon(Icons.auto_awesome, size: 16),
                     label: const Text('AUTO-APPROVE', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700)),
                     style: OutlinedButton.styleFrom(foregroundColor: const Color(0xFF10B981), padding: const EdgeInsets.symmetric(vertical: 12)),
@@ -111,7 +113,7 @@ class _LiveReturnsScreenState extends State<LiveReturnsScreen> with SingleTicker
                 const SizedBox(width: 8),
                 Expanded(
                   child: OutlinedButton.icon(
-                    onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Exporting...'))),
+                    onPressed: () => AppToast.show(context, 'Exporting...'),
                     icon: const Icon(Icons.file_download, size: 16),
                     label: const Text('EXPORT', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700)),
                     style: OutlinedButton.styleFrom(foregroundColor: AppColors.textSecondary, padding: const EdgeInsets.symmetric(vertical: 12)),
@@ -142,7 +144,7 @@ class _ReturnList extends StatelessWidget {
     }
 
     return RefreshIndicator(
-      color: kLiveColor,
+      color: IveTokens.moduleLive,
       onRefresh: () async {
         HapticFeedback.mediumImpact();
         await prov.loadReturns();

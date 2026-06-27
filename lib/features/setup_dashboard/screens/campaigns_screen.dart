@@ -1,9 +1,9 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD1.10: CAMPAIGNS — Marketing Campaign Management
+/// 
+/// SD1.10: CAMPAIGNS  Marketing Campaign Management
 /// Campaign list, ROI tracking, budget, reach/conversions
 /// RBAC: Owner(personal), Admin(full), BM(branch), SO(full), BSO(branch),
 ///        Monitor/BrMon(view)
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -76,7 +76,7 @@ class CampaignsScreen extends StatelessWidget {
                   child: SetupSectionTitle(title: 'All Campaigns', icon: Icons.campaign),
                 ),
               ),
-              // ─── AI Insights ─────────────────────────────────────────
+              //  AI Insights 
               const SliverToBoxAdapter(
               ),
               SliverPadding(
@@ -139,7 +139,7 @@ class _CampaignCard extends StatelessWidget {
                       style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textPrimary),
                     ),
                     Text(
-                      '${campaign.type.name} Â· ${campaign.goal.name}',
+                      '${campaign.type.name}  ${campaign.goal.name}',
                       style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                     ),
                   ],
@@ -157,7 +157,7 @@ class _CampaignCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Budget: â‚µ${campaign.spent.toStringAsFixed(0)}/â‚µ${campaign.budget.toStringAsFixed(0)}',
+                Text('Budget: ${campaign.spent.toStringAsFixed(0)}/${campaign.budget.toStringAsFixed(0)}',
                     style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                 if (campaign.roi > 0)
                   Text('ROI: ${campaign.roi.toStringAsFixed(0)}%',
@@ -166,7 +166,7 @@ class _CampaignCard extends StatelessWidget {
             ),
             const SizedBox(height: 6),
             ClipRRect(
-              borderRadius: BorderRadius.circular(3),
+              borderRadius: BorderRadius.circular(6),
               child: LinearProgressIndicator(
                 value: campaign.budget > 0 ? (campaign.spent / campaign.budget).clamp(0.0, 1.0) : 0,
                 backgroundColor: AppColors.inputBorder,

@@ -1,8 +1,8 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// LIVE MODULE — Screen 20: Emergency SOS Interface
+/// 
+/// LIVE MODULE  Screen 20: Emergency SOS Interface
 /// Critical safety screen: SOS activation, auto-location sharing,
 /// emergency contacts, countdown timer, authorities notification
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -31,11 +31,11 @@ class _LiveEmergencySOSScreenState extends State<LiveEmergencySOSScreen> {
     return Consumer<LiveProvider>(
       builder: (context, prov, _) {
         return Scaffold(
-          // CRITICAL: hard-cut to red instantly — no animation, no easing (spec Move 08)
-          backgroundColor: _sosActivated ? kLiveColor : const Color(0xFF08080F),
+          // CRITICAL: hard-cut to red instantly  no animation, no easing (spec Move 08)
+          backgroundColor: _sosActivated ? IveTokens.moduleLive : const Color(0xFF08080F),
           appBar: _sosActivated
               ? AppBar(
-                  backgroundColor: kLiveColor,
+                  backgroundColor: IveTokens.moduleLive,
                   title: const Text(
                     'SOS ACTIVE',
                     style: TextStyle(fontWeight: FontWeight.w800, color: Colors.white, letterSpacing: 1),
@@ -165,13 +165,13 @@ class _SOSSetupViewState extends State<_SOSSetupView>
                             valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
                           ),
                         ),
-                        // Flat red disc — no shadow
+                        // Flat red disc  no shadow
                         Container(
                           width: 132,
                           height: 132,
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
-                            color: kLiveColor,
+                            color: IveTokens.moduleLive,
                           ),
                           child: Center(
                             child: Column(
@@ -198,7 +198,7 @@ class _SOSSetupViewState extends State<_SOSSetupView>
               const SizedBox(height: 12),
               const Text(
                 'Hold to activate',
-                style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: kLiveColor),
+                style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: IveTokens.moduleLive),
               ),
               const SizedBox(height: 4),
               const Text(
@@ -214,7 +214,7 @@ class _SOSSetupViewState extends State<_SOSSetupView>
         LiveSectionCard(
           title: 'SOS SETTINGS',
           icon: Icons.settings,
-          iconColor: kLiveColor,
+          iconColor: IveTokens.moduleLive,
           child: Column(
             children: [
               _SOSToggle(label: 'Auto-share location', value: widget.locationSharing, onChanged: widget.onLocationSharingChanged),
@@ -236,16 +236,16 @@ class _SOSSetupViewState extends State<_SOSSetupView>
         // Info
         Container(
           padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(color: const Color(0xFF1C0A0A), borderRadius: BorderRadius.circular(10), border: Border.all(color: kLiveColor.withValues(alpha: 0.3), width: 1)),
+          decoration: BoxDecoration(color: const Color(0xFF1C0A0A), borderRadius: BorderRadius.circular(10), border: Border.all(color: IveTokens.moduleLive.withValues(alpha: 0.3), width: 1)),
           child: const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('âš ï¸ When SOS is activated:', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: kLiveColor)),
+              Text(' When SOS is activated:', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: IveTokens.moduleLive)),
               SizedBox(height: 4),
-              Text('• Your real-time location is shared', style: TextStyle(fontSize: 12, color: Color(0xFF991B1B))),
-              Text('• Emergency contacts are notified', style: TextStyle(fontSize: 12, color: Color(0xFF991B1B))),
-              Text('• Operations center is alerted', style: TextStyle(fontSize: 12, color: Color(0xFF991B1B))),
-              Text('• Audio recording begins (if enabled)', style: TextStyle(fontSize: 12, color: Color(0xFF991B1B))),
+              Text(' Your real-time location is shared', style: TextStyle(fontSize: 12, color: Color(0xFF991B1B))),
+              Text(' Emergency contacts are notified', style: TextStyle(fontSize: 12, color: Color(0xFF991B1B))),
+              Text(' Operations center is alerted', style: TextStyle(fontSize: 12, color: Color(0xFF991B1B))),
+              Text(' Audio recording begins (if enabled)', style: TextStyle(fontSize: 12, color: Color(0xFF991B1B))),
             ],
           ),
         ),
@@ -286,7 +286,7 @@ class _ActiveSOSViewState extends State<_ActiveSOSView> {
     // In production this calls the location service.
     // Simulating with a short delay for the UI demonstration.
     await Future<void>.delayed(const Duration(seconds: 2));
-    if (mounted) setState(() => _coords = '5.6037° N, 0.1870° W');
+    if (mounted) setState(() => _coords = '5.6037 N, 0.1870 W');
   }
 
   @override
@@ -298,7 +298,7 @@ class _ActiveSOSViewState extends State<_ActiveSOSView> {
         Center(
           child: Column(
             children: [
-              // White SOS icon on red — no shadow per spec
+              // White SOS icon on red  no shadow per spec
               Container(
                 width: 96, height: 96,
                 decoration: BoxDecoration(
@@ -323,7 +323,7 @@ class _ActiveSOSViewState extends State<_ActiveSOSView> {
         ),
         const SizedBox(height: 20),
 
-        // GPS coordinates — auto-attached per spec
+        // GPS coordinates  auto-attached per spec
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
           decoration: BoxDecoration(
@@ -401,7 +401,7 @@ class _ActiveSOSViewState extends State<_ActiveSOSView> {
                     foregroundColor: Colors.white,
                     backgroundColor: Colors.white.withValues(alpha: 0.15),
                     padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   ),
                   child: const Text('Call', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
                 ),
@@ -443,7 +443,7 @@ class _SOSToggle extends StatelessWidget {
       child: Row(
         children: [
           Expanded(child: Text(label, style: const TextStyle(fontSize: 13))),
-          Switch(value: value, onChanged: onChanged, activeThumbColor: kLiveColor, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
+          Switch(value: value, onChanged: onChanged, activeThumbColor: IveTokens.moduleLive, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
         ],
       ),
     );
@@ -462,8 +462,8 @@ class _ContactItem extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 18,
-            backgroundColor: kLiveColor.withValues(alpha: 0.1),
-            child: Text(contact.name.substring(0, 1), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: kLiveColor)),
+            backgroundColor: IveTokens.moduleLive.withValues(alpha: 0.1),
+            child: Text(contact.name.substring(0, 1), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: IveTokens.moduleLive)),
           ),
           const SizedBox(width: 10),
           Expanded(
@@ -471,7 +471,7 @@ class _ContactItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(contact.name, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-                Text('${contact.type.name} • ${contact.phone}', style: const TextStyle(fontSize: 11, color: IveTokens.muteColor)),
+                Text('${contact.type.name}  ${contact.phone}', style: const TextStyle(fontSize: 11, color: IveTokens.muteColor)),
               ],
             ),
           ),

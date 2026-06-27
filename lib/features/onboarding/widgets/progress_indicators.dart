@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import '../../../core/design/ive_tokens.dart';
 
 // OS palette
-const Color _kBorder    = Color(0xFF1C1C2E);
-const Color _kAccent    = Color(0xFF22BDD8);
-const Color _kAccentDim = Color(0xFF1E2A6E);
-const Color _kText      = Color(0xFFE8E8F0);
-const Color _kTextDim   = Color(0xFF9A9AB2);
+const Color _kBorder    = IveTokens.hairline;
+const Color _kAccent    = IveTokens.accent;
+const Color _kAccentDim = IveTokens.accentSoft;
+const Color _kText      = IveTokens.ink;
+const Color _kTextDim   = IveTokens.ink2;
 
-/// OS-style progress dots — active = accent pill, completed = accent dim, inactive = border.
+/// OS-style progress dots  active = accent pill, completed = accent dim, inactive = border.
 class ProgressDots extends StatelessWidget {
   final int currentStep;
   final int totalSteps;
@@ -36,7 +37,7 @@ class ProgressDots extends StatelessWidget {
                 : isCompleted
                     ? _kAccentDim
                     : _kBorder,
-            borderRadius: BorderRadius.circular(3),
+            borderRadius: BorderRadius.circular(6),
           ),
         );
       }),
@@ -75,7 +76,7 @@ class StepProgressBar extends StatelessWidget {
             ),
           ),
         ClipRRect(
-          borderRadius: BorderRadius.circular(2),
+          borderRadius: BorderRadius.circular(6),
           child: LinearProgressIndicator(
             value: currentStep / totalSteps,
             backgroundColor: _kBorder,
@@ -88,7 +89,7 @@ class StepProgressBar extends StatelessWidget {
   }
 }
 
-/// Circular completion indicator — OS accent ring.
+/// Circular completion indicator  OS accent ring.
 class CompletionCircle extends StatelessWidget {
   final int score;
   final int total;

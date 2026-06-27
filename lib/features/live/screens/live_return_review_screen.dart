@@ -1,11 +1,13 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// LIVE MODULE — Screen 7: Return Review Interface
+/// 
+/// LIVE MODULE  Screen 7: Return Review Interface
 /// Detailed return review with evidence gallery, customer history,
 /// adjudication options, and resolution workflow
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
@@ -48,7 +50,7 @@ class _LiveReturnReviewScreenState extends State<LiveReturnReviewScreen> {
                 onPressed: () {
                   showModalBottomSheet(
                     context: context,
-                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
+                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(10))),
                     builder: (_) => const SizedBox(height: 120),
                   );
                 },
@@ -74,10 +76,10 @@ class _LiveReturnReviewScreenState extends State<LiveReturnReviewScreen> {
                     Icon(
                       ret.status == LiveReturnStatus.approved ? Icons.check_circle : ret.status == LiveReturnStatus.rejected ? Icons.cancel : Icons.pending,
                       size: 20,
-                      color: ret.status == LiveReturnStatus.approved ? const Color(0xFF059669) : ret.status == LiveReturnStatus.rejected ? kLiveColor : const Color(0xFFF59E0B),
+                      color: ret.status == LiveReturnStatus.approved ? const Color(0xFF059669) : ret.status == LiveReturnStatus.rejected ? IveTokens.moduleLive : const Color(0xFFF59E0B),
                     ),
                     const SizedBox(width: 8),
-                    Text(ret.status.name.toUpperCase(), style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: ret.status == LiveReturnStatus.approved ? const Color(0xFF059669) : ret.status == LiveReturnStatus.rejected ? kLiveColor : const Color(0xFFF59E0B))),
+                    Text(ret.status.name.toUpperCase(), style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: ret.status == LiveReturnStatus.approved ? const Color(0xFF059669) : ret.status == LiveReturnStatus.rejected ? IveTokens.moduleLive : const Color(0xFFF59E0B))),
                   ],
                 ),
               ),
@@ -102,7 +104,7 @@ class _LiveReturnReviewScreenState extends State<LiveReturnReviewScreen> {
                         const SizedBox(width: 12),
                         Text('${ret.customerTotalOrders} orders', style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                         const SizedBox(width: 12),
-                        Text('${ret.customerReturnCount} returns (${(ret.customerReturnCount / ret.customerTotalOrders * 100).toStringAsFixed(0)}%)', style: TextStyle(fontSize: 12, color: (ret.customerReturnCount / ret.customerTotalOrders * 100) > 15 ? kLiveColor : AppColors.textSecondary)),
+                        Text('${ret.customerReturnCount} returns (${(ret.customerReturnCount / ret.customerTotalOrders * 100).toStringAsFixed(0)}%)', style: TextStyle(fontSize: 12, color: (ret.customerReturnCount / ret.customerTotalOrders * 100) > 15 ? IveTokens.moduleLive : AppColors.textSecondary)),
                       ],
                     ),
                   ],
@@ -113,7 +115,7 @@ class _LiveReturnReviewScreenState extends State<LiveReturnReviewScreen> {
               LiveSectionCard(
                 title: 'RETURN ITEM',
                 icon: Icons.inventory_2,
-                iconColor: kLiveColor,
+                iconColor: IveTokens.moduleLive,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -123,13 +125,13 @@ class _LiveReturnReviewScreenState extends State<LiveReturnReviewScreen> {
                       children: [
                         Text('Order #${ret.originalOrderId}', style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                         const SizedBox(width: 12),
-                        Text('â‚µ${ret.itemPrice.toStringAsFixed(2)}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: kLiveColor)),
+                        Text('${ret.itemPrice.toStringAsFixed(2)}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: IveTokens.moduleLive)),
                       ],
                     ),
                     const SizedBox(height: 8),
                     Container(
                       padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(color: const Color(0xFFF3F4F6), borderRadius: BorderRadius.circular(8)),
+                      decoration: BoxDecoration(color: const Color(0xFFF3F4F6), borderRadius: BorderRadius.circular(10)),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -193,7 +195,7 @@ class _LiveReturnReviewScreenState extends State<LiveReturnReviewScreen> {
 
               // AI Analysis
               LiveSectionCard(
-                title: '🤖 AI ANALYSIS',
+                title: ' AI ANALYSIS',
                 icon: Icons.psychology,
                 iconColor: const Color(0xFF10B981),
                 child: Column(
@@ -201,13 +203,13 @@ class _LiveReturnReviewScreenState extends State<LiveReturnReviewScreen> {
                   children: [
                     Container(
                       padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(color: const Color(0xFFD1FAE5), borderRadius: BorderRadius.circular(8)),
+                      decoration: BoxDecoration(color: const Color(0xFFD1FAE5), borderRadius: BorderRadius.circular(10)),
                       child: const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text('AI Recommendation: APPROVE', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: Color(0xFF059669))),
                           SizedBox(height: 4),
-                          Text('Confidence: 87% • Evidence quality: Good • Customer history: Low risk', style: TextStyle(fontSize: 11, color: AppColors.textSecondary)),
+                          Text('Confidence: 87%  Evidence quality: Good  Customer history: Low risk', style: TextStyle(fontSize: 11, color: AppColors.textSecondary)),
                         ],
                       ),
                     ),
@@ -234,7 +236,7 @@ class _LiveReturnReviewScreenState extends State<LiveReturnReviewScreen> {
                           opt == AdjudicationOption.approve ? 'Full Refund' : opt == AdjudicationOption.partialApprove ? 'Partial Refund' : opt == AdjudicationOption.offerStoreCredit ? 'Store Credit' : opt == AdjudicationOption.offerReplacement ? 'Replacement' : opt == AdjudicationOption.reject ? 'Reject' : opt.name,
                           style: TextStyle(fontSize: 13, fontWeight: selected ? FontWeight.w700 : FontWeight.w400),
                         ),
-                        activeColor: kLiveColor,
+                        activeColor: IveTokens.moduleLive,
                         dense: true,
                         contentPadding: EdgeInsets.zero,
                         visualDensity: VisualDensity.compact,
@@ -278,14 +280,14 @@ class _LiveReturnReviewScreenState extends State<LiveReturnReviewScreen> {
                       HapticFeedback.mediumImpact();
                       Navigator.pushNamed(context, AppRoutes.liveReturnRejection);
                     },
-                    style: OutlinedButton.styleFrom(foregroundColor: kLiveColor, padding: const EdgeInsets.symmetric(vertical: 14)),
+                    style: OutlinedButton.styleFrom(foregroundColor: IveTokens.moduleLive, padding: const EdgeInsets.symmetric(vertical: 14)),
                     child: const Text('REJECT', style: TextStyle(fontWeight: FontWeight.w700)),
                   ),
                 ),
                 const SizedBox(width: 8),
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Escalated to management'))),
+                    onPressed: () => AppToast.show(context, 'Escalated to management'),
                     style: OutlinedButton.styleFrom(foregroundColor: AppColors.textSecondary, padding: const EdgeInsets.symmetric(vertical: 14)),
                     child: const Text('ESCALATE', style: TextStyle(fontWeight: FontWeight.w700)),
                   ),

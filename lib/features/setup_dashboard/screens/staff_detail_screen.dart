@@ -1,8 +1,8 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD1.5-DETAIL: STAFF DETAIL — 4-Tab Deep View
+/// 
+/// SD1.5-DETAIL: STAFF DETAIL  4-Tab Deep View
 /// Tabs: Overview, Schedule, Tasks, Performance
 /// RBAC: Owner/Admin(fullAccess), BM(branchScoped), Monitor(viewOnly)
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -46,7 +46,7 @@ class _StaffDetailScreenState extends State<StaffDetailScreen> {
           appBar: SetupAppBar(
             title: staff.name,
             actions: [
-              // Edit role action — gated by OTP for Branch Manager
+              // Edit role action  gated by OTP for Branch Manager
               SetupActionGuard(
                 cardId: 'staff',
                 child: _RoleChangeButton(
@@ -107,7 +107,7 @@ class _StaffHeader extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
         children: [
@@ -139,7 +139,7 @@ class _StaffHeader extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(staff.name, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
-                Text('${staff.role} Â· ${staff.department}', style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                Text('${staff.role}  ${staff.department}', style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                 const SizedBox(height: 4),
                 if (staff.branch?.isNotEmpty ?? false)
                   Text(staff.branch!, style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
@@ -431,7 +431,7 @@ class _MetricBar extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           ClipRRect(
-            borderRadius: BorderRadius.circular(3),
+            borderRadius: BorderRadius.circular(6),
             child: LinearProgressIndicator(
               value: value.clamp(0.0, 1.0),
               minHeight: 6,
@@ -445,7 +445,7 @@ class _MetricBar extends StatelessWidget {
   }
 }
 
-// ─── Role Change Button ───────────────────────────────────────────────────────
+//  Role Change Button 
 
 /// Renders "Change Role" icon in the staff detail app bar.
 /// For Branch Managers, wraps in [SetupOtpGate] requiring Admin OTP.
@@ -489,7 +489,7 @@ class _RoleChangeButton extends StatelessWidget {
   }
 }
 
-// ─── Role Picker Sheet ────────────────────────────────────────────────────────
+//  Role Picker Sheet 
 
 class _RolePickerSheet extends StatelessWidget {
   const _RolePickerSheet({required this.staff});
@@ -562,7 +562,7 @@ class _RolePickerSheet extends StatelessWidget {
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: const Color(0xFF11131C),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         title: const Text(
           'Confirm Role Change',
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),

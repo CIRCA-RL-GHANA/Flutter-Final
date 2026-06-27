@@ -1,4 +1,4 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 /// UTILITY MODULE Provider
 /// Master state management for all 9 utility screens:
 /// Dashboard, Settings, Notifications, Search, Help, Privacy,
@@ -7,7 +7,7 @@
 /// Pattern: API-first with fallback demo data.
 /// Most of this provider is client-side / device-local. The init() method
 /// verifies backend connectivity via AuthService.getMe().
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -16,19 +16,19 @@ import '../../prompt/models/rbac_models.dart';
 import '../../../core/services/services.dart';
 
 class UtilityProvider extends ChangeNotifier {
-  // ─── Service instances ───────────────────────────────────────────────────
+  //  Service instances 
   final AuthService _authService = AuthService();
 
-  // ─── Loading / error state ───────────────────────────────────────────────
+  //  Loading / error state 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // INIT — verify connectivity & populate mutable lists
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
+  // INIT  verify connectivity & populate mutable lists
+  // 
 
   Future<void> init() async {
     _isLoading = true;
@@ -39,7 +39,7 @@ class UtilityProvider extends ChangeNotifier {
       // Verify backend connectivity via AuthService
       final meResponse = await _authService.getMe();
       if (meResponse.success) {
-        // Connection is good — update system health to online
+        // Connection is good  update system health to online
         _systemHealth = SystemHealthSummary(
           overallScore: _systemHealth.overallScore,
           activeAlerts: _systemHealth.activeAlerts,
@@ -59,9 +59,9 @@ class UtilityProvider extends ChangeNotifier {
     }
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // U0 - DASHBOARD STATE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   SystemHealthSummary _systemHealth = SystemHealthSummary(
     overallScore: 0.92,
@@ -75,7 +75,7 @@ class UtilityProvider extends ChangeNotifier {
 
   SystemHealthSummary get systemHealth => _systemHealth;
 
-  // ─── Recent Activities (fallback pattern) ────────────────────────────────
+  //  Recent Activities (fallback pattern) 
 
   static final List<RecentActivity> _fallbackRecentActivities = [
     RecentActivity(
@@ -197,20 +197,20 @@ class UtilityProvider extends ChangeNotifier {
     return actions;
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // U1 - SETTINGS STATE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   UserPreferences _preferences = const UserPreferences();
   UserPreferences get preferences => _preferences;
 
   static const List<LanguageOption> availableLanguages = [
     LanguageOption(code: 'en', name: 'English', nativeName: 'English'),
-    LanguageOption(code: 'fr', name: 'French', nativeName: 'Français'),
-    LanguageOption(code: 'es', name: 'Spanish', nativeName: 'Español'),
+    LanguageOption(code: 'fr', name: 'French', nativeName: 'Franais'),
+    LanguageOption(code: 'es', name: 'Spanish', nativeName: 'Espaol'),
     LanguageOption(code: 'de', name: 'German', nativeName: 'Deutsch'),
-    LanguageOption(code: 'ar', name: 'Arabic', nativeName: 'العربية', isRTL: true),
-    LanguageOption(code: 'zh', name: 'Chinese', nativeName: '中文'),
+    LanguageOption(code: 'ar', name: 'Arabic', nativeName: '', isRTL: true),
+    LanguageOption(code: 'zh', name: 'Chinese', nativeName: ''),
     LanguageOption(code: 'tw', name: 'Twi', nativeName: 'Twi'),
   ];
 
@@ -282,9 +282,9 @@ class UtilityProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // U2 - NOTIFICATIONS STATE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   NotificationFilter _notificationFilter = NotificationFilter.all;
   NotificationFilter get notificationFilter => _notificationFilter;
@@ -292,7 +292,7 @@ class UtilityProvider extends ChangeNotifier {
   NotificationType? _notificationTypeFilter;
   NotificationType? get notificationTypeFilter => _notificationTypeFilter;
 
-  // ─── Notifications (fallback pattern) ────────────────────────────────────
+  //  Notifications (fallback pattern) 
 
   static final List<NotificationItem> _fallbackNotifications = [
     NotificationItem(
@@ -453,9 +453,9 @@ class UtilityProvider extends ChangeNotifier {
     }
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // U3 - SEARCH STATE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   String _searchQuery = '';
   String get searchQuery => _searchQuery;
@@ -491,19 +491,19 @@ class UtilityProvider extends ChangeNotifier {
       category: SearchCategory.settings, icon: Icons.payment, iconColor: Color(0xFF6366F1), route: '/utility/settings',
     ),
     const SearchResult(
-      id: 'sr_2', title: 'Kwame Mensah', subtitle: 'Contact · Last seen 2h ago',
+      id: 'sr_2', title: 'Kwame Mensah', subtitle: 'Contact  Last seen 2h ago',
       category: SearchCategory.people, icon: Icons.person, iconColor: Color(0xFF10B981),
     ),
     const SearchResult(
-      id: 'sr_3', title: 'Order #4521', subtitle: 'Delivered · GHS 125.00',
+      id: 'sr_3', title: 'Order #4521', subtitle: 'Delivered  GHS 125.00',
       category: SearchCategory.orders, icon: Icons.receipt_long, iconColor: Color(0xFFF59E0B),
     ),
     const SearchResult(
-      id: 'sr_4', title: 'Dark Mode', subtitle: 'Settings → Appearance → Theme',
+      id: 'sr_4', title: 'Dark Mode', subtitle: 'Settings  Appearance  Theme',
       category: SearchCategory.settings, icon: Icons.dark_mode, iconColor: Color(0xFF64748B), route: '/utility/settings',
     ),
     const SearchResult(
-      id: 'sr_5', title: 'How to reset password', subtitle: 'Help article · Updated 3 days ago',
+      id: 'sr_5', title: 'How to reset password', subtitle: 'Help article  Updated 3 days ago',
       category: SearchCategory.help, icon: Icons.help_outline, iconColor: Color(0xFF3B82F6), route: '/utility/help',
     ),
     const SearchResult(
@@ -511,7 +511,7 @@ class UtilityProvider extends ChangeNotifier {
       category: SearchCategory.transactions, icon: Icons.history, iconColor: Color(0xFF8B5CF6),
     ),
     const SearchResult(
-      id: 'sr_7', title: 'Ama Serwaa', subtitle: 'Contact · Online now',
+      id: 'sr_7', title: 'Ama Serwaa', subtitle: 'Contact  Online now',
       category: SearchCategory.people, icon: Icons.person, iconColor: Color(0xFF10B981),
     ),
     const SearchResult(
@@ -519,11 +519,11 @@ class UtilityProvider extends ChangeNotifier {
       category: SearchCategory.messages, icon: Icons.chat, iconColor: Color(0xFF06B6D4), route: '/utility/help',
     ),
     const SearchResult(
-      id: 'sr_9', title: 'Wireless Headphones', subtitle: 'Product · GHS 89.99 · In Stock',
+      id: 'sr_9', title: 'Wireless Headphones', subtitle: 'Product  GHS 89.99  In Stock',
       category: SearchCategory.products, icon: Icons.headphones, iconColor: Color(0xFFEC4899),
     ),
     const SearchResult(
-      id: 'sr_10', title: 'Notification Preferences', subtitle: 'Settings → Notifications',
+      id: 'sr_10', title: 'Notification Preferences', subtitle: 'Settings  Notifications',
       category: SearchCategory.settings, icon: Icons.notifications, iconColor: Color(0xFFF59E0B), route: '/utility/settings',
     ),
   ];
@@ -592,9 +592,9 @@ class UtilityProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // U4 - HELP & SUPPORT STATE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   HelpCategory? _helpCategoryFilter;
   HelpCategory? get helpCategoryFilter => _helpCategoryFilter;
@@ -602,7 +602,7 @@ class UtilityProvider extends ChangeNotifier {
   String _helpSearchQuery = '';
   String get helpSearchQuery => _helpSearchQuery;
 
-  // ─── Help Articles (fallback pattern) ────────────────────────────────────
+  //  Help Articles (fallback pattern) 
 
   static final List<HelpArticle> _fallbackHelpArticles = [
     HelpArticle(
@@ -614,14 +614,14 @@ class UtilityProvider extends ChangeNotifier {
     ),
     HelpArticle(
       id: 'ha_2', title: 'How to Add a Payment Method',
-      content: 'Navigate to Settings → Payment Methods and tap "Add New". You can add mobile money, bank cards, or QPoints.',
+      content: 'Navigate to Settings  Payment Methods and tap "Add New". You can add mobile money, bank cards, or QPoints.',
       category: HelpCategory.payments, icon: Icons.credit_card,
       viewCount: 890, tags: ['payment', 'mobile money', 'card'],
       updatedAt: DateTime.now().subtract(const Duration(days: 7)),
     ),
     HelpArticle(
       id: 'ha_3', title: 'Reset Your Password',
-      content: 'Go to Settings → Security → Change Password. Enter your current password and set a new one.',
+      content: 'Go to Settings  Security  Change Password. Enter your current password and set a new one.',
       category: HelpCategory.security, icon: Icons.lock_reset,
       viewCount: 2100, tags: ['password', 'security', 'reset'],
       updatedAt: DateTime.now().subtract(const Duration(days: 5)),
@@ -695,7 +695,7 @@ class UtilityProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Support Tickets (fallback pattern) ──────────────────────────────────
+  //  Support Tickets (fallback pattern) 
 
   static final List<SupportTicket> _fallbackSupportTickets = [
     SupportTicket(
@@ -739,11 +739,11 @@ class UtilityProvider extends ChangeNotifier {
     ),
   ];
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // U5 - DATA & PRIVACY STATE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
-  // ─── Privacy Settings (fallback pattern) ─────────────────────────────────
+  //  Privacy Settings (fallback pattern) 
 
   static const List<PrivacySetting> _fallbackPrivacySettings = [
     PrivacySetting(
@@ -859,9 +859,9 @@ class UtilityProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // U6 - ACCESSIBILITY STATE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   AccessibilityConfig _accessibilityConfig = const AccessibilityConfig();
   AccessibilityConfig get accessibilityConfig => _accessibilityConfig;
@@ -959,9 +959,9 @@ class UtilityProvider extends ChangeNotifier {
     ),
   ];
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // U7 - ADVANCED DATA TOOLS STATE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   final StorageAnalytics _storageAnalytics = StorageAnalytics(
     totalMB: 50.0,
@@ -1049,9 +1049,9 @@ class UtilityProvider extends ChangeNotifier {
 
   List<SyncStatus> get syncStatuses => _syncStatuses;
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // U8 - SYSTEM MONITOR STATE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   final PerformanceSnapshot _performance = PerformanceSnapshot(
     cpuUsage: 0.23,
@@ -1070,7 +1070,7 @@ class UtilityProvider extends ChangeNotifier {
     appVersion: '1.0.5',
     buildNumber: '6',
     deviceId: 'PX7P-XXXX-XXXX',
-    screenResolution: '1440 × 3120',
+    screenResolution: '1440  3120',
     locale: 'en_GH',
     timezone: 'Africa/Accra (GMT+0)',
     totalStorageMB: 50.0,
@@ -1080,7 +1080,7 @@ class UtilityProvider extends ChangeNotifier {
 
   DeviceInfoModel get deviceInfo => _deviceInfo;
 
-  // ─── System Logs (fallback pattern) ──────────────────────────────────────
+  //  System Logs (fallback pattern) 
 
   static final List<SystemLogEntry> _fallbackSystemLogs = [
     SystemLogEntry(
@@ -1109,7 +1109,7 @@ class UtilityProvider extends ChangeNotifier {
       timestamp: DateTime.now().subtract(const Duration(hours: 2)),
     ),
     SystemLogEntry(
-      id: 'log_6', message: 'Security scan passed — no threats found',
+      id: 'log_6', message: 'Security scan passed  no threats found',
       level: LogLevel.info, source: 'Security',
       timestamp: DateTime.now().subtract(const Duration(hours: 3)),
     ),
@@ -1134,7 +1134,7 @@ class UtilityProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Active Sessions (fallback pattern) ──────────────────────────────────
+  //  Active Sessions (fallback pattern) 
 
   static final List<ActiveSession> _fallbackActiveSessions = [
     ActiveSession(

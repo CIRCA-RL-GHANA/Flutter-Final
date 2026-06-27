@@ -1,5 +1,5 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// Interests Service — Flutter ↔ Backend Integration
+/// 
+/// Interests Service  Flutter  Backend Integration
 ///
 /// Maps to InterestsController endpoints:
 ///   POST   /interests/favorite-shops
@@ -16,7 +16,7 @@
 ///   PUT    /interests/connection-requests/{requestId}/block
 ///   GET    /interests/connections/{userId}
 ///   GET    /interests/interests/categories
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import '../network/api_client.dart';
@@ -28,7 +28,7 @@ class InterestsService {
 
   InterestsService([ApiClient? api]) : _api = api ?? ApiClient.instance;
 
-  // ─── Favorite Shops ───────────────────────────────────────────────────────
+  //  Favorite Shops 
 
   Future<ApiResponse<Map<String, dynamic>>> addFavoriteShop(
     String userId,
@@ -58,7 +58,7 @@ class InterestsService {
     );
   }
 
-  // ─── Interests ────────────────────────────────────────────────────────────
+  //  Interests 
 
   Future<ApiResponse<Map<String, dynamic>>> addInterest(
     String userId,
@@ -93,7 +93,7 @@ class InterestsService {
     );
   }
 
-  // ─── Connection Requests ──────────────────────────────────────────────────
+  //  Connection Requests 
 
   Future<ApiResponse<Map<String, dynamic>>> createConnectionRequest(
     String senderId,
@@ -149,7 +149,7 @@ class InterestsService {
     );
   }
 
-  // ─── Connections ──────────────────────────────────────────────────────────
+  //  Connections 
 
   Future<ApiResponse<List<dynamic>>> getConnections(String userId) {
     return _api.get<List<dynamic>>(
@@ -157,4 +157,8 @@ class InterestsService {
       fromJson: (json) => json as List<dynamic>,
     );
   }
+
+  /// Alias used by SetupDashboardProvider.
+  Future<ApiResponse<List<dynamic>>> getInterests(String ownerId) =>
+      listInterests(ownerId);
 }

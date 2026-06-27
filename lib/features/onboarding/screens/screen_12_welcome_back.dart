@@ -1,25 +1,14 @@
-﻿import 'package:flutter/material.dart';
-import '../../../core/design/ive.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '../../../core/design/ive.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/constants/app_strings.dart';
 import '../../../core/utils/responsive.dart';
 import '../providers/onboarding_provider.dart';
-import '../widgets/buttons.dart';
+import '../providers/phone_auth_provider.dart';
+import '../../../core/services/auth_service.dart';
 
-
-// OS palette — mirrors splash / welcome
-const Color _kBg        = IveTokens.bg;
-const Color _kSurface   = IveTokens.surface;
-const Color _kBorder    = IveTokens.hairline;
-const Color _kAccent    = IveTokens.accent;
-// ignore: unused_element
-const Color _kAccentDim = IveTokens.accentPressed;
-const Color _kText      = IveTokens.label;
-const Color _kTextDim   = IveTokens.labelSecondary;
-const Color _kTextMuted = IveTokens.labelTertiary;
-/// Screen 12: Existing User Welcome Back
-/// Warm re-engagement with context awareness
+/// Screen 13 — Welcome back (returning user sign-in).
 class WelcomeBackScreen extends StatefulWidget {
   const WelcomeBackScreen({super.key});
 
@@ -27,314 +16,297 @@ class WelcomeBackScreen extends StatefulWidget {
   State<WelcomeBackScreen> createState() => _WelcomeBackScreenState();
 }
 
-class _WelcomeBackScreenState extends State<WelcomeBackScreen>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _animController;
+class _WelcomeBackScreenState extends State<WelcomeBackScreen> {
+  bool _loading = false;
+  String _firstName = '';
+  String _lastName  = '';
+  bool _fetching    = true;
 
   @override
   void initState() {
     super.initState();
-    _animController = AnimationController(
-      duration: const Duration(milliseconds: 800),
-      vsync: this,
-    )..forward();
+    _loadUser();
   }
 
-  @override
-  void dispose() {
-    _animController.dispose();
-    super.dispose();
+  Future<void> _loadUser() async {
+    // Try provider state first (set during this session's onboarding flow)
+    final ob = context.read<OnboardingProvider>();
+    if (ob.firstName.isNotEmpty) {
+      setState(() {
+        _firstName = ob.firstName;
+        _lastName  = ob.lastName;
+        _fetching  = false;
+      });
+      return;
+    }
+
+    // Returning user: fetch from backend
+    try {
+      final res = await AuthService().getMe();
+      if (mounted && res.success && res.data != null) {
+        final d = res.data!;
+        // Backend may return user nested under 'user' key
+        final user = (d['user'] as Map<String, dynamic>?) ?? d;
+        setState(() {
+          _firstName = (user['firstName'] as String?)?.trim() ?? '';
+          _lastName  = (user['lastName']  as String?)?.trim() ?? '';
+          _fetching  = false;
+        });
+        return;
+      }
+    } catch (_) {}
+
+    if (mounted) setState(() => _fetching = false);
   }
 
-  /// Determine personalized welcome message based on last login
-  _WelcomeContext _getWelcomeContext(OnboardingProvider onboarding) {
-    final lastLogin = onboarding.lastLoginDate;
-    if (lastLogin == null) {
-      return const _WelcomeContext(
-        greeting: AppStrings.welcomeBack,
-        emoji: 'ðŸ‘‹',
-        showWhatsNew: false,
-        daysSince: 0,
-      );
+  String get _fullName {
+    final n = '$_firstName $_lastName'.trim();
+    return n.isNotEmpty ? n : 'Commerce OS';
+  }
+
+  String get _initials {
+    if (_firstName.isEmpty && _lastName.isEmpty) return 'CO';
+    final f = _firstName.isNotEmpty ? _firstName[0].toUpperCase() : '';
+    final l = _lastName.isNotEmpty  ? _lastName[0].toUpperCase()  : '';
+    return '$f$l';
+  }
+
+  Future<void> _signIn() async {
+    final phone = context.read<PhoneAuthProvider>().formattedNumber;
+    if (phone.trim().isEmpty) {
+      Navigator.of(context).pushReplacementNamed(AppRoutes.phoneInput);
+      return;
     }
 
-    final daysSince = DateTime.now().difference(lastLogin).inDays;
-
-    if (daysSince < 7) {
-      return _WelcomeContext(
-        greeting: AppStrings.welcomeBack,
-        emoji: 'ðŸ‘‹',
-        showWhatsNew: false,
-        daysSince: daysSince,
-      );
-    } else if (daysSince < 30) {
-      return _WelcomeContext(
-        greeting: AppStrings.missedYou,
-        emoji: 'ðŸ’™',
-        showWhatsNew: false,
-        daysSince: daysSince,
-      );
-    } else if (daysSince < 90) {
-      return _WelcomeContext(
-        greeting: AppStrings.whatsNew,
-        emoji: 'ðŸŽ‰',
-        showWhatsNew: true,
-        daysSince: daysSince,
-      );
-    } else {
-      return _WelcomeContext(
-        greeting: AppStrings.refreshAccount,
-        emoji: 'ðŸ”„',
-        showWhatsNew: true,
-        daysSince: daysSince,
-      );
-    }
+    setState(() => _loading = true);
+    HapticFeedback.mediumImpact();
+    await Future.delayed(const Duration(milliseconds: 600));
+    if (!mounted) return;
+    setState(() => _loading = false);
+    Navigator.of(context).pushNamedAndRemoveUntil(
+      AppRoutes.genieHome,
+      (route) => false,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final onboarding = context.watch<OnboardingProvider>();
-    final welcomeCtx = _getWelcomeContext(onboarding);
-    final name = onboarding.firstName.isNotEmpty
-        ? onboarding.firstName
-        : 'User';
-
     return Scaffold(
-      body: Container(
-        color: _kBg,
-        child: SafeArea(
-          child: Responsive.constrained(
+      backgroundColor: IveTokens.bg,
+      body: SafeArea(
+        child: Responsive.constrained(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // Back button
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: GestureDetector(
-                      onTap: () => Navigator.pop(context),
-                      child: Container(
-                        width: 44,
-                        height: 44,
-                        decoration: const BoxDecoration(
-                          color: _kSurface,
-                          borderRadius: IveTokens.brMd,
+                const SizedBox(height: 48),
+
+                // Avatar
+                Container(
+                  width: 90,
+                  height: 90,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: IveTokens.surface,
+                    border: Border.all(color: IveTokens.hairline2),
+                  ),
+                  child: Center(
+                    child: _fetching
+                        ? const SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 1.5,
+                              color: IveTokens.mute,
+                            ),
+                          )
+                        : Text(
+                            _initials,
+                            style: const TextStyle(
+                              fontFamily: 'SpaceGrotesk',
+                              fontSize: 26,
+                              fontWeight: FontWeight.w600,
+                              color: IveTokens.ink2,
+                            ),
+                          ),
+                  ),
+                ),
+
+                const SizedBox(height: 16),
+
+                // WELCOME BACK eyebrow
+                Text(
+                  'WELCOME BACK',
+                  style: IveType.mono.copyWith(
+                    fontSize: 10,
+                    color: IveTokens.mute,
+                    letterSpacing: 1.6,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+
+                const SizedBox(height: 8),
+
+                // Name
+                _fetching
+                    ? Container(
+                        width: 160,
+                        height: 20,
+                        decoration: BoxDecoration(
+                          color: IveTokens.surface,
+                          borderRadius: BorderRadius.circular(4),
                         ),
-                        child: const Icon(
-                          Icons.arrow_back_ios_new,
-                          size: 18,
-                          color: _kText,
+                      )
+                    : Text(
+                        _fullName,
+                        style: const TextStyle(
+                          fontFamily: 'SpaceGrotesk',
+                          fontSize: 26,
+                          fontWeight: FontWeight.w700,
+                          color: IveTokens.ink,
                         ),
                       ),
+
+                const SizedBox(height: 28),
+
+                // Sign in with Face ID row
+                GestureDetector(
+                  onTap: _loading || _fetching ? null : _signIn,
+                  behavior: HitTestBehavior.opaque,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 14),
+                    decoration: BoxDecoration(
+                      color: IveTokens.surface,
+                      borderRadius: BorderRadius.circular(IveTokens.rSm),
+                      border: Border.all(color: IveTokens.hairline),
                     ),
-                  ),
-                ),
-
-                Expanded(
-                  child: SingleChildScrollView(
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: Column(
+                    child: Row(
                       children: [
-                        const SizedBox(height: 40),
-
-                        // Welcome emoji
-                        FadeTransition(
-                          opacity: CurvedAnimation(
-                            parent: _animController,
-                            curve: const Interval(0.0, 0.4, curve: Curves.easeIn),
+                        Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: IveTokens.accent.withValues(alpha: 0.12),
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Text(
-                            welcomeCtx.emoji,
-                            style: const TextStyle(fontSize: 72),
-                          ),
-                        ),
-
-                        const SizedBox(height: 24),
-
-                        // Greeting
-                        FadeTransition(
-                          opacity: CurvedAnimation(
-                            parent: _animController,
-                            curve: const Interval(0.2, 0.6, curve: Curves.easeIn),
-                          ),
-                          child: Text(
-                            welcomeCtx.greeting,
-                            style: const TextStyle(
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold,
-                              color: _kText,
-                            ),
-                            textAlign: TextAlign.center,
+                          child: const Icon(
+                            Icons.remove_red_eye_outlined,
+                            size: 20,
+                            color: IveTokens.accent,
                           ),
                         ),
 
-                        const SizedBox(height: 8),
+                        const SizedBox(width: 14),
 
-                        FadeTransition(
-                          opacity: CurvedAnimation(
-                            parent: _animController,
-                            curve: const Interval(0.3, 0.7, curve: Curves.easeIn),
-                          ),
-                          child: Text(
-                            name,
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: _kAccent.withValues(alpha: 0.9),
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-
-                        // What's New Section
-                        if (welcomeCtx.showWhatsNew) ...[
-                          const SizedBox(height: 32),
-                          FadeTransition(
-                            opacity: CurvedAnimation(
-                              parent: _animController,
-                              curve: const Interval(0.4, 0.8, curve: Curves.easeIn),
-                            ),
-                            child: Container(
-                              width: double.infinity,
-                              padding: const EdgeInsets.all(20),
-                              decoration: BoxDecoration(
-                                color: _kSurface,
-                                borderRadius: IveTokens.brXs,
-                                border: Border.all(color: _kBorder),
-                              ),
-                              child: const Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "What's New",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: _kText,
-                                    ),
-                                  ),
-                                  SizedBox(height: 12),
-                                  _NewFeatureItem(
-                                    icon: Icons.auto_awesome,
-                                    text: 'AI-powered recommendations',
-                                  ),
-                                  _NewFeatureItem(
-                                    icon: Icons.speed,
-                                    text: 'Faster checkout experience',
-                                  ),
-                                  _NewFeatureItem(
-                                    icon: Icons.security,
-                                    text: 'Enhanced security features',
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-
-                        // Data snapshot
-                        const SizedBox(height: 24),
-                        FadeTransition(
-                          opacity: CurvedAnimation(
-                            parent: _animController,
-                            curve: const Interval(0.5, 0.9, curve: Curves.easeIn),
-                          ),
-                          child: Container(
-                            width: double.infinity,
-                            padding: const EdgeInsets.all(20),
-                            decoration: BoxDecoration(
-                              color: _kSurface,
-                              borderRadius: IveTokens.brXs,
-                              border: Border.all(color: _kBorder),
-                            ),
-                            child: Column(
-                              children: [
-                                const Text(
-                                  'Your Account',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: _kText,
-                                  ),
+                        const Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Sign in with Face ID',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                  color: IveTokens.ink,
                                 ),
-                                const SizedBox(height: 16),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    _StatItem(
-                                      value: '${onboarding.profileCompleteness}%',
-                                      label: 'Profile',
-                                    ),
-                                    _StatItem(
-                                      value: welcomeCtx.daysSince.toString(),
-                                      label: 'Days away',
-                                    ),
-                                    const _StatItem(
-                                      value: '0',
-                                      label: 'Notifications',
-                                    ),
-                                  ],
+                              ),
+                              SizedBox(height: 2),
+                              Text(
+                                'Or use your PIN',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: IveTokens.mute,
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
 
-                        const SizedBox(height: 32),
+                        _loading
+                            ? const SizedBox(
+                                width: 16,
+                                height: 16,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 1.5,
+                                  color: IveTokens.accent,
+                                ),
+                              )
+                            : const Text(
+                                '>',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: IveTokens.mute,
+                                ),
+                              ),
                       ],
                     ),
                   ),
                 ),
 
-                // Quick Actions
-                FadeTransition(
-                  opacity: CurvedAnimation(
-                    parent: _animController,
-                    curve: const Interval(0.6, 1.0, curve: Curves.easeIn),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(24, 0, 24, 32),
-                    child: Column(
-                      children: [
-                        PrimaryButton(
-                          text: AppStrings.continueWhereLeftOff,
-                          icon: Icons.auto_awesome,
-                          onPressed: () {
-                            Navigator.of(context)
-                                .pushReplacementNamed(AppRoutes.genieHome);
-                          },
-                          margin: EdgeInsets.zero,
-                        ),
-                        const SizedBox(height: 12),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: _QuickActionBtn(
-                                icon: Icons.person_outline,
-                                label: 'Update\nProfile',
-                                onTap: () {
-                                  Navigator.of(context)
-                                      .pushNamed(AppRoutes.profilePhoto);
-                                },
-                              ),
-                            ),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              child: _QuickActionBtn(
-                                icon: Icons.explore_outlined,
-                                label: 'Explore\nNew',
-                                onTap: () {
-                                  Navigator.of(context)
-                                      .pushNamed(AppRoutes.tutorial);
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+                const SizedBox(height: 32),
+
+                // JUMP BACK IN section header
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'JUMP BACK IN',
+                    style: IveType.mono.copyWith(
+                      fontSize: 10,
+                      color: IveTokens.mute,
+                      letterSpacing: 1.4,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
+
+                const SizedBox(height: 10),
+
+                // 2×2 module grid
+                Row(
+                  children: [
+                    Expanded(
+                      child: _ModuleTile(
+                        icon: Icons.account_balance_wallet_outlined,
+                        label: 'GO',
+                        onTap: _signIn,
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: _ModuleTile(
+                        icon: Icons.grid_view_outlined,
+                        label: 'Market',
+                        onTap: _signIn,
+                      ),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 10),
+
+                Row(
+                  children: [
+                    Expanded(
+                      child: _ModuleTile(
+                        icon: Icons.diamond_outlined,
+                        label: 'Updates',
+                        onTap: _signIn,
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: _ModuleTile(
+                        icon: Icons.chat_bubble_outline,
+                        label: 'Chat',
+                        onTap: _signIn,
+                      ),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 32),
               ],
             ),
           ),
@@ -344,92 +316,12 @@ class _WelcomeBackScreenState extends State<WelcomeBackScreen>
   }
 }
 
-class _WelcomeContext {
-  final String greeting;
-  final String emoji;
-  final bool showWhatsNew;
-  final int daysSince;
-
-  const _WelcomeContext({
-    required this.greeting,
-    required this.emoji,
-    required this.showWhatsNew,
-    required this.daysSince,
-  });
-}
-
-class _NewFeatureItem extends StatelessWidget {
-  final IconData icon;
-  final String text;
-
-  const _NewFeatureItem({required this.icon, required this.text});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
-      child: Row(
-        children: [
-          Container(
-            width: 32,
-            height: 32,
-            decoration: BoxDecoration(
-              color: _kAccent.withValues(alpha: 0.2),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Icon(icon, size: 16, color: _kAccent),
-          ),
-          const SizedBox(width: 12),
-          Text(
-            text,
-            style: const TextStyle(
-              fontSize: 14,
-              color: _kTextDim,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _StatItem extends StatelessWidget {
-  final String value;
-  final String label;
-
-  const _StatItem({required this.value, required this.label});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          value,
-          style: const TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: _kAccent,
-          ),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: 12,
-            color: _kTextMuted,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _QuickActionBtn extends StatelessWidget {
+class _ModuleTile extends StatelessWidget {
   final IconData icon;
   final String label;
   final VoidCallback onTap;
 
-  const _QuickActionBtn({
+  const _ModuleTile({
     required this.icon,
     required this.label,
     required this.onTap,
@@ -439,25 +331,25 @@ class _QuickActionBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
+      behavior: HitTestBehavior.opaque,
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         decoration: BoxDecoration(
-          color: _kSurface,
-          borderRadius: IveTokens.brXs,
-          border: Border.all(color: _kBorder),
+          color: IveTokens.surface,
+          borderRadius: BorderRadius.circular(IveTokens.rSm),
+          border: Border.all(color: IveTokens.hairline),
         ),
-        child: Column(
+        child: Row(
           children: [
-            Icon(icon, size: 28, color: _kTextDim),
-            const SizedBox(height: 8),
+            Icon(icon, size: 18, color: IveTokens.accent),
+            const SizedBox(width: 10),
             Text(
               label,
               style: const TextStyle(
-                fontSize: 12,
-                color: _kTextDim,
-                height: 1.3,
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                color: IveTokens.ink,
               ),
-              textAlign: TextAlign.center,
             ),
           ],
         ),

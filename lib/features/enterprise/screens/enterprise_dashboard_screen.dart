@@ -1,4 +1,4 @@
-/// Enterprise â€º Dashboard Screen
+/// Enterprise  Dashboard Screen
 /// Central hub for managing API keys, multi-channel integrations,
 /// fulfillment tasks, and concierge sessions.
 library;
@@ -122,7 +122,7 @@ class _EnterpriseDashboardScreenState extends State<EnterpriseDashboardScreen>
     );
   }
 
-  // ─── Overview Tab ─────────────────────────────────────────────────────────
+  //  Overview Tab 
   Widget _buildOverview() {
     if (_profile == null) {
       return const Center(
@@ -138,7 +138,7 @@ class _EnterpriseDashboardScreenState extends State<EnterpriseDashboardScreen>
       children: [
         _statCard('Status', status.toUpperCase(), icon: Icons.verified, iconColor: statusColor),
         const SizedBox(height: 12),
-        _statCard('Type', (_profile!['enterpriseType'] as String? ?? '—').replaceAll('_', ' ').toUpperCase(),
+        _statCard('Type', (_profile!['enterpriseType'] as String? ?? '').replaceAll('_', ' ').toUpperCase(),
             icon: Icons.business),
         const SizedBox(height: 12),
         _statCard('API Keys', '${_apiKeys.length} active', icon: Icons.vpn_key),
@@ -167,7 +167,7 @@ class _EnterpriseDashboardScreenState extends State<EnterpriseDashboardScreen>
     );
   }
 
-  // ─── API Keys Tab ─────────────────────────────────────────────────────────
+  //  API Keys Tab 
   Widget _buildApiKeys() {
     return ListView(
       padding: const EdgeInsets.all(16),
@@ -185,8 +185,8 @@ class _EnterpriseDashboardScreenState extends State<EnterpriseDashboardScreen>
   }
 
   Widget _apiKeyCard(Map<String, dynamic> key) {
-    final label = key['label'] as String? ?? '—';
-    final prefix = key['keyPrefix'] as String? ?? '—';
+    final label = key['label'] as String? ?? '';
+    final prefix = key['keyPrefix'] as String? ?? '';
     final active = key['isActive'] == true;
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
@@ -218,7 +218,7 @@ class _EnterpriseDashboardScreenState extends State<EnterpriseDashboardScreen>
               ],
             ),
           ),
-          // Active indicator — quiet dot
+          // Active indicator  quiet dot
           Container(
             width: 7, height: 7,
             decoration: BoxDecoration(
@@ -316,9 +316,9 @@ class _EnterpriseDashboardScreenState extends State<EnterpriseDashboardScreen>
             ),
             Text('Your API key', style: IveType.title3),
             const SizedBox(height: IveTokens.s2),
-            // "Shown once" — stated clearly, once (spec P1)
+            // "Shown once"  stated clearly, once (spec P1)
             Text(
-              'Shown once. Copy it now — you cannot retrieve it again.',
+              'Shown once. Copy it now  you cannot retrieve it again.',
               style: IveType.callout.copyWith(color: IveTokens.warnColor),
             ),
             const SizedBox(height: IveTokens.s4),
@@ -367,7 +367,7 @@ class _EnterpriseDashboardScreenState extends State<EnterpriseDashboardScreen>
     );
   }
 
-  // ─── Channels Tab ─────────────────────────────────────────────────────────
+  //  Channels Tab 
   Widget _buildChannels() {
     return ListView(
       padding: const EdgeInsets.all(16),
@@ -400,10 +400,10 @@ class _EnterpriseDashboardScreenState extends State<EnterpriseDashboardScreen>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(ch['channelName'] as String? ?? '—', style: IveType.headline),
+                  Text(ch['channelName'] as String? ?? '', style: IveType.headline),
                   const SizedBox(height: 2),
                   Text(
-                    '${(ch['channelType'] as String? ?? '').toUpperCase()} • ${ch['syncStatus'] ?? 'idle'}',
+                    '${(ch['channelType'] as String? ?? '').toUpperCase()}  ${ch['syncStatus'] ?? 'idle'}',
                     style: IveType.caption.copyWith(color: IveTokens.muteColor),
                   ),
                 ],
@@ -479,7 +479,7 @@ class _EnterpriseDashboardScreenState extends State<EnterpriseDashboardScreen>
     );
   }
 
-  // ─── Fulfillment Tab ──────────────────────────────────────────────────────
+  //  Fulfillment Tab 
   Widget _buildFulfillment() {
     return ListView(
       padding: const EdgeInsets.all(16),
@@ -515,10 +515,10 @@ class _EnterpriseDashboardScreenState extends State<EnterpriseDashboardScreen>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Order ${task['orderId'] ?? '—'}', style: IveType.headline),
+                Text('Order ${task['orderId'] ?? ''}', style: IveType.headline),
                 const SizedBox(height: 2),
                 Text(
-                  '${(task['provider'] as String? ?? '').replaceAll('_', ' ')} • ${task['trackingId'] ?? 'No tracking'}',
+                  '${(task['provider'] as String? ?? '').replaceAll('_', ' ')}  ${task['trackingId'] ?? 'No tracking'}',
                   style: IveType.caption.copyWith(color: IveTokens.muteColor),
                 ),
               ],

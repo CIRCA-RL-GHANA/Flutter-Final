@@ -180,7 +180,7 @@ class WebSocketService extends ChangeNotifier {
     s.onDisconnect((_) {
       debugPrint('[WebSocket] Disconnected');
       _connectionController.add(false);
-      // Use the stored _currentBaseUrl — passing '' would block reconnection.
+      // Use the stored _currentBaseUrl  passing '' would block reconnection.
       _scheduleReconnect(_currentBaseUrl ?? '');
       notifyListeners();
     });
@@ -268,7 +268,7 @@ class WebSocketService extends ChangeNotifier {
   void _scheduleReconnect(String baseUrl) {
     if (_permanentlyDisconnected) return;
     if (_reconnectAttempts >= _maxReconnectAttempts) {
-      debugPrint('[WebSocket] Max reconnect attempts reached — permanently disconnecting');
+      debugPrint('[WebSocket] Max reconnect attempts reached  permanently disconnecting');
       _permanentlyDisconnected = true;
       // Signal the app to re-authenticate; emit false so UI can react.
       _connectionController.add(false);

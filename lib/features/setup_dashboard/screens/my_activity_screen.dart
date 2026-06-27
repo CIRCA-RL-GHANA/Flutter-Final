@@ -1,12 +1,13 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD3.5: MY ACTIVITY — Tasks, Goals, Timeline
+/// 
+/// SD3.5: MY ACTIVITY  Tasks, Goals, Timeline
 /// Task progress, goal tracking with progress bars, today's activity timeline
 /// RBAC: Owner(all), Admin(all), BM(branch), SO(entity),
 ///        BSO(branch), Monitor/BrMon(view), RO/BRO(own), Driver(own)
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../prompt/providers/context_provider.dart';
@@ -40,13 +41,13 @@ class MyActivityScreen extends StatelessWidget {
             ),
             floatingActionButton: SetupRbacFAB(
               cardId: 'my_activity',
-              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Add new task'))),
+              onPressed: () => AppToast.show(context, 'Add new task'),
               label: 'Add Task',
               icon: Icons.add_task,
             ),
           body: CustomScrollView(
             slivers: [
-              // ─── Task Summary ─────────────────────────────
+              //  Task Summary 
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -71,7 +72,7 @@ class MyActivityScreen extends StatelessWidget {
                       Expanded(
                         child: KPIBadge(
                           label: 'Productivity',
-                          value: tasks.isEmpty ? '—' : '${(completedTasks * 100 / tasks.length).round()}%',
+                          value: tasks.isEmpty ? '' : '${(completedTasks * 100 / tasks.length).round()}%',
                           icon: Icons.speed,
                           color: tasks.isEmpty
                               ? AppColors.textTertiary
@@ -87,7 +88,7 @@ class MyActivityScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Overdue Alert ────────────────────────────
+              //  Overdue Alert 
               if (tasks.where((t) => t.status != TaskStatus.completed && t.status != TaskStatus.cancelled && (t.dueDate?.isBefore(DateTime.now()) ?? false)).isNotEmpty)
                 SliverToBoxAdapter(
                   child: Padding(
@@ -105,7 +106,7 @@ class MyActivityScreen extends StatelessWidget {
                             padding: const EdgeInsets.all(6),
                             decoration: BoxDecoration(
                               color: AppColors.error.withValues(alpha: 0.15),
-                              borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(10),
                             ),
                             child: const Icon(Icons.warning_amber, size: 18, color: AppColors.error),
                           ),
@@ -132,7 +133,7 @@ class MyActivityScreen extends StatelessWidget {
                   ),
                 ),
 
-              // ─── Task Status Filter ───────────────────────
+              //  Task Status Filter 
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -155,7 +156,7 @@ class MyActivityScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Tasks Section ────────────────────────────
+              //  Tasks Section 
               const SliverToBoxAdapter(
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
@@ -163,7 +164,7 @@ class MyActivityScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── AI Insights ─────────────────────────────────────────
+              //  AI Insights 
               const SliverToBoxAdapter(
               ),
               SliverPadding(
@@ -176,7 +177,7 @@ class MyActivityScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Goals Section ────────────────────────────
+              //  Goals Section 
               const SliverToBoxAdapter(
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
@@ -194,7 +195,7 @@ class MyActivityScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Timeline Section ─────────────────────────
+              //  Timeline Section 
               const SliverToBoxAdapter(
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
@@ -306,7 +307,7 @@ class _TaskCard extends StatelessWidget {
               children: [
                 Expanded(
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(3),
+                    borderRadius: BorderRadius.circular(6),
                     child: LinearProgressIndicator(
                       value: task.checklist.isEmpty ? 0 : completedChecklist / task.checklist.length,
                       minHeight: 4,
@@ -400,7 +401,7 @@ class _GoalCard extends StatelessWidget {
             children: [
               Expanded(
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(4),
+                  borderRadius: BorderRadius.circular(6),
                   child: LinearProgressIndicator(
                     value: goal.progress / 100,
                     minHeight: 6,
@@ -471,7 +472,7 @@ class _TimelineItem extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // ─── Timeline Connector ──────────────
+          //  Timeline Connector 
           SizedBox(
             width: 30,
             child: Column(
@@ -491,7 +492,7 @@ class _TimelineItem extends StatelessWidget {
               ],
             ),
           ),
-          // ─── Content ─────────────────────────
+          //  Content 
           Expanded(
             child: Container(
               margin: const EdgeInsets.only(bottom: 12),
@@ -507,7 +508,7 @@ class _TimelineItem extends StatelessWidget {
                     height: 34,
                     decoration: BoxDecoration(
                       color: _actionColor.withValues(alpha: 0.1),
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                     child: Icon(_actionIcon, size: 16, color: _actionColor),
                   ),
@@ -552,7 +553,7 @@ class _TimelineItem extends StatelessWidget {
   }
 }
 
-// ─── Task Status Chip ────────────────────────────────────────────────────────
+//  Task Status Chip 
 
 class _TaskStatusChip extends StatelessWidget {
   final String label;
@@ -574,7 +575,7 @@ class _TaskStatusChip extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
         color: isSelected ? c.withValues(alpha: 0.12) : Colors.white,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(10),
         border: Border.all(
           color: isSelected ? c.withValues(alpha: 0.4) : AppColors.inputBorder,
         ),
@@ -595,7 +596,7 @@ class _TaskStatusChip extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
             decoration: BoxDecoration(
               color: c.withValues(alpha: 0.15),
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(10),
             ),
             child: Text(
               '$count',

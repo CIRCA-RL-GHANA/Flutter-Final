@@ -1,5 +1,5 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// Tabs Service — Flutter ↔ Backend Integration
+/// 
+/// Tabs Service  Flutter  Backend Integration
 ///
 /// Maps to TabsController endpoints:
 ///   GET  /tabs
@@ -10,7 +10,7 @@
 ///   POST /tabs/{id}/charge
 ///   POST /tabs/{id}/settle
 ///   GET  /tabs/{id}/transactions
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import '../network/api_client.dart';
@@ -21,7 +21,7 @@ class TabsService {
 
   TabsService([ApiClient? api]) : _api = api ?? ApiClient.instance;
 
-  // ─── Tabs CRUD ────────────────────────────────────────────────────────────
+  //  Tabs CRUD 
 
   Future<ApiResponse<List<dynamic>>> getTabs(String entityId) {
     return _api.get<List<dynamic>>(
@@ -63,7 +63,7 @@ class TabsService {
     return _api.delete<void>('/tabs/$id');
   }
 
-  // ─── Tab Operations ───────────────────────────────────────────────────────
+  //  Tab Operations 
 
   Future<ApiResponse<Map<String, dynamic>>> chargeTab(
     String id,

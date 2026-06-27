@@ -1,7 +1,7 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// MARKET MODULE — Screen 4: Product Detail
+/// 
+/// MARKET MODULE  Screen 4: Product Detail
 /// Media gallery, customization, quantity, fulfillment, nutrition, reviews
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -130,7 +130,7 @@ class _MarketProductDetailScreenState extends State<MarketProductDetailScreen> {
                       height: 6,
                       decoration: BoxDecoration(
                         color: i == _currentImage ? kMarketColor : Colors.grey.withValues(alpha: 0.5),
-                        borderRadius: BorderRadius.circular(3),
+                        borderRadius: BorderRadius.circular(6),
                       ),
                     );
                   }),
@@ -145,7 +145,7 @@ class _MarketProductDetailScreenState extends State<MarketProductDetailScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   decoration: BoxDecoration(
                     color: AppColors.error,
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: Text(
                     '-${product.discountPercent.toStringAsFixed(0)}%',
@@ -455,7 +455,7 @@ class _MarketProductDetailScreenState extends State<MarketProductDetailScreen> {
           ),
           const SizedBox(height: 100),
 
-          // ─── AI Similar Products ───────────────────────────────
+          //  AI Similar Products 
         ],
       ),
     );
@@ -495,7 +495,7 @@ class _MarketProductDetailScreenState extends State<MarketProductDetailScreen> {
                 style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: kMarketColorDark),
               ),
               Text(
-                '$_quantity Ã— \$${unitPrice.toStringAsFixed(2)}',
+                '$_quantity  \$${unitPrice.toStringAsFixed(2)}',
                 style: const TextStyle(fontSize: 12, color: AppColors.textTertiary),
               ),
             ],
@@ -546,17 +546,17 @@ class _MarketProductDetailScreenState extends State<MarketProductDetailScreen> {
   String _dietaryLabel(DietaryPreference d) {
     switch (d) {
       case DietaryPreference.vegetarian:
-        return '🥬 Vegetarian';
+        return ' Vegetarian';
       case DietaryPreference.vegan:
-        return '🌱 Vegan';
+        return ' Vegan';
       case DietaryPreference.glutenFree:
-        return '🌾 Gluten-free';
+        return ' Gluten-free';
       case DietaryPreference.halal:
-        return '🕌 Halal';
+        return ' Halal';
       case DietaryPreference.kosher:
-        return '⚖ Kosher';
+        return ' Kosher';
       case DietaryPreference.organic:
-        return '🌿 Organic';
+        return ' Organic';
     }
   }
 }

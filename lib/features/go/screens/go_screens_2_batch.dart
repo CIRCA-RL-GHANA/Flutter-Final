@@ -1,10 +1,10 @@
-/// PRODUCTION IMPLEMENTATION BUNDLE — Screens 2-16 & Services 2-11
+/// PRODUCTION IMPLEMENTATION BUNDLE  Screens 2-16 & Services 2-11
 /// 100% Complete, Zero TODOs, Deployment Ready
 /// Elite Developer Standards (20+ Years Experience)
 
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 /// GO SCREEN: TRANSFER (P2P Money Transfer)
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 
 class GOTransferScreen extends StatefulWidget {
   const GOTransferScreen({super.key});
@@ -225,9 +225,9 @@ class _GOTransferScreenState extends State<GOTransferScreen> {
   }
 }
 
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 /// GO SCREEN: BUY (P2P Currency Buying)
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 
 class GOBuyScreen extends StatefulWidget {
   const GOBuyScreen({super.key});

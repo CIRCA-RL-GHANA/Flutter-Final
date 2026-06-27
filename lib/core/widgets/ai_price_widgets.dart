@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
 
 /// Displays the AI-computed surge multiplier and fare breakdown for a ride.
@@ -69,7 +69,7 @@ class AISurgePriceCard extends StatelessWidget {
             textBaseline: TextBaseline.alphabetic,
             children: [
               Text(
-                '₦${final_.toStringAsFixed(0)}',
+                '${final_.toStringAsFixed(0)}',
                 style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w900,
@@ -78,7 +78,7 @@ class AISurgePriceCard extends StatelessWidget {
               const SizedBox(width: 8),
               if (isSurge)
                 Text(
-                  'was ₦${base.toStringAsFixed(0)}',
+                  'was ${base.toStringAsFixed(0)}',
                   style: const TextStyle(
                       color: Colors.white60,
                       decoration: TextDecoration.lineThrough,
@@ -89,7 +89,7 @@ class AISurgePriceCard extends StatelessWidget {
 
           const SizedBox(height: 6),
           Text(
-            'Est. $minutes min · $reason',
+            'Est. $minutes min  $reason',
             style: const TextStyle(color: Colors.white70, fontSize: 12),
           ),
 
@@ -138,7 +138,7 @@ class _SurgeChip extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
       ),
       child: Text(
-        '${surge.toStringAsFixed(1)}×',
+        '${surge.toStringAsFixed(1)}',
         style: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -168,7 +168,7 @@ class _BreakdownRow extends StatelessWidget {
       children: items.entries
           .where((e) => ((e.value as num?)?.toDouble() ?? 0) > 0)
           .map((e) => Text(
-                '${e.key}: ₦${(e.value as num).toStringAsFixed(0)}',
+                '${e.key}: ${(e.value as num).toStringAsFixed(0)}',
                 style: const TextStyle(color: Colors.white60, fontSize: 11),
               ))
           .toList(),
@@ -176,9 +176,9 @@ class _BreakdownRow extends StatelessWidget {
   }
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// 
 // SPENDING SUMMARY CARD
-// ─────────────────────────────────────────────────────────────────────────────
+// 
 
 /// Compact AI spending-pattern summary card for the Planner/April feature.
 class AISpendingSummaryCard extends StatelessWidget {
@@ -203,7 +203,7 @@ class AISpendingSummaryCard extends StatelessWidget {
 
     final avgDaily   = (spendingData!['avgDailySpend'] as num?)?.toDouble() ?? 0;
     final avgWeekly  = (spendingData!['avgWeeklySpend'] as num?)?.toDouble() ?? 0;
-    final topCat     = spendingData!['largestCategory'] as String? ?? '—';
+    final topCat     = spendingData!['largestCategory'] as String? ?? '';
     final categories =
         (spendingData!['topCategories'] as List<dynamic>? ?? [])
             .take(3)
@@ -248,11 +248,11 @@ class AISpendingSummaryCard extends StatelessWidget {
             children: [
               _StatTile(
                   label: 'Daily Avg',
-                  value: '₦${avgDaily.toStringAsFixed(0)}'),
+                  value: '${avgDaily.toStringAsFixed(0)}'),
               const SizedBox(width: 16),
               _StatTile(
                   label: 'Weekly Avg',
-                  value: '₦${avgWeekly.toStringAsFixed(0)}'),
+                  value: '${avgWeekly.toStringAsFixed(0)}'),
               const SizedBox(width: 16),
               _StatTile(label: 'Top Category', value: topCat),
             ],

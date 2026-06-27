@@ -1,9 +1,9 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD1.2: VEHICLES — Fleet Management
+/// 
+/// SD1.2: VEHICLES  Fleet Management
 /// Vehicle list, live status, fuel/maintenance tracking, driver assignment
 /// RBAC: Admin(full), BM(branch), RO(full), BRO(branch), Driver(own),
 ///        Monitor/BrMon(view)
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -46,7 +46,7 @@ class VehiclesScreen extends StatelessWidget {
             ),
             body: CustomScrollView(
             slivers: [
-              // ─── Fleet Overview ────────────────────────────
+              //  Fleet Overview 
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -82,7 +82,7 @@ class VehiclesScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Vehicle List ─────────────────────────────
+              //  Vehicle List 
               const SliverToBoxAdapter(
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(20, 16, 20, 0),
@@ -93,7 +93,7 @@ class VehiclesScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── AI Insights ─────────────────────────────────────────
+              //  AI Insights 
               const SliverToBoxAdapter(
               ),
               SliverPadding(
@@ -106,7 +106,7 @@ class VehiclesScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Maintenance Schedule ─────────────────────
+              //  Maintenance Schedule 
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -129,7 +129,7 @@ class VehiclesScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Fuel Log ─────────────────────────────────
+              //  Fuel Log 
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -162,7 +162,7 @@ class VehiclesScreen extends StatelessWidget {
   }
 }
 
-// ─── Vehicle Card ────────────────────────────────────────────────────────────
+//  Vehicle Card 
 
 class _VehicleCard extends StatelessWidget {
   final Vehicle vehicle;
@@ -211,7 +211,7 @@ class _VehicleCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '${vehicle.plateNumber} Â· ${vehicle.zone ?? "Unassigned"}',
+                      '${vehicle.plateNumber}  ${vehicle.zone ?? "Unassigned"}',
                       style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                     ),
                   ],
@@ -291,7 +291,7 @@ class _VehicleCard extends StatelessWidget {
   }
 }
 
-// ─── Vehicle Stat ────────────────────────────────────────────────────────────
+//  Vehicle Stat 
 
 class _VehicleStat extends StatelessWidget {
   final String label;
@@ -330,7 +330,7 @@ class _VehicleStat extends StatelessWidget {
   }
 }
 
-// ─── Maintenance Item ────────────────────────────────────────────────────────
+//  Maintenance Item 
 
 class _MaintenanceItem extends StatelessWidget {
   final MaintenanceRecord record;
@@ -369,7 +369,7 @@ class _MaintenanceItem extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'Vehicle ${record.vehicleId} Â· â‚µ${record.cost.toStringAsFixed(0)}',
+                  'Vehicle ${record.vehicleId}  ${record.cost.toStringAsFixed(0)}',
                   style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                 ),
               ],
@@ -385,7 +385,7 @@ class _MaintenanceItem extends StatelessWidget {
   }
 }
 
-// ─── Fuel Item ───────────────────────────────────────────────────────────────
+//  Fuel Item 
 
 class _FuelItem extends StatelessWidget {
   final FuelEntry entry;
@@ -412,7 +412,7 @@ class _FuelItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${entry.liters}L Â· â‚µ${entry.cost.toStringAsFixed(0)}',
+                  '${entry.liters}L  ${entry.cost.toStringAsFixed(0)}',
                   style: const TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w500,
@@ -420,7 +420,7 @@ class _FuelItem extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'Vehicle ${entry.vehicleId} Â· ${entry.odometer} km',
+                  'Vehicle ${entry.vehicleId}  ${entry.odometer} km',
                   style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                 ),
               ],

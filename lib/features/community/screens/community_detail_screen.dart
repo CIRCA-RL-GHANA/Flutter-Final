@@ -1,11 +1,12 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// COMMUNITY MODULE — Community Detail Screen
+/// 
+/// COMMUNITY MODULE  Community Detail Screen
 /// Adaptive detail view; UI surface adapts to community type.
-/// Theater â†’ linked asset; Hangout â†’ event date/location; Fair â†’ listings, etc.
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// Theater ' linked asset; Hangout ' event date/location; Fair ' listings, etc.
+/// 
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
@@ -103,7 +104,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> with Sing
                             Row(children: [
                               Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                                decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.2), borderRadius: BorderRadius.circular(20)),
+                                decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.2), borderRadius: BorderRadius.circular(10)),
                                 child: Row(children: [
                                   Icon(_arch['icon'] as IconData, color: Colors.white, size: 14),
                                   const SizedBox(width: 5),
@@ -132,12 +133,12 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> with Sing
             ],
             body: Column(
               children: [
-                // ── Type-specific banner ─────────────────────────────
+                //  Type-specific banner 
                 _typeSpecificBanner(),
 
-                // ── AI insight ────────────────────────────────────────
+                //  AI insight 
 
-                // ── Tab views ─────────────────────────────────────────
+                //  Tab views 
                 Expanded(
                   child: TabBarView(
                     controller: _tabs,
@@ -150,7 +151,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> with Sing
           floatingActionButton: _joined
               ? FloatingActionButton.extended(
                   backgroundColor: _color,
-                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Create new post'))),
+                  onPressed: () => AppToast.show(context, 'Create new post'),
                   icon: const Icon(Icons.add, color: Colors.white),
                   label: const Text('New Post', style: TextStyle(color: Colors.white)),
                 )
@@ -172,7 +173,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> with Sing
   Widget _typeSpecificBanner() {
     return switch (_type) {
       'theater' => _infoBanner(Icons.live_tv, 'Next screening: Tonight 8 PM WAT', 'Sync your watch session'),
-      'hangout' => _infoBanner(Icons.event, 'Next event: Sat, 24 May Â· Accra Hub', 'In-person & virtual attendance'),
+      'hangout' => _infoBanner(Icons.event, 'Next event: Sat, 24 May  Accra Hub', 'In-person & virtual attendance'),
       'fair'    => _infoBanner(Icons.storefront, 'Fair active until Dec 31', '24 listings available'),
       'journal' => _infoBanner(Icons.book, '12 shared entries this week', 'Community blog & documentation'),
       _         => const SizedBox.shrink(),

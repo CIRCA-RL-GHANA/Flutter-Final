@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/utils/app_toast.dart';
 import '../../core/routes/app_routes.dart';
 
 class Alert {
@@ -207,7 +208,7 @@ class UserProfile extends StatelessWidget {
             title: const Text('Wishlist'),
             subtitle: const Text('12 items'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Wishlist'))),
+            onTap: () => AppToast.show(context, 'Wishlist'),
           ),
           ListTile(
             leading: const Icon(Icons.stars),
@@ -238,12 +239,12 @@ class UserProfile extends StatelessWidget {
             leading: const Icon(Icons.info),
             title: const Text('About'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Version 2.4.1'))),
+            onTap: () => AppToast.show(context, 'Version 2.4.1'),
           ),
           ListTile(
             leading: const Icon(Icons.logout, color: Colors.red),
             title: const Text('Logout', style: TextStyle(color: Colors.red)),
-            onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Logged out'))),
+            onTap: () => AppToast.show(context, 'Logged out'),
           ),
         ],
       ),

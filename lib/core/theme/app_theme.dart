@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../design/ive_text.dart';
 import '../design/ive_tokens.dart';
@@ -7,7 +7,7 @@ import '../design/ive_tokens.dart';
 ///
 /// We ship a single, dark, brand-true ThemeData built on Ive tokens. The
 /// `lightTheme` getter remains for compatibility but currently mirrors the
-/// dark theme — the product is designed dark-first.
+/// dark theme  the product is designed dark-first.
 class AppTheme {
   AppTheme._();
 
@@ -91,14 +91,19 @@ class AppTheme {
         ),
       ),
       snackBarTheme: SnackBarThemeData(
-        backgroundColor: IveTokens.surface,
+        // Fallback style for any unconverted showSnackBar calls.
+        // New code should use AppToast instead.
+        backgroundColor: IveTokens.surfaceRaised,
         contentTextStyle: IveType.callout.copyWith(color: IveTokens.label),
+        actionTextColor: IveTokens.accent,
         behavior: SnackBarBehavior.floating,
         elevation: 0,
-        shape: const RoundedRectangleBorder(
+        width: 480, // cap width  avoids full-screen bar on wide viewports
+        shape: RoundedRectangleBorder(
           borderRadius: IveTokens.brSm,
-          side: BorderSide(color: IveTokens.hairline),
+          side: BorderSide(color: IveTokens.hairline2, width: 1),
         ),
+        insetPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
       ),
       dividerTheme: const DividerThemeData(
         color: IveTokens.hairline,
@@ -246,6 +251,11 @@ class AppTheme {
           borderRadius: IveTokens.brSm,
           borderSide: BorderSide(color: IveTokens.danger, width: 1.5),
         ),
+        disabledBorder: OutlineInputBorder(
+          borderRadius: IveTokens.brSm,
+          borderSide: BorderSide(
+              color: IveTokens.hairline.withValues(alpha: 0.4)),
+        ),
       ),
       textSelectionTheme: const TextSelectionThemeData(
         cursorColor: IveTokens.accent,
@@ -292,8 +302,8 @@ class AppTheme {
           TargetPlatform.windows: ZoomPageTransitionsBuilder(),
         },
       ),
-      // ─── Filled extra components so raw Material widgets used in older
-      //     screens still render with the Ive vocabulary. ────────────────
+      //  Filled extra components so raw Material widgets used in older
+      //     screens still render with the Ive vocabulary. 
       iconButtonTheme: IconButtonThemeData(
         style: IconButton.styleFrom(
           foregroundColor: IveTokens.label,

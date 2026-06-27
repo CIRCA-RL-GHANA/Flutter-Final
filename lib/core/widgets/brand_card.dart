@@ -6,7 +6,7 @@ import '../theme/brand.dart';
 /// A premium card surface with hairline border, subtle gradient,
 /// optional glassmorphism blur, and depth-tuned shadow.
 ///
-/// Use as the canonical container for any grouped content — feature cards,
+/// Use as the canonical container for any grouped content  feature cards,
 /// settings rows, summaries, modals.
 class BrandCard extends StatelessWidget {
   const BrandCard({
@@ -37,7 +37,7 @@ class BrandCard extends StatelessWidget {
         child: child,
       );
 
-  /// Glassmorphism variant — backdrop-blurred translucent fill.
+  /// Glassmorphism variant  backdrop-blurred translucent fill.
   factory BrandCard.glass({
     Key? key,
     required Widget child,

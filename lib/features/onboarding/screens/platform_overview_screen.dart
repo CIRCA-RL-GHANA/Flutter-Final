@@ -6,23 +6,23 @@ import '../../../core/utils/responsive.dart';
 ///
 /// Long-form, role-by-role explanation of what genie help is, who it serves,
 /// and what it unlocks for each kind of user. Linked from the Welcome screen
-/// so prospective users can understand the platform before signing up — without
+/// so prospective users can understand the platform before signing up  without
 /// cluttering the OS-style landing.
 ///
-/// Visual contract: identical to the rest of onboarding —
+/// Visual contract: identical to the rest of onboarding 
 ///   bg     #08080F   surface #0E0E1A   border #1C1C2E
 ///   accent #22BDD8   text    #E8E8F0   dim    #6B6B88
 class PlatformOverviewScreen extends StatelessWidget {
   const PlatformOverviewScreen({super.key});
 
-  // ── OS palette (mirrors splash/welcome) ──────────────────────────────────
+  //  OS palette (mirrors splash/welcome) 
   static const Color _kBg        = IveTokens.bg;
   static const Color _kSurface   = IveTokens.surface;
   static const Color _kBorder    = IveTokens.hairline;
   static const Color _kAccent    = IveTokens.accent;
-  static const Color _kText      = IveTokens.label;
-  static const Color _kTextDim   = IveTokens.labelSecondary;
-  static const Color _kTextMuted = IveTokens.labelTertiary;
+  static const Color _kText      = IveTokens.ink;
+  static const Color _kTextDim   = IveTokens.ink2;
+  static const Color _kTextMuted = IveTokens.mute;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class PlatformOverviewScreen extends StatelessWidget {
         child: Responsive.constrained(
           child: CustomScrollView(
             slivers: [
-              // ── App bar ─────────────────────────────────────────────────
+              //  App bar 
               SliverAppBar(
                 backgroundColor: _kBg,
                 elevation: 0,
@@ -51,7 +51,7 @@ class PlatformOverviewScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                         border:
                             Border.all(color: _kAccent.withValues(alpha: 0.30)),
-                        borderRadius: BorderRadius.circular(3),
+                        borderRadius: BorderRadius.circular(6),
                       ),
                       child: Text(
                         'PLATFORM OVERVIEW',
@@ -71,7 +71,7 @@ class PlatformOverviewScreen extends StatelessWidget {
                 ),
               ),
 
-              // ── Body ────────────────────────────────────────────────────
+              //  Body 
               SliverPadding(
                 padding: const EdgeInsets.fromLTRB(24, 24, 24, 40),
                 sliver: SliverList(
@@ -99,10 +99,10 @@ class PlatformOverviewScreen extends StatelessWidget {
                     const SizedBox(height: 18),
                     const _Paragraph(
                       'Welcome. Before you begin, here\'s what genie help means for '
-                      'you — depending on who you are and what you want to do.',
+                      'you  depending on who you are and what you want to do.',
                     ),
 
-                    // ── For Everyone ──
+                    //  For Everyone 
                     const SizedBox(height: 28),
                     const _SectionHeader(label: 'FOR EVERYONE', step: '01'),
                     const SizedBox(height: 12),
@@ -112,7 +112,7 @@ class PlatformOverviewScreen extends StatelessWidget {
                       'shopping, ride-hailing, messaging, planning, and business '
                       'operations. It is not a marketplace where you pay '
                       'commissions; it is the infrastructure on which commerce '
-                      'and daily life run — all from one account, one identity, '
+                      'and daily life run  all from one account, one identity, '
                       'and one intelligent assistant (Genie AI).',
                     ),
                     const SizedBox(height: 16),
@@ -147,7 +147,7 @@ class PlatformOverviewScreen extends StatelessWidget {
                       'forecasts, and fraud protection.',
                     ),
 
-                    // ── Role by Role ──
+                    //  Role by Role 
                     const SizedBox(height: 32),
                     const _SectionHeader(label: 'ROLE BY ROLE', step: '02'),
                     const SizedBox(height: 6),
@@ -169,7 +169,7 @@ class PlatformOverviewScreen extends StatelessWidget {
                         _Bullet('Unified digital wallet',
                             'Send and receive money instantly, pay for purchases, and track every transaction in one place. No more switching between mobile money apps.'),
                         _Bullet('Personalised shopping',
-                            'Browse thousands of products from shops around you. Food, fashion, electronics — a few taps away.'),
+                            'Browse thousands of products from shops around you. Food, fashion, electronics  a few taps away.'),
                         _Bullet('Ride-hailing built in',
                             'Request a ride, track your driver in real time, and pay automatically from your wallet on arrival.'),
                         _Bullet('Social discovery',
@@ -332,7 +332,7 @@ class PlatformOverviewScreen extends StatelessWidget {
                       subtitle: 'For licensed banks, micro-finance institutions, and insurers offering products inside the genie help ecosystem.',
                       bullets: [
                         _Bullet('Loan origination',
-                            'Manage loans inside the platform — set terms, approve applications, disburse funds.'),
+                            'Manage loans inside the platform  set terms, approve applications, disburse funds.'),
                         _Bullet('Deposits',
                             'Customers can open savings or fixed deposits from their wallet.'),
                         _Bullet('Insurance',
@@ -344,7 +344,7 @@ class PlatformOverviewScreen extends StatelessWidget {
                       ],
                     ),
 
-                    // ── Genie ──
+                    //  Genie 
                     const SizedBox(height: 32),
                     const _SectionHeader(label: 'GENIE AI', step: '03'),
                     const SizedBox(height: 12),
@@ -370,11 +370,11 @@ class PlatformOverviewScreen extends StatelessWidget {
                     ]),
                     const SizedBox(height: 14),
                     const _Paragraph(
-                      'Genie works offline too — actions are queued and synced '
+                      'Genie works offline too  actions are queued and synced '
                       'when you reconnect.',
                     ),
 
-                    // ── Differentiators ──
+                    //  Differentiators 
                     const SizedBox(height: 32),
                     const _SectionHeader(
                         label: 'WHAT MAKES IT DIFFERENT', step: '04'),
@@ -391,10 +391,10 @@ class PlatformOverviewScreen extends StatelessWidget {
                       _Bullet('Works offline',
                           'Core functions are available even on poor networks; everything syncs automatically.'),
                       _Bullet('Built for scale',
-                          'Single user or multi-branch enterprise — the same robust platform.'),
+                          'Single user or multi-branch enterprise  the same robust platform.'),
                     ]),
 
-                    // ── Ready ──
+                    //  Ready 
                     const SizedBox(height: 32),
                     const _SectionHeader(label: 'READY TO BEGIN', step: '05'),
                     const SizedBox(height: 12),
@@ -419,7 +419,7 @@ class PlatformOverviewScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     const Text(
-                      'genie help — The Global Operating System for Commerce.',
+                      'genie help  The Global Operating System for Commerce.',
                       style: TextStyle(
                         fontSize: 12,
                         color: _kText,
@@ -428,7 +428,7 @@ class PlatformOverviewScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 14),
                     const Text(
-                      'HUMNX LIMITED  Â·  Accra, Ghana',
+                      'HUMNX LIMITED    Accra, Ghana',
                       style: TextStyle(
                         fontSize: 10,
                         color: _kTextMuted,
@@ -436,7 +436,7 @@ class PlatformOverviewScreen extends StatelessWidget {
                       ),
                     ),
 
-                    // ── Back to Welcome ──
+                    //  Back to Welcome 
                     const SizedBox(height: 28),
                     SizedBox(
                       width: double.infinity,
@@ -476,7 +476,7 @@ class PlatformOverviewScreen extends StatelessWidget {
   }
 }
 
-// ─── Building blocks ──────────────────────────────────────────────────────────
+//  Building blocks 
 
 class _SectionHeader extends StatelessWidget {
   final String label;
@@ -595,7 +595,7 @@ class _ModuleList extends StatelessWidget {
                           ),
                         ),
                         TextSpan(
-                          text: '  —  ${items[i].desc}',
+                          text: '    ${items[i].desc}',
                           style: const TextStyle(
                             color: PlatformOverviewScreen._kTextDim,
                           ),
@@ -720,7 +720,7 @@ class _RoleCard extends StatelessWidget {
                   border: Border.all(
                       color: PlatformOverviewScreen._kAccent
                           .withValues(alpha: 0.35)),
-                  borderRadius: BorderRadius.circular(3),
+                  borderRadius: BorderRadius.circular(6),
                 ),
                 child: Text(
                   code,

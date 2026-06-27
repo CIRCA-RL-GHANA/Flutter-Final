@@ -1,7 +1,7 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 /// UTILITY Widget (Global Tools)
 /// Visible to: ALL roles
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -64,7 +64,7 @@ class UtilityWidgetContent extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
             decoration: BoxDecoration(
               color: AppColors.inputFill,
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(10),
             ),
             child: Row(
               children: [

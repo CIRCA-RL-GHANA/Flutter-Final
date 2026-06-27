@@ -1,11 +1,13 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// LIVE MODULE — Screen 16: Driver Home (Transport)
+/// 
+/// LIVE MODULE  Screen 16: Driver Home (Transport)
 /// Transport driver dashboard: active ride, earnings, availability,
 /// ride queue, vehicle info, and quick actions
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
@@ -53,7 +55,7 @@ class LiveTransportDriverHomeScreen extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Hey, ${driver.name.split(' ').first}! 🚗', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: Colors.white)),
+                                Text('Hey, ${driver.name.split(' ').first}!', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: Colors.white)),
                                 Text('Transport Driver', style: TextStyle(fontSize: 12, color: Colors.white.withValues(alpha: 0.8))),
                               ],
                             ),
@@ -61,7 +63,7 @@ class LiveTransportDriverHomeScreen extends StatelessWidget {
                           // Online status
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                            decoration: BoxDecoration(color: const Color(0xFF10B981).withValues(alpha: 0.3), borderRadius: BorderRadius.circular(20)),
+                            decoration: BoxDecoration(color: const Color(0xFF10B981).withValues(alpha: 0.3), borderRadius: BorderRadius.circular(10)),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -82,9 +84,9 @@ class LiveTransportDriverHomeScreen extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            _EarningsStat(label: 'Today', value: 'â‚µ${earnings.totalEarnings.toStringAsFixed(0)}'),
+                            _EarningsStat(label: 'Today', value: '${earnings.totalEarnings.toStringAsFixed(0)}'),
                             Container(width: 1, height: 30, color: Colors.white.withValues(alpha: 0.3)),
-                            const _EarningsStat(label: 'This Week', value: 'â‚µ0'),
+                            const _EarningsStat(label: 'This Week', value: '0'),
                             Container(width: 1, height: 30, color: Colors.white.withValues(alpha: 0.3)),
                             _EarningsStat(label: 'Rides', value: '${earnings.ridesCompleted}'),
                           ],
@@ -106,7 +108,7 @@ class LiveTransportDriverHomeScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('🚗 ACTIVE RIDE', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                        const Text(' ACTIVE RIDE', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                         const SizedBox(height: 8),
                         _ActiveRideCard(
                           ride: activeRide,
@@ -127,13 +129,13 @@ class LiveTransportDriverHomeScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('âš¡ QUICK ACTIONS', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                      const Text(' QUICK ACTIONS', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                       const SizedBox(height: 8),
                       Row(
                         children: [
-                          Expanded(child: _QuickAction(icon: Icons.navigation, label: 'Navigate', color: const Color(0xFF3B82F6), onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Opening navigation...'))))),
+                          Expanded(child: _QuickAction(icon: Icons.navigation, label: 'Navigate', color: const Color(0xFF3B82F6), onTap: () => AppToast.show(context, 'Opening navigation...'))),
                           const SizedBox(width: 8),
-                          Expanded(child: _QuickAction(icon: Icons.sos, label: 'Emergency', color: kLiveColor, onTap: () => Navigator.pushNamed(context, AppRoutes.liveEmergencySOS))),
+                          Expanded(child: _QuickAction(icon: Icons.sos, label: 'Emergency', color: IveTokens.moduleLive, onTap: () => Navigator.pushNamed(context, AppRoutes.liveEmergencySOS))),
                           const SizedBox(width: 8),
                           Expanded(child: _QuickAction(icon: Icons.report_problem, label: 'Report', color: const Color(0xFFF59E0B), onTap: () => Navigator.pushNamed(context, AppRoutes.liveIncidentReport))),
                           const SizedBox(width: 8),
@@ -149,7 +151,7 @@ class LiveTransportDriverHomeScreen extends StatelessWidget {
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-                  child: Text('📋 RIDE QUEUE (${pendingRides.length})', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                  child: Text(' RIDE QUEUE (${pendingRides.length})', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 ),
               ),
 
@@ -160,7 +162,7 @@ class LiveTransportDriverHomeScreen extends StatelessWidget {
                     child: LiveEmptyState(
                       icon: Icons.directions_car,
                       title: 'No rides in queue',
-                      subtitle: 'Stay online — new ride requests will appear here.',
+                      subtitle: 'Stay online  new ride requests will appear here.',
                     ),
                   ),
                 )
@@ -194,7 +196,7 @@ class LiveTransportDriverHomeScreen extends StatelessWidget {
                       children: [
                         const _InfoRow(label: 'Vehicle', value: 'Not set'),
                         const _InfoRow(label: 'License', value: 'Not set'),
-                        _InfoRow(label: 'Rating', value: '${driver.rating} â­'),
+                        _InfoRow(label: 'Rating', value: '${driver.rating} '),
                         _InfoRow(label: 'Total rides', value: '${driver.totalDeliveries}'),
                       ],
                     ),
@@ -238,7 +240,7 @@ class _ActiveRideCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          gradient: const LinearGradient(colors: [kLiveColor, kLiveAccent]),
+          gradient: const LinearGradient(colors: [IveTokens.moduleLive, IveTokens.moduleLive]),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
@@ -258,21 +260,21 @@ class _ActiveRideCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 8),
-            Text('${ride.passengerName} • ${ride.passengerRideCount} passenger(s)', style: TextStyle(fontSize: 13, color: Colors.white.withValues(alpha: 0.9))),
+            Text('${ride.passengerName}  ${ride.passengerRideCount} passenger(s)', style: TextStyle(fontSize: 13, color: Colors.white.withValues(alpha: 0.9))),
             const SizedBox(height: 4),
             Row(
               children: [
                 Icon(Icons.location_on, size: 14, color: Colors.white.withValues(alpha: 0.7)),
                 const SizedBox(width: 4),
-                Expanded(child: Text('${ride.pickupAddress} â†’ ${ride.dropoffAddress}', style: TextStyle(fontSize: 12, color: Colors.white.withValues(alpha: 0.8)), overflow: TextOverflow.ellipsis)),
+                Expanded(child: Text('${ride.pickupAddress} → ${ride.dropoffAddress}', style: TextStyle(fontSize: 12, color: Colors.white.withValues(alpha: 0.8)), overflow: TextOverflow.ellipsis)),
               ],
             ),
             const SizedBox(height: 8),
             Row(
               children: [
-                Text('â‚µ${ride.fare.toStringAsFixed(0)}', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: Colors.white)),
+                Text('${ride.fare.toStringAsFixed(0)}', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: Colors.white)),
                 const Spacer(),
-                const Text('TAP TO CONTINUE 🚗', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white70)),
+                const Text('TAP TO CONTINUE ', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white70)),
               ],
             ),
           ],
@@ -302,7 +304,7 @@ class _RideRequestCard extends StatelessWidget {
             children: [
               Text(ride.passengerName, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
               const Spacer(),
-              Text('â‚µ${ride.fare.toStringAsFixed(0)}', style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800, color: kLiveColor)),
+              Text('${ride.fare.toStringAsFixed(0)}', style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800, color: IveTokens.moduleLive)),
             ],
           ),
           const SizedBox(height: 6),
@@ -316,7 +318,7 @@ class _RideRequestCard extends StatelessWidget {
           const SizedBox(height: 2),
           Row(
             children: [
-              const Icon(Icons.location_on, size: 14, color: kLiveColor),
+              const Icon(Icons.location_on, size: 14, color: IveTokens.moduleLive),
               const SizedBox(width: 4),
               Expanded(child: Text(ride.dropoffAddress, style: const TextStyle(fontSize: 12, color: AppColors.textSecondary), overflow: TextOverflow.ellipsis)),
             ],
@@ -324,13 +326,13 @@ class _RideRequestCard extends StatelessWidget {
           const SizedBox(height: 8),
           Row(
             children: [
-              Text('${ride.distanceKm.toStringAsFixed(1)} km • ${ride.etaMinutes} min', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+              Text('${ride.distanceKm.toStringAsFixed(1)} km  ${ride.etaMinutes} min', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
               const Spacer(),
               SizedBox(
                 height: 32,
                 child: ElevatedButton(
                   onPressed: onAccept,
-                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10B981), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(horizontal: 16), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10B981), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(horizontal: 16), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                   child: const Text('ACCEPT', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700)),
                 ),
               ),

@@ -1,8 +1,10 @@
-/// GO Screen 12 — Reports Hub
+/// GO Screen 12  Reports Hub
 /// Standard/custom reports, real-time dashboards, export options
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:provider/provider.dart';
 import '../models/go_models.dart';
 import '../providers/go_provider.dart';
@@ -34,8 +36,8 @@ class _GoReportsScreenState extends State<GoReportsScreen> with SingleTickerProv
               color: Colors.white,
               child: TabBar(
                 controller: _tabCtrl,
-                labelColor: kGoColor, unselectedLabelColor: const Color(0xFF9CA3AF),
-                indicatorColor: kGoColor, indicatorSize: TabBarIndicatorSize.label,
+                labelColor: IveTokens.moduleGo, unselectedLabelColor: const Color(0xFF9CA3AF),
+                indicatorColor: IveTokens.moduleGo, indicatorSize: TabBarIndicatorSize.label,
                 labelStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
                 tabs: const [Tab(text: 'Standard'), Tab(text: 'Custom'), Tab(text: 'Saved')],
               ),
@@ -67,18 +69,18 @@ class _GoReportsScreenState extends State<GoReportsScreen> with SingleTickerProv
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
-        // ─── AI Spending Summary ─────────────────────────────
-        // ─── Standard Report Tiles ─────────────────────────────
+        //  AI Spending Summary 
+        //  Standard Report Tiles 
         ...reports.map((r) => Container(
           margin: const EdgeInsets.only(bottom: 10),
           decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: const Color(0xFFE5E7EB))),
           child: ListTile(
-            leading: Container(padding: const EdgeInsets.all(8), decoration: BoxDecoration(color: kGoColorLight, borderRadius: BorderRadius.circular(8)), child: Icon(r.$3, color: kGoColor, size: 20)),
+            leading: Container(padding: const EdgeInsets.all(8), decoration: BoxDecoration(color: IveTokens.surfaceRaised, borderRadius: BorderRadius.circular(10)), child: Icon(r.$3, color: IveTokens.moduleGo, size: 20)),
             title: Text(r.$1, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
             subtitle: Text(r.$2, style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
             trailing: Row(mainAxisSize: MainAxisSize.min, children: [
-              IconButton(icon: const Icon(Icons.visibility, size: 18, color: kGoColor), onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Generating report...')))),
-              IconButton(icon: const Icon(Icons.download, size: 18, color: Color(0xFF9CA3AF)), onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Preparing download...')))),
+              IconButton(icon: const Icon(Icons.visibility, size: 18, color: IveTokens.moduleGo), onPressed: () => AppToast.show(context, 'Generating report...')),
+              IconButton(icon: const Icon(Icons.download, size: 18, color: Color(0xFF9CA3AF)), onPressed: () => AppToast.show(context, 'Preparing download...')),
             ]),
           ),
         )),
@@ -107,8 +109,8 @@ class _GoReportsScreenState extends State<GoReportsScreen> with SingleTickerProv
           label: Text(t, style: const TextStyle(fontSize: 11)),
           selected: t == 'Transactions',
           onSelected: (_) {},
-          selectedColor: kGoColorLight,
-          checkmarkColor: kGoColor,
+          selectedColor: IveTokens.surfaceRaised,
+          checkmarkColor: IveTokens.moduleGo,
           backgroundColor: Colors.white,
           side: const BorderSide(color: Color(0xFF1C1C2E)),
         )).toList()),
@@ -120,8 +122,8 @@ class _GoReportsScreenState extends State<GoReportsScreen> with SingleTickerProv
           label: Text(f, style: const TextStyle(fontSize: 11)),
           selected: f == 'All Types',
           onSelected: (_) {},
-          selectedColor: kGoColorLight,
-          checkmarkColor: kGoColor,
+          selectedColor: IveTokens.surfaceRaised,
+          checkmarkColor: IveTokens.moduleGo,
           backgroundColor: Colors.white,
           side: const BorderSide(color: Color(0xFF1C1C2E)),
         )).toList()),
@@ -140,8 +142,8 @@ class _GoReportsScreenState extends State<GoReportsScreen> with SingleTickerProv
         SizedBox(width: double.infinity, child: ElevatedButton.icon(
           icon: const Icon(Icons.auto_awesome, size: 18),
           label: const Text('Generate Report'),
-          onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Generating report...'))),
-          style: ElevatedButton.styleFrom(backgroundColor: kGoColor, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+          onPressed: () => AppToast.show(context, 'Generating report...'),
+          style: ElevatedButton.styleFrom(backgroundColor: IveTokens.moduleGo, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
         )),
       ])),
     ]);
@@ -160,14 +162,14 @@ class _GoReportsScreenState extends State<GoReportsScreen> with SingleTickerProv
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: const Color(0xFFE5E7EB))),
           child: Row(children: [
-            Container(padding: const EdgeInsets.all(8), decoration: BoxDecoration(color: kGoColorLight, borderRadius: BorderRadius.circular(8)), child: const Icon(Icons.description, color: kGoColor, size: 20)),
+            Container(padding: const EdgeInsets.all(8), decoration: BoxDecoration(color: IveTokens.surfaceRaised, borderRadius: BorderRadius.circular(10)), child: const Icon(Icons.description, color: IveTokens.moduleGo, size: 20)),
             const SizedBox(width: 10),
             Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(r.title, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-              Text('${r.type.name} • ${r.format} • ${r.generatedAt.day}/${r.generatedAt.month}/${r.generatedAt.year}', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+              Text('${r.type.name}  ${r.format}  ${r.generatedAt.day}/${r.generatedAt.month}/${r.generatedAt.year}', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
             ])),
-            IconButton(icon: const Icon(Icons.download, size: 18, color: kGoColor), onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Preparing download...')))),
-            IconButton(icon: const Icon(Icons.share, size: 18, color: Color(0xFF9CA3AF)), onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Link copied to clipboard')))),
+            IconButton(icon: const Icon(Icons.download, size: 18, color: IveTokens.moduleGo), onPressed: () => AppToast.show(context, 'Preparing download...')),
+            IconButton(icon: const Icon(Icons.share, size: 18, color: Color(0xFF9CA3AF)), onPressed: () => AppToast.show(context, 'Link copied to clipboard')),
           ]),
         );
       },
@@ -205,7 +207,7 @@ class _DateFieldState extends State<_DateField> {
     decoration: InputDecoration(
       hintText: widget.label, suffixIcon: const Icon(Icons.calendar_today, size: 16),
       filled: true, fillColor: const Color(0xFFF3F4F6),
-      border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide.none),
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
       contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
     ),
     style: const TextStyle(fontSize: 13),
@@ -217,10 +219,10 @@ class _FormatChip extends StatelessWidget {
   const _FormatChip({required this.label, required this.selected});
   @override
   Widget build(BuildContext context) => GestureDetector(
-    onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Format selected'))),
+    onTap: () => AppToast.show(context, 'Format selected'),
     child: Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      decoration: BoxDecoration(color: selected ? kGoColor : Colors.white, borderRadius: BorderRadius.circular(8), border: Border.all(color: selected ? kGoColor : const Color(0xFFE5E7EB))),
+      decoration: BoxDecoration(color: selected ? IveTokens.moduleGo : Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: selected ? IveTokens.moduleGo : const Color(0xFFE5E7EB))),
       child: Text(label, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: selected ? Colors.white : const Color(0xFF6B7280))),
     ),
   );

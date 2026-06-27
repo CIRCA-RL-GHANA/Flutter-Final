@@ -1,4 +1,4 @@
-/// Alerts Screen 1 — Dashboard Master View
+/// Alerts Screen 1  Dashboard Master View
 /// Segmented control (Pending/Resolved/All), priority triage bar,
 /// alert cards sorted by priority, time filter chips, real-time counter
 library;
@@ -88,7 +88,7 @@ class AlertsDashboardScreen extends StatelessWidget {
           ),
           body: Column(
             children: [
-              // ──── PRIORITY TRIAGE BAR ────
+              //  PRIORITY TRIAGE BAR 
               if (provider.dashboardTab == AlertDashboardTab.pending)
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
@@ -96,7 +96,7 @@ class AlertsDashboardScreen extends StatelessWidget {
                   child: Row(
                     children: [
                       _TriageChip(
-                        label: 'ðŸš¨ Critical',
+                        label: ' Critical',
                         count: provider.pendingAlerts.where((a) => a.priority == AlertPriority.critical).length,
                         color: kAlertsCritical,
                         isSelected: provider.priorityFilter == AlertPriority.critical,
@@ -106,7 +106,7 @@ class AlertsDashboardScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 6),
                       _TriageChip(
-                        label: 'ðŸ”¥ High',
+                        label: '" High',
                         count: provider.pendingAlerts.where((a) => a.priority == AlertPriority.high).length,
                         color: kAlertsColor,
                         isSelected: provider.priorityFilter == AlertPriority.high,
@@ -116,7 +116,7 @@ class AlertsDashboardScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 6),
                       _TriageChip(
-                        label: 'âš ï¸ Med',
+                        label: ' Med',
                         count: provider.pendingAlerts.where((a) => a.priority == AlertPriority.medium).length,
                         color: kAlertsWarning,
                         isSelected: provider.priorityFilter == AlertPriority.medium,
@@ -126,7 +126,7 @@ class AlertsDashboardScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 6),
                       _TriageChip(
-                        label: 'â„¹ï¸ Low',
+                        label: ' Low',
                         count: provider.pendingAlerts.where((a) => a.priority == AlertPriority.low).length,
                         color: kAlertsInfo,
                         isSelected: provider.priorityFilter == AlertPriority.low,
@@ -138,10 +138,10 @@ class AlertsDashboardScreen extends StatelessWidget {
                   ),
                 ),
 
-              // ──── AI PRIORITY INSIGHTS ────
+              //  AI PRIORITY INSIGHTS 
               if (provider.dashboardTab == AlertDashboardTab.pending)
 
-              // ──── SYNC STATUS ────
+              //  SYNC STATUS 
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: Row(
@@ -168,7 +168,7 @@ class AlertsDashboardScreen extends StatelessWidget {
                 ),
               ),
 
-              // ──── ALERT LIST ────
+              //  ALERT LIST 
               Expanded(
                 child: provider.filteredAlerts.isEmpty
                     ? AlertsEmptyState(
@@ -236,7 +236,7 @@ class AlertsDashboardScreen extends StatelessWidget {
             ],
           ),
 
-          // ──── BULK ACTIONS FAB ────
+          //  BULK ACTIONS FAB 
           floatingActionButton: provider.isSelectMode
               ? FloatingActionButton.extended(
                   backgroundColor: kAlertsColor,
@@ -262,9 +262,9 @@ class AlertsDashboardScreen extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 // Segmented Tab Bar
-// ──────────────────────────────────────────────
+// 
 
 class _SegmentedTabBar extends StatelessWidget {
   final AlertDashboardTab selected;
@@ -344,7 +344,7 @@ class _TabSegment extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 8),
           decoration: BoxDecoration(
             color: isSelected ? Colors.white : Colors.transparent,
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(10),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -362,7 +362,7 @@ class _TabSegment extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
                 decoration: BoxDecoration(
                   color: isSelected ? color.withValues(alpha: 0.1) : Colors.transparent,
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: Text(
                   '$count',
@@ -381,9 +381,9 @@ class _TabSegment extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 // Triage Chip
-// ──────────────────────────────────────────────
+// 
 
 class _TriageChip extends StatelessWidget {
   final String label;
@@ -409,7 +409,7 @@ class _TriageChip extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 6),
           decoration: BoxDecoration(
             color: isSelected ? color.withValues(alpha: 0.15) : color.withValues(alpha: 0.05),
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(10),
             border: Border.all(color: isSelected ? color : Colors.transparent),
           ),
           child: Column(

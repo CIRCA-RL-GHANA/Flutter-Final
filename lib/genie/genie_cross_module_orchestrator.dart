@@ -1,10 +1,10 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// GenieCrossModuleOrchestrator – Multi-Step Workflow Engine
+/// 
+/// GenieCrossModuleOrchestrator  Multi-Step Workflow Engine
 ///
 /// Handles compound intents that span multiple modules (e.g., pay QPoints for
 /// a market order AND send a qualChat confirmation). Executes steps serially
 /// with rollback on failure. RBAC is verified for every step.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'package:flutter/foundation.dart';
@@ -41,7 +41,7 @@ class OrchestrationResult {
 class GenieCrossModuleOrchestrator {
   GenieCrossModuleOrchestrator._();
 
-  // ─── Known Multi-Step Workflows ───────────────────────────────────────────
+  //  Known Multi-Step Workflows 
 
   /// "Pay QPoints to X for order Y" workflow.
   static List<OrchestrationStep> buildPayForOrderWorkflow({
@@ -73,7 +73,7 @@ class GenieCrossModuleOrchestrator {
           action: 'send_message',
           params: {
             'recipient': recipient,
-            'message': 'QP payment sent for order ${orderId ?? ''} ✓',
+            'message': 'QP payment sent for order ${orderId ?? ''} ',
           },
         ),
       ),
@@ -109,7 +109,7 @@ class GenieCrossModuleOrchestrator {
           action: 'send_message',
           params: {
             'recipient': managerId,
-            'message': 'Package $packageId delivered successfully ✓',
+            'message': 'Package $packageId delivered successfully ',
           },
         ),
       ),
@@ -172,7 +172,7 @@ class GenieCrossModuleOrchestrator {
           action: 'send_message',
           params: {
             'recipient': qualChatRecipient,
-            'message': 'Join my community "$communityName" on Genie! 🌍',
+            'message': 'Join my community "$communityName" on Genie! ',
             'communityId': communityId,
           },
         ),
@@ -180,7 +180,7 @@ class GenieCrossModuleOrchestrator {
     ];
   }
 
-  /// Loan application workflow: confirm intent → submit application → show offers.
+  /// Loan application workflow: confirm intent  submit application  show offers.
   static List<OrchestrationStep> buildLoanApplicationWorkflow({
     required double amountQp,
     required String purpose,
@@ -210,7 +210,7 @@ class GenieCrossModuleOrchestrator {
     ];
   }
 
-  /// Deposit workflow: check balance → lock QP → confirm.
+  /// Deposit workflow: check balance  lock QP  confirm.
   static List<OrchestrationStep> buildDepositWorkflow({
     required double amountQp,
     required int termDays,
@@ -232,7 +232,7 @@ class GenieCrossModuleOrchestrator {
     ];
   }
 
-  /// Enterprise onboarding workflow: open profile form → KYB docs → confirm.
+  /// Enterprise onboarding workflow: open profile form  KYB docs  confirm.
   static List<OrchestrationStep> buildEnterpriseOnboardingWorkflow({
     required String legalName,
     required String enterpriseType,
@@ -258,7 +258,7 @@ class GenieCrossModuleOrchestrator {
     ];
   }
 
-  /// Enterprise channel registration workflow: connect channel → trigger first sync.
+  /// Enterprise channel registration workflow: connect channel  trigger first sync.
   static List<OrchestrationStep> buildConnectChannelWorkflow({
     required String channelType,
     required String channelName,
@@ -284,7 +284,7 @@ class GenieCrossModuleOrchestrator {
     ];
   }
 
-  /// Enterprise fulfillment dispatch workflow: verify order → route → dispatch.
+  /// Enterprise fulfillment dispatch workflow: verify order  route  dispatch.
   static List<OrchestrationStep> buildDispatchFulfillmentWorkflow({
     required String orderId,
     required String entityId,
@@ -310,7 +310,7 @@ class GenieCrossModuleOrchestrator {
     ];
   }
 
-  // ─── Run Orchestration ───────────────────────────────────────────────────
+  //  Run Orchestration 
   /// Execute a list of steps, verifying RBAC at each step.
   /// Returns an [OrchestrationResult] describing what completed.
   static Future<OrchestrationResult> run({
@@ -342,9 +342,9 @@ class GenieCrossModuleOrchestrator {
           );
         }
         completed.add(step.description);
-        debugPrint('[Orchestrator] ✓ ${step.description}');
+        debugPrint('[Orchestrator]  ${step.description}');
       } catch (e) {
-        debugPrint('[Orchestrator] ✗ ${step.description}: $e');
+        debugPrint('[Orchestrator]  ${step.description}: $e');
         return OrchestrationResult(
           status: OrchestrationStatus.failed,
           completedDescriptions: completed,

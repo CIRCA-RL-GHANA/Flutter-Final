@@ -326,11 +326,11 @@ class AIService {
     );
   }
 
-  // ═══════════════════════════════════════════════════════════════════════
+  // 
   // NLP
-  // ═══════════════════════════════════════════════════════════════════════
+  // 
 
-  /// Analyse sentiment of [text]. Returns score (-1→+1), label, confidence.
+  /// Analyse sentiment of [text]. Returns score (-1+1), label, confidence.
   Future<ApiResponse<Map<String, dynamic>>> analyzeSentiment(String text) {
     return _api.post<Map<String, dynamic>>(
       ApiRoutes.ai.sentiment,
@@ -369,7 +369,7 @@ class AIService {
     );
   }
 
-  /// Compute cosine similarity (0–1) between [text1] and [text2].
+  /// Compute cosine similarity (01) between [text1] and [text2].
   Future<ApiResponse<Map<String, dynamic>>> textSimilarity(
     String text1,
     String text2,
@@ -395,9 +395,9 @@ class AIService {
     );
   }
 
-  // ═══════════════════════════════════════════════════════════════════════
+  // 
   // DYNAMIC PRICING
-  // ═══════════════════════════════════════════════════════════════════════
+  // 
 
   /// Get AI-powered dynamic ride price with surge multiplier.
   Future<ApiResponse<Map<String, dynamic>>> computeRidePrice({
@@ -466,11 +466,11 @@ class AIService {
     );
   }
 
-  // ═══════════════════════════════════════════════════════════════════════
+  // 
   // FRAUD DETECTION
-  // ═══════════════════════════════════════════════════════════════════════
+  // 
 
-  /// Score a transaction for fraud risk. Returns riskScore (0–1) and signals.
+  /// Score a transaction for fraud risk. Returns riskScore (01) and signals.
   Future<ApiResponse<Map<String, dynamic>>> scoreFraud({
     required String userId,
     required double amount,
@@ -495,9 +495,9 @@ class AIService {
     );
   }
 
-  // ═══════════════════════════════════════════════════════════════════════
+  // 
   // FINANCIAL INSIGHTS
-  // ═══════════════════════════════════════════════════════════════════════
+  // 
 
   /// Get AI financial insights based on income/expense transactions.
   Future<ApiResponse<List<Map<String, dynamic>>>> getFinancialInsights({
@@ -537,7 +537,7 @@ class AIService {
     );
   }
 
-  /// Collaborative filtering — personalised item recommendations.
+  /// Collaborative filtering  personalised item recommendations.
   Future<ApiResponse<List<Map<String, dynamic>>>> collaborativeFilter({
     required Map<String, double> targetVector,
     required Map<String, Map<String, double>> allVectors,
@@ -555,9 +555,9 @@ class AIService {
     );
   }
 
-  // ═══════════════════════════════════════════════════════════════════════
+  // 
   // PLANNER AI SHORTCUTS
-  // ═══════════════════════════════════════════════════════════════════════
+  // 
 
   /// Get AI financial insights for the authenticated user's planner data.
   Future<ApiResponse<List<Map<String, dynamic>>>> getPlannerInsights() {
@@ -584,7 +584,7 @@ class AIService {
     );
   }
 
-  // ─── Semantic Search ────────────────────────────────────────────────────────
+  //  Semantic Search 
 
   /// Cross-entity semantic search over a list of documents.
   Future<ApiResponse<List<Map<String, dynamic>>>> searchDocuments({
@@ -623,7 +623,7 @@ class AIService {
     );
   }
 
-  // ─── Recommendations ────────────────────────────────────────────────────────
+  //  Recommendations 
 
   /// Content-based: find items similar to a target (by tags text).
   Future<ApiResponse<List<Map<String, dynamic>>>> getSimilarItems({

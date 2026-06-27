@@ -1,13 +1,13 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 /// USER DETAILS Models
 /// Complete identity, security, privacy, accessibility, notifications,
 /// audit trail, and device management models
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'package:flutter/material.dart';
 
-// ─── Identity ────────────────────────────────────────────────────────────────
+//  Identity 
 
 class UserIdentity {
   final String id;
@@ -180,7 +180,7 @@ class EmergencyContact {
   });
 }
 
-// ─── Security ────────────────────────────────────────────────────────────────
+//  Security 
 
 class SecuritySettings {
   final AuthMethod primaryAuth;
@@ -360,7 +360,7 @@ enum SecurityEventSeverity {
   }
 }
 
-// ─── Privacy ─────────────────────────────────────────────────────────────────
+//  Privacy 
 
 class PrivacySettings {
   final ProfileVisibility profileVisibility;
@@ -490,7 +490,7 @@ enum AutoDeleteSchedule {
   }
 }
 
-// ─── Accessibility ───────────────────────────────────────────────────────────
+//  Accessibility 
 
 class AccessibilitySettings {
   // Vision
@@ -593,7 +593,7 @@ class AccessibilityPreset {
   });
 }
 
-// ─── Notification Settings ───────────────────────────────────────────────────
+//  Notification Settings 
 
 class NotificationSettings {
   final bool globalEnabled;
@@ -712,7 +712,7 @@ class SmartNotificationRule {
   });
 }
 
-// ─── Audit Log ───────────────────────────────────────────────────────────────
+//  Audit Log 
 
 class AuditLogEntry {
   final String id;
@@ -817,7 +817,7 @@ enum AuditTimeFilter {
 
 enum AuditExportFormat { pdf, csv, json, print }
 
-// ─── Context Management ─────────────────────────────────────────────────────
+//  Context Management 
 
 enum ContextStatus {
   active,
@@ -849,7 +849,7 @@ enum ContextFilter {
   }
 }
 
-// ─── Entity Creation Steps ───────────────────────────────────────────────────
+//  Entity Creation Steps 
 
 enum EntityCreationType {
   personal,
@@ -894,7 +894,7 @@ enum EntityCreationType {
   }
 }
 
-// ─── Business-Specific Settings ──────────────────────────────────────────────
+//  Business-Specific Settings 
 
 class BusinessSettings {
   final String? registrationNumber;
@@ -930,7 +930,7 @@ class BranchSettings {
   });
 }
 
-// ─── Sync & Conflict Resolution ──────────────────────────────────────────────
+//  Sync & Conflict Resolution 
 
 enum ConflictResolution { useLocal, useRemote, merge }
 
@@ -952,7 +952,7 @@ class SyncConflict {
   });
 }
 
-// ─── Data Privacy Types ──────────────────────────────────────────────────────
+//  Data Privacy Types 
 
 class DataCategory {
   final String name;

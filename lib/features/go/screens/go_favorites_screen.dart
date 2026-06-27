@@ -1,9 +1,11 @@
-﻿/// GO Screen 7 — Favorites Hub
+/// GO Screen 7  Favorites Hub
 /// Categorized grid (People/Businesses/Services/Internal),
 /// entity cards, relationship insights, bulk management, discovery
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:provider/provider.dart';
 import '../models/go_models.dart';
 import '../providers/go_provider.dart';
@@ -79,8 +81,8 @@ class _GoFavoritesScreenState extends State<GoFavoritesScreen> {
                   TextButton.icon(
                     icon: const Icon(Icons.sort, size: 14),
                     label: const Text('Sort', style: TextStyle(fontSize: 11)),
-                    onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Sorted by name'))),
-                    style: TextButton.styleFrom(foregroundColor: kGoColor, padding: EdgeInsets.zero, minimumSize: const Size(50, 24)),
+                    onPressed: () => AppToast.show(context, 'Sorted by name'),
+                    style: TextButton.styleFrom(foregroundColor: IveTokens.moduleGo, padding: EdgeInsets.zero, minimumSize: const Size(50, 24)),
                   ),
                 ]),
               ),
@@ -98,8 +100,8 @@ class _GoFavoritesScreenState extends State<GoFavoritesScreen> {
             ],
           ),
           floatingActionButton: FloatingActionButton(
-            onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Add a new favorite'))),
-            backgroundColor: kGoColor,
+            onPressed: () => AppToast.show(context, 'Add a new favorite'),
+            backgroundColor: IveTokens.moduleGo,
             child: const Icon(Icons.person_add, color: Colors.white),
           ),
         );
@@ -118,7 +120,7 @@ class _Pill extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-        decoration: BoxDecoration(color: selected ? kGoColor : Colors.white, borderRadius: BorderRadius.circular(20), border: Border.all(color: selected ? kGoColor : const Color(0xFFE5E7EB))),
+        decoration: BoxDecoration(color: selected ? IveTokens.moduleGo : Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: selected ? IveTokens.moduleGo : const Color(0xFFE5E7EB))),
         child: Text(label, style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: selected ? Colors.white : const Color(0xFF6B7280))),
       ),
     ),

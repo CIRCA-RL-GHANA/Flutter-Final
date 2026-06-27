@@ -1,8 +1,8 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// MARKET MODULE — Screen 1.1: Unified Market Search
+/// 
+/// MARKET MODULE  Screen 1.1: Unified Market Search
 /// Full-screen modal with search bar, recent searches, quick filters,
 /// tabbed results (Merchants / Products / Deals), AI suggestions
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -61,7 +61,7 @@ class _MarketSearchScreenState extends State<MarketSearchScreen> with SingleTick
           ),
           body: Column(
             children: [
-              // ── Search Input ──
+              //  Search Input 
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: MarketSearchBar(
@@ -71,11 +71,11 @@ class _MarketSearchScreenState extends State<MarketSearchScreen> with SingleTick
                 ),
               ),
 
-              // ── Quick Filter Chips ──
+              //  Quick Filter Chips 
               Padding(
                 padding: const EdgeInsets.only(bottom: 8),
                 child: MarketQuickFilterChips(
-                  filters: const ['Open now', 'Free delivery', 'Under 30min', '4â˜…+', 'Near me'],
+                  filters: const ['Open now', 'Free delivery', 'Under 30min', '4+', 'Near me'],
                   selected: _quickFilters,
                   onToggle: (f) => setState(() {
                     _quickFilters.contains(f) ? _quickFilters.remove(f) : _quickFilters.add(f);
@@ -83,7 +83,7 @@ class _MarketSearchScreenState extends State<MarketSearchScreen> with SingleTick
                 ),
               ),
 
-              // ── Content area ──
+              //  Content area 
               if (_query.isEmpty) ...[
                 // Recent searches
                 const MarketSectionTitle(title: 'Recent Searches', icon: Icons.history),
@@ -226,8 +226,8 @@ class _MarketSearchScreenState extends State<MarketSearchScreen> with SingleTick
                       ),
                       Row(
                         children: [
-                          Text('${merchant.ratingDisplay}â˜…', style: const TextStyle(fontSize: 12)),
-                          Text(' • ${merchant.deliveryTimeDisplay} • ${merchant.distanceMiles}mi',
+                          Text('${merchant.ratingDisplay}', style: const TextStyle(fontSize: 12)),
+                          Text('  ${merchant.deliveryTimeDisplay}  ${merchant.distanceMiles}mi',
                               style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                         ],
                       ),
@@ -246,7 +246,7 @@ class _MarketSearchScreenState extends State<MarketSearchScreen> with SingleTick
                       foregroundColor: Colors.white,
                       elevation: 0,
                       padding: const EdgeInsets.symmetric(horizontal: 14),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                       textStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
                     ),
                     child: const Text('Order'),
@@ -340,7 +340,7 @@ class _MarketSearchScreenState extends State<MarketSearchScreen> with SingleTick
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                   decoration: BoxDecoration(
                     color: Colors.white.withValues(alpha: 0.2),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: Text(
                     deal.code!,
@@ -355,10 +355,10 @@ class _MarketSearchScreenState extends State<MarketSearchScreen> with SingleTick
   }
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// AI Search Suggestion Banner — shows AI keyword suggestions when query is empty
+// 
+// AI Search Suggestion Banner  shows AI keyword suggestions when query is empty
 // or a smart "you might like" row when the user has typed something.
-// ─────────────────────────────────────────────────────────────────────────────
+// 
 
 class _AISearchSuggestionBanner extends StatelessWidget {
   final String  query;

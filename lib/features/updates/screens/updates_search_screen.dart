@@ -1,8 +1,8 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SCREEN 6 — Search & Explore
+/// 
+/// SCREEN 6  Search & Explore
 /// Five tabs: Top, Latest, Accounts, Hashtags, Nearby.
 /// Trending hashtags, suggested accounts, recent searches.
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -129,7 +129,7 @@ class _BodyState extends State<_Body> with SingleTickerProviderStateMixin {
   }
 }
 
-// ─── Discover (Pre-Search) ──────────────────────────────────────────────────
+//  Discover (Pre-Search) 
 
 class _DiscoverView extends StatelessWidget {
   final UpdatesProvider prov;
@@ -157,7 +157,7 @@ class _DiscoverView extends StatelessWidget {
                     children: [
                       Container(
                         width: 32, height: 32,
-                        decoration: BoxDecoration(color: kUpdatesColor.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(8)),
+                        decoration: BoxDecoration(color: kUpdatesColor.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(10)),
                         child: const Icon(Icons.tag, size: 16, color: kUpdatesColor),
                       ),
                       const SizedBox(width: 10),
@@ -221,7 +221,7 @@ class _DiscoverView extends StatelessWidget {
                               ],
                             ],
                           ),
-                          Text('${a.followerCount} followers • ${a.mutualConnections} mutual', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                          Text('${a.followerCount} followers  ${a.mutualConnections} mutual', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                         ],
                       ),
                     ),
@@ -236,7 +236,7 @@ class _DiscoverView extends StatelessWidget {
                         foregroundColor: kUpdatesColor,
                         side: const BorderSide(color: kUpdatesColor),
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                       ),
                       child: const Text('Follow', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600)),
                     ),
@@ -251,7 +251,7 @@ class _DiscoverView extends StatelessWidget {
   }
 }
 
-// ─── Tab Results ────────────────────────────────────────────────────────────
+//  Tab Results 
 
 class _TopResults extends StatelessWidget {
   final UpdatesProvider prov;
@@ -333,7 +333,7 @@ class _AccountsResults extends StatelessWidget {
                   foregroundColor: kUpdatesColor,
                   side: const BorderSide(color: kUpdatesColor),
                   padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 ),
                 child: const Text('Follow', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600)),
               ),

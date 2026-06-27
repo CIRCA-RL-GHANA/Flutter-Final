@@ -29,34 +29,34 @@ class AppAnimations {
   static const int preloadingTimeout = 2000;
   static const int emailSuggestionDelay = 10000; // 10 seconds
 
-  // ─── Perfection Pass — Phase 0 / Move 07 (Duration-typed) ────────────────
+  //  Perfection Pass  Phase 0 / Move 07 (Duration-typed) 
   /// Instant micro-feedback: state changes, focus rings, press.
   static const Duration dpStateChange = Duration(milliseconds: 120);
   /// Default surface / sheet transitions.
   static const Duration dpSurface = Duration(milliseconds: 240);
-  /// Content reveal (skeleton → real content cross-fade).
+  /// Content reveal (skeleton  real content cross-fade).
   static const Duration dpContentReveal = Duration(milliseconds: 200);
   /// List stagger offset between successive items.
   static const Duration dpStagger = Duration(milliseconds: 60);
 
   // Module signature motions
-  /// GO — balance count-up (hero entrance).
+  /// GO  balance count-up (hero entrance).
   static const Duration dpGoBalance = Duration(milliseconds: 600);
-  /// Fintech — credit gauge sweep.
+  /// Fintech  credit gauge sweep.
   static const Duration dpCreditGauge = Duration(milliseconds: 800);
-  /// Updates — poll bar sweep.
+  /// Updates  poll bar sweep.
   static const Duration dpPollBars = Duration(milliseconds: 500);
-  /// ePlay — shared-element cover → player.
+  /// ePlay  shared-element cover  player.
   static const Duration dpSharedElement = Duration(milliseconds: 300);
-  /// Alerts — relation line draw.
+  /// Alerts  relation line draw.
   static const Duration dpAlertLine = Duration(milliseconds: 400);
-  /// qualChat — thread fold.
+  /// qualChat  thread fold.
   static const Duration dpThreadFold = Duration(milliseconds: 400);
-  /// Market — pin drop & settle.
+  /// Market  pin drop & settle.
   static const Duration dpPinSettle = Duration(milliseconds: 400);
-  /// User — privacy arc live update.
+  /// User  privacy arc live update.
   static const Duration dpPrivacyArc = Duration(milliseconds: 240);
-  /// Onboarding — boot-sequence step reveal.
+  /// Onboarding  boot-sequence step reveal.
   static const Duration dpBootStep = Duration(milliseconds: 180);
 
   // Exempt looping animations (only Genie spark + APRIL mic loop)

@@ -1,4 +1,4 @@
-﻿import 'package:hive/hive.dart';
+import 'package:hive/hive.dart';
 import 'package:flutter/foundation.dart';
 
 class LocalStorageService extends ChangeNotifier {

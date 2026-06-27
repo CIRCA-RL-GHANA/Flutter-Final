@@ -1,9 +1,11 @@
-﻿/// GO Screen 4 — My Tabs
+/// GO Screen 4  My Tabs
 /// Credit health dashboard, filter bar, accordion tab cards,
 /// bulk operations, analytics panel
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:provider/provider.dart';
 import '../models/go_models.dart';
 import '../providers/go_provider.dart';
@@ -43,11 +45,11 @@ class _GoTabsScreenState extends State<GoTabsScreen> with SingleTickerProviderSt
                 padding: const EdgeInsets.all(16),
                 color: Colors.white,
                 child: Row(children: [
-                  Expanded(child: _SummaryBox(label: 'OWED TO ME', value: '${totalOwed.toStringAsFixed(0)} QP', color: kGoPositive)),
+                  Expanded(child: _SummaryBox(label: 'OWED TO ME', value: '${totalOwed.toStringAsFixed(0)} QP', color: IveTokens.success)),
                   const SizedBox(width: 10),
-                  Expanded(child: _SummaryBox(label: 'I OWE', value: '${totalOwe.toStringAsFixed(0)} QP', color: kGoNegative)),
+                  Expanded(child: _SummaryBox(label: 'I OWE', value: '${totalOwe.toStringAsFixed(0)} QP', color: IveTokens.danger)),
                   const SizedBox(width: 10),
-                  Expanded(child: _SummaryBox(label: 'NET', value: '${(totalOwed - totalOwe).toStringAsFixed(0)} QP', color: totalOwed >= totalOwe ? kGoPositive : kGoNegative)),
+                  Expanded(child: _SummaryBox(label: 'NET', value: '${(totalOwed - totalOwe).toStringAsFixed(0)} QP', color: totalOwed >= totalOwe ? IveTokens.success : IveTokens.danger)),
                 ]),
               ),
               // Filter + tabs
@@ -56,8 +58,8 @@ class _GoTabsScreenState extends State<GoTabsScreen> with SingleTickerProviderSt
                 child: Column(children: [
                   TabBar(
                     controller: _tabCtrl,
-                    labelColor: kGoColor, unselectedLabelColor: const Color(0xFF9CA3AF),
-                    indicatorColor: kGoColor, indicatorSize: TabBarIndicatorSize.label,
+                    labelColor: IveTokens.moduleGo, unselectedLabelColor: const Color(0xFF9CA3AF),
+                    indicatorColor: IveTokens.moduleGo, indicatorSize: TabBarIndicatorSize.label,
                     labelStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
                     tabs: [
                       Tab(text: 'All (${provider.tabs.length})'),
@@ -88,9 +90,9 @@ class _GoTabsScreenState extends State<GoTabsScreen> with SingleTickerProviderSt
                   GestureDetector(
                     onTap: () => setState(() => _showAnalytics = !_showAnalytics),
                     child: Row(children: [
-                      Icon(_showAnalytics ? Icons.bar_chart : Icons.bar_chart_outlined, size: 16, color: kGoColor),
+                      Icon(_showAnalytics ? Icons.bar_chart : Icons.bar_chart_outlined, size: 16, color: IveTokens.moduleGo),
                       const SizedBox(width: 4),
-                      Text(_showAnalytics ? 'Hide' : 'Analytics', style: const TextStyle(fontSize: 11, color: kGoColor, fontWeight: FontWeight.w600)),
+                      Text(_showAnalytics ? 'Hide' : 'Analytics', style: const TextStyle(fontSize: 11, color: IveTokens.moduleGo, fontWeight: FontWeight.w600)),
                     ]),
                   ),
                 ]),
@@ -107,8 +109,8 @@ class _GoTabsScreenState extends State<GoTabsScreen> with SingleTickerProviderSt
             ],
           ),
           floatingActionButton: FloatingActionButton.extended(
-            onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Creating new tab...'))),
-            backgroundColor: kGoColor,
+            onPressed: () => AppToast.show(context, 'Creating new tab...'),
+            backgroundColor: IveTokens.moduleGo,
             icon: const Icon(Icons.add, color: Colors.white),
             label: const Text('New Tab', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
           ),
@@ -126,10 +128,10 @@ class _GoTabsScreenState extends State<GoTabsScreen> with SingleTickerProviderSt
         const Text('TAB ANALYTICS', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF9CA3AF))),
         const SizedBox(height: 10),
         Row(children: [
-          Expanded(child: _AnalyticStat(label: 'Active', value: '${p.tabs.where((t) => t.status == TabStatus.active).length}', color: kGoColor)),
-          Expanded(child: _AnalyticStat(label: 'Overdue', value: '${p.tabs.where((t) => t.status == TabStatus.overdue).length}', color: kGoNegative)),
-          Expanded(child: _AnalyticStat(label: 'Settled', value: '${p.tabs.where((t) => t.status == TabStatus.settled).length}', color: kGoPositive)),
-          const Expanded(child: _AnalyticStat(label: 'Avg Days', value: '14', color: kGoInfo)),
+          Expanded(child: _AnalyticStat(label: 'Active', value: '${p.tabs.where((t) => t.status == TabStatus.active).length}', color: IveTokens.moduleGo)),
+          Expanded(child: _AnalyticStat(label: 'Overdue', value: '${p.tabs.where((t) => t.status == TabStatus.overdue).length}', color: IveTokens.danger)),
+          Expanded(child: _AnalyticStat(label: 'Settled', value: '${p.tabs.where((t) => t.status == TabStatus.settled).length}', color: IveTokens.success)),
+          const Expanded(child: _AnalyticStat(label: 'Avg Days', value: '14', color: IveTokens.info)),
         ]),
       ]),
     );
@@ -170,7 +172,7 @@ class _FilterChip extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-        decoration: BoxDecoration(color: selected ? kGoColor : Colors.white, borderRadius: BorderRadius.circular(16), border: Border.all(color: selected ? kGoColor : const Color(0xFFE5E7EB))),
+        decoration: BoxDecoration(color: selected ? IveTokens.moduleGo : Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: selected ? IveTokens.moduleGo : const Color(0xFFE5E7EB))),
         child: Text(label, style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: selected ? Colors.white : const Color(0xFF6B7280))),
       ),
     ),

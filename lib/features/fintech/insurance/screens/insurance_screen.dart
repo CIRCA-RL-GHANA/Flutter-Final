@@ -1,7 +1,8 @@
-/// Fintech â€º Insurance — Policy Purchase & Claims Screen
+/// Fintech  Insurance  Policy Purchase & Claims Screen
 library;
 
 import 'package:flutter/material.dart';
+import '../../../../core/utils/app_toast.dart';
 import '../../../../core/services/fintech_service.dart';
 
 const _kTeal = Color(0xFF009688);
@@ -66,7 +67,7 @@ class _InsuranceScreenState extends State<InsuranceScreen>
     final coverage = double.tryParse(_coverageCtrl.text.trim());
     final premium = double.tryParse(_premiumCtrl.text.trim());
     if (fi.isEmpty || coverage == null || premium == null) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Fill all fields')));
+      AppToast.show(context, 'Fill all fields');
       return;
     }
     setState(() => _buying = true);
@@ -155,7 +156,7 @@ class _InsuranceScreenState extends State<InsuranceScreen>
   }
 }
 
-// ─── Sub-widgets ──────────────────────────────────────────────────────────────
+//  Sub-widgets 
 
 class _PolicyTypeSelector extends StatelessWidget {
   final String selected;
@@ -171,7 +172,7 @@ class _PolicyTypeSelector extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
         decoration: BoxDecoration(
           color: selected == t ? _kTeal : Colors.white,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(10),
           border: Border.all(color: selected == t ? _kTeal : const Color(0xFFE5E7EB)),
         ),
         child: Text(t, style: TextStyle(fontSize: 12, color: selected == t ? Colors.white : Colors.grey.shade700, fontWeight: FontWeight.w500)),
@@ -228,7 +229,7 @@ class _Field extends StatelessWidget {
     TextField(controller: ctrl,
       keyboardType: label.contains('QP') ? TextInputType.number : TextInputType.text,
       decoration: InputDecoration(hintText: hint, filled: true, fillColor: Colors.grey.shade50,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
         contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12))),
   ]);
 }
@@ -256,14 +257,14 @@ class PolicyCard extends StatelessWidget {
           ]),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-            decoration: BoxDecoration(color: (status == 'active' ? Colors.green : Colors.grey).withValues(alpha: 0.1), borderRadius: BorderRadius.circular(20)),
+            decoration: BoxDecoration(color: (status == 'active' ? Colors.green : Colors.grey).withValues(alpha: 0.1), borderRadius: BorderRadius.circular(10)),
             child: Text(status, style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: status == 'active' ? Colors.green : Colors.grey)),
           ),
         ]),
         const SizedBox(height: 6),
         Text('Coverage: $coverage QP', style: const TextStyle(color: Colors.grey, fontSize: 12)),
         if (status == 'active')
-          TextButton(onPressed: onFileClaim, child: const Text('File a Claim â†’', style: TextStyle(color: _kTeal))),
+          TextButton(onPressed: onFileClaim, child: const Text('File a Claim ', style: TextStyle(color: _kTeal))),
       ]),
     );
   }
@@ -290,7 +291,7 @@ class _ClaimTile extends StatelessWidget {
         ])),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-          decoration: BoxDecoration(color: _claimStatusColor(status).withValues(alpha: 0.1), borderRadius: BorderRadius.circular(20)),
+          decoration: BoxDecoration(color: _claimStatusColor(status).withValues(alpha: 0.1), borderRadius: BorderRadius.circular(10)),
           child: Text(status.replaceAll('_', ' '), style: TextStyle(fontSize: 11, color: _claimStatusColor(status), fontWeight: FontWeight.w600)),
         ),
       ]),
@@ -308,7 +309,7 @@ class _ClaimTile extends StatelessWidget {
   }
 }
 
-// ─── File Claim Bottom Sheet ──────────────────────────────────────────────────
+//  File Claim Bottom Sheet 
 
 class ClaimsScreen extends StatefulWidget {
   const ClaimsScreen({super.key});

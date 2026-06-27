@@ -1,8 +1,8 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// PROMPT Screen — The Universal Launcher
+/// 
+/// PROMPT Screen  The Universal Launcher
 /// Role-adaptive dashboard with 10 module widgets, global header, RBAC,
 /// responsive grid layout, time-based adaptation
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -104,23 +104,21 @@ class _PromptScreenState extends State<PromptScreen> {
       ),
       child: Scaffold(
         backgroundColor: AppColors.backgroundLight,
-        // Universal FAB — "+Add Entity" always visible per spec
+        // Universal FAB  "+Add Entity" always visible per spec
         floatingActionButton: _AddEntityFAB(contextProvider: contextProvider),
         body: CustomScrollView(
           physics: const BouncingScrollPhysics(
             parent: AlwaysScrollableScrollPhysics(),
           ),
           slivers: [
-            // ─── Global Header (pinned) ──────────────────────────────
+            //  Global Header (pinned) 
             SliverToBoxAdapter(
               child: GlobalHeader(
                 onContextSwitchTap: () => _showContextSwitcher(context),
-                onNotificationTap: () => _showNotifications(context),
-                onSOSTap: () => _triggerSOS(context),
               ),
             ),
 
-            // ─── Time Greeting ───────────────────────────────────────
+            //  Time Greeting 
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(20, 8, 20, 4),
@@ -137,7 +135,7 @@ class _PromptScreenState extends State<PromptScreen> {
               ),
             ),
 
-            // ─── Search Results Overlay ──────────────────────────────
+            //  Search Results Overlay 
             if (promptProvider.isSearching && promptProvider.searchResults.isNotEmpty)
               SliverToBoxAdapter(
                 child: SearchResultsOverlay(
@@ -155,7 +153,7 @@ class _PromptScreenState extends State<PromptScreen> {
                 ),
               ),
 
-            // ─── Module Widgets Grid ─────────────────────────────────
+            //  Module Widgets Grid 
             if (!promptProvider.isSearching || promptProvider.searchResults.isEmpty)
               AdaptiveGrid(
                 children: List.generate(modules.length, (index) {
@@ -185,7 +183,7 @@ class _PromptScreenState extends State<PromptScreen> {
                 }),
               ),
 
-            // ─── Bottom Padding ──────────────────────────────────────
+            //  Bottom Padding 
             const SliverToBoxAdapter(
               child: SizedBox(height: 100),
             ),
@@ -195,7 +193,7 @@ class _PromptScreenState extends State<PromptScreen> {
     );
   }
 
-  // ─── Module Content Factory ──────────────────────────────────────────────
+  //  Module Content Factory 
 
   Widget _buildModuleContent({
     required PromptModule module,
@@ -239,7 +237,7 @@ class _PromptScreenState extends State<PromptScreen> {
     }
   }
 
-  // ─── Interactions ────────────────────────────────────────────────────────
+  //  Interactions 
 
   void _onModuleTap(BuildContext context, PromptModule module) {
     HapticFeedback.lightImpact();
@@ -532,7 +530,7 @@ class _PromptScreenState extends State<PromptScreen> {
   }
 }
 
-// ─── Add Entity FAB ─────────────────────────────────────────────────────────
+//  Add Entity FAB 
 
 class _AddEntityFAB extends StatelessWidget {
   final ContextProvider contextProvider;

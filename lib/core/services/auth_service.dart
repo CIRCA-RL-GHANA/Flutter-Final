@@ -63,6 +63,33 @@ class AuthService {
     }
   }
 
+  /// Request a password reset OTP via SMS.
+  Future<ApiResponse<Map<String, dynamic>>> forgotPassword(
+      String phoneNumber) async {
+    return _api.post<Map<String, dynamic>>(
+      ApiRoutes.auth.forgotPassword,
+      data: {'phoneNumber': phoneNumber},
+      fromJson: (json) => json as Map<String, dynamic>,
+    );
+  }
+
+  /// Reset password using the OTP code sent by forgotPassword.
+  Future<ApiResponse<Map<String, dynamic>>> resetPassword({
+    required String phoneNumber,
+    required String code,
+    required String newPassword,
+  }) async {
+    return _api.post<Map<String, dynamic>>(
+      ApiRoutes.auth.resetPassword,
+      data: {
+        'phoneNumber': phoneNumber,
+        'code': code,
+        'newPassword': newPassword,
+      },
+      fromJson: (json) => json as Map<String, dynamic>,
+    );
+  }
+
   /// Check if user is currently authenticated.
   bool get isAuthenticated => _api.isAuthenticated;
 }

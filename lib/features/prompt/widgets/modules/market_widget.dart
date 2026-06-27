@@ -1,7 +1,7 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 /// MARKET Widget (Commerce & Logistics)
 /// Visible to: Owner, Administrator only
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -72,13 +72,13 @@ class MarketWidgetContent extends StatelessWidget {
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: const [
-                _MerchantChip(name: 'Fresh Farm', emoji: 'ðŸ¥¬'),
+                _MerchantChip(name: 'Fresh Farm', emoji: ''),
                 SizedBox(width: 6),
-                _MerchantChip(name: 'TechZone', emoji: 'ðŸ“±'),
+                _MerchantChip(name: 'TechZone', emoji: '"'),
                 SizedBox(width: 6),
-                _MerchantChip(name: 'StyleHub', emoji: 'ðŸ‘—'),
+                _MerchantChip(name: 'StyleHub', emoji: ''),
                 SizedBox(width: 6),
-                _MerchantChip(name: 'BookNest', emoji: 'ðŸ“š'),
+                _MerchantChip(name: 'BookNest', emoji: '"'),
               ],
             ),
           ),
@@ -108,7 +108,7 @@ class MarketWidgetContent extends StatelessWidget {
             ),
             child: Row(
               children: [
-                const Text('ðŸ”¥', style: TextStyle(fontSize: 14)),
+                const Text('"', style: TextStyle(fontSize: 14)),
                 const SizedBox(width: 6),
                 Expanded(
                   child: Text(

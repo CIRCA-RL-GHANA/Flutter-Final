@@ -1,5 +1,5 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// Fulfillment Service — Flutter ↔ Backend Integration
+/// 
+/// Fulfillment Service  Flutter  Backend Integration
 ///
 /// Maps to FulfillmentController endpoints:
 ///   POST /fulfillment/rules
@@ -9,7 +9,7 @@
 ///   GET  /fulfillment/tasks/{entityId}
 ///   POST /fulfillment/tasks
 ///   GET  /fulfillment/tasks/{id}/detail
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import '../network/api_client.dart';
@@ -21,7 +21,7 @@ class FulfillmentService {
 
   FulfillmentService([ApiClient? api]) : _api = api ?? ApiClient.instance;
 
-  // ─── Rules ────────────────────────────────────────────────────────────────
+  //  Rules 
 
   Future<ApiResponse<Map<String, dynamic>>> createRule(
     Map<String, dynamic> data,
@@ -55,7 +55,7 @@ class FulfillmentService {
     return _api.delete<void>(ApiRoutes.fulfillment.deleteRule(id));
   }
 
-  // ─── Tasks ────────────────────────────────────────────────────────────────
+  //  Tasks 
 
   Future<ApiResponse<List<dynamic>>> listTasks(
     String entityId, {

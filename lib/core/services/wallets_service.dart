@@ -1,10 +1,10 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// Wallets Service — Flutter ↔ Backend Integration
+/// 
+/// Wallets Service  Flutter  Backend Integration
 ///
 /// Maps to WalletsController endpoints:
 ///   GET /wallets/balance
 ///   GET /wallets/me
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import '../network/api_client.dart';
@@ -16,7 +16,7 @@ class WalletsService {
 
   WalletsService([ApiClient? api]) : _api = api ?? ApiClient.instance;
 
-  // ─── Wallet ───────────────────────────────────────────────────────────────
+  //  Wallet 
 
   Future<ApiResponse<Map<String, dynamic>>> getBalance() {
     return _api.get<Map<String, dynamic>>(

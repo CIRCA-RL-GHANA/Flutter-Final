@@ -1,8 +1,8 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 /// U8: SYSTEM MONITOR Screen
 /// Performance metrics, device info, active sessions, system logs
 /// RBAC: Owner, Administrator, BranchManager only
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -40,7 +40,7 @@ class SystemMonitorScreen extends StatelessWidget {
           body: ListView(
             padding: const EdgeInsets.fromLTRB(20, 12, 20, 100),
             children: [
-              // ─── Performance Metrics Grid ──────────────────
+              //  Performance Metrics Grid 
               const UtilitySectionTitle(
                 title: 'Performance',
                 icon: Icons.speed,
@@ -71,7 +71,7 @@ class SystemMonitorScreen extends StatelessWidget {
 
               const SizedBox(height: 16),
 
-              // ─── Device Info ───────────────────────────────
+              //  Device Info 
               const UtilitySectionTitle(
                 title: 'Device Information',
                 icon: Icons.phone_android,
@@ -93,7 +93,7 @@ class SystemMonitorScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Active Sessions ──────────────────────────
+              //  Active Sessions 
               const UtilitySectionTitle(
                 title: 'Active Sessions',
                 icon: Icons.devices,
@@ -108,7 +108,7 @@ class SystemMonitorScreen extends StatelessWidget {
 
               const SizedBox(height: 16),
 
-              // ─── System Logs ──────────────────────────────
+              //  System Logs 
               const UtilitySectionTitle(
                 title: 'System Logs',
                 icon: Icons.terminal,
@@ -201,7 +201,7 @@ class SystemMonitorScreen extends StatelessWidget {
   }
 }
 
-// ─── Trend Icon ──────────────────────────────────────────────────────────────
+//  Trend Icon 
 
 class _TrendIcon extends StatelessWidget {
   final MetricTrend trend;
@@ -220,7 +220,7 @@ class _TrendIcon extends StatelessWidget {
   }
 }
 
-// ─── Info Row ────────────────────────────────────────────────────────────────
+//  Info Row 
 
 class _InfoRow extends StatelessWidget {
   final String label;
@@ -258,7 +258,7 @@ class _InfoRow extends StatelessWidget {
   }
 }
 
-// ─── Session Card ────────────────────────────────────────────────────────────
+//  Session Card 
 
 class _SessionCard extends StatelessWidget {
   final ActiveSession session;
@@ -304,7 +304,7 @@ class _SessionCard extends StatelessWidget {
                     ],
                   ),
                   Text(
-                    '${session.location} Â· ${session.ipAddress}',
+                    '${session.location}  ${session.ipAddress}',
                     style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                   ),
                 ],
@@ -323,7 +323,7 @@ class _SessionCard extends StatelessWidget {
   }
 }
 
-// ─── Log Filter Chip ─────────────────────────────────────────────────────────
+//  Log Filter Chip 
 
 class _LogFilterChip extends StatelessWidget {
   final String label;
@@ -366,7 +366,7 @@ class _LogFilterChip extends StatelessWidget {
   }
 }
 
-// ─── Log Row ─────────────────────────────────────────────────────────────────
+//  Log Row 
 
 class _LogRow extends StatelessWidget {
   final SystemLogEntry entry;
@@ -398,7 +398,7 @@ class _LogRow extends StatelessWidget {
                   style: const TextStyle(fontSize: 12, color: AppColors.textPrimary),
                 ),
                 Text(
-                  '${entry.source} Â· ${_formatTime(entry.timestamp)}',
+                  '${entry.source}  ${_formatTime(entry.timestamp)}',
                   style: const TextStyle(fontSize: 10, color: AppColors.textTertiary),
                 ),
               ],

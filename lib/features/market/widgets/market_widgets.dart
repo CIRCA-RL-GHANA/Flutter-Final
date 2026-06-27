@@ -1,9 +1,9 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// MARKET MODULE — Shared Widgets
+/// 
+/// MARKET MODULE  Shared Widgets
 /// Reusable UI components: MarketAppBar, MerchantCard, ProductCard,
 /// CartPreview, StatusTimeline, RatingStars, PriceTag, CategoryChip,
 /// MarketFilterChipRow, MarketSectionTitle, MarketSearchBar, etc.
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -11,14 +11,14 @@ import 'package:flutter/services.dart';
 import '../../../core/theme/app_colors.dart';
 import '../models/market_models.dart';
 
-// ─── Market Module Color ─────────────────────────────────────────────────────
+//  Market Module Color 
 
 /// The canonical module color for Market (Emerald Green)
 const Color kMarketColor = Color(0xFF10B981);
 const Color kMarketColorLight = Color(0xFFD1FAE5);
 const Color kMarketColorDark = Color(0xFF065F46);
 
-// ─── Market App Bar ──────────────────────────────────────────────────────────
+//  Market App Bar 
 
 class MarketAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -80,7 +80,7 @@ class MarketAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-// ─── Merchant Card ───────────────────────────────────────────────────────────
+//  Merchant Card 
 
 class MerchantCard extends StatelessWidget {
   final Merchant merchant;
@@ -106,7 +106,7 @@ class MerchantCard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -119,7 +119,7 @@ class MerchantCard extends StatelessWidget {
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: kMarketColor.withValues(alpha: 0.1),
-                    borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+                    borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
                   ),
                   child: Center(
                     child: Icon(
@@ -218,7 +218,7 @@ class MerchantCard extends StatelessWidget {
                   // Tags
                   if (merchant.tags.isNotEmpty)
                     Text(
-                      merchant.tags.join(' • '),
+                      merchant.tags.join('  '),
                       style: const TextStyle(
                         fontSize: 12,
                         color: AppColors.textSecondary,
@@ -233,7 +233,7 @@ class MerchantCard extends StatelessWidget {
                       const Icon(Icons.star, size: 14, color: AppColors.warning),
                       const SizedBox(width: 2),
                       Text(
-                        '${merchant.ratingDisplay}â˜…',
+                        '${merchant.ratingDisplay}',
                         style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
                       ),
                       const SizedBox(width: 8),
@@ -282,7 +282,7 @@ class MerchantCard extends StatelessWidget {
                                 foregroundColor: Colors.white,
                                 elevation: 0,
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
                                 textStyle: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
                               ),
@@ -299,7 +299,7 @@ class MerchantCard extends StatelessWidget {
                               foregroundColor: kMarketColor,
                               side: const BorderSide(color: kMarketColor),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
+                                borderRadius: BorderRadius.circular(10),
                               ),
                               textStyle: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
                             ),
@@ -340,7 +340,7 @@ class MerchantCard extends StatelessWidget {
   }
 }
 
-// ─── Product Card ────────────────────────────────────────────────────────────
+//  Product Card 
 
 class MarketProductCard extends StatelessWidget {
   final MarketProduct product;
@@ -384,7 +384,7 @@ class MarketProductCard extends StatelessWidget {
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: kMarketColor.withValues(alpha: 0.08),
-                    borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+                    borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
                   ),
                   child: Icon(Icons.image, size: 40, color: kMarketColor.withValues(alpha: 0.3)),
                 ),
@@ -400,7 +400,7 @@ class MarketProductCard extends StatelessWidget {
                             : product.badges.first == 'LIMITED'
                                 ? AppColors.error
                                 : AppColors.warning,
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: BorderRadius.circular(6),
                       ),
                       child: Text(
                         product.badges.first,
@@ -515,7 +515,7 @@ class MarketProductCard extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
                       decoration: BoxDecoration(
                         color: AppColors.warning,
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: BorderRadius.circular(6),
                       ),
                       child: Text(
                         product.badges.first,
@@ -610,7 +610,7 @@ class MarketProductCard extends StatelessWidget {
   }
 }
 
-// ─── Rating Stars ────────────────────────────────────────────────────────────
+//  Rating Stars 
 
 class RatingStars extends StatelessWidget {
   final double rating;
@@ -651,7 +651,7 @@ class RatingStars extends StatelessWidget {
   }
 }
 
-// ─── Price Tag ───────────────────────────────────────────────────────────────
+//  Price Tag 
 
 class PriceTag extends StatelessWidget {
   final double price;
@@ -695,7 +695,7 @@ class PriceTag extends StatelessWidget {
   }
 }
 
-// ─── Category Chip Row ───────────────────────────────────────────────────────
+//  Category Chip Row 
 
 class MarketCategoryChipRow extends StatelessWidget {
   final MerchantCategory selected;
@@ -736,7 +736,7 @@ class MarketCategoryChipRow extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
               decoration: BoxDecoration(
                 color: isActive ? kMarketColor : Colors.white,
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(10),
                 border: isActive ? null : Border.all(color: AppColors.inputBorder),
               ),
               child: Row(
@@ -762,7 +762,7 @@ class MarketCategoryChipRow extends StatelessWidget {
   }
 }
 
-// ─── Quick Filter Chips ──────────────────────────────────────────────────────
+//  Quick Filter Chips 
 
 class MarketQuickFilterChips extends StatelessWidget {
   final List<String> filters;
@@ -815,7 +815,7 @@ class MarketQuickFilterChips extends StatelessWidget {
   }
 }
 
-// ─── Section Title ───────────────────────────────────────────────────────────
+//  Section Title 
 
 class MarketSectionTitle extends StatelessWidget {
   final String title;
@@ -869,7 +869,7 @@ class MarketSectionTitle extends StatelessWidget {
   }
 }
 
-// ─── Search Bar ──────────────────────────────────────────────────────────────
+//  Search Bar 
 
 class MarketSearchBar extends StatelessWidget {
   final String hint;
@@ -896,7 +896,7 @@ class MarketSearchBar extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         decoration: BoxDecoration(
           color: AppColors.inputFill,
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(10),
           border: Border.all(color: AppColors.inputBorder),
         ),
         child: Row(
@@ -915,6 +915,7 @@ class MarketSearchBar extends StatelessWidget {
                       onChanged: onChanged,
                       decoration: InputDecoration(
                         border: InputBorder.none,
+              filled: false,
                         hintText: hint,
                         hintStyle: const TextStyle(fontSize: 14, color: AppColors.textTertiary),
                         isDense: true,
@@ -931,7 +932,7 @@ class MarketSearchBar extends StatelessWidget {
   }
 }
 
-// ─── Order Status Timeline ───────────────────────────────────────────────────
+//  Order Status Timeline 
 
 class OrderStatusTimeline extends StatelessWidget {
   final List<TrackingEvent> events;
@@ -1027,7 +1028,7 @@ class OrderStatusTimeline extends StatelessWidget {
   }
 }
 
-// ─── Cart Preview Badge ──────────────────────────────────────────────────────
+//  Cart Preview Badge 
 
 class CartPreviewBadge extends StatelessWidget {
   final int itemCount;
@@ -1076,7 +1077,7 @@ class CartPreviewBadge extends StatelessWidget {
   }
 }
 
-// ─── Order Card ──────────────────────────────────────────────────────────────
+//  Order Card 
 
 class MarketOrderCard extends StatelessWidget {
   final MarketOrder order;
@@ -1130,7 +1131,7 @@ class MarketOrderCard extends StatelessWidget {
                         style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
                       ),
                       Text(
-                        '${order.id} • ${_timeAgo(order.createdAt)}',
+                        '${order.id}  ${_timeAgo(order.createdAt)}',
                         style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
                       ),
                     ],
@@ -1171,7 +1172,7 @@ class MarketOrderCard extends StatelessWidget {
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
-                          '${item.quantity}Ã— ${item.name}',
+                          '${item.quantity} ${item.name}',
                           style: const TextStyle(fontSize: 13),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
@@ -1233,7 +1234,7 @@ class _ActionButton extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
         decoration: BoxDecoration(
           color: color,
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(10),
         ),
         child: Text(
           label,
@@ -1244,7 +1245,7 @@ class _ActionButton extends StatelessWidget {
   }
 }
 
-// ─── Market Info Row ─────────────────────────────────────────────────────────
+//  Market Info Row 
 
 class MarketInfoRow extends StatelessWidget {
   final IconData icon;
@@ -1284,7 +1285,7 @@ class MarketInfoRow extends StatelessWidget {
   }
 }
 
-// ─── Market Section Card ─────────────────────────────────────────────────────
+//  Market Section Card 
 
 class MarketSectionCard extends StatelessWidget {
   final String title;
@@ -1337,7 +1338,7 @@ class MarketSectionCard extends StatelessWidget {
   }
 }
 
-// ─── KPI Badge ───────────────────────────────────────────────────────────────
+//  KPI Badge 
 
 class MarketKPIBadge extends StatelessWidget {
   final String label;
@@ -1387,7 +1388,7 @@ class MarketKPIBadge extends StatelessWidget {
   }
 }
 
-// ─── Empty State ─────────────────────────────────────────────────────────────
+//  Empty State 
 
 class MarketEmptyState extends StatelessWidget {
   final IconData icon;
@@ -1448,7 +1449,7 @@ class MarketEmptyState extends StatelessWidget {
   }
 }
 
-// ─── Quantity Selector ───────────────────────────────────────────────────────
+//  Quantity Selector 
 
 class QuantitySelector extends StatelessWidget {
   final int quantity;

@@ -1,14 +1,14 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// MARKET MODULE — Data Models
+/// 
+/// MARKET MODULE  Data Models
 /// Comprehensive models for unified commerce & logistics:
 /// Market Hub, Search, Filters, Merchants, Products, Cart, Orders,
 /// Transactions, Self-Pickup, Returns, Delivery Tracking, Ride Hailing
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'package:flutter/material.dart';
 
-// ─── Enums ──────────────────────────────────────────────────────────────────
+//  Enums 
 
 /// Merchant operational status
 enum MerchantStatus { open, closed, busy, temporarilyClosed }
@@ -99,7 +99,7 @@ enum PickupPhase { preparation, arrival, verification, handoff, complete }
 /// Diet / preference filter
 enum DietaryPreference { vegetarian, vegan, glutenFree, halal, kosher, organic }
 
-// ─── Merchant Models ────────────────────────────────────────────────────────
+//  Merchant Models 
 
 /// A merchant / vendor in the marketplace
 class Merchant {
@@ -265,7 +265,7 @@ class MerchantPost {
   });
 }
 
-// ─── Product Models ─────────────────────────────────────────────────────────
+//  Product Models 
 
 /// A product within a merchant's catalogue
 class MarketProduct {
@@ -407,7 +407,7 @@ class ProductCategory {
   });
 }
 
-// ─── Cart Models ────────────────────────────────────────────────────────────
+//  Cart Models 
 
 /// An item in the shopping cart
 class CartItem {
@@ -494,7 +494,7 @@ class CartSummary {
   }
 }
 
-// ─── Order Models ───────────────────────────────────────────────────────────
+//  Order Models 
 
 /// A completed or in-progress order
 class MarketOrder {
@@ -633,7 +633,7 @@ class OrderItem {
   double get total => price * quantity;
 }
 
-// ─── Return Models ──────────────────────────────────────────────────────────
+//  Return Models 
 
 /// A return request for an order
 class ReturnRequest {
@@ -752,7 +752,7 @@ class RejectedReturnVideo {
   }
 }
 
-// ─── Delivery / Tracking Models ─────────────────────────────────────────────
+//  Delivery / Tracking Models 
 
 /// Live delivery tracking data
 class DeliveryTracking {
@@ -820,7 +820,7 @@ class TrackingEvent {
   });
 }
 
-// ─── Ride Hailing Models ────────────────────────────────────────────────────
+//  Ride Hailing Models 
 
 /// A ride request / active ride
 class RideRequest {
@@ -929,7 +929,7 @@ class RideRequest {
   }
 }
 
-// ─── Payment Models ─────────────────────────────────────────────────────────
+//  Payment Models 
 
 /// A saved payment method
 class SavedPaymentMethod {
@@ -969,7 +969,7 @@ class SavedPaymentMethod {
   }
 }
 
-// ─── Filter / Search Models ─────────────────────────────────────────────────
+//  Filter / Search Models 
 
 /// Active filters state
 class MarketFilters {
@@ -1039,7 +1039,7 @@ class SavedFilter {
   });
 }
 
-// ─── Transaction Summary Models ─────────────────────────────────────────────
+//  Transaction Summary Models 
 
 /// Summary stats for the transaction dashboard
 class TransactionSummary {
@@ -1062,7 +1062,7 @@ class TransactionSummary {
   });
 }
 
-// ─── AI / Bundling Models ───────────────────────────────────────────────────
+//  AI / Bundling Models 
 
 /// AI bundling suggestion for cart optimization
 class BundleSuggestion {
@@ -1110,7 +1110,7 @@ class MarketAISuggestion {
   });
 }
 
-// ─── Self-Pickup Models ─────────────────────────────────────────────────────
+//  Self-Pickup Models 
 
 /// Self-pickup session state
 class PickupSession {

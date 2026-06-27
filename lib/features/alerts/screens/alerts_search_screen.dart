@@ -1,4 +1,4 @@
-﻿/// Alerts Screen 1.1 — Advanced Search & Discovery
+/// Alerts Screen 1.1  Advanced Search & Discovery
 /// Full-width search bar, grouped results by status, search highlighting,
 /// AI suggestions, recent/saved searches
 library;
@@ -70,6 +70,7 @@ class _AlertsSearchScreenState extends State<AlertsSearchScreen> {
                   hintStyle: TextStyle(fontSize: 14, color: Color(0xFF9CA3AF)),
                   prefixIcon: Icon(Icons.search, size: 20, color: Color(0xFF9CA3AF)),
                   border: InputBorder.none,
+              filled: false,
                   contentPadding: EdgeInsets.symmetric(vertical: 10),
                 ),
                 style: const TextStyle(fontSize: 14),
@@ -101,10 +102,10 @@ class _AlertsSearchScreenState extends State<AlertsSearchScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // ──── AI SUGGESTIONS (dynamic) ────
+          //  AI SUGGESTIONS (dynamic) 
           const SizedBox(height: 16),
 
-          // ──── RECENT SEARCHES ────
+          //  RECENT SEARCHES 
           if (provider.recentSearches.isNotEmpty) ...[
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -124,7 +125,7 @@ class _AlertsSearchScreenState extends State<AlertsSearchScreen> {
             const SizedBox(height: 16),
           ],
 
-          // ──── SAVED SEARCHES ────
+          //  SAVED SEARCHES 
           if (provider.savedSearches.isNotEmpty) ...[
             const Text('Saved Searches', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700)),
             const SizedBox(height: 8),
@@ -134,7 +135,7 @@ class _AlertsSearchScreenState extends State<AlertsSearchScreen> {
             )),
           ],
 
-          // ──── SEARCH TIPS ────
+          //  SEARCH TIPS 
           const SizedBox(height: 24),
           Container(
             padding: const EdgeInsets.all(14),
@@ -145,7 +146,7 @@ class _AlertsSearchScreenState extends State<AlertsSearchScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('ðŸ’¡ Search Tips', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: kAlertsInfo)),
+                const Text('Search Tips', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: kAlertsInfo)),
                 const SizedBox(height: 8),
                 _tip('Search by ID: TX-2041'),
                 _tip('Search by category: payment, shipment'),
@@ -185,7 +186,7 @@ class _AlertsSearchScreenState extends State<AlertsSearchScreen> {
           ),
           const SizedBox(height: 12),
 
-          // ──── PENDING GROUP ────
+          //  PENDING GROUP 
           if (pending.isNotEmpty) ...[
             _GroupHeader(label: 'Pending', count: pending.length, color: kAlertsColor),
             const SizedBox(height: 8),
@@ -196,7 +197,7 @@ class _AlertsSearchScreenState extends State<AlertsSearchScreen> {
             const SizedBox(height: 16),
           ],
 
-          // ──── RESOLVED GROUP ────
+          //  RESOLVED GROUP 
           if (resolved.isNotEmpty) ...[
             _GroupHeader(label: 'Resolved', count: resolved.length, color: kAlertsResolved),
             const SizedBox(height: 8),
@@ -221,7 +222,7 @@ class _AlertsSearchScreenState extends State<AlertsSearchScreen> {
       padding: const EdgeInsets.only(bottom: 4),
       child: Row(
         children: [
-          const Text('•', style: TextStyle(fontSize: 12, color: kAlertsInfo)),
+          const Text('', style: TextStyle(fontSize: 12, color: kAlertsInfo)),
           const SizedBox(width: 8),
           Text(text, style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
         ],
@@ -230,9 +231,9 @@ class _AlertsSearchScreenState extends State<AlertsSearchScreen> {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 // Recent Search Tile
-// ──────────────────────────────────────────────
+// 
 
 class _RecentSearchTile extends StatelessWidget {
   final RecentSearch search;
@@ -248,7 +249,7 @@ class _RecentSearchTile extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(10),
           border: Border.all(color: const Color(0xFFE5E7EB)),
         ),
         child: Row(
@@ -264,9 +265,9 @@ class _RecentSearchTile extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 // Saved Search Tile
-// ──────────────────────────────────────────────
+// 
 
 class _SavedSearchTile extends StatelessWidget {
   final SavedSearch search;
@@ -282,7 +283,7 @@ class _SavedSearchTile extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(10),
           border: Border.all(color: kAlertsInfo.withValues(alpha: 0.3)),
         ),
         child: Row(
@@ -298,9 +299,9 @@ class _SavedSearchTile extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 // Group Header
-// ──────────────────────────────────────────────
+// 
 
 class _GroupHeader extends StatelessWidget {
   final String label;
@@ -312,13 +313,13 @@ class _GroupHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Container(width: 4, height: 16, decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(2))),
+        Container(width: 4, height: 16, decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(6))),
         const SizedBox(width: 8),
         Text(label, style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: color)),
         const SizedBox(width: 6),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
-          decoration: BoxDecoration(color: color.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(8)),
+          decoration: BoxDecoration(color: color.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(10)),
           child: Text('$count', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: color)),
         ),
       ],

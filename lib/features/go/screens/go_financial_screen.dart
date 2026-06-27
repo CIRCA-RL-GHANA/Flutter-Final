@@ -1,9 +1,10 @@
-/// GO Screen — Financial Overview
+/// GO Screen  Financial Overview
 /// Real-time balance, 24h change, quick actions, and transaction feed
 /// wired to GoProvider (Consumer pattern).
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
 import '../providers/go_provider.dart';
@@ -46,8 +47,8 @@ class _GoFinancialScreenState extends State<GoFinancialScreen> {
         return Scaffold(
           backgroundColor: const Color(0xFFF8F9FE),
           appBar: AppBar(
-            title: const Text('GO — Financial'),
-            backgroundColor: kGoColor,
+            title: const Text('GO  Financial'),
+            backgroundColor: IveTokens.moduleGo,
             foregroundColor: Colors.white,
             elevation: 0,
             actions: [
@@ -59,15 +60,15 @@ class _GoFinancialScreenState extends State<GoFinancialScreen> {
           ),
           body: RefreshIndicator(
             onRefresh: _refresh,
-            color: kGoColor,
+            color: IveTokens.moduleGo,
             child: CustomScrollView(
               slivers: [
-                // ── Balance Header ────────────────────────────────────────
+                //  Balance Header 
                 SliverToBoxAdapter(
                   child: _buildBalanceHeader(provider),
                 ),
 
-                // ── Quick Actions ─────────────────────────────────────────
+                //  Quick Actions 
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -77,25 +78,25 @@ class _GoFinancialScreenState extends State<GoFinancialScreen> {
                         _ActionButton(
                           icon: Icons.add_circle_outline,
                           label: 'Buy QP',
-                          color: kGoPositive,
+                          color: IveTokens.success,
                           onTap: () => Navigator.pushNamed(context, AppRoutes.goBuy),
                         ),
                         _ActionButton(
                           icon: Icons.remove_circle_outline,
                           label: 'Sell QP',
-                          color: kGoNegative,
+                          color: IveTokens.danger,
                           onTap: () => Navigator.pushNamed(context, AppRoutes.goSell),
                         ),
                         _ActionButton(
                           icon: Icons.swap_horiz,
                           label: 'Transfer',
-                          color: kGoColor,
+                          color: IveTokens.moduleGo,
                           onTap: () => Navigator.pushNamed(context, AppRoutes.goTransfer),
                         ),
                         _ActionButton(
                           icon: Icons.dashboard_outlined,
                           label: 'Hub',
-                          color: kGoPurple,
+                          color: IveTokens.accent,
                           onTap: () => Navigator.pushNamed(context, AppRoutes.goHub),
                         ),
                       ],
@@ -103,18 +104,18 @@ class _GoFinancialScreenState extends State<GoFinancialScreen> {
                   ),
                 ),
 
-                // ── AI Widgets ────────────────────────────────────────────
+                //  AI Widgets 
                 const SliverToBoxAdapter(
                 ),
 
-                // ── Transactions Header ───────────────────────────────────
+                //  Transactions Header 
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(16, 4, 8, 6),
                     child: Row(
                       children: [
                         const Icon(Icons.receipt_long,
-                            size: 16, color: kGoColor),
+                            size: 16, color: IveTokens.moduleGo),
                         const SizedBox(width: 6),
                         const Text(
                           'Recent Transactions',
@@ -126,7 +127,7 @@ class _GoFinancialScreenState extends State<GoFinancialScreen> {
                           onPressed: () =>
                               Navigator.pushNamed(context, AppRoutes.goArchive),
                           style: TextButton.styleFrom(
-                              foregroundColor: kGoColor,
+                              foregroundColor: IveTokens.moduleGo,
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 8)),
                           child: const Text('View All',
@@ -137,11 +138,11 @@ class _GoFinancialScreenState extends State<GoFinancialScreen> {
                   ),
                 ),
 
-                // ── Loading / Error / Empty / Data ────────────────────────
+                //  Loading / Error / Empty / Data 
                 if (provider.isTransactionsLoading)
                   const SliverFillRemaining(
                     child: Center(
-                      child: CircularProgressIndicator(color: kGoColor),
+                      child: CircularProgressIndicator(color: IveTokens.moduleGo),
                     ),
                   )
                 else if (provider.error != null &&
@@ -152,7 +153,7 @@ class _GoFinancialScreenState extends State<GoFinancialScreen> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           const Icon(Icons.error_outline,
-                              size: 48, color: kGoNegative),
+                              size: 48, color: IveTokens.danger),
                           const SizedBox(height: 12),
                           Text(
                             provider.error!,
@@ -164,7 +165,7 @@ class _GoFinancialScreenState extends State<GoFinancialScreen> {
                           ElevatedButton(
                             onPressed: _refresh,
                             style: ElevatedButton.styleFrom(
-                                backgroundColor: kGoColor,
+                                backgroundColor: IveTokens.moduleGo,
                                 foregroundColor: Colors.white),
                             child: const Text('Retry'),
                           ),
@@ -213,7 +214,7 @@ class _GoFinancialScreenState extends State<GoFinancialScreen> {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [kGoColor, kGoColorDark],
+          colors: [IveTokens.moduleGo, IveTokens.ink],
         ),
       ),
       padding: const EdgeInsets.fromLTRB(24, 20, 24, 28),

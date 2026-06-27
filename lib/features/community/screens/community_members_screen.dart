@@ -1,7 +1,7 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// COMMUNITY MODULE — Community Members Screen
+/// 
+/// COMMUNITY MODULE  Community Members Screen
 /// Paginated member list with roles. Admins can ban members.
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -92,7 +92,7 @@ class _CommunityMembersScreenState extends State<CommunityMembersScreen> {
           ),
           body: Column(
             children: [
-              // ── AI insight ──────────────────────────────────────────
+              //  AI insight 
               if (ai.insights.isNotEmpty)
                 Container(
                   margin: const EdgeInsets.fromLTRB(16, 10, 16, 0),
@@ -105,24 +105,24 @@ class _CommunityMembersScreenState extends State<CommunityMembersScreen> {
                   ]),
                 ),
 
-              // ── Search ──────────────────────────────────────────────
+              //  Search 
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
                 child: TextField(
                   controller: _searchCtrl,
                   onChanged: (_) => setState(() {}),
                   decoration: InputDecoration(
-                    hintText: 'Search members…',
+                    hintText: 'Search members',
                     prefixIcon: const Icon(Icons.search, size: 20),
                     filled: true,
                     fillColor: AppColors.inputFill,
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
                     contentPadding: const EdgeInsets.symmetric(vertical: 10),
                   ),
                 ),
               ),
 
-              // ── Role filter chips ──────────────────────────────────
+              //  Role filter chips 
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 child: SingleChildScrollView(
@@ -146,7 +146,7 @@ class _CommunityMembersScreenState extends State<CommunityMembersScreen> {
                 ),
               ),
 
-              // ── Member count / loading ─────────────────────────────
+              //  Member count / loading 
               if (communityProvider.isMembersLoading && allMembers.isEmpty)
                 const Expanded(child: Center(child: CircularProgressIndicator()))
               else ...[
@@ -189,7 +189,7 @@ class _CommunityMembersScreenState extends State<CommunityMembersScreen> {
 
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 4),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: ListTile(
         leading: CircleAvatar(
           backgroundColor: _color.withValues(alpha: 0.15),
@@ -202,7 +202,7 @@ class _CommunityMembersScreenState extends State<CommunityMembersScreen> {
           children: [
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-              decoration: BoxDecoration(color: roleColor.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(20)),
+              decoration: BoxDecoration(color: roleColor.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(10)),
               child: Text(role.toUpperCase(), style: TextStyle(fontSize: 9, fontWeight: FontWeight.bold, color: roleColor)),
             ),
             if (canModerate && !isOwner) ...[

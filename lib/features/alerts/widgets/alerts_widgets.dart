@@ -1,30 +1,32 @@
-﻿/// Alerts Module — Shared Reusable UI Components
+/// Alerts Module  Shared Reusable UI Components
 /// Module Color: Red (0xFFEF4444)
 /// Visibility: All roles EXCEPT Owner
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
 import '../models/alerts_models.dart';
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // COLOR CONSTANTS
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
-const kAlertsColor = Color(0xFFEF4444);
-const kAlertsColorLight = Color(0xFFFEE2E2);
-const kAlertsColorDark = Color(0xFFDC2626);
-const kAlertsResolved = Color(0xFF10B981);
-const kAlertsResolvedLight = Color(0xFFD1FAE5);
-const kAlertsWarning = Color(0xFFF59E0B);
-const kAlertsWarningLight = Color(0xFFFEF3C7);
-const kAlertsInfo = Color(0xFF3B82F6);
-const kAlertsInfoLight = Color(0xFFDBEAFE);
-const kAlertsCritical = Color(0xFF7C3AED);
-const kAlertsCriticalLight = Color(0xFFEDE9FE);
+// Module color consts  replaced by IveTokens
+const kAlertsColor = IveTokens.moduleAlerts;      // was 0xFFEF4444  use moduleAlerts per spec
+const kAlertsColorLight = Color(0x1AFBBF24);      // 10% moduleAlerts tint
+const kAlertsColorDark = IveTokens.moduleAlerts;  // dark variant  same token
+const kAlertsResolved = IveTokens.success;
+const kAlertsResolvedLight = Color(0x1A34D399);   // 10% success tint
+const kAlertsWarning = IveTokens.warning;
+const kAlertsWarningLight = Color(0x1AF5B544);    // 10% warning tint
+const kAlertsInfo = IveTokens.info;
+const kAlertsInfoLight = Color(0x1A5BA8E8);       // 10% info tint
+const kAlertsCritical = IveTokens.accent;         // purple critical  accent
+const kAlertsCriticalLight = Color(0x1A4361EE);   // 10% accent tint
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // ALERTS APP BAR
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class AlertsAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -44,8 +46,8 @@ class AlertsAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
-      foregroundColor: const Color(0xFF1A1A1A),
+      backgroundColor: IveTokens.surface,
+      foregroundColor: IveTokens.ink,
       elevation: 0,
       surfaceTintColor: Colors.transparent,
       title: Row(
@@ -66,9 +68,9 @@ class AlertsAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // SECTION CARD
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class AlertsSectionCard extends StatelessWidget {
   final String? title;
@@ -87,9 +89,9 @@ class AlertsSectionCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: const Color(0xFFE5E7EB)),
+        color: IveTokens.surface,
+        borderRadius: BorderRadius.circular(IveTokens.rSm),
+        border: Border.all(color: IveTokens.hairline2),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -111,9 +113,9 @@ class AlertsSectionCard extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // EMPTY STATE
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class AlertsEmptyState extends StatelessWidget {
   final IconData icon;
@@ -151,18 +153,12 @@ class AlertsEmptyState extends StatelessWidget {
             const SizedBox(height: 16),
             Text(title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
             const SizedBox(height: 8),
-            Text(message, textAlign: TextAlign.center, style: const TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+            Text(message, textAlign: TextAlign.center, style: const TextStyle(fontSize: 14, color: IveTokens.mute)),
             if (actionLabel != null) ...[
               const SizedBox(height: 20),
-              ElevatedButton(
+              IveButton.primary(
+                label: actionLabel!,
                 onPressed: onAction,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: kAlertsColor,
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                ),
-                child: Text(actionLabel!, style: const TextStyle(fontWeight: FontWeight.w600)),
               ),
             ],
           ],
@@ -172,9 +168,9 @@ class AlertsEmptyState extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// ALERT CARD — Pending
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
+// ALERT CARD  Pending
+// 
 
 class PendingAlertCard extends StatelessWidget {
   final AlertItem alert;
@@ -209,19 +205,19 @@ class PendingAlertCard extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 10),
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: isSelected ? kAlertsColorLight : Colors.white,
-          borderRadius: BorderRadius.circular(10),
+          color: isSelected ? kAlertsColorLight : IveTokens.surface,
+          borderRadius: BorderRadius.circular(IveTokens.rSm),
           border: Border(
             left: BorderSide(color: borderColor, width: 4),
-            top: BorderSide(color: isSelected ? kAlertsColor : const Color(0xFFE5E7EB)),
-            right: BorderSide(color: isSelected ? kAlertsColor : const Color(0xFFE5E7EB)),
-            bottom: BorderSide(color: isSelected ? kAlertsColor : const Color(0xFFE5E7EB)),
+            top: BorderSide(color: isSelected ? kAlertsColor : IveTokens.hairline2),
+            right: BorderSide(color: isSelected ? kAlertsColor : IveTokens.hairline2),
+            bottom: BorderSide(color: isSelected ? kAlertsColor : IveTokens.hairline2),
           ),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Top row — priority chip + time
+            // Top row  priority chip + time
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -229,14 +225,14 @@ class PendingAlertCard extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                   decoration: BoxDecoration(
                     color: borderColor.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(6),
+                    borderRadius: BorderRadius.circular(IveTokens.rXs),
                   ),
                   child: Text(
                     alert.priorityLabel,
                     style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: borderColor),
                   ),
                 ),
-                Text(_timeAgo(alert.createdAt), style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                Text(_timeAgo(alert.createdAt), style: const TextStyle(fontSize: 11, color: IveTokens.ink2)),
               ],
             ),
             const SizedBox(height: 6),
@@ -260,7 +256,7 @@ class PendingAlertCard extends StatelessWidget {
             ),
             const Spacer(),
 
-            // Bottom row — assignee + actions
+            // Bottom row  assignee + actions
             Row(
               children: [
                 if (alert.assigneeName != null) ...[
@@ -274,9 +270,9 @@ class PendingAlertCard extends StatelessWidget {
                     child: Center(child: Text(alert.assigneeName![0], style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: kAlertsInfo))),
                   ),
                   const SizedBox(width: 6),
-                  Text('${alert.assigneeName}', style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
+                  Text('${alert.assigneeName}', style: const TextStyle(fontSize: 11, color: IveTokens.mute)),
                 ] else
-                  const Text('Unassigned', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF), fontStyle: FontStyle.italic)),
+                  const Text('Unassigned', style: TextStyle(fontSize: 11, color: IveTokens.ink2, fontStyle: FontStyle.italic)),
                 const Spacer(),
                 if (alert.slaInfo != null)
                   _SlaChip(sla: alert.slaInfo!),
@@ -291,7 +287,7 @@ class PendingAlertCard extends StatelessWidget {
   Color _priorityColor(AlertPriority p) {
     switch (p) {
       case AlertPriority.critical: return kAlertsCritical;
-      case AlertPriority.high: return kAlertsColor;
+      case AlertPriority.high: return IveTokens.danger;
       case AlertPriority.medium: return kAlertsWarning;
       case AlertPriority.low: return kAlertsInfo;
     }
@@ -305,9 +301,9 @@ class PendingAlertCard extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// ALERT CARD — Resolved
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
+// ALERT CARD  Resolved
+// 
 
 class ResolvedAlertCard extends StatelessWidget {
   final AlertItem alert;
@@ -327,19 +323,19 @@ class ResolvedAlertCard extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 10),
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
+          color: IveTokens.surface,
+          borderRadius: BorderRadius.circular(IveTokens.rSm),
           border: const Border(
             left: BorderSide(color: kAlertsResolved, width: 4),
-            top: BorderSide(color: Color(0xFF1C1C2E)),
-            right: BorderSide(color: Color(0xFF1C1C2E)),
-            bottom: BorderSide(color: Color(0xFF1C1C2E)),
+            top: BorderSide(color: IveTokens.hairline),
+            right: BorderSide(color: IveTokens.hairline),
+            bottom: BorderSide(color: IveTokens.hairline),
           ),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Top row — status + time
+            // Top row  status + time
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -372,16 +368,16 @@ class ResolvedAlertCard extends StatelessWidget {
                     child: Center(child: Text(alert.resolution!.resolverName[0], style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: kAlertsResolved))),
                   ),
                   const SizedBox(width: 6),
-                  Text(alert.resolution!.resolverName, style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
+                  Text(alert.resolution!.resolverName, style: const TextStyle(fontSize: 11, color: IveTokens.mute)),
                   const SizedBox(width: 8),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                    decoration: BoxDecoration(color: const Color(0xFFF3F4F6), borderRadius: BorderRadius.circular(4)),
-                    child: Text(alert.resolution!.methodLabel, style: const TextStyle(fontSize: 10, color: Color(0xFF6B7280))),
+                    decoration: BoxDecoration(color: IveTokens.hairline, borderRadius: BorderRadius.circular(IveTokens.rXs)),
+                    child: Text(alert.resolution!.methodLabel, style: const TextStyle(fontSize: 10, color: IveTokens.mute)),
                   ),
                 ],
                 const Spacer(),
-                Text(_timeAgo(alert.updatedAt), style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                Text(_timeAgo(alert.updatedAt), style: const TextStyle(fontSize: 11, color: IveTokens.ink2)),
               ],
             ),
           ],
@@ -398,9 +394,9 @@ class ResolvedAlertCard extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // SLA CHIP
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _SlaChip extends StatelessWidget {
   final AlertSlaInfo sla;
@@ -421,7 +417,7 @@ class _SlaChip extends StatelessWidget {
             : '${remaining.inMinutes}m left';
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-      decoration: BoxDecoration(color: color.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(6)),
+      decoration: BoxDecoration(color: color.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(IveTokens.rXs)),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -434,9 +430,9 @@ class _SlaChip extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // VERIFICATION BADGE
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _VerificationBadge extends StatelessWidget {
   final VerificationStatus status;
@@ -444,19 +440,19 @@ class _VerificationBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final label = status == VerificationStatus.verified ? 'âœ… Verified' : 'ðŸ“‹ Pending Review';
+    final label = status == VerificationStatus.verified ? ' Verified' : '" Pending Review';
     final color = status == VerificationStatus.verified ? kAlertsResolved : kAlertsInfo;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-      decoration: BoxDecoration(color: color.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(6)),
+      decoration: BoxDecoration(color: color.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(IveTokens.rXs)),
       child: Text(label, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: color)),
     );
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // PRIORITY FILTER PILL
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class PriorityFilterPill extends StatelessWidget {
   final String label;
@@ -478,16 +474,16 @@ class PriorityFilterPill extends StatelessWidget {
         margin: const EdgeInsets.only(right: 8),
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
         decoration: BoxDecoration(
-          color: isSelected ? kAlertsColor : Colors.white,
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: isSelected ? kAlertsColor : const Color(0xFFE5E7EB)),
+          color: isSelected ? kAlertsColor : IveTokens.surface,
+          borderRadius: BorderRadius.circular(IveTokens.rSm),
+          border: Border.all(color: isSelected ? kAlertsColor : IveTokens.hairline2),
         ),
         child: Text(
           label,
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w500,
-            color: isSelected ? Colors.white : const Color(0xFF6B7280),
+            color: isSelected ? IveTokens.bg : IveTokens.mute,
           ),
         ),
       ),
@@ -495,9 +491,9 @@ class PriorityFilterPill extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // ACTIVITY TIMELINE EVENT
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class ActivityTimelineEvent extends StatelessWidget {
   final ActivityEvent event;
@@ -529,7 +525,7 @@ class ActivityTimelineEvent extends StatelessWidget {
                   ),
                   child: Center(child: Text(event.typeEmoji, style: const TextStyle(fontSize: 13))),
                 ),
-                if (!isLast) Expanded(child: Container(width: 2, color: const Color(0xFFE5E7EB))),
+                if (!isLast) Expanded(child: Container(width: 2, color: IveTokens.hairline2)),
               ],
             ),
           ),
@@ -546,20 +542,20 @@ class ActivityTimelineEvent extends StatelessWidget {
                     children: [
                       Text(event.actorName, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
                       const Spacer(),
-                      Text(_timeAgo(event.timestamp), style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                      Text(_timeAgo(event.timestamp), style: const TextStyle(fontSize: 11, color: IveTokens.ink2)),
                     ],
                   ),
                   const SizedBox(height: 2),
-                  Text(event.description, style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+                  Text(event.description, style: const TextStyle(fontSize: 13, color: IveTokens.mute)),
                   if (event.details != null) ...[
                     const SizedBox(height: 6),
                     Container(
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFF3F4F6),
-                        borderRadius: BorderRadius.circular(8),
+                        color: IveTokens.hairline,
+                        borderRadius: BorderRadius.circular(IveTokens.rSm),
                       ),
-                      child: Text(event.details!, style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
+                      child: Text(event.details!, style: const TextStyle(fontSize: 12, color: IveTokens.mute)),
                     ),
                   ],
                 ],
@@ -575,9 +571,9 @@ class ActivityTimelineEvent extends StatelessWidget {
     switch (t) {
       case ActivityEventType.created: return kAlertsInfo;
       case ActivityEventType.assigned: return kAlertsInfo;
-      case ActivityEventType.commented: return const Color(0xFF6B7280);
+      case ActivityEventType.commented: return IveTokens.mute;
       case ActivityEventType.statusChanged: return kAlertsWarning;
-      case ActivityEventType.fileAttached: return const Color(0xFF6B7280);
+      case ActivityEventType.fileAttached: return IveTokens.mute;
       case ActivityEventType.escalated: return kAlertsColor;
       case ActivityEventType.resolved: return kAlertsResolved;
       case ActivityEventType.verified: return kAlertsResolved;
@@ -592,9 +588,9 @@ class ActivityTimelineEvent extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // KNOWLEDGE BASE ITEM CARD
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class KnowledgeItemCard extends StatelessWidget {
   final KnowledgeBaseItem item;
@@ -610,9 +606,9 @@ class KnowledgeItemCard extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 10),
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: const Color(0xFFE5E7EB)),
+          color: IveTokens.surface,
+          borderRadius: BorderRadius.circular(IveTokens.rSm),
+          border: Border.all(color: IveTokens.hairline2),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -625,22 +621,22 @@ class KnowledgeItemCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 6),
-            Text(item.summary, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+            Text(item.summary, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 13, color: IveTokens.mute)),
             const SizedBox(height: 8),
             Row(
               children: [
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                  decoration: BoxDecoration(color: kAlertsResolved.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(4)),
+                  decoration: BoxDecoration(color: kAlertsResolved.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(IveTokens.rXs)),
                   child: Text('${(item.similarityScore * 100).toInt()}% match', style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: kAlertsResolved)),
                 ),
                 const SizedBox(width: 8),
-                const Icon(Icons.thumb_up, size: 12, color: Color(0xFF9CA3AF)),
+                const Icon(Icons.thumb_up, size: 12, color: IveTokens.ink2),
                 const SizedBox(width: 4),
-                Text('${item.helpfulCount}', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                Text('${item.helpfulCount}', style: const TextStyle(fontSize: 11, color: IveTokens.ink2)),
                 if (item.source != null) ...[
                   const Spacer(),
-                  Text(item.source!, style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                  Text(item.source!, style: const TextStyle(fontSize: 11, color: IveTokens.ink2)),
                 ],
               ],
             ),
@@ -658,22 +654,22 @@ class _KbTypeBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final data = {
-      KnowledgeItemType.article: ('ðŸ“š', 'Article', kAlertsInfo),
-      KnowledgeItemType.pastResolution: ('âœ…', 'Past Fix', kAlertsResolved),
-      KnowledgeItemType.communitySolution: ('ðŸŒ', 'Community', kAlertsCritical),
+      KnowledgeItemType.article: ('"', 'Article', kAlertsInfo),
+      KnowledgeItemType.pastResolution: ('', 'Past Fix', kAlertsResolved),
+      KnowledgeItemType.communitySolution: ('', 'Community', kAlertsCritical),
     };
     final d = data[type]!;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-      decoration: BoxDecoration(color: d.$3.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(4)),
+      decoration: BoxDecoration(color: d.$3.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(IveTokens.rXs)),
       child: Text('${d.$1} ${d.$2}', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: d.$3)),
     );
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // TEMPLATE CARD
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class AlertTemplateCard extends StatelessWidget {
   final AlertTemplate template;
@@ -688,9 +684,9 @@ class AlertTemplateCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: const Color(0xFFE5E7EB)),
+          color: IveTokens.surface,
+          borderRadius: BorderRadius.circular(IveTokens.rSm),
+          border: Border.all(color: IveTokens.hairline2),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -706,22 +702,22 @@ class AlertTemplateCard extends StatelessWidget {
               template.content,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
+              style: const TextStyle(fontSize: 12, color: IveTokens.mute),
             ),
             const SizedBox(height: 8),
             Row(
               children: [
                 if (template.variables.isNotEmpty) ...[
-                  const Icon(Icons.data_object, size: 12, color: Color(0xFF9CA3AF)),
+                  const Icon(Icons.data_object, size: 12, color: IveTokens.ink2),
                   const SizedBox(width: 4),
-                  Text('${template.variables.length} vars', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                  Text('${template.variables.length} vars', style: const TextStyle(fontSize: 11, color: IveTokens.ink2)),
                   const SizedBox(width: 12),
                 ],
-                const Icon(Icons.repeat, size: 12, color: Color(0xFF9CA3AF)),
+                const Icon(Icons.repeat, size: 12, color: IveTokens.ink2),
                 const SizedBox(width: 4),
-                Text('${template.usageCount} uses', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                Text('${template.usageCount} uses', style: const TextStyle(fontSize: 11, color: IveTokens.ink2)),
                 const Spacer(),
-                Text('by ${template.createdBy}', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                Text('by ${template.createdBy}', style: const TextStyle(fontSize: 11, color: IveTokens.ink2)),
               ],
             ),
           ],
@@ -731,9 +727,9 @@ class AlertTemplateCard extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // RESOLVER LEADERBOARD TILE
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class ResolverLeaderboardTile extends StatelessWidget {
   final ResolverStats resolver;
@@ -747,9 +743,9 @@ class ResolverLeaderboardTile extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: const Color(0xFFE5E7EB)),
+        color: IveTokens.surface,
+        borderRadius: BorderRadius.circular(IveTokens.rSm),
+        border: Border.all(color: IveTokens.hairline2),
       ),
       child: Row(
         children: [
@@ -758,12 +754,12 @@ class ResolverLeaderboardTile extends StatelessWidget {
             width: 28,
             height: 28,
             decoration: BoxDecoration(
-              color: rank <= 3 ? kAlertsWarning.withValues(alpha: 0.15) : const Color(0xFFF3F4F6),
+              color: rank <= 3 ? kAlertsWarning.withValues(alpha: 0.15) : IveTokens.hairline,
               shape: BoxShape.circle,
             ),
             child: Center(
               child: Text(
-                rank <= 3 ? ['ðŸ¥‡', 'ðŸ¥ˆ', 'ðŸ¥‰'][rank - 1] : '#$rank',
+                rank <= 3 ? ['', '', ''][rank - 1] : '#$rank',
                 style: TextStyle(fontSize: rank <= 3 ? 14 : 11, fontWeight: FontWeight.w700),
               ),
             ),
@@ -775,7 +771,7 @@ class ResolverLeaderboardTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(resolver.name, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
-                Text(resolver.role, style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
+                Text(resolver.role, style: const TextStyle(fontSize: 11, color: IveTokens.mute)),
               ],
             ),
           ),
@@ -789,7 +785,7 @@ class ResolverLeaderboardTile extends StatelessWidget {
                 children: [
                   const Icon(Icons.star, size: 12, color: kAlertsWarning),
                   const SizedBox(width: 2),
-                  Text('${resolver.satisfactionScore}', style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
+                  Text('${resolver.satisfactionScore}', style: const TextStyle(fontSize: 11, color: IveTokens.mute)),
                 ],
               ),
             ],
@@ -800,9 +796,9 @@ class ResolverLeaderboardTile extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // STAFF PICKER TILE
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class StaffPickerTile extends StatelessWidget {
   final AlertStaffMember staff;
@@ -819,9 +815,9 @@ class StaffPickerTile extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 8),
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: isSelected ? kAlertsColorLight : Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: isSelected ? kAlertsColor : const Color(0xFFE5E7EB)),
+          color: isSelected ? kAlertsColorLight : IveTokens.surface,
+          borderRadius: BorderRadius.circular(IveTokens.rSm),
+          border: Border.all(color: isSelected ? kAlertsColor : IveTokens.hairline2),
         ),
         child: Row(
           children: [
@@ -842,10 +838,10 @@ class StaffPickerTile extends StatelessWidget {
                   Text(staff.name, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
                   Row(
                     children: [
-                      Text(staff.role, style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
+                      Text(staff.role, style: const TextStyle(fontSize: 11, color: IveTokens.mute)),
                       if (staff.branch != null) ...[
-                        const Text(' • ', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
-                        Text(staff.branch!, style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                        const Text('  ', style: TextStyle(fontSize: 11, color: IveTokens.ink2)),
+                        Text(staff.branch!, style: const TextStyle(fontSize: 11, color: IveTokens.ink2)),
                       ],
                     ],
                   ),
@@ -864,7 +860,7 @@ class StaffPickerTile extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 4),
-                Text('${staff.activeAlerts} active', style: const TextStyle(fontSize: 10, color: Color(0xFF9CA3AF))),
+                Text('${staff.activeAlerts} active', style: const TextStyle(fontSize: 10, color: IveTokens.ink2)),
               ],
             ),
           ],
@@ -874,9 +870,9 @@ class StaffPickerTile extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // MINI DONUT CHART (for widget)
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class MiniDonutChart extends StatelessWidget {
   final List<IssueDistribution> data;
@@ -903,11 +899,11 @@ class _DonutPainter extends CustomPainter {
     final center = Offset(size.width / 2, size.height / 2);
     final radius = size.width / 2;
     const strokeWidth = 8.0;
-    final colors = [kAlertsColor, kAlertsWarning, kAlertsInfo, kAlertsResolved, const Color(0xFF9CA3AF)];
+    final colors = [kAlertsColor, kAlertsWarning, kAlertsInfo, kAlertsResolved, IveTokens.ink2];
 
-    double startAngle = -1.5708; // -Ï€/2
+    double startAngle = -1.5708; // -/2
     for (int i = 0; i < data.length && i < colors.length; i++) {
-      final sweepAngle = (data[i].percentage / 100) * 6.2832; // 2Ï€
+      final sweepAngle = (data[i].percentage / 100) * 6.2832; // 2
       final paint = Paint()
         ..color = colors[i]
         ..style = PaintingStyle.stroke

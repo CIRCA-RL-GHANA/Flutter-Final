@@ -8,19 +8,19 @@ class AIInsightsNotifier extends ChangeNotifier {
 
   AIInsightsNotifier([AIService? service]) : _aiService = service ?? AIService();
 
-  // ── Planner financial insights ────────────────────────────────────────
+  //  Planner financial insights 
   List<Map<String, dynamic>> _insights       = [];
   Map<String, dynamic>?      _spendingPattern;
   Map<String, dynamic>?      _forecast;
 
-  // ── Recommendations ───────────────────────────────────────────────────
+  //  Recommendations 
   List<Map<String, dynamic>> _recommendations = [];
 
-  // ── Smart search ──────────────────────────────────────────────────────
+  //  Smart search 
   List<Map<String, dynamic>> _searchResults  = [];
   String                     _lastQuery      = '';
 
-  // ── State flags ───────────────────────────────────────────────────────
+  //  State flags 
   bool    _loadingInsights = false;
   bool    _loadingSearch   = false;
   String? _error;
@@ -35,9 +35,9 @@ class AIInsightsNotifier extends ChangeNotifier {
   bool                       get loadingSearch   => _loadingSearch;
   String?                    get error           => _error;
 
-  // ─────────────────────────────────────────────────────────────────────────
+  // 
   // FINANCIAL INSIGHTS
-  // ─────────────────────────────────────────────────────────────────────────
+  // 
 
   Future<void> loadPlannerInsights() async {
     _loadingInsights = true;
@@ -86,9 +86,9 @@ class AIInsightsNotifier extends ChangeNotifier {
     ]);
   }
 
-  // ─────────────────────────────────────────────────────────────────────────
+  // 
   // RECOMMENDATIONS
-  // ─────────────────────────────────────────────────────────────────────────
+  // 
 
   Future<void> loadRecommendations() async {
     try {
@@ -102,9 +102,9 @@ class AIInsightsNotifier extends ChangeNotifier {
     }
   }
 
-  // ─────────────────────────────────────────────────────────────────────────
+  // 
   // SMART SEARCH
-  // ─────────────────────────────────────────────────────────────────────────
+  // 
 
   Future<void> smartSearch({
     required String query,

@@ -1,11 +1,12 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// LIVE MODULE — Screen 12: Package Acceptance Flow
+/// 
+/// LIVE MODULE  Screen 12: Package Acceptance Flow
 /// Driver accepts/declines assigned packages, reviews details,
 /// confirms pickup readiness, and starts navigation
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
@@ -61,8 +62,8 @@ class _LivePackageAcceptanceScreenState extends State<LivePackageAcceptanceScree
                     ),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                      decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.2), borderRadius: BorderRadius.circular(8)),
-                      child: Text('â‚µ${(pkg.driverEarnings * 0.08).toStringAsFixed(0)} earnings', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white)),
+                      decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.2), borderRadius: BorderRadius.circular(10)),
+                      child: Text('${(pkg.driverEarnings * 0.08).toStringAsFixed(0)} earnings', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white)),
                     ),
                   ],
                 ),
@@ -74,7 +75,7 @@ class _LivePackageAcceptanceScreenState extends State<LivePackageAcceptanceScree
               LiveSectionCard(
                 title: 'PACKAGE DETAILS',
                 icon: Icons.inventory_2,
-                iconColor: kLiveColor,
+                iconColor: IveTokens.moduleLive,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -84,14 +85,14 @@ class _LivePackageAcceptanceScreenState extends State<LivePackageAcceptanceScree
                         const SizedBox(width: 8),
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                          decoration: BoxDecoration(color: kLiveColor.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(4)),
-                          child: Text(pkg.type.name.toUpperCase(), style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: kLiveColor)),
+                          decoration: BoxDecoration(color: IveTokens.moduleLive.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(6)),
+                          child: Text(pkg.type.name.toUpperCase(), style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: IveTokens.moduleLive)),
                         ),
                       ],
                     ),
                     const SizedBox(height: 8),
                     _InfoRow(icon: Icons.route, label: '${pkg.stops.length} stops'),
-                    _InfoRow(icon: Icons.attach_money, label: 'Value: â‚µ${pkg.driverEarnings.toStringAsFixed(0)}'),
+                    _InfoRow(icon: Icons.attach_money, label: 'Value: ${pkg.driverEarnings.toStringAsFixed(0)}'),
                     const _InfoRow(icon: Icons.timer, label: 'Est. duration: 45 min'),
                     const _InfoRow(icon: Icons.straighten, label: 'Est. distance: 8.3 km'),
                   ],
@@ -148,10 +149,10 @@ class _LivePackageAcceptanceScreenState extends State<LivePackageAcceptanceScree
                   spacing: 6,
                   runSpacing: 6,
                   children: [
-                    if (pkg.pinRequired) const _VerifyChip(label: 'ðŸ”¢ PIN', active: true),
-                    if (pkg.signatureRequired) const _VerifyChip(label: 'âœï¸ Signature', active: true),
-                    if (pkg.photoRequired) const _VerifyChip(label: 'ðŸ“¸ Photo', active: true),
-                    if (pkg.biometricRequired) const _VerifyChip(label: 'ðŸ” Biometric', active: true),
+                    if (pkg.pinRequired) const _VerifyChip(label: '" PIN', active: true),
+                    if (pkg.signatureRequired) const _VerifyChip(label: ' Signature', active: true),
+                    if (pkg.photoRequired) const _VerifyChip(label: '" Photo', active: true),
+                    if (pkg.biometricRequired) const _VerifyChip(label: '" Biometric', active: true),
                   ],
                 ),
               ),
@@ -163,7 +164,7 @@ class _LivePackageAcceptanceScreenState extends State<LivePackageAcceptanceScree
                 iconColor: const Color(0xFFF59E0B),
                 child: Container(
                   padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(color: const Color(0xFFFEF3C7), borderRadius: BorderRadius.circular(8)),
+                  decoration: BoxDecoration(color: const Color(0xFFFEF3C7), borderRadius: BorderRadius.circular(10)),
                   child: const Text('Handle with care. Customer requested call before delivery. Leave at reception if unavailable.',
                     style: TextStyle(fontSize: 13, color: Color(0xFF92400E)),
                   ),
@@ -186,7 +187,7 @@ class _LivePackageAcceptanceScreenState extends State<LivePackageAcceptanceScree
                       HapticFeedback.mediumImpact();
                       Navigator.pop(context);
                     },
-                    style: OutlinedButton.styleFrom(foregroundColor: kLiveColor, padding: const EdgeInsets.symmetric(vertical: 14)),
+                    style: OutlinedButton.styleFrom(foregroundColor: IveTokens.moduleLive, padding: const EdgeInsets.symmetric(vertical: 14)),
                     child: const Text('DECLINE', style: TextStyle(fontWeight: FontWeight.w700)),
                   ),
                 ),
@@ -293,7 +294,7 @@ class _VerifyChip extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
         color: active ? const Color(0xFFD1FAE5) : const Color(0xFFF3F4F6),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Text(label, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: active ? const Color(0xFF059669) : AppColors.textTertiary)),
     );

@@ -1,8 +1,8 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 /// U5: DATA & PRIVACY Screen
 /// Privacy toggles, data storage breakdown, connected apps, data export,
 /// account deletion
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -26,12 +26,12 @@ class DataPrivacyScreen extends StatelessWidget {
           body: ListView(
             padding: const EdgeInsets.fromLTRB(20, 12, 20, 100),
             children: [
-              // ─── Privacy Score Banner ──────────────────────
+              //  Privacy Score Banner 
               _PrivacyScoreBanner(settings: prov.privacySettings),
 
               const SizedBox(height: 16),
 
-              // ─── Privacy Controls ─────────────────────────
+              //  Privacy Controls 
               const UtilitySectionTitle(
                 title: 'Privacy Controls',
                 icon: Icons.privacy_tip_outlined,
@@ -58,7 +58,7 @@ class DataPrivacyScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Data Usage ───────────────────────────────
+              //  Data Usage 
               const UtilitySectionTitle(
                 title: 'Data Usage',
                 icon: Icons.pie_chart_outline,
@@ -99,7 +99,7 @@ class DataPrivacyScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Connected Apps ───────────────────────────
+              //  Connected Apps 
               const UtilitySectionTitle(
                 title: 'Connected Apps',
                 icon: Icons.apps,
@@ -121,7 +121,7 @@ class DataPrivacyScreen extends StatelessWidget {
                   onRevoke: () => _confirmRevoke(context, prov, app),
                 )),
 
-              // ─── Data Export ───────────────────────────────
+              //  Data Export 
               const UtilitySectionTitle(
                 title: 'Data Export',
                 icon: Icons.download,
@@ -170,7 +170,7 @@ class DataPrivacyScreen extends StatelessWidget {
                             ),
                             const SizedBox(width: 8),
                             Text(
-                              '${req.format.name.toUpperCase()} Â· ${_exportStatusLabel(req.status)}',
+                              '${req.format.name.toUpperCase()}  ${_exportStatusLabel(req.status)}',
                               style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
                             ),
                             if (req.fileSizeMB != null) ...[
@@ -185,7 +185,7 @@ class DataPrivacyScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Danger Zone ──────────────────────────────
+              //  Danger Zone 
               const UtilitySectionTitle(
                 title: 'Danger Zone',
                 icon: Icons.warning_amber,
@@ -258,7 +258,7 @@ class DataPrivacyScreen extends StatelessWidget {
   }
 }
 
-// ─── Privacy Score Banner ────────────────────────────────────────────────────
+//  Privacy Score Banner 
 
 class _PrivacyScoreBanner extends StatelessWidget {
   final List<PrivacySetting> settings;
@@ -282,7 +282,7 @@ class _PrivacyScoreBanner extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(10),
         border: Border.all(color: color.withValues(alpha: 0.15)),
       ),
       child: Row(
@@ -313,7 +313,7 @@ class _PrivacyScoreBanner extends StatelessWidget {
   }
 }
 
-// ─── Data Category Row ───────────────────────────────────────────────────────
+//  Data Category Row 
 
 class _DataCategoryRow extends StatelessWidget {
   final DataCategory category;
@@ -343,7 +343,7 @@ class _DataCategoryRow extends StatelessWidget {
           SizedBox(
             width: 60,
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(3),
+              borderRadius: BorderRadius.circular(6),
               child: LinearProgressIndicator(
                 value: total > 0 ? category.sizeMB / total : 0,
                 backgroundColor: category.color.withValues(alpha: 0.1),
@@ -358,7 +358,7 @@ class _DataCategoryRow extends StatelessWidget {
   }
 }
 
-// ─── Connected App Card ──────────────────────────────────────────────────────
+//  Connected App Card 
 
 class _ConnectedAppCard extends StatelessWidget {
   final ConnectedApp app;
@@ -401,7 +401,7 @@ class _ConnectedAppCard extends StatelessWidget {
                     ],
                   ),
                   Text(
-                    app.permissions.join(' Â· '),
+                    app.permissions.join('  '),
                     style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                   ),
                 ],

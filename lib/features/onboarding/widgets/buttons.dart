@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import '../../../core/design/ive_tokens.dart';
 
-// OS palette
-const Color _kSurface  = Color(0xFF0E0E1A);
-const Color _kBorder   = Color(0xFF1C1C2E);
-const Color _kAccent   = Color(0xFF22BDD8);
-const Color _kTextMuted= Color(0xFF7A7A95);
+// OS palette  V2 tokens
+const Color _kSurface   = IveTokens.surface;
+const Color _kBorder    = IveTokens.hairline;
+const Color _kAccent    = IveTokens.accent;
+const Color _kTextMuted = IveTokens.mute;
 
-/// Primary OS button — flat electric-blue, uppercase, monospace-ish spacing.
+/// Primary OS button  flat electric-blue, uppercase, monospace-ish spacing.
 class PrimaryButton extends StatelessWidget {
   final String text;
   final VoidCallback? onPressed;
@@ -80,7 +81,7 @@ class PrimaryButton extends StatelessWidget {
   }
 }
 
-/// Secondary OS button — surface bg with border.
+/// Secondary OS button  surface bg with border.
 class SecondaryButton extends StatelessWidget {
   final String text;
   final VoidCallback? onPressed;
@@ -114,7 +115,7 @@ class SecondaryButton extends StatelessWidget {
   }
 }
 
-/// Outlined OS action button — border, no fill.
+/// Outlined OS action button  border, no fill.
 class OutlinedActionButton extends StatelessWidget {
   final String text;
   final VoidCallback? onPressed;

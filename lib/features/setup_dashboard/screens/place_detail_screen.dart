@@ -1,11 +1,12 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD2.2-DETAIL: PLACE DETAIL — 4-Tab Deep View
+/// 
+/// SD2.2-DETAIL: PLACE DETAIL  4-Tab Deep View
 /// Tabs: Overview, Staff, Products, Settings
 /// RBAC: Admin(fullAccess), BranchManager(branchScoped), Monitor(viewOnly)
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../prompt/providers/context_provider.dart';
@@ -83,7 +84,7 @@ class _PlaceHeader extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
         children: [
@@ -111,7 +112,7 @@ class _PlaceHeader extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                       decoration: BoxDecoration(
                         color: kSetupColor.withValues(alpha: 0.1),
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: BorderRadius.circular(6),
                       ),
                       child: Text(
                         place.type.name.toUpperCase(),
@@ -123,7 +124,7 @@ class _PlaceHeader extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                       decoration: BoxDecoration(
                         color: AppColors.success.withValues(alpha: 0.1),
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: BorderRadius.circular(6),
                       ),
                       child: Text(
                         place.visibility.name,
@@ -370,7 +371,7 @@ class _SettingsTab extends StatelessWidget {
                         content: const Text('This will hide the place from all operations. You can reactivate it later.'),
                         actions: [
                           TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
-                          ElevatedButton(onPressed: () { Navigator.pop(context); ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Place deactivated'))); }, style: ElevatedButton.styleFrom(backgroundColor: AppColors.error), child: const Text('Deactivate')),
+                          ElevatedButton(onPressed: () { Navigator.pop(context); AppToast.show(context, 'Place deactivated'); }, style: ElevatedButton.styleFrom(backgroundColor: AppColors.error), child: const Text('Deactivate')),
                         ],
                       )),
                       style: OutlinedButton.styleFrom(

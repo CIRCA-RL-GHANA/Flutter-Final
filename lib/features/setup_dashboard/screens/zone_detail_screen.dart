@@ -1,8 +1,8 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD2.3-DETAIL: ZONE DETAIL — 4-Tab Deep View
+/// 
+/// SD2.3-DETAIL: ZONE DETAIL  4-Tab Deep View
 /// Tabs: Overview, Coverage, Vehicles, Analytics
 /// RBAC: Admin(fullAccess), BranchManager(branchScoped), Monitor(viewOnly)
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -91,7 +91,7 @@ class _ZoneHeader extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
         children: [
@@ -125,7 +125,7 @@ class _ZoneHeader extends StatelessWidget {
                       style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: _statusColor),
                     ),
                     const SizedBox(width: 12),
-                    Text('â‚µ${zone.fee.toStringAsFixed(2)} fee', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                    Text('${zone.fee.toStringAsFixed(2)} fee', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                   ],
                 ),
               ],
@@ -153,7 +153,7 @@ class _OverviewTab extends StatelessWidget {
             const SizedBox(width: 10),
             Expanded(child: SetupStatCard(label: 'Deliveries', value: '${zone.dailyDeliveries}', icon: Icons.delivery_dining, color: AppColors.success)),
             const SizedBox(width: 10),
-            Expanded(child: SetupStatCard(label: 'Coverage', value: '${zone.coverageKm2.toStringAsFixed(0)} kmÂ²', icon: Icons.straighten, color: kSetupColor)),
+            Expanded(child: SetupStatCard(label: 'Coverage', value: '${zone.coverageKm2.toStringAsFixed(0)} km', icon: Icons.straighten, color: kSetupColor)),
           ],
         ),
         const SizedBox(height: 16),
@@ -180,8 +180,8 @@ class _OverviewTab extends StatelessWidget {
                   ZoneStatus.partial => AppColors.warning,
                 },
               ),
-              SetupInfoRow(label: 'Delivery Fee', value: 'â‚µ${zone.fee.toStringAsFixed(2)}'),
-              SetupInfoRow(label: 'Minimum Order', value: 'â‚µ${zone.minimumOrder.toStringAsFixed(2)}'),
+              SetupInfoRow(label: 'Delivery Fee', value: '${zone.fee.toStringAsFixed(2)}'),
+              SetupInfoRow(label: 'Minimum Order', value: '${zone.minimumOrder.toStringAsFixed(2)}'),
               SetupInfoRow(label: 'Est. Time', value: zone.estimatedTime),
               SetupInfoRow(label: 'Population Served', value: '${zone.populationServed}'),
             ],
@@ -215,7 +215,7 @@ class _CoverageTab extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 12),
-              SetupInfoRow(label: 'Coverage Area', value: '${zone.coverageKm2.toStringAsFixed(1)} kmÂ²'),
+              SetupInfoRow(label: 'Coverage Area', value: '${zone.coverageKm2.toStringAsFixed(1)} km'),
               SetupInfoRow(label: 'Population', value: '${zone.populationServed}'),
               SetupInfoRow(label: 'Daily Deliveries', value: '${zone.dailyDeliveries}'),
               SetupInfoRow(label: 'Active Vehicles', value: '${zone.vehicleCount}'),
@@ -369,7 +369,7 @@ class _MetricRow extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           ClipRRect(
-            borderRadius: BorderRadius.circular(3),
+            borderRadius: BorderRadius.circular(6),
             child: LinearProgressIndicator(
               value: value.clamp(0.0, 1.0),
               minHeight: 6,
@@ -383,7 +383,7 @@ class _MetricRow extends StatelessWidget {
   }
 }
 
-// ─── Zone Coverage Card ───────────────────────────────────────────────────────
+//  Zone Coverage Card 
 
 class _ZoneCoverageCard extends StatelessWidget {
   final DeliveryZone zone;
@@ -406,7 +406,7 @@ class _ZoneCoverageCard extends StatelessWidget {
       height: 200,
       decoration: BoxDecoration(
         color: IveTokens.surface,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(10),
         border: IveTokens.cardBorder,
       ),
       child: Stack(
@@ -422,13 +422,13 @@ class _ZoneCoverageCard extends StatelessWidget {
                     const Icon(Icons.layers_rounded, size: 18, color: IveTokens.accent),
                     const SizedBox(width: 6),
                     Text(
-                      'Zone Coverage — ${zone.name}',
+                      'Zone Coverage  ${zone.name}',
                       style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: IveTokens.label),
                     ),
                   ],
                 ),
                 const SizedBox(height: 10),
-                _ZoneInfoRow(icon: Icons.crop_square_rounded, label: 'Area', value: '${zone.coverageKm2.toStringAsFixed(1)} km²'),
+                _ZoneInfoRow(icon: Icons.crop_square_rounded, label: 'Area', value: '${zone.coverageKm2.toStringAsFixed(1)} km'),
                 const SizedBox(height: 4),
                 _ZoneInfoRow(icon: Icons.people_rounded, label: 'Population served', value: '${zone.populationServed}'),
                 const SizedBox(height: 4),

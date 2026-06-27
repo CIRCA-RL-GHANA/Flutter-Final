@@ -4,7 +4,7 @@ import 'ive_tokens.dart';
 
 /// Page chrome. A flat translucent bar at top, a large title that the
 /// scrolling content slides under and "collapses into" a small inline title
-/// — the iOS Large Title pattern, but mechanical and quiet.
+///  the iOS Large Title pattern, but mechanical and quiet.
 class IveAppBar extends StatelessWidget implements PreferredSizeWidget {
   const IveAppBar({
     super.key,

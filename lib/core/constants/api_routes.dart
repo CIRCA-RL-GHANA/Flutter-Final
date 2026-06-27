@@ -33,19 +33,19 @@ class ApiRoutes {
   static const go = _GoRoutes();
   static const eplay = _EPlayRoutes();
   static const community = _CommunityRoutes();
-  // ── Financial Institution Extension ────────────────────────────────────
+  //  Financial Institution Extension 
   static const loans = _LoanRoutes();
   static const deposits = _DepositRoutes();
   static const insurance = _InsuranceRoutes();
   static const creditData = _CreditDataRoutes();
-  // ── Enterprise Extension ────────────────────────────────────────────────
+  //  Enterprise Extension 
   static const enterprise = _EnterpriseRoutes();
   static const multiChannel = _MultiChannelRoutes();
   static const fulfillment = _FulfillmentRoutes();
   static const concierge = _ConciergeRoutes();
-  // ── Q-Point Liquid Market ───────────────────────────────────────────────
+  //  Q-Point Liquid Market 
   static const qpointMarket = _QPointMarketRoutes();
-  // ── Facilitator / Settlement / Webhooks (Enterprise extension) ──────────
+  //  Facilitator / Settlement / Webhooks (Enterprise extension) 
   static const facilitator      = _FacilitatorRoutes();
   static const qpointSettlement = _QPointSettlementRoutes();
   static const webhooks         = _WebhookRoutes();
@@ -57,6 +57,8 @@ class _AuthRoutes {
   String get logout => '/auth/logout';
   String get refresh => '/auth/refresh';
   String get me => '/auth/me';
+  String get forgotPassword => '/auth/forgot-password';
+  String get resetPassword  => '/auth/reset-password';
 }
 
 class _UserRoutes {
@@ -70,6 +72,7 @@ class _UserRoutes {
   String get resendOtp => '/users/resend-otp';
   String byId(String id) => '/users/$id';
   String checkUsername(String username) => '/users/check-username/$username';
+  String checkWireId(String wireId) => '/users/check-wire-id/${Uri.encodeComponent(wireId)}';
 }
 
 class _ProfileRoutes {
@@ -351,7 +354,7 @@ class _AIRoutes {
       '/ai/recommendations/stats/$userId';
   String userEvents(String userId) => '/ai/events/user/$userId';
 
-  // ── NLP endpoints ──────────────────────────────────────────────────────
+  //  NLP endpoints 
   String get sentiment      => '/ai/nlp/sentiment';
   String get intent         => '/ai/nlp/intent';
   String get keywords       => '/ai/nlp/keywords';
@@ -359,32 +362,32 @@ class _AIRoutes {
   String get similarity     => '/ai/nlp/similarity';
   String get semanticSearch => '/ai/nlp/search';
 
-  // ── Pricing endpoints ──────────────────────────────────────────────────
+  //  Pricing endpoints 
   String get ridePrice        => '/ai/pricing/ride';
   String get discountAdvice   => '/ai/pricing/discount';
   String get retentionOffer   => '/ai/pricing/retention';
 
-  // ── Fraud endpoints ────────────────────────────────────────────────────
+  //  Fraud endpoints 
   String get fraudScore    => '/ai/fraud/score';
   String get fraudLocation => '/ai/fraud/location';
 
-  // ── Insights endpoints ─────────────────────────────────────────────────
+  //  Insights endpoints 
   String get financialInsights  => '/ai/insights/financials';
   String get spendingPattern    => '/ai/insights/spending-pattern';
   String get revenueForecast    => '/ai/insights/forecast';
   String get collaborativeFilter => '/ai/insights/collaborative-filter';
 
-  // ── Planner AI shortcuts ───────────────────────────────────────────────
+  //  Planner AI shortcuts 
   String get plannerInsights       => '/planner/ai/insights';
   String get plannerSpending       => '/planner/ai/spending-pattern';
   String get plannerForecast       => '/planner/ai/forecast';
 
-  // ── Semantic Search endpoints ──────────────────────────────────────────
+  //  Semantic Search endpoints 
   String get searchDocuments  => '/ai/search';
   String get searchRank       => '/ai/search/rank';
   String get searchSuggest    => '/ai/search/suggest';
 
-  // ── Recommendation endpoints ───────────────────────────────────────────
+  //  Recommendation endpoints 
   String get similarItems          => '/ai/recommendations/similar-items';
   String get productRecommendations => '/ai/recommendations/products';
   String get personalizedFeed      => '/ai/recommendations/feed';
@@ -392,11 +395,11 @@ class _AIRoutes {
   String get subscriptionPlanReco  => '/ai/recommendations/subscription';
   String get wishlistScores        => '/ai/recommendations/wishlist-score';
 
-  // ── Wishlist AI shortcuts ──────────────────────────────────────────────
+  //  Wishlist AI shortcuts 
   String wishlistConversionScores(String userId) =>
       '/wishlist/$userId/ai/conversion-scores';
 
-  // ── Subscription AI shortcuts ──────────────────────────────────────────
+  //  Subscription AI shortcuts 
   String subscriptionRetentionOffer(String id) =>
       '/subscriptions/$id/ai/retention-offer';
   String get subscriptionPlanAdvice => '/subscriptions/ai/plan-advice';
@@ -491,21 +494,21 @@ class _RevenueRoutes {
 class _EPlayRoutes {
   const _EPlayRoutes();
 
-  // ── Discovery ──────────────────────────────────────────────────────────
+  //  Discovery 
   String get browse              => '/eplay/browse';
   String assetById(String id)    => '/eplay/assets/$id';
 
-  // ── Content Management ─────────────────────────────────────────────────
+  //  Content Management 
   String get uploadAsset         => '/eplay/assets';
   String publishAsset(String id) => '/eplay/assets/$id/publish';
 
-  // ── Cloud Locker (purchased licenses) ─────────────────────────────────
+  //  Cloud Locker (purchased licenses) 
   String get locker              => '/eplay/locker';
   String get purchase            => '/eplay/locker/purchase';
   String stream(String assetId)  => '/eplay/locker/$assetId/stream';
   String pinLocker(String id)    => '/eplay/locker/licenses/$id/pin';
 
-  // ── Creator Profile ────────────────────────────────────────────────────
+  //  Creator Profile 
   String get openCreator         => '/eplay/creator/open';
   String get myCreator           => '/eplay/creator/me';
 }
@@ -513,28 +516,28 @@ class _EPlayRoutes {
 class _CommunityRoutes {
   const _CommunityRoutes();
 
-  // ── Discovery ──────────────────────────────────────────────────────────
+  //  Discovery 
   String get discover            => '/community';
   String get mine                => '/community/mine';
   String byId(String id)         => '/community/$id';
 
-  // ── Lifecycle ──────────────────────────────────────────────────────────
+  //  Lifecycle 
   String get create              => '/community';
   String join(String id)         => '/community/$id/join';
   String leave(String id)        => '/community/$id/leave';
 
-  // ── Members ────────────────────────────────────────────────────────────
+  //  Members 
   String members(String id)             => '/community/$id/members';
   String banMember(String id, String uid) =>
       '/community/$id/members/$uid/ban';
 
-  // ── Posts ──────────────────────────────────────────────────────────────
+  //  Posts 
   String posts(String id)               => '/community/$id/posts';
   String removePost(String id, String postId) =>
       '/community/$id/posts/$postId';
 }
 
-// ── Financial Institution Extension ──────────────────────────────────────────
+//  Financial Institution Extension 
 
 class _LoanRoutes {
   const _LoanRoutes();
@@ -578,11 +581,11 @@ class _EnterpriseRoutes {
   String branches(String id) => '/enterprise/profiles/$id/branches';
   String apiKeys(String id) => '/enterprise/profiles/$id/api-keys';
   String revokeKey(String id, String keyId) => '/enterprise/profiles/$id/api-keys/$keyId';
-  // ── Analytics ────────────────────────────────────────────────────────────
+  //  Analytics 
   String analytics(String entityId) => '/enterprise/analytics/$entityId';
   String analyticsBranches(String entityId) => '/enterprise/analytics/$entityId/branches';
   String analyticsFees(String entityId) => '/enterprise/analytics/$entityId/fees';
-  // ── Bulk operations ──────────────────────────────────────────────────────
+  //  Bulk operations 
   String get bulkProducts   => '/products/bulk';
   String get bulkStock      => '/products/bulk/stock';
   String ordersByBranch(String branchId) => '/orders/branch/$branchId';
@@ -634,59 +637,59 @@ class _ConciergeRoutes {
   String history(String id) => '/concierge/sessions/$id/messages';
 }
 
-// ── Q-Point Liquid Market ─────────────────────────────────────────────────────
+//  Q-Point Liquid Market 
 
 class _QPointMarketRoutes {
   const _QPointMarketRoutes();
 
-  // ── Balance ────────────────────────────────────────────────────────────────
+  //  Balance 
   String get balance            => '/qpoints/balance';
 
-  // ── Order Book ────────────────────────────────────────────────────────────
+  //  Order Book 
   String get orderBook          => '/qpoints/orders';
   String get openOrders         => '/qpoints/orders/open';
   String cancelOrder(String id) => '/qpoints/orders/$id';
 
-  // ── Instant Buy / Sell ────────────────────────────────────────────────────
+  //  Instant Buy / Sell 
   String get cashIn             => '/qpoints/cashin';
   String get cashOut            => '/qpoints/cashout';
 
-  // ── Trades ────────────────────────────────────────────────────────────────
+  //  Trades 
   String get trades             => '/qpoints/trades';
 
-  // ── Market Stats ──────────────────────────────────────────────────────────
+  //  Market Stats 
   String get market             => '/qpoints/market';
 
-  // ── Notifications ─────────────────────────────────────────────────────────
+  //  Notifications 
   String get notifications      => '/qpoints/notifications';
   String get notificationsRead  => '/qpoints/notifications/read';
 
-  // ── Terms of Service ──────────────────────────────────────────────────────
+  //  Terms of Service 
   String get tos                => '/qpoints/tos';
   String get tosStatus          => '/qpoints/tos/status';
   String get tosAccept          => '/qpoints/tos/accept';
 
-  // ── Fee Schedule ──────────────────────────────────────────────────────────
+  //  Fee Schedule 
   String get fees               => '/qpoints/fees';
 
-  // ── Facilitators ──────────────────────────────────────────────────────────
+  //  Facilitators 
   String get facilitators       => '/qpoints/facilitators';
   String get paymentAccounts    => '/qpoints/payment/accounts';
   String get paymentRegister    => '/qpoints/payment/register';
 
-  // ── Cash Balance ──────────────────────────────────────────────────────────
+  //  Cash Balance 
   String get cashBalance        => '/qpoints/payment/cash-balance';
   String get cashBalanceRefresh => '/qpoints/payment/cash-balance/refresh';
 
-  // ── Deposit / Withdrawal ──────────────────────────────────────────────────
+  //  Deposit / Withdrawal 
   String get deposit            => '/qpoints/payment/deposit';
   String get withdraw           => '/qpoints/payment/withdraw';
 
-  // ── Transaction History ───────────────────────────────────────────────────
+  //  Transaction History 
   String get paymentTransactions => '/qpoints/payment/transactions';
   String paymentTransactionById(String id) => '/qpoints/payment/transactions/$id';
 
-  // ── Admin: Cross-Facilitator Bridge ───────────────────────────────────────
+  //  Admin: Cross-Facilitator Bridge 
   String get adminCrossFacilitatorBalances  => '/qpoints/admin/cross-facilitator/balances';
   String get adminNetPosition               => '/qpoints/admin/cross-facilitator/net-position';
   String get adminNettingTasks              => '/qpoints/admin/netting/tasks';

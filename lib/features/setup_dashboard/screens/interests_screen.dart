@@ -1,12 +1,13 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD3.3: INTERESTS — Topic Following & Recommendations
+/// 
+/// SD3.3: INTERESTS  Topic Following & Recommendations
 /// Interest grid, categories, recommendations, update counts
 /// RBAC: Owner(personal), Admin(entity), BM(branch), SO(entity),
 ///        BSO(branch), Monitor/BrMon(view), RO/BRO(view), Driver(own)
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../prompt/providers/context_provider.dart';
@@ -37,13 +38,13 @@ class InterestsScreen extends StatelessWidget {
             ),
             floatingActionButton: SetupRbacFAB(
               cardId: 'interests',
-              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Discover new interests'))),
+              onPressed: () => AppToast.show(context, 'Discover new interests'),
               label: 'Discover',
               icon: Icons.explore,
             ),
           body: CustomScrollView(
             slivers: [
-              // ─── Summary KPIs ─────────────────────────────
+              //  Summary KPIs 
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -79,7 +80,7 @@ class InterestsScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Categories Bar ───────────────────────────
+              //  Categories Bar 
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -108,7 +109,7 @@ class InterestsScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Interest Grid ────────────────────────────
+              //  Interest Grid 
               const SliverToBoxAdapter(
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(20, 16, 20, 0),
@@ -116,7 +117,7 @@ class InterestsScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── AI Insights ─────────────────────────────────────────
+              //  AI Insights 
               const SliverToBoxAdapter(
               ),
               SliverPadding(
@@ -135,7 +136,7 @@ class InterestsScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Recommendations ──────────────────────────
+              //  Recommendations 
               if (recommendations.isNotEmpty) ...[
                 const SliverToBoxAdapter(
                   child: Padding(
@@ -181,7 +182,7 @@ List<Widget> _getCategoryChips(List<UserInterest> interests) {
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
         color: c.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -278,7 +279,7 @@ class _RecommendationCard extends StatelessWidget {
                   style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textPrimary),
                 ),
                 Text(
-                  '${rec.matchPercent}% match Â· ${rec.followerGrowth} new followers',
+                  '${rec.matchPercent}% match  ${rec.followerGrowth} new followers',
                   style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                 ),
               ],
@@ -288,7 +289,7 @@ class _RecommendationCard extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             decoration: BoxDecoration(
               color: kSetupColor,
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(10),
             ),
             child: const Text(
               'Follow',

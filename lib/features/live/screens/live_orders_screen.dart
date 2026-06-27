@@ -1,11 +1,13 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// LIVE MODULE — Screen 2: Orders Tab (Detailed View)
+/// 
+/// LIVE MODULE  Screen 2: Orders Tab (Detailed View)
 /// Complete order management: sub-tabs (New/In Progress/Ready/All),
 /// order cards, bulk operations, auto-assign
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
@@ -50,17 +52,17 @@ class _LiveOrdersScreenState extends State<LiveOrdersScreen> with SingleTickerPr
               icon: const Icon(Icons.arrow_back, size: 22, color: AppColors.textPrimary),
               onPressed: () => Navigator.pop(context),
             ),
-            title: const Text('ORDERS • LIVE', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: AppColors.textPrimary)),
+            title: const Text('ORDERS  LIVE', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: AppColors.textPrimary)),
             actions: [
-              IconButton(icon: const Icon(Icons.search, size: 20), color: AppColors.textSecondary, onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Search orders...')))),
+              IconButton(icon: const Icon(Icons.search, size: 20), color: AppColors.textSecondary, onPressed: () => AppToast.show(context, 'Search orders...')),
               IconButton(icon: const Icon(Icons.settings, size: 20), color: AppColors.textSecondary, onPressed: () => Navigator.pushNamed(context, AppRoutes.liveSettings)),
               IconButton(icon: const Icon(Icons.bar_chart, size: 20), color: AppColors.textSecondary, onPressed: () => Navigator.pushNamed(context, AppRoutes.liveAnalytics)),
             ],
             bottom: TabBar(
               controller: _tabController,
-              indicatorColor: kLiveColor,
+              indicatorColor: IveTokens.moduleLive,
               indicatorWeight: 3,
-              labelColor: kLiveColor,
+              labelColor: IveTokens.moduleLive,
               unselectedLabelColor: AppColors.textSecondary,
               labelStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12),
               tabs: [
@@ -96,17 +98,17 @@ class _LiveOrdersScreenState extends State<LiveOrdersScreen> with SingleTickerPr
                       onPressed: () => Navigator.pushNamed(context, AppRoutes.liveDriverAssignment),
                       icon: const Icon(Icons.select_all, size: 16),
                       label: const Text('BULK ASSIGN', style: TextStyle(fontSize: 12)),
-                      style: OutlinedButton.styleFrom(foregroundColor: kLiveColor, padding: const EdgeInsets.symmetric(vertical: 12)),
+                      style: OutlinedButton.styleFrom(foregroundColor: IveTokens.moduleLive, padding: const EdgeInsets.symmetric(vertical: 12)),
                     ),
                   ),
                   const SizedBox(width: 8),
                   Expanded(
                     child: ElevatedButton.icon(
-                      onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Auto-assigning all orders...'))),
+                      onPressed: () => AppToast.show(context, 'Auto-assigning all orders...'),
                       icon: const Icon(Icons.auto_fix_high, size: 16),
                       label: const Text('AUTO-ASSIGN ALL', style: TextStyle(fontSize: 12)),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: kLiveColor,
+                        backgroundColor: IveTokens.moduleLive,
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(vertical: 12),
                       ),
@@ -114,7 +116,7 @@ class _LiveOrdersScreenState extends State<LiveOrdersScreen> with SingleTickerPr
                   ),
                   const SizedBox(width: 8),
                   OutlinedButton.icon(
-                    onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Exporting...'))),
+                    onPressed: () => AppToast.show(context, 'Exporting...'),
                     icon: const Icon(Icons.download, size: 16),
                     label: const Text('EXPORT', style: TextStyle(fontSize: 12)),
                     style: OutlinedButton.styleFrom(foregroundColor: AppColors.textSecondary, padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12)),
@@ -139,7 +141,7 @@ class _LiveOrdersScreenState extends State<LiveOrdersScreen> with SingleTickerPr
       );
     }
     return RefreshIndicator(
-      color: kLiveColor,
+      color: IveTokens.moduleLive,
       onRefresh: () async {
         HapticFeedback.mediumImpact();
         await prov.loadOrders();

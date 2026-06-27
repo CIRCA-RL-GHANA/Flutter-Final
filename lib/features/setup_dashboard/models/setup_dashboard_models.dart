@@ -1,15 +1,15 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SETUP DASHBOARD MODULE — Data Models
+/// 
+/// SETUP DASHBOARD MODULE  Data Models
 /// Comprehensive models for 19+ screens:
 /// Hub Dashboard, Products, Vehicles, Tabs, Discounts, Staff, Places,
 /// Delivery Zones, Vehicle Bands, Branches, Campaigns, Social, Connections,
 /// Audit Log, Outlook, Q-Points, My Activity, Profile, Subscription, Interests
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'package:flutter/material.dart';
 
-// ─── Enums ──────────────────────────────────────────────────────────────────
+//  Enums 
 
 /// Access level for a dashboard card per role
 enum CardAccessLevel {
@@ -100,11 +100,11 @@ enum TaskStatus { todo, inProgress, completed, overdue, blocked, cancelled }
 /// Goal status
 enum GoalStatus { onTrack, ahead, atRisk, behind, needsAttention, completed }
 
-/// Subscription plan — matches backend SubscriptionTier enum
+/// Subscription plan  matches backend SubscriptionTier enum
 /// Pricing: free=0 QP, basic=4 QP/staff, professional=8 QP/staff, enterprise=12 QP/staff
 enum SubscriptionPlan { free, basic, professional, enterprise }
 
-// ─── Hub Dashboard Models ───────────────────────────────────────────────────
+//  Hub Dashboard Models 
 
 /// A module card on the Setup Dashboard Hub
 class DashboardCard {
@@ -118,7 +118,7 @@ class DashboardCard {
   final List<String> actionLabels;
   final CardAccessLevel accessLevel;
 
-  /// Optional progress bar (0.0–1.0), e.g. stock utilisation or credit usage
+  /// Optional progress bar (0.01.0), e.g. stock utilisation or credit usage
   final double? progress;
   /// Optional label above/below progress bar
   final String? progressLabel;
@@ -132,7 +132,7 @@ class DashboardCard {
   /// Single-line summary beneath metrics, e.g. "Coverage: 85% of target"
   final String? summaryLine;
 
-  /// Subtitle shown under title, e.g. "₵312,450 total credit"
+  /// Subtitle shown under title, e.g. "312,450 total credit"
   final String? subtitle;
 
   const DashboardCard({
@@ -186,7 +186,7 @@ class DashboardHeaderInfo {
   });
 }
 
-// ─── Product Models ────────────────────────────────────────────────────────
+//  Product Models 
 
 class Product {
   final String id;
@@ -252,7 +252,7 @@ class ProductFilter {
   });
 }
 
-// ─── Vehicle / Fleet Models ────────────────────────────────────────────────
+//  Vehicle / Fleet Models 
 
 class Vehicle {
   final String id;
@@ -342,7 +342,7 @@ class FuelEntry {
   });
 }
 
-// ─── Tab / Credit Models ───────────────────────────────────────────────────
+//  Tab / Credit Models 
 
 class CustomerTab {
   final String id;
@@ -398,7 +398,7 @@ class TabTransaction {
   });
 }
 
-// ─── Discount Models ───────────────────────────────────────────────────────
+//  Discount Models 
 
 class DiscountTier {
   final String id;
@@ -438,14 +438,14 @@ class DiscountTier {
       case DiscountType.percentage:
         return '${value.toStringAsFixed(0)}% off';
       case DiscountType.fixedAmount:
-        return '₵${value.toStringAsFixed(0)} off';
+        return '${value.toStringAsFixed(0)} off';
       case DiscountType.buyXGetY:
         return 'Buy ${value.toInt()} Get 1';
     }
   }
 }
 
-// ─── Staff Models ──────────────────────────────────────────────────────────
+//  Staff Models 
 
 class StaffMember {
   final String id;
@@ -488,7 +488,7 @@ class StaffMember {
       tasksTotal > 0 ? (tasksCompleted / tasksTotal * 100) : 0;
 }
 
-// ─── Places Models ─────────────────────────────────────────────────────────
+//  Places Models 
 
 class Place {
   final String id;
@@ -533,7 +533,7 @@ class Place {
   }
 }
 
-// ─── Delivery Zone Models ──────────────────────────────────────────────────
+//  Delivery Zone Models 
 
 class DeliveryZone {
   final String id;
@@ -561,7 +561,7 @@ class DeliveryZone {
   });
 }
 
-// ─── Vehicle Band Models ───────────────────────────────────────────────────
+//  Vehicle Band Models 
 
 class VehicleBand {
   final String id;
@@ -594,7 +594,7 @@ class VehicleBand {
   }
 }
 
-// ─── Branch Models ─────────────────────────────────────────────────────────
+//  Branch Models 
 
 class Branch {
   final String id;
@@ -635,7 +635,7 @@ class Branch {
   }
 }
 
-// ─── Campaign Models ───────────────────────────────────────────────────────
+//  Campaign Models 
 
 class Campaign {
   final String id;
@@ -675,7 +675,7 @@ class Campaign {
       : 0;
 }
 
-// ─── Social / Post Models ──────────────────────────────────────────────────
+//  Social / Post Models 
 
 class SocialPost {
   final String id;
@@ -711,7 +711,7 @@ class SocialPost {
   int get totalEngagement => likes + comments + shares;
 }
 
-// ─── Connection Models ─────────────────────────────────────────────────────
+//  Connection Models 
 
 class Connection {
   final String id;
@@ -752,7 +752,7 @@ class Connection {
   }
 }
 
-// ─── Audit Log Models ──────────────────────────────────────────────────────
+//  Audit Log Models 
 
 class AuditEntry {
   final String id;
@@ -816,7 +816,7 @@ class AuditEntry {
   }
 }
 
-// ─── Outlook / Analytics Models ────────────────────────────────────────────
+//  Outlook / Analytics Models 
 
 class KPIMetric {
   final String label;
@@ -854,7 +854,7 @@ class AIInsight {
   });
 }
 
-// ─── Q-Points Models ───────────────────────────────────────────────────────
+//  Q-Points Models 
 
 class QPointsBalance {
   final int available;
@@ -936,7 +936,7 @@ class QPointsTransaction {
   }
 }
 
-// ─── My Activity / Task Models ─────────────────────────────────────────────
+//  My Activity / Task Models 
 
 class UserTask {
   final String id;
@@ -1060,7 +1060,7 @@ class ActivityTimelineEntry {
   });
 }
 
-// ─── Profile Models ────────────────────────────────────────────────────────
+//  Profile Models 
 
 class UserProfile {
   final String id;
@@ -1110,12 +1110,12 @@ class UserProfile {
   });
 }
 
-// ─── Subscription Models ───────────────────────────────────────────────────
+//  Subscription Models 
 
 class SubscriptionInfo {
   final SubscriptionPlan plan;
 
-  /// Actual monthly cost in Q Points = pricePerStaffQPoints × staffCount
+  /// Actual monthly cost in Q Points = pricePerStaffQPoints  staffCount
   final double monthlyPrice;
 
   /// Per-staff Q Point rate (4 basic / 8 professional / 12 enterprise)
@@ -1219,7 +1219,7 @@ class SubscriptionInfo {
           : 0;
 }
 
-// ─── Interest Models ───────────────────────────────────────────────────────
+//  Interest Models 
 
 class UserInterest {
   final String id;

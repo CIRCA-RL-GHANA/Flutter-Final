@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import '../core/design/ive_tokens.dart';
+import '../../../core/design/ive_tokens.dart';
 
-/// Pathway 2 — Live delivery tracking card.
+/// Pathway 2  Live delivery tracking card.
 ///
 /// Connects to the Genie WebSocket feed and shows real-time driver
 /// location, ETA, and status for a fulfillment task.
@@ -106,7 +106,7 @@ class _LiveTrackingCardState extends State<LiveTrackingCard>
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            // ── Header ─────────────────────────────────────────────────────
+            //  Header 
             Row(
               children: [
                 AnimatedBuilder(
@@ -149,7 +149,7 @@ class _LiveTrackingCardState extends State<LiveTrackingCard>
 
             const SizedBox(height: 16),
 
-            // ── Progress bar ───────────────────────────────────────────────
+            //  Progress bar 
             ClipRRect(
               borderRadius: IveTokens.brXs,
               child: LinearProgressIndicator(
@@ -162,12 +162,12 @@ class _LiveTrackingCardState extends State<LiveTrackingCard>
 
             const SizedBox(height: 16),
 
-            // ── Steps ──────────────────────────────────────────────────────
+            //  Steps 
             ..._steps.map((step) => _StepRow(step: step, isDelivered: isDelivered)),
 
             const Divider(height: 24),
 
-            // ── Driver info ────────────────────────────────────────────────
+            //  Driver info 
             Row(
               children: [
                 CircleAvatar(
@@ -207,7 +207,7 @@ class _LiveTrackingCardState extends State<LiveTrackingCard>
                   tooltip: 'Call driver',
                   onPressed: () {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Calling driver…')),
+                      const SnackBar(content: Text('Calling driver')),
                     );
                   },
                 ),
@@ -220,7 +220,7 @@ class _LiveTrackingCardState extends State<LiveTrackingCard>
   }
 }
 
-// ─── Sub-widgets ──────────────────────────────────────────────────────────────
+//  Sub-widgets 
 
 class _TrackStep {
   const _TrackStep({required this.icon, required this.label, required this.done});

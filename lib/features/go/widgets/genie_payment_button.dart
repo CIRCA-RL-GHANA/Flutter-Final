@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../core/design/ive_tokens.dart';
-import '../core/services/enterprise_service.dart';
+import '../../../core/design/ive_tokens.dart';
+import '../../../core/services/enterprise_service.dart';
 
-/// Pathway 1 — Embeddable Q-Points payment button.
+/// Pathway 1  Embeddable Q-Points payment button.
 ///
 /// Usage:
 /// ```dart

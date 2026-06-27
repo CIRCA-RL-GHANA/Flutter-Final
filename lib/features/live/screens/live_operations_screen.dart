@@ -1,11 +1,12 @@
-﻿/// ═══════════════════════════════════════════════════════════════════════════
-/// LIVE MODULE — Operations Feed
+/// 
+/// LIVE MODULE  Operations Feed
 /// Real-time operations log wired to LiveProvider: active orders,
 /// driver status, package events, and return updates
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
@@ -43,7 +44,7 @@ class _LiveOperationsScreenState extends State<LiveOperationsScreen> {
               icon: const Icon(Icons.arrow_back, size: 22, color: AppColors.textPrimary),
               onPressed: () => Navigator.pop(context),
             ),
-            title: const Text('LIVE • Operations Feed', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w700, color: AppColors.textPrimary)),
+            title: const Text('LIVE  Operations Feed', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w700, color: AppColors.textPrimary)),
             actions: [
               IconButton(
                 icon: const Icon(Icons.notifications_outlined, size: 20),
@@ -53,26 +54,26 @@ class _LiveOperationsScreenState extends State<LiveOperationsScreen> {
             ],
           ),
           body: prov.isLoading
-              ? const Center(child: CircularProgressIndicator(color: kLiveColor))
+              ? const Center(child: CircularProgressIndicator(color: IveTokens.moduleLive))
               : prov.error != null && prov.orders.isEmpty
                   ? Center(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Icon(Icons.error_outline, size: 48, color: kLiveColor),
+                          const Icon(Icons.error_outline, size: 48, color: IveTokens.moduleLive),
                           const SizedBox(height: 12),
                           Text(prov.error!, style: const TextStyle(fontSize: 13, color: AppColors.textSecondary), textAlign: TextAlign.center),
                           const SizedBox(height: 16),
                           ElevatedButton(
                             onPressed: prov.init,
-                            style: ElevatedButton.styleFrom(backgroundColor: kLiveColor, foregroundColor: Colors.white),
+                            style: ElevatedButton.styleFrom(backgroundColor: IveTokens.moduleLive, foregroundColor: Colors.white),
                             child: const Text('Retry'),
                           ),
                         ],
                       ),
                     )
                   : RefreshIndicator(
-                      color: kLiveColor,
+                      color: IveTokens.moduleLive,
                       onRefresh: prov.init,
                       child: ListView(
                         padding: const EdgeInsets.all(16),
@@ -83,7 +84,7 @@ class _LiveOperationsScreenState extends State<LiveOperationsScreen> {
                           LiveSectionCard(
                             title: 'OPERATIONS OVERVIEW',
                             icon: Icons.analytics_outlined,
-                            iconColor: kLiveColor,
+                            iconColor: IveTokens.moduleLive,
                             onMore: () => Navigator.pushNamed(context, AppRoutes.liveAnalytics),
                             child: Wrap(
                               spacing: 8,
@@ -93,7 +94,7 @@ class _LiveOperationsScreenState extends State<LiveOperationsScreen> {
                                   label: 'Active Orders',
                                   value: '${prov.activeOrderCount}',
                                   icon: Icons.receipt_long,
-                                  color: kLiveColor,
+                                  color: IveTokens.moduleLive,
                                 ),
                                 LiveMetricBadge(
                                   label: 'Pending Returns',
@@ -122,13 +123,13 @@ class _LiveOperationsScreenState extends State<LiveOperationsScreen> {
                             LiveSectionCard(
                               title: 'URGENT ACTIONS (${prov.urgentActionItems.length})',
                               icon: Icons.warning_amber,
-                              iconColor: kLiveColor,
+                              iconColor: IveTokens.moduleLive,
                               child: Column(
                                 children: prov.urgentActionItems.map((a) => Padding(
                                   padding: const EdgeInsets.only(bottom: 8),
                                   child: Row(
                                     children: [
-                                      const Icon(Icons.error, size: 16, color: kLiveColor),
+                                      const Icon(Icons.error, size: 16, color: IveTokens.moduleLive),
                                       const SizedBox(width: 8),
                                       Expanded(child: Text(a.title, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500))),
                                     ],

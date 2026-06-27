@@ -1,28 +1,24 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 /// Global Header (Persistent)
 /// Top Navigation Bar with context, search, and quick actions
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/design/ive_tokens.dart';
-import '../../../core/theme/app_colors.dart';
 import '../models/rbac_models.dart';
 import '../providers/context_provider.dart';
 import '../providers/prompt_provider.dart';
 
 class GlobalHeader extends StatelessWidget {
   final VoidCallback? onContextSwitchTap;
-  final VoidCallback? onNotificationTap;
-  final VoidCallback? onSOSTap;
 
   const GlobalHeader({
     super.key,
     this.onContextSwitchTap,
-    this.onNotificationTap,
-    this.onSOSTap,
   });
 
   @override
@@ -34,41 +30,23 @@ class GlobalHeader extends StatelessWidget {
       ),
       child: SafeArea(
         bottom: false,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // ─── Top Row: Context | Quick Actions ────────────────────────
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-              child: Row(
-                children: [
-                  // Left: Context Display
-                  Expanded(child: _ContextSection(onSwitchTap: onContextSwitchTap)),
-
-                  // Right: Quick Actions
-                  _QuickActionsSection(
-                    onNotificationTap: onNotificationTap,
-                    onSOSTap: onSOSTap,
-                  ),
-                ],
-              ),
-            ),
-
-            // ─── Search Bar ─────────────────────────────────────────────
-            const Padding(
-              padding: EdgeInsets.fromLTRB(16, 0, 16, 12),
-              child: _GlobalSearchBar(),
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 8, 16, 10),
+          child: Row(
+            children: [
+              Expanded(child: _ContextSection(onSwitchTap: onContextSwitchTap)),
+              const _QuickActionsSection(),
+            ],
+          ),
         ),
       ),
     );
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Context Section (Left)
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _ContextSection extends StatelessWidget {
   final VoidCallback? onSwitchTap;
@@ -111,8 +89,9 @@ class _ContextSection extends StatelessWidget {
           ),
         ),
 
-        // Switch Context Button
-        _SwitchContextButton(onTap: onSwitchTap),
+        // Only show context switcher when the user has multiple contexts
+        if (ctxProvider.availableContexts.isNotEmpty)
+          _SwitchContextButton(onTap: onSwitchTap),
       ],
     );
   }
@@ -141,7 +120,7 @@ class _ContextAvatar extends StatelessWidget {
             label: 'Profile avatar for $name. Status: ${presence.name}',
             child: CircleAvatar(
               radius: 20,
-              backgroundColor: AppColors.primaryLight.withValues(alpha: 0.15),
+              backgroundColor: IveTokens.genie.withValues(alpha: 0.15),
               backgroundImage:
                   avatarUrl != null ? NetworkImage(avatarUrl!) : null,
               child: avatarUrl == null
@@ -150,7 +129,7 @@ class _ContextAvatar extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: AppColors.primaryLight,
+                        color: IveTokens.genie,
                       ),
                     )
                   : null,
@@ -177,11 +156,11 @@ class _ContextAvatar extends StatelessWidget {
   Color get _presenceColor {
     switch (presence) {
       case PresenceStatus.online:
-        return AppColors.success;
+        return IveTokens.success;
       case PresenceStatus.idle:
-        return AppColors.warning;
+        return IveTokens.warning;
       case PresenceStatus.offline:
-        return AppColors.textTertiary;
+        return IveTokens.labelTertiary;
     }
   }
 }
@@ -239,7 +218,7 @@ class _RoleBadge extends StatelessWidget {
   }
 }
 
-/// ðŸ”„ Switch context button
+/// " Switch context button
 class _SwitchContextButton extends StatelessWidget {
   final VoidCallback? onTap;
   const _SwitchContextButton({this.onTap});
@@ -258,13 +237,13 @@ class _SwitchContextButton extends StatelessWidget {
           width: 36,
           height: 36,
           decoration: const BoxDecoration(
-            color: AppColors.inputFill,
+            color: IveTokens.surface,
             borderRadius: IveTokens.brSm,
           ),
           child: const Icon(
-            Icons.sync,
+            Icons.swap_horiz_rounded,
             size: 18,
-            color: AppColors.textSecondary,
+            color: IveTokens.labelSecondary,
           ),
         ),
       ),
@@ -272,45 +251,16 @@ class _SwitchContextButton extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Quick Actions Section (Right)
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _QuickActionsSection extends StatelessWidget {
-  final VoidCallback? onNotificationTap;
-  final VoidCallback? onSOSTap;
-
-  const _QuickActionsSection({
-    this.onNotificationTap,
-    this.onSOSTap,
-  });
+  const _QuickActionsSection();
 
   @override
   Widget build(BuildContext context) {
-    final ctxProvider = context.watch<ContextProvider>();
-    final promptProvider = context.watch<PromptProvider>();
-    final showSOS = WidgetVisibility.canSeeSOS(ctxProvider.currentRole);
-
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        // Zap Action Menu
-        _ZapActionMenu(role: ctxProvider.currentRole),
-        const SizedBox(width: 4),
-
-        // Notifications Bell
-        _NotificationBell(
-          count: promptProvider.notificationCount,
-          onTap: onNotificationTap,
-        ),
-
-        // Emergency SOS (role-gated)
-        if (showSOS) ...[
-          const SizedBox(width: 4),
-          _EmergencySOS(onTap: onSOSTap),
-        ],
-      ],
-    );
+    return const SizedBox.shrink();
   }
 }
 
@@ -326,13 +276,13 @@ class _ZapActionMenu extends StatelessWidget {
         width: 36,
         height: 36,
         decoration: const BoxDecoration(
-          color: AppColors.inputFill,
+          color: IveTokens.surface,
           borderRadius: IveTokens.brSm,
         ),
         child: const Icon(
           Icons.electric_bolt,
           size: 18,
-          color: AppColors.accent,
+          color: IveTokens.labelSecondary,
         ),
       ),
       shape: const RoundedRectangleBorder(borderRadius: IveTokens.brLg),
@@ -348,7 +298,7 @@ class _ZapActionMenu extends StatelessWidget {
             value: a.label,
             child: Row(
               children: [
-                Icon(a.icon, size: 20, color: AppColors.textSecondary),
+                Icon(a.icon, size: 20, color: IveTokens.labelSecondary),
                 const SizedBox(width: 12),
                 Text(
                   a.label,
@@ -393,13 +343,13 @@ class _NotificationBell extends StatelessWidget {
                 width: 36,
                 height: 36,
                 decoration: const BoxDecoration(
-                  color: AppColors.inputFill,
+                  color: IveTokens.surface,
                   borderRadius: IveTokens.brSm,
                 ),
                 child: const Icon(
                   Icons.notifications_outlined,
                   size: 20,
-                  color: AppColors.textSecondary,
+                  color: IveTokens.labelSecondary,
                 ),
               ),
               if (count > 0)
@@ -412,7 +362,7 @@ class _NotificationBell extends StatelessWidget {
                       vertical: 1,
                     ),
                     decoration: BoxDecoration(
-                      color: AppColors.error,
+                      color: IveTokens.danger,
                       borderRadius: IveTokens.brPill,
                       border: Border.all(color: IveTokens.bg, width: 1.5),
                     ),
@@ -453,7 +403,7 @@ class _EmergencySOS extends StatelessWidget {
           width: 36,
           height: 36,
           decoration: const BoxDecoration(
-            color: AppColors.error,
+            color: IveTokens.danger,
             borderRadius: IveTokens.brSm,
           ),
           child: const Icon(
@@ -467,9 +417,9 @@ class _EmergencySOS extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Global Search Bar
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _GlobalSearchBar extends StatelessWidget {
   const _GlobalSearchBar();
@@ -481,7 +431,7 @@ class _GlobalSearchBar extends StatelessWidget {
     return Container(
       height: 44,
       decoration: const BoxDecoration(
-        color: AppColors.inputFill,
+        color: IveTokens.surface,
         borderRadius: IveTokens.brMd,
       ),
       child: Row(
@@ -490,7 +440,7 @@ class _GlobalSearchBar extends StatelessWidget {
           const Icon(
             Icons.search,
             size: 20,
-            color: AppColors.textTertiary,
+            color: IveTokens.labelTertiary,
           ),
           const SizedBox(width: 10),
           Expanded(
@@ -501,9 +451,10 @@ class _GlobalSearchBar extends StatelessWidget {
                 hintText: 'Search everything...',
                 hintStyle: TextStyle(
                   fontSize: 14,
-                  color: AppColors.textTertiary,
+                  color: IveTokens.labelTertiary,
                 ),
                 border: InputBorder.none,
+              filled: false,
                 isDense: true,
                 contentPadding: EdgeInsets.symmetric(vertical: 10),
               ),
@@ -520,13 +471,13 @@ class _GlobalSearchBar extends StatelessWidget {
                 width: 36,
                 height: 36,
                 decoration: BoxDecoration(
-                  color: AppColors.primaryLight.withValues(alpha: 0.08),
+                  color: IveTokens.genie.withValues(alpha: 0.08),
                   borderRadius: IveTokens.brSm,
                 ),
                 child: const Icon(
                   Icons.mic,
                   size: 18,
-                  color: AppColors.primaryLight,
+                  color: IveTokens.genie,
                 ),
               ),
             ),
@@ -538,9 +489,9 @@ class _GlobalSearchBar extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Context Switcher (Full-Screen Modal)
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class ContextSwitcherSheet extends StatelessWidget {
   const ContextSwitcherSheet({super.key});
@@ -564,8 +515,8 @@ class ContextSwitcherSheet extends StatelessWidget {
               width: 40,
               height: 4,
               decoration: BoxDecoration(
-                color: AppColors.inputBorder,
-                borderRadius: BorderRadius.circular(2),
+                color: IveTokens.hairline,
+                borderRadius: BorderRadius.circular(6),
               ),
             ),
           ),
@@ -575,7 +526,7 @@ class ContextSwitcherSheet extends StatelessWidget {
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: AppColors.textPrimary,
+              color: IveTokens.label,
             ),
           ),
           const SizedBox(height: 4),
@@ -583,7 +534,7 @@ class ContextSwitcherSheet extends StatelessWidget {
             'Active: ${ctxProvider.activeContext.displayLabel}',
             style: const TextStyle(
               fontSize: 13,
-              color: AppColors.textSecondary,
+              color: IveTokens.labelSecondary,
             ),
           ),
           const SizedBox(height: 20),
@@ -601,11 +552,11 @@ class ContextSwitcherSheet extends StatelessWidget {
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: isActive
-                        ? AppColors.primaryLight.withValues(alpha: 0.08)
-                        : AppColors.inputFill,
+                        ? IveTokens.genie.withValues(alpha: 0.08)
+                        : IveTokens.surface,
                     borderRadius: IveTokens.brLg,
                     border: isActive
-                        ? Border.all(color: AppColors.primaryLight, width: 1.5)
+                        ? Border.all(color: IveTokens.genie, width: 1.5)
                         : null,
                   ),
                   child: Row(
@@ -625,7 +576,7 @@ class ContextSwitcherSheet extends StatelessWidget {
                               style: const TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w600,
-                                color: AppColors.textPrimary,
+                                color: IveTokens.label,
                               ),
                             ),
                             const SizedBox(height: 2),
@@ -633,7 +584,7 @@ class ContextSwitcherSheet extends StatelessWidget {
                               ctx.subtitle,
                               style: const TextStyle(
                                 fontSize: 12,
-                                color: AppColors.textSecondary,
+                                color: IveTokens.labelSecondary,
                               ),
                             ),
                           ],
@@ -643,7 +594,7 @@ class ContextSwitcherSheet extends StatelessWidget {
                       if (isActive) ...[
                         const SizedBox(width: 8),
                         const Icon(Icons.check_circle,
-                            size: 20, color: AppColors.primaryLight),
+                            size: 20, color: IveTokens.genie),
                       ],
                     ],
                   ),
@@ -658,7 +609,7 @@ class ContextSwitcherSheet extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: OutlinedButton.icon(
-              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Add new entity'))),
+              onPressed: () => AppToast.show(context, 'Add new entity'),
               icon: const Icon(Icons.add, size: 20),
               label: const Text('Add Entity'),
               style: OutlinedButton.styleFrom(
@@ -666,7 +617,7 @@ class ContextSwitcherSheet extends StatelessWidget {
                 shape: const RoundedRectangleBorder(
                   borderRadius: IveTokens.brMd,
                 ),
-                side: BorderSide(color: AppColors.primaryLight.withValues(alpha: 0.3)),
+                side: BorderSide(color: IveTokens.genie.withValues(alpha: 0.3)),
               ),
             ),
           ),

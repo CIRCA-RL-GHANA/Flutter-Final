@@ -1,6 +1,7 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '../../../core/design/ive.dart';
 import '../../../core/routes/app_routes.dart';
 import '../models/market_models.dart';
 import '../providers/market_provider.dart';
@@ -43,12 +44,12 @@ class _MarketCommerceScreenState extends State<MarketCommerceScreen>
     return Consumer<MarketProvider>(
       builder: (context, prov, _) {
         return Scaffold(
-          backgroundColor: const Color(0xFFF8F9FE),
+          backgroundColor: IveTokens.bg,
           appBar: AppBar(
             title: const Text('Market'),
             elevation: 0,
-            backgroundColor: Colors.white,
-            foregroundColor: const Color(0xFF1A1A1A),
+            backgroundColor: IveTokens.surface,
+            foregroundColor: IveTokens.ink,
             actions: [
               Stack(
                 children: [
@@ -113,7 +114,7 @@ class _MarketCommerceScreenState extends State<MarketCommerceScreen>
                               horizontal: 5, vertical: 1),
                           decoration: BoxDecoration(
                             color: kMarketColor,
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           child: Text(
                             '${prov.cartItemCount}',
@@ -161,7 +162,7 @@ class _MarketCommerceScreenState extends State<MarketCommerceScreen>
   }
 }
 
-// ─── Shop Tab ────────────────────────────────────────────────────────────────
+//  Shop Tab 
 
 class _ShopTab extends StatefulWidget {
   final MarketProvider prov;
@@ -286,7 +287,7 @@ class _ShopTabState extends State<_ShopTab> {
   }
 }
 
-// ─── Cart Tab ────────────────────────────────────────────────────────────────
+//  Cart Tab 
 
 class _CartTab extends StatelessWidget {
   final MarketProvider prov;
@@ -325,11 +326,11 @@ class _CartTab extends StatelessWidget {
                         height: 56,
                         decoration: BoxDecoration(
                           color: kMarketColor.withValues(alpha: 0.08),
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(10),
                         ),
                         child: item.product.imageUrl != null
                             ? ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
+                                borderRadius: BorderRadius.circular(10),
                                 child: Image.network(
                                   item.product.imageUrl!,
                                   fit: BoxFit.cover,
@@ -453,7 +454,7 @@ class _CartTab extends StatelessWidget {
   }
 }
 
-// ─── Orders Tab ──────────────────────────────────────────────────────────────
+//  Orders Tab 
 
 class _OrdersTab extends StatelessWidget {
   final MarketProvider prov;

@@ -1,9 +1,11 @@
-﻿/// GO Screen 8 — Favorite Detail
+/// GO Screen 8  Favorite Detail
 /// Entity passport, relationship dashboard, financial relationship,
 /// communication hub, transaction tools, relationship management
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
+import '../../../core/utils/app_toast.dart';
 import '../../../core/routes/app_routes.dart';
 import 'package:provider/provider.dart';
 import '../models/go_models.dart';
@@ -26,22 +28,22 @@ class GoFavoriteDetailScreen extends StatelessWidget {
           body: ListView(
             padding: const EdgeInsets.all(16),
             children: [
-              // 1 — Entity passport
+              // 1  Entity passport
               _buildPassport(fav),
               const SizedBox(height: 14),
-              // 2 — Relationship dashboard
+              // 2  Relationship dashboard
               _buildRelationship(fav),
               const SizedBox(height: 14),
-              // 3 — Quick actions
+              // 3  Quick actions
               _buildQuickActions(context),
               const SizedBox(height: 14),
-              // 4 — Transaction history
+              // 4  Transaction history
               _buildTransactionHistory(context, fav),
               const SizedBox(height: 14),
-              // 5 — Notes / Context
+              // 5  Notes / Context
               _buildNotes(context, fav),
               const SizedBox(height: 14),
-              // 6 — Admin tools
+              // 6  Admin tools
               _buildAdminTools(context, fav),
               const SizedBox(height: 80),
             ],
@@ -56,17 +58,17 @@ class GoFavoriteDetailScreen extends StatelessWidget {
       child: Column(children: [
         CircleAvatar(
           radius: 36,
-          backgroundColor: kGoColorLight,
-          child: Text(fav.name.substring(0, 1), style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w700, color: kGoColor)),
+          backgroundColor: IveTokens.surfaceRaised,
+          child: Text(fav.name.substring(0, 1), style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w700, color: IveTokens.moduleGo)),
         ),
         const SizedBox(height: 10),
         Text(fav.name, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
         Text(fav.role, style: const TextStyle(fontSize: 12, color: Color(0xFF9CA3AF))),
         const SizedBox(height: 8),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          _Badge(label: fav.category.name, color: kGoColor),
+          _Badge(label: fav.category.name, color: IveTokens.moduleGo),
           const SizedBox(width: 6),
-          if (fav.trustScore > 50) const _Badge(label: 'Trusted', color: kGoPositive),
+          if (fav.trustScore > 50) const _Badge(label: 'Trusted', color: IveTokens.success),
         ]),
         const SizedBox(height: 12),
         Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
@@ -82,7 +84,7 @@ class GoFavoriteDetailScreen extends StatelessWidget {
     return GoSectionCard(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       const GoSectionHeader(title: 'Relationship', icon: Icons.handshake),
       const SizedBox(height: 10),
-      _InfoRow(label: 'Trust Score', value: fav.trustScore > 50 ? 'High (Verified)' : 'Medium', color: fav.trustScore > 50 ? kGoPositive : kGoWarning),
+      _InfoRow(label: 'Trust Score', value: fav.trustScore > 50 ? 'High (Verified)' : 'Medium', color: fav.trustScore > 50 ? IveTokens.success : IveTokens.warning),
       _InfoRow(label: 'Last Transaction', value: fav.lastInteraction != null ? '${fav.lastInteraction!.day}/${fav.lastInteraction!.month}/${fav.lastInteraction!.year}' : 'N/A'),
       _InfoRow(label: 'Avg Transaction', value: fav.transactionCount > 0 ? '${(fav.totalSpent / fav.transactionCount).toStringAsFixed(0)} QP' : 'N/A'),
       _InfoRow(label: 'Category', value: fav.category.name),
@@ -91,12 +93,12 @@ class GoFavoriteDetailScreen extends StatelessWidget {
       Row(children: [
         const Text('Strength', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
         const SizedBox(width: 10),
-        Expanded(child: ClipRRect(borderRadius: BorderRadius.circular(4), child: LinearProgressIndicator(
+        Expanded(child: ClipRRect(borderRadius: BorderRadius.circular(6), child: LinearProgressIndicator(
           value: fav.transactionCount > 20 ? 0.9 : fav.transactionCount / 20,
-          minHeight: 6, backgroundColor: const Color(0xFFE5E7EB), valueColor: const AlwaysStoppedAnimation(kGoColor),
+          minHeight: 6, backgroundColor: const Color(0xFFE5E7EB), valueColor: const AlwaysStoppedAnimation(IveTokens.moduleGo),
         ))),
         const SizedBox(width: 8),
-        Text(fav.transactionCount > 20 ? 'Strong' : fav.transactionCount > 5 ? 'Growing' : 'New', style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: kGoColor)),
+        Text(fav.transactionCount > 20 ? 'Strong' : fav.transactionCount > 5 ? 'Growing' : 'New', style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: IveTokens.moduleGo)),
       ]),
     ]));
   }
@@ -111,7 +113,7 @@ class GoFavoriteDetailScreen extends StatelessWidget {
         _ActionBtn(icon: Icons.receipt_long, label: 'New Tab', onTap: () => Navigator.pushNamed(context, '/go/tabs')),
         _ActionBtn(icon: Icons.message, label: 'Message', onTap: () => Navigator.pushNamed(context, AppRoutes.qualChatDashboard)),
         _ActionBtn(icon: Icons.schedule, label: 'Schedule', onTap: () => Navigator.pushNamed(context, AppRoutes.goPlanner)),
-        _ActionBtn(icon: Icons.share, label: 'Share', onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Link copied to clipboard')))),
+        _ActionBtn(icon: Icons.share, label: 'Share', onTap: () => AppToast.show(context, 'Link copied to clipboard')),
       ]),
     ]));
   }
@@ -120,7 +122,7 @@ class GoFavoriteDetailScreen extends StatelessWidget {
     return GoSectionCard(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Row(children: [
         const Expanded(child: GoSectionHeader(title: 'Recent Activity', icon: Icons.history)),
-        TextButton(onPressed: () => Navigator.pushNamed(context, AppRoutes.goArchive), child: const Text('View All', style: TextStyle(fontSize: 11, color: kGoColor))),
+        TextButton(onPressed: () => Navigator.pushNamed(context, AppRoutes.goArchive), child: const Text('View All', style: TextStyle(fontSize: 11, color: IveTokens.moduleGo))),
       ]),
       const SizedBox(height: 8),
       // Mock recent transactions
@@ -140,14 +142,14 @@ class GoFavoriteDetailScreen extends StatelessWidget {
       Container(
         width: double.infinity,
         padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(color: const Color(0xFFF3F4F6), borderRadius: BorderRadius.circular(8)),
+        decoration: BoxDecoration(color: const Color(0xFFF3F4F6), borderRadius: BorderRadius.circular(10)),
         child: const Text('No notes yet. Add a note.', style: TextStyle(fontSize: 12, color: Color(0xFF9CA3AF))),
       ),
       const SizedBox(height: 8),
       Wrap(spacing: 6, children: [
-        const Chip(label: Text('Frequent', style: TextStyle(fontSize: 10)), backgroundColor: kGoColorLight, side: BorderSide.none, padding: EdgeInsets.zero, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
-        Chip(label: const Text('Verified', style: TextStyle(fontSize: 10)), backgroundColor: kGoPositive.withValues(alpha: 0.1), side: BorderSide.none, padding: EdgeInsets.zero, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
-        ActionChip(label: const Text('+ Tag', style: TextStyle(fontSize: 10)), onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Tag added'))), backgroundColor: Colors.white, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: EdgeInsets.zero, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
+        const Chip(label: Text('Frequent', style: TextStyle(fontSize: 10)), backgroundColor: IveTokens.surfaceRaised, side: BorderSide.none, padding: EdgeInsets.zero, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
+        Chip(label: const Text('Verified', style: TextStyle(fontSize: 10)), backgroundColor: IveTokens.success.withValues(alpha: 0.1), side: BorderSide.none, padding: EdgeInsets.zero, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
+        ActionChip(label: const Text('+ Tag', style: TextStyle(fontSize: 10)), onPressed: () => AppToast.show(context, 'Tag added'), backgroundColor: Colors.white, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: EdgeInsets.zero, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
       ]),
     ]));
   }
@@ -157,22 +159,22 @@ class GoFavoriteDetailScreen extends StatelessWidget {
       const GoSectionHeader(title: 'Management', icon: Icons.settings),
       const SizedBox(height: 8),
       ListTile(
-        leading: const Icon(Icons.block, color: kGoNegative, size: 20),
-        title: const Text('Block Party', style: TextStyle(fontSize: 13, color: kGoNegative)),
+        leading: const Icon(Icons.block, color: IveTokens.danger, size: 20),
+        title: const Text('Block Party', style: TextStyle(fontSize: 13, color: IveTokens.danger)),
         dense: true, contentPadding: EdgeInsets.zero,
-        onTap: () => showDialog(context: context, builder: (ctx) => AlertDialog(title: const Text('Block Party'), content: const Text('Are you sure you want to block this party?'), actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')), ElevatedButton(onPressed: () { Navigator.pop(ctx); ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Party blocked'))); }, style: ElevatedButton.styleFrom(backgroundColor: kGoNegative, foregroundColor: Colors.white), child: const Text('Block'))])),
+        onTap: () => showDialog(context: context, builder: (ctx) => AlertDialog(title: const Text('Block Party'), content: const Text('Are you sure you want to block this party?'), actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')), ElevatedButton(onPressed: () { Navigator.pop(ctx); AppToast.show(context, 'Party blocked'); }, style: ElevatedButton.styleFrom(backgroundColor: IveTokens.danger, foregroundColor: Colors.white), child: const Text('Block'))])),
       ),
       ListTile(
         leading: const Icon(Icons.delete_outline, color: Color(0xFF9CA3AF), size: 20),
         title: const Text('Remove from Favorites', style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
         dense: true, contentPadding: EdgeInsets.zero,
-        onTap: () => showDialog(context: context, builder: (ctx) => AlertDialog(title: const Text('Remove from Favorites'), content: const Text('Remove this party from your favorites?'), actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')), ElevatedButton(onPressed: () => Navigator.pop(ctx), style: ElevatedButton.styleFrom(backgroundColor: kGoColor, foregroundColor: Colors.white), child: const Text('Remove'))])),
+        onTap: () => showDialog(context: context, builder: (ctx) => AlertDialog(title: const Text('Remove from Favorites'), content: const Text('Remove this party from your favorites?'), actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')), ElevatedButton(onPressed: () => Navigator.pop(ctx), style: ElevatedButton.styleFrom(backgroundColor: IveTokens.moduleGo, foregroundColor: Colors.white), child: const Text('Remove'))])),
       ),
       ListTile(
-        leading: const Icon(Icons.flag_outlined, color: kGoWarning, size: 20),
+        leading: const Icon(Icons.flag_outlined, color: IveTokens.warning, size: 20),
         title: const Text('Report', style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
         dense: true, contentPadding: EdgeInsets.zero,
-        onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Report submitted'))),
+        onTap: () => AppToast.show(context, 'Report submitted'),
       ),
     ]));
   }
@@ -217,11 +219,11 @@ class _ActionBtn extends StatelessWidget {
     onTap: onTap,
     child: Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      decoration: BoxDecoration(color: kGoColorLight, borderRadius: BorderRadius.circular(8)),
+      decoration: BoxDecoration(color: IveTokens.surfaceRaised, borderRadius: BorderRadius.circular(10)),
       child: Row(mainAxisSize: MainAxisSize.min, children: [
-        Icon(icon, size: 14, color: kGoColor),
+        Icon(icon, size: 14, color: IveTokens.moduleGo),
         const SizedBox(width: 4),
-        Text(label, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: kGoColor)),
+        Text(label, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: IveTokens.moduleGo)),
       ]),
     ),
   );
@@ -234,10 +236,10 @@ class _TxnRow extends StatelessWidget {
   Widget build(BuildContext context) => Padding(
     padding: const EdgeInsets.only(bottom: 8),
     child: Row(children: [
-      Icon(isPositive ? Icons.arrow_downward : Icons.arrow_upward, size: 14, color: isPositive ? kGoPositive : kGoNegative),
+      Icon(isPositive ? Icons.arrow_downward : Icons.arrow_upward, size: 14, color: isPositive ? IveTokens.success : IveTokens.danger),
       const SizedBox(width: 8),
       Expanded(child: Text(type, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500))),
-      Text(amount, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: isPositive ? kGoPositive : kGoNegative)),
+      Text(amount, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: isPositive ? IveTokens.success : IveTokens.danger)),
       const SizedBox(width: 8),
       Text(date, style: const TextStyle(fontSize: 10, color: Color(0xFF9CA3AF))),
     ]),

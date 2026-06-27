@@ -1,4 +1,4 @@
-﻿/// Alerts Screen 7 — Knowledge Base Integration
+/// Alerts Screen 7  Knowledge Base Integration
 /// AI-suggested solutions, similarity scores, feedback loop
 library;
 
@@ -43,7 +43,7 @@ class _AlertsKnowledgeScreenState extends State<AlertsKnowledgeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // ──── CONTEXT BANNER ────
+                //  CONTEXT BANNER 
                 if (alert != null) ...[
                   Container(
                     padding: const EdgeInsets.all(12),
@@ -70,29 +70,29 @@ class _AlertsKnowledgeScreenState extends State<AlertsKnowledgeScreen> {
                   const SizedBox(height: 16),
                 ],
 
-                // ──── CATEGORY TABS ────
+                //  CATEGORY TABS 
                 SizedBox(
                   height: 36,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: [
                       _KbFilterChip(label: 'All', isSelected: _selectedFilter == 'All', onTap: () => setState(() => _selectedFilter = 'All')),
-                      _KbFilterChip(label: '📚 Articles', isSelected: _selectedFilter == 'Articles', onTap: () => setState(() => _selectedFilter = 'Articles')),
-                      _KbFilterChip(label: '✅ Past Fixes', isSelected: _selectedFilter == 'Past Fixes', onTap: () => setState(() => _selectedFilter = 'Past Fixes')),
-                      _KbFilterChip(label: '🌐 Community', isSelected: _selectedFilter == 'Community', onTap: () => setState(() => _selectedFilter = 'Community')),
+                      _KbFilterChip(label: ' Articles', isSelected: _selectedFilter == 'Articles', onTap: () => setState(() => _selectedFilter = 'Articles')),
+                      _KbFilterChip(label: ' Past Fixes', isSelected: _selectedFilter == 'Past Fixes', onTap: () => setState(() => _selectedFilter = 'Past Fixes')),
+                      _KbFilterChip(label: ' Community', isSelected: _selectedFilter == 'Community', onTap: () => setState(() => _selectedFilter = 'Community')),
                     ],
                   ),
                 ),
                 const SizedBox(height: 16),
 
-                // ──── RESULTS COUNT ────
+                //  RESULTS COUNT 
                 Text(
                   '${items.length} article${items.length == 1 ? '' : 's'} found',
                   style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280)),
                 ),
                 const SizedBox(height: 12),
 
-                // ──── KNOWLEDGE ITEMS ────
+                //  KNOWLEDGE ITEMS 
                 if (items.isEmpty)
                   const AlertsEmptyState(
                     icon: Icons.library_books,
@@ -107,7 +107,7 @@ class _AlertsKnowledgeScreenState extends State<AlertsKnowledgeScreen> {
 
                 const SizedBox(height: 16),
 
-                // ──── FEEDBACK PROMPT ────
+                //  FEEDBACK PROMPT 
                 Container(
                   padding: const EdgeInsets.all(14),
                   decoration: BoxDecoration(
@@ -122,7 +122,7 @@ class _AlertsKnowledgeScreenState extends State<AlertsKnowledgeScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           _FeedbackButton(icon: Icons.thumb_up, label: 'Helpful', onTap: () {
-                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Thanks for your feedback! ðŸ‘'), backgroundColor: kAlertsResolved));
+                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Thanks for your feedback! '), backgroundColor: kAlertsResolved));
                           }),
                           const SizedBox(width: 12),
                           _FeedbackButton(icon: Icons.thumb_down, label: 'Not Helpful', onTap: () {
@@ -145,7 +145,7 @@ class _AlertsKnowledgeScreenState extends State<AlertsKnowledgeScreen> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(10))),
       builder: (context) => DraggableScrollableSheet(
         initialChildSize: 0.7,
         minChildSize: 0.5,
@@ -157,7 +157,7 @@ class _AlertsKnowledgeScreenState extends State<AlertsKnowledgeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(child: Container(width: 40, height: 4, margin: const EdgeInsets.only(bottom: 16), decoration: BoxDecoration(color: const Color(0xFFE5E7EB), borderRadius: BorderRadius.circular(2)))),
+              Center(child: Container(width: 40, height: 4, margin: const EdgeInsets.only(bottom: 16), decoration: BoxDecoration(color: const Color(0xFFE5E7EB), borderRadius: BorderRadius.circular(6)))),
               Row(
                 children: [
                   Expanded(child: Text(item.title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700))),
@@ -210,9 +210,9 @@ class _AlertsKnowledgeScreenState extends State<AlertsKnowledgeScreen> {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 // KB Filter Chip
-// ──────────────────────────────────────────────
+// 
 
 class _KbFilterChip extends StatelessWidget {
   final String label;
@@ -229,7 +229,7 @@ class _KbFilterChip extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
         decoration: BoxDecoration(
           color: isSelected ? kAlertsCritical : Colors.white,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(10),
           border: Border.all(color: isSelected ? kAlertsCritical : const Color(0xFFE5E7EB)),
         ),
         child: Text(label, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: isSelected ? Colors.white : const Color(0xFF6B7280))),
@@ -238,9 +238,9 @@ class _KbFilterChip extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 // Feedback Button
-// ──────────────────────────────────────────────
+// 
 
 class _FeedbackButton extends StatelessWidget {
   final IconData icon;
@@ -256,7 +256,7 @@ class _FeedbackButton extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(10),
           border: Border.all(color: const Color(0xFFE5E7EB)),
         ),
         child: Row(

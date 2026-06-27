@@ -5,13 +5,13 @@
 /// ```
 ///
 /// Re-exports:
-///   * `Brand` — design tokens (colors, spacing, radii, motion, elevation).
-///   * `BrandText` — typography ramp.
-///   * `BrandButton` — premium CTA component.
-///   * `BrandCard` — surface component (flat / glow / glass).
-///   * `BrandBackdrop` — cinematic animated backdrop.
-///   * `BrandPressable` — tap-feedback wrapper.
-///   * `AppLogo` — brand mark + wordmark.
+///   * `Brand`  design tokens (colors, spacing, radii, motion, elevation).
+///   * `BrandText`  typography ramp.
+///   * `BrandButton`  premium CTA component.
+///   * `BrandCard`  surface component (flat / glow / glass).
+///   * `BrandBackdrop`  cinematic animated backdrop.
+///   * `BrandPressable`  tap-feedback wrapper.
+///   * `AppLogo`  brand mark + wordmark.
 library;
 
 export 'theme/brand.dart';

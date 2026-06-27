@@ -1,10 +1,11 @@
-﻿/// GO Screen 2B — Sell QPoints Flow
+/// GO Screen 2B  Sell QPoints Flow
 /// Mirror of Buy flow with sell-specific differences:
 /// Destination selection, minimum 500 QP, processing time warning,
 /// additional verification for large amounts
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
 import 'package:provider/provider.dart';
 import '../models/go_models.dart';
 import '../providers/go_provider.dart';
@@ -74,15 +75,15 @@ class _GoSellScreenState extends State<GoSellScreen> {
                   child: Container(
                     margin: const EdgeInsets.only(bottom: 10),
                     padding: const EdgeInsets.all(14),
-                    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: sel ? kGoColor : const Color(0xFFE5E7EB), width: sel ? 2 : 1)),
+                    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: sel ? IveTokens.moduleGo : const Color(0xFFE5E7EB), width: sel ? 2 : 1)),
                     child: Row(
                       children: [
                         // ignore: deprecated_member_use
-                        Radio<String>(value: gw.id, groupValue: _selectedGwId, onChanged: (v) => setState(() => _selectedGwId = v), activeColor: kGoColor),
+                        Radio<String>(value: gw.id, groupValue: _selectedGwId, onChanged: (v) => setState(() => _selectedGwId = v), activeColor: IveTokens.moduleGo),
                         const SizedBox(width: 8),
                         Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                           Text(gw.name, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
-                          Text('Rate: 1 QP = ${gw.sellRate} GHS • Min: ${gw.minSell.toStringAsFixed(0)} QP', style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
+                          Text('Rate: 1 QP = ${gw.sellRate} GHS  Min: ${gw.minSell.toStringAsFixed(0)} QP', style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
                           Text('Processing: ${gw.processingTime}', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
                         ])),
                       ],
@@ -92,10 +93,10 @@ class _GoSellScreenState extends State<GoSellScreen> {
               }),
               const SizedBox(height: 10),
               GoSectionCard(
-                borderColor: kGoWarning.withValues(alpha: 0.3),
+                borderColor: IveTokens.warning.withValues(alpha: 0.3),
                 child: const Row(
                   children: [
-                    Icon(Icons.info_outline, size: 18, color: kGoWarning),
+                    Icon(Icons.info_outline, size: 18, color: IveTokens.warning),
                     SizedBox(width: 10),
                     Expanded(child: Text('Withdrawals take 1-3 business days.\nFor instant cash-out, use P2P transfer.', style: TextStyle(fontSize: 12, color: Color(0xFF92400E)))),
                   ],
@@ -127,7 +128,7 @@ class _GoSellScreenState extends State<GoSellScreen> {
                   children: [
                     const Text('SELL AMOUNT', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF9CA3AF))),
                     const SizedBox(height: 8),
-                    Text('Available: ${provider.liquidity.available.toStringAsFixed(0)} QP', style: const TextStyle(fontSize: 12, color: kGoColor, fontWeight: FontWeight.w600)),
+                    Text('Available: ${provider.liquidity.available.toStringAsFixed(0)} QP', style: const TextStyle(fontSize: 12, color: IveTokens.moduleGo, fontWeight: FontWeight.w600)),
                     const SizedBox(height: 8),
                     TextField(
                       controller: _amountCtrl,
@@ -138,7 +139,7 @@ class _GoSellScreenState extends State<GoSellScreen> {
                       onChanged: (v) => setState(() => _amount = double.tryParse(v) ?? 0),
                     ),
                     if (_amount > 0 && _amount < gw.minSell)
-                      Padding(padding: const EdgeInsets.only(top: 6), child: Text('Minimum sell: ${gw.minSell.toStringAsFixed(0)} QP', style: const TextStyle(fontSize: 11, color: kGoNegative))),
+                      Padding(padding: const EdgeInsets.only(top: 6), child: Text('Minimum sell: ${gw.minSell.toStringAsFixed(0)} QP', style: const TextStyle(fontSize: 11, color: IveTokens.danger))),
                     const SizedBox(height: 12),
                     const Text('YOU WILL RECEIVE', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF9CA3AF))),
                     const SizedBox(height: 4),
@@ -157,7 +158,7 @@ class _GoSellScreenState extends State<GoSellScreen> {
                 _Row(label: 'Revenue', value: '${revenue.toStringAsFixed(2)} GHS'),
                 _Row(label: 'Fee (${gw.feePercent}%)', value: '-${fee.toStringAsFixed(2)} GHS'),
                 const Divider(height: 16),
-                _Row(label: 'NET RECEIVE', value: '${net.toStringAsFixed(2)} GHS', bold: true, color: kGoPositive),
+                _Row(label: 'NET RECEIVE', value: '${net.toStringAsFixed(2)} GHS', bold: true, color: IveTokens.success),
               ])),
               const SizedBox(height: 14),
               // Purpose
@@ -203,9 +204,9 @@ class _GoSellScreenState extends State<GoSellScreen> {
               if (_amount > 10000) ...[
                 const SizedBox(height: 10),
                 GoSectionCard(
-                  borderColor: kGoWarning.withValues(alpha: 0.3),
+                  borderColor: IveTokens.warning.withValues(alpha: 0.3),
                   child: const Row(children: [
-                    Icon(Icons.warning_amber, size: 18, color: kGoWarning),
+                    Icon(Icons.warning_amber, size: 18, color: IveTokens.warning),
                     SizedBox(width: 10),
                     Expanded(child: Text('Large withdrawal requires manual review and may take up to 48 hours.', style: TextStyle(fontSize: 12, color: Color(0xFF92400E)))),
                   ]),
@@ -216,7 +217,7 @@ class _GoSellScreenState extends State<GoSellScreen> {
               CheckboxListTile(
                 value: _termsAccepted,
                 onChanged: (v) => setState(() => _termsAccepted = v ?? false),
-                activeColor: kGoColor,
+                activeColor: IveTokens.moduleGo,
                 controlAffinity: ListTileControlAffinity.leading,
                 title: const Text('I confirm this withdrawal and understand the processing timeline.', style: TextStyle(fontSize: 12)),
               ),
@@ -235,7 +236,7 @@ class _GoSellScreenState extends State<GoSellScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(Icons.shield, size: 56, color: kGoColor),
+          const Icon(Icons.shield, size: 56, color: IveTokens.moduleGo),
           const SizedBox(height: 16),
           const Text('VERIFY WITHDRAWAL', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
           const SizedBox(height: 24),
@@ -267,7 +268,7 @@ class _GoSellScreenState extends State<GoSellScreen> {
             );
             if (mounted) setState(() { _processing = false; _success = ok; });
           },
-          style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+          style: OutlinedButton.styleFrom(foregroundColor: IveTokens.moduleGo, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
         ),
       ),
     );
@@ -277,18 +278,18 @@ class _GoSellScreenState extends State<GoSellScreen> {
   Widget _buildResult() {
     if (_processing) {
       return const Center(child: Column(mainAxisSize: MainAxisSize.min, children: [
-        SizedBox(width: 56, height: 56, child: CircularProgressIndicator(strokeWidth: 4, color: kGoColor)),
+        SizedBox(width: 56, height: 56, child: CircularProgressIndicator(strokeWidth: 4, color: IveTokens.moduleGo)),
         SizedBox(height: 16), Text('Processing withdrawal...', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
       ]));
     }
     return Center(child: Column(mainAxisSize: MainAxisSize.min, children: [
-      Icon(_success == true ? Icons.check_circle : Icons.error_outline, size: 72, color: _success == true ? kGoPositive : kGoNegative),
+      Icon(_success == true ? Icons.check_circle : Icons.error_outline, size: 72, color: _success == true ? IveTokens.success : IveTokens.danger),
       const SizedBox(height: 16),
-      Text(_success == true ? 'Withdrawal Initiated!' : 'Withdrawal Failed', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: _success == true ? kGoPositive : kGoNegative)),
+      Text(_success == true ? 'Withdrawal Initiated!' : 'Withdrawal Failed', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: _success == true ? IveTokens.success : IveTokens.danger)),
       const SizedBox(height: 8),
       Text(_success == true ? 'Your funds will arrive in 1-3 business days.' : 'Try again.', style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
       const SizedBox(height: 24),
-      ElevatedButton(onPressed: () => Navigator.pop(context), style: ElevatedButton.styleFrom(backgroundColor: kGoColor, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))), child: const Text('Done')),
+      ElevatedButton(onPressed: () => Navigator.pop(context), style: ElevatedButton.styleFrom(backgroundColor: IveTokens.moduleGo, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))), child: const Text('Done')),
     ]));
   }
 
@@ -299,7 +300,7 @@ class _GoSellScreenState extends State<GoSellScreen> {
       child: Row(children: [
         if (onBack != null) Expanded(child: OutlinedButton(onPressed: onBack, style: OutlinedButton.styleFrom(foregroundColor: const Color(0xFF6B7280), side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))), child: const Text('Back'))),
         if (onBack != null) const SizedBox(width: 12),
-        Expanded(child: ElevatedButton(onPressed: onNext, style: ElevatedButton.styleFrom(backgroundColor: onNext != null ? kGoColor : const Color(0xFFE5E7EB), foregroundColor: onNext != null ? Colors.white : const Color(0xFF9CA3AF), padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))), child: Text(label, style: const TextStyle(fontWeight: FontWeight.w600)))),
+        Expanded(child: ElevatedButton(onPressed: onNext, style: ElevatedButton.styleFrom(backgroundColor: onNext != null ? IveTokens.moduleGo : const Color(0xFFE5E7EB), foregroundColor: onNext != null ? Colors.white : const Color(0xFF9CA3AF), padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))), child: Text(label, style: const TextStyle(fontWeight: FontWeight.w600)))),
       ]),
     );
   }

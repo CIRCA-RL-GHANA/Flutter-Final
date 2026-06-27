@@ -1,9 +1,10 @@
-﻿/// Enterprise â€º Onboarding Screen
+/// Enterprise  Onboarding Screen
 /// Allows an account owner to register their business on the Genie Enterprise
-/// platform (pathways 1–5), upload KYB documents, and view profile status.
+/// platform (pathways 15), upload KYB documents, and view profile status.
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
 import '../../../core/services/enterprise_service.dart';
 
 const _kGold = Color(0xFFD4A017);

@@ -1,10 +1,10 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// MARKET MODULE — Provider (State Management)
+/// 
+/// MARKET MODULE  Provider (State Management)
 /// Cart management, order tracking, merchant discovery, ride hailing,
 /// returns, self-pickup, delivery tracking, AI bundling
 ///
 /// Migrated from hardcoded demo data to real API calls with fallback.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -12,17 +12,17 @@ import '../models/market_models.dart';
 import '../../../core/services/services.dart';
 
 class MarketProvider extends ChangeNotifier {
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SERVICES
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   final ProductService _productService = ProductService();
   final OrdersService _orderService = OrdersService();
   final RideService _rideService = RideService();
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // LOADING / ERROR STATE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -50,9 +50,9 @@ class MarketProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // INIT — Load everything on startup
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
+  // INIT  Load everything on startup
+  // 
 
   Future<void> init() async {
     _isLoading = true;
@@ -70,9 +70,9 @@ class MarketProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 1: MERCHANTS
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   List<Merchant> _merchants = [];
 
@@ -147,9 +147,9 @@ class MarketProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 2: PRODUCTS
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   List<MarketProduct> _products = [];
 
@@ -246,9 +246,9 @@ class MarketProvider extends ChangeNotifier {
     return _searchResults;
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // SECTION 3: CART (Client-side — no API changes)
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
+  // SECTION 3: CART (Client-side  no API changes)
+  // 
 
   final List<CartItem> _cartItems = [];
   List<CartItem> get cartItems => List.unmodifiable(_cartItems);
@@ -359,9 +359,9 @@ class MarketProvider extends ChangeNotifier {
         )
       : null;
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 4: ORDERS
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   List<MarketOrder> _orders = [];
 
@@ -464,9 +464,9 @@ class MarketProvider extends ChangeNotifier {
     return null;
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 5: RETURNS
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   List<ReturnRequest> _returns = [];
 
@@ -545,17 +545,17 @@ class MarketProvider extends ChangeNotifier {
     return null;
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // SECTION 6: DELIVERY TRACKING (Client-side for now — WebSocket later)
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
+  // SECTION 6: DELIVERY TRACKING (Client-side for now  WebSocket later)
+  // 
 
   DeliveryTracking? _activeDeliveryTracking;
 
   DeliveryTracking? get activeDelivery => _activeDeliveryTracking ?? _fallbackDeliveryTracking;
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 7: RIDE HAILING
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   List<RideRequest> _rides = [];
 
@@ -639,9 +639,9 @@ class MarketProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 8: FILTERS & SEARCH (Client-side)
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   MarketFilters _filters = const MarketFilters();
   MarketFilters get filters => _filters;
@@ -660,9 +660,9 @@ class MarketProvider extends ChangeNotifier {
 
   List<String> get searchSuggestions => ['Pizza', 'Pharmacy', '24/7', 'Free delivery'];
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 9: PAYMENT METHODS (Client-side for now)
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   List<SavedPaymentMethod> get paymentMethods => _fallbackPaymentMethods;
 
@@ -677,9 +677,9 @@ class MarketProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // SECTION 10: AI SUGGESTIONS (Client-side — different backend system)
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
+  // SECTION 10: AI SUGGESTIONS (Client-side  different backend system)
+  // 
 
   List<MarketAISuggestion> get aiSuggestions => const [
         MarketAISuggestion(
@@ -704,9 +704,9 @@ class MarketProvider extends ChangeNotifier {
         ),
       ];
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 11: MERCHANT POSTS & DEALS (Client-side fallback for now)
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   List<MerchantPost> get merchantPosts => _fallbackMerchantPosts;
 
@@ -717,9 +717,9 @@ class MarketProvider extends ChangeNotifier {
 
   List<RejectedReturnVideo> get rejectedReturnVideos => _fallbackRejectedVideos;
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // JSON → MODEL HELPERS
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
+  // JSON  MODEL HELPERS
+  // 
 
   /// Build a Merchant from product-level JSON (inferred from products endpoint).
   Merchant _merchantFromProductJson(Map<String, dynamic> json) {
@@ -910,9 +910,9 @@ class MarketProvider extends ChangeNotifier {
     }
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // PARSING UTILITIES
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   double _toDouble(dynamic value, {double fallback = 0.0}) {
     if (value == null) return fallback;
@@ -1192,9 +1192,9 @@ class MarketProvider extends ChangeNotifier {
     }).toList();
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // FALLBACK DEMO DATA — Used when API calls fail
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
+  // FALLBACK DEMO DATA  Used when API calls fail
+  // 
 
   static final List<Merchant> _fallbackMerchants = [
     const Merchant(
@@ -1862,7 +1862,7 @@ class MarketProvider extends ChangeNotifier {
     MerchantPost(
       id: 'post_1',
       merchantId: 'merch_1',
-      content: 'Our new Dragon Roll is here! Made with the freshest ingredients imported daily from Tokyo. 🐉🍣',
+      content: 'Our new Dragon Roll is here! Made with the freshest ingredients imported daily from Tokyo. ',
       postType: 'image',
       createdAt: DateTime.now().subtract(const Duration(hours: 6)),
       views: 142,
@@ -1872,7 +1872,7 @@ class MarketProvider extends ChangeNotifier {
     MerchantPost(
       id: 'post_2',
       merchantId: 'merch_1',
-      content: '🎉 Special announcement: We are extending our hours! Now open until midnight on weekends.',
+      content: ' Special announcement: We are extending our hours! Now open until midnight on weekends.',
       postType: 'announcement',
       createdAt: DateTime.now().subtract(const Duration(days: 1)),
       views: 89,
@@ -1882,7 +1882,7 @@ class MarketProvider extends ChangeNotifier {
     MerchantPost(
       id: 'post_3',
       merchantId: 'merch_1',
-      content: 'Watch our head chef prepare the legendary Omakase experience! 🎬',
+      content: 'Watch our head chef prepare the legendary Omakase experience! ',
       postType: 'video',
       createdAt: DateTime.now().subtract(const Duration(days: 3)),
       views: 534,
@@ -1895,7 +1895,7 @@ class MarketProvider extends ChangeNotifier {
     RejectedReturnVideo(
       id: 'rv_1',
       returnId: 'RET-789099',
-      title: 'Return #RET-789099 — Damaged Package',
+      title: 'Return #RET-789099  Damaged Package',
       durationSeconds: 45,
       reason: ReturnReason.damaged,
       createdAt: DateTime.now().subtract(const Duration(days: 2)),
@@ -1904,7 +1904,7 @@ class MarketProvider extends ChangeNotifier {
     RejectedReturnVideo(
       id: 'rv_2',
       returnId: 'RET-789088',
-      title: 'Return #RET-789088 — Wrong Item',
+      title: 'Return #RET-789088  Wrong Item',
       durationSeconds: 32,
       reason: ReturnReason.wrongItem,
       createdAt: DateTime.now().subtract(const Duration(days: 5)),
@@ -1913,7 +1913,7 @@ class MarketProvider extends ChangeNotifier {
     RejectedReturnVideo(
       id: 'rv_3',
       returnId: 'RET-789077',
-      title: 'Return #RET-789077 — Item Expired',
+      title: 'Return #RET-789077  Item Expired',
       durationSeconds: 18,
       reason: ReturnReason.expired,
       createdAt: DateTime.now().subtract(const Duration(days: 8)),

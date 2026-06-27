@@ -1,10 +1,10 @@
-﻿/// ═══════════════════════════════════════════════════════════════════════════
-/// Community Provider — State Management
+/// 
+/// Community Provider  State Management
 ///
 /// Manages community discovery, memberships, and post state.
 /// Delegates all API calls to CommunityService. Gracefully falls back to
 /// stub data when offline so the UI always renders beautifully.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'package:flutter/foundation.dart';
@@ -16,7 +16,7 @@ class CommunityProvider extends ChangeNotifier {
   CommunityProvider({CommunityService? service})
       : _service = service ?? CommunityService();
 
-  // ─── Loading / Error State ────────────────────────────────────────────────
+  //  Loading / Error State 
 
   bool _isDiscoveryLoading = false;
   bool get isDiscoveryLoading => _isDiscoveryLoading;
@@ -35,7 +35,7 @@ class CommunityProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Discovery State ──────────────────────────────────────────────────────
+  //  Discovery State 
 
   List<Map<String, dynamic>> _communities = [];
   List<Map<String, dynamic>> get communities => _communities;
@@ -92,7 +92,7 @@ class CommunityProvider extends ChangeNotifier {
     }
   }
 
-  // ─── My Memberships State ─────────────────────────────────────────────────
+  //  My Memberships State 
 
   List<Map<String, dynamic>> _myMemberships = [];
   List<Map<String, dynamic>> get myMemberships => _myMemberships;
@@ -119,7 +119,7 @@ class CommunityProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Active Community Detail ──────────────────────────────────────────────
+  //  Active Community Detail 
 
   Map<String, dynamic>? _activeCommunity;
   Map<String, dynamic>? get activeCommunity => _activeCommunity;
@@ -162,7 +162,7 @@ class CommunityProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Create Community ─────────────────────────────────────────────────────
+  //  Create Community 
 
   bool _isCreating = false;
   bool get isCreating => _isCreating;
@@ -205,7 +205,7 @@ class CommunityProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Posts ────────────────────────────────────────────────────────────────
+  //  Posts 
 
   final Map<String, List<Map<String, dynamic>>> _postsCache = {};
 
@@ -259,7 +259,7 @@ class CommunityProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Members ─────────────────────────────────────────────────────────────
+  //  Members 
 
   final Map<String, List<Map<String, dynamic>>> _membersCache = {};
 
@@ -314,7 +314,7 @@ class CommunityProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Fallback / Offline Data ──────────────────────────────────────────────
+  //  Fallback / Offline Data 
 
   static final List<Map<String, dynamic>> _fallbackCommunities = [
     {'id': 'c1', 'name': 'Afrobeats Book Club',   'type': 'library',  'memberCount': 1200, 'visibility': 'public'},

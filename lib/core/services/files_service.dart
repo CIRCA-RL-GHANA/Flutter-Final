@@ -1,10 +1,10 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// Files Service — Flutter ↔ Backend Integration
+/// 
+/// Files Service  Flutter  Backend Integration
 ///
 /// Maps to FilesController endpoints:
 ///   POST   /files/upload
 ///   DELETE /files/{fileKey}
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'package:dio/dio.dart';
@@ -16,7 +16,7 @@ class FilesService {
 
   FilesService([ApiClient? api]) : _api = api ?? ApiClient.instance;
 
-  // ─── File Operations ──────────────────────────────────────────────────────
+  //  File Operations 
 
   Future<ApiResponse<Map<String, dynamic>>> uploadFile(
     String filePath,

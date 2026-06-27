@@ -19,6 +19,7 @@ export 'ive_scaffold.dart';
 // Inputs
 export 'ive_button.dart';
 export 'ive_text_field.dart';
+export 'ive_text_form_field.dart';
 
 // Data display
 export 'value_display.dart';

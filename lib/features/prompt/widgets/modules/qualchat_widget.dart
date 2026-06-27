@@ -1,7 +1,7 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 /// qualChat Widget (Communications Hub)
 /// Visible to: ALL roles (with Owner-only HeyYa section)
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -47,7 +47,7 @@ class QualChatWidgetContent extends StatelessWidget {
                 height: 28,
                 decoration: BoxDecoration(
                   color: color.withValues(alpha: 0.1),
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: Icon(Icons.edit, size: 14, color: color),
               ),
@@ -61,7 +61,7 @@ class QualChatWidgetContent extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
               color: AppColors.inputFill,
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(10),
             ),
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -78,7 +78,7 @@ class QualChatWidgetContent extends StatelessWidget {
           // Recent Chats
           _ChatPreview(
             name: 'Alice',
-            message: 'Payment confirmed âœ“',
+            message: 'Payment confirmed "',
             time: '2m',
             unread: 2,
             color: color,
@@ -113,7 +113,7 @@ class QualChatWidgetContent extends StatelessWidget {
               ),
               child: const Row(
                 children: [
-                  Text('ðŸ’˜', style: TextStyle(fontSize: 14)),
+                  Text('', style: TextStyle(fontSize: 14)),
                   SizedBox(width: 6),
                   Expanded(
                     child: Column(
@@ -128,7 +128,7 @@ class QualChatWidgetContent extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '5 Sparks • 2 Matches',
+                          '5 Sparks  2 Matches',
                           style: TextStyle(
                             fontSize: 9,
                             color: AppColors.textTertiary,
@@ -199,7 +199,7 @@ class _ChatPreview extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
       decoration: BoxDecoration(
         color: AppColors.inputFill,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
         children: [

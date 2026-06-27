@@ -1,8 +1,9 @@
-﻿/// GO Screen 15 — Archive & History
+/// GO Screen 15  Archive & History
 /// Transaction archive, historical analysis, compliance storage
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
 import 'package:provider/provider.dart';
 import '../models/go_models.dart';
 import '../providers/go_provider.dart';
@@ -51,8 +52,8 @@ class _GoArchiveScreenState extends State<GoArchiveScreen> with SingleTickerProv
               color: Colors.transparent,
               child: TabBar(
                 controller: _tabCtrl,
-                labelColor: kGoColor, unselectedLabelColor: const Color(0xFF9CA3AF),
-                indicatorColor: kGoColor, indicatorSize: TabBarIndicatorSize.label,
+                labelColor: IveTokens.moduleGo, unselectedLabelColor: const Color(0xFF9CA3AF),
+                indicatorColor: IveTokens.moduleGo, indicatorSize: TabBarIndicatorSize.label,
                 labelStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
                 tabs: const [Tab(text: 'Transactions'), Tab(text: 'Analysis'), Tab(text: 'Compliance')],
               ),
@@ -87,10 +88,10 @@ class _GoArchiveScreenState extends State<GoArchiveScreen> with SingleTickerProv
             children: ['All', 'Last 30d', 'Last 90d', 'This Year', '2023'].map((f) => Padding(
               padding: const EdgeInsets.only(right: 6),
               child: GestureDetector(
-                onTap: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Filtering: $f'), backgroundColor: kGoColor, duration: const Duration(seconds: 1))),
+                onTap: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Filtering: $f'), backgroundColor: IveTokens.moduleGo, duration: const Duration(seconds: 1))),
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                  decoration: BoxDecoration(color: f == 'All' ? kGoColor : Colors.white, borderRadius: BorderRadius.circular(16), border: Border.all(color: f == 'All' ? kGoColor : const Color(0xFFE5E7EB))),
+                  decoration: BoxDecoration(color: f == 'All' ? IveTokens.moduleGo : Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: f == 'All' ? IveTokens.moduleGo : const Color(0xFFE5E7EB))),
                   child: Text(f, style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: f == 'All' ? Colors.white : const Color(0xFF6B7280))),
                 ),
               ),
@@ -141,7 +142,7 @@ class _GoArchiveScreenState extends State<GoArchiveScreen> with SingleTickerProv
         SizedBox(height: 10),
         SizedBox(height: 150, child: Center(child: GoDonutChart(
           values: [42, 28, 18, 12],
-          colors: [kGoColor, kGoInfo, kGoWarning, kGoPurple],
+          colors: [IveTokens.moduleGo, IveTokens.info, IveTokens.warning, IveTokens.accent],
         ))),
       ])),
     ]);
@@ -149,8 +150,8 @@ class _GoArchiveScreenState extends State<GoArchiveScreen> with SingleTickerProv
 
   Widget _buildComplianceStorage(GoProvider p) {
     return ListView(padding: const EdgeInsets.all(16), children: [
-      GoSectionCard(borderColor: kGoInfo.withValues(alpha: 0.3), child: const Row(children: [
-        Icon(Icons.info_outline, size: 18, color: kGoInfo),
+      GoSectionCard(borderColor: IveTokens.info.withValues(alpha: 0.3), child: const Row(children: [
+        Icon(Icons.info_outline, size: 18, color: IveTokens.info),
         SizedBox(width: 10),
         Expanded(child: Text('All transaction records are retained for 7 years in compliance with regulatory requirements.', style: TextStyle(fontSize: 12, color: Color(0xFF1E40AF)))),
       ])),
@@ -168,13 +169,13 @@ class _GoArchiveScreenState extends State<GoArchiveScreen> with SingleTickerProv
         const GoSectionHeader(title: 'Export Options', icon: Icons.download),
         const SizedBox(height: 10),
         Row(children: [
-          Expanded(child: _ExportBtn(icon: Icons.picture_as_pdf, label: 'PDF', onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Generating PDF export...'), backgroundColor: kGoColor)))),
+          Expanded(child: _ExportBtn(icon: Icons.picture_as_pdf, label: 'PDF', onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Generating PDF export...'), backgroundColor: IveTokens.moduleGo)))),
           const SizedBox(width: 8),
-          Expanded(child: _ExportBtn(icon: Icons.table_chart, label: 'CSV', onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Generating CSV export...'), backgroundColor: kGoColor)))),
+          Expanded(child: _ExportBtn(icon: Icons.table_chart, label: 'CSV', onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Generating CSV export...'), backgroundColor: IveTokens.moduleGo)))),
           const SizedBox(width: 8),
-          Expanded(child: _ExportBtn(icon: Icons.grid_on, label: 'Excel', onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Generating Excel export...'), backgroundColor: kGoColor)))),
+          Expanded(child: _ExportBtn(icon: Icons.grid_on, label: 'Excel', onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Generating Excel export...'), backgroundColor: IveTokens.moduleGo)))),
           const SizedBox(width: 8),
-          Expanded(child: _ExportBtn(icon: Icons.data_object, label: 'JSON', onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Generating JSON export...'), backgroundColor: kGoColor)))),
+          Expanded(child: _ExportBtn(icon: Icons.data_object, label: 'JSON', onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Generating JSON export...'), backgroundColor: IveTokens.moduleGo)))),
         ]),
       ])),
       const SizedBox(height: 14),
@@ -186,10 +187,10 @@ class _GoArchiveScreenState extends State<GoArchiveScreen> with SingleTickerProv
           content: const Text('This will submit a request to delete non-mandatory records. Legally required records will be retained per compliance rules.'),
           actions: [
             TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
-            ElevatedButton(onPressed: () { Navigator.pop(context); ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Data deletion request submitted'), backgroundColor: kGoNegative)); }, style: ElevatedButton.styleFrom(backgroundColor: kGoNegative), child: const Text('Submit Request')),
+            ElevatedButton(onPressed: () { Navigator.pop(context); ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Data deletion request submitted'), backgroundColor: IveTokens.danger)); }, style: ElevatedButton.styleFrom(backgroundColor: IveTokens.danger), child: const Text('Submit Request')),
           ],
         )),
-        style: OutlinedButton.styleFrom(foregroundColor: kGoNegative, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 12)),
+        style: OutlinedButton.styleFrom(foregroundColor: IveTokens.danger, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 12)),
       )),
     ]);
   }
@@ -207,8 +208,8 @@ class _ArchiveCard extends StatelessWidget {
       child: Row(children: [
         Container(
           padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(color: kGoColorLight, borderRadius: BorderRadius.circular(8)),
-          child: const Icon(Icons.archive_outlined, color: kGoColor, size: 18),
+          decoration: BoxDecoration(color: IveTokens.surfaceRaised, borderRadius: BorderRadius.circular(10)),
+          child: const Icon(Icons.archive_outlined, color: IveTokens.moduleGo, size: 18),
         ),
         const SizedBox(width: 10),
         Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -217,10 +218,10 @@ class _ArchiveCard extends StatelessWidget {
           Text('${record.archivedAt.day}/${record.archivedAt.month}/${record.archivedAt.year}', style: const TextStyle(fontSize: 10, color: Color(0xFFD1D5DB))),
         ])),
         Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-          Text('${record.totalValue.toStringAsFixed(0)} QP', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: kGoColor)),
+          Text('${record.totalValue.toStringAsFixed(0)} QP', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: IveTokens.moduleGo)),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
-            decoration: BoxDecoration(color: const Color(0xFF9CA3AF).withValues(alpha: 0.1), borderRadius: BorderRadius.circular(4)),
+            decoration: BoxDecoration(color: const Color(0xFF9CA3AF).withValues(alpha: 0.1), borderRadius: BorderRadius.circular(6)),
             child: Text(record.type, style: const TextStyle(fontSize: 9, color: Color(0xFF9CA3AF))),
           ),
         ]),
@@ -239,7 +240,7 @@ class _TrendRow extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 6),
       child: Row(children: [
         SizedBox(width: 60, child: Text(month, style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280)))),
-        Expanded(child: ClipRRect(borderRadius: BorderRadius.circular(3), child: LinearProgressIndicator(value: pct, minHeight: 8, backgroundColor: const Color(0xFFE5E7EB), valueColor: const AlwaysStoppedAnimation(kGoColor)))),
+        Expanded(child: ClipRRect(borderRadius: BorderRadius.circular(6), child: LinearProgressIndicator(value: pct, minHeight: 8, backgroundColor: const Color(0xFFE5E7EB), valueColor: const AlwaysStoppedAnimation(IveTokens.moduleGo)))),
         SizedBox(width: 60, child: Text('${(amount / 1000).toStringAsFixed(1)}K', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600), textAlign: TextAlign.end)),
       ]),
     );
@@ -255,9 +256,9 @@ class _TopPartyRow extends StatelessWidget {
     child: Row(children: [
       Container(
         width: 24, height: 24,
-        decoration: BoxDecoration(color: rank <= 3 ? kGoColor.withValues(alpha: 0.1) : const Color(0xFFF3F4F6), borderRadius: BorderRadius.circular(6)),
+        decoration: BoxDecoration(color: rank <= 3 ? IveTokens.moduleGo.withValues(alpha: 0.1) : const Color(0xFFF3F4F6), borderRadius: BorderRadius.circular(6)),
         alignment: Alignment.center,
-        child: Text('$rank', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: rank <= 3 ? kGoColor : const Color(0xFF9CA3AF))),
+        child: Text('$rank', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: rank <= 3 ? IveTokens.moduleGo : const Color(0xFF9CA3AF))),
       ),
       const SizedBox(width: 8),
       Expanded(child: Text(name, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500))),
@@ -292,11 +293,11 @@ class _ExportBtn extends StatelessWidget {
     onTap: onTap,
     child: Container(
       padding: const EdgeInsets.symmetric(vertical: 12),
-      decoration: BoxDecoration(color: kGoColorLight, borderRadius: BorderRadius.circular(8)),
+      decoration: BoxDecoration(color: IveTokens.surfaceRaised, borderRadius: BorderRadius.circular(10)),
       child: Column(children: [
-        Icon(icon, color: kGoColor, size: 20),
+        Icon(icon, color: IveTokens.moduleGo, size: 20),
         const SizedBox(height: 4),
-        Text(label, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: kGoColor)),
+        Text(label, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: IveTokens.moduleGo)),
       ]),
     ),
   );

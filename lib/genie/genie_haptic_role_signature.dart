@@ -1,15 +1,15 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 /// GenieHapticRoleSignature
 ///
 /// Bridges haptic feedback, PWA Vibration API polyfill, role-distinct audio
 /// earcons, and visual pulse events into a single cohesive signal per role.
 ///
 /// Recommendation 1 implementation:
-///   • Native: uses Flutter HapticFeedback with role-distinct patterns
-///   • PWA / Web: maps patterns to navigator.vibrate() payloads
-///   • Audio: Web Audio API earcons (owner / admin / driver / default)
-///   • Visual: exposes a Stream<RoleSignalEvent> for the pulse ring widget
-/// ═══════════════════════════════════════════════════════════════════════════
+///    Native: uses Flutter HapticFeedback with role-distinct patterns
+///    PWA / Web: maps patterns to navigator.vibrate() payloads
+///    Audio: Web Audio API earcons (owner / admin / driver / default)
+///    Visual: exposes a Stream<RoleSignalEvent> for the pulse ring widget
+/// 
 library;
 
 import 'dart:async';
@@ -32,7 +32,7 @@ class RoleSignalEvent {
 class GenieHapticRoleSignature {
   GenieHapticRoleSignature._();
 
-  // ─── Configuration ────────────────────────────────────────────────────────
+  //  Configuration 
   static bool _hapticsEnabled = true;
   static bool _audioEnabled = true;
 
@@ -41,21 +41,21 @@ class GenieHapticRoleSignature {
     if (audio != null) _audioEnabled = audio;
   }
 
-  // ─── Visual Pulse Stream ──────────────────────────────────────────────────
+  //  Visual Pulse Stream 
   static final StreamController<RoleSignalEvent> _pulseController =
       StreamController<RoleSignalEvent>.broadcast();
 
   /// Listen to this stream to animate the pulse ring in sync with haptics.
   static Stream<RoleSignalEvent> get pulseStream => _pulseController.stream;
 
-  // ─── Role → Vibration Patterns ───────────────────────────────────────────
-  /// PWA vibration patterns expressed as [on, off, on, off …] milliseconds.
+  //  Role  Vibration Patterns 
+  /// PWA vibration patterns expressed as [on, off, on, off ] milliseconds.
   ///
-  ///   Owner        → short-short-long:    80,60,80,60,220
-  ///   Administrator→ two fast bursts:     60,50,60
-  ///   Driver       → single long gentle:  180
-  ///   Branch roles → medium double pulse: 100,80,100
-  ///   Default      → single medium:       120
+  ///   Owner         short-short-long:    80,60,80,60,220
+  ///   Administrator two fast bursts:     60,50,60
+  ///   Driver        single long gentle:  180
+  ///   Branch roles  medium double pulse: 100,80,100
+  ///   Default       single medium:       120
   static List<int> _vibrationPattern(UserRole role) {
     switch (role) {
       case UserRole.owner:
@@ -74,7 +74,7 @@ class GenieHapticRoleSignature {
     }
   }
 
-  // ─── Role → Native Haptic Sequence ───────────────────────────────────────
+  //  Role  Native Haptic Sequence 
   static Future<void> _nativePattern(UserRole role) async {
     switch (role) {
       case UserRole.owner:
@@ -90,7 +90,7 @@ class GenieHapticRoleSignature {
         await Future.delayed(const Duration(milliseconds: 50));
         await HapticFeedback.mediumImpact();
       case UserRole.driver:
-        // single long gentle pulse — selectionClick is the softest available
+        // single long gentle pulse  selectionClick is the softest available
         await HapticFeedback.selectionClick();
         await Future.delayed(const Duration(milliseconds: 80));
         await HapticFeedback.lightImpact();
@@ -106,23 +106,23 @@ class GenieHapticRoleSignature {
     }
   }
 
-  // ─── Role → Pulse Color ───────────────────────────────────────────────────
+  //  Role  Pulse Color 
   static Color _pulseColor(UserRole role) {
     switch (role) {
       case UserRole.owner:
-        return const Color(0xFF9C27B0); // deep purple — "royal heartbeat"
+        return const Color(0xFF9C27B0); // deep purple  "royal heartbeat"
       case UserRole.administrator:
-        return const Color(0xFF2196F3); // blue — "crisp authority"
+        return const Color(0xFF2196F3); // blue  "crisp authority"
       case UserRole.driver:
-        return const Color(0xFF4CAF50); // green — "on the move"
+        return const Color(0xFF4CAF50); // green  "on the move"
       case UserRole.branchManager:
-        return const Color(0xFFFF9800); // amber — "branch warmth"
+        return const Color(0xFFFF9800); // amber  "branch warmth"
       default:
-        return const Color(0xFF22BDD8); // indigo — brand default
+        return const Color(0xFF22BDD8); // indigo  brand default
     }
   }
 
-  // ─── Public API ──────────────────────────────────────────────────────────
+  //  Public API 
   /// Fire the full multimodal role signature: native haptic + PWA vibration +
   /// audio earcon (if enabled) + visual pulse event.
   static Future<void> fireForRole(UserRole role) async {
@@ -139,7 +139,7 @@ class GenieHapticRoleSignature {
     } else {
       // 3. PWA Vibration API polyfill
       pwaVibrate(_vibrationPattern(role));
-      // 4. Audio earcon (web only — native apps use the platform audio stack)
+      // 4. Audio earcon (web only  native apps use the platform audio stack)
       if (_audioEnabled) {
         pwaPlayEarcon(role.name);
       }
@@ -154,7 +154,7 @@ class GenieHapticRoleSignature {
   static Future<void> onGenieOpen(UserRole currentRole) =>
       fireForRole(currentRole);
 
-  // ─── Lifecycle ────────────────────────────────────────────────────────────
+  //  Lifecycle 
   static void dispose() {
     _pulseController.close();
   }

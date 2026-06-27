@@ -1,8 +1,8 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD1.5: STAFF — Team Management
+/// 
+/// SD1.5: STAFF  Team Management
 /// Staff list, roles, performance, branch assignment
 /// RBAC: Admin(full), BM(branch), Monitor/BrMon(view)
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -45,7 +45,7 @@ class StaffScreen extends StatelessWidget {
             ),
             body: CustomScrollView(
             slivers: [
-              // ─── Summary ──────────────────────────────────
+              //  Summary 
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -72,7 +72,7 @@ class StaffScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Staff List ───────────────────────────────
+              //  Staff List 
               const SliverToBoxAdapter(
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(20, 16, 20, 0),
@@ -83,7 +83,7 @@ class StaffScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── AI Insights ─────────────────────────────────────────
+              //  AI Insights 
               const SliverToBoxAdapter(
               ),
               SliverPadding(
@@ -104,7 +104,7 @@ class StaffScreen extends StatelessWidget {
   }
 }
 
-// ─── Staff Card ──────────────────────────────────────────────────────────────
+//  Staff Card 
 
 class _StaffCard extends StatelessWidget {
   final StaffMember member;
@@ -161,7 +161,7 @@ class _StaffCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '${member.role} Â· ${member.branch ?? member.department}',
+                      '${member.role}  ${member.branch ?? member.department}',
                       style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                     ),
                   ],
@@ -232,7 +232,7 @@ class _StaffCard extends StatelessWidget {
   }
 }
 
-// ─── Staff Stat ──────────────────────────────────────────────────────────────
+//  Staff Stat 
 
 class _StaffStat extends StatelessWidget {
   final String label;

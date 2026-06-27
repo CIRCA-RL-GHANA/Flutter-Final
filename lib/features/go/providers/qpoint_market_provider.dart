@@ -1,16 +1,16 @@
-﻿import 'package:flutter/foundation.dart';
-import '../../../core/services/qpoint_market_service.dart';
+import 'package:flutter/foundation.dart';
+import '../../../core/services/qpoints_market_service.dart';
 import '../models/qpoint_market_models.dart';
 
 /// ChangeNotifier backing the Q Points Market screens.
 /// Manages all market state: balance, order book, open orders, trades, stats.
 class QPointMarketProvider extends ChangeNotifier {
-  final QPointMarketService _service;
+  final QPointsMarketService _service;
 
-  QPointMarketProvider([QPointMarketService? service])
-      : _service = service ?? QPointMarketService();
+  QPointMarketProvider([QPointsMarketService? service])
+      : _service = service ?? QPointsMarketService();
 
-  // ── State ─────────────────────────────────────────────────────────────────
+  //  State 
 
   QPointMarketBalance? balance;
   QPointOrderBook? orderBook;
@@ -28,17 +28,17 @@ class QPointMarketProvider extends ChangeNotifier {
 
   String? errorMessage;
 
-  // ── Notifications state ──────────────────────────────────────────────────
+  //  Notifications state 
 
   List<QPointNotification> notifications = [];
   int unreadCount = 0;
 
-  // ── Fee schedule state (TOS §7.1) ────────────────────────────────────────
+  //  Fee schedule state (TOS 7.1) 
 
   QPointFeeSchedule? feeSchedule;
   bool isLoadingFees = false;
 
-  // ── Facilitator state (TOS §2.2) ─────────────────────────────────────────
+  //  Facilitator state (TOS 2.2) 
 
   List<QPointFacilitatorInfo> availableFacilitators = [];
   List<QPointFacilitatorAccount> myFacilitatorAccounts = [];
@@ -47,16 +47,16 @@ class QPointMarketProvider extends ChangeNotifier {
   bool isRegisteringFacilitatorAccount = false;
   String? facilitatorError;
 
-  // ── Cross-Facilitator Bridge state ────────────────────────────────────────
+  //  Cross-Facilitator Bridge state 
 
   /// The facilitator ID the user is currently trading through.
-  /// Derived from [myFacilitatorAccounts] — the most recently added account.
+  /// Derived from [myFacilitatorAccounts]  the most recently added account.
   String? get activeFacilitatorId =>
       myFacilitatorAccounts.isNotEmpty ? myFacilitatorAccounts.first.provider : null;
 
   /// Whether the bridge is currently active for [activeFacilitatorId].
   /// False = "Cash-out via this payment method is temporarily limited."
-  bool isBridgeActive = true; // optimistic default — corrected on load
+  bool isBridgeActive = true; // optimistic default  corrected on load
 
   /// Human-readable bridge suspension message (null when bridge is active).
   String? get bridgeUnavailableMessage => isBridgeActive
@@ -65,13 +65,13 @@ class QPointMarketProvider extends ChangeNotifier {
 
   bool isLoadingBridgeStatus = false;
 
-  // ── Facilitator Cash Balance (Zen of User Balance) ────────────────────────
+  //  Facilitator Cash Balance (Zen of User Balance) 
 
   FacilitatorCashBalance? cashBalance;
   bool isLoadingCashBalance = false;
   DateTime? cashBalanceLastUpdated;
 
-  // ── Loaders ───────────────────────────────────────────────────────────────
+  //  Loaders 
 
   Future<void> loadAll() async {
     await Future.wait([
@@ -83,7 +83,7 @@ class QPointMarketProvider extends ChangeNotifier {
     // Load facilitator accounts first, then bridge status (depends on active account)
     await loadMyFacilitatorAccounts();
     await loadBridgeStatus();
-    // Load cash balance (non-blocking — shows after accounts resolve)
+    // Load cash balance (non-blocking  shows after accounts resolve)
     await loadCashBalance();
   }
 
@@ -93,7 +93,7 @@ class QPointMarketProvider extends ChangeNotifier {
     final res = await _service.getBalance();
     isLoadingBalance = false;
     if (res.isSuccess && res.data != null) {
-      balance = res.data;
+      balance = QPointMarketBalance.fromJson(res.data!);
     } else {
       errorMessage = res.message;
     }
@@ -106,7 +106,7 @@ class QPointMarketProvider extends ChangeNotifier {
     final res = await _service.getOrderBook();
     isLoadingBook = false;
     if (res.isSuccess && res.data != null) {
-      orderBook = res.data;
+      orderBook = QPointOrderBook.fromJson(res.data!);
     }
     notifyListeners();
   }
@@ -117,7 +117,9 @@ class QPointMarketProvider extends ChangeNotifier {
     final res = await _service.getOpenOrders();
     isLoadingOrders = false;
     if (res.isSuccess && res.data != null) {
-      openOrders = res.data!;
+      openOrders = res.data!
+          .map((e) => QPointOrder.fromJson(e as Map<String, dynamic>))
+          .toList();
     }
     notifyListeners();
   }
@@ -125,7 +127,7 @@ class QPointMarketProvider extends ChangeNotifier {
   Future<void> loadStats() async {
     final res = await _service.getMarketStats();
     if (res.isSuccess && res.data != null) {
-      stats = res.data;
+      stats = QPointMarketStats.fromJson(res.data!);
       notifyListeners();
     }
   }
@@ -133,17 +135,15 @@ class QPointMarketProvider extends ChangeNotifier {
   Future<void> loadTradeHistory({int limit = 20, int offset = 0}) async {
     final res = await _service.getTradeHistory(limit: limit, offset: offset);
     if (res.isSuccess && res.data != null) {
-      final raw = res.data!;
-      final list = raw['trades'] as List<dynamic>? ?? [];
-      tradeHistory = list
+      tradeHistory = res.data!
           .map((e) => QPointTrade.fromJson(e as Map<String, dynamic>))
           .toList();
-      tradeTotal = (raw['total'] as num?)?.toInt() ?? tradeHistory.length;
+      tradeTotal = tradeHistory.length;
       notifyListeners();
     }
   }
 
-  // ── Order placement ────────────────────────────────────────────────────────
+  //  Order placement 
 
   /// Returns an error string on failure, null on success.
   Future<String?> placeOrder({
@@ -182,7 +182,7 @@ class QPointMarketProvider extends ChangeNotifier {
     return res.message ?? 'Cancel failed';
   }
 
-  // ── Instant cash in/out ────────────────────────────────────────────────────
+  //  Instant cash in/out 
 
   Future<String?> cashIn(double quantity) async {
     isCashingIn = true;
@@ -210,14 +210,12 @@ class QPointMarketProvider extends ChangeNotifier {
     return res.message ?? 'Sell failed';
   }
 
-  // ── Notifications ──────────────────────────────────────────────────────────
+  //  Notifications 
 
   Future<void> loadNotifications() async {
     final res = await _service.getNotifications();
     if (res.isSuccess && res.data != null) {
-      final raw = res.data!;
-      final list = raw['notifications'] as List<dynamic>? ?? [];
-      notifications = list
+      notifications = res.data!
           .map((e) => QPointNotification.fromJson(e as Map<String, dynamic>))
           .toList();
       unreadCount = notifications.where((n) => !n.read).length;
@@ -226,7 +224,7 @@ class QPointMarketProvider extends ChangeNotifier {
   }
 
   Future<void> markAllNotificationsRead() async {
-    await _service.markNotificationsRead(all: true);
+    await _service.markAllNotificationsRead(all: true);
     notifications = notifications.map((n) => QPointNotification(
           id: n.id,
           type: n.type,
@@ -244,10 +242,10 @@ class QPointMarketProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ── Fee schedule (TOS §7.1 — must be disclosed on the Platform) ───────────
+  //  Fee schedule (TOS 7.1  must be disclosed on the Platform) 
 
   /// Loads and caches the current fee schedule.
-  /// GET /qpoints/fees — public endpoint, no ToS acceptance required.
+  /// GET /qpoints/fees  public endpoint, no ToS acceptance required.
   Future<void> loadFeeSchedule() async {
     if (isLoadingFees) return;
     isLoadingFees = true;
@@ -255,15 +253,15 @@ class QPointMarketProvider extends ChangeNotifier {
     final res = await _service.getFeeSchedule();
     isLoadingFees = false;
     if (res.isSuccess && res.data != null) {
-      feeSchedule = res.data;
+      feeSchedule = QPointFeeSchedule.fromJson(res.data!);
     }
     notifyListeners();
   }
 
-  // ── Facilitator loaders (TOS §2.2) ───────────────────────────────────────
+  //  Facilitator loaders (TOS 2.2) 
 
   /// Loads the bridge availability for the user's active facilitator.
-  /// This is a best-effort call — a network failure defaults to [isBridgeActive = true]
+  /// This is a best-effort call  a network failure defaults to [isBridgeActive = true]
   /// to avoid blocking users unnecessarily.
   Future<void> loadBridgeStatus() async {
     final facilitatorId = activeFacilitatorId;
@@ -289,7 +287,7 @@ class QPointMarketProvider extends ChangeNotifier {
     final res = await _service.getCashBalance(forceRefresh: forceRefresh);
     isLoadingCashBalance = false;
     if (res.isSuccess && res.data != null) {
-      cashBalance = res.data;
+      cashBalance = FacilitatorCashBalance.fromJson(res.data!);
       cashBalanceLastUpdated = DateTime.now();
     }
     notifyListeners();
@@ -303,7 +301,9 @@ class QPointMarketProvider extends ChangeNotifier {
     final res = await _service.getFacilitatorsForCountry(countryCode);
     isLoadingFacilitators = false;
     if (res.isSuccess && res.data != null) {
-      availableFacilitators = res.data!;
+      availableFacilitators = res.data!
+          .map((e) => QPointFacilitatorInfo.fromJson(e as Map<String, dynamic>))
+          .toList();
     } else {
       facilitatorError = res.message;
     }
@@ -317,7 +317,9 @@ class QPointMarketProvider extends ChangeNotifier {
     final res = await _service.getMyFacilitatorAccounts();
     isLoadingFacilitatorAccounts = false;
     if (res.isSuccess && res.data != null) {
-      myFacilitatorAccounts = res.data!;
+      myFacilitatorAccounts = res.data!
+          .map((e) => QPointFacilitatorAccount.fromJson(e as Map<String, dynamic>))
+          .toList();
     }
     notifyListeners();
   }
@@ -361,7 +363,7 @@ class QPointMarketProvider extends ChangeNotifier {
     return false;
   }
 
-  // ── On-Ramp / Off-Ramp state ─────────────────────────────────────────────
+  //  On-Ramp / Off-Ramp state 
 
   FacilitatorTransactionResult? lastDepositResult;
   FacilitatorTransactionResult? lastWithdrawalResult;
@@ -376,7 +378,7 @@ class QPointMarketProvider extends ChangeNotifier {
   int transactionsTotal = 0;
   bool isLoadingTransactions = false;
 
-  // ── On-Ramp / Off-Ramp methods ────────────────────────────────────────────
+  //  On-Ramp / Off-Ramp methods 
 
   Future<bool> initiateDeposit({
     required double amount,
@@ -392,7 +394,7 @@ class QPointMarketProvider extends ChangeNotifier {
     isInitiatingDeposit = false;
 
     if (res.isSuccess && res.data != null) {
-      lastDepositResult = res.data;
+      lastDepositResult = res.data != null ? FacilitatorTransactionResult.fromJson(res.data!) : null;
       loadTransactions();
       notifyListeners();
       return true;
@@ -422,7 +424,7 @@ class QPointMarketProvider extends ChangeNotifier {
     isInitiatingWithdrawal = false;
 
     if (res.isSuccess && res.data != null) {
-      lastWithdrawalResult = res.data;
+      lastWithdrawalResult = res.data != null ? FacilitatorTransactionResult.fromJson(res.data!) : null;
       loadTransactions();
       notifyListeners();
       return true;
@@ -440,12 +442,16 @@ class QPointMarketProvider extends ChangeNotifier {
     final res = await _service.getTransactions(limit: limit, offset: offset);
     isLoadingTransactions = false;
     if (res.isSuccess && res.data != null) {
+      final rawItems = res.data!['items'] as List<dynamic>? ?? [];
+      final items = rawItems
+          .map((e) => FacilitatorTransaction.fromJson(e as Map<String, dynamic>))
+          .toList();
       if (offset == 0) {
-        transactions = res.data!.items;
+        transactions = items;
       } else {
-        transactions = [...transactions, ...res.data!.items];
+        transactions = [...transactions, ...items];
       }
-      transactionsTotal = res.data!.total;
+      transactionsTotal = res.data!['total'] as int? ?? items.length;
     }
     notifyListeners();
   }

@@ -1,11 +1,13 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// LIVE MODULE — Screen 4: Driver Assignment Flow
+/// 
+/// LIVE MODULE  Screen 4: Driver Assignment Flow
 /// Intelligent driver matching: recommended driver, alternatives,
 /// driver map view, assignment settings, confirmation
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
@@ -54,7 +56,7 @@ class _LiveDriverAssignmentScreenState extends State<LiveDriverAssignmentScreen>
         return Scaffold(
           backgroundColor: AppColors.backgroundLight,
           appBar: LiveAppBar(
-            title: 'Assign Driver • Order #${order.id}',
+            title: 'Assign Driver  Order #${order.id}',
             actions: [
               IconButton(
                 icon: const Icon(Icons.close, size: 20),
@@ -90,7 +92,7 @@ class _LiveDriverAssignmentScreenState extends State<LiveDriverAssignmentScreen>
               // Alternatives
               if (prov.availableDrivers.length > 1) ...[
                 const SizedBox(height: 8),
-                const Text('ðŸ¥ˆ ALTERNATIVES', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: AppColors.textSecondary)),
+                const Text(' ALTERNATIVES', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: AppColors.textSecondary)),
                 const SizedBox(height: 8),
                 ...prov.availableDrivers.skip(1).map((d) => LiveDriverCard(
                   driver: d,
@@ -142,7 +144,7 @@ class _LiveDriverAssignmentScreenState extends State<LiveDriverAssignmentScreen>
                         SizedBox(width: 16),
                         _MapLegendDot(color: Color(0xFFF59E0B), label: 'Finishing soon'),
                         SizedBox(width: 16),
-                        _MapLegendDot(color: kLiveColor, label: 'Unavailable'),
+                        _MapLegendDot(color: IveTokens.moduleLive, label: 'Unavailable'),
                       ],
                     ),
                   ],
@@ -170,16 +172,16 @@ class _LiveDriverAssignmentScreenState extends State<LiveDriverAssignmentScreen>
                 children: [
                   Expanded(
                     child: OutlinedButton.icon(
-                      onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Broadcasting to all drivers...'))),
+                      onPressed: () => AppToast.show(context, 'Broadcasting to all drivers...'),
                       icon: const Icon(Icons.broadcast_on_personal, size: 16),
                       label: const Text('BROADCAST TO ALL', style: TextStyle(fontSize: 12)),
-                      style: OutlinedButton.styleFrom(foregroundColor: kLiveColor, padding: const EdgeInsets.symmetric(vertical: 12)),
+                      style: OutlinedButton.styleFrom(foregroundColor: IveTokens.moduleLive, padding: const EdgeInsets.symmetric(vertical: 12)),
                     ),
                   ),
                   const SizedBox(width: 8),
                   Expanded(
                     child: OutlinedButton.icon(
-                      onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Scheduling...'))),
+                      onPressed: () => AppToast.show(context, 'Scheduling...'),
                       icon: const Icon(Icons.schedule, size: 16),
                       label: const Text('SCHEDULE LATER', style: TextStyle(fontSize: 12)),
                       style: OutlinedButton.styleFrom(foregroundColor: AppColors.textSecondary, padding: const EdgeInsets.symmetric(vertical: 12)),
@@ -230,7 +232,7 @@ class _AssignmentConfirmation extends StatelessWidget {
                   child: const Icon(Icons.check_circle, size: 48, color: Color(0xFF10B981)),
                 ),
                 const SizedBox(height: 16),
-                Text('ðŸŽ‰ ORDER #${order.id} ASSIGNED!', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800)),
+                Text(' ORDER #${order.id} ASSIGNED!', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800)),
                 const SizedBox(height: 4),
                 Text('To: ${driver.name}', style: const TextStyle(fontSize: 15, color: AppColors.textSecondary)),
                 const SizedBox(height: 4),
@@ -247,9 +249,9 @@ class _AssignmentConfirmation extends StatelessWidget {
             iconColor: const Color(0xFF3B82F6),
             child: Column(
               children: [
-                _DetailRow(label: 'Order value', value: 'â‚µ${order.total.toStringAsFixed(0)}'),
-                const _DetailRow(label: 'Driver earnings', value: 'â‚µ43.50'),
-                const _DetailRow(label: 'Priority bonus', value: 'â‚µ4.35'),
+                _DetailRow(label: 'Order value', value: '${order.total.toStringAsFixed(0)}'),
+                const _DetailRow(label: 'Driver earnings', value: '43.50'),
+                const _DetailRow(label: 'Priority bonus', value: '4.35'),
                 const _DetailRow(label: 'Customer notified', value: 'Yes'),
                 const _DetailRow(label: 'Live tracking enabled', value: 'Yes'),
               ],
@@ -276,9 +278,9 @@ class _AssignmentConfirmation extends StatelessWidget {
           const SizedBox(height: 16),
           Row(
             children: [
-              Expanded(child: OutlinedButton.icon(onPressed: () => Navigator.pushNamed(context, AppRoutes.liveDriverPerformance), icon: const Icon(Icons.gps_fixed, size: 16), label: const Text('VIEW DRIVER'), style: OutlinedButton.styleFrom(foregroundColor: kLiveColor, padding: const EdgeInsets.symmetric(vertical: 12)))),
+              Expanded(child: OutlinedButton.icon(onPressed: () => Navigator.pushNamed(context, AppRoutes.liveDriverPerformance), icon: const Icon(Icons.gps_fixed, size: 16), label: const Text('VIEW DRIVER'), style: OutlinedButton.styleFrom(foregroundColor: IveTokens.moduleLive, padding: const EdgeInsets.symmetric(vertical: 12)))),
               const SizedBox(width: 8),
-              Expanded(child: OutlinedButton.icon(onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Notifying customer...'))), icon: const Icon(Icons.notifications, size: 16), label: const Text('NOTIFY CUSTOMER'), style: OutlinedButton.styleFrom(foregroundColor: AppColors.textSecondary, padding: const EdgeInsets.symmetric(vertical: 12)))),
+              Expanded(child: OutlinedButton.icon(onPressed: () => AppToast.show(context, 'Notifying customer...'), icon: const Icon(Icons.notifications, size: 16), label: const Text('NOTIFY CUSTOMER'), style: OutlinedButton.styleFrom(foregroundColor: AppColors.textSecondary, padding: const EdgeInsets.symmetric(vertical: 12)))),
               const SizedBox(width: 8),
               Expanded(
                 child: ElevatedButton(
@@ -306,7 +308,7 @@ class _DetailRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text('• $label', style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+          Text(' $label', style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
           Text(value, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
         ],
       ),
@@ -343,7 +345,7 @@ class _SettingToggle extends StatelessWidget {
       child: Row(
         children: [
           Expanded(child: Text(label, style: const TextStyle(fontSize: 13))),
-          Switch(value: value, onChanged: onChanged, activeThumbColor: kLiveColor, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
+          Switch(value: value, onChanged: onChanged, activeThumbColor: IveTokens.moduleLive, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
         ],
       ),
     );

@@ -1,4 +1,4 @@
-/// Fintech â€º Deposits — Term Deposit Screen
+/// Fintech  Deposits  Term Deposit Screen
 /// User picks a bank, amount, and term length to lock Q-Points.
 library;
 
@@ -166,7 +166,7 @@ class _DepositCard extends StatelessWidget {
 
   InputDecoration _inputDec(String hint) => InputDecoration(
     hintText: hint, filled: true, fillColor: Colors.grey.shade50,
-    border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
     contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
   );
 }
@@ -197,14 +197,14 @@ class _DepositTile extends StatelessWidget {
         const SizedBox(width: 12),
         Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text('$locked QP locked', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
-          Text('$interest% p.a. Â· matures ${maturity.substring(0, maturity.length > 10 ? 10 : maturity.length)}',
+          Text('$interest% p.a.  matures ${maturity.substring(0, maturity.length > 10 ? 10 : maturity.length)}',
             style: const TextStyle(color: Colors.grey, fontSize: 12)),
         ])),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
           decoration: BoxDecoration(
             color: (status == 'active' ? Colors.green : Colors.grey).withValues(alpha: 0.1),
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(10),
           ),
           child: Text(status, style: TextStyle(
             fontSize: 11, fontWeight: FontWeight.w600,

@@ -1,4 +1,4 @@
-﻿/// APRIL Screen 0 — PROMPT Screen Integration (APRIL Widget)
+/// APRIL Screen 0  PROMPT Screen Integration (APRIL Widget)
 /// Voice activation, quick actions, pending actions, plugin status
 library;
 
@@ -28,7 +28,7 @@ class AprilWidgetScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // ──── VOICE ACTIVATION PANEL ────
+              //  VOICE ACTIVATION PANEL 
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
                 child: Row(
@@ -71,7 +71,7 @@ class AprilWidgetScreen extends StatelessWidget {
                 ),
               ),
 
-              // ──── QUICK ACTIONS BAR ────
+              //  QUICK ACTIONS BAR 
               SizedBox(
                 height: 40,
                 child: ListView(
@@ -104,7 +104,7 @@ class AprilWidgetScreen extends StatelessWidget {
 
               const Divider(height: 20, indent: 16, endIndent: 16),
 
-              // ──── PENDING ACTIONS ────
+              //  PENDING ACTIONS 
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
@@ -119,7 +119,7 @@ class AprilWidgetScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                         decoration: BoxDecoration(
                           color: const Color(0xFFEF4444),
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(10),
                         ),
                         child: Text(
                           '${provider.pendingActionCount}',
@@ -143,7 +143,7 @@ class AprilWidgetScreen extends StatelessWidget {
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   child: Text(
-                    'No pending actions ðŸŽ‰',
+                    'No pending actions ',
                     style: TextStyle(fontSize: 13, color: Color(0xFF6B7280)),
                   ),
                 )
@@ -155,7 +155,7 @@ class AprilWidgetScreen extends StatelessWidget {
 
               const SizedBox(height: 12),
 
-              // ──── PLUGIN STATUS INDICATORS ────
+              //  PLUGIN STATUS INDICATORS 
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
                 child: Row(
@@ -175,9 +175,9 @@ class AprilWidgetScreen extends StatelessWidget {
 
   String _greeting(String name) {
     final hour = DateTime.now().hour;
-    if (hour < 12) return 'Good morning, $name â˜€ï¸';
-    if (hour < 17) return 'Good afternoon, $name ðŸŒ¤ï¸';
-    return 'Good evening, $name ðŸŒ™';
+    if (hour < 12) return 'Good morning, $name ';
+    if (hour < 17) return 'Good afternoon, $name ';
+    return 'Good evening, $name ';
   }
 }
 

@@ -1,15 +1,15 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// GenieOutbox – Persistent Multi-Step Orchestration with Compensating Tx
+/// 
+/// GenieOutbox  Persistent Multi-Step Orchestration with Compensating Tx
 ///
 /// Implements Recommendation 4: Persistent Outbox Pattern.
 ///
-///   • Writes "Orchestration Intents" with steps into SharedPreferences
-///   • Executes steps sequentially; updates outbox entry after each step
-///   • On app re-launch, resumes incomplete orchestrations from the outbox
-///   • On step failure, triggers a pre-defined compensating transaction and
+///    Writes "Orchestration Intents" with steps into SharedPreferences
+///    Executes steps sequentially; updates outbox entry after each step
+///    On app re-launch, resumes incomplete orchestrations from the outbox
+///    On step failure, triggers a pre-defined compensating transaction and
 ///     surfaces a clear failure message
-///   • Exposes a Stream so the stepper card widget can react in real-time
-/// ═══════════════════════════════════════════════════════════════════════════
+///    Exposes a Stream so the stepper card widget can react in real-time
+/// 
 library;
 
 import 'dart:async';
@@ -20,7 +20,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'genie_intent.dart';
 import 'genie_tactile_actions.dart';
 
-// ─── Outbox Models ────────────────────────────────────────────────────────────
+//  Outbox Models 
 
 enum OutboxStepStatus { pending, running, completed, failed, compensated }
 
@@ -130,14 +130,14 @@ class OutboxOrchestration {
       );
 }
 
-// ─── Compensating Transaction Registry ───────────────────────────────────────
+//  Compensating Transaction Registry 
 
 /// Returns a compensating intent for a failed step, if one exists.
 /// Extend this registry as new workflows are added.
 GenieIntent? _compensatingIntent(OutboxStep failedStep) {
   if (failedStep.module == GenieModule.goPage &&
       failedStep.action == 'transfer') {
-    // Payment went through but a downstream step failed → refund
+    // Payment went through but a downstream step failed  refund
     return GenieIntent(
       module: GenieModule.goPage,
       action: 'refund',
@@ -168,12 +168,12 @@ String _compensationMessage(OutboxStep failedStep) {
       (failedStep.action == 'transfer' ||
           failedStep.action == 'deduct_balance')) {
     final amt = failedStep.params['amount'] ?? '?';
-    return 'Something went wrong — your $amt QP has been refunded.';
+    return 'Something went wrong  your $amt QP has been refunded.';
   }
   return 'Something went wrong. The action was rolled back safely.';
 }
 
-// ─── Outbox Progress Event ───────────────────────────────────────────────────
+//  Outbox Progress Event 
 
 class OutboxProgressEvent {
   final String orchestrationId;
@@ -193,7 +193,7 @@ class OutboxProgressEvent {
   });
 }
 
-// ─── Main Outbox Service ──────────────────────────────────────────────────────
+//  Main Outbox Service 
 
 const String _outboxKey = 'genie_outbox';
 
@@ -205,7 +205,7 @@ class GenieOutbox {
   static final StreamController<OutboxProgressEvent> _progressController =
       StreamController<OutboxProgressEvent>.broadcast();
 
-  /// Real-time step progress — consumed by GenieStepper card.
+  /// Real-time step progress  consumed by GenieStepper card.
   static Stream<OutboxProgressEvent> get progressStream =>
       _progressController.stream;
 
@@ -213,7 +213,7 @@ class GenieOutbox {
     _prefs ??= await SharedPreferences.getInstance();
   }
 
-  // ─── Create & Queue ───────────────────────────────────────────────────────
+  //  Create & Queue 
 
   /// Enqueues a new orchestration. Call this before starting execution.
   static Future<OutboxOrchestration> enqueue({
@@ -229,7 +229,7 @@ class GenieOutbox {
     return orch;
   }
 
-  // ─── Execute ──────────────────────────────────────────────────────────────
+  //  Execute 
 
   /// Runs the orchestration, executing each step via [stepExecutor].
   ///
@@ -308,7 +308,7 @@ class GenieOutbox {
     return orch;
   }
 
-  // ─── Resume on Launch ─────────────────────────────────────────────────────
+  //  Resume on Launch 
 
   /// Returns any orchestrations that were interrupted mid-flight.
   static List<OutboxOrchestration> getPendingOrchestrations() {
@@ -319,7 +319,7 @@ class GenieOutbox {
         .toList();
   }
 
-  // ─── Cleanup ──────────────────────────────────────────────────────────────
+  //  Cleanup 
 
   static Future<void> markComplete(String orchestrationId) async {
     final all = _loadAll()
@@ -328,7 +328,7 @@ class GenieOutbox {
     await _persist(all);
   }
 
-  // ─── Internals ────────────────────────────────────────────────────────────
+  //  Internals 
 
   static bool _isFinancialStep(OutboxStep step) =>
       step.module == GenieModule.goPage &&

@@ -1,7 +1,7 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 /// USER DETAILS Widget (Profile & Entities)
 /// Visible to: ALL roles
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -113,7 +113,7 @@ class UserDetailsWidgetContent extends StatelessWidget {
               ),
               Expanded(
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(4),
+                  borderRadius: BorderRadius.circular(6),
                   child: LinearProgressIndicator(
                     value: 0.75,
                     backgroundColor: AppColors.inputFill,
@@ -161,7 +161,7 @@ class UserDetailsWidgetContent extends StatelessWidget {
                 SizedBox(width: 4),
                 Expanded(
                   child: Text(
-                    '2FA on • Last login: Today',
+                    '2FA on  Last login: Today',
                     style: TextStyle(fontSize: 9, color: AppColors.textTertiary),
                   ),
                 ),
@@ -190,7 +190,7 @@ class _QuickSetting extends StatelessWidget {
           height: 32,
           decoration: BoxDecoration(
             color: color.withValues(alpha: 0.08),
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(10),
           ),
           child: Icon(icon, size: 16, color: color),
         ),

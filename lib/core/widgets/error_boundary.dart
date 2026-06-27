@@ -1,4 +1,4 @@
-﻿import 'package:flutter/foundation.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../design/ive_button.dart';
@@ -113,7 +113,7 @@ class _ErrorBoundaryState extends State<ErrorBoundary> {
   }
 }
 
-/// Inline API error widget — shown inside a screen when a request fails.
+/// Inline API error widget  shown inside a screen when a request fails.
 class ApiError extends StatelessWidget {
   final String title;
   final String message;

@@ -18,7 +18,7 @@ import '../../features/onboarding/screens/screen_11_tutorial.dart';
 import '../../features/onboarding/screens/screen_12_welcome_back.dart';
 import '../../features/onboarding/screens/screen_13_error_recovery.dart';
 import '../screens/prompt_screen.dart';
-import '../../genie/genie_screen.dart';
+import '../navigation/app_shell.dart';
 // User Details Screens
 import '../../features/user_details/screens/user_details_master_screen.dart';
 import '../../features/user_details/screens/context_management_screen.dart';
@@ -486,7 +486,13 @@ class AppRoutes {
       case platformOverview:
         return _buildRoute(const PlatformOverviewScreen(), settings);
       case phoneInput:
-        return _buildRoute(const PhoneInputScreen(), settings);
+        final phoneArgs = settings.arguments is Map<String, dynamic>
+            ? settings.arguments as Map<String, dynamic>
+            : null;
+        return _buildRoute(
+          PhoneInputScreen(isLoginMode: (phoneArgs?['mode'] as String?) == 'login'),
+          settings,
+        );
       case otpVerification:
         final args = settings.arguments is Map<String, dynamic> ? settings.arguments as Map<String, dynamic> : null;
         return _buildRoute(
@@ -524,7 +530,7 @@ class AppRoutes {
         );
       case genieHome:
       case home:
-        return _buildRoute(const GenieScreen(), settings);
+        return _buildRoute(const AppShell(), settings);
       case promptScreen:
       case classicDashboard:
         return _buildRoute(const PromptScreen(), settings);
@@ -802,7 +808,7 @@ class AppRoutes {
       case aprilSettings:
         return _buildRoute(const AprilSettingsScreen(), settings);
 
-      // ── ALERTS ──────────────────────────────
+      //  ALERTS 
       case alertsWidget:
         return _buildRoute(const AlertsWidgetScreen(), settings);
       case alerts:
@@ -963,13 +969,13 @@ class AppRoutes {
           ),
         );
       },
-      // 320 ms matches IveTokens.dBase — snappy yet perceptible.
+      // 320 ms matches IveTokens.dBase  snappy yet perceptible.
       transitionDuration: IveTokens.dBase,
     );
   }
 }
 
-// ─── 404 fallback ─────────────────────────────────────────────────────────────
+//  404 fallback 
 
 class _RouteNotFoundScreen extends StatelessWidget {
   final String name;

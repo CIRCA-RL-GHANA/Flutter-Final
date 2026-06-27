@@ -1,8 +1,8 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD3.2: SUBSCRIPTION — Plan Management
+/// 
+/// SD3.2: SUBSCRIPTION  Plan Management
 /// Plan details, usage limits, storage, API calls, renewal
 /// RBAC: Owner(personal), Admin(entity), BM(brView)
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -35,7 +35,7 @@ class SubscriptionScreen extends StatelessWidget {
             ),
           body: CustomScrollView(
             slivers: [
-              // ─── Plan Header ──────────────────────────────
+              //  Plan Header 
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -60,12 +60,12 @@ class SubscriptionScreen extends StatelessWidget {
                         // Per-staff pricing
                         if (sub.plan != SubscriptionPlan.free)
                           Text(
-                            '${sub.pricePerStaffQPoints.toStringAsFixed(0)} QP Ã— ${sub.staffCount} staff / month',
+                            '${sub.pricePerStaffQPoints.toStringAsFixed(0)} QP  ${sub.staffCount} staff / month',
                             style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
                           ),
                         if (sub.plan == SubscriptionPlan.free)
                           const Text(
-                            'Free — no charge',
+                            'Free  no charge',
                             style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
                           ),
                         const SizedBox(height: 12),
@@ -78,7 +78,7 @@ class SubscriptionScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Text(
-                              '✨ Free Trial — ${sub.daysInFreeTrial} days left',
+                              ' Free Trial  ${sub.daysInFreeTrial} days left',
                               style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: AppColors.success),
                             ),
                           )
@@ -100,8 +100,8 @@ class SubscriptionScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Usage Metrics ────────────────────────────
-              // ─── AI Insights ─────────────────────────────────────────
+              //  Usage Metrics 
+              //  AI Insights 
               const SliverToBoxAdapter(
               ),
               SliverToBoxAdapter(
@@ -139,7 +139,7 @@ class SubscriptionScreen extends StatelessWidget {
                         limit: sub.txFreeQuota.toDouble(),
                         icon: Icons.receipt_long,
                         overageNote: sub.txCountThisMonth > sub.txFreeQuota
-                            ? '${sub.txCountThisMonth - sub.txFreeQuota} Ã— 0.02 QP fee'
+                            ? '${sub.txCountThisMonth - sub.txFreeQuota}  0.02 QP fee'
                             : null,
                       ),
                     ],
@@ -147,7 +147,7 @@ class SubscriptionScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Plan Features ────────────────────────────
+              //  Plan Features 
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -172,7 +172,7 @@ class SubscriptionScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Upgrade CTA ──────────────────────────────
+              //  Upgrade CTA 
               // Hidden for Branch Manager (branchViewOnly) via SetupActionGuard.
               // Owner/Admin see it with OTP required on tap (spec: subscription.upgrade).
               if (sub.plan != SubscriptionPlan.enterprise)
@@ -189,7 +189,7 @@ class SubscriptionScreen extends StatelessWidget {
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                           ),
-                          borderRadius: BorderRadius.circular(16),
+                          borderRadius: BorderRadius.circular(10),
                         ),
                         child: Row(
                           children: [
@@ -225,7 +225,7 @@ class SubscriptionScreen extends StatelessWidget {
                                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                                 decoration: BoxDecoration(
                                   color: Colors.white,
-                                  borderRadius: BorderRadius.circular(8),
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: const Text(
                                   'Upgrade',
@@ -307,7 +307,7 @@ class _UsageBar extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           ClipRRect(
-            borderRadius: BorderRadius.circular(3),
+            borderRadius: BorderRadius.circular(6),
             child: LinearProgressIndicator(
               value: pct.clamp(0.0, 1.0),
               backgroundColor: AppColors.inputBorder,
@@ -325,7 +325,7 @@ class _UsageBar extends StatelessWidget {
   }
 }
 
-// ─── Feature Row ─────────────────────────────────────────────────────────────
+//  Feature Row 
 
 class _FeatureRow extends StatelessWidget {
   final String label;

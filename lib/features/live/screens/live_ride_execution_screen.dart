@@ -1,15 +1,16 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// LIVE MODULE — Screen 17: Ride Execution & Security
+/// 
+/// LIVE MODULE  Screen 17: Ride Execution & Security
 /// Full ride flow: passenger pickup, identity verification,
 /// live navigation, trip details, fare display, completion
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../../../core/design/ive_tokens.dart';
+import '../../../core/design/ive.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
 import '../models/live_models.dart';
@@ -38,13 +39,13 @@ class _LiveRideExecutionScreenState extends State<LiveRideExecutionScreen> {
         }
 
         return Scaffold(
-          backgroundColor: AppColors.backgroundLight,
+          backgroundColor: IveTokens.bg,
           appBar: LiveAppBar(
             title: _phase == 0 ? 'En Route to Pickup' : _phase == 1 ? 'Verify Passenger' : 'Trip in Progress',
             actions: [
               IconButton(
                 icon: const Icon(Icons.sos, size: 20),
-                color: kLiveColor,
+                color: IveTokens.moduleLive,
                 onPressed: () => Navigator.pushNamed(context, AppRoutes.liveEmergencySOS),
               ),
             ],
@@ -53,14 +54,14 @@ class _LiveRideExecutionScreenState extends State<LiveRideExecutionScreen> {
             children: [
               // Phase indicator
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                color: Colors.white,
+                padding: const EdgeInsets.symmetric(horizontal: IveTokens.s4, vertical: IveTokens.s2),
+                color: IveTokens.surface,
                 child: Row(
                   children: [
                     _PhaseDot(label: 'En Route', index: 0, current: _phase),
-                    Expanded(child: Container(height: 2, color: _phase > 0 ? const Color(0xFF10B981) : const Color(0xFFE5E7EB))),
+                    Expanded(child: Container(height: 2, color: _phase > 0 ? IveTokens.success : IveTokens.hairline)),
                     _PhaseDot(label: 'Verify', index: 1, current: _phase),
-                    Expanded(child: Container(height: 2, color: _phase > 1 ? const Color(0xFF10B981) : const Color(0xFFE5E7EB))),
+                    Expanded(child: Container(height: 2, color: _phase > 1 ? IveTokens.success : IveTokens.hairline)),
                     _PhaseDot(label: 'Trip', index: 2, current: _phase),
                   ],
                 ),
@@ -87,64 +88,47 @@ class _LiveRideExecutionScreenState extends State<LiveRideExecutionScreen> {
             ],
           ),
           bottomNavigationBar: Container(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-            decoration: const BoxDecoration(
-              color: Colors.white,
-            ),
+            padding: const EdgeInsets.fromLTRB(IveTokens.s4, IveTokens.s2, IveTokens.s4, IveTokens.s6),
+            decoration: const BoxDecoration(color: IveTokens.surface),
             child: _phase == 0
-                ? SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton.icon(
-                      onPressed: () {
-                        HapticFeedback.heavyImpact();
-                        setState(() => _phase = 1);
-                      },
-                      icon: const Icon(Icons.location_on, size: 18),
-                      label: const Text('ARRIVED AT PICKUP', style: TextStyle(fontWeight: FontWeight.w700)),
-                      style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF3B82F6), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 16), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
-                    ),
+                ? IveButton.primary(
+                    label: 'ARRIVED AT PICKUP',
+                    icon: Icons.location_on,
+                    onPressed: () {
+                      HapticFeedback.heavyImpact();
+                      setState(() => _phase = 1);
+                    },
                   )
                 : _phase == 1
-                    ? SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton.icon(
-                          onPressed: _identityVerified
-                              ? () {
-                                  HapticFeedback.heavyImpact();
-                                  setState(() => _phase = 2);
-                                }
-                              : null,
-                          icon: const Icon(Icons.play_arrow, size: 18),
-                          label: const Text('START TRIP', style: TextStyle(fontWeight: FontWeight.w700)),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: _identityVerified ? const Color(0xFF10B981) : const Color(0xFFE5E7EB),
-                            foregroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                          ),
-                        ),
+                    ? IveButton.primary(
+                        label: 'START TRIP',
+                        icon: Icons.play_arrow,
+                        onPressed: _identityVerified
+                            ? () {
+                                HapticFeedback.heavyImpact();
+                                setState(() => _phase = 2);
+                              }
+                            : null,
                       )
                     : Row(
                         children: [
                           Expanded(
-                            child: OutlinedButton.icon(
+                            child: IveButton.secondary(
+                              label: 'REPORT',
+                              icon: Icons.report_problem,
                               onPressed: () => Navigator.pushNamed(context, AppRoutes.liveIncidentReport),
-                              icon: const Icon(Icons.report_problem, size: 16),
-                              label: const Text('REPORT', style: TextStyle(fontSize: 12)),
-                              style: OutlinedButton.styleFrom(foregroundColor: kLiveColor, padding: const EdgeInsets.symmetric(vertical: 14)),
                             ),
                           ),
-                          const SizedBox(width: 12),
+                          const SizedBox(width: IveTokens.s3),
                           Expanded(
                             flex: 2,
-                            child: ElevatedButton.icon(
+                            child: IveButton.primary(
+                              label: 'END TRIP',
+                              icon: Icons.flag,
                               onPressed: () {
                                 HapticFeedback.heavyImpact();
                                 setState(() => _phase = 3);
                               },
-                              icon: const Icon(Icons.flag, size: 18),
-                              label: const Text('END TRIP', style: TextStyle(fontWeight: FontWeight.w700)),
-                              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10B981), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                             ),
                           ),
                         ],
@@ -163,41 +147,41 @@ class _EnRouteView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(IveTokens.s4),
       children: [
-        // Route card — shows live location context and opens the native maps app.
+        // Route card  shows live location context and opens the native maps app.
         _RouteMapCard(
           label: 'Navigating to pickup',
           address: ride.pickupAddress,
           destinationAddress: ride.dropoffAddress,
         ),
 
-        const SizedBox(height: 12),
+        const SizedBox(height: IveTokens.s3),
 
         LiveSectionCard(
           title: 'PASSENGER',
           icon: Icons.person,
-          iconColor: const Color(0xFF3B82F6),
+          iconColor: IveTokens.accent,
           child: Row(
             children: [
               CircleAvatar(
                 radius: 22,
-                backgroundColor: const Color(0xFF3B82F6).withValues(alpha: 0.1),
-                child: Text(ride.passengerName.substring(0, 1), style: const TextStyle(fontWeight: FontWeight.w700, color: Color(0xFF3B82F6))),
+                backgroundColor: IveTokens.accentSoft,
+                child: Text(ride.passengerName.substring(0, 1), style: const TextStyle(fontWeight: FontWeight.w700, color: IveTokens.accent)),
               ),
-              const SizedBox(width: 12),
+              const SizedBox(width: IveTokens.s3),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(ride.passengerName, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                    Text(ride.passengerName, style: IveType.callout.copyWith(fontWeight: FontWeight.w700, color: IveTokens.ink)),
                     Row(
                       children: [
-                        const Icon(Icons.star, size: 12, color: Color(0xFFF59E0B)),
+                        const Icon(Icons.star, size: 12, color: IveTokens.warning),
                         const SizedBox(width: 2),
-                        Text('${ride.passengerRating}', style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
-                        const SizedBox(width: 8),
-                        Text('${ride.passengerRideCount} passenger(s)', style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                        Text('${ride.passengerRating}', style: IveType.footnote),
+                        const SizedBox(width: IveTokens.s2),
+                        Text('${ride.passengerRideCount} passenger(s)', style: IveType.footnote),
                       ],
                     ),
                   ],
@@ -206,9 +190,9 @@ class _EnRouteView extends StatelessWidget {
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  IconButton(onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Calling...'))), icon: const Icon(Icons.phone, size: 18, color: Color(0xFF10B981)), style: IconButton.styleFrom(backgroundColor: const Color(0xFFD1FAE5))),
-                  const SizedBox(width: 4),
-                  IconButton(onPressed: () => Navigator.pushNamed(context, AppRoutes.qualChatDashboard), icon: const Icon(Icons.chat, size: 18, color: Color(0xFF3B82F6)), style: IconButton.styleFrom(backgroundColor: const Color(0xFFDBEAFE))),
+                  IconButton(onPressed: () => AppToast.show(context, 'Calling...'), icon: const Icon(Icons.phone, size: 18, color: IveTokens.success), style: IconButton.styleFrom(backgroundColor: IveTokens.surfaceRaised)),
+                  const SizedBox(width: IveTokens.s1),
+                  IconButton(onPressed: () => Navigator.pushNamed(context, AppRoutes.qualChatDashboard), icon: const Icon(Icons.chat, size: 18, color: IveTokens.accent), style: IconButton.styleFrom(backgroundColor: IveTokens.surfaceRaised)),
                 ],
               ),
             ],
@@ -218,14 +202,14 @@ class _EnRouteView extends StatelessWidget {
         LiveSectionCard(
           title: 'TRIP DETAILS',
           icon: Icons.route,
-          iconColor: kLiveColor,
+          iconColor: IveTokens.moduleLive,
           child: Column(
             children: [
-              _TripDetailRow(icon: Icons.my_location, label: 'Pickup', value: ride.pickupAddress, color: const Color(0xFF10B981)),
-              _TripDetailRow(icon: Icons.location_on, label: 'Destination', value: ride.dropoffAddress, color: kLiveColor),
-              _TripDetailRow(icon: Icons.straighten, label: 'Distance', value: '${ride.distanceKm.toStringAsFixed(1)} km', color: AppColors.textSecondary),
-              _TripDetailRow(icon: Icons.timer, label: 'Duration', value: '${ride.etaMinutes} min', color: AppColors.textSecondary),
-              _TripDetailRow(icon: Icons.attach_money, label: 'Fare', value: 'â‚µ${ride.fare.toStringAsFixed(0)}', color: const Color(0xFFF59E0B)),
+              _TripDetailRow(icon: Icons.my_location, label: 'Pickup', value: ride.pickupAddress, color: IveTokens.success),
+              _TripDetailRow(icon: Icons.location_on, label: 'Destination', value: ride.dropoffAddress, color: IveTokens.moduleLive),
+              _TripDetailRow(icon: Icons.straighten, label: 'Distance', value: '${ride.distanceKm.toStringAsFixed(1)} km', color: IveTokens.mute),
+              _TripDetailRow(icon: Icons.timer, label: 'Duration', value: '${ride.etaMinutes} min', color: IveTokens.mute),
+              _TripDetailRow(icon: Icons.attach_money, label: 'Fare', value: '${ride.fare.toStringAsFixed(0)}', color: IveTokens.warning),
             ],
           ),
         ),
@@ -234,14 +218,14 @@ class _EnRouteView extends StatelessWidget {
           LiveSectionCard(
             title: 'SPECIAL REQUIREMENTS',
             icon: Icons.info,
-            iconColor: const Color(0xFFF59E0B),
+            iconColor: IveTokens.warning,
             child: Wrap(
-              spacing: 6,
-              runSpacing: 6,
+              spacing: IveTokens.s1 + 2,
+              runSpacing: IveTokens.s1 + 2,
               children: [Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                decoration: BoxDecoration(color: const Color(0xFFFEF3C7), borderRadius: BorderRadius.circular(8)),
-                child: Text(ride.specialRequest!, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Color(0xFF92400E))),
+                padding: const EdgeInsets.symmetric(horizontal: IveTokens.s2 + 2, vertical: IveTokens.s1 + 2),
+                decoration: const BoxDecoration(color: IveTokens.surfaceRaised, borderRadius: BorderRadius.all(Radius.circular(IveTokens.rXs))),
+                child: Text(ride.specialRequest!, style: IveType.footnote.copyWith(fontWeight: FontWeight.w600, color: IveTokens.warning)),
               )],
             ),
           ),
@@ -259,41 +243,41 @@ class _VerifyView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(IveTokens.s4),
       children: [
-        const SizedBox(height: 20),
+        const SizedBox(height: IveTokens.s5),
         Center(
           child: Column(
             children: [
               Container(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(IveTokens.s4),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: verified ? const Color(0xFF10B981).withValues(alpha: 0.1) : const Color(0xFF8B5CF6).withValues(alpha: 0.1),
+                  color: verified ? IveTokens.success.withValues(alpha: 0.1) : IveTokens.accent.withValues(alpha: 0.1),
                 ),
                 child: Icon(
                   verified ? Icons.check_circle : Icons.person_pin,
                   size: 48,
-                  color: verified ? const Color(0xFF10B981) : const Color(0xFF8B5CF6),
+                  color: verified ? IveTokens.success : IveTokens.accent,
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: IveTokens.s4),
               Text(
-                verified ? 'IDENTITY VERIFIED âœ…' : 'VERIFY PASSENGER IDENTITY',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: verified ? const Color(0xFF10B981) : AppColors.textPrimary),
+                verified ? 'IDENTITY VERIFIED' : 'VERIFY PASSENGER IDENTITY',
+                style: IveType.headline.copyWith(fontWeight: FontWeight.w800, color: verified ? IveTokens.success : IveTokens.ink),
               ),
-              const SizedBox(height: 4),
-              const Text('Confirm the passenger matches the booking', style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+              const SizedBox(height: IveTokens.s1),
+              Text('Confirm the passenger matches the booking', style: IveType.subhead),
             ],
           ),
         ),
 
-        const SizedBox(height: 24),
+        const SizedBox(height: IveTokens.s6),
 
         LiveSectionCard(
           title: 'BOOKING DETAILS',
           icon: Icons.confirmation_number,
-          iconColor: const Color(0xFF3B82F6),
+          iconColor: IveTokens.accent,
           child: Column(
             children: [
               _VerifyRow(label: 'Name', value: ride.passengerName),
@@ -306,18 +290,14 @@ class _VerifyView extends StatelessWidget {
 
         if (!verified)
           Padding(
-            padding: const EdgeInsets.only(top: 12),
-            child: SizedBox(
-              width: double.infinity,
-              child: ElevatedButton.icon(
-                onPressed: () {
-                  HapticFeedback.heavyImpact();
-                  onVerify();
-                },
-                icon: const Icon(Icons.verified_user, size: 18),
-                label: const Text('CONFIRM IDENTITY', style: TextStyle(fontWeight: FontWeight.w700)),
-                style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10B981), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
-              ),
+            padding: const EdgeInsets.only(top: IveTokens.s3),
+            child: IveButton.primary(
+              label: 'CONFIRM IDENTITY',
+              icon: Icons.verified_user,
+              onPressed: () {
+                HapticFeedback.heavyImpact();
+                onVerify();
+              },
             ),
           ),
       ],
@@ -332,32 +312,32 @@ class _InTripView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(IveTokens.s4),
       children: [
         // Live map
         Container(
           height: 200,
-          decoration: BoxDecoration(color: const Color(0xFFE5E7EB), borderRadius: BorderRadius.circular(10)),
+          decoration: const BoxDecoration(color: IveTokens.surfaceRaised, borderRadius: BorderRadius.all(Radius.circular(IveTokens.rSm))),
           child: const Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(Icons.navigation, size: 40, color: AppColors.textTertiary),
-                SizedBox(height: 8),
-                Text('Live trip navigation', style: TextStyle(fontSize: 13, color: AppColors.textTertiary)),
+                Icon(Icons.navigation, size: 40, color: IveTokens.mute),
+                SizedBox(height: IveTokens.s2),
+                Text('Live trip navigation', style: TextStyle(fontSize: 13, color: IveTokens.mute)),
               ],
             ),
           ),
         ),
 
-        const SizedBox(height: 12),
+        const SizedBox(height: IveTokens.s3),
 
         // Trip progress
         Container(
           padding: const EdgeInsets.all(14),
-          decoration: BoxDecoration(
-            gradient: const LinearGradient(colors: [Color(0xFF10B981), Color(0xFF059669)]),
-            borderRadius: BorderRadius.circular(10),
+          decoration: const BoxDecoration(
+            color: IveTokens.moduleLive,
+            borderRadius: BorderRadius.all(Radius.circular(IveTokens.rSm)),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -366,23 +346,23 @@ class _InTripView extends StatelessWidget {
               Container(width: 1, height: 30, color: Colors.white.withValues(alpha: 0.3)),
               _TripStat(label: 'ETA', value: '${ride.etaMinutes} min'),
               Container(width: 1, height: 30, color: Colors.white.withValues(alpha: 0.3)),
-              _TripStat(label: 'Fare', value: 'â‚µ${ride.fare.toStringAsFixed(0)}'),
+              _TripStat(label: 'Fare', value: '${ride.fare.toStringAsFixed(0)}'),
             ],
           ),
         ),
 
-        const SizedBox(height: 12),
+        const SizedBox(height: IveTokens.s3),
 
         LiveSectionCard(
           title: 'DESTINATION',
           icon: Icons.flag,
-          iconColor: kLiveColor,
+          iconColor: IveTokens.moduleLive,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(ride.dropoffAddress, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
-              const SizedBox(height: 4),
-              Text('Passenger: ${ride.passengerName}', style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+              Text(ride.dropoffAddress, style: IveType.callout.copyWith(fontWeight: FontWeight.w600, color: IveTokens.ink)),
+              const SizedBox(height: IveTokens.s1),
+              Text('Passenger: ${ride.passengerName}', style: IveType.footnote),
             ],
           ),
         ),
@@ -391,33 +371,33 @@ class _InTripView extends StatelessWidget {
         LiveSectionCard(
           title: 'SAFETY TOOLS',
           icon: Icons.shield,
-          iconColor: kLiveColor,
+          iconColor: IveTokens.moduleLive,
           child: Row(
             children: [
               Expanded(
                 child: OutlinedButton.icon(
-                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Trip link copied'))),
+                  onPressed: () => AppToast.show(context, 'Trip link copied'),
                   icon: const Icon(Icons.share_location, size: 16),
                   label: const Text('Share Trip', style: TextStyle(fontSize: 11)),
-                  style: OutlinedButton.styleFrom(foregroundColor: const Color(0xFF3B82F6)),
+                  style: OutlinedButton.styleFrom(foregroundColor: IveTokens.accent),
                 ),
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: IveTokens.s2),
               Expanded(
                 child: OutlinedButton.icon(
-                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Recording...'))),
+                  onPressed: () => AppToast.show(context, 'Recording...'),
                   icon: const Icon(Icons.mic, size: 16),
                   label: const Text('Record', style: TextStyle(fontSize: 11)),
-                  style: OutlinedButton.styleFrom(foregroundColor: const Color(0xFF8B5CF6)),
+                  style: OutlinedButton.styleFrom(foregroundColor: IveTokens.accent),
                 ),
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: IveTokens.s2),
               Expanded(
                 child: OutlinedButton.icon(
                   onPressed: () => Navigator.pushNamed(context, AppRoutes.liveEmergencySOS),
                   icon: const Icon(Icons.sos, size: 16),
                   label: const Text('SOS', style: TextStyle(fontSize: 11)),
-                  style: OutlinedButton.styleFrom(foregroundColor: kLiveColor),
+                  style: OutlinedButton.styleFrom(foregroundColor: IveTokens.moduleLive),
                 ),
               ),
             ],
@@ -436,38 +416,30 @@ class _RideCompleteView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundLight,
+      backgroundColor: IveTokens.bg,
       appBar: const LiveAppBar(title: 'Trip Complete'),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(IveTokens.s6),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                padding: const EdgeInsets.all(24),
-                decoration: BoxDecoration(shape: BoxShape.circle, color: const Color(0xFF10B981).withValues(alpha: 0.1)),
-                child: const Icon(Icons.celebration, size: 64, color: Color(0xFF10B981)),
+                padding: const EdgeInsets.all(IveTokens.s6),
+                decoration: BoxDecoration(shape: BoxShape.circle, color: IveTokens.success.withValues(alpha: 0.1)),
+                child: const Icon(Icons.celebration, size: 64, color: IveTokens.success),
               ),
-              const SizedBox(height: 20),
-              const Text('🎉 TRIP COMPLETED!', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
-              const SizedBox(height: 8),
-              Text(ride.passengerName, style: const TextStyle(fontSize: 15, color: AppColors.textSecondary)),
-              const SizedBox(height: 16),
+              const SizedBox(height: IveTokens.s5),
+              Text('TRIP COMPLETED!', style: IveType.title2.copyWith(fontWeight: FontWeight.w900, color: IveTokens.ink)),
+              const SizedBox(height: IveTokens.s2),
+              Text(ride.passengerName, style: IveType.subhead),
+              const SizedBox(height: IveTokens.s4),
               Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10),
-                ),
+                padding: const EdgeInsets.all(IveTokens.s4),
+                decoration: const BoxDecoration(color: IveTokens.surface, borderRadius: BorderRadius.all(Radius.circular(IveTokens.rSm))),
               ),
-              const SizedBox(height: 24),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: onDone,
-                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10B981), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 16), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
-                  child: const Text('BACK TO HOME', style: TextStyle(fontWeight: FontWeight.w700)),
-                ),
-              ),
+              const SizedBox(height: IveTokens.s6),
+              IveButton.primary(label: 'BACK TO HOME', onPressed: onDone),
             ],
           ),
         ),
@@ -490,11 +462,11 @@ class _PhaseDot extends StatelessWidget {
       children: [
         Container(
           width: 28, height: 28,
-          decoration: BoxDecoration(shape: BoxShape.circle, color: completed ? const Color(0xFF10B981) : active ? const Color(0xFF3B82F6) : const Color(0xFFE5E7EB)),
-          child: Center(child: completed ? const Icon(Icons.check, size: 16, color: Colors.white) : active ? const Icon(Icons.circle, size: 8, color: Colors.white) : null),
+          decoration: BoxDecoration(shape: BoxShape.circle, color: completed ? IveTokens.success : active ? IveTokens.accent : IveTokens.hairline),
+          child: Center(child: completed ? const Icon(Icons.check, size: 16, color: IveTokens.ink) : active ? const Icon(Icons.circle, size: 8, color: IveTokens.ink) : null),
         ),
-        const SizedBox(height: 4),
-        Text(label, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: active || completed ? AppColors.textPrimary : AppColors.textTertiary)),
+        const SizedBox(height: IveTokens.s1),
+        Text(label, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: active || completed ? IveTokens.ink : IveTokens.mute)),
       ],
     );
   }
@@ -510,13 +482,13 @@ class _TripDetailRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 6),
+      padding: const EdgeInsets.only(bottom: IveTokens.s1 + 2),
       child: Row(
         children: [
           Icon(icon, size: 14, color: color),
-          const SizedBox(width: 8),
-          Text('$label: ', style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
-          Expanded(child: Text(value, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600))),
+          const SizedBox(width: IveTokens.s2),
+          Text('$label: ', style: IveType.subhead),
+          Expanded(child: Text(value, style: IveType.subhead.copyWith(fontWeight: FontWeight.w600, color: IveTokens.ink))),
         ],
       ),
     );
@@ -531,12 +503,12 @@ class _VerifyRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 6),
+      padding: const EdgeInsets.only(bottom: IveTokens.s1 + 2),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
-          Text(value, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
+          Text(label, style: IveType.subhead),
+          Text(value, style: IveType.subhead.copyWith(fontWeight: FontWeight.w600, color: IveTokens.ink)),
         ],
       ),
     );
@@ -552,15 +524,15 @@ class _TripStat extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(value, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: Colors.white)),
-        Text(label, style: TextStyle(fontSize: 10, color: Colors.white.withValues(alpha: 0.7))),
+        Text(value, style: IveType.headline.copyWith(fontWeight: FontWeight.w800, color: IveTokens.ink)),
+        Text(label, style: IveType.caption.copyWith(color: IveTokens.ink.withValues(alpha: 0.7))),
       ],
     );
   }
 }
 
-// ─── Route Map Card ───────────────────────────────────────────────────────────
-/// Shows pickup → drop-off route with an "Open in Maps" deep-link.
+//  Route Map Card 
+/// Shows pickup  drop-off route with an "Open in Maps" deep-link.
 /// Replaces a native map tile when google_maps_flutter is not in use.
 class _RouteMapCard extends StatelessWidget {
   final String label;

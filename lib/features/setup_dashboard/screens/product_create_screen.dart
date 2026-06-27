@@ -1,8 +1,8 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD1.1-CREATE: PRODUCT CREATE WIZARD — 7-Step Form
-/// Steps: Basic Info â†’ Pricing â†’ Inventory â†’ Media â†’ Variants â†’ SEO â†’ Review
+/// 
+/// SD1.1-CREATE: PRODUCT CREATE WIZARD  7-Step Form
+/// Steps: Basic Info ' Pricing ' Inventory ' Media ' Variants ' SEO ' Review
 /// RBAC: Admin(full), BM(branch), SO(full), BSO(branch)
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -176,7 +176,7 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
   }
 }
 
-// ─── Step Indicator ──────────────────────────────────────────────────────────
+//  Step Indicator 
 
 class _StepIndicator extends StatelessWidget {
   final int currentStep;
@@ -197,7 +197,7 @@ class _StepIndicator extends StatelessWidget {
         children: [
           // Progress bar
           ClipRRect(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(6),
             child: LinearProgressIndicator(
               value: (currentStep + 1) / stepCount,
               backgroundColor: kSetupColor.withValues(alpha: 0.1),
@@ -234,7 +234,7 @@ class _StepIndicator extends StatelessWidget {
   }
 }
 
-// ─── Step 1: Basic Info ──────────────────────────────────────────────────────
+//  Step 1: Basic Info 
 
 class _BasicInfoStep extends StatelessWidget {
   final TextEditingController nameCtrl;
@@ -310,7 +310,7 @@ class _BasicInfoStep extends StatelessWidget {
   }
 }
 
-// ─── Step 2: Pricing ─────────────────────────────────────────────────────────
+//  Step 2: Pricing 
 
 class _PricingStep extends StatelessWidget {
   final TextEditingController priceCtrl;
@@ -329,22 +329,22 @@ class _PricingStep extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       children: [
         SetupFormField(
-          label: 'Selling Price (â‚µ)',
+          label: 'Selling Price ()',
           hint: '0.00',
           controller: priceCtrl,
           keyboardType: TextInputType.number,
         ),
         const SizedBox(height: 14),
         SetupFormField(
-          label: 'Compare-at Price (â‚µ)',
-          hint: '0.00 — Show strikethrough for discounts',
+          label: 'Compare-at Price ()',
+          hint: '0.00  Show strikethrough for discounts',
           controller: comparePriceCtrl,
           keyboardType: TextInputType.number,
         ),
         const SizedBox(height: 14),
         SetupFormField(
-          label: 'Cost per Item (â‚µ)',
-          hint: '0.00 — Used for margin calculations',
+          label: 'Cost per Item ()',
+          hint: '0.00  Used for margin calculations',
           controller: costCtrl,
           keyboardType: TextInputType.number,
         ),
@@ -375,7 +375,7 @@ class _PricingStep extends StatelessWidget {
   }
 }
 
-// ─── Step 3: Inventory ───────────────────────────────────────────────────────
+//  Step 3: Inventory 
 
 class _InventoryStep extends StatelessWidget {
   final TextEditingController stockCtrl;
@@ -418,7 +418,7 @@ class _InventoryStep extends StatelessWidget {
           const SizedBox(height: 14),
           SetupFormField(
             label: 'Low Stock Threshold',
-            hint: '10 — Alert when stock falls below this',
+            hint: '10  Alert when stock falls below this',
             controller: lowStockCtrl,
             keyboardType: TextInputType.number,
           ),
@@ -442,7 +442,7 @@ class _InventoryStep extends StatelessWidget {
   }
 }
 
-// ─── Step 4: Media ───────────────────────────────────────────────────────────
+//  Step 4: Media 
 
 class _MediaStep extends StatelessWidget {
   const _MediaStep();
@@ -477,7 +477,7 @@ class _MediaStep extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 const Text(
-                  'PNG, JPG up to 5MB Â· Max 8 images',
+                  'PNG, JPG up to 5MB  Max 8 images',
                   style: TextStyle(fontSize: 11, color: AppColors.textTertiary),
                 ),
               ],
@@ -514,7 +514,7 @@ class _MediaStep extends StatelessWidget {
   }
 }
 
-// ─── Step 5: Variants ────────────────────────────────────────────────────────
+//  Step 5: Variants 
 
 class _VariantsStep extends StatelessWidget {
   const _VariantsStep();
@@ -592,7 +592,7 @@ class _VariantsStep extends StatelessWidget {
   }
 }
 
-// ─── Step 6: SEO ─────────────────────────────────────────────────────────────
+//  Step 6: SEO 
 
 class _SEOStep extends StatelessWidget {
   final TextEditingController metaTitleCtrl;
@@ -674,7 +674,7 @@ class _SEOStep extends StatelessWidget {
   }
 }
 
-// ─── Step 7: Review ──────────────────────────────────────────────────────────
+//  Step 7: Review 
 
 class _ReviewStep extends StatelessWidget {
   final String name;
@@ -725,11 +725,11 @@ class _ReviewStep extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SetupSectionTitle(title: 'Product Summary', icon: Icons.inventory_2),
-              SetupInfoRow(label: 'Name', value: name.isNotEmpty ? name : '—'),
-              SetupInfoRow(label: 'SKU', value: sku.isNotEmpty ? sku : '—'),
+              SetupInfoRow(label: 'Name', value: name.isNotEmpty ? name : ''),
+              SetupInfoRow(label: 'SKU', value: sku.isNotEmpty ? sku : ''),
               SetupInfoRow(label: 'Category', value: category),
-              SetupInfoRow(label: 'Price', value: price.isNotEmpty ? 'â‚µ$price' : '—'),
-              SetupInfoRow(label: 'Stock', value: stock.isNotEmpty ? stock : '—'),
+              SetupInfoRow(label: 'Price', value: price.isNotEmpty ? '$price' : ''),
+              SetupInfoRow(label: 'Stock', value: stock.isNotEmpty ? stock : ''),
             ],
           ),
         ),
@@ -769,7 +769,7 @@ class _ReviewStep extends StatelessWidget {
   }
 }
 
-// ─── Wizard Nav Bar ──────────────────────────────────────────────────────────
+//  Wizard Nav Bar 
 
 class _WizardNavBar extends StatelessWidget {
   final int currentStep;
@@ -836,7 +836,7 @@ class _WizardNavBar extends StatelessWidget {
   }
 }
 
-// ─── Shared Helpers ──────────────────────────────────────────────────────────
+//  Shared Helpers 
 
 class _SwitchTile extends StatelessWidget {
   final String title;

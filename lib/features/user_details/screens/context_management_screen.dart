@@ -1,7 +1,7 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 /// Screen 2: Context Management & Switcher
 /// Search + filter, context grid, archived section, create/merge actions
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -33,7 +33,7 @@ class ContextManagementScreen extends StatelessWidget {
           body: Column(
             children: [
 
-              // ─── Search Bar ──────────────────────────────
+              //  Search Bar 
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
                 child: TextField(
@@ -52,7 +52,7 @@ class ContextManagementScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Filter Chips ────────────────────────────
+              //  Filter Chips 
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 12, 20, 8),
                 child: Row(
@@ -78,7 +78,7 @@ class ContextManagementScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Context Grid ────────────────────────────
+              //  Context Grid 
               Expanded(
                 child: filtered.isEmpty
                     ? Center(
@@ -130,7 +130,7 @@ class ContextManagementScreen extends StatelessWidget {
             ],
           ),
 
-          // ─── Bottom Action Bar ──────────────────────────
+          //  Bottom Action Bar 
           bottomNavigationBar: Container(
             padding: EdgeInsets.only(
               left: 20,
@@ -162,9 +162,9 @@ class ContextManagementScreen extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Context Tile
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _ContextTile extends StatelessWidget {
   final AppContextModel context;
@@ -189,7 +189,7 @@ class _ContextTile extends StatelessWidget {
         padding: EdgeInsets.zero,
         child: InkWell(
           onTap: onTap,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(10),
           child: Padding(
             padding: const EdgeInsets.all(14),
             child: Row(

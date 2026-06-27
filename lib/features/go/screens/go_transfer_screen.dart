@@ -1,4 +1,4 @@
-/// GO Screen 2C — Transfer QPoints
+/// GO Screen 2C  Transfer QPoints
 /// Enhanced P2P transfer with receiver selection, risk assessment,
 /// fee optimizer, scheduling, relationship context
 library;
@@ -55,7 +55,7 @@ class _GoTransferScreenState extends State<GoTransferScreen> {
         appBar: const GoAppBar(title: 'Transfer QPoints'),
         body: Column(
           children: [
-            // 4-step flow: Receiver → Amount → Review → Done
+            // 4-step flow: Receiver  Amount  Review  Done
             GoStepIndicator(
               currentStep: _step,
               totalSteps: 4,
@@ -388,12 +388,12 @@ class _GoTransferScreenState extends State<GoTransferScreen> {
     switch (s) {
       case TransferSchedule.now: return 'Send now';
       case TransferSchedule.later: return 'Schedule for later';
-      case TransferSchedule.onRate: return 'When rate reaches…';
+      case TransferSchedule.onRate: return 'When rate reaches';
       case TransferSchedule.recurring: return 'Recurring';
     }
   }
 
-  // Step 3: Review — tapping Confirm opens VerifySheet
+  // Step 3: Review  tapping Confirm opens VerifySheet
   Widget _buildReview(GoProvider p) {
     return Column(
       children: [
@@ -437,7 +437,7 @@ class _GoTransferScreenState extends State<GoTransferScreen> {
               const SizedBox(width: IveTokens.s3),
               Expanded(
                 child: Text(
-                  'Risk: LOW — Recipient is a favourite with 12 previous transfers.',
+                  'Risk: LOW  Recipient is a favourite with 12 previous transfers.',
                   style: IveType.caption.copyWith(color: IveTokens.ink2Color),
                 ),
               ),
@@ -497,9 +497,9 @@ class _GoTransferScreenState extends State<GoTransferScreen> {
     if (_processing) {
       return Center(
         child: Column(mainAxisSize: MainAxisSize.min, children: [
-          IveSkeleton(width: 56, height: 56, radius: BorderRadius.circular(28)),
+          IveSkeleton(width: 56, height: 56, radius: BorderRadius.circular(10)),
           const SizedBox(height: IveTokens.s4),
-          Text('Sending QPoints…', style: IveType.headline),
+          Text('Sending QPoints', style: IveType.headline),
         ]),
       );
     }

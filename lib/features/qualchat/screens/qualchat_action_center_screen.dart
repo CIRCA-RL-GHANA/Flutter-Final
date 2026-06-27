@@ -1,8 +1,9 @@
-﻿/// qualChat Screen 12 — Action Center
+/// qualChat Screen 12  Action Center
 /// Task manager: priority sections, AI suggestions, profile completeness, analytics
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
 import 'package:provider/provider.dart';
 import '../models/qualchat_models.dart';
 import '../providers/qualchat_provider.dart';
@@ -29,12 +30,12 @@ class QualChatActionCenterScreen extends StatelessWidget {
             .toList();
 
         return Scaffold(
-          backgroundColor: const Color(0xFFF8F9FE),
+          backgroundColor: IveTokens.bg,
           appBar: QualChatAppBar(
             title: 'Action Center',
             actions: [
               IconButton(
-                icon: const Icon(Icons.bar_chart, color: kChatColor),
+                icon: const Icon(Icons.bar_chart, color: IveTokens.moduleQualChat),
                 onPressed: () => _showAnalytics(context, analytics),
               ),
             ],
@@ -44,21 +45,21 @@ class QualChatActionCenterScreen extends StatelessWidget {
             children: [
               // Profile completeness bar
               QualChatSectionCard(
-                title: 'ðŸŽ¯ Profile Completeness',
+                title: ' Profile Completeness',
                 trailing: '$completeness%',
                 child: Column(
                   children: [
                     ClipRRect(
-                      borderRadius: BorderRadius.circular(6),
+                      borderRadius: BorderRadius.circular(IveTokens.rXs),
                       child: LinearProgressIndicator(
                         value: completeness / 100,
-                        backgroundColor: const Color(0xFFE5E7EB),
+                        backgroundColor: IveTokens.hairline,
                         valueColor: AlwaysStoppedAnimation(
                           completeness > 80
-                              ? const Color(0xFF10B981)
+                              ? IveTokens.success
                               : completeness > 50
-                                  ? kChatColor
-                                  : const Color(0xFFF59E0B),
+                                  ? IveTokens.moduleQualChat
+                                  : IveTokens.warning,
                         ),
                         minHeight: 10,
                       ),
@@ -66,67 +67,66 @@ class QualChatActionCenterScreen extends StatelessWidget {
                     const SizedBox(height: 8),
                     Text(
                       completeness >= 90
-                          ? 'Excellent! Your profile is nearly complete ðŸŒŸ'
+                          ? 'Excellent! Your profile is nearly complete '
                           : completeness >= 70
                               ? 'Good progress! A few more items to go'
                               : 'Complete your profile to get better results',
-                      style: const TextStyle(
-                          fontSize: 12, color: Color(0xFF6B7280)),
+                      style: IveType.caption.copyWith(color: IveTokens.mute),
                     ),
                   ],
                 ),
               ),
               const SizedBox(height: 16),
 
-              // ──── ACT NOW ────
+              //  ACT NOW 
               if (actNow.isNotEmpty) ...[
                 _SectionLabel(
-                    title: 'ðŸ”¥ ACT NOW',
+                    title: ' ACT NOW',
                     count: actNow.length,
-                    color: const Color(0xFFEF4444)),
+                    color: IveTokens.danger),
                 ...actNow.map((task) => _TaskCard(task: task)),
                 const SizedBox(height: 16),
               ],
 
-              // ──── CONSIDER LATER ────
+              //  CONSIDER LATER 
               if (considerLater.isNotEmpty) ...[
                 _SectionLabel(
-                    title: 'ðŸ’¡ CONSIDER LATER',
+                    title: ' CONSIDER LATER',
                     count: considerLater.length,
-                    color: const Color(0xFFF59E0B)),
+                    color: IveTokens.warning),
                 ...considerLater.map((task) => _TaskCard(task: task)),
                 const SizedBox(height: 16),
               ],
 
-              // ──── AI SUGGESTIONS ────
+              //  AI SUGGESTIONS 
               if (suggestions.isNotEmpty) ...[
                 const _SectionLabel(
-                    title: 'ðŸ¤– AI SUGGESTIONS', count: 0, color: kChatColor),
+                    title: ' AI SUGGESTIONS', count: 0, color: IveTokens.moduleQualChat),
                 ...suggestions.map((s) => _AISuggestionCard(suggestion: s)),
                 const SizedBox(height: 16),
               ],
 
               // Quick analytics
               QualChatSectionCard(
-                title: 'ðŸ“Š Task Analytics',
+                title: ' Task Analytics',
                 child: Row(
                   children: [
                     _MiniStat(
                         label: 'Completed',
                         value: '${analytics.completedThisWeek}',
-                        color: const Color(0xFF10B981)),
+                        color: IveTokens.success),
                     _MiniStat(
                         label: 'Total',
                         value: '${analytics.totalThisWeek}',
-                        color: kChatColor),
+                        color: IveTokens.moduleQualChat),
                     _MiniStat(
                         label: 'Avg Days',
                         value: '${analytics.avgCompletionDays}',
-                        color: const Color(0xFFF59E0B)),
+                        color: IveTokens.warning),
                     _MiniStat(
                         label: 'Top Day',
                         value: analytics.mostProductiveDay,
-                        color: const Color(0xFFEF4444)),
+                        color: IveTokens.danger),
                   ],
                 ),
               ),
@@ -141,8 +141,9 @@ class QualChatActionCenterScreen extends StatelessWidget {
   void _showAnalytics(BuildContext context, TaskAnalytics analytics) {
     showModalBottomSheet(
       context: context,
+      backgroundColor: IveTokens.surface,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(IveTokens.rSm)),
       ),
       builder: (_) => Padding(
         padding: const EdgeInsets.all(24),
@@ -155,35 +156,35 @@ class QualChatActionCenterScreen extends StatelessWidget {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
-                    borderRadius: BorderRadius.circular(2)),
+                    color: IveTokens.hairline2,
+                    borderRadius: BorderRadius.circular(IveTokens.rXs)),
               ),
             ),
             const SizedBox(height: 16),
-            const Text('ðŸ“Š Full Task Analytics',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
+            Text(' Full Task Analytics',
+                style: IveType.headline.copyWith(color: IveTokens.ink)),
             const SizedBox(height: 20),
             _AnalyticsRow(
-                label: 'âœ… Completed',
+                label: ' Completed',
                 value: '${analytics.completedThisWeek}',
-                color: const Color(0xFF10B981)),
+                color: IveTokens.success),
             _AnalyticsRow(
-                label: 'ðŸ“‹ Total',
+                label: ' Total',
                 value: '${analytics.totalThisWeek}',
-                color: kChatColor),
+                color: IveTokens.moduleQualChat),
             _AnalyticsRow(
-                label: 'ðŸ“Š Most Common',
+                label: ' Most Common',
                 value: analytics.mostCommonTask,
-                color: const Color(0xFFF59E0B)),
+                color: IveTokens.warning),
             _AnalyticsRow(
-                label: 'ðŸ“… Top Day',
+                label: ' Top Day',
                 value: analytics.mostProductiveDay,
-                color: const Color(0xFFEF4444)),
-            const Divider(height: 24),
+                color: IveTokens.danger),
+            Divider(height: 24, color: IveTokens.hairline),
             _AnalyticsRow(
-                label: 'â±ï¸ Avg Completion',
+                label: ' Avg Completion',
                 value: '${analytics.avgCompletionDays} days',
-                color: const Color(0xFF6B7280)),
+                color: IveTokens.mute),
             const SizedBox(height: 16),
           ],
         ),
@@ -207,9 +208,7 @@ class _SectionLabel extends StatelessWidget {
         children: [
           Text(
             title,
-            style: TextStyle(
-                fontSize: 13,
-                fontWeight: FontWeight.w700,
+            style: IveType.subhead.copyWith(
                 color: color,
                 letterSpacing: 0.5),
           ),
@@ -219,10 +218,9 @@ class _SectionLabel extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               decoration: BoxDecoration(
                   color: color.withValues(alpha: 0.15),
-                  borderRadius: BorderRadius.circular(8)),
+                  borderRadius: BorderRadius.circular(IveTokens.rSm)),
               child: Text('$count',
-                  style: TextStyle(
-                      fontSize: 11, fontWeight: FontWeight.w700, color: color)),
+                  style: IveType.footnote.copyWith(fontWeight: FontWeight.w700, color: color)),
             ),
           ],
         ],
@@ -238,9 +236,9 @@ class _TaskCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final priorityColors = {
-      TaskPriority.high: const Color(0xFFEF4444),
-      TaskPriority.medium: kChatColor,
-      TaskPriority.low: const Color(0xFF10B981),
+      TaskPriority.high: IveTokens.danger,
+      TaskPriority.medium: IveTokens.moduleQualChat,
+      TaskPriority.low: IveTokens.success,
     };
     final typeIcons = {
       TaskType.communication: Icons.chat,
@@ -250,20 +248,20 @@ class _TaskCard extends StatelessWidget {
       TaskType.social: Icons.people,
     };
     final statusIcons = {
-      TaskStatus.actNow: 'ðŸ”¥',
-      TaskStatus.considerLater: 'ðŸ’¡',
-      TaskStatus.completed: 'âœ…',
-      TaskStatus.dismissed: 'âŒ',
+      TaskStatus.actNow: '',
+      TaskStatus.considerLater: '',
+      TaskStatus.completed: '',
+      TaskStatus.dismissed: '',
     };
 
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
+        color: IveTokens.surface,
+        borderRadius: BorderRadius.circular(IveTokens.rSm),
         border: Border(
           left: BorderSide(
-              color: priorityColors[task.priority] ?? kChatColor, width: 4),
+              color: priorityColors[task.priority] ?? IveTokens.moduleQualChat, width: 4),
         ),
       ),
       child: Padding(
@@ -279,12 +277,11 @@ class _TaskCard extends StatelessWidget {
                 Expanded(
                   child: Text(
                     task.title,
-                    style: const TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.w600),
+                    style: IveType.bodyEmphasis.copyWith(color: IveTokens.ink),
                   ),
                 ),
                 Text(
-                  statusIcons[task.status] ?? 'â³',
+                  statusIcons[task.status] ?? '',
                   style: const TextStyle(fontSize: 16),
                 ),
               ],
@@ -293,7 +290,7 @@ class _TaskCard extends StatelessWidget {
               const SizedBox(height: 6),
               Text(
                 task.description,
-                style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280)),
+                style: IveType.caption.copyWith(color: IveTokens.mute),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -304,12 +301,11 @@ class _TaskCard extends StatelessWidget {
                 const Spacer(),
                 if (task.dueDate != null)
                   Text(
-                    'ðŸ“… ${task.dueDate!.day}/${task.dueDate!.month}',
-                    style: TextStyle(
-                      fontSize: 11,
+                    ' ${task.dueDate!.day}/${task.dueDate!.month}',
+                    style: IveType.footnote.copyWith(
                       color: task.dueDate!.isBefore(DateTime.now())
-                          ? const Color(0xFFEF4444)
-                          : const Color(0xFF6B7280),
+                          ? IveTokens.danger
+                          : IveTokens.mute,
                       fontWeight: task.dueDate!.isBefore(DateTime.now())
                           ? FontWeight.w700
                           : FontWeight.w400,
@@ -323,7 +319,7 @@ class _TaskCard extends StatelessWidget {
               children: [
                 _TaskAction(
                     label: 'Complete',
-                    color: const Color(0xFF10B981),
+                    color: IveTokens.success,
                     onTap: () {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Task marked complete')),
@@ -332,14 +328,14 @@ class _TaskCard extends StatelessWidget {
                 const SizedBox(width: 8),
                 _TaskAction(
                     label: 'Snooze',
-                    color: const Color(0xFFF59E0B),
+                    color: IveTokens.warning,
                     onTap: () {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Task snoozed')),
                       );
                     }),
                 const SizedBox(width: 8),
-                _TaskAction(label: 'Delegate', color: kChatColor, onTap: () {
+                _TaskAction(label: 'Delegate', color: IveTokens.moduleQualChat, onTap: () {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Task delegated')),
                   );
@@ -368,11 +364,10 @@ class _TaskAction extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         decoration: BoxDecoration(
           color: color.withValues(alpha: 0.1),
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(IveTokens.rSm),
         ),
         child: Text(label,
-            style: TextStyle(
-                fontSize: 11, fontWeight: FontWeight.w600, color: color)),
+            style: IveType.footnote.copyWith(fontWeight: FontWeight.w600, color: color)),
       ),
     );
   }
@@ -388,26 +383,21 @@ class _AISuggestionCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [kChatColor.withValues(alpha: 0.05), Colors.white],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: kChatColor.withValues(alpha: 0.2)),
+        color: IveTokens.moduleQualChat.withValues(alpha: 0.05),
+        borderRadius: BorderRadius.circular(IveTokens.rSm),
+        border: Border.all(color: IveTokens.moduleQualChat.withValues(alpha: 0.2)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              const Icon(Icons.auto_awesome, size: 18, color: kChatColor),
+              const Icon(Icons.auto_awesome, size: 18, color: IveTokens.moduleQualChat),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
                   suggestion.text,
-                  style: const TextStyle(
-                      fontSize: 14, fontWeight: FontWeight.w600),
+                  style: IveType.bodyEmphasis.copyWith(color: IveTokens.ink),
                 ),
               ),
             ],
@@ -416,46 +406,33 @@ class _AISuggestionCard extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               suggestion.detail!,
-              style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280)),
+              style: IveType.caption.copyWith(color: IveTokens.mute),
             ),
           ],
           const SizedBox(height: 10),
           Row(
             children: [
               Expanded(
-                child: ElevatedButton(
+                child: IveButton.primary(
+                  label: 'Apply',
+                  compact: true,
                   onPressed: () {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('AI suggestion applied')),
                     );
                   },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: kChatColor,
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8)),
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                  ),
-                  child: const Text('Apply',
-                      style:
-                          TextStyle(fontSize: 12, fontWeight: FontWeight.w600)),
                 ),
               ),
               const SizedBox(width: 8),
-              OutlinedButton(
+              IveButton.secondary(
+                label: 'Dismiss',
+                compact: true,
+                expand: false,
                 onPressed: () {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('AI suggestion dismissed')),
                   );
                 },
-                style: OutlinedButton.styleFrom(
-                  side: const BorderSide(color: kChatColor),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8)),
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                ),
-                child: const Text('Dismiss',
-                    style: TextStyle(fontSize: 12, color: kChatColor)),
               ),
             ],
           ),
@@ -478,11 +455,10 @@ class _MiniStat extends StatelessWidget {
       child: Column(
         children: [
           Text(value,
-              style: TextStyle(
-                  fontSize: 20, fontWeight: FontWeight.w700, color: color)),
+              style: IveType.title3.copyWith(color: color)),
           const SizedBox(height: 2),
           Text(label,
-              style: const TextStyle(fontSize: 10, color: Color(0xFF6B7280))),
+              style: IveType.footnote.copyWith(color: IveTokens.mute)),
         ],
       ),
     );
@@ -503,10 +479,9 @@ class _AnalyticsRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: const TextStyle(fontSize: 14)),
+          Text(label, style: IveType.body.copyWith(color: IveTokens.ink)),
           Text(value,
-              style: TextStyle(
-                  fontSize: 14, fontWeight: FontWeight.w700, color: color)),
+              style: IveType.bodyEmphasis.copyWith(color: color)),
         ],
       ),
     );

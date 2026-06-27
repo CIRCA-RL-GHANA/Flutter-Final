@@ -1,24 +1,24 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SETUP DASHBOARD — Complete RBAC Authority
+/// 
+/// SETUP DASHBOARD  Complete RBAC Authority
 /// Canonical permission model for all 19 Setup Dashboard screens.
 ///
-/// Hierarchy (Tier 1→4):
-///   Owner → Administrator → Branch Manager → [Specialists] → Driver
+/// Hierarchy (Tier 14):
+///   Owner  Administrator  Branch Manager  [Specialists]  Driver
 ///
 /// Enforces:
-///   • Card-level visibility (hub dashboard)
-///   • Per-screen action gating (create / edit / delete / export)
-///   • OTP requirements for sensitive mutations
-///   • Redacted data views for Monitor roles
-///   • Export permission matrix
-///   • SOS button visibility
-///   • Tooltip messages for locked / view-only UI elements
-/// ═══════════════════════════════════════════════════════════════════════════
+///    Card-level visibility (hub dashboard)
+///    Per-screen action gating (create / edit / delete / export)
+///    OTP requirements for sensitive mutations
+///    Redacted data views for Monitor roles
+///    Export permission matrix
+///    SOS button visibility
+///    Tooltip messages for locked / view-only UI elements
+/// 
 library;
 
 import '../../prompt/models/rbac_models.dart';
 
-// ─── Action Permission Value Object ──────────────────────────────────────────
+//  Action Permission Value Object 
 
 /// Granular action-level permission for a given card + role combination.
 class SetupActionPermission {
@@ -66,26 +66,26 @@ class SetupActionPermission {
   );
 }
 
-// ─── Setup Dashboard Canonical RBAC ──────────────────────────────────────────
+//  Setup Dashboard Canonical RBAC 
 
 /// Static authority class. All RBAC decisions for Setup Dashboard screens
 /// flow through this class. Do NOT duplicate permission logic elsewhere.
 class SetupDashboardRBAC {
   SetupDashboardRBAC._();
 
-  // ══════════════════════════════════════════════════════════════════════════
+  // 
   // SOS BUTTON
-  // ══════════════════════════════════════════════════════════════════════════
+  // 
 
-  /// Emergency SOS visible to Tier 1–3 leads only.
+  /// Emergency SOS visible to Tier 13 leads only.
   static bool canSeeSOS(UserRole role) =>
       role == UserRole.owner ||
       role == UserRole.administrator ||
       role == UserRole.branchManager;
 
-  // ══════════════════════════════════════════════════════════════════════════
+  // 
   // OTP / PIN REQUIREMENTS
-  // ══════════════════════════════════════════════════════════════════════════
+  // 
 
   /// Whether [action] on [cardId] requires OTP verification for [role].
   ///
@@ -127,9 +127,9 @@ class SetupDashboardRBAC {
     }
   }
 
-  // ══════════════════════════════════════════════════════════════════════════
+  // 
   // EXPORT PERMISSIONS
-  // ══════════════════════════════════════════════════════════════════════════
+  // 
 
   /// Export permission matrix per data type.
   ///
@@ -172,13 +172,13 @@ class SetupDashboardRBAC {
     }
   }
 
-  // ══════════════════════════════════════════════════════════════════════════
+  // 
   // REDACTED DATA VIEW
-  // ══════════════════════════════════════════════════════════════════════════
+  // 
 
   /// Whether [role] must see [cardId] in redacted mode (PII masked).
   ///
-  /// Spec: Audit log — full details for Admin only; redacted for Monitor roles.
+  /// Spec: Audit log  full details for Admin only; redacted for Monitor roles.
   static bool isRedactedView(String cardId, UserRole role) {
     if (cardId == 'activity_log') {
       return role == UserRole.monitor || role == UserRole.branchMonitor;
@@ -186,21 +186,21 @@ class SetupDashboardRBAC {
     return false;
   }
 
-  // ══════════════════════════════════════════════════════════════════════════
+  // 
   // TOOLTIP MESSAGES
-  // ══════════════════════════════════════════════════════════════════════════
+  // 
 
   /// Tooltip / snackbar message shown when a locked feature is tapped.
   /// Returns null when the role has full access (no tooltip needed).
   static String? getTooltipMessage(String cardId, UserRole role) {
     switch (cardId) {
-      // ─── Admin-only cards ─────────────────────────────────────────────
+      //  Admin-only cards 
       case 'branches':
         if (role == UserRole.administrator) return null;
         if (role == UserRole.monitor) return 'Branch Monitor view only.';
         return 'Requires Administrator role.';
 
-      // ─── Operations cards ─────────────────────────────────────────────
+      //  Operations cards 
       case 'products':
         if (role == UserRole.owner || role == UserRole.socialOfficer ||
             role == UserRole.branchSocialOfficer || role == UserRole.driver) {
@@ -234,7 +234,7 @@ class SetupDashboardRBAC {
         if (role == UserRole.branchMonitor) return 'Branch view-only tab access.';
         return null;
 
-      // ─── Finance & Staff cards ────────────────────────────────────────
+      //  Finance & Staff cards 
       case 'discounts':
         if (role == UserRole.owner || role == UserRole.responseOfficer ||
             role == UserRole.branchResponseOfficer || role == UserRole.driver) {
@@ -261,14 +261,14 @@ class SetupDashboardRBAC {
           return 'Contact your Administrator for access.';
         }
         if (role == UserRole.monitor || role == UserRole.branchMonitor) {
-          return 'Redacted view — user identities are masked.';
+          return 'Redacted view  user identities are masked.';
         }
         if (role == UserRole.responseOfficer || role == UserRole.branchResponseOfficer) {
           return 'View-only access to your own audit activity.';
         }
         return null;
 
-      // ─── Logistics cards ──────────────────────────────────────────────
+      //  Logistics cards 
       case 'places':
         if (role == UserRole.socialOfficer || role == UserRole.branchSocialOfficer) {
           return 'View-only access to places for marketing context.';
@@ -302,7 +302,7 @@ class SetupDashboardRBAC {
         if (role == UserRole.branchMonitor) return 'Branch view-only band access.';
         return null;
 
-      // ─── Engagement cards ─────────────────────────────────────────────
+      //  Engagement cards 
       case 'marketing':
         if (role == UserRole.responseOfficer || role == UserRole.branchResponseOfficer ||
             role == UserRole.driver) {
@@ -330,7 +330,7 @@ class SetupDashboardRBAC {
         }
         return null;
 
-      // ─── Branch Identity cards ────────────────────────────────────────
+      //  Branch Identity cards 
       case 'profile':
         return null; // All roles can access profile (personal scope).
 
@@ -351,10 +351,10 @@ class SetupDashboardRBAC {
             role == UserRole.driver) {
           return 'Contact your Administrator for access.';
         }
-        if (role == UserRole.branchManager) return 'Branch Manager can view only — switch to Owner context.';
+        if (role == UserRole.branchManager) return 'Branch Manager can view only  switch to Owner context.';
         return null;
 
-      // ─── Personal & History cards ─────────────────────────────────────
+      //  Personal & History cards 
       case 'interests':
         if (role == UserRole.monitor) return 'View-only interest analytics.';
         if (role == UserRole.branchMonitor) return 'Branch view-only interests.';
@@ -381,9 +381,9 @@ class SetupDashboardRBAC {
     }
   }
 
-  // ══════════════════════════════════════════════════════════════════════════
+  // 
   // PER-SCREEN ACTION PERMISSIONS
-  // ══════════════════════════════════════════════════════════════════════════
+  // 
 
   /// Returns the full action permission for [cardId] for [role].
   ///
@@ -414,7 +414,7 @@ class SetupDashboardRBAC {
     }
   }
 
-  // ─── Screen 1.1: Products ─────────────────────────────────────────────────
+  //  Screen 1.1: Products 
   static SetupActionPermission _products(UserRole role) {
     switch (role) {
       case UserRole.administrator:
@@ -441,7 +441,7 @@ class SetupDashboardRBAC {
     }
   }
 
-  // ─── Screen 1.2: Vehicles (Fleet Command) ────────────────────────────────
+  //  Screen 1.2: Vehicles (Fleet Command) 
   static SetupActionPermission _vehicles(UserRole role) {
     switch (role) {
       case UserRole.administrator:
@@ -481,7 +481,7 @@ class SetupDashboardRBAC {
     }
   }
 
-  // ─── Screen 1.3: Tabs ────────────────────────────────────────────────────
+  //  Screen 1.3: Tabs 
   static SetupActionPermission _tabs(UserRole role) {
     switch (role) {
       case UserRole.administrator:
@@ -502,7 +502,7 @@ class SetupDashboardRBAC {
     }
   }
 
-  // ─── Screen 1.4: Discounts ───────────────────────────────────────────────
+  //  Screen 1.4: Discounts 
   static SetupActionPermission _discounts(UserRole role) {
     switch (role) {
       case UserRole.administrator:
@@ -518,7 +518,7 @@ class SetupDashboardRBAC {
         // Marketing access: create promotional discounts.
         return const SetupActionPermission(
           canCreate: true, canEdit: true, canDelete: false,
-          tooltipMessage: 'Marketing access — create promotional discounts.',
+          tooltipMessage: 'Marketing access  create promotional discounts.',
         );
       case UserRole.branchSocialOfficer:
         return const SetupActionPermission(
@@ -535,13 +535,13 @@ class SetupDashboardRBAC {
     }
   }
 
-  // ─── Screen 1.5: Staff ───────────────────────────────────────────────────
+  //  Screen 1.5: Staff 
   static SetupActionPermission _staff(UserRole role) {
     switch (role) {
       case UserRole.administrator:
         return const SetupActionPermission(
           canCreate: true, canEdit: true, canDelete: true, canExport: true,
-          tooltipMessage: 'Full control — add/remove staff, assign roles.',
+          tooltipMessage: 'Full control  add/remove staff, assign roles.',
         );
       case UserRole.branchManager:
         // Role changes require Admin OTP.
@@ -559,7 +559,7 @@ class SetupDashboardRBAC {
     }
   }
 
-  // ─── Screen 2.1: Activity Log (Audit) ────────────────────────────────────
+  //  Screen 2.1: Activity Log (Audit) 
   static SetupActionPermission _activityLog(UserRole role) {
     switch (role) {
       case UserRole.owner:
@@ -577,10 +577,10 @@ class SetupDashboardRBAC {
           tooltipMessage: 'Branch audit logs only.',
         );
       case UserRole.monitor:
-        // Redacted view — user identities masked.
+        // Redacted view  user identities masked.
         return const SetupActionPermission(
           isRedacted: true,
-          tooltipMessage: 'Redacted view — user identities are masked.',
+          tooltipMessage: 'Redacted view  user identities are masked.',
         );
       case UserRole.branchMonitor:
         return const SetupActionPermission(
@@ -597,7 +597,7 @@ class SetupDashboardRBAC {
     }
   }
 
-  // ─── Screen 1.6: Places ──────────────────────────────────────────────────
+  //  Screen 1.6: Places 
   static SetupActionPermission _places(UserRole role) {
     switch (role) {
       case UserRole.owner:
@@ -628,7 +628,7 @@ class SetupDashboardRBAC {
     }
   }
 
-  // ─── Screen 1.7: Delivery Zones ──────────────────────────────────────────
+  //  Screen 1.7: Delivery Zones 
   static SetupActionPermission _deliveryZones(UserRole role) {
     switch (role) {
       case UserRole.administrator:
@@ -653,7 +653,7 @@ class SetupDashboardRBAC {
     }
   }
 
-  // ─── Screen 1.8: Vehicle Bands ───────────────────────────────────────────
+  //  Screen 1.8: Vehicle Bands 
   static SetupActionPermission _vehicleBands(UserRole role) {
     switch (role) {
       case UserRole.administrator:
@@ -672,7 +672,7 @@ class SetupDashboardRBAC {
     }
   }
 
-  // ─── Screen 1.9: Branches ────────────────────────────────────────────────
+  //  Screen 1.9: Branches 
   static SetupActionPermission _branches(UserRole role) {
     switch (role) {
       case UserRole.administrator:
@@ -689,7 +689,7 @@ class SetupDashboardRBAC {
     }
   }
 
-  // ─── Screen 1.10: Campaign Manager (Marketing) ───────────────────────────
+  //  Screen 1.10: Campaign Manager (Marketing) 
   static SetupActionPermission _marketing(UserRole role) {
     switch (role) {
       case UserRole.owner:
@@ -720,7 +720,7 @@ class SetupDashboardRBAC {
     }
   }
 
-  // ─── Screen 1.11: Social & Updates ───────────────────────────────────────
+  //  Screen 1.11: Social & Updates 
   static SetupActionPermission _social(UserRole role) {
     switch (role) {
       case UserRole.owner:
@@ -759,7 +759,7 @@ class SetupDashboardRBAC {
     }
   }
 
-  // ─── Screen 1.12: Connections ────────────────────────────────────────────
+  //  Screen 1.12: Connections 
   static SetupActionPermission _connections(UserRole role) {
     switch (role) {
       case UserRole.owner:
@@ -795,7 +795,7 @@ class SetupDashboardRBAC {
     }
   }
 
-  // ─── Screen 3.1: Profile ─────────────────────────────────────────────────
+  //  Screen 3.1: Profile 
   static SetupActionPermission _profile(UserRole role) {
     // All roles can edit their personal profile.
     switch (role) {
@@ -815,7 +815,7 @@ class SetupDashboardRBAC {
     }
   }
 
-  // ─── Screen 2.2: Outlook ─────────────────────────────────────────────────
+  //  Screen 2.2: Outlook 
   static SetupActionPermission _outlook(UserRole role) {
     switch (role) {
       case UserRole.owner:
@@ -841,7 +841,7 @@ class SetupDashboardRBAC {
     }
   }
 
-  // ─── Screen 3.2: Subscription ────────────────────────────────────────────
+  //  Screen 3.2: Subscription 
   static SetupActionPermission _subscription(UserRole role) {
     switch (role) {
       case UserRole.owner:
@@ -863,7 +863,7 @@ class SetupDashboardRBAC {
     }
   }
 
-  // ─── Screen 3.3: Interests ───────────────────────────────────────────────
+  //  Screen 3.3: Interests 
   static SetupActionPermission _interests(UserRole role) {
     switch (role) {
       case UserRole.owner:
@@ -890,7 +890,7 @@ class SetupDashboardRBAC {
     }
   }
 
-  // ─── Screen 2.3: Q-Points History ────────────────────────────────────────
+  //  Screen 2.3: Q-Points History 
   static SetupActionPermission _qpoints(UserRole role) {
     switch (role) {
       case UserRole.owner:
@@ -908,18 +908,18 @@ class SetupDashboardRBAC {
     }
   }
 
-  // ─── Screen 2.4: My Activity ─────────────────────────────────────────────
+  //  Screen 2.4: My Activity 
   static SetupActionPermission _myActivity(UserRole role) {
-    // All roles — personal dashboard scope.
+    // All roles  personal dashboard scope.
     return const SetupActionPermission(
       canExport: true,
       tooltipMessage: 'Personal tasks and goals.',
     );
   }
 
-  // ══════════════════════════════════════════════════════════════════════════
+  // 
   // PERSONAL CARD CLASSIFICATION
-  // ══════════════════════════════════════════════════════════════════════════
+  // 
 
   /// Card IDs that represent personal-scope features.
   /// Owner (individual entity) has access to ONLY these cards.
@@ -944,9 +944,9 @@ class SetupDashboardRBAC {
   static bool isPersonalCard(String cardId) =>
       _ownerPersonalCards.contains(cardId);
 
-  // ══════════════════════════════════════════════════════════════════════════
+  // 
   // CROSS-BRANCH VISIBILITY HELPERS
-  // ══════════════════════════════════════════════════════════════════════════
+  // 
 
   /// Whether [role] can see data from all branches.
   static bool canSeeAllBranches(UserRole role) {
@@ -963,9 +963,9 @@ class SetupDashboardRBAC {
         role == UserRole.branchResponseOfficer;
   }
 
-  // ══════════════════════════════════════════════════════════════════════════
+  // 
   // HIERARCHY OVERRIDE HELPERS
-  // ══════════════════════════════════════════════════════════════════════════
+  // 
 
   /// Whether [overrider] can override decisions made by [subordinate].
   static bool canOverride(UserRole overrider, UserRole subordinate) {

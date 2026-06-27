@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
 
 /// Displays a single AI insight card with type-based icon and colour coding.
@@ -147,9 +147,9 @@ class _ImpactChip extends StatelessWidget {
   }
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// 
 // INSIGHTS LIST (scrollable)
-// ─────────────────────────────────────────────────────────────────────────────
+// 
 
 /// Displays a horizontal or vertical list of AI insight cards.
 class AIInsightsList extends StatelessWidget {

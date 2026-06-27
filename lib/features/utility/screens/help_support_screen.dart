@@ -1,7 +1,7 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 /// U4: HELP & SUPPORT Screen
 /// FAQ articles, support tickets, contact options, search help
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -29,7 +29,7 @@ class HelpSupportScreen extends StatelessWidget {
           body: ListView(
             padding: const EdgeInsets.fromLTRB(20, 12, 20, 100),
             children: [
-              // ─── Search Help ───────────────────────────────
+              //  Search Help 
               Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -42,6 +42,7 @@ class HelpSupportScreen extends StatelessWidget {
                     hintStyle: TextStyle(color: AppColors.textTertiary, fontSize: 15),
                     prefixIcon: Icon(Icons.search, color: AppColors.textTertiary),
                     border: InputBorder.none,
+              filled: false,
                     contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                   ),
                 ),
@@ -49,7 +50,7 @@ class HelpSupportScreen extends StatelessWidget {
 
               const SizedBox(height: 16),
 
-              // ─── Contact Options ──────────────────────────
+              //  Contact Options 
               const UtilitySectionTitle(
                 title: 'Contact Us',
                 icon: Icons.headset_mic,
@@ -70,7 +71,7 @@ class HelpSupportScreen extends StatelessWidget {
 
               const SizedBox(height: 16),
 
-              // ─── Category Chips ───────────────────────────
+              //  Category Chips 
               const UtilitySectionTitle(
                 title: 'Help Articles',
                 icon: Icons.article,
@@ -100,7 +101,7 @@ class HelpSupportScreen extends StatelessWidget {
 
               const SizedBox(height: 12),
 
-              // ─── Articles List ────────────────────────────
+              //  Articles List 
               if (articles.isEmpty)
                 const Padding(
                   padding: EdgeInsets.only(top: 20),
@@ -113,7 +114,7 @@ class HelpSupportScreen extends StatelessWidget {
               else
                 ...articles.map((article) => _ArticleCard(article: article)),
 
-              // ─── Support Tickets ──────────────────────────
+              //  Support Tickets 
               if (tickets.isNotEmpty) ...[
                 const SizedBox(height: 16),
                 const UtilitySectionTitle(
@@ -143,7 +144,7 @@ class HelpSupportScreen extends StatelessWidget {
   }
 }
 
-// ─── Contact Card ────────────────────────────────────────────────────────────
+//  Contact Card 
 
 class _ContactCard extends StatelessWidget {
   final ContactOption option;
@@ -195,7 +196,7 @@ class _ContactCard extends StatelessWidget {
   }
 }
 
-// ─── Category Chip ───────────────────────────────────────────────────────────
+//  Category Chip 
 
 class _HelpCategoryChip extends StatelessWidget {
   final String label;
@@ -219,7 +220,7 @@ class _HelpCategoryChip extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
           color: isSelected ? const Color(0xFF10B981) : Colors.white,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(10),
           border: Border.all(
             color: isSelected ? const Color(0xFF10B981) : AppColors.inputBorder,
           ),
@@ -237,7 +238,7 @@ class _HelpCategoryChip extends StatelessWidget {
   }
 }
 
-// ─── Article Card ────────────────────────────────────────────────────────────
+//  Article Card 
 
 class _ArticleCard extends StatefulWidget {
   final HelpArticle article;
@@ -334,7 +335,7 @@ class _ArticleCardState extends State<_ArticleCard> {
   }
 }
 
-// ─── Ticket Card ─────────────────────────────────────────────────────────────
+//  Ticket Card 
 
 class _TicketCard extends StatelessWidget {
   final SupportTicket ticket;
@@ -364,7 +365,7 @@ class _TicketCard extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              '#${ticket.id} Â· ${ticket.messages.length} message${ticket.messages.length != 1 ? 's' : ''}',
+              '#${ticket.id}  ${ticket.messages.length} message${ticket.messages.length != 1 ? 's' : ''}',
               style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
             ),
             if (ticket.assignedAgent != null) ...[

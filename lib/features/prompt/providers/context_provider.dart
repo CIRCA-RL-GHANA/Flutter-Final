@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 /// Context Provider
 /// Manages active user context, role switching, entity management
 /// Loads real user contexts from API, falls back to hardcoded defaults
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'package:flutter/foundation.dart';
@@ -19,7 +19,7 @@ class ContextProvider extends ChangeNotifier {
   })  : _entityService = entityService ?? EntityService(),
         _authService = authService ?? AuthService();
 
-  // ─── Loading / Error State ───────────────────────────────────────────────
+  //  Loading / Error State 
   bool _isLoading = false;
   String? _error;
 
@@ -31,8 +31,15 @@ class ContextProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Active Context ──────────────────────────────────────────────────────
-  AppContextModel _activeContext = _fallbackContexts.first;
+  void clear() {
+    _activeContext = _anonymousContext;
+    _availableContexts = [];
+    _error = null;
+    notifyListeners();
+  }
+
+  //  Active Context
+  AppContextModel _activeContext = _anonymousContext;
 
   AppContextModel get activeContext => _activeContext;
   UserRole get currentRole => _activeContext.role;
@@ -41,9 +48,8 @@ class ContextProvider extends ChangeNotifier {
   DriverType? get currentDriverType => _activeContext.driverType;
   PresenceStatus get presence => _activeContext.presence;
 
-  // ─── Available Contexts ──────────────────────────────────────────────────
-  /// All contexts the user can switch to
-  List<AppContextModel> _availableContexts = List.from(_fallbackContexts);
+  //  Available Contexts
+  List<AppContextModel> _availableContexts = [];
 
   List<AppContextModel> get availableContexts => _availableContexts;
 
@@ -51,37 +57,16 @@ class ContextProvider extends ChangeNotifier {
   List<AppContextModel> get otherContexts =>
       _availableContexts.where((c) => c.id != _activeContext.id).toList();
 
-  // ─── Fallback Contexts ──────────────────────────────────────────────────
-  static const List<AppContextModel> _fallbackContexts = [
-    AppContextModel(
-      id: 'ctx_personal_1',
-      name: 'John Doe',
-      subtitle: 'Personal Account',
-      entityType: EntityType.personal,
-      role: UserRole.owner,
-      presence: PresenceStatus.online,
-    ),
-    AppContextModel(
-      id: 'ctx_business_1',
-      name: 'Wizdom Shop',
-      subtitle: 'Business Account',
-      entityType: EntityType.business,
-      role: UserRole.administrator,
-      branchType: BranchType.shop,
-      presence: PresenceStatus.online,
-    ),
-    AppContextModel(
-      id: 'ctx_branch_1',
-      name: 'Wizdom Shop - Accra',
-      subtitle: 'Branch',
-      entityType: EntityType.branch,
-      role: UserRole.branchManager,
-      branchType: BranchType.shop,
-      presence: PresenceStatus.online,
-    ),
-  ];
+  static const AppContextModel _anonymousContext = AppContextModel(
+    id: 'ctx_loading',
+    name: '',
+    subtitle: '',
+    entityType: EntityType.personal,
+    role: UserRole.none,
+    presence: PresenceStatus.offline,
+  );
 
-  // ─── Initialization ─────────────────────────────────────────────────────
+  //  Initialization 
 
   /// Call once after the provider is created to load real user contexts.
   Future<void> init() async {
@@ -115,7 +100,7 @@ class ContextProvider extends ChangeNotifier {
       // Build personal context from profile
       final personalContext = AppContextModel(
         id: userId.isNotEmpty ? userId : 'ctx_personal',
-        name: userName.isNotEmpty ? userName : 'My Account',
+        name: userName,
         subtitle: 'Personal Account',
         entityType: EntityType.personal,
         role: UserRole.owner,
@@ -165,14 +150,14 @@ class ContextProvider extends ChangeNotifier {
     } catch (e) {
       debugPrint('ContextProvider.loadContexts error: $e');
       _error = e.toString();
-      _availableContexts = List.from(_fallbackContexts);
-      _activeContext = _fallbackContexts.first;
+      _availableContexts = [];
+      _activeContext = _anonymousContext;
       _isLoading = false;
       notifyListeners();
     }
   }
 
-  // ─── JSON → Model Helpers ───────────────────────────────────────────────
+  //  JSON  Model Helpers 
 
   /// Converts an entity JSON map into an [AppContextModel].
   /// Returns null if the JSON is missing required fields.
@@ -224,7 +209,7 @@ class ContextProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Enum Parsers ───────────────────────────────────────────────────────
+  //  Enum Parsers 
 
   EntityType _parseEntityType(String value) {
     switch (value.toLowerCase()) {
@@ -292,7 +277,7 @@ class ContextProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Context Switching ──────────────────────────────────────────────────
+  //  Context Switching 
 
   void switchContext(AppContextModel context) {
     _activeContext = context;
@@ -308,7 +293,7 @@ class ContextProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Presence ────────────────────────────────────────────────────────────
+  //  Presence 
 
   void updatePresence(PresenceStatus status) {
     _activeContext = AppContextModel(
@@ -325,7 +310,7 @@ class ContextProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Entity Management ──────────────────────────────────────────────────
+  //  Entity Management 
 
   void addContext(AppContextModel context) {
     _availableContexts.add(context);
@@ -340,7 +325,7 @@ class ContextProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Demo / Debug Helpers ─────────────────────────────────────────────
+  //  Demo / Debug Helpers 
 
   /// Quick-switch to a role for testing RBAC
   void debugSetRole(UserRole role) {

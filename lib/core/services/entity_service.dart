@@ -9,23 +9,14 @@ class EntityService {
 
   EntityService([ApiClient? api]) : _api = api ?? ApiClient.instance;
 
-  /// Create an individual entity
+  /// Create an individual entity.
+  /// Backend DTO only accepts { userId: UUID }.
   Future<ApiResponse<Map<String, dynamic>>> createIndividual({
-    required String ownerId,
-    required String entityType,
-    required String role,
-    String? displayName,
-    Map<String, dynamic>? metadata,
+    required String userId,
   }) async {
     return _api.post<Map<String, dynamic>>(
       ApiRoutes.entities.createIndividual,
-      data: {
-        'ownerId': ownerId,
-        'entityType': entityType,
-        'role': role,
-        if (displayName != null) 'displayName': displayName,
-        if (metadata != null) 'metadata': metadata,
-      },
+      data: {'userId': userId},
       fromJson: (json) => json as Map<String, dynamic>,
     );
   }

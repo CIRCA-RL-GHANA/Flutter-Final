@@ -1,8 +1,8 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD1.3-CREATE: TAB CREATE WIZARD — 4-Step Form
-/// Steps: Customer â†’ Credit Settings â†’ Payment Terms â†’ Review
+/// 
+/// SD1.3-CREATE: TAB CREATE WIZARD  4-Step Form
+/// Steps: Customer ' Credit Settings ' Payment Terms ' Review
 /// RBAC: Admin(full), BM(branch), SO(full), BSO(branch)
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -177,7 +177,7 @@ class _TabCreateScreenState extends State<TabCreateScreen> {
   }
 }
 
-// ─── Step Indicator ──────────────────────────────────────────────────────────
+//  Step Indicator 
 
 class _TabStepIndicator extends StatelessWidget {
   final int currentStep;
@@ -197,7 +197,7 @@ class _TabStepIndicator extends StatelessWidget {
       child: Column(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(6),
             child: LinearProgressIndicator(
               value: (currentStep + 1) / stepCount,
               backgroundColor: kSetupColor.withValues(alpha: 0.1),
@@ -225,7 +225,7 @@ class _TabStepIndicator extends StatelessWidget {
   }
 }
 
-// ─── Step 1: Customer ────────────────────────────────────────────────────────
+//  Step 1: Customer 
 
 class _CustomerStep extends StatelessWidget {
   final TextEditingController nameCtrl;
@@ -322,7 +322,7 @@ class _CustomerStep extends StatelessWidget {
   }
 }
 
-// ─── Step 2: Credit Settings ─────────────────────────────────────────────────
+//  Step 2: Credit Settings 
 
 class _CreditSettingsStep extends StatelessWidget {
   final TextEditingController creditLimitCtrl;
@@ -345,7 +345,7 @@ class _CreditSettingsStep extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       children: [
         SetupFormField(
-          label: 'Credit Limit (â‚µ)',
+          label: 'Credit Limit ()',
           hint: '0.00',
           controller: creditLimitCtrl,
           keyboardType: TextInputType.number,
@@ -442,7 +442,7 @@ class _CreditSettingsStep extends StatelessWidget {
   }
 }
 
-// ─── Step 3: Payment Terms ───────────────────────────────────────────────────
+//  Step 3: Payment Terms 
 
 class _PaymentTermsStep extends StatelessWidget {
   final int paymentDays;
@@ -551,7 +551,7 @@ class _PaymentTermsStep extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '• 5 days before due date\n• On due date\n• 3 days after due date (overdue)',
+                  ' 5 days before due date\n On due date\n 3 days after due date (overdue)',
                   style: TextStyle(fontSize: 11, color: AppColors.info.withValues(alpha: 0.8)),
                 ),
               ],
@@ -572,7 +572,7 @@ class _PaymentTermsStep extends StatelessWidget {
   }
 }
 
-// ─── Step 4: Review ──────────────────────────────────────────────────────────
+//  Step 4: Review 
 
 class _TabReviewStep extends StatelessWidget {
   final String customerName;
@@ -621,7 +621,7 @@ class _TabReviewStep extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SetupSectionTitle(title: 'Customer Details', icon: Icons.person),
-              SetupInfoRow(label: 'Name', value: customerName.isNotEmpty ? customerName : '—'),
+              SetupInfoRow(label: 'Name', value: customerName.isNotEmpty ? customerName : ''),
               SetupInfoRow(label: 'Type', value: customerType),
             ],
           ),
@@ -632,7 +632,7 @@ class _TabReviewStep extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SetupSectionTitle(title: 'Credit & Payment', icon: Icons.credit_card),
-              SetupInfoRow(label: 'Credit Limit', value: creditLimit.isNotEmpty ? 'â‚µ$creditLimit' : '—'),
+              SetupInfoRow(label: 'Credit Limit', value: creditLimit.isNotEmpty ? '$creditLimit' : ''),
               SetupInfoRow(label: 'Payment Terms', value: 'Net $paymentDays'),
               SetupInfoRow(label: 'Interest', value: interestRate),
               SetupInfoRow(label: 'Reminders', value: autoReminders ? 'Enabled' : 'Disabled'),
@@ -684,7 +684,7 @@ class _TabReviewStep extends StatelessWidget {
   }
 }
 
-// ─── Nav Bar ─────────────────────────────────────────────────────────────────
+//  Nav Bar 
 
 class _TabNavBar extends StatelessWidget {
   final int currentStep;

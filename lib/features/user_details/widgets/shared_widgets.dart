@@ -1,14 +1,14 @@
-/// ──────────────────────────────────────────────────────────────────────────
+/// 
 /// Shared Widgets for User Details Module
 /// Reusable components: collapsible sections, edit fields, status badges, etc.
-/// ──────────────────────────────────────────────────────────────────────────
+/// 
 library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../core/design/ive.dart';
 
-// ─── Collapsible Section ─────────────────────────────────────────────────────
+//  Collapsible Section 
 
 class CollapsibleSection extends StatefulWidget {
   final String title;
@@ -106,7 +106,7 @@ class _CollapsibleSectionState extends State<CollapsibleSection>
   }
 }
 
-// ─── Detail Row ──────────────────────────────────────────────────────────────
+//  Detail Row 
 
 class DetailRow extends StatelessWidget {
   final IconData icon;
@@ -160,7 +160,7 @@ class DetailRow extends StatelessWidget {
   }
 }
 
-// ─── Status Badge ────────────────────────────────────────────────────────────
+//  Status Badge 
 
 class StatusBadge extends StatelessWidget {
   final String label;
@@ -204,7 +204,7 @@ class StatusBadge extends StatelessWidget {
   }
 }
 
-// ─── Settings Toggle ─────────────────────────────────────────────────────────
+//  Settings Toggle 
 
 class SettingsToggle extends StatelessWidget {
   final String label;
@@ -256,7 +256,7 @@ class SettingsToggle extends StatelessWidget {
   }
 }
 
-// ─── Section Card ────────────────────────────────────────────────────────────
+//  Section Card 
 
 class SectionCard extends StatelessWidget {
   final Widget child;
@@ -286,7 +286,7 @@ class SectionCard extends StatelessWidget {
   }
 }
 
-// ─── Module Header (Back + Title + Actions) ──────────────────────────────────
+//  Module Header (Back + Title + Actions) 
 
 class ModuleHeader extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -336,7 +336,7 @@ class ModuleHeader extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-// ─── Edit Field Modal ────────────────────────────────────────────────────────
+//  Edit Field Modal 
 
 class EditFieldModal extends StatefulWidget {
   final String title;
@@ -437,7 +437,7 @@ class _EditFieldModalState extends State<EditFieldModal> {
   }
 }
 
-// ─── Context Type Gradient ───────────────────────────────────────────────────
+//  Context Type Gradient 
 
 Color contextTypeColor(dynamic entityType) {
   final name = entityType.toString().split('.').last;

@@ -1,16 +1,16 @@
-﻿import 'package:flutter/foundation.dart';
-import '../../../core/services/qpoint_market_service.dart';
+import 'package:flutter/foundation.dart';
+import '../../../core/services/qpoints_market_service.dart';
 import '../models/qpoint_market_models.dart';
 
 /// State management for the Q Points Terms of Service flow.
 /// Used by QPointsTosScreen and the market screen gate.
 class QPointsTosProvider extends ChangeNotifier {
-  final QPointMarketService _service;
+  final QPointsMarketService _service;
 
-  QPointsTosProvider([QPointMarketService? service])
-      : _service = service ?? QPointMarketService();
+  QPointsTosProvider([QPointsMarketService? service])
+      : _service = service ?? QPointsMarketService();
 
-  // ── State ─────────────────────────────────────────────────────────────────
+  //  State 
 
   QPointsTosContent? tosContent;
   QPointsTosStatus? tosStatus;
@@ -33,7 +33,7 @@ class QPointsTosProvider extends ChangeNotifier {
   bool get canAccept =>
       hasScrolledToBottom && allCheckboxesChecked && !isAccepting;
 
-  // ── Loaders ───────────────────────────────────────────────────────────────
+  //  Loaders 
 
   Future<void> loadTosContent() async {
     isLoading = true;
@@ -43,7 +43,7 @@ class QPointsTosProvider extends ChangeNotifier {
     final res = await _service.getCurrentTos();
     isLoading = false;
     if (res.isSuccess && res.data != null) {
-      tosContent = res.data;
+      tosContent = QPointsTosContent.fromJson(res.data!);
     } else {
       errorMessage = res.message ?? 'Failed to load Terms of Service.';
     }
@@ -53,7 +53,7 @@ class QPointsTosProvider extends ChangeNotifier {
   Future<void> loadTosStatus() async {
     final res = await _service.getTosStatus();
     if (res.isSuccess && res.data != null) {
-      tosStatus = res.data;
+      tosStatus = QPointsTosStatus.fromJson(res.data!);
     }
     notifyListeners();
   }
@@ -67,7 +67,7 @@ class QPointsTosProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ── Checkbox helpers ──────────────────────────────────────────────────────
+  //  Checkbox helpers 
 
   void setReadConfirmed(bool value) {
     readConfirmed = value;
@@ -91,7 +91,7 @@ class QPointsTosProvider extends ChangeNotifier {
     }
   }
 
-  // ── Accept ToS ────────────────────────────────────────────────────────────
+  //  Accept ToS 
 
   Future<bool> acceptTos(String platform) async {
     if (tosContent == null) return false;

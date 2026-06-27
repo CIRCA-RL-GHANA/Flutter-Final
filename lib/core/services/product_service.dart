@@ -341,9 +341,9 @@ class ProductService {
     );
   }
 
-  // ═══════════════════════════════════════════════════════════════════════
+  // 
   // AI-ENHANCED METHODS
-  // ═══════════════════════════════════════════════════════════════════════
+  // 
 
   /// Get AI-recommended discount percentage for a product.
   /// Analyzes views, conversion, stock, and days since last sale.

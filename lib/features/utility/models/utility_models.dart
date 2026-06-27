@@ -1,15 +1,15 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 /// UTILITY MODULE Models
 /// Complete data models for all 9 screens: Dashboard, Settings, Notifications,
 /// Search, Help, Privacy, Accessibility, Advanced Data, System Monitor
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'package:flutter/material.dart';
 
-// ═══════════════════════════════════════════════════════════════════════════════
+// 
 // U0 - DASHBOARD MODELS
-// ═══════════════════════════════════════════════════════════════════════════════
+// 
 
 /// Quick action item for the utility dashboard
 class UtilityQuickAction {
@@ -79,9 +79,9 @@ class RecentActivity {
 
 enum ActivityCategory { system, security, data, user, notification }
 
-// ═══════════════════════════════════════════════════════════════════════════════
+// 
 // U1 - SETTINGS MODELS
-// ═══════════════════════════════════════════════════════════════════════════════
+// 
 
 /// App theme preference
 enum ThemePreference { light, dark, system }
@@ -206,9 +206,9 @@ class UserPreferences {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
+// 
 // U2 - NOTIFICATION MODELS
-// ═══════════════════════════════════════════════════════════════════════════════
+// 
 
 /// Notification priority
 enum NotificationPriority { critical, high, medium, low }
@@ -313,9 +313,9 @@ class NotificationItem {
 /// Notification filter
 enum NotificationFilter { all, unread, read, archived }
 
-// ═══════════════════════════════════════════════════════════════════════════════
+// 
 // U3 - SEARCH MODELS
-// ═══════════════════════════════════════════════════════════════════════════════
+// 
 
 /// Search category
 enum SearchCategory {
@@ -382,9 +382,9 @@ class SearchSuggestion {
   });
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
+// 
 // U4 - HELP & SUPPORT MODELS
-// ═══════════════════════════════════════════════════════════════════════════════
+// 
 
 /// Help category
 enum HelpCategory {
@@ -483,9 +483,9 @@ class ContactOption {
   });
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
+// 
 // U5 - DATA & PRIVACY MODELS
-// ═══════════════════════════════════════════════════════════════════════════════
+// 
 
 /// Privacy setting
 class PrivacySetting {
@@ -584,9 +584,9 @@ class DataExportRequest {
 enum DataExportFormat { json, csv, pdf }
 enum DataExportStatus { pending, processing, ready, expired, failed }
 
-// ═══════════════════════════════════════════════════════════════════════════════
+// 
 // U6 - ACCESSIBILITY MODELS
-// ═══════════════════════════════════════════════════════════════════════════════
+// 
 
 /// Accessibility configuration
 class AccessibilityConfig {
@@ -674,9 +674,9 @@ class AccessibilityPreset {
   });
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
+// 
 // U7 - ADVANCED DATA TOOLS MODELS
-// ═══════════════════════════════════════════════════════════════════════════════
+// 
 
 /// Data backup
 class DataBackup {
@@ -757,9 +757,9 @@ class SyncStatus {
 
 enum SyncState { synced, syncing, error, offline, pending }
 
-// ═══════════════════════════════════════════════════════════════════════════════
+// 
 // U8 - SYSTEM MONITOR MODELS
-// ═══════════════════════════════════════════════════════════════════════════════
+// 
 
 /// System metric
 class SystemMetric {

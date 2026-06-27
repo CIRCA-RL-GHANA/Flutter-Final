@@ -1,8 +1,9 @@
-﻿/// qualChat Screen 8 — Chat List (Enhanced)
+/// qualChat Screen 8  Chat List (Enhanced)
 /// Smart inbox: tabs, pinned, search, swipe actions, FAB
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
 import 'package:provider/provider.dart';
 import '../models/qualchat_models.dart';
 import '../providers/qualchat_provider.dart';
@@ -26,10 +27,10 @@ class QualChatChatListScreen extends StatelessWidget {
                 icon: const Icon(Icons.filter_list),
                 onSelected: (_) {},
                 itemBuilder: (_) => const [
-                  PopupMenuItem(value: 'pinned', child: Text('ðŸ“Œ Pinned')),
-                  PopupMenuItem(value: 'online', child: Text('ðŸŸ¢ Online')),
-                  PopupMenuItem(value: 'unread', child: Text('ðŸ’¬ Unread')),
-                  PopupMenuItem(value: 'recent', child: Text('â° Recent')),
+                  PopupMenuItem(value: 'pinned', child: Text(' Pinned')),
+                  PopupMenuItem(value: 'online', child: Text(' Online')),
+                  PopupMenuItem(value: 'unread', child: Text('Unread')),
+                  PopupMenuItem(value: 'recent', child: Text(' Recent')),
                 ],
               ),
             ],
@@ -44,8 +45,8 @@ class QualChatChatListScreen extends StatelessWidget {
                     final isSelected = provider.chatTab == tab;
                     final labels = {
                       ChatListTab.all: 'All',
-                      ChatListTab.unread: 'Unread ðŸ”µ',
-                      ChatListTab.priority: 'Priority âš ï¸',
+                      ChatListTab.unread: 'Unread "',
+                      ChatListTab.priority: 'Priority ',
                       ChatListTab.groups: 'Groups',
                     };
                     return Expanded(
@@ -54,8 +55,8 @@ class QualChatChatListScreen extends StatelessWidget {
                         child: Container(
                           padding: const EdgeInsets.symmetric(vertical: 8),
                           decoration: BoxDecoration(
-                            color: isSelected ? kChatColor : Colors.transparent,
-                            borderRadius: BorderRadius.circular(8),
+                            color: isSelected ? IveTokens.moduleQualChat : Colors.transparent,
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           child: Text(
                             labels[tab]!,
@@ -98,17 +99,17 @@ class QualChatChatListScreen extends StatelessWidget {
                     ? const QualChatEmptyState(
                         icon: Icons.chat_bubble_outline,
                         title: 'No conversations',
-                        message: 'Your inbox is empty ðŸ’«\nStart your first chat!',
-                        ctaLabel: '✨ New Chat',
+                        message: 'Your inbox is empty  Start your first chat!',
+                        ctaLabel: ' New Chat',
                       )
                     : RefreshIndicator(
-                        color: kChatColor,
+                        color: IveTokens.moduleQualChat,
                         onRefresh: () async {},
                         child: ListView(
                           children: [
                             // Pinned
                             if (pinned.isNotEmpty) ...[
-                              _SectionHeader(title: 'ðŸ“Œ PINNED', count: pinned.length),
+                              _SectionHeader(title: ' PINNED', count: pinned.length),
                               ...pinned.map((c) => _SwipeableConversation(
                                 conversation: c,
                                 onTap: () {
@@ -119,7 +120,7 @@ class QualChatChatListScreen extends StatelessWidget {
                             ],
                             // Recent
                             if (unpinned.isNotEmpty) ...[
-                              _SectionHeader(title: 'ðŸ’¬ RECENT CONVERSATIONS', count: unpinned.length),
+                              _SectionHeader(title: 'RECENT CONVERSATIONS', count: unpinned.length),
                               ...unpinned.where((c) => c.type == ChatType.individual).map((c) =>
                                 _SwipeableConversation(
                                   conversation: c,
@@ -133,7 +134,7 @@ class QualChatChatListScreen extends StatelessWidget {
                             // Groups
                             if (unpinned.where((c) => c.type == ChatType.group).isNotEmpty) ...[
                               _SectionHeader(
-                                title: 'ðŸ‘¥ GROUPS',
+                                title: 'GROUPS',
                                 count: unpinned.where((c) => c.type == ChatType.group).length,
                               ),
                               ...unpinned.where((c) => c.type == ChatType.group).map((c) =>
@@ -154,7 +155,7 @@ class QualChatChatListScreen extends StatelessWidget {
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () => Navigator.pushNamed(context, '/qualchat/new-chat'),
-            backgroundColor: kChatColor,
+            backgroundColor: IveTokens.moduleQualChat,
             child: const Icon(Icons.chat, color: Colors.white),
           ),
         );
@@ -196,7 +197,7 @@ class _SwipeableConversation extends StatelessWidget {
     return Dismissible(
       key: ValueKey(conversation.id),
       background: Container(
-        color: kChatColor,
+        color: IveTokens.moduleQualChat,
         alignment: Alignment.centerLeft,
         padding: const EdgeInsets.only(left: 20),
         child: const Icon(Icons.archive, color: Colors.white),

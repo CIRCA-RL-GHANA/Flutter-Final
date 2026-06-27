@@ -1,7 +1,7 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// MARKET MODULE — Screen 5: Cart & Bundling
+/// 
+/// MARKET MODULE  Screen 5: Cart & Bundling
 /// AI bundling suggestions, per-item controls, financial summary, promo
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -203,7 +203,7 @@ class MarketCartScreen extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             ClipRRect(
-              borderRadius: BorderRadius.circular(4),
+              borderRadius: BorderRadius.circular(6),
               child: LinearProgressIndicator(
                 value: summary.freeDeliveryProgress,
                 backgroundColor: kMarketColorLight,
@@ -338,7 +338,7 @@ class MarketCartScreen extends StatelessWidget {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         title: const Text('Clear cart?'),
         content: const Text('All items will be removed from your cart.'),
         actions: [
@@ -363,7 +363,7 @@ class MarketCartScreen extends StatelessWidget {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         title: const Text('Enter Promo Code'),
         content: TextField(
           controller: controller,
@@ -403,7 +403,7 @@ class MarketCartScreen extends StatelessWidget {
   }
 }
 
-// ── Cart Item Tile ─────────────────────────────────────────────────
+//  Cart Item Tile 
 class _CartItemTile extends StatelessWidget {
   final CartItem item;
   final MarketProvider prov;
@@ -506,7 +506,7 @@ class _CartItemTile extends StatelessWidget {
   }
 }
 
-// ── Summary Row ────────────────────────────────────────────────────
+//  Summary Row 
 class _SummaryRow extends StatelessWidget {
   final String label;
   final String value;

@@ -1,8 +1,9 @@
-/// qualChat Screen 0 — Loading & Permission Gate
+/// qualChat Screen 0  Loading & Permission Gate
 /// Seamless entry with zero-error authentication
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
 import '../widgets/qualchat_widgets.dart';
 
 class QualChatLoadingScreen extends StatefulWidget {
@@ -198,7 +199,7 @@ class _QualChatLoadingScreenState extends State<QualChatLoadingScreen>
           label: const Text('Retry'),
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.white,
-            foregroundColor: kChatColor,
+            foregroundColor: IveTokens.moduleQualChat,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),

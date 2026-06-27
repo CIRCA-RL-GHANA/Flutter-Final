@@ -1,8 +1,8 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD1.9: BRANCHES — Multi-Location Management
+/// 
+/// SD1.9: BRANCHES  Multi-Location Management
 /// Branch list, online status, revenue, staff/vehicle counts
 /// RBAC: Admin(full), Monitor(view)
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -81,7 +81,7 @@ class BranchesScreen extends StatelessWidget {
                   child: SetupSectionTitle(title: 'All Branches', icon: Icons.business),
                 ),
               ),
-              // ─── AI Insights ─────────────────────────────────────────
+              //  AI Insights 
               const SliverToBoxAdapter(
               ),
               SliverPadding(
@@ -148,7 +148,7 @@ class _BranchCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '${branch.type} Â· ${branch.managerName}',
+                      '${branch.type}  ${branch.managerName}',
                       style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                     ),
                   ],
@@ -168,7 +168,7 @@ class _BranchCard extends StatelessWidget {
               _BranchStat(label: 'Vehicles', value: '${branch.vehicleCount}', icon: Icons.local_shipping),
               _BranchStat(
                 label: 'Revenue',
-                value: 'â‚µ${(branch.monthlyRevenue / 1000).toStringAsFixed(0)}K',
+                value: '${(branch.monthlyRevenue / 1000).toStringAsFixed(0)}K',
                 icon: Icons.attach_money,
               ),
               if (branch.rating > 0)

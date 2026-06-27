@@ -1,10 +1,12 @@
-﻿/// GO Screen 2A — Buy QPoints Flow (5-Step Process)
+/// GO Screen 2A  Buy QPoints Flow (5-Step Process)
 /// Step 1: Gateway Selection, Step 2: Amount, Step 3: Review,
 /// Step 4: Security, Step 5: Processing/Confirmation
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/utils/app_toast.dart';
 import '../../../core/routes/app_routes.dart';
+import '../../../core/design/ive.dart';
 import 'package:provider/provider.dart';
 import '../models/go_models.dart';
 import '../providers/go_provider.dart';
@@ -35,7 +37,7 @@ class _GoBuyScreenState extends State<GoBuyScreen> {
     return Consumer<GoProvider>(
       builder: (context, provider, _) {
         return Scaffold(
-          backgroundColor: const Color(0xFFF8F9FE),
+          backgroundColor: IveTokens.bg,
           appBar: const GoAppBar(title: 'Buy QPoints'),
           body: Column(
             children: [
@@ -69,7 +71,7 @@ class _GoBuyScreenState extends State<GoBuyScreen> {
   }
 }
 
-// ── Step 1: Gateway Selection ──────────
+//  Step 1: Gateway Selection 
 class _StepGateway extends StatelessWidget {
   final List<PaymentGateway> gateways;
   final String? selectedId;
@@ -95,27 +97,27 @@ class _StepGateway extends StatelessWidget {
                   margin: const EdgeInsets.only(bottom: 10),
                   padding: const EdgeInsets.all(14),
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: selected ? kGoColor : const Color(0xFFE5E7EB), width: selected ? 2 : 1),
+                    color: IveTokens.surface,
+                    borderRadius: BorderRadius.circular(IveTokens.rSm),
+                    border: Border.all(color: selected ? IveTokens.moduleGo : IveTokens.hairline2, width: selected ? 2 : 1),
                   ),
                   child: Row(
                     children: [
                       // ignore: deprecated_member_use
-                      Radio<String>(value: gw.id, groupValue: selectedId, onChanged: gw.status == GatewayStatus.live || gw.status == GatewayStatus.pending ? (v) => onSelect(v!) : null, activeColor: kGoColor),
+                      Radio<String>(value: gw.id, groupValue: selectedId, onChanged: gw.status == GatewayStatus.live || gw.status == GatewayStatus.pending ? (v) => onSelect(v!) : null, activeColor: IveTokens.moduleGo),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(children: [
-                              Text(gw.name, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+                              Text(gw.name, style: IveType.bodyEmphasis.copyWith(color: IveTokens.ink)),
                               const SizedBox(width: 8),
-                              Container(padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2), decoration: BoxDecoration(color: gw.statusColor.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(6)), child: Text(gw.statusLabel, style: TextStyle(fontSize: 10, color: gw.statusColor, fontWeight: FontWeight.w600))),
+                              Container(padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2), decoration: BoxDecoration(color: gw.statusColor.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(IveTokens.rXs)), child: Text(gw.statusLabel, style: TextStyle(fontSize: 10, color: gw.statusColor, fontWeight: FontWeight.w600))),
                             ]),
                             const SizedBox(height: 4),
-                            Text('Rate: 1 QP = ${gw.buyRate} GHS • Fee: ${gw.feePercent}%${gw.flatFee > 0 ? ' + ${gw.flatFee.toStringAsFixed(0)} QP' : ''}', style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
-                            Text('Limits: ${gw.minBuy.toStringAsFixed(0)}-${gw.maxBuy.toStringAsFixed(0)} QP • ${gw.processingTime}', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
-                            if (gw.status == GatewayStatus.live) Text('Balance: ${gw.balance.toStringAsFixed(0)} ${gw.currency}', style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
+                            Text('Rate: 1 QP = ${gw.buyRate} GHS  Fee: ${gw.feePercent}%${gw.flatFee > 0 ? ' + ${gw.flatFee.toStringAsFixed(0)} QP' : ''}', style: IveType.caption.copyWith(color: IveTokens.mute)),
+                            Text('Limits: ${gw.minBuy.toStringAsFixed(0)}-${gw.maxBuy.toStringAsFixed(0)} QP  ${gw.processingTime}', style: IveType.caption.copyWith(color: IveTokens.ink2)),
+                            if (gw.status == GatewayStatus.live) Text('Balance: ${gw.balance.toStringAsFixed(0)} ${gw.currency}', style: IveType.caption.copyWith(color: IveTokens.mute)),
                           ],
                         ),
                       ),
@@ -132,7 +134,7 @@ class _StepGateway extends StatelessWidget {
   }
 }
 
-// ── Step 2: Amount ──────────
+//  Step 2: Amount 
 class _StepAmount extends StatelessWidget {
   final PaymentGateway gateway;
   final TextEditingController controller;
@@ -162,20 +164,20 @@ class _StepAmount extends StatelessWidget {
               GoSectionCard(
                 child: Column(
                   children: [
-                    const Text('I WANT TO BUY', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF9CA3AF))),
+                    Text('I WANT TO BUY', style: IveType.caption.copyWith(color: IveTokens.ink2)),
                     const SizedBox(height: 8),
                     TextField(
                       controller: controller,
                       keyboardType: TextInputType.number,
                       textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
-                      decoration: InputDecoration(suffixText: 'QPoints', border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none), filled: true, fillColor: const Color(0xFFF3F4F6)),
+                      style: IveType.display.copyWith(color: IveTokens.ink),
+                      decoration: InputDecoration(suffixText: 'QPoints', border: OutlineInputBorder(borderRadius: BorderRadius.circular(IveTokens.rSm), borderSide: BorderSide.none), filled: true, fillColor: IveTokens.hairline2),
                       onChanged: (v) => onAmountChanged(double.tryParse(v) ?? 0),
                     ),
                     const SizedBox(height: 8),
-                    const Text('WHICH WILL COST', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF9CA3AF))),
+                    Text('WHICH WILL COST', style: IveType.caption.copyWith(color: IveTokens.ink2)),
                     const SizedBox(height: 4),
-                    Text('${cost.toStringAsFixed(2)} GHS', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Color(0xFF6B7280))),
+                    ValueDisplay(amount: cost, unit: 'GHS', unitLeading: false, integerSize: 20),
                   ],
                 ),
               ),
@@ -184,9 +186,9 @@ class _StepAmount extends StatelessWidget {
               Wrap(
                 spacing: 8,
                 children: [100, 500, 1000, 5000, 10000].map((v) => ActionChip(
-                  label: Text('$v', style: const TextStyle(fontSize: 12)),
+                  label: Text('$v', style: IveType.caption),
                   onPressed: () { controller.text = '$v'; onAmountChanged(v.toDouble()); },
-                  backgroundColor: Colors.white, side: const BorderSide(color: Color(0xFF1C1C2E)),
+                  backgroundColor: IveTokens.surface, side: const BorderSide(color: IveTokens.hairline),
                 )).toList(),
               ),
               const SizedBox(height: 14),
@@ -195,22 +197,22 @@ class _StepAmount extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('BREAKDOWN', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF9CA3AF), letterSpacing: 0.5)),
-                    const Divider(height: 16),
+                    Text('BREAKDOWN', style: IveType.caption.copyWith(color: IveTokens.ink2, letterSpacing: 0.5)),
+                    const Divider(height: 16, color: IveTokens.hairline),
                     _BreakdownRow(label: 'QPoints to receive', value: amount.toStringAsFixed(0)),
                     _BreakdownRow(label: 'Gateway rate', value: '${gateway.buyRate} GHS/QP'),
                     _BreakdownRow(label: 'Subtotal', value: '${cost.toStringAsFixed(2)} GHS'),
                     _BreakdownRow(label: 'Gateway fee (${gateway.feePercent}%)', value: '${fee.toStringAsFixed(2)} GHS'),
                     if (gateway.flatFee > 0) _BreakdownRow(label: 'Service fee', value: '${gateway.flatFee.toStringAsFixed(0)} QP'),
-                    const Divider(height: 16),
+                    const Divider(height: 16, color: IveTokens.hairline),
                     _BreakdownRow(label: 'TOTAL COST', value: '${totalCost.toStringAsFixed(2)} GHS', bold: true),
-                    _BreakdownRow(label: 'NET QPOINTS', value: '${netQp.toStringAsFixed(0)} QP', bold: true, valueColor: kGoColor),
+                    _BreakdownRow(label: 'NET QPOINTS', value: '${netQp.toStringAsFixed(0)} QP', bold: true, valueColor: IveTokens.moduleGo),
                   ],
                 ),
               ),
               const SizedBox(height: 14),
               // Funding source
-              const Text('FUND FROM', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF9CA3AF), letterSpacing: 0.5)),
+              Text('FUND FROM', style: IveType.caption.copyWith(color: IveTokens.ink2, letterSpacing: 0.5)),
               const SizedBox(height: 8),
               ...fundingSources.map((fs) => GestureDetector(
                 onTap: () => onFundingSelected(fs.id),
@@ -218,19 +220,19 @@ class _StepAmount extends StatelessWidget {
                   margin: const EdgeInsets.only(bottom: 6),
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: selectedFundingId == fs.id ? kGoColor : const Color(0xFFE5E7EB), width: selectedFundingId == fs.id ? 2 : 1),
+                    color: IveTokens.surface,
+                    borderRadius: BorderRadius.circular(IveTokens.rSm),
+                    border: Border.all(color: selectedFundingId == fs.id ? IveTokens.moduleGo : IveTokens.hairline2, width: selectedFundingId == fs.id ? 2 : 1),
                   ),
                   child: Row(
                     children: [
                       // ignore: deprecated_member_use
-                      Radio<String>(value: fs.id, groupValue: selectedFundingId, onChanged: (v) => onFundingSelected(v!), activeColor: kGoColor),
-                      Icon(fs.icon, size: 18, color: const Color(0xFF6B7280)),
+                      Radio<String>(value: fs.id, groupValue: selectedFundingId, onChanged: (v) => onFundingSelected(v!), activeColor: IveTokens.moduleGo),
+                      Icon(fs.icon, size: 18, color: IveTokens.mute),
                       const SizedBox(width: 8),
-                      Expanded(child: Text(fs.label, style: const TextStyle(fontSize: 13))),
-                      if (fs.balance != null) Text('${fs.balance!.toStringAsFixed(0)} GHS', style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
-                      if (fs.lastFour != null) Text('•••• ${fs.lastFour}', style: const TextStyle(fontSize: 12, color: Color(0xFF9CA3AF))),
+                      Expanded(child: Text(fs.label, style: IveType.body.copyWith(color: IveTokens.ink))),
+                      if (fs.balance != null) Text('${fs.balance!.toStringAsFixed(0)} GHS', style: IveType.caption.copyWith(color: IveTokens.mute)),
+                      if (fs.lastFour != null) Text(' ${fs.lastFour}', style: IveType.caption.copyWith(color: IveTokens.ink2)),
                     ],
                   ),
                 ),
@@ -244,7 +246,7 @@ class _StepAmount extends StatelessWidget {
   }
 }
 
-// ── Step 3: Review ──────────
+//  Step 3: Review 
 class _StepReview extends StatelessWidget {
   final PaymentGateway gateway;
   final double amount;
@@ -271,7 +273,7 @@ class _StepReview extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Center(child: Text('TRANSACTION REVIEW', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Color(0xFF9CA3AF), letterSpacing: 0.8))),
+                    Center(child: Text('TRANSACTION REVIEW', style: IveType.caption.copyWith(color: IveTokens.ink2, letterSpacing: 0.8))),
                     const SizedBox(height: 12),
                     const _ReviewRow(label: 'Type', value: 'Buy QPoints'),
                     _ReviewRow(label: 'Amount', value: '${amount.toStringAsFixed(0)} QP'),
@@ -288,11 +290,11 @@ class _StepReview extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    const _ReviewParty(label: 'YOU', icon: Icons.person, color: kGoColor),
-                    const Icon(Icons.arrow_forward, size: 16, color: Color(0xFF9CA3AF)),
-                    _ReviewParty(label: gateway.name.toUpperCase(), icon: Icons.payment, color: kGoInfo),
-                    const Icon(Icons.arrow_forward, size: 16, color: Color(0xFF9CA3AF)),
-                    const _ReviewParty(label: 'QP WALLET', icon: Icons.account_balance_wallet, color: kGoPurple),
+                    const _ReviewParty(label: 'YOU', icon: Icons.person, color: IveTokens.moduleGo),
+                    const Icon(Icons.arrow_forward, size: 16, color: IveTokens.ink2),
+                    _ReviewParty(label: gateway.name.toUpperCase(), icon: Icons.payment, color: IveTokens.info),
+                    const Icon(Icons.arrow_forward, size: 16, color: IveTokens.ink2),
+                    const _ReviewParty(label: 'QP WALLET', icon: Icons.account_balance_wallet, color: IveTokens.accent),
                   ],
                 ),
               ),
@@ -307,12 +309,12 @@ class _StepReview extends StatelessWidget {
                       value: termsAccepted,
                       onChanged: (v) => onTermsChanged(v ?? false),
                       controlAffinity: ListTileControlAffinity.leading,
-                      activeColor: kGoColor,
-                      title: const Text('I agree to the gateway fee and confirm this transaction is authorized', style: TextStyle(fontSize: 12)),
+                      activeColor: IveTokens.moduleGo,
+                      title: Text('I agree to the gateway fee and confirm this transaction is authorized', style: IveType.caption.copyWith(color: IveTokens.ink)),
                       contentPadding: EdgeInsets.zero,
                     ),
                     const SizedBox(height: 4),
-                    const Text('This transaction will be logged and audited. Contact support: finance@qualremit.com', style: TextStyle(fontSize: 10, color: Color(0xFF9CA3AF))),
+                    Text('This transaction will be logged and audited. Contact support: finance@qualremit.com', style: IveType.caption.copyWith(color: IveTokens.ink2)),
                   ],
                 ),
               ),
@@ -325,7 +327,7 @@ class _StepReview extends StatelessWidget {
   }
 }
 
-// ── Step 4: Verify ──────────
+//  Step 4: Verify 
 class _StepVerify extends StatelessWidget {
   final VoidCallback onBack;
   final VoidCallback onVerified;
@@ -339,9 +341,9 @@ class _StepVerify extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(Icons.shield, size: 56, color: kGoColor),
+          const Icon(Icons.shield, size: 56, color: IveTokens.moduleGo),
           const SizedBox(height: 16),
-          const Text('SECURE APPROVAL REQUIRED', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
+          Text('SECURE APPROVAL REQUIRED', style: IveType.title3.copyWith(color: IveTokens.ink)),
           const SizedBox(height: 24),
           _VerifyOption(icon: Icons.face, label: 'Use Face ID', onTap: onVerified),
           const SizedBox(height: 10),
@@ -351,14 +353,14 @@ class _StepVerify extends StatelessWidget {
           const SizedBox(height: 10),
           _VerifyOption(icon: Icons.sms, label: 'Receive OTP via SMS', onTap: onVerified),
           const Spacer(),
-          TextButton(onPressed: onBack, child: const Text('Back', style: TextStyle(color: Color(0xFF6B7280)))),
+          IveButton.text(label: 'Back', onPressed: onBack),
         ],
       ),
     );
   }
 }
 
-// ── Step 5: Result ──────────
+//  Step 5: Result 
 class _StepResult extends StatelessWidget {
   final bool processing;
   final bool? success;
@@ -371,15 +373,15 @@ class _StepResult extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (processing) {
-      return const Center(
+      return Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            SizedBox(width: 56, height: 56, child: CircularProgressIndicator(strokeWidth: 4, color: kGoColor)),
-            SizedBox(height: 16),
-            Text('Processing...', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-            SizedBox(height: 8),
-            Text('Validating â†’ Converting â†’ Crediting', style: TextStyle(fontSize: 12, color: Color(0xFF9CA3AF))),
+            const SizedBox(width: 56, height: 56, child: CircularProgressIndicator(strokeWidth: 4, color: IveTokens.moduleGo)),
+            const SizedBox(height: 16),
+            Text('Processing...', style: IveType.title3.copyWith(color: IveTokens.ink)),
+            const SizedBox(height: 8),
+            Text('Validating  Converting  Crediting', style: IveType.caption.copyWith(color: IveTokens.ink2)),
           ],
         ),
       );
@@ -390,26 +392,23 @@ class _StepResult extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.check_circle, size: 72, color: kGoPositive),
+            const Icon(Icons.check_circle, size: 72, color: IveTokens.success),
             const SizedBox(height: 16),
-            const Text('SUCCESS!', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: kGoPositive)),
+            Text('SUCCESS!', style: IveType.title1.copyWith(color: IveTokens.success)),
             const SizedBox(height: 8),
-            Text('${amount.toStringAsFixed(0)} QP ADDED TO WALLET', style: const TextStyle(fontSize: 14, color: Color(0xFF6B7280))),
+            ValueDisplay(amount: amount, unit: 'QP', unitLeading: false, integerSize: 18),
+            Text('ADDED TO WALLET', style: IveType.caption.copyWith(color: IveTokens.mute)),
             const SizedBox(height: 24),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TextButton(onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Preparing download...'))), child: const Text('View Receipt')),
+                IveButton.text(label: 'View Receipt', onPressed: () => AppToast.show(context, 'Preparing download...')),
                 const SizedBox(width: 12),
-                TextButton(onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Link copied to clipboard'))), child: const Text('Share')),
+                IveButton.text(label: 'Share', onPressed: () => AppToast.show(context, 'Link copied to clipboard')),
               ],
             ),
             const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: onDone,
-              style: ElevatedButton.styleFrom(backgroundColor: kGoColor, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
-              child: const Text('Done', style: TextStyle(fontWeight: FontWeight.w600)),
-            ),
+            IveButton.primary(label: 'Done', onPressed: onDone, expand: false, compact: false),
           ],
         ),
       );
@@ -420,21 +419,21 @@ class _StepResult extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.error_outline, size: 72, color: kGoNegative),
+          const Icon(Icons.error_outline, size: 72, color: IveTokens.danger),
           const SizedBox(height: 16),
-          const Text('Transaction Failed', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: kGoNegative)),
+          Text('Transaction Failed', style: IveType.title1.copyWith(color: IveTokens.danger)),
           const SizedBox(height: 8),
-          const Text('Try again or contact support.', style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+          Text('Try again or contact support.', style: IveType.body.copyWith(color: IveTokens.mute)),
           const SizedBox(height: 24),
-          ElevatedButton(onPressed: onRetry, style: ElevatedButton.styleFrom(backgroundColor: kGoColor, foregroundColor: Colors.white, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))), child: const Text('Retry')),
-          TextButton(onPressed: () => Navigator.pushNamed(context, AppRoutes.utilityHelp), child: const Text('Contact Support')),
+          IveButton.primary(label: 'Retry', onPressed: onRetry, expand: false),
+          IveButton.text(label: 'Contact Support', onPressed: () => Navigator.pushNamed(context, AppRoutes.utilityHelp)),
         ],
       ),
     );
   }
 }
 
-// ── Helpers ──────────
+//  Helpers 
 
 class _NavFooter extends StatelessWidget {
   final VoidCallback? onBack;
@@ -446,12 +445,12 @@ class _NavFooter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
-      decoration: const BoxDecoration(color: Colors.white, border: Border(top: BorderSide(color: Color(0xFF1C1C2E)))),
+      decoration: const BoxDecoration(color: IveTokens.surface, border: Border(top: BorderSide(color: IveTokens.hairline))),
       child: Row(
         children: [
-          if (onBack != null) Expanded(child: OutlinedButton(onPressed: onBack, style: OutlinedButton.styleFrom(foregroundColor: const Color(0xFF6B7280), side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))), child: const Text('Back'))),
+          if (onBack != null) Expanded(child: IveButton.secondary(label: 'Back', onPressed: onBack)),
           if (onBack != null) const SizedBox(width: 12),
-          Expanded(child: ElevatedButton(onPressed: onNext, style: ElevatedButton.styleFrom(backgroundColor: onNext != null ? kGoColor : const Color(0xFFE5E7EB), foregroundColor: onNext != null ? Colors.white : const Color(0xFF9CA3AF), padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))), child: Text(nextLabel, style: const TextStyle(fontWeight: FontWeight.w600)))),
+          Expanded(child: IveButton.primary(label: nextLabel, onPressed: onNext)),
         ],
       ),
     );
@@ -471,8 +470,8 @@ class _BreakdownRow extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 3),
       child: Row(
         children: [
-          Expanded(child: Text(label, style: TextStyle(fontSize: 12, color: bold ? const Color(0xFF1A1A1A) : const Color(0xFF6B7280), fontWeight: bold ? FontWeight.w700 : FontWeight.w400))),
-          Text(value, style: TextStyle(fontSize: 12, fontWeight: bold ? FontWeight.w700 : FontWeight.w500, color: valueColor ?? (bold ? const Color(0xFF1A1A1A) : const Color(0xFF6B7280)))),
+          Expanded(child: Text(label, style: IveType.caption.copyWith(color: bold ? IveTokens.ink : IveTokens.mute, fontWeight: bold ? FontWeight.w700 : FontWeight.w400))),
+          Text(value, style: IveType.caption.copyWith(fontWeight: bold ? FontWeight.w700 : FontWeight.w500, color: valueColor ?? (bold ? IveTokens.ink : IveTokens.mute))),
         ],
       ),
     );
@@ -490,9 +489,9 @@ class _ReviewRow extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
         children: [
-          Text(label, style: const TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
+          Text(label, style: IveType.body.copyWith(color: IveTokens.mute)),
           const Spacer(),
-          Text(value, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
+          Text(value, style: IveType.bodyEmphasis.copyWith(color: IveTokens.ink)),
         ],
       ),
     );
@@ -511,7 +510,7 @@ class _ReviewParty extends StatelessWidget {
       children: [
         CircleAvatar(radius: 18, backgroundColor: color.withValues(alpha: 0.12), child: Icon(icon, size: 18, color: color)),
         const SizedBox(height: 4),
-        Text(label, style: const TextStyle(fontSize: 9, fontWeight: FontWeight.w600)),
+        Text(label, style: IveType.caption.copyWith(color: IveTokens.ink, fontWeight: FontWeight.w600)),
       ],
     );
   }
@@ -531,7 +530,7 @@ class _VerifyOption extends StatelessWidget {
         icon: Icon(icon, size: 20),
         label: Text(label),
         onPressed: onTap,
-        style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+        style: OutlinedButton.styleFrom(foregroundColor: IveTokens.moduleGo, side: const BorderSide(color: IveTokens.hairline), padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(IveTokens.rSm))),
       ),
     );
   }

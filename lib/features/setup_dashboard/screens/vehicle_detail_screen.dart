@@ -1,9 +1,9 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD1.2-DETAIL: VEHICLE DETAIL — 5-Tab Deep View
+/// 
+/// SD1.2-DETAIL: VEHICLE DETAIL  5-Tab Deep View
 /// Tabs: Overview, Maintenance, Fuel, Routes, Driver
 /// RBAC: Owner/Admin(fullAccess), BM(branchScoped), Monitor(viewOnly),
 ///        Driver(ownOnly)
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -51,7 +51,7 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
           appBar: SetupAppBar(title: '${vehicle.make} ${vehicle.model}'),
           body: Column(
             children: [
-              // ─── Vehicle Header ────────────────────────────
+              //  Vehicle Header 
               _VehicleHeader(vehicle: vehicle),
               const SizedBox(height: 12),
               SetupDetailTabBar(
@@ -80,7 +80,7 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
   }
 }
 
-// ─── Vehicle Header ──────────────────────────────────────────────────────────
+//  Vehicle Header 
 
 class _VehicleHeader extends StatelessWidget {
   final Vehicle vehicle;
@@ -100,7 +100,7 @@ class _VehicleHeader extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
         children: [
@@ -160,7 +160,7 @@ class _VehicleHeader extends StatelessWidget {
   }
 }
 
-// ─── Overview Tab ────────────────────────────────────────────────────────────
+//  Overview Tab 
 
 class _OverviewTab extends StatelessWidget {
   final Vehicle vehicle;
@@ -208,7 +208,7 @@ class _OverviewTab extends StatelessWidget {
   }
 }
 
-// ─── Maintenance Tab ─────────────────────────────────────────────────────────
+//  Maintenance Tab 
 
 class _MaintenanceTab extends StatelessWidget {
   final List<MaintenanceRecord> records;
@@ -280,7 +280,7 @@ class _MaintenanceCard extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                         decoration: BoxDecoration(
                           color: AppColors.error.withValues(alpha: 0.1),
-                          borderRadius: BorderRadius.circular(4),
+                          borderRadius: BorderRadius.circular(6),
                         ),
                         child: const Text(
                           'URGENT',
@@ -291,7 +291,7 @@ class _MaintenanceCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'â‚µ${record.cost.toStringAsFixed(0)} Â· ${setupTimeAgo(record.date)}',
+                  '${record.cost.toStringAsFixed(0)}  ${setupTimeAgo(record.date)}',
                   style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                 ),
               ],
@@ -303,7 +303,7 @@ class _MaintenanceCard extends StatelessWidget {
   }
 }
 
-// ─── Fuel Tab ────────────────────────────────────────────────────────────────
+//  Fuel Tab 
 
 class _FuelTab extends StatelessWidget {
   final List<FuelEntry> entries;
@@ -332,7 +332,7 @@ class _FuelTab extends StatelessWidget {
             const SizedBox(width: 10),
             Expanded(child: SetupStatCard(
               label: 'Total Cost',
-              value: 'â‚µ${entries.fold(0.0, (sum, e) => sum + e.cost).toStringAsFixed(0)}',
+              value: '${entries.fold(0.0, (sum, e) => sum + e.cost).toStringAsFixed(0)}',
               icon: Icons.attach_money,
               color: AppColors.warning,
             )),
@@ -380,14 +380,14 @@ class _FuelEntryCard extends StatelessWidget {
                   style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
                 ),
                 Text(
-                  'Odometer: ${entry.odometer} km Â· ${setupTimeAgo(entry.date)}',
+                  'Odometer: ${entry.odometer} km  ${setupTimeAgo(entry.date)}',
                   style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                 ),
               ],
             ),
           ),
           Text(
-            'â‚µ${entry.cost.toStringAsFixed(0)}',
+            '${entry.cost.toStringAsFixed(0)}',
             style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AppColors.warning),
           ),
         ],
@@ -396,7 +396,7 @@ class _FuelEntryCard extends StatelessWidget {
   }
 }
 
-// ─── Routes Tab ──────────────────────────────────────────────────────────────
+//  Routes Tab 
 
 class _RoutesTab extends StatelessWidget {
   final Vehicle vehicle;
@@ -427,14 +427,14 @@ class _RoutesTab extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 12),
-        // Route card — shows vehicle zone and opens native maps.
+        // Route card  shows vehicle zone and opens native maps.
         _VehicleRouteCard(vehicle: vehicle),
       ],
     );
   }
 }
 
-// ─── Driver Tab ──────────────────────────────────────────────────────────────
+//  Driver Tab 
 
 class _DriverTab extends StatelessWidget {
   final Vehicle vehicle;
@@ -502,7 +502,7 @@ class _DriverTab extends StatelessWidget {
   }
 }
 
-// ─── Vehicle Route Card ───────────────────────────────────────────────────────
+//  Vehicle Route Card 
 
 class _VehicleRouteCard extends StatelessWidget {
   final Vehicle vehicle;
@@ -563,7 +563,7 @@ class _VehicleRouteCard extends StatelessWidget {
                   icon: Icons.route_rounded,
                   color: IveTokens.success,
                   label: 'Today',
-                  value: '${vehicle.distanceToday} km · ${vehicle.deliveriesToday} deliveries',
+                  value: '${vehicle.distanceToday} km  ${vehicle.deliveriesToday} deliveries',
                 ),
                 const Spacer(),
                 Align(

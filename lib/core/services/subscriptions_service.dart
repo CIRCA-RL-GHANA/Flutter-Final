@@ -1,5 +1,5 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// Subscriptions Service — Flutter ↔ Backend Integration
+/// 
+/// Subscriptions Service  Flutter  Backend Integration
 ///
 /// Maps to SubscriptionsController endpoints:
 ///   GET   /subscriptions/plans
@@ -7,7 +7,7 @@
 ///   POST  /subscriptions/activate
 ///   GET   /subscriptions/active/{targetType}/{targetId}
 ///   PATCH /subscriptions/{id}/cancel
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import '../network/api_client.dart';
@@ -19,7 +19,7 @@ class SubscriptionsService {
 
   SubscriptionsService([ApiClient? api]) : _api = api ?? ApiClient.instance;
 
-  // ─── Plans ────────────────────────────────────────────────────────────────
+  //  Plans 
 
   Future<ApiResponse<List<dynamic>>> getPlans() {
     return _api.get<List<dynamic>>(
@@ -35,7 +35,7 @@ class SubscriptionsService {
     );
   }
 
-  // ─── Subscriptions ────────────────────────────────────────────────────────
+  //  Subscriptions 
 
   Future<ApiResponse<Map<String, dynamic>>> activateSubscription(
     String planId,
@@ -58,6 +58,13 @@ class SubscriptionsService {
       fromJson: (json) => json as Map<String, dynamic>,
     );
   }
+
+  /// Named-param overload used by SetupDashboardProvider.
+  Future<ApiResponse<Map<String, dynamic>>> getActiveSubscriptionFor({
+    required String targetType,
+    required String targetId,
+  }) =>
+      getActiveSubscription(targetType, targetId);
 
   Future<ApiResponse<void>> cancelSubscription(
     String id, {

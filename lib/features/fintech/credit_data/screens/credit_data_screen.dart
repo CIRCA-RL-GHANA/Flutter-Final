@@ -1,4 +1,4 @@
-/// Fintech › Credit Data — Credit Score Gauge & FI query screen
+/// Fintech  Credit Data  Credit Score Gauge & FI query screen
 library;
 
 import 'package:flutter/material.dart';
@@ -8,7 +8,7 @@ import '../../../../core/constants/app_animations.dart';
 import '../../../../core/design/ive.dart';
 import '../../../../core/services/fintech_service.dart';
 
-/// Credit score gauge that sweeps from 0 → score on first render (800ms).
+/// Credit score gauge that sweeps from 0  score on first render (800ms).
 /// Band label appears only after animation completes.
 class CreditScoreGauge extends StatefulWidget {
   final int score;
@@ -155,7 +155,7 @@ class _GaugePainter extends CustomPainter {
       old.ratio != ratio || old.color != color;
 }
 
-// ─── Credit Data Screen ────────────────────────────────────────────────────────
+//  Credit Data Screen 
 
 class CreditDataScreen extends StatefulWidget {
   const CreditDataScreen({super.key});
@@ -269,7 +269,7 @@ class _CreditDataScreenState extends State<CreditDataScreen> {
               ),
               child: Column(
                 children: [
-                  _MetricRow('QP balance', '${_result!['dataJson']?['qpBalance'] ?? '—'} QP'),
+                  _MetricRow('QP balance', '${_result!['dataJson']?['qpBalance'] ?? ''} QP'),
                   _MetricRow('Total loans', '${_result!['dataJson']?['totalLoans'] ?? 0}'),
                   _MetricRow('Repaid loans', '${_result!['dataJson']?['repaidLoans'] ?? 0}'),
                   _MetricRow('Defaulted loans', '${_result!['dataJson']?['defaultedLoans'] ?? 0}'),

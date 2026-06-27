@@ -1,9 +1,10 @@
-﻿/// GO Screen 0 — Context Switcher (Pre-Entry)
+/// GO Screen 0  Context Switcher (Pre-Entry)
 /// Full-screen modal for selecting operational financial context
 /// Trigger: Tapping GO widget on PROMPT screen
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
 import 'package:provider/provider.dart';
 import '../models/go_models.dart';
 import '../providers/go_provider.dart';
@@ -24,7 +25,7 @@ class GoContextScreen extends StatelessWidget {
             provider.setActiveContext(contexts.first.id);
             Navigator.pushReplacementNamed(context, '/go');
           });
-          return const Scaffold(body: Center(child: CircularProgressIndicator(color: kGoColor)));
+          return const Scaffold(body: Center(child: CircularProgressIndicator(color: IveTokens.moduleGo)));
         }
 
         return Scaffold(
@@ -32,7 +33,7 @@ class GoContextScreen extends StatelessWidget {
           body: SafeArea(
             child: Column(
               children: [
-                // ── Header ──────────────────────────
+                //  Header 
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
                   child: Row(
@@ -54,7 +55,7 @@ class GoContextScreen extends StatelessWidget {
 
                 const SizedBox(height: 20),
 
-                // ── Global Summary ──────────────────────────
+                //  Global Summary 
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: GoSectionCard(
@@ -77,15 +78,15 @@ class GoContextScreen extends StatelessWidget {
                             ),
                             Container(
                               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                              decoration: BoxDecoration(color: kGoColorLight, borderRadius: BorderRadius.circular(8)),
-                              child: Text('+${provider.change24h}% 24h', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: kGoColorDark)),
+                              decoration: BoxDecoration(color: IveTokens.surfaceRaised, borderRadius: BorderRadius.circular(10)),
+                              child: Text('+${provider.change24h}% 24h', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: IveTokens.ink)),
                             ),
                           ],
                         ),
                         const SizedBox(height: 10),
                         // Distribution bar
                         ClipRRect(
-                          borderRadius: BorderRadius.circular(4),
+                          borderRadius: BorderRadius.circular(6),
                           child: SizedBox(
                             height: 8,
                             child: Row(
@@ -107,7 +108,7 @@ class GoContextScreen extends StatelessWidget {
                             return Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Container(width: 8, height: 8, decoration: BoxDecoration(color: _contextColor(c.type), borderRadius: BorderRadius.circular(2))),
+                                Container(width: 8, height: 8, decoration: BoxDecoration(color: _contextColor(c.type), borderRadius: BorderRadius.circular(6))),
                                 const SizedBox(width: 4),
                                 Text('${c.typeLabel.split(' ').first} ${pct.toStringAsFixed(0)}%', style: const TextStyle(fontSize: 10, color: Color(0xFF9CA3AF))),
                               ],
@@ -122,7 +123,7 @@ class GoContextScreen extends StatelessWidget {
                 const SizedBox(height: 20),
 
 
-                // ── Context Grid ──────────────────────────
+                //  Context Grid 
                 Expanded(
                   child: contexts.isEmpty
                       ? GoEmptyState(
@@ -158,17 +159,17 @@ class GoContextScreen extends StatelessWidget {
 
   Color _contextColor(FinancialContextType type) {
     switch (type) {
-      case FinancialContextType.personal: return kGoColor;
-      case FinancialContextType.business: return kGoInfo;
-      case FinancialContextType.branch: return kGoWarning;
-      case FinancialContextType.entity: return kGoPurple;
+      case FinancialContextType.personal: return IveTokens.moduleGo;
+      case FinancialContextType.business: return IveTokens.info;
+      case FinancialContextType.branch: return IveTokens.warning;
+      case FinancialContextType.entity: return IveTokens.accent;
     }
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 // Context Card
-// ──────────────────────────────────────────────
+// 
 
 class _ContextCard extends StatelessWidget {
   final FinancialContext ctx;
@@ -184,9 +185,9 @@ class _ContextCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: isSelected ? kGoColorLight : Colors.white,
+          color: isSelected ? IveTokens.surfaceRaised : Colors.white,
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: isSelected ? kGoColor : const Color(0xFFE5E7EB), width: isSelected ? 2 : 1),
+          border: Border.all(color: isSelected ? IveTokens.moduleGo : const Color(0xFFE5E7EB), width: isSelected ? 2 : 1),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -208,10 +209,10 @@ class _ContextCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(
-                    color: ctx.permission == ContextPermission.fullAccess ? kGoColorLight : kGoWarningLight,
+                    color: ctx.permission == ContextPermission.fullAccess ? IveTokens.surfaceRaised : IveTokens.surfaceRaised,
                     borderRadius: BorderRadius.circular(6),
                   ),
-                  child: Text(ctx.permissionLabel, style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600, color: ctx.permission == ContextPermission.fullAccess ? kGoColorDark : const Color(0xFF92400E))),
+                  child: Text(ctx.permissionLabel, style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600, color: ctx.permission == ContextPermission.fullAccess ? IveTokens.ink : const Color(0xFF92400E))),
                 ),
               ],
             ),
@@ -233,10 +234,10 @@ class _ContextCard extends StatelessWidget {
 
   Color get _typeColor {
     switch (ctx.type) {
-      case FinancialContextType.personal: return kGoColor;
-      case FinancialContextType.business: return kGoInfo;
-      case FinancialContextType.branch: return kGoWarning;
-      case FinancialContextType.entity: return kGoPurple;
+      case FinancialContextType.personal: return IveTokens.moduleGo;
+      case FinancialContextType.business: return IveTokens.info;
+      case FinancialContextType.branch: return IveTokens.warning;
+      case FinancialContextType.entity: return IveTokens.accent;
     }
   }
 }

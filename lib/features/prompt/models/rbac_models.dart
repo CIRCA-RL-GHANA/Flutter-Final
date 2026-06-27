@@ -1,19 +1,19 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 /// RBAC (Role-Based Access Control) Models
 /// Complete role, context, entity, and permission definitions
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'package:flutter/material.dart';
 
-// ─── User Roles ──────────────────────────────────────────────────────────────
+//  User Roles 
 
 /// All 11 roles in the genie help ecosystem.
 /// NOTE: [owner] is strictly a personal/individual entity role.
 /// It is granted automatically when a user creates their individual entity
 /// and can NEVER be assigned as a staff role on a business or branch entity.
 enum UserRole {
-  // Individual Entity only — auto-granted, never staff-assignable
+  // Individual Entity only  auto-granted, never staff-assignable
   owner,
 
   // Business Entity
@@ -40,7 +40,7 @@ enum BranchType {
   shop,
   logisticsProvider,
   transportProvider,
-  /// Content creation is a commercial activity — operates under a Digital branch.
+  /// Content creation is a commercial activity  operates under a Digital branch.
   digital,
 }
 
@@ -65,7 +65,7 @@ enum PresenceStatus {
   offline,
 }
 
-// ─── App Context ─────────────────────────────────────────────────────────────
+//  App Context 
 
 /// Represents the active context a user is operating in.
 /// A user can switch between personal, business, and branch contexts.
@@ -93,7 +93,7 @@ class AppContextModel {
   }) : assert(
           role != UserRole.owner || entityType == EntityType.personal,
           'UserRole.owner is only valid for EntityType.personal (individual entity). '
-          'Owner is a personal role — not an assignable business staff role.',
+          'Owner is a personal role  not an assignable business staff role.',
         );
 
   /// Display label for the context
@@ -128,7 +128,7 @@ class AppContextModel {
   }
 }
 
-// ─── Module Widget Identifiers ───────────────────────────────────────────────
+//  Module Widget Identifiers 
 
 /// The 12 module widgets on the PROMPT screen
 enum PromptModule {
@@ -142,12 +142,12 @@ enum PromptModule {
   april,
   userDetails,
   utility,
-  // Commercial modules — owner + administrator only
+  // Commercial modules  owner + administrator only
   ePlay,
   communities,
 }
 
-// ─── Role Colors ─────────────────────────────────────────────────────────────
+//  Role Colors 
 
 /// Color-coded pill colors per spec
 class RoleColors {
@@ -156,7 +156,7 @@ class RoleColors {
   static Color forRole(UserRole role) {
     switch (role) {
       case UserRole.owner:
-        return const Color(0xFF22BDD8); // Accent Blue — individual entity
+        return const Color(0xFF22BDD8); // Accent Blue  individual entity
       case UserRole.administrator:
         return const Color(0xFF2563EB); // Blue
       case UserRole.branchManager:
@@ -208,7 +208,7 @@ class RoleColors {
   }
 }
 
-// ─── Widget Visibility RBAC Matrix ───────────────────────────────────────────
+//  Widget Visibility RBAC Matrix 
 
 /// Pedantic enforcement of RBAC visibility matrix.
 /// Returns the list of visible modules for a given role.
@@ -444,7 +444,7 @@ class _ZapAction {
   const _ZapAction(this.icon, this.label);
 }
 
-// ─── Module Info ─────────────────────────────────────────────────────────────
+//  Module Info 
 
 /// Metadata for each module widget
 class ModuleInfo {
@@ -563,7 +563,7 @@ class ModuleInfo {
           shortName: 'ePlay',
           icon: Icons.play_circle_outline,
           color: RoleColors.forModule(module),
-          description: 'Entertainment Hub — Media, Content, Digital Experiences',
+          description: 'Entertainment Hub  Media, Content, Digital Experiences',
         );
       case PromptModule.communities:
         return ModuleInfo(
@@ -572,13 +572,13 @@ class ModuleInfo {
           shortName: 'Community',
           icon: Icons.people_outline,
           color: RoleColors.forModule(module),
-          description: 'Social Communities — Groups, Feeds, Discussions',
+          description: 'Social Communities  Groups, Feeds, Discussions',
         );
     }
   }
 }
 
-// ─── Time Period for Adaptive Behavior ───────────────────────────────────────
+//  Time Period for Adaptive Behavior 
 
 /// Time periods that drive widget priority stacking
 enum TimePeriod {
@@ -596,7 +596,7 @@ TimePeriod getCurrentTimePeriod() {
   return TimePeriod.night;
 }
 
-// ─── Widget Priority ────────────────────────────────────────────────────────
+//  Widget Priority 
 
 enum WidgetPriority { high, medium, low }
 
@@ -660,7 +660,7 @@ class PriorityEngine {
   }
 }
 
-// ─── UserRole Extensions ─────────────────────────────────────────────────────
+//  UserRole Extensions 
 
 extension UserRoleX on UserRole {
   /// True if this role can only exist within a personal (individual) entity.

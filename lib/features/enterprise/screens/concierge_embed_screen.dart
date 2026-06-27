@@ -1,5 +1,5 @@
-﻿/// Enterprise â€º Concierge Embed Screen
-/// Allows enterprise accounts to test and manage their AI Concierge sessions —
+/// Enterprise  Concierge Embed Screen
+/// Allows enterprise accounts to test and manage their AI Concierge sessions 
 /// open a session, send messages, and view the response thread.
 library;
 
@@ -67,7 +67,7 @@ class _ConciergeEmbedScreenState extends State<ConciergeEmbedScreen> {
         if (res.success && res.data != null) {
           _messages.add({
             'role': 'assistant',
-            'content': res.data!['reply'] as String? ?? '…',
+            'content': res.data!['reply'] as String? ?? '',
             'detectedIntent': res.data!['detectedIntent'],
           });
         }
@@ -191,7 +191,7 @@ class _ConciergeEmbedScreenState extends State<ConciergeEmbedScreen> {
                         strokeWidth: 2, color: _kCyan),
                   ),
                   SizedBox(width: 8),
-                  Text('Genie is typing…',
+                  Text('Genie is typing',
                       style: TextStyle(color: Colors.white38, fontSize: 12)),
                 ],
               ),
@@ -252,12 +252,12 @@ class _ConciergeEmbedScreenState extends State<ConciergeEmbedScreen> {
                   style: const TextStyle(color: Colors.white),
                   onSubmitted: (_) => _send(),
                   decoration: InputDecoration(
-                    hintText: 'Ask the concierge…',
+                    hintText: 'Ask the concierge',
                     hintStyle: const TextStyle(color: Colors.white30),
                     filled: true,
                     fillColor: const Color(0xFF0A0A0F),
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(24),
+                      borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide.none,
                     ),
                     contentPadding: const EdgeInsets.symmetric(
@@ -273,7 +273,7 @@ class _ConciergeEmbedScreenState extends State<ConciergeEmbedScreen> {
                   height: 44,
                   decoration: BoxDecoration(
                     color: _kGold,
-                    borderRadius: BorderRadius.circular(22),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: const Icon(Icons.send, color: Colors.black, size: 20),
                 ),

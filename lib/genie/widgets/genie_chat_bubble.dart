@@ -1,8 +1,8 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// GenieChatBubble – Individual Message Bubble in the Conversation Thread
+/// 
+/// GenieChatBubble  Individual Message Bubble in the Conversation Thread
 /// Handles user bubbles (right-aligned) and Genie bubbles (left-aligned).
 /// Supports swipe-to-dismiss and swipe-to-act gestures.
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -39,7 +39,7 @@ class _GenieChatBubbleState extends State<GenieChatBubble>
     super.initState();
     _entranceCtrl = AnimationController(
       vsync: this,
-      duration: IveTokens.dFast,
+      duration: IveTokens.dBase, // 240ms per spec: result card SlideTransition
     );
     _fadeAnim = CurvedAnimation(parent: _entranceCtrl, curve: IveTokens.enter);
     _slideAnim = Tween<Offset>(
@@ -123,7 +123,7 @@ class _GenieChatBubbleState extends State<GenieChatBubble>
   }
 }
 
-// ─── Text Bubble ─────────────────────────────────────────────────────────────
+//  Text Bubble 
 class _TextBubble extends StatelessWidget {
   final GenieMessage message;
   const _TextBubble({required this.message});
@@ -158,7 +158,7 @@ class _TextBubble extends StatelessWidget {
   }
 }
 
-// ─── Card Bubble (wraps inline card) ─────────────────────────────────────────
+//  Card Bubble (wraps inline card) 
 class _CardBubble extends StatelessWidget {
   final GenieMessage message;
   const _CardBubble({required this.message});
@@ -185,7 +185,7 @@ class _CardBubble extends StatelessWidget {
   }
 }
 
-// ─── Genie Avatar ─────────────────────────────────────────────────────────────
+//  Genie Avatar 
 class _GenieAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -205,7 +205,7 @@ class _GenieAvatar extends StatelessWidget {
   }
 }
 
-// ─── Swipe Background ─────────────────────────────────────────────────────────
+//  Swipe Background 
 class _SwipeBackground extends StatelessWidget {
   final Color color;
   final IconData icon;

@@ -4,7 +4,7 @@ import 'ive_text.dart';
 import 'ive_tokens.dart';
 
 /// Quiet, focused text field. Hairline border by default, accent on focus.
-/// No drop-shadow, no rounded "pill" — a precise rectangle with a 10px radius.
+/// No drop-shadow, no rounded "pill"  a precise rectangle with a 10px radius.
 class IveTextField extends StatelessWidget {
   const IveTextField({
     super.key,
@@ -31,6 +31,7 @@ class IveTextField extends StatelessWidget {
     this.readOnly = false,
     this.inputFormatters,
     this.textCapitalization = TextCapitalization.none,
+    this.semanticsLabel,
   });
 
   final TextEditingController? controller;
@@ -56,6 +57,7 @@ class IveTextField extends StatelessWidget {
   final bool readOnly;
   final List<TextInputFormatter>? inputFormatters;
   final TextCapitalization textCapitalization;
+  final String? semanticsLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +68,10 @@ class IveTextField extends StatelessWidget {
           Text(label!, style: IveType.subhead),
           const SizedBox(height: IveTokens.s2),
         ],
-        TextField(
+        Semantics(
+          label: semanticsLabel ?? label ?? hint,
+          textField: true,
+          child: TextField(
           controller: controller,
           focusNode: focusNode,
           obscureText: obscure,
@@ -112,7 +117,7 @@ class IveTextField extends StatelessWidget {
             ),
             focusedBorder: const OutlineInputBorder(
               borderRadius: IveTokens.brSm,
-              borderSide: BorderSide(color: IveTokens.accent, width: 1.5),
+              borderSide: BorderSide(color: IveTokens.genie, width: 1.5),
             ),
             errorBorder: const OutlineInputBorder(
               borderRadius: IveTokens.brSm,
@@ -129,6 +134,7 @@ class IveTextField extends StatelessWidget {
             ),
             counterText: '',
           ),
+        ),
         ),
       ],
     );

@@ -1,9 +1,9 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// Interests Provider — State Management
+/// 
+/// Interests Provider  State Management
 ///
 /// Manages favorite shops, connection requests, and connections.
 /// Delegates all API calls to InterestsService.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'package:flutter/foundation.dart';
@@ -15,7 +15,7 @@ class InterestsProvider extends ChangeNotifier {
   InterestsProvider({InterestsService? service})
       : _service = service ?? InterestsService();
 
-  // ─── State ────────────────────────────────────────────────────────────────
+  //  State 
 
   List<dynamic> _favoriteShops = [];
   List<dynamic> get favoriteShops => _favoriteShops;
@@ -40,7 +40,7 @@ class InterestsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Favorite Shops ───────────────────────────────────────────────────────
+  //  Favorite Shops 
 
   Future<void> loadFavoriteShops(String entityId) async {
     _isLoading = true;
@@ -98,7 +98,7 @@ class InterestsProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Connections ──────────────────────────────────────────────────────────
+  //  Connections 
 
   Future<void> loadConnections(String userId) async {
     _isLoading = true;
@@ -122,7 +122,7 @@ class InterestsProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Connection Requests ──────────────────────────────────────────────────
+  //  Connection Requests 
 
   Future<Map<String, dynamic>?> createConnectionRequest(
     String senderId,

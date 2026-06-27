@@ -1,17 +1,13 @@
-﻿import 'package:flutter/material.dart';
-import '../../../core/design/ive.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../core/design/ive.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/constants/app_strings.dart';
 import '../../../core/utils/responsive.dart';
 import '../providers/permission_provider.dart';
 import '../providers/onboarding_provider.dart';
-import '../widgets/buttons.dart';
+import '../widgets/onboarding_header.dart';
 
-
-// OS palette — mirrors splash / welcome
-/// Screen 9: Permissions Onboarding
-/// Just-in-time, benefit-focused permission requests
+/// Screen 10 — Permissions, step 07/08.
 class PermissionsScreen extends StatefulWidget {
   const PermissionsScreen({super.key});
 
@@ -19,48 +15,23 @@ class PermissionsScreen extends StatefulWidget {
   State<PermissionsScreen> createState() => _PermissionsScreenState();
 }
 
-class _PermissionsScreenState extends State<PermissionsScreen>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _animController;
+class _PermissionsScreenState extends State<PermissionsScreen> {
+  bool _camera        = true;
+  bool _location      = true;
+  bool _notifications = true;
+  bool _contacts      = false;
 
-  @override
-  void initState() {
-    super.initState();
-    _animController = AnimationController(
-      duration: const Duration(milliseconds: 600),
-      vsync: this,
-    )..forward();
-  }
+  Future<void> _onAllow() async {
+    final perms = context.read<PermissionProvider>();
 
-  @override
-  void dispose() {
-    _animController.dispose();
-    super.dispose();
-  }
+    if (_camera)        await perms.requestPermission(AppPermission.camera);
+    if (_location)      await perms.requestPermission(AppPermission.locationPrecise);
+    if (_notifications) await perms.requestPermission(AppPermission.notifications);
+    if (_contacts)      await perms.requestPermission(AppPermission.contacts);
 
-  Future<void> _onAllow(AppPermission permission) async {
-    final permProvider = context.read<PermissionProvider>();
-    await permProvider.requestPermission(permission);
-    _moveToNext(permProvider);
-  }
-
-  void _onSkip(AppPermission permission) {
-    final permProvider = context.read<PermissionProvider>();
-    permProvider.skipPermission(permission);
-    _moveToNext(permProvider);
-  }
-
-  void _moveToNext(PermissionProvider permProvider) {
-    permProvider.moveToNext();
-
-    if (permProvider.allGroupsProcessed) {
-      context.read<OnboardingProvider>().completePermissions();
-      Navigator.of(context).pushReplacementNamed(AppRoutes.success);
-    } else {
-      // Re-animate for next permission
-      _animController.reset();
-      _animController.forward();
-    }
+    if (!mounted) return;
+    context.read<OnboardingProvider>().completePermissions();
+    Navigator.of(context).pushReplacementNamed(AppRoutes.success);
   }
 
   @override
@@ -69,297 +40,150 @@ class _PermissionsScreenState extends State<PermissionsScreen>
       backgroundColor: IveTokens.bg,
       body: SafeArea(
         child: Responsive.constrained(
-          child: Consumer<PermissionProvider>(
-            builder: (context, permProvider, child) {
-              final currentPerm = permProvider.currentPermission;
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              OnboardingHeader(
+                title: 'Permissions',
+                subtitle: 'Grant access so the OS can serve you fully.',
+                currentStep: 7,
+                totalSteps: 8,
+              ),
 
-              if (currentPerm == null || permProvider.allGroupsProcessed) {
-                // All done, navigate
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  context.read<OnboardingProvider>().completePermissions();
-                  Navigator.of(context)
-                      .pushReplacementNamed(AppRoutes.success);
-                });
-                return const Center(
-                  child: CircularProgressIndicator(
-                    color: IveTokens.accent,
-                  ),
-                );
-              }
-
-              return Column(
-                children: [
-                  // Header
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(24, 16, 24, 0),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            GestureDetector(
-                              onTap: () => Navigator.pop(context),
-                              child: Container(
-                                width: 44,
-                                height: 44,
-                                decoration: const BoxDecoration(
-                                  color: IveTokens.surface,
-                                  borderRadius: IveTokens.brMd,
-                                ),
-                                child: const Icon(
-                                  Icons.arrow_back_ios_new,
-                                  size: 18,
-                                  color: IveTokens.label,
-                                ),
-                              ),
-                            ),
-                            const Text(
-                              'Step 7 of 8',
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                                color: IveTokens.labelTertiary,
-                              ),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                // Skip all remaining permissions
-                                context
-                                    .read<OnboardingProvider>()
-                                    .completePermissions();
-                                Navigator.of(context)
-                                    .pushReplacementNamed(AppRoutes.success);
-                              },
-                              child: const Text(
-                                'Skip All',
-                                style: TextStyle(
-                                  fontSize: 13,
-                                  color: IveTokens.labelTertiary,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 16),
-
-                        // Progress bar
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(4),
-                          child: LinearProgressIndicator(
-                            value: permProvider.progress,
-                            backgroundColor: IveTokens.surface,
-                            valueColor:
-                                const AlwaysStoppedAnimation<Color>(
-                                    IveTokens.accent),
-                            minHeight: 4,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  // Main content
-                  Expanded(
-                    child: FadeTransition(
-                      opacity: CurvedAnimation(
-                        parent: _animController,
-                        curve: Curves.easeIn,
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    children: [
+                      _PermRow(
+                        icon: Icons.camera_alt_outlined,
+                        title: 'Camera',
+                        subtitle: 'Scan codes, capture proof',
+                        value: _camera,
+                        onChanged: (v) => setState(() => _camera = v),
                       ),
-                      child: SlideTransition(
-                        position: Tween<Offset>(
-                          begin: const Offset(0.2, 0),
-                          end: Offset.zero,
-                        ).animate(CurvedAnimation(
-                          parent: _animController,
-                          curve: Curves.easeOut,
-                        )),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 24),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              // Permission group badge
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 12,
-                                  vertical: 6,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: _getGroupColor(
-                                          permProvider.currentGroup)
-                                      .withValues(alpha: 0.1),
-                                  borderRadius: BorderRadius.circular(6),
-                                ),
-                                child: Text(
-                                  _getGroupLabel(permProvider.currentGroup),
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w600,
-                                    color: _getGroupColor(
-                                        permProvider.currentGroup),
-                                  ),
-                                ),
-                              ),
-
-                              const SizedBox(height: 24),
-
-                              // Permission icon
-                              Container(
-                                width: 120,
-                                height: 120,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                color: IveTokens.accent
-                                    .withValues(alpha: 0.08),
-                                ),
-                                child: Icon(
-                                  _getPermissionIconData(currentPerm),
-                                  size: 56,
-                                  color: IveTokens.accent,
-                                ),
-                              ),
-
-                              const SizedBox(height: 32),
-
-                              // Permission name
-                              Text(
-                                permProvider
-                                    .getPermissionLabel(currentPerm),
-                                style: const TextStyle(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                  color: IveTokens.label,
-                                ),
-                              ),
-
-                              const SizedBox(height: 12),
-
-                              // Benefit text
-                              Text(
-                                permProvider
-                                    .getBenefitText(currentPerm),
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  color: IveTokens.labelSecondary,
-                                  height: 1.5,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-
-                              const SizedBox(height: 16),
-
-                              // Visual preview placeholder
-                              Container(
-                                width: double.infinity,
-                                height: 160,
-                                decoration: const BoxDecoration(
-                                  color: IveTokens.surface,
-                                  borderRadius: IveTokens.brXs,
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      _getPermissionIconData(currentPerm),
-                                      size: 40,
-                                      color: IveTokens.labelTertiary.withValues(alpha: 0.5),
-                                    ),
-                                    const SizedBox(height: 8),
-                                    const Text(
-                                      'Feature Preview',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: IveTokens.labelTertiary,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                      _Divider(),
+                      _PermRow(
+                        icon: Icons.place_outlined,
+                        title: 'Location',
+                        subtitle: 'Delivery & ride tracking',
+                        value: _location,
+                        onChanged: (v) => setState(() => _location = v),
                       ),
-                    ),
+                      _Divider(),
+                      _PermRow(
+                        icon: Icons.notifications_outlined,
+                        title: 'Notifications',
+                        subtitle: 'Alerts & order updates',
+                        value: _notifications,
+                        onChanged: (v) => setState(() => _notifications = v),
+                      ),
+                      _Divider(),
+                      _PermRow(
+                        icon: Icons.import_contacts_outlined,
+                        title: 'Contacts',
+                        subtitle: 'Find people to pay',
+                        value: _contacts,
+                        onChanged: (v) => setState(() => _contacts = v),
+                      ),
+                    ],
                   ),
+                ),
+              ),
 
-                  // Action buttons
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(24, 16, 24, 16),
-                    child: Column(
-                      children: [
-                        PrimaryButton(
-                          text: AppStrings.allow,
-                          icon: Icons.check,
-                          isLoading: permProvider.isLoading,
-                          onPressed: () => _onAllow(currentPerm),
-                          margin: EdgeInsets.zero,
-                        ),
-                        const SizedBox(height: 12),
-                        OutlinedActionButton(
-                          text: AppStrings.notNow,
-                          onPressed: () => _onSkip(currentPerm),
-                        ),
-                        const SizedBox(height: 8),
-                        const Text(
-                          AppStrings.enableLater,
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: IveTokens.labelTertiary,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  const SizedBox(height: 16),
-                ],
-              );
-            },
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 16, 20, 32),
+                child: IveButton.primary(
+                  label: 'ALLOW & CONTINUE',
+                  onPressed: _onAllow,
+                ),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
+}
 
-  IconData _getPermissionIconData(AppPermission permission) {
-    switch (permission) {
-      case AppPermission.notifications:
-        return Icons.notifications_outlined;
-      case AppPermission.locationCoarse:
-      case AppPermission.locationPrecise:
-        return Icons.location_on_outlined;
-      case AppPermission.contacts:
-        return Icons.contacts_outlined;
-      case AppPermission.camera:
-        return Icons.camera_alt_outlined;
-      case AppPermission.microphone:
-        return Icons.mic_outlined;
-      case AppPermission.files:
-        return Icons.folder_outlined;
-      case AppPermission.calendar:
-        return Icons.calendar_today_outlined;
-    }
-  }
+class _Divider extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) =>
+      const Divider(height: 1, thickness: 1, color: IveTokens.hairline);
+}
 
-  Color _getGroupColor(PermissionGroup group) {
-    switch (group) {
-      case PermissionGroup.essential:
-        return IveTokens.accent;
-      case PermissionGroup.enhanced:
-        return IveTokens.success;
-      case PermissionGroup.premium:
-        return IveTokens.accent;
-    }
-  }
+class _PermRow extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String subtitle;
+  final bool value;
+  final ValueChanged<bool> onChanged;
 
-  String _getGroupLabel(PermissionGroup group) {
-    switch (group) {
-      case PermissionGroup.essential:
-        return 'Essential';
-      case PermissionGroup.enhanced:
-        return 'Enhanced';
-      case PermissionGroup.premium:
-        return 'Premium';
-    }
+  const _PermRow({
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+    required this.value,
+    required this.onChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      child: Row(
+        children: [
+          // Icon tile
+          Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: IveTokens.surface,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: IveTokens.hairline),
+            ),
+            child: Icon(
+              icon,
+              size: 20,
+              color: value ? IveTokens.accent : IveTokens.mute,
+            ),
+          ),
+
+          const SizedBox(width: 14),
+
+          // Labels
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: IveTokens.ink,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  subtitle,
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: IveTokens.mute,
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          Switch.adaptive(
+            value: value,
+            onChanged: onChanged,
+            activeColor: IveTokens.accent,
+            activeTrackColor: IveTokens.accent.withValues(alpha: 0.3),
+          ),
+        ],
+      ),
+    );
   }
 }

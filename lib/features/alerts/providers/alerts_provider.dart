@@ -1,4 +1,4 @@
-/// Alerts Module — State Management & Demo Data
+/// Alerts Module  State Management & Demo Data
 /// Unified incident resolution tracking system
 /// Module Color: Red (0xFFEF4444)
 /// API-first with fallback demo data pattern
@@ -8,7 +8,7 @@ import 'package:flutter/foundation.dart';
 import '../models/alerts_models.dart';
 
 class AlertsProvider extends ChangeNotifier {
-  // ──── LOADING / ERROR STATE ───────────────────────────
+  //  LOADING / ERROR STATE 
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -16,7 +16,7 @@ class AlertsProvider extends ChangeNotifier {
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
 
-  // ──── GLOBAL STATE ────────────────────────────────────
+  //  GLOBAL STATE 
 
   AlertDashboardTab _dashboardTab = AlertDashboardTab.pending;
   AlertDashboardTab get dashboardTab => _dashboardTab;
@@ -39,7 +39,7 @@ class AlertsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ──── INIT ────────────────────────────────────────────
+  //  INIT 
 
   Future<void> init() async {
     await loadAlerts();
@@ -51,7 +51,7 @@ class AlertsProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      // No dedicated alerts endpoint exists — populate from fallback
+      // No dedicated alerts endpoint exists  populate from fallback
       _alerts = List.from(_fallbackAlerts);
     } catch (e) {
       debugPrint('AlertsProvider.loadAlerts error: $e');
@@ -89,7 +89,7 @@ class AlertsProvider extends ChangeNotifier {
     }
   }
 
-  // ──── ALERTS DATA ────────────────────────────────────
+  //  ALERTS DATA 
 
   List<AlertItem> _alerts = [];
 
@@ -98,7 +98,7 @@ class AlertsProvider extends ChangeNotifier {
     AlertItem(
       id: 'TX-2041',
       title: 'Payment Error - QPoints Debited Twice',
-      description: 'Customer reports QPoints were debited twice for a single transaction. Amount: ₵245.00 each. Customer is requesting immediate refund of the duplicate charge.',
+      description: 'Customer reports QPoints were debited twice for a single transaction. Amount: 245.00 each. Customer is requesting immediate refund of the duplicate charge.',
       priority: AlertPriority.high,
       status: AlertStatus.assigned,
       category: AlertCategory.payment,
@@ -339,7 +339,7 @@ class AlertsProvider extends ChangeNotifier {
     AlertItem(
       id: 'TX-2035',
       title: 'Payment Refund Processed - Order #ORD-8801',
-      description: 'Customer refund of ₵89.50 has been processed and confirmed by payment gateway.',
+      description: 'Customer refund of 89.50 has been processed and confirmed by payment gateway.',
       priority: AlertPriority.low,
       status: AlertStatus.closed,
       category: AlertCategory.payment,
@@ -352,7 +352,7 @@ class AlertsProvider extends ChangeNotifier {
       assigneeRole: 'Response Officer',
       resolution: AlertResolution(
         method: ResolutionMethod.fixed,
-        summary: 'Refund of ₵89.50 processed. Customer notified via SMS.',
+        summary: 'Refund of 89.50 processed. Customer notified via SMS.',
         resolverName: 'Mike Johnson',
         resolvedAt: DateTime.now().subtract(const Duration(days: 1, hours: 6)),
         verificationStatus: VerificationStatus.verified,
@@ -546,7 +546,7 @@ class AlertsProvider extends ChangeNotifier {
   int get highPriorityPendingCount =>
       pendingAlerts.where((a) => a.priority == AlertPriority.high || a.priority == AlertPriority.critical).length;
 
-  // ──── FILTERING ────────────────────────────────────────
+  //  FILTERING 
 
   AlertPriority? _priorityFilter;
   AlertPriority? get priorityFilter => _priorityFilter;
@@ -625,7 +625,7 @@ class AlertsProvider extends ChangeNotifier {
     return result;
   }
 
-  // ──── ALERT ACTIONS ────────────────────────────────────
+  //  ALERT ACTIONS 
 
   AlertItem? getAlertById(String id) {
     try {
@@ -726,7 +726,7 @@ class AlertsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ──── BULK OPERATIONS ────────────────────────────────────
+  //  BULK OPERATIONS 
 
   final Set<String> _selectedAlertIds = {};
   Set<String> get selectedAlertIds => _selectedAlertIds;
@@ -772,7 +772,7 @@ class AlertsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ──── ISSUE DISTRIBUTION ────────────────────────────────
+  //  ISSUE DISTRIBUTION 
 
   List<IssueDistribution> get issueDistribution {
     final source = alerts;
@@ -790,7 +790,7 @@ class AlertsProvider extends ChangeNotifier {
       ..sort((a, b) => b.percentage.compareTo(a.percentage));
   }
 
-  // ──── SEARCH ────────────────────────────────────────
+  //  SEARCH 
 
   final List<RecentSearch> _recentSearches = [
     RecentSearch(query: 'payment double charge', timestamp: DateTime.now().subtract(const Duration(hours: 2)), resultCount: 3),
@@ -814,7 +814,7 @@ class AlertsProvider extends ChangeNotifier {
 
   List<SavedSearch> get savedSearches => _savedSearches;
 
-  // ──── STAFF DATA (fallback-only) ────────────────────────
+  //  STAFF DATA (fallback-only) 
 
   static const List<AlertStaffMember> _fallbackStaff = [
     AlertStaffMember(id: 'staff-1', name: 'Jane Smith', role: 'Administrator', activeAlerts: 3, isAvailable: true, branch: 'Main'),
@@ -829,7 +829,7 @@ class AlertsProvider extends ChangeNotifier {
 
   List<AlertStaffMember> get staff => _staff.isNotEmpty ? _staff : _fallbackStaff;
 
-  // ──── TEMPLATES (fallback-only) ─────────────────────────
+  //  TEMPLATES (fallback-only) 
 
   static final List<AlertTemplate> _fallbackTemplates = [
     AlertTemplate(id: 'tpl-1', name: 'Payment Refund Resolution', type: AlertTemplateType.resolution,
@@ -864,7 +864,7 @@ class AlertsProvider extends ChangeNotifier {
   List<AlertTemplate> get templates => _templates.isNotEmpty ? _templates : _fallbackTemplates;
   List<AlertTemplate> templatesByType(AlertTemplateType type) => templates.where((t) => t.type == type).toList();
 
-  // ──── KNOWLEDGE BASE (fallback-only) ────────────────────
+  //  KNOWLEDGE BASE (fallback-only) 
 
   static final List<KnowledgeBaseItem> _fallbackKnowledgeBase = [
     KnowledgeBaseItem(id: 'kb-1', title: 'Resolving Double Charge Issues', summary: 'Step-by-step guide to investigate and refund duplicate payment charges.',
@@ -888,7 +888,7 @@ class AlertsProvider extends ChangeNotifier {
       ..sort((a, b) => b.similarityScore.compareTo(a.similarityScore));
   }
 
-  // ──── ANALYTICS DATA (fallback-only) ────────────────────
+  //  ANALYTICS DATA (fallback-only) 
 
   List<AlertAnalyticsPoint> get volumeByDay => const [
     AlertAnalyticsPoint(label: 'Mon', count: 8),
@@ -918,7 +918,7 @@ class AlertsProvider extends ChangeNotifier {
     AlertAnalyticsPoint(label: 'Other', count: 5),
   ];
 
-  // ──── FILTER PRESETS (fallback-only) ────────────────────
+  //  FILTER PRESETS (fallback-only) 
 
   static const List<AlertFilterPreset> _fallbackFilterPresets = [
     AlertFilterPreset(id: 'fp-1', name: 'My Open Items', isDefault: true),
@@ -929,7 +929,7 @@ class AlertsProvider extends ChangeNotifier {
 
   List<AlertFilterPreset> get filterPresets => _fallbackFilterPresets;
 
-  // ──── SETTINGS ────────────────────────────────────────
+  //  SETTINGS 
 
   final Map<String, bool> _settingsToggles = {
     'pushNotifications': true,
@@ -960,7 +960,7 @@ class AlertsProvider extends ChangeNotifier {
   String get quietHoursEnd => _quietHoursEnd;
   void setQuietHoursEnd(String v) { _quietHoursEnd = v; notifyListeners(); }
 
-  // ──── ESCALATION PATHS (fallback-only) ──────────────────
+  //  ESCALATION PATHS (fallback-only) 
 
   static const List<EscalationPath> _fallbackEscalationPaths = [
     EscalationPath(level: EscalationLevel.team, afterDuration: Duration(hours: 2), targetRole: 'Team Lead'),
@@ -971,7 +971,7 @@ class AlertsProvider extends ChangeNotifier {
 
   List<EscalationPath> get escalationPaths => _fallbackEscalationPaths;
 
-  // ──── ASSIGNMENT RULES (fallback-only) ──────────────────
+  //  ASSIGNMENT RULES (fallback-only) 
 
   static const List<AssignmentRule> _fallbackAssignmentRules = [
     AssignmentRule(id: 'ar-1', category: AlertCategory.payment, assignToRole: 'Administrator', isActive: true),

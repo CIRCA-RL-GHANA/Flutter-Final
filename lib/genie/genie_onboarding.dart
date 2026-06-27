@@ -1,12 +1,12 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 /// GenieOnboarding
 ///
-/// Recommendations 8 — Proactive Onboarding That Disappears:
-///   • Graduated revelation: role-specific greeting cards for first launch
-///   • Contextual tip cards: interject when repeated manual navigation detected
-///   • Confusion detection: offer a help lifeline after N failed intents
-///   • All state persisted in SharedPreferences → tips never repeat once dismissed
-/// ═══════════════════════════════════════════════════════════════════════════
+/// Recommendations 8  Proactive Onboarding That Disappears:
+///    Graduated revelation: role-specific greeting cards for first launch
+///    Contextual tip cards: interject when repeated manual navigation detected
+///    Confusion detection: offer a help lifeline after N failed intents
+///    All state persisted in SharedPreferences  tips never repeat once dismissed
+/// 
 library;
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,7 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../features/prompt/models/rbac_models.dart';
 import 'genie_intent.dart';
 
-// ─── Tip Card Model ───────────────────────────────────────────────────────────
+//  Tip Card Model 
 
 class GenieTipCard {
   final String id;
@@ -30,7 +30,7 @@ class GenieTipCard {
   });
 }
 
-// ─── First-Launch Greeting Data ───────────────────────────────────────────────
+//  First-Launch Greeting Data 
 
 class RoleGreetingData {
   final String headline;
@@ -46,7 +46,7 @@ class RoleGreetingData {
   });
 }
 
-// ─── Main Service ─────────────────────────────────────────────────────────────
+//  Main Service 
 
 const String _firstLaunchPrefix = 'genie_first_launch_';
 const String _dismissedTipsKey = 'genie_dismissed_tips';
@@ -64,7 +64,7 @@ class GenieOnboarding {
     _prefs ??= await SharedPreferences.getInstance();
   }
 
-  // ─── First-Launch Detection ───────────────────────────────────────────────
+  //  First-Launch Detection 
 
   /// Returns true on the very first time this role opens Genie.
   static bool isFirstLaunchForRole(UserRole role) {
@@ -75,21 +75,21 @@ class GenieOnboarding {
     await _prefs?.setBool('$_firstLaunchPrefix${role.name}', true);
   }
 
-  // ─── Role Greeting Data ───────────────────────────────────────────────────
+  //  Role Greeting Data 
 
   /// Returns a role-specific first-launch greeting payload.
   static RoleGreetingData greetingForRole(UserRole role) {
     switch (role) {
       case UserRole.owner:
         return const RoleGreetingData(
-          headline: 'Hi Owner 👋  I\'m Genie.',
+          headline: 'Hi Owner   I\'m Genie.',
           subline: 'Your personal command centre. Here are a few things you can ask:',
           exampleCommands: [
             'What\'s my balance?',
             'Show incoming orders',
             'Start an e-Play broadcast',
           ],
-          ctaLabel: 'Show me more →',
+          ctaLabel: 'Show me more ',
         );
       case UserRole.administrator:
         return const RoleGreetingData(
@@ -100,23 +100,23 @@ class GenieOnboarding {
             'Show staff roster',
             'Send announcement',
           ],
-          ctaLabel: 'Explore commands →',
+          ctaLabel: 'Explore commands ',
         );
       case UserRole.driver:
         return const RoleGreetingData(
-          headline: 'Hey Driver 🚗  Genie here.',
+          headline: 'Hey Driver   Genie here.',
           subline: 'I\'ll keep your hands free. Try saying:',
           exampleCommands: [
             'Available packages',
             'My current delivery',
             'SOS',
           ],
-          ctaLabel: 'Ready to go →',
+          ctaLabel: 'Ready to go ',
         );
       case UserRole.socialOfficer:
       case UserRole.branchSocialOfficer:
         return const RoleGreetingData(
-          headline: 'Hi Social Officer 📣  I\'m Genie.',
+          headline: 'Hi Social Officer   I\'m Genie.',
           subline: 'Manage your community and content:',
           exampleCommands: [
             'Post an update',
@@ -126,7 +126,7 @@ class GenieOnboarding {
         );
       default:
         return const RoleGreetingData(
-          headline: 'Hi there 👋  I\'m Genie.',
+          headline: 'Hi there   I\'m Genie.',
           subline: 'Your AI assistant. You can ask me things like:',
           exampleCommands: [
             '"What\'s my balance?"',
@@ -137,7 +137,7 @@ class GenieOnboarding {
     }
   }
 
-  // ─── Confusion Detection ──────────────────────────────────────────────────
+  //  Confusion Detection 
 
   /// Call whenever Genie fails to resolve an intent (unknown intent returned).
   static Future<bool> recordIntentFailure() async {
@@ -164,7 +164,7 @@ class GenieOnboarding {
     );
   }
 
-  // ─── Navigation Pattern Tips ──────────────────────────────────────────────
+  //  Navigation Pattern Tips 
 
   /// Records a manual navigation to a module route.
   static Future<GenieTipCard?> recordManualNavigation(
@@ -215,7 +215,7 @@ class GenieOnboarding {
         .toUpperCase();
   }
 
-  // ─── Tip Dismissal ────────────────────────────────────────────────────────
+  //  Tip Dismissal 
 
   static Future<void> dismissTip(String tipId) async {
     final dismissed = _getDismissedTips();

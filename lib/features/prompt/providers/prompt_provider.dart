@@ -1,8 +1,8 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 /// PROMPT Provider
 /// Master state for the PROMPT screen: widget ordering, notifications,
 /// search, time adaptation, widget data, layout persistence
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'package:flutter/foundation.dart';
@@ -11,31 +11,31 @@ import '../../../core/network/api_response.dart';
 import '../models/rbac_models.dart';
 
 class PromptProvider extends ChangeNotifier {
-  // ─── Services ───────────────────────────────────────────────────────────
+  //  Services 
   final ProductService _productService;
 
   PromptProvider({
     ProductService? productService,
   })  : _productService = productService ?? ProductService();
 
-  // ─── Global Loading / Error State ───────────────────────────────────────
+  //  Global Loading / Error State 
   final bool _isLoading = false;
   bool get isLoading => _isLoading;
 
   String? _error;
   String? get error => _error;
 
-  // ─── Init ───────────────────────────────────────────────────────────────
+  //  Init 
   /// Call once when the screen mounts to bootstrap data.
   Future<void> init() async {
     await loadNotifications();
   }
 
-  // ─── Notifications ──────────────────────────────────────────────────────
+  //  Notifications 
   bool _isNotificationsLoading = false;
   bool get isNotificationsLoading => _isNotificationsLoading;
 
-  int _notificationCount = 3;
+  int _notificationCount = 0;
   int get notificationCount => _notificationCount;
 
   List<PromptNotification> _notifications = [];
@@ -114,7 +114,7 @@ class PromptProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Search ────────────────────────────────────────────────────────────
+  //  Search 
   String _searchQuery = '';
   String get searchQuery => _searchQuery;
   bool get isSearching => _searchQuery.isNotEmpty;
@@ -172,7 +172,7 @@ class PromptProvider extends ChangeNotifier {
         }).toList();
       }
 
-      // API returned empty — fall through to local fallback
+      // API returned empty  fall through to local fallback
       return _fallbackSearch(query);
     } catch (e) {
       debugPrint('PromptProvider._performSearch error: $e');
@@ -207,7 +207,7 @@ class PromptProvider extends ChangeNotifier {
       results.add(const SearchResult(
         type: SearchResultType.person,
         title: 'Alice Johnson',
-        subtitle: 'Customer • Last order 2 days ago',
+        subtitle: 'Customer  Last order 2 days ago',
         icon: 'person',
       ));
     }
@@ -215,7 +215,7 @@ class PromptProvider extends ChangeNotifier {
       results.add(const SearchResult(
         type: SearchResultType.transaction,
         title: 'Order #ORD-2041',
-        subtitle: 'In transit • ETA 15 min',
+        subtitle: 'In transit  ETA 15 min',
         icon: 'local_shipping',
       ));
     }
@@ -231,7 +231,7 @@ class PromptProvider extends ChangeNotifier {
       results.add(const SearchResult(
         type: SearchResultType.alert,
         title: 'Alert #TX-2040',
-        subtitle: 'Payment discrepancy • Pending',
+        subtitle: 'Payment discrepancy  Pending',
         icon: 'warning',
       ));
     }
@@ -239,7 +239,7 @@ class PromptProvider extends ChangeNotifier {
     return results;
   }
 
-  // ─── Widget Layout / Ordering ─────────────────────────────────────────
+  //  Widget Layout / Ordering 
   /// Custom module order (persisted per role via SharedPreferences in production)
   final Map<UserRole, List<PromptModule>> _customOrders = {};
 
@@ -257,7 +257,7 @@ class PromptProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Widget States ───────────────────────────────────────────────────
+  //  Widget States 
   final Map<PromptModule, ModuleWidgetState> _widgetStates = {};
 
   ModuleWidgetState getWidgetState(PromptModule module) =>
@@ -268,7 +268,7 @@ class PromptProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Hidden Widgets ──────────────────────────────────────────────────
+  //  Hidden Widgets 
   final Set<PromptModule> _hiddenByUser = {};
   Set<PromptModule> get hiddenByUser => _hiddenByUser;
 
@@ -287,7 +287,7 @@ class PromptProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Emergency SOS ──────────────────────────────────────────────────
+  //  Emergency SOS 
   bool _sosActive = false;
   bool get sosActive => _sosActive;
 
@@ -302,7 +302,7 @@ class PromptProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Time-Based Adaptation ──────────────────────────────────────────
+  //  Time-Based Adaptation 
   TimePeriod get currentTimePeriod => getCurrentTimePeriod();
 
   String get timeGreeting {
@@ -321,18 +321,18 @@ class PromptProvider extends ChangeNotifier {
   String get timeEmoji {
     switch (currentTimePeriod) {
       case TimePeriod.morning:
-        return '🌤️';
+        return '';
       case TimePeriod.afternoon:
-        return '☀️';
+        return '';
       case TimePeriod.evening:
-        return '🌙';
+        return '';
       case TimePeriod.night:
-        return '🌙';
+        return '';
     }
   }
 }
 
-// ─── Data Models ──────────────────────────────────────────────────────────────
+//  Data Models 
 
 enum NotificationType { order, transaction, alert, social, system }
 

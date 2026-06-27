@@ -1,7 +1,7 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 /// Screen 9: Activity & Audit Log
 /// Timeline, filter matrix, export, anomaly highlighting
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -37,7 +37,7 @@ class AuditLogScreen extends StatelessWidget {
           body: Column(
             children: [
 
-              // ─── Time Filter ─────────────────────────────
+              //  Time Filter 
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
                 child: SizedBox(
@@ -66,7 +66,7 @@ class AuditLogScreen extends StatelessWidget {
                           },
                           selectedColor: const Color(0xFF3B82F6),
                           backgroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                           padding: const EdgeInsets.symmetric(horizontal: 2),
                           visualDensity: VisualDensity.compact,
                         ),
@@ -76,7 +76,7 @@ class AuditLogScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Action Filters ──────────────────────────
+              //  Action Filters 
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
                 child: SizedBox(
@@ -103,7 +103,7 @@ class AuditLogScreen extends StatelessWidget {
                           selectedColor: const Color(0xFF3B82F6),
                           backgroundColor: Colors.white,
                           checkmarkColor: Colors.white,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                           visualDensity: VisualDensity.compact,
                           padding: EdgeInsets.zero,
                         ),
@@ -113,7 +113,7 @@ class AuditLogScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Module Filter ───────────────────────────
+              //  Module Filter 
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 8, 20, 4),
                 child: Row(
@@ -129,6 +129,7 @@ class AuditLogScreen extends StatelessWidget {
                           decoration: const InputDecoration(
                             contentPadding: EdgeInsets.symmetric(horizontal: 8),
                             border: InputBorder.none,
+              filled: false,
                             isDense: true,
                           ),
                           style: const TextStyle(fontSize: 12, color: AppColors.textPrimary),
@@ -146,7 +147,7 @@ class AuditLogScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Results Count ───────────────────────────
+              //  Results Count 
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 4, 20, 4),
                 child: Row(
@@ -174,7 +175,7 @@ class AuditLogScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Timeline ────────────────────────────────
+              //  Timeline 
               Expanded(
                 child: entries.isEmpty
                     ? Center(
@@ -247,7 +248,7 @@ class AuditLogScreen extends StatelessWidget {
   void _showExportOptions(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(10))),
       builder: (_) => Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
@@ -257,7 +258,7 @@ class AuditLogScreen extends StatelessWidget {
             Center(
               child: Container(
                 width: 36, height: 4,
-                decoration: BoxDecoration(color: AppColors.inputBorder, borderRadius: BorderRadius.circular(2)),
+                decoration: BoxDecoration(color: AppColors.inputBorder, borderRadius: BorderRadius.circular(6)),
               ),
             ),
             const SizedBox(height: 16),
@@ -280,9 +281,9 @@ class AuditLogScreen extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Timeline Entry
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _TimelineEntry extends StatelessWidget {
   final AuditLogEntry entry;
@@ -388,12 +389,12 @@ class _TimelineEntry extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                       decoration: BoxDecoration(
                         color: entry.actionColor.withValues(alpha: 0.1),
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: BorderRadius.circular(6),
                       ),
                       child: Text(
                         entry.anomaly == AuditAnomaly.securityConcern
-                            ? 'âš  Security Concern'
-                            : 'âš¡ Unusual Activity',
+                            ? ' Security Concern'
+                            : ' Unusual Activity',
                         style: TextStyle(
                           fontSize: 10,
                           fontWeight: FontWeight.w700,
@@ -437,9 +438,9 @@ class _MetaTag extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Export Option
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _ExportOption extends StatelessWidget {
   final AuditExportFormat format;

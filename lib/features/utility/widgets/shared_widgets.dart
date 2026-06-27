@@ -1,19 +1,19 @@
-/// ──────────────────────────────────────────────────────────────────────────
+/// 
 /// Shared Widgets for Utility Module
 /// Reusable components: metric cards, section headers, utility tiles,
 /// filter chips, status indicators, info panels
-/// ──────────────────────────────────────────────────────────────────────────
+/// 
 library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../core/design/ive.dart';
 
-// ─── Utility Module Color ────────────────────────────────────────────────────
+//  Utility Module Color 
 
 const Color kUtilityColor = Color(0xFF64748B);
 
-// ─── Utility App Bar ─────────────────────────────────────────────────────────
+//  Utility App Bar 
 
 class UtilityAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -66,7 +66,7 @@ class UtilityAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-// ─── Metric Card ─────────────────────────────────────────────────────────────
+//  Metric Card 
 
 class MetricCard extends StatelessWidget {
   final String label;
@@ -120,7 +120,7 @@ class MetricCard extends StatelessWidget {
           if (percentage != null) ...[
             const SizedBox(height: 8),
             ClipRRect(
-              borderRadius: BorderRadius.circular(3),
+              borderRadius: BorderRadius.circular(6),
               child: LinearProgressIndicator(
                 value: percentage!.clamp(0.0, 1.0),
                 backgroundColor: color.withValues(alpha: 0.1),
@@ -135,7 +135,7 @@ class MetricCard extends StatelessWidget {
   }
 }
 
-// ─── Utility Section Card ────────────────────────────────────────────────────
+//  Utility Section Card 
 
 class UtilitySectionCard extends StatelessWidget {
   final Widget child;
@@ -178,7 +178,7 @@ class UtilitySectionCard extends StatelessWidget {
   }
 }
 
-// ─── Section Title ───────────────────────────────────────────────────────────
+//  Section Title 
 
 class UtilitySectionTitle extends StatelessWidget {
   final String title;
@@ -213,7 +213,7 @@ class UtilitySectionTitle extends StatelessWidget {
   }
 }
 
-// ─── Utility Action Tile ─────────────────────────────────────────────────────
+//  Utility Action Tile 
 
 class UtilityActionTile extends StatelessWidget {
   final String label;
@@ -282,7 +282,7 @@ class UtilityActionTile extends StatelessWidget {
   }
 }
 
-// ─── Utility Toggle Tile ─────────────────────────────────────────────────────
+//  Utility Toggle Tile 
 
 class UtilityToggleTile extends StatelessWidget {
   final String label;
@@ -343,7 +343,7 @@ class UtilityToggleTile extends StatelessWidget {
   }
 }
 
-// ─── Filter Chip Row ─────────────────────────────────────────────────────────
+//  Filter Chip Row 
 
 class UtilityFilterChipRow extends StatelessWidget {
   final List<String> labels;
@@ -402,7 +402,7 @@ class UtilityFilterChipRow extends StatelessWidget {
   }
 }
 
-// ─── Status Indicator ────────────────────────────────────────────────────────
+//  Status Indicator 
 
 class UtilityStatusIndicator extends StatelessWidget {
   final String label;
@@ -451,7 +451,7 @@ class UtilityStatusIndicator extends StatelessWidget {
   }
 }
 
-// ─── Empty State ─────────────────────────────────────────────────────────────
+//  Empty State 
 
 class UtilityEmptyState extends StatelessWidget {
   final IconData icon;
@@ -505,7 +505,7 @@ class UtilityEmptyState extends StatelessWidget {
   }
 }
 
-// ─── Percentage Ring ─────────────────────────────────────────────────────────
+//  Percentage Ring 
 
 class PercentageRing extends StatelessWidget {
   final double percentage;
@@ -549,7 +549,7 @@ class PercentageRing extends StatelessWidget {
   }
 }
 
-// ─── Quick Action Grid Item ──────────────────────────────────────────────────
+//  Quick Action Grid Item 
 
 class QuickActionGridItem extends StatelessWidget {
   final String label;

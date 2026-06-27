@@ -1,9 +1,9 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// Multi-Channel Provider — State Management
+/// 
+/// Multi-Channel Provider  State Management
 ///
 /// Manages multi-channel registrations, sync, and status updates.
 /// Delegates all API calls to MultiChannelService.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'package:flutter/foundation.dart';
@@ -15,7 +15,7 @@ class MultiChannelProvider extends ChangeNotifier {
   MultiChannelProvider({MultiChannelService? service})
       : _service = service ?? MultiChannelService();
 
-  // ─── State ────────────────────────────────────────────────────────────────
+  //  State 
 
   List<dynamic> _channels = [];
   List<dynamic> get channels => _channels;
@@ -31,7 +31,7 @@ class MultiChannelProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Load ─────────────────────────────────────────────────────────────────
+  //  Load 
 
   Future<void> loadChannels(String entityId) async {
     _isLoading = true;
@@ -55,7 +55,7 @@ class MultiChannelProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Register ─────────────────────────────────────────────────────────────
+  //  Register 
 
   Future<Map<String, dynamic>?> registerChannel(
     Map<String, dynamic> data,
@@ -84,7 +84,7 @@ class MultiChannelProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Sync ─────────────────────────────────────────────────────────────────
+  //  Sync 
 
   Future<bool> syncChannel(String id) async {
     try {
@@ -103,7 +103,7 @@ class MultiChannelProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Delete ───────────────────────────────────────────────────────────────
+  //  Delete 
 
   Future<bool> deleteChannel(String id) async {
     try {

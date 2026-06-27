@@ -1,8 +1,8 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SCREEN 10 — Interests Management
+/// 
+/// SCREEN 10  Interests Management
 /// Category-based interest grid, weight sliders, feed preview toggle,
 /// suggestion AI, follow/unfollow interests.
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -158,7 +158,7 @@ class _BodyState extends State<_Body> {
       };
 }
 
-// ─── Category Chip ──────────────────────────────────────────────────────────
+//  Category Chip 
 
 class _CategoryChip extends StatelessWidget {
   final String label;
@@ -191,7 +191,7 @@ class _CategoryChip extends StatelessWidget {
   }
 }
 
-// ─── Interest Card ──────────────────────────────────────────────────────────
+//  Interest Card 
 
 class _InterestCard extends StatefulWidget {
   final UserInterest interest;

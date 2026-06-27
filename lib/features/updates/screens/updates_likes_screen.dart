@@ -1,8 +1,8 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SCREEN 3 — Likes List
+/// 
+/// SCREEN 3  Likes List
 /// Shows who liked an update: search/filter, mutual connections, online
 /// indicators, follow buttons, reaction type badges.
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -134,15 +134,15 @@ class _BodyState extends State<_Body> with SingleTickerProviderStateMixin {
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.symmetric(horizontal: 14),
                   children: const [
-                    _ReactionChip(emoji: 'â¤ï¸', label: 'All', isSelected: true),
+                    _ReactionChip(emoji: '', label: 'All', isSelected: true),
                     SizedBox(width: 6),
-                    _ReactionChip(emoji: 'ðŸ‘', label: 'Like', isSelected: false),
+                    _ReactionChip(emoji: '', label: 'Like', isSelected: false),
                     SizedBox(width: 6),
-                    _ReactionChip(emoji: 'ðŸ”¥', label: 'Fire', isSelected: false),
+                    _ReactionChip(emoji: '', label: 'Fire', isSelected: false),
                     SizedBox(width: 6),
-                    _ReactionChip(emoji: 'ðŸ˜‚', label: 'Laugh', isSelected: false),
+                    _ReactionChip(emoji: '', label: 'Laugh', isSelected: false),
                     SizedBox(width: 6),
-                    _ReactionChip(emoji: 'ðŸ˜®', label: 'Wow', isSelected: false),
+                    _ReactionChip(emoji: '', label: 'Wow', isSelected: false),
                   ],
                 ),
               ),

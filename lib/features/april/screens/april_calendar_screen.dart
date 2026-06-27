@@ -1,9 +1,10 @@
-﻿/// APRIL Screen 3 — Smart Calendar
+/// APRIL Screen 3  Smart Calendar
 /// 5 view modes: day, week, month, agenda, year
 /// Event creation, meeting scheduling, day timeline
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
 import 'package:provider/provider.dart';
 import '../models/april_models.dart';
 import '../providers/april_provider.dart';
@@ -19,7 +20,7 @@ class AprilCalendarScreen extends StatelessWidget {
         return Scaffold(
           backgroundColor: const Color(0xFFF8F9FE),
           appBar: AprilAppBar(
-            title: 'ðŸ“… Calendar',
+            title: '" Calendar',
             actions: [
               IconButton(
                 icon: const Icon(Icons.today, size: 22),
@@ -35,7 +36,7 @@ class AprilCalendarScreen extends StatelessWidget {
                       Icon(
                         _viewIcon(v),
                         size: 18,
-                        color: provider.calendarView == v ? kAprilColorDark : const Color(0xFF6B7280),
+                        color: provider.calendarView == v ? IveTokens.genieBright : const Color(0xFF6B7280),
                       ),
                       const SizedBox(width: 8),
                       Text(
@@ -64,10 +65,10 @@ class AprilCalendarScreen extends StatelessWidget {
                       margin: const EdgeInsets.only(right: 8),
                       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
                       decoration: BoxDecoration(
-                        color: provider.calendarView == v ? kAprilColor : Colors.white,
-                        borderRadius: BorderRadius.circular(8),
+                        color: provider.calendarView == v ? IveTokens.genie : Colors.white,
+                        borderRadius: BorderRadius.circular(10),
                         border: Border.all(
-                          color: provider.calendarView == v ? kAprilColor : const Color(0xFFE5E7EB),
+                          color: provider.calendarView == v ? IveTokens.genie : const Color(0xFFE5E7EB),
                         ),
                       ),
                       child: Text(
@@ -93,7 +94,7 @@ class AprilCalendarScreen extends StatelessWidget {
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () => _showAddEvent(context, provider),
-            backgroundColor: kAprilColor,
+            backgroundColor: IveTokens.genie,
             foregroundColor: Colors.black,
             child: const Icon(Icons.add),
           ),
@@ -132,7 +133,7 @@ class AprilCalendarScreen extends StatelessWidget {
       context: context,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
       ),
       builder: (ctx) => Padding(
         padding: EdgeInsets.fromLTRB(20, 20, 20, MediaQuery.of(ctx).viewInsets.bottom + 20),
@@ -141,7 +142,7 @@ class AprilCalendarScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
-              child: Container(width: 40, height: 4, decoration: BoxDecoration(color: const Color(0xFFE5E7EB), borderRadius: BorderRadius.circular(2))),
+              child: Container(width: 40, height: 4, decoration: BoxDecoration(color: const Color(0xFFE5E7EB), borderRadius: BorderRadius.circular(6))),
             ),
             const SizedBox(height: 16),
             const Text('New Event', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
@@ -154,12 +155,12 @@ class AprilCalendarScreen extends StatelessWidget {
               spacing: 8,
               runSpacing: 8,
               children: [
-                _EventTypeChip(emoji: 'ðŸ“ž', label: 'Call', type: EventType.call),
-                _EventTypeChip(emoji: 'ðŸ¤', label: 'Meeting', type: EventType.meeting),
-                _EventTypeChip(emoji: 'ðŸ ', label: 'Personal', type: EventType.personal),
-                _EventTypeChip(emoji: 'â°', label: 'Reminder', type: EventType.reminder),
-                _EventTypeChip(emoji: 'âœˆï¸', label: 'Travel', type: EventType.travel),
-                _EventTypeChip(emoji: 'ðŸŽ¯', label: 'Deadline', type: EventType.deadline),
+                _EventTypeChip(emoji: '"', label: 'Call', type: EventType.call),
+                _EventTypeChip(emoji: '', label: 'Meeting', type: EventType.meeting),
+                _EventTypeChip(emoji: '', label: 'Personal', type: EventType.personal),
+                _EventTypeChip(emoji: '', label: 'Reminder', type: EventType.reminder),
+                _EventTypeChip(emoji: '', label: 'Travel', type: EventType.travel),
+                _EventTypeChip(emoji: '', label: 'Deadline', type: EventType.deadline),
               ],
             ),
             const SizedBox(height: 16),
@@ -169,7 +170,7 @@ class AprilCalendarScreen extends StatelessWidget {
               decoration: InputDecoration(
                 hintText: 'e.g., "Team standup at 9am"',
                 hintStyle: const TextStyle(fontSize: 14, color: Color(0xFF9CA3AF)),
-                prefixIcon: const Icon(Icons.bolt, color: kAprilColorDark),
+                prefixIcon: const Icon(Icons.bolt, color: IveTokens.genieBright),
                 filled: true,
                 fillColor: const Color(0xFFF3F4F6),
                 border: OutlineInputBorder(
@@ -185,7 +186,7 @@ class AprilCalendarScreen extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () => Navigator.pop(ctx),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: kAprilColor,
+                  backgroundColor: IveTokens.genie,
                   foregroundColor: Colors.black,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -200,9 +201,9 @@ class AprilCalendarScreen extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// DAY VIEW — Timeline
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
+// DAY VIEW  Timeline
+// 
 class _DayView extends StatelessWidget {
   final AprilProvider provider;
   const _DayView({required this.provider});
@@ -271,9 +272,9 @@ class _DayView extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // WEEK VIEW
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 class _WeekView extends StatelessWidget {
   final AprilProvider provider;
   const _WeekView({required this.provider});
@@ -303,9 +304,9 @@ class _WeekView extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 8),
                     decoration: BoxDecoration(
                       color: isSelected
-                          ? kAprilColor
+                          ? IveTokens.genie
                           : isToday
-                              ? kAprilColor.withValues(alpha: 0.1)
+                              ? IveTokens.genie.withValues(alpha: 0.1)
                               : Colors.transparent,
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -334,7 +335,7 @@ class _WeekView extends StatelessWidget {
                             width: 6,
                             height: 6,
                             decoration: BoxDecoration(
-                              color: isSelected ? Colors.black : kAprilColorDark,
+                              color: isSelected ? Colors.black : IveTokens.genieBright,
                               shape: BoxShape.circle,
                             ),
                           ),
@@ -386,9 +387,9 @@ class _WeekView extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// MONTH VIEW — Calendar Grid
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
+// MONTH VIEW  Calendar Grid
+// 
 class _MonthView extends StatelessWidget {
   final AprilProvider provider;
   const _MonthView({required this.provider});
@@ -466,11 +467,11 @@ class _MonthView extends StatelessWidget {
                   margin: const EdgeInsets.all(2),
                   decoration: BoxDecoration(
                     color: isSelected
-                        ? kAprilColor
+                        ? IveTokens.genie
                         : isToday
-                            ? kAprilColor.withValues(alpha: 0.1)
+                            ? IveTokens.genie.withValues(alpha: 0.1)
                             : Colors.transparent,
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -489,7 +490,7 @@ class _MonthView extends StatelessWidget {
                           width: 5,
                           height: 5,
                           decoration: BoxDecoration(
-                            color: isSelected ? Colors.black : kAprilColorDark,
+                            color: isSelected ? Colors.black : IveTokens.genieBright,
                             shape: BoxShape.circle,
                           ),
                         ),
@@ -513,9 +514,9 @@ class _MonthView extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// AGENDA VIEW — Scrollable Event List
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
+// AGENDA VIEW  Scrollable Event List
+// 
 class _AgendaView extends StatelessWidget {
   final AprilProvider provider;
   const _AgendaView({required this.provider});
@@ -539,7 +540,7 @@ class _AgendaView extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                     decoration: BoxDecoration(
-                      color: _isSameDay(d, today) ? kAprilColor : const Color(0xFFF3F4F6),
+                      color: _isSameDay(d, today) ? IveTokens.genie : const Color(0xFFF3F4F6),
                       borderRadius: BorderRadius.circular(6),
                     ),
                     child: Text(
@@ -580,9 +581,9 @@ class _AgendaView extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// YEAR VIEW — Compact 12-Month Grid
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
+// YEAR VIEW  Compact 12-Month Grid
+// 
 class _YearView extends StatelessWidget {
   final AprilProvider provider;
   const _YearView({required this.provider});
@@ -610,10 +611,10 @@ class _YearView extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: isCurrent ? kAprilColor.withValues(alpha: 0.1) : Colors.white,
+              color: isCurrent ? IveTokens.genie.withValues(alpha: 0.1) : Colors.white,
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
-                color: isCurrent ? kAprilColor : const Color(0xFFE5E7EB),
+                color: isCurrent ? IveTokens.genie : const Color(0xFFE5E7EB),
               ),
             ),
             child: Column(
@@ -624,7 +625,7 @@ class _YearView extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 13,
                     fontWeight: isCurrent ? FontWeight.w700 : FontWeight.w500,
-                    color: isCurrent ? kAprilColorDark : null,
+                    color: isCurrent ? IveTokens.genieBright : null,
                   ),
                 ),
                 const SizedBox(height: 4),
@@ -673,7 +674,7 @@ class _MiniMonthGrid extends StatelessWidget {
             width: 14,
             height: 14,
             decoration: BoxDecoration(
-              color: isToday ? kAprilColor : Colors.transparent,
+              color: isToday ? IveTokens.genie : Colors.transparent,
               shape: BoxShape.circle,
             ),
             child: Center(
@@ -702,9 +703,9 @@ class _EventTypeChip extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
       decoration: BoxDecoration(
-        color: kAprilColor.withValues(alpha: 0.08),
+        color: IveTokens.genie.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: kAprilColor.withValues(alpha: 0.2)),
+        border: Border.all(color: IveTokens.genie.withValues(alpha: 0.2)),
       ),
       child: Text('$emoji $label', style: const TextStyle(fontSize: 13)),
     );

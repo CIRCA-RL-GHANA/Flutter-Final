@@ -1,7 +1,7 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 /// U1: SETTINGS & PREFERENCES Screen
 /// Theme, language, date/time format, haptics, sounds, updates, analytics
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -51,7 +51,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           body: ListView(
             padding: const EdgeInsets.fromLTRB(20, 12, 20, 100),
             children: [
-              // ─── Appearance ────────────────────────────────
+              //  Appearance 
               const UtilitySectionTitle(
                 title: 'Appearance',
                 icon: Icons.palette_outlined,
@@ -103,7 +103,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
 
-              // ─── Regional ──────────────────────────────────
+              //  Regional 
               const UtilitySectionTitle(
                 title: 'Regional',
                 icon: Icons.language,
@@ -139,7 +139,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
 
-              // ─── Feedback ──────────────────────────────────
+              //  Feedback 
               const UtilitySectionTitle(
                 title: 'Feedback',
                 icon: Icons.vibration,
@@ -169,7 +169,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
 
-              // ─── Data & Updates ────────────────────────────
+              //  Data & Updates 
               const UtilitySectionTitle(
                 title: 'Data & Updates',
                 icon: Icons.system_update,
@@ -208,7 +208,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
 
-              // ─── About ────────────────────────────────────
+              //  About 
               const UtilitySectionTitle(
                 title: 'About',
                 icon: Icons.info_outline,
@@ -251,7 +251,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  // ─── Pickers ───────────────────────────────────────────────────────────────
+  //  Pickers 
 
   String _themeLabel(ThemePreference t) {
     switch (t) {
@@ -273,7 +273,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
       ),
       builder: (_) => _OptionSheet<ThemePreference>(
         title: 'Choose Theme',
@@ -299,7 +299,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
       ),
       builder: (_) => Padding(
         padding: const EdgeInsets.fromLTRB(24, 20, 24, 20),
@@ -310,7 +310,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Center(
               child: Container(
                 width: 36, height: 4,
-                decoration: BoxDecoration(color: AppColors.inputBorder, borderRadius: BorderRadius.circular(2)),
+                decoration: BoxDecoration(color: AppColors.inputBorder, borderRadius: BorderRadius.circular(6)),
               ),
             ),
             const SizedBox(height: 16),
@@ -339,7 +339,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
       ),
       builder: (_) => _OptionSheet<DateFormatPreference>(
         title: 'Date Format',
@@ -359,7 +359,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
       ),
       builder: (_) => _OptionSheet<TimeFormatPreference>(
         title: 'Time Format',
@@ -376,7 +376,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 }
 
-// ─── Slider Tile ─────────────────────────────────────────────────────────────
+//  Slider Tile 
 
 class _SliderTile extends StatelessWidget {
   final String label;
@@ -453,7 +453,7 @@ class _SliderTile extends StatelessWidget {
   }
 }
 
-// ─── Generic Option Sheet ────────────────────────────────────────────────────
+//  Generic Option Sheet 
 
 class _OptionSheet<T> extends StatelessWidget {
   final String title;
@@ -483,7 +483,7 @@ class _OptionSheet<T> extends StatelessWidget {
           Center(
             child: Container(
               width: 36, height: 4,
-              decoration: BoxDecoration(color: AppColors.inputBorder, borderRadius: BorderRadius.circular(2)),
+              decoration: BoxDecoration(color: AppColors.inputBorder, borderRadius: BorderRadius.circular(6)),
             ),
           ),
           const SizedBox(height: 16),

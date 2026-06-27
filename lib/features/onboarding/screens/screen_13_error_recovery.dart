@@ -1,22 +1,8 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import '../../../core/design/ive.dart';
-import '../../../core/constants/app_strings.dart';
 import '../../../core/utils/responsive.dart';
-import '../widgets/buttons.dart';
 
-
-// OS palette — mirrors splash / welcome
-const Color _kBg        = IveTokens.bg;
-const Color _kSurface   = IveTokens.surface;
-// ignore: unused_element
-const Color _kBorder    = IveTokens.hairline;
-const Color _kAccent    = IveTokens.accent;
-// ignore: unused_element
-const Color _kAccentDim = IveTokens.accentPressed;
-const Color _kText      = IveTokens.label;
-const Color _kTextDim   = IveTokens.labelSecondary;
-const Color _kTextMuted = IveTokens.labelTertiary;
-/// Error types for the recovery screen
+/// Error types for the recovery screen (must stay — used by app router).
 enum ErrorType {
   network,
   server,
@@ -29,9 +15,9 @@ enum ErrorType {
   deviceChange,
 }
 
-/// Screen 13: Error & Recovery Flows
-/// Graceful degradation with clear recovery paths
-class ErrorRecoveryScreen extends StatefulWidget {
+/// Screen 14 — Error recovery.
+/// Class name and ErrorType enum are referenced by the app router.
+class ErrorRecoveryScreen extends StatelessWidget {
   final ErrorType errorType;
   final String? errorMessage;
   final VoidCallback? onRetry;
@@ -43,379 +29,105 @@ class ErrorRecoveryScreen extends StatefulWidget {
     this.onRetry,
   });
 
-  @override
-  State<ErrorRecoveryScreen> createState() => _ErrorRecoveryScreenState();
-}
-
-class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _animController;
-
-  @override
-  void initState() {
-    super.initState();
-    _animController = AnimationController(
-      duration: const Duration(milliseconds: 600),
-      vsync: this,
-    )..forward();
-  }
-
-  @override
-  void dispose() {
-    _animController.dispose();
-    super.dispose();
-  }
-
-  _ErrorConfig _getErrorConfig() {
-    switch (widget.errorType) {
-      case ErrorType.network:
-        return _ErrorConfig(
-          icon: Icons.wifi_off_rounded,
-          iconColor: IveTokens.warning,
-          title: AppStrings.offlineMode,
-          message: widget.errorMessage ??
-              'Check your internet connection and try again.',
-          primaryAction: 'Try Again',
-          primaryIcon: Icons.refresh,
-          secondaryAction: 'Continue Offline',
-          showRetryTimer: true,
-          retryBackoff: true,
-          suggestions: [
-            'Check your Wi-Fi or mobile data',
-            'Try moving to an area with better signal',
-            'Restart your device and try again',
-          ],
-        );
-
-      case ErrorType.server:
-        return _ErrorConfig(
-          icon: Icons.cloud_off_rounded,
-          iconColor: IveTokens.danger,
-          title: AppStrings.serverBusy,
-          message: widget.errorMessage ??
-              'Our servers are experiencing high traffic. Try again shortly.',
-          primaryAction: AppStrings.tryAgain,
-          primaryIcon: Icons.refresh,
-          secondaryAction: 'Use Demo Mode',
-          showRetryTimer: true,
-          retryBackoff: true,
-          suggestions: [
-            'Wait a few moments and try again',
-            'Check our status page for updates',
-            'Contact support if the issue persists',
-          ],
-        );
-
-      case ErrorType.validation:
-        return _ErrorConfig(
-          icon: Icons.error_outline_rounded,
-          iconColor: IveTokens.warning,
-          title: 'Validation Error',
-          message: widget.errorMessage ??
-              'Some information needs to be corrected.',
-          primaryAction: 'Fix & Continue',
-          primaryIcon: Icons.edit,
-          suggestions: [
-            'Check the highlighted fields',
-            'Make sure all required fields are filled',
-            'Use the correct format shown below each field',
-          ],
-        );
-
-      case ErrorType.accountSuspended:
-        return _ErrorConfig(
-          icon: Icons.block_rounded,
-          iconColor: IveTokens.danger,
-          title: 'Account Suspended',
-          message: widget.errorMessage ??
-              'Your account has been suspended. Contact support for more information.',
-          primaryAction: 'Contact Support',
-          primaryIcon: Icons.support_agent,
-          secondaryAction: 'View Reason',
-          suggestions: [
-            'Review our community guidelines',
-            'Contact our support team for assistance',
-            'Check your email for suspension details',
-          ],
-        );
-
-      case ErrorType.accountDuplicate:
-        return _ErrorConfig(
-          icon: Icons.people_outline_rounded,
-          iconColor: _kAccent,
-          title: 'Account Already Exists',
-          message: widget.errorMessage ??
-              'An account with this information already exists.',
-          primaryAction: 'Log In Instead',
-          primaryIcon: Icons.login,
-          secondaryAction: 'Create New Account',
-          suggestions: [
-            'Try logging in with your existing account',
-            'Use a different phone number or email',
-            'Contact support to merge accounts',
-          ],
-        );
-
-      case ErrorType.accountCompromised:
-        return _ErrorConfig(
-          icon: Icons.shield_rounded,
-          iconColor: IveTokens.danger,
-          title: 'Security Alert',
-          message: widget.errorMessage ??
-              'We detected unusual activity on your account.',
-          primaryAction: 'Verify Identity',
-          primaryIcon: Icons.verified_user,
-          secondaryAction: 'Contact Support',
-          suggestions: [
-            'Verify your identity to secure your account',
-            'Change your password immediately',
-            'Review recent account activity',
-          ],
-        );
-
-      case ErrorType.phoneLost:
-        return const _ErrorConfig(
-          icon: Icons.phone_disabled_rounded,
-          iconColor: IveTokens.warning,
-          title: 'Phone Number Changed?',
-          message: 'Verify your identity through alternative methods.',
-          primaryAction: 'Verify via Email',
-          primaryIcon: Icons.email_outlined,
-          secondaryAction: 'Security Questions',
-          suggestions: [
-            'Use your backup email to verify',
-            'Answer your security questions',
-            'Contact support with proof of identity',
-          ],
-        );
-
-      case ErrorType.biometricChanged:
-        return const _ErrorConfig(
-          icon: Icons.fingerprint,
-          iconColor: IveTokens.warning,
-          title: 'Biometric Changed',
-          message: 'Your biometric data has changed. Verify with your PIN or password.',
-          primaryAction: 'Use PIN',
-          primaryIcon: Icons.pin,
-          secondaryAction: 'Use Password',
-          suggestions: [
-            'Enter your backup PIN or password',
-            'Re-enroll biometrics in settings after login',
-            'Contact support if you cannot access your account',
-          ],
-        );
-
-      case ErrorType.deviceChange:
-        return const _ErrorConfig(
-          icon: Icons.devices_rounded,
-          iconColor: _kAccent,
-          title: 'New Device Detected',
-          message: 'Transfer your account to this device securely.',
-          primaryAction: 'Scan QR Code',
-          primaryIcon: Icons.qr_code_scanner,
-          secondaryAction: 'Verify Manually',
-          suggestions: [
-            'Open PROMPT on your previous device',
-            'Go to Settings > Account Transfer',
-            'Scan the QR code shown on this screen',
-          ],
-        );
-    }
+  String get _description {
+    if (errorMessage != null && errorMessage!.isNotEmpty) return errorMessage!;
+    return "We couldn't reach the commerce layer. Check your connection and try one of the options below.";
   }
 
   @override
   Widget build(BuildContext context) {
-    final config = _getErrorConfig();
-
     return Scaffold(
-      backgroundColor: _kBg,
+      backgroundColor: IveTokens.bg,
       body: SafeArea(
         child: Responsive.constrained(
-          child: Column(
-            children: [
-              // Close / Back button
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: Container(
-                      width: 44,
-                      height: 44,
-                      decoration: const BoxDecoration(
-                        color: _kSurface,
-                        borderRadius: IveTokens.brMd,
-                      ),
-                      child: const Icon(
-                        Icons.close,
-                        size: 20,
-                        color: _kText,
-                      ),
-                    ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 48),
+
+                // Red "!" icon tile (top-left aligned)
+                Container(
+                  width: 56,
+                  height: 56,
+                  decoration: BoxDecoration(
+                    color: IveTokens.danger.withValues(alpha: 0.12),
+                    borderRadius: BorderRadius.circular(14),
+                    border: Border.all(
+                        color: IveTokens.danger.withValues(alpha: 0.3)),
+                  ),
+                  child: const Icon(
+                    Icons.priority_high_rounded,
+                    size: 28,
+                    color: IveTokens.danger,
                   ),
                 ),
-              ),
 
-              Expanded(
-                child: FadeTransition(
-                  opacity: _animController,
-                  child: SingleChildScrollView(
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: Column(
-                      children: [
-                        const SizedBox(height: 24),
+                const SizedBox(height: 24),
 
-                        // Error icon
-                        Container(
-                          width: 100,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: config.iconColor.withValues(alpha: 0.12),
-                          ),
-                          child: Icon(
-                            config.icon,
-                            size: 48,
-                            color: config.iconColor,
-                          ),
-                        ),
-
-                        const SizedBox(height: 24),
-
-                        // Title
-                        Text(
-                          config.title,
-                          style: const TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: _kText,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-
-                        const SizedBox(height: 12),
-
-                        // Message
-                        Text(
-                          config.message,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            color: _kTextDim,
-                            height: 1.5,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-
-                        const SizedBox(height: 32),
-
-                        // Suggestions
-                        if (config.suggestions != null) ...[
-                          Container(
-                            width: double.infinity,
-                            padding: const EdgeInsets.all(16),
-                            decoration: const BoxDecoration(
-                              color: _kSurface,
-                              borderRadius: IveTokens.brXs,
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  'What you can do:',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                    color: _kText,
-                                  ),
-                                ),
-                                const SizedBox(height: 12),
-                                ...config.suggestions!.asMap().entries.map(
-                                  (entry) => Padding(
-                                    padding: const EdgeInsets.only(bottom: 8),
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          width: 24,
-                                          height: 24,
-                                          decoration: BoxDecoration(
-                                            color: _kAccent
-                                                .withValues(alpha: 0.1),
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: Center(
-                                            child: Text(
-                                              '${entry.key + 1}',
-                                              style: const TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w600,
-                                                color: _kAccent,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(width: 10),
-                                        Expanded(
-                                          child: Text(
-                                            entry.value,
-                                            style: const TextStyle(
-                                              fontSize: 14,
-                                              color: _kTextDim,
-                                              height: 1.4,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-
-                        const SizedBox(height: 32),
-                      ],
-                    ),
+                // Title
+                const Text(
+                  'Something went wrong',
+                  style: TextStyle(
+                    fontFamily: 'SpaceGrotesk',
+                    fontSize: 24,
+                    fontWeight: FontWeight.w700,
+                    color: IveTokens.ink,
+                    height: 1.2,
                   ),
                 ),
-              ),
 
-              // Action buttons
-              Padding(
-                padding: const EdgeInsets.fromLTRB(24, 16, 24, 32),
-                child: Column(
-                  children: [
-                    PrimaryButton(
-                      text: config.primaryAction,
-                      icon: config.primaryIcon,
-                      onPressed: widget.onRetry ?? () => Navigator.pop(context),
-                      margin: EdgeInsets.zero,
-                    ),
-                    if (config.secondaryAction != null) ...[
-                      const SizedBox(height: 12),
-                      OutlinedActionButton(
-                        text: config.secondaryAction!,
-                        onPressed: () {
-                          // Handle secondary action based on type
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ],
-                    const SizedBox(height: 16),
-                    const Text(
-                      AppStrings.needHelp,
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: _kTextMuted,
-                      ),
-                    ),
-                  ],
+                const SizedBox(height: 10),
+
+                // Description
+                Text(
+                  _description,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: IveTokens.ink2,
+                    height: 1.5,
+                  ),
                 ),
-              ),
-            ],
+
+                const SizedBox(height: 32),
+
+                // Action rows
+                _ActionRow(
+                  icon: Icons.refresh_rounded,
+                  title: 'Retry connection',
+                  subtitle: 'Attempt to reconnect now',
+                  onTap: onRetry ?? () {},
+                ),
+                const Divider(
+                    height: 1, thickness: 1, color: IveTokens.hairline),
+                _ActionRow(
+                  icon: Icons.search_rounded,
+                  title: 'Run diagnostics',
+                  subtitle: 'Check network & storage',
+                  onTap: () {},
+                ),
+                const Divider(
+                    height: 1, thickness: 1, color: IveTokens.hairline),
+                _ActionRow(
+                  icon: Icons.help_outline_rounded,
+                  title: 'Contact support',
+                  subtitle: "We'll help you recover",
+                  onTap: () {},
+                ),
+
+                const Spacer(),
+
+                // RETRY button
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 32),
+                  child: IveButton.primary(
+                    label: 'RETRY',
+                    onPressed: onRetry ?? () => Navigator.of(context).maybePop(),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -423,28 +135,73 @@ class _ErrorRecoveryScreenState extends State<ErrorRecoveryScreen>
   }
 }
 
-class _ErrorConfig {
+class _ActionRow extends StatelessWidget {
   final IconData icon;
-  final Color iconColor;
   final String title;
-  final String message;
-  final String primaryAction;
-  final IconData? primaryIcon;
-  final String? secondaryAction;
-  final bool showRetryTimer;
-  final bool retryBackoff;
-  final List<String>? suggestions;
+  final String subtitle;
+  final VoidCallback onTap;
 
-  const _ErrorConfig({
+  const _ActionRow({
     required this.icon,
-    required this.iconColor,
     required this.title,
-    required this.message,
-    required this.primaryAction,
-    this.primaryIcon,
-    this.secondaryAction,
-    this.showRetryTimer = false,
-    this.retryBackoff = false,
-    this.suggestions,
+    required this.subtitle,
+    required this.onTap,
   });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      behavior: HitTestBehavior.opaque,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 14),
+        child: Row(
+          children: [
+            // Icon tile
+            Container(
+              width: 36,
+              height: 36,
+              decoration: BoxDecoration(
+                color: IveTokens.surface,
+                borderRadius: BorderRadius.circular(9),
+                border: Border.all(color: IveTokens.hairline),
+              ),
+              child: Icon(icon, size: 18, color: IveTokens.ink2),
+            ),
+
+            const SizedBox(width: 14),
+
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: IveTokens.ink,
+                    ),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    subtitle,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: IveTokens.mute,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            const Text(
+              '>',
+              style: TextStyle(fontSize: 14, color: IveTokens.mute),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

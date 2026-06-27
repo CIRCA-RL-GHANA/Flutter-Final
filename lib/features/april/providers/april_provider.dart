@@ -1,4 +1,4 @@
-/// APRIL Module — State Management
+/// APRIL Module  State Management
 /// Provider with API-first loading + fallback demo data for all 7 screens
 /// Module Color: Gold 0xFFFFD700
 library;
@@ -8,17 +8,17 @@ import '../../../core/services/services.dart';
 import '../models/april_models.dart';
 
 class AprilProvider extends ChangeNotifier {
-  // ──────────────────────────────────────────────
+  // 
   //  SERVICE INSTANCES
-  // ──────────────────────────────────────────────
+  // 
 
   final CalendarService _calendarService = CalendarService();
   final WishlistService _wishlistService = WishlistService();
   final PlannerService _plannerService = PlannerService();
 
-  // ──────────────────────────────────────────────
+  // 
   //  LOADING / ERROR STATE
-  // ──────────────────────────────────────────────
+  // 
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -26,9 +26,9 @@ class AprilProvider extends ChangeNotifier {
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
 
-  // ──────────────────────────────────────────────
+  // 
   //  INIT
-  // ──────────────────────────────────────────────
+  // 
 
   Future<void> init() async {
     _isLoading = true;
@@ -45,9 +45,9 @@ class AprilProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ──────────────────────────────────────────────
+  // 
   //  GLOBAL STATE (local only)
-  // ──────────────────────────────────────────────
+  // 
 
   final String _userName = 'John';
   String get userName => _userName;
@@ -68,9 +68,9 @@ class AprilProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ──────────────────────────────────────────────
+  // 
   //  VOICE COMMANDS  (fallback only)
-  // ──────────────────────────────────────────────
+  // 
 
   static final List<VoiceCommand> _fallbackVoiceHistory = [
     VoiceCommand(
@@ -127,17 +127,17 @@ class AprilProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ──────────────────────────────────────────────
+  // 
   //  NOTIFICATIONS  (fallback only)
-  // ──────────────────────────────────────────────
+  // 
 
   static final List<AprilNotification> _fallbackNotifications = [
     AprilNotification(
       id: 'n1',
       type: AprilNotificationType.financial,
       title: 'Bill due tomorrow',
-      message: 'Electricity: ₵150',
-      emoji: '⚠️',
+      message: 'Electricity: 150',
+      emoji: '',
       timestamp: DateTime.now().subtract(const Duration(minutes: 30)),
       actions: [NotificationAction.pay, NotificationAction.snooze, NotificationAction.dismiss],
     ),
@@ -145,8 +145,8 @@ class AprilProvider extends ChangeNotifier {
       id: 'n2',
       type: AprilNotificationType.calendar,
       title: 'Meeting with team in 30 min',
-      message: '10:00 AM • Conference Room A',
-      emoji: '✅',
+      message: '10:00 AM  Conference Room A',
+      emoji: '',
       timestamp: DateTime.now().subtract(const Duration(minutes: 15)),
       actions: [NotificationAction.join, NotificationAction.snooze, NotificationAction.reschedule],
     ),
@@ -154,8 +154,8 @@ class AprilProvider extends ChangeNotifier {
       id: 'n3',
       type: AprilNotificationType.financial,
       title: 'Budget alert: Dining exceeds limit',
-      message: 'You\'ve spent ₵480 of ₵400 budget',
-      emoji: '💰',
+      message: 'You\'ve spent 480 of 400 budget',
+      emoji: '',
       timestamp: DateTime.now().subtract(const Duration(hours: 1)),
       actions: [NotificationAction.viewDetails, NotificationAction.dismiss],
     ),
@@ -164,7 +164,7 @@ class AprilProvider extends ChangeNotifier {
       type: AprilNotificationType.wishlist,
       title: 'Price drop alert!',
       message: 'PlayStation 5 dropped by 15%',
-      emoji: '🎉',
+      emoji: '',
       timestamp: DateTime.now().subtract(const Duration(hours: 2)),
       actions: [NotificationAction.viewDetails, NotificationAction.purchase, NotificationAction.dismiss],
     ),
@@ -187,15 +187,15 @@ class AprilProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ──────────────────────────────────────────────
+  // 
   //  PLUGIN STATUS  (fallback only)
-  // ──────────────────────────────────────────────
+  // 
 
   static final List<PluginStatus> _fallbackPluginStatuses = [
     PluginStatus(
       plugin: AprilPlugin.planner,
       syncStatus: SyncStatus.synced,
-      statusText: '₵12,458 balance',
+      statusText: '12,458 balance',
       badgeCount: 3,
       lastSynced: DateTime.now().subtract(const Duration(minutes: 2)),
     ),
@@ -225,14 +225,14 @@ class AprilProvider extends ChangeNotifier {
   List<PluginStatus> get pluginStatuses =>
       _pluginStatuses.isNotEmpty ? _pluginStatuses : _fallbackPluginStatuses;
 
-  // ──────────────────────────────────────────────
+  // 
   //  PENDING ACTIONS  (fallback only)
-  // ──────────────────────────────────────────────
+  // 
 
   static final List<PendingAction> _fallbackPendingActions = [
     PendingAction(
       id: 'pa1',
-      description: 'Pay electricity bill — ₵150',
+      description: 'Pay electricity bill  150',
       priority: ActionPriority.critical,
       dueText: 'Tomorrow',
       dueDate: DateTime.now().add(const Duration(days: 1)),
@@ -284,9 +284,9 @@ class AprilProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ──────────────────────────────────────────────
-  //  PLANNER — FINANCIAL DATA  (API-wired)
-  // ──────────────────────────────────────────────
+  // 
+  //  PLANNER  FINANCIAL DATA  (API-wired)
+  // 
 
   PlannerTab _plannerTab = PlannerTab.overview;
   PlannerTab get plannerTab => _plannerTab;
@@ -393,7 +393,7 @@ class AprilProvider extends ChangeNotifier {
       }
     } catch (e) {
       debugPrint('loadTransactions fallback: $e');
-      // keep _transactions empty → getter returns _fallbackTransactions
+      // keep _transactions empty  getter returns _fallbackTransactions
     }
   }
 
@@ -534,9 +534,9 @@ class AprilProvider extends ChangeNotifier {
 
   FinancialHealth get financialHealth => _fallbackFinancialHealth;
 
-  // ──────────────────────────────────────────────
+  // 
   //  CALENDAR DATA  (API-wired)
-  // ──────────────────────────────────────────────
+  // 
 
   CalendarView _calendarView = CalendarView.day;
   CalendarView get calendarView => _calendarView;
@@ -572,7 +572,7 @@ class AprilProvider extends ChangeNotifier {
       id: 'e3', title: 'Lunch with Sarah', type: EventType.personal,
       startTime: DateTime.now().copyWith(hour: 12, minute: 0),
       endTime: DateTime.now().copyWith(hour: 13, minute: 0),
-      location: 'Café Azure', calendarName: 'Personal', colorIndex: 2,
+      location: 'Caf Azure', calendarName: 'Personal', colorIndex: 2,
     ),
     CalendarEvent(
       id: 'e4', title: 'Project Deadline', type: EventType.deadline,
@@ -609,7 +609,7 @@ class AprilProvider extends ChangeNotifier {
       }
     } catch (e) {
       debugPrint('loadEvents fallback: $e');
-      // keep _events empty → getter returns _fallbackEvents
+      // keep _events empty  getter returns _fallbackEvents
     }
   }
 
@@ -690,9 +690,9 @@ class AprilProvider extends ChangeNotifier {
   List<CalendarEvent> get todayEvents => eventsForDate(DateTime.now());
   int get todayEventCount => todayEvents.length;
 
-  // ──────────────────────────────────────────────
+  // 
   //  WISHLIST DATA  (API-wired)
-  // ──────────────────────────────────────────────
+  // 
 
   WishlistViewMode _wishlistView = WishlistViewMode.grid;
   WishlistViewMode get wishlistView => _wishlistView;
@@ -769,7 +769,7 @@ class AprilProvider extends ChangeNotifier {
       }
     } catch (e) {
       debugPrint('loadWishlistItems fallback: $e');
-      // keep _wishlistItems empty → getter returns _fallbackWishlistItems
+      // keep _wishlistItems empty  getter returns _fallbackWishlistItems
     }
   }
 
@@ -857,57 +857,57 @@ class AprilProvider extends ChangeNotifier {
   double get totalWishlistSaved => wishlistItems.where((i) => !i.isPurchased).fold(0.0, (sum, i) => sum + i.savedAmount);
 
   static const List<WishlistCollection> _fallbackWishlistCollections = [
-    WishlistCollection(id: 'wc1', name: 'Personal', emoji: '🎁', itemCount: 4, totalValue: 8249.98),
-    WishlistCollection(id: 'wc2', name: 'Birthday Ideas', emoji: '🎂', itemCount: 2, totalValue: 3949.99, isShared: true),
-    WishlistCollection(id: 'wc3', name: 'Home Office', emoji: '🏠', itemCount: 3, totalValue: 4800.00),
+    WishlistCollection(id: 'wc1', name: 'Personal', emoji: '', itemCount: 4, totalValue: 8249.98),
+    WishlistCollection(id: 'wc2', name: 'Birthday Ideas', emoji: '', itemCount: 2, totalValue: 3949.99, isShared: true),
+    WishlistCollection(id: 'wc3', name: 'Home Office', emoji: '', itemCount: 3, totalValue: 4800.00),
   ];
 
   List<WishlistCollection> get wishlistCollections => _fallbackWishlistCollections;
 
-  // ──────────────────────────────────────────────
+  // 
   //  PERSONAL STATEMENT DATA  (fallback only)
-  // ──────────────────────────────────────────────
+  // 
 
   static final List<StatementCardData> _fallbackStatementCards = [
     StatementCardData(
-      type: StatementCard.lifestyle, title: 'Lifestyle & Values', emoji: '🌟',
+      type: StatementCard.lifestyle, title: 'Lifestyle & Values', emoji: '',
       summary: 'Core values, daily routines, and life philosophy',
       completionPercent: 85, lastUpdated: DateTime.now().subtract(const Duration(days: 5)),
       highlights: ['Integrity', 'Family first', 'Continuous learning'],
     ),
     StatementCardData(
-      type: StatementCard.family, title: 'Family & Relationships', emoji: '👨‍👩‍👧‍👦',
+      type: StatementCard.family, title: 'Family & Relationships', emoji: '',
       summary: 'Family connections, important dates, and relationship goals',
       completionPercent: 70, lastUpdated: DateTime.now().subtract(const Duration(days: 10)),
       highlights: ['Wife: Sarah', 'Son: James (8)', 'Anniversary: Jun 15'],
     ),
     StatementCardData(
-      type: StatementCard.career, title: 'Career & Education', emoji: '💼',
+      type: StatementCard.career, title: 'Career & Education', emoji: '',
       summary: 'Professional journey, skills, and career goals',
       completionPercent: 90, lastUpdated: DateTime.now().subtract(const Duration(days: 2)),
       highlights: ['Product Manager', '10+ years experience', 'MBA, Stanford'],
     ),
     StatementCardData(
-      type: StatementCard.financial, title: 'Financial Statement', emoji: '💰',
+      type: StatementCard.financial, title: 'Financial Statement', emoji: '',
       summary: 'Net worth, goals, and investment philosophy',
       completionPercent: 65, lastUpdated: DateTime.now().subtract(const Duration(days: 15)),
       highlights: ['Retirement goal: 55', 'House fund: 40%', 'Emergency fund: 6mo'],
     ),
     StatementCardData(
-      type: StatementCard.health, title: 'Health & Wellness', emoji: '💚',
+      type: StatementCard.health, title: 'Health & Wellness', emoji: '',
       summary: 'Medical profile, fitness goals, and wellness tracking',
       completionPercent: 55, lastUpdated: DateTime.now().subtract(const Duration(days: 20)),
       highlights: ['No allergies', 'Target: 10k steps/day', 'Mediterranean diet'],
     ),
     StatementCardData(
-      type: StatementCard.legal, title: 'Legal & Administrative', emoji: '📜',
+      type: StatementCard.legal, title: 'Legal & Administrative', emoji: '',
       summary: 'Important documents, digital assets, and privacy preferences',
       completionPercent: 40, lastUpdated: DateTime.now().subtract(const Duration(days: 30)),
       isLocked: true,
       highlights: ['Passport: Valid until 2028', 'Will: Draft'],
     ),
     StatementCardData(
-      type: StatementCard.growth, title: 'Personal Growth', emoji: '🌱',
+      type: StatementCard.growth, title: 'Personal Growth', emoji: '',
       summary: 'Bucket list, personal projects, and reflection journal',
       completionPercent: 75, lastUpdated: DateTime.now().subtract(const Duration(days: 3)),
       highlights: ['Reading: 24/50 books', 'Learn Spanish', 'Run marathon'],
@@ -930,9 +930,9 @@ class AprilProvider extends ChangeNotifier {
 
   List<StatementVersion> get statementVersions => _fallbackStatementVersions;
 
-  // ──────────────────────────────────────────────
+  // 
   //  SETTINGS DATA  (local only)
-  // ──────────────────────────────────────────────
+  // 
 
   final Map<String, bool> _settingsToggles = {
     'auto_backup': true,
@@ -973,9 +973,9 @@ class AprilProvider extends ChangeNotifier {
   String get backupFrequency => _backupFrequency;
   void setBackupFrequency(String f) { _backupFrequency = f; notifyListeners(); }
 
-  // ──────────────────────────────────────────────
+  // 
   //  JSON PARSE HELPERS
-  // ──────────────────────────────────────────────
+  // 
 
   static CalendarEvent _parseCalendarEvent(Map<String, dynamic> json) {
     final eventTypeMap = <String, EventType>{

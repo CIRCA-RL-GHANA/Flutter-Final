@@ -1,4 +1,4 @@
-﻿/// Alerts Screen 10 — Settings & Preferences
+/// Alerts Screen 10  Settings & Preferences
 /// Notification channels, event notifications, quiet hours,
 /// workflow rules, escalation paths, assignment rules
 library;
@@ -22,8 +22,8 @@ class AlertsSettingsScreen extends StatelessWidget {
           body: ListView(
             padding: const EdgeInsets.all(16),
             children: [
-              // ── AI Insights Strip ──────────────
-              // ── Notification Channels ──────────────
+              //  AI Insights Strip 
+              //  Notification Channels 
               const _SectionHeader(title: 'Notification Channels', icon: Icons.notifications_outlined),
               const SizedBox(height: 8),
               AlertsSectionCard(
@@ -42,8 +42,8 @@ class AlertsSettingsScreen extends StatelessWidget {
 
               const SizedBox(height: 20),
 
-              // ── Event Notifications ──────────────
-              const _SectionHeader(title: 'Notify Me When…', icon: Icons.event_note_outlined),
+              //  Event Notifications 
+              const _SectionHeader(title: 'Notify Me When', icon: Icons.event_note_outlined),
               const SizedBox(height: 8),
               AlertsSectionCard(
                 child: Column(
@@ -61,7 +61,7 @@ class AlertsSettingsScreen extends StatelessWidget {
 
               const SizedBox(height: 20),
 
-              // ── Quiet Hours ──────────────
+              //  Quiet Hours 
               const _SectionHeader(title: 'Quiet Hours', icon: Icons.do_not_disturb_on_outlined),
               const SizedBox(height: 8),
               AlertsSectionCard(
@@ -91,7 +91,7 @@ class AlertsSettingsScreen extends StatelessWidget {
 
               const SizedBox(height: 20),
 
-              // ── Sound & Haptics ──────────────
+              //  Sound & Haptics 
               const _SectionHeader(title: 'Sound & Haptics', icon: Icons.volume_up_outlined),
               const SizedBox(height: 8),
               AlertsSectionCard(
@@ -106,7 +106,7 @@ class AlertsSettingsScreen extends StatelessWidget {
 
               const SizedBox(height: 20),
 
-              // ── Workflow ──────────────
+              //  Workflow 
               const _SectionHeader(title: 'Workflow Automation', icon: Icons.auto_fix_high),
               const SizedBox(height: 8),
               AlertsSectionCard(
@@ -123,7 +123,7 @@ class AlertsSettingsScreen extends StatelessWidget {
 
               const SizedBox(height: 20),
 
-              // ── Escalation Paths ──────────────
+              //  Escalation Paths 
               const _SectionHeader(title: 'Escalation Paths', icon: Icons.trending_up),
               const SizedBox(height: 8),
               AlertsSectionCard(
@@ -143,7 +143,7 @@ class AlertsSettingsScreen extends StatelessWidget {
 
               const SizedBox(height: 20),
 
-              // ── Danger Zone ──────────────
+              //  Danger Zone 
               const _SectionHeader(title: 'Data', icon: Icons.storage_outlined),
               const SizedBox(height: 8),
               AlertsSectionCard(
@@ -155,7 +155,7 @@ class AlertsSettingsScreen extends StatelessWidget {
                       subtitle: const Text('Download as CSV or PDF', style: TextStyle(fontSize: 12, color: Color(0xFF9CA3AF))),
                       trailing: const Icon(Icons.chevron_right, size: 20, color: Color(0xFF9CA3AF)),
                       onTap: () => ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Export started…'), backgroundColor: kAlertsInfo),
+                        const SnackBar(content: Text('Export started'), backgroundColor: kAlertsInfo),
                       ),
                     ),
                     const Divider(height: 1),
@@ -182,7 +182,7 @@ class AlertsSettingsScreen extends StatelessWidget {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         title: const Text('Clear Old Alerts?', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
         content: const Text('This will permanently delete all resolved alerts older than 30 days. This action cannot be undone.'),
         actions: [
@@ -200,9 +200,9 @@ class AlertsSettingsScreen extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 // Section Header
-// ──────────────────────────────────────────────
+// 
 
 class _SectionHeader extends StatelessWidget {
   final String title;
@@ -221,9 +221,9 @@ class _SectionHeader extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 // Toggle Tile
-// ──────────────────────────────────────────────
+// 
 
 class _ToggleTile extends StatelessWidget {
   final IconData icon;
@@ -253,9 +253,9 @@ class _ToggleTile extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 // Time Picker
-// ──────────────────────────────────────────────
+// 
 
 class _TimePicker extends StatelessWidget {
   final String label;
@@ -279,7 +279,7 @@ class _TimePicker extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
           color: const Color(0xFFF3F4F6),
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
           children: [
@@ -299,9 +299,9 @@ class _TimePicker extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 // Assignment Rule Tile
-// ──────────────────────────────────────────────
+// 
 
 class _AssignmentRuleTile extends StatelessWidget {
   final AssignmentRule rule;
@@ -327,7 +327,7 @@ class _AssignmentRuleTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${rule.category.name.toUpperCase()}${rule.priority != null ? ' (${rule.priority!.name})' : ''} â†’ ${rule.assignToRole}',
+                  '${rule.category.name.toUpperCase()}${rule.priority != null ? ' (${rule.priority!.name})' : ''} ${rule.assignToRole}',
                   style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
                 ),
               ],
@@ -340,9 +340,9 @@ class _AssignmentRuleTile extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 // Escalation Path Tile
-// ──────────────────────────────────────────────
+// 
 
 class _EscalationTile extends StatelessWidget {
   final EscalationPath path;
@@ -351,10 +351,10 @@ class _EscalationTile extends StatelessWidget {
 
   String _levelLabel(EscalationLevel level) {
     switch (level) {
-      case EscalationLevel.team: return 'ðŸŸ¢ Team Level';
-      case EscalationLevel.branch: return 'ðŸŸ¡ Branch Level';
-      case EscalationLevel.regional: return 'ðŸŸ  Regional Level';
-      case EscalationLevel.executive: return 'ðŸ”´ Executive Level';
+      case EscalationLevel.team: return ' Team Level';
+      case EscalationLevel.branch: return ' Branch Level';
+      case EscalationLevel.regional: return ' Regional Level';
+      case EscalationLevel.executive: return ' Executive Level';
     }
   }
 

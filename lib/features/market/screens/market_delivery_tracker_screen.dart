@@ -1,7 +1,7 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// MARKET MODULE — Screen 10: Delivery Tracker & PIN Verification
+/// 
+/// MARKET MODULE  Screen 10: Delivery Tracker & PIN Verification
 /// Live map, delivery timeline, driver info, PIN handoff, safety features
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -35,7 +35,7 @@ class _MarketDeliveryTrackerScreenState extends State<MarketDeliveryTrackerScree
       vsync: this,
       duration: const Duration(milliseconds: 480),
     );
-    // Elastic out — drop from above and settle with 1 bounce
+    // Elastic out  drop from above and settle with 1 bounce
     _pinScale = CurvedAnimation(parent: _pinDropCtrl, curve: Curves.elasticOut);
     _pinSlide = Tween<Offset>(
       begin: const Offset(0, -0.4),
@@ -167,7 +167,7 @@ class _MarketDeliveryTrackerScreenState extends State<MarketDeliveryTrackerScree
                       // Delivery timeline
                       _buildTimeline(tracking),
                       const SizedBox(height: 16),
-                      // PIN verification — drops in with elastic-out bounce
+                      // PIN verification  drops in with elastic-out bounce
                       if (tracking.isDriverApproaching)
                         SlideTransition(
                           position: _pinSlide,
@@ -201,7 +201,7 @@ class _MarketDeliveryTrackerScreenState extends State<MarketDeliveryTrackerScree
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: statusColor.withValues(alpha: 0.08),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(10),
         border: Border.all(color: statusColor.withValues(alpha: 0.3)),
       ),
       child: Row(
@@ -229,7 +229,7 @@ class _MarketDeliveryTrackerScreenState extends State<MarketDeliveryTrackerScree
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  '${tracking.distanceMiles.toStringAsFixed(1)} mi away • ${tracking.etaMinutes} min ETA',
+                  '${tracking.distanceMiles.toStringAsFixed(1)} mi away  ${tracking.etaMinutes} min ETA',
                   style: const TextStyle(fontSize: 13, color: IveTokens.ink2Color),
                 ),
               ],
@@ -396,7 +396,7 @@ class _MarketDeliveryTrackerScreenState extends State<MarketDeliveryTrackerScree
           ]),
           const SizedBox(height: IveTokens.s3),
           Text(
-            tracking.deliveryPin ?? '—',
+            tracking.deliveryPin ?? '',
             style: GoogleFonts.ibmPlexMono(
               fontSize: 40,
               fontWeight: FontWeight.w700,
@@ -508,7 +508,7 @@ class _SafetyOption extends StatelessWidget {
   }
 }
 
-// ─── Delivery Map Banner ──────────────────────────────────────────────────────
+//  Delivery Map Banner 
 
 class _DeliveryMapBanner extends StatelessWidget {
   final String driverName;
@@ -575,7 +575,7 @@ class _DeliveryMapBanner extends StatelessWidget {
                   icon: Icons.person_rounded,
                   color: IveTokens.accent,
                   label: 'Driver',
-                  address: '$driverName · ETA $etaMinutes min',
+                  address: '$driverName  ETA $etaMinutes min',
                 ),
                 const SizedBox(height: 12),
                 GestureDetector(

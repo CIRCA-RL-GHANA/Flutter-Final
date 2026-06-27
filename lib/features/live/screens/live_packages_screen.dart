@@ -1,11 +1,13 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// LIVE MODULE — Screen 9: Packages Tab
+/// 
+/// LIVE MODULE  Screen 9: Packages Tab
 /// All packages with sub-tabs, progress tracking,
 /// security info, and real-time status
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
@@ -49,8 +51,8 @@ class _LivePackagesScreenState extends State<LivePackagesScreen> with SingleTick
           appBar: LiveAppBar(
             title: 'Package Management',
             actions: [
-              IconButton(icon: const Icon(Icons.filter_list, size: 20), color: AppColors.textSecondary, onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Filter packages...')))),
-              IconButton(icon: const Icon(Icons.search, size: 20), color: AppColors.textSecondary, onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Search packages...')))),
+              IconButton(icon: const Icon(Icons.filter_list, size: 20), color: AppColors.textSecondary, onPressed: () => AppToast.show(context, 'Filter packages...')),
+              IconButton(icon: const Icon(Icons.search, size: 20), color: AppColors.textSecondary, onPressed: () => AppToast.show(context, 'Search packages...')),
             ],
           ),
           body: Column(
@@ -60,9 +62,9 @@ class _LivePackagesScreenState extends State<LivePackagesScreen> with SingleTick
                 color: Colors.white,
                 child: TabBar(
                   controller: _tabController,
-                  labelColor: kLiveColor,
+                  labelColor: IveTokens.moduleLive,
                   unselectedLabelColor: AppColors.textTertiary,
-                  indicatorColor: kLiveColor,
+                  indicatorColor: IveTokens.moduleLive,
                   labelStyle: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700),
                   tabs: [
                     Tab(text: 'PENDING (${pending.length})'),
@@ -97,12 +99,12 @@ class _LivePackagesScreenState extends State<LivePackagesScreen> with SingleTick
                     onPressed: () => Navigator.pushNamed(context, AppRoutes.livePackageCreation),
                     icon: const Icon(Icons.add, size: 18),
                     label: const Text('CREATE NEW PACKAGE', style: TextStyle(fontWeight: FontWeight.w700)),
-                    style: ElevatedButton.styleFrom(backgroundColor: kLiveColor, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+                    style: ElevatedButton.styleFrom(backgroundColor: IveTokens.moduleLive, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                   ),
                 ),
                 const SizedBox(width: 8),
                 OutlinedButton.icon(
-                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Exporting...'))),
+                  onPressed: () => AppToast.show(context, 'Exporting...'),
                   icon: const Icon(Icons.file_download, size: 16),
                   label: const Text('EXPORT', style: TextStyle(fontSize: 12)),
                   style: OutlinedButton.styleFrom(foregroundColor: AppColors.textSecondary, padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12)),
@@ -132,7 +134,7 @@ class _PackageList extends StatelessWidget {
     }
 
     return RefreshIndicator(
-      color: kLiveColor,
+      color: IveTokens.moduleLive,
       onRefresh: () async {
         HapticFeedback.mediumImpact();
         await prov.loadPackages();

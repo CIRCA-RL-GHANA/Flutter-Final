@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import '../core/design/ive_tokens.dart';
-import '../core/services/enterprise_service.dart';
+import '../../core/design/ive_tokens.dart';
+import '../../core/services/enterprise_service.dart';
 
-/// Pathway 4 — Embeddable Agentic Concierge chat widget.
+/// Pathway 4  Embeddable Agentic Concierge chat widget.
 ///
 /// Embeds a Genie AI conversation into any screen.  Manages its own
-/// session lifecycle (create → send → close).
+/// session lifecycle (create  send  close).
 ///
 /// Usage:
 /// ```dart
@@ -48,7 +48,7 @@ class _GenieConciergeWidgetState extends State<GenieConciergeWidget> {
 
   final List<_ChatMessage> _messages = [];
 
-  // ─── Lifecycle ────────────────────────────────────────────────────────────
+  //  Lifecycle 
 
   @override
   void initState() {
@@ -66,7 +66,7 @@ class _GenieConciergeWidgetState extends State<GenieConciergeWidget> {
     super.dispose();
   }
 
-  // ─── Session ──────────────────────────────────────────────────────────────
+  //  Session 
 
   Future<void> _startSession() async {
     setState(() {
@@ -110,7 +110,7 @@ class _GenieConciergeWidgetState extends State<GenieConciergeWidget> {
       final resp = await _svc.sendConciergeMessage(_sessionId!, text);
       final reply = resp.data?['text'] as String? ??
           resp.data?['card']?.toString() ??
-          '…';
+          '';
       setState(() => _messages.add(_ChatMessage(role: 'agent', text: reply)));
     } catch (e) {
       setState(() =>
@@ -133,7 +133,7 @@ class _GenieConciergeWidgetState extends State<GenieConciergeWidget> {
     });
   }
 
-  // ─── Build ────────────────────────────────────────────────────────────────
+  //  Build 
 
   @override
   Widget build(BuildContext context) {
@@ -158,7 +158,7 @@ class _GenieConciergeWidgetState extends State<GenieConciergeWidget> {
 
     return Column(
       children: [
-        // ── Header ──────────────────────────────────────────────────────────
+        //  Header 
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           color: accent,
@@ -188,7 +188,7 @@ class _GenieConciergeWidgetState extends State<GenieConciergeWidget> {
           ),
         ),
 
-        // ── Message list ─────────────────────────────────────────────────────
+        //  Message list 
         Expanded(
           child: ListView.builder(
             controller: _scrollCtrl,
@@ -201,7 +201,7 @@ class _GenieConciergeWidgetState extends State<GenieConciergeWidget> {
           ),
         ),
 
-        // ── Input bar ────────────────────────────────────────────────────────
+        //  Input bar 
         const Divider(height: 1),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
@@ -211,7 +211,7 @@ class _GenieConciergeWidgetState extends State<GenieConciergeWidget> {
                 child: TextField(
                   controller: _textCtrl,
                   decoration: const InputDecoration(
-                    hintText: 'Type a message…',
+                    hintText: 'Type a message',
                     border: OutlineInputBorder(),
                     contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     isDense: true,
@@ -233,7 +233,7 @@ class _GenieConciergeWidgetState extends State<GenieConciergeWidget> {
   }
 }
 
-// ─── Data models ──────────────────────────────────────────────────────────────
+//  Data models 
 
 class _ChatMessage {
   final String role; // 'user' | 'agent'

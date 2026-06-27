@@ -1,5 +1,5 @@
-/// MARKET MODULE — Ride Hailing & Execution
-/// 6 phases: Request → Matching → Driver Assigned → In-Ride → Arrival → Post-Ride
+/// MARKET MODULE  Ride Hailing & Execution
+/// 6 phases: Request  Matching  Driver Assigned  In-Ride  Arrival  Post-Ride
 /// P1 spec: map persists through all phases; only the status overlay text changes.
 library;
 
@@ -49,8 +49,8 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
     switch (_phase) {
       case 0: return 'Select your destination';
       case 1: return 'Finding nearby drivers...';
-      case 2: return 'Driver en route · ${ride?.estimatedMinutes ?? '--'} min';
-      case 3: return 'In transit · ${ride?.estimatedMinutes ?? '--'} min left';
+      case 2: return 'Driver en route  ${ride?.estimatedMinutes ?? '--'} min';
+      case 3: return 'In transit  ${ride?.estimatedMinutes ?? '--'} min left';
       case 4: return 'Arrived at destination';
       default: return '';
     }
@@ -69,7 +69,7 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
           backgroundColor: IveTokens.voidColor,
           body: Column(
             children: [
-              // ── Persistent map — never rebuilds between phases ──────
+              //  Persistent map  never rebuilds between phases 
               Expanded(
                 flex: _phase == 5 ? 1 : 2,
                 child: _PersistentMap(
@@ -79,7 +79,7 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
                 ),
               ),
 
-              // ── Phase-specific bottom panel ─────────────────────────
+              //  Phase-specific bottom panel 
               _buildBottomPanel(context, prov, activeRide),
             ],
           ),
@@ -133,7 +133,7 @@ class _MarketRideHailingScreenState extends State<MarketRideHailingScreen> {
   }
 }
 
-// ── Persistent map placeholder ───────────────────────────────────────────────
+//  Persistent map placeholder 
 
 class _PersistentMap extends StatelessWidget {
   final int phase;
@@ -163,7 +163,7 @@ class _PersistentMap extends StatelessWidget {
           ),
         ),
 
-        // Status overlay bar (phases 0–4 only)
+        // Status overlay bar (phases 04 only)
         if (phase < 5)
           Positioned(
             top: MediaQuery.of(context).padding.top + 8,
@@ -185,7 +185,7 @@ class _PersistentMap extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 8),
-                // Status text pill — only changes text, widget stays
+                // Status text pill  only changes text, widget stays
                 Expanded(
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
@@ -218,7 +218,7 @@ class _PersistentMap extends StatelessWidget {
   }
 }
 
-// ── Phase 0: Request panel ───────────────────────────────────────────────────
+//  Phase 0: Request panel 
 
 class _RequestPanel extends StatelessWidget {
   final MarketProvider prov;
@@ -349,7 +349,7 @@ class _RequestPanel extends StatelessWidget {
   }
 }
 
-// ── Phase 1: Matching panel ──────────────────────────────────────────────────
+//  Phase 1: Matching panel 
 
 class _MatchingPanel extends StatelessWidget {
   final VoidCallback onCancel;
@@ -399,7 +399,7 @@ class _MatchingPanel extends StatelessWidget {
   }
 }
 
-// ── Phase 2: Driver assigned panel ──────────────────────────────────────────
+//  Phase 2: Driver assigned panel 
 
 class _DriverPanel extends StatelessWidget {
   final RideRequest ride;
@@ -506,7 +506,7 @@ class _DriverPanel extends StatelessWidget {
   }
 }
 
-// ── Phase 3: In-ride panel ───────────────────────────────────────────────────
+//  Phase 3: In-ride panel 
 
 class _InRidePanel extends StatelessWidget {
   final RideRequest ride;
@@ -563,7 +563,7 @@ class _InRidePanel extends StatelessWidget {
   }
 }
 
-// ── Phase 4: Arrival panel ───────────────────────────────────────────────────
+//  Phase 4: Arrival panel 
 
 class _ArrivalPanel extends StatelessWidget {
   final RideRequest ride;
@@ -656,7 +656,7 @@ class _FareRow extends StatelessWidget {
   }
 }
 
-// ── Phase 5: Post-ride panel ─────────────────────────────────────────────────
+//  Phase 5: Post-ride panel 
 
 class _PostRidePanel extends StatelessWidget {
   final VoidCallback onDone;
@@ -745,7 +745,7 @@ class _PostRidePanel extends StatelessWidget {
   }
 }
 
-// ── Shared small widgets ─────────────────────────────────────────────────────
+//  Shared small widgets 
 
 class _BottomHandle extends StatelessWidget {
   @override
@@ -755,7 +755,7 @@ class _BottomHandle extends StatelessWidget {
       child: Center(
         child: Container(
           width: 36, height: 4,
-          decoration: BoxDecoration(color: IveTokens.hair2Color, borderRadius: BorderRadius.circular(2)),
+          decoration: BoxDecoration(color: IveTokens.hair2Color, borderRadius: BorderRadius.circular(6)),
         ),
       ),
     );
@@ -847,7 +847,7 @@ class _DarkTextField extends StatelessWidget {
   }
 }
 
-// ── Ride type helpers ────────────────────────────────────────────────────────
+//  Ride type helpers 
 
 IconData _rideTypeIcon(RideType type) {
   switch (type) {
@@ -881,10 +881,10 @@ String _rideTypeDesc(RideType type) {
 
 String _rideTypePrice(RideType type) {
   switch (type) {
-    case RideType.standard: return '\$8–12';
-    case RideType.premium:  return '\$15–20';
-    case RideType.xl:       return '\$18–25';
-    case RideType.eco:      return '\$7–10';
-    case RideType.assist:   return '\$10–15';
+    case RideType.standard: return '\$812';
+    case RideType.premium:  return '\$1520';
+    case RideType.xl:       return '\$1825';
+    case RideType.eco:      return '\$710';
+    case RideType.assist:   return '\$1015';
   }
 }

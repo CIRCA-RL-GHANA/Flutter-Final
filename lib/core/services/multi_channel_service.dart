@@ -1,5 +1,5 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// Multi-Channel Service — Flutter ↔ Backend Integration
+/// 
+/// Multi-Channel Service  Flutter  Backend Integration
 ///
 /// Maps to MultiChannelController endpoints:
 ///   POST   /multi-channel/channels
@@ -7,7 +7,7 @@
 ///   PUT    /multi-channel/channels/{channelId}/sync
 ///   PATCH  /multi-channel/channels/{channelId}/status
 ///   DELETE /multi-channel/channels/{channelId}
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import '../network/api_client.dart';
@@ -19,7 +19,7 @@ class MultiChannelService {
 
   MultiChannelService([ApiClient? api]) : _api = api ?? ApiClient.instance;
 
-  // ─── Channels ────────────────────────────────────────────────────────────
+  //  Channels 
 
   Future<ApiResponse<Map<String, dynamic>>> registerChannel(
     Map<String, dynamic> data,

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'ive_text.dart';
 import 'ive_tokens.dart';
 
-/// Genie intelligence strip — appears at most ONCE per screen.
+/// Genie intelligence strip  appears at most ONCE per screen.
 ///
 /// Gold border + genie-soft background. The spark icon breathes on a
-/// 4-second cycle. Slides in over 240 ms. Swipe-up or tap ✕ to dismiss.
+/// 4-second cycle. Slides in over 240 ms. Swipe-up or tap  to dismiss.
 ///
 /// Rule: never place a second [GenieStrip] on the same screen. If you need
 /// a second Genie element use a plain [Text] with [IveTokens.genieColor].

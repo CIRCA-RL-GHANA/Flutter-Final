@@ -1,32 +1,17 @@
-﻿/// GO Module — Shared Reusable UI Components
-/// Module Color: Emerald Green (0xFF10B981)
+/// GO Module  Shared Reusable UI Components
+/// Module Color: IveTokens.moduleGo
 /// Visibility: Owner + Administrator only
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
 import '../models/go_models.dart';
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// COLOR CONSTANTS
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// All GO colors use IveTokens directly — no local constants needed.
 
-const kGoColor = Color(0xFF10B981);
-const kGoColorLight = Color(0xFFD1FAE5);
-const kGoColorDark = Color(0xFF065F46);
-const kGoPositive = Color(0xFF10B981);
-const kGoPositiveLight = Color(0xFFD1FAE5);
-const kGoNegative = Color(0xFFEF4444);
-const kGoNegativeLight = Color(0xFFFEE2E2);
-const kGoWarning = Color(0xFFF59E0B);
-const kGoWarningLight = Color(0xFFFEF3C7);
-const kGoInfo = Color(0xFF3B82F6);
-const kGoInfoLight = Color(0xFFDBEAFE);
-const kGoPurple = Color(0xFF7C3AED);
-const kGoPurpleLight = Color(0xFFEDE9FE);
-
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // GO APP BAR
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class GoAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -42,18 +27,18 @@ class GoAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
-      surfaceTintColor: Colors.white,
+      backgroundColor: IveTokens.surface,
+      surfaceTintColor: IveTokens.surface,
       elevation: 0,
       leading: showBackButton
-          ? IconButton(icon: const Icon(Icons.arrow_back, color: Color(0xFF1A1A1A)), onPressed: () => Navigator.pop(context))
+          ? IconButton(icon: Icon(Icons.arrow_back, color: IveTokens.ink), onPressed: () => Navigator.pop(context))
           : null,
       title: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Container(width: 8, height: 8, decoration: const BoxDecoration(color: kGoColor, shape: BoxShape.circle)),
+          Container(width: 8, height: 8, decoration: const BoxDecoration(color: IveTokens.moduleGo, shape: BoxShape.circle)),
           const SizedBox(width: 8),
-          Text(title, style: const TextStyle(color: Color(0xFF1A1A1A), fontSize: 18, fontWeight: FontWeight.w700)),
+          Text(title, style: IveType.title3.copyWith(color: IveTokens.ink)),
         ],
       ),
       actions: actions,
@@ -62,9 +47,9 @@ class GoAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // SECTION CARD
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class GoSectionCard extends StatelessWidget {
   final Widget child;
@@ -79,18 +64,18 @@ class GoSectionCard extends StatelessWidget {
       width: double.infinity,
       padding: padding ?? const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: borderColor ?? const Color(0xFFE5E7EB)),
+        color: IveTokens.surface,
+        borderRadius: BorderRadius.circular(IveTokens.rSm),
+        border: Border.all(color: borderColor ?? IveTokens.hairline2),
       ),
       child: child,
     );
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // EMPTY STATE
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class GoEmptyState extends StatelessWidget {
   final IconData icon;
@@ -109,17 +94,18 @@ class GoEmptyState extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, size: 56, color: const Color(0xFFE5E7EB)),
+            Icon(icon, size: 56, color: IveTokens.hairline2),
             const SizedBox(height: 16),
-            Text(title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFF1A1A1A))),
+            Text(title, style: IveType.headline.copyWith(color: IveTokens.ink)),
             const SizedBox(height: 8),
-            Text(message, textAlign: TextAlign.center, style: const TextStyle(fontSize: 13, color: Color(0xFF9CA3AF))),
+            Text(message, textAlign: TextAlign.center, style: IveType.subhead.copyWith(color: IveTokens.ink2)),
             if (actionLabel != null) ...[
               const SizedBox(height: 16),
-              ElevatedButton(
+              IveButton.primary(
+                label: actionLabel!,
                 onPressed: onAction,
-                style: ElevatedButton.styleFrom(backgroundColor: kGoColor, foregroundColor: Colors.white, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
-                child: Text(actionLabel!),
+                expand: false,
+                compact: true,
               ),
             ],
           ],
@@ -129,9 +115,9 @@ class GoEmptyState extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // CONTEXT CHIP
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class GoContextChip extends StatelessWidget {
   final FinancialContext context;
@@ -147,18 +133,18 @@ class GoContextChip extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
         decoration: BoxDecoration(
-          color: kGoColorLight,
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: kGoColor.withValues(alpha: 0.3)),
+          color: IveTokens.surfaceRaised,
+          borderRadius: BorderRadius.circular(IveTokens.rSm),
+          border: Border.all(color: IveTokens.moduleGo.withValues(alpha: 0.3)),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(ctx.typeEmoji, style: const TextStyle(fontSize: 14)),
             const SizedBox(width: 6),
-            Text('${ctx.name} • ${ctx.role}', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: kGoColorDark)),
+            Text('${ctx.name}  ${ctx.role}', style: IveType.caption.copyWith(fontWeight: FontWeight.w600, color: IveTokens.moduleGo)),
             const SizedBox(width: 4),
-            const Icon(Icons.keyboard_arrow_down, size: 16, color: kGoColorDark),
+            const Icon(Icons.keyboard_arrow_down, size: 16, color: IveTokens.moduleGo),
           ],
         ),
       ),
@@ -166,9 +152,9 @@ class GoContextChip extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // METRIC CARD (Small stat box)
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class GoMetricCard extends StatelessWidget {
   final String label;
@@ -187,9 +173,9 @@ class GoMetricCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: const Color(0xFFE5E7EB)),
+          color: IveTokens.surface,
+          borderRadius: BorderRadius.circular(IveTokens.rSm),
+          border: Border.all(color: IveTokens.hairline2),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -197,15 +183,15 @@ class GoMetricCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                if (icon != null) ...[Icon(icon!, size: 14, color: const Color(0xFF9CA3AF)), const SizedBox(width: 4)],
-                Expanded(child: Text(label, style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF), fontWeight: FontWeight.w500), overflow: TextOverflow.ellipsis)),
+                if (icon != null) ...[Icon(icon!, size: 14, color: IveTokens.ink2), const SizedBox(width: 4)],
+                Expanded(child: Text(label, style: IveType.caption.copyWith(color: IveTokens.ink2, fontWeight: FontWeight.w500), overflow: TextOverflow.ellipsis)),
               ],
             ),
             const SizedBox(height: 6),
-            Text(value, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: valueColor ?? const Color(0xFF1A1A1A))),
+            Text(value, style: IveType.title3.copyWith(color: valueColor ?? IveTokens.ink)),
             if (subtitle != null) ...[
               const SizedBox(height: 2),
-              Text(subtitle!, style: const TextStyle(fontSize: 10, color: Color(0xFF9CA3AF))),
+              Text(subtitle!, style: IveType.caption.copyWith(color: IveTokens.ink2)),
             ],
           ],
         ),
@@ -214,9 +200,9 @@ class GoMetricCard extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // GATEWAY STATUS ROW
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class GatewayStatusRow extends StatelessWidget {
   final PaymentGateway gateway;
@@ -238,14 +224,14 @@ class GatewayStatusRow extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(gateway.name, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-                  Text(gateway.statusLabel, style: TextStyle(fontSize: 11, color: gateway.statusColor)),
+                  Text(gateway.name, style: IveType.subhead.copyWith(fontWeight: FontWeight.w600, color: IveTokens.ink)),
+                  Text(gateway.statusLabel, style: IveType.caption.copyWith(color: gateway.statusColor)),
                 ],
               ),
             ),
-            Text('${gateway.balance.toStringAsFixed(0)} ${gateway.currency}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
+            Text('${gateway.balance.toStringAsFixed(0)} ${gateway.currency}', style: IveType.subhead.copyWith(fontWeight: FontWeight.w600, color: IveTokens.ink)),
             const SizedBox(width: 8),
-            const Icon(Icons.settings, size: 16, color: Color(0xFF9CA3AF)),
+            const Icon(Icons.settings, size: 16, color: IveTokens.ink2),
           ],
         ),
       ),
@@ -253,9 +239,9 @@ class GatewayStatusRow extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // QUICK ACTION BUTTON
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class GoQuickAction extends StatelessWidget {
   final IconData icon;
@@ -273,9 +259,9 @@ class GoQuickAction extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: const Color(0xFFE5E7EB)),
+          color: IveTokens.surface,
+          borderRadius: BorderRadius.circular(IveTokens.rSm),
+          border: Border.all(color: IveTokens.hairline2),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -285,22 +271,22 @@ class GoQuickAction extends StatelessWidget {
               children: [
                 Container(
                   padding: const EdgeInsets.all(6),
-                  decoration: BoxDecoration(color: kGoColorLight, borderRadius: BorderRadius.circular(8)),
-                  child: Icon(icon, size: 18, color: kGoColor),
+                  decoration: BoxDecoration(color: IveTokens.surfaceRaised, borderRadius: BorderRadius.circular(IveTokens.rSm)),
+                  child: Icon(icon, size: 18, color: IveTokens.moduleGo),
                 ),
                 const Spacer(),
                 if (badge != null)
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                    decoration: BoxDecoration(color: kGoColorLight, borderRadius: BorderRadius.circular(8)),
-                    child: Text(badge!, style: const TextStyle(fontSize: 9, fontWeight: FontWeight.w600, color: kGoColorDark)),
+                    decoration: BoxDecoration(color: IveTokens.surfaceRaised, borderRadius: BorderRadius.circular(IveTokens.rSm)),
+                    child: Text(badge!, style: IveType.caption.copyWith(fontWeight: FontWeight.w600, color: IveTokens.moduleGo)),
                   ),
               ],
             ),
             const SizedBox(height: 8),
-            Text(label, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
+            Text(label, style: IveType.subhead.copyWith(fontWeight: FontWeight.w600, color: IveTokens.ink)),
             const SizedBox(height: 2),
-            Text(subtitle, style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+            Text(subtitle, style: IveType.caption.copyWith(color: IveTokens.ink2)),
           ],
         ),
       ),
@@ -308,9 +294,9 @@ class GoQuickAction extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // TRANSACTION ROW
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class GoTransactionRow extends StatelessWidget {
   final GoTransaction transaction;
@@ -327,9 +313,9 @@ class GoTransactionRow extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 8),
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: const Color(0xFFE5E7EB)),
+          color: IveTokens.surface,
+          borderRadius: BorderRadius.circular(IveTokens.rSm),
+          border: Border.all(color: IveTokens.hairline2),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -339,19 +325,19 @@ class GoTransactionRow extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(6),
                   decoration: BoxDecoration(
-                    color: isPositive ? kGoPositiveLight : kGoNegativeLight,
-                    borderRadius: BorderRadius.circular(8),
+                    color: IveTokens.surfaceRaised,
+                    borderRadius: BorderRadius.circular(IveTokens.rSm),
                   ),
-                  child: Icon(transaction.typeIcon, size: 16, color: isPositive ? kGoPositive : kGoNegative),
+                  child: Icon(transaction.typeIcon, size: 16, color: isPositive ? IveTokens.success : IveTokens.danger),
                 ),
                 const SizedBox(width: 10),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(transaction.typeLabel, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
+                      Text(transaction.typeLabel, style: IveType.subhead.copyWith(fontWeight: FontWeight.w600, color: IveTokens.ink)),
                       const SizedBox(height: 2),
-                      Text('${transaction.fromEntity} â†’ ${transaction.toEntity}', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF)), overflow: TextOverflow.ellipsis),
+                      Text('${transaction.fromEntity}  ${transaction.toEntity}', style: IveType.caption.copyWith(color: IveTokens.ink2), overflow: TextOverflow.ellipsis),
                     ],
                   ),
                 ),
@@ -359,17 +345,17 @@ class GoTransactionRow extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text('${isPositive ? '+' : '-'}${transaction.amount.toStringAsFixed(0)} QP',
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: isPositive ? kGoPositive : kGoNegative)),
+                      style: IveType.bodyEmphasis.copyWith(color: isPositive ? IveTokens.success : IveTokens.danger)),
                     const SizedBox(height: 2),
-                    Text('${transaction.statusEmoji} ${transaction.statusLabel}', style: const TextStyle(fontSize: 10, color: Color(0xFF9CA3AF))),
+                    Text('${transaction.statusEmoji} ${transaction.statusLabel}', style: IveType.caption.copyWith(color: IveTokens.ink2)),
                   ],
                 ),
               ],
             ),
             if (transaction.feeAmount != null) ...[
               const SizedBox(height: 6),
-              Text('Fee: ${transaction.feeAmount!.toStringAsFixed(2)} QP • Net: ${transaction.netAmount?.toStringAsFixed(2) ?? '-'} QP',
-                style: const TextStyle(fontSize: 10, color: Color(0xFF9CA3AF))),
+              Text('Fee: ${transaction.feeAmount!.toStringAsFixed(2)} QP  Net: ${transaction.netAmount?.toStringAsFixed(2) ?? '-'} QP',
+                style: IveType.caption.copyWith(color: IveTokens.ink2)),
             ],
           ],
         ),
@@ -378,9 +364,9 @@ class GoTransactionRow extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // TAB CARD (Credit tab overview)
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class GoTabCard extends StatelessWidget {
   final GoTab tab;
@@ -395,13 +381,13 @@ class GoTabCard extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.only(bottom: 10),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: const Color(0xFFE5E7EB)),
+          color: IveTokens.surface,
+          borderRadius: BorderRadius.circular(IveTokens.rSm),
+          border: Border.all(color: IveTokens.hairline2),
         ),
         child: Row(
           children: [
-            Container(width: 4, height: 88, decoration: BoxDecoration(color: tab.riskColor, borderRadius: const BorderRadius.only(topLeft: Radius.circular(12), bottomLeft: Radius.circular(12)))),
+            Container(width: 4, height: 88, decoration: BoxDecoration(color: tab.riskColor, borderRadius: const BorderRadius.only(topLeft: Radius.circular(IveTokens.rSm), bottomLeft: Radius.circular(IveTokens.rSm)))),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(12),
@@ -410,41 +396,41 @@ class GoTabCard extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Text(tab.id, style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF), fontWeight: FontWeight.w500)),
+                        Text(tab.id, style: IveType.caption.copyWith(color: IveTokens.ink2, fontWeight: FontWeight.w500)),
                         const SizedBox(width: 6),
-                        Text('• ${tab.entityName} • ${tab.entityRole}', style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
+                        Text(' ${tab.entityName}  ${tab.entityRole}', style: IveType.caption.copyWith(color: IveTokens.mute)),
                         const Spacer(),
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                          decoration: BoxDecoration(color: tab.statusColor.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(6)),
-                          child: Text(tab.statusLabel, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: tab.statusColor)),
+                          decoration: BoxDecoration(color: tab.statusColor.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(IveTokens.rXs)),
+                          child: Text(tab.statusLabel, style: IveType.caption.copyWith(fontWeight: FontWeight.w600, color: tab.statusColor)),
                         ),
                       ],
                     ),
                     const SizedBox(height: 4),
-                    Text(tab.description, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
+                    Text(tab.description, style: IveType.subhead.copyWith(fontWeight: FontWeight.w600, color: IveTokens.ink)),
                     const SizedBox(height: 6),
                     Row(
                       children: [
                         Expanded(
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(4),
+                            borderRadius: BorderRadius.circular(IveTokens.rXs),
                             child: LinearProgressIndicator(
                               value: (tab.utilization / 100).clamp(0, 1),
-                              backgroundColor: const Color(0xFFF3F4F6),
-                              valueColor: AlwaysStoppedAnimation(tab.utilization > 80 ? kGoNegative : kGoColor),
+                              backgroundColor: IveTokens.hairline,
+                              valueColor: AlwaysStoppedAnimation(tab.utilization > 80 ? IveTokens.danger : IveTokens.moduleGo),
                               minHeight: 4,
                             ),
                           ),
                         ),
                         const SizedBox(width: 8),
                         Text('${tab.currentBalance.toStringAsFixed(0)}/${tab.creditLimit.toStringAsFixed(0)} QP (${tab.utilization.toStringAsFixed(0)}%)',
-                          style: const TextStyle(fontSize: 10, color: Color(0xFF9CA3AF))),
+                          style: IveType.caption.copyWith(color: IveTokens.ink2)),
                       ],
                     ),
                     const SizedBox(height: 4),
-                    Text(tab.isOverdue ? 'âš ï¸ Overdue by ${(-tab.daysUntilDue)} days' : 'Due: ${tab.daysUntilDue}d',
-                      style: TextStyle(fontSize: 11, color: tab.isOverdue ? kGoNegative : const Color(0xFF9CA3AF), fontWeight: tab.isOverdue ? FontWeight.w600 : FontWeight.w400)),
+                    Text(tab.isOverdue ? ' Overdue by ${(-tab.daysUntilDue)} days' : 'Due: ${tab.daysUntilDue}d',
+                      style: IveType.caption.copyWith(color: tab.isOverdue ? IveTokens.danger : IveTokens.ink2, fontWeight: tab.isOverdue ? FontWeight.w600 : FontWeight.w400)),
                   ],
                 ),
               ),
@@ -456,9 +442,9 @@ class GoTabCard extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // REQUEST CARD
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class GoRequestCard extends StatelessWidget {
   final GoRequest request;
@@ -474,29 +460,29 @@ class GoRequestCard extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 10),
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: const Color(0xFFE5E7EB)),
+          color: IveTokens.surface,
+          borderRadius: BorderRadius.circular(IveTokens.rSm),
+          border: Border.all(color: IveTokens.hairline2),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
-                Icon(request.typeIcon, size: 18, color: kGoColor),
+                Icon(request.typeIcon, size: 18, color: IveTokens.moduleGo),
                 const SizedBox(width: 8),
-                Expanded(child: Text(request.typeLabel, style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF), fontWeight: FontWeight.w500))),
+                Expanded(child: Text(request.typeLabel, style: IveType.caption.copyWith(color: IveTokens.ink2, fontWeight: FontWeight.w500))),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                  decoration: BoxDecoration(color: request.statusColor.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(6)),
-                  child: Text(request.statusLabel, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: request.statusColor)),
+                  decoration: BoxDecoration(color: request.statusColor.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(IveTokens.rXs)),
+                  child: Text(request.statusLabel, style: IveType.caption.copyWith(fontWeight: FontWeight.w600, color: request.statusColor)),
                 ),
               ],
             ),
             const SizedBox(height: 6),
-            Text(request.title, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
+            Text(request.title, style: IveType.subhead.copyWith(fontWeight: FontWeight.w600, color: IveTokens.ink)),
             const SizedBox(height: 4),
-            Text('by ${request.submittedBy} • ${request.id}', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+            Text('by ${request.submittedBy}  ${request.id}', style: IveType.caption.copyWith(color: IveTokens.ink2)),
           ],
         ),
       ),
@@ -504,9 +490,9 @@ class GoRequestCard extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // FAVORITE ENTITY CARD
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class GoFavoriteCard extends StatelessWidget {
   final FavoriteEntity entity;
@@ -521,9 +507,9 @@ class GoFavoriteCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: const Color(0xFFE5E7EB)),
+          color: IveTokens.surface,
+          borderRadius: BorderRadius.circular(IveTokens.rSm),
+          border: Border.all(color: IveTokens.hairline2),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -532,8 +518,8 @@ class GoFavoriteCard extends StatelessWidget {
               children: [
                 Stack(
                   children: [
-                    CircleAvatar(radius: 20, backgroundColor: kGoColorLight, child: Text(entity.name[0], style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: kGoColorDark))),
-                    if (entity.isOnline) Positioned(right: 0, bottom: 0, child: Container(width: 10, height: 10, decoration: BoxDecoration(color: kGoPositive, shape: BoxShape.circle, border: Border.all(color: Colors.white, width: 2)))),
+                    CircleAvatar(radius: 20, backgroundColor: IveTokens.surfaceRaised, child: Text(entity.name[0], style: IveType.bodyEmphasis.copyWith(color: IveTokens.moduleGo))),
+                    if (entity.isOnline) Positioned(right: 0, bottom: 0, child: Container(width: 10, height: 10, decoration: BoxDecoration(color: IveTokens.success, shape: BoxShape.circle, border: Border.all(color: IveTokens.surface, width: 2)))),
                   ],
                 ),
                 const SizedBox(width: 10),
@@ -541,8 +527,8 @@ class GoFavoriteCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(entity.name, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-                      Text('${entity.handle} • ${entity.role}', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                      Text(entity.name, style: IveType.subhead.copyWith(fontWeight: FontWeight.w600, color: IveTokens.ink)),
+                      Text('${entity.handle}  ${entity.role}', style: IveType.caption.copyWith(color: IveTokens.ink2)),
                     ],
                   ),
                 ),
@@ -552,12 +538,12 @@ class GoFavoriteCard extends StatelessWidget {
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(Icons.star, size: 12, color: Color(0xFFF59E0B)),
+                        const Icon(Icons.star, size: 12, color: IveTokens.warning),
                         const SizedBox(width: 2),
-                        Text(entity.rating.toStringAsFixed(1), style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600)),
+                        Text(entity.rating.toStringAsFixed(1), style: IveType.caption.copyWith(fontWeight: FontWeight.w600, color: IveTokens.ink)),
                       ],
                     ),
-                    Text('${entity.transactionCount} trans', style: const TextStyle(fontSize: 10, color: Color(0xFF9CA3AF))),
+                    Text('${entity.transactionCount} trans', style: IveType.caption.copyWith(color: IveTokens.ink2)),
                   ],
                 ),
               ],
@@ -571,8 +557,8 @@ class GoFavoriteCard extends StatelessWidget {
                 const Spacer(),
                 if (entity.isMutualFavorite) Container(
                   padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                  decoration: BoxDecoration(color: kGoColorLight, borderRadius: BorderRadius.circular(6)),
-                  child: const Text('Mutual â¤ï¸', style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600, color: kGoColorDark)),
+                  decoration: BoxDecoration(color: IveTokens.surfaceRaised, borderRadius: BorderRadius.circular(IveTokens.rXs)),
+                  child: Text('Mutual ', style: IveType.caption.copyWith(fontWeight: FontWeight.w600, color: IveTokens.moduleGo)),
                 ),
               ],
             ),
@@ -593,16 +579,16 @@ class _MiniStat extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: const TextStyle(fontSize: 9, color: Color(0xFF9CA3AF))),
-        Text(value, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600)),
+        Text(label, style: IveType.caption.copyWith(color: IveTokens.ink2)),
+        Text(value, style: IveType.caption.copyWith(fontWeight: FontWeight.w600, color: IveTokens.ink)),
       ],
     );
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // HEALTH SCORE ARC
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class GoHealthGauge extends StatelessWidget {
   final int score;
@@ -612,7 +598,7 @@ class GoHealthGauge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = score >= 70 ? kGoPositive : score >= 50 ? kGoWarning : kGoNegative;
+    final color = score >= 70 ? IveTokens.success : score >= 50 ? IveTokens.warning : IveTokens.danger;
     return SizedBox(
       width: size,
       height: size,
@@ -625,7 +611,7 @@ class GoHealthGauge extends StatelessWidget {
             child: CircularProgressIndicator(
               value: score / 100,
               strokeWidth: 6,
-              backgroundColor: const Color(0xFFF3F4F6),
+              backgroundColor: IveTokens.hairline,
               valueColor: AlwaysStoppedAnimation(color),
             ),
           ),
@@ -633,7 +619,7 @@ class GoHealthGauge extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text('$score', style: TextStyle(fontSize: size * 0.28, fontWeight: FontWeight.w700, color: color)),
-              Text('/100', style: TextStyle(fontSize: size * 0.12, color: const Color(0xFF9CA3AF))),
+              Text('/100', style: TextStyle(fontSize: size * 0.12, color: IveTokens.ink2)),
             ],
           ),
         ],
@@ -642,9 +628,9 @@ class GoHealthGauge extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // SECTION HEADER WITH ACTION
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class GoSectionHeader extends StatelessWidget {
   final String title;
@@ -660,12 +646,12 @@ class GoSectionHeader extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 8),
       child: Row(
         children: [
-          if (icon != null) ...[Icon(icon!, size: 18, color: kGoColor), const SizedBox(width: 8)],
-          Text(title, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: Color(0xFF1A1A1A))),
+          if (icon != null) ...[Icon(icon!, size: 18, color: IveTokens.moduleGo), const SizedBox(width: 8)],
+          Text(title, style: IveType.bodyEmphasis.copyWith(color: IveTokens.ink)),
           const Spacer(),
           if (actionLabel != null) GestureDetector(
             onTap: onAction,
-            child: Text(actionLabel!, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: kGoColor)),
+            child: Text(actionLabel!, style: IveType.subhead.copyWith(fontWeight: FontWeight.w600, color: IveTokens.moduleGo)),
           ),
         ],
       ),
@@ -673,9 +659,9 @@ class GoSectionHeader extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // STEP INDICATOR (For wizard flows)
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class GoStepIndicator extends StatelessWidget {
   final int currentStep;
@@ -691,7 +677,7 @@ class GoStepIndicator extends StatelessWidget {
       child: Row(
         children: List.generate(totalSteps * 2 - 1, (index) {
           if (index.isOdd) {
-            return Expanded(child: Container(height: 2, color: index ~/ 2 < currentStep ? kGoColor : const Color(0xFFE5E7EB)));
+            return Expanded(child: Container(height: 2, color: index ~/ 2 < currentStep ? IveTokens.moduleGo : IveTokens.hairline2));
           }
           final step = index ~/ 2;
           final isActive = step <= currentStep;
@@ -699,14 +685,14 @@ class GoStepIndicator extends StatelessWidget {
             width: 28,
             height: 28,
             decoration: BoxDecoration(
-              color: isActive ? kGoColor : const Color(0xFFF3F4F6),
+              color: isActive ? IveTokens.moduleGo : IveTokens.surfaceRaised,
               shape: BoxShape.circle,
-              border: Border.all(color: isActive ? kGoColor : const Color(0xFFE5E7EB), width: 2),
+              border: Border.all(color: isActive ? IveTokens.moduleGo : IveTokens.hairline2, width: 2),
             ),
             child: Center(
               child: step < currentStep
-                  ? const Icon(Icons.check, size: 14, color: Colors.white)
-                  : Text('${step + 1}', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: isActive ? Colors.white : const Color(0xFF9CA3AF))),
+                  ? const Icon(Icons.check, size: 14, color: IveTokens.bg)
+                  : Text('${step + 1}', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: isActive ? IveTokens.bg : IveTokens.ink2)),
             ),
           );
         }),
@@ -715,9 +701,9 @@ class GoStepIndicator extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // AUDIT ENTRY ROW
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class GoAuditRow extends StatelessWidget {
   final AuditEntry entry;
@@ -742,14 +728,14 @@ class GoAuditRow extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(entry.action, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500)),
+                Text(entry.action, style: IveType.subhead.copyWith(fontWeight: FontWeight.w500, color: IveTokens.ink)),
                 const SizedBox(height: 2),
-                Text('${entry.actor}${entry.ipAddress != null ? ' • ${entry.ipAddress}' : ''}',
-                  style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+                Text('${entry.actor}${entry.ipAddress != null ? '  ${entry.ipAddress}' : ''}',
+                  style: IveType.caption.copyWith(color: IveTokens.ink2)),
               ],
             ),
           ),
-          Text(_formatTimeAgo(entry.timestamp), style: const TextStyle(fontSize: 10, color: Color(0xFF9CA3AF))),
+          Text(_formatTimeAgo(entry.timestamp), style: IveType.caption.copyWith(color: IveTokens.ink2)),
         ],
       ),
     );
@@ -763,9 +749,9 @@ class GoAuditRow extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // MINI DONUT CHART (Reusable)
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class GoDonutChart extends StatelessWidget {
   final List<double> values;

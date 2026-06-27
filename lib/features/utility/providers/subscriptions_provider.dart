@@ -1,9 +1,9 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// Subscriptions Provider — State Management
+/// 
+/// Subscriptions Provider  State Management
 ///
 /// Manages subscription plans and active subscriptions.
 /// Delegates all API calls to SubscriptionsService.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'package:flutter/foundation.dart';
@@ -15,7 +15,7 @@ class SubscriptionsProvider extends ChangeNotifier {
   SubscriptionsProvider({SubscriptionsService? service})
       : _service = service ?? SubscriptionsService();
 
-  // ─── State ────────────────────────────────────────────────────────────────
+  //  State 
 
   List<dynamic> _plans = [];
   List<dynamic> get plans => _plans;
@@ -34,7 +34,7 @@ class SubscriptionsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Plans ────────────────────────────────────────────────────────────────
+  //  Plans 
 
   Future<void> loadPlans() async {
     _isLoading = true;
@@ -58,7 +58,7 @@ class SubscriptionsProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Active Subscription ──────────────────────────────────────────────────
+  //  Active Subscription 
 
   Future<void> loadActiveSubscription(
     String targetType,

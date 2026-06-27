@@ -1,4 +1,4 @@
-/// GO Module — Provider (State Management)
+/// GO Module  Provider (State Management)
 /// Comprehensive demo data for all 16 screens
 /// Module Color: Emerald Green (0xFF10B981)
 library;
@@ -8,7 +8,7 @@ import '../models/go_models.dart';
 import '../../../core/services/services.dart';
 
 class GoProvider extends ChangeNotifier {
-  // ──── SERVICES ────────────────────────────────
+  //  SERVICES 
 
   final QPointsService _qPointsService;
   final EntityService _entityService;
@@ -19,7 +19,7 @@ class GoProvider extends ChangeNotifier {
   })  : _qPointsService = qPointsService ?? QPointsService(),
         _entityService = entityService ?? EntityService();
 
-  // ──── LOADING / ERROR STATE ────────────────────────────────
+  //  LOADING / ERROR STATE 
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -38,7 +38,7 @@ class GoProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ──── INIT ────────────────────────────────
+  //  INIT 
 
   Future<void> init({String? entityId}) async {
     _isLoading = true;
@@ -58,7 +58,7 @@ class GoProvider extends ChangeNotifier {
     }
   }
 
-  // ──── ACTIVE CONTEXT ────────────────────────────────
+  //  ACTIVE CONTEXT 
 
   String _activeContextId = 'ctx-2';
   String get activeContextId => _activeContextId;
@@ -76,7 +76,7 @@ class GoProvider extends ChangeNotifier {
     }
   }
 
-  // ──── CONTEXTS ────────────────────────────────
+  //  CONTEXTS 
 
   List<FinancialContext> _contexts = [];
 
@@ -141,12 +141,12 @@ class GoProvider extends ChangeNotifier {
   double get totalNetWorth => contexts.fold(0, (s, c) => s + c.qpBalance);
   double get change24h => 2.3;
 
-  // ──── LIQUIDITY ────────────────────────────────
+  //  LIQUIDITY 
 
   LiquidityInfo get liquidity =>
       const LiquidityInfo(available: 14250, frozen: 2000, reserved: 230300);
 
-  // ──── GATEWAYS ────────────────────────────────
+  //  GATEWAYS 
 
   static final List<PaymentGateway> _fallbackGateways = [
     const PaymentGateway(id: 'gw-1', name: 'Paystack', status: GatewayStatus.live, balance: 8450, buyRate: 0.085, sellRate: 0.083, minBuy: 100, maxBuy: 50000, minSell: 500, maxSell: 20000, feePercent: 0.85, flatFee: 5, processingTime: 'Instant'),
@@ -163,13 +163,13 @@ class GoProvider extends ChangeNotifier {
   List<PaymentGateway> get liveGateways =>
       gateways.where((g) => g.status == GatewayStatus.live).toList();
 
-  // ──── TRANSACTIONS ────────────────────────────────
+  //  TRANSACTIONS 
 
   static final List<GoTransaction> _fallbackTransactions = [
     GoTransaction(id: 'TX-4623', type: TransactionType.buy, status: TransactionStatus.completed, amount: 5000, feeAmount: 42.50, netAmount: 4957.50, fromEntity: 'You (John)', toEntity: 'System Wallet', gatewayName: 'Paystack', fundingSource: 'Paystack Balance', createdAt: DateTime.now().subtract(const Duration(hours: 2)), completedAt: DateTime.now().subtract(const Duration(hours: 2)), reference: 'TX-BUY-78901', note: 'Monthly top-up'),
     GoTransaction(id: 'TX-4622', type: TransactionType.transfer, status: TransactionStatus.completed, amount: 1200, feeAmount: 0.85, netAmount: 1199.15, fromEntity: 'You', toEntity: 'Leo Mensah', createdAt: DateTime.now().subtract(const Duration(hours: 5)), completedAt: DateTime.now().subtract(const Duration(hours: 5)), reference: 'TX-TRF-78900', note: 'Driver payment'),
     GoTransaction(id: 'TX-4621', type: TransactionType.tabSettlement, status: TransactionStatus.completed, amount: 800, fromEntity: 'BrightMart', toEntity: 'You', createdAt: DateTime.now().subtract(const Duration(days: 1)), completedAt: DateTime.now().subtract(const Duration(days: 1)), reference: 'TX-TAB-78899'),
-    GoTransaction(id: 'TX-4620', type: TransactionType.sell, status: TransactionStatus.processing, amount: 3000, feeAmount: 45, netAmount: 2955, fromEntity: 'System Wallet', toEntity: 'Bank (•••• 4582)', gatewayName: 'Paystack', createdAt: DateTime.now().subtract(const Duration(days: 1)), reference: 'TX-SEL-78898'),
+    GoTransaction(id: 'TX-4620', type: TransactionType.sell, status: TransactionStatus.processing, amount: 3000, feeAmount: 45, netAmount: 2955, fromEntity: 'System Wallet', toEntity: 'Bank ( 4582)', gatewayName: 'Paystack', createdAt: DateTime.now().subtract(const Duration(days: 1)), reference: 'TX-SEL-78898'),
     GoTransaction(id: 'TX-4619', type: TransactionType.buy, status: TransactionStatus.completed, amount: 10000, feeAmount: 85, netAmount: 9915, fromEntity: 'You', toEntity: 'System Wallet', gatewayName: 'Flutterwave', fundingSource: 'Mobile Money', createdAt: DateTime.now().subtract(const Duration(days: 2)), completedAt: DateTime.now().subtract(const Duration(days: 2)), reference: 'TX-BUY-78897'),
     GoTransaction(id: 'TX-4618', type: TransactionType.transfer, status: TransactionStatus.failed, amount: 500, fromEntity: 'You', toEntity: 'Sarah Chen', createdAt: DateTime.now().subtract(const Duration(days: 2)), reference: 'TX-TRF-78896', note: 'Insufficient balance'),
     GoTransaction(id: 'TX-4617', type: TransactionType.fee, status: TransactionStatus.completed, amount: 15, fromEntity: 'System', toEntity: 'Service Fee', createdAt: DateTime.now().subtract(const Duration(days: 3)), completedAt: DateTime.now().subtract(const Duration(days: 3)), reference: 'TX-FEE-78895'),
@@ -197,7 +197,7 @@ class GoProvider extends ChangeNotifier {
     }
   }
 
-  // ──── LOAD TRANSACTIONS FROM API ────────────────────────────────
+  //  LOAD TRANSACTIONS FROM API 
 
   Future<void> loadTransactions({String? entityId, int page = 1, int limit = 20}) async {
     _isTransactionsLoading = true;
@@ -223,7 +223,7 @@ class GoProvider extends ChangeNotifier {
     }
   }
 
-  // ──── LOAD BALANCE FROM API ────────────────────────────────
+  //  LOAD BALANCE FROM API 
 
   Future<void> loadBalance({String? entityId}) async {
     _isBalanceLoading = true;
@@ -271,7 +271,7 @@ class GoProvider extends ChangeNotifier {
     }).toList();
   }
 
-  // ──── API-WIRED FINANCIAL OPERATIONS ────────────────────────────────
+  //  API-WIRED FINANCIAL OPERATIONS 
 
   /// Transfer QPoints to another entity/user
   Future<bool> transfer({
@@ -368,7 +368,7 @@ class GoProvider extends ChangeNotifier {
     }
   }
 
-  // ──── TRANSACTION JSON PARSER ────────────────────────────────
+  //  TRANSACTION JSON PARSER 
 
   static GoTransaction _transactionFromJson(Map<String, dynamic> json) {
     return GoTransaction(
@@ -442,7 +442,7 @@ class GoProvider extends ChangeNotifier {
     }
   }
 
-  // ──── FINANCIAL HEALTH ────────────────────────────────
+  //  FINANCIAL HEALTH 
 
   int get healthScore => 78;
   List<HealthMetricData> get healthMetrics => const [
@@ -455,7 +455,7 @@ class GoProvider extends ChangeNotifier {
 
   String get healthRecommendation => 'Add 2nd gateway for redundancy';
 
-  // ──── UPCOMING EVENTS ────────────────────────────────
+  //  UPCOMING EVENTS 
 
   static final List<UpcomingEvent> _fallbackUpcomingEvents = [
     UpcomingEvent(id: 'ev-1', title: 'Tab payment due (T-8821)', date: DateTime.now().add(const Duration(days: 1)), amount: 1200, relatedId: 'T-8821', icon: Icons.receipt_long, color: const Color(0xFFEF4444)),
@@ -469,7 +469,7 @@ class GoProvider extends ChangeNotifier {
   List<UpcomingEvent> get upcomingEvents =>
       _upcomingEvents.isNotEmpty ? _upcomingEvents : _fallbackUpcomingEvents;
 
-  // ──── FAVORITES ────────────────────────────────
+  //  FAVORITES 
 
   static final List<FavoriteEntity> _fallbackFavorites = [
     FavoriteEntity(id: 'fav-1', name: 'Leo Mensah', handle: '@leo_driver', role: 'Driver', category: FavoriteCategory.services, rating: 4.8, ratingCount: 124, totalSpent: 6400, avgTransaction: 500, transactionCount: 42, favoriteSince: DateTime(2024, 5, 1), lastInteraction: DateTime.now().subtract(const Duration(days: 1)), isOnline: true, isMutualFavorite: true, trustScore: 92),
@@ -494,7 +494,7 @@ class GoProvider extends ChangeNotifier {
     try { return favorites.firstWhere((f) => f.id == id); } catch (_) { return null; }
   }
 
-  // ──── TABS (CREDIT) ────────────────────────────────
+  //  TABS (CREDIT) 
 
   static final List<GoTab> _fallbackTabs = [
     GoTab(id: 'T-8821', entityName: 'Wizdom Shop', entityRole: 'Owner', description: 'Electronics Supply', status: TabStatus.active, risk: TabRisk.high, creditLimit: 2500, currentBalance: 1200, minimumDue: 600, dueDate: DateTime.now().add(const Duration(days: 1)), createdAt: DateTime(2024, 8, 1), lastActivity: DateTime.now().subtract(const Duration(hours: 4)), onTimePayments: 12, totalPayments: 12, interestRate: 0),
@@ -526,7 +526,7 @@ class GoProvider extends ChangeNotifier {
     return tabs.where((t) => t.status == status).toList();
   }
 
-  // ──── TAB TIMELINE ────────────────────────────────
+  //  TAB TIMELINE 
 
   List<TabTimelineEvent> getTabTimeline(String tabId) {
     return [
@@ -539,10 +539,10 @@ class GoProvider extends ChangeNotifier {
     ];
   }
 
-  // ──── REQUESTS ────────────────────────────────
+  //  REQUESTS 
 
   static final List<GoRequest> _fallbackRequests = [
-    GoRequest(id: 'RQC-78901', type: RequestType.creditLimitChange, status: RequestStatus.underReview, title: 'Increase credit limit: 2,500 → 5,000 QP', description: 'Business expansion requires higher credit.', submittedBy: 'BrightMart Admin', submittedAt: DateTime.now().subtract(const Duration(hours: 3)), relatedTabId: 'T-8821', amount: 5000),
+    GoRequest(id: 'RQC-78901', type: RequestType.creditLimitChange, status: RequestStatus.underReview, title: 'Increase credit limit: 2,500  5,000 QP', description: 'Business expansion requires higher credit.', submittedBy: 'BrightMart Admin', submittedAt: DateTime.now().subtract(const Duration(hours: 3)), relatedTabId: 'T-8821', amount: 5000),
     GoRequest(id: 'RQC-78900', type: RequestType.paymentExtension, status: RequestStatus.submitted, title: 'Extend due date for T-8820', description: 'Cash flow delay from client. Expecting payment next week.', submittedBy: 'BrightMart Admin', submittedAt: DateTime.now().subtract(const Duration(days: 1)), relatedTabId: 'T-8820'),
     GoRequest(id: 'RQC-78899', type: RequestType.newTab, status: RequestStatus.approved, title: 'New tab for Fleet Services', description: 'Monthly fleet maintenance credit line.', submittedBy: 'John Doe', submittedAt: DateTime.now().subtract(const Duration(days: 3)), decidedAt: DateTime.now().subtract(const Duration(days: 2)), decidedBy: 'Admin', amount: 3000),
     GoRequest(id: 'RQC-78898', type: RequestType.disputeFiling, status: RequestStatus.implemented, title: 'Dispute: Service fee overcharge', description: 'Charged 50 QP service fee, should be 25 QP per agreement.', submittedBy: 'Sarah Chen', submittedAt: DateTime.now().subtract(const Duration(days: 7)), decidedAt: DateTime.now().subtract(const Duration(days: 5)), decidedBy: 'Finance Officer', amount: 25, comments: 'Refund processed'),
@@ -557,7 +557,7 @@ class GoProvider extends ChangeNotifier {
   List<GoRequest> get myRequests => requests.where((r) => r.submittedBy == 'John Doe' || r.submittedBy == 'BrightMart Admin').toList();
   List<GoRequest> get pendingApproval => requests.where((r) => r.status == RequestStatus.submitted || r.status == RequestStatus.underReview).toList();
 
-  // ──── BATCH OPERATIONS ────────────────────────────────
+  //  BATCH OPERATIONS 
 
   static final List<BatchOperation> _fallbackBatchOps = [
     BatchOperation(id: 'BATCH-001', type: BatchActionType.transfer, itemCount: 5, totalAmount: 4500, status: TransactionStatus.completed, createdAt: DateTime.now().subtract(const Duration(days: 4)), completedItems: 5, failedItems: 0, label: 'Weekly payroll'),
@@ -570,7 +570,7 @@ class GoProvider extends ChangeNotifier {
   List<BatchOperation> get batchOperations =>
       _batchOps.isNotEmpty ? _batchOps : _fallbackBatchOps;
 
-  // ──── FINANCIAL PLANNER ────────────────────────────────
+  //  FINANCIAL PLANNER 
 
   static final List<FinancialGoal> _fallbackGoals = [
     FinancialGoal(id: 'goal-1', title: 'Emergency Fund', type: GoalType.savings, status: GoalStatus.onTrack, targetAmount: 50000, currentAmount: 35000, targetDate: DateTime(2025, 6, 30), createdAt: DateTime(2024, 1, 1), description: 'Build 3-month operational reserve'),
@@ -606,7 +606,7 @@ class GoProvider extends ChangeNotifier {
     CashFlowPoint(label: 'Jun', income: 52000, expense: 47000),
   ];
 
-  // ──── TAX & COMPLIANCE ────────────────────────────────
+  //  TAX & COMPLIANCE 
 
   static final List<TaxEntry> _fallbackTaxEntries = [
     TaxEntry(id: 'tax-1', transactionId: 'TX-4623', description: 'QPoints Purchase', category: TaxCategory.expense, amount: 425, date: DateTime.now().subtract(const Duration(hours: 2)), isCategorized: true, taxCode: 'EXP-001'),
@@ -636,7 +636,7 @@ class GoProvider extends ChangeNotifier {
   List<ComplianceCheck> get complianceChecks =>
       _complianceChecks.isNotEmpty ? _complianceChecks : _fallbackComplianceChecks;
 
-  // ──── REPORTS ────────────────────────────────
+  //  REPORTS 
 
   static final List<GeneratedReport> _fallbackReports = [
     GeneratedReport(id: 'rpt-1', title: 'Q3 2024 Income Statement', type: ReportType.income, format: ReportFormat.pdf, generatedAt: DateTime.now().subtract(const Duration(days: 5)), period: 'Jul-Sep 2024', fileSize: 2.4),
@@ -650,7 +650,7 @@ class GoProvider extends ChangeNotifier {
   List<GeneratedReport> get reports =>
       _reports.isNotEmpty ? _reports : _fallbackReports;
 
-  // ──── SECURITY & AUDIT ────────────────────────────────
+  //  SECURITY & AUDIT 
 
   static final List<AuditEntry> _fallbackAuditEntries = [
     AuditEntry(id: 'aud-1', action: 'Transaction initiated: Buy 5,000 QP', actor: 'John Doe', timestamp: DateTime.now().subtract(const Duration(hours: 2)), severity: AuditSeverity.info, ipAddress: '192.168.1.100'),
@@ -680,7 +680,7 @@ class GoProvider extends ChangeNotifier {
   bool getSecuritySetting(String key) => _securitySettings[key] ?? false;
   void setSecuritySetting(String key, bool v) { _securitySettings[key] = v; notifyListeners(); }
 
-  // ──── INTEGRATIONS ────────────────────────────────
+  //  INTEGRATIONS 
 
   static final List<GoIntegration> _fallbackIntegrations = [
     GoIntegration(id: 'int-1', name: 'QuickBooks', category: IntegrationCategory.accounting, status: IntegrationStatus.connected, description: 'Auto-sync transactions & invoices', lastSync: DateTime.now().subtract(const Duration(hours: 1)), icon: Icons.receipt_long),
@@ -698,7 +698,7 @@ class GoProvider extends ChangeNotifier {
 
   List<GoIntegration> integrationsByCategory(IntegrationCategory cat) => integrations.where((i) => i.category == cat).toList();
 
-  // ──── ARCHIVE ────────────────────────────────
+  //  ARCHIVE 
 
   static final List<ArchivedRecord> _fallbackArchives = [
     ArchivedRecord(id: 'arc-1', title: 'FY 2023 Transactions', type: 'Transactions', archivedAt: DateTime(2024, 1, 15), period: 'Jan-Dec 2023', transactionCount: 1245, totalValue: 856000),
@@ -711,7 +711,7 @@ class GoProvider extends ChangeNotifier {
   List<ArchivedRecord> get archives =>
       _archives.isNotEmpty ? _archives : _fallbackArchives;
 
-  // ──── RATE ALERTS ────────────────────────────────
+  //  RATE ALERTS 
 
   static const List<RateAlert> _fallbackRateAlerts = [
     RateAlert(id: 'ra-1', targetRate: 0.080, channel: RateAlertChannel.push, isActive: true),
@@ -723,7 +723,7 @@ class GoProvider extends ChangeNotifier {
   List<RateAlert> get rateAlerts =>
       _rateAlerts.isNotEmpty ? _rateAlerts : _fallbackRateAlerts;
 
-  // ──── AI INSIGHTS ────────────────────────────────
+  //  AI INSIGHTS 
 
   static const List<FinancialInsight> _fallbackInsights = [
     FinancialInsight(id: 'ins-1', text: 'Weekly cash burn: 2,400 QP', icon: Icons.local_fire_department),
@@ -737,7 +737,7 @@ class GoProvider extends ChangeNotifier {
   List<FinancialInsight> get insights =>
       _insights.isNotEmpty ? _insights : _fallbackInsights;
 
-  // ──── FUNDING SOURCES ────────────────────────────────
+  //  FUNDING SOURCES 
 
   static const List<FundingSource> _fallbackFundingSources = [
     FundingSource(id: 'fs-1', label: 'Paystack Balance', type: FundingSourceType.gatewayBalance, balance: 8450, isDefault: true),
@@ -751,16 +751,16 @@ class GoProvider extends ChangeNotifier {
   List<FundingSource> get fundingSources =>
       _fundingSources.isNotEmpty ? _fundingSources : _fallbackFundingSources;
 
-  // ──── SYNC ────────────────────────────────
+  //  SYNC 
 
   double _syncProgress = 0.72;
   double get syncProgress => _syncProgress;
   void setSyncProgress(double v) { _syncProgress = v; notifyListeners(); }
 
-  final String _financialPeriod = 'Q3 2024 • Week 32';
+  final String _financialPeriod = 'Q3 2024  Week 32';
   String get financialPeriod => _financialPeriod;
 
-  // ──── BUY/SELL/TRANSFER STATE ────────────────────────────────
+  //  BUY/SELL/TRANSFER STATE 
 
   int _transactionStep = 0;
   int get transactionStep => _transactionStep;
@@ -801,7 +801,7 @@ class GoProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ──── VERIFICATION STATE ────────────────────────────────
+  //  VERIFICATION STATE 
 
   GoVerificationState _verificationState = GoVerificationState.pending;
   GoVerificationState get verificationState => _verificationState;
@@ -811,7 +811,7 @@ class GoProvider extends ChangeNotifier {
   GoVerificationMethod get verificationMethod => _verificationMethod;
   void setVerificationMethod(GoVerificationMethod m) { _verificationMethod = m; notifyListeners(); }
 
-  // ──── TABS FILTER ────────────────────────────────
+  //  TABS FILTER 
 
   TabStatus? _tabFilter;
   TabStatus? get tabFilter => _tabFilter;
@@ -819,7 +819,7 @@ class GoProvider extends ChangeNotifier {
 
   List<GoTab> get filteredTabs => tabsByStatus(_tabFilter);
 
-  // ──── FAVORITES FILTER ────────────────────────────────
+  //  FAVORITES FILTER 
 
   FavoriteCategory? _favCategory;
   FavoriteCategory? get favCategory => _favCategory;

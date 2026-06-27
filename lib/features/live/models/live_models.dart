@@ -1,14 +1,14 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// LIVE MODULE — Data Models
+/// 
+/// LIVE MODULE  Data Models
 /// Comprehensive models for real-time operations center:
 /// Orders, Packages, Returns, Drivers, Rides, Incidents, Analytics,
 /// Verification, Emergency, Settings, Notifications
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'package:flutter/material.dart';
 
-// ─── Enums ──────────────────────────────────────────────────────────────────
+//  Enums 
 
 /// Order priority level
 enum OrderPriority { urgent, normal, flexible, scheduled }
@@ -120,7 +120,7 @@ enum ReturnSubTab { pending, underReview, resolved }
 /// Package sub-tab
 enum PackageSubTab { active, inTransit, delivered }
 
-// ─── Order Models ───────────────────────────────────────────────────────────
+//  Order Models 
 
 /// A live order in the operations center
 class LiveOrder {
@@ -260,7 +260,7 @@ class OrderTimelineEntry {
   });
 }
 
-// ─── Driver Models ──────────────────────────────────────────────────────────
+//  Driver Models 
 
 /// A driver in the operations center
 class LiveDriver {
@@ -359,7 +359,7 @@ class DriverFeedback {
   });
 }
 
-// ─── Package Models ─────────────────────────────────────────────────────────
+//  Package Models 
 
 /// A delivery/return package
 class LivePackage {
@@ -464,7 +464,7 @@ class PackageStop {
   });
 }
 
-// ─── Return Models ──────────────────────────────────────────────────────────
+//  Return Models 
 
 /// A return request in the operations center
 class LiveReturn {
@@ -532,7 +532,7 @@ class LiveReturn {
   bool get hasVoiceNote => voiceNote != null;
 }
 
-// ─── Ride Models (Transport) ────────────────────────────────────────────────
+//  Ride Models (Transport) 
 
 /// A ride request for transport drivers
 class LiveRide {
@@ -581,7 +581,7 @@ class LiveRide {
   });
 }
 
-// ─── Incident & Emergency Models ────────────────────────────────────────────
+//  Incident & Emergency Models 
 
 /// An incident report
 class LiveIncident {
@@ -641,7 +641,7 @@ class EmergencyContact {
   });
 }
 
-// ─── Analytics Models ───────────────────────────────────────────────────────
+//  Analytics Models 
 
 /// Operations overview metrics
 class OperationsMetrics {
@@ -732,7 +732,7 @@ class BottleneckAlert {
   });
 }
 
-// ─── Notification Models ────────────────────────────────────────────────────
+//  Notification Models 
 
 /// A live notification
 class LiveNotification {
@@ -755,7 +755,7 @@ class LiveNotification {
   });
 }
 
-// ─── Settings Models ────────────────────────────────────────────────────────
+//  Settings Models 
 
 /// LIVE module automation settings
 class LiveSettings {
@@ -838,7 +838,7 @@ class LiveSettings {
   }
 }
 
-// ─── Transfer Models ────────────────────────────────────────────────────────
+//  Transfer Models 
 
 /// A multi-hop transfer request
 class TransferRequest {
@@ -886,7 +886,7 @@ class TransferStep {
   });
 }
 
-// ─── Transport Earnings ─────────────────────────────────────────────────────
+//  Transport Earnings 
 
 /// Transport driver earnings summary
 class TransportEarnings {

@@ -1,11 +1,13 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// LIVE MODULE — Screen 10: Package Detail & Management
+/// 
+/// LIVE MODULE  Screen 10: Package Detail & Management
 /// Full package detail: multi-stop progress, driver info,
 /// security settings, timeline, live tracking
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
@@ -28,14 +30,14 @@ class LivePackageDetailScreen extends StatelessWidget {
           appBar: LiveAppBar(
             title: 'Package ${pkg.id}',
             actions: [
-              IconButton(icon: const Icon(Icons.share, size: 20), color: AppColors.textSecondary, onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Sharing...')))),
+              IconButton(icon: const Icon(Icons.share, size: 20), color: AppColors.textSecondary, onPressed: () => AppToast.show(context, 'Sharing...')),
               IconButton(
                 icon: const Icon(Icons.more_vert, size: 20),
                 color: AppColors.textSecondary,
                 onPressed: () {
                   showModalBottomSheet(
                     context: context,
-                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
+                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(10))),
                     builder: (_) => const SizedBox(height: 120),
                   );
                 },
@@ -49,7 +51,7 @@ class LivePackageDetailScreen extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
-                  gradient: const LinearGradient(colors: [kLiveColor, kLiveAccent]),
+                  gradient: const LinearGradient(colors: [IveTokens.moduleLive, IveTokens.moduleLive]),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Row(
@@ -65,14 +67,14 @@ class LivePackageDetailScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(pkg.status.name.toUpperCase(), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: Colors.white)),
-                          Text('${pkg.type.name} • ${pkg.stops.length} stops', style: TextStyle(fontSize: 12, color: Colors.white.withValues(alpha: 0.8))),
+                          Text('${pkg.type.name}  ${pkg.stops.length} stops', style: TextStyle(fontSize: 12, color: Colors.white.withValues(alpha: 0.8))),
                         ],
                       ),
                     ),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                      decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.2), borderRadius: BorderRadius.circular(8)),
-                      child: Text('â‚µ${pkg.driverEarnings.toStringAsFixed(0)}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: Colors.white)),
+                      decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.2), borderRadius: BorderRadius.circular(10)),
+                      child: Text('${pkg.driverEarnings.toStringAsFixed(0)}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: Colors.white)),
                     ),
                   ],
                 ),
@@ -90,8 +92,8 @@ class LivePackageDetailScreen extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 20,
-                        backgroundColor: kLiveColor.withValues(alpha: 0.1),
-                        child: Text(driver.name.substring(0, 1), style: const TextStyle(fontWeight: FontWeight.w700, color: kLiveColor)),
+                        backgroundColor: IveTokens.moduleLive.withValues(alpha: 0.1),
+                        child: Text(driver.name.substring(0, 1), style: const TextStyle(fontWeight: FontWeight.w700, color: IveTokens.moduleLive)),
                       ),
                       const SizedBox(width: 12),
                       Expanded(
@@ -112,7 +114,7 @@ class LivePackageDetailScreen extends StatelessWidget {
                         ),
                       ),
                       IconButton(
-                        onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Calling...'))),
+                        onPressed: () => AppToast.show(context, 'Calling...'),
                         icon: const Icon(Icons.phone, size: 18, color: Color(0xFF10B981)),
                         style: IconButton.styleFrom(backgroundColor: const Color(0xFFD1FAE5)),
                       ),
@@ -143,7 +145,7 @@ class LivePackageDetailScreen extends StatelessWidget {
                               height: 24,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: completed ? const Color(0xFF10B981) : current ? kLiveColor : const Color(0xFFE5E7EB),
+                                color: completed ? const Color(0xFF10B981) : current ? IveTokens.moduleLive : const Color(0xFFE5E7EB),
                               ),
                               child: Center(
                                 child: completed
@@ -169,10 +171,10 @@ class LivePackageDetailScreen extends StatelessWidget {
                                     Icon(
                                       stop.type == StopType.returnPickup ? Icons.store : stop.type == StopType.delivery ? Icons.location_on : Icons.swap_horiz,
                                       size: 14,
-                                      color: current ? kLiveColor : AppColors.textSecondary,
+                                      color: current ? IveTokens.moduleLive : AppColors.textSecondary,
                                     ),
                                     const SizedBox(width: 4),
-                                    Text(stop.type.name.toUpperCase(), style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: current ? kLiveColor : AppColors.textTertiary)),
+                                    Text(stop.type.name.toUpperCase(), style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: current ? IveTokens.moduleLive : AppColors.textTertiary)),
                                   ],
                                 ),
                                 Text(stop.address, style: TextStyle(fontSize: 13, fontWeight: current ? FontWeight.w600 : FontWeight.w400)),
@@ -207,7 +209,7 @@ class LivePackageDetailScreen extends StatelessWidget {
               LiveSectionCard(
                 title: 'PACKAGE CONTENTS',
                 icon: Icons.shopping_bag,
-                iconColor: kLiveColor,
+                iconColor: IveTokens.moduleLive,
                 child: Column(
                   children: pkg.stops.map((s) => s.orderId).whereType<String>().toList().asMap().entries.map((entry) {
                     return Padding(
@@ -216,8 +218,8 @@ class LivePackageDetailScreen extends StatelessWidget {
                         children: [
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                            decoration: BoxDecoration(color: kLiveColor.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(4)),
-                            child: Text('#${entry.value}', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: kLiveColor)),
+                            decoration: BoxDecoration(color: IveTokens.moduleLive.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(6)),
+                            child: Text('#${entry.value}', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: IveTokens.moduleLive)),
                           ),
                           const SizedBox(width: 8),
                           Expanded(child: Text('Order #${entry.value}', style: const TextStyle(fontSize: 13))),
@@ -264,7 +266,7 @@ class LivePackageDetailScreen extends StatelessWidget {
                     onPressed: () => Navigator.pushNamed(context, AppRoutes.liveDriverAssignment),
                     icon: const Icon(Icons.swap_horiz, size: 16),
                     label: const Text('REASSIGN', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700)),
-                    style: OutlinedButton.styleFrom(foregroundColor: kLiveColor, padding: const EdgeInsets.symmetric(vertical: 14)),
+                    style: OutlinedButton.styleFrom(foregroundColor: IveTokens.moduleLive, padding: const EdgeInsets.symmetric(vertical: 14)),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -279,7 +281,7 @@ class LivePackageDetailScreen extends StatelessWidget {
                 const SizedBox(width: 8),
                 Expanded(
                   child: ElevatedButton.icon(
-                    onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Locating...'))),
+                    onPressed: () => AppToast.show(context, 'Locating...'),
                     icon: const Icon(Icons.gps_fixed, size: 16),
                     label: const Text('TRACK', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 12)),
                     style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10B981), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),

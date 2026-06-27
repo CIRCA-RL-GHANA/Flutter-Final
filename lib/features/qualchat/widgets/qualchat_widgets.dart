@@ -1,24 +1,23 @@
-﻿/// qualChat Module — Shared Widgets
+/// qualChat Module  Shared Widgets
 /// Reusable UI components for all qualChat screens
 /// Module Color: Cyan 0xFF06B6D4
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
 import '../models/qualchat_models.dart';
 
-// ──────────────────────────────────────────────
+// 
 //  MODULE COLORS
-// ──────────────────────────────────────────────
+// 
 
-const Color kChatColor = Color(0xFF06B6D4);
-const Color kChatColorLight = Color(0xFFCFFAFE);
-const Color kChatColorDark = Color(0xFF0E7490);
-const Color kChatAccent = Color(0xFFEC4899);
+// IveTokens.moduleQualChat/IveTokens.accentSoft/IveTokens.accent replaced by IveTokens.moduleQualChat / IveTokens.accent
+// kChatSocial kept as local const (no system token for hot-pink social accent)
 const Color kChatSocial = Color(0xFFEC4899);
 
-// ──────────────────────────────────────────────
+// 
 //  APP BAR
-// ──────────────────────────────────────────────
+// 
 
 class QualChatAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -40,8 +39,8 @@ class QualChatAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
-      foregroundColor: const Color(0xFF1A1A1A),
+      backgroundColor: IveTokens.surface,
+      foregroundColor: IveTokens.ink,
       elevation: 0,
       leading: leading ??
           (showBackButton
@@ -57,7 +56,7 @@ class QualChatAppBar extends StatelessWidget implements PreferredSizeWidget {
             width: 8,
             height: 8,
             decoration: const BoxDecoration(
-              color: kChatColor,
+              color: IveTokens.moduleQualChat,
               shape: BoxShape.circle,
             ),
           ),
@@ -67,7 +66,7 @@ class QualChatAppBar extends StatelessWidget implements PreferredSizeWidget {
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w700,
-              color: Color(0xFF1A1A1A),
+              color: IveTokens.ink,
             ),
           ),
         ],
@@ -77,9 +76,9 @@ class QualChatAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 //  PRESENCE DOT
-// ──────────────────────────────────────────────
+// 
 
 class PresenceDot extends StatelessWidget {
   final PresenceStatus status;
@@ -95,7 +94,7 @@ class PresenceDot extends StatelessWidget {
       decoration: BoxDecoration(
         color: _color,
         shape: BoxShape.circle,
-        border: Border.all(color: Colors.white, width: 1.5),
+        border: Border.all(color: IveTokens.surface, width: 1.5),
       ),
     );
   }
@@ -103,18 +102,18 @@ class PresenceDot extends StatelessWidget {
   Color get _color {
     switch (status) {
       case PresenceStatus.online:
-        return const Color(0xFF10B981);
+        return IveTokens.success;
       case PresenceStatus.idle:
-        return const Color(0xFFF59E0B);
+        return IveTokens.warning;
       case PresenceStatus.offline:
-        return const Color(0xFFEF4444);
+        return IveTokens.danger;
     }
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 //  PRESENCE STAT CARD
-// ──────────────────────────────────────────────
+// 
 
 class PresenceStatCard extends StatelessWidget {
   final int count;
@@ -140,9 +139,9 @@ class PresenceStatCard extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: const Color(0xFFE5E7EB)),
+            color: IveTokens.surface,
+            borderRadius: BorderRadius.circular(IveTokens.rSm),
+            border: Border.all(color: IveTokens.hairline2),
           ),
           child: Column(
             children: [
@@ -151,26 +150,26 @@ class PresenceStatCard extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.w800,
-                  color: Color(0xFF1A1A1A),
+                  color: IveTokens.ink,
                 ),
               ),
               const SizedBox(height: 2),
               Text(
                 label,
-                style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
+                style: const TextStyle(fontSize: 12, color: IveTokens.mute),
               ),
               const SizedBox(height: 4),
               PresenceDot(status: status),
               if (changePercent != null) ...[
                 const SizedBox(height: 4),
                 Text(
-                  '${changePercent! >= 0 ? '+' : ''}${changePercent!.toStringAsFixed(0)}%',
+                  '${changePercent! >= 0 ? '+' : '-'}${changePercent!.toStringAsFixed(0)}%',
                   style: TextStyle(
                     fontSize: 10,
                     fontWeight: FontWeight.w600,
                     color: changePercent! >= 0
-                        ? const Color(0xFF10B981)
-                        : const Color(0xFFEF4444),
+                        ? IveTokens.success
+                        : IveTokens.danger,
                   ),
                 ),
               ],
@@ -182,9 +181,9 @@ class PresenceStatCard extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 //  CONVERSATION CARD
-// ──────────────────────────────────────────────
+// 
 
 class ConversationCard extends StatelessWidget {
   final Conversation conversation;
@@ -207,9 +206,9 @@ class ConversationCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
-          color: c.unreadCount > 0 ? kChatColorLight.withValues(alpha: 0.3) : Colors.white,
+          color: c.unreadCount > 0 ? IveTokens.moduleQualChat.withValues(alpha: 0.08) : IveTokens.surface,
           border: const Border(
-            bottom: BorderSide(color: Color(0xFFF3F4F6)),
+            bottom: BorderSide(color: IveTokens.hairline),
           ),
         ),
         child: Row(
@@ -219,13 +218,13 @@ class ConversationCard extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 24,
-                  backgroundColor: kChatColor.withValues(alpha: 0.1),
+                  backgroundColor: IveTokens.moduleQualChat.withValues(alpha: 0.1),
                   child: Text(
                     c.title.isNotEmpty ? c.title[0] : '?',
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w700,
-                      color: kChatColor,
+                      color: IveTokens.moduleQualChat,
                     ),
                   ),
                 ),
@@ -256,7 +255,7 @@ class ConversationCard extends StatelessWidget {
                             fontWeight: c.unreadCount > 0
                                 ? FontWeight.w700
                                 : FontWeight.w500,
-                            color: const Color(0xFF1A1A1A),
+                            color: IveTokens.ink,
                           ),
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -266,8 +265,8 @@ class ConversationCard extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 12,
                           color: c.unreadCount > 0
-                              ? kChatColor
-                              : const Color(0xFF9CA3AF),
+                              ? IveTokens.moduleQualChat
+                              : IveTokens.ink2,
                         ),
                       ),
                     ],
@@ -276,13 +275,13 @@ class ConversationCard extends StatelessWidget {
                   Row(
                     children: [
                       if (c.typingUser != null) ...[
-                        const Icon(Icons.edit, size: 14, color: kChatColor),
+                        const Icon(Icons.edit, size: 14, color: IveTokens.moduleQualChat),
                         const SizedBox(width: 4),
                         Text(
                           '${c.typingUser} is typing...',
                           style: const TextStyle(
                             fontSize: 13,
-                            color: kChatColor,
+                            color: IveTokens.moduleQualChat,
                             fontStyle: FontStyle.italic,
                           ),
                         ),
@@ -293,8 +292,8 @@ class ConversationCard extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 13,
                               color: c.unreadCount > 0
-                                  ? const Color(0xFF1A1A1A)
-                                  : const Color(0xFF6B7280),
+                                  ? IveTokens.ink
+                                  : IveTokens.mute,
                             ),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
@@ -308,15 +307,15 @@ class ConversationCard extends StatelessWidget {
                             vertical: 2,
                           ),
                           decoration: BoxDecoration(
-                            color: kChatColor,
-                            borderRadius: BorderRadius.circular(10),
+                            color: IveTokens.moduleQualChat,
+                            borderRadius: BorderRadius.circular(IveTokens.rSm),
                           ),
                           child: Text(
                             '${c.unreadCount}',
                             style: const TextStyle(
                               fontSize: 11,
                               fontWeight: FontWeight.w700,
-                              color: Colors.white,
+                              color: IveTokens.bg,
                             ),
                           ),
                         ),
@@ -328,7 +327,7 @@ class ConversationCard extends StatelessWidget {
                       '${c.onlineCount} online',
                       style: const TextStyle(
                         fontSize: 11,
-                        color: Color(0xFF10B981),
+                        color: IveTokens.success,
                       ),
                     ),
                   ],
@@ -338,12 +337,12 @@ class ConversationCard extends StatelessWidget {
             if (c.isPinned)
               const Padding(
                 padding: EdgeInsets.only(left: 4),
-                child: Icon(Icons.push_pin, size: 14, color: Color(0xFF9CA3AF)),
+                child: Icon(Icons.push_pin, size: 14, color: IveTokens.ink2),
               ),
             if (c.isMuted)
               const Padding(
                 padding: EdgeInsets.only(left: 4),
-                child: Icon(Icons.volume_off, size: 14, color: Color(0xFF9CA3AF)),
+                child: Icon(Icons.volume_off, size: 14, color: IveTokens.ink2),
               ),
           ],
         ),
@@ -352,9 +351,9 @@ class ConversationCard extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 //  HEY YA CARD
-// ──────────────────────────────────────────────
+// 
 
 class HeyYaCard extends StatelessWidget {
   final HeyYaRequest request;
@@ -381,9 +380,9 @@ class HeyYaCard extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: const Color(0xFFE5E7EB)),
+          color: IveTokens.surface,
+          borderRadius: BorderRadius.circular(IveTokens.rSm),
+          border: Border.all(color: IveTokens.hairline2),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -413,15 +412,15 @@ class HeyYaCard extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
-                          color: Color(0xFF1A1A1A),
+                          color: IveTokens.ink,
                         ),
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        'ðŸ™ï¸ ${r.person.role} • ${r.person.distanceKm?.toStringAsFixed(0) ?? '?'}km away',
+                        ' ${r.person.role}  ${r.person.distanceKm?.toStringAsFixed(0) ?? '?'}km away',
                         style: const TextStyle(
                           fontSize: 12,
-                          color: Color(0xFF6B7280),
+                          color: IveTokens.mute,
                         ),
                       ),
                     ],
@@ -432,10 +431,10 @@ class HeyYaCard extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     color: kChatSocial.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(IveTokens.rSm),
                   ),
                   child: Text(
-                    'ðŸ’˜ ${r.matchPercentage}%',
+                    '${r.matchPercentage}%',
                     style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w700,
@@ -452,10 +451,10 @@ class HeyYaCard extends StatelessWidget {
             if (r.message != null) ...[
               const SizedBox(height: 12),
               Text(
-                'ðŸ’¬ "${r.message}"',
+                '${r.message}"',
                 style: const TextStyle(
                   fontSize: 13,
-                  color: Color(0xFF6B7280),
+                  color: IveTokens.mute,
                   fontStyle: FontStyle.italic,
                 ),
               ),
@@ -467,8 +466,8 @@ class HeyYaCard extends StatelessWidget {
                 _StatusBadge(status: r.status),
                 const SizedBox(width: 8),
                 Text(
-                  'â° ${r.isSentByMe ? "Sent" : "Received"} ${_timeAgo(r.sentAt)}',
-                  style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF)),
+                  ' ${r.isSentByMe ? "Sent" : "Received"} ${_timeAgo(r.sentAt)}',
+                  style: const TextStyle(fontSize: 11, color: IveTokens.ink2),
                 ),
               ],
             ),
@@ -478,10 +477,10 @@ class HeyYaCard extends StatelessWidget {
               children: [
                 _ActionChip(label: 'View Journey', icon: Icons.timeline, onTap: onTimeline),
                 const SizedBox(width: 8),
-                _ActionChip(label: 'Plan Date ðŸ“…', icon: Icons.event_outlined, onTap: onFollowUp),
+                _ActionChip(label: 'Plan Date "', icon: Icons.event_outlined, onTap: onFollowUp),
                 const Spacer(),
                 IconButton(
-                  icon: const Icon(Icons.more_horiz, color: Color(0xFF9CA3AF)),
+                  icon: const Icon(Icons.more_horiz, color: IveTokens.ink2),
                   onPressed: onOptions,
                   constraints: const BoxConstraints(),
                   padding: EdgeInsets.zero,
@@ -507,22 +506,22 @@ class _IntentBadge extends StatelessWidget {
   const _IntentBadge({required this.intent});
 
   static const _icons = {
-    HeyYaIntent.coffee: ('â˜•', 'Coffee'),
-    HeyYaIntent.dinner: ('ðŸ½ï¸', 'Dinner'),
-    HeyYaIntent.walk: ('ðŸš¶', 'Walk'),
-    HeyYaIntent.movie: ('ðŸŽ¬', 'Movie Night'),
-    HeyYaIntent.videoCall: ('ðŸ“¹', 'Video Date'),
-    HeyYaIntent.any: ('ðŸ’«', 'Open to Anything'),
+    HeyYaIntent.coffee: ('', 'Coffee'),
+    HeyYaIntent.dinner: ('', 'Dinner'),
+    HeyYaIntent.walk: ('', 'Walk'),
+    HeyYaIntent.movie: ('', 'Movie Night'),
+    HeyYaIntent.videoCall: ('', 'Video Date'),
+    HeyYaIntent.any: ('', 'Open to Anything'),
   };
 
   @override
   Widget build(BuildContext context) {
-    final info = _icons[intent] ?? ('ðŸ’«', 'Open to Anything');
+    final info = _icons[intent] ?? ('', 'Open to Anything');
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
         color: kChatSocial.withValues(alpha: 0.06),
-        borderRadius: BorderRadius.circular(6),
+        borderRadius: BorderRadius.circular(IveTokens.rXs),
         border: Border.all(color: kChatSocial.withValues(alpha: 0.2)),
       ),
       child: Row(
@@ -535,7 +534,7 @@ class _IntentBadge extends StatelessWidget {
             style: const TextStyle(
               fontSize: 11,
               fontWeight: FontWeight.w600,
-              color: Color(0xFF9D174D),
+              color: kChatSocial,
             ),
           ),
         ],
@@ -556,7 +555,7 @@ class _CompatibilityMiniBar extends StatelessWidget {
       children: [
         const Text(
           'Compatibility',
-          style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: Color(0xFF6B7280)),
+          style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: IveTokens.mute),
         ),
         const SizedBox(height: 4),
         Row(
@@ -587,16 +586,16 @@ class _MiniBar extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(label, style: const TextStyle(fontSize: 9, color: Color(0xFF9CA3AF))),
-              Text('$value%', style: const TextStyle(fontSize: 9, fontWeight: FontWeight.w700, color: Color(0xFF6B7280))),
+              Text(label, style: const TextStyle(fontSize: 9, color: IveTokens.ink2)),
+              Text('$value%', style: const TextStyle(fontSize: 9, fontWeight: FontWeight.w700, color: IveTokens.mute)),
             ],
           ),
           const SizedBox(height: 2),
           ClipRRect(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(IveTokens.rXs),
             child: LinearProgressIndicator(
               value: value / 100,
-              backgroundColor: const Color(0xFFF3F4F6),
+              backgroundColor: IveTokens.hairline,
               valueColor: const AlwaysStoppedAnimation<Color>(kChatSocial),
               minHeight: 4,
             ),
@@ -616,26 +615,26 @@ class _StatusBadge extends StatelessWidget {
     Color color;
     switch (status) {
       case HeyYaStatus.pending:
-        text = '🟡 Pending';
-        color = const Color(0xFFF59E0B);
+        text = ' Pending';
+        color = IveTokens.warning;
       case HeyYaStatus.accepted:
-        text = '✅ Matched';
-        color = const Color(0xFF10B981);
+        text = ' Matched';
+        color = IveTokens.success;
       case HeyYaStatus.expired:
-        text = '🔴 Expired';
-        color = const Color(0xFFEF4444);
+        text = ' Expired';
+        color = IveTokens.danger;
       case HeyYaStatus.rejected:
-        text = '❌ Passed';
-        color = const Color(0xFFEF4444);
+        text = ' Passed';
+        color = IveTokens.danger;
       case HeyYaStatus.withdrawn:
-        text = '↩️ Withdrawn';
-        color = const Color(0xFF6B7280);
+        text = ' Withdrawn';
+        color = IveTokens.mute;
     }
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(IveTokens.rSm),
       ),
       child: Text(
         text,
@@ -655,21 +654,21 @@ class _ActionChip extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: BorderRadius.circular(IveTokens.rSm),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
         decoration: BoxDecoration(
-          border: Border.all(color: const Color(0xFFE5E7EB)),
-          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: IveTokens.hairline2),
+          borderRadius: BorderRadius.circular(IveTokens.rSm),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, size: 14, color: kChatColor),
+            Icon(icon, size: 14, color: IveTokens.moduleQualChat),
             const SizedBox(width: 4),
             Text(
               label,
-              style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
+              style: const TextStyle(fontSize: 12, color: IveTokens.mute),
             ),
           ],
         ),
@@ -678,9 +677,9 @@ class _ActionChip extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 //  SECTION CARD (titled container)
-// ──────────────────────────────────────────────
+// 
 
 class QualChatSectionCard extends StatelessWidget {
   final String title;
@@ -702,9 +701,9 @@ class QualChatSectionCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE5E7EB)),
+        color: IveTokens.surface,
+        borderRadius: BorderRadius.circular(IveTokens.rSm),
+        border: Border.all(color: IveTokens.hairline2),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -717,7 +716,7 @@ class QualChatSectionCard extends StatelessWidget {
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w700,
-                    color: Color(0xFF1A1A1A),
+                    color: IveTokens.ink,
                   ),
                 ),
               ),
@@ -729,7 +728,7 @@ class QualChatSectionCard extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w600,
-                      color: kChatColor,
+                      color: IveTokens.moduleQualChat,
                     ),
                   ),
                 ),
@@ -743,9 +742,9 @@ class QualChatSectionCard extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 //  EMPTY STATE
-// ──────────────────────────────────────────────
+// 
 
 class QualChatEmptyState extends StatelessWidget {
   final IconData icon;
@@ -771,36 +770,28 @@ class QualChatEmptyState extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, size: 64, color: kChatColor.withValues(alpha: 0.3)),
+            Icon(icon, size: 64, color: IveTokens.moduleQualChat.withValues(alpha: 0.3)),
             const SizedBox(height: 16),
             Text(
               title,
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
-                color: Color(0xFF1A1A1A),
+                color: IveTokens.ink,
               ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 8),
             Text(
               message,
-              style: const TextStyle(fontSize: 14, color: Color(0xFF6B7280)),
+              style: const TextStyle(fontSize: 14, color: IveTokens.mute),
               textAlign: TextAlign.center,
             ),
             if (ctaLabel != null) ...[
               const SizedBox(height: 24),
-              ElevatedButton(
+              IveButton.primary(
+                label: ctaLabel!,
                 onPressed: onCta,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: kChatColor,
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 14),
-                ),
-                child: Text(ctaLabel!),
               ),
             ],
           ],
@@ -810,9 +801,9 @@ class QualChatEmptyState extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 //  CHAT BUBBLE
-// ──────────────────────────────────────────────
+// 
 
 class ChatBubble extends StatelessWidget {
   final ChatMessage message;
@@ -831,12 +822,12 @@ class ChatBubble extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: isMine ? kChatColor : const Color(0xFFF3F4F6),
+          color: isMine ? IveTokens.accent : IveTokens.surface,
           borderRadius: BorderRadius.only(
-            topLeft: const Radius.circular(16),
-            topRight: const Radius.circular(16),
-            bottomLeft: Radius.circular(isMine ? 16 : 4),
-            bottomRight: Radius.circular(isMine ? 4 : 16),
+            topLeft: const Radius.circular(IveTokens.rSm),
+            topRight: const Radius.circular(IveTokens.rSm),
+            bottomLeft: Radius.circular(isMine ? 10 : 6),
+            bottomRight: Radius.circular(isMine ? 6 : 10),
           ),
         ),
         child: Column(
@@ -850,7 +841,7 @@ class ChatBubble extends StatelessWidget {
                   style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
-                    color: kChatColorDark,
+                    color: IveTokens.moduleQualChat,
                   ),
                 ),
               ),
@@ -860,14 +851,14 @@ class ChatBubble extends StatelessWidget {
                 padding: const EdgeInsets.all(10),
                 margin: const EdgeInsets.only(bottom: 6),
                 decoration: BoxDecoration(
-                  color: isMine ? Colors.white.withValues(alpha: 0.2) : Colors.white,
-                  borderRadius: BorderRadius.circular(8),
+                  color: isMine ? IveTokens.accent.withValues(alpha: 0.2) : IveTokens.surfaceRaised,
+                  borderRadius: BorderRadius.circular(IveTokens.rSm),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(Icons.attach_file, size: 16,
-                        color: isMine ? Colors.white70 : const Color(0xFF6B7280)),
+                        color: isMine ? IveTokens.ink2 : IveTokens.mute),
                     const SizedBox(width: 6),
                     Flexible(
                       child: Column(
@@ -878,7 +869,7 @@ class ChatBubble extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.w600,
-                              color: isMine ? Colors.white : const Color(0xFF1A1A1A),
+                              color: isMine ? IveTokens.ink : IveTokens.ink,
                             ),
                           ),
                           if (message.attachmentSizeMb != null)
@@ -886,7 +877,7 @@ class ChatBubble extends StatelessWidget {
                               '${message.attachmentSizeMb} MB',
                               style: TextStyle(
                                 fontSize: 11,
-                                color: isMine ? Colors.white60 : const Color(0xFF9CA3AF),
+                                color: isMine ? IveTokens.ink2 : IveTokens.ink2,
                               ),
                             ),
                         ],
@@ -900,7 +891,7 @@ class ChatBubble extends StatelessWidget {
                 message.content,
                 style: TextStyle(
                   fontSize: 14,
-                  color: isMine ? Colors.white : const Color(0xFF1A1A1A),
+                  color: isMine ? IveTokens.ink : IveTokens.ink,
                 ),
               ),
             const SizedBox(height: 4),
@@ -911,7 +902,7 @@ class ChatBubble extends StatelessWidget {
                   _formatTime(message.timestamp),
                   style: TextStyle(
                     fontSize: 10,
-                    color: isMine ? Colors.white60 : const Color(0xFF9CA3AF),
+                    color: isMine ? IveTokens.ink2 : IveTokens.ink2,
                   ),
                 ),
                 if (isMine) ...[
@@ -924,8 +915,8 @@ class ChatBubble extends StatelessWidget {
                             : Icons.done,
                     size: 14,
                     color: message.status == DeliveryStatus.read
-                        ? Colors.white
-                        : Colors.white60,
+                        ? IveTokens.ink
+                        : IveTokens.faint,
                   ),
                 ],
                 if (message.reactions.isNotEmpty) ...[
@@ -946,26 +937,26 @@ class ChatBubble extends StatelessWidget {
   String _reactionEmoji(MessageReaction r) {
     switch (r) {
       case MessageReaction.smile:
-        return 'ðŸ˜Š';
+        return '';
       case MessageReaction.heart:
-        return 'â¤ï¸';
+        return '';
       case MessageReaction.thumbsUp:
-        return 'ðŸ‘';
+        return '';
       case MessageReaction.fire:
-        return 'ðŸ”¥';
+        return '"';
       case MessageReaction.surprised:
-        return 'ðŸ˜®';
+        return '';
       case MessageReaction.sad:
-        return 'ðŸ˜¢';
+        return '';
       case MessageReaction.celebration:
-        return 'ðŸŽ‰';
+        return '';
     }
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 //  USER LIST ITEM
-// ──────────────────────────────────────────────
+// 
 
 class UserListItem extends StatelessWidget {
   final ChatUser user;
@@ -987,13 +978,13 @@ class UserListItem extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 22,
-            backgroundColor: kChatColor.withValues(alpha: 0.1),
+            backgroundColor: IveTokens.moduleQualChat.withValues(alpha: 0.1),
             child: Text(
               user.name[0],
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
-                color: kChatColor,
+                color: IveTokens.moduleQualChat,
               ),
             ),
           ),
@@ -1009,21 +1000,21 @@ class UserListItem extends StatelessWidget {
         style: const TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w600,
-          color: Color(0xFF1A1A1A),
+          color: IveTokens.ink,
         ),
       ),
       subtitle: Row(
         children: [
           Text(
             user.role,
-            style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
+            style: const TextStyle(fontSize: 12, color: IveTokens.mute),
           ),
           if (user.statusMessage != null) ...[
-            const Text(' • ', style: TextStyle(fontSize: 12, color: Color(0xFF9CA3AF))),
+            const Text('  ', style: TextStyle(fontSize: 12, color: IveTokens.ink2)),
             Flexible(
               child: Text(
                 user.statusMessage!,
-                style: const TextStyle(fontSize: 12, color: Color(0xFF9CA3AF)),
+                style: const TextStyle(fontSize: 12, color: IveTokens.ink2),
                 overflow: TextOverflow.ellipsis,
               ),
             ),
@@ -1035,9 +1026,9 @@ class UserListItem extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 //  MODE TOGGLE
-// ──────────────────────────────────────────────
+// 
 
 class ModeToggle extends StatelessWidget {
   final ChatMode mode;
@@ -1051,21 +1042,21 @@ class ModeToggle extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
-        color: const Color(0xFFF3F4F6),
-        borderRadius: BorderRadius.circular(10),
+        color: IveTokens.hairline,
+        borderRadius: BorderRadius.circular(IveTokens.rSm),
       ),
       child: Row(
         children: [
           _ModeButton(
-            label: 'Social ðŸ’–',
+            label: 'Social',
             isSelected: mode == ChatMode.social,
             color: kChatSocial,
             onTap: () => onChanged(ChatMode.social),
           ),
           _ModeButton(
-            label: 'Professional ðŸ’¼',
+            label: 'Professional',
             isSelected: mode == ChatMode.professional,
-            color: kChatColor,
+            color: IveTokens.moduleQualChat,
             onTap: () => onChanged(ChatMode.professional),
           ),
         ],
@@ -1097,7 +1088,7 @@ class _ModeButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 10),
           decoration: BoxDecoration(
             color: isSelected ? color : Colors.transparent,
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(IveTokens.rSm),
           ),
           child: Text(
             label,
@@ -1105,7 +1096,7 @@ class _ModeButton extends StatelessWidget {
             style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w600,
-              color: isSelected ? Colors.white : const Color(0xFF6B7280),
+              color: isSelected ? IveTokens.ink : IveTokens.mute,
             ),
           ),
         ),
@@ -1114,9 +1105,9 @@ class _ModeButton extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 //  HELPERS
-// ──────────────────────────────────────────────
+// 
 
 String _timeAgo(DateTime dt) {
   final diff = DateTime.now().difference(dt);

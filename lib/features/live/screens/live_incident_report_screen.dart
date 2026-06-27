@@ -1,11 +1,12 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// LIVE MODULE — Screen 21: Incident Reporting
+/// 
+/// LIVE MODULE  Screen 21: Incident Reporting
 /// Structured incident report: type/severity selection, description,
 /// photo evidence, location tagging, submission flow
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
@@ -55,9 +56,9 @@ class _LiveIncidentReportScreenState extends State<LiveIncidentReportScreen> {
             child: Row(
               children: [
                 _StepDot(index: 0, current: _step, label: 'Type'),
-                Expanded(child: Container(height: 2, color: _step > 0 ? kLiveColor : Colors.grey.shade300)),
+                Expanded(child: Container(height: 2, color: _step > 0 ? IveTokens.moduleLive : Colors.grey.shade300)),
                 _StepDot(index: 1, current: _step, label: 'Details'),
-                Expanded(child: Container(height: 2, color: _step > 1 ? kLiveColor : Colors.grey.shade300)),
+                Expanded(child: Container(height: 2, color: _step > 1 ? IveTokens.moduleLive : Colors.grey.shade300)),
                 _StepDot(index: 2, current: _step, label: 'Review'),
               ],
             ),
@@ -134,7 +135,7 @@ class _LiveIncidentReportScreenState extends State<LiveIncidentReportScreen> {
                                 ? null
                                 : () => setState(() => _step++),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: _step == 2 ? kLiveColor : AppColors.primary,
+                      backgroundColor: _step == 2 ? IveTokens.moduleLive : AppColors.primary,
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -176,7 +177,7 @@ class _TypeSeverityStep extends StatelessWidget {
         LiveSectionCard(
           title: 'INCIDENT TYPE',
           icon: Icons.warning_amber,
-          iconColor: kLiveAccent,
+          iconColor: IveTokens.moduleLive,
           child: Column(
             children: IncidentType.values.map((type) {
               final info = _typeInfo(type);
@@ -187,9 +188,9 @@ class _TypeSeverityStep extends StatelessWidget {
                   margin: const EdgeInsets.only(bottom: 6),
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: isSelected ? kLiveColor.withValues(alpha: 0.05) : Colors.grey.shade50,
+                    color: isSelected ? IveTokens.moduleLive.withValues(alpha: 0.05) : Colors.grey.shade50,
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: isSelected ? kLiveColor : Colors.grey.shade200, width: isSelected ? 2 : 1),
+                    border: Border.all(color: isSelected ? IveTokens.moduleLive : Colors.grey.shade200, width: isSelected ? 2 : 1),
                   ),
                   child: Row(
                     children: [
@@ -199,12 +200,12 @@ class _TypeSeverityStep extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(info.$2, style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: isSelected ? kLiveColor : AppColors.textPrimary)),
+                            Text(info.$2, style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: isSelected ? IveTokens.moduleLive : AppColors.textPrimary)),
                             Text(info.$3, style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                           ],
                         ),
                       ),
-                      if (isSelected) const Icon(Icons.check_circle, size: 20, color: kLiveColor),
+                      if (isSelected) const Icon(Icons.check_circle, size: 20, color: IveTokens.moduleLive),
                     ],
                   ),
                 ),
@@ -217,7 +218,7 @@ class _TypeSeverityStep extends StatelessWidget {
         LiveSectionCard(
           title: 'SEVERITY LEVEL',
           icon: Icons.speed,
-          iconColor: kLiveColor,
+          iconColor: IveTokens.moduleLive,
           child: Column(
             children: IncidentSeverity.values.map((s) {
               final info = _severityInfo(s);
@@ -262,13 +263,13 @@ class _TypeSeverityStep extends StatelessWidget {
   }
 
   (String, String, String) _typeInfo(IncidentType type) => switch (type) {
-        IncidentType.vehicleAccident => ('ðŸš—', 'Vehicle Accident', 'Collision or road accident'),
-        IncidentType.theftRobbery => ('ðŸ”’', 'Theft / Robbery', 'Package or vehicle theft'),
-        IncidentType.packageDamageLoss => ('ðŸ“¦', 'Package Damage', 'Damaged goods during transit'),
-        IncidentType.harassment => ('âš ï¸', 'Harassment', 'Customer or third-party harassment'),
-        IncidentType.customerDispute => ('ðŸ—£ï¸', 'Customer Dispute', 'Dispute with customer'),
-        IncidentType.medicalEmergency => ('ðŸ¥', 'Medical Emergency', 'Medical emergency incident'),
-        IncidentType.other => ('ðŸ“‹', 'Other', 'Any other incident type'),
+        IncidentType.vehicleAccident => ('', 'Vehicle Accident', 'Collision or road accident'),
+        IncidentType.theftRobbery => ('', 'Theft / Robbery', 'Package or vehicle theft'),
+        IncidentType.packageDamageLoss => ('', 'Package Damage', 'Damaged goods during transit'),
+        IncidentType.harassment => ('', 'Harassment', 'Customer or third-party harassment'),
+        IncidentType.customerDispute => ('', 'Customer Dispute', 'Dispute with customer'),
+        IncidentType.medicalEmergency => ('', 'Medical Emergency', 'Medical emergency incident'),
+        IncidentType.other => ('', 'Other', 'Any other incident type'),
       };
 
   (String, String, Color) _severityInfo(IncidentSeverity severity) => switch (severity) {
@@ -316,7 +317,7 @@ class _DetailsStep extends StatelessWidget {
                   hintText: 'Provide details about the incident...',
                   hintStyle: TextStyle(color: Colors.grey.shade400, fontSize: 13),
                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide(color: Colors.grey.shade300)),
-                  focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: kLiveColor, width: 2)),
+                  focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: IveTokens.moduleLive, width: 2)),
                   contentPadding: const EdgeInsets.all(12),
                 ),
                 style: const TextStyle(fontSize: 13),
@@ -353,7 +354,7 @@ class _DetailsStep extends StatelessWidget {
                       width: 56, height: 56,
                       decoration: BoxDecoration(
                         color: Colors.grey.shade200,
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(10),
                         border: Border.all(color: Colors.grey.shade300),
                       ),
                       child: const Center(child: Icon(Icons.image, size: 24, color: Color(0xFF9CA3AF))),
@@ -369,7 +370,7 @@ class _DetailsStep extends StatelessWidget {
         LiveSectionCard(
           title: 'LOCATION',
           icon: Icons.location_on,
-          iconColor: kLiveColor,
+          iconColor: IveTokens.moduleLive,
           child: Column(
             children: [
               Row(
@@ -383,19 +384,19 @@ class _DetailsStep extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Switch(value: locationTagged, onChanged: onLocationTaggedChanged, activeThumbColor: kLiveColor),
+                  Switch(value: locationTagged, onChanged: onLocationTaggedChanged, activeThumbColor: IveTokens.moduleLive),
                 ],
               ),
               if (locationTagged)
                 Container(
                   margin: const EdgeInsets.only(top: 6),
                   padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(color: const Color(0xFFF0FDF4), borderRadius: BorderRadius.circular(8)),
+                  decoration: BoxDecoration(color: const Color(0xFFF0FDF4), borderRadius: BorderRadius.circular(10)),
                   child: const Row(
                     children: [
                       Icon(Icons.my_location, size: 16, color: Color(0xFF10B981)),
                       SizedBox(width: 8),
-                      Text('Location acquired âœ“', style: TextStyle(fontSize: 12, color: Color(0xFF059669), fontWeight: FontWeight.w600)),
+                      Text('Location acquired "', style: TextStyle(fontSize: 12, color: Color(0xFF059669), fontWeight: FontWeight.w600)),
                     ],
                   ),
                 ),
@@ -437,15 +438,15 @@ class _ReviewStep extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [kLiveColor.withValues(alpha: 0.1), kLiveAccent.withValues(alpha: 0.05)]),
+            gradient: LinearGradient(colors: [IveTokens.moduleLive.withValues(alpha: 0.1), IveTokens.moduleLive.withValues(alpha: 0.05)]),
             borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: kLiveColor.withValues(alpha: 0.2)),
+            border: Border.all(color: IveTokens.moduleLive.withValues(alpha: 0.2)),
           ),
           child: const Column(
             children: [
-              Icon(Icons.fact_check, size: 28, color: kLiveColor),
+              Icon(Icons.fact_check, size: 28, color: IveTokens.moduleLive),
               SizedBox(height: 6),
-              Text('Review Your Report', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: kLiveColor)),
+              Text('Review Your Report', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: IveTokens.moduleLive)),
               Text('Verify all details before submitting', style: TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
             ],
           ),
@@ -464,7 +465,7 @@ class _ReviewStep extends StatelessWidget {
               const Divider(height: 12),
               _SummaryRow(label: 'Description', value: description.isEmpty ? 'No description' : (description.length > 60 ? '${description.substring(0, 60)}...' : description)),
               const Divider(height: 12),
-              _SummaryRow(label: 'Location tagged', value: locationTagged ? 'Yes âœ“' : 'No'),
+              _SummaryRow(label: 'Location tagged', value: locationTagged ? 'Yes ' : 'No'),
               const Divider(height: 12),
               _SummaryRow(label: 'Photos', value: '$photoCount attached'),
             ],
@@ -507,7 +508,7 @@ class _SubmittedView extends StatelessWidget {
             const SizedBox(height: 20),
             const Text('Report Submitted', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
             const SizedBox(height: 8),
-            Text('Incident #INC-${DateTime.now().millisecondsSinceEpoch % 10000}', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: kLiveColor)),
+            Text('Incident #INC-${DateTime.now().millisecondsSinceEpoch % 10000}', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: IveTokens.moduleLive)),
             const SizedBox(height: 8),
             const Text('Our operations team has been notified and will review your report shortly.', textAlign: TextAlign.center, style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
             const SizedBox(height: 24),
@@ -546,7 +547,7 @@ class _StepDot extends StatelessWidget {
           width: 28, height: 28,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: isActive ? kLiveColor : Colors.grey.shade300,
+            color: isActive ? IveTokens.moduleLive : Colors.grey.shade300,
           ),
           child: Center(
             child: index < current
@@ -555,7 +556,7 @@ class _StepDot extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 4),
-        Text(label, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: isActive ? kLiveColor : Colors.grey.shade500)),
+        Text(label, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: isActive ? IveTokens.moduleLive : Colors.grey.shade500)),
       ],
     );
   }

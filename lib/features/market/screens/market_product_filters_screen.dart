@@ -1,7 +1,7 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// MARKET MODULE — Screen 3.1: Product Filters
+/// 
+/// MARKET MODULE  Screen 3.1: Product Filters
 /// Advanced product filtering: price, dietary, availability, category
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -83,8 +83,8 @@ class _MarketProductFiltersScreenState extends State<MarketProductFiltersScreen>
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           _PricePreset(label: 'Under \$10', onTap: () => setState(() => _priceRange = const RangeValues(0, 10))),
-                          _PricePreset(label: '\$10–\$25', onTap: () => setState(() => _priceRange = const RangeValues(10, 25))),
-                          _PricePreset(label: '\$25–\$50', onTap: () => setState(() => _priceRange = const RangeValues(25, 50))),
+                          _PricePreset(label: '\$10\$25', onTap: () => setState(() => _priceRange = const RangeValues(10, 25))),
+                          _PricePreset(label: '\$25\$50', onTap: () => setState(() => _priceRange = const RangeValues(25, 50))),
                           _PricePreset(label: '\$50+', onTap: () => setState(() => _priceRange = const RangeValues(50, 200))),
                         ],
                       ),
@@ -311,17 +311,17 @@ class _MarketProductFiltersScreenState extends State<MarketProductFiltersScreen>
   String _dietaryLabel(DietaryPreference d) {
     switch (d) {
       case DietaryPreference.vegetarian:
-        return '🥬 Vegetarian';
+        return ' Vegetarian';
       case DietaryPreference.vegan:
-        return '🌱 Vegan';
+        return ' Vegan';
       case DietaryPreference.glutenFree:
-        return '🌾 Gluten-free';
+        return ' Gluten-free';
       case DietaryPreference.halal:
-        return '🕌 Halal';
+        return ' Halal';
       case DietaryPreference.kosher:
-        return '⚖ Kosher';
+        return ' Kosher';
       case DietaryPreference.organic:
-        return '🌿 Organic';
+        return ' Organic';
     }
   }
 
@@ -371,7 +371,7 @@ class _PricePreset extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         decoration: BoxDecoration(
           border: Border.all(color: AppColors.inputBorder),
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(10),
         ),
         child: Text(label, style: const TextStyle(fontSize: 11, color: AppColors.textSecondary)),
       ),

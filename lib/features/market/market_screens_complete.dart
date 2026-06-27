@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/utils/app_toast.dart';
 import 'package:provider/provider.dart';
 
 class MarketCategoriesScreen extends StatelessWidget {
@@ -80,7 +81,7 @@ class StoreDetailsScreen extends StatelessWidget {
                 Row(
                   children: [
                     const Icon(Icons.star, color: Colors.amber, size: 20),
-                    const Text(' 4.7 • 2,341 reviews'),
+                    const Text(' 4.7  2,341 reviews'),
                   ],
                 ),
                 const SizedBox(height: 16),
@@ -104,7 +105,7 @@ class StoreDetailsScreen extends StatelessWidget {
                     const SizedBox(width: 12),
                     Expanded(
                       child: ElevatedButton.icon(
-                        onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Opening chat with store...'))),
+                        onPressed: () => AppToast.show(context, 'Opening chat with store...'),
                         icon: const Icon(Icons.message),
                         label: const Text('Contact'),
                       ),
@@ -175,7 +176,7 @@ class ProductDetailsScreen extends StatelessWidget {
                 Row(
                   children: [
                     const Icon(Icons.star, color: Colors.amber, size: 20),
-                    Text(' $rating • $reviews reviews'),
+                    Text(' $rating  $reviews reviews'),
                   ],
                 ),
                 const SizedBox(height: 16),
@@ -207,7 +208,7 @@ class ProductDetailsScreen extends StatelessWidget {
                     ),
                     const SizedBox(width: 12),
                     ElevatedButton(
-                      onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Added to wishlist'))),
+                      onPressed: () => AppToast.show(context, 'Added to wishlist'),
                       style: ElevatedButton.styleFrom(backgroundColor: Colors.grey),
                       child: const Icon(Icons.favorite_border),
                     ),
@@ -494,7 +495,7 @@ class OrderHistoryScreen extends StatelessWidget {
             margin: const EdgeInsets.only(bottom: 12),
             child: ListTile(
               title: Text(order['id'] as String, style: const TextStyle(fontWeight: FontWeight.bold)),
-              subtitle: Text('${order['items']} items • ${order['date']}'),
+              subtitle: Text('${order['items']} items  ${order['date']}'),
               trailing: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -502,7 +503,7 @@ class OrderHistoryScreen extends StatelessWidget {
                   Text(order['total'] as String, style: const TextStyle(fontWeight: FontWeight.bold)),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(color: statusColor.withValues(alpha: 0.2), borderRadius: BorderRadius.circular(4)),
+                    decoration: BoxDecoration(color: statusColor.withValues(alpha: 0.2), borderRadius: BorderRadius.circular(6)),
                     child: Text(order['status'] as String, style: TextStyle(color: statusColor, fontSize: 12)),
                   ),
                 ],

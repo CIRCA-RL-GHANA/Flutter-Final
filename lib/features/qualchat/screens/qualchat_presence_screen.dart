@@ -1,8 +1,9 @@
-﻿/// qualChat Screen 6 — Presence Dashboard (Enhanced)
+/// qualChat Screen 6  Presence Dashboard (Enhanced)
 /// Real-Time Operations Center: presence, heatmap, user cards
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
 import 'package:provider/provider.dart';
 import '../models/qualchat_models.dart';
 import '../providers/qualchat_provider.dart';
@@ -24,7 +25,7 @@ class QualChatPresenceScreen extends StatelessWidget {
             title: 'Presence Dashboard',
             actions: [
               IconButton(
-                icon: const Icon(Icons.sync, color: kChatColor),
+                icon: const Icon(Icons.sync, color: IveTokens.moduleQualChat),
                 onPressed: () {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Syncing...')),
@@ -93,9 +94,9 @@ class QualChatPresenceScreen extends StatelessWidget {
                     children: PresenceFilter.values.map((f) {
                       final isSelected = provider.presenceFilter == f;
                       final labels = {
-                        PresenceFilter.individual: 'ðŸ‘¤ Individual',
-                        PresenceFilter.entity: 'ðŸ¢ Entity',
-                        PresenceFilter.all: 'ðŸŒ All',
+                        PresenceFilter.individual: 'Individual',
+                        PresenceFilter.entity: ' Entity',
+                        PresenceFilter.all: ' All',
                       };
                       return Expanded(
                         child: GestureDetector(
@@ -104,8 +105,8 @@ class QualChatPresenceScreen extends StatelessWidget {
                             margin: const EdgeInsets.symmetric(horizontal: 4),
                             padding: const EdgeInsets.symmetric(vertical: 8),
                             decoration: BoxDecoration(
-                              color: isSelected ? kChatColor : const Color(0xFFF3F4F6),
-                              borderRadius: BorderRadius.circular(8),
+                              color: isSelected ? IveTokens.moduleQualChat : const Color(0xFFF3F4F6),
+                              borderRadius: BorderRadius.circular(10),
                             ),
                             child: Text(
                               labels[f]!,
@@ -136,17 +137,17 @@ class QualChatPresenceScreen extends StatelessWidget {
                           onTap: () => provider.setStatusFilter(null),
                         ),
                         _FilterChip2(
-                          label: 'ðŸŸ¢ Online',
+                          label: ' Online',
                           isSelected: provider.statusFilter == PresenceStatus.online,
                           onTap: () => provider.setStatusFilter(PresenceStatus.online),
                         ),
                         _FilterChip2(
-                          label: 'ðŸŸ¡ Idle',
+                          label: ' Idle',
                           isSelected: provider.statusFilter == PresenceStatus.idle,
                           onTap: () => provider.setStatusFilter(PresenceStatus.idle),
                         ),
                         _FilterChip2(
-                          label: 'ðŸ”´ Offline',
+                          label: ' Offline',
                           isSelected: provider.statusFilter == PresenceStatus.offline,
                           onTap: () => provider.setStatusFilter(PresenceStatus.offline),
                         ),
@@ -207,7 +208,7 @@ class QualChatPresenceScreen extends StatelessWidget {
                           icon: const Icon(Icons.chat, size: 16),
                           label: const Text('Message All Online'),
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: kChatColor,
+                            backgroundColor: IveTokens.moduleQualChat,
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                           ),
@@ -220,8 +221,8 @@ class QualChatPresenceScreen extends StatelessWidget {
                           icon: const Icon(Icons.campaign, size: 16),
                           label: const Text('Announcement'),
                           style: OutlinedButton.styleFrom(
-                            foregroundColor: kChatColor,
-                            side: const BorderSide(color: kChatColor),
+                            foregroundColor: IveTokens.moduleQualChat,
+                            side: const BorderSide(color: IveTokens.moduleQualChat),
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                           ),
                         ),
@@ -254,15 +255,15 @@ class _FilterChip2 extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(
-            color: isSelected ? kChatColor.withValues(alpha: 0.1) : const Color(0xFFF3F4F6),
-            borderRadius: BorderRadius.circular(16),
-            border: isSelected ? Border.all(color: kChatColor) : null,
+            color: isSelected ? IveTokens.moduleQualChat.withValues(alpha: 0.1) : const Color(0xFFF3F4F6),
+            borderRadius: BorderRadius.circular(10),
+            border: isSelected ? Border.all(color: IveTokens.moduleQualChat) : null,
           ),
           child: Text(
             label,
             style: TextStyle(
               fontSize: 12, fontWeight: FontWeight.w600,
-              color: isSelected ? kChatColor : const Color(0xFF6B7280),
+              color: isSelected ? IveTokens.moduleQualChat : const Color(0xFF6B7280),
             ),
           ),
         ),
@@ -324,7 +325,7 @@ class _ExpandableUserCardState extends State<_ExpandableUserCard> {
               _InfoRow('Status', u.statusMessage ?? 'Available'),
               _InfoRow('Average response', '${u.avgResponseMinutes} minutes'),
               _InfoRow('Department', u.department ?? 'N/A'),
-              const _InfoRow('Preferred contact', 'ðŸ’¬ Chat first'),
+              const _InfoRow('Preferred contact', 'Chat first'),
               const SizedBox(height: 8),
               Row(
                 children: [
@@ -392,18 +393,18 @@ class _QuickAction extends StatelessWidget {
     return Expanded(
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(10),
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 8),
           decoration: BoxDecoration(
-            color: kChatColor.withValues(alpha: 0.1),
-            borderRadius: BorderRadius.circular(8),
+            color: IveTokens.moduleQualChat.withValues(alpha: 0.1),
+            borderRadius: BorderRadius.circular(10),
           ),
           child: Column(
             children: [
-              Icon(icon, size: 16, color: kChatColor),
+              Icon(icon, size: 16, color: IveTokens.moduleQualChat),
               const SizedBox(height: 2),
-              Text(label, style: const TextStyle(fontSize: 10, color: kChatColor)),
+              Text(label, style: const TextStyle(fontSize: 10, color: IveTokens.moduleQualChat)),
             ],
           ),
         ),
@@ -425,7 +426,7 @@ class _HeatmapPainter extends CustomPainter {
       canvas.drawRRect(
         RRect.fromRectAndRadius(
           Rect.fromLTWH(i * barWidth + 1, size.height - h, barWidth - 2, h),
-          const Radius.circular(2),
+          const Radius.circular(6),
         ),
         paint,
       );

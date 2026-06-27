@@ -1,11 +1,13 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// LIVE MODULE — Screen 19: Driver Performance Detail
+/// 
+/// LIVE MODULE  Screen 19: Driver Performance Detail
 /// Individual driver analytics: delivery history, ratings,
 /// performance trends, feedback, and management actions
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../models/live_models.dart';
@@ -31,7 +33,7 @@ class LiveDriverPerformanceScreen extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.fromLTRB(16, MediaQuery.of(context).padding.top + 8, 16, 16),
                   decoration: const BoxDecoration(
-                    gradient: LinearGradient(colors: [kLiveColor, kLiveAccent], begin: Alignment.topLeft, end: Alignment.bottomRight),
+                    gradient: LinearGradient(colors: [IveTokens.moduleLive, IveTokens.moduleLive], begin: Alignment.topLeft, end: Alignment.bottomRight),
                   ),
                   child: Column(
                     children: [
@@ -92,7 +94,7 @@ class LiveDriverPerformanceScreen extends StatelessWidget {
                         iconColor: const Color(0xFF3B82F6),
                         child: Column(
                           children: [
-                            _DetailRow(label: 'Availability', value: driver.availability.name.toUpperCase(), valueColor: driver.availability == DriverAvailability.online ? const Color(0xFF10B981) : kLiveColor),
+                            _DetailRow(label: 'Availability', value: driver.availability.name.toUpperCase(), valueColor: driver.availability == DriverAvailability.online ? const Color(0xFF10B981) : IveTokens.moduleLive),
                             if (driver.activePackageId != null)
                               _DetailRow(label: 'Active Package', value: driver.activePackageId!),
                           ],
@@ -112,8 +114,8 @@ class LiveDriverPerformanceScreen extends StatelessWidget {
                               runSpacing: 6,
                               children: driver.specialties.map((s) => Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                                decoration: BoxDecoration(color: kLiveColor.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(8)),
-                                child: Text(s, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: kLiveColor)),
+                                decoration: BoxDecoration(color: IveTokens.moduleLive.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(10)),
+                                child: Text(s, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: IveTokens.moduleLive)),
                               )).toList(),
                             ),
                             if (driver.badges.isNotEmpty) ...[
@@ -125,7 +127,7 @@ class LiveDriverPerformanceScreen extends StatelessWidget {
                                 runSpacing: 6,
                                 children: driver.badges.map((b) => Container(
                                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                                  decoration: BoxDecoration(color: const Color(0xFFFEF3C7), borderRadius: BorderRadius.circular(8)),
+                                  decoration: BoxDecoration(color: const Color(0xFFFEF3C7), borderRadius: BorderRadius.circular(10)),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
@@ -143,7 +145,7 @@ class LiveDriverPerformanceScreen extends StatelessWidget {
 
                       // Performance Chart placeholder
                       LiveSectionCard(
-                        title: 'ðŸ“ˆ DELIVERY TRENDS (7 DAYS)',
+                        title: '" DELIVERY TRENDS (7 DAYS)',
                         icon: Icons.trending_up,
                         iconColor: const Color(0xFF10B981),
                         child: Container(
@@ -164,7 +166,7 @@ class LiveDriverPerformanceScreen extends StatelessWidget {
 
                       // Recent Feedback
                       LiveSectionCard(
-                        title: 'ðŸ’¬ RECENT FEEDBACK',
+                        title: 'RECENT FEEDBACK',
                         icon: Icons.feedback,
                         iconColor: const Color(0xFF8B5CF6),
                         child: Column(
@@ -195,7 +197,7 @@ class LiveDriverPerformanceScreen extends StatelessWidget {
                         children: [
                           Expanded(
                             child: OutlinedButton.icon(
-                              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Calling...'))),
+                              onPressed: () => AppToast.show(context, 'Calling...'),
                               icon: const Icon(Icons.phone, size: 16),
                               label: const Text('CALL', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700)),
                               style: OutlinedButton.styleFrom(foregroundColor: const Color(0xFF10B981), padding: const EdgeInsets.symmetric(vertical: 12)),
@@ -216,7 +218,7 @@ class LiveDriverPerformanceScreen extends StatelessWidget {
                               onPressed: () => Navigator.pushNamed(context, AppRoutes.liveDriverAssignment),
                               icon: const Icon(Icons.assignment, size: 16),
                               label: const Text('ASSIGN', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700)),
-                              style: OutlinedButton.styleFrom(foregroundColor: kLiveColor, padding: const EdgeInsets.symmetric(vertical: 12)),
+                              style: OutlinedButton.styleFrom(foregroundColor: IveTokens.moduleLive, padding: const EdgeInsets.symmetric(vertical: 12)),
                             ),
                           ),
                         ],
@@ -291,7 +293,7 @@ class _FeedbackItem extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 8),
       child: Container(
         padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(color: AppColors.backgroundLight, borderRadius: BorderRadius.circular(8)),
+        decoration: BoxDecoration(color: AppColors.backgroundLight, borderRadius: BorderRadius.circular(10)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

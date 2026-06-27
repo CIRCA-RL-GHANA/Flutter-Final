@@ -6,17 +6,17 @@ import 'ive_tokens.dart';
 /// Honest, single-color buttons. No gradients. The accent does the talking.
 ///
 /// Three weights:
-/// - [IveButton.primary]  — filled accent, the page's one action
-/// - [IveButton.secondary] — hairline-bordered, neutral
-/// - [IveButton.text]     — text-only, used for tertiary actions
+/// - [IveButton.primary]   filled accent, the page's one action
+/// - [IveButton.secondary]  hairline-bordered, neutral
+/// - [IveButton.text]      text-only, used for tertiary actions
 ///
 /// Sized to a 44pt minimum tap target.
 ///
 /// Interaction polish (Jony-Ive grade):
-///  • Pointer cursor on hover (web/desktop)
-///  • Subtle press-scale (97%) for tactile feedback
-///  • Light haptic on tap (medium for destructive)
-///  • Visible focus ring for keyboard / accessibility users
+///   Pointer cursor on hover (web/desktop)
+///   Subtle press-scale (97%) for tactile feedback
+///   Light haptic on tap (medium for destructive)
+///   Visible focus ring for keyboard / accessibility users
 class IveButton extends StatefulWidget {
   const IveButton._({
     super.key,
@@ -125,7 +125,7 @@ class _IveButtonState extends State<IveButton> {
     final fg = widget.isDestructive
         ? IveTokens.danger
         : isPrimary
-            ? Colors.white
+            ? IveTokens.ink
             : IveTokens.label;
 
     final bg = isPrimary
@@ -157,11 +157,12 @@ class _IveButtonState extends State<IveButton> {
               ],
               Flexible(
                 child: Text(
-                  widget.label,
+                  isPrimary ? widget.label.toUpperCase() : widget.label,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: IveType.bodyEmphasis.copyWith(
+                  style: (isPrimary ? IveType.monoEmphasis : IveType.bodyEmphasis).copyWith(
                     color: fg.withValues(alpha: disabled ? 0.4 : 1),
+                    letterSpacing: isPrimary ? 1.0 : null,
                   ),
                 ),
               ),
@@ -179,7 +180,7 @@ class _IveButtonState extends State<IveButton> {
         borderRadius: IveTokens.brMd,
       ),
       // Luminance lift: a faint top-edge highlight replaces any shadow
-      // (Move 03 — Weightless Depth).
+      // (Move 03  Weightless Depth).
       child: Stack(
         fit: StackFit.expand,
         children: [
@@ -200,11 +201,11 @@ class _IveButtonState extends State<IveButton> {
       ),
     );
 
-    // Press-scale gives a tactile, physical response.
+    // Press-scale: 0.98 per spec (subtle, not dramatic).
     final scaled = AnimatedScale(
-      duration: IveTokens.dMicro,
+      duration: const Duration(milliseconds: 90),
       curve: IveTokens.standard,
-      scale: _pressed && !disabled ? 0.97 : 1.0,
+      scale: _pressed && !disabled ? 0.98 : 1.0,
       child: container,
     );
 

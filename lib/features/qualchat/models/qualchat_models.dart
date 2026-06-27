@@ -1,11 +1,11 @@
-/// qualChat Module — Data Models
+/// qualChat Module  Data Models
 /// Communications Hub: Messages, Presence, HeyYa
 /// Module Color: Cyan 0xFF06B6D4
 library;
 
-// ──────────────────────────────────────────────
+// 
 //  ENUMS
-// ──────────────────────────────────────────────
+// 
 
 /// Widget loading state machine
 enum QualChatWidgetState { loading, loaded, error, empty }
@@ -22,7 +22,7 @@ enum HeyYaStatus { pending, accepted, expired, rejected, withdrawn }
 /// Hey Ya tab filter
 enum HeyYaTab { all, sent, received, matches }
 
-/// Hey Ya date intent — what kind of date the sender has in mind
+/// Hey Ya date intent  what kind of date the sender has in mind
 enum HeyYaIntent { coffee, dinner, walk, movie, videoCall, any }
 
 /// Timeline event types
@@ -94,9 +94,9 @@ enum SentimentTrend { positive, neutral, negative }
 /// Conversation insight priority
 enum InsightPriority { unresolved, followUp, completed }
 
-// ──────────────────────────────────────────────
+// 
 //  DATA MODELS
-// ──────────────────────────────────────────────
+// 
 
 /// Represents a user in the qualChat system
 class ChatUser {
@@ -319,7 +319,7 @@ class Conversation {
       };
 }
 
-/// A Hey Ya request (dating feature — Owner only)
+/// A Hey Ya request (dating feature  Owner only)
 /// Expresses romantic/social interest in another user and proposes a date intent.
 /// Both users must accept for a match; Genie AI scores compatibility.
 class HeyYaRequest {
@@ -396,10 +396,10 @@ class HeyYaRequest {
 
 /// Genie AI compatibility breakdown for a Hey Ya pair
 class CompatibilityBreakdown {
-  final int interests;  // 0–100
-  final int vibe;       // 0–100
-  final int lifestyle;  // 0–100
-  final int values;     // 0–100
+  final int interests;  // 0100
+  final int vibe;       // 0100
+  final int lifestyle;  // 0100
+  final int values;     // 0100
 
   const CompatibilityBreakdown({
     required this.interests,

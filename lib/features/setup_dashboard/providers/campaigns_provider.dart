@@ -1,9 +1,9 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// Campaigns Provider — State Management
+/// 
+/// Campaigns Provider  State Management
 ///
 /// Manages campaign lifecycle: listing, creation, activation, pausing.
 /// Delegates all API calls to CampaignsService.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'package:flutter/foundation.dart';
@@ -15,7 +15,7 @@ class CampaignsProvider extends ChangeNotifier {
   CampaignsProvider({CampaignsService? service})
       : _service = service ?? CampaignsService();
 
-  // ─── State ────────────────────────────────────────────────────────────────
+  //  State 
 
   List<dynamic> _campaigns = [];
   List<dynamic> get campaigns => _campaigns;
@@ -31,7 +31,7 @@ class CampaignsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Load ─────────────────────────────────────────────────────────────────
+  //  Load 
 
   Future<void> loadCampaigns(String entityId, {String? status}) async {
     _isLoading = true;
@@ -55,7 +55,7 @@ class CampaignsProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Create ───────────────────────────────────────────────────────────────
+  //  Create 
 
   Future<Map<String, dynamic>?> createCampaign(
     Map<String, dynamic> data,
@@ -84,7 +84,7 @@ class CampaignsProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Update ───────────────────────────────────────────────────────────────
+  //  Update 
 
   Future<bool> updateCampaign(
     String id,
@@ -117,7 +117,7 @@ class CampaignsProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Delete ───────────────────────────────────────────────────────────────
+  //  Delete 
 
   Future<bool> deleteCampaign(String id) async {
     try {
@@ -139,7 +139,7 @@ class CampaignsProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Activate / Pause ─────────────────────────────────────────────────────
+  //  Activate / Pause 
 
   Future<bool> activate(String id) async {
     try {

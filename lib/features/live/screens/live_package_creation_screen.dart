@@ -1,11 +1,12 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// LIVE MODULE — Screen 5: Package Creation & Bundling
+/// 
+/// LIVE MODULE  Screen 5: Package Creation & Bundling
 /// Multi-step wizard: Package config, bundle assistant, route preview,
 /// security/verification settings, confirmation
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
@@ -42,7 +43,7 @@ class _LivePackageCreationScreenState extends State<LivePackageCreationScreen> {
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('Cancel', style: TextStyle(color: kLiveColor)),
+                child: const Text('Cancel', style: TextStyle(color: IveTokens.moduleLive)),
               ),
             ],
           ),
@@ -58,8 +59,8 @@ class _LivePackageCreationScreenState extends State<LivePackageCreationScreen> {
                       margin: EdgeInsets.only(right: i < 2 ? 4 : 0),
                       height: 4,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(2),
-                        color: i <= _step ? kLiveColor : const Color(0xFFE5E7EB),
+                        borderRadius: BorderRadius.circular(6),
+                        color: i <= _step ? IveTokens.moduleLive : const Color(0xFFE5E7EB),
                       ),
                     ),
                   )),
@@ -134,19 +135,19 @@ class _LivePackageCreationScreenState extends State<LivePackageCreationScreen> {
                         setState(() => _step++);
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('âœ… Package created successfully!'), backgroundColor: Color(0xFF10B981)),
+                          const SnackBar(content: Text(' Package created successfully!'), backgroundColor: Color(0xFF10B981)),
                         );
                         Navigator.pop(context);
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: _step == 2 ? const Color(0xFF10B981) : kLiveColor,
+                      backgroundColor: _step == 2 ? const Color(0xFF10B981) : IveTokens.moduleLive,
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                     ),
                     child: Text(
-                      _step == 0 ? 'CONTINUE TO SECURITY' : _step == 1 ? 'REVIEW PACKAGE' : 'âœ… CREATE PACKAGE',
+                      _step == 0 ? 'CONTINUE TO SECURITY' : _step == 1 ? 'REVIEW PACKAGE' : ' CREATE PACKAGE',
                       style: const TextStyle(fontWeight: FontWeight.w700),
                     ),
                   ),
@@ -160,7 +161,7 @@ class _LivePackageCreationScreenState extends State<LivePackageCreationScreen> {
   }
 }
 
-// ─── Step 1: Package Configuration ─────────────────────────────────────────────
+//  Step 1: Package Configuration 
 
 class _PackageConfigStep extends StatelessWidget {
   final PackageType selectedType;
@@ -203,9 +204,9 @@ class _PackageConfigStep extends StatelessWidget {
               return ChoiceChip(
                 selected: selected,
                 label: Text(t.name.toUpperCase(), style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: selected ? Colors.white : AppColors.textSecondary)),
-                selectedColor: kLiveColor,
+                selectedColor: IveTokens.moduleLive,
                 backgroundColor: const Color(0xFFF3F4F6),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 onSelected: (_) => onTypeChanged(t),
               );
             }).toList(),
@@ -214,7 +215,7 @@ class _PackageConfigStep extends StatelessWidget {
 
         // Bundle Assistant
         LiveSectionCard(
-          title: 'ðŸ§© BUNDLE ASSISTANT',
+          title: ' BUNDLE ASSISTANT',
           icon: Icons.auto_awesome,
           iconColor: const Color(0xFFF59E0B),
           child: Column(
@@ -224,7 +225,7 @@ class _PackageConfigStep extends StatelessWidget {
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: const Color(0xFFFEF3C7),
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: Row(
                   children: [
@@ -253,8 +254,8 @@ class _PackageConfigStep extends StatelessWidget {
           iconColor: const Color(0xFFF97316),
           child: Column(
             children: [
-              _PackageToggle(label: 'â„ï¸ Cold chain required', value: coldChain, onChanged: onColdChainChanged),
-              _PackageToggle(label: 'ðŸ“¦ Fragile — handle with care', value: fragile, onChanged: onFragileChanged),
+              _PackageToggle(label: ' Cold chain required', value: coldChain, onChanged: onColdChainChanged),
+              _PackageToggle(label: '" Fragile  handle with care', value: fragile, onChanged: onFragileChanged),
             ],
           ),
         ),
@@ -276,7 +277,7 @@ class _PackageConfigStep extends StatelessWidget {
                 children: [
                   const Icon(Icons.route, size: 32, color: AppColors.textTertiary),
                   const SizedBox(height: 4),
-                  Text('${selectedOrderIds.length} stop${selectedOrderIds.length == 1 ? '' : 's'} • Est. 45 min', style: const TextStyle(fontSize: 12, color: AppColors.textTertiary)),
+                  Text('${selectedOrderIds.length} stop${selectedOrderIds.length == 1 ? '' : 's'}  Est. 45 min', style: const TextStyle(fontSize: 12, color: AppColors.textTertiary)),
                 ],
               ),
             ),
@@ -287,7 +288,7 @@ class _PackageConfigStep extends StatelessWidget {
   }
 }
 
-// ─── Step 2: Security & Verification ──────────────────────────────────────────
+//  Step 2: Security & Verification 
 
 class _SecurityStep extends StatelessWidget {
   final bool requireSignature;
@@ -321,10 +322,10 @@ class _SecurityStep extends StatelessWidget {
           iconColor: const Color(0xFF10B981),
           child: Column(
             children: [
-              _PackageToggle(label: 'âœï¸ Require digital signature', value: requireSignature, onChanged: onSignatureChanged),
-              _PackageToggle(label: 'ðŸ“¸ Require proof-of-delivery photo', value: requirePhoto, onChanged: onPhotoChanged),
-              _PackageToggle(label: 'ðŸ”¢ PIN verification', value: pinVerification, onChanged: onPinChanged),
-              _PackageToggle(label: 'ðŸ” Biometric verification', value: biometricVerification, onChanged: onBiometricChanged),
+              _PackageToggle(label: ' Require digital signature', value: requireSignature, onChanged: onSignatureChanged),
+              _PackageToggle(label: '" Require proof-of-delivery photo', value: requirePhoto, onChanged: onPhotoChanged),
+              _PackageToggle(label: '" PIN verification', value: pinVerification, onChanged: onPinChanged),
+              _PackageToggle(label: '" Biometric verification', value: biometricVerification, onChanged: onBiometricChanged),
             ],
           ),
         ),
@@ -340,7 +341,7 @@ class _SecurityStep extends StatelessWidget {
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: const Color(0xFFF3E8FF),
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: const Row(
                   children: [
@@ -368,12 +369,12 @@ class _SecurityStep extends StatelessWidget {
             children: [
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                decoration: BoxDecoration(color: const Color(0xFFFEF3C7), borderRadius: BorderRadius.circular(8)),
+                decoration: BoxDecoration(color: const Color(0xFFFEF3C7), borderRadius: BorderRadius.circular(10)),
                 child: const Row(
                   children: [
                     Icon(Icons.security, size: 14, color: Color(0xFFF59E0B)),
                     SizedBox(width: 6),
-                    Text('Standard coverage up to â‚µ5,000', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Color(0xFF92400E))),
+                    Text('Standard coverage up to 5,000', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Color(0xFF92400E))),
                   ],
                 ),
               ),
@@ -387,7 +388,7 @@ class _SecurityStep extends StatelessWidget {
   }
 }
 
-// ─── Step 3: Confirmation ────────────────────────────────────────────────────
+//  Step 3: Confirmation 
 
 class _ConfirmationStep extends StatelessWidget {
   final PackageType selectedType;
@@ -413,8 +414,8 @@ class _ConfirmationStep extends StatelessWidget {
             children: [
               Container(
                 padding: const EdgeInsets.all(14),
-                decoration: BoxDecoration(shape: BoxShape.circle, color: kLiveColor.withValues(alpha: 0.1)),
-                child: const Icon(Icons.inventory_2, size: 36, color: kLiveColor),
+                decoration: BoxDecoration(shape: BoxShape.circle, color: IveTokens.moduleLive.withValues(alpha: 0.1)),
+                child: const Icon(Icons.inventory_2, size: 36, color: IveTokens.moduleLive),
               ),
               const SizedBox(height: 12),
               const Text('REVIEW YOUR PACKAGE', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
@@ -432,7 +433,7 @@ class _ConfirmationStep extends StatelessWidget {
               _SummaryRow(label: 'Package type', value: selectedType.name.toUpperCase()),
               _SummaryRow(label: 'Orders bundled', value: '${bundledOrders.length}'),
               _SummaryRow(label: 'Total stops', value: '${bundledOrders.length + 1}'),
-              _SummaryRow(label: 'Total value', value: 'â‚µ${totalValue.toStringAsFixed(2)}'),
+              _SummaryRow(label: 'Total value', value: '${totalValue.toStringAsFixed(2)}'),
               const _SummaryRow(label: 'Est. distance', value: '8.3 km'),
               const _SummaryRow(label: 'Est. duration', value: '45 min'),
             ],
@@ -443,7 +444,7 @@ class _ConfirmationStep extends StatelessWidget {
           LiveSectionCard(
             title: 'INCLUDED ORDERS',
             icon: Icons.shopping_bag,
-            iconColor: kLiveColor,
+            iconColor: IveTokens.moduleLive,
             child: Column(
               children: bundledOrders.map((o) => Padding(
                 padding: const EdgeInsets.only(bottom: 6),
@@ -451,12 +452,12 @@ class _ConfirmationStep extends StatelessWidget {
                   children: [
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                      decoration: BoxDecoration(color: kLiveColor.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(4)),
-                      child: Text('#${o.id}', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: kLiveColor)),
+                      decoration: BoxDecoration(color: IveTokens.moduleLive.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(6)),
+                      child: Text('#${o.id}', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: IveTokens.moduleLive)),
                     ),
                     const SizedBox(width: 8),
                     Expanded(child: Text(o.customerName, style: const TextStyle(fontSize: 13))),
-                    Text('â‚µ${o.total.toStringAsFixed(0)}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
+                    Text('${o.total.toStringAsFixed(0)}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
                   ],
                 ),
               )).toList(),
@@ -482,7 +483,7 @@ class _ConfirmationStep extends StatelessWidget {
   }
 }
 
-// ─── Shared Helpers ──────────────────────────────────────────────────────────
+//  Shared Helpers 
 
 class _OrderBundleItem extends StatelessWidget {
   final LiveOrder order;
@@ -500,28 +501,28 @@ class _OrderBundleItem extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
           decoration: BoxDecoration(
-            color: selected ? kLiveColor.withValues(alpha: 0.05) : Colors.white,
+            color: selected ? IveTokens.moduleLive.withValues(alpha: 0.05) : Colors.white,
             borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: selected ? kLiveColor : const Color(0xFFE5E7EB)),
+            border: Border.all(color: selected ? IveTokens.moduleLive : const Color(0xFFE5E7EB)),
           ),
           child: Row(
             children: [
-              Icon(selected ? Icons.check_box : Icons.check_box_outline_blank, size: 20, color: selected ? kLiveColor : AppColors.textTertiary),
+              Icon(selected ? Icons.check_box : Icons.check_box_outline_blank, size: 20, color: selected ? IveTokens.moduleLive : AppColors.textTertiary),
               const SizedBox(width: 8),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('#${order.id} — ${order.customerName}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-                    Text('${order.items.length} items • â‚µ${order.total.toStringAsFixed(0)}', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                    Text('#${order.id}  ${order.customerName}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
+                    Text('${order.items.length} items  ${order.total.toStringAsFixed(0)}', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                   ],
                 ),
               ),
               if (order.priority == OrderPriority.urgent)
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                  decoration: BoxDecoration(color: kLiveColor.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(4)),
-                  child: const Text('URGENT', style: TextStyle(fontSize: 9, fontWeight: FontWeight.w700, color: kLiveColor)),
+                  decoration: BoxDecoration(color: IveTokens.moduleLive.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(6)),
+                  child: const Text('URGENT', style: TextStyle(fontSize: 9, fontWeight: FontWeight.w700, color: IveTokens.moduleLive)),
                 ),
             ],
           ),
@@ -544,7 +545,7 @@ class _PackageToggle extends StatelessWidget {
       child: Row(
         children: [
           Expanded(child: Text(label, style: const TextStyle(fontSize: 13))),
-          Switch(value: value, onChanged: onChanged, activeThumbColor: kLiveColor, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
+          Switch(value: value, onChanged: onChanged, activeThumbColor: IveTokens.moduleLive, materialTapTargetSize: MaterialTapTargetSize.shrinkWrap),
         ],
       ),
     );

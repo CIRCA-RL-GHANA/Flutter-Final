@@ -1,8 +1,8 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SCREEN 2 — Update Details & Comments
+/// 
+/// SCREEN 2  Update Details & Comments
 /// Full update view with engagement metrics, comments module (sort, reply,
 /// nested threads), and quick-compose input.
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -163,7 +163,7 @@ class _BodyState extends State<_Body> {
   }
 }
 
-// ─── Engagement Strip ───────────────────────────────────────────────────────
+//  Engagement Strip 
 
 class _EngagementStrip extends StatelessWidget {
   final dynamic update;
@@ -244,7 +244,7 @@ class _MetricTap extends StatelessWidget {
   }
 }
 
-// ─── Comments Header ────────────────────────────────────────────────────────
+//  Comments Header 
 
 class _CommentsHeader extends StatelessWidget {
   final UpdatesProvider prov;
@@ -276,7 +276,7 @@ class _CommentsHeader extends StatelessWidget {
   }
 }
 
-// ─── Comment Input ──────────────────────────────────────────────────────────
+//  Comment Input 
 
 class _CommentInput extends StatelessWidget {
   final TextEditingController controller;
@@ -307,7 +307,7 @@ class _CommentInput extends StatelessWidget {
                 filled: true,
                 fillColor: AppColors.inputFill,
                 contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide.none),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
               ),
             ),
           ),

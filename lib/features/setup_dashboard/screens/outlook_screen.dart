@@ -1,9 +1,9 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD2.2: OUTLOOK — Analytics & AI Insights
+/// 
+/// SD2.2: OUTLOOK  Analytics & AI Insights
 /// KPI dashboard, AI-powered insights, trend analysis
 /// RBAC: Owner(personal), Admin(full), BM(branch), SO/BSO(view/brView),
 ///        Monitor/BrMon(view), RO/BRO(view)
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -44,7 +44,7 @@ class OutlookScreen extends StatelessWidget {
             ),
           body: CustomScrollView(
             slivers: [
-              // ─── Quick Actions ────────────────────────────
+              //  Quick Actions 
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -56,7 +56,7 @@ class OutlookScreen extends StatelessWidget {
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                     child: Row(
                       children: [
@@ -78,7 +78,7 @@ class OutlookScreen extends StatelessWidget {
                                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: Colors.white),
                               ),
                               Text(
-                                '${insights.length} insights Â· ${insights.where((i) => i.priority == AlertPriority.critical).length} critical',
+                                '${insights.length} insights  ${insights.where((i) => i.priority == AlertPriority.critical).length} critical',
                                 style: const TextStyle(fontSize: 11, color: Colors.white70),
                               ),
                             ],
@@ -88,7 +88,7 @@ class OutlookScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                           decoration: BoxDecoration(
                             color: Colors.white.withValues(alpha: 0.2),
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           child: const Text(
                             'View All',
@@ -101,8 +101,8 @@ class OutlookScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── KPI Grid ─────────────────────────────────
-              // ─── AI Insights ─────────────────────────────────────────
+              //  KPI Grid 
+              //  AI Insights 
               const SliverToBoxAdapter(
               ),
               SliverToBoxAdapter(
@@ -139,7 +139,7 @@ class OutlookScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Performance Summary ──────────────────────
+              //  Performance Summary 
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
@@ -158,7 +158,7 @@ class OutlookScreen extends StatelessWidget {
                               padding: const EdgeInsets.all(6),
                               decoration: BoxDecoration(
                                 color: AppColors.success.withValues(alpha: 0.1),
-                                borderRadius: BorderRadius.circular(8),
+                                borderRadius: BorderRadius.circular(10),
                               ),
                               child: const Icon(Icons.trending_up, size: 16, color: AppColors.success),
                             ),
@@ -183,7 +183,7 @@ class OutlookScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── AI Insights ──────────────────────────────
+              //  AI Insights 
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
@@ -259,7 +259,7 @@ class _InsightCard extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                   decoration: BoxDecoration(
                     color: AppColors.success.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: Text(
                     insight.impact!,
@@ -278,7 +278,7 @@ class _InsightCard extends StatelessWidget {
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               color: kSetupColor.withValues(alpha: 0.04),
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(10),
             ),
             child: Row(
               children: [
@@ -299,7 +299,7 @@ class _InsightCard extends StatelessWidget {
   }
 }
 
-// ─── Performance Bar ─────────────────────────────────────────────────────────
+//  Performance Bar 
 
 class _PerfBar extends StatelessWidget {
   final String label;
@@ -322,7 +322,7 @@ class _PerfBar extends StatelessWidget {
         ),
         const SizedBox(height: 4),
         ClipRRect(
-          borderRadius: BorderRadius.circular(3),
+          borderRadius: BorderRadius.circular(6),
           child: LinearProgressIndicator(
             value: percent.clamp(0.0, 1.0),
             backgroundColor: AppColors.inputBorder,

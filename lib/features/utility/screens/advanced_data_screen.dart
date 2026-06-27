@@ -1,8 +1,8 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 /// U7: ADVANCED DATA TOOLS Screen
 /// Storage analytics, backup management, cache control, sync status
 /// RBAC: Owner, Administrator, BranchManager only
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -28,7 +28,7 @@ class AdvancedDataScreen extends StatelessWidget {
           body: ListView(
             padding: const EdgeInsets.fromLTRB(20, 12, 20, 100),
             children: [
-              // ─── Storage Overview ─────────────────────────
+              //  Storage Overview 
               const UtilitySectionTitle(
                 title: 'Storage Overview',
                 icon: Icons.sd_storage,
@@ -58,7 +58,7 @@ class AdvancedDataScreen extends StatelessWidget {
                                 style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: AppColors.textPrimary),
                               ),
                               Text(
-                                'of ${storage.totalMB.toStringAsFixed(0)} MB total Â· ${(storage.freePercentage * 100).toStringAsFixed(0)}% free',
+                                'of ${storage.totalMB.toStringAsFixed(0)} MB total  ${(storage.freePercentage * 100).toStringAsFixed(0)}% free',
                                 style: const TextStyle(fontSize: 12, color: AppColors.textTertiary),
                               ),
                             ],
@@ -76,7 +76,7 @@ class AdvancedDataScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Backup Management ────────────────────────
+              //  Backup Management 
               const UtilitySectionTitle(
                 title: 'Backups',
                 icon: Icons.backup,
@@ -119,7 +119,7 @@ class AdvancedDataScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Cache Management ─────────────────────────
+              //  Cache Management 
               const UtilitySectionTitle(
                 title: 'Cache',
                 icon: Icons.cached,
@@ -168,7 +168,7 @@ class AdvancedDataScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Sync Status ──────────────────────────────
+              //  Sync Status 
               const UtilitySectionTitle(
                 title: 'Sync Status',
                 icon: Icons.sync,
@@ -195,7 +195,7 @@ class AdvancedDataScreen extends StatelessWidget {
   }
 }
 
-// ─── Storage Breakdown Row ───────────────────────────────────────────────────
+//  Storage Breakdown Row 
 
 class _StorageBreakdownRow extends StatelessWidget {
   final DataCategory category;
@@ -214,7 +214,7 @@ class _StorageBreakdownRow extends StatelessWidget {
             height: 28,
             decoration: BoxDecoration(
               color: category.color.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(7),
+              borderRadius: BorderRadius.circular(6),
             ),
             child: Icon(category.icon, size: 14, color: category.color),
           ),
@@ -236,7 +236,7 @@ class _StorageBreakdownRow extends StatelessWidget {
           SizedBox(
             width: 50,
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(3),
+              borderRadius: BorderRadius.circular(6),
               child: LinearProgressIndicator(
                 value: total > 0 ? category.sizeMB / total : 0,
                 backgroundColor: category.color.withValues(alpha: 0.1),
@@ -251,7 +251,7 @@ class _StorageBreakdownRow extends StatelessWidget {
   }
 }
 
-// ─── Backup Row ──────────────────────────────────────────────────────────────
+//  Backup Row 
 
 class _BackupRow extends StatelessWidget {
   final DataBackup backup;
@@ -306,7 +306,7 @@ class _BackupRow extends StatelessWidget {
   }
 }
 
-// ─── Cache Row ───────────────────────────────────────────────────────────────
+//  Cache Row 
 
 class _CacheRow extends StatelessWidget {
   final CacheInfo cache;
@@ -324,7 +324,7 @@ class _CacheRow extends StatelessWidget {
             child: Text(cache.category, style: const TextStyle(fontSize: 13, color: AppColors.textPrimary)),
           ),
           Text(
-            '${cache.sizeMB.toStringAsFixed(1)} MB Â· ${cache.itemCount} items',
+            '${cache.sizeMB.toStringAsFixed(1)} MB  ${cache.itemCount} items',
             style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
           ),
         ],
@@ -333,7 +333,7 @@ class _CacheRow extends StatelessWidget {
   }
 }
 
-// ─── Sync Row ────────────────────────────────────────────────────────────────
+//  Sync Row 
 
 class _SyncRow extends StatelessWidget {
   final SyncStatus sync;
@@ -350,7 +350,7 @@ class _SyncRow extends StatelessWidget {
             height: 32,
             decoration: BoxDecoration(
               color: _syncColor(sync.state).withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(sync.icon, size: 16, color: _syncColor(sync.state)),
           ),

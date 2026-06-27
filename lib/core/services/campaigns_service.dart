@@ -1,5 +1,5 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// Campaigns Service — Flutter ↔ Backend Integration
+/// 
+/// Campaigns Service  Flutter  Backend Integration
 ///
 /// Maps to CampaignsController endpoints:
 ///   GET   /campaigns
@@ -10,7 +10,7 @@
 ///   PATCH /campaigns/{id}/activate
 ///   PATCH /campaigns/{id}/pause
 ///   GET   /campaigns/{id}/analytics
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import '../network/api_client.dart';
@@ -21,7 +21,7 @@ class CampaignsService {
 
   CampaignsService([ApiClient? api]) : _api = api ?? ApiClient.instance;
 
-  // ─── Campaigns CRUD ───────────────────────────────────────────────────────
+  //  Campaigns CRUD 
 
   Future<ApiResponse<List<dynamic>>> getCampaigns(
     String entityId, {
@@ -69,7 +69,7 @@ class CampaignsService {
     return _api.delete<void>('/campaigns/$id');
   }
 
-  // ─── Campaign State ───────────────────────────────────────────────────────
+  //  Campaign State 
 
   Future<ApiResponse<Map<String, dynamic>>> activateCampaign(String id) {
     return _api.patch<Map<String, dynamic>>(
@@ -85,7 +85,7 @@ class CampaignsService {
     );
   }
 
-  // ─── Analytics ────────────────────────────────────────────────────────────
+  //  Analytics 
 
   Future<ApiResponse<Map<String, dynamic>>> getCampaignAnalytics(String id) {
     return _api.get<Map<String, dynamic>>(

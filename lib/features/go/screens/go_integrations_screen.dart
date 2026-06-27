@@ -1,8 +1,10 @@
-﻿/// GO Screen 14 — Integrations Hub
+/// GO Screen 14  Integrations Hub
 /// Accounting, banking, business, custom integrations
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
+import '../../../core/utils/app_toast.dart';
 import '../../../core/routes/app_routes.dart';
 import 'package:provider/provider.dart';
 import '../models/go_models.dart';
@@ -39,9 +41,9 @@ class _GoIntegrationsScreenState extends State<GoIntegrationsScreen> with Single
                 padding: const EdgeInsets.all(16),
                 color: Colors.white,
                 child: Row(children: [
-                  _StatBadge(label: 'Connected', value: '$connected', color: kGoPositive),
+                  _StatBadge(label: 'Connected', value: '$connected', color: IveTokens.success),
                   const SizedBox(width: 8),
-                  _StatBadge(label: 'Available', value: '${integrations.length - connected}', color: kGoInfo),
+                  _StatBadge(label: 'Available', value: '${integrations.length - connected}', color: IveTokens.info),
                   const SizedBox(width: 8),
                   _StatBadge(label: 'Total', value: '${integrations.length}', color: const Color(0xFF6B7280)),
                 ]),
@@ -50,8 +52,8 @@ class _GoIntegrationsScreenState extends State<GoIntegrationsScreen> with Single
                 color: Colors.white,
                 child: TabBar(
                   controller: _tabCtrl,
-                  labelColor: kGoColor, unselectedLabelColor: const Color(0xFF9CA3AF),
-                  indicatorColor: kGoColor, indicatorSize: TabBarIndicatorSize.label,
+                  labelColor: IveTokens.moduleGo, unselectedLabelColor: const Color(0xFF9CA3AF),
+                  indicatorColor: IveTokens.moduleGo, indicatorSize: TabBarIndicatorSize.label,
                   labelStyle: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600),
                   isScrollable: true,
                   tabs: const [Tab(text: 'Accounting'), Tab(text: 'Banking'), Tab(text: 'Business'), Tab(text: 'Custom')],
@@ -90,23 +92,23 @@ class _GoIntegrationsScreenState extends State<GoIntegrationsScreen> with Single
         const SizedBox(height: 14),
         Container(
           padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(color: const Color(0xFFF3F4F6), borderRadius: BorderRadius.circular(8)),
+          decoration: BoxDecoration(color: const Color(0xFFF3F4F6), borderRadius: BorderRadius.circular(10)),
           child: Row(children: [
-            const Expanded(child: Text('API Key: ••••••••••••a7f3', style: TextStyle(fontSize: 12, fontFamily: 'monospace'))),
-            IconButton(icon: const Icon(Icons.copy, size: 16, color: kGoColor), onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Copied to clipboard')))),
+            const Expanded(child: Text('API Key: a7f3', style: TextStyle(fontSize: 12, fontFamily: 'monospace'))),
+            IconButton(icon: const Icon(Icons.copy, size: 16, color: IveTokens.moduleGo), onPressed: () => AppToast.show(context, 'Copied to clipboard')),
           ]),
         ),
         const SizedBox(height: 10),
         Row(children: [
           Expanded(child: OutlinedButton(
             onPressed: () => Navigator.pushNamed(context, AppRoutes.utilityHelp),
-            style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFF1C1C2E))),
+            style: OutlinedButton.styleFrom(foregroundColor: IveTokens.moduleGo, side: const BorderSide(color: Color(0xFF1C1C2E))),
             child: const Text('View Docs'),
           )),
           const SizedBox(width: 10),
           Expanded(child: OutlinedButton(
-            onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('New API key generated'))),
-            style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFF1C1C2E))),
+            onPressed: () => AppToast.show(context, 'New API key generated'),
+            style: OutlinedButton.styleFrom(foregroundColor: IveTokens.moduleGo, side: const BorderSide(color: Color(0xFF1C1C2E))),
             child: const Text('Generate Key'),
           )),
         ]),
@@ -120,8 +122,8 @@ class _GoIntegrationsScreenState extends State<GoIntegrationsScreen> with Single
         SizedBox(width: double.infinity, child: ElevatedButton.icon(
           icon: const Icon(Icons.add, size: 18),
           label: const Text('Add Webhook'),
-          onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Webhook configuration added'))),
-          style: ElevatedButton.styleFrom(backgroundColor: kGoColor, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 12), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+          onPressed: () => AppToast.show(context, 'Webhook configuration added'),
+          style: ElevatedButton.styleFrom(backgroundColor: IveTokens.moduleGo, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 12), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
         )),
       ])),
     ]);
@@ -135,7 +137,7 @@ class _StatBadge extends StatelessWidget {
   Widget build(BuildContext context) => Expanded(
     child: Container(
       padding: const EdgeInsets.symmetric(vertical: 10),
-      decoration: BoxDecoration(color: color.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(8)),
+      decoration: BoxDecoration(color: color.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(10)),
       child: Column(children: [
         Text(value, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: color)),
         Text(label, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: color)),
@@ -159,8 +161,8 @@ class _IntegrationCard extends StatelessWidget {
         children: [
           Container(
             padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(color: kGoColorLight, borderRadius: BorderRadius.circular(10)),
-            child: Icon(integration.icon, color: kGoColor, size: 22),
+            decoration: BoxDecoration(color: IveTokens.surfaceRaised, borderRadius: BorderRadius.circular(10)),
+            child: Icon(integration.icon, color: IveTokens.moduleGo, size: 22),
           ),
           const SizedBox(width: 12),
           Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -168,19 +170,19 @@ class _IntegrationCard extends StatelessWidget {
             Text(integration.description ?? '', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
             if (connected && integration.lastSync != null) ...[
               const SizedBox(height: 2),
-              Text('Last sync: ${integration.lastSync!.day}/${integration.lastSync!.month}', style: const TextStyle(fontSize: 10, color: kGoPositive)),
+              Text('Last sync: ${integration.lastSync!.day}/${integration.lastSync!.month}', style: const TextStyle(fontSize: 10, color: IveTokens.success)),
             ],
           ])),
           Column(children: [
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-              decoration: BoxDecoration(color: (connected ? kGoPositive : const Color(0xFF9CA3AF)).withValues(alpha: 0.1), borderRadius: BorderRadius.circular(8)),
-              child: Text(connected ? 'Connected' : 'Available', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: connected ? kGoPositive : const Color(0xFF9CA3AF))),
+              decoration: BoxDecoration(color: (connected ? IveTokens.success : const Color(0xFF9CA3AF)).withValues(alpha: 0.1), borderRadius: BorderRadius.circular(10)),
+              child: Text(connected ? 'Connected' : 'Available', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: connected ? IveTokens.success : const Color(0xFF9CA3AF))),
             ),
             const SizedBox(height: 6),
             GestureDetector(
               onTap: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(connected ? 'Managing integration...' : 'Connecting integration...'))),
-              child: Text(connected ? 'Manage' : 'Connect', style: const TextStyle(fontSize: 11, color: kGoColor, fontWeight: FontWeight.w600)),
+              child: Text(connected ? 'Manage' : 'Connect', style: const TextStyle(fontSize: 11, color: IveTokens.moduleGo, fontWeight: FontWeight.w600)),
             ),
           ]),
         ],

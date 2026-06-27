@@ -3,7 +3,7 @@ import 'ive_text.dart';
 import 'ive_tokens.dart';
 
 /// Hairline card. The card itself contributes nothing visual beyond a 1px
-/// outline — the content is the figure.
+/// outline  the content is the figure.
 class IveCard extends StatelessWidget {
   const IveCard({
     super.key,

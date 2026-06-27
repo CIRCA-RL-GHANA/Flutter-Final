@@ -1,13 +1,13 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 /// Screen 7: Notification Orchestrator
 /// Mode presets, per-module matrix, smart rules, quiet hours
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import '../../../core/theme/app_colors.dart';
+import '../../../core/design/ive.dart';
 import '../models/user_details_models.dart';
 import '../providers/user_details_provider.dart';
 import '../widgets/shared_widgets.dart';
@@ -22,15 +22,15 @@ class NotificationSettingsScreen extends StatelessWidget {
         final notif = udp.notifications;
 
         return Scaffold(
-          backgroundColor: const Color(0xFF08080F),
+          backgroundColor: IveTokens.bg,
           appBar: const ModuleHeader(
             title: 'Notifications',
-            contextColor: Color(0xFFF59E0B),
+            contextColor: IveTokens.moduleUser,
           ),
           body: ListView(
             padding: const EdgeInsets.all(20),
             children: [
-              // ─── Master Toggle ─────────────────────────────
+              //  Master Toggle 
               SectionCard(
                 child: SettingsToggle(
                   icon: Icons.notifications,
@@ -38,14 +38,14 @@ class NotificationSettingsScreen extends StatelessWidget {
                   subtitle: notif.globalEnabled ? 'All notifications enabled' : 'All notifications paused',
                   value: notif.globalEnabled,
                   onChanged: (v) => udp.toggleGlobalNotifications(v),
-                  activeColor: const Color(0xFFF59E0B),
+                  activeColor: IveTokens.warning,
                 ),
               ),
 
               if (notif.globalEnabled) ...[
-                // ─── Mode Presets ──────────────────────────────
+                //  Mode Presets 
                 const SizedBox(height: 8),
-                const Text('Notification Mode', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textSecondary)),
+                Text('Notification Mode', style: IveType.bodyEmphasis.copyWith(color: IveTokens.ink2)),
                 const SizedBox(height: 10),
                 SizedBox(
                   height: 88,
@@ -65,13 +65,13 @@ class NotificationSettingsScreen extends StatelessWidget {
                   ),
                 ),
 
-                // ─── Per-Module Matrix ─────────────────────────
+                //  Per-Module Matrix 
                 const SizedBox(height: 16),
                 SectionCard(
                   child: CollapsibleSection(
                     title: 'Per-Module Settings',
                     icon: Icons.grid_view,
-                    iconColor: const Color(0xFFF59E0B),
+                    iconColor: IveTokens.warning,
                     child: Column(
                       children: notif.moduleConfigs.entries.map((entry) => _ModuleNotifRow(
                             moduleName: entry.key,
@@ -82,7 +82,7 @@ class NotificationSettingsScreen extends StatelessWidget {
                   ),
                 ),
 
-                // ─── Quiet Hours ───────────────────────────────
+                //  Quiet Hours 
                 SectionCard(
                   child: Column(
                     children: [
@@ -92,10 +92,10 @@ class NotificationSettingsScreen extends StatelessWidget {
                         subtitle: '${_formatTime(notif.quietHoursStart)} - ${_formatTime(notif.quietHoursEnd)}',
                         value: notif.quietHoursEnabled,
                         onChanged: (v) => udp.toggleQuietHours(v),
-                        activeColor: const Color(0xFF8B5CF6),
+                        activeColor: IveTokens.accent,
                       ),
                       if (notif.quietHoursEnabled) ...[
-                        const Divider(height: 1),
+                        const Divider(height: 1, color: IveTokens.hairline),
                         Padding(
                           padding: const EdgeInsets.only(top: 8),
                           child: Row(
@@ -109,7 +109,7 @@ class NotificationSettingsScreen extends StatelessWidget {
                               ),
                               const Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 8),
-                                child: Icon(Icons.arrow_forward, size: 16, color: AppColors.textTertiary),
+                                child: Icon(Icons.arrow_forward, size: 16, color: IveTokens.mute),
                               ),
                               Expanded(
                                 child: _TimePickerButton(
@@ -126,12 +126,12 @@ class NotificationSettingsScreen extends StatelessWidget {
                   ),
                 ),
 
-                // ─── Smart Rules ───────────────────────────────
+                //  Smart Rules 
                 SectionCard(
                   child: CollapsibleSection(
                     title: 'Smart Rules',
                     icon: Icons.auto_awesome,
-                    iconColor: const Color(0xFF06B6D4),
+                    iconColor: IveTokens.moduleUser,
                     initiallyExpanded: false,
                     child: Column(
                       children: [
@@ -166,7 +166,10 @@ class NotificationSettingsScreen extends StatelessWidget {
                                       onPressed: () => Navigator.pop(ctx),
                                       child: const Text('Cancel'),
                                     ),
-                                    ElevatedButton(
+                                    IveButton.primary(
+                                      label: 'Save',
+                                      expand: false,
+                                      compact: true,
                                       onPressed: () {
                                         Navigator.pop(ctx);
                                         if (nameCtrl.text.isNotEmpty) {
@@ -175,7 +178,6 @@ class NotificationSettingsScreen extends StatelessWidget {
                                           );
                                         }
                                       },
-                                      child: const Text('Save'),
                                     ),
                                   ],
                                 ),
@@ -184,9 +186,9 @@ class NotificationSettingsScreen extends StatelessWidget {
                             icon: const Icon(Icons.add, size: 16),
                             label: const Text('Add Rule'),
                             style: OutlinedButton.styleFrom(
-                              foregroundColor: const Color(0xFF06B6D4),
-                              side: const BorderSide(color: Color(0xFF06B6D4)),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                              foregroundColor: IveTokens.moduleUser,
+                              side: const BorderSide(color: IveTokens.moduleUser),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(IveTokens.rSm)),
                             ),
                           ),
                         ),
@@ -195,16 +197,16 @@ class NotificationSettingsScreen extends StatelessWidget {
                   ),
                 ),
 
-                // ─── Preview ───────────────────────────────────
+                //  Preview 
                 SectionCard(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Row(
+                      Row(
                         children: [
-                          Icon(Icons.preview, size: 18, color: Color(0xFF3B82F6)),
-                          SizedBox(width: 8),
-                          Text('Notification Preview', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textPrimary)),
+                          const Icon(Icons.preview, size: 18, color: IveTokens.accent),
+                          const SizedBox(width: 8),
+                          Text('Notification Preview', style: IveType.bodyEmphasis.copyWith(color: IveTokens.ink)),
                         ],
                       ),
                       const SizedBox(height: 10),
@@ -243,9 +245,9 @@ class NotificationSettingsScreen extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Mode Card
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _ModeCard extends StatelessWidget {
   final NotificationMode mode;
@@ -258,15 +260,15 @@ class _ModeCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
+        duration: IveTokens.dFast,
         width: 80,
         margin: const EdgeInsets.only(right: 8),
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: active ? const Color(0xFFF59E0B).withValues(alpha: 0.1) : Colors.white,
-          borderRadius: BorderRadius.circular(10),
+          color: active ? IveTokens.warning.withValues(alpha: 0.1) : IveTokens.surface,
+          borderRadius: BorderRadius.circular(IveTokens.rSm),
           border: Border.all(
-            color: active ? const Color(0xFFF59E0B) : Colors.grey.withValues(alpha: 0.15),
+            color: active ? IveTokens.warning : IveTokens.hairline,
             width: active ? 2 : 1,
           ),
         ),
@@ -276,15 +278,14 @@ class _ModeCard extends StatelessWidget {
             Icon(
               mode.icon,
               size: 24,
-              color: active ? const Color(0xFFF59E0B) : AppColors.textTertiary,
+              color: active ? IveTokens.warning : IveTokens.mute,
             ),
             const SizedBox(height: 6),
             Text(
               mode.label,
-              style: TextStyle(
-                fontSize: 10,
+              style: IveType.caption.copyWith(
                 fontWeight: active ? FontWeight.w700 : FontWeight.w500,
-                color: active ? const Color(0xFFF59E0B) : AppColors.textSecondary,
+                color: active ? IveTokens.warning : IveTokens.ink2,
               ),
               textAlign: TextAlign.center,
               maxLines: 1,
@@ -297,9 +298,9 @@ class _ModeCard extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Module Notification Row
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _ModuleNotifRow extends StatelessWidget {
   final String moduleName;
@@ -329,7 +330,7 @@ class _ModuleNotifRow extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
         children: [
-          Icon(_moduleIcon, size: 18, color: config.pushEnabled ? const Color(0xFFF59E0B) : AppColors.textTertiary),
+          Icon(_moduleIcon, size: 18, color: config.pushEnabled ? IveTokens.warning : IveTokens.mute),
           const SizedBox(width: 10),
           Expanded(
             child: Column(
@@ -337,19 +338,18 @@ class _ModuleNotifRow extends StatelessWidget {
               children: [
                 Text(
                   moduleName,
-                  style: TextStyle(
-                    fontSize: 13,
+                  style: IveType.body.copyWith(
                     fontWeight: FontWeight.w500,
-                    color: config.pushEnabled ? AppColors.textPrimary : AppColors.textTertiary,
+                    color: config.pushEnabled ? IveTokens.ink : IveTokens.mute,
                   ),
                 ),
                 Row(
                   children: [
-                    Text('P${config.priority}', style: const TextStyle(fontSize: 10, color: AppColors.textTertiary)),
+                    Text('P${config.priority}', style: IveType.caption.copyWith(color: IveTokens.mute)),
                     if (config.overrideQuietHours) ...[
                       const SizedBox(width: 6),
-                      const Icon(Icons.notifications_active, size: 10, color: Color(0xFFF59E0B)),
-                      const Text(' Override', style: TextStyle(fontSize: 9, color: Color(0xFFF59E0B))),
+                      const Icon(Icons.notifications_active, size: 10, color: IveTokens.warning),
+                      Text(' Override', style: IveType.caption.copyWith(color: IveTokens.warning)),
                     ],
                   ],
                 ),
@@ -362,7 +362,7 @@ class _ModuleNotifRow extends StatelessWidget {
               HapticFeedback.selectionClick();
               onToggle(v);
             },
-            activeThumbColor: const Color(0xFFF59E0B),
+            activeThumbColor: IveTokens.warning,
           ),
         ],
       ),
@@ -370,9 +370,9 @@ class _ModuleNotifRow extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Smart Rule Card
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _SmartRuleCard extends StatelessWidget {
   final SmartNotificationRule rule;
@@ -386,10 +386,10 @@ class _SmartRuleCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: rule.enabled ? const Color(0xFF06B6D4).withValues(alpha: 0.04) : Colors.grey.withValues(alpha: 0.04),
-          borderRadius: BorderRadius.circular(10),
+          color: rule.enabled ? IveTokens.moduleUser.withValues(alpha: 0.04) : IveTokens.hairline.withValues(alpha: 0.04),
+          borderRadius: BorderRadius.circular(IveTokens.rSm),
           border: Border.all(
-            color: rule.enabled ? const Color(0xFF06B6D4).withValues(alpha: 0.15) : Colors.grey.withValues(alpha: 0.1),
+            color: rule.enabled ? IveTokens.moduleUser.withValues(alpha: 0.15) : IveTokens.hairline.withValues(alpha: 0.1),
           ),
         ),
         child: Row(
@@ -397,7 +397,7 @@ class _SmartRuleCard extends StatelessWidget {
             Icon(
               Icons.auto_awesome,
               size: 16,
-              color: rule.enabled ? const Color(0xFF06B6D4) : AppColors.textTertiary,
+              color: rule.enabled ? IveTokens.moduleUser : IveTokens.mute,
             ),
             const SizedBox(width: 10),
             Expanded(
@@ -406,17 +406,15 @@ class _SmartRuleCard extends StatelessWidget {
                 children: [
                   Text(
                     rule.condition,
-                    style: TextStyle(
-                      fontSize: 12,
+                    style: IveType.caption.copyWith(
                       fontWeight: FontWeight.w600,
-                      color: rule.enabled ? AppColors.textPrimary : AppColors.textTertiary,
+                      color: rule.enabled ? IveTokens.ink : IveTokens.mute,
                     ),
                   ),
                   Text(
-                    'â†’ ${rule.action}',
-                    style: TextStyle(
-                      fontSize: 11,
-                      color: rule.enabled ? const Color(0xFF06B6D4) : AppColors.textTertiary,
+                    ' ${rule.action}',
+                    style: IveType.caption.copyWith(
+                      color: rule.enabled ? IveTokens.moduleUser : IveTokens.mute,
                     ),
                   ),
                 ],
@@ -428,7 +426,7 @@ class _SmartRuleCard extends StatelessWidget {
                 HapticFeedback.selectionClick();
                 onToggle(v);
               },
-              activeThumbColor: const Color(0xFF06B6D4),
+              activeThumbColor: IveTokens.moduleUser,
             ),
           ],
         ),
@@ -437,9 +435,9 @@ class _SmartRuleCard extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Time Picker Button
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _TimePickerButton extends StatelessWidget {
   final String label;
@@ -457,15 +455,15 @@ class _TimePickerButton extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
         decoration: BoxDecoration(
-          color: const Color(0xFF8B5CF6).withValues(alpha: 0.06),
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: const Color(0xFF8B5CF6).withValues(alpha: 0.15)),
+          color: IveTokens.accent.withValues(alpha: 0.06),
+          borderRadius: BorderRadius.circular(IveTokens.rSm),
+          border: Border.all(color: IveTokens.accent.withValues(alpha: 0.15)),
         ),
         child: Column(
           children: [
-            Text(label, style: const TextStyle(fontSize: 10, color: AppColors.textTertiary)),
+            Text(label, style: IveType.caption.copyWith(color: IveTokens.mute)),
             const SizedBox(height: 2),
-            Text('$h:$m $p', style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: Color(0xFF8B5CF6))),
+            Text('$h:$m $p', style: IveType.bodyEmphasis.copyWith(color: IveTokens.accent)),
           ],
         ),
       ),
@@ -473,9 +471,9 @@ class _TimePickerButton extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Notification Preview
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _NotificationPreview extends StatelessWidget {
   final NotificationMode mode;
@@ -486,8 +484,8 @@ class _NotificationPreview extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.black87,
-        borderRadius: BorderRadius.circular(10),
+        color: IveTokens.surface,
+        borderRadius: BorderRadius.circular(IveTokens.rSm),
       ),
       child: Row(
         children: [
@@ -495,32 +493,32 @@ class _NotificationPreview extends StatelessWidget {
             width: 36,
             height: 36,
             decoration: BoxDecoration(
-              color: const Color(0xFF6366F1).withValues(alpha: 0.2),
-              borderRadius: BorderRadius.circular(8),
+              color: IveTokens.accent.withValues(alpha: 0.2),
+              borderRadius: BorderRadius.circular(IveTokens.rSm),
             ),
-            child: const Icon(Icons.notifications, size: 18, color: Color(0xFF6366F1)),
+            child: const Icon(Icons.notifications, size: 18, color: IveTokens.accent),
           ),
           const SizedBox(width: 10),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   'thePG',
-                  style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white70),
+                  style: IveType.caption.copyWith(color: IveTokens.ink2, fontWeight: FontWeight.w600),
                 ),
                 Text(
                   mode == NotificationMode.sleep
                       ? 'Notifications silenced'
                       : 'New message from Wizdom Shop',
-                  style: const TextStyle(fontSize: 13, color: Colors.white, fontWeight: FontWeight.w500),
+                  style: IveType.body.copyWith(color: IveTokens.ink, fontWeight: FontWeight.w500),
                 ),
               ],
             ),
           ),
           Text(
             'now',
-            style: TextStyle(fontSize: 10, color: Colors.white.withValues(alpha: 0.5)),
+            style: IveType.caption.copyWith(color: IveTokens.faint),
           ),
         ],
       ),

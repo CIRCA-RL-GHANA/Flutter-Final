@@ -1,4 +1,4 @@
-﻿/// Q Points Market Screen — Full production implementation
+/// Q Points Market Screen  Full production implementation
 /// Sections: Stats Bar | Order Book | Place Order | Open Orders | Trade History
 ///
 /// Access is gated behind Q Points ToS acceptance (v1.0.0).
@@ -6,6 +6,7 @@
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../providers/qpoint_market_provider.dart';
@@ -14,7 +15,7 @@ import '../models/qpoint_market_models.dart';
 import 'qpoints_tos_screen.dart';
 import '../../../core/design/ive_tokens.dart';
 
-// ── Brand colour for the market module ──────────────────────────────────────
+//  Brand colour for the market module 
 const Color kMarketColor = IveTokens.moduleUpdates; // deep violet
 
 /// Entry point: checks ToS acceptance, shows ToS screen or the market.
@@ -97,7 +98,7 @@ class _QPointMarketScreenState extends State<QPointMarketScreen>
         actions: [
           IconButton(
             icon: const Icon(Icons.info_outline),
-            tooltip: 'Fees & Disclosures (Â§7)',
+            tooltip: 'Fees & Disclosures (7)',
             onPressed: () => _showFeeSheet(context),
           ),
           IconButton(
@@ -126,10 +127,10 @@ class _QPointMarketScreenState extends State<QPointMarketScreen>
         builder: (context, provider, _) {
           return Column(
             children: [
-              // ── Stats banner ─────────────────────────────────────────────
+              //  Stats banner 
               _StatsBanner(provider: provider),
 
-              // ── Tabs ─────────────────────────────────────────────────────
+              //  Tabs 
               Expanded(
                 child: TabBarView(
                   controller: _tab,
@@ -156,7 +157,7 @@ class _QPointMarketScreenState extends State<QPointMarketScreen>
     );
   }
 
-  // ── Sheets ────────────────────────────────────────────────────────────────
+  //  Sheets 
 
   void _showPlaceOrderSheet(BuildContext ctx, QPointMarketProvider provider) {
     showModalBottomSheet(
@@ -183,7 +184,7 @@ class _QPointMarketScreenState extends State<QPointMarketScreen>
     );
   }
 
-  /// Fee & Disclosure sheet — TOS Â§7.1 requires fees to be disclosed on the Platform.
+  /// Fee & Disclosure sheet  TOS 7.1 requires fees to be disclosed on the Platform.
   void _showFeeSheet(BuildContext ctx) {
     context.read<QPointMarketProvider>().loadFeeSchedule();
     showModalBottomSheet(
@@ -198,9 +199,9 @@ class _QPointMarketScreenState extends State<QPointMarketScreen>
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Stats Banner
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _StatsBanner extends StatelessWidget {
   final QPointMarketProvider provider;
@@ -223,7 +224,7 @@ class _StatsBanner extends StatelessWidget {
                 label: 'Balance',
                 value: balance != null
                     ? '${balance.balance.toStringAsFixed(2)} QP'
-                    : '—',
+                    : '',
               ),
               const SizedBox(width: 16),
               const _Stat(
@@ -233,12 +234,12 @@ class _StatsBanner extends StatelessWidget {
               const SizedBox(width: 16),
               _Stat(
                 label: 'Vol 24h (QP)',
-                value: stats != null ? _formatVol(stats.volume24h) : '—',
+                value: stats != null ? _formatVol(stats.volume24h) : '',
               ),
             ],
           ),
           const SizedBox(height: 8),
-          // TOS Â§5.2 — AI last-resort counterparty indicator (operational, not a legal guarantee)
+          // TOS 5.2  AI last-resort counterparty indicator (operational, not a legal guarantee)
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
@@ -296,9 +297,9 @@ class _Stat extends StatelessWidget {
       );
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Market Tab: Order Book + Quick Buy/Sell
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _MarketTab extends StatelessWidget {
   final QPointMarketProvider provider;
@@ -309,10 +310,10 @@ class _MarketTab extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
-        // Cash balance card — real-time facilitator liquidity with Refresh button
+        // Cash balance card  real-time facilitator liquidity with Refresh button
         _CashBalanceCard(provider: provider),
         const SizedBox(height: 16),
-        // Bridge suspension banner — only shown when active facilitator's bridge is down
+        // Bridge suspension banner  only shown when active facilitator's bridge is down
         if (provider.bridgeUnavailableMessage != null)
           _BridgeStatusBanner(message: provider.bridgeUnavailableMessage!),
         if (provider.bridgeUnavailableMessage != null)
@@ -356,7 +357,7 @@ class _CashBalanceCard extends StatelessWidget {
       _providerNames[id ?? 'mock'] ?? (id ?? 'Facilitator');
 
   String _formatAmount(double? amount) {
-    if (amount == null) return '—';
+    if (amount == null) return '';
     return '\$${amount.toStringAsFixed(2)}';
   }
 
@@ -382,13 +383,13 @@ class _CashBalanceCard extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(10),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // ── Header row ──────────────────────────────────────────────
+          //  Header row 
           Row(
             children: [
               const Icon(
@@ -413,7 +414,7 @@ class _CashBalanceCard extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(
                     color: Colors.white.withValues(alpha: 0.15),
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius: BorderRadius.circular(6),
                   ),
                   child: const Text(
                     'CACHED',
@@ -453,7 +454,7 @@ class _CashBalanceCard extends StatelessWidget {
 
           const SizedBox(height: 10),
 
-          // ── Balance amount ───────────────────────────────────────────
+          //  Balance amount 
           if (isLoading && cb == null)
             const SizedBox(
               height: 32,
@@ -508,7 +509,7 @@ class _CashBalanceCard extends StatelessWidget {
 
           const SizedBox(height: 12),
 
-          // ── Fee disclosure row (TOS Â§7.1) ────────────────────────────
+          //  Fee disclosure row (TOS 7.1) 
           if (cb != null)
             Row(
               children: [
@@ -520,7 +521,7 @@ class _CashBalanceCard extends StatelessWidget {
                   ),
                   decoration: BoxDecoration(
                     color: IveTokens.moduleSetup,
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -530,8 +531,8 @@ class _CashBalanceCard extends StatelessWidget {
                       const SizedBox(width: 4),
                       Text(
                         '${cb.liquidityFeePercent}% liquidity fee  '
-                        'Â·  Buy \$${cb.buyPrice.toStringAsFixed(3)}'
-                        '  Â·  Sell \$${cb.sellPrice.toStringAsFixed(3)}',
+                        '  Buy \$${cb.buyPrice.toStringAsFixed(3)}'
+                        '    Sell \$${cb.sellPrice.toStringAsFixed(3)}',
                         style: const TextStyle(
                           color: Colors.white60,
                           fontSize: 11,
@@ -620,7 +621,7 @@ class _ActiveFacilitatorChip extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.surfaceContainerHighest,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -922,9 +923,9 @@ class _BookRow extends StatelessWidget {
       );
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Orders Tab
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _OrdersTab extends StatelessWidget {
   final QPointMarketProvider provider;
@@ -1023,9 +1024,9 @@ class _OpenOrderTile extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // History Tab
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _HistoryTab extends StatefulWidget {
   final QPointMarketProvider provider;
@@ -1059,7 +1060,7 @@ class _HistoryTabState extends State<_HistoryTab> {
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
-        // ── Deposit / Withdrawal history ──────────────────────────────
+        //  Deposit / Withdrawal history 
         if (transactions.isNotEmpty) ...[
           const Padding(
             padding: EdgeInsets.only(bottom: 8),
@@ -1070,7 +1071,7 @@ class _HistoryTabState extends State<_HistoryTab> {
           const SizedBox(height: 16),
         ],
 
-        // ── Q Points trade history ────────────────────────────────────
+        //  Q Points trade history 
         if (trades.isNotEmpty) ...[
           const Padding(
             padding: EdgeInsets.only(bottom: 8),
@@ -1099,7 +1100,7 @@ class _TradeTile extends StatelessWidget {
                 const Icon(Icons.swap_horiz, color: kMarketColor, size: 20),
           ),
           title: Text(
-            '\$${trade.price.toStringAsFixed(4)} Ã— ${trade.quantity.toStringAsFixed(2)} QP',
+            '\$${trade.price.toStringAsFixed(4)}  ${trade.quantity.toStringAsFixed(2)} QP',
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
           ),
           subtitle: Text(
@@ -1119,9 +1120,9 @@ class _TradeTile extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Place Order Bottom Sheet
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _PlaceOrderSheet extends StatefulWidget {
   const _PlaceOrderSheet();
@@ -1147,7 +1148,7 @@ class _PlaceOrderSheetState extends State<_PlaceOrderSheet> {
       builder: (ctx, provider, _) => Container(
         decoration: const BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
         ),
         padding: EdgeInsets.fromLTRB(
           24,
@@ -1169,7 +1170,7 @@ class _PlaceOrderSheetState extends State<_PlaceOrderSheet> {
                   margin: const EdgeInsets.only(bottom: 20),
                   decoration: BoxDecoration(
                     color: Colors.grey.shade300,
-                    borderRadius: BorderRadius.circular(2),
+                    borderRadius: BorderRadius.circular(6),
                   ),
                 ),
               ),
@@ -1325,9 +1326,9 @@ class _TypeButton extends StatelessWidget {
       );
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Cash In / Cash Out Bottom Sheet
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _CashInOutSheet extends StatefulWidget {
   final bool isBuy;
@@ -1362,7 +1363,7 @@ class _CashInOutSheetState extends State<_CashInOutSheet> {
         return Container(
           decoration: const BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
           ),
           padding: EdgeInsets.fromLTRB(
             24,
@@ -1383,7 +1384,7 @@ class _CashInOutSheetState extends State<_CashInOutSheet> {
                     margin: const EdgeInsets.only(bottom: 20),
                     decoration: BoxDecoration(
                         color: Colors.grey.shade300,
-                        borderRadius: BorderRadius.circular(2)),
+                        borderRadius: BorderRadius.circular(6)),
                   ),
                 ),
                 Text(
@@ -1471,9 +1472,9 @@ class _CashInOutSheetState extends State<_CashInOutSheet> {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Notifications Bottom Sheet
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _NotificationsSheet extends StatelessWidget {
   const _NotificationsSheet();
@@ -1485,7 +1486,7 @@ class _NotificationsSheet extends StatelessWidget {
         height: MediaQuery.of(context).size.height * 0.65,
         decoration: const BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
         ),
         child: Column(
           children: [
@@ -1580,10 +1581,10 @@ class _NotificationTile extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// Fee Disclosure Sheet — TOS Â§7.1 & Â§7.2
+// 
+// Fee Disclosure Sheet  TOS 7.1 & 7.2
 // "Fees will be disclosed on the Platform and may be changed upon notice."
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _FeeDisclosureSheet extends StatelessWidget {
   const _FeeDisclosureSheet();
@@ -1594,7 +1595,7 @@ class _FeeDisclosureSheet extends StatelessWidget {
       builder: (ctx, provider, _) => Container(
         decoration: const BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
         ),
         padding: const EdgeInsets.fromLTRB(20, 16, 20, 32),
         child: Column(
@@ -1621,10 +1622,10 @@ class _FeeDisclosureSheet extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
               decoration: BoxDecoration(
                 color: kMarketColor.withValues(alpha: 0.08),
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(10),
               ),
               child: const Text(
-                'Q Points Terms of Service Â§7.1 — Fee Disclosure',
+                'Q Points Terms of Service 7.1  Fee Disclosure',
                 style: TextStyle(fontSize: 11, color: kMarketColor, fontWeight: FontWeight.w600),
               ),
             ),
@@ -1659,7 +1660,7 @@ class _FeeDisclosureSheet extends StatelessWidget {
                 detail: 'The price peg is fixed. 1 Q Point is always equal to \$1.00 USD.',
               ),
               const SizedBox(height: 16),
-              // Tax disclosure — TOS Â§7.2
+              // Tax disclosure  TOS 7.2
               Container(
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
@@ -1676,7 +1677,7 @@ class _FeeDisclosureSheet extends StatelessWidget {
                             size: 16, color: IveTokens.warning),
                         SizedBox(width: 6),
                         Text(
-                          'Tax Disclosure — Q Points ToS Â§7.2',
+                          'Tax Disclosure  Q Points ToS 7.2',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 12,
@@ -1701,7 +1702,7 @@ class _FeeDisclosureSheet extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               const Text(
-                'Fees may be changed upon notice per Q Points Terms of Service Â§7.1.',
+                'Fees may be changed upon notice per Q Points Terms of Service 7.1.',
                 style: TextStyle(fontSize: 11, color: Colors.black38),
               ),
             ],
@@ -1758,9 +1759,9 @@ class _FeeRow extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// Transaction tile — shows a single deposit or withdrawal record
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
+// Transaction tile  shows a single deposit or withdrawal record
+// 
 
 class _TransactionTile extends StatelessWidget {
   final FacilitatorTransaction transaction;
@@ -1806,14 +1807,14 @@ class _TransactionTile extends StatelessWidget {
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
           ),
           subtitle: Text(
-            '${transaction.provider.toUpperCase()} Â· ${_formatDate(transaction.createdAt)}',
+            '${transaction.provider.toUpperCase()}  ${_formatDate(transaction.createdAt)}',
             style: const TextStyle(fontSize: 11, color: Colors.black45),
           ),
           trailing: Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
             decoration: BoxDecoration(
               color: _statusColor(transaction.status).withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(10),
             ),
             child: Text(
               transaction.status.toUpperCase(),
@@ -1828,9 +1829,9 @@ class _TransactionTile extends StatelessWidget {
       );
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Deposit bottom sheet
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _DepositSheet extends StatefulWidget {
   const _DepositSheet();
@@ -1890,7 +1891,7 @@ class _DepositSheetState extends State<_DepositSheet> {
       builder: (ctx, provider, _) => Container(
         decoration: const BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
         ),
         padding: EdgeInsets.fromLTRB(
             20, 20, 20, MediaQuery.of(ctx).viewInsets.bottom + 24),
@@ -1904,7 +1905,7 @@ class _DepositSheetState extends State<_DepositSheet> {
                 height: 4,
                 decoration: BoxDecoration(
                     color: Colors.black12,
-                    borderRadius: BorderRadius.circular(2)),
+                    borderRadius: BorderRadius.circular(6)),
               ),
             ),
             const SizedBox(height: 16),
@@ -2016,9 +2017,9 @@ class _DepositSheetState extends State<_DepositSheet> {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Withdraw bottom sheet
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _WithdrawSheet extends StatefulWidget {
   const _WithdrawSheet();
@@ -2049,7 +2050,7 @@ class _WithdrawSheetState extends State<_WithdrawSheet> {
     if (ok) {
       setState(() {
         _result = 'Withdrawal initiated! Funds will be sent to your '
-            'registered payout account within 1–3 business days depending on your provider.';
+            'registered payout account within 13 business days depending on your provider.';
         _done = true;
       });
       provider.clearLastWithdrawalResult();
@@ -2064,7 +2065,7 @@ class _WithdrawSheetState extends State<_WithdrawSheet> {
       builder: (ctx, provider, _) => Container(
         decoration: const BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
         ),
         padding: EdgeInsets.fromLTRB(
             20, 20, 20, MediaQuery.of(ctx).viewInsets.bottom + 24),
@@ -2078,7 +2079,7 @@ class _WithdrawSheetState extends State<_WithdrawSheet> {
                 height: 4,
                 decoration: BoxDecoration(
                     color: Colors.black12,
-                    borderRadius: BorderRadius.circular(2)),
+                    borderRadius: BorderRadius.circular(6)),
               ),
             ),
             const SizedBox(height: 16),

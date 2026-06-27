@@ -1,9 +1,9 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// Tabs Provider — State Management
+/// 
+/// Tabs Provider  State Management
 ///
 /// Manages credit tab lifecycle: listing, creation, charging, settling.
 /// Delegates all API calls to TabsService.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'package:flutter/foundation.dart';
@@ -14,7 +14,7 @@ class TabsProvider extends ChangeNotifier {
 
   TabsProvider({TabsService? service}) : _service = service ?? TabsService();
 
-  // ─── State ────────────────────────────────────────────────────────────────
+  //  State 
 
   List<dynamic> _tabs = [];
   List<dynamic> get tabs => _tabs;
@@ -33,7 +33,7 @@ class TabsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Load ─────────────────────────────────────────────────────────────────
+  //  Load 
 
   Future<void> loadTabs(String entityId) async {
     _isLoading = true;
@@ -62,7 +62,7 @@ class TabsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Create ───────────────────────────────────────────────────────────────
+  //  Create 
 
   Future<Map<String, dynamic>?> createTab(Map<String, dynamic> data) async {
     _isLoading = true;
@@ -89,7 +89,7 @@ class TabsProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Charge / Settle ──────────────────────────────────────────────────────
+  //  Charge / Settle 
 
   Future<bool> chargeTab(String id, double amount, {String? description}) async {
     _isLoading = true;
@@ -139,7 +139,7 @@ class TabsProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Delete ───────────────────────────────────────────────────────────────
+  //  Delete 
 
   Future<bool> deleteTab(String id) async {
     try {

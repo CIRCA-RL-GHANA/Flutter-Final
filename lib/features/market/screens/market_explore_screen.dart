@@ -1,7 +1,7 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// MARKET MODULE — Screen 1.5: Explore All Merchants
+/// 
+/// MARKET MODULE  Screen 1.5: Explore All Merchants
 /// Full-screen immersive grid with map/grid toggle, masonry merchant cards
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -105,7 +105,7 @@ class _MarketExploreScreenState extends State<MarketExploreScreen> {
                 )
               : CustomScrollView(
                   slivers: [
-                    // ─── AI Personalized Recommendations Banner ────
+                    //  AI Personalized Recommendations Banner 
                     const SliverToBoxAdapter(
                     ),
                     SliverPadding(
@@ -142,7 +142,7 @@ class _MarketExploreScreenState extends State<MarketExploreScreen> {
   Widget _buildMapView(MarketProvider prov) {
     return Stack(
       children: [
-        // Map surface — grid texture with merchant count indicator.
+        // Map surface  grid texture with merchant count indicator.
         Positioned.fill(
           child: Container(
             color: const Color(0xFF0D0F1A),

@@ -1,8 +1,8 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SCREEN 11 — Following Management
+/// 
+/// SCREEN 11  Following Management
 /// Categories: Entities, People, Topics, Lists. Bulk actions,
 /// mute/unmute, priority, following analytics.
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -196,7 +196,7 @@ class _BodyState extends State<_Body> with SingleTickerProviderStateMixin {
   }
 }
 
-// ─── Following List ─────────────────────────────────────────────────────────
+//  Following List 
 
 class _FollowingList extends StatelessWidget {
   final List<FollowedEntity> items;
@@ -298,7 +298,7 @@ class _FollowingList extends StatelessWidget {
                     Row(
                       children: [
                         Text('${entity.followerCount} followers', style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
-                        const Text(' • ', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
+                        const Text('  ', style: TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                         Text(entity.updateFrequency, style: const TextStyle(fontSize: 11, color: AppColors.textTertiary)),
                       ],
                     ),
@@ -358,7 +358,7 @@ class _FollowingList extends StatelessWidget {
   void _showPriorityPicker(BuildContext context, FollowedEntity entity) {
     showModalBottomSheet(
       context: context,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(10))),
       builder: (_) => Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -390,7 +390,7 @@ class _FollowingList extends StatelessWidget {
   }
 }
 
-// ─── Lists View ─────────────────────────────────────────────────────────────
+//  Lists View 
 
 class _ListsView extends StatelessWidget {
   final List<FollowingList> lists;

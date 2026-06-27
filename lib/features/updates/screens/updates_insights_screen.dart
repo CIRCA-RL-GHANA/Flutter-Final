@@ -1,13 +1,14 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SCREEN 12 — Update Insights (Business Roles)
+/// 
+/// SCREEN 12  Update Insights (Business Roles)
 /// Reach, impressions, engagement rate, time-based analytics, AI insights,
 /// audience demographics, content performance, ROI metrics.
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '../../../core/design/ive.dart';
 import '../../../core/theme/app_colors.dart';
 import '../models/updates_models.dart';
 import '../providers/updates_provider.dart';
@@ -53,8 +54,8 @@ class _BodyState extends State<_Body> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     decoration: BoxDecoration(
-                      color: kUpdatesColor.withValues(alpha: 0.08),
-                      borderRadius: BorderRadius.circular(8),
+                      color: IveTokens.moduleUpdates.withValues(alpha: 0.08),
+                      borderRadius: BorderRadius.circular(IveTokens.rSm),
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -100,13 +101,13 @@ class _BodyState extends State<_Body> {
                 UpdatesSectionCard(
                   title: 'PERFORMANCE TREND',
                   icon: Icons.show_chart,
-                  iconColor: const Color(0xFF3B82F6),
+                  iconColor: IveTokens.accent,
                   trailing: Text(_periodLabel(_timePeriod), style: const TextStyle(fontSize: 10, color: AppColors.textTertiary)),
                   child: Container(
                     height: 180,
                     decoration: BoxDecoration(
-                      color: const Color(0xFF3B82F6).withValues(alpha: 0.04),
-                      borderRadius: BorderRadius.circular(10),
+                      color: IveTokens.accent.withValues(alpha: 0.04),
+                      borderRadius: BorderRadius.circular(IveTokens.rSm),
                     ),
                     child: CustomPaint(
                       size: const Size(double.infinity, 180),
@@ -126,7 +127,7 @@ class _BodyState extends State<_Body> {
                     children: [
                       _AudienceRow(label: 'Followers', value: 68, color: kUpdatesColor),
                       _AudienceRow(label: 'Non-followers', value: 22, color: kUpdatesAccent),
-                      _AudienceRow(label: 'New visitors', value: 10, color: Color(0xFF10B981)),
+                      _AudienceRow(label: 'New visitors', value: 10, color: IveTokens.success),
                     ],
                   ),
                 ),
@@ -137,7 +138,7 @@ class _BodyState extends State<_Body> {
                 const UpdatesSectionCard(
                   title: 'CONTENT PERFORMANCE',
                   icon: Icons.bar_chart,
-                  iconColor: Color(0xFFF59E0B),
+                  iconColor: IveTokens.warning,
                   child: Column(
                     children: [
                       _ContentTypeRow(type: 'Images', engagement: 15.2, count: 12),
@@ -162,7 +163,7 @@ class _BodyState extends State<_Body> {
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         color: kUpdatesColor.withValues(alpha: 0.04),
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(IveTokens.rSm),
                         border: Border.all(color: kUpdatesColor.withValues(alpha: 0.12)),
                       ),
                       child: Row(
@@ -185,7 +186,7 @@ class _BodyState extends State<_Body> {
                 UpdatesSectionCard(
                   title: 'RECOMMENDATIONS',
                   icon: Icons.tips_and_updates,
-                  iconColor: const Color(0xFF10B981),
+                  iconColor: IveTokens.success,
                   child: Column(
                     children: insight.recommendations.asMap().entries.map((entry) => Padding(
                       padding: const EdgeInsets.only(bottom: 8),
@@ -195,11 +196,11 @@ class _BodyState extends State<_Body> {
                           Container(
                             width: 22, height: 22,
                             decoration: BoxDecoration(
-                              color: const Color(0xFF10B981).withValues(alpha: 0.12),
+                              color: IveTokens.success.withValues(alpha: 0.12),
                               shape: BoxShape.circle,
                             ),
                             child: Center(
-                              child: Text('${entry.key + 1}', style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: Color(0xFF10B981))),
+                              child: Text('${entry.key + 1}', style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: IveTokens.success)),
                             ),
                           ),
                           const SizedBox(width: 8),
@@ -218,7 +219,7 @@ class _BodyState extends State<_Body> {
                 const UpdatesSectionCard(
                   title: 'BEST POSTING TIMES',
                   icon: Icons.schedule,
-                  iconColor: Color(0xFF3B82F6),
+                  iconColor: IveTokens.accent,
                   child: Column(
                     children: [
                       _TimeSlot(day: 'Monday', time: '9:00 AM - 11:00 AM', engagement: 'High'),
@@ -245,7 +246,7 @@ class _BodyState extends State<_Body> {
       };
 }
 
-// ─── Overview Metrics ───────────────────────────────────────────────────────
+//  Overview Metrics 
 
 class _OverviewMetrics extends StatelessWidget {
   final UpdateInsight insight;
@@ -257,7 +258,7 @@ class _OverviewMetrics extends StatelessWidget {
       children: [
         Expanded(child: _MetricCard(value: '${insight.totalReach}', label: 'Reach', icon: Icons.visibility, color: kUpdatesColor, change: '+12%')),
         const SizedBox(width: 8),
-        Expanded(child: _MetricCard(value: '${insight.impressions}', label: 'Impressions', icon: Icons.remove_red_eye, color: const Color(0xFF3B82F6), change: '+8%')),
+        Expanded(child: _MetricCard(value: '${insight.impressions}', label: 'Impressions', icon: Icons.remove_red_eye, color: IveTokens.accent, change: '+8%')),
       ],
     );
   }
@@ -276,8 +277,8 @@ class _MetricCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
+        color: IveTokens.surface,
+        borderRadius: BorderRadius.circular(IveTokens.rSm),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -289,10 +290,10 @@ class _MetricCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
                 decoration: BoxDecoration(
-                  color: AppColors.success.withValues(alpha: 0.08),
-                  borderRadius: BorderRadius.circular(6),
+                  color: IveTokens.success.withValues(alpha: 0.08),
+                  borderRadius: BorderRadius.circular(IveTokens.rXs),
                 ),
-                child: Text(change, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: AppColors.success)),
+                child: Text(change, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: IveTokens.success)),
               ),
             ],
           ),
@@ -305,7 +306,7 @@ class _MetricCard extends StatelessWidget {
   }
 }
 
-// ─── Engagement Rate Card ───────────────────────────────────────────────────
+//  Engagement Rate Card 
 
 class _EngagementRateCard extends StatelessWidget {
   final UpdateInsight insight;
@@ -321,7 +322,7 @@ class _EngagementRateCard extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(IveTokens.rSm),
         border: Border.all(color: kUpdatesColor.withValues(alpha: 0.15)),
       ),
       child: Row(
@@ -336,7 +337,7 @@ class _EngagementRateCard extends StatelessWidget {
                   width: 72, height: 72,
                   child: CircularProgressIndicator(
                     value: insight.engagementRate / 100,
-                    backgroundColor: Colors.white.withValues(alpha: 0.4),
+                    backgroundColor: IveTokens.hairline,
                     valueColor: const AlwaysStoppedAnimation(kUpdatesColor),
                     strokeWidth: 6,
                   ),
@@ -356,9 +357,9 @@ class _EngagementRateCard extends StatelessWidget {
                 const SizedBox(height: 6),
                 Row(
                   children: [
-                    const Icon(Icons.trending_up, size: 14, color: AppColors.success),
+                    const Icon(Icons.trending_up, size: 14, color: IveTokens.success),
                     const SizedBox(width: 4),
-                    Text('+${(insight.engagementRate * 0.15).toStringAsFixed(1)}% vs last period', style: const TextStyle(fontSize: 11, color: AppColors.success)),
+                    Text('+${(insight.engagementRate * 0.15).toStringAsFixed(1)}% vs last period', style: const TextStyle(fontSize: 11, color: IveTokens.success)),
                   ],
                 ),
               ],
@@ -370,7 +371,7 @@ class _EngagementRateCard extends StatelessWidget {
   }
 }
 
-// ─── Audience Row ───────────────────────────────────────────────────────────
+//  Audience Row 
 
 class _AudienceRow extends StatelessWidget {
   final String label;
@@ -391,10 +392,10 @@ class _AudienceRow extends StatelessWidget {
           SizedBox(
             width: 120,
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(3),
+              borderRadius: BorderRadius.circular(IveTokens.rXs),
               child: LinearProgressIndicator(
                 value: value / 100,
-                backgroundColor: Colors.grey.shade100,
+                backgroundColor: IveTokens.hairline2,
                 valueColor: AlwaysStoppedAnimation(color),
                 minHeight: 6,
               ),
@@ -408,7 +409,7 @@ class _AudienceRow extends StatelessWidget {
   }
 }
 
-// ─── Content Type Row ───────────────────────────────────────────────────────
+//  Content Type Row 
 
 class _ContentTypeRow extends StatelessWidget {
   final String type;
@@ -425,10 +426,10 @@ class _ContentTypeRow extends StatelessWidget {
           SizedBox(width: 60, child: Text(type, style: const TextStyle(fontSize: 12))),
           Expanded(
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(3),
+              borderRadius: BorderRadius.circular(IveTokens.rXs),
               child: LinearProgressIndicator(
                 value: engagement / 35,
-                backgroundColor: Colors.grey.shade100,
+                backgroundColor: IveTokens.hairline2,
                 valueColor: AlwaysStoppedAnimation(engagement > 20 ? kUpdatesColor : kUpdatesAccent),
                 minHeight: 6,
               ),
@@ -446,7 +447,7 @@ class _ContentTypeRow extends StatelessWidget {
   }
 }
 
-// ─── Time Slot ──────────────────────────────────────────────────────────────
+//  Time Slot 
 
 class _TimeSlot extends StatelessWidget {
   final String day;
@@ -458,8 +459,8 @@ class _TimeSlot extends StatelessWidget {
   Widget build(BuildContext context) {
     final color = switch (engagement) {
       'Very High' => kUpdatesColor,
-      'High' => const Color(0xFF10B981),
-      _ => const Color(0xFFF59E0B),
+      'High' => IveTokens.success,
+      _ => IveTokens.warning,
     };
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
@@ -469,7 +470,7 @@ class _TimeSlot extends StatelessWidget {
           Expanded(child: Text(time, style: const TextStyle(fontSize: 12, color: AppColors.textSecondary))),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-            decoration: BoxDecoration(color: color.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(8)),
+            decoration: BoxDecoration(color: color.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(IveTokens.rSm)),
             child: Text(engagement, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: color)),
           ),
         ],
@@ -478,7 +479,7 @@ class _TimeSlot extends StatelessWidget {
   }
 }
 
-// ─── Simple Chart Painter ───────────────────────────────────────────────────
+//  Simple Chart Painter 
 
 class _ChartPainter extends CustomPainter {
   @override

@@ -15,7 +15,7 @@ void voiceConfigure({
   VoiceTranscriptCallback? onResult,
   VoiceStatusCallback? onStatus,
 }) {
-  // no-op on native — platform STT not wired yet
+  // no-op on native  platform STT not wired yet
 }
 
 Future<bool> voiceStart() async => false;

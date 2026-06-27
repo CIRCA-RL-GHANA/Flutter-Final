@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../design/ive_tokens.dart';
 
-/// Ambient page background — the "Living Void".
+/// Ambient page background  the "Living Void".
 ///
 /// Renders [IveTokens.voidColor] as the base with a barely-perceptible
 /// radial gradient that drifts across a 40-second cycle, giving the app a
@@ -70,16 +70,16 @@ class _LivingVoidState extends State<LivingVoid>
     return Stack(
       fit: StackFit.expand,
       children: [
-        // Solid base — always rendered
+        // Solid base  always rendered
         const ColoredBox(color: IveTokens.voidColor),
 
-        // Drifting radial — skipped under reduce-motion
+        // Drifting radial  skipped under reduce-motion
         if (!reduced)
           AnimatedBuilder(
             animation: _ctrl,
             builder: (_, __) {
               final t = Curves.easeInOut.transform(_ctrl.value);
-              // Center drifts gently: x −0.10→+0.10, y −0.15→+0.15
+              // Center drifts gently: x 0.10+0.10, y 0.15+0.15
               final dx = -0.10 + t * 0.20;
               final dy = -0.15 + t * 0.30;
               return DecoratedBox(

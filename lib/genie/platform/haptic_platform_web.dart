@@ -1,6 +1,6 @@
 /// Web implementation of the PWA haptic platform bridge.
 /// Uses the Vibration API (navigator.vibrate). Earcons are intentionally
-/// no-op on web (Web Audio earcons removed for cross-SDK compatibility —
+/// no-op on web (Web Audio earcons removed for cross-SDK compatibility 
 /// `dart:web_audio` is no longer part of the Dart SDK).
 library;
 import 'dart:js_interop';
@@ -18,7 +18,7 @@ void pwaVibrate(List<int> pattern) {
     final jsPattern = pattern.map((ms) => ms.toJS).toList().toJS;
     nav.callMethod('vibrate'.toJS, jsPattern);
   } catch (_) {
-    // Vibration API unsupported — silently ignored.
+    // Vibration API unsupported  silently ignored.
   }
 }
 

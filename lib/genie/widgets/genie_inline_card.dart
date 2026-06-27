@@ -1,10 +1,10 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// GenieInlineCard – Rich Module Cards Rendered Inside the Chat Thread
+/// 
+/// GenieInlineCard  Rich Module Cards Rendered Inside the Chat Thread
 ///
 /// Each card type renders a functional micro-widget. Cards reuse module
 /// color identities and expose action buttons that feed back into the
 /// GenieController. Pinch-out triggers full-screen navigation.
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -14,7 +14,7 @@ import '../../core/theme/app_colors.dart';
 import '../genie_intent.dart';
 import '../genie_tactile_actions.dart';
 
-/// Module accent colors — sourced from the unified design system so every
+/// Module accent colors  sourced from the unified design system so every
 /// card, chip, and tile across the app draws from the same palette.
 const _moduleColors = IveTokens.moduleColors;
 
@@ -85,7 +85,7 @@ class GenieInlineCard extends StatelessWidget {
   }
 }
 
-// ─── Card Shell ───────────────────────────────────────────────────────────────
+//  Card Shell 
 class _CardShell extends StatelessWidget {
   final Color accentColor;
   final Widget child;
@@ -151,7 +151,7 @@ class _CardShell extends StatelessWidget {
   }
 }
 
-// ─── Action Button ────────────────────────────────────────────────────────────
+//  Action Button 
 class _CardActionButton extends StatelessWidget {
   final String label;
   final Color color;
@@ -201,7 +201,7 @@ class _CardActionButton extends StatelessWidget {
   }
 }
 
-// ─── Balance Card ────────────────────────────────────────────────────────────
+//  Balance Card 
 class _BalanceCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _BalanceCard({required this.data});
@@ -234,7 +234,7 @@ class _BalanceCard extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              'â‰ˆ \$${(balance * rate).toStringAsFixed(2)} USD Â· Rate: \$$rate',
+              ' \$${(balance * rate).toStringAsFixed(2)} USD  Rate: \$$rate',
               style: const TextStyle(
                 fontSize: 12,
                 color: AppColors.textSecondary,
@@ -274,7 +274,7 @@ class _BalanceCard extends StatelessWidget {
   }
 }
 
-// ─── Transaction Card ─────────────────────────────────────────────────────────
+//  Transaction Card 
 class _TransactionCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _TransactionCard({required this.data});
@@ -286,7 +286,7 @@ class _TransactionCard extends StatelessWidget {
 
     return _CardShell(
       accentColor: color,
-      moduleLabel: 'GO PAGE Â· TRANSACTIONS',
+      moduleLabel: 'GO PAGE  TRANSACTIONS',
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8),
         child: Column(
@@ -328,7 +328,7 @@ class _TransactionCard extends StatelessWidget {
   }
 }
 
-// ─── Order Summary Card ───────────────────────────────────────────────────────
+//  Order Summary Card 
 class _OrderSummaryCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _OrderSummaryCard({required this.data});
@@ -341,7 +341,7 @@ class _OrderSummaryCard extends StatelessWidget {
 
     return _CardShell(
       accentColor: color,
-      moduleLabel: 'MARKET Â· CART',
+      moduleLabel: 'MARKET  CART',
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(
@@ -367,7 +367,7 @@ class _OrderSummaryCard extends StatelessWidget {
   }
 }
 
-// ─── Order Tracker Card ───────────────────────────────────────────────────────
+//  Order Tracker Card 
 class _OrderTrackerCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _OrderTrackerCard({required this.data});
@@ -377,7 +377,7 @@ class _OrderTrackerCard extends StatelessWidget {
     final color = _moduleColors['market']!;
     return _CardShell(
       accentColor: color,
-      moduleLabel: 'MARKET Â· TRACKING',
+      moduleLabel: 'MARKET  TRACKING',
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -394,7 +394,7 @@ class _OrderTrackerCard extends StatelessWidget {
                     size: 14, color: AppColors.textSecondary),
                 const SizedBox(width: 4),
                 Text(
-                  '${data['status'] ?? 'In transit'} Â· ETA: ${data['eta'] ?? '—'}',
+                  '${data['status'] ?? 'In transit'}  ETA: ${data['eta'] ?? ''}',
                   style: const TextStyle(
                       color: AppColors.textSecondary, fontSize: 12),
                 ),
@@ -414,7 +414,7 @@ class _OrderTrackerCard extends StatelessWidget {
   }
 }
 
-// ─── Shop Carousel Card ───────────────────────────────────────────────────────
+//  Shop Carousel Card 
 class _ShopCarouselCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _ShopCarouselCard({required this.data});
@@ -429,7 +429,7 @@ class _ShopCarouselCard extends StatelessWidget {
 
     return _CardShell(
       accentColor: color,
-      moduleLabel: 'MARKET Â· SHOPS',
+      moduleLabel: 'MARKET  SHOPS',
       child: Column(
         children: [
           SizedBox(
@@ -461,7 +461,7 @@ class _ShopCarouselCard extends StatelessWidget {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis),
                         const SizedBox(height: 2),
-                        Text('${shop['distance']} Â· â­ ${shop['rating']}',
+                        Text('${shop['distance']}   ${shop['rating']}',
                             style: const TextStyle(
                                 fontSize: 10, color: AppColors.textSecondary)),
                       ],
@@ -482,7 +482,7 @@ class _ShopCarouselCard extends StatelessWidget {
   }
 }
 
-// ─── Feed Card ────────────────────────────────────────────────────────────────
+//  Feed Card 
 class _FeedCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _FeedCard({required this.data});
@@ -492,7 +492,7 @@ class _FeedCard extends StatelessWidget {
     final color = _moduleColors['updates']!;
     return _CardShell(
       accentColor: color,
-      moduleLabel: 'MY UPDATES Â· FEED',
+      moduleLabel: 'MY UPDATES  FEED',
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(
@@ -513,7 +513,7 @@ class _FeedCard extends StatelessWidget {
   }
 }
 
-// ─── Live Orders Card ─────────────────────────────────────────────────────────
+//  Live Orders Card 
 class _LiveOrdersCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _LiveOrdersCard({required this.data});
@@ -525,7 +525,7 @@ class _LiveOrdersCard extends StatelessWidget {
 
     return _CardShell(
       accentColor: color,
-      moduleLabel: 'LIVE Â· ORDERS',
+      moduleLabel: 'LIVE  ORDERS',
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8),
         child: orders.isEmpty
@@ -558,7 +558,7 @@ class _LiveOrdersCard extends StatelessWidget {
                           fontSize: 13, fontWeight: FontWeight.w600),
                     ),
                     subtitle: Text(
-                      '${order['customer']} Â· ${order['items']} item(s)',
+                      '${order['customer']}  ${order['items']} item(s)',
                       style: const TextStyle(fontSize: 11),
                     ),
                     trailing: _CardActionButton(
@@ -574,7 +574,7 @@ class _LiveOrdersCard extends StatelessWidget {
   }
 }
 
-// ─── Driver Delivery Card ─────────────────────────────────────────────────────
+//  Driver Delivery Card 
 class _DriverDeliveryCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _DriverDeliveryCard({required this.data});
@@ -586,7 +586,7 @@ class _DriverDeliveryCard extends StatelessWidget {
 
     return _CardShell(
       accentColor: color,
-      moduleLabel: 'LIVE Â· DRIVER',
+      moduleLabel: 'LIVE  DRIVER',
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: data['type'] == 'current'
@@ -600,7 +600,7 @@ class _DriverDeliveryCard extends StatelessWidget {
                         style: const TextStyle(fontWeight: FontWeight.w600)),
                   ]),
                   const SizedBox(height: 4),
-                  Text('ETA: ${data['eta'] ?? '—'}',
+                  Text('ETA: ${data['eta'] ?? ''}',
                       style: const TextStyle(
                           color: AppColors.textSecondary, fontSize: 12)),
                   const SizedBox(height: 12),
@@ -611,7 +611,7 @@ class _DriverDeliveryCard extends StatelessWidget {
                         onTap: () => Navigator.pushNamed(context, AppRoutes.liveDeliveryVerification)),
                     const SizedBox(width: 8),
                     _CardActionButton(
-                        label: '🆘 SOS',
+                        label: ' SOS',
                         color: AppColors.error,
                         onTap: () => Navigator.pushNamed(context, AppRoutes.liveEmergencySOS),
                         isDestructive: true),
@@ -628,7 +628,7 @@ class _DriverDeliveryCard extends StatelessWidget {
                         title: Text(pkg['id']?.toString() ?? '',
                             style: const TextStyle(fontWeight: FontWeight.w600)),
                         subtitle: Text(
-                          '${pkg['stops']} stops Â· ${pkg['distance']} Â· ETA ${pkg['eta']}',
+                          '${pkg['stops']} stops  ${pkg['distance']}  ETA ${pkg['eta']}',
                           style: const TextStyle(fontSize: 11),
                         ),
                         trailing: _CardActionButton(
@@ -644,7 +644,7 @@ class _DriverDeliveryCard extends StatelessWidget {
   }
 }
 
-// ─── Alert List Card ──────────────────────────────────────────────────────────
+//  Alert List Card 
 class _AlertListCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _AlertListCard({required this.data});
@@ -679,11 +679,11 @@ class _AlertListCard extends StatelessWidget {
                         style: const TextStyle(
                             fontSize: 13, fontWeight: FontWeight.w600)),
                     subtitle: Text(
-                      '${alert['type']} Â· ${alert['age']}',
+                      '${alert['type']}  ${alert['age']}',
                       style: const TextStyle(fontSize: 11),
                     ),
                     trailing: resolved
-                        ? const Text('✓',
+                        ? const Text('',
                             style: TextStyle(color: AppColors.success))
                         : _CardActionButton(
                             label: 'Resolve',
@@ -697,7 +697,7 @@ class _AlertListCard extends StatelessWidget {
   }
 }
 
-// ─── Chat List Card ───────────────────────────────────────────────────────────
+//  Chat List Card 
 class _ChatListCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _ChatListCard({required this.data});
@@ -709,7 +709,7 @@ class _ChatListCard extends StatelessWidget {
 
     return _CardShell(
       accentColor: color,
-      moduleLabel: 'qualChat${type == 'hey_ya' ? ' Â· HEY YA' : type == 'fleet' ? ' Â· FLEET' : ''}',
+      moduleLabel: 'qualChat${type == 'hey_ya' ? '  HEY YA' : type == 'fleet' ? '  FLEET' : ''}',
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(
@@ -748,7 +748,7 @@ class _ChatListCard extends StatelessWidget {
   }
 }
 
-// ─── Operations Overview Card ─────────────────────────────────────────────────
+//  Operations Overview Card 
 class _OperationsCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _OperationsCard({required this.data});
@@ -808,7 +808,7 @@ class _StatChip extends StatelessWidget {
   }
 }
 
-// ─── Profile Strength Card ────────────────────────────────────────────────────
+//  Profile Strength Card 
 class _ProfileStrengthCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _ProfileStrengthCard({required this.data});
@@ -860,7 +860,7 @@ class _ProfileStrengthCard extends StatelessWidget {
   }
 }
 
-// ─── Notification Hub Card ────────────────────────────────────────────────────
+//  Notification Hub Card 
 class _NotificationHubCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _NotificationHubCard({required this.data});
@@ -871,7 +871,7 @@ class _NotificationHubCard extends StatelessWidget {
 
     return _CardShell(
       accentColor: color,
-      moduleLabel: 'UTILITY Â· NOTIFICATIONS',
+      moduleLabel: 'UTILITY  NOTIFICATIONS',
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(
@@ -890,7 +890,7 @@ class _NotificationHubCard extends StatelessWidget {
   }
 }
 
-// ─── Help Guide Card ─────────────────────────────────────────────────────────
+//  Help Guide Card 
 class _HelpGuideCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _HelpGuideCard({required this.data});
@@ -903,7 +903,7 @@ class _HelpGuideCard extends StatelessWidget {
 
     return _CardShell(
       accentColor: color,
-      moduleLabel: data['reminders'] != null ? 'APRIL Â· REMINDERS' : 'HELP',
+      moduleLabel: data['reminders'] != null ? 'APRIL  REMINDERS' : 'HELP',
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: reminders.isNotEmpty
@@ -937,7 +937,7 @@ class _HelpGuideCard extends StatelessWidget {
   }
 }
 
-// ─── Confirmation Card ────────────────────────────────────────────────────────
+//  Confirmation Card 
 class _ConfirmationCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _ConfirmationCard({required this.data});
@@ -978,7 +978,7 @@ class _ConfirmationCard extends StatelessWidget {
                     onTap: () => Navigator.pop(context)),
               ]),
             ] else if (action == 'sos') ...[
-              const Text('🆘 Emergency SOS Activated',
+              const Text(' Emergency SOS Activated',
                   style: TextStyle(
                       fontWeight: FontWeight.w800,
                       color: AppColors.error,
@@ -1001,7 +1001,7 @@ class _ConfirmationCard extends StatelessWidget {
   }
 }
 
-// ─── Greeting Card ────────────────────────────────────────────────────────────
+//  Greeting Card 
 class _GreetingCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _GreetingCard({required this.data});
@@ -1012,7 +1012,7 @@ class _GreetingCard extends StatelessWidget {
   }
 }
 
-// ─── Coming Soon Card ─────────────────────────────────────────────────────────
+//  Coming Soon Card 
 class _ComingSoonCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -1028,7 +1028,7 @@ class _ComingSoonCard extends StatelessWidget {
         children: [
           Icon(Icons.open_in_new, size: 14, color: AppColors.textTertiary),
           SizedBox(width: 6),
-          Text('Opening full screen…',
+          Text('Opening full screen',
               style: TextStyle(
                   fontSize: 12, color: AppColors.textSecondary)),
         ],
@@ -1037,7 +1037,7 @@ class _ComingSoonCard extends StatelessWidget {
   }
 }
 
-// ─── Error Card ───────────────────────────────────────────────────────────────
+//  Error Card 
 class _ErrorCard extends StatelessWidget {
   final Map<String, dynamic> data;
   const _ErrorCard({required this.data});

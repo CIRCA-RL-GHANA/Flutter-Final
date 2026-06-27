@@ -4,7 +4,7 @@ import 'ive_tokens.dart';
 
 /// Horizontal step progress bar.
 ///
-/// Active segment sweeps left → right over [sweepDuration] (240 ms default).
+/// Active segment sweeps left  right over [sweepDuration] (240 ms default).
 /// On checkpoint arrival the active segment pulses once (scale + opacity).
 /// Labels below: active step in [IveTokens.inkColor], others in [IveTokens.muteColor].
 ///
@@ -174,7 +174,7 @@ class _Segment extends StatelessWidget {
                         child: DecoratedBox(
                           decoration: BoxDecoration(
                             color: isDone
-                                ? IveTokens.accentColor
+                                ? IveTokens.genieColor
                                 : IveTokens.genieColor,
                             borderRadius:
                                 BorderRadius.circular(IveTokens.rChip),

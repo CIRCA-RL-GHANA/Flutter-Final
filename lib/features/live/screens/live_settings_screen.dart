@@ -1,11 +1,12 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// LIVE MODULE — Screen 22: Live Module Settings
+/// 
+/// LIVE MODULE  Screen 22: Live Module Settings
 /// Configuration: auto-assign, bundles, returns, verification defaults,
 /// thresholds, driver policies, performance targets
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
@@ -36,7 +37,7 @@ class _LiveSettingsScreenState extends State<LiveSettingsScreen> {
               LiveSectionCard(
                 title: 'ORDER ASSIGNMENT',
                 icon: Icons.auto_awesome,
-                iconColor: kLiveAccent,
+                iconColor: IveTokens.moduleLive,
                 child: Column(
                   children: [
                     _SettingsToggle(
@@ -63,7 +64,7 @@ class _LiveSettingsScreenState extends State<LiveSettingsScreen> {
                       value: s.minimumDriverRating,
                       min: 3.0,
                       max: 5.0,
-                      suffix: 'â˜…',
+                      suffix: '',
                       divisions: 20,
                       onChanged: (v) => prov.updateSettings(s.copyWith(minimumDriverRating: v)),
                     ),
@@ -212,7 +213,7 @@ class _LiveSettingsScreenState extends State<LiveSettingsScreen> {
               LiveSectionCard(
                 title: 'PERFORMANCE TARGETS',
                 icon: Icons.speed,
-                iconColor: kLiveColor,
+                iconColor: IveTokens.moduleLive,
                 child: Column(
                   children: [
                     _SliderSetting(
@@ -228,7 +229,7 @@ class _LiveSettingsScreenState extends State<LiveSettingsScreen> {
                       value: s.customerRatingTarget,
                       min: 3.0,
                       max: 5.0,
-                      suffix: 'â˜…',
+                      suffix: '',
                       divisions: 20,
                       onChanged: (v) => prov.updateSettings(s.copyWith(customerRatingTarget: v)),
                     ),
@@ -250,12 +251,12 @@ class _LiveSettingsScreenState extends State<LiveSettingsScreen> {
                 decoration: BoxDecoration(
                   color: const Color(0xFFFEE2E2),
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: kLiveColor.withValues(alpha: 0.3)),
+                  border: Border.all(color: IveTokens.moduleLive.withValues(alpha: 0.3)),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('âš ï¸ DANGER ZONE', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w800, color: kLiveColor)),
+                    const Text(' DANGER ZONE', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w800, color: IveTokens.moduleLive)),
                     const SizedBox(height: 8),
                     SizedBox(
                       width: double.infinity,
@@ -263,15 +264,15 @@ class _LiveSettingsScreenState extends State<LiveSettingsScreen> {
                         onPressed: () {
                           HapticFeedback.mediumImpact();
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Settings reset to defaults'), backgroundColor: kLiveColor),
+                            const SnackBar(content: Text('Settings reset to defaults'), backgroundColor: IveTokens.moduleLive),
                           );
                           prov.resetSettings();
                         },
                         icon: const Icon(Icons.restore, size: 16),
                         label: const Text('Reset All Settings', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600)),
                         style: OutlinedButton.styleFrom(
-                          foregroundColor: kLiveColor,
-                          side: const BorderSide(color: kLiveColor),
+                          foregroundColor: IveTokens.moduleLive,
+                          side: const BorderSide(color: IveTokens.moduleLive),
                           padding: const EdgeInsets.symmetric(vertical: 10),
                         ),
                       ),
@@ -288,10 +289,10 @@ class _LiveSettingsScreenState extends State<LiveSettingsScreen> {
   }
 
   (String, String, String) _verificationInfo(DefaultVerification method) => switch (method) {
-        DefaultVerification.biometricOnly => ('🔐', 'Biometric Only', 'Fingerprint or face verification'),
-        DefaultVerification.pinOnly => ('🔑', 'PIN Only', 'Customer enters a delivery PIN'),
-        DefaultVerification.biometricAndPin => ('🛡', 'Biometric + PIN', 'Full multi-factor verification'),
-        DefaultVerification.photoSignature => ('📸', 'Photo + Signature', 'Photo proof with digital signature'),
+        DefaultVerification.biometricOnly => ('', 'Biometric Only', 'Fingerprint or face verification'),
+        DefaultVerification.pinOnly => ('', 'PIN Only', 'Customer enters a delivery PIN'),
+        DefaultVerification.biometricAndPin => ('', 'Biometric + PIN', 'Full multi-factor verification'),
+        DefaultVerification.photoSignature => ('', 'Photo + Signature', 'Photo proof with digital signature'),
       };
 }
 
@@ -330,7 +331,7 @@ class _SettingsToggle extends StatelessWidget {
           Switch(
             value: value,
             onChanged: onChanged,
-            activeThumbColor: kLiveColor,
+            activeThumbColor: IveTokens.moduleLive,
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
           ),
         ],
@@ -370,17 +371,17 @@ class _SliderSetting extends StatelessWidget {
               Expanded(child: Text(label, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500))),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                decoration: BoxDecoration(color: kLiveColor.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(6)),
-                child: Text('${value.toStringAsFixed(value == value.roundToDouble() ? 0 : 1)} $suffix', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: kLiveColor)),
+                decoration: BoxDecoration(color: IveTokens.moduleLive.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(6)),
+                child: Text('${value.toStringAsFixed(value == value.roundToDouble() ? 0 : 1)} $suffix', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: IveTokens.moduleLive)),
               ),
             ],
           ),
           SliderTheme(
             data: SliderThemeData(
-              activeTrackColor: kLiveColor,
-              inactiveTrackColor: kLiveColor.withValues(alpha: 0.15),
-              thumbColor: kLiveColor,
-              overlayColor: kLiveColor.withValues(alpha: 0.1),
+              activeTrackColor: IveTokens.moduleLive,
+              inactiveTrackColor: IveTokens.moduleLive.withValues(alpha: 0.15),
+              thumbColor: IveTokens.moduleLive,
+              overlayColor: IveTokens.moduleLive.withValues(alpha: 0.1),
               trackHeight: 3,
             ),
             child: Slider(

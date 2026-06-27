@@ -1,4 +1,4 @@
-/// qualChat Module — State Management & Demo Data
+/// qualChat Module  State Management & Demo Data
 /// Provides all state for 15 screens + prompt widget
 /// Wired to SocialService with fallback demo data for offline mode.
 library;
@@ -10,9 +10,9 @@ import '../../../core/services/social_service.dart';
 import '../models/qualchat_models.dart';
 
 class QualChatProvider extends ChangeNotifier {
-  // ──────────────────────────────────────────────
+  // 
   //  SERVICE & LOADING STATE
-  // ──────────────────────────────────────────────
+  // 
 
   final SocialService _socialService;
 
@@ -33,9 +33,9 @@ class QualChatProvider extends ChangeNotifier {
     ]);
   }
 
-  // ──────────────────────────────────────────────
+  // 
   //  DASHBOARD STATE
-  // ──────────────────────────────────────────────
+  // 
 
   ChatMode _mode = ChatMode.social;
   ChatMode get mode => _mode;
@@ -51,9 +51,9 @@ class QualChatProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ──────────────────────────────────────────────
+  // 
   //  PRESENCE DATA
-  // ──────────────────────────────────────────────
+  // 
 
   static const PresenceStats presenceStats = PresenceStats(
     online: 92,
@@ -93,9 +93,9 @@ class QualChatProvider extends ChangeNotifier {
     ActivityDataPoint(label: '12:00', value: 0.9, time: DateTime(2026, 2, 8, 12)),
   ];
 
-  // ──────────────────────────────────────────────
+  // 
   //  CHAT USERS
-  // ──────────────────────────────────────────────
+  // 
 
   static final List<ChatUser> _fallbackUsers = [
     ChatUser(
@@ -143,7 +143,7 @@ class QualChatProvider extends ChangeNotifier {
     ),
   ];
 
-  /// Public accessor — preserved for backward compatibility.
+  /// Public accessor  preserved for backward compatibility.
   static final List<ChatUser> allUsers = _fallbackUsers;
 
   final List<ChatUser> _users = [];
@@ -164,9 +164,9 @@ class QualChatProvider extends ChangeNotifier {
     return list;
   }
 
-  // ──────────────────────────────────────────────
+  // 
   //  CONVERSATIONS
-  // ──────────────────────────────────────────────
+  // 
 
   ChatListTab _chatTab = ChatListTab.all;
   ChatListTab get chatTab => _chatTab;
@@ -238,7 +238,7 @@ class QualChatProvider extends ChangeNotifier {
     ),
   ];
 
-  /// Public accessor — preserved for backward compatibility.
+  /// Public accessor  preserved for backward compatibility.
   static final List<Conversation> conversations = _fallbackConversations;
 
   List<Conversation> _conversations = [];
@@ -280,9 +280,9 @@ class QualChatProvider extends ChangeNotifier {
     return source.fold(0, (sum, c) => sum + c.unreadCount);
   }
 
-  // ──────────────────────────────────────────────
-  //  MESSAGES (for Chat Thread — Screen 10)
-  // ──────────────────────────────────────────────
+  // 
+  //  MESSAGES (for Chat Thread  Screen 10)
+  // 
 
   String? _activeConversationId;
   String? get activeConversationId => _activeConversationId;
@@ -332,7 +332,7 @@ class QualChatProvider extends ChangeNotifier {
     ),
   ];
 
-  /// Public accessor — preserved for backward compatibility.
+  /// Public accessor  preserved for backward compatibility.
   static final List<ChatMessage> demoMessages = _fallbackMessages;
 
   List<ChatMessage> _messages = [];
@@ -351,9 +351,9 @@ class QualChatProvider extends ChangeNotifier {
     }
   }
 
-  // ──────────────────────────────────────────────
+  // 
   //  HEY YA DATA (Owner only)
-  // ──────────────────────────────────────────────
+  // 
 
   HeyYaTab _heyYaTab = HeyYaTab.all;
   HeyYaTab get heyYaTab => _heyYaTab;
@@ -398,15 +398,15 @@ class QualChatProvider extends ChangeNotifier {
     HeyYaRequest(
       id: 'h1',
       person: ChatUser(
-        id: 'hu1', name: 'Alex Morgan', role: 'Creative Designer · 28',
+        id: 'hu1', name: 'Alex Morgan', role: 'Creative Designer  28',
         presence: PresenceStatus.online,
-        statusMessage: 'Coffee-first, adventure-always ☕',
+        statusMessage: 'Coffee-first, adventure-always ',
         lastSeen: DateTime.now(), distanceKm: 8,
       ),
       status: HeyYaStatus.pending,
       matchPercentage: 92,
       intent: HeyYaIntent.coffee,
-      message: 'Your vibe is everything ✨ Coffee sometime?',
+      message: 'Your vibe is everything  Coffee sometime?',
       sentAt: DateTime.now().subtract(const Duration(days: 2)),
       expiresAt: DateTime.now().add(const Duration(days: 2, hours: 4)),
       isSentByMe: true,
@@ -417,7 +417,7 @@ class QualChatProvider extends ChangeNotifier {
       timeline: [
         TimelineEvent(
           type: TimelineEventType.sent,
-          description: 'You sparked interest ✨',
+          description: 'You sparked interest ',
           timestamp: DateTime(2026, 5, 10, 14, 30),
         ),
         TimelineEvent(
@@ -436,15 +436,15 @@ class QualChatProvider extends ChangeNotifier {
     HeyYaRequest(
       id: 'h2',
       person: ChatUser(
-        id: 'hu2', name: 'Sam Boateng', role: 'Photographer · 31',
+        id: 'hu2', name: 'Sam Boateng', role: 'Photographer  31',
         presence: PresenceStatus.idle,
-        statusMessage: 'Golden hour chaser 📸',
+        statusMessage: 'Golden hour chaser ',
         lastSeen: DateTime.now().subtract(const Duration(hours: 1)), distanceKm: 15,
       ),
       status: HeyYaStatus.accepted,
       matchPercentage: 88,
       intent: HeyYaIntent.walk,
-      message: 'Your travel aesthetic spoke to my soul 🌍 Walk and chat?',
+      message: 'Your travel aesthetic spoke to my soul  Walk and chat?',
       sentAt: DateTime.now().subtract(const Duration(days: 5)),
       isSentByMe: false,
       viewCount: 8,
@@ -454,7 +454,7 @@ class QualChatProvider extends ChangeNotifier {
       timeline: [
         TimelineEvent(
           type: TimelineEventType.sent,
-          description: 'Sam sparked interest ✨',
+          description: 'Sam sparked interest ',
           timestamp: DateTime(2026, 5, 7, 10, 0),
         ),
         TimelineEvent(
@@ -464,7 +464,7 @@ class QualChatProvider extends ChangeNotifier {
         ),
         TimelineEvent(
           type: TimelineEventType.matched,
-          description: "It's a Match! 💘",
+          description: "It's a Match! ",
           timestamp: DateTime(2026, 5, 7, 18, 0),
           detail: 'You both accepted!',
         ),
@@ -473,15 +473,15 @@ class QualChatProvider extends ChangeNotifier {
     HeyYaRequest(
       id: 'h3',
       person: ChatUser(
-        id: 'hu3', name: 'Leo Mensah', role: 'Entrepreneur · 29',
+        id: 'hu3', name: 'Leo Mensah', role: 'Entrepreneur  29',
         presence: PresenceStatus.offline,
-        statusMessage: 'Building the future, one step at a time 🏔️',
+        statusMessage: 'Building the future, one step at a time ',
         lastSeen: DateTime.now().subtract(const Duration(days: 1)), distanceKm: 3,
       ),
       status: HeyYaStatus.pending,
       matchPercentage: 84,
       intent: HeyYaIntent.dinner,
-      message: 'Fellow explorer — dinner and stories? 🌆',
+      message: 'Fellow explorer  dinner and stories? ',
       sentAt: DateTime.now().subtract(const Duration(days: 3)),
       expiresAt: DateTime.now().add(const Duration(days: 1)),
       isSentByMe: true,
@@ -493,9 +493,9 @@ class QualChatProvider extends ChangeNotifier {
     HeyYaRequest(
       id: 'h4',
       person: ChatUser(
-        id: 'hu4', name: 'Ama Asante', role: 'Writer · 26',
+        id: 'hu4', name: 'Ama Asante', role: 'Writer  26',
         presence: PresenceStatus.online,
-        statusMessage: 'Words, chai & sunsets 🌅',
+        statusMessage: 'Words, chai & sunsets ',
         lastSeen: DateTime.now(), distanceKm: 22,
       ),
       status: HeyYaStatus.expired,
@@ -507,15 +507,15 @@ class QualChatProvider extends ChangeNotifier {
     HeyYaRequest(
       id: 'h5',
       person: ChatUser(
-        id: 'hu5', name: 'Kwame Ofori', role: 'Developer · 30',
+        id: 'hu5', name: 'Kwame Ofori', role: 'Developer  30',
         presence: PresenceStatus.online,
-        statusMessage: 'Night owl & weekend hiker 🌙',
+        statusMessage: 'Night owl & weekend hiker ',
         lastSeen: DateTime.now(), distanceKm: 5,
       ),
       status: HeyYaStatus.accepted,
       matchPercentage: 90,
       intent: HeyYaIntent.movie,
-      message: 'Your recommendations list is everything 🎬 Cinema date?',
+      message: 'Your recommendations list is everything  Cinema date?',
       sentAt: DateTime.now().subtract(const Duration(days: 7)),
       isSentByMe: false,
       viewCount: 12,
@@ -525,7 +525,7 @@ class QualChatProvider extends ChangeNotifier {
       timeline: [
         TimelineEvent(
           type: TimelineEventType.sent,
-          description: 'Kwame sparked interest ✨',
+          description: 'Kwame sparked interest ',
           timestamp: DateTime(2026, 5, 5, 20, 0),
         ),
         TimelineEvent(
@@ -535,13 +535,13 @@ class QualChatProvider extends ChangeNotifier {
         ),
         TimelineEvent(
           type: TimelineEventType.matched,
-          description: "It's a Match! 💘",
+          description: "It's a Match! ",
           timestamp: DateTime(2026, 5, 6, 12, 0),
           detail: 'You both accepted!',
         ),
         TimelineEvent(
           type: TimelineEventType.dateProposed,
-          description: 'Date proposed 🎬',
+          description: 'Date proposed ',
           timestamp: DateTime(2026, 5, 6, 14, 0),
           detail: 'Saturday at Cinema Accra',
         ),
@@ -549,7 +549,7 @@ class QualChatProvider extends ChangeNotifier {
     ),
   ];
 
-  /// Public accessor — preserved for backward compatibility.
+  /// Public accessor  preserved for backward compatibility.
   static final List<HeyYaRequest> heyYaRequests = _fallbackHeyYas;
 
   List<HeyYaRequest> _heyYaRequests = [];
@@ -573,9 +573,9 @@ class QualChatProvider extends ChangeNotifier {
     return list;
   }
 
-  // ──────────────────────────────────────────────
+  // 
   //  VIBE IMAGE (Screen 5)
-  // ──────────────────────────────────────────────
+  // 
 
   static const VibeImage currentVibeImage = VibeImage(
     id: 'vi1',
@@ -589,13 +589,13 @@ class QualChatProvider extends ChangeNotifier {
     remainingPercent: 65,
     analysisText:
         'Your photo shows confidence and approachability. '
-        'Lighting: Excellent • Composition: Good. '
+        'Lighting: Excellent  Composition: Good. '
         'Suggested: Add a smile for 23% more responses',
   );
 
-  // ──────────────────────────────────────────────
+  // 
   //  SMART NUDGES (Screen 11)
-  // ──────────────────────────────────────────────
+  // 
 
   int _currentNudgeIndex = 0;
   int get currentNudgeIndex => _currentNudgeIndex;
@@ -621,7 +621,7 @@ class QualChatProvider extends ChangeNotifier {
       id: 'n3', type: NudgeType.compatibility,
       person: _fallbackHeyYas[4].person, matchPercentage: 90,
       prompt: 'High match alert!',
-      suggestedOpener: 'Hey Kwame! Fellow developer here — what tech stack do you use?',
+      suggestedOpener: 'Hey Kwame! Fellow developer here  what tech stack do you use?',
       reason: 'New high-match user is available and online right now.',
       createdAt: DateTime.now(),
     ),
@@ -646,9 +646,9 @@ class QualChatProvider extends ChangeNotifier {
     nextNudge();
   }
 
-  // ──────────────────────────────────────────────
+  // 
   //  ACTION CENTER (Screen 12)
-  // ──────────────────────────────────────────────
+  // 
 
   int get profileCompleteness => 75;
 
@@ -730,9 +730,9 @@ class QualChatProvider extends ChangeNotifier {
         'Your response rate improves by 2.3x with reminders.',
   );
 
-  // ──────────────────────────────────────────────
+  // 
   //  PREFERENCES (Screen 4)
-  // ──────────────────────────────────────────────
+  // 
 
   bool _isOpenToConnections = true;
   bool get isOpenToConnections => _isOpenToConnections;
@@ -794,9 +794,9 @@ class QualChatProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ──────────────────────────────────────────────
+  // 
   //  CONVERSATION INSIGHTS (Dashboard Section C)
-  // ──────────────────────────────────────────────
+  // 
 
   static const List<ConversationInsight> insights = [
     ConversationInsight(
@@ -822,9 +822,9 @@ class QualChatProvider extends ChangeNotifier {
     RecentMedia(id: 'rm3', type: MessageType.file, timestamp: DateTime.now()),
   ];
 
-  // ──────────────────────────────────────────────
+  // 
   //  ARCHIVED CHATS (Screen 9)
-  // ──────────────────────────────────────────────
+  // 
 
   ArchiveSort _archiveSort = ArchiveSort.newest;
   ArchiveSort get archiveSort => _archiveSort;
@@ -892,9 +892,9 @@ class QualChatProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ──────────────────────────────────────────────
+  // 
   //  SETTINGS (Screen 13)
-  // ──────────────────────────────────────────────
+  // 
 
   final Map<String, bool> _settingsToggles = {
     // Notifications
@@ -947,9 +947,9 @@ class QualChatProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ──────────────────────────────────────────────
+  // 
   //  ONBOARDING (Screen 14)
-  // ──────────────────────────────────────────────
+  // 
 
   int _onboardingStep = 0;
   int get onboardingStep => _onboardingStep;
@@ -972,9 +972,9 @@ class QualChatProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ──────────────────────────────────────────────
+  // 
   //  NEW CHAT (Screen 7)
-  // ──────────────────────────────────────────────
+  // 
 
   ChatType _newChatType = ChatType.individual;
   ChatType get newChatType => _newChatType;
@@ -1010,9 +1010,9 @@ class QualChatProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ══════════════════════════════════════════════
+  // 
   //  ASYNC DATA-LOADING (wired to SocialService)
-  // ══════════════════════════════════════════════
+  // 
 
   /// Load conversations from backend; falls back to demo data on error.
   Future<void> loadConversations() async {
@@ -1145,9 +1145,9 @@ class QualChatProvider extends ChangeNotifier {
     }
   }
 
-  // ══════════════════════════════════════════════
-  //  JSON → MODEL HELPERS (models lack fromJson)
-  // ══════════════════════════════════════════════
+  // 
+  //  JSON  MODEL HELPERS (models lack fromJson)
+  // 
 
   static PresenceStatus _presenceFromString(String? s) {
     switch (s) {

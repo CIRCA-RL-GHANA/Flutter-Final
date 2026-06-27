@@ -1,28 +1,11 @@
-﻿import 'package:flutter/material.dart';
-import '../../../core/design/ive.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../core/design/ive.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/constants/app_strings.dart';
 import '../../../core/utils/responsive.dart';
 import '../providers/onboarding_provider.dart';
-import '../widgets/buttons.dart';
-import '../widgets/progress_indicators.dart';
 
-
-// OS palette — mirrors splash / welcome
-const Color _kBg        = IveTokens.bg;
-// ignore: unused_element
-const Color _kSurface   = IveTokens.surface;
-// ignore: unused_element
-const Color _kBorder    = IveTokens.hairline;
-const Color _kAccent    = IveTokens.accent;
-// ignore: unused_element
-const Color _kAccentDim = IveTokens.accentPressed;
-const Color _kText      = IveTokens.label;
-const Color _kTextDim   = IveTokens.labelSecondary;
-const Color _kTextMuted = IveTokens.labelTertiary;
-/// Screen 11: Interactive Tutorial (Optional)
-/// Learn by doing, not by reading
+/// Screen 12 — Tutorial, 4 slides.
 class TutorialScreen extends StatefulWidget {
   const TutorialScreen({super.key});
 
@@ -31,99 +14,92 @@ class TutorialScreen extends StatefulWidget {
 }
 
 class _TutorialScreenState extends State<TutorialScreen> {
-  final PageController _pageController = PageController();
-  int _currentStep = 0;
-  static const int _totalSteps = 5;
+  final PageController _page = PageController();
+  int _current = 0;
+  static const _total = 4;
 
-  final List<_TutorialStep> _steps = [
-    const _TutorialStep(
-      title: 'Your genie help Screen',
-      description: 'This is your personalized dashboard. Tap any widget to interact with it.',
-      icon: Icons.dashboard_customize_outlined,
-      color: _kAccent,
-      instruction: 'Explore widgets',
+  static const _slides = [
+    _Slide(
+      label: 'TUTORIAL · GENIE AI',
+      counter: '01 / 04',
+      title: 'Meet Genie',
+      description:
+          'Tap the gold ✦ in any module to ask Genie for insights, payments, or actions in plain language.',
     ),
-    const _TutorialStep(
-      title: 'Widget Interactions',
-      description: 'Swipe left/right to navigate. Long-press to customize. Tap to open.',
-      icon: Icons.touch_app_outlined,
-      color: IveTokens.success,
-      instruction: 'Try swiping, tapping, and long-pressing',
+    _Slide(
+      label: 'TUTORIAL · GO WALLET',
+      counter: '02 / 04',
+      title: 'GO Wallet',
+      description:
+          'Send, receive and manage money with zero-friction payments across borders. Instant, secure.',
     ),
-    const _TutorialStep(
-      title: 'Your Role Features',
-      description: 'Based on your selected role, you have unique features and widgets.',
-      icon: Icons.person_outline,
-      color: _kAccent,
-      instruction: 'Explore your role-specific tools',
+    _Slide(
+      label: 'TUTORIAL · MARKET',
+      counter: '03 / 04',
+      title: 'Commerce Market',
+      description:
+          'Browse thousands of products from verified merchants. Buy, track deliveries, and review sellers.',
     ),
-    const _TutorialStep(
-      title: 'Quick Actions',
-      description: 'The most common tasks are just one tap away from your home screen.',
-      icon: Icons.flash_on_outlined,
-      color: IveTokens.warning,
-      instruction: 'Try the quick action buttons',
-    ),
-    const _TutorialStep(
-      title: 'Get Help Anytime',
-      description: 'Tap the help icon anywhere in the app to get instant assistance.',
-      icon: Icons.help_outline,
-      color: _kAccent,
-      instruction: 'Look for the help icon',
+    _Slide(
+      label: 'TUTORIAL · UPDATES',
+      counter: '04 / 04',
+      title: 'Live & Updates',
+      description:
+          'Stay connected with real-time commerce feeds and live events from your network.',
     ),
   ];
 
-  void _nextStep() {
-    if (_currentStep < _totalSteps - 1) {
-      _pageController.nextPage(
-        duration: const Duration(milliseconds: 400),
-        curve: Curves.easeInOut,
-      );
-    } else {
-      _completeTutorial();
-    }
-  }
-
-  void _completeTutorial() {
+  void _skip() {
     context.read<OnboardingProvider>().completeTutorial();
     Navigator.of(context).pushReplacementNamed(AppRoutes.promptScreen);
   }
 
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
+  void _next() {
+    if (_current < _total - 1) {
+      _page.nextPage(
+          duration: const Duration(milliseconds: 280), curve: Curves.easeOut);
+    } else {
+      context.read<OnboardingProvider>().completeTutorial();
+      Navigator.of(context)
+          .pushReplacementNamed(AppRoutes.promptScreen);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    final slide = _slides[_current];
+
     return Scaffold(
-      backgroundColor: _kBg,
+      backgroundColor: IveTokens.bg,
       body: SafeArea(
         child: Responsive.constrained(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Header
+              // Topbar
               Padding(
-                padding: const EdgeInsets.fromLTRB(24, 16, 24, 8),
+                padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const Text(
-                      AppStrings.tutorialTitle,
+                      'Quick tour',
                       style: TextStyle(
+                        fontFamily: 'SpaceGrotesk',
                         fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: _kText,
+                        fontWeight: FontWeight.w700,
+                        color: IveTokens.ink,
                       ),
                     ),
-                    TextButton(
-                      onPressed: _completeTutorial,
+                    const Spacer(),
+                    GestureDetector(
+                      onTap: _skip,
                       child: const Text(
                         'Skip',
                         style: TextStyle(
                           fontSize: 14,
-                          color: _kTextMuted,
+                          fontWeight: FontWeight.w600,
+                          color: IveTokens.accent,
                         ),
                       ),
                     ),
@@ -131,61 +107,83 @@ class _TutorialScreenState extends State<TutorialScreen> {
                 ),
               ),
 
-              // Progress
+              const SizedBox(height: 20),
+
+              // Hatched card
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: StepProgressBar(
-                  currentStep: _currentStep + 1,
-                  totalSteps: _totalSteps,
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: AspectRatio(
+                  aspectRatio: 16 / 9,
+                  child: ClipRRect(
+                    borderRadius:
+                        BorderRadius.circular(IveTokens.rMd),
+                    child: CustomPaint(
+                      painter: _HatchPainter(),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: IveTokens.hairline),
+                          borderRadius:
+                              BorderRadius.circular(IveTokens.rMd),
+                        ),
+                        alignment: Alignment.center,
+                        child: Text(
+                          slide.label,
+                          style: IveType.mono.copyWith(
+                            fontSize: 10,
+                            color: IveTokens.ink2,
+                            letterSpacing: 1.5,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ),
 
-              // Content
+              const SizedBox(height: 20),
+
+              // Slide content (not in PageView — we control manually)
               Expanded(
-                child: PageView.builder(
-                  controller: _pageController,
-                  onPageChanged: (index) =>
-                      setState(() => _currentStep = index),
-                  itemCount: _totalSteps,
-                  itemBuilder: (context, index) {
-                    final step = _steps[index];
-                    return _TutorialStepView(step: step);
-                  },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 220),
+                    child: _SlideContent(
+                      key: ValueKey(_current),
+                      slide: slide,
+                    ),
+                  ),
                 ),
               ),
 
-              // Navigation
+              // Pagination dots
               Padding(
-                padding: const EdgeInsets.fromLTRB(24, 16, 24, 32),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
-                  children: [
-                    // Step counter
-                    Text(
-                      '${_currentStep + 1} / $_totalSteps',
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: _kTextMuted,
+                  children: List.generate(_total, (i) {
+                    final active = i == _current;
+                    return AnimatedContainer(
+                      duration: IveTokens.dFast,
+                      margin: const EdgeInsets.only(right: 6),
+                      width: active ? 24 : 8,
+                      height: 8,
+                      decoration: BoxDecoration(
+                        color: active ? IveTokens.accent : IveTokens.hairline2,
+                        borderRadius: BorderRadius.circular(IveTokens.rPill),
                       ),
-                    ),
-                    const Spacer(),
+                    );
+                  }),
+                ),
+              ),
 
-                    // Next / Complete button
-                    SizedBox(
-                      width: 160,
-                      child: PrimaryButton(
-                        text: _currentStep == _totalSteps - 1
-                            ? 'Complete'
-                            : 'Next',
-                        icon: _currentStep == _totalSteps - 1
-                            ? Icons.check
-                            : Icons.arrow_forward,
-                        onPressed: _nextStep,
-                        margin: EdgeInsets.zero,
-                        height: 48,
-                      ),
-                    ),
-                  ],
+              const SizedBox(height: 20),
+
+              // NEXT button
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 32),
+                child: IveButton.primary(
+                  label: _current < _total - 1 ? 'NEXT' : 'GET STARTED',
+                  onPressed: _next,
                 ),
               ),
             ],
@@ -194,123 +192,96 @@ class _TutorialScreenState extends State<TutorialScreen> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    _page.dispose();
+    super.dispose();
+  }
 }
 
-class _TutorialStep {
+// ── Data ─────────────────────────────────────────────────────────────────────
+
+class _Slide {
+  final String label;
+  final String counter;
   final String title;
   final String description;
-  final IconData icon;
-  final Color color;
-  final String instruction;
 
-  const _TutorialStep({
+  const _Slide({
+    required this.label,
+    required this.counter,
     required this.title,
     required this.description,
-    required this.icon,
-    required this.color,
-    required this.instruction,
   });
 }
 
-class _TutorialStepView extends StatelessWidget {
-  final _TutorialStep step;
-
-  const _TutorialStepView({required this.step});
+class _SlideContent extends StatelessWidget {
+  final _Slide slide;
+  const _SlideContent({super.key, required this.slide});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(24),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          // Illustration area
-          Container(
-            width: 200,
-            height: 200,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: step.color.withValues(alpha: 0.08),
-            ),
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                // Outer ring
-                Container(
-                  width: 180,
-                  height: 180,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: step.color.withValues(alpha: 0.15),
-                      width: 2,
-                    ),
-                  ),
-                ),
-                // Icon
-                Icon(
-                  step.icon,
-                  size: 72,
-                  color: step.color,
-                ),
-              ],
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          slide.counter,
+          style: IveType.mono.copyWith(
+            fontSize: 11,
+            color: IveTokens.mute,
+            letterSpacing: 1.2,
           ),
-
-          const SizedBox(height: 40),
-
-          // Title
-          Text(
-            step.title,
-            style: const TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: _kText,
-            ),
-            textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 8),
+        Text(
+          slide.title,
+          style: const TextStyle(
+            fontFamily: 'SpaceGrotesk',
+            fontSize: 22,
+            fontWeight: FontWeight.w700,
+            color: IveTokens.ink,
           ),
-
-          const SizedBox(height: 12),
-
-          // Description
-          Text(
-            step.description,
-            style: const TextStyle(
-              fontSize: 16,
-              color: _kTextDim,
-              height: 1.5,
-            ),
-            textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 8),
+        Text(
+          slide.description,
+          style: const TextStyle(
+            fontSize: 14,
+            color: IveTokens.ink2,
+            height: 1.5,
           ),
-
-          const SizedBox(height: 24),
-
-          // Interactive instruction
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            decoration: BoxDecoration(
-              color: step.color.withValues(alpha: 0.08),
-              borderRadius: IveTokens.brMd,
-              border: Border.all(color: step.color.withValues(alpha: 0.2)),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(Icons.touch_app, size: 18, color: step.color),
-                const SizedBox(width: 8),
-                Text(
-                  step.instruction,
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: step.color,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
+}
+
+// ── Hatched card painter ──────────────────────────────────────────────────────
+
+class _HatchPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    const bg = IveTokens.surface;
+    final bgPaint = Paint()..color = bg;
+    canvas.drawRect(Offset.zero & size, bgPaint);
+
+    final linePaint = Paint()
+      ..color = IveTokens.hairline.withValues(alpha: 0.5)
+      ..strokeWidth = 1;
+
+    const spacing = 16.0;
+    final count = ((size.width + size.height) / spacing).ceil() + 2;
+    for (int i = -2; i < count; i++) {
+      final x = i * spacing;
+      canvas.drawLine(
+        Offset(x, 0),
+        Offset(x + size.height, size.height),
+        linePaint,
+      );
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

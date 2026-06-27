@@ -1,8 +1,8 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 /// Module Widget Card
 /// The universal wrapper for all 10 module widgets on the PROMPT screen.
 /// Handles 6 states, gestures, accessibility, view-only overlay, shimmer.
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -138,7 +138,7 @@ class _ModuleWidgetCardState extends State<ModuleWidgetCard>
   }
 }
 
-// ─── Normal Card ──────────────────────────────────────────────────────────────
+//  Normal Card 
 
 class _NormalCard extends StatelessWidget {
   final ModuleInfo info;
@@ -189,7 +189,7 @@ class _NormalCard extends StatelessWidget {
   }
 }
 
-// ─── Loading (Shimmer) Card ──────────────────────────────────────────────────
+//  Loading (Shimmer) Card 
 
 class _LoadingCard extends StatefulWidget {
   final ModuleInfo info;
@@ -272,7 +272,7 @@ class _LoadingCardState extends State<_LoadingCard>
   }
 }
 
-// ─── Error Card ─────────────────────────────────────────────────────────────
+//  Error Card 
 
 class _ErrorCard extends StatelessWidget {
   final ModuleInfo info;
@@ -321,7 +321,7 @@ class _ErrorCard extends StatelessWidget {
   }
 }
 
-// ─── Empty Card ─────────────────────────────────────────────────────────────
+//  Empty Card 
 
 class _EmptyCard extends StatelessWidget {
   final ModuleInfo info;
@@ -376,7 +376,7 @@ class _EmptyCard extends StatelessWidget {
   }
 }
 
-// ─── Disabled Card ──────────────────────────────────────────────────────────
+//  Disabled Card 
 
 class _DisabledCard extends StatelessWidget {
   final ModuleInfo info;

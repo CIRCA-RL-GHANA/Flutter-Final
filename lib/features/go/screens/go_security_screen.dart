@@ -1,8 +1,9 @@
-﻿/// GO Screen 13 — Security Center
+/// GO Screen 13  Security Center
 /// Access control, audit trail, security settings
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
 import '../providers/go_provider.dart';
@@ -34,8 +35,8 @@ class _GoSecurityScreenState extends State<GoSecurityScreen> with SingleTickerPr
               color: Colors.white,
               child: TabBar(
                 controller: _tabCtrl,
-                labelColor: kGoColor, unselectedLabelColor: const Color(0xFF9CA3AF),
-                indicatorColor: kGoColor, indicatorSize: TabBarIndicatorSize.label,
+                labelColor: IveTokens.moduleGo, unselectedLabelColor: const Color(0xFF9CA3AF),
+                indicatorColor: IveTokens.moduleGo, indicatorSize: TabBarIndicatorSize.label,
                 labelStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
                 tabs: const [Tab(text: 'Overview'), Tab(text: 'Audit Trail'), Tab(text: 'Settings')],
               ),
@@ -61,7 +62,7 @@ class _GoSecurityScreenState extends State<GoSecurityScreen> with SingleTickerPr
         SizedBox(height: 10),
         GoHealthGauge(score: 85, size: 110),
         SizedBox(height: 8),
-        Text('Strong', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: kGoPositive)),
+        Text('Strong', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: IveTokens.success)),
         SizedBox(height: 4),
         Text('2 recommendations to improve', style: TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
       ])),
@@ -93,8 +94,8 @@ class _GoSecurityScreenState extends State<GoSecurityScreen> with SingleTickerPr
         TextButton.icon(
           icon: const Icon(Icons.filter_list, size: 14),
           label: const Text('Filter', style: TextStyle(fontSize: 11)),
-          onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Showing latest 30 entries'), backgroundColor: kGoColor)),
-          style: TextButton.styleFrom(foregroundColor: kGoColor),
+          onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Showing latest 30 entries'), backgroundColor: IveTokens.moduleGo)),
+          style: TextButton.styleFrom(foregroundColor: IveTokens.moduleGo),
         ),
       ]),
       const SizedBox(height: 8),
@@ -129,8 +130,8 @@ class _GoSecurityScreenState extends State<GoSecurityScreen> with SingleTickerPr
         const _LimitRow(label: 'Monthly Limit', value: '1000000 QP'),
         const SizedBox(height: 8),
         SizedBox(width: double.infinity, child: OutlinedButton(
-          onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Limit increase request submitted'), backgroundColor: kGoColor)),
-          style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFF1C1C2E))),
+          onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Limit increase request submitted'), backgroundColor: IveTokens.moduleGo)),
+          style: OutlinedButton.styleFrom(foregroundColor: IveTokens.moduleGo, side: const BorderSide(color: Color(0xFF1C1C2E))),
           child: const Text('Request Limit Increase'),
         )),
       ])),
@@ -139,7 +140,7 @@ class _GoSecurityScreenState extends State<GoSecurityScreen> with SingleTickerPr
         const GoSectionHeader(title: 'Danger Zone', icon: Icons.warning),
         const SizedBox(height: 8),
         ListTile(
-          leading: const Icon(Icons.lock_reset, color: kGoWarning, size: 20),
+          leading: const Icon(Icons.lock_reset, color: IveTokens.warning, size: 20),
           title: const Text('Reset Security Settings', style: TextStyle(fontSize: 13)),
           dense: true, contentPadding: EdgeInsets.zero,
           onTap: () => showDialog(context: context, builder: (_) => AlertDialog(
@@ -147,20 +148,20 @@ class _GoSecurityScreenState extends State<GoSecurityScreen> with SingleTickerPr
             content: const Text('This will restore all security settings to their defaults. You cannot undo this.'),
             actions: [
               TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
-              ElevatedButton(onPressed: () { Navigator.pop(context); ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Security settings reset'), backgroundColor: kGoWarning)); }, style: ElevatedButton.styleFrom(backgroundColor: kGoWarning), child: const Text('Reset')),
+              ElevatedButton(onPressed: () { Navigator.pop(context); ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Security settings reset'), backgroundColor: IveTokens.warning)); }, style: ElevatedButton.styleFrom(backgroundColor: IveTokens.warning), child: const Text('Reset')),
             ],
           )),
         ),
         ListTile(
-          leading: const Icon(Icons.block, color: kGoNegative, size: 20),
-          title: const Text('Freeze Account', style: TextStyle(fontSize: 13, color: kGoNegative)),
+          leading: const Icon(Icons.block, color: IveTokens.danger, size: 20),
+          title: const Text('Freeze Account', style: TextStyle(fontSize: 13, color: IveTokens.danger)),
           dense: true, contentPadding: EdgeInsets.zero,
           onTap: () => showDialog(context: context, builder: (_) => AlertDialog(
             title: const Text('Freeze Account?'),
             content: const Text('No transactions will be possible while your account is frozen. Contact support to unfreeze.'),
             actions: [
               TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
-              ElevatedButton(onPressed: () { Navigator.pop(context); ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Account frozen. Contact support to reactivate.'), backgroundColor: kGoNegative)); }, style: ElevatedButton.styleFrom(backgroundColor: kGoNegative), child: const Text('Freeze')),
+              ElevatedButton(onPressed: () { Navigator.pop(context); ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Account frozen. Contact support to reactivate.'), backgroundColor: IveTokens.danger)); }, style: ElevatedButton.styleFrom(backgroundColor: IveTokens.danger), child: const Text('Freeze')),
             ],
           )),
         ),
@@ -178,13 +179,13 @@ class _StatusRow extends StatelessWidget {
     padding: const EdgeInsets.all(12),
     decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: const Color(0xFFE5E7EB))),
     child: Row(children: [
-      Icon(icon, size: 20, color: kGoColor),
+      Icon(icon, size: 20, color: IveTokens.moduleGo),
       const SizedBox(width: 10),
       Expanded(child: Text(label, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500))),
       Container(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-        decoration: BoxDecoration(color: (isGood ? kGoPositive : kGoWarning).withValues(alpha: 0.1), borderRadius: BorderRadius.circular(8)),
-        child: Text(status, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: isGood ? kGoPositive : kGoWarning)),
+        decoration: BoxDecoration(color: (isGood ? IveTokens.success : IveTokens.warning).withValues(alpha: 0.1), borderRadius: BorderRadius.circular(10)),
+        child: Text(status, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: isGood ? IveTokens.success : IveTokens.warning)),
       ),
     ]),
   );
@@ -197,15 +198,15 @@ class _RecommendCard extends StatelessWidget {
   Widget build(BuildContext context) => Container(
     margin: const EdgeInsets.only(bottom: 10),
     padding: const EdgeInsets.all(14),
-    decoration: BoxDecoration(color: kGoWarning.withValues(alpha: 0.06), borderRadius: BorderRadius.circular(10), border: Border.all(color: kGoWarning.withValues(alpha: 0.2))),
+    decoration: BoxDecoration(color: IveTokens.warning.withValues(alpha: 0.06), borderRadius: BorderRadius.circular(10), border: Border.all(color: IveTokens.warning.withValues(alpha: 0.2))),
     child: Row(children: [
-      Icon(icon, size: 20, color: kGoWarning),
+      Icon(icon, size: 20, color: IveTokens.warning),
       const SizedBox(width: 10),
       Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text(title, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
         Text(desc, style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
       ])),
-      TextButton(onPressed: () => Navigator.pushNamed(context, AppRoutes.userDetailsSecurity), child: Text(action, style: const TextStyle(fontSize: 11, color: kGoColor, fontWeight: FontWeight.w600))),
+      TextButton(onPressed: () => Navigator.pushNamed(context, AppRoutes.userDetailsSecurity), child: Text(action, style: const TextStyle(fontSize: 11, color: IveTokens.moduleGo, fontWeight: FontWeight.w600))),
     ]),
   );
 }
@@ -216,7 +217,7 @@ class _ToggleRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) => SwitchListTile(
     title: Text(label, style: const TextStyle(fontSize: 13)),
-    value: value, onChanged: onChanged, activeThumbColor: kGoColor, dense: true, contentPadding: EdgeInsets.zero,
+    value: value, onChanged: onChanged, activeThumbColor: IveTokens.moduleGo, dense: true, contentPadding: EdgeInsets.zero,
   );
 }
 

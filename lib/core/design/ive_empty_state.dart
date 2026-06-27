@@ -75,7 +75,7 @@ class IveEmptyState extends StatelessWidget {
 
 /// Error state.
 ///
-/// Structure: [cause] — what went wrong. [fixLabel] + [onFix] — the remedy.
+/// Structure: [cause]  what went wrong. [fixLabel] + [onFix]  the remedy.
 /// Never says "Something went wrong". Always names the cause and the fix.
 class IveErrorState extends StatelessWidget {
   const IveErrorState({

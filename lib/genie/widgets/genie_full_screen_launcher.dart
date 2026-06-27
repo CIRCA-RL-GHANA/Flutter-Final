@@ -1,11 +1,11 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// GenieFullScreenLauncher – Modal + Full-Screen Module Navigation
+/// 
+/// GenieFullScreenLauncher  Modal + Full-Screen Module Navigation
 ///
 /// When an intent sets requiresFullScreen=true Genie can:
 ///   1. Push the module's named route (full-screen mode).
 ///   2. Show a bottom-sheet overlay for semi-immersive depth.
 /// Also renders the '+' expand menu that lists all accessible modules.
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';

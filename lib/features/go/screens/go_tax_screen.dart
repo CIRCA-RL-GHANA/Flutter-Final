@@ -1,8 +1,10 @@
-﻿/// GO Screen 11 — Tax & Compliance
+/// GO Screen 11  Tax & Compliance
 /// Transaction categorization, report generator, regulatory dashboard
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:provider/provider.dart';
 import '../models/go_models.dart';
 import '../providers/go_provider.dart';
@@ -39,8 +41,8 @@ class _GoTaxScreenState extends State<GoTaxScreen> with SingleTickerProviderStat
               color: Colors.white,
               child: TabBar(
                 controller: _tabCtrl,
-                labelColor: kGoColor, unselectedLabelColor: const Color(0xFF9CA3AF),
-                indicatorColor: kGoColor, indicatorSize: TabBarIndicatorSize.label,
+                labelColor: IveTokens.moduleGo, unselectedLabelColor: const Color(0xFF9CA3AF),
+                indicatorColor: IveTokens.moduleGo, indicatorSize: TabBarIndicatorSize.label,
                 labelStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
                 tabs: const [Tab(text: 'Tax Summary'), Tab(text: 'Compliance'), Tab(text: 'Documents')],
               ),
@@ -62,7 +64,7 @@ class _GoTaxScreenState extends State<GoTaxScreen> with SingleTickerProviderStat
     return ListView(padding: const EdgeInsets.all(16), children: [
       // Period selector
       GoSectionCard(child: Row(children: [
-        const Icon(Icons.calendar_month, size: 18, color: kGoColor),
+        const Icon(Icons.calendar_month, size: 18, color: IveTokens.moduleGo),
         const SizedBox(width: 8),
         Text(_selectedPeriod, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
         const Spacer(),
@@ -76,28 +78,28 @@ class _GoTaxScreenState extends State<GoTaxScreen> with SingleTickerProviderStat
                   onPressed: () => Navigator.pop(ctx, p),
                   child: Text(p, style: TextStyle(
                     fontWeight: p == _selectedPeriod ? FontWeight.w700 : FontWeight.w400,
-                    color: p == _selectedPeriod ? kGoColor : null,
+                    color: p == _selectedPeriod ? IveTokens.moduleGo : null,
                   )),
                 )).toList(),
               ),
             );
             if (chosen != null) setState(() => _selectedPeriod = chosen);
           },
-          child: const Text('Change', style: TextStyle(fontSize: 12, color: kGoColor)),
+          child: const Text('Change', style: TextStyle(fontSize: 12, color: IveTokens.moduleGo)),
         ),
       ])),
       const SizedBox(height: 14),
       // Summary cards
       const Row(children: [
-        Expanded(child: _TaxCard(label: 'Total Income', value: '125,000 QP', icon: Icons.arrow_downward, color: kGoPositive)),
+        Expanded(child: _TaxCard(label: 'Total Income', value: '125,000 QP', icon: Icons.arrow_downward, color: IveTokens.success)),
         SizedBox(width: 10),
-        Expanded(child: _TaxCard(label: 'Total Expenses', value: '87,500 QP', icon: Icons.arrow_upward, color: kGoNegative)),
+        Expanded(child: _TaxCard(label: 'Total Expenses', value: '87,500 QP', icon: Icons.arrow_upward, color: IveTokens.danger)),
       ]),
       const SizedBox(height: 10),
       const Row(children: [
-        Expanded(child: _TaxCard(label: 'Tax Liability', value: '5,625 QP', icon: Icons.account_balance, color: kGoWarning)),
+        Expanded(child: _TaxCard(label: 'Tax Liability', value: '5,625 QP', icon: Icons.account_balance, color: IveTokens.warning)),
         SizedBox(width: 10),
-        Expanded(child: _TaxCard(label: 'Net Profit', value: '37,500 QP', icon: Icons.trending_up, color: kGoInfo)),
+        Expanded(child: _TaxCard(label: 'Net Profit', value: '37,500 QP', icon: Icons.trending_up, color: IveTokens.info)),
       ]),
       const SizedBox(height: 14),
       // Tax entries
@@ -108,8 +110,8 @@ class _GoTaxScreenState extends State<GoTaxScreen> with SingleTickerProviderStat
       SizedBox(width: double.infinity, child: OutlinedButton.icon(
         icon: const Icon(Icons.download, size: 18),
         label: const Text('Export Tax Report'),
-        onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Exporting tax report...'))),
-        style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 12)),
+        onPressed: () => AppToast.show(context, 'Exporting tax report...'),
+        style: OutlinedButton.styleFrom(foregroundColor: IveTokens.moduleGo, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 12)),
       )),
     ]);
   }
@@ -127,15 +129,15 @@ class _GoTaxScreenState extends State<GoTaxScreen> with SingleTickerProviderStat
         SizedBox(
           height: 100, width: 100,
           child: Stack(alignment: Alignment.center, children: [
-            SizedBox(height: 100, width: 100, child: CircularProgressIndicator(value: checks.isNotEmpty ? passed / checks.length : 0, strokeWidth: 8, backgroundColor: const Color(0xFFE5E7EB), valueColor: const AlwaysStoppedAnimation(kGoPositive))),
-            Text('${checks.isNotEmpty ? (passed / checks.length * 100).toStringAsFixed(0) : 0}%', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: kGoPositive)),
+            SizedBox(height: 100, width: 100, child: CircularProgressIndicator(value: checks.isNotEmpty ? passed / checks.length : 0, strokeWidth: 8, backgroundColor: const Color(0xFFE5E7EB), valueColor: const AlwaysStoppedAnimation(IveTokens.success))),
+            Text('${checks.isNotEmpty ? (passed / checks.length * 100).toStringAsFixed(0) : 0}%', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: IveTokens.success)),
           ]),
         ),
         const SizedBox(height: 8),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          _ComplianceBadge(label: '$passed Passed', color: kGoPositive),
+          _ComplianceBadge(label: '$passed Passed', color: IveTokens.success),
           const SizedBox(width: 8),
-          _ComplianceBadge(label: '$failed Issues', color: failed > 0 ? kGoNegative : kGoPositive),
+          _ComplianceBadge(label: '$failed Issues', color: failed > 0 ? IveTokens.danger : IveTokens.success),
         ]),
       ])),
       const SizedBox(height: 14),
@@ -147,11 +149,11 @@ class _GoTaxScreenState extends State<GoTaxScreen> with SingleTickerProviderStat
 
   Widget _buildDocuments(GoProvider p) {
     final docs = [
-      ('Tax Certificate 2024', 'PDF', '2.3 MB', Icons.picture_as_pdf, kGoNegative),
-      ('KYC Verification', 'Verified', '—', Icons.verified, kGoPositive),
-      ('AML Report Q4', 'PDF', '1.1 MB', Icons.picture_as_pdf, kGoNegative),
-      ('Transaction Summary', 'CSV', '456 KB', Icons.table_chart, kGoInfo),
-      ('Compliance Audit', 'PDF', '3.7 MB', Icons.picture_as_pdf, kGoNegative),
+      ('Tax Certificate 2024', 'PDF', '2.3 MB', Icons.picture_as_pdf, IveTokens.danger),
+      ('KYC Verification', 'Verified', '', Icons.verified, IveTokens.success),
+      ('AML Report Q4', 'PDF', '1.1 MB', Icons.picture_as_pdf, IveTokens.danger),
+      ('Transaction Summary', 'CSV', '456 KB', Icons.table_chart, IveTokens.info),
+      ('Compliance Audit', 'PDF', '3.7 MB', Icons.picture_as_pdf, IveTokens.danger),
     ];
 
     return ListView(padding: const EdgeInsets.all(16), children: [
@@ -163,8 +165,8 @@ class _GoTaxScreenState extends State<GoTaxScreen> with SingleTickerProviderStat
         SizedBox(width: double.infinity, child: ElevatedButton.icon(
           icon: const Icon(Icons.description, size: 18),
           label: const Text('Generate Report'),
-          onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Generating report...'))),
-          style: ElevatedButton.styleFrom(backgroundColor: kGoColor, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 12), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+          onPressed: () => AppToast.show(context, 'Generating report...'),
+          style: ElevatedButton.styleFrom(backgroundColor: IveTokens.moduleGo, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 12), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
         )),
       ])),
       const SizedBox(height: 14),
@@ -176,8 +178,8 @@ class _GoTaxScreenState extends State<GoTaxScreen> with SingleTickerProviderStat
         child: ListTile(
           leading: Icon(d.$4, color: d.$5, size: 24),
           title: Text(d.$1, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-          subtitle: Text('${d.$2} • ${d.$3}', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
-          trailing: IconButton(icon: const Icon(Icons.download, size: 18, color: kGoColor), onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Preparing download...')))),
+          subtitle: Text('${d.$2}  ${d.$3}', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+          trailing: IconButton(icon: const Icon(Icons.download, size: 18, color: IveTokens.moduleGo), onPressed: () => AppToast.show(context, 'Preparing download...')),
           dense: true,
         ),
       )),
@@ -219,8 +221,8 @@ class _TaxEntryRow extends StatelessWidget {
           Text(entry.description, style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
         ])),
         Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-          Text('${entry.amount.toStringAsFixed(0)} QP', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: entry.isCategorized ? kGoPositive : const Color(0xFF1A1A1A))),
-          if (entry.isCategorized) const Text('Deductible', style: TextStyle(fontSize: 9, color: kGoPositive, fontWeight: FontWeight.w600)),
+          Text('${entry.amount.toStringAsFixed(0)} QP', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: entry.isCategorized ? IveTokens.success : const Color(0xFF1A1A1A))),
+          if (entry.isCategorized) const Text('Deductible', style: TextStyle(fontSize: 9, color: IveTokens.success, fontWeight: FontWeight.w600)),
         ]),
       ]),
     );
@@ -233,7 +235,7 @@ class _ComplianceBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
-    decoration: BoxDecoration(color: color.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(8)),
+    decoration: BoxDecoration(color: color.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(10)),
     child: Text(label, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: color)),
   );
 }
@@ -245,9 +247,9 @@ class _ComplianceRow extends StatelessWidget {
   Widget build(BuildContext context) {
     Color c; IconData ic;
     switch (check.status) {
-      case ComplianceStatus.compliant: c = kGoPositive; ic = Icons.check_circle;
-      case ComplianceStatus.nonCompliant: c = kGoNegative; ic = Icons.cancel;
-      case ComplianceStatus.actionRequired: c = kGoWarning; ic = Icons.hourglass_bottom;
+      case ComplianceStatus.compliant: c = IveTokens.success; ic = Icons.check_circle;
+      case ComplianceStatus.nonCompliant: c = IveTokens.danger; ic = Icons.cancel;
+      case ComplianceStatus.actionRequired: c = IveTokens.warning; ic = Icons.hourglass_bottom;
       case ComplianceStatus.pending: c = const Color(0xFF9CA3AF); ic = Icons.schedule;
     }
     return Container(
@@ -261,7 +263,7 @@ class _ComplianceRow extends StatelessWidget {
           Text(check.title, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
           Text(check.description, style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
         ])),
-        Container(padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3), decoration: BoxDecoration(color: c.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(8)), child: Text(check.status.name, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: c))),
+        Container(padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3), decoration: BoxDecoration(color: c.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(10)), child: Text(check.status.name, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: c))),
       ]),
     );
   }

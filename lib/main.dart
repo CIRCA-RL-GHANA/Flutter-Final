@@ -25,14 +25,14 @@ void main() async {
       return true;
     }());
 
-    // FLUTTER-047: Initialize Hive for local storage — guarded so corruption doesn't crash
+    // FLUTTER-047: Initialize Hive for local storage  guarded so corruption doesn't crash
     try {
       await Hive.initFlutter();
     } catch (e, st) {
       debugPrint('[HIVE INIT ERROR] $e\n$st');
     }
 
-    // FLUTTER-046: Initialize API client (loads saved auth tokens) — guarded so failures are logged
+    // FLUTTER-046: Initialize API client (loads saved auth tokens)  guarded so failures are logged
     try {
       await ApiClient.instance.init();
     } catch (e, st) {
@@ -45,7 +45,7 @@ void main() async {
       DeviceOrientation.portraitDown,
     ]);
 
-    // Set system UI overlay style — aligned to brand-dark surfaces
+    // Set system UI overlay style  aligned to brand-dark surfaces
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,

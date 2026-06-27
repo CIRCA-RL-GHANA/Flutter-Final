@@ -1,12 +1,13 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD1.12: CONNECTIONS — Network Management
+/// 
+/// SD1.12: CONNECTIONS  Network Management
 /// Connection list, types, strength, interaction history
 /// RBAC: Owner(personal), Admin(full), BM(branch), SO(full), BSO(branch),
 ///        Monitor/BrMon(view), RO/BRO(own), Driver(own)
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:provider/provider.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/theme/app_colors.dart';
@@ -37,13 +38,13 @@ class ConnectionsScreen extends StatelessWidget {
             ),
             floatingActionButton: SetupRbacFAB(
               cardId: 'connections',
-              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Add new contact'))),
+              onPressed: () => AppToast.show(context, 'Add new contact'),
               label: 'Add Contact',
               icon: Icons.person_add,
             ),
           body: CustomScrollView(
             slivers: [
-              // ─── Network KPIs ─────────────────────────────
+              //  Network KPIs 
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -69,7 +70,7 @@ class ConnectionsScreen extends StatelessWidget {
                       Expanded(
                         child: KPIBadge(
                           label: 'Net. Value',
-                          value: 'â‚µ${(connections.fold<double>(0, (s, c) => s + c.totalValue) / 1000).toStringAsFixed(0)}K',
+                          value: '${(connections.fold<double>(0, (s, c) => s + c.totalValue) / 1000).toStringAsFixed(0)}K',
                           icon: Icons.account_balance_wallet,
                           color: AppColors.success,
                         ),
@@ -79,7 +80,7 @@ class ConnectionsScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Type Filter ──────────────────────────────
+              //  Type Filter 
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -100,7 +101,7 @@ class ConnectionsScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Network Health ───────────────────────────
+              //  Network Health 
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -157,7 +158,7 @@ class ConnectionsScreen extends StatelessWidget {
                   child: SetupSectionTitle(title: 'Your Network', icon: Icons.handshake),
                 ),
               ),
-              // ─── AI Insights ─────────────────────────────────────────
+              //  AI Insights 
               const SliverToBoxAdapter(
               ),
               SliverPadding(
@@ -228,7 +229,7 @@ class _ConnectionCard extends StatelessWidget {
                       style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textPrimary),
                     ),
                     Text(
-                      '${connection.type.name} Â· ${connection.category ?? "General"}',
+                      '${connection.type.name}  ${connection.category ?? "General"}',
                       style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                     ),
                   ],
@@ -262,7 +263,7 @@ class _ConnectionCard extends StatelessWidget {
                     children: [
                       if (connection.totalOrders > 0)
                         Text(
-                          '${connection.totalOrders} orders Â· â‚µ${(connection.totalValue / 1000).toStringAsFixed(0)}K',
+                          '${connection.totalOrders} orders  ${(connection.totalValue / 1000).toStringAsFixed(0)}K',
                           style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: AppColors.textSecondary),
                         ),
                       if (connection.lastInteraction != null)
@@ -304,7 +305,7 @@ class _ConnectionCard extends StatelessWidget {
   }
 }
 
-// ─── Type Filter Chip ────────────────────────────────────────────────────────
+//  Type Filter Chip 
 
 class _TypeFilterChip extends StatelessWidget {
   final String label;
@@ -326,7 +327,7 @@ class _TypeFilterChip extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
         color: isSelected ? c.withValues(alpha: 0.12) : Colors.white,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(10),
         border: Border.all(color: isSelected ? c.withValues(alpha: 0.4) : AppColors.inputBorder),
       ),
       child: Row(
@@ -345,7 +346,7 @@ class _TypeFilterChip extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
             decoration: BoxDecoration(
               color: c.withValues(alpha: 0.15),
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(10),
             ),
             child: Text('$count', style: TextStyle(fontSize: 9, fontWeight: FontWeight.w700, color: c)),
           ),
@@ -355,7 +356,7 @@ class _TypeFilterChip extends StatelessWidget {
   }
 }
 
-// ─── Network Stat ────────────────────────────────────────────────────────────
+//  Network Stat 
 
 class _NetworkStat extends StatelessWidget {
   final String label;

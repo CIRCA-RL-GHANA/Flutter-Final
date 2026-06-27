@@ -1,12 +1,12 @@
-/// Alerts Module — Data Models
+/// Alerts Module  Data Models
 /// Unified incident resolution tracking system
 /// Module Color: Red (0xFFEF4444)
 /// Visibility: All roles EXCEPT Owner
 library;
 
-// ═══════════════════════════════════════════
+// 
 // ENUMS
-// ═══════════════════════════════════════════
+// 
 
 /// Priority levels for alerts
 enum AlertPriority { critical, high, medium, low }
@@ -103,11 +103,11 @@ enum EscalationLevel { team, branch, regional, executive }
 /// SLA status
 enum SlaStatus { onTrack, atRisk, breached }
 
-// ═══════════════════════════════════════════
+// 
 // DATA MODELS
-// ═══════════════════════════════════════════
+// 
 
-/// Core alert model — single source of truth
+/// Core alert model  single source of truth
 class AlertItem {
   final String id;
   final String title;
@@ -170,13 +170,13 @@ class AlertItem {
   String get priorityLabel {
     switch (priority) {
       case AlertPriority.critical:
-        return '🚨 CRITICAL';
+        return ' CRITICAL';
       case AlertPriority.high:
-        return '🔥 HIGH';
+        return ' HIGH';
       case AlertPriority.medium:
-        return '⚠️ MEDIUM';
+        return ' MEDIUM';
       case AlertPriority.low:
-        return 'ℹ️ LOW';
+        return ' LOW';
     }
   }
 
@@ -204,21 +204,21 @@ class AlertItem {
   String get categoryEmoji {
     switch (category) {
       case AlertCategory.payment:
-        return '💳';
+        return '';
       case AlertCategory.shipment:
-        return '📦';
+        return '';
       case AlertCategory.system:
-        return '⚙️';
+        return '';
       case AlertCategory.driverRide:
-        return '🚗';
+        return '';
       case AlertCategory.returnRefund:
-        return '↩️';
+        return '';
       case AlertCategory.account:
-        return '👤';
+        return '';
       case AlertCategory.security:
-        return '🔒';
+        return '';
       case AlertCategory.other:
-        return '📋';
+        return '';
     }
   }
 
@@ -286,21 +286,21 @@ class ActivityEvent {
   String get typeEmoji {
     switch (type) {
       case ActivityEventType.created:
-        return '📢';
+        return '';
       case ActivityEventType.assigned:
-        return '👤';
+        return '';
       case ActivityEventType.commented:
-        return '💬';
+        return '';
       case ActivityEventType.statusChanged:
-        return '🔄';
+        return '';
       case ActivityEventType.fileAttached:
-        return '📎';
+        return '';
       case ActivityEventType.escalated:
-        return '⚠️';
+        return '';
       case ActivityEventType.resolved:
-        return '✅';
+        return '';
       case ActivityEventType.verified:
-        return '🔒';
+        return '';
     }
   }
 }
@@ -470,13 +470,13 @@ class AlertTemplate {
   String get typeLabel {
     switch (type) {
       case AlertTemplateType.resolution:
-        return '✅ Resolution';
+        return ' Resolution';
       case AlertTemplateType.alert:
-        return '🚨 Alert';
+        return ' Alert';
       case AlertTemplateType.communication:
-        return '📧 Communication';
+        return ' Communication';
       case AlertTemplateType.workflow:
-        return '🔄 Workflow';
+        return ' Workflow';
     }
   }
 }

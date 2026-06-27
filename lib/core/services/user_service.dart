@@ -50,12 +50,17 @@ class UserService {
   }
 
   /// Check if a username is available.
-  /// Returns { available: bool, username: string }.
-  Future<ApiResponse<Map<String, dynamic>>> checkUsername(
-    String username,
-  ) async {
+  Future<ApiResponse<Map<String, dynamic>>> checkUsername(String username) async {
     return _api.get<Map<String, dynamic>>(
       ApiRoutes.users.checkUsername(username),
+      fromJson: (json) => json as Map<String, dynamic>,
+    );
+  }
+
+  /// Check if a Wire ID is available.
+  Future<ApiResponse<Map<String, dynamic>>> checkWireId(String wireId) async {
+    return _api.get<Map<String, dynamic>>(
+      ApiRoutes.users.checkWireId(wireId),
       fromJson: (json) => json as Map<String, dynamic>,
     );
   }

@@ -1,9 +1,9 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD1.1-DETAIL: PRODUCT DETAIL — 5-Tab Deep View
+/// 
+/// SD1.1-DETAIL: PRODUCT DETAIL  5-Tab Deep View
 /// Tabs: Overview, Inventory, Pricing, Media, Analytics
 /// RBAC: Owner/Admin(fullAccess), BM(branchScoped), Monitor(viewOnly),
 ///        Driver(viewOnly), Others(hidden)
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -48,16 +48,16 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           appBar: SetupAppBar(title: product.name),
           body: Column(
             children: [
-              // ─── Product Header ────────────────────────────
+              //  Product Header 
               _ProductHeader(product: product),
-              // ─── Tab Bar ──────────────────────────────────
+              //  Tab Bar 
               SetupDetailTabBar(
                 tabs: _tabs,
                 selectedIndex: _tabIndex,
                 onTabChanged: (i) => setState(() => _tabIndex = i),
               ),
               const SizedBox(height: 12),
-              // ─── Tab Content ──────────────────────────────
+              //  Tab Content 
               Expanded(
                 child: IndexedStack(
                   index: _tabIndex,
@@ -78,7 +78,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   }
 }
 
-// ─── Product Header ──────────────────────────────────────────────────────────
+//  Product Header 
 
 class _ProductHeader extends StatelessWidget {
   final Product product;
@@ -91,7 +91,7 @@ class _ProductHeader extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
         children: [
@@ -134,7 +134,7 @@ class _ProductHeader extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '${product.category} Â· ${product.brand}',
+                  '${product.category}  ${product.brand}',
                   style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
                 ),
                 const SizedBox(height: 6),
@@ -205,7 +205,7 @@ class _StockBadge extends StatelessWidget {
   }
 }
 
-// ─── Overview Tab ────────────────────────────────────────────────────────────
+//  Overview Tab 
 
 class _OverviewTab extends StatelessWidget {
   final Product product;
@@ -219,7 +219,7 @@ class _OverviewTab extends StatelessWidget {
         // KPI Row
         Row(
           children: [
-            Expanded(child: SetupStatCard(label: 'Price', value: 'â‚µ${product.currentPrice.toStringAsFixed(0)}', icon: Icons.attach_money)),
+            Expanded(child: SetupStatCard(label: 'Price', value: '${product.currentPrice.toStringAsFixed(0)}', icon: Icons.attach_money)),
             const SizedBox(width: 10),
             Expanded(child: SetupStatCard(label: 'Stock', value: '${product.stock}', icon: Icons.inventory)),
             const SizedBox(width: 10),
@@ -284,7 +284,7 @@ class _OverviewTab extends StatelessWidget {
   }
 }
 
-// ─── Inventory Tab ───────────────────────────────────────────────────────────
+//  Inventory Tab 
 
 class _InventoryTab extends StatelessWidget {
   final Product product;
@@ -359,7 +359,7 @@ class _InventoryTab extends StatelessWidget {
   }
 }
 
-// ─── Pricing Tab ─────────────────────────────────────────────────────────────
+//  Pricing Tab 
 
 class _PricingTab extends StatelessWidget {
   final Product product;
@@ -386,10 +386,10 @@ class _PricingTab extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 12),
-              SetupInfoRow(label: 'Base Price', value: 'â‚µ${product.basePrice.toStringAsFixed(2)}'),
+              SetupInfoRow(label: 'Base Price', value: '${product.basePrice.toStringAsFixed(2)}'),
               SetupInfoRow(
                 label: 'Current Price',
-                value: 'â‚µ${product.currentPrice.toStringAsFixed(2)}',
+                value: '${product.currentPrice.toStringAsFixed(2)}',
                 valueColor: kSetupColor,
               ),
               if (discount > 0)
@@ -457,7 +457,7 @@ class _PriceHistoryRow extends StatelessWidget {
             )),
           ),
           Text(
-            'â‚µ${price.toStringAsFixed(2)}',
+            '${price.toStringAsFixed(2)}',
             style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w600,
@@ -470,7 +470,7 @@ class _PriceHistoryRow extends StatelessWidget {
   }
 }
 
-// ─── Media Tab ───────────────────────────────────────────────────────────────
+//  Media Tab 
 
 class _MediaTab extends StatelessWidget {
   final Product product;
@@ -541,7 +541,7 @@ class _MediaTab extends StatelessWidget {
   }
 }
 
-// ─── Analytics Tab ───────────────────────────────────────────────────────────
+//  Analytics Tab 
 
 class _AnalyticsTab extends StatelessWidget {
   final Product product;
@@ -559,7 +559,7 @@ class _AnalyticsTab extends StatelessWidget {
             SizedBox(width: 10),
             Expanded(child: SetupStatCard(label: 'Conversion', value: '12%', icon: Icons.trending_up, color: AppColors.success)),
             SizedBox(width: 10),
-            Expanded(child: SetupStatCard(label: 'Revenue', value: 'â‚µ42K', icon: Icons.attach_money, color: Color(0xFF8B5CF6))),
+            Expanded(child: SetupStatCard(label: 'Revenue', value: '42K', icon: Icons.attach_money, color: Color(0xFF8B5CF6))),
           ],
         ),
         const SizedBox(height: 16),
@@ -637,7 +637,7 @@ class _BuyerRow extends StatelessWidget {
               ],
             ),
           ),
-          Text('â‚µ${amount.toStringAsFixed(0)}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: kSetupColor)),
+          Text('${amount.toStringAsFixed(0)}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: kSetupColor)),
         ],
       ),
     );

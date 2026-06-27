@@ -1,15 +1,19 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 /// Screen 1: USER DETAILS Master Dashboard
 /// Identity section, multi-context carousel, collapsible sections, footer
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/design/ive_tokens.dart';
+import '../../../core/design/ive_text.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
+import '../../../core/services/auth_service.dart';
+import '../../onboarding/providers/onboarding_provider.dart';
+import '../../onboarding/providers/phone_auth_provider.dart';
 import '../../prompt/providers/context_provider.dart';
 import '../models/user_details_models.dart';
 import '../providers/user_details_provider.dart';
@@ -30,7 +34,7 @@ class UserDetailsMasterScreen extends StatelessWidget {
           backgroundColor: IveTokens.bg,
           body: CustomScrollView(
             slivers: [
-              // ─── App Bar ──────────────────────────────────
+              //  App Bar 
               SliverAppBar(
                 expandedHeight: 0,
                 floating: true,
@@ -89,10 +93,10 @@ class UserDetailsMasterScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              // ─── AI Insights ────────────────────────────────────
+              //  AI Insights 
               const SliverToBoxAdapter(
               ),
-              // ─── Identity Section ─────────────────────────
+              //  Identity Section 
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
@@ -100,7 +104,7 @@ class UserDetailsMasterScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Quick Stats ──────────────────────────────
+              //  Quick Stats 
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
@@ -108,7 +112,7 @@ class UserDetailsMasterScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Multi-Context Carousel ────────────────────
+              //  Multi-Context Carousel 
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.only(top: 16),
@@ -124,7 +128,7 @@ class UserDetailsMasterScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Personal Information ──────────────────────
+              //  Personal Information 
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
@@ -139,7 +143,7 @@ class UserDetailsMasterScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Security Center ──────────────────────────
+              //  Security Center 
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -155,7 +159,7 @@ class UserDetailsMasterScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Preferences Hub ──────────────────────────
+              //  Preferences Hub 
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -175,7 +179,7 @@ class UserDetailsMasterScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Context-Specific Settings ─────────────────
+              //  Context-Specific Settings 
               if (activeCtx.entityType.toString().contains('business') ||
                   activeCtx.entityType.toString().contains('branch'))
                 SliverToBoxAdapter(
@@ -194,12 +198,20 @@ class UserDetailsMasterScreen extends StatelessWidget {
                   ),
                 ),
 
-              // ─── Bottom Spacer ────────────────────────────
+              // Sign out
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+                  child: _SignOutRow(),
+                ),
+              ),
+
+              //  Bottom Spacer
               const SliverToBoxAdapter(child: SizedBox(height: 100)),
             ],
           ),
 
-          // ─── Sticky Footer ──────────────────────────────
+          //  Sticky Footer 
           bottomNavigationBar: _StickyFooter(
             onHelp: () {},
             onDownload: () => udp.requestDataExport(),
@@ -227,9 +239,9 @@ class UserDetailsMasterScreen extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Identity Section
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _IdentitySection extends StatelessWidget {
   final UserIdentity identity;
@@ -388,9 +400,9 @@ class _IdentitySection extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Quick Stats
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _QuickStats extends StatelessWidget {
   final UserIdentity identity;
@@ -466,9 +478,9 @@ class _StatChip extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Multi-Context Carousel
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _ContextCarousel extends StatelessWidget {
   final List<dynamic> contexts;
@@ -628,9 +640,9 @@ class _AddContextCard extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Personal Information
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _PersonalInfoContent extends StatelessWidget {
   final UserIdentity identity;
@@ -641,7 +653,7 @@ class _PersonalInfoContent extends StatelessWidget {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(10))),
       builder: (_) => EditFieldModal(title: title, initialValue: current, onSave: onSave),
     );
   }
@@ -719,9 +731,9 @@ class _PersonalInfoContent extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Security Preview
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _SecurityPreview extends StatelessWidget {
   final SecuritySettings security;
@@ -804,9 +816,9 @@ class _SecurityRow extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Preferences Hub
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _PreferencesHub extends StatelessWidget {
   final NotificationSettings notifications;
@@ -888,9 +900,9 @@ class _PrefTile extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Context-Specific Settings
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _ContextSpecificSettings extends StatelessWidget {
   final dynamic entityType;
@@ -916,9 +928,9 @@ class _ContextSpecificSettings extends StatelessWidget {
   }
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 // Sticky Footer
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 
 
 class _StickyFooter extends StatelessWidget {
   final VoidCallback onHelp;
@@ -967,7 +979,7 @@ class _FooterButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: BorderRadius.circular(10),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         child: Row(
@@ -976,6 +988,94 @@ class _FooterButton extends StatelessWidget {
             const SizedBox(width: 4),
             Text(label, style: const TextStyle(fontSize: 12, color: AppColors.textTertiary, fontWeight: FontWeight.w500)),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _SignOutRow extends StatefulWidget {
+  @override
+  State<_SignOutRow> createState() => _SignOutRowState();
+}
+
+class _SignOutRowState extends State<_SignOutRow> {
+  bool _loading = false;
+
+  Future<void> _signOut() async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: IveTokens.surfaceRaised,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(IveTokens.rSm)),
+        ),
+        title: Text('Sign out', style: IveType.title3),
+        content: Text(
+          'You will need to sign in again to access your account.',
+          style: IveType.body,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: Text('Cancel', style: IveType.callout),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            child: Text('Sign out',
+                style: IveType.callout.copyWith(color: IveTokens.danger)),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed != true || !mounted) return;
+
+    setState(() => _loading = true);
+    HapticFeedback.mediumImpact();
+
+    await AuthService().logout();
+
+    if (!mounted) return;
+    context.read<ContextProvider>().clear();
+    context.read<OnboardingProvider>().reset();
+    context.read<PhoneAuthProvider>().reset();
+    Navigator.of(context).pushNamedAndRemoveUntil(
+      AppRoutes.welcome,
+      (route) => false,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: IveTokens.surface,
+      borderRadius: BorderRadius.circular(IveTokens.rSm),
+      child: InkWell(
+        onTap: _loading ? null : _signOut,
+        borderRadius: BorderRadius.circular(IveTokens.rSm),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+          child: Row(
+            children: [
+              Icon(Icons.logout, size: 18, color: IveTokens.danger),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  'Sign out',
+                  style: IveType.body.copyWith(color: IveTokens.danger),
+                ),
+              ),
+              if (_loading)
+                const SizedBox(
+                  width: 16, height: 16,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 1.5,
+                    color: IveTokens.danger,
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
     );

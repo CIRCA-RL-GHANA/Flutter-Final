@@ -1,9 +1,9 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD1.6: PLACES — Location Management
+/// 
+/// SD1.6: PLACES  Location Management
 /// Place list, types, visibility, staff/product counts
 /// RBAC: Owner(full), Admin(full), BM(branch), Monitor/BrMon(view),
 ///        RO/BRO(view), Driver(view)
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -65,7 +65,7 @@ class PlacesScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              // ─── AI Insights ─────────────────────────────────────────
+              //  AI Insights 
               const SliverToBoxAdapter(
               ),
               SliverPadding(
@@ -132,7 +132,7 @@ class _PlaceCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '${place.type.name} Â· ${place.area ?? place.address}',
+                      '${place.type.name}  ${place.area ?? place.address}',
                       style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
                     ),
                   ],

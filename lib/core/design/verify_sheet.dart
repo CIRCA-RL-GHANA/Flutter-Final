@@ -6,7 +6,7 @@ import 'ive_tokens.dart';
 
 /// Shows the VerifySheet modal and returns `true` on confirm, `false` on cancel.
 ///
-/// The sheet title MUST match the trigger button's label exactly — this is
+/// The sheet title MUST match the trigger button's label exactly  this is
 /// enforced by the caller passing the same string to both.
 ///
 /// [onConfirm] should return `null` on success or an error string on failure.
@@ -196,7 +196,7 @@ class _VerifySheetState extends State<_VerifySheet>
                 ),
               ),
             ),
-            // Title — must match trigger button text exactly
+            // Title  must match trigger button text exactly
             Text(widget.title, style: IveType.title3),
             if (widget.subtitle != null) ...[
               const SizedBox(height: IveTokens.s2),

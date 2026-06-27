@@ -1,9 +1,10 @@
-﻿/// GO Screen 6 — Request Center
+/// GO Screen 6  Request Center
 /// 3-tab interface: My Requests, Pending Approval, Templates
 /// 8 request types, creation flow, status pipeline
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
 import 'package:provider/provider.dart';
 import '../models/go_models.dart';
 import '../providers/go_provider.dart';
@@ -42,19 +43,19 @@ class _GoRequestsScreenState extends State<GoRequestsScreen> with SingleTickerPr
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                 color: Colors.white,
                 child: Row(children: [
-                  _CountBadge(label: 'Sent', count: myReqs.length, color: kGoColor),
+                  _CountBadge(label: 'Sent', count: myReqs.length, color: IveTokens.moduleGo),
                   const SizedBox(width: 8),
-                  _CountBadge(label: 'Pending', count: pending.length, color: kGoWarning),
+                  _CountBadge(label: 'Pending', count: pending.length, color: IveTokens.warning),
                   const SizedBox(width: 8),
-                  _CountBadge(label: 'Approved', count: myReqs.where((r) => r.status == RequestStatus.approved).length, color: kGoPositive),
+                  _CountBadge(label: 'Approved', count: myReqs.where((r) => r.status == RequestStatus.approved).length, color: IveTokens.success),
                 ]),
               ),
               Container(
                 color: Colors.white,
                 child: TabBar(
                   controller: _tabCtrl,
-                  labelColor: kGoColor, unselectedLabelColor: const Color(0xFF9CA3AF),
-                  indicatorColor: kGoColor, indicatorSize: TabBarIndicatorSize.label,
+                  labelColor: IveTokens.moduleGo, unselectedLabelColor: const Color(0xFF9CA3AF),
+                  indicatorColor: IveTokens.moduleGo, indicatorSize: TabBarIndicatorSize.label,
                   labelStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
                   tabs: const [Tab(text: 'My Requests'), Tab(text: 'Pending'), Tab(text: 'Templates')],
                 ),
@@ -85,7 +86,7 @@ class _GoRequestsScreenState extends State<GoRequestsScreen> with SingleTickerPr
           ),
           floatingActionButton: FloatingActionButton.extended(
             onPressed: () => setState(() => _showCreate = !_showCreate),
-            backgroundColor: kGoColor,
+            backgroundColor: IveTokens.moduleGo,
             icon: const Icon(Icons.add, color: Colors.white),
             label: const Text('New Request', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
           ),
@@ -100,7 +101,7 @@ class _GoRequestsScreenState extends State<GoRequestsScreen> with SingleTickerPr
     return ListView.builder(
       padding: const EdgeInsets.all(16),
       itemCount: reqs.length,
-      itemBuilder: (_, i) => GoRequestCard(request: reqs[i], onTap: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Request #${reqs[i].id} opened'), backgroundColor: kGoColor))),
+      itemBuilder: (_, i) => GoRequestCard(request: reqs[i], onTap: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Request #${reqs[i].id} opened'), backgroundColor: IveTokens.moduleGo))),
     );
   }
 
@@ -122,11 +123,11 @@ class _GoRequestsScreenState extends State<GoRequestsScreen> with SingleTickerPr
           margin: const EdgeInsets.only(bottom: 10),
           decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: const Color(0xFFE5E7EB))),
           child: ListTile(
-            leading: Container(padding: const EdgeInsets.all(8), decoration: BoxDecoration(color: kGoColorLight, borderRadius: BorderRadius.circular(8)), child: Icon(t.$2, color: kGoColor, size: 20)),
+            leading: Container(padding: const EdgeInsets.all(8), decoration: BoxDecoration(color: IveTokens.surfaceRaised, borderRadius: BorderRadius.circular(10)), child: Icon(t.$2, color: IveTokens.moduleGo, size: 20)),
             title: Text(t.$1, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
             subtitle: Text(t.$3, style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
             trailing: const Icon(Icons.arrow_forward_ios, size: 14, color: Color(0xFFD1D5DB)),
-            onTap: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('New ${t.$1} started'), backgroundColor: kGoColor)),
+            onTap: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('New ${t.$1} started'), backgroundColor: IveTokens.moduleGo)),
           ),
         );
       },
@@ -137,7 +138,7 @@ class _GoRequestsScreenState extends State<GoRequestsScreen> with SingleTickerPr
     return Container(
       height: 300,
       padding: const EdgeInsets.all(16),
-      decoration: const BoxDecoration(color: Colors.white, borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      decoration: const BoxDecoration(color: Colors.white, borderRadius: BorderRadius.vertical(top: Radius.circular(10))),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Row(children: [
           const Text('New Request', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
@@ -151,11 +152,11 @@ class _GoRequestsScreenState extends State<GoRequestsScreen> with SingleTickerPr
           child: GridView.count(
             crossAxisCount: 4, mainAxisSpacing: 8, crossAxisSpacing: 8, childAspectRatio: 0.9,
             children: RequestType.values.map((t) => GestureDetector(
-              onTap: () { setState(() => _showCreate = false); ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Creating ${t.name} request...'), backgroundColor: kGoColor)); },
+              onTap: () { setState(() => _showCreate = false); ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Creating ${t.name} request...'), backgroundColor: IveTokens.moduleGo)); },
               child: Container(
-                decoration: BoxDecoration(color: kGoColorLight, borderRadius: BorderRadius.circular(10)),
+                decoration: BoxDecoration(color: IveTokens.surfaceRaised, borderRadius: BorderRadius.circular(10)),
                 child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Icon(_typeIcon(t), color: kGoColor, size: 22),
+                  Icon(_typeIcon(t), color: IveTokens.moduleGo, size: 22),
                   const SizedBox(height: 4),
                   Text(t.name, style: const TextStyle(fontSize: 9, fontWeight: FontWeight.w600, color: Color(0xFF6B7280)), textAlign: TextAlign.center, maxLines: 1, overflow: TextOverflow.ellipsis),
                 ]),
@@ -188,7 +189,7 @@ class _CountBadge extends StatelessWidget {
   Widget build(BuildContext context) => Expanded(
     child: Container(
       padding: const EdgeInsets.symmetric(vertical: 8),
-      decoration: BoxDecoration(color: color.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(8)),
+      decoration: BoxDecoration(color: color.withValues(alpha: 0.08), borderRadius: BorderRadius.circular(10)),
       child: Column(children: [
         Text('$count', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: color)),
         Text(label, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: color)),
@@ -207,7 +208,7 @@ class _FilterChip extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-        decoration: BoxDecoration(color: selected ? kGoColor : Colors.white, borderRadius: BorderRadius.circular(16), border: Border.all(color: selected ? kGoColor : const Color(0xFFE5E7EB))),
+        decoration: BoxDecoration(color: selected ? IveTokens.moduleGo : Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: selected ? IveTokens.moduleGo : const Color(0xFFE5E7EB))),
         child: Text(label, style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: selected ? Colors.white : const Color(0xFF6B7280))),
       ),
     ),

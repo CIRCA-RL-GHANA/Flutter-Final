@@ -1,11 +1,12 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// MARKET MODULE — Screen 8: Self-Pickup Process
-/// 5 Phases: Preparation â†’ Arrival â†’ Verification â†’ Handoff â†’ Complete
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
+/// MARKET MODULE  Screen 8: Self-Pickup Process
+/// 5 Phases: Preparation ' Arrival ' Verification ' Handoff ' Complete
+/// 
 library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../core/design/ive.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/routes/app_routes.dart';
 import '../models/market_models.dart';
@@ -69,7 +70,7 @@ class _MarketPickupScreenState extends State<MarketPickupScreen> {
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-      color: Colors.white,
+      color: IveTokens.surface,
       child: Column(
         children: [
           Row(
@@ -79,7 +80,7 @@ class _MarketPickupScreenState extends State<MarketPickupScreen> {
                 return Expanded(
                   child: Container(
                     height: 3,
-                    color: stepIdx < currentIdx ? kMarketColor : AppColors.inputBorder,
+                    color: stepIdx < currentIdx ? IveTokens.moduleMarket : IveTokens.hairline2,
                   ),
                 );
               }
@@ -92,12 +93,12 @@ class _MarketPickupScreenState extends State<MarketPickupScreen> {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: isDone
-                      ? kMarketColor
+                      ? IveTokens.moduleMarket
                       : isCurrent
-                          ? kMarketColorLight
-                          : Colors.white,
+                          ? IveTokens.moduleMarket.withValues(alpha: 0.15)
+                          : IveTokens.surface,
                   border: Border.all(
-                    color: isDone || isCurrent ? kMarketColor : AppColors.inputBorder,
+                    color: isDone || isCurrent ? IveTokens.moduleMarket : IveTokens.hairline2,
                     width: 2,
                   ),
                 ),
@@ -109,7 +110,7 @@ class _MarketPickupScreenState extends State<MarketPickupScreen> {
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w700,
-                            color: isCurrent ? kMarketColorDark : AppColors.textTertiary,
+                            color: isCurrent ? IveTokens.moduleMarket : IveTokens.mute,
                           ),
                         ),
                 ),
@@ -151,9 +152,7 @@ class _MarketPickupScreenState extends State<MarketPickupScreen> {
         top: 12,
         bottom: MediaQuery.of(context).padding.bottom + 12,
       ),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-      ),
+      color: IveTokens.surface,
       child: Row(
         children: [
           if (_phase != PickupPhase.preparation && !isLast)
@@ -165,9 +164,9 @@ class _MarketPickupScreenState extends State<MarketPickupScreen> {
                   if (idx > 0) setState(() => _phase = phases[idx - 1]);
                 },
                 style: OutlinedButton.styleFrom(
-                  foregroundColor: kMarketColor,
-                  side: const BorderSide(color: kMarketColor),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  foregroundColor: IveTokens.moduleMarket,
+                  side: const BorderSide(color: IveTokens.moduleMarket),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(IveTokens.rSm)),
                   padding: const EdgeInsets.symmetric(vertical: 14),
                 ),
                 child: const Text('Back'),
@@ -188,9 +187,9 @@ class _MarketPickupScreenState extends State<MarketPickupScreen> {
                 }
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: kMarketColor,
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                backgroundColor: IveTokens.moduleMarket,
+                foregroundColor: IveTokens.ink,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(IveTokens.rSm)),
                 padding: const EdgeInsets.symmetric(vertical: 14),
                 elevation: 0,
               ),
@@ -236,7 +235,7 @@ class _MarketPickupScreenState extends State<MarketPickupScreen> {
   }
 }
 
-// ── Phase 1: Preparation ───────────────────────────────────────────
+//  Phase 1: Preparation 
 class _PreparationPhase extends StatelessWidget {
   final MarketOrder order;
 
@@ -251,7 +250,7 @@ class _PreparationPhase extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             color: kMarketColorLight,
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(10),
           ),
           child: const Column(
             children: [
@@ -298,11 +297,11 @@ class _PreparationPhase extends StatelessWidget {
               Container(
                 height: 120,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFE8F0FE),
-                  borderRadius: BorderRadius.circular(10),
+                  color: IveTokens.accentSoft,
+                  borderRadius: BorderRadius.circular(IveTokens.rSm),
                 ),
-                child: const Center(
-                  child: Icon(Icons.map, size: 40, color: AppColors.textTertiary),
+                child: Center(
+                  child: Icon(Icons.map, size: 40, color: IveTokens.mute),
                 ),
               ),
             ],
@@ -312,7 +311,7 @@ class _PreparationPhase extends StatelessWidget {
   }
 }
 
-// ── Phase 2: Arrival ───────────────────────────────────────────────
+//  Phase 2: Arrival 
 class _ArrivalPhase extends StatelessWidget {
   final MarketOrder order;
 
@@ -325,8 +324,8 @@ class _ArrivalPhase extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: const Color(0xFFFEF3C7),
-            borderRadius: BorderRadius.circular(16),
+            color: IveTokens.warning.withValues(alpha: 0.12),
+            borderRadius: BorderRadius.circular(IveTokens.rSm),
           ),
           child: const Column(
             children: [
@@ -352,16 +351,16 @@ class _ArrivalPhase extends StatelessWidget {
               Container(
                 height: 160,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFE8F0FE),
-                  borderRadius: BorderRadius.circular(10),
+                  color: IveTokens.accentSoft,
+                  borderRadius: BorderRadius.circular(IveTokens.rSm),
                 ),
-                child: const Center(
+                child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.navigation, size: 40, color: AppColors.info),
-                      SizedBox(height: 8),
-                      Text('Navigation Map', style: TextStyle(color: AppColors.textTertiary)),
+                      Icon(Icons.navigation, size: 40, color: IveTokens.info),
+                      const SizedBox(height: 8),
+                      Text('Navigation Map', style: TextStyle(color: IveTokens.mute)),
                     ],
                   ),
                 ),
@@ -379,9 +378,10 @@ class _ArrivalPhase extends StatelessWidget {
                       icon: const Icon(Icons.navigation, size: 18),
                       label: const Text('Navigate'),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.info,
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                        backgroundColor: IveTokens.info,
+                        foregroundColor: IveTokens.ink,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(IveTokens.rSm)),
+                        elevation: 0,
                       ),
                     ),
                   ),
@@ -396,9 +396,9 @@ class _ArrivalPhase extends StatelessWidget {
                       icon: const Icon(Icons.phone, size: 18),
                       label: const Text('Call'),
                       style: OutlinedButton.styleFrom(
-                        foregroundColor: kMarketColor,
-                        side: const BorderSide(color: kMarketColor),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                        foregroundColor: IveTokens.moduleMarket,
+                        side: const BorderSide(color: IveTokens.moduleMarket),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(IveTokens.rSm)),
                       ),
                     ),
                   ),
@@ -411,7 +411,7 @@ class _ArrivalPhase extends StatelessWidget {
   }
 }
 
-// ── Phase 3: Verification ──────────────────────────────────────────
+//  Phase 3: Verification 
 class _VerificationPhase extends StatelessWidget {
   final MarketOrder order;
 
@@ -424,12 +424,12 @@ class _VerificationPhase extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: const Color(0xFFEDE9FE),
-            borderRadius: BorderRadius.circular(16),
+            color: IveTokens.accentSoft,
+            borderRadius: BorderRadius.circular(IveTokens.rSm),
           ),
           child: Column(
             children: [
-              const Icon(Icons.qr_code, size: 64, color: Color(0xFF8B5CF6)),
+              Icon(Icons.qr_code, size: 64, color: IveTokens.accent),
               const SizedBox(height: 12),
               const Text(
                 'Show this code to the merchant',
@@ -440,17 +440,17 @@ class _VerificationPhase extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: const Color(0xFF8B5CF6), width: 2),
+                  color: IveTokens.surface,
+                  borderRadius: BorderRadius.circular(IveTokens.rSm),
+                  border: Border.all(color: IveTokens.accent, width: 2),
                 ),
                 child: Text(
                   order.pickupCode ?? '${order.id.substring(0, 4).toUpperCase()}-${order.id.substring(4, 8).toUpperCase()}',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.w900,
                     letterSpacing: 4,
-                    color: Color(0xFF8B5CF6),
+                    color: IveTokens.accent,
                   ),
                 ),
               ),
@@ -513,7 +513,7 @@ class _VerificationStep extends StatelessWidget {
   }
 }
 
-// ── Phase 4: Handoff ───────────────────────────────────────────────
+//  Phase 4: Handoff 
 class _HandoffPhase extends StatefulWidget {
   final MarketOrder order;
 
@@ -540,7 +540,7 @@ class _HandoffPhaseState extends State<_HandoffPhase> {
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             color: kMarketColorLight,
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(10),
           ),
           child: const Column(
             children: [
@@ -601,7 +601,7 @@ class _HandoffPhaseState extends State<_HandoffPhase> {
   }
 }
 
-// ── Phase 5: Complete ──────────────────────────────────────────────
+//  Phase 5: Complete 
 class _CompletePhase extends StatelessWidget {
   final MarketOrder order;
 
@@ -671,25 +671,25 @@ class _CompletePhase extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            gradient: const LinearGradient(
-              colors: [Color(0xFF8B5CF6), Color(0xFF6D28D9)],
+            borderRadius: BorderRadius.circular(IveTokens.rSm),
+            gradient: LinearGradient(
+              colors: [IveTokens.accent, IveTokens.accentPressed],
             ),
           ),
           child: Row(
             children: [
-              const Icon(Icons.stars, size: 32, color: Colors.white),
+              Icon(Icons.stars, size: 32, color: IveTokens.ink),
               const SizedBox(width: 12),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     '+25 QP Earned',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: Colors.white),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: IveTokens.ink),
                   ),
                   Text(
                     'From this pickup order',
-                    style: TextStyle(fontSize: 12, color: Colors.white.withValues(alpha: 0.8)),
+                    style: TextStyle(fontSize: 12, color: IveTokens.ink.withValues(alpha: 0.8)),
                   ),
                 ],
               ),

@@ -1,8 +1,8 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SCREEN 9 — Notifications Center
+/// 
+/// SCREEN 9  Notifications Center
 /// Six filter tabs: All, Likes, Comments, Mentions, Shares, System.
 /// Mark all read, individual actions, notification grouping.
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -138,7 +138,7 @@ class _BodyState extends State<_Body> with SingleTickerProviderStateMixin {
                           const SizedBox(width: 4),
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
-                            decoration: BoxDecoration(color: kUpdatesColor, borderRadius: BorderRadius.circular(8)),
+                            decoration: BoxDecoration(color: kUpdatesColor, borderRadius: BorderRadius.circular(10)),
                             child: Text('${prov.unreadNotificationCount}', style: const TextStyle(fontSize: 9, fontWeight: FontWeight.w700, color: Colors.white)),
                           ),
                         ],
@@ -211,7 +211,7 @@ class _BodyState extends State<_Body> with SingleTickerProviderStateMixin {
   void _showNotificationSettings(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(10))),
       builder: (_) => const Padding(
         padding: EdgeInsets.all(16),
         child: Column(

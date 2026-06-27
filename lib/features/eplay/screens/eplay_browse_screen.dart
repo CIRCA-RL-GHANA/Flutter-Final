@@ -1,7 +1,7 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// e-PLAY MODULE — Browse Screen
+/// 
+/// e-PLAY MODULE  Browse Screen
 /// Filterable content catalogue by type (music / movie / podcast / ebook / show)
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -80,7 +80,7 @@ class _EPlayBrowseScreenState extends State<EPlayBrowseScreen> {
                   onChanged: (v) => setState(() => _searchQuery = v),
                   style: const TextStyle(color: Colors.white),
                   decoration: InputDecoration(
-                    hintText: 'Search titles, creators…',
+                    hintText: 'Search titles, creators',
                     hintStyle: const TextStyle(color: Colors.white54),
                     prefixIcon: const Icon(Icons.search, color: Colors.white54),
                     filled: true,
@@ -94,9 +94,9 @@ class _EPlayBrowseScreenState extends State<EPlayBrowseScreen> {
           ),
           body: Column(
             children: [
-              // ── AI insight ──────────────────────────────────────────────
+              //  AI insight 
 
-              // ── Type filter chips ────────────────────────────────────
+              //  Type filter chips 
               SizedBox(
                 height: 50,
                 child: ListView.builder(
@@ -118,7 +118,7 @@ class _EPlayBrowseScreenState extends State<EPlayBrowseScreen> {
                         padding: const EdgeInsets.symmetric(horizontal: 14),
                         decoration: BoxDecoration(
                           color: isSelected ? kEPlayColor : Colors.white,
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(10),
                           border: Border.all(color: isSelected ? kEPlayColor : AppColors.inputBorder),
                         ),
                         child: Row(children: [
@@ -132,7 +132,7 @@ class _EPlayBrowseScreenState extends State<EPlayBrowseScreen> {
                 ),
               ),
 
-              // ── Grid ────────────────────────────────────────────────
+              //  Grid 
               Expanded(
                 child: eplay.isBrowseLoading && items.isEmpty
                     ? const Center(child: CircularProgressIndicator())
@@ -176,7 +176,7 @@ class _EPlayBrowseScreenState extends State<EPlayBrowseScreen> {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, colors: colors),
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(14)),
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
                 ),
                 child: Center(child: Icon(_iconForType(item['type'] as String), color: Colors.white, size: 40)),
               ),

@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
+
 /// Environment configuration for genie help
 /// Switch between environments by changing the active config.
 class EnvConfig {
@@ -19,7 +21,10 @@ class EnvConfig {
   static String get baseUrl {
     switch (current) {
       case Environment.development:
-        return 'http://10.0.2.2:3000/api/v1';
+        // localhost:3030 for web/desktop; 10.0.2.2:3030 for Android emulator
+        return kIsWeb || !_isAndroidEmulator
+            ? 'http://localhost:3030/api/v1'
+            : 'http://10.0.2.2:3030/api/v1';
       case Environment.staging:
         return 'https://staging-api.genieinprompt.app/api/v1';
       case Environment.production:
@@ -30,11 +35,21 @@ class EnvConfig {
   static String get webSocketUrl {
     switch (current) {
       case Environment.development:
-        return 'ws://10.0.2.2:3000';
+        return kIsWeb || !_isAndroidEmulator
+            ? 'ws://localhost:3030'
+            : 'ws://10.0.2.2:3030';
       case Environment.staging:
         return 'wss://staging-api.genieinprompt.app';
       case Environment.production:
         return 'wss://api.genieinprompt.app';
+    }
+  }
+
+  static bool get _isAndroidEmulator {
+    try {
+      return const bool.fromEnvironment('ANDROID_EMULATOR', defaultValue: false);
+    } catch (_) {
+      return false;
     }
   }
 

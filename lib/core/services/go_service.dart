@@ -1,12 +1,12 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// GO Service — Flutter ↔ Backend Integration
+/// 
+/// GO Service  Flutter  Backend Integration
 ///
 /// Maps to GoController endpoints:
 ///   GET  /go/wallet
 ///   GET  /go/transactions
 ///   GET  /go/transactions/{id}
 ///   POST /go/topup
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import '../network/api_client.dart';
@@ -18,7 +18,7 @@ class GoService {
 
   GoService([ApiClient? api]) : _api = api ?? ApiClient.instance;
 
-  // ─── Wallet ───────────────────────────────────────────────────────────────
+  //  Wallet 
 
   Future<ApiResponse<Map<String, dynamic>>> getWalletSummary() {
     return _api.get<Map<String, dynamic>>(
@@ -27,7 +27,7 @@ class GoService {
     );
   }
 
-  // ─── Transactions ─────────────────────────────────────────────────────────
+  //  Transactions 
 
   Future<ApiResponse<List<dynamic>>> getTransactions({
     String? type,
@@ -54,7 +54,7 @@ class GoService {
     );
   }
 
-  // ─── Top-Up ───────────────────────────────────────────────────────────────
+  //  Top-Up 
 
   Future<ApiResponse<Map<String, dynamic>>> topUp(
     double amount, {

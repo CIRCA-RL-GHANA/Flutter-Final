@@ -1,8 +1,8 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 /// U6: ACCESSIBILITY CENTER Screen
 /// Text scaling, bold text, high contrast, reduce motion, color blindness,
 /// screen reader, touch targets, presets
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -41,7 +41,7 @@ class AccessibilityCenterScreen extends StatelessWidget {
           body: ListView(
             padding: const EdgeInsets.fromLTRB(20, 12, 20, 100),
             children: [
-              // ─── Quick Presets ─────────────────────────────
+              //  Quick Presets 
               const UtilitySectionTitle(
                 title: 'Quick Presets',
                 icon: Icons.auto_awesome,
@@ -68,7 +68,7 @@ class AccessibilityCenterScreen extends StatelessWidget {
 
               const SizedBox(height: 16),
 
-              // ─── Vision ───────────────────────────────────
+              //  Vision 
               const UtilitySectionTitle(
                 title: 'Vision',
                 icon: Icons.visibility,
@@ -127,7 +127,7 @@ class AccessibilityCenterScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Motion ───────────────────────────────────
+              //  Motion 
               const UtilitySectionTitle(
                 title: 'Motion',
                 icon: Icons.animation,
@@ -148,7 +148,7 @@ class AccessibilityCenterScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Interaction ──────────────────────────────
+              //  Interaction 
               const UtilitySectionTitle(
                 title: 'Interaction',
                 icon: Icons.touch_app,
@@ -198,7 +198,7 @@ class AccessibilityCenterScreen extends StatelessWidget {
                 ),
               ),
 
-              // ─── Audio ────────────────────────────────────
+              //  Audio 
               const UtilitySectionTitle(
                 title: 'Audio & Screen Reader',
                 icon: Icons.record_voice_over,
@@ -248,7 +248,7 @@ class AccessibilityCenterScreen extends StatelessWidget {
     showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
       ),
       builder: (_) => Padding(
         padding: const EdgeInsets.fromLTRB(24, 20, 24, 20),
@@ -259,7 +259,7 @@ class AccessibilityCenterScreen extends StatelessWidget {
             Center(
               child: Container(
                 width: 36, height: 4,
-                decoration: BoxDecoration(color: AppColors.inputBorder, borderRadius: BorderRadius.circular(2)),
+                decoration: BoxDecoration(color: AppColors.inputBorder, borderRadius: BorderRadius.circular(6)),
               ),
             ),
             const SizedBox(height: 16),
@@ -284,7 +284,7 @@ class AccessibilityCenterScreen extends StatelessWidget {
   }
 }
 
-// ─── Preset Card ─────────────────────────────────────────────────────────────
+//  Preset Card 
 
 class _PresetCard extends StatelessWidget {
   final AccessibilityPreset preset;
@@ -325,7 +325,7 @@ class _PresetCard extends StatelessWidget {
   }
 }
 
-// ─── Accessibility Slider ────────────────────────────────────────────────────
+//  Accessibility Slider 
 
 class _AccessibilitySlider extends StatelessWidget {
   final String label;

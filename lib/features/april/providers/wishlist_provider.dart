@@ -1,9 +1,9 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// Wishlist Provider — State Management
+/// 
+/// Wishlist Provider  State Management
 ///
 /// Manages wishlist items, high-priority items, and purchase tracking.
 /// Delegates all API calls to WishlistService.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'package:flutter/foundation.dart';
@@ -15,7 +15,7 @@ class WishlistProvider extends ChangeNotifier {
   WishlistProvider({WishlistService? service})
       : _service = service ?? WishlistService();
 
-  // ─── State ────────────────────────────────────────────────────────────────
+  //  State 
 
   List<Map<String, dynamic>> _items = [];
   List<Map<String, dynamic>> get items => _items;
@@ -37,7 +37,7 @@ class WishlistProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Load ─────────────────────────────────────────────────────────────────
+  //  Load 
 
   Future<void> loadWishlist() async {
     _isLoading = true;
@@ -77,7 +77,7 @@ class WishlistProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Create ───────────────────────────────────────────────────────────────
+  //  Create 
 
   Future<Map<String, dynamic>?> addItem(Map<String, dynamic> data) async {
     _isLoading = true;
@@ -110,7 +110,7 @@ class WishlistProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Update ───────────────────────────────────────────────────────────────
+  //  Update 
 
   Future<bool> updateItem(String id, Map<String, dynamic> updates) async {
     try {
@@ -150,7 +150,7 @@ class WishlistProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Delete ───────────────────────────────────────────────────────────────
+  //  Delete 
 
   Future<bool> deleteItem(String id) async {
     try {

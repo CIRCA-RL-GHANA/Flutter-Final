@@ -1,8 +1,8 @@
-/// ─────────────────────────────────────────────────────────────────────────────
-/// LIVE MODULE — Screen 13: Delivery Verification Flow
+/// 
+/// LIVE MODULE  Screen 13: Delivery Verification Flow
 /// Multi-method verification: PIN entry, photo capture,
 /// signature, biometric, proof of delivery, and confirmation
-/// ─────────────────────────────────────────────────────────────────────────────
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -62,7 +62,7 @@ class _LiveDeliveryVerificationScreenState extends State<LiveDeliveryVerificatio
           ),
           body: Column(
             children: [
-              // StepBar replacing custom dots (spec P1 — gold checkpoint pulse)
+              // StepBar replacing custom dots (spec P1  gold checkpoint pulse)
               Padding(
                 padding: const EdgeInsets.fromLTRB(
                   IveTokens.s4, IveTokens.s3, IveTokens.s4, 0,
@@ -151,7 +151,7 @@ class _LiveDeliveryVerificationScreenState extends State<LiveDeliveryVerificatio
   }
 }
 
-// ─── PIN Step ─────────────────────────────────────────────────────────────────
+//  PIN Step 
 
 class _PinStep extends StatelessWidget {
   final TextEditingController controller;
@@ -172,12 +172,12 @@ class _PinStep extends StatelessWidget {
                 padding: const EdgeInsets.all(IveTokens.s4),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: (verified ? IveTokens.okColor : kLiveColor).withValues(alpha: 0.12),
+                  color: (verified ? IveTokens.okColor : IveTokens.moduleLive).withValues(alpha: 0.12),
                 ),
                 child: Icon(
                   verified ? Icons.check_circle_rounded : Icons.dialpad_rounded,
                   size: 48,
-                  color: verified ? IveTokens.okColor : kLiveColor,
+                  color: verified ? IveTokens.okColor : IveTokens.moduleLive,
                 ),
               ),
               const SizedBox(height: IveTokens.s4),
@@ -211,9 +211,9 @@ class _PinStep extends StatelessWidget {
               color: IveTokens.inkColor,
               fontFeatures: [const FontFeature.tabularFigures()],
             ),
-            cursorColor: kLiveColor,
+            cursorColor: IveTokens.moduleLive,
             decoration: InputDecoration(
-              hintText: '· · · ·',
+              hintText: '   ',
               hintStyle: GoogleFonts.ibmPlexMono(
                 fontSize: 24,
                 color: IveTokens.faintColor,
@@ -232,7 +232,7 @@ class _PinStep extends StatelessWidget {
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(IveTokens.rContainer),
-                borderSide: const BorderSide(color: kLiveColor, width: 1.5),
+                borderSide: const BorderSide(color: IveTokens.moduleLive, width: 1.5),
               ),
             ),
           ),
@@ -244,7 +244,7 @@ class _PinStep extends StatelessWidget {
   }
 }
 
-// ─── Photo Step ───────────────────────────────────────────────────────────────
+//  Photo Step 
 
 class _PhotoStep extends StatelessWidget {
   final bool taken;
@@ -319,7 +319,7 @@ class _PhotoStep extends StatelessWidget {
   }
 }
 
-// ─── Signature Step ───────────────────────────────────────────────────────────
+//  Signature Step 
 
 class _SignatureStep extends StatelessWidget {
   final bool collected;
@@ -406,7 +406,7 @@ class _SignatureStep extends StatelessWidget {
   }
 }
 
-// ─── Completion View ──────────────────────────────────────────────────────────
+//  Completion View 
 
 class _CompletionView extends StatelessWidget {
   final LivePackage package;

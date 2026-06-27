@@ -1,20 +1,20 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 /// GeniePerformanceTelemetry
 ///
-/// Recommendation 3 & 11 — Performance Monitoring.
+/// Recommendation 3 & 11  Performance Monitoring.
 ///
 /// Client-side telemetry for:
-///   • Model inference time (on-device NLU + TF.js shard load)
-///   • Card animation FPS (reports jank events to the pipeline)
-///   • Memory usage snapshot (via dart:developer)
-///   • Offline fallback rate
-///   • Intent recognition failure rate
-///   • Task completion time (voice/text → confirmed action)
+///    Model inference time (on-device NLU + TF.js shard load)
+///    Card animation FPS (reports jank events to the pipeline)
+///    Memory usage snapshot (via dart:developer)
+///    Offline fallback rate
+///    Intent recognition failure rate
+///    Task completion time (voice/text  confirmed action)
 ///
 /// All metrics accumulate in memory, flushed to the backend AI events
 /// endpoint periodically via [flush]. If offline, metrics are queued in
 /// SharedPreferences and flushed on reconnect.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'dart:convert';
@@ -22,7 +22,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// ─── Metric Enums ─────────────────────────────────────────────────────────────
+//  Metric Enums 
 
 enum TelemetryEventType {
   modelInference,
@@ -35,7 +35,7 @@ enum TelemetryEventType {
   memorySnapshot,
 }
 
-// ─── Metric Entry ─────────────────────────────────────────────────────────────
+//  Metric Entry 
 
 class TelemetryEvent {
   final TelemetryEventType type;
@@ -58,7 +58,7 @@ class TelemetryEvent {
       };
 }
 
-// ─── Main Service ─────────────────────────────────────────────────────────────
+//  Main Service 
 
 const String _metricsQueueKey = 'genie_telemetry_queue';
 const int _flushThreshold = 50; // flush after 50 events or on reconnect
@@ -76,7 +76,7 @@ class GeniePerformanceTelemetry {
     _prefs ??= await SharedPreferences.getInstance();
   }
 
-  // ─── Timed Block API ──────────────────────────────────────────────────────
+  //  Timed Block API 
 
   /// Start timing a named block (e.g., 'model_inference', 'voice_capture').
   static void startTimer(String key) {
@@ -93,7 +93,7 @@ class GeniePerformanceTelemetry {
     sw.reset();
   }
 
-  // ─── Direct Record ────────────────────────────────────────────────────────
+  //  Direct Record 
 
   static void record(TelemetryEventType type, double valueMs,
       {Map<String, dynamic> meta = const {}}) {
@@ -108,13 +108,13 @@ class GeniePerformanceTelemetry {
     }
   }
 
-  // ─── Memory Snapshot ──────────────────────────────────────────────────────
+  //  Memory Snapshot 
 
   static void captureMemorySnapshot() {
-    // Memory introspection not available on web/all platforms — skip silently.
+    // Memory introspection not available on web/all platforms  skip silently.
   }
 
-  // ─── Jank Detection (frame callback) ─────────────────────────────────────
+  //  Jank Detection (frame callback) 
 
   /// Call this once from main() or GenieScreen.initState() to register a
   /// persistent frame timing callback.
@@ -136,7 +136,7 @@ class GeniePerformanceTelemetry {
     }
   }
 
-  // ─── Flush to Backend ────────────────────────────────────────────────────
+  //  Flush to Backend 
 
   /// Sends buffered metrics to the AI events endpoint.
   /// If offline, persists them to SharedPreferences for later flush.
@@ -160,7 +160,7 @@ class GeniePerformanceTelemetry {
     // Production: _apiClient.post('/ai/events/batch', { events: all.map(...) });
   }
 
-  // ─── Persisted Queue Helpers ─────────────────────────────────────────────
+  //  Persisted Queue Helpers 
 
   static Future<void> _persistQueue(List<TelemetryEvent> events) async {
     final existing = await _loadQueue();

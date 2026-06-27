@@ -1,17 +1,17 @@
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 /// GenieInputSanitizer
 ///
-/// Recommendation 5 — Input Sanitization at the Edge:
-///   • Rejects or normalises code injection attempts (SQL, JS, shell)
-///   • Strips adversarial homoglyph substitutions (e.g. Ⓐ → a)
-///   • Caps emoji density to prevent flood attacks
-///   • Caps raw input length to prevent model token-exhaustion
-///   • Returns a SanitizationResult: cleaned text + flagged categories
+/// Recommendation 5  Input Sanitization at the Edge:
+///    Rejects or normalises code injection attempts (SQL, JS, shell)
+///    Strips adversarial homoglyph substitutions (e.g.   a)
+///    Caps emoji density to prevent flood attacks
+///    Caps raw input length to prevent model token-exhaustion
+///    Returns a SanitizationResult: cleaned text + flagged categories
 ///
 /// All sanitization runs synchronously on the client before any intent
 /// resolution or server call. The same logic should be mirrored on the
 /// backend AI guard (see ai-input-sanitizer.guard.ts).
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 /// Categories of input that were sanitized or rejected.
@@ -41,9 +41,9 @@ class SanitizationResult {
 class GenieInputSanitizer {
   GenieInputSanitizer._();
 
-  // ─── Constants ────────────────────────────────────────────────────────────
+  //  Constants 
   static const int _maxLength = 512;
-  static const int _maxEmojiDensityPercent = 40; // >40% emoji chars → flood
+  static const int _maxEmojiDensityPercent = 40; // >40% emoji chars  flood
 
   // Injection patterns: SQL, JS, shell meta-chars, prompt injection markers
   static final List<RegExp> _injectionPatterns = [
@@ -59,9 +59,9 @@ class GenieInputSanitizer {
 
   // Common homoglyph substitution map (adversarial phoneme avoidance)
   static final Map<RegExp, String> _homoglyphMap = {
-    RegExp(r'[Ａ-Ｚａ-ｚ０-９]'): 'a', // fullwidth ASCII → normalize
-    RegExp(r'[ₐₑₒₓₔ]'): 'a',
-    RegExp(r'[①②③④⑤⑥⑦⑧⑨⑩]'): '0',
+    RegExp(r'[---]'): 'a', // fullwidth ASCII  normalize
+    RegExp(r'[]'): 'a',
+    RegExp(r'[]'): '0',
   };
 
   // Control / non-printable characters
@@ -73,7 +73,7 @@ class GenieInputSanitizer {
     unicode: true,
   );
 
-  // ─── Public API ───────────────────────────────────────────────────────────
+  //  Public API 
 
   static SanitizationResult sanitize(String raw) {
     final flags = <SanitizationFlag>[];
@@ -96,10 +96,10 @@ class GenieInputSanitizer {
       if (entry.key.hasMatch(text)) {
         text = text.replaceAllMapped(entry.key, (m) {
           // Use static transformer for each pattern
-          if (entry.key.pattern.contains('Ａ')) {
+          if (entry.key.pattern.contains('')) {
             return _normaliseFullWidth(m[0]!);
           }
-          if (entry.key.pattern.contains('①')) {
+          if (entry.key.pattern.contains('')) {
             return _normaliseCircledDigit(m[0]!);
           }
           return entry.value;
@@ -108,7 +108,7 @@ class GenieInputSanitizer {
       }
     }
 
-    // 4. Injection detection — reject outright
+    // 4. Injection detection  reject outright
     for (final pattern in _injectionPatterns) {
       if (pattern.hasMatch(text)) {
         return const SanitizationResult(
@@ -123,7 +123,7 @@ class GenieInputSanitizer {
     final emojiCount = _emojiRange.allMatches(text).length;
     if (text.isNotEmpty &&
         (emojiCount / text.length * 100) > _maxEmojiDensityPercent) {
-      // Strip excess emojis — keep first 3
+      // Strip excess emojis  keep first 3
       int kept = 0;
       text = text.replaceAllMapped(_emojiRange, (m) {
         if (kept < 3) {
@@ -143,7 +143,7 @@ class GenieInputSanitizer {
         cleanedText: text, flags: flags, rejected: false);
   }
 
-  // ─── Helpers ──────────────────────────────────────────────────────────────
+  //  Helpers 
 
   /// Normalise Unicode full-width characters to ASCII equivalents.
   static String _normaliseFullWidth(String char) {
@@ -154,9 +154,9 @@ class GenieInputSanitizer {
     return char;
   }
 
-  /// Normalise circled digit characters (①→1, ②→2 …).
+  /// Normalise circled digit characters (1, 2 ).
   static String _normaliseCircledDigit(String char) {
-    const circled = '①②③④⑤⑥⑦⑧⑨⑩';
+    const circled = '';
     final idx = circled.indexOf(char);
     return idx >= 0 ? '${idx + 1}' : char;
   }

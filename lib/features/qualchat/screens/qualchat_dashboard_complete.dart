@@ -1,4 +1,5 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
 import 'package:provider/provider.dart';
 import 'package:dio/dio.dart';
 import '../models/qualchat_models.dart';
@@ -89,7 +90,7 @@ class _QualChatDashboardScreenState extends State<QualChatDashboardScreen> {
       body: _buildBody(),
       floatingActionButton: FloatingActionButton(
         onPressed: _handleNewChat,
-        backgroundColor: kChatColor,
+        backgroundColor: IveTokens.moduleQualChat,
         child: const Icon(Icons.add),
       ),
     );
@@ -211,11 +212,11 @@ class _ConversationTile extends StatelessWidget {
     return ListTile(
       onTap: onTap,
       leading: CircleAvatar(
-        backgroundColor: kChatColor.withValues(alpha: 0.1),
+        backgroundColor: IveTokens.moduleQualChat.withValues(alpha: 0.1),
         child: Text(
           conversation.title[0].toUpperCase(),
           style: const TextStyle(
-            color: kChatColor,
+            color: IveTokens.moduleQualChat,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -242,7 +243,7 @@ class _ConversationTile extends StatelessWidget {
               margin: const EdgeInsets.only(top: 4),
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
               decoration: BoxDecoration(
-                color: kChatColor,
+                color: IveTokens.moduleQualChat,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Text(

@@ -1,8 +1,9 @@
-﻿/// GO Screen 9 — Batch Operations
+/// GO Screen 9  Batch Operations
 /// Batch transfer creator, payment run manager, bulk approval interface
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
 import 'package:provider/provider.dart';
 import '../models/go_models.dart';
 import '../providers/go_provider.dart';
@@ -34,8 +35,8 @@ class _GoBatchScreenState extends State<GoBatchScreen> with SingleTickerProvider
               color: Colors.white,
               child: TabBar(
                 controller: _tabCtrl,
-                labelColor: kGoColor, unselectedLabelColor: const Color(0xFF9CA3AF),
-                indicatorColor: kGoColor, indicatorSize: TabBarIndicatorSize.label,
+                labelColor: IveTokens.moduleGo, unselectedLabelColor: const Color(0xFF9CA3AF),
+                indicatorColor: IveTokens.moduleGo, indicatorSize: TabBarIndicatorSize.label,
                 labelStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
                 tabs: const [Tab(text: 'Batch Transfer'), Tab(text: 'Payment Runs'), Tab(text: 'Bulk Approve')],
               ),
@@ -50,8 +51,8 @@ class _GoBatchScreenState extends State<GoBatchScreen> with SingleTickerProvider
           ],
         ),
         floatingActionButton: FloatingActionButton.extended(
-          onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Creating new batch...'), backgroundColor: kGoColor)),
-          backgroundColor: kGoColor,
+          onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Creating new batch...'), backgroundColor: IveTokens.moduleGo)),
+          backgroundColor: IveTokens.moduleGo,
           icon: const Icon(Icons.add, color: Colors.white),
           label: const Text('New Batch', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
         ),
@@ -71,15 +72,15 @@ class _GoBatchScreenState extends State<GoBatchScreen> with SingleTickerProvider
           Expanded(child: OutlinedButton.icon(
             icon: const Icon(Icons.upload_file, size: 18),
             label: const Text('Upload CSV'),
-            onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Select a CSV file to upload'), backgroundColor: kGoColor)),
-            style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 12)),
+            onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Select a CSV file to upload'), backgroundColor: IveTokens.moduleGo)),
+            style: OutlinedButton.styleFrom(foregroundColor: IveTokens.moduleGo, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 12)),
           )),
           const SizedBox(width: 10),
           Expanded(child: OutlinedButton.icon(
             icon: const Icon(Icons.person_add, size: 18),
             label: const Text('Add Manual'),
-            onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Add recipients manually'), backgroundColor: kGoColor)),
-            style: OutlinedButton.styleFrom(foregroundColor: kGoColor, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 12)),
+            onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Add recipients manually'), backgroundColor: IveTokens.moduleGo)),
+            style: OutlinedButton.styleFrom(foregroundColor: IveTokens.moduleGo, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 12)),
           )),
         ]),
       ])),
@@ -103,8 +104,8 @@ class _GoBatchScreenState extends State<GoBatchScreen> with SingleTickerProvider
         SizedBox(width: double.infinity, child: ElevatedButton.icon(
           icon: const Icon(Icons.add, size: 18),
           label: const Text('Create Payment Run'),
-          onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Setting up new payment run...'), backgroundColor: kGoColor)),
-          style: ElevatedButton.styleFrom(backgroundColor: kGoColor, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 12), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+          onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Setting up new payment run...'), backgroundColor: IveTokens.moduleGo)),
+          style: ElevatedButton.styleFrom(backgroundColor: IveTokens.moduleGo, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 12), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
         )),
       ])),
       const SizedBox(height: 14),
@@ -120,8 +121,8 @@ class _GoBatchScreenState extends State<GoBatchScreen> with SingleTickerProvider
     final pending = p.batchOperations.where((b) => b.status == TransactionStatus.pending).toList();
     return ListView(padding: const EdgeInsets.all(16), children: [
       if (pending.isNotEmpty) ...[
-        GoSectionCard(borderColor: kGoWarning.withValues(alpha: 0.3), child: Row(children: [
-          const Icon(Icons.warning_amber, color: kGoWarning, size: 20),
+        GoSectionCard(borderColor: IveTokens.warning.withValues(alpha: 0.3), child: Row(children: [
+          const Icon(Icons.warning_amber, color: IveTokens.warning, size: 20),
           const SizedBox(width: 10),
           Expanded(child: Text('${pending.length} operations pending approval', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: Color(0xFF92400E)))),
         ])),
@@ -129,14 +130,14 @@ class _GoBatchScreenState extends State<GoBatchScreen> with SingleTickerProvider
         // Approve all / Reject all
         Row(children: [
           Expanded(child: OutlinedButton(
-            onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('All pending operations rejected'), backgroundColor: kGoNegative)),
-            style: OutlinedButton.styleFrom(foregroundColor: kGoNegative, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 12)),
+            onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('All pending operations rejected'), backgroundColor: IveTokens.danger)),
+            style: OutlinedButton.styleFrom(foregroundColor: IveTokens.danger, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 12)),
             child: const Text('Reject All'),
           )),
           const SizedBox(width: 10),
           Expanded(child: ElevatedButton(
-            onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('All pending operations approved'), backgroundColor: kGoPositive)),
-            style: ElevatedButton.styleFrom(backgroundColor: kGoPositive, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 12), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+            onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('All pending operations approved'), backgroundColor: IveTokens.success)),
+            style: ElevatedButton.styleFrom(backgroundColor: IveTokens.success, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 12), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
             child: const Text('Approve All'),
           )),
         ]),
@@ -164,30 +165,30 @@ class _BatchCard extends StatelessWidget {
         Row(children: [
           Container(
             padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(color: kGoColorLight, borderRadius: BorderRadius.circular(8)),
-            child: Icon(_typeIcon, color: kGoColor, size: 18),
+            decoration: BoxDecoration(color: IveTokens.surfaceRaised, borderRadius: BorderRadius.circular(10)),
+            child: Icon(_typeIcon, color: IveTokens.moduleGo, size: 18),
           ),
           const SizedBox(width: 10),
           Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(batch.label ?? batch.typeLabel, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-            Text('${batch.itemCount} items • ${batch.totalAmount.toStringAsFixed(0)} QP', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
+            Text('${batch.itemCount} items  ${batch.totalAmount.toStringAsFixed(0)} QP', style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF))),
           ])),
           _StatusChip(status: batch.status.name),
         ]),
         if (batch.progress > 0 && batch.progress < 1) ...[
           const SizedBox(height: 8),
           Row(children: [
-            Expanded(child: ClipRRect(borderRadius: BorderRadius.circular(3), child: LinearProgressIndicator(value: batch.progress, minHeight: 4, backgroundColor: const Color(0xFFE5E7EB), valueColor: const AlwaysStoppedAnimation(kGoColor)))),
+            Expanded(child: ClipRRect(borderRadius: BorderRadius.circular(6), child: LinearProgressIndicator(value: batch.progress, minHeight: 4, backgroundColor: const Color(0xFFE5E7EB), valueColor: const AlwaysStoppedAnimation(IveTokens.moduleGo)))),
             const SizedBox(width: 8),
-            Text('${(batch.progress * 100).toStringAsFixed(0)}%', style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: kGoColor)),
+            Text('${(batch.progress * 100).toStringAsFixed(0)}%', style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: IveTokens.moduleGo)),
           ]),
         ],
         if (showApproveReject) ...[
           const SizedBox(height: 10),
           Row(children: [
-            Expanded(child: OutlinedButton(onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Batch rejected'), backgroundColor: kGoNegative)), style: OutlinedButton.styleFrom(foregroundColor: kGoNegative, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 8)), child: const Text('Reject', style: TextStyle(fontSize: 12)))),
+            Expanded(child: OutlinedButton(onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Batch rejected'), backgroundColor: IveTokens.danger)), style: OutlinedButton.styleFrom(foregroundColor: IveTokens.danger, side: const BorderSide(color: Color(0xFF1C1C2E)), padding: const EdgeInsets.symmetric(vertical: 8)), child: const Text('Reject', style: TextStyle(fontSize: 12)))),
             const SizedBox(width: 8),
-            Expanded(child: ElevatedButton(onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Batch approved'), backgroundColor: kGoPositive)), style: ElevatedButton.styleFrom(backgroundColor: kGoPositive, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 8), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))), child: const Text('Approve', style: TextStyle(fontSize: 12)))),
+            Expanded(child: ElevatedButton(onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Batch approved'), backgroundColor: IveTokens.success)), style: ElevatedButton.styleFrom(backgroundColor: IveTokens.success, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 8), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))), child: const Text('Approve', style: TextStyle(fontSize: 12)))),
           ]),
         ],
       ]),
@@ -213,15 +214,15 @@ class _StatusChip extends StatelessWidget {
   Widget build(BuildContext context) {
     Color c;
     switch (status) {
-      case 'completed': c = kGoPositive;
-      case 'processing': c = kGoInfo;
-      case 'pending': c = kGoWarning;
-      case 'failed': c = kGoNegative;
+      case 'completed': c = IveTokens.success;
+      case 'processing': c = IveTokens.info;
+      case 'pending': c = IveTokens.warning;
+      case 'failed': c = IveTokens.danger;
       default: c = const Color(0xFF9CA3AF);
     }
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-      decoration: BoxDecoration(color: c.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(8)),
+      decoration: BoxDecoration(color: c.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(10)),
       child: Text(status, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: c)),
     );
   }

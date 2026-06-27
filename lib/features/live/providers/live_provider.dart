@@ -1,10 +1,10 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// LIVE MODULE — Provider (State Management)
+/// 
+/// LIVE MODULE  Provider (State Management)
 /// Orders, packages, returns, drivers, rides, analytics, incidents,
-/// emergency, settings, verification — real API with fallback demo data
+/// emergency, settings, verification  real API with fallback demo data
 ///
 /// Migrated from hardcoded demo data to real API calls with fallback.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -12,15 +12,15 @@ import '../models/live_models.dart';
 import '../../../core/services/services.dart';
 
 class LiveProvider extends ChangeNotifier {
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SERVICES
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
-  final OrderService _orderService = OrderService();
+  final OrdersService _orderService = OrdersService();
   final RideService _rideService = RideService();
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // LOADING / ERROR STATE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -48,9 +48,9 @@ class LiveProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // INIT — Load everything on startup
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
+  // INIT  Load everything on startup
+  // 
 
   Future<void> init() async {
     _isLoading = true;
@@ -87,9 +87,9 @@ class LiveProvider extends ChangeNotifier {
     return 'me';
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 1: DASHBOARD STATE (client-side only)
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   LiveDashboardTab _dashboardTab = LiveDashboardTab.orders;
   LiveDashboardTab get dashboardTab => _dashboardTab;
@@ -131,9 +131,9 @@ class LiveProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 2: ORDERS
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   List<LiveOrder> _orders = [];
 
@@ -248,9 +248,9 @@ class LiveProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 3: DRIVERS
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   List<LiveDriver> _drivers = [];
 
@@ -284,7 +284,7 @@ class LiveProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Load drivers. No backend driver-list endpoint yet — uses fallback.
+  /// Load drivers. No backend driver-list endpoint yet  uses fallback.
   Future<void> loadDrivers() async {
     _driversLoading = true;
     notifyListeners();
@@ -301,9 +301,9 @@ class LiveProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 4: PACKAGES
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   List<LivePackage> _packages = [];
 
@@ -331,7 +331,7 @@ class LiveProvider extends ChangeNotifier {
 
   int get activePackageCount => activePackages.length + inTransitPackages.length;
 
-  /// Load packages. No backend package endpoint yet — uses fallback.
+  /// Load packages. No backend package endpoint yet  uses fallback.
   Future<void> loadPackages() async {
     _packagesLoading = true;
     notifyListeners();
@@ -348,9 +348,9 @@ class LiveProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 5: RETURNS
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   List<LiveReturn> _returns = [];
 
@@ -453,9 +453,9 @@ class LiveProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 6: RIDES (TRANSPORT)
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   List<LiveRide> _rides = [];
 
@@ -499,9 +499,9 @@ class LiveProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 7: ANALYTICS (client-side)
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   AnalyticsPeriod _analyticsPeriod = AnalyticsPeriod.today;
   AnalyticsPeriod get analyticsPeriod => _analyticsPeriod;
@@ -521,9 +521,9 @@ class LiveProvider extends ChangeNotifier {
 
   List<BottleneckAlert> get bottlenecks => _fallbackBottlenecks;
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 8: INCIDENTS & EMERGENCY
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   bool _sosTriggered = false;
   bool get sosTriggered => _sosTriggered;
@@ -543,7 +543,7 @@ class LiveProvider extends ChangeNotifier {
       }
     } catch (e) {
       debugPrint('LiveProvider.triggerSOS error: $e');
-      // SOS is already triggered locally — graceful degradation
+      // SOS is already triggered locally  graceful degradation
     }
   }
 
@@ -559,9 +559,9 @@ class LiveProvider extends ChangeNotifier {
   int get unreadNotificationCount =>
       _fallbackNotifications.where((n) => !n.isRead).length;
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 9: SETTINGS (client-side)
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   LiveSettings _settings = const LiveSettings();
   LiveSettings get settings => _settings;
@@ -576,9 +576,9 @@ class LiveProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 10: VERIFICATION (client-side)
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   bool _verificationComplete = false;
   bool get verificationComplete => _verificationComplete;
@@ -593,9 +593,9 @@ class LiveProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // JSON → MODEL PARSERS
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
+  // JSON  MODEL PARSERS
+  // 
 
   LiveOrder _orderFromJson(Map<String, dynamic> json) {
     return LiveOrder(
@@ -710,9 +710,9 @@ class LiveProvider extends ChangeNotifier {
     );
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // ENUM PARSERS
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   LiveOrderStatus _parseLiveOrderStatus(String? value) {
     switch (value) {
@@ -765,9 +765,9 @@ class LiveProvider extends ChangeNotifier {
     }
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // PARSING UTILITIES
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   double _toDouble(dynamic value, {double fallback = 0.0}) {
     if (value == null) return fallback;
@@ -790,9 +790,9 @@ class LiveProvider extends ChangeNotifier {
     return null;
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // FALLBACK DATA — used when API is unavailable (graceful offline mode)
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
+  // FALLBACK DATA  used when API is unavailable (graceful offline mode)
+  // 
 
   final List<LiveOrder> _fallbackOrders = [
     LiveOrder(
@@ -1341,7 +1341,7 @@ class LiveProvider extends ChangeNotifier {
   final List<LiveNotification> _fallbackNotifications = [
     LiveNotification(
       id: 'N1', type: LiveNotificationType.orderAlert,
-      title: 'NEW ORDER #1298', body: 'Michael Chen • ₵5,343 • MacBook Pro',
+      title: 'NEW ORDER #1298', body: 'Michael Chen  5,343  MacBook Pro',
       actions: const ['ASSIGN NOW', 'VIEW'],
       timestamp: DateTime.now().subtract(const Duration(minutes: 15)),
     ),
@@ -1353,7 +1353,7 @@ class LiveProvider extends ChangeNotifier {
     ),
     LiveNotification(
       id: 'N3', type: LiveNotificationType.returnRequest,
-      title: 'RETURN #567 PENDING', body: 'Sarah M. • Headphones • Video evidence available',
+      title: 'RETURN #567 PENDING', body: 'Sarah M.  Headphones  Video evidence available',
       actions: const ['REVIEW', 'SCHEDULE PICKUP'],
       timestamp: DateTime.now().subtract(const Duration(minutes: 45)),
     ),

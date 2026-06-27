@@ -1,9 +1,9 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// Statement Provider — State Management
+/// 
+/// Statement Provider  State Management
 ///
 /// Manages the user's personal statement.
 /// Delegates all API calls to StatementService.
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'package:flutter/foundation.dart';
@@ -15,7 +15,7 @@ class StatementProvider extends ChangeNotifier {
   StatementProvider({StatementService? service})
       : _service = service ?? StatementService();
 
-  // ─── State ────────────────────────────────────────────────────────────────
+  //  State 
 
   Map<String, dynamic>? _statement;
   Map<String, dynamic>? get statement => _statement;
@@ -34,7 +34,7 @@ class StatementProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Load ─────────────────────────────────────────────────────────────────
+  //  Load 
 
   Future<void> loadStatement() async {
     _isLoading = true;
@@ -63,7 +63,7 @@ class StatementProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Create / Update ──────────────────────────────────────────────────────
+  //  Create / Update 
 
   Future<bool> createOrUpdate(String content) async {
     _isLoading = true;
@@ -91,7 +91,7 @@ class StatementProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Delete ───────────────────────────────────────────────────────────────
+  //  Delete 
 
   Future<bool> delete() async {
     _isLoading = true;

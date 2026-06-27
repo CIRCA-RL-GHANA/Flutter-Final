@@ -1,4 +1,4 @@
-/// Alerts Screen 8 — Bulk Alert Management
+/// Alerts Screen 8  Bulk Alert Management
 /// Bulk assign, status change, tags, export, merge
 /// Progress indicator, undo
 library;
@@ -49,7 +49,7 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
           body: Column(
             children: [
 
-              // ──── SELECTION BANNER ────
+              //  SELECTION BANNER 
               Container(
                 padding: const EdgeInsets.all(14),
                 color: kAlertsColorLight,
@@ -70,7 +70,7 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
                 ),
               ),
 
-              // ──── ACTION GRID ────
+              //  ACTION GRID 
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(
@@ -131,7 +131,7 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
                 ),
               ),
 
-              // ──── ACTION PANEL ────
+              //  ACTION PANEL 
               if (_selectedAction != null)
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -140,7 +140,7 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
 
               const SizedBox(height: 12),
 
-              // ──── SELECTED ALERTS LIST ────
+              //  SELECTED ALERTS LIST 
               Expanded(
                 child: selectedAlerts.isEmpty
                     ? const AlertsEmptyState(
@@ -171,7 +171,7 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
             ],
           ),
 
-          // ──── EXECUTE FOOTER ────
+          //  EXECUTE FOOTER 
           bottomNavigationBar: _selectedAction != null && provider.selectedCount > 0
               ? Container(
                   padding: const EdgeInsets.all(16),
@@ -205,7 +205,7 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
     switch (_selectedAction!) {
       case BulkActionType.assign:
         return AlertsSectionCard(
-          title: 'ðŸ‘¤ Assign To',
+          title: 'Assign To',
           child: Column(
             children: provider.staff.take(4).map((s) => StaffPickerTile(staff: s, onTap: () {
               provider.bulkAssign(s.name);
@@ -216,7 +216,7 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
         );
       case BulkActionType.changeStatus:
         return AlertsSectionCard(
-          title: 'ðŸ”„ Change Status',
+          title: '" Change Status',
           child: Wrap(
             spacing: 8,
             runSpacing: 8,
@@ -226,7 +226,7 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
               },
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8), border: Border.all(color: const Color(0xFFE5E7EB))),
+                decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: const Color(0xFFE5E7EB))),
                 child: Text(_statusLabel(st), style: const TextStyle(fontSize: 12)),
               ),
             )).toList(),
@@ -234,7 +234,7 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
         );
       case BulkActionType.export:
         return AlertsSectionCard(
-          title: 'ðŸ“¥ Export Format',
+          title: '" Export Format',
           child: Row(
             children: [
               _ExportChip(label: 'CSV', icon: Icons.table_chart, onTap: () => _showExportSuccess(context)),
@@ -247,7 +247,7 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
         );
       case BulkActionType.addTags:
         return AlertsSectionCard(
-          title: '🏷️ Select Tags',
+          title: ' Select Tags',
           child: Wrap(
             spacing: 8,
             runSpacing: 8,
@@ -265,7 +265,7 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
                     color: selected ? kAlertsColor : Colors.white,
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: selected ? kAlertsColor : const Color(0xFFE5E7EB)),
                   ),
                   child: Text(
@@ -283,7 +283,7 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
         );
       case BulkActionType.merge:
         return AlertsSectionCard(
-          title: '🔀 Merge Strategy',
+          title: ' Merge Strategy',
           child: Column(
             children: [
               RadioListTile<String>(
@@ -322,7 +322,7 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
 
   void _showExportSuccess(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Export started — check downloads'), backgroundColor: kAlertsResolved),
+      const SnackBar(content: Text('Export started  check downloads'), backgroundColor: kAlertsResolved),
     );
   }
 
@@ -350,9 +350,9 @@ class _AlertsBulkScreenState extends State<AlertsBulkScreen> {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 // Bulk Action Button
-// ──────────────────────────────────────────────
+// 
 
 class _BulkActionButton extends StatelessWidget {
   final IconData icon;
@@ -388,9 +388,9 @@ class _BulkActionButton extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 // Compact Selected Alert
-// ──────────────────────────────────────────────
+// 
 
 class _CompactSelectedAlert extends StatelessWidget {
   final AlertItem alert;
@@ -421,9 +421,9 @@ class _CompactSelectedAlert extends StatelessWidget {
   }
 }
 
-// ──────────────────────────────────────────────
+// 
 // Export Chip
-// ──────────────────────────────────────────────
+// 
 
 class _ExportChip extends StatelessWidget {
   final String label;

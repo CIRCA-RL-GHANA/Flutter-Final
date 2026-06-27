@@ -1,8 +1,8 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// SD1.10-CREATE: CAMPAIGN CREATE WIZARD — 5-Step Form
-/// Steps: Type â†’ Audience â†’ Budget â†’ Content â†’ Review
+/// 
+/// SD1.10-CREATE: CAMPAIGN CREATE WIZARD  5-Step Form
+/// Steps: Type ' Audience ' Budget ' Content ' Review
 /// RBAC: Admin(full), BM(branch), SO(full), BSO(branch)
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -154,7 +154,7 @@ class _CampaignCreateScreenState extends State<CampaignCreateScreen> {
   }
 }
 
-// ─── Step Indicator ──────────────────────────────────────────────────────────
+//  Step Indicator 
 
 class _CampaignStepIndicator extends StatelessWidget {
   final int currentStep;
@@ -174,7 +174,7 @@ class _CampaignStepIndicator extends StatelessWidget {
       child: Column(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(6),
             child: LinearProgressIndicator(
               value: (currentStep + 1) / stepCount,
               backgroundColor: kSetupColor.withValues(alpha: 0.1),
@@ -202,7 +202,7 @@ class _CampaignStepIndicator extends StatelessWidget {
   }
 }
 
-// ─── Step 1: Type ────────────────────────────────────────────────────────────
+//  Step 1: Type 
 
 class _TypeStep extends StatelessWidget {
   final TextEditingController nameCtrl;
@@ -289,7 +289,7 @@ class _TypeStep extends StatelessWidget {
   }
 }
 
-// ─── Step 2: Audience ────────────────────────────────────────────────────────
+//  Step 2: Audience 
 
 class _AudienceStep extends StatelessWidget {
   final Set<String> selectedAudiences;
@@ -380,7 +380,7 @@ class _AudienceStep extends StatelessWidget {
                       value: isSelected,
                       onChanged: (_) => onToggle(name),
                       activeColor: kSetupColor,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
                     ),
                   ],
                 ),
@@ -394,7 +394,7 @@ class _AudienceStep extends StatelessWidget {
   }
 }
 
-// ─── Step 3: Budget ──────────────────────────────────────────────────────────
+//  Step 3: Budget 
 
 class _BudgetStep extends StatelessWidget {
   final TextEditingController budgetCtrl;
@@ -421,7 +421,7 @@ class _BudgetStep extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       children: [
         SetupFormField(
-          label: 'Total Budget (â‚µ)',
+          label: 'Total Budget ()',
           hint: '0.00',
           controller: budgetCtrl,
           keyboardType: TextInputType.number,
@@ -518,9 +518,9 @@ class _BudgetStep extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 8),
-              SetupInfoRow(label: 'Est. Reach', value: '5,000 – 12,000'),
-              SetupInfoRow(label: 'Est. Clicks', value: '250 – 600'),
-              SetupInfoRow(label: 'Est. Cost/Click', value: 'â‚µ0.15 – â‚µ0.40'),
+              SetupInfoRow(label: 'Est. Reach', value: '5,000  12,000'),
+              SetupInfoRow(label: 'Est. Clicks', value: '250  600'),
+              SetupInfoRow(label: 'Est. Cost/Click', value: '0.15  0.40'),
             ],
           ),
         ),
@@ -530,7 +530,7 @@ class _BudgetStep extends StatelessWidget {
   }
 }
 
-// ─── Step 4: Content ─────────────────────────────────────────────────────────
+//  Step 4: Content 
 
 class _ContentStep extends StatelessWidget {
   final TextEditingController headlineCtrl;
@@ -585,7 +585,7 @@ class _ContentStep extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 const Text(
-                  'PNG, JPG Â· Recommended 1200Ã—628',
+                  'PNG, JPG  Recommended 1200628',
                   style: TextStyle(fontSize: 11, color: AppColors.textTertiary),
                 ),
               ],
@@ -608,7 +608,7 @@ class _ContentStep extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: Colors.grey.shade300),
               ),
               child: Text(
@@ -624,7 +624,7 @@ class _ContentStep extends StatelessWidget {
   }
 }
 
-// ─── Step 5: Review ──────────────────────────────────────────────────────────
+//  Step 5: Review 
 
 class _CampaignReviewStep extends StatelessWidget {
   final String name;
@@ -673,10 +673,10 @@ class _CampaignReviewStep extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SetupSectionTitle(title: 'Campaign Summary', icon: Icons.campaign),
-              SetupInfoRow(label: 'Name', value: name.isNotEmpty ? name : '—'),
+              SetupInfoRow(label: 'Name', value: name.isNotEmpty ? name : ''),
               SetupInfoRow(label: 'Type', value: type.name),
               SetupInfoRow(label: 'Goal', value: goal.name),
-              SetupInfoRow(label: 'Budget', value: budget.isNotEmpty ? 'â‚µ$budget' : '—'),
+              SetupInfoRow(label: 'Budget', value: budget.isNotEmpty ? '$budget' : ''),
               SetupInfoRow(label: 'Channel', value: channel),
               SetupInfoRow(label: 'Audiences', value: audiences.join(', ')),
             ],
@@ -688,9 +688,9 @@ class _CampaignReviewStep extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SetupSectionTitle(title: 'Estimated Results', icon: Icons.analytics),
-              SetupInfoRow(label: 'Reach', value: '5,000 – 12,000'),
-              SetupInfoRow(label: 'Engagement', value: '3.5% – 5.2%'),
-              SetupInfoRow(label: 'Conversions', value: '50 – 150'),
+              SetupInfoRow(label: 'Reach', value: '5,000  12,000'),
+              SetupInfoRow(label: 'Engagement', value: '3.5%  5.2%'),
+              SetupInfoRow(label: 'Conversions', value: '50  150'),
             ],
           ),
         ),
@@ -700,7 +700,7 @@ class _CampaignReviewStep extends StatelessWidget {
   }
 }
 
-// ─── Nav Bar ─────────────────────────────────────────────────────────────────
+//  Nav Bar 
 
 class _CampaignNavBar extends StatelessWidget {
   final int currentStep;
@@ -767,7 +767,7 @@ class _CampaignNavBar extends StatelessWidget {
   }
 }
 
-// ─── Shared Widgets ──────────────────────────────────────────────────────────
+//  Shared Widgets 
 
 class _SelectionTile extends StatelessWidget {
   final String title;

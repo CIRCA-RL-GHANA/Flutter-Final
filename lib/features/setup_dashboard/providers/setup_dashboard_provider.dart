@@ -1,10 +1,10 @@
-/// ═══════════════════════════════════════════════════════════════════════════
-/// SETUP DASHBOARD MODULE — Provider (State Management)
+/// 
+/// SETUP DASHBOARD MODULE  Provider (State Management)
 /// RBAC-aware data management wired to real API services with fallback data
 /// Manages: Dashboard Hub, Products, Vehicles, Tabs, Discounts, Staff,
 /// Places, Zones, Bands, Branches, Campaigns, Social, Connections,
 /// Audit, Outlook, Q-Points, My Activity, Profile, Subscription, Interests
-/// ═══════════════════════════════════════════════════════════════════════════
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -14,16 +14,16 @@ import '../models/setup_dashboard_models.dart';
 import '../models/setup_rbac.dart';
 
 class SetupDashboardProvider extends ChangeNotifier {
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SERVICE INSTANCES
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   final ProductService _productService = ProductService();
   final VehicleService _vehicleService = VehicleService();
   final PlaceService _placeService = PlaceService();
   final SocialService _socialService = SocialService();
-  final InterestService _interestService = InterestService();
-  final SubscriptionService _subscriptionService = SubscriptionService();
+  final InterestsService _interestService = InterestsService();
+  final SubscriptionsService _subscriptionService = SubscriptionsService();
   final QPointsService _qPointsService = QPointsService();
   final ProfileService _profileService = ProfileService();
   final AuthService _authService = AuthService();
@@ -32,9 +32,9 @@ class SetupDashboardProvider extends ChangeNotifier {
   /// (e.g. role-assignment confirmation dialogs).
   AuthService get authService => _authService;
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // MUTABLE INSTANCE DATA (loaded from API)
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   List<Product> _products = [];
   List<Vehicle> _vehicles = [];
@@ -66,9 +66,9 @@ class SetupDashboardProvider extends ChangeNotifier {
   final List<ActivityTimelineEntry> _timeline = [];
   final List<InterestRecommendation> _recommendations = [];
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // INIT — loads all API-backed data
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
+  // INIT  loads all API-backed data
+  // 
 
   Future<void> init() async {
     _isLoading = true;
@@ -92,9 +92,9 @@ class SetupDashboardProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // LOAD METHODS (API-backed)
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   Future<void> loadHeaderInfo() async {
     try {
@@ -200,13 +200,13 @@ class SetupDashboardProvider extends ChangeNotifier {
     try {
       _sectionStates['connections'] = CardState.loading;
       notifyListeners();
-      // Need a userId — try to get from auth
+      // Need a userId  try to get from auth
       final meResponse = await _authService.getMe();
       final userId = meResponse.data?['id'] as String? ?? '';
       if (userId.isNotEmpty) {
         final response = await _interestService.getConnections(userId);
         if (response.success && response.data != null) {
-          _connections = response.data!.map(_connectionFromJson).toList();
+          _connections = response.data!.map((e) => _connectionFromJson(e as Map<String, dynamic>)).toList();
         }
       }
       _sectionStates['connections'] = CardState.loaded;
@@ -243,7 +243,7 @@ class SetupDashboardProvider extends ChangeNotifier {
       if (userId.isNotEmpty) {
         final response = await _interestService.getInterests(userId);
         if (response.success && response.data != null) {
-          _interests = response.data!.map(_userInterestFromJson).toList();
+          _interests = response.data!.map((e) => _userInterestFromJson(e as Map<String, dynamic>)).toList();
         }
       }
       _sectionStates['interests'] = CardState.loaded;
@@ -261,7 +261,7 @@ class SetupDashboardProvider extends ChangeNotifier {
       final meResponse = await _authService.getMe();
       final userId = meResponse.data?['id'] as String? ?? '';
       if (userId.isNotEmpty) {
-        final response = await _subscriptionService.getActiveSubscription(
+        final response = await _subscriptionService.getActiveSubscriptionFor(
           targetType: 'user',
           targetId: userId,
         );
@@ -297,9 +297,9 @@ class SetupDashboardProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 1: DASHBOARD HUB STATE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   DashboardHeaderInfo get headerInfo =>
       _headerInfoData ??
@@ -347,7 +347,7 @@ class SetupDashboardProvider extends ChangeNotifier {
     return matrix[role] ?? CardAccessLevel.hidden;
   }
 
-  /// Public accessor for RBAC — screens use this to gate UI
+  /// Public accessor for RBAC  screens use this to gate UI
   CardAccessLevel getCardAccess(String cardId, UserRole role) =>
       _getCardAccess(cardId, role);
 
@@ -367,9 +367,9 @@ class SetupDashboardProvider extends ChangeNotifier {
         level == CardAccessLevel.branchViewOnly;
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // RBAC AUTHORITY DELEGATION — delegates to SetupDashboardRBAC
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
+  // RBAC AUTHORITY DELEGATION  delegates to SetupDashboardRBAC
+  // 
 
   /// Full action-level permission for a card + role pair.
   SetupActionPermission getActionPermission(String cardId, UserRole role) =>
@@ -574,7 +574,7 @@ class SetupDashboardProvider extends ChangeNotifier {
           alertCount: 3,
           progress: 0.85,
           progressLabel: '85% in stock',
-          subtitle: '1,245 SKUs · 32 low stock',
+          subtitle: '1,245 SKUs  32 low stock',
           metrics: {
             'Total SKUs': '1,245',
             'Low Stock': '32',
@@ -589,7 +589,7 @@ class SetupDashboardProvider extends ChangeNotifier {
           title: 'Vehicles',
           icon: Icons.local_shipping,
           route: '/setup/vehicles',
-          subtitle: '24 Vehicles · 3 in maintenance',
+          subtitle: '24 Vehicles  3 in maintenance',
           statusDots: [
             StatusDot(color: Color(0xFF10B981), label: 'A'),
             StatusDot(color: Color(0xFFF59E0B), label: 'M'),
@@ -610,13 +610,13 @@ class SetupDashboardProvider extends ChangeNotifier {
           title: 'Customer Tabs',
           icon: Icons.receipt_long,
           route: '/setup/tabs',
-          subtitle: '₵312,450 total credit',
+          subtitle: '312,450 total credit',
           progress: 0.75,
           progressLabel: 'Credit Utilization: 75%',
           metrics: {
             'Active': '312',
             'Overdue': '24',
-            'Limit': '₵500K',
+            'Limit': '500K',
           },
           summaryLine: 'Next repayment: Jan 15 (5 days)',
           actionLabels: ['View All Tabs', 'Send Reminders'],
@@ -628,13 +628,13 @@ class SetupDashboardProvider extends ChangeNotifier {
           title: 'Discount Tiers',
           icon: Icons.local_offer,
           route: '/setup/discounts',
-          subtitle: '3 active · Revenue Impact +12%',
+          subtitle: '3 active  Revenue Impact +12%',
           metrics: {
             'Active': '3',
             'Paused': '1',
             'Draft': '2',
           },
-          summaryLine: 'Tier 1: ₵100→5% | Tier 2: ₵250→10%',
+          summaryLine: 'Tier 1: 1005% | Tier 2: 25010%',
           actionLabels: ['Manage Discounts', 'Create New'],
           highlightColor: Color(0xFF10B981),
         ),
@@ -644,7 +644,7 @@ class SetupDashboardProvider extends ChangeNotifier {
           icon: Icons.people,
           route: '/setup/staff',
           alertCount: 3,
-          subtitle: '42 total · 28 online',
+          subtitle: '42 total  28 online',
           statusDots: [
             StatusDot(color: Color(0xFF10B981), label: 'On'),
             StatusDot(color: Color(0xFFF59E0B), label: 'Id'),
@@ -665,7 +665,7 @@ class SetupDashboardProvider extends ChangeNotifier {
           title: 'Activity Log',
           icon: Icons.history,
           route: '/setup/audit',
-          subtitle: 'Live · 42 actions today',
+          subtitle: 'Live  42 actions today',
           metrics: {
             'Today': '42 actions',
             'Failures': '3',
@@ -707,13 +707,13 @@ class SetupDashboardProvider extends ChangeNotifier {
           title: 'Vehicle Bands',
           icon: Icons.category,
           route: '/setup/bands',
-          subtitle: '3 bands · 18/24 assigned',
+          subtitle: '3 bands  18/24 assigned',
           metrics: {
             'Band A': '85%',
             'Band B': '42%',
             'Band C': '23%',
           },
-          summaryLine: 'Optimal: 70-85% · Alert: >90%',
+          summaryLine: 'Optimal: 70-85%  Alert: >90%',
           actionLabels: ['Manage Bands', 'Reassign Vehicles'],
         ),
         const DashboardCard(
@@ -721,7 +721,7 @@ class SetupDashboardProvider extends ChangeNotifier {
           title: 'Branches',
           icon: Icons.business,
           route: '/setup/branches',
-          subtitle: '12 total · 9 online',
+          subtitle: '12 total  9 online',
           statusDots: [
             StatusDot(color: Color(0xFF10B981), label: 'On'),
             StatusDot(color: Color(0xFF10B981), label: 'On'),
@@ -731,9 +731,9 @@ class SetupDashboardProvider extends ChangeNotifier {
           metrics: {
             'Online': '9',
             'Offline': '3',
-            'Avg Rating': '4.7 ⭐',
+            'Avg Rating': '4.7 ',
           },
-          summaryLine: 'Staff: 142 · Vehicles: 48',
+          summaryLine: 'Staff: 142  Vehicles: 48',
           actionLabels: ['View All Branches', 'Add Branch'],
         ),
         // Row 4: Engagement
@@ -744,7 +744,7 @@ class SetupDashboardProvider extends ChangeNotifier {
           route: '/setup/campaigns',
           subtitle: '5 active campaigns',
           progress: 0.50,
-          progressLabel: 'Budget: ₵5,000/₵10K',
+          progressLabel: 'Budget: 5,000/10K',
           metrics: {
             'ROI': '142%',
             'Reach': '45,000',
@@ -758,7 +758,7 @@ class SetupDashboardProvider extends ChangeNotifier {
           title: 'Social & Updates',
           icon: Icons.forum,
           route: '/setup/social',
-          subtitle: 'Engagement Rate: 4.2% ↑ 12%',
+          subtitle: 'Engagement Rate: 4.2%  12%',
           metrics: {
             'Followers': '2,345',
             'Posts/week': '8',
@@ -772,7 +772,7 @@ class SetupDashboardProvider extends ChangeNotifier {
           title: 'Connections',
           icon: Icons.handshake,
           route: '/setup/connections',
-          subtitle: '342 total · Strength 85%',
+          subtitle: '342 total  Strength 85%',
           statusDots: [
             StatusDot(color: Color(0xFF10B981), label: 'A'),
             StatusDot(color: Color(0xFFF59E0B), label: 'P'),
@@ -791,7 +791,7 @@ class SetupDashboardProvider extends ChangeNotifier {
           title: 'Branch Profile',
           icon: Icons.badge,
           route: '/setup/profile',
-          subtitle: '✅ Verified · ⭐ 4.8 (428)',
+          subtitle: ' Verified   4.8 (428)',
           metrics: {
             'Response Rate': '98%',
             'Avg Time': '12 min',
@@ -810,7 +810,7 @@ class SetupDashboardProvider extends ChangeNotifier {
           progress: 0.92,
           progressLabel: 'Overall Health',
           metrics: {
-            'Revenue': '₵245K',
+            'Revenue': '245K',
             'Growth': '+12%',
             'Customers': '2,450',
           },
@@ -822,12 +822,12 @@ class SetupDashboardProvider extends ChangeNotifier {
           title: 'Subscription',
           icon: Icons.diamond,
           route: '/setup/subscription',
-          subtitle: '💎 Premium · Auto-renew ON',
+          subtitle: ' Premium  Auto-renew ON',
           progress: 0.75,
           progressLabel: 'Usage: 75% of allocation',
           metrics: {
             'Q-Points': '15,240',
-            'Monthly': '₵500',
+            'Monthly': '500',
             'Renews': '15 days',
           },
           actionLabels: ['Manage Plan', 'Add Q-Points'],
@@ -852,7 +852,7 @@ class SetupDashboardProvider extends ChangeNotifier {
           title: 'Q-Points History',
           icon: Icons.monetization_on,
           route: '/setup/qpoints',
-          subtitle: 'Balance: 15,240 QP ≈ ₵1,295',
+          subtitle: 'Balance: 15,240 QP  1,295',
           metrics: {
             'Today': '+320 / -150',
             'Rate': '1 QP = 0.085',
@@ -867,7 +867,7 @@ class SetupDashboardProvider extends ChangeNotifier {
           title: 'My Activity',
           icon: Icons.task_alt,
           route: '/setup/my-activity',
-          subtitle: 'Efficiency: 85% · Streak: 12 days',
+          subtitle: 'Efficiency: 85%  Streak: 12 days',
           progress: 0.43,
           progressLabel: 'Progress: 3/7 (43%)',
           metrics: {
@@ -879,9 +879,9 @@ class SetupDashboardProvider extends ChangeNotifier {
         ),
       ];
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 2: PRODUCTS STATE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   String _productSearchQuery = '';
   String get productSearchQuery => _productSearchQuery;
@@ -914,9 +914,9 @@ class SetupDashboardProvider extends ChangeNotifier {
   int get lowStockCount => products.where((p) => p.isLowStock).length;
   int get outOfStockCount => products.where((p) => p.isOutOfStock).length;
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 3: VEHICLES STATE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   List<Vehicle> get vehicles =>
       _vehicles.isNotEmpty ? _vehicles : _fallbackVehicles;
@@ -932,9 +932,9 @@ class SetupDashboardProvider extends ChangeNotifier {
   List<FuelEntry> get fuelEntries =>
       _fuelEntries.isNotEmpty ? _fuelEntries : _fallbackFuelEntries;
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 4: TABS STATE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   List<CustomerTab> get tabs =>
       _tabs.isNotEmpty ? _tabs : _fallbackTabs;
@@ -945,78 +945,78 @@ class SetupDashboardProvider extends ChangeNotifier {
           ? _tabTransactions
           : _fallbackTabTransactions;
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 5: DISCOUNTS STATE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   List<DiscountTier> get discounts =>
       _discounts.isNotEmpty ? _discounts : _fallbackDiscounts;
   int get activeDiscountCount =>
       discounts.where((d) => d.status == DiscountStatus.active).length;
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 6: STAFF STATE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   List<StaffMember> get staffMembers =>
       _staff.isNotEmpty ? _staff : _fallbackStaff;
   int get onlineStaffCount =>
       staffMembers.where((s) => s.status == StaffStatus.online).length;
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 7: PLACES STATE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   List<Place> get places =>
       _places.isNotEmpty ? _places : _fallbackPlaces;
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 8: DELIVERY ZONES STATE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   List<DeliveryZone> get zones =>
       _zones.isNotEmpty ? _zones : _fallbackZones;
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 9: VEHICLE BANDS STATE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   List<VehicleBand> get bands =>
       _bands.isNotEmpty ? _bands : _fallbackBands;
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 10: BRANCHES STATE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   List<Branch> get branches =>
       _branches.isNotEmpty ? _branches : _fallbackBranches;
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 11: CAMPAIGNS STATE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   List<Campaign> get campaigns =>
       _campaigns.isNotEmpty ? _campaigns : _fallbackCampaigns;
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 12: SOCIAL STATE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   List<SocialPost> get posts =>
       _posts.isNotEmpty ? _posts : _fallbackPosts;
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 13: CONNECTIONS STATE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   List<Connection> get connections =>
       _connections.isNotEmpty ? _connections : _fallbackConnections;
   int get activeConnectionCount =>
       connections.where((c) => c.status == ConnectionStatus.active).length;
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 14: AUDIT LOG STATE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   List<AuditEntry> get auditEntries =>
       _auditEntries.isNotEmpty ? _auditEntries : _fallbackAuditEntries;
@@ -1033,18 +1033,18 @@ class SetupDashboardProvider extends ChangeNotifier {
     return source.where((e) => e.outcome.name == _auditFilter).toList();
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 15: OUTLOOK STATE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   List<KPIMetric> get kpiMetrics =>
       _kpiMetrics.isNotEmpty ? _kpiMetrics : _fallbackKPIs;
   List<AIInsight> get aiInsights =>
       _aiInsights.isNotEmpty ? _aiInsights : _fallbackInsights;
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 16: Q-POINTS STATE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   QPointsBalance get qPointsBalance => const QPointsBalance(
         available: 15240,
@@ -1064,9 +1064,9 @@ class SetupDashboardProvider extends ChangeNotifier {
           ? _qPointsTransactions
           : _fallbackQPointsTransactions;
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 17: MY ACTIVITY STATE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   List<UserTask> get tasks =>
       _tasks.isNotEmpty ? _tasks : _fallbackTasks;
@@ -1081,9 +1081,9 @@ class SetupDashboardProvider extends ChangeNotifier {
       tasks.where((t) => t.status == TaskStatus.completed).length;
   int get totalTaskCount => tasks.length;
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 18: PROFILE STATE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   UserProfile get userProfile =>
       _userProfile ??
@@ -1122,9 +1122,9 @@ class SetupDashboardProvider extends ChangeNotifier {
 
   static final DateTime _memberSince = DateTime(2022, 1, 15);
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 19: SUBSCRIPTION STATE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   SubscriptionInfo get subscription =>
       _subscriptionInfo ??
@@ -1149,9 +1149,9 @@ class SetupDashboardProvider extends ChangeNotifier {
         txFreeQuota: 100,
       );
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 20: INTERESTS STATE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   List<UserInterest> get interests =>
       _interests.isNotEmpty ? _interests : _fallbackInterests;
@@ -1160,9 +1160,9 @@ class SetupDashboardProvider extends ChangeNotifier {
           ? _recommendations
           : _fallbackRecommendations;
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 21: LOADING / ERROR STATES
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -1215,7 +1215,7 @@ class SetupDashboardProvider extends ChangeNotifier {
           await loadProfile();
           return;
         default:
-          // Section has no dedicated backend endpoint — mark loaded immediately.
+          // Section has no dedicated backend endpoint  mark loaded immediately.
           _sectionStates[sectionId] = CardState.loaded;
           notifyListeners();
       }
@@ -1225,9 +1225,9 @@ class SetupDashboardProvider extends ChangeNotifier {
     }
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 22: SELECTED ITEM TRACKING (for detail views)
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   String? _selectedProductId;
   String? get selectedProductId => _selectedProductId;
@@ -1372,9 +1372,9 @@ class SetupDashboardProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 23: SEARCH / FILTER FOR ALL SECTIONS
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   String _vehicleSearchQuery = '';
   String get vehicleSearchQuery => _vehicleSearchQuery;
@@ -1484,11 +1484,11 @@ class SetupDashboardProvider extends ChangeNotifier {
         .toList();
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 24: CRUD OPERATIONS
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
-  // Products — wired to real API
+  // Products  wired to real API
   Future<void> addProduct(Product product) async {
     _isLoading = true;
     notifyListeners();
@@ -1561,7 +1561,7 @@ class SetupDashboardProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Staff ──────────────────────────────────────────────────────────────────
+  //  Staff 
 
   /// Assign a new role to a staff member via the backend.
   ///
@@ -1647,7 +1647,7 @@ class SetupDashboardProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Tasks — local fallback (no task endpoint)
+  // Tasks  local fallback (no task endpoint)
   Future<void> addTask(UserTask task) async {
     _tasks = List.from(tasks)..add(task);
     notifyListeners();
@@ -1681,9 +1681,9 @@ class SetupDashboardProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 25: BRANCH-SCOPE FILTERING
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   String? _activeBranchFilter;
   String? get activeBranchFilter => _activeBranchFilter;
@@ -1706,9 +1706,9 @@ class SetupDashboardProvider extends ChangeNotifier {
         .toList();
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // SECTION 26: UTILITY GETTERS
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   /// KPI: Total revenue across all branches
   double get totalRevenue =>
@@ -1749,9 +1749,9 @@ class SetupDashboardProvider extends ChangeNotifier {
     super.dispose();
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // JSON PARSING HELPERS
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   Product _productFromJson(Map<String, dynamic> json) {
     return Product(
@@ -1903,7 +1903,7 @@ class SetupDashboardProvider extends ChangeNotifier {
     return UserInterest(
       id: json['id'] as String? ?? '',
       name: json['name'] as String? ?? '',
-      emoji: json['emoji'] as String? ?? '📌',
+      emoji: json['emoji'] as String? ?? '',
       updateCount: (json['updateCount'] as num?)?.toInt() ?? 0,
       isFollowing: json['isFollowing'] as bool? ?? true,
       category: json['category'] as String?,
@@ -1976,9 +1976,9 @@ class SetupDashboardProvider extends ChangeNotifier {
     );
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // ENUM PARSER HELPERS
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   StockLevel _parseStockLevel(String? s) {
     switch (s?.toLowerCase()) {
@@ -2119,9 +2119,9 @@ class SetupDashboardProvider extends ChangeNotifier {
     }
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
   // FALLBACK DATA
-  // ═══════════════════════════════════════════════════════════════════════════
+  // 
 
   static final List<Product> _fallbackProducts = [
     Product(id: 'p1', name: 'iPhone 13 Pro', sku: 'IP13P-BLK', category: 'Electronics', brand: 'Apple', basePrice: 3999, currentPrice: 3499, stock: 45, rating: 4.8, reviewCount: 128, tags: ['Best Seller', 'On Sale'], soldToday: 12, lastSold: DateTime.now().subtract(const Duration(hours: 2))),
@@ -2218,8 +2218,8 @@ class SetupDashboardProvider extends ChangeNotifier {
   ];
 
   static final List<SocialPost> _fallbackPosts = [
-    SocialPost(id: 'sp1', content: 'Winter Sale is Here! ❄️ Get up to 50% off on all electronics.', status: PostStatus.published, platforms: [SocialPlatform.facebook, SocialPlatform.instagram, SocialPlatform.twitter], likes: 245, comments: 42, shares: 12, reach: 12450, engagementRate: 4.8, publishDate: DateTime.now().subtract(const Duration(hours: 4)), hasMedia: true, mediaType: 'Image'),
-    SocialPost(id: 'sp2', content: 'Behind the scenes at our warehouse! 📦', status: PostStatus.scheduled, platforms: [SocialPlatform.instagram], scheduledDate: DateTime.now().add(const Duration(hours: 18)), hasMedia: true, mediaType: 'Video'),
+    SocialPost(id: 'sp1', content: 'Winter Sale is Here!  Get up to 50% off on all electronics.', status: PostStatus.published, platforms: [SocialPlatform.facebook, SocialPlatform.instagram, SocialPlatform.twitter], likes: 245, comments: 42, shares: 12, reach: 12450, engagementRate: 4.8, publishDate: DateTime.now().subtract(const Duration(hours: 4)), hasMedia: true, mediaType: 'Image'),
+    SocialPost(id: 'sp2', content: 'Behind the scenes at our warehouse! ', status: PostStatus.scheduled, platforms: [SocialPlatform.instagram], scheduledDate: DateTime.now().add(const Duration(hours: 18)), hasMedia: true, mediaType: 'Video'),
     const SocialPost(id: 'sp3', content: 'Customer spotlight: How Sarah transformed her kitchen.', status: PostStatus.draft, platforms: [SocialPlatform.facebook, SocialPlatform.linkedIn]),
   ];
 
@@ -2240,17 +2240,17 @@ class SetupDashboardProvider extends ChangeNotifier {
   ];
 
   static const List<KPIMetric> _fallbackKPIs = [
-    KPIMetric(label: 'Revenue', value: '₵245,000', changePercent: 12, isPositive: true, icon: Icons.attach_money),
+    KPIMetric(label: 'Revenue', value: '245,000', changePercent: 12, isPositive: true, icon: Icons.attach_money),
     KPIMetric(label: 'Customers', value: '2,450', changePercent: 8, isPositive: true, icon: Icons.people),
     KPIMetric(label: 'Orders', value: '1,234', changePercent: 15, isPositive: true, icon: Icons.shopping_cart),
     KPIMetric(label: 'Satisfaction', value: '4.8/5', changePercent: 4, isPositive: true, icon: Icons.sentiment_satisfied),
     KPIMetric(label: 'Efficiency', value: '85%', changePercent: 5, isPositive: true, icon: Icons.speed),
-    KPIMetric(label: 'Costs', value: '₵189,000', changePercent: 8, isPositive: false, icon: Icons.trending_up),
+    KPIMetric(label: 'Costs', value: '189,000', changePercent: 8, isPositive: false, icon: Icons.trending_up),
   ];
 
   static const List<AIInsight> _fallbackInsights = [
-    AIInsight(title: 'Opportunity Detected', description: 'Evening hours (18:00-20:00) show 52% higher customer spend but 30% lower staff coverage.', recommendation: 'Increase evening staff by 2. Projected Impact: +₵12,450 monthly revenue.', priority: AlertPriority.important, impact: '+₵12,450/month', icon: Icons.lightbulb),
-    AIInsight(title: 'Risk Identified', description: 'Supplier "John Electronics" has 3 delayed shipments this month (avg. +2 days).', recommendation: 'Diversify suppliers or renegotiate terms.', priority: AlertPriority.important, impact: '₵45,000 at risk', icon: Icons.warning_amber),
+    AIInsight(title: 'Opportunity Detected', description: 'Evening hours (18:00-20:00) show 52% higher customer spend but 30% lower staff coverage.', recommendation: 'Increase evening staff by 2. Projected Impact: +12,450 monthly revenue.', priority: AlertPriority.important, impact: '+12,450/month', icon: Icons.lightbulb),
+    AIInsight(title: 'Risk Identified', description: 'Supplier "John Electronics" has 3 delayed shipments this month (avg. +2 days).', recommendation: 'Diversify suppliers or renegotiate terms.', priority: AlertPriority.important, impact: '45,000 at risk', icon: Icons.warning_amber),
     AIInsight(title: 'Trend Identified', description: 'Mobile app users spend 35% more than web users.', recommendation: 'Promote app downloads. Target: +15% this quarter.', priority: AlertPriority.normal, icon: Icons.trending_up),
   ];
 
@@ -2274,8 +2274,8 @@ class SetupDashboardProvider extends ChangeNotifier {
   ];
 
   static final List<UserGoal> _fallbackGoals = [
-    UserGoal(id: 'g1', title: 'Increase sales by 15%', status: GoalStatus.onTrack, progress: 48, target: '₵750K', current: '₵245K', currentValue: '₵245K', targetValue: '₵750K', unit: 'revenue', dueDate: DateTime(2024, 3, 31), deadline: DateTime(2024, 3, 31)),
-    UserGoal(id: 'g2', title: 'Reduce operational costs by 10%', status: GoalStatus.ahead, progress: 32, target: '-₵50K', current: '-₵8K', currentValue: '₵8K', targetValue: '₵50K', unit: 'savings', dueDate: DateTime(2024, 3, 31), deadline: DateTime(2024, 3, 31)),
+    UserGoal(id: 'g1', title: 'Increase sales by 15%', status: GoalStatus.onTrack, progress: 48, target: '750K', current: '245K', currentValue: '245K', targetValue: '750K', unit: 'revenue', dueDate: DateTime(2024, 3, 31), deadline: DateTime(2024, 3, 31)),
+    UserGoal(id: 'g2', title: 'Reduce operational costs by 10%', status: GoalStatus.ahead, progress: 32, target: '-50K', current: '-8K', currentValue: '8K', targetValue: '50K', unit: 'savings', dueDate: DateTime(2024, 3, 31), deadline: DateTime(2024, 3, 31)),
     UserGoal(id: 'g3', title: 'Improve team satisfaction to 4.8/5', status: GoalStatus.ahead, progress: 76, target: '4.8/5', current: '4.6/5', currentValue: '4.6', targetValue: '4.8', unit: 'rating', dueDate: DateTime(2024, 3, 31), deadline: DateTime(2024, 3, 31)),
     UserGoal(id: 'g4', title: 'Complete professional certification', status: GoalStatus.onTrack, progress: 60, target: '5 modules', current: '3 modules', currentValue: '3', targetValue: '5', unit: 'modules', dueDate: DateTime(2024, 2, 28), deadline: DateTime(2024, 2, 28), category: 'Personal'),
     const UserGoal(id: 'g5', title: 'Improve work-life balance', status: GoalStatus.needsAttention, progress: 20, target: '40 hrs/week', current: '48 hrs/week', currentValue: '48', targetValue: '40', unit: 'hrs/week', category: 'Personal'),
@@ -2296,18 +2296,18 @@ class SetupDashboardProvider extends ChangeNotifier {
   ];
 
   static const List<UserInterest> _fallbackInterests = [
-    UserInterest(id: 'i1', name: 'Technology', emoji: '📱', updateCount: 56, category: 'Tech'),
-    UserInterest(id: 'i2', name: 'Food & Dining', emoji: '🍕', updateCount: 45, category: 'Lifestyle'),
-    UserInterest(id: 'i3', name: 'Automotive', emoji: '🚗', updateCount: 32, category: 'Lifestyle'),
-    UserInterest(id: 'i4', name: 'Home', emoji: '🏠', updateCount: 28, category: 'Lifestyle'),
-    UserInterest(id: 'i5', name: 'Fashion', emoji: '👕', updateCount: 23, category: 'Lifestyle'),
-    UserInterest(id: 'i6', name: 'Travel', emoji: '✈️', updateCount: 12, category: 'Lifestyle'),
-    UserInterest(id: 'i7', name: 'Books', emoji: '📚', updateCount: 34, category: 'Education'),
-    UserInterest(id: 'i8', name: 'Gaming', emoji: '🎮', updateCount: 67, category: 'Entertainment'),
-    UserInterest(id: 'i9', name: 'Fitness', emoji: '🏃', updateCount: 45, category: 'Health'),
-    UserInterest(id: 'i10', name: 'Music', emoji: '🎵', updateCount: 56, category: 'Entertainment'),
-    UserInterest(id: 'i11', name: 'Photography', emoji: '📷', updateCount: 23, category: 'Creative'),
-    UserInterest(id: 'i12', name: 'Gardening', emoji: '🌿', updateCount: 31, category: 'Lifestyle'),
+    UserInterest(id: 'i1', name: 'Technology', emoji: '', updateCount: 56, category: 'Tech'),
+    UserInterest(id: 'i2', name: 'Food & Dining', emoji: '', updateCount: 45, category: 'Lifestyle'),
+    UserInterest(id: 'i3', name: 'Automotive', emoji: '', updateCount: 32, category: 'Lifestyle'),
+    UserInterest(id: 'i4', name: 'Home', emoji: '', updateCount: 28, category: 'Lifestyle'),
+    UserInterest(id: 'i5', name: 'Fashion', emoji: '', updateCount: 23, category: 'Lifestyle'),
+    UserInterest(id: 'i6', name: 'Travel', emoji: '', updateCount: 12, category: 'Lifestyle'),
+    UserInterest(id: 'i7', name: 'Books', emoji: '', updateCount: 34, category: 'Education'),
+    UserInterest(id: 'i8', name: 'Gaming', emoji: '', updateCount: 67, category: 'Entertainment'),
+    UserInterest(id: 'i9', name: 'Fitness', emoji: '', updateCount: 45, category: 'Health'),
+    UserInterest(id: 'i10', name: 'Music', emoji: '', updateCount: 56, category: 'Entertainment'),
+    UserInterest(id: 'i11', name: 'Photography', emoji: '', updateCount: 23, category: 'Creative'),
+    UserInterest(id: 'i12', name: 'Gardening', emoji: '', updateCount: 31, category: 'Lifestyle'),
   ];
 
   static const List<InterestRecommendation> _fallbackRecommendations = [

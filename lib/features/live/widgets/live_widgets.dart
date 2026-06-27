@@ -1,26 +1,23 @@
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// LIVE MODULE — Shared Widgets
+/// 
+/// LIVE MODULE  Shared Widgets
 /// Reusable UI components: LiveAppBar, LiveOrderCard, LivePackageCard,
 /// LiveReturnCard, LiveDriverCard, LiveMetricBadge, LiveTimeline,
 /// LiveVerificationWidget, LiveSectionCard, LiveEmptyState, etc.
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:flutter/services.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/theme/app_colors.dart';
+import '../../../core/design/ive.dart';
 import '../models/live_models.dart';
 
-// ─── LIVE Module Color ───────────────────────────────────────────────────────
+//  LIVE Module Color 
 
-/// The canonical module color for LIVE (Vibrant Red-Orange — Operations)
-const Color kLiveColor = Color(0xFFEF4444);
-const Color kLiveColorLight = Color(0xFFFEE2E2);
-const Color kLiveColorDark = Color(0xFF991B1B);
-const Color kLiveAccent = Color(0xFFF97316);
+// Module color is IveTokens.moduleLive (#34D399  logistics green).
 
-// ─── Live App Bar ────────────────────────────────────────────────────────────
+//  Live App Bar 
 
 class LiveAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -44,7 +41,7 @@ class LiveAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: backgroundColor ?? Colors.white,
+      backgroundColor: backgroundColor ?? IveTokens.surface,
       surfaceTintColor: Colors.transparent,
       elevation: 0,
       leading: showBackButton
@@ -53,15 +50,15 @@ class LiveAppBar extends StatelessWidget implements PreferredSizeWidget {
                 const SizedBox(width: 4),
                 IconButton(
                   icon: const Icon(Icons.arrow_back, size: 22),
-                  color: AppColors.textPrimary,
+                  color: IveTokens.ink,
                   onPressed: () => Navigator.pop(context),
                 ),
                 Container(
                   width: 10,
                   height: 10,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: kLiveColor,
+                    color: IveTokens.moduleLive,
                   ),
                 ),
               ],
@@ -73,7 +70,7 @@ class LiveAppBar extends StatelessWidget implements PreferredSizeWidget {
         style: const TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.w700,
-          color: AppColors.textPrimary,
+          color: IveTokens.ink,
         ),
       ),
       centerTitle: true,
@@ -82,7 +79,7 @@ class LiveAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-// ─── Live Order Card ─────────────────────────────────────────────────────────
+//  Live Order Card 
 
 class LiveOrderCard extends StatelessWidget {
   final LiveOrder order;
@@ -107,12 +104,12 @@ class LiveOrderCard extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.only(bottom: 12),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
+          color: IveTokens.surface,
+          borderRadius: BorderRadius.circular(IveTokens.rSm),
           border: Border.all(
             color: order.priority == OrderPriority.urgent
-                ? kLiveColor.withValues(alpha: 0.3)
-                : Colors.grey.shade200,
+                ? IveTokens.moduleLive.withValues(alpha: 0.3)
+                : IveTokens.hairline,
           ),
         ),
         child: Padding(
@@ -125,7 +122,7 @@ class LiveOrderCard extends StatelessWidget {
                 children: [
                   Text(
                     'Order #${order.id}',
-                    style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15),
+                    style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15, color: IveTokens.ink),
                   ),
                   const SizedBox(width: 8),
                   _PriorityBadge(priority: order.priority),
@@ -134,17 +131,17 @@ class LiveOrderCard extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                       decoration: BoxDecoration(
-                        color: kLiveColor.withValues(alpha: 0.1),
-                        borderRadius: BorderRadius.circular(6),
+                        color: IveTokens.moduleLive.withValues(alpha: 0.1),
+                        borderRadius: BorderRadius.circular(IveTokens.rXs),
                       ),
                       child: const Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(Icons.access_time, size: 12, color: kLiveColor),
+                          Icon(Icons.access_time, size: 12, color: IveTokens.moduleLive),
                           SizedBox(width: 2),
                           Text(
                             'OVERDUE',
-                            style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: kLiveColor),
+                            style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: IveTokens.moduleLive),
                           ),
                         ],
                       ),
@@ -153,7 +150,7 @@ class LiveOrderCard extends StatelessWidget {
                   const Spacer(),
                   Text(
                     order.timeSinceCreated,
-                    style: const TextStyle(fontSize: 12, color: AppColors.textTertiary),
+                    style: const TextStyle(fontSize: 12, color: IveTokens.mute),
                   ),
                 ],
               ),
@@ -161,17 +158,17 @@ class LiveOrderCard extends StatelessWidget {
               // Customer row
               Row(
                 children: [
-                  const Icon(Icons.person_outline, size: 16, color: AppColors.textSecondary),
+                  const Icon(Icons.person_outline, size: 16, color: IveTokens.ink2),
                   const SizedBox(width: 4),
                   Text(
                     order.customerName,
-                    style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                    style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: IveTokens.ink),
                   ),
                   const SizedBox(width: 8),
-                  const Icon(Icons.star, size: 14, color: Color(0xFFF59E0B)),
+                  const Icon(Icons.star, size: 14, color: IveTokens.warning),
                   Text(
                     order.customerRating.toStringAsFixed(1),
-                    style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
+                    style: const TextStyle(fontSize: 12, color: IveTokens.ink2),
                   ),
                 ],
               ),
@@ -179,12 +176,12 @@ class LiveOrderCard extends StatelessWidget {
               // Address row
               Row(
                 children: [
-                  const Icon(Icons.location_on_outlined, size: 16, color: AppColors.textSecondary),
+                  const Icon(Icons.location_on_outlined, size: 16, color: IveTokens.ink2),
                   const SizedBox(width: 4),
                   Expanded(
                     child: Text(
                       order.deliveryAddress,
-                      style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
+                      style: const TextStyle(fontSize: 13, color: IveTokens.ink2),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
@@ -194,12 +191,12 @@ class LiveOrderCard extends StatelessWidget {
               // Items row
               Row(
                 children: [
-                  const Icon(Icons.inventory_2_outlined, size: 16, color: AppColors.textSecondary),
+                  const Icon(Icons.inventory_2_outlined, size: 16, color: IveTokens.ink2),
                   const SizedBox(width: 4),
                   Expanded(
                     child: Text(
                       order.items.map((i) => i.name).join(', '),
-                      style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
+                      style: const TextStyle(fontSize: 13, color: IveTokens.ink2),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
@@ -223,17 +220,17 @@ class LiveOrderCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: AppColors.backgroundLight,
-                    borderRadius: BorderRadius.circular(8),
+                    color: IveTokens.surfaceRaised,
+                    borderRadius: BorderRadius.circular(IveTokens.rSm),
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.chat_bubble_outline, size: 14, color: AppColors.textTertiary),
+                      const Icon(Icons.chat_bubble_outline, size: 14, color: IveTokens.mute),
                       const SizedBox(width: 6),
                       Expanded(
                         child: Text(
                           '"${order.customerNote}"',
-                          style: const TextStyle(fontSize: 12, fontStyle: FontStyle.italic, color: AppColors.textSecondary),
+                          style: const TextStyle(fontSize: 12, fontStyle: FontStyle.italic, color: IveTokens.ink2),
                         ),
                       ),
                     ],
@@ -246,24 +243,24 @@ class LiveOrderCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFF0FDF4),
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: const Color(0xFF10B981).withValues(alpha: 0.2)),
+                    color: IveTokens.success.withValues(alpha: 0.08),
+                    borderRadius: BorderRadius.circular(IveTokens.rSm),
+                    border: Border.all(color: IveTokens.success.withValues(alpha: 0.2)),
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.local_shipping, size: 16, color: Color(0xFF10B981)),
+                      const Icon(Icons.local_shipping, size: 16, color: IveTokens.success),
                       const SizedBox(width: 6),
                       Expanded(
                         child: Text(
                           'Driver: ${order.assignedDriverName}${order.driverDistanceMiles != null ? " (${order.driverDistanceMiles}mi away)" : ""}',
-                          style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: Color(0xFF065F46)),
+                          style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: IveTokens.success),
                         ),
                       ),
                       if (order.driverEtaMinutes != null)
                         Text(
                           'ETA: ${order.driverEtaMinutes}min',
-                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF10B981)),
+                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: IveTokens.success),
                         ),
                     ],
                   ),
@@ -273,23 +270,23 @@ class LiveOrderCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFFEF3C7),
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: const Color(0xFFF59E0B).withValues(alpha: 0.2)),
+                    color: IveTokens.warning.withValues(alpha: 0.08),
+                    borderRadius: BorderRadius.circular(IveTokens.rSm),
+                    border: Border.all(color: IveTokens.warning.withValues(alpha: 0.2)),
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.person_search, size: 16, color: Color(0xFFF59E0B)),
+                      const Icon(Icons.person_search, size: 16, color: IveTokens.warning),
                       const SizedBox(width: 6),
                       const Text(
                         'Driver: Unassigned',
-                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: Color(0xFF92400E)),
+                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: IveTokens.warning),
                       ),
                       const Spacer(),
                       if (order.prepTimeMinutes != null)
                         Text(
                           'Prep: ${order.prepTimeMinutes}min',
-                          style: const TextStyle(fontSize: 11, color: Color(0xFFF59E0B)),
+                          style: const TextStyle(fontSize: 11, color: IveTokens.warning),
                         ),
                     ],
                   ),
@@ -304,8 +301,8 @@ class LiveOrderCard extends StatelessWidget {
                   children: [
                     if (order.assignedDriverName == null) ...[
                       _LiveActionChip(label: 'ASSIGN DRIVER', icon: Icons.person_add, onTap: onAssign),
-                      _LiveActionChip(label: 'SELF-PICKUP', icon: Icons.store, onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Self-pickup confirmed')))),
-                      _LiveActionChip(label: 'CREATE PACKAGE', icon: Icons.inventory, onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Creating package...')))),
+                      _LiveActionChip(label: 'SELF-PICKUP', icon: Icons.store, onTap: () => AppToast.show(context, 'Self-pickup confirmed')),
+                      _LiveActionChip(label: 'CREATE PACKAGE', icon: Icons.inventory, onTap: () => AppToast.show(context, 'Creating package...')),
                     ] else ...[
                       _LiveActionChip(label: 'VIEW DETAILS', icon: Icons.visibility, onTap: onTap),
                       _LiveActionChip(label: 'TRACK DRIVER', icon: Icons.gps_fixed, onTap: onTrack),
@@ -322,7 +319,7 @@ class LiveOrderCard extends StatelessWidget {
   }
 }
 
-// ─── Live Package Card ───────────────────────────────────────────────────────
+//  Live Package Card 
 
 class LivePackageCard extends StatelessWidget {
   final LivePackage package;
@@ -345,9 +342,9 @@ class LivePackageCard extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.only(bottom: 12),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: Colors.grey.shade200),
+          color: IveTokens.surface,
+          borderRadius: BorderRadius.circular(IveTokens.rSm),
+          border: Border.all(color: IveTokens.hairline),
         ),
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -357,7 +354,7 @@ class LivePackageCard extends StatelessWidget {
               // Header
               Row(
                 children: [
-                  const Icon(Icons.inventory_2, size: 18, color: Color(0xFF3B82F6)),
+                  const Icon(Icons.inventory_2, size: 18, color: IveTokens.accent),
                   const SizedBox(width: 6),
                   Text(
                     'Package #${package.id}',
@@ -372,17 +369,17 @@ class LivePackageCard extends StatelessWidget {
               if (package.driverName != null)
                 Row(
                   children: [
-                    const Icon(Icons.local_shipping_outlined, size: 16, color: AppColors.textSecondary),
+                    const Icon(Icons.local_shipping_outlined, size: 16, color: IveTokens.ink2),
                     const SizedBox(width: 4),
                     Text(
                       'Driver: ${package.driverName}',
-                      style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+                      style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: IveTokens.ink),
                     ),
                     const SizedBox(width: 4),
-                    const Icon(Icons.star, size: 14, color: Color(0xFFF59E0B)),
+                    const Icon(Icons.star, size: 14, color: IveTokens.warning),
                     Text(
                       package.driverRating?.toStringAsFixed(1) ?? '',
-                      style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
+                      style: const TextStyle(fontSize: 12, color: IveTokens.ink2),
                     ),
                   ],
                 ),
@@ -390,18 +387,18 @@ class LivePackageCard extends StatelessWidget {
               // Stops & ETA
               Row(
                 children: [
-                  const Icon(Icons.route, size: 16, color: AppColors.textSecondary),
+                  const Icon(Icons.route, size: 16, color: IveTokens.ink2),
                   const SizedBox(width: 4),
                   Text(
                     'Stops: ${package.progressText}',
-                    style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
+                    style: const TextStyle(fontSize: 13, color: IveTokens.ink2),
                   ),
                   const SizedBox(width: 12),
-                  const Icon(Icons.timer_outlined, size: 16, color: AppColors.textSecondary),
+                  const Icon(Icons.timer_outlined, size: 16, color: IveTokens.ink2),
                   const SizedBox(width: 4),
                   Text(
                     'ETA: ${package.estimatedTimeMinutes}min',
-                    style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
+                    style: const TextStyle(fontSize: 13, color: IveTokens.ink2),
                   ),
                 ],
               ),
@@ -409,12 +406,12 @@ class LivePackageCard extends StatelessWidget {
               const SizedBox(height: 6),
               Row(
                 children: [
-                  const Icon(Icons.list_alt, size: 16, color: AppColors.textSecondary),
+                  const Icon(Icons.list_alt, size: 16, color: IveTokens.ink2),
                   const SizedBox(width: 4),
                   Text(
                     '${package.stops.where((s) => s.type == StopType.delivery).length} deliveries, '
                     '${package.stops.where((s) => s.type == StopType.returnPickup).length} return pickups',
-                    style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
+                    style: const TextStyle(fontSize: 13, color: IveTokens.ink2),
                   ),
                 ],
               ),
@@ -423,14 +420,14 @@ class LivePackageCard extends StatelessWidget {
                 const SizedBox(height: 6),
                 Row(
                   children: [
-                    const Icon(Icons.security, size: 16, color: AppColors.textSecondary),
+                    const Icon(Icons.security, size: 16, color: IveTokens.ink2),
                     const SizedBox(width: 4),
                     Text(
                       'Security: ${[
                         if (package.biometricRequired) 'Biometric',
                         if (package.pinRequired) 'PIN',
                       ].join(' + ')}',
-                      style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
+                      style: const TextStyle(fontSize: 12, color: IveTokens.ink2),
                     ),
                   ],
                 ),
@@ -441,21 +438,21 @@ class LivePackageCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFEFF6FF),
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: const Color(0xFF3B82F6).withValues(alpha: 0.2)),
+                    color: IveTokens.accent.withValues(alpha: 0.08),
+                    borderRadius: BorderRadius.circular(IveTokens.rSm),
+                    border: Border.all(color: IveTokens.accent.withValues(alpha: 0.2)),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'CURRENT STOP: ${package.stops.firstWhere((s) => s.status == StopStatus.inProgress).sequence}/${package.totalStops}',
-                        style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: Color(0xFF3B82F6)),
+                        style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: IveTokens.accent),
                       ),
                       const SizedBox(height: 4),
                       Text(
                         '${package.stops.firstWhere((s) => s.status == StopStatus.inProgress).type == StopType.returnPickup ? "Return pickup" : "Delivery"} at ${package.stops.firstWhere((s) => s.status == StopStatus.inProgress).customerName}',
-                        style: const TextStyle(fontSize: 13, color: Color(0xFF1E40AF)),
+                        style: const TextStyle(fontSize: 13, color: IveTokens.ink2),
                       ),
                     ],
                   ),
@@ -484,22 +481,22 @@ class LivePackageCard extends StatelessWidget {
   Color _packageStatusColor(PackageStatus status) {
     switch (status) {
       case PackageStatus.created:
-        return const Color(0xFF3B82F6);
+        return IveTokens.accent;
       case PackageStatus.active:
-        return const Color(0xFF10B981);
+        return IveTokens.success;
       case PackageStatus.inTransit:
-        return const Color(0xFFF59E0B);
+        return IveTokens.warning;
       case PackageStatus.delivered:
-        return AppColors.success;
+        return IveTokens.success;
       case PackageStatus.returned:
-        return const Color(0xFF8B5CF6);
+        return IveTokens.info;
       case PackageStatus.cancelled:
-        return AppColors.error;
+        return IveTokens.danger;
     }
   }
 }
 
-// ─── Live Return Card ────────────────────────────────────────────────────────
+//  Live Return Card 
 
 class LiveReturnCard extends StatelessWidget {
   final LiveReturn ret;
@@ -522,9 +519,9 @@ class LiveReturnCard extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.only(bottom: 12),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: Colors.grey.shade200),
+          color: IveTokens.surface,
+          borderRadius: BorderRadius.circular(IveTokens.rSm),
+          border: Border.all(color: IveTokens.hairline),
         ),
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -536,28 +533,28 @@ class LiveReturnCard extends StatelessWidget {
                 children: [
                   Text(
                     'Return #${ret.id}',
-                    style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15),
+                    style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15, color: IveTokens.ink),
                   ),
                   const SizedBox(width: 8),
                   _StatusBadge(label: _returnStatusLabel(ret.status), color: _returnStatusColor(ret.status)),
                   const Spacer(),
-                  Text(ret.timeSinceCreated, style: const TextStyle(fontSize: 12, color: AppColors.textTertiary)),
+                  Text(ret.timeSinceCreated, style: const TextStyle(fontSize: 12, color: IveTokens.mute)),
                 ],
               ),
               const SizedBox(height: 10),
               // Customer
               Row(
                 children: [
-                  const Icon(Icons.person_outline, size: 16, color: AppColors.textSecondary),
+                  const Icon(Icons.person_outline, size: 16, color: IveTokens.ink2),
                   const SizedBox(width: 4),
-                  Text(ret.customerName, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+                  Text(ret.customerName, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: IveTokens.ink)),
                   const SizedBox(width: 8),
-                  const Icon(Icons.star, size: 14, color: Color(0xFFF59E0B)),
-                  Text(ret.customerRating.toStringAsFixed(1), style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                  const Icon(Icons.star, size: 14, color: IveTokens.warning),
+                  Text(ret.customerRating.toStringAsFixed(1), style: const TextStyle(fontSize: 12, color: IveTokens.ink2)),
                   const SizedBox(width: 8),
                   Text(
                     '${_ordinal(ret.customerReturnCount)} return',
-                    style: const TextStyle(fontSize: 12, color: AppColors.textTertiary),
+                    style: const TextStyle(fontSize: 12, color: IveTokens.mute),
                   ),
                 ],
               ),
@@ -565,21 +562,21 @@ class LiveReturnCard extends StatelessWidget {
               // Item
               Row(
                 children: [
-                  const Icon(Icons.shopping_bag_outlined, size: 16, color: AppColors.textSecondary),
+                  const Icon(Icons.shopping_bag_outlined, size: 16, color: IveTokens.ink2),
                   const SizedBox(width: 4),
-                  Text('${ret.itemName} • â‚µ${ret.itemPrice.toStringAsFixed(0)}', style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+                  Text('${ret.itemName}  ${ret.itemPrice.toStringAsFixed(0)}', style: const TextStyle(fontSize: 13, color: IveTokens.ink2)),
                 ],
               ),
               const SizedBox(height: 4),
               // Reason
               Row(
                 children: [
-                  const Icon(Icons.info_outline, size: 16, color: AppColors.textSecondary),
+                  const Icon(Icons.info_outline, size: 16, color: IveTokens.ink2),
                   const SizedBox(width: 4),
                   Expanded(
                     child: Text(
-                      '${ret.reason}${ret.reasonDetail != null ? " • \"${ret.reasonDetail}\"" : ""}',
-                      style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
+                      '${ret.reason}${ret.reasonDetail != null ? "  \"${ret.reasonDetail}\"" : ""}',
+                      style: const TextStyle(fontSize: 13, color: IveTokens.ink2),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
@@ -591,20 +588,20 @@ class LiveReturnCard extends StatelessWidget {
                 Row(
                   children: [
                     if (ret.hasVideo) ...[
-                      const Icon(Icons.videocam, size: 16, color: Color(0xFF8B5CF6)),
+                      const Icon(Icons.videocam, size: 16, color: IveTokens.info),
                       const SizedBox(width: 4),
                       Text(
                         'VIDEO (${_formatDuration(ret.videoEvidence!)})',
-                        style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF8B5CF6)),
+                        style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: IveTokens.info),
                       ),
                       const SizedBox(width: 10),
                     ],
                     if (ret.hasVoiceNote) ...[
-                      const Icon(Icons.mic, size: 16, color: Color(0xFF3B82F6)),
+                      const Icon(Icons.mic, size: 16, color: IveTokens.accent),
                       const SizedBox(width: 4),
                       Text(
                         'VOICE NOTE (${_formatDuration(ret.voiceNote!)})',
-                        style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF3B82F6)),
+                        style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: IveTokens.accent),
                       ),
                     ],
                   ],
@@ -616,12 +613,12 @@ class LiveReturnCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFFEF3C7),
-                    borderRadius: BorderRadius.circular(6),
+                    color: IveTokens.warning.withValues(alpha: 0.1),
+                    borderRadius: BorderRadius.circular(IveTokens.rXs),
                   ),
                   child: Text(
-                    'Reviewer: ${ret.reviewerName} • Started ${ret.reviewStartedAt != null ? "${DateTime.now().difference(ret.reviewStartedAt!).inMinutes}min ago" : ""}',
-                    style: const TextStyle(fontSize: 11, color: Color(0xFF92400E)),
+                    'Reviewer: ${ret.reviewerName}  Started ${ret.reviewStartedAt != null ? "${DateTime.now().difference(ret.reviewStartedAt!).inMinutes}min ago" : ""}',
+                    style: const TextStyle(fontSize: 11, color: IveTokens.warning),
                   ),
                 ),
               ],
@@ -634,7 +631,7 @@ class LiveReturnCard extends StatelessWidget {
                     if (ret.status == LiveReturnStatus.pending)
                       _LiveActionChip(label: 'REVIEW RETURN', icon: Icons.rate_review, onTap: onReview),
                     if (ret.status == LiveReturnStatus.pending)
-                      _LiveActionChip(label: 'REQUEST MORE INFO', icon: Icons.help_outline, onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Info request sent to customer')))),
+                      _LiveActionChip(label: 'REQUEST MORE INFO', icon: Icons.help_outline, onTap: () => AppToast.show(context, 'Info request sent to customer')),
                     if (ret.status == LiveReturnStatus.underReview)
                       _LiveActionChip(label: 'VIEW REVIEW', icon: Icons.visibility, onTap: onTap),
                   ],
@@ -660,12 +657,12 @@ class LiveReturnCard extends StatelessWidget {
 
   Color _returnStatusColor(LiveReturnStatus status) {
     switch (status) {
-      case LiveReturnStatus.pending: return kLiveColor;
-      case LiveReturnStatus.underReview: return const Color(0xFFF59E0B);
-      case LiveReturnStatus.approved: return const Color(0xFF10B981);
-      case LiveReturnStatus.partiallyApproved: return const Color(0xFF3B82F6);
-      case LiveReturnStatus.rejected: return AppColors.error;
-      case LiveReturnStatus.escalated: return const Color(0xFF8B5CF6);
+      case LiveReturnStatus.pending: return IveTokens.moduleLive;
+      case LiveReturnStatus.underReview: return IveTokens.warning;
+      case LiveReturnStatus.approved: return IveTokens.success;
+      case LiveReturnStatus.partiallyApproved: return IveTokens.accent;
+      case LiveReturnStatus.rejected: return IveTokens.danger;
+      case LiveReturnStatus.escalated: return IveTokens.info;
     }
   }
 
@@ -683,7 +680,7 @@ class LiveReturnCard extends StatelessWidget {
   }
 }
 
-// ─── Live Driver Card ────────────────────────────────────────────────────────
+//  Live Driver Card 
 
 class LiveDriverCard extends StatelessWidget {
   final LiveDriver driver;
@@ -706,10 +703,10 @@ class LiveDriverCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        color: IveTokens.surface,
+        borderRadius: BorderRadius.circular(IveTokens.rSm),
         border: Border.all(
-          color: isRecommended ? const Color(0xFF10B981).withValues(alpha: 0.3) : Colors.grey.shade200,
+          color: isRecommended ? IveTokens.success.withValues(alpha: 0.3) : IveTokens.hairline,
           width: isRecommended ? 2 : 1,
         ),
       ),
@@ -726,12 +723,13 @@ class LiveDriverCard extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                       decoration: BoxDecoration(
-                        gradient: const LinearGradient(colors: [Color(0xFF10B981), Color(0xFF059669)]),
-                        borderRadius: BorderRadius.circular(8),
+                        color: IveTokens.success.withValues(alpha: 0.15),
+                        borderRadius: BorderRadius.circular(IveTokens.rSm),
+                        border: Border.all(color: IveTokens.success.withValues(alpha: 0.4)),
                       ),
                       child: const Text(
-                        '🥇 RECOMMENDED',
-                        style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white),
+                        ' RECOMMENDED',
+                        style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: IveTokens.success),
                       ),
                     ),
                   ],
@@ -742,10 +740,10 @@ class LiveDriverCard extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 20,
-                  backgroundColor: const Color(0xFF3B82F6).withValues(alpha: 0.1),
+                  backgroundColor: IveTokens.accentSoft,
                   child: Text(
                     driver.name.split(' ').map((n) => n[0]).take(2).join(),
-                    style: const TextStyle(fontWeight: FontWeight.w700, color: Color(0xFF3B82F6)),
+                    style: const TextStyle(fontWeight: FontWeight.w700, color: IveTokens.accent),
                   ),
                 ),
                 const SizedBox(width: 10),
@@ -755,13 +753,13 @@ class LiveDriverCard extends StatelessWidget {
                     children: [
                       Text(
                         driver.name,
-                        style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15),
+                        style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15, color: IveTokens.ink),
                       ),
                       Row(
                         children: [
-                          const Icon(Icons.star, size: 14, color: Color(0xFFF59E0B)),
-                          Text(' ${driver.rating} ', style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
-                          Text('• ${driver.distanceMiles}mi away', style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                          const Icon(Icons.star, size: 14, color: IveTokens.warning),
+                          Text(' ${driver.rating} ', style: const TextStyle(fontSize: 12, color: IveTokens.ink2)),
+                          Text(' ${driver.distanceMiles}mi away', style: const TextStyle(fontSize: 12, color: IveTokens.ink2)),
                         ],
                       ),
                     ],
@@ -788,10 +786,10 @@ class LiveDriverCard extends StatelessWidget {
                   children: driver.specialties.map((s) => Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                     decoration: BoxDecoration(
-                      color: AppColors.backgroundLight,
-                      borderRadius: BorderRadius.circular(6),
+                      color: IveTokens.surfaceRaised,
+                      borderRadius: BorderRadius.circular(IveTokens.rXs),
                     ),
-                    child: Text(s, style: const TextStyle(fontSize: 11, color: AppColors.textSecondary)),
+                    child: Text(s, style: const TextStyle(fontSize: 11, color: IveTokens.ink2)),
                   )).toList(),
                 ),
               ],
@@ -799,28 +797,23 @@ class LiveDriverCard extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: ElevatedButton.icon(
+                    child: IveButton.primary(
+                      label: 'SELECT & ASSIGN',
                       onPressed: onSelect,
-                      icon: const Icon(Icons.check_circle, size: 16),
-                      label: const Text('SELECT & ASSIGN'),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: kLiveColor,
-                        foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                        textStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
-                      ),
+                      icon: Icons.check_circle,
+                      compact: true,
                     ),
                   ),
                   const SizedBox(width: 8),
                   OutlinedButton(
                     onPressed: onViewProfile,
                     style: OutlinedButton.styleFrom(
-                      foregroundColor: AppColors.textSecondary,
+                      foregroundColor: IveTokens.ink2,
+                      side: const BorderSide(color: IveTokens.hairline2),
                       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(IveTokens.rSm)),
                     ),
-                    child: const Text('VIEW PROFILE', style: TextStyle(fontSize: 12)),
+                    child: const Text('VIEW PROFILE', style: TextStyle(fontSize: 12, color: IveTokens.ink2)),
                   ),
                 ],
               ),
@@ -832,7 +825,7 @@ class LiveDriverCard extends StatelessWidget {
   }
 }
 
-// ─── Live Metric Badge ───────────────────────────────────────────────────────
+//  Live Metric Badge 
 
 class LiveMetricBadge extends StatelessWidget {
   final String label;
@@ -846,7 +839,7 @@ class LiveMetricBadge extends StatelessWidget {
     required this.label,
     required this.value,
     required this.icon,
-    this.color = const Color(0xFF3B82F6),
+    this.color = IveTokens.accent,
     this.trend,
   });
 
@@ -856,7 +849,7 @@ class LiveMetricBadge extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.08),
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(IveTokens.rSm),
         border: Border.all(color: color.withValues(alpha: 0.15)),
       ),
       child: Column(
@@ -882,7 +875,7 @@ class LiveMetricBadge extends StatelessWidget {
   }
 }
 
-// ─── Live Timeline Widget ────────────────────────────────────────────────────
+//  Live Timeline Widget 
 
 class LiveTimelineWidget extends StatelessWidget {
   final List<OrderTimelineEntry> entries;
@@ -910,17 +903,17 @@ class LiveTimelineWidget extends StatelessWidget {
                     height: 12,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: entries[i].isCompleted ? const Color(0xFF10B981) : Colors.grey.shade300,
+                      color: entries[i].isCompleted ? IveTokens.success : IveTokens.faint,
                     ),
                     child: entries[i].isCompleted
-                        ? const Icon(Icons.check, size: 8, color: Colors.white)
+                        ? const Icon(Icons.check, size: 8, color: IveTokens.ink)
                         : null,
                   ),
                   if (i < entries.length - 1 || currentLabel != null)
                     Container(
                       width: 2,
                       height: 28,
-                      color: entries[i].isCompleted ? const Color(0xFF10B981).withValues(alpha: 0.3) : Colors.grey.shade200,
+                      color: entries[i].isCompleted ? IveTokens.success.withValues(alpha: 0.3) : IveTokens.hairline,
                     ),
                 ],
               ),
@@ -933,13 +926,13 @@ class LiveTimelineWidget extends StatelessWidget {
                       '${_formatTime(entries[i].timestamp)} - ${entries[i].title}',
                       style: TextStyle(
                         fontSize: 13,
-                        color: entries[i].isCompleted ? AppColors.textPrimary : AppColors.textSecondary,
+                        color: entries[i].isCompleted ? IveTokens.ink : IveTokens.ink2,
                       ),
                     ),
                     if (entries[i].description != null)
                       Text(
                         entries[i].description!,
-                        style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
+                        style: const TextStyle(fontSize: 11, color: IveTokens.mute),
                       ),
                   ],
                 ),
@@ -956,13 +949,13 @@ class LiveTimelineWidget extends StatelessWidget {
                 height: 12,
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
-                  color: kLiveColor,
+                  color: IveTokens.moduleLive,
                 ),
               ),
               const SizedBox(width: 10),
               Text(
                 'NOW - $currentLabel',
-                style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: kLiveColor),
+                style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: IveTokens.moduleLive),
               ),
             ],
           ),
@@ -978,7 +971,7 @@ class LiveTimelineWidget extends StatelessWidget {
   }
 }
 
-// ─── Live Section Card ───────────────────────────────────────────────────────
+//  Live Section Card 
 
 class LiveSectionCard extends StatelessWidget {
   final String title;
@@ -1001,8 +994,8 @@ class LiveSectionCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        color: IveTokens.surface,
+        borderRadius: BorderRadius.circular(IveTokens.rSm),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1011,17 +1004,17 @@ class LiveSectionCard extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(16, 14, 12, 8),
             child: Row(
               children: [
-                Icon(icon, size: 18, color: iconColor ?? kLiveColor),
+                Icon(icon, size: 18, color: iconColor ?? IveTokens.moduleLive),
                 const SizedBox(width: 6),
                 Text(
                   title,
-                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AppColors.textPrimary),
+                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: IveTokens.ink),
                 ),
                 const Spacer(),
                 if (onMore != null)
                   GestureDetector(
                     onTap: onMore,
-                    child: const Icon(Icons.chevron_right, size: 20, color: AppColors.textTertiary),
+                    child: const Icon(Icons.chevron_right, size: 20, color: IveTokens.mute),
                   ),
               ],
             ),
@@ -1036,7 +1029,7 @@ class LiveSectionCard extends StatelessWidget {
   }
 }
 
-// ─── Live Empty State ────────────────────────────────────────────────────────
+//  Live Empty State 
 
 class LiveEmptyState extends StatelessWidget {
   final IconData icon;
@@ -1066,17 +1059,17 @@ class LiveEmptyState extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, size: 64, color: AppColors.textTertiary),
+            Icon(icon, size: 64, color: IveTokens.mute),
             const SizedBox(height: 16),
             Text(
               title,
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.textPrimary),
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: IveTokens.ink),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 8),
             Text(
               subtitle,
-              style: const TextStyle(fontSize: 14, color: AppColors.textSecondary),
+              style: const TextStyle(fontSize: 14, color: IveTokens.ink2),
               textAlign: TextAlign.center,
             ),
             if (suggestions != null && suggestions!.isNotEmpty) ...[
@@ -1086,24 +1079,19 @@ class LiveEmptyState extends StatelessWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.check_circle_outline, size: 16, color: Color(0xFF10B981)),
+                    const Icon(Icons.check_circle_outline, size: 16, color: IveTokens.success),
                     const SizedBox(width: 6),
-                    Text(s, style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+                    Text(s, style: const TextStyle(fontSize: 13, color: IveTokens.ink2)),
                   ],
                 ),
               )),
             ],
             if (actionLabel != null) ...[
               const SizedBox(height: 20),
-              ElevatedButton(
+              IveButton.primary(
+                label: actionLabel!,
                 onPressed: onAction,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: kLiveColor,
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                ),
-                child: Text(actionLabel!),
+                expand: false,
               ),
             ],
             if (tip != null) ...[
@@ -1111,18 +1099,18 @@ class LiveEmptyState extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFFEF3C7),
-                  borderRadius: BorderRadius.circular(10),
+                  color: IveTokens.warning.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(IveTokens.rSm),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.lightbulb_outline, size: 18, color: Color(0xFFF59E0B)),
+                    const Icon(Icons.lightbulb_outline, size: 18, color: IveTokens.warning),
                     const SizedBox(width: 8),
                     Flexible(
                       child: Text(
                         tip!,
-                        style: const TextStyle(fontSize: 12, color: Color(0xFF92400E)),
+                        style: const TextStyle(fontSize: 12, color: IveTokens.warning),
                       ),
                     ),
                   ],
@@ -1136,7 +1124,7 @@ class LiveEmptyState extends StatelessWidget {
   }
 }
 
-// ─── Verification PIN Display ────────────────────────────────────────────────
+//  Verification PIN Display 
 
 class PinDisplayWidget extends StatelessWidget {
   final String pin;
@@ -1153,14 +1141,13 @@ class PinDisplayWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFF8B5CF6), Color(0xFF6D28D9)],
-        ),
-        borderRadius: BorderRadius.circular(16),
+        color: IveTokens.accent.withValues(alpha: 0.12),
+        borderRadius: BorderRadius.circular(IveTokens.rSm),
+        border: Border.all(color: IveTokens.accent.withValues(alpha: 0.3)),
       ),
       child: Column(
         children: [
-          Text(label, style: const TextStyle(fontSize: 12, color: Colors.white70)),
+          Text(label, style: const TextStyle(fontSize: 12, color: IveTokens.ink2)),
           const SizedBox(height: 8),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -1169,13 +1156,13 @@ class PinDisplayWidget extends StatelessWidget {
               width: 36,
               height: 44,
               decoration: BoxDecoration(
-                color: Colors.white.withValues(alpha: 0.2),
-                borderRadius: BorderRadius.circular(8),
+                color: IveTokens.accent.withValues(alpha: 0.15),
+                borderRadius: BorderRadius.circular(IveTokens.rSm),
               ),
               child: Center(
                 child: Text(
                   d,
-                  style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: Colors.white),
+                  style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: IveTokens.ink),
                 ),
               ),
             )).toList(),
@@ -1188,16 +1175,16 @@ class PinDisplayWidget extends StatelessWidget {
                 onPressed: () {
                   HapticFeedback.lightImpact();
                 },
-                icon: const Icon(Icons.refresh, size: 16, color: Colors.white70),
-                label: const Text('REGENERATE', style: TextStyle(fontSize: 11, color: Colors.white70)),
+                icon: const Icon(Icons.refresh, size: 16, color: IveTokens.ink2),
+                label: const Text('REGENERATE', style: TextStyle(fontSize: 11, color: IveTokens.ink2)),
               ),
               const SizedBox(width: 12),
               TextButton.icon(
                 onPressed: () {
                   HapticFeedback.lightImpact();
                 },
-                icon: const Icon(Icons.copy, size: 16, color: Colors.white70),
-                label: const Text('COPY', style: TextStyle(fontSize: 11, color: Colors.white70)),
+                icon: const Icon(Icons.copy, size: 16, color: IveTokens.ink2),
+                label: const Text('COPY', style: TextStyle(fontSize: 11, color: IveTokens.ink2)),
               ),
             ],
           ),
@@ -1207,7 +1194,7 @@ class PinDisplayWidget extends StatelessWidget {
   }
 }
 
-// ─── Private Helpers ─────────────────────────────────────────────────────────
+//  Private Helpers 
 
 class _PriorityBadge extends StatelessWidget {
   final OrderPriority priority;
@@ -1221,7 +1208,7 @@ class _PriorityBadge extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(6),
+        borderRadius: BorderRadius.circular(IveTokens.rXs),
       ),
       child: Text(
         priority.name.toUpperCase(),
@@ -1232,10 +1219,10 @@ class _PriorityBadge extends StatelessWidget {
 
   Color _colorFor(OrderPriority p) {
     switch (p) {
-      case OrderPriority.urgent: return const Color(0xFFEF4444);
-      case OrderPriority.normal: return const Color(0xFFF59E0B);
-      case OrderPriority.flexible: return const Color(0xFF10B981);
-      case OrderPriority.scheduled: return const Color(0xFF3B82F6);
+      case OrderPriority.urgent: return IveTokens.danger;
+      case OrderPriority.normal: return IveTokens.warning;
+      case OrderPriority.flexible: return IveTokens.success;
+      case OrderPriority.scheduled: return IveTokens.accent;
     }
   }
 }
@@ -1252,7 +1239,7 @@ class _StatusBadge extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(6),
+        borderRadius: BorderRadius.circular(IveTokens.rXs),
       ),
       child: Text(
         label,
@@ -1273,16 +1260,16 @@ class _SpecialTag extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
       decoration: BoxDecoration(
-        color: AppColors.backgroundLight,
-        borderRadius: BorderRadius.circular(6),
-        border: Border.all(color: Colors.grey.shade200),
+        color: IveTokens.surfaceRaised,
+        borderRadius: BorderRadius.circular(IveTokens.rXs),
+        border: Border.all(color: IveTokens.hairline),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 12, color: AppColors.textSecondary),
+          Icon(icon, size: 12, color: IveTokens.ink2),
           const SizedBox(width: 3),
-          Text(label, style: const TextStyle(fontSize: 10, color: AppColors.textSecondary)),
+          Text(label, style: const TextStyle(fontSize: 10, color: IveTokens.ink2)),
         ],
       ),
     );
@@ -1303,19 +1290,19 @@ class _LiveActionChip extends StatelessWidget {
         HapticFeedback.lightImpact();
         onTap?.call();
       },
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: BorderRadius.circular(IveTokens.rSm),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
         decoration: BoxDecoration(
-          border: Border.all(color: kLiveColor.withValues(alpha: 0.3)),
-          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: IveTokens.moduleLive.withValues(alpha: 0.3)),
+          borderRadius: BorderRadius.circular(IveTokens.rSm),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, size: 14, color: kLiveColor),
+            Icon(icon, size: 14, color: IveTokens.moduleLive),
             const SizedBox(width: 4),
-            Text(label, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: kLiveColor)),
+            Text(label, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: IveTokens.moduleLive)),
           ],
         ),
       ),
@@ -1343,9 +1330,9 @@ class _AvailabilityDot extends StatelessWidget {
 
   Color _colorFor(DriverAvailability a) {
     switch (a) {
-      case DriverAvailability.online: return const Color(0xFF10B981);
-      case DriverAvailability.offline: return Colors.grey;
-      case DriverAvailability.onBreak: return const Color(0xFFF59E0B);
+      case DriverAvailability.online: return IveTokens.success;
+      case DriverAvailability.offline: return IveTokens.faint;
+      case DriverAvailability.onBreak: return IveTokens.warning;
     }
   }
 }
@@ -1361,8 +1348,8 @@ class _DriverStat extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: const TextStyle(fontSize: 10, color: AppColors.textTertiary)),
-        Text(value, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
+        Text(label, style: const TextStyle(fontSize: 10, color: IveTokens.mute)),
+        Text(value, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: IveTokens.ink)),
       ],
     );
   }

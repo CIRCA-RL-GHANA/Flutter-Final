@@ -1,9 +1,9 @@
-/// ─────────────────────────────────────────────────────────────────────────────
-/// SD0: SETUP DASHBOARD HUB — Master Entry Point
+/// 
+/// SD0: SETUP DASHBOARD HUB  Master Entry Point
 /// 6-row adaptive card matrix with role-based filtering
 /// Rows: Operations, Finance & Staff, Logistics, Engagement,
 ///        Branch Identity, Personal & History
-/// ─────────────────────────────────────────────────────────────────────────────
+/// 
 library;
 
 import 'package:flutter/material.dart';
@@ -65,7 +65,7 @@ class _SetupDashboardScreenState extends State<SetupDashboardScreen>
     return Consumer2<SetupDashboardProvider, ContextProvider>(
       builder: (context, setupProv, ctxProv, _) {
         final role = ctxProv.currentRole;
-        // Spec P1: only render permitted (fully-actionable) cards — no greyed-out locked cards
+        // Spec P1: only render permitted (fully-actionable) cards  no greyed-out locked cards
         final cards = setupProv.getCardsForRole(role).where((c) => !c.isViewOnly).toList();
         final header = setupProv.headerInfo;
 
@@ -76,7 +76,7 @@ class _SetupDashboardScreenState extends State<SetupDashboardScreen>
 
         final rows = _groupCardsIntoRows(filteredCards);
 
-        // Flat index counter for stagger — pre-count total visible cards
+        // Flat index counter for stagger  pre-count total visible cards
         final totalCards = filteredCards.length;
         var flatIndex = 0;
 
@@ -92,7 +92,7 @@ class _SetupDashboardScreenState extends State<SetupDashboardScreen>
             onRefresh: () async => setupProv.refreshSection('hub'),
             child: CustomScrollView(
               slivers: [
-                // ─── Header ─────────────────────────────────
+                //  Header 
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(
@@ -102,7 +102,7 @@ class _SetupDashboardScreenState extends State<SetupDashboardScreen>
                   ),
                 ),
 
-                // ─── Genie health strip (max one per screen) ─
+                //  Genie health strip (max one per screen) 
                 if (_genieVisible)
                   SliverToBoxAdapter(
                     child: Padding(
@@ -116,7 +116,7 @@ class _SetupDashboardScreenState extends State<SetupDashboardScreen>
                     ),
                   ),
 
-                // ─── Search ──────────────────────────────────
+                //  Search 
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(
@@ -126,7 +126,7 @@ class _SetupDashboardScreenState extends State<SetupDashboardScreen>
                   ),
                 ),
 
-                // ─── Card Rows ───────────────────────────────
+                //  Card Rows 
                 ...rows.entries.map((entry) {
                   final rowCards = entry.value;
                   if (rowCards.isEmpty) return const SliverToBoxAdapter(child: SizedBox.shrink());
@@ -183,7 +183,7 @@ class _SetupDashboardScreenState extends State<SetupDashboardScreen>
                   );
                 }),
 
-                // ─── Empty State ─────────────────────────────
+                //  Empty State 
                 if (filteredCards.isEmpty && _searchQuery.isNotEmpty)
                   const SliverToBoxAdapter(
                     child: Padding(
@@ -196,7 +196,7 @@ class _SetupDashboardScreenState extends State<SetupDashboardScreen>
                     ),
                   ),
 
-                // ─── SOS Button ──────────────────────────────
+                //  SOS Button 
                 SliverToBoxAdapter(
                   child: SetupSOSButton(
                     onPressed: () => Navigator.pushNamed(context, AppRoutes.liveEmergencySOS),
@@ -248,7 +248,7 @@ class _SetupDashboardScreenState extends State<SetupDashboardScreen>
   }
 }
 
-// ─── Dark App Bar ─────────────────────────────────────────────────────────────
+//  Dark App Bar 
 
 class _DarkSetupAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -272,7 +272,7 @@ class _DarkSetupAppBar extends StatelessWidget implements PreferredSizeWidget {
   );
 }
 
-// ─── Header Banner ────────────────────────────────────────────────────────────
+//  Header Banner 
 
 class _HeaderBanner extends StatelessWidget {
   final DashboardHeaderInfo header;
@@ -316,7 +316,7 @@ class _HeaderBanner extends StatelessWidget {
                 Text('Welcome, ${header.userName}', style: IveType.callout),
                 const SizedBox(height: 2),
                 Text(
-                  '${header.roleName} · ${header.branchName}',
+                  '${header.roleName}  ${header.branchName}',
                   style: IveType.caption.copyWith(color: IveTokens.muteColor),
                 ),
               ],
@@ -329,7 +329,7 @@ class _HeaderBanner extends StatelessWidget {
   }
 }
 
-// ─── Sync Badge ───────────────────────────────────────────────────────────────
+//  Sync Badge 
 
 class _SyncBadge extends StatelessWidget {
   final SyncState state;
@@ -367,7 +367,7 @@ class _SyncBadge extends StatelessWidget {
   }
 }
 
-// ─── Dark Search Bar ──────────────────────────────────────────────────────────
+//  Dark Search Bar 
 
 class _DarkSearchBar extends StatelessWidget {
   final ValueChanged<String> onChanged;
@@ -391,9 +391,10 @@ class _DarkSearchBar extends StatelessWidget {
             style: const TextStyle(fontSize: 14, color: IveTokens.inkColor),
             cursorColor: IveTokens.accentColor,
             decoration: const InputDecoration(
-              hintText: 'Search modules…',
+              hintText: 'Search modules',
               hintStyle: TextStyle(fontSize: 14, color: IveTokens.muteColor),
               border: InputBorder.none,
+              filled: false,
               contentPadding: EdgeInsets.zero,
               isDense: true,
             ),
@@ -406,7 +407,7 @@ class _DarkSearchBar extends StatelessWidget {
   );
 }
 
-// ─── Row Label ────────────────────────────────────────────────────────────────
+//  Row Label 
 
 class _RowLabel extends StatelessWidget {
   final String title;
@@ -425,7 +426,7 @@ class _RowLabel extends StatelessWidget {
   ]);
 }
 
-// ─── Dark Module Card ─────────────────────────────────────────────────────────
+//  Dark Module Card 
 
 class _DarkModuleCard extends StatelessWidget {
   final DashboardCard card;

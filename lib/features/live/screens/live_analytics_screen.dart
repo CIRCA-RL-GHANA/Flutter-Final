@@ -1,11 +1,13 @@
-﻿/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-/// LIVE MODULE — Screen 18: Live Analytics Dashboard
+/// 
+/// LIVE MODULE  Screen 18: Live Analytics Dashboard
 /// Real-time operations analytics: KPIs, delivery zones,
 /// bottleneck alerts, performance trends, predictive insights
-/// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/// 
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
+import '../../../core/utils/app_toast.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
@@ -38,11 +40,11 @@ class LiveAnalyticsScreen extends StatelessWidget {
               IconButton(
                   icon: const Icon(Icons.file_download, size: 20),
                   color: AppColors.textSecondary,
-                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Exporting...')))),
+                  onPressed: () => AppToast.show(context, 'Exporting...')),
             ],
           ),
           body: RefreshIndicator(
-            color: kLiveColor,
+            color: IveTokens.moduleLive,
             onRefresh: () async {
               HapticFeedback.mediumImpact();
               await prov.init();
@@ -51,7 +53,7 @@ class LiveAnalyticsScreen extends StatelessWidget {
               padding: const EdgeInsets.all(16),
               children: [
                 // Key Metrics
-                const Text('ðŸ“Š KEY METRICS',
+                const Text('" KEY METRICS',
                     style:
                         TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 const SizedBox(height: 8),
@@ -62,7 +64,7 @@ class LiveAnalyticsScreen extends StatelessWidget {
                             label: 'Total Orders',
                             value: '${metrics.ordersProcessed}',
                             icon: Icons.shopping_bag,
-                            color: kLiveColor)),
+                            color: IveTokens.moduleLive)),
                     const SizedBox(width: 8),
                     Expanded(
                         child: LiveMetricBadge(
@@ -99,7 +101,7 @@ class LiveAnalyticsScreen extends StatelessWidget {
                         child: LiveMetricBadge(
                             label: 'Revenue',
                             value:
-                                'â‚µ${metrics.todayRevenue.toStringAsFixed(0)}',
+                                '${metrics.todayRevenue.toStringAsFixed(0)}',
                             icon: Icons.attach_money,
                             color: const Color(0xFF8B5CF6))),
                     const SizedBox(width: 8),
@@ -111,7 +113,7 @@ class LiveAnalyticsScreen extends StatelessWidget {
                             icon: Icons.speed,
                             color: metrics.efficiencyScore >= 0.9
                                 ? const Color(0xFF10B981)
-                                : kLiveColor)),
+                                : IveTokens.moduleLive)),
                   ],
                 ),
 
@@ -119,7 +121,7 @@ class LiveAnalyticsScreen extends StatelessWidget {
 
                 // Delivery Zones
                 LiveSectionCard(
-                  title: 'ðŸ—ºï¸ DELIVERY ZONE PERFORMANCE',
+                  title: ' DELIVERY ZONE PERFORMANCE',
                   icon: Icons.map,
                   iconColor: const Color(0xFF3B82F6),
                   child: Column(
@@ -131,7 +133,7 @@ class LiveAnalyticsScreen extends StatelessWidget {
                 // Bottleneck Alerts
                 if (bottlenecks.isNotEmpty)
                   LiveSectionCard(
-                    title: 'âš ï¸ BOTTLENECK ALERTS',
+                    title: ' BOTTLENECK ALERTS',
                     icon: Icons.warning,
                     iconColor: const Color(0xFFF59E0B),
                     child: Column(
@@ -143,7 +145,7 @@ class LiveAnalyticsScreen extends StatelessWidget {
 
                 // Predictive Insights
                 LiveSectionCard(
-                  title: 'ðŸ¤– AI PREDICTIVE INSIGHTS',
+                  title: ' AI PREDICTIVE INSIGHTS',
                   icon: Icons.psychology,
                   iconColor: const Color(0xFF8B5CF6),
                   child: Column(
@@ -155,7 +157,7 @@ class LiveAnalyticsScreen extends StatelessWidget {
 
                 // Driver Performance Summary
                 LiveSectionCard(
-                  title: 'ðŸ‘¥ DRIVER LEADERBOARD',
+                  title: 'DRIVER LEADERBOARD',
                   icon: Icons.leaderboard,
                   iconColor: const Color(0xFFF59E0B),
                   child: Column(
@@ -183,9 +185,9 @@ class LiveAnalyticsScreen extends StatelessWidget {
 
                 // Performance chart placeholder
                 LiveSectionCard(
-                  title: 'ðŸ“ˆ HOURLY ORDER VOLUME',
+                  title: '" HOURLY ORDER VOLUME',
                   icon: Icons.bar_chart,
-                  iconColor: kLiveColor,
+                  iconColor: IveTokens.moduleLive,
                   child: Container(
                     height: 120,
                     decoration: BoxDecoration(
@@ -239,7 +241,7 @@ class _ZoneCard extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: zone.intensity == 'hot'
-                    ? kLiveColor
+                    ? IveTokens.moduleLive
                     : const Color(0xFF10B981),
               ),
             ),
@@ -259,18 +261,18 @@ class _ZoneCard extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 6, vertical: 1),
                           decoration: BoxDecoration(
-                              color: kLiveColor.withValues(alpha: 0.1),
-                              borderRadius: BorderRadius.circular(4)),
+                              color: IveTokens.moduleLive.withValues(alpha: 0.1),
+                              borderRadius: BorderRadius.circular(6)),
                           child: const Text('HIGH DEMAND',
                               style: TextStyle(
                                   fontSize: 9,
                                   fontWeight: FontWeight.w700,
-                                  color: kLiveColor)),
+                                  color: IveTokens.moduleLive)),
                         ),
                       ],
                     ],
                   ),
-                  Text('${zone.orderCount} orders • ${zone.intensity} demand',
+                  Text('${zone.orderCount} orders  ${zone.intensity} demand',
                       style: const TextStyle(
                           fontSize: 11, color: AppColors.textTertiary)),
                 ],
@@ -281,7 +283,7 @@ class _ZoneCard extends StatelessWidget {
                     fontSize: 14,
                     fontWeight: FontWeight.w700,
                     color: zone.intensity == 'hot'
-                        ? kLiveColor
+                        ? IveTokens.moduleLive
                         : const Color(0xFF10B981))),
           ],
         ),
@@ -349,7 +351,7 @@ class _InsightCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('ðŸ§ ', style: TextStyle(fontSize: 16)),
+            const Text('', style: TextStyle(fontSize: 16)),
             const SizedBox(width: 8),
             Expanded(
               child: Column(
@@ -381,11 +383,11 @@ class _DriverLeaderboardItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final medal = rank == 1
-        ? 'ðŸ¥‡'
+        ? ''
         : rank == 2
-            ? 'ðŸ¥ˆ'
+            ? ''
             : rank == 3
-                ? 'ðŸ¥‰'
+                ? ''
                 : '$rank';
     return InkWell(
       onTap: onTap,
@@ -402,12 +404,12 @@ class _DriverLeaderboardItem extends StatelessWidget {
             const SizedBox(width: 8),
             CircleAvatar(
               radius: 16,
-              backgroundColor: kLiveColor.withValues(alpha: 0.1),
+              backgroundColor: IveTokens.moduleLive.withValues(alpha: 0.1),
               child: Text(driver.name.substring(0, 1),
                   style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w700,
-                      color: kLiveColor)),
+                      color: IveTokens.moduleLive)),
             ),
             const SizedBox(width: 8),
             Expanded(
@@ -418,7 +420,7 @@ class _DriverLeaderboardItem extends StatelessWidget {
                       style: const TextStyle(
                           fontSize: 13, fontWeight: FontWeight.w600)),
                   Text(
-                      '${driver.todayDeliveries} deliveries • ${driver.onTimeRate.toStringAsFixed(0)}% on-time',
+                      '${driver.todayDeliveries} deliveries  ${driver.onTimeRate.toStringAsFixed(0)}% on-time',
                       style: const TextStyle(
                           fontSize: 11, color: AppColors.textTertiary)),
                 ],

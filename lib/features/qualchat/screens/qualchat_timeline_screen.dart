@@ -1,8 +1,9 @@
-/// qualChat Screen 3 — Hey Ya Journey (Owner Only)
+/// qualChat Screen 3  Hey Ya Journey (Owner Only)
 /// Dating timeline: track your connection journey and plan a date
 library;
 
 import 'package:flutter/material.dart';
+import '../../../core/design/ive.dart';
 import '../models/qualchat_models.dart';
 import '../providers/qualchat_provider.dart';
 import '../widgets/qualchat_widgets.dart';
@@ -13,23 +14,23 @@ class QualChatTimelineScreen extends StatelessWidget {
 
   String _intentLabel(HeyYaIntent intent) {
     const labels = {
-      HeyYaIntent.coffee: 'Coffee â˜•',
-      HeyYaIntent.dinner: 'Dinner ðŸ½ï¸',
-      HeyYaIntent.walk: 'Walk ðŸš¶',
-      HeyYaIntent.movie: 'Movie Night ðŸŽ¬',
-      HeyYaIntent.videoCall: 'Video Date ðŸ“¹',
-      HeyYaIntent.any: 'Open to Anything ðŸ’«',
+      HeyYaIntent.coffee: 'Coffee ',
+      HeyYaIntent.dinner: 'Dinner ',
+      HeyYaIntent.walk: 'Walk ',
+      HeyYaIntent.movie: 'Movie Night ',
+      HeyYaIntent.videoCall: 'Video Date "',
+      HeyYaIntent.any: 'Open to Anything ',
     };
     return labels[intent] ?? 'Open to Anything';
   }
 
   String _statusLabel(HeyYaStatus status) {
     const labels = {
-      HeyYaStatus.pending: 'â³ Awaiting response',
-      HeyYaStatus.accepted: 'ðŸ’˜ Matched!',
-      HeyYaStatus.expired: 'âŒ› Expired',
-      HeyYaStatus.rejected: 'ðŸ’” Passed',
-      HeyYaStatus.withdrawn: 'â†©ï¸ Withdrawn',
+      HeyYaStatus.pending: ' Awaiting response',
+      HeyYaStatus.accepted: 'Matched!',
+      HeyYaStatus.expired: ' Expired',
+      HeyYaStatus.rejected: 'Passed',
+      HeyYaStatus.withdrawn: ' Withdrawn',
     };
     return labels[status] ?? status.name;
   }
@@ -41,7 +42,7 @@ class QualChatTimelineScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FE),
       appBar: QualChatAppBar(
-        title: 'Dating Journey ðŸ’˜',
+        title: 'Dating Journey ',
         actions: [
           TextButton(
             onPressed: () {
@@ -49,7 +50,7 @@ class QualChatTimelineScreen extends StatelessWidget {
                 const SnackBar(content: Text('Link copied to clipboard')),
               );
             },
-            child: const Text('Share', style: TextStyle(color: kChatColor)),
+            child: const Text('Share', style: TextStyle(color: IveTokens.moduleQualChat)),
           ),
         ],
       ),
@@ -61,7 +62,7 @@ class QualChatTimelineScreen extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(10),
               border: Border.all(color: const Color(0xFFE5E7EB)),
             ),
             child: Row(
@@ -85,12 +86,12 @@ class QualChatTimelineScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Match Score: ${request.matchPercentage}% ðŸ’˜',
+                        'Match Score: ${request.matchPercentage}% ',
                         style: const TextStyle(fontSize: 13, color: kChatSocial),
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        'ðŸ“… Intent: ${_intentLabel(request.intent)}',
+                        ' Intent: ${_intentLabel(request.intent)}',
                         style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
                       ),
                       const SizedBox(height: 2),
@@ -146,22 +147,22 @@ class QualChatTimelineScreen extends StatelessWidget {
           children: [
             Text(
               request.status == HeyYaStatus.accepted
-                  ? 'ðŸ’˜ You matched! Ready to plan your date?'
-                  : 'Still into ${request.person.name}? ðŸ˜Š',
+                  ? 'You matched! Ready to plan your date?'
+                  : 'Still into ${request.person.name}? ',
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 12),
             Row(
               children: [
-                _ActionButton(icon: '💌', label: 'Say Hi', onTap: () => Navigator.pushNamed(context, AppRoutes.qualChatDashboard)),
+                _ActionButton(icon: '', label: 'Say Hi', onTap: () => Navigator.pushNamed(context, AppRoutes.qualChatDashboard)),
                 const SizedBox(width: 8),
-                _ActionButton(icon: '📅', label: 'Plan Date', onTap: () {
+                _ActionButton(icon: '', label: 'Plan Date', onTap: () {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Opening planner...')),
                   );
                 }, isPrimary: true),
                 const SizedBox(width: 8),
-                _ActionButton(icon: '🎤', label: 'Voice Note', onTap: () {
+                _ActionButton(icon: '', label: 'Voice Note', onTap: () {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Recording voice note...')),
                   );
@@ -171,19 +172,19 @@ class QualChatTimelineScreen extends StatelessWidget {
             const SizedBox(height: 8),
             Row(
               children: [
-                _ActionButton(icon: '✅', label: 'Accept', onTap: () {
+                _ActionButton(icon: '', label: 'Accept', onTap: () {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Accepted!')),
                   );
                 }, isPrimary: request.status == HeyYaStatus.pending && !request.isSentByMe),
                 const SizedBox(width: 8),
-                _ActionButton(icon: '🔄', label: 'Re-spark', onTap: () {
+                _ActionButton(icon: '', label: 'Re-spark', onTap: () {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Re-sparked!')),
                   );
                 }),
                 const SizedBox(width: 8),
-                _ActionButton(icon: '❌', label: 'Withdraw', onTap: () {
+                _ActionButton(icon: '', label: 'Withdraw', onTap: () {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Withdrawn')),
                   );
@@ -262,7 +263,7 @@ class _TimelineItem extends StatelessWidget {
                   ],
                   const SizedBox(height: 4),
                   Text(
-                    'â° ${_formatDateTime(event.timestamp)}',
+                    ' ${_formatDateTime(event.timestamp)}',
                     style: const TextStyle(fontSize: 11, color: Color(0xFF9CA3AF)),
                   ),
                 ],
@@ -315,10 +316,10 @@ class _PendingTimelineItem extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
                 color: const Color(0xFFF59E0B).withValues(alpha: 0.1),
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(10),
               ),
               child: const Text(
-                'â³ PENDING RESPONSE',
+                ' PENDING RESPONSE',
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
@@ -338,10 +339,10 @@ class _PendingTimelineItem extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
                   color: const Color(0xFFEF4444).withValues(alpha: 0.1),
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: Text(
-                  'â° Expires in: ${remaining.inDays}d ${remaining.inHours % 24}h',
+                  ' Expires in: ${remaining.inDays}d ${remaining.inHours % 24}h',
                   style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
