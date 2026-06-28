@@ -89,30 +89,25 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Setup Gradle 8.11.1
-        uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: '8.11.1'
-
-      - name: Generate Gradle wrapper
-        run: gradle wrapper --gradle-version=8.11.1 --distribution-type=bin
-        working-directory: android
-
       - name: Decode keystore
         run: |
           mkdir -p android/keystore
           if [ -n "$KEYSTORE_B64" ]; then
             echo "$KEYSTORE_B64" | base64 -d > android/keystore/promptgenie-release.jks
           else
-            echo "::warning::ANDROID_KEYSTORE_BASE64 not set — skipping keystore decode"
-            keytool -genkey -v -keystore android/keystore/promptgenie-release.jks -alias debug -keyalg RSA -keysize 2048 -validity 1 -storepass android -keypass android -dname "CN=debug" 2>/dev/null || true
+            echo "::warning::ANDROID_KEYSTORE_BASE64 not set — generating ephemeral debug keystore"
+            keytool -genkey -v \
+              -keystore android/keystore/promptgenie-release.jks \
+              -alias debug -keyalg RSA -keysize 2048 -validity 1 \
+              -storepass android -keypass android \
+              -dname "CN=debug" 2>/dev/null || true
           fi
         env:
           KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
 
       - name: Create keystore.properties
         run: |
-          cat > android/keystore.properties << EOF
+          cat > android/keystore.properties <<EOF
           storePassword=${KEYSTORE_PASS:-android}
           keyPassword=${KEY_PASS:-android}
           keyAlias=${KEY_ALIAS:-debug}
@@ -120,14 +115,24 @@ jobs:
           EOF
         env:
           KEYSTORE_PASS: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
-          KEY_PASS: ${{ secrets.ANDROID_KEY_PASSWORD }}
-          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          KEY_PASS:      ${{ secrets.ANDROID_KEY_PASSWORD }}
+          KEY_ALIAS:     ${{ secrets.ANDROID_KEY_ALIAS }}
 
       - name: Build App Bundle (AAB)
-        run: flutter build appbundle --release --obfuscate --split-debug-info=build/debug-info --dart-define=API_BASE_URL=${{ vars.API_BASE_URL || 'https://api.genieinprompt.app' }} --dart-define=ENVIRONMENT=production
+        run: |
+          flutter build appbundle --release \
+            --obfuscate \
+            --split-debug-info=build/debug-info \
+            --dart-define=API_BASE_URL=${{ vars.API_BASE_URL || 'https://api.genieinprompt.app' }} \
+            --dart-define=ENVIRONMENT=production
 
       - name: Build APK
-        run: flutter build apk --release --obfuscate --split-debug-info=build/debug-info --dart-define=API_BASE_URL=${{ vars.API_BASE_URL || 'https://api.genieinprompt.app' }} --dart-define=ENVIRONMENT=production
+        run: |
+          flutter build apk --release \
+            --obfuscate \
+            --split-debug-info=build/debug-info \
+            --dart-define=API_BASE_URL=${{ vars.API_BASE_URL || 'https://api.genieinprompt.app' }} \
+            --dart-define=ENVIRONMENT=production
 
       - name: Upload AAB
         uses: actions/upload-artifact@v4
@@ -170,30 +175,33 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Generate iOS project files
-        run: flutter create --platforms=ios --no-pub --org com.promptgenie --project-name thepg .
-
-      - name: Install CocoaPods
+      - name: Install CocoaPods dependencies
         run: cd ios && pod install --repo-update
+        continue-on-error: true
 
       - name: Import signing certificate
         continue-on-error: true
         uses: apple-actions/import-codesign-certs@v2
         with:
           p12-file-base64: ${{ secrets.IOS_CERTIFICATE_BASE64 }}
-          p12-password: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
+          p12-password:    ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
 
       - name: Import provisioning profile
         continue-on-error: true
         uses: apple-actions/download-provisioning-profiles@v2
         with:
-          bundle-id: com.promptgenie.app
-          issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
-          api-key-id: ${{ secrets.APPSTORE_API_KEY_ID }}
+          bundle-id:       com.promptgenie.app
+          issuer-id:       ${{ secrets.APPSTORE_ISSUER_ID }}
+          api-key-id:      ${{ secrets.APPSTORE_API_KEY_ID }}
           api-private-key: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
 
-      - name: Build iOS
-        run: flutter build ios --release --no-codesign --obfuscate --split-debug-info=build/debug-info --dart-define=API_BASE_URL=${{ vars.API_BASE_URL || 'https://api.genieinprompt.app' }} --dart-define=ENVIRONMENT=production
+      - name: Build iOS (no-codesign)
+        run: |
+          flutter build ios --release --no-codesign \
+            --obfuscate \
+            --split-debug-info=build/debug-info \
+            --dart-define=API_BASE_URL=${{ vars.API_BASE_URL || 'https://api.genieinprompt.app' }} \
+            --dart-define=ENVIRONMENT=production
 
       - name: Upload IPA
         continue-on-error: true
@@ -218,6 +226,8 @@ jobs:
     needs: test
     if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
     environment: production
+    env:
+      HAS_VERCEL: ${{ secrets.VERCEL_TOKEN != '' }}
 
     steps:
       - uses: actions/checkout@v4
@@ -238,17 +248,8 @@ jobs:
             --dart-define=API_BASE_URL=${{ vars.API_BASE_URL || 'https://api.genieinprompt.app' }} \
             --dart-define=ENVIRONMENT=production
 
-      - name: Inject build SHA into version.json (unique per-deploy cache-bust)
+      - name: Inject build SHA into version.json
         run: |
-          # Flutter's pubspec version (e.g. 1.0.5+6) is static across code-only commits,
-          # so the index.html version-stamp would never change and purgeAndReload() would
-          # never fire for returning visitors.  We enrich version.json with the exact git
-          # SHA so every deployment — even one that doesn't bump pubspec — gets a unique
-          # build_stamp that the client-side cache-bust logic can detect.
-          #
-          # NOTE: Flutter 3.27+ already injects ?v=<serviceWorkerVersion> into the SW
-          # registration URL itself (and marks the legacy SW as deprecated), so a
-          # sed-based URL patch is no longer needed or possible.
           SHA="${{ github.sha }}"
           SHORT="${SHA:0:8}"
           node -e "
@@ -273,26 +274,18 @@ jobs:
       - name: Construct Vercel Build Output (prebuilt, zero-build)
         run: |
           set -e
-          # Vercel's "Build Output API" lets us skip Vercel's build phase
-          # entirely. We translate vercel.json (headers + rewrites) into the
-          # official .vercel/output/config.json schema, and place the Flutter
-          # build under .vercel/output/static.
           mkdir -p .vercel/output/static
           cp -a build/web/. .vercel/output/static/
           node -e "
             const fs = require('fs');
             const v = JSON.parse(fs.readFileSync('vercel.json','utf8'));
             const routes = [];
-            // 1. Apply all header rules first, with continue:true so matching
-            //    continues to the filesystem / rewrite phase.
             for (const h of (v.headers || [])) {
               const headers = {};
               for (const kv of (h.headers || [])) headers[kv.key] = kv.value;
               routes.push({ src: h.source, headers, continue: true });
             }
-            // 2. Serve real files from disk before falling through to rewrites.
             routes.push({ handle: 'filesystem' });
-            // 3. SPA rewrites.
             for (const r of (v.rewrites || [])) {
               routes.push({ src: r.source, dest: r.destination });
             }
@@ -306,51 +299,55 @@ jobs:
           du -sh .vercel/output/static
 
       - name: Install Vercel CLI
+        if: env.HAS_VERCEL == 'true'
         run: npm install --global vercel@latest
 
       - name: Pull Vercel project metadata
+        if: env.HAS_VERCEL == 'true'
         timeout-minutes: 3
-        run: |
-          vercel pull --yes --environment=production --token="${{ secrets.VERCEL_TOKEN }}"
+        run: vercel pull --yes --environment=production --token="${{ secrets.VERCEL_TOKEN }}"
         env:
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_ORG_ID:     ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
       - name: Deploy to Vercel (production, prebuilt)
+        if: env.HAS_VERCEL == 'true'
         id: vercel_deploy
         timeout-minutes: 8
         run: |
           set -e
-          # --prebuilt tells Vercel to deploy .vercel/output verbatim with NO
-          # build phase. This is the official escape hatch that prevents the
-          # "Building…" hang we hit when Vercel detected the directory and
-          # tried to re-build it.
           URL=$(vercel deploy --prebuilt --prod --yes \
             --token="${{ secrets.VERCEL_TOKEN }}" 2>&1 | tee /tmp/vercel.log | tail -1)
           echo "Deployment URL: $URL"
           echo "url=$URL" >> "$GITHUB_OUTPUT"
         env:
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_ORG_ID:     ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
       - name: Smoke-test Vercel deployment
+        if: env.HAS_VERCEL == 'true'
         env:
           DEPLOY_URL: ${{ vars.VERCEL_URL || 'https://genieinprompt.app' }}
         run: |
           sleep 15
-          # Root must be reachable.
           STATUS=$(curl -s -o /dev/null -w '%{http_code}' "$DEPLOY_URL?cb=$RANDOM")
           echo "PWA HTTP status: $STATUS"
           [ "$STATUS" -eq 200 ] || { echo "::error::Smoke test failed: HTTP $STATUS"; exit 1; }
-          # Served HTML must contain the silent-update SW logic.
           HTML=$(curl -s "$DEPLOY_URL/index.html?cb=$RANDOM")
           echo "$HTML" | grep -q 'controllerchange' || { echo "::error::Live HTML missing controllerchange (silent SW update logic)"; exit 1; }
           echo "$HTML" | grep -q 'New version available! Reload to update' && { echo "::error::Live HTML still serves old confirm() prompt"; exit 1; } || true
-          # main.dart.js must NOT be served as immutable.
           CC=$(curl -sI "$DEPLOY_URL/main.dart.js?cb=$RANDOM" | grep -i '^cache-control:' || true)
           echo "main.dart.js: $CC"
           echo "$CC" | grep -qi 'immutable' && { echo "::error::main.dart.js still served with immutable header"; exit 1; } || true
-          echo "✅ Deploy verified: silent SW logic live, main.dart.js no-cache."
+          echo "Deploy verified: silent SW logic live, main.dart.js no-cache."
+
+      - name: Upload PWA build (no Vercel token configured)
+        if: env.HAS_VERCEL != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: pwa-build
+          path: build/web/
+          retention-days: 7
 
   # ---- Deploy Android to Play Store ----
   deploy-android:
@@ -359,7 +356,6 @@ jobs:
     needs: build-android
     environment: production
     continue-on-error: true
-    # Only run when Play Store creds are configured.
     if: github.ref == 'refs/heads/main'
 
     steps:
@@ -404,7 +400,7 @@ jobs:
         continue-on-error: true
         uses: apple-actions/upload-testflight-build@v1
         with:
-          app-path: '*.ipa'
-          issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
-          api-key-id: ${{ secrets.APPSTORE_API_KEY_ID }}
+          app-path:        '*.ipa'
+          issuer-id:       ${{ secrets.APPSTORE_ISSUER_ID }}
+          api-key-id:      ${{ secrets.APPSTORE_API_KEY_ID }}
           api-private-key: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
