@@ -1,307 +1,185 @@
-/// 
-/// U2: NOTIFICATION CENTER Screen
-/// Filterable notification feed with read/unread/archive, swipe actions,
-/// notification type chips, priority indicators
-/// 
 library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
-import '../../../core/theme/app_colors.dart';
-import '../models/utility_models.dart';
-import '../providers/utility_provider.dart';
-import '../widgets/shared_widgets.dart';
+import '../../../core/design/ive.dart';
 
-class NotificationCenterScreen extends StatelessWidget {
+class NotificationCenterScreen extends StatefulWidget {
   const NotificationCenterScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Consumer<UtilityProvider>(
-      builder: (context, prov, _) {
-        final filtered = prov.filteredNotifications;
-
-        return Scaffold(
-          backgroundColor: const Color(0xFF08080F),
-          appBar: UtilityAppBar(
-            title: 'Notifications',
-            actions: [
-              if (prov.unreadCount > 0)
-                TextButton(
-                  onPressed: () {
-                    HapticFeedback.mediumImpact();
-                    prov.markAllRead();
-                  },
-                  child: const Text(
-                    'Read All',
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w600,
-                      color: kUtilityColor,
-                    ),
-                  ),
-                ),
-              const SizedBox(width: 4),
-            ],
-          ),
-          body: Column(
-            children: [
-
-              //  Status Filter Chips 
-              Padding(
-                padding: const EdgeInsets.only(top: 8),
-                child: UtilityFilterChipRow(
-                  labels: [
-                    'All (${prov.notifications.where((n) => !n.isArchived).length})',
-                    'Unread (${prov.unreadCount})',
-                    'Read',
-                    'Archived',
-                  ],
-                  selectedIndex: prov.notificationFilter.index,
-                  onSelected: (i) => prov.setNotificationFilter(NotificationFilter.values[i]),
-                ),
-              ),
-
-              //  Type Filter Chips 
-              Padding(
-                padding: const EdgeInsets.only(top: 8),
-                child: SizedBox(
-                  height: 32,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    children: [
-                      _TypeChip(
-                        label: 'All Types',
-                        isSelected: prov.notificationTypeFilter == null,
-                        onTap: () => prov.setNotificationTypeFilter(null),
-                      ),
-                      ...NotificationType.values.map((type) => Padding(
-                        padding: const EdgeInsets.only(left: 6),
-                        child: _TypeChip(
-                          label: _typeLabel(type),
-                          isSelected: prov.notificationTypeFilter == type,
-                          onTap: () => prov.setNotificationTypeFilter(type),
-                        ),
-                      )),
-                    ],
-                  ),
-                ),
-              ),
-
-              const SizedBox(height: 8),
-
-              //  Notification List 
-              Expanded(
-                child: filtered.isEmpty
-                    ? const UtilityEmptyState(
-                        icon: Icons.notifications_none,
-                        title: 'No Notifications',
-                        subtitle: 'You\'re all caught up! New notifications will appear here.',
-                      )
-                    : ListView.separated(
-                        padding: const EdgeInsets.fromLTRB(20, 4, 20, 100),
-                        itemCount: filtered.length,
-                        separatorBuilder: (_, __) => const SizedBox(height: 8),
-                        itemBuilder: (context, i) {
-                          final notif = filtered[i];
-                          return Dismissible(
-                            key: ValueKey(notif.id),
-                            background: _dismissBackground(Colors.blue, Icons.archive, Alignment.centerLeft),
-                            secondaryBackground: _dismissBackground(AppColors.error, Icons.delete, Alignment.centerRight),
-                            confirmDismiss: (direction) async {
-                              if (direction == DismissDirection.startToEnd) {
-                                prov.archiveNotification(notif.id);
-                                return false;
-                              } else {
-                                prov.deleteNotification(notif.id);
-                                return true;
-                              }
-                            },
-                            child: _NotificationCard(
-                              notification: notif,
-                              onTap: () {
-                                HapticFeedback.selectionClick();
-                                prov.markNotificationRead(notif.id);
-                                if (notif.actionRoute != null) {
-                                  Navigator.pushNamed(context, notif.actionRoute!);
-                                }
-                              },
-                            ),
-                          );
-                        },
-                      ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _dismissBackground(Color color, IconData icon, Alignment alignment) {
-    return Container(
-      alignment: alignment,
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Icon(icon, color: color),
-    );
-  }
-
-  String _typeLabel(NotificationType type) {
-    switch (type) {
-      case NotificationType.system: return 'System';
-      case NotificationType.security: return 'Security';
-      case NotificationType.transaction: return 'Transaction';
-      case NotificationType.social: return 'Social';
-      case NotificationType.promotion: return 'Promo';
-      case NotificationType.reminder: return 'Reminder';
-      case NotificationType.alert: return 'Alert';
-      case NotificationType.update: return 'Update';
-    }
-  }
+  State<NotificationCenterScreen> createState() => _NotificationCenterScreenState();
 }
 
-//  Type Filter Chip 
+class _NotificationCenterScreenState extends State<NotificationCenterScreen> {
+  String _filter = 'All';
+  static const _filters = ['All', 'Payments', 'Alerts', 'Messages', 'System'];
 
-class _TypeChip extends StatelessWidget {
-  final String label;
-  final bool isSelected;
-  final VoidCallback onTap;
+  static const _items = [
+    _NotifItem(
+      dot: Color(0xFFEF4444),
+      category: 'SECURITY',
+      badge: 'HIGH',
+      title: 'New device sign-in detected',
+      meta: 'Accra · 9:32 AM',
+    ),
+    _NotifItem(
+      dot: Color(0xFF4361EE),
+      category: 'PAYMENTS',
+      badge: null,
+      title: 'You received 250 QP from Ama',
+      meta: '2h ago',
+    ),
+    _NotifItem(
+      dot: Color(0xFFC9A84C),
+      category: 'GENIE',
+      badge: null,
+      title: 'Your spending is 12% under budget',
+      meta: '3h ago',
+    ),
+    _NotifItem(
+      dot: Color(0xFF4361EE),
+      category: 'MARKET',
+      badge: null,
+      title: 'Order #GO-2291 is out for delivery',
+      meta: '5h ago',
+    ),
+    _NotifItem(
+      dot: Color(0xFF34D399),
+      category: 'LIVE',
+      badge: null,
+      title: 'Return #4821 was approved',
+      meta: 'Yesterday',
+    ),
+  ];
 
-  const _TypeChip({
-    required this.label,
-    required this.isSelected,
-    required this.onTap,
-  });
+  List<_NotifItem> get _filtered {
+    if (_filter == 'All') return _items;
+    return _items.where((n) {
+      switch (_filter) {
+        case 'Payments': return n.category == 'PAYMENTS';
+        case 'Alerts':   return n.category == 'SECURITY';
+        case 'Messages': return n.category == 'GENIE';
+        case 'System':   return n.category == 'LIVE' || n.category == 'MARKET';
+        default:         return true;
+      }
+    }).toList();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        HapticFeedback.selectionClick();
-        onTap();
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        decoration: BoxDecoration(
-          color: isSelected ? kUtilityColor.withValues(alpha: 0.1) : Colors.transparent,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(
-            color: isSelected ? kUtilityColor : AppColors.inputBorder,
-          ),
-        ),
-        child: Text(
-          label,
-          style: TextStyle(
-            fontSize: 11,
-            fontWeight: FontWeight.w500,
-            color: isSelected ? kUtilityColor : AppColors.textTertiary,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-//  Notification Card 
-
-class _NotificationCard extends StatelessWidget {
-  final NotificationItem notification;
-  final VoidCallback onTap;
-
-  const _NotificationCard({
-    required this.notification,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.all(14),
-        decoration: BoxDecoration(
-          color: notification.isRead ? Colors.white : const Color(0xFFF0F4FF),
-          borderRadius: BorderRadius.circular(10),
-          border: notification.isRead
-              ? null
-              : Border.all(color: const Color(0xFF3B82F6).withValues(alpha: 0.15)),
-        ),
-        child: Row(
+    return Scaffold(
+      backgroundColor: IveTokens.bg,
+      body: SafeArea(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Priority dot + icon
-            Stack(
-              children: [
-                Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: notification.priorityColor.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Icon(notification.typeIcon, size: 20, color: notification.priorityColor),
-                ),
-                if (!notification.isRead)
-                  Positioned(
-                    right: 0,
-                    top: 0,
-                    child: Container(
-                      width: 8,
-                      height: 8,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF3B82F6),
-                        shape: BoxShape.circle,
-                        border: Border.all(color: Colors.white, width: 1.5),
-                      ),
+            // Header
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 14, 16, 0),
+              child: Row(
+                children: [
+                  GestureDetector(
+                    onTap: () => Navigator.of(context).pop(),
+                    behavior: HitTestBehavior.opaque,
+                    child: const Padding(
+                      padding: EdgeInsets.only(right: 12),
+                      child: Icon(Icons.chevron_left_rounded, size: 24, color: IveTokens.ink2),
                     ),
                   ),
-              ],
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        child: Text(
-                          notification.title,
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: notification.isRead ? FontWeight.w500 : FontWeight.w600,
-                            color: AppColors.textPrimary,
-                          ),
+                      Text(
+                        'UTILITY',
+                        style: IveType.caption.copyWith(
+                          color: IveTokens.mute,
+                          letterSpacing: 0.8,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
-                      Text(
-                        _timeAgo(notification.timestamp),
-                        style: const TextStyle(fontSize: 10, color: AppColors.textTertiary),
-                      ),
+                      Text('Notifications', style: IveType.title3),
                     ],
                   ),
-                  const SizedBox(height: 3),
-                  Text(
-                    notification.body,
-                    style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  if (notification.senderName != null) ...[
-                    const SizedBox(height: 4),
-                    Text(
-                      notification.senderName!,
-                      style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: AppColors.textTertiary),
+                  const Spacer(),
+                  GestureDetector(
+                    onTap: () {
+                      HapticFeedback.lightImpact();
+                    },
+                    child: Text(
+                      'Read all',
+                      style: IveType.callout.copyWith(
+                        color: IveTokens.accent,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  ],
+                  ),
                 ],
               ),
+            ),
+
+            const SizedBox(height: 16),
+
+            // Filter chips
+            SizedBox(
+              height: 36,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                itemCount: _filters.length,
+                separatorBuilder: (_, __) => const SizedBox(width: 8),
+                itemBuilder: (context, i) {
+                  final f = _filters[i];
+                  final active = f == _filter;
+                  return GestureDetector(
+                    onTap: () {
+                      HapticFeedback.selectionClick();
+                      setState(() => _filter = f);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 7),
+                      decoration: BoxDecoration(
+                        color: active ? IveTokens.accent : Colors.transparent,
+                        borderRadius: BorderRadius.circular(IveTokens.rPill),
+                        border: Border.all(
+                          color: active ? IveTokens.accent : IveTokens.hairline2,
+                        ),
+                      ),
+                      child: Text(
+                        f,
+                        style: IveType.footnote.copyWith(
+                          color: active ? Colors.white : IveTokens.ink2,
+                          fontWeight: active ? FontWeight.w600 : FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+
+            const SizedBox(height: 8),
+
+            // Notification list
+            Expanded(
+              child: _filtered.isEmpty
+                  ? Center(
+                      child: Text(
+                        'No notifications',
+                        style: IveType.callout.copyWith(color: IveTokens.mute),
+                      ),
+                    )
+                  : ListView.separated(
+                      padding: const EdgeInsets.only(top: 8, bottom: 24),
+                      itemCount: _filtered.length,
+                      separatorBuilder: (_, __) => const Divider(
+                        height: 1,
+                        thickness: 0.5,
+                        color: IveTokens.hairline,
+                        indent: 16,
+                      ),
+                      itemBuilder: (context, i) => _NotifRow(item: _filtered[i]),
+                    ),
             ),
           ],
         ),
@@ -310,11 +188,86 @@ class _NotificationCard extends StatelessWidget {
   }
 }
 
-String _timeAgo(DateTime dt) {
-  final diff = DateTime.now().difference(dt);
-  if (diff.inMinutes < 1) return 'Now';
-  if (diff.inMinutes < 60) return '${diff.inMinutes}m';
-  if (diff.inHours < 24) return '${diff.inHours}h';
-  if (diff.inDays < 7) return '${diff.inDays}d';
-  return '${dt.day}/${dt.month}';
+class _NotifItem {
+  final Color dot;
+  final String category;
+  final String? badge;
+  final String title;
+  final String meta;
+  const _NotifItem({
+    required this.dot,
+    required this.category,
+    this.badge,
+    required this.title,
+    required this.meta,
+  });
+}
+
+class _NotifRow extends StatelessWidget {
+  const _NotifRow({required this.item});
+  final _NotifItem item;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Colored dot
+          Padding(
+            padding: const EdgeInsets.only(top: 5, right: 12),
+            child: Container(
+              width: 8,
+              height: 8,
+              decoration: BoxDecoration(color: item.dot, shape: BoxShape.circle),
+            ),
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      item.category,
+                      style: IveType.caption.copyWith(
+                        color: item.dot,
+                        letterSpacing: 0.6,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    if (item.badge != null) ...[
+                      const SizedBox(width: 6),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFEF4444).withValues(alpha: 0.15),
+                          borderRadius: BorderRadius.circular(4),
+                          border: Border.all(color: const Color(0xFFEF4444).withValues(alpha: 0.4)),
+                        ),
+                        child: Text(
+                          item.badge!,
+                          style: const TextStyle(
+                            fontSize: 9,
+                            fontWeight: FontWeight.w700,
+                            color: Color(0xFFEF4444),
+                            letterSpacing: 0.5,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
+                const SizedBox(height: 3),
+                Text(item.title, style: IveType.callout),
+                const SizedBox(height: 2),
+                Text(item.meta, style: IveType.caption.copyWith(color: IveTokens.mute)),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }

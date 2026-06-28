@@ -4,10 +4,11 @@ import '../../core/design/ive_tokens.dart';
 import '../../core/design/ive_text.dart';
 import '../../features/go/screens/go_hub_screen.dart';
 import '../../features/market/screens/market_hub_screen.dart';
-import '../../features/april/screens/april_dashboard_screen.dart';
+import '../../features/updates/screens/updates_feed_screen.dart';
+import '../../features/qualchat/screens/qualchat_dashboard_complete.dart';
 import '../../genie/genie_screen.dart';
 
-/// 4-tab shell: Home · GO · Market · APRIL
+/// 5-tab shell: Home · GO · Market · Updates · Chat
 class AppShell extends StatefulWidget {
   final int initialIndex;
   const AppShell({super.key, this.initialIndex = 0});
@@ -23,14 +24,16 @@ class _AppShellState extends State<AppShell> {
     GenieScreen(),
     GoHubScreen(),
     MarketHubScreen(),
-    AprilDashboardScreen(),
+    UpdatesFeedScreen(),
+    QualChatDashboardScreen(),
   ];
 
   static const _tabs = [
-    _NavTab(icon: Icons.auto_awesome_outlined, activeIcon: Icons.auto_awesome, label: 'Home'),
-    _NavTab(icon: Icons.diamond_outlined,      activeIcon: Icons.diamond,      label: 'GO'),
-    _NavTab(icon: Icons.storefront_outlined,   activeIcon: Icons.storefront,   label: 'Market'),
-    _NavTab(icon: Icons.mic_none_outlined,     activeIcon: Icons.mic,          label: 'APRIL'),
+    _NavTab(icon: Icons.diamond_outlined,           activeIcon: Icons.diamond,               label: 'HOME'),
+    _NavTab(icon: Icons.credit_card_outlined,        activeIcon: Icons.credit_card,           label: 'GO'),
+    _NavTab(icon: Icons.grid_view_outlined,          activeIcon: Icons.grid_view,             label: 'MARKET'),
+    _NavTab(icon: Icons.trending_up_outlined,        activeIcon: Icons.trending_up,           label: 'UPDATES'),
+    _NavTab(icon: Icons.chat_bubble_outline_rounded, activeIcon: Icons.chat_bubble_rounded,   label: 'CHAT'),
   ];
 
   @override
@@ -101,14 +104,16 @@ class _BottomNav extends StatelessWidget {
                     children: [
                       Icon(
                         active ? tab.activeIcon : tab.icon,
-                        size: 22,
-                        color: active ? IveTokens.genie : IveTokens.labelTertiary,
+                        size: 20,
+                        color: active ? IveTokens.accent : IveTokens.labelTertiary,
                       ),
                       const SizedBox(height: 3),
                       Text(
                         tab.label,
                         style: IveType.caption.copyWith(
-                          color: active ? IveTokens.genie : IveTokens.labelTertiary,
+                          fontSize: 9,
+                          letterSpacing: 0.5,
+                          color: active ? IveTokens.accent : IveTokens.labelTertiary,
                           fontWeight: active ? FontWeight.w600 : FontWeight.w400,
                         ),
                       ),

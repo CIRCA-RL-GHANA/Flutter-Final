@@ -1,261 +1,235 @@
-/// GO Screen 0  Context Switcher (Pre-Entry)
-/// Full-screen modal for selecting operational financial context
-/// Trigger: Tapping GO widget on PROMPT screen
 library;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../../core/design/ive.dart';
-import 'package:provider/provider.dart';
-import '../models/go_models.dart';
-import '../providers/go_provider.dart';
-import '../widgets/go_widgets.dart';
+import '../../../core/routes/app_routes.dart';
 
 class GoContextScreen extends StatelessWidget {
   const GoContextScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<GoProvider>(
-      builder: (context, provider, _) {
-        final contexts = provider.contexts;
-
-        // Auto-redirect if single context
-        if (contexts.length == 1) {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            provider.setActiveContext(contexts.first.id);
-            Navigator.pushReplacementNamed(context, '/go');
-          });
-          return const Scaffold(body: Center(child: CircularProgressIndicator(color: IveTokens.moduleGo)));
-        }
-
-        return Scaffold(
-          backgroundColor: const Color(0xFFF8F9FE),
-          body: SafeArea(
-            child: Column(
-              children: [
-                //  Header 
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
-                  child: Row(
+    return Scaffold(
+      backgroundColor: IveTokens.bg,
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Header
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 14, 16, 0),
+              child: Row(
+                children: [
+                  GestureDetector(
+                    onTap: () => Navigator.of(context).pop(),
+                    behavior: HitTestBehavior.opaque,
+                    child: const Padding(
+                      padding: EdgeInsets.only(right: 12),
+                      child: Icon(Icons.chevron_left_rounded, size: 24, color: IveTokens.ink2),
+                    ),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      GestureDetector(
-                        onTap: () => Navigator.pop(context),
-                        child: const Icon(Icons.close, size: 24, color: Color(0xFF1A1A1A)),
+                      Text(
+                        'GO · FINANCIAL',
+                        style: IveType.caption.copyWith(
+                          color: IveTokens.mute,
+                          letterSpacing: 0.8,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                      const SizedBox(width: 12),
-                      const Text('Select Financial Context', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
+                      Text('Choose context', style: IveType.title3),
                     ],
                   ),
-                ),
-                const SizedBox(height: 8),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: Text('Choose which financial environment to enter', style: TextStyle(fontSize: 13, color: Color(0xFF6B7280))),
-                ),
+                ],
+              ),
+            ),
 
-                const SizedBox(height: 20),
+            const SizedBox(height: 20),
 
-                //  Global Summary 
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: GoSectionCard(
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Total net worth card
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: IveTokens.surface,
+                      borderRadius: BorderRadius.circular(IveTokens.rContainer),
+                      border: Border.all(color: IveTokens.hairline),
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('GLOBAL FINANCIAL SUMMARY', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF9CA3AF), letterSpacing: 0.8)),
-                        const SizedBox(height: 8),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text('Total Net Worth', style: TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
-                                  const SizedBox(height: 2),
-                                  Text('${provider.totalNetWorth.toStringAsFixed(0)} QP', style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w700, color: Color(0xFF1A1A1A))),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                              decoration: BoxDecoration(color: IveTokens.surfaceRaised, borderRadius: BorderRadius.circular(10)),
-                              child: Text('+${provider.change24h}% 24h', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: IveTokens.ink)),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 10),
-                        // Distribution bar
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(6),
-                          child: SizedBox(
-                            height: 8,
-                            child: Row(
-                              children: contexts.map((c) {
-                                final pct = provider.totalNetWorth > 0 ? c.qpBalance / provider.totalNetWorth : 0.0;
-                                return Expanded(
-                                  flex: (pct * 100).round().clamp(1, 100),
-                                  child: Container(color: _contextColor(c.type)),
-                                );
-                              }).toList(),
-                            ),
+                        Text(
+                          'TOTAL NET WORTH · ALL CONTEXTS',
+                          style: IveType.caption.copyWith(
+                            color: IveTokens.mute,
+                            letterSpacing: 0.7,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
-                        const SizedBox(height: 6),
-                        Wrap(
-                          spacing: 12,
-                          children: contexts.map((c) {
-                            final pct = provider.totalNetWorth > 0 ? (c.qpBalance / provider.totalNetWorth * 100) : 0.0;
-                            return Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Container(width: 8, height: 8, decoration: BoxDecoration(color: _contextColor(c.type), borderRadius: BorderRadius.circular(6))),
-                                const SizedBox(width: 4),
-                                Text('${c.typeLabel.split(' ').first} ${pct.toStringAsFixed(0)}%', style: const TextStyle(fontSize: 10, color: Color(0xFF9CA3AF))),
-                              ],
-                            );
-                          }).toList(),
+                        const SizedBox(height: 8),
+                        Text(
+                          '₵ 48,320',
+                          style: IveType.title1.copyWith(fontSize: 34),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          '+ ₵ 1,240 this week',
+                          style: IveType.footnote.copyWith(color: IveTokens.success),
                         ),
                       ],
                     ),
                   ),
-                ),
 
-                const SizedBox(height: 20),
+                  const SizedBox(height: 24),
 
-
-                //  Context Grid 
-                Expanded(
-                  child: contexts.isEmpty
-                      ? GoEmptyState(
-                          icon: Icons.account_balance_wallet_outlined,
-                          title: 'No Financial Context',
-                          message: 'Set up your first financial context to start using GO.',
-                          actionLabel: '+ Add Financial Context',
-                          onAction: () {},
-                        )
-                      : GridView.count(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 12,
-                          crossAxisSpacing: 12,
-                          childAspectRatio: 0.78,
-                          children: contexts.map((c) => _ContextCard(
-                            ctx: c,
-                            isSelected: c.id == provider.activeContextId,
-                            onTap: () {
-                              provider.setActiveContext(c.id);
-                              Navigator.pushReplacementNamed(context, '/go');
-                            },
-                          )).toList(),
-                        ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  Color _contextColor(FinancialContextType type) {
-    switch (type) {
-      case FinancialContextType.personal: return IveTokens.moduleGo;
-      case FinancialContextType.business: return IveTokens.info;
-      case FinancialContextType.branch: return IveTokens.warning;
-      case FinancialContextType.entity: return IveTokens.accent;
-    }
-  }
-}
-
-// 
-// Context Card
-// 
-
-class _ContextCard extends StatelessWidget {
-  final FinancialContext ctx;
-  final bool isSelected;
-  final VoidCallback onTap;
-
-  const _ContextCard({required this.ctx, required this.isSelected, required this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.all(14),
-        decoration: BoxDecoration(
-          color: isSelected ? IveTokens.surfaceRaised : Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: isSelected ? IveTokens.moduleGo : const Color(0xFFE5E7EB), width: isSelected ? 2 : 1),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Avatar
-            CircleAvatar(
-              radius: 24,
-              backgroundColor: _typeColor.withValues(alpha: 0.15),
-              child: Text(ctx.typeEmoji, style: const TextStyle(fontSize: 22)),
-            ),
-            const SizedBox(height: 10),
-            Text(ctx.name, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700), maxLines: 1, overflow: TextOverflow.ellipsis),
-            Text(ctx.role, style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280))),
-            const SizedBox(height: 8),
-            Text('${ctx.qpBalance.toStringAsFixed(0)} QP', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: _typeColor)),
-            const Spacer(),
-            Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                  decoration: BoxDecoration(
-                    color: ctx.permission == ContextPermission.fullAccess ? IveTokens.surfaceRaised : IveTokens.surfaceRaised,
-                    borderRadius: BorderRadius.circular(6),
+                  Text(
+                    'YOUR CONTEXTS',
+                    style: IveType.caption.copyWith(
+                      color: IveTokens.mute,
+                      letterSpacing: 0.8,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                  child: Text(ctx.permissionLabel, style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600, color: ctx.permission == ContextPermission.fullAccess ? IveTokens.ink : const Color(0xFF92400E))),
-                ),
-              ],
-            ),
-            const SizedBox(height: 6),
-            Row(
-              children: [
-                _QuickStat(icon: Icons.receipt_long, value: '${ctx.activeTabs}'),
-                const SizedBox(width: 8),
-                _QuickStat(icon: Icons.pending_actions, value: '${ctx.pendingTransactions}'),
-                const SizedBox(width: 8),
-                _QuickStat(icon: Icons.notifications_active, value: '${ctx.unreadAlerts}'),
-              ],
+
+                  const SizedBox(height: 10),
+
+                  _ContextCard(
+                    type: 'PERSONAL',
+                    typeColor: IveTokens.accent,
+                    name: 'Kwame Mensah',
+                    netWorth: '₵ 12,840',
+                    isActive: true,
+                    onTap: () => Navigator.of(context).pushReplacementNamed(AppRoutes.goHub),
+                  ),
+                  const SizedBox(height: 10),
+                  _ContextCard(
+                    type: 'BUSINESS',
+                    typeColor: IveTokens.success,
+                    name: 'Mensah Trading Co.',
+                    netWorth: '₵ 31,200',
+                    isActive: false,
+                    onTap: () => Navigator.of(context).pushReplacementNamed(AppRoutes.goHub),
+                  ),
+                  const SizedBox(height: 10),
+                  _ContextCard(
+                    type: 'BRANCH',
+                    typeColor: const Color(0xFF8B5CF6),
+                    name: 'Osu Retail Hub',
+                    netWorth: '₵ 4,280',
+                    isActive: false,
+                    onTap: () => Navigator.of(context).pushReplacementNamed(AppRoutes.goHub),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
       ),
     );
   }
-
-  Color get _typeColor {
-    switch (ctx.type) {
-      case FinancialContextType.personal: return IveTokens.moduleGo;
-      case FinancialContextType.business: return IveTokens.info;
-      case FinancialContextType.branch: return IveTokens.warning;
-      case FinancialContextType.entity: return IveTokens.accent;
-    }
-  }
 }
 
-class _QuickStat extends StatelessWidget {
-  final IconData icon;
-  final String value;
-  const _QuickStat({required this.icon, required this.value});
+class _ContextCard extends StatelessWidget {
+  const _ContextCard({
+    required this.type,
+    required this.typeColor,
+    required this.name,
+    required this.netWorth,
+    required this.isActive,
+    required this.onTap,
+  });
+
+  final String type;
+  final Color typeColor;
+  final String name;
+  final String netWorth;
+  final bool isActive;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(icon, size: 11, color: const Color(0xFF9CA3AF)),
-        const SizedBox(width: 2),
-        Text(value, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: Color(0xFF6B7280))),
-      ],
+    return GestureDetector(
+      onTap: () {
+        HapticFeedback.mediumImpact();
+        onTap();
+      },
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(18),
+        decoration: BoxDecoration(
+          color: IveTokens.surface,
+          borderRadius: BorderRadius.circular(IveTokens.rContainer),
+          border: Border.all(
+            color: isActive ? IveTokens.accent : IveTokens.hairline,
+            width: isActive ? 1.5 : 1,
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                  decoration: BoxDecoration(
+                    color: typeColor.withValues(alpha: 0.15),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Text(
+                    type,
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w700,
+                      color: typeColor,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                ),
+                const Spacer(),
+                if (isActive)
+                  Row(
+                    children: [
+                      Container(
+                        width: 6,
+                        height: 6,
+                        decoration: BoxDecoration(color: IveTokens.success, shape: BoxShape.circle),
+                      ),
+                      const SizedBox(width: 5),
+                      Text(
+                        'ACTIVE',
+                        style: IveType.caption.copyWith(
+                          color: IveTokens.success,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: 0.5,
+                        ),
+                      ),
+                    ],
+                  )
+                else
+                  Text(
+                    'Switch  ›',
+                    style: IveType.caption.copyWith(color: IveTokens.mute),
+                  ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Text(name, style: IveType.headline),
+            const SizedBox(height: 3),
+            Text(
+              'Net worth · $netWorth',
+              style: IveType.footnote.copyWith(color: IveTokens.mute),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

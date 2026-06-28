@@ -3,8 +3,8 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import '../core/design/ive_text.dart';
-import '../core/design/ive_tokens.dart';
+import '../core/design/ive.dart';
+import '../core/routes/app_routes.dart';
 import '../features/prompt/providers/context_provider.dart';
 import '../features/prompt/models/rbac_models.dart';
 import 'genie_controller.dart';
@@ -117,6 +117,8 @@ class _GenieScreenState extends State<GenieScreen> {
   }
 }
 
+// ─── Body ─────────────────────────────────────────────────────────────────────
+
 class _Body extends StatelessWidget {
   const _Body({
     required this.ctx,
@@ -149,21 +151,21 @@ class _Body extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _ContextBar(ctx: ctx, onModules: onModules),
+        _TopBar(ctx: ctx),
         Expanded(
           child: hasMessages
               ? _ChatThread(controller: controller, scrollCtrl: scrollCtrl)
               : SingleChildScrollView(
-                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+                  padding: const EdgeInsets.fromLTRB(20, 8, 20, 32),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Greeting
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(4, 0, 4, 24),
+                        padding: const EdgeInsets.only(bottom: 20),
                         child: Text(_greeting(), style: IveType.title1),
                       ),
-                      // Genie input card — in content, not pinned
+                      // Genie input card
                       _GenieInputCard(
                         textCtrl: textCtrl,
                         inputFocus: inputFocus,
@@ -175,8 +177,9 @@ class _Body extends StatelessWidget {
                         onVoice: onVoice,
                       ),
                       const SizedBox(height: 28),
-                      // Jump back in
-                      const _JumpBackIn(),
+                      _JumpBackIn(),
+                      const SizedBox(height: 28),
+                      const _YourModules(),
                     ],
                   ),
                 ),
@@ -193,12 +196,11 @@ class _Body extends StatelessWidget {
   }
 }
 
-// ─── Context bar ─────────────────────────────────────────────────────────────
+// ─── Top bar ──────────────────────────────────────────────────────────────────
 
-class _ContextBar extends StatelessWidget {
-  const _ContextBar({required this.ctx, required this.onModules});
+class _TopBar extends StatelessWidget {
+  const _TopBar({required this.ctx});
   final AppContextModel ctx;
-  final VoidCallback onModules;
 
   String get _dayLabel {
     const days = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
@@ -218,11 +220,11 @@ class _ContextBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 14, 16, 8),
+      padding: const EdgeInsets.fromLTRB(20, 14, 12, 8),
       child: Row(
         children: [
           Text(
-            '$_roleLabel · $_dayLabel',
+            '$_roleLabel · ACCRA · $_dayLabel',
             style: IveType.caption.copyWith(
               color: IveTokens.mute,
               letterSpacing: 0.8,
@@ -230,23 +232,84 @@ class _ContextBar extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          // Modules grid icon
-          GestureDetector(
-            onTap: onModules,
-            behavior: HitTestBehavior.opaque,
-            child: Padding(
-              padding: const EdgeInsets.all(8),
-              child: Icon(Icons.grid_view_rounded, size: 20, color: IveTokens.mute),
-            ),
+          // Search
+          _IconBtn(
+            icon: Icons.search_rounded,
+            onTap: () => Navigator.of(context).pushNamed(AppRoutes.utilitySearch),
           ),
+          const SizedBox(width: 4),
+          // Notifications with badge
+          _NotifBtn(),
         ],
       ),
     );
   }
 }
 
+class _IconBtn extends StatelessWidget {
+  const _IconBtn({required this.icon, required this.onTap});
+  final IconData icon;
+  final VoidCallback onTap;
 
-// ─── Jump back in ────────────────────────────────────────────────────────────
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      behavior: HitTestBehavior.opaque,
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Icon(icon, size: 20, color: IveTokens.mute),
+      ),
+    );
+  }
+}
+
+class _NotifBtn extends StatelessWidget {
+  const _NotifBtn();
+
+  @override
+  Widget build(BuildContext context) {
+    const badgeCount = 3; // TODO: wire to UtilityProvider.unreadCount
+    return GestureDetector(
+      onTap: () => Navigator.of(context).pushNamed(AppRoutes.utilityNotifications),
+      behavior: HitTestBehavior.opaque,
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            Icon(Icons.notifications_none_rounded, size: 20, color: IveTokens.mute),
+            if (badgeCount > 0)
+              Positioned(
+                top: -4,
+                right: -4,
+                child: Container(
+                  width: 16,
+                  height: 16,
+                  decoration: BoxDecoration(
+                    color: IveTokens.accent,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Center(
+                    child: Text(
+                      '$badgeCount',
+                      style: const TextStyle(
+                        fontSize: 9,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ─── Jump Back In ─────────────────────────────────────────────────────────────
 
 class _JumpBackIn extends StatelessWidget {
   const _JumpBackIn();
@@ -267,21 +330,25 @@ class _JumpBackIn extends StatelessWidget {
         const SizedBox(height: 10),
         Row(
           children: [
-            Expanded(child: _ModuleCard(
-              label: 'GO',
-              labelColor: IveTokens.info,
-              title: 'Wallet',
-              subtitle: 'Check your balance',
-              onTap: () {},
-            )),
+            Expanded(
+              child: _JumpCard(
+                label: 'GO',
+                labelColor: IveTokens.accent,
+                title: 'Wallet',
+                subtitle: 'Balance steady',
+                onTap: () => Navigator.of(context).pushNamed(AppRoutes.goHub),
+              ),
+            ),
             const SizedBox(width: 12),
-            Expanded(child: _ModuleCard(
-              label: 'MARKET',
-              labelColor: IveTokens.success,
-              title: 'Orders',
-              subtitle: 'View recent orders',
-              onTap: () {},
-            )),
+            Expanded(
+              child: _JumpCard(
+                label: 'MARKET',
+                labelColor: IveTokens.success,
+                title: '1 delivery',
+                subtitle: 'Kofi · 4 min away',
+                onTap: () => Navigator.of(context).pushNamed(AppRoutes.marketHub),
+              ),
+            ),
           ],
         ),
       ],
@@ -289,8 +356,8 @@ class _JumpBackIn extends StatelessWidget {
   }
 }
 
-class _ModuleCard extends StatelessWidget {
-  const _ModuleCard({
+class _JumpCard extends StatelessWidget {
+  const _JumpCard({
     required this.label,
     required this.labelColor,
     required this.title,
@@ -336,7 +403,102 @@ class _ModuleCard extends StatelessWidget {
   }
 }
 
-// ─── Chat thread (when messages exist) ───────────────────────────────────────
+// ─── Your Modules ─────────────────────────────────────────────────────────────
+
+class _YourModules extends StatelessWidget {
+  const _YourModules();
+
+  static const _modules = [
+    _Module('GO',        Icons.credit_card_outlined,        AppRoutes.goHub,            false),
+    _Module('MARKET',   Icons.grid_view_outlined,           AppRoutes.marketHub,        false),
+    _Module('UPDATES',  Icons.diamond_outlined,             AppRoutes.updatesFeed,      false),
+    _Module('APRIL',    Icons.auto_awesome,                 AppRoutes.aprilDashboard,   true),
+    _Module('CHAT',     Icons.chat_bubble_outline_rounded,  AppRoutes.qualChatDashboard, false),
+    _Module('SETUP',    Icons.tune,                         AppRoutes.setupDashboard,   false),
+    _Module('E-PLAY',   Icons.play_arrow_outlined,          AppRoutes.eplayHub,         false),
+    _Module('COMMUNITY',Icons.language_outlined,            AppRoutes.communityHub,     false),
+    _Module('FINTECH',  Icons.account_balance_outlined,     AppRoutes.fintechLoans,     false),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'YOUR MODULES',
+          style: IveType.caption.copyWith(
+            color: IveTokens.mute,
+            letterSpacing: 0.8,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        const SizedBox(height: 10),
+        GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            childAspectRatio: 1,
+          ),
+          itemCount: _modules.length,
+          itemBuilder: (context, i) => _ModuleTile(module: _modules[i]),
+        ),
+      ],
+    );
+  }
+}
+
+class _Module {
+  final String label;
+  final IconData icon;
+  final String route;
+  final bool isGold;
+  const _Module(this.label, this.icon, this.route, this.isGold);
+}
+
+class _ModuleTile extends StatelessWidget {
+  const _ModuleTile({required this.module});
+  final _Module module;
+
+  @override
+  Widget build(BuildContext context) {
+    final color = module.isGold ? IveTokens.genie : IveTokens.accent;
+    return GestureDetector(
+      onTap: () {
+        HapticFeedback.selectionClick();
+        Navigator.of(context).pushNamed(module.route);
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: IveTokens.surface,
+          borderRadius: BorderRadius.circular(IveTokens.rContainer),
+          border: Border.all(color: IveTokens.hairline),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(module.icon, size: 24, color: color),
+            const SizedBox(height: 8),
+            Text(
+              module.label,
+              style: IveType.caption.copyWith(
+                fontSize: 10,
+                letterSpacing: 0.5,
+                fontWeight: FontWeight.w600,
+                color: IveTokens.ink2,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ─── Chat thread ──────────────────────────────────────────────────────────────
 
 class _ChatThread extends StatelessWidget {
   const _ChatThread({required this.controller, required this.scrollCtrl});
@@ -347,7 +509,7 @@ class _ChatThread extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       controller: scrollCtrl,
-      padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
+      padding: const EdgeInsets.fromLTRB(20, 12, 20, 8),
       itemCount: controller.messages.length,
       itemBuilder: (context, i) {
         final msg = controller.messages[i];
@@ -380,7 +542,6 @@ class _ChatThread extends StatelessWidget {
     );
   }
 }
-
 
 // ─── Genie input card ─────────────────────────────────────────────────────────
 
@@ -418,13 +579,10 @@ class _GenieInputCardState extends State<_GenieInputCard> {
 
   List<String> get _chips {
     switch (widget.role) {
-      case UserRole.owner:
-      case UserRole.administrator:
-        return ["How's my spending?", 'Find a driver', 'Today\'s orders'];
       case UserRole.driver:
         return ['My earnings', 'Active trip', 'Navigate home'];
       default:
-        return ["How's my spending?", 'Find a driver', 'Today\'s orders'];
+        return ["How's my spending?", 'Find a driver', 'Pay Ama', "Today's orders"];
     }
   }
 
@@ -433,7 +591,6 @@ class _GenieInputCardState extends State<_GenieInputCard> {
     final hasText = widget.textCtrl.text.isNotEmpty;
 
     return Container(
-      margin: const EdgeInsets.fromLTRB(16, 4, 16, 16),
       decoration: BoxDecoration(
         color: IveTokens.surface,
         borderRadius: BorderRadius.circular(IveTokens.rContainer),
@@ -450,7 +607,7 @@ class _GenieInputCardState extends State<_GenieInputCard> {
             children: [
               const Padding(
                 padding: EdgeInsets.only(left: 14),
-                child: Icon(Icons.auto_awesome, size: 18, color: IveTokens.genie),
+                child: Icon(Icons.auto_awesome, size: 16, color: IveTokens.genie),
               ),
               Expanded(
                 child: TextField(
@@ -475,8 +632,8 @@ class _GenieInputCardState extends State<_GenieInputCard> {
                   onTap: hasText ? widget.onSend : widget.onVoice,
                   child: AnimatedContainer(
                     duration: IveTokens.dFast,
-                    width: 34,
-                    height: 34,
+                    width: 32,
+                    height: 32,
                     decoration: BoxDecoration(
                       color: hasText || widget.isListening
                           ? IveTokens.genie
@@ -489,7 +646,7 @@ class _GenieInputCardState extends State<_GenieInputCard> {
                           : widget.isListening
                               ? Icons.stop_rounded
                               : Icons.mic_none_rounded,
-                      size: 18,
+                      size: 16,
                       color: hasText || widget.isListening ? IveTokens.bg : IveTokens.genie,
                     ),
                   ),
@@ -499,34 +656,32 @@ class _GenieInputCardState extends State<_GenieInputCard> {
           ),
 
           // Quick chips
-          ...[
-            const Divider(height: 1, color: IveTokens.hairline),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(12, 10, 12, 12),
-              child: Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: _chips.map((chip) => GestureDetector(
-                  onTap: () {
-                    HapticFeedback.lightImpact();
-                    widget.onChip(chip);
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
-                    decoration: BoxDecoration(
-                      color: IveTokens.bg,
-                      borderRadius: BorderRadius.circular(IveTokens.rPill),
-                      border: Border.all(color: IveTokens.hairline2),
-                    ),
-                    child: Text(
-                      chip,
-                      style: IveType.footnote.copyWith(color: IveTokens.ink2),
-                    ),
+          const Divider(height: 1, color: IveTokens.hairline),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(12, 10, 12, 12),
+            child: Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: _chips.map((chip) => GestureDetector(
+                onTap: () {
+                  HapticFeedback.lightImpact();
+                  widget.onChip(chip);
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+                  decoration: BoxDecoration(
+                    color: IveTokens.bg,
+                    borderRadius: BorderRadius.circular(IveTokens.rPill),
+                    border: Border.all(color: IveTokens.hairline2),
                   ),
-                )).toList(),
-              ),
+                  child: Text(
+                    chip,
+                    style: IveType.footnote.copyWith(color: IveTokens.ink2),
+                  ),
+                ),
+              )).toList(),
             ),
-          ],
+          ),
         ],
       ),
     );
